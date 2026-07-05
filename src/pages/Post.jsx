@@ -2,10 +2,12 @@ import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { usePosts } from '../usePosts.js'
 import { useHead, SITE_NAME } from '../seo.js'
+import { useLang } from '../i18n.jsx'
 
 export default function Post() {
   const { slug } = useParams()
   const { posts, loading, error } = usePosts()
+  const { t } = useLang()
   const [copied, setCopied] = useState(false)
 
   const post = posts.find((p) => p.slug === slug)
@@ -30,14 +32,14 @@ export default function Post() {
       : {},
   )
 
-  if (loading) return <p className="muted">Yükleniyor…</p>
-  if (error) return <p className="error">Hata: {error.message}</p>
+  if (loading) return <p className="muted">{t('loading')}</p>
+  if (error) return <p className="error">{t('error')}: {error.message}</p>
 
   if (!post) {
     return (
       <div className="empty">
-        <p>Bu yazı bulunamadı.</p>
-        <Link to="/" className="back-link">← Tüm yazılar</Link>
+        <p>{t('notFound')}</p>
+        <Link to="/" className="back-link">{t('allPosts')}</Link>
       </div>
     )
   }
@@ -58,7 +60,7 @@ export default function Post() {
 
   return (
     <article className="post">
-      <Link to="/" className="back-link">← Tüm yazılar</Link>
+      <Link to="/" className="back-link">{t('allPosts')}</Link>
 
       <div className="post-head">
         <div>
@@ -69,13 +71,13 @@ export default function Post() {
 
       <div className="post-actions">
         <a href={pdfUrl} target="_blank" rel="noreferrer" className="btn">
-          Yeni sekmede aç
+          {t('openNewTab')}
         </a>
         <a href={pdfUrl} download className="btn">
-          İndir
+          {t('download')}
         </a>
         <button type="button" onClick={share} className="btn">
-          {copied ? 'Bağlantı kopyalandı ✓' : 'Paylaş'}
+          {copied ? t('copied') : t('share')}
         </button>
       </div>
 

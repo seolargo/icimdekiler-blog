@@ -2,13 +2,14 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { usePosts } from '../usePosts.js'
 import { useHead } from '../seo.js'
+import { useLang } from '../i18n.jsx'
 
 const PER_PAGE = 10
 
-function formatDate(iso) {
+function formatDate(iso, locale) {
   if (!iso) return ''
   try {
-    return new Date(iso).toLocaleDateString('tr-TR', {
+    return new Date(iso).toLocaleDateString(locale, {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
@@ -19,27 +20,18 @@ function formatDate(iso) {
 }
 
 function Intro() {
+  const { t } = useLang()
   return (
     <section className="intro">
-      <p>
-        Applying a cognitive evolution framework in software engineering —
-        spanning similarity recognition, clustering, visual, abstraction,
-        modular and generalized design, to evolutionary, intent-oriented, and
-        reflective–adaptive system thinking with self-improving architectures.
-      </p>
-      <p>
-        Focused on building systems that learn, evolve, and align with human
-        intent and needs.
-      </p>
-      <p className="intro-quote">
-        Every problem must be solved in design before it reaches engineering —
-        clarity scales better than code.
-      </p>
+      <p>{t('intro1')}</p>
+      <p>{t('intro2')}</p>
+      <p className="intro-quote">{t('introQuote')}</p>
     </section>
   )
 }
 
 function Pagination({ page, pageCount, onChange }) {
+  const { t } = useLang()
   if (pageCount <= 1) return null
   return (
     <nav className="pagination" aria-label="Sayfalar">
@@ -47,7 +39,7 @@ function Pagination({ page, pageCount, onChange }) {
         className="page-btn"
         onClick={() => onChange(page - 1)}
         disabled={page === 1}
-        aria-label="Önceki"
+        aria-label={t('prev')}
       >
         ‹
       </button>
@@ -65,7 +57,7 @@ function Pagination({ page, pageCount, onChange }) {
         className="page-btn"
         onClick={() => onChange(page + 1)}
         disabled={page === pageCount}
-        aria-label="Sonraki"
+        aria-label={t('next')}
       >
         ›
       </button>
@@ -75,6 +67,7 @@ function Pagination({ page, pageCount, onChange }) {
 
 export default function Home() {
   const { posts, loading, error } = usePosts()
+  const { t, lang } = useLang()
   const [page, setPage] = useState(1)
 
   useHead({ image: '/profile.jpeg' })
@@ -92,16 +85,12 @@ export default function Home() {
     <>
       <Intro />
 
-      {loading && <p className="muted">Yükleniyor…</p>}
-      {error && <p className="error">Hata: {error.message}</p>}
+      {loading && <p className="muted">{t('loading')}</p>}
+      {error && <p className="error">{t('error')}: {error.message}</p>}
 
       {!loading && !error && posts.length === 0 && (
         <div className="empty">
-          <p>Henüz PDF yok.</p>
-          <p className="muted">
-            <code>public/pdfs/</code> klasörüne bir PDF ekleyip sunucuyu yeniden
-            başlat — otomatik listeye düşer.
-          </p>
+          <p>{t('emptyTitle')}</p>
         </div>
       )}
 
@@ -124,7 +113,7 @@ export default function Home() {
                     {post.description && (
                       <span className="post-desc">{post.description}</span>
                     )}
-                    <time className="post-date">{formatDate(post.date)}</time>
+                    <time className="post-date">{formatDate(post.date, lang)}</time>
                   </div>
                 </Link>
               </li>

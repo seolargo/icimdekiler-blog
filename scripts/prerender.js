@@ -15,7 +15,7 @@ const dist = join(root, 'dist')
 const base = (process.env.BASE_PATH || '/').replace(/\/+$/, '/') // sonu '/' garanti
 const SITE_URL = (process.env.SITE_URL || 'https://example.com').replace(/\/+$/, '')
 const SITE_NAME = 'Ömer Faruk Yavuz'
-const SITE_ROLE = 'Computer Engineer, Yıldız Technical University'
+const SITE_ROLE = 'Bilgisayar Mühendisi, Yıldız Teknik Üniversitesi' // no-JS varsayılan: TR
 const SITE_DESCRIPTION =
   'Ömer Faruk Yavuz — mühendislik, tasarım ve sistem düşüncesi üzerine PDF makaleler.'
 
@@ -49,10 +49,16 @@ const posts = JSON.parse(readFileSync(join(dist, 'posts.json'), 'utf8'))
 
 // --- ortak parçalar -------------------------------------------------------
 function header() {
-  return `<div class="site"><header class="site-header"><a href="${base}" class="brand">` +
+  return `<div class="site">` +
+    `<div class="lang-switch" role="group" aria-label="Dil / Language">` +
+    `<button type="button" class="lang-btn is-active">TR</button>` +
+    `<span class="lang-sep">/</span>` +
+    `<button type="button" class="lang-btn">EN</button></div>` +
+    `<header class="site-header"><a href="${base}" class="brand">` +
     `<img class="brand-photo" src="${asset('profile.jpeg')}" alt="${escAttr(SITE_NAME)}" />` +
     `<span class="brand-name">${esc(SITE_NAME)}</span>` +
     `<span class="brand-role">${esc(SITE_ROLE)}</span>` +
+    `<span class="brand-title">İçimdekiler</span>` +
     `</a></header><main class="site-main">`
 }
 const footer = () =>
@@ -60,9 +66,9 @@ const footer = () =>
 
 const introHtml =
   '<section class="intro">' +
-  '<p>Applying a cognitive evolution framework in software engineering — spanning similarity recognition, clustering, visual, abstraction, modular and generalized design, to evolutionary, intent-oriented, and reflective–adaptive system thinking with self-improving architectures.</p>' +
-  '<p>Focused on building systems that learn, evolve, and align with human intent and needs.</p>' +
-  '<p class="intro-quote">Every problem must be solved in design before it reaches engineering — clarity scales better than code.</p>' +
+  '<p>Yazılım mühendisliğinde bilişsel evrim çerçevesini uyguluyorum — benzerlik tanıma, kümeleme, görsel ve soyut düşünme, modüler ve genelleştirilmiş tasarımdan; evrimsel, niyet-odaklı ve düşünümsel-uyarlanabilir sistem düşüncesine ve kendini geliştiren mimarilere uzanan bir yelpazede.</p>' +
+  '<p>Öğrenen, evrilen ve insanın niyet ve ihtiyaçlarıyla hizalanan sistemler kurmaya odaklıyım.</p>' +
+  '<p class="intro-quote">Her problem, mühendisliğe ulaşmadan önce tasarımda çözülmelidir — açıklık koddan daha iyi ölçeklenir.</p>' +
   '</section>'
 
 function postListItem(p) {
@@ -180,6 +186,7 @@ for (const p of posts) {
     `<div class="post-actions">` +
     `<a href="${escAttr(pdfUrl)}" target="_blank" rel="noreferrer" class="btn">Yeni sekmede aç</a>` +
     `<a href="${escAttr(pdfUrl)}" download class="btn">İndir</a>` +
+    `<button type="button" class="btn">Paylaş</button>` +
     `</div>` +
     `<div class="pdf-frame"><iframe title="${escAttr(p.title)}" src="${escAttr(pdfUrl)}"></iframe></div>` +
     `</article>` +
