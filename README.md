@@ -9,6 +9,9 @@ paylaşılabilir bir link verir.
 - `scripts/generate-manifest.js` bu klasörü tarayıp `public/posts.json` listesini üretir
   (bu `npm run dev` / `npm run build` öncesi **otomatik** çalışır).
 - Blog bu listeyi okuyup ana sayfada gösterir; her yazının kendi linki olur.
+- `scripts/build-search-index.js` PDF'lerin **tam metnini** çıkarıp `public/search-index.json`
+  üretir; ana sayfadaki arama başlık + açıklama + **PDF içeriğinde** arar (artımlı: sadece
+  yeni PDF'ler parse edilir). Türkçe/aksan ve LaTeX çıkarım bozulmalarına karşı dayanıklıdır.
 
 ## Komutlar
 

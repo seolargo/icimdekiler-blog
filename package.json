@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "manifest": "node scripts/generate-manifest.js",
-    "predev": "node scripts/generate-manifest.js",
+    "search-index": "node scripts/build-search-index.js",
+    "predev": "node scripts/generate-manifest.js && node scripts/build-search-index.js",
     "dev": "vite",
-    "prebuild": "node scripts/generate-manifest.js",
+    "prebuild": "node scripts/generate-manifest.js && node scripts/build-search-index.js",
     "build": "vite build && node scripts/prerender.js",
     "preview": "vite preview"
   },
@@ -18,6 +19,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.1",
+    "pdf-parse": "^2.4.5",
     "vite": "^5.4.8"
   }
 }

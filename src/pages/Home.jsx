@@ -1,12 +1,11 @@
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useLocation, useSearchParams } from 'react-router-dom'
 import { usePosts } from '../usePosts.js'
 import { useHead } from '../seo.js'
 import { useLang } from '../i18n.jsx'
+import { fold, matchesTokens } from '../search.js'
 
 const PER_PAGE = 10
-
-const trLower = (s) => (s || '').toLocaleLowerCase('tr')
 
 function formatDate(iso, locale) {
   if (!iso) return ''
@@ -91,6 +90,22 @@ export default function Home() {
 
   const setQuery = (v) => update({ q: v || null, sayfa: null })
   const setSeries = (v) => update({ seri: v || null, sayfa: null })
+
+  // Tam metin arama indeksi (PDF içerikleri) — tembel yüklenir
+  const [index, setIndex] = useState(null)
+  const indexReq = useRef(null)
+  const loadIndex = () => {
+    if (index || indexReq.current) return
+    indexReq.current = fetch(`${import.meta.env.BASE_URL}search-index.json`)
+      .then((r) => r.json())
+      .then((arr) => setIndex(new Map(arr.map((e) => [e.slug, e.body]))))
+      .catch(() => {})
+  }
+  // Paylaşılan linkte hazır bir sorgu varsa indeksi hemen yükle
+  useEffect(() => {
+    if (query) loadIndex()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   const goTo = (n) => {
     update({ sayfa: n > 1 ? String(n) : null })
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -132,13 +147,15 @@ export default function Home() {
   }, [posts])
 
   const filtered = useMemo(() => {
-    const q = trLower(query.trim())
+    const fq = fold(query.trim())
     return posts.filter((p) => {
       if (series && p.series !== series) return false
-      if (!q) return true
-      return trLower(p.title).includes(q) || trLower(p.description).includes(q)
+      if (!fq) return true
+      const hay =
+        fold(p.title) + ' ' + fold(p.description) + ' ' + (index?.get(p.slug) || '')
+      return matchesTokens(fq, hay, true)
     })
-  }, [posts, query, series])
+  }, [posts, query, series, index])
 
   const pageCount = Math.ceil(filtered.length / PER_PAGE)
   const current = Math.min(page, pageCount || 1)
@@ -165,7 +182,11 @@ export default function Home() {
               className="search-input"
               placeholder={t('searchPlaceholder')}
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              onFocus={loadIndex}
+              onChange={(e) => {
+                loadIndex()
+                setQuery(e.target.value)
+              }}
               aria-label={t('searchPlaceholder')}
             />
             <div className="series-chips" role="group" aria-label="Seriler">
@@ -188,6 +209,12 @@ export default function Home() {
               ))}
             </div>
           </div>
+
+          {(query || series) && filtered.length > 0 && (
+            <p className="muted result-count">
+              {filtered.length} {t('results')}
+            </p>
+          )}
 
           {filtered.length === 0 ? (
             <p className="muted no-results">{t('noResults')}</p>
