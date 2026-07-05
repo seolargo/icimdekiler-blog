@@ -40,12 +40,36 @@ alanları senin yazdığın gibi korunur, yeniden tarama bunları silmez:
 }
 ```
 
+## SEO
+
+Site tam SEO uyumludur:
+
+- **Temiz URL'ler** (`/post/slug`) — `BrowserRouter` ile crawler'ların indeksleyebileceği gerçek yollar.
+- **Prerender:** `npm run build`, `vite build` sonrası her yazı için gerçek statik HTML
+  üretir (`dist/post/<slug>/index.html`). Her sayfada JS çalışmadan da görünen içerik +
+  sayfa-başına `<title>`, `description`, `canonical`, Open Graph, Twitter Card ve Article
+  JSON-LD bulunur.
+- **`sitemap.xml`** ve **`robots.txt`** otomatik üretilir.
+- Runtime'da rota değiştikçe `useHead` ([src/seo.js](src/seo.js)) meta etiketlerini günceller.
+
+### Build ayarları (ortam değişkenleri)
+
+```bash
+# Yayınlanacak tam adres — canonical / sitemap / OG için ŞART
+SITE_URL=https://alanadin.com npm run build
+
+# Alt dizinde barındırma (GitHub Pages proje sitesi: user.github.io/repo/)
+SITE_URL=https://user.github.io/repo BASE_PATH=/repo/ npm run build
+```
+
+`SITE_URL` verilmezse `https://example.com` placeholder kullanılır ve uyarı basılır.
+
 ## Yayınlama (paylaşım)
 
-`npm run build` sonrası `dist/` klasörünü herhangi bir statik hosta at:
+`npm run build` sonrası `dist/` klasörünü herhangi bir statik hosta at. Temiz URL'ler için
+her platformun fallback dosyası hazır üretilir:
 
-- **Netlify / Vercel:** klasörü sürükle-bırak ya da GitHub reposunu bağla.
-- **GitHub Pages:** `dist/` içeriğini `gh-pages` dalına push et.
-
-Uygulama `HashRouter` + relatif yollar kullanır; alt-dizinde bile yapılandırma
-gerektirmeden çalışır ve link paylaşımı bozulmaz.
+- **Netlify:** `dist/_redirects` otomatik. Klasörü sürükle-bırak ya da repoyu bağla.
+- **Vercel:** kökteki [vercel.json](vercel.json) SPA rewrite'ı sağlar.
+- **GitHub Pages:** `dist/404.html` fallback'i yazılır; `BASE_PATH=/repo/` ile build al,
+  `dist/` içeriğini `gh-pages` dalına push et.

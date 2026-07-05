@@ -1,8 +1,10 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// base: './' -> relatif yollar. GitHub Pages / Netlify / Vercel her yerde çalışır.
+// base: mutlak yol gerekir (temiz URL + prerender edilen alt sayfalar için).
+// Kök alan adı / Netlify / Vercel / GitHub user-site -> '/'.
+// GitHub Pages proje sitesi (user.github.io/repo/) -> BASE_PATH=/repo/ ver.
 export default defineConfig({
-  base: './',
+  base: process.env.BASE_PATH || '/',
   plugins: [react()],
 })

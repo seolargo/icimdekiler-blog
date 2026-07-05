@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { usePosts } from '../usePosts.js'
+import { useHead } from '../seo.js'
 
 const PER_PAGE = 10
 
@@ -75,6 +76,8 @@ function Pagination({ page, pageCount, onChange }) {
 export default function Home() {
   const { posts, loading, error } = usePosts()
   const [page, setPage] = useState(1)
+
+  useHead({ image: '/profile.jpeg' })
 
   const pageCount = Math.ceil(posts.length / PER_PAGE)
   const current = Math.min(page, pageCount || 1)

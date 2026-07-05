@@ -1,16 +1,38 @@
 import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { usePosts } from '../usePosts.js'
+import { useHead, SITE_NAME } from '../seo.js'
 
 export default function Post() {
   const { slug } = useParams()
   const { posts, loading, error } = usePosts()
   const [copied, setCopied] = useState(false)
 
+  const post = posts.find((p) => p.slug === slug)
+
+  useHead(
+    post
+      ? {
+          title: post.title,
+          description: post.description,
+          type: 'article',
+          image: post.thumb ? `/${post.thumb}` : '/profile.jpeg',
+          jsonLd: {
+            '@context': 'https://schema.org',
+            '@type': 'Article',
+            headline: post.title,
+            description: post.description || undefined,
+            datePublished: post.date || undefined,
+            author: { '@type': 'Person', name: SITE_NAME },
+            url: window.location.origin + window.location.pathname,
+          },
+        }
+      : {},
+  )
+
   if (loading) return <p className="muted">Yükleniyor…</p>
   if (error) return <p className="error">Hata: {error.message}</p>
 
-  const post = posts.find((p) => p.slug === slug)
   if (!post) {
     return (
       <div className="empty">
