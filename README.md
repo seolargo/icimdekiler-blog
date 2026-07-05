@@ -62,6 +62,8 @@ Site, LLM'ler ve AI ajanları tarafından da keşfedilsin diye:
 - **`llms.txt`** ([llmstxt.org](https://llmstxt.org) standardı) — tüm makalelerin başlık,
   açıklama ve kalıcı bağlantılarıyla temiz markdown listesi. LLM'lerin siteyi tek dosyadan
   anlaması için.
+- **`llms-full.txt`** — tüm makalelerin **tam metni** (PDF'lerden çıkarılıp temizlenmiş).
+  LLM'lerin/AI ajanlarının içeriği doğrudan yutması için; `llms.txt` ve `robots.txt` buna işaret eder.
 - **`feed.xml`** (RSS 2.0) — AI okuyucular ve ajanların tükettiği makine-okunur akış;
   her sayfanın `<head>`'inde `rel="alternate"` ile bağlanır.
 - **`robots.txt`** bilinen AI botlarına (GPTBot, ClaudeBot, PerplexityBot, Google-Extended,

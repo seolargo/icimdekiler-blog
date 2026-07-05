@@ -47,6 +47,12 @@ function fmtDate(iso) {
 const template = readFileSync(join(dist, 'index.html'), 'utf8')
 const posts = JSON.parse(readFileSync(join(dist, 'posts.json'), 'utf8'))
 
+// Tam metin önbelleği (build-search-index.js üretir) — llms-full.txt için
+const fulltextPath = join(root, '.fulltext-cache.json')
+const fulltext = existsSync(fulltextPath)
+  ? new Map(JSON.parse(readFileSync(fulltextPath, 'utf8')).map((e) => [e.slug, e.text]))
+  : new Map()
+
 // --- ortak parçalar -------------------------------------------------------
 function header() {
   return `<div class="site">` +
@@ -242,7 +248,8 @@ const aiBots = [
 const robots =
   aiBots.map((b) => `User-agent: ${b}\nAllow: /`).join('\n\n') +
   '\n\nUser-agent: *\nAllow: /\n\n' +
-  `# LLM içerik haritası\n# ${SITE_URL}${base}llms.txt\n\n` +
+  `# LLM içerik haritası (özet + tam metin)\n` +
+  `# ${SITE_URL}${base}llms.txt\n# ${SITE_URL}${base}llms-full.txt\n\n` +
   `Sitemap: ${SITE_URL}${base}sitemap.xml\n`
 writeFileSync(join(dist, 'robots.txt'), robots)
 
@@ -252,7 +259,7 @@ const llms =
   `> ${SITE_DESCRIPTION}\n\n` +
   `${SITE_NAME} — ${SITE_ROLE}. Aşağıda tüm makaleler, başlık, kısa açıklama ve ` +
   `kalıcı bağlantılarıyla listelenmiştir. Her makalenin tam metni bağlantıdaki ` +
-  `PDF'te yer alır.\n\n` +
+  `PDF'te ve toplu olarak ${SITE_URL}${base}llms-full.txt dosyasında yer alır.\n\n` +
   `## Makaleler\n\n` +
   (() => {
     // serilere göre grupla (yazı sırasındaki ilk görülme sırasıyla)
@@ -282,6 +289,31 @@ const llms =
   })() +
   '\n'
 writeFileSync(join(dist, 'llms.txt'), llms)
+
+// --- llms-full.txt: tüm makalelerin OKUNABİLİR tam metni (AI/LLM yutumu için) --
+if (fulltext.size) {
+  const full =
+    `# ${SITE_NAME} — Tam Metin\n\n` +
+    `> ${SITE_DESCRIPTION}\n\n` +
+    `Bu dosya tüm makalelerin tam metnini içerir. Kaynak PDF'lerden çıkarılmıştır; ` +
+    `bazı Türkçe karakterler çıkarım nedeniyle eksik olabilir.\n\n` +
+    posts
+      .map((p) => {
+        const url = `${SITE_URL}${base}post/${encodeURIComponent(p.slug)}`
+        const body = (fulltext.get(p.slug) || '').trim()
+        return (
+          `\n---\n\n# ${p.title}\n\n` +
+          (p.series ? `Seri: ${p.series}\n` : '') +
+          `URL: ${url}\n` +
+          (p.description ? `\n${p.description}\n` : '') +
+          (body ? `\n${body}\n` : '')
+        )
+      })
+      .join('\n')
+  writeFileSync(join(dist, 'llms-full.txt'), full)
+} else {
+  console.warn('[prerender] .fulltext-cache.json yok — llms-full.txt atlandı (önce npm run search-index)')
+}
 
 // --- feed.xml (RSS 2.0): AI okuyucular ve ajanlar için makine-okunur akış -----
 function rfc822(iso) {
