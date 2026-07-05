@@ -195,6 +195,84 @@ code {
   padding-left: 14px;
 }
 
+/* Keşif: arama + seri filtreleri */
+.discover {
+  padding: 4px 0 8px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--btn-bg);
+  color: var(--fg);
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: border-color 0.15s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--muted);
+}
+
+.series-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--muted);
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.chip:hover {
+  color: var(--fg);
+  border-color: var(--muted);
+}
+
+.chip.is-active {
+  background: var(--fg);
+  color: var(--bg);
+  border-color: var(--fg);
+}
+
+.chip-count {
+  font-size: 0.72rem;
+  opacity: 0.6;
+}
+
+.chip.is-active .chip-count {
+  opacity: 0.75;
+}
+
+.post-series {
+  display: inline-block;
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.no-results {
+  padding: 32px 0;
+  text-align: center;
+}
+
 /* Post list */
 .post-list {
   list-style: none;

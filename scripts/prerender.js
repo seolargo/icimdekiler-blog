@@ -75,11 +75,13 @@ function postListItem(p) {
   const thumb = p.thumb
     ? `<img class="post-thumb" src="${asset(p.thumb)}" alt="" loading="lazy" />`
     : ''
+  const ser = p.series ? `<span class="post-series">${esc(p.series)}</span>` : ''
   const desc = p.description ? `<span class="post-desc">${esc(p.description)}</span>` : ''
   return (
     `<li class="post-item"><a href="${base}post/${encodeURIComponent(p.slug)}" class="post-link">` +
     thumb +
     `<div class="post-body"><span class="post-title">${esc(p.title)}</span>` +
+    ser +
     desc +
     `<time class="post-date" datetime="${escAttr(p.date)}">${esc(fmtDate(p.date))}</time>` +
     `</div></a></li>`
@@ -253,13 +255,32 @@ const llms =
   `kalıcı bağlantılarıyla listelenmiştir. Her makalenin tam metni bağlantıdaki ` +
   `PDF'te yer alır.\n\n` +
   `## Makaleler\n\n` +
-  posts
-    .map((p) => {
-      const url = `${SITE_URL}${base}post/${encodeURIComponent(p.slug)}`
-      const d = p.description ? `: ${p.description}` : ''
-      return `- [${p.title}](${url})${d}`
-    })
-    .join('\n') +
+  (() => {
+    // serilere göre grupla (yazı sırasındaki ilk görülme sırasıyla)
+    const groups = []
+    const idx = new Map()
+    for (const p of posts) {
+      const key = p.series || 'Diğer'
+      if (!idx.has(key)) {
+        idx.set(key, groups.length)
+        groups.push({ name: key, items: [] })
+      }
+      groups[idx.get(key)].items.push(p)
+    }
+    return groups
+      .map(
+        (g) =>
+          `### ${g.name}\n\n` +
+          g.items
+            .map((p) => {
+              const url = `${SITE_URL}${base}post/${encodeURIComponent(p.slug)}`
+              const d = p.description ? `: ${p.description}` : ''
+              return `- [${p.title}](${url})${d}`
+            })
+            .join('\n'),
+      )
+      .join('\n\n')
+  })() +
   '\n'
 writeFileSync(join(dist, 'llms.txt'), llms)
 

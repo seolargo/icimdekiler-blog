@@ -21,6 +21,10 @@ export const TRANSLATIONS = {
     emptyTitle: 'Henüz PDF yok.',
     prev: 'Önceki',
     next: 'Sonraki',
+    searchPlaceholder: 'Yazılarda ara…',
+    all: 'Tümü',
+    noResults: 'Sonuç bulunamadı.',
+    results: 'yazı',
     locale: 'tr-TR',
   },
   en: {
@@ -42,6 +46,10 @@ export const TRANSLATIONS = {
     emptyTitle: 'No PDFs yet.',
     prev: 'Previous',
     next: 'Next',
+    searchPlaceholder: 'Search posts…',
+    all: 'All',
+    noResults: 'No results.',
+    results: 'posts',
     locale: 'en-US',
   },
 }
