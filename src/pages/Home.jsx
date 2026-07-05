@@ -7,19 +7,6 @@ import { fold, matchesTokens } from '../search.js'
 
 const PER_PAGE = 10
 
-function formatDate(iso, locale) {
-  if (!iso) return ''
-  try {
-    return new Date(iso).toLocaleDateString(locale, {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    })
-  } catch {
-    return iso
-  }
-}
-
 function Intro() {
   const { t } = useLang()
   return (
@@ -68,7 +55,7 @@ function Pagination({ page, pageCount, onChange }) {
 
 export default function Home() {
   const { posts, loading, error } = usePosts()
-  const { t, lang } = useLang()
+  const { t } = useLang()
   const [searchParams, setSearchParams] = useSearchParams()
   const location = useLocation()
 
@@ -240,7 +227,6 @@ export default function Home() {
                         {post.description && (
                           <span className="post-desc">{post.description}</span>
                         )}
-                        <time className="post-date">{formatDate(post.date, lang)}</time>
                       </div>
                     </Link>
                   </li>

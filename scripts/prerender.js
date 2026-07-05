@@ -83,7 +83,6 @@ function postListItem(p) {
     `<div class="post-body"><span class="post-title">${esc(p.title)}</span>` +
     ser +
     desc +
-    `<time class="post-date" datetime="${escAttr(p.date)}">${esc(fmtDate(p.date))}</time>` +
     `</div></a></li>`
   )
 }
