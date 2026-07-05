@@ -66,20 +66,23 @@ const files = existsSync(pdfDir)
 const posts = files.map((file) => {
   const prev = byPdf.get(file)
   const slug = prev?.slug ?? slugify(file)
+  const mtime = statSync(join(pdfDir, file)).mtime
   const base = prev ?? {
     slug,
     title: titleize(file),
-    date: statSync(join(pdfDir, file)).mtime.toISOString().slice(0, 10),
+    date: mtime.toISOString().slice(0, 10),
     description: '',
     pdf: file,
   }
   // önizleme eksikse (yeni PDF ya da eski manifest) üret
   const thumb = base.thumb ?? makeThumb(file, slug)
-  return { ...base, thumb }
+  // eklenme sırası: tam zaman damgası (bir kez atanır, korunur; eskiler mtime'dan doldurulur)
+  const addedAt = base.addedAt ?? mtime.toISOString()
+  return { ...base, thumb, addedAt }
 })
 
-// En yeni tarih en üstte
-posts.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0))
+// En son EKLENEN en üstte (eklenme zamanına göre)
+posts.sort((a, b) => (a.addedAt < b.addedAt ? 1 : a.addedAt > b.addedAt ? -1 : 0))
 
 writeFileSync(manifestPath, JSON.stringify(posts, null, 2) + '\n')
 console.log(`[manifest] ${posts.length} yazı yazıldı -> public/posts.json`)
