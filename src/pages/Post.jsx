@@ -74,6 +74,8 @@ export default function Post() {
         </div>
       </div>
 
+      {post.note && <p className="post-note">{post.note}</p>}
+
       <div className="post-actions">
         <a href={pdfUrl} target="_blank" rel="noreferrer" className="btn">
           {t('openNewTab')}

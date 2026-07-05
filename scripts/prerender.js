@@ -190,6 +190,7 @@ for (const p of posts) {
     `<article class="post">` +
     `<a href="${base}" class="back-link">← Tüm yazılar</a>` +
     `<div class="post-head"><div><h1 class="post-heading">${esc(p.title)}</h1>${lead}</div></div>` +
+    (p.note ? `<p class="post-note">${esc(p.note)}</p>` : '') +
     `<div class="post-actions">` +
     `<a href="${escAttr(pdfUrl)}" target="_blank" rel="noreferrer" class="btn">Yeni sekmede aç</a>` +
     `<a href="${escAttr(pdfUrl)}" download class="btn">İndir</a>` +
