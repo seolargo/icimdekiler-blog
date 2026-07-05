@@ -52,6 +52,20 @@ Site tam SEO uyumludur:
 - **`sitemap.xml`** ve **`robots.txt`** otomatik üretilir.
 - Runtime'da rota değiştikçe `useHead` ([src/seo.js](src/seo.js)) meta etiketlerini günceller.
 
+### Yapay zeka keşfedilebilirliği (GEO)
+
+Site, LLM'ler ve AI ajanları tarafından da keşfedilsin diye:
+
+- **`llms.txt`** ([llmstxt.org](https://llmstxt.org) standardı) — tüm makalelerin başlık,
+  açıklama ve kalıcı bağlantılarıyla temiz markdown listesi. LLM'lerin siteyi tek dosyadan
+  anlaması için.
+- **`feed.xml`** (RSS 2.0) — AI okuyucular ve ajanların tükettiği makine-okunur akış;
+  her sayfanın `<head>`'inde `rel="alternate"` ile bağlanır.
+- **`robots.txt`** bilinen AI botlarına (GPTBot, ClaudeBot, PerplexityBot, Google-Extended,
+  Applebot-Extended, CCBot, Meta-ExternalAgent, …) **açıkça izin verir** ve `llms.txt` +
+  `sitemap.xml` konumlarını bildirir.
+- Article JSON-LD ve prerender edilen düz içerik, AI'ların veriyi güvenle çıkarmasını sağlar.
+
 ### Build ayarları (ortam değişkenleri)
 
 ```bash

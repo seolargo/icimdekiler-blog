@@ -96,6 +96,7 @@ function buildHead({ title, description, canonical, type, image, jsonLd }) {
     `<meta name="twitter:title" content="${escAttr(fullTitle)}" />`,
     `<meta name="twitter:description" content="${escAttr(description)}" />`,
     `<meta name="twitter:image" content="${escAttr(img)}" />`,
+    `<link rel="alternate" type="application/rss+xml" title="${escAttr(SITE_NAME)}" href="${escAttr(SITE_URL + base + 'feed.xml')}" />`,
   ]
   if (jsonLd) {
     const json = JSON.stringify(jsonLd).replace(/</g, '\\u003c')
@@ -208,11 +209,86 @@ const sitemap =
   '\n</urlset>\n'
 writeFileSync(join(dist, 'sitemap.xml'), sitemap)
 
-// --- robots.txt ------------------------------------------------------------
-writeFileSync(
-  join(dist, 'robots.txt'),
-  `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}${base}sitemap.xml\n`,
-)
+// --- robots.txt (AI botlarına açık izin) -----------------------------------
+// Site, yapay zeka sistemleri tarafından keşfedilsin diye bilinen AI crawler'lara
+// açıkça izin verir. llms.txt ve sitemap konumları da burada bildirilir.
+const aiBots = [
+  'GPTBot', // OpenAI eğitim/crawler
+  'OAI-SearchBot', // OpenAI arama
+  'ChatGPT-User', // ChatGPT tarama
+  'ClaudeBot', // Anthropic
+  'anthropic-ai',
+  'Claude-Web',
+  'PerplexityBot', // Perplexity
+  'Perplexity-User',
+  'Google-Extended', // Gemini/Bard
+  'Applebot-Extended', // Apple Intelligence
+  'CCBot', // Common Crawl (birçok LLM veri kaynağı)
+  'Meta-ExternalAgent', // Meta AI
+  'Bytespider', // TikTok/ByteDance
+  'Amazonbot',
+  'cohere-ai',
+  'YouBot',
+  'Diffbot',
+]
+const robots =
+  aiBots.map((b) => `User-agent: ${b}\nAllow: /`).join('\n\n') +
+  '\n\nUser-agent: *\nAllow: /\n\n' +
+  `# LLM içerik haritası\n# ${SITE_URL}${base}llms.txt\n\n` +
+  `Sitemap: ${SITE_URL}${base}sitemap.xml\n`
+writeFileSync(join(dist, 'robots.txt'), robots)
+
+// --- llms.txt (llmstxt.org): LLM'ler için temiz, markdown site haritası ------
+const llms =
+  `# ${SITE_NAME}\n\n` +
+  `> ${SITE_DESCRIPTION}\n\n` +
+  `${SITE_NAME} — ${SITE_ROLE}. Aşağıda tüm makaleler, başlık, kısa açıklama ve ` +
+  `kalıcı bağlantılarıyla listelenmiştir. Her makalenin tam metni bağlantıdaki ` +
+  `PDF'te yer alır.\n\n` +
+  `## Makaleler\n\n` +
+  posts
+    .map((p) => {
+      const url = `${SITE_URL}${base}post/${encodeURIComponent(p.slug)}`
+      const d = p.description ? `: ${p.description}` : ''
+      return `- [${p.title}](${url})${d}`
+    })
+    .join('\n') +
+  '\n'
+writeFileSync(join(dist, 'llms.txt'), llms)
+
+// --- feed.xml (RSS 2.0): AI okuyucular ve ajanlar için makine-okunur akış -----
+function rfc822(iso) {
+  if (!iso) return ''
+  try {
+    return new Date(iso + 'T00:00:00Z').toUTCString()
+  } catch {
+    return ''
+  }
+}
+const feed =
+  '<?xml version="1.0" encoding="UTF-8"?>\n' +
+  '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">\n<channel>\n' +
+  `  <title>${esc(SITE_NAME)}</title>\n` +
+  `  <link>${escAttr(SITE_URL + base)}</link>\n` +
+  `  <description>${esc(SITE_DESCRIPTION)}</description>\n` +
+  `  <language>tr</language>\n` +
+  `  <atom:link href="${escAttr(SITE_URL + base + 'feed.xml')}" rel="self" type="application/rss+xml" />\n` +
+  posts
+    .map((p) => {
+      const url = `${SITE_URL}${base}post/${encodeURIComponent(p.slug)}`
+      return (
+        '  <item>\n' +
+        `    <title>${esc(p.title)}</title>\n` +
+        `    <link>${escAttr(url)}</link>\n` +
+        `    <guid isPermaLink="true">${escAttr(url)}</guid>\n` +
+        (p.date ? `    <pubDate>${rfc822(p.date)}</pubDate>\n` : '') +
+        (p.description ? `    <description>${esc(p.description)}</description>\n` : '') +
+        '  </item>'
+      )
+    })
+    .join('\n') +
+  '\n</channel>\n</rss>\n'
+writeFileSync(join(dist, 'feed.xml'), feed)
 
 // --- hosting fallback'leri -------------------------------------------------
 // Netlify: bilinmeyen rotalar SPA kabuğuna düşsün (prerender edilen dosyalar önce servis edilir)
@@ -221,5 +297,7 @@ writeFileSync(join(dist, '_redirects'), '/*    /index.html    200\n')
 writeFileSync(join(dist, '404.html'), template)
 
 console.log(
-  `[prerender] ${posts.length} yazı + ana sayfa statik HTML üretildi; sitemap.xml, robots.txt, _redirects, 404.html yazıldı (SITE_URL=${SITE_URL})`,
+  `[prerender] ${posts.length} yazı + ana sayfa statik HTML üretildi; ` +
+    `sitemap.xml, robots.txt (AI botlarına açık), llms.txt, feed.xml, _redirects, 404.html yazıldı ` +
+    `(SITE_URL=${SITE_URL})`,
 )
