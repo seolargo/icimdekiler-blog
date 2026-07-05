@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { usePosts } from '../usePosts.js'
 import { useHead, SITE_NAME } from '../seo.js'
@@ -9,6 +9,11 @@ export default function Post() {
   const { posts, loading, error } = usePosts()
   const { t } = useLang()
   const [copied, setCopied] = useState(false)
+
+  // Yeni bir yazıya girildiğinde en üstten başla
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [slug])
 
   const post = posts.find((p) => p.slug === slug)
 

@@ -1,5 +1,5 @@
-import { useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useEffect, useMemo } from 'react'
+import { Link, useLocation, useSearchParams } from 'react-router-dom'
 import { usePosts } from '../usePosts.js'
 import { useHead } from '../seo.js'
 import { useLang } from '../i18n.jsx'
@@ -70,11 +70,57 @@ function Pagination({ page, pageCount, onChange }) {
 export default function Home() {
   const { posts, loading, error } = usePosts()
   const { t, lang } = useLang()
-  const [page, setPage] = useState(1)
-  const [query, setQuery] = useState('')
-  const [series, setSeries] = useState(null) // null = tümü
+  const [searchParams, setSearchParams] = useSearchParams()
+  const location = useLocation()
 
   useHead({ image: '/profile.jpeg' })
+
+  // Liste durumu URL'de tutulur -> geri gelince aynen korunur, paylaşılabilir olur
+  const page = Math.max(1, parseInt(searchParams.get('sayfa') || '1', 10) || 1)
+  const series = searchParams.get('seri') || null
+  const query = searchParams.get('q') || ''
+
+  const update = (patch) => {
+    const next = new URLSearchParams(searchParams)
+    for (const [k, v] of Object.entries(patch)) {
+      if (v == null || v === '') next.delete(k)
+      else next.set(k, v)
+    }
+    setSearchParams(next, { replace: true })
+  }
+
+  const setQuery = (v) => update({ q: v || null, sayfa: null })
+  const setSeries = (v) => update({ seri: v || null, sayfa: null })
+  const goTo = (n) => {
+    update({ sayfa: n > 1 ? String(n) : null })
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  // Kaydırma konumunu URL başına kaydet; geri gelişte geri yükle
+  useEffect(() => {
+    const key = 'scroll:' + location.pathname + location.search
+    let raf = 0
+    const onScroll = () => {
+      cancelAnimationFrame(raf)
+      raf = requestAnimationFrame(() =>
+        sessionStorage.setItem(key, String(window.scrollY)),
+      )
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      cancelAnimationFrame(raf)
+    }
+  }, [location.pathname, location.search])
+
+  useEffect(() => {
+    if (loading) return
+    const key = 'scroll:' + location.pathname + location.search
+    const y = sessionStorage.getItem(key)
+    if (y != null) {
+      requestAnimationFrame(() => window.scrollTo(0, parseInt(y, 10)))
+    }
+  }, [loading, location.pathname, location.search])
 
   // seriler ve adetleri (yazı sırasına göre ilk görülen sırada)
   const seriesList = useMemo(() => {
@@ -98,17 +144,6 @@ export default function Home() {
   const current = Math.min(page, pageCount || 1)
   const visible = filtered.slice((current - 1) * PER_PAGE, current * PER_PAGE)
 
-  const goTo = (n) => {
-    setPage(n)
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-
-  // filtre/arama değişince ilk sayfaya dön
-  const resetTo = (fn) => (val) => {
-    fn(val)
-    setPage(1)
-  }
-
   return (
     <>
       <Intro />
@@ -130,14 +165,14 @@ export default function Home() {
               className="search-input"
               placeholder={t('searchPlaceholder')}
               value={query}
-              onChange={(e) => resetTo(setQuery)(e.target.value)}
+              onChange={(e) => setQuery(e.target.value)}
               aria-label={t('searchPlaceholder')}
             />
             <div className="series-chips" role="group" aria-label="Seriler">
               <button
                 type="button"
                 className={`chip${series === null ? ' is-active' : ''}`}
-                onClick={() => resetTo(setSeries)(null)}
+                onClick={() => setSeries(null)}
               >
                 {t('all')} <span className="chip-count">{posts.length}</span>
               </button>
@@ -146,7 +181,7 @@ export default function Home() {
                   key={name}
                   type="button"
                   className={`chip${series === name ? ' is-active' : ''}`}
-                  onClick={() => resetTo(setSeries)(series === name ? null : name)}
+                  onClick={() => setSeries(series === name ? null : name)}
                 >
                   {name} <span className="chip-count">{count}</span>
                 </button>

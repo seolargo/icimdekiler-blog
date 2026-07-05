@@ -11,6 +11,11 @@ import './styles.css'
 // basename, vite base'inden türetilir (alt dizinde barındırmayı da destekler).
 const basename = import.meta.env.BASE_URL.replace(/\/$/, '')
 
+// Kaydırma konumunu kendimiz yönetiyoruz (Home listede konumu korur)
+if ('scrollRestoration' in window.history) {
+  window.history.scrollRestoration = 'manual'
+}
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter basename={basename}>
