@@ -1,4 +1,4 @@
-import { Link, Outlet } from 'react-router-dom'
+import { Link, NavLink, Outlet } from 'react-router-dom'
 import { useLang } from './i18n.jsx'
 
 // blog başlığı ve alt bilgi — buradan kişiselleştirebilirsin
@@ -48,6 +48,15 @@ export default function App() {
           <span className="brand-title">İçimdekiler</span>
         </Link>
       </header>
+
+      <nav className="site-nav" aria-label={t('sections')}>
+        <NavLink to="/" end className="nav-tab">
+          {t('writings')}
+        </NavLink>
+        <NavLink to="/muzik" className="nav-tab">
+          {t('music')}
+        </NavLink>
+      </nav>
 
       <main className="site-main">
         <Outlet />

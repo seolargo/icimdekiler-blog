@@ -124,25 +124,28 @@ export default function Home() {
     }
   }, [loading, location.pathname, location.search])
 
+  // Müzik sekmesindeki yazılar ana "Yazılar" akışında görünmez
+  const writings = useMemo(() => posts.filter((p) => p.tab !== 'muzik'), [posts])
+
   // seriler ve adetleri (yazı sırasına göre ilk görülen sırada)
   const seriesList = useMemo(() => {
     const counts = new Map()
-    for (const p of posts) {
+    for (const p of writings) {
       if (p.series) counts.set(p.series, (counts.get(p.series) || 0) + 1)
     }
     return [...counts.entries()].map(([name, count]) => ({ name, count }))
-  }, [posts])
+  }, [writings])
 
   const filtered = useMemo(() => {
     const fq = fold(query.trim())
-    return posts.filter((p) => {
+    return writings.filter((p) => {
       if (series && p.series !== series) return false
       if (!fq) return true
       const hay =
         fold(p.title) + ' ' + fold(p.description) + ' ' + (index?.get(p.slug) || '')
       return matchesTokens(fq, hay, true)
     })
-  }, [posts, query, series, index])
+  }, [writings, query, series, index])
 
   const pageCount = Math.ceil(filtered.length / PER_PAGE)
   const current = Math.min(page, pageCount || 1)
@@ -182,7 +185,7 @@ export default function Home() {
                 className={`chip${series === null ? ' is-active' : ''}`}
                 onClick={() => setSeries(null)}
               >
-                {t('all')} <span className="chip-count">{posts.length}</span>
+                {t('all')} <span className="chip-count">{writings.length}</span>
               </button>
               {seriesList.map(({ name, count }) => (
                 <button

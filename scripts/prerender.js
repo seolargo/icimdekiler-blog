@@ -54,7 +54,9 @@ const fulltext = existsSync(fulltextPath)
   : new Map()
 
 // --- ortak parçalar -------------------------------------------------------
-function header() {
+function header(active) {
+  const tab = (href, label, key) =>
+    `<a href="${href}" class="nav-tab${active === key ? ' active' : ''}">${label}</a>`
   return `<div class="site">` +
     `<div class="lang-switch" role="group" aria-label="Dil / Language">` +
     `<button type="button" class="lang-btn is-active">TR</button>` +
@@ -65,7 +67,12 @@ function header() {
     `<span class="brand-name">${esc(SITE_NAME)}</span>` +
     `<span class="brand-role">${esc(SITE_ROLE)}</span>` +
     `<span class="brand-title">İçimdekiler</span>` +
-    `</a></header><main class="site-main">`
+    `</a></header>` +
+    `<nav class="site-nav" aria-label="Bölümler">` +
+    tab(base, 'Yazılar', 'yazilar') +
+    tab(base + 'muzik', 'Müzik', 'muzik') +
+    `</nav>` +
+    `<main class="site-main">`
 }
 const footer = () =>
   `</main><footer class="site-footer"><span>© 2026 ${esc(SITE_NAME)}</span></footer></div>`
@@ -156,12 +163,28 @@ const homeHead = buildHead({
     author: { '@type': 'Person', name: SITE_NAME, jobTitle: SITE_ROLE },
   },
 })
+const writings = posts.filter((p) => p.tab !== 'muzik') // Müzik sekmesi hariç
+const musicPosts = posts.filter((p) => p.tab === 'muzik')
 const homeBody =
-  header() +
+  header('yazilar') +
   introHtml +
-  `<ul class="post-list">${posts.map(postListItem).join('')}</ul>` +
+  `<ul class="post-list">${writings.map(postListItem).join('')}</ul>` +
   footer()
 writeFileSync(join(dist, 'index.html'), renderPage({ head: homeHead, bodyHtml: homeBody }))
+
+// --- MÜZİK SEKMESİ ---------------------------------------------------------
+const muzikHead = buildHead({
+  title: 'Müzik',
+  description: 'Müzik teorisi ve pratik akor notları.',
+  canonical: `${SITE_URL}${base}muzik`,
+  type: 'website',
+  image: '/profile.jpeg',
+})
+const muzikBody =
+  header('muzik') +
+  `<ul class="post-list">${musicPosts.map(postListItem).join('')}</ul>` +
+  footer()
+write('muzik', renderPage({ head: muzikHead, bodyHtml: muzikBody }))
 
 // --- YAZI SAYFALARI --------------------------------------------------------
 for (const p of posts) {
@@ -185,10 +208,13 @@ for (const p of posts) {
     },
   })
   const lead = p.description ? `<p class="post-lead">${esc(p.description)}</p>` : ''
+  const isMusic = p.tab === 'muzik'
+  const backHref = isMusic ? base + 'muzik' : base
+  const backLabel = isMusic ? '← Müzik' : '← Tüm yazılar'
   const body =
-    header() +
+    header(isMusic ? 'muzik' : 'yazilar') +
     `<article class="post">` +
-    `<a href="${base}" class="back-link">← Tüm yazılar</a>` +
+    `<a href="${escAttr(backHref)}" class="back-link">${backLabel}</a>` +
     `<div class="post-head"><div><h1 class="post-heading">${esc(p.title)}</h1>${lead}</div></div>` +
     (p.note ? `<p class="post-note">${esc(p.note)}</p>` : '') +
     `<div class="post-actions">` +
@@ -205,6 +231,7 @@ for (const p of posts) {
 // --- sitemap.xml -----------------------------------------------------------
 const urls = [
   { loc: SITE_URL + base, lastmod: posts[0]?.date },
+  { loc: `${SITE_URL}${base}muzik` },
   ...posts.map((p) => ({
     loc: `${SITE_URL}${base}post/${encodeURIComponent(p.slug)}`,
     lastmod: p.date,

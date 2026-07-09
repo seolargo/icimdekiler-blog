@@ -25,6 +25,9 @@ export const TRANSLATIONS = {
     all: 'Tümü',
     noResults: 'Sonuç bulunamadı.',
     results: 'yazı',
+    sections: 'Bölümler',
+    writings: 'Yazılar',
+    music: 'Müzik',
     locale: 'tr-TR',
   },
   en: {
@@ -50,6 +53,9 @@ export const TRANSLATIONS = {
     all: 'All',
     noResults: 'No results.',
     results: 'posts',
+    sections: 'Sections',
+    writings: 'Writings',
+    music: 'Music',
     locale: 'en-US',
   },
 }

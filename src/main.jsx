@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import App from './App.jsx'
 import Home from './pages/Home.jsx'
 import Post from './pages/Post.jsx'
+import Muzik from './pages/Muzik.jsx'
 import { LanguageProvider } from './i18n.jsx'
 import './styles.css'
 
@@ -23,6 +24,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Routes>
           <Route element={<App />}>
             <Route index element={<Home />} />
+            <Route path="muzik" element={<Muzik />} />
             <Route path="post/:slug" element={<Post />} />
           </Route>
         </Routes>
