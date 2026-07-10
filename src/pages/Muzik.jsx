@@ -31,6 +31,11 @@ export default function Muzik() {
                 )}
                 <div className="post-body">
                   <span className="post-title">{post.title}</span>
+                  {post.pages > 0 && (
+                    <span className="post-series">
+                      {post.pages} {t('pagesUnit')}
+                    </span>
+                  )}
                   {post.description && (
                     <span className="post-desc">{post.description}</span>
                   )}

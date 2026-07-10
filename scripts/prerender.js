@@ -88,7 +88,8 @@ function postListItem(p) {
   const thumb = p.thumb
     ? `<img class="post-thumb" src="${asset(p.thumb)}" alt="" loading="lazy" />`
     : ''
-  const ser = p.series ? `<span class="post-series">${esc(p.series)}</span>` : ''
+  const meta = [p.series, p.pages > 0 ? `${p.pages} sayfa` : null].filter(Boolean).join(' · ')
+  const ser = meta ? `<span class="post-series">${esc(meta)}</span>` : ''
   const desc = p.description ? `<span class="post-desc">${esc(p.description)}</span>` : ''
   return (
     `<li class="post-item"><a href="${base}post/${encodeURIComponent(p.slug)}" class="post-link">` +

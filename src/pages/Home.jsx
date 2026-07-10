@@ -224,8 +224,12 @@ export default function Home() {
                       )}
                       <div className="post-body">
                         <span className="post-title">{post.title}</span>
-                        {post.series && (
-                          <span className="post-series">{post.series}</span>
+                        {(post.series || post.pages > 0) && (
+                          <span className="post-series">
+                            {[post.series, post.pages > 0 ? `${post.pages} ${t('pagesUnit')}` : null]
+                              .filter(Boolean)
+                              .join(' · ')}
+                          </span>
                         )}
                         {post.description && (
                           <span className="post-desc">{post.description}</span>

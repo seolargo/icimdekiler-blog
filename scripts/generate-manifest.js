@@ -7,6 +7,10 @@ import { readdirSync, readFileSync, writeFileSync, existsSync, statSync, mkdirSy
 import { join, dirname, basename } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { execFileSync } from 'node:child_process'
+import { createRequire } from 'node:module'
+
+const require = createRequire(import.meta.url)
+const { PDFParse } = require('pdf-parse')
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const pdfDir = join(root, 'public', 'pdfs')
@@ -36,6 +40,20 @@ function makeThumb(file, slug) {
   return null
 }
 
+// PDF'in toplam sayfa sayısını okur; hata olursa null döner (kart sayfa
+// bilgisi olmadan görünür).
+async function pageCount(file) {
+  const parser = new PDFParse({ data: new Uint8Array(readFileSync(join(pdfDir, file))) })
+  try {
+    const info = await parser.getInfo()
+    return info.total || null
+  } catch {
+    return null
+  } finally {
+    await parser.destroy?.()
+  }
+}
+
 function slugify(name) {
   return name
     .toLowerCase()
@@ -63,7 +81,8 @@ const files = existsSync(pdfDir)
   ? readdirSync(pdfDir).filter((f) => f.toLowerCase().endsWith('.pdf'))
   : []
 
-const posts = files.map((file) => {
+const posts = []
+for (const file of files) {
   const prev = byPdf.get(file)
   const slug = prev?.slug ?? slugify(file)
   const mtime = statSync(join(pdfDir, file)).mtime
@@ -78,8 +97,10 @@ const posts = files.map((file) => {
   const thumb = base.thumb ?? makeThumb(file, slug)
   // eklenme sırası: tam zaman damgası (bir kez atanır, korunur; eskiler mtime'dan doldurulur)
   const addedAt = base.addedAt ?? mtime.toISOString()
-  return { ...base, thumb, addedAt }
-})
+  // sayfa sayısı eksikse PDF'ten oku (bir kez hesaplanır, korunur)
+  const pages = base.pages ?? (await pageCount(file))
+  posts.push({ ...base, thumb, addedAt, pages })
+}
 
 // En son EKLENEN en üstte (eklenme zamanına göre)
 posts.sort((a, b) => (a.addedAt < b.addedAt ? 1 : a.addedAt > b.addedAt ? -1 : 0))
