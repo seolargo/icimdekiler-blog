@@ -193,6 +193,10 @@ code {
 }
 
 .site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 6px 16px;
   padding: 32px 0;
   border-top: 1px solid var(--line);
   color: var(--muted);

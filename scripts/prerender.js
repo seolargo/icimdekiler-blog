@@ -9,6 +9,7 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { execSync } from 'node:child_process'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const dist = join(root, 'dist')
@@ -74,8 +75,21 @@ function header(active) {
     `</nav>` +
     `<main class="site-main">`
 }
+// Son değişiklik zamanı: son git commit tarihi; git yoksa (ör. Vercel build) derleme anı.
+let LAST_CHANGE = new Date().toISOString()
+try {
+  LAST_CHANGE = execSync('git log -1 --format=%cI').toString().trim() || LAST_CHANGE
+} catch {
+  // git yok — derleme anı kalır
+}
+const lastChangeText = new Date(LAST_CHANGE).toLocaleString('tr-TR', {
+  dateStyle: 'medium',
+  timeStyle: 'short',
+})
+
 const footer = () =>
-  `</main><footer class="site-footer"><span>© 2026 ${esc(SITE_NAME)}</span></footer></div>`
+  `</main><footer class="site-footer"><span>© ${new Date().getFullYear()} ${esc(SITE_NAME)}</span>` +
+  `<span class="footer-updated">Son güncelleme: ${esc(lastChangeText)}</span></footer></div>`
 
 const introHtml =
   '<section class="intro">' +

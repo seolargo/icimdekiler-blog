@@ -64,6 +64,13 @@ export default function App() {
 
       <footer className="site-footer">
         <span>© {new Date().getFullYear()} {SITE.title}</span>
+        <span className="footer-updated">
+          {t('lastUpdate')}:{' '}
+          {new Date(__LAST_CHANGE__).toLocaleString(t('locale'), {
+            dateStyle: 'medium',
+            timeStyle: 'short',
+          })}
+        </span>
       </footer>
     </div>
   )
