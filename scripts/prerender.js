@@ -85,6 +85,7 @@ try {
 const lastChangeText = new Date(LAST_CHANGE).toLocaleString('tr-TR', {
   dateStyle: 'medium',
   timeStyle: 'short',
+  timeZone: 'Europe/Istanbul', // build makinesi UTC olabilir (ör. Vercel)
 })
 
 const footer = () =>
