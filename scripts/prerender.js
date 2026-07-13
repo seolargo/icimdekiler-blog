@@ -223,6 +223,8 @@ for (const p of posts) {
       url: canonical,
     },
   })
+  const metaLine = [p.series, p.pages > 0 ? `${p.pages} sayfa` : null].filter(Boolean).join(' · ')
+  const meta = metaLine ? `<p class="post-meta">${esc(metaLine)}</p>` : ''
   const lead = p.description ? `<p class="post-lead">${esc(p.description)}</p>` : ''
   const isMusic = p.tab === 'muzik'
   const backHref = isMusic ? base + 'muzik' : base
@@ -231,7 +233,7 @@ for (const p of posts) {
     header(isMusic ? 'muzik' : 'yazilar') +
     `<article class="post">` +
     `<a href="${escAttr(backHref)}" class="back-link">${backLabel}</a>` +
-    `<div class="post-head"><div><h1 class="post-heading">${esc(p.title)}</h1>${lead}</div></div>` +
+    `<div class="post-head"><div><h1 class="post-heading">${esc(p.title)}</h1>${meta}${lead}</div></div>` +
     (p.note ? `<p class="post-note">${esc(p.note)}</p>` : '') +
     `<div class="post-actions">` +
     `<a href="${escAttr(pdfUrl)}" target="_blank" rel="noreferrer" class="btn">Yeni sekmede aç</a>` +

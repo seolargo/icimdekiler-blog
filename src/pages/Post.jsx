@@ -70,6 +70,13 @@ export default function Post() {
       <div className="post-head">
         <div>
           <h1 className="post-heading">{post.title}</h1>
+          {(post.series || post.pages > 0) && (
+            <p className="post-meta">
+              {[post.series, post.pages > 0 ? `${post.pages} ${t('pagesUnit')}` : null]
+                .filter(Boolean)
+                .join(' · ')}
+            </p>
+          )}
           {post.description && <p className="post-lead">{post.description}</p>}
         </div>
       </div>
