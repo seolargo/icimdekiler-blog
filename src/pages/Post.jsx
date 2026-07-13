@@ -17,6 +17,11 @@ export default function Post() {
 
   const post = posts.find((p) => p.slug === slug)
 
+  // Listeden gelindiyse kaldığı sayfaya/filtreye geri döndür (Home kaydeder)
+  const listSearch = sessionStorage.getItem('listSearch:/') || ''
+  const backTo =
+    post?.tab === 'muzik' ? '/muzik' : { pathname: '/', search: listSearch }
+
   useHead(
     post
       ? {
@@ -44,7 +49,7 @@ export default function Post() {
     return (
       <div className="empty">
         <p>{t('notFound')}</p>
-        <Link to="/" className="back-link">{t('allPosts')}</Link>
+        <Link to={backTo} className="back-link">{t('allPosts')}</Link>
       </div>
     )
   }
@@ -65,7 +70,7 @@ export default function Post() {
 
   return (
     <article className="post">
-      <Link to="/" className="back-link">{t('allPosts')}</Link>
+      <Link to={backTo} className="back-link">{t('allPosts')}</Link>
 
       <div className="post-head">
         <div>

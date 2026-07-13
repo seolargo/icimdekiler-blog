@@ -98,6 +98,12 @@ export default function Home() {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
+  // Liste durumu (sayfa/seri/arama) hatırlanır -> yazıdan "Tüm yazılar" ile
+  // dönüşte kaldığın sayfaya gelirsin, baştan başlamazsın
+  useEffect(() => {
+    sessionStorage.setItem('listSearch:/', location.search)
+  }, [location.search])
+
   // Kaydırma konumunu URL başına kaydet; geri gelişte geri yükle
   useEffect(() => {
     const key = 'scroll:' + location.pathname + location.search
