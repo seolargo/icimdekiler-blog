@@ -20,7 +20,17 @@ export default function Post() {
   // Listeden gelindiyse kaldığı sayfaya/filtreye geri döndür (Home kaydeder)
   const listSearch = sessionStorage.getItem('listSearch:/') || ''
   const backTo =
-    post?.tab === 'muzik' ? '/muzik' : { pathname: '/', search: listSearch }
+    post?.tab === 'muzik'
+      ? '/muzik'
+      : post?.tab === 'rehber'
+        ? '/rehberler'
+        : { pathname: '/', search: listSearch }
+  const backLabel =
+    post?.tab === 'muzik'
+      ? `← ${t('music')}`
+      : post?.tab === 'rehber'
+        ? `← ${t('guides')}`
+        : t('allPosts')
 
   useHead(
     post
@@ -49,7 +59,7 @@ export default function Post() {
     return (
       <div className="empty">
         <p>{t('notFound')}</p>
-        <Link to={backTo} className="back-link">{t('allPosts')}</Link>
+        <Link to={backTo} className="back-link">{backLabel}</Link>
       </div>
     )
   }
@@ -70,7 +80,7 @@ export default function Post() {
 
   return (
     <article className="post">
-      <Link to={backTo} className="back-link">{t('allPosts')}</Link>
+      <Link to={backTo} className="back-link">{backLabel}</Link>
 
       <div className="post-head">
         <div>

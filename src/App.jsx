@@ -53,6 +53,9 @@ export default function App() {
         <NavLink to="/" end className="nav-tab">
           {t('writings')}
         </NavLink>
+        <NavLink to="/rehberler" className="nav-tab">
+          {t('guides')}
+        </NavLink>
         <NavLink to="/muzik" className="nav-tab">
           {t('music')}
         </NavLink>

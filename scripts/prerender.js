@@ -71,6 +71,7 @@ function header(active) {
     `</a></header>` +
     `<nav class="site-nav" aria-label="Bölümler">` +
     tab(base, 'Yazılar', 'yazilar') +
+    tab(base + 'rehberler', 'Rehberler', 'rehber') +
     tab(base + 'muzik', 'Müzik', 'muzik') +
     `</nav>` +
     `<main class="site-main">`
@@ -179,8 +180,9 @@ const homeHead = buildHead({
     author: { '@type': 'Person', name: SITE_NAME, jobTitle: SITE_ROLE },
   },
 })
-const writings = posts.filter((p) => p.tab !== 'muzik') // Müzik sekmesi hariç
+const writings = posts.filter((p) => !p.tab) // sekmeli yazılar (müzik, rehber) hariç
 const musicPosts = posts.filter((p) => p.tab === 'muzik')
+const guidePosts = posts.filter((p) => p.tab === 'rehber')
 const homeBody =
   header('yazilar') +
   introHtml +
@@ -201,6 +203,20 @@ const muzikBody =
   `<ul class="post-list">${musicPosts.map(postListItem).join('')}</ul>` +
   footer()
 write('muzik', renderPage({ head: muzikHead, bodyHtml: muzikBody }))
+
+// --- REHBERLER SEKMESİ -------------------------------------------------------
+const rehberHead = buildHead({
+  title: 'Rehberler',
+  description: 'Kapsamlı başvuru rehberleri ve ders notları.',
+  canonical: `${SITE_URL}${base}rehberler`,
+  type: 'website',
+  image: '/profile.jpeg',
+})
+const rehberBody =
+  header('rehber') +
+  `<ul class="post-list">${guidePosts.map(postListItem).join('')}</ul>` +
+  footer()
+write('rehberler', renderPage({ head: rehberHead, bodyHtml: rehberBody }))
 
 // --- YAZI SAYFALARI --------------------------------------------------------
 for (const p of posts) {
@@ -227,10 +243,11 @@ for (const p of posts) {
   const meta = metaLine ? `<p class="post-meta">${esc(metaLine)}</p>` : ''
   const lead = p.description ? `<p class="post-lead">${esc(p.description)}</p>` : ''
   const isMusic = p.tab === 'muzik'
-  const backHref = isMusic ? base + 'muzik' : base
-  const backLabel = isMusic ? '← Müzik' : '← Tüm yazılar'
+  const isGuide = p.tab === 'rehber'
+  const backHref = isMusic ? base + 'muzik' : isGuide ? base + 'rehberler' : base
+  const backLabel = isMusic ? '← Müzik' : isGuide ? '← Rehberler' : '← Tüm yazılar'
   const body =
-    header(isMusic ? 'muzik' : 'yazilar') +
+    header(isMusic ? 'muzik' : isGuide ? 'rehber' : 'yazilar') +
     `<article class="post">` +
     `<a href="${escAttr(backHref)}" class="back-link">${backLabel}</a>` +
     `<div class="post-head"><div><h1 class="post-heading">${esc(p.title)}</h1>${meta}${lead}</div></div>` +
@@ -250,6 +267,7 @@ for (const p of posts) {
 const urls = [
   { loc: SITE_URL + base, lastmod: posts[0]?.date },
   { loc: `${SITE_URL}${base}muzik` },
+  { loc: `${SITE_URL}${base}rehberler` },
   ...posts.map((p) => ({
     loc: `${SITE_URL}${base}post/${encodeURIComponent(p.slug)}`,
     lastmod: p.date,

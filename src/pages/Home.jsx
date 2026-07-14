@@ -130,8 +130,8 @@ export default function Home() {
     }
   }, [loading, location.pathname, location.search])
 
-  // Müzik sekmesindeki yazılar ana "Yazılar" akışında görünmez
-  const writings = useMemo(() => posts.filter((p) => p.tab !== 'muzik'), [posts])
+  // Sekmeli yazılar (müzik, rehber) ana "Yazılar" akışında görünmez
+  const writings = useMemo(() => posts.filter((p) => !p.tab), [posts])
 
   // seriler ve adetleri (yazı sırasına göre ilk görülen sırada)
   const seriesList = useMemo(() => {
