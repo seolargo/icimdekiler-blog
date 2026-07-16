@@ -247,14 +247,27 @@ for (const p of posts) {
   const isGuide = p.tab === 'rehber'
   const backHref = isMusic ? base + 'muzik' : isGuide ? base + 'rehberler' : base
   const backLabel = isMusic ? '← Müzik' : isGuide ? '← Rehberler' : '← Tüm yazılar'
-  const relatedPosts = (p.related || []).map((s) => postsBySlug.get(s)).filter(Boolean)
+  const curatedRelated = (p.related || []).map((s) => postsBySlug.get(s)).filter(Boolean)
+  const relatedPosts = curatedRelated.length
+    ? curatedRelated
+    : p.series
+      ? posts.filter((o) => o.series === p.series && o.slug !== p.slug).slice(0, 8)
+      : []
   const related = relatedPosts.length
     ? `<div class="post-related"><h2 class="post-related-title">İlgili Yazılar</h2>` +
       `<ul class="post-related-list">${relatedPosts
-        .map(
-          (rp) =>
-            `<li><a href="${base}post/${encodeURIComponent(rp.slug)}">${esc(rp.title)}</a></li>`,
-        )
+        .map((rp) => {
+          const thumb = rp.thumb
+            ? `<img class="post-related-thumb" src="${asset(rp.thumb)}" alt="" loading="lazy" />`
+            : ''
+          return (
+            `<li class="post-related-item"><a href="${base}post/${encodeURIComponent(rp.slug)}">` +
+            thumb +
+            `<span class="post-related-name">${esc(rp.title)}</span>` +
+            `<span class="post-related-slug">${esc(rp.slug)}</span>` +
+            `</a></li>`
+          )
+        })
         .join('')}</ul></div>`
     : ''
   const body =

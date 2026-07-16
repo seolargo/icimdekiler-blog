@@ -490,26 +490,68 @@ code {
 .post-related-title {
   font-size: 0.95rem;
   font-weight: 600;
-  margin: 0 0 10px;
+  margin: 0 0 14px;
   color: var(--muted);
 }
 
 .post-related-list {
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 0 0 8px;
   display: flex;
-  flex-direction: column;
-  gap: 6px;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
 }
 
-.post-related-list a {
-  color: var(--accent);
+.post-related-item {
+  flex: 0 0 auto;
+  width: 150px;
+  scroll-snap-align: start;
+}
+
+.post-related-item a {
+  display: block;
+  color: inherit;
   text-decoration: none;
 }
 
-.post-related-list a:hover {
-  text-decoration: underline;
+.post-related-thumb {
+  display: block;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--btn-bg);
+  margin-bottom: 8px;
+  transition: opacity 0.15s ease;
+}
+
+.post-related-item a:hover .post-related-thumb {
+  opacity: 0.65;
+}
+
+.post-related-name {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 0.84rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 3px;
+}
+
+.post-related-slug {
+  display: block;
+  font-size: 0.68rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* States */

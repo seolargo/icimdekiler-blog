@@ -16,9 +16,15 @@ export default function Post() {
   }, [slug])
 
   const post = posts.find((p) => p.slug === slug)
-  const relatedPosts = (post?.related || [])
+  const curatedRelated = (post?.related || [])
     .map((s) => posts.find((p) => p.slug === s))
     .filter(Boolean)
+  // Elle küratörlü ilişki yoksa aynı seriden diğer yazılara düş
+  const relatedPosts = curatedRelated.length
+    ? curatedRelated
+    : post?.series
+      ? posts.filter((p) => p.series === post.series && p.slug !== post.slug).slice(0, 8)
+      : []
 
   // Listeden gelindiyse kaldığı sayfaya/filtreye geri döndür (Home kaydeder)
   const listSearch = sessionStorage.getItem('listSearch:/') || ''
@@ -122,8 +128,19 @@ export default function Post() {
           <h2 className="post-related-title">{t('relatedPosts')}</h2>
           <ul className="post-related-list">
             {relatedPosts.map((rp) => (
-              <li key={rp.slug}>
-                <Link to={`/post/${rp.slug}`}>{rp.title}</Link>
+              <li key={rp.slug} className="post-related-item">
+                <Link to={`/post/${rp.slug}`}>
+                  {rp.thumb && (
+                    <img
+                      className="post-related-thumb"
+                      src={`${import.meta.env.BASE_URL}${rp.thumb}`}
+                      alt=""
+                      loading="lazy"
+                    />
+                  )}
+                  <span className="post-related-name">{rp.title}</span>
+                  <span className="post-related-slug">{rp.slug}</span>
+                </Link>
               </li>
             ))}
           </ul>
