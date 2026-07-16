@@ -16,6 +16,9 @@ export default function Post() {
   }, [slug])
 
   const post = posts.find((p) => p.slug === slug)
+  const relatedPosts = (post?.related || [])
+    .map((s) => posts.find((p) => p.slug === s))
+    .filter(Boolean)
 
   // Listeden gelindiyse kaldığı sayfaya/filtreye geri döndür (Home kaydeder)
   const listSearch = sessionStorage.getItem('listSearch:/') || ''
@@ -113,6 +116,19 @@ export default function Post() {
       <div className="pdf-frame">
         <iframe title={post.title} src={pdfUrl} />
       </div>
+
+      {relatedPosts.length > 0 && (
+        <div className="post-related">
+          <h2 className="post-related-title">{t('relatedPosts')}</h2>
+          <ul className="post-related-list">
+            {relatedPosts.map((rp) => (
+              <li key={rp.slug}>
+                <Link to={`/post/${rp.slug}`}>{rp.title}</Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </article>
   )
 }

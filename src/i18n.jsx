@@ -31,6 +31,7 @@ export const TRANSLATIONS = {
     writings: 'Yazılar',
     guides: 'Rehberler',
     music: 'Müzik',
+    relatedPosts: 'İlgili Yazılar',
     locale: 'tr-TR',
   },
   en: {
@@ -62,6 +63,7 @@ export const TRANSLATIONS = {
     writings: 'Writings',
     guides: 'Guides',
     music: 'Music',
+    relatedPosts: 'Related Writings',
     locale: 'en-US',
   },
 }

@@ -219,6 +219,7 @@ const rehberBody =
 write('rehberler', renderPage({ head: rehberHead, bodyHtml: rehberBody }))
 
 // --- YAZI SAYFALARI --------------------------------------------------------
+const postsBySlug = new Map(posts.map((p) => [p.slug, p]))
 for (const p of posts) {
   const canonical = `${SITE_URL}${base}post/${encodeURIComponent(p.slug)}`
   const pdfUrl = asset(`pdfs/${p.pdf}`)
@@ -246,6 +247,16 @@ for (const p of posts) {
   const isGuide = p.tab === 'rehber'
   const backHref = isMusic ? base + 'muzik' : isGuide ? base + 'rehberler' : base
   const backLabel = isMusic ? '← Müzik' : isGuide ? '← Rehberler' : '← Tüm yazılar'
+  const relatedPosts = (p.related || []).map((s) => postsBySlug.get(s)).filter(Boolean)
+  const related = relatedPosts.length
+    ? `<div class="post-related"><h2 class="post-related-title">İlgili Yazılar</h2>` +
+      `<ul class="post-related-list">${relatedPosts
+        .map(
+          (rp) =>
+            `<li><a href="${base}post/${encodeURIComponent(rp.slug)}">${esc(rp.title)}</a></li>`,
+        )
+        .join('')}</ul></div>`
+    : ''
   const body =
     header(isMusic ? 'muzik' : isGuide ? 'rehber' : 'yazilar') +
     `<article class="post">` +
@@ -258,6 +269,7 @@ for (const p of posts) {
     `<button type="button" class="btn">Paylaş</button>` +
     `</div>` +
     `<div class="pdf-frame"><iframe title="${escAttr(p.title)}" src="${escAttr(pdfUrl)}"></iframe></div>` +
+    related +
     `</article>` +
     footer()
   write(`post/${p.slug}`, renderPage({ head, bodyHtml: body }))
