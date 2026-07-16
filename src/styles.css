@@ -507,7 +507,7 @@ code {
 
 .post-related-item {
   flex: 0 0 auto;
-  width: 150px;
+  width: 210px;
   scroll-snap-align: start;
 }
 
@@ -520,7 +520,7 @@ code {
 .post-related-thumb {
   display: block;
   width: 100%;
-  height: 200px;
+  height: 260px;
   object-fit: cover;
   border-radius: 8px;
   border: 1px solid var(--line);
@@ -544,14 +544,14 @@ code {
   margin-bottom: 3px;
 }
 
-.post-related-slug {
-  display: block;
-  font-size: 0.68rem;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  color: var(--muted);
+.post-related-desc {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  font-size: 0.76rem;
+  line-height: 1.4;
+  color: var(--muted);
 }
 
 /* States */

@@ -260,11 +260,14 @@ for (const p of posts) {
           const thumb = rp.thumb
             ? `<img class="post-related-thumb" src="${asset(rp.thumb)}" alt="" loading="lazy" />`
             : ''
+          const desc = rp.description
+            ? `<span class="post-related-desc">${esc(rp.description)}</span>`
+            : ''
           return (
             `<li class="post-related-item"><a href="${base}post/${encodeURIComponent(rp.slug)}">` +
             thumb +
             `<span class="post-related-name">${esc(rp.title)}</span>` +
-            `<span class="post-related-slug">${esc(rp.slug)}</span>` +
+            desc +
             `</a></li>`
           )
         })

@@ -139,7 +139,9 @@ export default function Post() {
                     />
                   )}
                   <span className="post-related-name">{rp.title}</span>
-                  <span className="post-related-slug">{rp.slug}</span>
+                  {rp.description && (
+                    <span className="post-related-desc">{rp.description}</span>
+                  )}
                 </Link>
               </li>
             ))}
