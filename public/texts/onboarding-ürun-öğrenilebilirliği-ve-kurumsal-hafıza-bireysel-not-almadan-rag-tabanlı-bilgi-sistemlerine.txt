@@ -1,0 +1,244 @@
+Onboarding, Ürün Öğrenilebilirliği ve Kurumsal Hafıza:
+Bireysel Not Almadan RAG Tabanlı Bilgi Sistemlerine
+Ömer Faruk Yavuz
+Kasım 2025
+Giriş
+Bu çalışma, bireysel hafızanın sınırları ile kurumsal sistemlerin sorumluluğu arasındaki
+çizgiyi yeniden çerçevelemeyi amaçlamaktadır. Çıkış noktası, gündelik iş hayatında sık
+karşılaşılan bir gerilimdir: "bunu sana anlatmıştım, artık hatırlaman gerekirdi" ifadesiyle
+özetlenebilecek, hatırlama yükünün bütünüyle bireyin üzerine bırakıldığı yaklaşım.
+Merkezi tez şudur: tekrar edilmesi gereken bilgi bireyin hafızasında değil, kurumsal
+sistemlerde bulunmalıdır. Bu, Nonaka ve Takeuchi’nin örgütsel bilgi yaratımı kuramındaki
+temel ayrımla örtüşür: örtük bilgi (tacit knowledge) — bir kişinin deneyimiyle edindiği ama
+tam olarak ifade edemediği bilgi — ancak açık bilgiye (explicit knowledge) dönüştürülüp
+belgelendiğinde kurumsal düzeyde yeniden kullanılabilir hale gelir. Bu çalışma üç soruya
+yanıt aramaktadır: onboarding sürecinde bireyin sorumluluğu nerede başlar, kurumun
+sorumluluğu nerede devreye girer; bir ürünün kendi kendini öğretmesi ne anlama gelir;
+asenkron onboarding ve RAG tabanlı sistemler bu ekosistemde nasıl konumlanır.
+Onboarding Sürecinde Sorumluluk Paylaşımı
+Çift Katmanlı Model
+Sağlıklı bir onboarding yaklaşımı, sorumluluğu iki katmana ayırır. Birey; kritik karar
+noktalarını, süreçleri ve gerekçeleri düzenli olarak kaydetmek, sınıflandırmak ve anlaşılanı
+doğrulamakla yükümlüdür. Organizasyon ise tekrarlanabilir onboarding içeriği üretmek,
+merkezi bir bilgi yönetim sistemi sağlamak ve bu sistemin erişilebilir kalmasını garanti
+etmekle yükümlüdür.
+Sorumlu Bilgi Türü Aktarım Yöntemi
+Organizasyon Kurumsal bilgi ve süreçler Wiki, runbook, karar kaydı
+Birey Kişisel görevler ve öğrenilenler Kişisel notlar, kontrol liste-
+leri
+Sorumluluk paylaşımının belirleyici kriteri basittir: bilgi yazılı olarak dokümante
+edilmişse ve birey buna rağmen süreci takip etmiyorsa sorumluluk bireydedir; bilgi yalnızca
+sözlü paylaşılmış ve yazılı kayda dönüştürülmemişse sorumluluk sistemdedir. Bu ikili
+ayrımın bir sınırı vardır: bilginin var olduğu ama bulunamadığı (zayıf arama, güncel
+olmayan içerik, gömülü konum) ara durum da fiilen bir sistem hatasıdır — bu nedenle
+1
+
+-- 1 of 6 --
+
+"kayıtlı mı" sorusu tek başına yeterli değildir, "bulunabilir mi" sorusu da eklenmelidir. Bu
+ayrım, çalışmanın ilerleyen bölümlerinde RAG sistemlerinin versiyonlama tartışmasında
+yeniden ele alınmaktadır.
+Bireyin ve Organizasyonun Sorumlulukları
+Bireyden beklenen: bilgiyi sistemli not almak, kategorize etmek, gerektiğinde tekrar
+sormak ve anlaşılanı doğrulamak. Organizasyondan beklenen: tekrarlanabilir içerik üretmek,
+merkezi bilgi sistemi sağlamak, versiyon kontrolü uygulamak ve kontrol listeleri oluşturmak.
+Aşağıdaki ifade, çözüm odaklı ve profesyonel bir tutumu örnekler:
+"Bu bilgiyi hatırlayamıyorum; notlarımı inceledim fakat bulamadım. Bu içeriği
+dokümante etmemiz mümkün müdür? Böylece ileride tüm ekip için güvenilir
+bir referans oluşabilir."
+Ürün Öğrenilebilirliği ve Bilgi Aktarımı
+Hiçbir ürün doğası gereği kendisini tamamen öğretmez; öğrenilebilirlik düzeyi, tasarım
+tercihleri, dokümantasyon kalitesi ve onboarding süreçlerinin birlikte oluşturduğu bir
+bütünün sonucudur. Doğru soru "ürün neden kendisini öğretmiyor?" değil, "ürün hangi
+bilgiyi kendi içinden sezdirebilir, hangisi dış kaynak gerektirir?" sorusudur.
+Mimari karar kayıtları, teknik borç geçmişi, açıkça ifade edilmemiş iş kuralları ve legacy
+davranış örüntüleri gibi unsurlar arayüzden veya koddan otomatik çıkarılamaz; bu nedenle
+ürünün "nasıl kullanılacağı" öğrenilebilir olsa da "neden bu şekilde davrandığı" çoğunlukla
+ek bilgi aktarımı gerektirir.
+Bilgi Aktarım Ekosistemi
+Alan İçerik Sorumlu
+Kullanıcı deneyimi Özelliklerin doğal keşfi Ürün, tasarım
+Satır içi doküman-
+tasyon
+Tooltip, boş durum rehberi Ürün, tasarım
+Onboarding meka-
+nizmaları
+Eğitim ekranları, yönlendirme Ürün
+Mühendislik ko-
+ruma katmanları
+Hatalı kullanımın engellenmesi Mühendislik
+Runbook ve prose-
+dürler
+Nasıl yapılır dokümanları Ekip
+Alan bilgisi Tarihsel bağlam, gerekçe Teknik lider, ürün
+yöneticisi
+Bu ekosistem eksik olduğunda ürün "kendini öğretmiyormuş" gibi görünür. Olgun
+olmayan yapılarda tekrarlayan anti-pattern’ler görülür: bilginin yalnızca çalışan hafıza-
+sında tutulması (bus factor artışı), güncel olmayan dokümantasyon (güven azalması) ve
+onboarding’in "kendin çöz" biçiminde bırakılması (verimsizlik). Sorumluluk sorgusu burada
+da aynı ilkeyi izler: "neden hatırlamadın" değil, "bu bilgi neden kayıt altına alınmadı"
+sorulmalıdır.
+2
+
+-- 2 of 6 --
+
+Dokümantasyon Mimarisi ve Sözlü Bilginin Kalıcılaştı-
+rılması
+Öğrenilebilir Ürün Tasarımı İlkeleri
+Boş ekranların öğretici bir başlangıç noktası olarak tasarlanması ("henüz kaydınız yok"
+yerine "görevleriniz burada listelenir, başlamak için artı butonuna tıklayın"), satır içi
+rehberlik, kademeli açığa çıkarma (progressive disclosure), hataları sonradan bildirmek
+yerine önleyici tasarım ve yalnızca "nasıl" değil "neden" sorusunu da yanıtlayan bağlamsal
+açıklamalar, öğrenilebilir tasarımın temel unsurlarıdır.
+Altı Katmanlı Bilgi Hiyerarşisi
+Katman İçerik Format Ömür
+Vizyon ve ilkeler Amaç, değerler Manifesto Sabit
+Ürün tanımı Özellik tanımları Gereksinim
+dökümanı
+Orta
+Mimari Sistem tasarımı Diyagram,
+karar kaydı
+Uzun
+Prosedür Nasıl yapılır Kontrol lis-
+tesi
+Uzun
+Sorun giderme Bilinen problemler Kılavuz Orta
+Toplantı notları Karar kayıtları Özet, bağ-
+lantı
+Kısa
+Sözlü Bilgiyi Kalıcı Hale Getiren Çalışma Modeli
+Bu model, Nonaka ve Takeuchi’nin dışsallaştırma (externalization) aşamasına karşılık gelen
+"önce söyle, sonra dokümante et, sonra bağla" ilkesi üzerine kuruludur: toplantı sonrası kısa
+özet not oluşturulur, bu not iletişim platformunda bırakılmayıp ilgili bilgi tabanına taşınır,
+her doküman tarihle versiyonlanır ve tekrar eden açıklamalar yerine doküman bağlantısı
+paylaşılır. Aynı soru iki kez soruluyorsa, bilgi henüz yeterince dokümante edilmemiş
+demektir; sözlü kararlar, kayıt altına alınmadığı sürece geçerli kabul edilmemelidir.
+Asenkron Onboarding
+Bazı organizasyonlarda onboarding sürecinin büyük bölümü yoğun biçimde video görüşme-
+leri ve eşzamanlı oturumlar aracılığıyla yürütülür. Bu yaklaşım, pratisyen çevrelerde bazen
+senkron-ağır onboarding olarak anılır; bu terimin resmi bir akademik literatür kaynağı
+yoktur, ancak tarif ettiği örüntü — bilginin öncelikli olarak sözlü ve tekrarlanamaz biçimde
+aktarılması — yaygın biçimde gözlemlenir.
+Sözlü aktarımın doğası gereği uçucu olması, bağlam kaybı ve yanlış anlaşılma riskini
+artırır; yeni çalışan bilgiyi kendi hızında sindirme fırsatı bulamaz; aktaran taraf için de
+tekrarlayan anlatım bilişsel yük üretir ve süreç zaman içinde sürdürülemez hale gelir.
+Alternatif olan asenkron onboarding, bilginin eşzamanlı toplantılara bağlı kalmadan
+çalışanın kendi hızında erişebileceği biçimde sistematik olarak dokümante edilmesini
+esas alır. Bu yaklaşım eşzamanlı etkileşimi tamamen ortadan kaldırmayı amaçlamaz;
+toplantıları birincil bilgi kaynağı olmaktan çıkarıp dokümantasyonu derinleştiren destek
+3
+
+-- 3 of 6 --
+
+mekanizmalarına dönüştürür. Eşzamanlı oturumlar yalnızca tartışma ve geri bildirim
+gerektiren, bağlamın gerçekten kritik olduğu durumlarla sınırlanmalıdır.
+Video Kayıtlarının Sınırları
+Toplantı kayıtlarının yeni çalışanlara sunulması ilk bakışta asenkron öğrenmeyle uyumlu
+görünse de, tek başına yeterli değildir; çünkü video, bilginin aranabilir, bölünebilir ve
+versiyonlanabilir olmasını doğal olarak desteklemez — belirli bir ayrıntıyı bulmak için uzun
+kayıtları taramak gerekir. En etkili yaklaşım, video kayıtlarının mimari bakış açıları ve
+kavramsal çerçeveler gibi bağlamsal içerikleri güçlendirmek için kullanıldığı, ancak süreç ve
+kural aktarımının esas kaynağının yapılandırılmış metinsel dokümantasyon olduğu hibrit
+bir modeldir.
+Bire Bir Görüşmelerin Kaydı: Etik Sınırlar
+Bire bir onboarding oturumlarının kaydı, tekrar edilebilirlik açısından cazip görünse de
+önemli etik ve operasyonel sınırlar taşır. Doğal bir iletişimin kayıt altına alınması taraflar
+üzerinde baskı yaratıp aktarımı yapaylaştırabilir; bazı çalışanlar kayıt altında konuşmaktan
+rahatsız olabilir ve bu durum psikolojik güvenlik algısını zedeleyebilir; kayıtların saklama
+süresi ve erişim izinleri konusundaki belirsizlik ayrı bir risktir. Bu nedenle kayıt, ancak her
+iki tarafın açık rızası bulunduğunda ve yalnızca destekleyici materyal olarak kullanıldığında
+anlamlı kalır; oturumun temel bilgisi yazılı dokümantasyona taşınmalı, kayıt yalnızca
+bağlamsal açıklamayı destekleyen ikincil bir araç olarak değerlendirilmelidir.
+RAG Tabanlı Sistemlerin Rolü
+Onboarding bilgisinin toplantılar, dağınık dokümantasyon ve sözlü aktarımlarla parçalı
+biçimde dağılması, hem yeni çalışan hem kurum için bir ölçeklenebilirlik problemi yaratır.
+Lewis ve arkadaşlarının tanımladığı Erişim-Destekli Üretim (Retrieval-Augmented Genera-
+tion, RAG) mimarisi, dil modellerinin cevap üretimini harici bir bilgi kaynağından anlık
+erişilen belgelerle temellendirerek, kurumsal dokümantasyonun doğal dilde sorgulanabilir
+hale gelmesini sağlar.
+Bu yaklaşımın onboarding bağlamındaki katkısı üç yönlüdür: çalışan, belirli bir süreç
+hakkında doğal dilde soru sorarak doğru kaynağa yönlendirilir ve bilgi arama maliyeti
+azalır; bire bir görüşmelerde aktarılan bağlamsal bilgi zamanla sisteme işlenerek kişiye
+bağımlılıktan çıkar; ve bilginin metinsel formatta bulunması, video kayıtlarının aksine
+aranabilirlik ve versiyonlanabilirlik sağlar.
+Versiyonlama ve Güncellik Sorunu
+RAG sistemlerinin güvenilirliği, bilgiyi erişilebilir kılmalarına değil, bu bilginin güncelliğini
+koruyabilmelerine bağlıdır. RAG mimarisi dokümantasyon içeriğini olduğu gibi indeksler
+ve sorgular; dolayısıyla eski veya versiyonsuz bir kayıt, güncel bir kayıtla aynı güvenle
+sunulur — sistem, geri getirdiği metnin doğruluğunu değil yalnızca ilgisini değerlendirir.
+Bu nedenle RAG tabanlı bir mimarinin sürdürülebilir olması, kurumsal dokümantasyonun
+versiyonlanabilir, tarihçesi izlenebilir ve değişiklik notlarıyla desteklenmiş bir formatta
+tutulmasını zorunlu kılar; aksi halde sistem "doğru bağlamı" değil yalnızca "mevcut bağlamı"
+sunar ve bu, özellikle onboarding gibi kritik süreçlerde yanlış yönlendirme riskine dönüşür.
+4
+
+-- 4 of 6 --
+
+Uygulama Şablonları
+Bilgi Girişi Şablonu
+Kurumsal bilgi kaydının tutarlı olması için önerilen asgari alanlar: başlık, oluşturan, son
+güncelleme, durum (taslak/aktif/kullanım dışı), amaç, bağlam (problem, ilgili alan, tarihsel
+gerekçe), temel bilgi (en fazla beş madde), kural ve sınırlar, değerlendirilip reddedilen
+alternatifler, referanslar ve sahiplik (birincil sorumlu, yedek).
+Ekip Bilgi Politikası: Özet İlkeler
+Tekrar eden bilgi sözlü kalamaz; bilgi uzun mesaj yerine bağlantı üzerinden paylaşılır;
+yazılı olmayan karar geçerli sayılmaz; bilgi kişide değil sistemde yaşamalıdır; her doküman
+versiyonlanır; "nasıl" kadar "neden" sorusu da yanıtlanmalıdır.
+Onboarding Planlaması: 30/60/90 Gün
+Mühendislik ve ürün rollerinde onboarding üç aşamada yapılandırılabilir: öğrenme, katkı
+üretme ve sahiplik kazanma.
+Aşama Amaç Kanıt
+İlk 30 gün Mimari, alan bilgisi ve iş akışlarının özümsenmesi;
+gözetimli bir ilk teslimat
+Kurulumun bağımsız ye-
+niden üretilebilirliği; sis-
+temin uçtan uca açıklana-
+bilmesi
+31–60 gün Bağımsız teslimat; test ve dokümantasyon alışkanlı-
+ğının yerleşmesi
+Asgari revizyonla onay-
+lanan teslimatlar; "önce
+dokümana bakma" davra-
+nışı
+61–90 gün Belirli bir alanda teknik veya süreç sahipliği Ekibin bir haftalık yoklu-
+ğunda sistemin kesintisiz
+işlemesi
+Ürün rolünde aynı çerçeve, ilk otuz günde ürün vizyonu ve kullanıcı segmentlerinin
+özümsenmesine, altmışıncı güne kadar problem çerçeveleme ve ilk değer teslimine, dok-
+sanıncı güne kadar ise ölçülebilir bir etkinin (örneğin belirli bir metrikte gözlemlenen
+iyileşme) üstlenilmesine karşılık gelir.
+Destekleyici Mekanizmalar
+Bu planlamayı destekleyen dört mekanizma özetlenebilir. Kılavuz (buddy) ve mentor sistemi,
+günlük araçlar ve informal kültür konusunda kısa vadeli rehberlik ile uzun vadeli gelişim
+ve kalite standartlarını ayrı rollere böler. Mühendislik yetkinlik matrisi, teknik teslimat,
+dokümantasyon ve sahiplik gibi alanlarda başlangıçtan ileri seviyeye beklenen davranışları
+görünür kılarak kariyer gelişimini şeffaflaştırır. KPI puan kartı, teslimat güvenilirliği ve
+bilgi paylaşımı gibi göstergeleri dönem sonunda özetler. Onboarding memnuniyet anketi ise
+kişiyi değil süreci değerlendirir; rol netliği, dokümantasyon kalitesi ve üretkenliğe ulaşma
+hızı gibi başlıklarda doğrudan geri bildirim toplar.
+5
+
+-- 5 of 6 --
+
+Sonuç
+Bu çalışma, onboarding sürecini bir hafıza testi olarak değil, tasarlanmış bir öğrenme sistemi
+olarak ele almayı önermiştir. Üç eksen tekrar eden bir çerçeve oluşturur: çift katmanlı
+sorumluluk modeli (kurumsal bilgi sistemde, bireysel öğrenme bireyde), öğrenilebilir ürün
+ve dokümantasyon ekosistemi (boş durumlardan karar kayıtlarına kadar bilginin ürünün
+içinden ve çevresinden sezdirilmesi) ve asenkron onboarding ile RAG tabanlı erişim (bilginin
+senkron toplantılara ve bireysel hafızaya bağımlı kalmaması).
+Bu çerçevenin pratikteki sınavı şu sorularla özetlenebilir: bu bilgi tekrar sorulduğunda
+bir bağlantı paylaşabiliyor muyuz; aynı soru iki kez sorulduğunda yeni bir doküman doğuyor
+mu; onboarding’in ne kadarı senkron, ne kadarı asenkron kaynağa dayanıyor; kritik alan
+bilgisi aranabilir ve versiyonlanabilir mi? Nihai hedef, bireyi "neden hatırlamadın" sorusuyla
+köşeye sıkıştırmak değil, organizasyonun şu soruya tutarlı bir cevap verebilmesidir: bu bilgiyi
+gelecekte tekrar ihtiyaç duyulduğunda güvenilir ve erişilebilir biçimde nerede saklıyoruz?
+Kaynaklar
+[1] M. Polanyi, The Tacit Dimension, University of Chicago Press, Chicago, 1966.
+[2] I. Nonaka and H. Takeuchi, The Knowledge-Creating Company: How Japanese Compa-
+nies Create the Dynamics of Innovation, Oxford University Press, New York, 1995.
+[3] P. Lewis et al., “Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks,”
+Advances in Neural Information Processing Systems, vol. 33, 2020.
+6
+
+-- 6 of 6 --

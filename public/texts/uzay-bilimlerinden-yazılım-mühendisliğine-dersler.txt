@@ -1,0 +1,160 @@
+Uzay Bilimlerinden Yazılım Mühendisliğine Dersler
+Ömer Faruk Yavuz
+June 2026
+Giriş
+Uzay mühendisliği, özünde tek bir zorlu kısıtın disiplinidir: ikinci şansın olmadığı, fiziksel olarak
+erişilemeyen ve onarılamayan bir sistemin nasıl güvenilir kılınacağı. Bir uzay aracı fırlatıldıktan
+sonra yerinde tamir edilemez; bu kısıt, mühendisliğin en olgun dayanıklılık ve gözlemlenebilirlik
+pratiklerini doğurmuştur. Sıradan yazılım geliştirmede bu kısıtların çoğu bulunmaz; sunucuya
+erişilebilir, sistem yeniden başlatılabilir, yama geçilebilir. Ancak en sağlam yazılım, sanki bu
+olanaklar yokmuş gibi tasarlananıdır. Bu makale, uzay bilimlerinin bir yazılımcıya hem düşünce
+biçimi hem de somut mühendislik pratiği düzeyinde öğrettiği dersleri ele alır.
+Epistemolojik Temel
+Astronomi, doğrudan dokunulamayan bir sistemin yalnızca bıraktığı izlerden anlaşılması disiplin-
+idir. Görünmeyeni izinden bilmek, hipotezle aramak, uç koşullarda sınamak ve yanlış pozitiften
+kaçınmak, hem astrofizik gözlemin hem de üretim ortamındaki bir yazılım sistemini loglardan
+okumanın ortak iskeletidir.
+Hata Toleransı ve Dayanıklılık
+Bir uzay aracı fırlatıldıktan sonra onarılamadığı için, dayanıklılık tasarımın merkezine yerleştir-
+ilir. Bu yaklaşımın üç temel pratiği vardır.
+Birincisi yedekliliktir (redundancy). Kritik her sistemin iki veya üç yedeği bulunur; biri arıza-
+lanırsa diğeri görevi devralır. Yazılımdaki karşılığı failover mekanizmaları, çoğaltılmış kopyalar
+(replica) ve yedekli servislerdir.
+İkincisi zarif bozulmadır (graceful degradation). Bir bileşen arızalandığında araç tümüyle
+devre dışı kalmaz, düşük kapasiteyle çalışmayı sürdürür. Yazılımda bu, bir servis çöktüğünde
+sistemin tümünün değil, yalnızca ilgili özelliğin devre dışı kalmasına karşılık gelir.
+Üçüncüsü hata düzeltme mekanizmalarıdır. Uzaydaki radyasyon, bellekteki bitleri bozabilir;
+bu nedenle uzay yazılımı sağlama toplamları (checksum), hata düzeltici kodlar ve üçlü oylama
+gibi yöntemler kullanır. Bozuk bir veri çerçevesini tespit edip atlayan bir dönüştürücü mantığı,
+bu felsefenin küçük ölçekli bir örneğidir. Bu ailenin temel dersi şudur: hata bir istisna değil,
+bir kesinliktir; sistem “hiç hata olmaz” varsayımıyla değil, “hata olduğunda ne olur” sorusuyla
+tasarlanmalıdır.
+Test Edilemezi Test Etme
+Bir uzay aracı, hedef ortamında konuşlanmadan önce o ortamda test edilemez. Bu sorun,
+simülasyon ve analog ortamlarla çözülür: hedefe benzeyen çöl bölgelerinde saha testleri yapılır,
+fizik bilgisayarda modellenir ve donanım döngüde testler yürütülür.
+1
+
+-- 1 of 4 --
+
+Yazılımdaki karşılığı doğrudandır. Üretim ortamı, üretim ortamında güvenle test edilemez;
+bu nedenle hazırlık ortamları (staging), simülasyon, kademeli dağıtım (canary deployment) ve
+kaos mühendisliği kullanılır. Kaos mühendisliği, sistemin dayanıklılığını ölçmek için onu kasıtlı
+olarak bozmaya dayanır ve uzay mühendisliğindeki “uçmadan önce yerde defalarca uç” felsefesinin
+yazılıma uyarlanmış hâlidir.
+Marj ve Kaynak Bütçesi
+Bütçe Kavramı
+Uzay mühendisliğindeki bütçe kavramı, gündelik para bütçesiyle aynı mantığa dayanır. Sınırlı
+bir kaynak, onu paylaşan kalemler arasında bölüştürülür ve toplam pay, mevcut kaynağı aşamaz.
+Uzay araçlarında para yerine fiziksel kaynaklar bütçelenir; her bileşen, bu sınırlı kaynaklardan
+belirli bir pay alacak şekilde planlanır. Başlıca dört bütçe türü vardır.
+Kütle Bütçesi
+Bir roketin uzaya taşıyabileceği toplam ağırlık sınırlıdır. Aracın içindeki her unsur (kameralar,
+piller, antenler, yakıt, bilgisayar) bu sınırlı kütleyi paylaşır. Bir bileşene ayrılan ağırlık, geri
+kalanlara kalan payı azaltır; toplam, taşıma kapasitesini aşarsa araç fırlatılamaz.
+Güç Bütçesi
+Uzay aracının elektriği genellikle güneş panellerinden gelir ve üretilen toplam güç sınırlıdır.
+Aracın içindeki her cihaz bu gücü paylaşır. Toplam tüketim, üretilen gücü aşarsa sistem çöker.
+Bu nedenle yalnızca toplam tüketim değil, cihazların hangi anda çalışacağı da planlanır; tüm
+sistemler aynı anda devreye alınmaz.
+Isı Bütçesi
+Her elektronik bileşen ısı üretir, ancak uzayda ısıyı atmak güçtür, çünkü taşınımla soğutma
+sağlayacak bir ortam yoktur. Aracın atabileceği toplam ısı miktarı sınırlıdır ve her bileşen ürettiği
+ısıyı bu bütçeden düşer.
+Veri ve Bant Genişliği Bütçesi
+Araç, Dünya’ya birim zamanda yalnızca belirli bir miktar veri gönderebilir. Kamera görüntü-
+leri, sensör verileri ve sağlık raporları bu sınırlı iletişim hattını paylaşır; tüm veriler aynı anda
+iletilemez, öncelik sırasına göre sıraya konur.
+Emniyet Marjı
+Bu yaklaşımın en kritik ilkesi, bütçelerin hiçbir zaman tam kapasitesine kadar doldurulmamasıdır.
+Örneğin güç bütçesi beş yüz watt ise, sistem bu değeri tümüyle tüketecek biçimde değil, belirgin
+bir boşluk bırakacak biçimde tasarlanır. Bu boşluğa emniyet marjı denir ve tipik olarak toplam
+kapasitenin yüzde yirmi ila yirmi beşi kadar tutulur.
+Bu marjın bırakılmasının nedenleri şunlardır: bileşenler zamanla yıpranarak daha az verim
+üretir; beklenmedik durumlar fazladan kaynak tüketebilir; sonradan eklenecek işlevler için yer
+gerekebilir; ve gerçek dünya değerleri her zaman tahminlerden bir miktar sapar. Bütçeyi son
+damlasına kadar kullanmak, ilk aksilikte çökmek anlamına gelir. Bu, gündelik hayatta gelirin
+tamamını harcamak yerine bir kısmını acil durum fonu olarak ayırmaya benzer.
+2
+
+-- 2 of 4 --
+
+Yazılımdaki Karşılığı
+Aynı ilke yazılım sistemlerinde de geçerlidir. On altı gigabayt belleği olan bir sunucuda uygulama,
+belleğin tamamını kullanacak biçimde değil, belirgin bir boşluk bırakacak biçimde tasarlanır; ani
+bir yük artışı, bir bellek sızıntısı veya beklenmedik bir istek seli bu boşlukla karşılanır. İşlemci
+kullanımı için de aynısı geçerlidir. Bu ailenin temel dersi nettir: her kaynak sonludur ve marj
+bırakmadan yapılan tasarım kırılgandır.
+Telemetri ve Gözlemlenebilirlik
+Bir uzay aracının yapabildiği en kritik şey, kendi iç durumunu sürekli olarak yere raporlamaktır;
+bu, telemetri olarak bilinir. Sıcaklık, voltaj, konum ve her alt sistemin sağlığı düzenli aralıklarla
+gönderilir, çünkü araca dokunulamaz ve onun durumu hakkında bilinen tek şey, kendi rapor-
+ladığıdır.
+Bu yaklaşım, modern yazılımdaki gözlemlenebilirlik kültürünün doğrudan atasıdır. Bu ailenin
+dersi şudur: sistem, bir gün içine girilemeyeceği varsayımıyla, iç durumunu sürekli dışa anlatacak
+biçimde tasarlanmalıdır.
+Geri Döndürülemezlik ve Geç Bağlama
+Uzay araçları, fırlatıldıktan sonra bile yazılımları uzaktan güncellenebilecek biçimde tasarlanır.
+Onlarca yıldır görevde olan araçlar, Dünya’dan hâlâ yazılım yaması alabilmektedir. Donanım
+değiştirilemediği için, esneklik bilinçli olarak yazılıma gömülür.
+Bunun dersi, yazılım mimarisine doğrudan taşınır: değiştirilmesi güç olan unsurlar (donanım,
+temel mimari kararlar) en aza indirilmeli, değişkenlik ise yazılıma ve yapılandırmaya kaydırıl-
+malıdır. Esnek olması gereken yer esnek bırakılmalı, sabitlenmesi gereken yer sabitlenmelidir.
+Uzaktan Yazılım Güncellemesi
+Milyonlarca kilometre uzaktaki, fiziksel olarak erişilemeyen ve onarılamayan bir araca güvenli
+biçimde yazılım göndermek, mühendisliğin en zorlu dağıtım problemidir. Aşağıda bu sürecin
+temel bileşenleri ele alınmaktadır.
+İletişim ve Gecikme
+Yazılım yaması, Dünya üzerinde farklı boylamlara yerleştirilmiş dev radyo antenlerinden oluşan
+bir ağ üzerinden gönderilir. Sinyal ışık hızıyla yayılsa bile, uzak araçlarda tek yönlü iletim
+saatler sürebilir. “Gönder ve anında gözle” olanağı yoktur; bu da yamanın gönderilmeden önce
+yerde her senaryosuyla test edilmiş olmasını zorunlu kılar, çünkü yanlış bir komut aracı tümüyle
+kaybettirebilir.
+Düşük Bant Genişliği ve Veri Bütünlüğü
+Uzak araçlara veri gönderme hızı son derece düşüktür; bu nedenle yama küçük parçalara bölünür
+ve mümkün olduğunca fark temelli (delta) tutulur; yazılımın tamamı değil, yalnızca değişen kısmı
+gönderilir. Sinyal yol alırken bozulabileceğinden, her paket hata düzeltici kodlar ve sağlama
+toplamları taşır; araç, gelen yamayı uygulamadan önce bütünlüğünü doğrular.
+Yedekli Kopya ve Geçiş
+Araçta yazılımın iki kopyası tutulur. Yeni yama, pasif kopyaya yazılırken aktif kopya çalış-
+maya devam eder. Yama tümüyle ulaşıp doğrulandıktan sonra, araç yeni kopyaya geçiş yapar;
+3
+
+-- 3 of 4 --
+
+yeni yazılım sorunluysa eski kopyaya geri döner. Bu yaklaşım, modern yazılımdaki mavi-yeşil
+dağıtımın (blue-green deployment) doğrudan atasıdır.
+Kademeli Etkinleştirme
+Yama parçaları günlerce aktarılırken, araç bunları bir tamponda biriktirir ancak henüz çalıştır-
+maz. Tüm parçalar gelip bütünlük doğrulandıktan sonra, tek bir etkinleştirme komutuyla yazılım
+devreye alınır. Yarım kalmış bir yama hiçbir zaman çalıştırılmaz.
+Bekçi Mekanizması ve Güvenli Mod
+Araçta bir bekçi zamanlayıcı (watchdog timer) bulunur. Yeni yazılım çöker ve araç belirli bir
+süre sağlık sinyali gönderemezse, bu mekanizma devreye girip aracı bilinen son güvenli du-
+ruma döndürür. Bu yapı, modern sistemlerdeki sağlık denetimi ve otomatik geri alma mekaniz-
+malarının atasıdır. Ayrıca bir arıza durumunda araç, gereksiz tüm sistemleri kapatıp yalnızca
+hayatta kalmaya ve Dünya’yı dinlemeye odaklanan bir güvenli moda (safe mode) geçer.
+Yazılımcı İçin Çıkarılan Dersler
+Uzaktan güncelleme felsefesi, gündelik yazılım dağıtımına doğrudan uygulanabilecek desenler
+sunar: yamayı uygulamadan önce bütünlüğünü doğrulamak, yedekli kopya tutarak geçişi en sona
+bırakmak ve sorun durumunda eski sürüme dönebilmek, otomatik sağlık denetimi ile otomatik
+geri alma kurmak, güncellemeyi önce küçük bir kısma uygulayıp doğrulandıktan sonra yaymak
+ve her değişikliği canlıya almadan önce yerde kapsamlı biçimde test etmek.
+Suçlamasız Felaket Analizi
+Uzay programlarının en değerli kültürel mirası, her kaza sonrasında yürütülen titiz ancak suçlayıcı
+olmayan kök neden analizidir. Sorulan soru “kim hata yaptı” değil, “sistem bu hataya nasıl izin
+verdi” biçimindedir.
+Yazılımdaki karşılığı, suçlamasız olay sonrası analiz (blameless post-mortem) kültürüdür.
+Bir üretim arızasından sonra kişi değil, süreç sorgulanır. Bu yaklaşım, “öğrenen öğrenmediyse,
+öğretmeyen sorumludur” ilkesiyle aynı köke dayanır: hata bireyde değil, sistemde aranır.
+Sonuç
+Uzay mühendisliği, dokunulamayan, onarılamayan ve ikinci şans tanımayan bir sistemin nasıl
+güvenilir kılınacağı disiplinidir. Sıradan yazılımda bu kısıtların hiçbiri zorunlu değildir; ancak
+en yetkin mühendisler, bu kısıtlar varmış gibi tasarlar: yedekli, gözlemlenebilir, zarifçe bozulan,
+marjlı ve geri döndürülebilir sistemler kurarlar. Pratik düzeyde öne çıkan üç çıkarım şunlardır:
+gözlemlenebilirlik sonradan değil baştan tasarlanmalı, her kaynağa emniyet marjı bırakılmalı ve
+hata bir istisna değil bir kesinlik olarak kabul edilmelidir. Uzay bilimleri, bu disiplinin en saf
+okuludur, çünkü orada gevşekliğin bedeli ölümcüldür.
+4
+
+-- 4 of 4 --

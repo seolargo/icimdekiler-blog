@@ -1,0 +1,306 @@
+Düzen Nereden Çıkar?
+Sistemler, Ağlar, Evrim ve Zihin Üzerine
+Ömer Faruk
+Temmuz 2026
+İçindekiler
+1 Giriş: Haritadaki Boşluk 2
+2 Karmaşıklık Bilimi: Basit Kurallardan Doğan Düzen 2
+2.1 Santa Fe ve Karmaşık Uyarlanabilir Sistemler . . . . . . . . . . . . . . . . . . . 2
+2.2 Belirme: Bütünün Yeni Özelliği . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+2.3 Güç Yasaları, Kritiklik ve West’in Ölçekleme Yasaları . . . . . . . . . . . . . . 2
+3 Ağ Bilimi: Bağlantının Matematiği 3
+4 İkinci Dalga Sibernetik ve Enaktivizm: Gözlemci Sahneye Çıkar 3
+4.1 İkinci Dalga: Gözlemleyen Sistemlerin Sibernetiği . . . . . . . . . . . . . . . . . 3
+4.2 Maturana–Varela: Autopoiesis . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+4.3 Enaktivizm: Biliş, Eylemle Dünya Kurmaktır . . . . . . . . . . . . . . . . . . . 4
+5 Kategori Teorisi: Yapı Biliminin Kesin Formu 4
+6 Bilişsel Dilbilim: Metaforla Yaşamak 5
+7 Evrimsel Düşünce: Üçüncü Büyük Gramer 5
+8 Gramer Olarak Enformasyon Teorisi 6
+9 Pragmatizm ve Polanyi: Verimlilik Testinin Felsefesi 6
+10 Hesaplamalı Cephe: Yapı Eşlemenin Mühendislik Gerçeklemesi 7
+11 Sonuç: Yeni Gövdelerin Ortak Deseni 7
+1
+
+-- 1 of 7 --
+
+1 Giriş: Haritadaki Boşluk
+Önceki notlar, disiplinler arası yapısal düşüncenin 1940–1975 gövdesini derinlemesine işledi:
+sibernetik, genel sistem teorisi, sistem dinamiği, enformasyon teorisinin doğuşu, TRIZ ve klasik
+iktisadın büyük kuşağı. O gövdenin sonraki devamları ve düzeltmeleri de (Senge, Munger,
+Taleb, davranışsal iktisat) haritaya girdi. Görünmeyen ise başka bir kategoridir: 1980 sonrasında
+doğan yeni gövdeler — eski soruların yeni cevapları değil, yeni soru sorma biçimleri; 1940–1970
+gövdesinin çocukları olan ama artık kendi başlarına ağaç olmuş alanlar. Bu not, o ağaçları tek
+tek tanıtır: karmaşıklık bilimi, ağ bilimi, ikinci dalga sibernetik ve enaktivizm, kategori teorisi,
+bilişsel dilbilim, evrimsel düşünce, gramer olarak enformasyon teorisi, pragmatist epistemoloji,
+Polanyi ve hesaplamalı cephe. Her bölüm, alanın çekirdek fikrini ön bilgi varsaymadan açar ve
+yazılım mühendisliğine doğal düşen karşılıklarını verir.
+2 Karmaşıklık Bilimi: Basit Kurallardan Doğan Düzen
+2.1 Santa Fe ve Karmaşık Uyarlanabilir Sistemler
+Karmaşıklık bilimi, kurumsal doğum tarihi belli ender alanlardandır: 1984’te, aralarında fizik
+Nobel ödüllü Murray Gell-Mann ve iktisat Nobel ödüllü Kenneth Arrow’un bulunduğu bir grup,
+disiplin sınırlarını aşan ortak bir olguyu incelemek için Santa Fe Enstitüsü’nü kurdu. Ortak
+olgu şuydu: çok sayıda basit parçanın yerel etkileşiminden, hiçbir parçada ve hiçbir merkezi
+planda bulunmayan karmaşık kolektif davranışın doğuşu. Karınca kolonisi bunun arketipidir:
+tek karınca neredeyse aptaldır, hiçbir karınca koloninin planını bilmez; ama koloni yol ağları
+kurar, savaş yürütür, mantar tarımı yapar. Beyin (tek nöron düşünmez, ağ düşünür), piyasa
+(kimse fiyatı belirlemez, fiyat oluşur) ve şehir aynı sınıftandır.
+John Holland’ın karmaşık uyarlanabilir sistem (complex adaptive system) çerçevesi, sınıfın
+tanımını verdi: çok sayıda ajan, yerel kurallar, merkezi kontrol yokluğu, ve ajanların deneyimle
+kurallarını değiştirmesi — uyarlanma. Bu son özellik, sınıfı klasik sistem dinamiğinden ayırır:
+Forrester’ın stok-akış modellerinde yapı sabittir, davranış değişir; karmaşık uyarlanabilir sistemde
+yapının kendisi evrilir. Mühendislik izdüşümü doğrudandır: büyük mikroservis ekosistemleri, açık
+kaynak toplulukları ve organizasyonların kendisi bu sınıftadır — ve sınıfın temel dersi rahatsız
+edicidir: bu sistemler tasarlanmaz, bahçıvanlığı yapılır; merkezi kontrol arttıkça uyarlanma
+kapasitesi düşer.
+2.2 Belirme: Bütünün Yeni Özelliği
+Alanın merkez kavramı belirme (emergence): bütünün, parçaların hiçbirinde bulunmayan ve
+parçalara bakılarak öngörülemeyen özellikler taşıması. Islaklık, tek su molekülünün özelliği
+değildir; trafik sıkışıklığı, tek arabanın özelliği değildir; ve kritik olarak, bir yazılım sisteminin
+güvenilirliği, tek bileşenin özelliği değildir — bileşenler arası etkileşimin beliren bir ürünüdür.
+Kavramın pratik değeri bir uyarıda toplanır: beliren özellikler, bileşen testiyle yakalanamaz;
+entegrasyon davranışı, kendi başına bir inceleme nesnesidir. Kesinti raporlarının klasik cümlesi —
+“her bileşen tek tek doğru çalışıyordu” — belirmenin negatif yüzüdür: arıza da emergent olabilir.
+2.3 Güç Yasaları, Kritiklik ve West’in Ölçekleme Yasaları
+Karmaşık sistemlerin imzası, normal dağılım yerine güç yasası dağılımlarıdır: çoğu olay küçük, az
+sayıda olay devasadır ve “tipik olay” kavramı anlamını yitirir — depremler, şehir büyüklükleri,
+dosya boyutları, kesinti süreleri böyle dağılır. Per Bak’ın öz-örgütlenmiş kritiklik kavramı
+mekanizmayı verir: kum yığınına tane tane kum ekleyin; yığın kendini, her yeni tanenin
+küçük ya da devasa çığlara yol açabildiği kritik eğime taşır — felaketin boyutu, tetikleyicinin
+boyutundan bağımsızlaşır. Uzun süre kesintisiz çalışan sistemlerin “kritikliğe sürüklenmesi”,
+2
+
+-- 2 of 7 --
+
+Minsky hipotezinin fizik diliyle ifadesidir: küçük bir dağıtımın devasa kesinti tetiklemesi, kum
+tanesinin çığ tetiklemesidir.
+Geoffrey West’in Scale çalışması, izomorfizm tezinin en çarpıcı güncel kanıtıdır: organizmalar,
+şehirler ve şirketler, birbirinden habersiz, aynı matematiksel ölçekleme yasalarına uyar. Memeli
+metabolizması kütleyle 3/4 üssüyle ölçeklenir (fil, farenin büyütülmüş hali değildir — birim hücre
+başına çok daha az enerji harcar); şehirler nüfusla üst-doğrusal ölçeklenir (nüfus ikiye katlanınca
+patent, gelir ve suç yüzde on beş fazlasıyla katlanır — büyük şehir, küçük şehrin büyütülmüş
+hali değil, birim başına daha üretken ve daha hızlı bir şeydir); şirketler ise organizmalar gibi
+alt-doğrusal ölçeklenir ve ölür. Yazılım sorusu kendiliğinden doğar: kod tabanları ve mühendislik
+organizasyonları hangi rejimde ölçeklenir? Brooks yasası (ekip büyüdükçe iletişim maliyetinin
+kombinatoryal patlaması), alt-doğrusal rejimin mühendislik gözlemi olarak okunabilir — ve
+“organizasyonu şehir gibi mi, organizma gibi mi ölçeklendiriyoruz” sorusu, platform tasarımının
+en derin sorularından biridir.
+3 Ağ Bilimi: Bağlantının Matematiği
+1998–1999’da iki makale yeni bir alan açtı. Watts ve Strogatz küçük dünya olgusunu biçimsel-
+leştirdi: yüksek yerel kümelenme (arkadaşlarım birbirinin arkadaşı) ile kısa küresel mesafenin
+(herkes herkese altı adımda bağlı) aynı ağda bir arada bulunabilmesi — az sayıda uzun menzilli
+kestirme, devasa ağı küçültür. Barabási ve Albert ise ölçeksiz ağları keşfetti: gerçek ağlarda
+(Web, atıf ağları, protein etkileşimleri) bağlantılar eşit dağılmaz; az sayıda düğüm (hub) de-
+vasa bağlantı toplar ve mekanizma tercihli bağlanmadır — yeni düğüm, zaten bağlantılı olana
+bağlanır; zengin zenginleşir.
+Ölçeksiz ağların çifte karakteri, alanın en kullanışlı teoremidir: bu ağlar rastgele arızaya karşı
+olağanüstü dayanıklı (rastgele silinen düğüm neredeyse kesin önemsizdir) ama hedefli saldırıya
+karşı olağanüstü kırılgandır (birkaç hub’ın kaybı ağı parçalar). Yazılım çevirileri dolaysızdır:
+bağımlılık grafikleri ölçeksizdir — birkaç kütüphane (hub) her şeyin altındadır ve Log4j vakası,
+hub kırılganlığının ders kitabı örneğidir; organizasyon bilgi ağları ölçeksizdir — birkaç kişi (hub)
+bütün bağlamı taşır ve “otobüs faktörü”, hub analizi yapılmadan ölçülemez; mikroservis çağrı
+grafikleri ölçeksizdir — sistemik önem (SIFI) analizi, ağ biliminin merkezîlik ölçüleriyle (degree,
+betweenness) nicelleşir. Ağ bilimi, önceki notlarda “sistemik risk” ve “bulaşma” olarak geçen
+kavramların matematiksel altyapısıdır.
+4 İkinci Dalga Sibernetik ve Enaktivizm: Gözlemci Sahneye
+Çıkar
+4.1 İkinci Dalga: Gözlemleyen Sistemlerin Sibernetiği
+Klasik sibernetik, sistemleri dışarıdan gözlemleyen mühendisin bilimiydi. Heinz von Foerster’in
+başlattığı ikinci dalga (second-order cybernetics), rahatsız edici soruyu sordu: gözlemci nerede
+duruyor? Cevabı radikaldi: gözlemci sistemin dışında değildir — “gözlemlenen sistemlerin
+sibernetiğinden, gözlemleyen sistemlerin sibernetiğine” geçilmelidir. Organizasyon bağlamında
+bu soyut bir incelik değildir: metrik koyan yönetici, sistemi dışarıdan ölçmüyordur — metriğin
+kendisi sistemi değiştirir (Goodhart yasasının sibernetik temeli budur); organizasyonu analiz
+eden danışman, analiziyle organizasyonu değiştirir. Gözlemcinin masumiyeti bir yanılsamadır ve
+ölçüm tasarımı, bu yanılsamayı bırakınca ciddileşir.
+3
+
+-- 3 of 7 --
+
+4.2 Maturana–Varela: Autopoiesis
+Şilili biyologlar Humberto Maturana ve Francisco Varela, “canlı nedir” sorusuna yapısal bir cevap
+verdi: canlı, autopoietik — kendi kendini üreten — sistemdir: bileşenleri, o bileşenleri üreten
+süreçleri üreten bir ağ; hücre, kendi zarını yapan molekülleri yapan bir organizasyondur ve ürünü
+kendisidir. İkinci kurucu kavram yapısal belirlenimdir: bir sisteme dışarıdan ne yapılacağını
+dikte edemezsin — dış etki yalnızca tetikler, tepkiyi sistemin kendi yapısı belirler. Aynı e-posta
+iki organizasyonda iki farklı sonuç doğurur; “değişim yönetiminin” kronik başarısızlığının teorisi
+budur: organizasyona talimat enjekte edilmez, organizasyonun yapısının o talimatla ne yapacağı
+beklenir. Niklas Luhmann, autopoiesis’i sosyolojiye taşıdı: toplumsal sistemler (hukuk, ekonomi,
+bilim) iletişimlerden oluşan, kendi iletişimlerini kendi iletişimleriyle üreten kapalı ağlardır —
+her biri dünyayı yalnızca kendi koduyla (yasal/yasadışı, kârlı/kârsız) görür. Departmanlar arası
+“birbirini duymama” fenomeninin en derin teorisi Luhmann’dadır: pazarlama ile mühendislik
+birbirini yanlış anlamıyor; her biri, ötekinin mesajını yalnızca kendi koduna çevirerek işleyebiliyor.
+4.3 Enaktivizm: Biliş, Eylemle Dünya Kurmaktır
+Varela’nın bilişsel bilime taşıdığı enaktivizm, klasik “zihin, dünyayı temsil eden bir bilgisayardır”
+modeline itirazdır: biliş, hazır bir dünyanın içsel temsili değil, canlının eylemleriyle kendi anlamlı
+dünyasını ortaya çıkarmasıdır (enact). Dreyfus’un ustalık analizi aynı damardandır: usta, kural
+izleyip temsil hesaplamaz — dünyayı doğrudan imkânlar olarak algılar; de Groot’un satranç
+bulgusunun (usta hamleyi hesaplamaz, görür) felsefi ikizi budur. Mühendislik dersi, öğrenme
+tasarımınadır: ustalık dokümandan (temsil aktarımı) değil, yapmaktan (dünya kurmaktan) gelir;
+eşli programlama ve usta-çırak modelinin dokümantasyona indirgenemezliği, enaktivist tezin
+pratik doğrulamasıdır.
+5 Kategori Teorisi: Yapı Biliminin Kesin Formu
+Bertalanffy, disiplinler arası izomorfizmleri toplayacak bir “yapılar bilimi” hayal etmişti; ma-
+tematik o bilimi fiilen kurdu ve adı kategori teorisidir. Alanın kurucu jesti radikal bir bakış
+değişimidir: nesnelerin içine bakma — nesneler arasındaki ilişkilere (morfizmlere) ve ilişkilerin
+nasıl birleştiğine (kompozisyona) bak. Bir kategori, nesneler ve aralarındaki oklardan oluşur;
+okların ard arda eklenebilmesi (kompozisyon) tek temel işlemdir. Kümeler ve fonksiyonlar bir
+kategoridir; veri tipleri ve programlar bir kategoridir; sistem durumları ve geçişler bir kategoridir.
+Teorinin bu notlar açısından kritik kavramı funktordur: bir kategoriden diğerine, yapıyı koruyan
+çeviri — nesneleri nesnelere, okları oklara, kompozisyonu kompozisyona götüren eşleme. Bu,
+çeviri prosedürünün matematiksel tanımının ta kendisidir: “finans kelimeleriyle yazılım görmek”,
+finans kategorisinden yazılım kategorisine bir funktor kurmaktır ve iyi çeviriyi kötüden ayıran şey
+— ilişki yapısının korunup korunmadığı — funktor aksiyomlarının denetlediği şeydir. İzomorfizm
+kelimesinin kesin tanımı da buradadır: iki yapı, aralarında iki yönde yapı koruyan ve birbirini geri
+alan çeviriler varsa izomorfiktir — Bertalanffy’nin sezgisel kullandığı kelimenin matematiksel
+içeriği.
+Alan uzun süre saf matematiğin en soyut köşesi sayıldı; 2010’lardan itibaren uygulamalı kategori
+teorisi doğdu (Fong ve Spivak’ın Seven Sketches in Compositionality kitabı alanın kapısıdır):
+veritabanı şemaları, elektrik devreleri, kimyasal reaksiyon ağları ve olasılıksal modeller, aynı
+kategorik dille ifade edilip aralarında biçimsel çeviriler kurulmaktadır. Yazılımcı için alan
+ayrıca tanıdıktır: fonksiyonel programlamanın çekirdek kavramları (map, monad, tip sistemleri)
+doğrudan kategori teorisinden gelir — Haskell programcısı, farkında olmadan kategorik düşünür.
+Merkez kavram kompozisyonellik ise mühendisliğin en derin ilkesinin matematiği sayılabilir:
+büyük sistemin anlamı, parçaların anlamından ve birleştirme kurallarından türeyebilmelidir —
+modülerliğin, arayüz sözleşmelerinin ve “birleştirilebilir soyutlamaların” biçimsel temeli.
+4
+
+-- 4 of 7 --
+
+6 Bilişsel Dilbilim: Metaforla Yaşamak
+Lakoff ve Johnson’ın 1980 tarihli Metaphors We Live By kitabı, dil çalışmasını biliş çalışmasına
+dönüştüren dönüm noktasıdır. Tez şudur: metafor, şairin süsü değil, gündelik düşüncenin
+varsayılan çalışma modudur — kavram sistemimizin kendisi metaforik olarak örgütlüdür. Kanıt
+gündelik dildedir: “tartışma savaştır” metaforu tek tek cümlelerimizi üretir (pozisyonunu savundu,
+argümanı çürüttüm, iddiaya saldırdı); “zaman paradır” (zaman harcamak, kazanmak, yatırmak),
+“fikirler binadır” (temellendirmek, çökertmek, sağlam argüman) aynı biçimde çalışır. Ve kritik
+iddia: metafor yalnızca konuşmayı değil, düşünmeyi ve eylemi yapılandırır — tartışmayı savaş
+olarak kavrayan kültür, tartışmada kazanmaya çalışır; dans olarak kavrayan kültür başka
+davranırdı.
+Fauconnier ve Turner’ın kavramsal harmanlama (conceptual blending) teorisi mekanizmayı
+inceltti: zihin, iki ayrı girdi uzayından öğeleri seçip yeni bir “harman uzayında” birleştirir ve
+harmanda, girdilerin hiçbirinde olmayan yeni yapı doğar — “masaüstü” metaforu (bilgisayar +
+ofis masası harmanı: klasörler, çöp kutusu) tarihin en yüksek getirili harmanlarından biridir. Bu
+notlar dizisi açısından teori, meşruiyet belgesidir: “finans kelimeleriyle yazılım görme” projesi,
+bilişin istisnai bir kullanımı değil, varsayılan mekanizmasının bilinçli ve disiplinli işletilmesidir.
+Uyarısı da beraberinde gelir: metaforlar aydınlattığı kadar gizler — “zaman paradır” metaforu
+zamanın biriktirilemezliğini gizler; “teknik borç” metaforu, borcun aksine faiz oranının pazarlık
+edilemezliğini gizler. Çalışılan her metaforun neyi görünmez kıldığı sorusu, Lakoff geleneğinin
+verimlilik testine eklediği maddedir.
+7 Evrimsel Düşünce: Üçüncü Büyük Gramer
+Stok-akış ve geri besleme gramerlerinin yanına, aynı evrensellikte üçüncü bir gramer konmalıdır:
+varyasyon–seçilim–kalıtım. Üçlü, kör bir süreçle tasarımsız uyum üretir — çeşitleri üret, işe
+yaramayanı ele, işe yarayanı çoğalt — ve Darwin’in biyolojideki keşfi, yapının kendisinin
+biyolojiyle sınırlı olmadığı anlaşıldıkça genelleşmiştir.
+Donald Campbell’ın evrimsel epistemolojisi, grameri bilgiye uygular: bilginin büyümesi de kör
+varyasyon ve seçici tutmadır — hipotezler üretilir, yanlışlananlar elenir, hayatta kalanlar birikir;
+Popper’ın yanlışlamacılığı, bu sürecin metodolojik disiplinidir ve “bilim, kuramların doğal
+seçilimidir” cümlesi metafor değil yapısal iddiadır. Nelson ve Winter’ın 1982 tarihli evrimsel
+iktisadı, grameri firmalara uygular: firmanın “genleri” rutinleridir — işlerin nasıl yapıldığına
+dair yerleşik prosedürler; rutinler kopyalanır (yeni çalışan eskiden öğrenir), mutasyona uğrar
+(uygulama kayar) ve piyasa seçilimi başarılı rutin taşıyıcılarını büyütür. Organizasyon kültürünün
+neden talimatla değişmediğinin evrimsel cevabı buradadır: kültür bir karar değil, seçilimle
+yerleşmiş bir rutin havuzudur.
+Brian Arthur’un The Nature of Technology kitabı, grameri teknolojiye uygular ve bu notlar
+dizisinin transfer tezine evrimsel temel verir: yeni teknoloji, hiçlikten icat edilmez — mevcut
+teknolojilerin kombinasyonundan evrilir; jet motoru, mevcut kompresör, türbin ve yanma odası
+bilgilerinin yeni birleşimidir. Teknolojinin evrimi, kombinatoryal evrimdir ve bunun doğrudan
+sonucu şudur: eldeki yapı taşı repertuvarı ne kadar genişse, mümkün kombinasyon uzayı o kadar
+büyüktür — disiplinler arası kavram biriktirmenin değeri, Arthur’un çerçevesinde, kombinasyon
+hammaddesi biriktirmektir. Yazılım pratiğine üçüncü bir uygulama da eklenmelidir: A/B testi
+ve kademeli yayın, mühendisliğin bilinçli evrim makineleridir — varyasyon (varyantlar), seçilim
+(metrik), kalıtım (kazananın kalıcılaşması); ve evrimin bilinen patolojileri (yerel tepeye sıkışma,
+kısa vadeli seçilim baskısının uzun vadeli sağlığı yemesi) bu makinelerde aynen yaşar.
+5
+
+-- 5 of 7 --
+
+8 Gramer Olarak Enformasyon Teorisi
+Shannon’ın teorisi önceki notlarda tarihsel bir hat olarak (Kelly–Thorp) anlatılmıştı; burada
+eksik olan, teorinin kendisinin bir yapı grameri olarak kullanılmasıdır — stok-akış nasıl bir
+teşhis diliyse, entropi-kanal-gürültü de öyledir.
+Çekirdek kavramlar kısaca: entropi, bir kaynağın belirsizliğinin ölçüsüdür — mesajın taşıdığı
+bilgi, ortadan kaldırdığı belirsizliktir; hep “yeşil” diyen statü raporunun entropisi sıfırdır ve sıfır
+entropili kanal, bant genişliği ne olursa olsun bilgi taşımaz (ucuz konuşma analizinin enformasyon-
+teorik temeli). Kanal kapasitesi, gürültülü bir kanaldan hatasız geçirilebilecek bilginin üst sınırıdır
+— ve organizasyonel çevirisi doğrudandır: yönetim zinciri bir kanaldır, her kademe gürültü ekler ve
+kapasitesi sınırlıdır; kapasite üstü iletişim denemesi, mesajın bozulmasıyla sonuçlanır. Yedeklilik
+(redundancy), gürültüye karşı bilinçli tekrardır — doğal dillerin yarıya yakını yedekliliktir ve bu
+israf değil, hata düzeltme kodudur; önemli mesajın üç kanaldan tekrarı, Shannon mühendisliğidir.
+Sıkıştırma ise anlamanın ölçüsü olarak okunabilir: bir alanı sıkıştırabilmek — az kavramla
+çok olguyu türetebilmek — o alanı anlamaktır; Kolmogorov karmaşıklığı (bir nesnenin en
+kısa tarifinin uzunluğu) bunun sınırını verir ve “sıkıştırılamayan karmaşıklık” kavramı, hangi
+sistemlerin özetlenemeyeceğinin, hangi dokümantasyonun kısaltılamayacağının teorik dilidir.
+Ashby’nin gerekli çeşitlilik yasasının enformasyon-teorik bir yasa olduğu da burada netleşir:
+denetleyicinin tepki repertuvarı, bozucunun entropisini emebilecek kapasitede olmalıdır — izleme
+sistemi tasarımı, kelimenin teknik anlamıyla bir kanal kapasitesi problemidir.
+9 Pragmatizm ve Polanyi: Verimlilik Testinin Felsefesi
+Bu notlar dizisi baştan beri örtük bir epistemolojiyle çalışmaktadır ve okulun adını koymak,
+dağınık pratiği teoriye bağlar. “Bir çeviri, yeni soru ya da yeni hamle üretiyorsa değerlidir”
+testi, kelimesi kelimesine pragmatizmdir: Peirce’ün maksimi — bir kavramın anlamı, pratik
+sonuçlarının toplamıdır; pratik sonucu olmayan ayrım, ayrım değildir — ve James’in “doğru-
+nun nakit değeri” formülü, verimlilik testinin on dokuzuncu yüzyıl sonundaki orijinalleridir.
+Dewey’nin araçsalcılığı çerçeveyi tamamlar: düşünce, dünyayı seyretmek için değil, problemli
+durumları dönüştürmek için evrilmiş bir araçtır; kavramlar aletlerdir ve aletin ölçüsü kesme
+kabiliyetidir. Pragmatizmin bu notlara ikinci katkısı, çoğulculuğun meşrulaştırılmasıdır: farklı
+sözlükler (finans, TPS, sistem) “hangisi gerçekten doğru” yarışında değildir — her biri bir alettir
+ve alet kutusunda çekiçle testere çelişmez; sözlük biriktirme projesi, pragmatist çerçevede, alet
+kutusu büyütme projesidir.
+Michael Polanyi’nin örtük bilgi (tacit knowledge) kavramı, epistemolojinin pratiğe dönüşünün
+ikinci ayağıdır. Formülü ünlüdür: “söyleyebildiğimizden fazlasını biliriz” — bisiklet süren, dengeyi
+sağlayan fizik kurallarını ifade edemez; yüz tanıyan, hangi hatlardan tanıdığını söyleyemez; usta
+mühendis, kötü tasarımı kokusundan bilir ama kokunun tarifini veremez. Polanyi’nin radikal
+iddiası, örtük bilginin açık bilginin eksik hali değil, bütün bilginin temeli olduğudur: her açık
+kural, uygulanması örtük beceri isteyen bir kuraldır — kuralı uygulama kuralı yazılamaz, sonsuz
+gerileme başlar. Sonuçları bu dizinin birçok temasını temellendirir: teknolojik bilgi kaybı (Saturn
+V vakası) örtük bilginin dokümana sığmamasının sonucudur; usta-çırak zincirinin ikamesizliği,
+örtük bilginin tek aktarım kanalının ortak pratik olmasındandır; ve “her şeyi dokümante edelim”
+programının yapısal sınırı Polanyi teoremidir — dokümantasyon açık bilgiyi taşır, açık bilgi
+buzdağının görünen ucudur.
+6
+
+-- 6 of 7 --
+
+10 Hesaplamalı Cephe: Yapı Eşlemenin Mühendislik Gerçekle-
+mesi
+Son gövde, en yenisidir ve bu dizinin ana problemini bugün fiilen inşa edilen bir teknolojiye
+bağlar: modern makine öğrenmesi, “yüzeyi soyup yapıyı çıkarma” işleminin endüstrileşmesidir.
+Temsil öğrenme (representation learning), alanın merkez kavramıdır: derin öğrenmenin asıl işi,
+ham veriden (piksel, kelime, ses dalgası) görevle ilgili yapıyı yakalayan iç temsiller çıkarmaktır
+— yüzeyden yapıya otomatik geçiş; çeviri prosedürünün birinci adımının makineleşmiş hali.
+Gömme uzayları (embeddings) sonucu somutlaştırır: kelimeler, kavramlar ya da kod parçaları,
+anlamsal yakınlığın geometrik yakınlığa çevrildiği bir uzaya yerleştirilir — ve bu uzaylarda
+analoji, kelimenin tam anlamıyla aritmetik olur (kral − erkek + kadın ≈ kraliçe): Gentner’ın yapı
+eşlemesi, vektör işlemine dönüşmüştür. Transfer öğrenme ise çeviri prosedürünün bütününün
+mühendislik karşılığıdır: bir alanda (genel metin, genel görüntü) öğrenilen yapının, başka bir
+alana (hukuk metni, tıbbi görüntü) az veriyle taşınması — transferin çalışması, alanlar arası
+paylaşılan yapının gerçekliğinin ampirik kanıtıdır; Bertalanffy’nin izomorfizm tezi, her ince ayar
+işleminde yeniden doğrulanmaktadır.
+Cephenin bu diziye son katkısı, düşündürücü bir aynadır: büyük dil modellerinin gücünün
+önemli bir kısmı, devasa örnek birikiminden yapı çıkarıp alanlar arası eşleme kurabilmesinden
+gelir — yani bu notların “yapı görme kası” dediği şeyin ölçeklenmiş halinden. Kasın hem insan
+hem makine tarafında aynı ilkeyle çalışması, ilkenin kendisi hakkındaki en güçlü güncel kanıttır;
+ve işbölümünün geleceği de buradan okunabilir: örnek biriktirme ve kaba eşleme makineye
+kayarken, eşlemenin verimlilik testi — yeni soru, yeni hamle, sorumluluk — insanın elinde
+kalmaktadır.
+11 Sonuç: Yeni Gövdelerin Ortak Deseni
+Dokuz alan toplandığında bir desen belirir: 1980 sonrasının yeni gövdeleri, 191940–1970 göv-
+desinin sorularını üç yönde radikalleştirmiştir. Birincisi aşağıdan yukarı dönüş: klasik gövde
+sistemleri yukarıdan (denklem, plan, kontrol) modelliyordu; yeni gövdeler düzenin aşağıdan
+doğuşunu (emergence, öz-örgütlenme, evrim, tercihli bağlanma) inceler — kontrol paradigmasın-
+dan bahçıvanlık paradigmasına geçiş. İkincisi gözlemcinin içeri alınması: ikinci dalga sibernetik,
+enaktivizm ve pragmatizm, bilenin bilinenin dışında durmadığını üç ayrı dilde söyler — ölçen
+değiştirir, bilen kurar, kavram alettir. Üçüncüsü biçimselleşme ve makineleşme: izomorfizm
+sezgisi kategori teorisinde kesin bir tanıma, temsil öğrenmede çalışan mühendisliğe kavuşmuştur
+— Bertalanffy’nin hayali, bir uçta teorem, öbür uçta ürün olmuştur.
+Okuma köprüleri, alan başına tek kapı olarak şöyle dizilebilir: karmaşıklık için West (Scale)
+ya da Mitchell (Complexity: A Guided Tour); ağlar için Barabási (Linked); ikinci dalga için
+Maturana–Varela (The Tree of Knowledge); kategori teorisi için Fong–Spivak (Seven Sketches
+in Compositionality); bilişsel dilbilim için Lakoff–Johnson (Metaphors We Live By); evrimsel
+düşünce için Arthur (The Nature of Technology); enformasyon için Gleick (The Information);
+pragmatizm ve örtük bilgi için Polanyi (The Tacit Dimension). Her köprü, klasik gövdeden bir
+yeni ağaca geçirir; ve ağaçların hepsi, farklı dallardan aynı gökyüzüne uzanmaktadır: yüzeyler
+farklıdır, gramer tektir — ama gramerin kendisi de evrilmektedir.
+7
+
+-- 7 of 7 --

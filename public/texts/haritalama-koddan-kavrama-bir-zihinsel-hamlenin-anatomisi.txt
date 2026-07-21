@@ -1,0 +1,180 @@
+Haritalama: Koddan Kavrama Bir Zihinsel
+Hamlenin Anatomisi
+Ömer Faruk Yavuz
+July 2026
+Özet
+Bu çalışma, yazılım mühendisliğinde “kod haritalaması” (code mapping) olarak
+adlandırılan pratiği hareket noktası alarak, haritalamanın genel bir bilişsel işlem
+olarak yapısını incelemektedir. İlk bölümde kod haritalamasının katmanları
+sınıflandırılmakta; ikinci bölümde haritalama ediminin genel tanımı, matem-
+atiksel ve kartografik karşılıklarıyla birlikte formüle edilmektedir. Üçüncü bölümde,
+teknik kavramların tarihsel kökenlerinden — jenealojilerinden — koparılmış
+biçimde öğretilmesinin yapısal nedenleri ve bilişsel maliyetleri tartışılmakta;
+son bölümde jenealoji kavramının felsefi çerçevesi Nietzsche ve Foucault refer-
+anslarıyla açıklanmaktadır. Çalışmanın temel savı şudur: kök kavramları tanı-
+mayan öğrenici, aynı kavram ailesine ait örnekler arasında bilgi transferi gerçek-
+leştirememekte; bu durum teknik eğitimin isimler düzeyinde kalıp fiiller düzeyine
+inememesinden kaynaklanmaktadır.
+Giriş
+Kod haritalaması, bir kod tabanının yapısını, bileşenlerini ve bu bileşenler arasın-
+daki ilişkileri sistematik biçimde anlaşılır kılma işlemi olarak tanımlanabilir.
+Fiziksel bir haritanın araziyi temsil etmesine benzer biçimde, kod haritası da
+kodun “arazisini” temsil eder. Bu pratiğin temel gerekçesi, modern kod taban-
+larının satır satır okunarak kavranamayacak ölçekte olmasıdır: harita, “nerede
+ne bulunmaktadır ve neyle bağlantılıdır” sorusuna satır düzeyine inmeksizin
+yanıt vererek bilişsel yükü azaltır. Yeni bir kod tabanına uyum süreci (on-
+boarding), yeniden yapılandırma (refactoring) planlaması, etki analizi ve teknik
+borç tespiti gibi mühendislik faaliyetlerinin tümü, nitelikli bir haritanın varlığına
+dayanmaktadır.
+Kod Haritalamasının Katmanları
+Kod haritalaması, uygulamada birbirini tamamlayan birden fazla katmanı kap-
+samaktadır.
+1
+
+-- 1 of 5 --
+
+• Yapısal harita: Kod tabanında hangi dosyaların, paketlerin ve modül-
+lerin bulunduğunu betimler. Katmanlı bir mimaride handlers/, services/,
+repositories/ ve models/ dizinlerinin içerikleri ile her katmanın üstlendiği
+sorumluluk bu haritanın konusudur.
+• Bağımlılık haritası: Hangi modülün hangi modüle bağımlı olduğunu be-
+timler ve genellikle yönlü bir graf olarak modellenir: handler → service
+→ repository → database. Döngüsel bağımlılık gibi mimari sorunlar
+bu temsil üzerinde görünür hale gelmektedir.
+• Veri akışı haritası: Bir verinin sisteme girişinden itibaren izlediği yolu
+uçtan uca betimler. Örnek olarak, bir ses dosyasının yükleme uç nok-
+tasından nesne depolamaya (S3), oradan üstveri (metadata) olarak ilişkisel
+veritabanına (PostgreSQL) ve nihayetinde WebSocket kanalı üzerinden is-
+temciye bildirim olarak ulaşan yolculuğu verilebilir.
+• Kontrol akışı / davranış haritası: Belirli bir kullanım senaryosunda
+(oturum açma, arama, indirme) hangi fonksiyonların hangi sırayla tetik-
+lendiğini betimler.
+• Kavramsal harita: Kodun alan modelini (domain model) betimler; “Cut”,
+“Session”, “Library” gibi kavramların neyi temsil ettiğini ve aralarındaki il-
+işkileri ortaya koyar.
+Haritalama, otomatik araçlarla (bağımlılık grafı üreticileri, çağrı grafı anal-
+izörleri, go mod graph, tümleşik geliştirme ortamlarının çağrı hiyerarşisi özellik-
+leri) veya elle (mimari dokümantasyon, diyagramlar) gerçekleştirilebilmektedir.
+Haritalamanın Genel Tanımı
+Bir alanın haritasını çıkarmak, en genel anlamıyla, bir bölgeyi (territory) daha
+küçük ve daha işlenebilir bir temsile (representation) dönüştürmek olarak tanım-
+lanabilir; ancak bu dönüşüm rastgele değil, yapıyı koruyarak gerçekleştirilir.
+İşlemin matematiksel karşılığı doğrudan mevcuttur: bir map (fonksiyon, mor-
+fizm), bir kümenin elemanlarını, aralarındaki ilişkileri bozmaksızın başka bir
+kümeye taşır. Kartografik karşılık da aynı ilkeye dayanır: İstanbul’un haritası
+İstanbul’un kendisi değildir; ancak haritadaki iki nokta arasındaki ilişki (mesafe,
+yön, komşuluk) gerçeklikteki ilişkiye tekabül eder. Bu tanım çerçevesinde dört
+kurucu unsur ayırt edilebilir.
+Seçici İndirgeme
+Harita, temsil ettiği alandan zorunlu olarak daha az bilgi içerir. Borges’in
+öyküsünde betimlenen, ülkeyle birebir ölçekli harita işlevsizdir; zira haritanın
+değeri tam olarak neyi dışarıda bıraktığında yatmaktadır. Metro haritası coğrafi
+mesafeleri çarpıtmakta ancak bağlantı ilişkilerini korumaktadır; çünkü metro
+yolcusu açısından belirleyici olan mesafe değil bağlantıdır. Buradan çıkan sonuç
+2
+
+-- 2 of 5 --
+
+şudur: haritalama her zaman bir amaç varsayar; yanıtlanmak istenen soru,
+hangi bilginin korunacağını ve hangisinin eleneceğini belirler.
+İzomorfizm Yerine Homomorfizm
+Nitelikli bir harita, gerçekliğin bütün detaylarını değil, ilgili yapısını korur. “A
+noktası B noktasının kuzeyindeyse, haritada da öyle görünmelidir” ilkesi yapısal
+sadakat olarak adlandırılabilir. Aynı ilke kod haritalamasında da geçerlidir:
+bağımlılık grafı, kodun her satırını değil, “hangi bileşen hangi bileşene bağım-
+lıdır” ilişkisini muhafaza eder.
+Örtük Olanın Açık Hale Getirilmesi
+Haritalanan alan zaten mevcuttur; ancak yapısı görünmez, dağınık ve yalnızca
+parça parça deneyimlenebilir durumdadır. Harita, bu dağınık deneyimi tek
+bakışta kavranabilir bir bütüne dönüştürür. Bu nedenle haritalama bir bilme
+biçimi olarak nitelendirilebilir: bir alanın haritası çıkarılabiliyorsa, o alan — en
+azından seçilen boyutta — anlaşılmış demektir.
+Navigasyon İmkânı
+Haritanın nihai işlevi eyleme dönüktür: mevcut konumu bilmek, hedefe giden
+yolu planlamak, iki nokta arasında güzergâh bulmak. Haritası bulunmayan
+özne, alanda yalnızca yerel olarak hareket edebilir; bulunduğu noktadan göre-
+bildiği kadarını bilir. Harita, yerel bilgiyi küresel bilgiye dönüştürür.
+Ortak Şablon
+Bu çerçeveden bakıldığında, “haritası çıkarılabilen” her nesne aynı şablona otur-
+maktadır: genom haritası, zihin haritası, paydaş haritası ve kod haritası, kar-
+maşık bir bütünün, belirli bir amaç doğrultusunda, ilişki yapısı korunarak gerçek-
+leştirilmiş indirgemeleridir. Korzybski’nin klasik uyarısı anlamını bu noktada
+bulur: harita, arazi değildir. Her harita bir perspektiftir ve haritayı gerçekliğin
+kendisi saymak, haritalama pratiğinin en temel hatasını oluşturur.
+Kavramların Jenealojisiz Öğrenimi
+Teknik eğitim ve mesleki dil, kavramları jenealojilerinden — tarihsel soy kütük-
+lerinden — koparılmış biçimde aktarmaktadır. “Dependency graph” öğreniciye
+bir araç olarak sunulur: geliştirme ortamında bir düğme, bir komut satırı aracı,
+bir mülakat sorusu. Kullanımı öğretilir; ancak bu aracın bir haritalama edimi
+olduğu, yani binlerce yıllık bir insan pratiğinin (bilinmeyeni temsile dönüştürme)
+özel bir örneğini oluşturduğu aktarılmaz. Terim aktarılmakta, hikâye aktarıl-
+mamaktadır. Bu durumun üç yapısal nedeni ayırt edilebilir.
+3
+
+-- 3 of 5 --
+
+Yapısal Nedenler
+• Teknik dil, soyutlamanın son katmanını sunar; merdivenini sun-
+maz. “Dependency graph” ifadesi iki büyük fikrin bileşimidir: “bağım-
+lılık” (bir varlığın mevcudiyetinin başka bir varlığa koşullu olması — felsefi
+kökenli bir kavram) ve “graf” (Euler’in 1736 tarihli Königsberg köprüleri
+probleminden doğan, ilişkilerin noktalar ve çizgilerle temsili — bir hari-
+talama devrimi). Bileşim, öğreniciye hazır paket olarak sunulur; paketin
+açılması müfredatta yer almaz, zira müfredat kullanımı öğretmekte, anla-
+mayı öğretmemektedir.
+• Kullanım, anlayışı taklit eder. Bir terimi doğru bağlamlarda kullan-
+abilmek, o terimin anlaşıldığı izlenimini üretir ve çoğu pratik amaç açısın-
+dan bu yeterli sayılır. Wittgenstein’ın “anlam kullanımdır” tezi burada
+ironik biçimde işler: bağımlılık grafını doğru kullanan kişi, mesleki toplu-
+luk tarafından “anlamış” kabul edilir. Arka plandaki “haritalama nedir”
+sorusu ise hiçbir üretim döngüsünde iş kalemi haline gelmez.
+• Kök kavramlar, her yerde bulundukları için görünmezdir. Hari-
+talama o denli temel bir bilişsel işlemdir ki — balığın suyu fark etmeme-
+sine benzer biçimde — kendisi olarak algılanmaz; yalnızca özel örnekleri
+görülür: graf, şema, model, diyagram, dizin, katalog. Genel örüntü hiçbir
+derste müstakil bir konu oluşturmaz; disiplinlerin arasına düşer ve disi-
+plinler arasına düşen konular sahipsiz kalır.
+Bilişsel Maliyet: Transfer Yetersizliği
+Kök kavramı tanımayan öğrenici, aynı ailenin örnekleri arasında transfer gerçek-
+leştirememektedir. Bağımlılık grafını bilen ancak haritalamayı kavram olarak
+tanımayan kişi, yeni bir problemle karşılaştığında (“bir organizasyondaki bilgi
+akışı nasıl anlaşılır?”) elindeki aracın aynı kavram ailesinin üyesi olduğunu göre-
+memektedir. Kök kavramı tanıyan kişi içinse bağımlılık grafı, paydaş haritası,
+genom haritası ve metro şeması aynı zihinsel hamlenin dört tezahürüdür; beşin-
+cisi bizzat icat edilebilir. Aradaki fark, aracı tüketen özne ile aracın arkasındaki
+kristalize edilmiş düşünceyi görebilen özne arasındaki farktır.
+Durum şu formülle özetlenebilir: eğitim isimleri vermekte, fiilleri vermemek-
+tedir. “Graf” bir isimdir; “haritalamak” bir fiil, bir zihinsel hamledir. İsimleri
+ezberleyen bilgili görünmekte; fiilleri kavrayan üretken olmaktadır.
+Jenealoji Kavramının Çerçevesi
+Jenealoji, sözcük anlamıyla “soy bilimi” demektir; Yunanca genea (soy, nesil) ve
+logos (bilim, söz) köklerinden türemiştir. Gündelik kullanımda bir ailenin soy
+ağacının çıkarılmasını ve ataların izlenmesini ifade eder.
+4
+
+-- 4 of 5 --
+
+Felsefi Anlam: Nietzsche ve Foucault
+Felsefi anlamda jenealoji, bir kavramın, pratiğin veya kurumun tarihsel kökeninin
+ve dönüşüm sürecinin izlenmesidir: fikrin nereden geldiği, hangi ihtiyaçtan doğ-
+duğu, hangi aşamalardan geçtiği ve bugünkü biçimine nasıl ulaştığı sorgulanır.
+Nietzsche bu yöntemi ahlâk alanına uygulamıştır (Ahlâkın Soykütüğü): “iyi”
+ve “kötü” kavramlarını verili ve zamansız doğrular olarak kabul etmek yerine,
+bu kavramların tarih içinde nasıl üretildiğini, kimler tarafından üretildiğini ve
+hangi güç ilişkileri içinde biçimlendiğini sorgulamıştır. Foucault aynı yöntemi
+hapishane, cinsellik ve delilik gibi kavram ve kurumlara uygulamıştır.
+Yetim Kavramlar
+“Kavramların jenealojisinden koparılmış olarak öğrenilmesi” ifadesinin anlamı
+bu çerçevede netleşmektedir: bağımlılık grafı, soy ağacı olmaksızın öğrenilmek-
+tedir. Kavramın ataları — Euler’in 1736 tarihli köprü problemi, graf teorisinin
+doğuşu, “bağımlılık” fikrinin felsefi kökeni, haritalama pratiğinin binlerce yıllık
+tarihi — bilinmemektedir. Kavram, öğreniciye yetim olarak ulaşmaktadır: soyu
+bulunmayan, her zaman var olmuş izlenimi veren bir teknik terim.
+Jenealojiyi bilmek ile bilmemek arasındaki fark, bir kişiyi yalnızca bugünkü
+haliyle tanımak ile o kişinin hikâyesini bilmek arasındaki farka benzetilebilir;
+ikincisi, kişinin gelecekteki davranışlarını öngörmeyi de mümkün kılar. Aynı
+ilke kavramlar için de geçerlidir: soyu bilinen kavram bükülerek yeni bağlamlara
+taşınabilir; zira o kavramın neyin cevabı olduğu bilinmektedir.
+5
+
+-- 5 of 5 --

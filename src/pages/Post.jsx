@@ -9,6 +9,7 @@ export default function Post() {
   const { posts, loading, error } = usePosts()
   const { t } = useLang()
   const [copied, setCopied] = useState(false)
+  const [textCopied, setTextCopied] = useState(false)
 
   // Yeni bir yazıya girildiğinde en üstten başla
   useEffect(() => {
@@ -74,6 +75,17 @@ export default function Post() {
   }
 
   const pdfUrl = `${import.meta.env.BASE_URL}pdfs/${post.pdf}`
+  const textUrl = `${import.meta.env.BASE_URL}texts/${post.slug}.txt`
+
+  function copyText() {
+    fetch(textUrl)
+      .then((r) => r.text())
+      .then((text) => navigator.clipboard.writeText(text))
+      .then(() => {
+        setTextCopied(true)
+        setTimeout(() => setTextCopied(false), 2000)
+      })
+  }
 
   function share() {
     const url = window.location.href
@@ -113,6 +125,12 @@ export default function Post() {
         </a>
         <a href={pdfUrl} download className="btn">
           {t('download')}
+        </a>
+        <button type="button" onClick={copyText} className="btn">
+          {textCopied ? t('textCopied') : t('copyText')}
+        </button>
+        <a href={textUrl} download={`${post.slug}.txt`} className="btn">
+          {t('downloadText')}
         </a>
         <button type="button" onClick={share} className="btn">
           {copied ? t('copied') : t('share')}

@@ -1,0 +1,430 @@
+Bilgi Geometrisi ve Kodun Topolojisi:
+Yazlm Sistemlerini Yapsal Biçim Üzerinden Anlamak
+Ömer Faruk Yavuz
+Temmuz 2026
+Giriş
+Modern dünyada karmaşklk yalnzca ziksel sistemlerde değil, bilgi sistemlerinde de ortaya çk-
+maktadr. Yazlm mimarileri, organizasyon yaplar, karar mekanizmalar ve dijital platformlar
+giderek daha büyük ve birbirine bağl yaplar haline gelmiştir. Bu dönüşümle birlikte kritik soru
+artk yalnzca bir sistem çalşyor mu sorusu değildir; asl mesele, bir sistem anlaşlabilir, sür-
+dürülebilir ve yönetilebilir mi sorusudur. Çünkü modern sistemlerde başarszlk çoğu zaman tek
+bir algoritmann yetersizliğinden değil; bilginin dağnklaşmasndan, akşlarn belirsizleşmesinden
+ve yapnn kontrol edilemez hale gelmesinden kaynaklanr.
+Bu bağlamda bilgi geometrisi kavram, bilginin sistem içindeki organizasyon biçimini anla-
+mak için güçlü bir düşünsel çerçeve sunmaktadr. Bilginin nasl aktğ, nasl katmanlandğ, nasl
+tekrar ettiği ve hangi yaplar etrafnda organize olduğu; sistemin anlaşlabilirliğini ve ölçeklene-
+bilirliğini doğrudan etkiler.
+Bu ihtiyaç bir benzetmeyle açklanabilir: herkes amatör düzeyde takm oyunu oynayabilir;
+ancak en üst düzey rekabette oynamak yalnzca bireysel yetenek değil, yüksek koordinasyon,
+strateji, disiplin ve sistem organizasyonu gerektirir. Yazlm sistemleri de benzer biçimde çalşr:
+küçük ölçekte ayakta kalan yaplar, karmaşklk ve ölçek arttğnda çoğu zaman krlganlaşr.
+Teknik borç, belirsiz bilgi akş ve bozuk sistem geometrisi; düşük yoğunlukta tolere edilebilirken,
+büyük sistemlerde ciddi performans ve sürdürülebilirlik problemlerine dönüşür.
+Belirtmek gerekir ki bilgi geometrisi ifadesi burada, resmi ve yerleşik bir bilgisayar bilimi
+terimi olarak değil, bir sistemde bilginin nasl organize olduğunu, nasl aktğn ve farkl parçalar
+arasnda nasl bağlandğn anlatan güçlü bir metafor olarak kullanlmaktadr. Kavram temelde
+şu soruya yant arar:
+Bir sistemde bilgi hangi biçimde düzenleniyor, hangi yollardan akyor ve hangi ilişkiler
+araclğyla anlam kazanyor?
+Bir yazlm sistemi yalnzca satrlardan oluşan bir metin değildir; ayn zamanda veri akşlar,
+bağmllklar, modüller, durum kaynaklar, yan etkiler, testler, sözleşmeler ve alan kavramlarndan
+oluşan ilişkisel bir yapdr. Bu yap, sistemin bilgi geometrisini oluşturur.
+1
+
+-- 1 of 12 --
+
+Bilginin Sistem çindeki Organizasyonu
+Bir sistemde bilginin nasl konumlandğ, sistemin sağlkl olup olmadğn büyük ölçüde belirler.
+Bilgi şu biçimlerde organize olabilir:
+ dağnk,
+ merkezi,
+ tekrar eden,
+ katmanl,
+ döngüsel,
+ lokal,
+ her yere szan,
+ kontrollü snrlar içinde akan.
+Bu özelliklerin her biri sistemin geometrisini etkiler. Örneğin ayn bilginin birden fazla yerde
+tekrar etmesi, sistemde fazladan bağlantlar ve belirsizlikler üretir. Bir durumun tek bir kaynağ
+varsa sistem daha kolay anlaşlr; ayn durum farkl yerlerde farkl biçimlerde tutuluyorsa bilgi
+geometrisi bulanklaşr. Bu nedenle bilgi geometrisi, sistemin yalnzca teknik yapsn değil, ayn
+zamanda anlaşlabilirliğini de ifade eder.
+yi ve Kötü Bilgi Geometrisi
+yi Bilgi Geometrisi
+yi bir bilgi geometrisinde akş yönleri nettir, sorumluluklar ayrlmştr ve sistemin hangi parças-
+nn hangi işi yaptğ kolayca anlaşlr. Basit bir katmanl arayüz mimarisi şu şekilde gösterilebilir:
+UI
+|
+v
+Facade
+|
+v
+Service
+|
+v
+API
+Bu yapda bilgi yönlü biçimde akar: arayüz doğrudan dş sistem detaylarn bilmez, facade
+katman arayüz ile alt katmanlar arasnda sade bir yüzey sağlar, servis dş sistemlerle iletişim
+kurar. Bu mimarinin kazanmlar şunlardr:
+2
+
+-- 2 of 12 --
+
+ arayüz yalnzca gösterim ve kullanc etkileşiminden sorumludur,
+ facade kullanm niyetini sadeleştirir,
+ servis dş iletişim detaylarn taşr,
+ dş sistem snr nettir,
+ veri akş izlenebilirdir,
+ değişikliklerin etki alan lokal kalr.
+Böyle bir yapya hem insan geliştirici hem de yapay zekâ daha kolay uyum sağlar; çünkü
+sistemin anlam haritas açktr.
+Kötü Bilgi Geometrisi
+Kötü bir bilgi geometrisinde sorumluluklar karşr, veri farkl yönlere dağlr, bağmllklar görün-
+mezleşir ve yan etkiler kontrolsüz biçimde yaylr. Aşağdaki yap problemli bir geometriyi temsil
+eder:
+UI <-> Service
+| ^
+v \
+Store <-> Helper
+^ |
+\ v
+Random util
+Bu yapda bilgi akş net değildir: arayüz servis ile doğrudan konuşur, durum deposu birden
+fazla noktadan etkilenir, yardmc yaplar sistem davranşnn parças haline gelir ve belirsiz araç-
+lar sistemin farkl noktalarna kontrolsüz bağlantlar kurar. Ortaya çkan problemler şunlardr:
+ durum her yere yaylr,
+ yan etkiler gizlenir,
+ verinin kaynağ belirsizleşir,
+ değişikliklerin etki alan öngörülemez hale gelir,
+ küçük bir değişiklik dalga etkisiyle başka bölgeleri bozar,
+ test yazmak zorlaşr,
+ yapay zekâ yanlş bağmllk ilişkileri kurabilir.
+Bu tür sistemler yalnzca karmaşk değildir; daha doğru bir ifadeyle, topolojik olarak çamur-
+laşmştr:
+Kötü mimaride problem yalnzca kodun uzun olmas değildir. Problem, sistemin şek-
+linin okunamaz hale gelmesidir.
+3
+
+-- 3 of 12 --
+
+Topolojik Çamur
+Topolojik çamur ifadesi, sistemdeki bağmllklarn, veri akşlarnn ve sorumluluklarn artk
+sağlkl biçimde ayrştrlamadğ durumu anlatmak için önerilebilir. Bu durumda sistemde her
+şey her şeyle bağlantl hale gelir: bir fonksiyonun yalnzca kendi işini yapp yapmadğ belli
+değildir; bir bileşenin yalnzca arayüz mü çizdiği, yoksa iş mantğ m çalştrdğ, durumu mu
+değiştirdiği, önbelleği mi temizlediği veya başka bir olay m tetiklediği izlenemez.
+Topolojik çamurun temel problemi şudur:
+Sistemin herhangi bir noktasna dokunulduğunda, hangi noktalarn etkileneceği ön-
+ceden tahmin edilemez.
+Bu, hem insan geliştirici hem de yapay zekâ için ciddi bir engeldir; çünkü doğru değişiklik
+yapabilmek için sistemin şeklinin okunabilir olmas gerekir.
+Karmaşklğn ekli
+Karmaşklk yalnzca miktar meselesi değildir; karmaşklğn bir şekli vardr. Bir sistem büyük
+fakat düzenli, başka bir sistem daha küçük fakat çok daha karmaşk olabilir. Bu fark belirleyen,
+sistemdeki parçalarn nasl bağlandğdr. Baz yaplar doğalar gereği daha yönetilebilirdir:
+ ağaç yaplar yönetilebilirdir,
+ modüler yaplar ölçeklenebilirdir,
+ ağ yaplar güçlü fakat karmaşktr,
+ düğümlenmiş (spaghetti) yaplar krlgandr.
+Bu nedenle yazlmda yalnzca kod satr saysna bakmak yeterli değildir; asl önemli olan,
+bu satrlarn nasl bir ilişki yaps oluşturduğudur.
+Yazlm Dşndaki Bilgi Geometrileri
+Bilgi geometrisi yalnzca yazlma özgü bir düşünce değildir. Birçok doğal, sosyal ve kültürel
+sistem de benzer yapsal organizasyonlara sahiptir.
+nsan Vücudu
+nsan vücudu farkl geometrik ve ilişkisel organizasyonlardan oluşur: damar sistemi büyük ölçüde
+ağaç yapsna, sinir sistemi ağ yapsna benzer; hücreler modüler yaplardr; hormon sistemi ise
+akş dinamikleriyle çalşr. Damar sistemi dallanarak yaylr, sinir sistemi yoğun bağlantlar kurar,
+hücreler belirli snrlar olan modüller gibi işler ve hormon sistemi kimyasal sinyallerin akşyla
+davranş üretir.
+4
+
+-- 4 of 12 --
+
+ehirler
+ehirler de bilgi ve hareket geometrisine sahiptir: zgara plan düzenli ve öngörülebilir bir yap
+sunar; organik ortaçağ dokusu tarihsel olarak büyümüş, daha düzensiz bir yapdr; merkezçevre
+ulaşm modeli ise merkezi düğümler üzerinden dağlan bir düzeni temsil eder. Bir şehrin sokak
+yaps, insanlarn nasl hareket ettiğini, trağin nerede skştğn ve şehrin nasl deneyimlendiğini
+etkiler. Yazlm mimarisinde bağmllk graği benzer bir rol üstlenir.
+Müzik
+Müzikte de geometrik ve ilişkisel organizasyon bulunur: tema bir merkez oluşturur, varyasyonlar
+bu merkezin etrafnda gelişir, dönüşler yapsal bütünlük sağlar, gerilim ve çözülme müzikal hare-
+ketin yönünü belirler. Bir müzik parças yalnzca notalarn sralanmas değildir; gerilim, çözülme,
+tekrar, varyasyon ve dönüş ilişkileriyle anlam kazanr.
+Anlat
+Hikâye anlatm da belirli bir yapsal geometriye sahiptir: anlat yay, dallanan yollar, duygusal
+tempo, çatşma ve çözüm, karakter dönüşümü. yi bir hikâyede olaylar rastgele dizilmez; duygusal
+akş, karakter gelişimi ve olay örgüsü belirli bir yap içinde ilerler.
+Bilim
+Bilimsel bilgi de geometrik olarak düşünülebilir: bilgi grakleri, anlamsal ağlar, kategori hiyerar-
+şileri, nedensel modeller ve kuram yaplar. Bilim yalnzca veri biriktirme faaliyeti değildir; veriler
+arasndaki ilişkileri kurma, kavramlar snandrma ve açklama modelleri oluşturma sürecidir.
+Geometri Kavramnn Buradaki Anlam
+Bu bağlamda geometri, dar anlamda yalnzca çizgi, aç, yüzey veya hacim anlamna gelmez. Daha
+geniş anlamda, bir yapnn uzaysal ve ilişkisel organizasyonunu ifade eder:
+Bir sistemin parçalarnn birbirine göre nasl konumlandğ, nasl bağlandğ ve hangi
+yönlerde etkileştiği.
+Bu açdan bakldğnda yazlm sistemi de bir geometriye sahiptir: dosyalar, modüller, fonk-
+siyonlar, bileşenler, servisler, durum kaynaklar, testler ve dş sistem snrlar birlikte bir yap
+oluşturur. Bu yapnn biçimi sağlklysa sistem anlaşlr; biçimi bozuksa sistem krlganlaşr.
+Yapsal Formlarn Snandrlmas
+Kod tabanlarnn aldğ tipik yapsal formlar, birer ideal tip olarak snandrlabilir.
+5
+
+-- 5 of 12 --
+
+Ağaç (Tree) Geometrisi
+Ağaç geometrisi, hiyerarşik yaplarda görülür; üst seviyeden alt seviyeye doğru dallanma vardr:
+App
+|
+----------------
+| |
+Module A Module B
+| |
+-------- --------
+| | | |
+Comp1 Comp2 Comp3 Comp4
+Bu yap, sorumluluklarn üstten alta dağldğ sistemlerde anlaşlr bir model sağlar.
+Akş (Flow) Geometrisi
+Akş geometrisi, verinin veya işlemin belirli bir srayla ilerlediği sistemleri temsil eder:
+Input
+|
+v
+Validate
+|
+v
+Transform
+|
+v
+Process
+|
+v
+Output
+Bu form özellikle işlem hatlar, form işleme, veri işleme ve sunucu taraf iş akş tasarmlarnda
+kullanşldr.
+Katmanl (Layered) Geometri
+Katmanl geometri, yazlm mimarisinde en sağlkl ve anlaşlr formlardan biridir:
++-----------------------------+
+| Presentation Layer |
++-----------------------------+
+| Application Layer |
++-----------------------------+
+6
+
+-- 6 of 12 --
+
+| Domain Layer |
++-----------------------------+
+| Infrastructure Layer |
++-----------------------------+
+Her katman farkl bir sorumluluk taşr; üst katmanlar alt katmanlar kullanr, fakat alt kat-
+manlar üst katmanlara bağml olmamaldr.
+Merkez (Hub) Geometrisi
+Merkez geometrisinde birçok parça tek bir düğüm üzerinden haberleşir:
+Feature A
+|
+v
+Feature B -> Hub -> Feature C
+^
+|
+Feature D
+Kontrollü kullanldğnda bu yap koordinasyon sağlar; ancak merkez aşr sorumluluk üstle-
+nirse aşağda incelenen merkezi şişme problemine dönüşür.
+Ağ (Network) Geometrisi
+Ağ geometrisi, çok sayda parçann birbirine bağl olduğu yaplarda görülür:
+A ----- B ----- C
+| \ | / |
+| \ | / |
+D ----- E ----- F
+| / | \ |
+| / | \ |
+G ----- H ----- I
+Bu form baz alanlarda doğaldr: sosyal ağlar, bilgi grakleri ve nöral bağlantlar ağ geomet-
+risine sahiptir. Ancak yazlm mimarisinde kontrolsüz ağ yaps karmaşklk üretir.
+Merkezi işme: God Component Geometrisi
+Baz sistemlerde tek bir bileşen veya servis aşr büyür ve sistemin merkezi haline gelir:
++----------------+
+| God Component |
++----------------+
+/ / | \ \
+7
+
+-- 7 of 12 --
+
+v v v v v
+UI API Store Log Helper
+\ \ | / /
+\ \ | / /
+v v v v v
+Other Features
+Bu geometri tehlikelidir; çünkü sistem tek bir merkezde aşr yoğunlaşr ve bu merkez bozul-
+duğunda veya değiştiğinde çok geniş bir alan etkilenir.
+Döngüsel Bağmllk Geometrisi
+Döngüsel bağmllk, bir parçann başka bir parçaya, onun da dolayl olarak ilk parçaya bağml
+olmasdr:
++-----------+ +-----------+
+| Component | ----> | Service |
++-----------+ +-----------+
+^ |
+| v
++-----------+ +-----------+
+| Store | <---- | Helper |
++-----------+ +-----------+
+Sistem kapal bir döngü oluşturur; bu durum test etmeyi, hata ayklamay ve yeniden düzen-
+lemeyi zorlaştrr.
+Sistem Sağlğnn Geometrik Göstergeleri
+Bir sistemin sağlkl olup olmadğn çoğu zaman geometrisinden anlamak mümkündür; çünkü
+sağlkl sistemler belirli yapsal özellikler gösterir:
+ yüksek bağdaşklk (cohesion),
+ düşük bağlaşm (coupling),
+ net akş yönleri,
+ lokal değişim,
+ tekrarn azalmas,
+ hiyerarşik organizasyon,
+ anlaşlr bağmllk graği,
+ açk snrlar,
+8
+
+-- 8 of 12 --
+
+ deterministik akş,
+ testlerle sabitlenmiş davranşlar.
+Bu özellikler teknik kalite göstergeleri olduğu kadar geometrik göstergeler olarak da okuna-
+bilir.
+Yüksek Bağdaşklk
+Yüksek bağdaşklk, bir modülün kendi içinde anlaml ve tutarl bir sorumluluğa sahip olmasdr.
+Bir dosya veya bileşen yalnzca birbiriyle ilişkili işleri yapyorsa bağdaşklk yüksektir. Bağdaşklk
+düşükse, ayn parça birbirinden kopuk birçok sorumluluk taşr ve sistemin geometrisi bozulur.
+Düşük Bağlaşm
+Düşük bağlaşm, sistem parçalarnn birbirine gereğinden fazla bağml olmamasdr. Bağlaşm
+yükseldikçe değişikliklerin etki alan genişler; bir modüldeki küçük bir değişiklik başka modülleri
+beklenmedik biçimde etkileyebilir.
+Net Akş Yönleri
+Net akş yönleri, verinin ve kontrolün sistem içinde hangi yönde ilerlediğinin anlaşlabilir ol-
+masdr. Arayüzden facade'a, facade'dan servise, servisten dş sisteme giden tek yönlü bir akş,
+izlenebilir bir geometri üretir.
+Lokal Değişim
+Lokal değişim, bir özellik veya hata düzeltmesi için yaplan değişikliğin snrl bir bölgede kalabil-
+mesidir. Sağlkl sistemlerde lokal değişiklikler küresel bozulmalara neden olmaz; bu, mimarinin
+iyi snrlandğn gösterir.
+Anlaşlr Bağmllk Graği
+Bağmllk graği, sistemde hangi parçann hangi parçaya bağl olduğunu gösterir. Grak okuna-
+bilir ise sistemin zihinsel modeli kurulabilir; grak karmaşk, döngüsel ve kontrolsüz ise sistemin
+davranş tahmin edilemez hale gelir.
+Mevcut Geometriden Hedef Geometriye
+Bir kod taban analiz edilirken iki ayr temsil oluşturmak faydaldr: mevcut geometri ve hedef
+sağlkl geometri.
+Mevcut geometri tipik olarak şu görünümü alabilir:
+UI
+/ | \
+v v v
+Service Store Helper
+9
+
+-- 9 of 12 --
+
+\ | /
+v v v
+API
+|
+v
+Side Effects
+Bu temsil, veri akşnn dağnk olduğunu ve birçok parçann doğrudan dş sistem veya yan
+etkilerle temas ettiğini gösterir. Hedef sağlkl geometri ise şu biçimde tanmlanabilir:
++----------------------+
+| UI Components |
++----------------------+
+|
+v
++----------------------+
+| Facade / Container |
++----------------------+
+|
+v
++----------------------+
+| State / Store |
++----------------------+
+|
+v
++----------------------+
+| Services |
++----------------------+
+|
+v
++----------------------+
+| API / Infrastructure |
++----------------------+
+Hedef geometride akş nettir: arayüz doğrudan dş sistemle konuşmaz, yan etkiler belirli
+bir katmanda toplanr ve durum sahipliği belirginleşir. Bu iki temsil arasndaki fark, yeniden
+düzenleme çalşmasnn yol haritasn oluşturur.
+Kod Geometrisinin Analizi
+Bir kodun geometrisi, dosyalarn ziksel konumundan çok modüller arasndaki ilişkilerle ilgilidir
+ve şu sorularla anlaşlabilir:
+ Ana modüller nelerdir?
+10
+
+-- 10 of 12 --
+
+ Veri akş nereden nereye gider?
+ Hangi bileşen, servis veya dosya merkezî konumdadr?
+ Hangi parçalar birbirine aşr bağldr?
+ Tek yönlü veri akş var mdr?
+ Döngüsel bağmllklar var mdr?
+ Durum sahipliği net midir?
+ Sistem ağaç, akş, merkez, ağ, katmanl veya düğümlenmiş formlardan hangisine benze-
+mektedir?
+Bu sorular, kodun yalnzca çalşp çalşmadğn değil, nasl bir yapsal forma sahip oldu-
+ğunu ortaya koyar. Bu analiz yapay zekâ araçlaryla da yürütülebilir; ancak bunun için model-
+den yalnzca özet istemek yeterli değildir. Modelden bağmllklar, veri akşn ve mimari formu
+çkarmas; mevcut ve hedef geometriyi ayr temsiller olarak üretmesi; en riskli bağlantlar gerek-
+çelendirmesi ve dosya baznda yeniden düzenleme önerileri sunmas istenmelidir. Değerlendirme
+şemas şu boyutlar kapsamaldr:
++----------------+
+| Code Geometry |
++----------------+
+|
+---------------------------------------
+| | | | |
+v v v v v
+Data Flow Dependency State Side Module
+Direction Owner Effects Shape
+| | | | |
+v v v v v
+clear? one-way? clear? isolated? healthy?
+Bu değerlendirme, kodun yalnzca bugün çalşp çalşmadğn değil, uzun vadede yaşayp
+yaşayamayacağn anlamaya yarar.
+Kod Sadece Metin Değildir
+Modern yazlm mimarisi araçlarnn bağmllk graği, çağr graği, modül graği ve çalşma za-
+man izleri gibi görselleştirmeler sunmas tesadüf değildir; çünkü yazlm yalnzca metin değildir.
+Kod ayn zamanda bir yapdr:
+Kod sadece metin değildir. Kod; bir şekil, bir ağ ve bir akş sistemidir.
+11
+
+-- 11 of 12 --
+
+Bu nedenle yazlm yalnzca satr satr okumak bazen yeterli olmaz; sistemin nasl bağland-
+ğn, hangi yönlerde aktğn, hangi parçalarn merkezileştiğini ve hangi bölgelerin çamurlaştğn
+görmek gerekir.
+Kodun geometrisi, yapay zekâ destekli geliştirme açsndan ayrca önemlidir. Yapay zekâ;
+sistemdeki örüntüleri, isimlendirmeleri, snrlar ve bağmllk ilişkilerini kullanarak öneri üretir.
+Sistemin geometrisi sağlklysa model doğru örüntüyü sürdürebilir; geometri bozuksa model yanlş
+örüntüleri doğruymuş gibi çoğaltabilir. Dolaysyla mimari kalite, yalnzca insan okunabilirliği
+açsndan değil, makineyle birlikte akl yürütebilme açsndan da belirleyicidir.
+Sonuç
+Bilgi geometrisi resmi bir bilgisayar bilimi terimi olmayabilir; ancak bir sistemde bilginin na-
+sl organize olduğunu, nasl aktğn ve nasl bağlandğn ifade etmek için güçlü ve açklayc
+bir metafordur. Bu metafor özellikle yazlm mimarisi için değerlidir; çünkü yazlm sistemleri
+yalnzca kod satrlarndan değil, bağmllk graklerinden, veri akşlarndan, snrlardan, durum
+kaynaklarndan, testlerden ve alan ilişkilerinden oluşur.
+Bu çalşmann merkezi sezgisi şudur:
+Karmaşklğn şekli vardr; ve bir sistemin sağlkl olup olmadğ çoğu zaman bu şekle
+baklarak anlaşlabilir.
+Akşlar net, bağmllklar kontrollü, merkezler dengeli ve katmanlar belirginse sistem sağlk-
+ldr. Bağlantlar rastgele, döngüler gizli, merkezler aşr şişmiş ve veri akş belirsizse sistemin
+geometrisi bozulmuştur. Özetle:
+Kodun geometrisi bozuksa sistemin anlam dağlr; kodun geometrisi sağlklysa hem
+insan hem yapay zekâ sistem üzerinde daha doğru düşünebilir.
+12
+
+-- 12 of 12 --

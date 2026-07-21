@@ -1,0 +1,259 @@
+Yazılım Ekiplerinde Soru Sormak:
+Sistem Açıklığı Üzerinden Bir Ölçüm Sistematiği
+Ömer Faruk Yavuz
+Kasım 2025
+Özet
+Bu çalışma, yazılım ekiplerinde gündelik soru–cevap trafiğini örgütsel öğren-
+menin bir ölçüm yüzeyine dönüştüren bir sistematik önermektedir. Ana tez şudur:
+bir geliştiricinin sorduğu sorunun kalitesi, bireysel yetkinliğinden çok sistemin
+açıklığının — dokümantasyon, tasarım niyeti şeffaflığı ve süreç görünürlüğünün —
+fonksiyonudur. Çalışma; soru akışını izlemek için operasyonel olarak tanımlanmış
+göstergeler, soruları kurumsal belleğe dönüştüren standart bir soru formatı ve
+soru kalıplarını sistemsel eksiklere bağlayan bir teşhis tablosu sunar. İlişkinin
+çift yönlü olduğu varsayılır: açıklık soru kalitesini yükseltir; nitelikli sorular da
+dokümantasyonu ve niyet yazımını tetikleyerek açıklığı geri besler.
+Giriş
+Yazılım ekiplerinde öğrenmenin kalıcılaşması, bireysel kahramanlıklardan ziyade siste-
+min kendini açıklama kapasitesine bağlıdır. Bir mühendisin sorduğu sorunun yüzeysel
+görünmesi, çoğu durumda bireysel yetersizliğin değil, sistemdeki belirsizliğin göstergesi-
+dir: basit sorular, dokümantasyon, tasarım niyeti veya iletişim açıklığındaki eksikleri
+görünür kılar. Soru, bir hata değil, sistemin kendini anlatma kapasitesinin aynasıdır.
+Bu çerçevenin kuramsal dayanakları bellidir. Etkileşim güveni olarak adlandırı-
+lan boyut, Edmondson’ın psikolojik güvenlik kavramına dayanır: ekip üyelerinin soru
+sormayı, hata bildirmeyi ve fikir ayrılığını güvenli bulduğu ortamlarda öğrenme davra-
+nışı artar. Tekrarlayan soruların ve savunmacı soru kalıplarının analizi ise Argyris’in
+savunmacı örgütsel rutinler kavramıyla ilişkilidir. Bu çalışmanın katkısı, söz konusu
+kavramları soru trafiği üzerinden gözlemlenebilir göstergelere bağlamaktır.
+Çalışma üç katkı sunar: soru akışının ölçümü ve normalizasyonu için tanımlar;
+sistemin durumunu izlemek için açıklık ve güven boyutları; soruları kurumsal belleğe
+dönüştüren format ve süreç önerileri. Ölçüm yüzeyi, ekip içi yazılı iletişim kanalları,
+karar kayıtları ve dokümantasyon tabanlarıdır.
+1
+
+-- 1 of 6 --
+
+Temel Kavramlar
+Sistem Açıklığı
+Sistem açıklığı (S); doküman kalitesi, tasarım niyetinin şeffaflığı, kodun okunabilirliği ve
+süreçlerin görünürlük düzeyini birlikte temsil eden bileşik bir kavramdır. Gözlemlenebilir
+bileşenleri şunlardır: dokümantasyon kapsama oranı, karar kaydı sayısı ve güncelliği, bilgi
+tabanında arama isabet oranı, kod karmaşıklığının ters göstergeleri ve rol–sorumluluk
+tanımlarının mevcudiyeti. Bu bileşenlerin tek bir sayıya indirgenmesi ağırlıklandırma
+gerektirir ve ağırlıkların nesnel belirlenmesi ayrı bir metodolojik problemdir; bu nedenle
+pratik kullanımda S, birleşik bir skor olarak değil, bileşenlerinin ayrı ayrı izlendiği bir
+gösterge ailesi olarak ele alınmalıdır.
+Etkileşim Güveni
+Etkileşim güveni (E), Edmondson’ın psikolojik güvenlik kavramının soru davranışına
+yansımasıdır: bireylerin bilmediklerini açık etmeyi güvenli bulma derecesi. Gözlemle-
+nebilir bileşenleri şunlardır: soruların cevaplanma oranı, ilk yanıt süresi, suçlayıcı dil
+sıklığı (azaldıkça güven artar), suçlamasız olay incelemesi pratiğinin varlığı ve anonim
+soru kanallarına duyulan ihtiyaç (yüksek kullanım, açık kanallarda güven eksikliğine
+işaret edebilir). S için geçerli olan uyarı burada da geçerlidir: birleşik skor yerine bileşen
+izleme tercih edilmelidir.
+İlişki İlkesi
+Çalışmanın merkezi ilkesi niteliksel olarak ifade edilir: soru kalitesi, açıklık ve güvenle
+birlikte artar; tekrar oranıyla birlikte düşer. Açıklık ve güven yüksekken sorular derinleşir
+— ilişkisel, kavramsal ve tasarım varsayımlarını sorgulayan nitelik kazanır. Tekrar oranı
+yüksekken sorular yüzeysel döngülerde kalır; aynı bilgi boşlukları kapanmadan yeniden
+açılır. Bu ilişki kasıtlı olarak bir formüle dökülmemiştir: bileşenlerin ortak bir birimi
+yoktur ve katsayıların ampirik temeli bulunmadan kurulacak bir denklem, sözde kesinlik
+üretir. İlkenin işlevi öngörü değil, teşhistir — soru kalitesi düşükse bakılacak yer bireyin
+yetkinliği değil, S ve E bileşenleridir.
+Nedensellik yorumunda dikkatli olunmalıdır: ilişki çift yönlüdür. Açıklık soru kalite-
+sini yükseltir; nitelikli sorular da yanıtlandıkça dokümantasyonu besler ve açıklığı artırır.
+Ölçüm pratiğinde bu döngüyü kısmen ayrıştırmak için açıklık ve güven bileşenleri bir
+önceki ölçüm penceresinden, soru göstergeleri mevcut pencereden raporlanabilir.
+Soru Akışı Göstergeleri
+Tanımlar
+Ölçümler sabit bir zaman penceresi içinde yapılır; varsayılan pencere on dört gündür.
+Bir sorunun tekrar sayılması, aynı pencere içinde anlamca eşdeğer bir sorunun daha
+önce sorulmuş olmasına bağlıdır. Eşdeğerlik tespiti elle etiketlemeyle veya anlamsal
+benzerlik araçlarıyla yapılabilir; otomatik tespit kullanılıyorsa benzerlik eşiğinin proje
+2
+
+-- 2 of 6 --
+
+ve dil bağlamına göre, elle etiketlenmiş bir doğrulama kümesi üzerinde kalibre edilmesi
+gerekir — evrensel bir eşik değeri yoktur.
+Gösterge Tanım Yorum
+Soru hızı (QV ) Penceredeki benzersiz soru
+sayısının süreye oranı
+Yüksek değer aktif öğrenmeye işaret eder; ekip
+büyüklüğüne veya mesaj hacmine normalize
+edilerek karşılaştırılabilir hale getirilir
+Tekrar oranı
+(RQ)
+Tekrar soruların toplam so-
+rulara oranı
+Yüksek değer, bilginin kurumsal belleğe yerleş-
+mediğini ve dokümantasyon eksikliğini gösterir
+Çözüm süresi
+(T T R)
+Soruların ortalama ka-
+panma süresi
+Düşük değer, bilgiye hızlı erişimi gösterir
+Yükseltme
+oranı (EQ)
+Üst kademeye taşınan soru-
+ların oranı
+Yüksek değer, süreç veya rol belirsizliğine işa-
+ret eder
+Soru derinliğinin ölçümü bu listeye bilinçli olarak dahil edilmemiştir. Derinliği
+kelime kalıplarıyla (örneğin “neden” içeren soruların oranıyla) ölçmek kaba bir vekildir:
+yüzeysel bir hata sorusu “neden” içerebilirken, derin bir tasarım sorgusu içermeyebilir.
+Derinlik değerlendirmesi, düzenli aralıklarla örneklem üzerinden yapılan niteliksel
+gözden geçirmeye daha uygundur.
+Goodhart Koruması
+Her gösterge, hedefe dönüştüğünde bozulur. Soru hızının kendisi bir hedef yapılırsa,
+düşük nitelikli soru üretimi teşvik edilmiş olur. Bunu önlemek için üç koruma uygulanır:
+tekrar tespiti zorunludur (aynı sorunun varyasyonları sayılmaz); kabul edilen yanıt
+oranı birlikte raporlanır (yanıtsız kalan soru akışı sağlıklı değildir); dokümana işlenen
+soru payı ayrı izlenir (akışın kalıcı öğrenmeye dönüşüp dönüşmediğinin asıl göstergesi
+budur).
+Soru Formatı ve Kurumsal Bellek
+Standart Format
+Bir soru, yalnızca cevap arayan bir cümle değil, sistemin eksik veya belirsiz noktasını
+tanımlayan bir mikro-belirtimdir. Bu nedenle sorular beş bileşenli bir formatta ifade
+edilmelidir:
+1. Bağlam: Soru hangi durum, modül veya karar alanıyla ilgilidir? (“Kimlik doğru-
+lama sürecinde token yenileme sırasında...”)
+2. Gözlem: Hangi davranış beklenenle uyuşmuyor? (“Beklenen başarılı yanıt yerine
+yetkilendirme hatası dönüyor.”)
+3. Varsayım: Olası neden nedir? (“Yenileme süresi yanlış hesaplanıyor olabilir.”)
+4. Soru: Tek cümlelik net soru. (“Yenileme süresi hangi fonksiyonda kontrol edili-
+yor?”)
+3
+
+-- 3 of 6 --
+
+5. Etki: Belirsizlik sistemin hangi yönünü etkiliyor? (“Kullanıcı oturumları bekle-
+nenden erken düşüyor.”)
+Gözlem–varsayım–niyet sıralaması, soruyu bir talepten paylaşılan bir analize dö-
+nüştürür: soran kişi yalnızca bilgi istemez, düşünce zincirini görünür kılar. Bu format
+ayrıca her sorunun bir öğrenme kaydı olarak arşivlenmesini sağlar ve tekrar tespiti ile
+çözüm süresi ölçümü için tutarlı veri üretir.
+Soru–Görev Eşlenimi
+Öğrenen sistemlerde soru sormak, görev açmaya benzer: her soru, bilgi mimarisinde
+bir boşluk bileti açar; her yanıt, sistemin dokümantasyonuna bir katkıdır; her tekrar-
+layan soru, eksik veya bulanık doküman sinyalidir. Bu eşlenim, sağlıklı soru akışını
+sistemin kendini iyileştirme hızının göstergesi haline getirir — ancak yalnızca yanıtların
+dokümana işlenmesi koşuluyla. Yanıtı sohbet kanalında kaybolan soru, aynı boşluğun
+yeniden açılmasını garanti eder.
+Teşhis Tablosu: Soru Kalıplarından Sistemsel Eksiklere
+Belirli soru kalıplarının sıklaşması, belirli sistemsel eksiklere işaret eder. Aşağıdaki
+tablo, soru türlerini teşhis sensörü olarak kullanır:
+Soru Kalıbı Olası Kök Neden Sistemsel Müdahale
+“Bu ne?” Kavramsal bağlam eksikliği;
+dokümansız terim veya bile-
+şen
+Kısa tanımlar, diyagramlar ve ta-
+sarım niyeti açıklamaları
+“Neden böyle?” Tasarım kararının gerekçesi
+paylaşılmamış
+Karar kayıtları ve değerlendirilen
+alternatiflerin belgelenmesi
+“Nerede ta-
+nımlı?”
+Bilgi dağınık; arama erişimi
+zayıf
+Bilgi mimarisinin gözden geçiril-
+mesi, referans bağlantılar
+“Bunu kim yapı-
+yor?”
+Rol veya sorumluluk belir-
+sizliği
+Sorumluluk matrisi ve süreç sahip-
+liği tanımı
+“Nasıl test edi-
+lir?”
+Kabul kriterleri belirsiz Tamamlanma tanımı ve test dokü-
+manlarının standartlaşması
+“Buna bakan var
+mı?”
+Geri bildirim döngüsü eksik Soru sahipliği ve kapanış takibi ta-
+nımı
+Üç Aşamalı Sistem Evrimi
+Bir ekibin bilgiyle etkileşim biçimi üç aşamalı bir evrim olarak okunabilir.
+Kapalı sistem: Düşük açıklık ve yüksek tekrar oranıyla karakterizedir. Sorular
+savunmacı veya reaktif niteliktedir; bilgi bireylere bağlıdır ve paylaşım zayıftır. Argy-
+ris’in savunmacı rutinleri bu aşamada baskındır: sorular sorumluyu bulmaya, kendini
+korumaya yönelir.
+Öğrenen sistem: Dokümantasyon ve niyet açıklığı arttıkça soru akışı hızlanır ve
+sorular keşif yönelimli hale gelir: nasıl daha iyi yapılabileceği, alternatiflerin ne olduğu
+4
+
+-- 4 of 6 --
+
+sorulur. Bu evre, psikolojik güvenle desteklenirse kalıcılaşır; desteklenmezse açıklık
+yatırımı tek başına yeterli olmaz.
+Kendini açıklayan sistem: Dokümantasyon, standartlar ve örnekler sayesinde
+bilgi dağılmadan akar. Sorular derinleştirici niteliktedir: bir ilkenin başka bağlamlarda
+geçerli olup olmadığı, modelin sınırlarının ne olduğu sorgulanır. Öğrenme içselleşmiştir;
+birey değil, sistem öğrenir.
+İleri akışı sağlayan şey dokümantasyon ve açıklık yatırımıdır; geri döngüleri sağlayan
+şey retrospektifler ve suçlamasız olay incelemeleridir. Özetle: kapalı sistemler bilgi saklar,
+öğrenen sistemler bilgi keşfeder, kendini açıklayan sistemler bilgiyi yeniden üretir.
+Sohbetten Kurumsal Belleğe: Bilgi Akış Hattı
+Modern ekiplerde bilgi genellikle geçici sohbet kanallarında doğar ve orada kaybolur. Bu
+akışın kalıcı öğrenmeye dönüşmesi için dört adımlı bir hat önerilir: sohbet kayıtlarından
+yalnızca karar, eylem ve ders nitelikli mesajların seçilmesi; her başlığın ne yapıldı,
+neden yapıldı ve ne öğrenildi biçiminde sadeleştirilmesi; bu özetlerin aranabilir bir bilgi
+tabanına işlenmesi; yeni bir ekip üyesi benzer bir soru sorduğunda ilgili geçmiş kararın
+erişilebilir olması.
+Bu hattın son iki adımı, anlamsal arama ve üretken yanıt araçlarıyla desteklenebilir.
+Ancak iki koşul kritiktir: birincisi, çıkarma ve özetleme adımlarının kalitesi denetlenme-
+lidir — otomatik özetin yanlış aktardığı bir karar, hiç kaydedilmemiş karardan daha
+zararlıdır. İkincisi, ekip iletişiminin sistematik taranmasının mahremiyet boyutu vardır;
+kapsam şeffaf tanımlanmalı, analiz bireysel davranışa değil bilgi boşluklarına yönelme-
+lidir. Gözetim algısı yaratan bir bilgi hattı, tam da güvenmeye dayandığı psikolojik
+zemini aşındırır.
+Uygulama Kontrol Listesi
+Sistemin öğrenme kapasitesini sürdürülebilir kılmak için beş pratik düzenli uygulanma-
+lıdır:
+• Niyet yazımı: Her tasarım, değişiklik talebi veya dokümana kararın gerekçesini
+açıklayan kısa bir bölüm eklenir. Gerekçesi yazılmış karar, gelecekteki soruların
+önemli bölümünü önler.
+• Üçlü örnekleme: Her ilke; bir iyi örnek, bir kötü örnek ve bir sınır durumu
+(istisnanın meşru olduğu bağlam) ile belgelenir. İyi örnek nasıl yapılacağını, kötü
+örnek neden yapılmayacağını, sınır durumu ne zaman istisna olabileceğini öğretir.
+• Soru bakımı: Sorular düzenli olarak ortak bir havuza taşınır; tekrar oranı
+haftalık eğilim olarak izlenir ve eğilim yükseliyorsa kök neden analizi yapılır.
+• Çözüm süresi hedefi: Soruların kapanma süresi için hedef belirlenir ve izlenir;
+kapanma süresi, sistemin refleks hızını gösterir.
+• Suçlamasız dil: İncelemelerde kişi değil süreç iyileştirilir. Güven olmadan hiçbir
+ölçüm düzeni bilgi akışını kalıcı kılamaz; anti-pattern örneği “X yanlış yapılandırdı”
+iken, sağlıklı biçim “bu durumda test senaryosu eksikti”dir.
+5
+
+-- 5 of 6 --
+
+Sınırlar
+Çerçevenin sınırları açıkça belirtilmelidir. Birincisi, öne sürülen ilişkiler ampirik olarak
+doğrulanmamıştır; ilkeler gözleme ve kuramsal öncüllere dayanır, kontrollü karşılaş-
+tırmaya değil. İkincisi, tekrar tespitinin otomasyonu kalibrasyon gerektirir ve kalib-
+rasyonsuz eşikler yanıltıcı oranlar üretir. Üçüncüsü, soru derinliğinin güvenilir nicel
+ölçümü açık bir problemdir; bu çalışma derinliği niteliksel gözden geçirmeye bırakmıştır.
+Dördüncüsü, göstergelerin izlenmesi küçük ekiplerde düşük maliyetlidir; ancak ölçüm
+pratiğinin kendisi gözetim algısı yaratırsa, ölçmeye çalıştığı güveni tahrip eder — gös-
+tergeler ekip hakkında değil, ekip için toplanmalıdır ve sonuçlar ekibin kendisiyle şeffaf
+paylaşılmalıdır.
+Sonuç
+Bu çalışma, soru sorma davranışını örgütsel öğrenmenin ölçüm yüzeyine dönüştüren
+bir sistematik önermiştir. Merkezi ilke şudur: soru kalitesi bireysel zekânın değil, sistem
+açıklığının ve psikolojik güvenin fonksiyonudur; tekrar oranı ise bilginin kurumsal
+belleğe yerleşme derecesinin ters göstergesidir. Pratik çekirdek üç öğedir: soruları
+kurumsal belleğe dönüştüren standart format ve soru–dokümana-katkı döngüsü; tekrar
+oranı ile çözüm süresinin düzenli izlenmesi; soru kalıplarını sistemsel eksiklere bağlayan
+teşhis yaklaşımı. Bir ekipte soruların niteliği yükseliyor ve tekrarlar azalıyorsa, öğrenme
+sisteme yerleşiyor demektir; sorular yüzeyselleşiyor ve döngüler tekrarlıyorsa, bakılacak
+yer bireyler değil, sistemin kendini açıklama kapasitesidir.
+Kaynaklar
+[1] A. C. Edmondson, “Psychological Safety and Learning Behavior in Work Teams,”
+Administrative Science Quarterly, vol. 44, no. 2, 1999.
+[2] C. Argyris, Overcoming Organizational Defenses: Facilitating Organizational Lear-
+ning, Allyn and Bacon, Boston, 1990.
+[3] C. A. E. Goodhart, Monetary Theory and Practice: The UK Experience, Macmillan,
+London, 1984.
+6
+
+-- 6 of 6 --

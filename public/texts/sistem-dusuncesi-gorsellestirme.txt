@@ -1,0 +1,162 @@
+Sistem Düşüncesi: Bir Görselleştirme
+Ömer Faruk Yavuz
+Haziran 2026
+Giriş
+Bu metin, sistem düşüncesinin çekirdek kirlerini  doğrusal ve sistemsel düşünme
+ayrm, geri besleme, gecikme ve kaldraç hiyerarşisi  görsel bir dille sunar.
+Kavramsal arka plan için Sistem Teorisi: Arketipler, Kaldraç Noktalar ve
+Karmaşklk belgesine baklabilir.
+I  ki Düşünme Biçimi
+Doğrusal düşünce: bir eylem, bir sonuç. Dolu nokta aktif eylem, boş nokta
+sonuç. Düğmeye bastm, şk yand. Mühendis zihninin default ayar, çoğu
+post-mortem'in örtük modeli.
+Sistemsel düşünce: bir eylem, sistemin tepkisi (♢), birden fazla dallanan
+sonuç. Z, W, V  ayn eylemin paralel, farkl düzlemlerdeki etkileri.
+doğrusal
+X Y
+sistemsel
+X
+Z
+W
+V
+V. bölümle fark: V zinciri gösterir (X→Z→W, zaman içinde ardşk), I dal-
+lanmay gösterir (X→{Z, W, V}, ayn anda farkl yerlerde). Gerçek sistemlerde
+ikisi de olur  hem dallanr, hem her dal kendi içinde zincir başlatr.
+Somut örnek: EARS'a SAML auth ekledim (X).
+ Z → ESPN kullanclar tek tkla giriyor (beklenen sonuç)
+1
+
+-- 1 of 6 --
+
+ W → dş vendor'lar artk giremiyor, ayr bir auth ow gerekiyor (beklen-
+medik)
+ V → session timeout davranş değişti, uzun streaming işleri krlyor (gecik-
+meli yan etki)
+Doğrusal düşünme biçimi yalnzca beklenen sonucu (Z) gözlemler ve görevi
+tamamlanmş kabul eder. Sistemsel düşünme biçimi ise beklenen sonucu gözlem-
+lediğinde, eylemin diğer düzlemlerde doğurduğu sonuçlar (W ve V) araştrmaya
+yönelir.
+2
+
+-- 2 of 6 --
+
+II  Her ey Bir Sistem
+Sistem düşüncesinin temel kabulü, birbirinden tümüyle farkl görünen alanlarn
+ortak yapsal yasalara tabi olmasdr. Beden, aile, şirket, trak, ekonomi ve
+yazlm  hepsi etkileşen parçalardan oluşur, geri besleme döngüleri barndrr,
+kendi dengesini korumaya çalşr ve müdahalelere benzer biçimlerde tepki verir.
+Bu yüzden bir alanda öğrenilen sistem davranş, çoğu zaman bir başka alana
+taşnabilir: bedendeki homeostaz ile bir yazlm sisteminin kendini stabilize etme
+eğilimi, trakteki skşklk ile dağtk bir sistemdeki tkanma, aile içindeki geri
+besleme ile bir organizasyondaki teşvik döngüleri ayn yapsal mantğ paylaşr.
+Sistem teorisinin gücü de buradan gelir: incelenen nesne değişse bile, davranş
+yöneten ilkeler büyük ölçüde sabit kalr.
+♢ beden ♢ trak
+♢ aile ♢ ekonomi
+♢ şirket ♢ yazlm
+ ayn yasalar geçerli 
+III  Geri Besleme: Duş Örneği
+Geri besleme döngüsü, bir sistemin çktsnn tekrar girdisine dönerek sonraki
+davranş etkilemesidir. Duş, bunun en sezgisel örneğidir, çünkü döngünün her
+halkasn günlük hayatta doğrudan deneyimleriz.
+Döngü şöyle işler: musluğu çevirirsin, su ss değişir, bu su bir süre sonra
+cildine ulaşr, hissin değişir ve bu hisse göre musluğu yeniden çevirirsin. Çkt
+(cildindeki scaklk hissi), girdiye (musluğu çevirme kararna) geri besleniyor 
+kapal bir döngü.
+Bu döngüyü ilginç  ve sinir bozucu  klan şey gecikmedir. Musluğu çe-
+virmen ile suyun gerçekten cildine ulaşmas arasnda bir süre geçer. Bu gecikme
+yüzünden müdahalenin sonucunu annda göremezsin.
+Sorun da burada başlar: sonucu hemen hissetmediğin için yeterince çe-
+virmedim diye düşünüp daha fazla çevirirsin. Oysa ilk müdahalenin etkisi
+henüz yoldadr. Gecikmeli etki sonunda geldiğinde, üst üste binmiş iki mü-
+dahalenin toplamyla karşlaşrsn  su birden kavurucu olur. Geri çekersin,
+ayn gecikme bu kez ters yönde işler ve bu sefer üşürsün. Sistem, hedeediğin
+scaklğn etrafnda bir türlü oturamaz; scak ile soğuk arasnda salnma girer.
+Buradaki genel ilke şudur: gecikmeli bir geri besleme döngüsünde aşr
+tepki, sistemi dengeye değil salnma götürür. Sabrszlandkça  yani
+gecikmeyi hesaba katmadan müdahaleyi büyüttükçe  salnmn genliği artar.
+Çözüm çoğu zaman daha sert değil, daha küçük müdahaleler yapp gecikmenin
+etkisini görmeyi beklemektir.
+Ayn kalp duşla snrl değildir: bir ekonomide faiz kararlarnn etkisi aylar
+sonra hissedilir, bir yazlm sisteminde ölçeklendirme tepkisi metriklere gecikmeli
+yansr, bir ekipte yaplan bir değişikliğin sonucu haftalar sonra ortaya çkar.
+Gecikmeyi göz ard eden her müdahale, ayn salnm riskini taşr.
+3
+
+-- 3 of 6 --
+
+IV  Kaldraç Hiyerarşisi
+Donella Meadows'un meşhur kaldraç noktalar çerçevesinin sadeleştirilmiş
+hâli. Bir sistemi değiştirmek istediğinde nereye dokunabileceğinin hiyerarşisi
+ ve her seviyenin etki gücü çok farkl.
+paradigma
+hedef
+kurallar
+bilgi akş
+geri besleme
+parametreler
+kaldraç gücü
+en güçlü
+en zayf
+Çubuklarn uzunluğu, o seviyeye yaplan müdahalenin sistem üzerindeki etki
+gücünü temsil eder. En altta, etkisi en snrl olan parametreler (saylar, lim-
+itler, eşikler) yer alr; yukar çktkça srasyla geri besleme döngüleri, bilgi akş,
+kurallar, sistemin hede ve en tepede onu doğuran paradigma gelir. Aşağdan
+yukarya doğru her seviyeye müdahale etmek giderek zorlaşr, ancak başarldğnda
+etkisi kat kat büyür. Pratikteki çelişki şudur: insanlar zamanlarnn büyük
+ksmn en alttaki zayf kaldraçlarda harcar, oysa sistemin kaderini belirleyen
+kararlar üst seviyelerde alnr.
+Yukardan aşağya ne demek:
+ Paradigma  biz neyiz, ne yapyoruz? sorusunun cevab. Sistemin
+kendine bakş. ENCO için biz broadcast yazlm şirketiyiz mi ESPN'in
+iş ortağyz m kabul etmek her şeyi değiştirir.
+ Hedef  sistem neyi maksimize ediyor? EARS hzl kullanlabilirlik mi
+güvenli arşivleme mi optimize ediyor? Hede değiştirmek tüm tasarm
+yeniden çizer.
+ Kurallar  teşvikler, kstlar, izinler. Kim ne yapabilir, ne yapamaz.
+Role-based access bu seviyede.
+ Bilgi akş  kim neyi ne zaman görür? Standup notlarn LaTeX'e
+dökme alşkanlğn tam bu seviyede çalşr.
+ Geri besleme  döngülerin gücü, tampon büyüklüğü, gecikmeler. Retry
+says, cache TTL'i, alarm eşikleri.
+4
+
+-- 4 of 6 --
+
+ Parametreler  düz saylar. Pixel, timeout, limit. En aşağ, en zayf
+seviye.
+Çubuklarn genişliği o seviyenin kaldraç gücüdür. Yukar çktkça az insan
+müdahale eder, ama her müdahalenin etkisi büyür. Meadows'un asl çarpc
+tespiti: insanlarn neredeyse tamam en alttaki iki seviyede yaşar  say ayarlar,
+tampon büyütür. Bu butonu 2px büyüt 6. seviye; bu sistem aslnda neyi
+optimize ediyor? 12. seviye. Ayn saatler, on kat farkl etki.
+5
+
+-- 5 of 6 --
+
+V  Esas Ders
+✗ X Y
+✓ X ♢ Z W
+Bu, tüm görselleştirmenin özüdür: X yaptm, sistem tepki verdi, sonra başka
+bir şey oldu krinin sembolik hâli.
+Doğrusal düşünce (✗). X yaptm, Y oldu. Tek bir adm, tek bir sonuç;
+eylemle sonucu doğrudan ve birebir eşleştirir, sonra meseleyi kapanmş sayar.
+Sistemsel düşünce (✓). X yaptm, araya bir sistem girdi (♢), sistem
+buna kendince tepki verdi, Z ortaya çkt, Z de W'yi tetikledi. Burada eylem
+ile gerçek sonuç arasnda bir arac  sistemin kendisi  vardr; etkiler tek bir
+noktada durmaz, zincirleme yaylr.
+ki düşünme biçiminin fark, somut bir örnekte netleşir. Diyelim ki bir
+bug' kökünden düzeltmek yerine etrafndan dolaşan bir çözüm uyguladn (X).
+Doğrusal beklenti basittir: özellik çabucak çkar (Y), iş biter. Sistemsel gerçek
+ise zincirleme işler: ekipteki herkes zamanla ayn etrafndan dolaşma alşkan-
+lğn benimser (Z), bu alşkanlk teknik borcu sessizce biriktirir (W) ve aylar
+sonra, en basit değişiklik bile neredeyse imkânsz hâle gelir. Asl sonuç, ilk
+eylemden hiç beklemediğin bir noktada ve hiç beklemediğin bir zamanda ortaya
+çkar.
+Esas ders budur: bir eylemin sonucunu tek bir çktyla eşleştirmek yerine, o
+eylemin içinden geçtiği sistemi ve sistemin doğuracağ gecikmeli, dolayl etkileri
+hesaba katmak. X yaptm, Y oldu düşüncesinden, X yaptm, sistem şöyle
+tepki verdi, sonra şu oldu düşüncesine geçmek.
+6
+
+-- 6 of 6 --

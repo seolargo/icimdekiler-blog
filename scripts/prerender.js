@@ -223,6 +223,7 @@ const postsBySlug = new Map(posts.map((p) => [p.slug, p]))
 for (const p of posts) {
   const canonical = `${SITE_URL}${base}post/${encodeURIComponent(p.slug)}`
   const pdfUrl = asset(`pdfs/${p.pdf}`)
+  const textUrl = asset(`texts/${p.slug}.txt`)
   const head = buildHead({
     title: p.title,
     description: p.description || SITE_DESCRIPTION,
@@ -282,6 +283,8 @@ for (const p of posts) {
     `<div class="post-actions">` +
     `<a href="${escAttr(pdfUrl)}" target="_blank" rel="noreferrer" class="btn">Yeni sekmede aç</a>` +
     `<a href="${escAttr(pdfUrl)}" download class="btn">İndir</a>` +
+    `<button type="button" class="btn">Metni Kopyala</button>` +
+    `<a href="${escAttr(textUrl)}" download="${escAttr(p.slug)}.txt" class="btn">Metni İndir</a>` +
     `<button type="button" class="btn">Paylaş</button>` +
     `</div>` +
     `<div class="pdf-frame"><iframe title="${escAttr(p.title)}" src="${escAttr(pdfUrl)}"></iframe></div>` +

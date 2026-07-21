@@ -1,0 +1,167 @@
+Yazlm ve lüzyon
+Ömer Faruk Yavuz
+May 2026
+Yazlm ve lüzyon
+Yazlm Bir lüzyondur
+Yazlm, donanmn üzerinde işleyen ve organize edilmiş bir anlam ilüzyonu
+olarak tanmlanabilir. Kullancnn ekranda gördüğü buton, sayfa, dosya
+ya da sepet gibi ögelerin hiçbiri ontolojik anlamda bir nesne değildir. Bu
+görünümlerin altnda yatan gerçeklik; elektrik sinyalleri, ikili (binary) veri, bellek
+adresleri, ağ paketleri, veritaban kaytlar ve durum (state) değişimlerinden
+ibarettir.
+yi tasarlanmş yazlm, bu teknik gerçekliği kullancnn kavrayabileceği metafor-
+lara tercüme eder. Bu nedenle yazlm mühendisliği yalnzca kod yazma etkinliği
+değildir; ayn zamanda bir alg tasarm, davranş tasarm, soyutlama tasarm
+ve nihayetinde bir anlam mimarisidir.
+Kontrollü Bir lüzyon Olarak Yazlm
+Yazlm, özü itibaryla kontrollü bir ilüzyondur ve bu kontrolün yitirildiği her
+noktada belirli bir bozulma ortaya çkar. Kontrol kaybedildiğinde bir hata
+(bug) doğar. Tutarllk kaybedildiğinde kullancnn sisteme duyduğu güven
+zedelenir. Soyutlama bozulduğunda, alttaki karmaşklk (complexity) yüzeye
+szmaya başlar. Tasarmn ardndaki niyet kaybedildiğinde ise kod taban (code-
+base) zamanla çürür.
+Kullanc Arayüzü ile Mimari Arasndaki Boşluk
+yi bir kullanc arayüzü ve deneyimi (UI/UX), kötü bir mimariyi geçici olarak
+görünmez klabilir. Kullanc temiz ekranlar ve akc animasyonlar deneyim-
+lerken, arka planda tekrarlanan (copy-paste) kod bloklar, dağnk bir durum
+yönetimi, yarş koşullar (race condition) ve test edilmemiş uç durumlar (edge
+case) bulunabilir.
+Buradaki temel ayrm şu biçimde formüle edilebilir: kullanc arayüzü ve
+deneyimi, kullancnn yaşadğ ilüzyonun kalitesini; mimari ise o ilüzyonu ayakta
+tutan görünmez makinenin kalitesini temsil eder. Güzel bir arayüz, kötü bir
+kodu bir süre saklayabilir; ancak kötü bir kod, güzel bir arayüzü uzun süre
+1
+
+-- 1 of 5 --
+
+taşyamaz. Yapsal düzensizliğin üzerine yalnzca sunum kalitesiyle inşa edilen
+ilüzyon, zamanla kaçnlmaz biçimde yüzeye szar.
+Üç Katmanl Yazlm Kalitesi
+Bu çerçevede yazlm kalitesi üç katmanda değerlendirilebilir. Birinci katman
+görsel ilüzyondur; kullanc arayüzünü, yerleşimi, animasyonu, rengi ve tipograyi
+kapsar. kinci katman davranş ilüzyonudur; kullanc deneyimini, akş, geri
+bildirimi, yükleme durumlarn ve hata yönetimini içerir. Üçüncü katman ise
+yapsal gerçekliktir; mimariyi, durum yönetimini, testleri, alan snrlarn (do-
+main boundaries) ve gözlemlenebilirliği (observability) barndrr.
+ki Yönlü lüzyon: Kullanc ve Ekip
+Yazlm iki yönlü işleyen bir ilüzyondur: bir yönüyle kullancy, diğer yönüyle
+geliştirme ekibini yanltr. Niteliksiz ekiplerin ortak özelliği, kullancy yanlt-
+madan önce kendilerini yanltmaya başlamalardr.
+Bu iç yanlsamann tipik tezahürleri şöyle sralanabilir. Bir gösterge paneli
+(dashboard) her şey yolunda bildirimi verir; oysa bu bildirim yalnzca izlen-
+mekte olan metrikler için geçerlidir. Mimari diyagram tertemiz görünür; ancak
+gerçek bağmllklar çoğunlukla diyagramn dşnda kalr. Test kapsam (cov-
+erage) yüzde doksan seviyesinde olabilir; fakat test edilen ksm, çoğu zaman
+kritik olan ksm değildir. Sprint planlamas bir işlevi (feature) üç günlük olarak
+öngörür; ne var ki gizli karmaşklk bu süreyi üç haftaya çkarr. Kod incelemesi
+(code review) temiz kod onay verir; buna karşn altyap yine de çürümeye
+devam edebilir.
+Sağlkl mühendislik kültürlerinin ortak niteliği, kendi ilüzyonlarna yöne-
+lik şüpheciliği kurumsallaştrmş olmalardr. Bu şüphecilik; olay incelemeleri
+(incident reviews), kaos mühendisliği (chaos engineering), teknik borç (tech-
+nical debt) sprintleri ve neyi bilmiyoruz başlkl toplantlar gibi pratiklerle
+sürdürülür. lüzyonun en tehlikeli hâle geldiği an, onu inşa edenlerin kendi-
+lerinin de ona inanmaya başladğ andr.
+lüzyon Yğn
+Yazlmdaki gerçek tablo iki katmandan değil, bütünsel bir yğndan (stack)
+oluşur. Bu yğnda her katman, kendi altndaki katmann sunduğu ilüzyona
+güvenir. Kullanc katman butona bastm, uygulama gereğini yapt varsaymyla;
+ekip katman sistemi anlyoruz, kontrol bizde varsaymyla; yazlm katman
+durum tutarl, işlemler (transaction) atomik varsaymyla; donanm katman
+ise komutlar (instruction) deterministik, bellek güvenilir varsaymyla işler.
+Bu yğndaki her bağ, esasen bir güven aktarmdr. Gerçeklik, her katmanda
+basitleştirilmiş bir model olarak bir üst katmana teslim edilir. Söz konusu durum
+özel bir patoloji değil, soyutlamann doğasnn kaçnlmaz bir sonucudur. Bu
+anlamda bütün yazlm, temelde bir ilüzyondur.
+2
+
+-- 2 of 5 --
+
+yi Yazlmn Gerçek Tanm
+yi yazlm, ilüzyonu reddetmez; onu sürdürülebilir klar. Her katmanda alttaki
+gerçeklik benim modelimden farkldr ve bu farkn belirli bir maliyeti vardr bil-
+inci korunduğu sürece yğn çökmeden ayakta kalr. yi mühendislerin ilüzyon
+katmanlarn şeaf tutma çabas da buradan kaynaklanr. Gözlemlenebilirlik,
+izleme (monitoring), günlükleme (logging), izsürme (tracing) ve prolleme (pro-
+ling) gibi araçlarn tamam tek bir amaca hizmet eder: ilüzyona bir pencere
+açmak.
+Hayat Bir lüzyon Olabilir mi?
+Bu soru, birbirinden ayr analitik düzeylerde ele alnmaldr; zira her düzeyde
+hem epistemik statü hem de pratik sonuçlar farkllaşr.
+Algsal Düzey
+Bu düzeyde çağdaş bilişsel bilimin verdiği yant büyük ölçüde olumludur. Renk
+niteliği, şğn ziksel bir özelliği değildir; belirli dalga boylarnn retinal uyaran-
+lara dönüşmesinin ardndan, kortikal işleme sonucunda üretilen niteliksel bir
+yapdr. Benzer biçimde, öznel olarak deneyimlenen şimdi an, sinir sisteminin
+yaklaşk dört yüz milisaniyelik bir gecikmeyle inşa ettiği, geriye dönük bir tem-
+sildir. Süregelen benlik hissi ise, nöronal düzeydeki kesintisiz değişime karşn
+korunan işlevsel bir kurgudur.
+Bu çerçevede alg, bir tür kontrollü temsil sistemi olarak tanmlanabilir: or-
+ganizma, dş dünyann ham ziksel hâlini değil, evrimsel olarak hayatta kalmaya
+hizmet eden indirgenmiş bir modelini deneyimler. Bu anlamda algnn bir
+ilüzyon olduğu önermesi, bir metafor değil, ampirik bir betimlemedir.
+Metazik Düzey
+Felsefe tarihi boyunca birçok büyük gelenek, gözlemlenen gerçekliğin nihai gerçek-
+likle örtüşmediği tezini farkl biçimlerde savunmuştur. Advaita Vedanta ge-
+leneğinde görünür dünya maya olarak nitelendirilir; bu kategori ne mutlak an-
+lamda gerçek ne de tümüyle yanlsamadr, Brahman'n görünüş biçimi olarak
+işlev gören bir ara ontolojik konumdur. Budist felsefede ±unyata doktrini,
+fenomenlerin özsel bir varlğa sahip olmadğn, ancak ilişkisel bir ağ içinde var
+olduklarn ileri sürer. Platon, mağara alegorisinde duyusal dünyay asl gerçek-
+liğin yalnzca gölgeleri olarak konumlandrr. Kant, Ding an sich (kendinde
+şey) kavramyla, bilen öznenin nesnenin kendisine değil yalnzca görünüşüne
+erişebileceğini öne sürer. Nihayet Bostrom'un simülasyon argüman, istatistik-
+sel akl yürütme yoluyla, içinde bulunduğumuz gerçekliğin bir simülasyon olma
+olaslğnn ihmal edilemeyeceğini gösterir.
+Bu geleneklerin ortak çekirdek iddias, gözlemlenen gerçeklikin kendisinin
+de bir soyutlama katman olduğudur. Yazlm sistemlerindeki ilüzyon yğn
+analojisi bu noktada yeniden devreye girer; aradaki tek fark, metazik yğnn
+3
+
+-- 3 of 5 --
+
+daha derin, daha eski ve kaynak koduna doğrudan erişimin mümkün olmadğ
+bir yap olmasdr.
+Kritik Ayrm: lüzyon ile Önemsizlik
+lüzyon kategorisine ait olmak, önemsiz olmakla özdeş değildir. Bu ayrmn
+vurgulanmas hem epistemik hem etik düzeyde belirleyicidir. Yazlm, ontolojik
+açdan bir ilüzyon olmasna karşn, işlediği veriyi ilen taşr, ekonomik değer
+üretir ve gerçek aktörler üzerinde gerçek sonuçlar doğurur. lüzyon olma özelliği,
+sistemin işlevselliğini geçersiz klmaz. Ayn analitik tutum, yaşamn kendisi için
+de korunabilir.
+Buradan çkan formülasyon şudur: yaşam büyük olaslkla ilüzyon kategori-
+sine aittir; ancak bu nitelik onun anlamn veya değerini azaltmaz, yalnzca
+ontolojik doğasn açklar. Yazlm pratiğindeki karşlğyla okunduğunda, iyi
+mühendisin tutumuna benzer bir duruş ortaya çkar: ilüzyonun varlğn red-
+detmek yerine onu kabul etmek, sürdürülebilirliği için sorumluluk üstlenmek ve
+yapsal çatlaklar gözlemlemekten geri durmamak. Bilge bir yaşam pratiği de,
+yaps itibaryla bu tutuma yakn bir duruşa karşlk gelir.
+Yazlmn Açtğ Kaplar
+Yazlm, birçok meslekten farkl olarak, düşünme biçiminin kendisini yeniden
+şekillendirir. Bunu üç ayr düzeyde eş zamanl olarak gerçekleştirir.
+Soyut Sistemi Zihinde nşa Etmek
+Bir fonksiyon yazarken, görünmez bir makineyi zihinde kurmak gerekir. Bu bil-
+işsel kas, başka hiçbir etkinlikte bu yoğunlukta çalşmaz. Yeterince geliştiğinde
+ise başka alanlara da taşnr: felsefe okurken bir argümann durum makinesi
+(state machine), tarih okurken imparatorluklarn bağmllk graği (dependency
+graph), müzik teorisinde ise akorlarn tip sistemi (type system) olarak yeniden
+görünür hâle gelir.
+Katmanl Düşünme
+Yazlmda her şey katmanl bir yapya sahiptir: ön yüz (frontend), arka uç
+(backend), veritaban, işletim sistemi ve donanm birbirinin üzerine yğlr. Bu
+alşkanlk başka alanlara szdğnda; ekonomi de, biyoloji de, dil de, tarih de
+katmanl bir görünüm kazanr. Böylece bu olay hangi katmanda gerçekleşiyor
+sorusu, evrensel bir çözümleme aracna dönüşür.
+Gerçeklikle Anlk Geri Bildirim
+Yazlmda yanlş düşünüldüğünde kod çalşmaz ve hata annda görünür hâle
+gelir. Oysa felsefede yanlş düşünüldüğünde bunu kimse fark etmeyebilir. Yl-
+larca bu acmasz geri bildirim döngüsü içinde çalşmak, zihne son derece değerli
+4
+
+-- 4 of 5 --
+
+bir disiplin kazandrr: kişinin kendi modelinin yanlş olabileceğini ciddiye alma
+disiplinini.
+5
+
+-- 5 of 5 --

@@ -1,0 +1,251 @@
+Pratik Refactor Teknikleri ve Entropi Azaltma:
+Yazlm Sistemlerinde Bilgi Geometrisinin Sadeleştirilmesi
+Ömer Faruk Yavuz
+Temmuz 2026
+Giriş
+Yazlm geliştirme literatüründe yeniden düzenleme (refactoring) teknikleri çoğunlukla kod kali-
+tesi ve okunabilirlik bağlamnda ele alnr. Bu çalşma, söz konusu tekniklere daha derin bir işlev
+atfetmektedir: yeniden düzenleme pratikleri, sistemdeki belirsizliği, tekrarlar, gizli bağmllklar
+ve kontrolsüz varyasyonlar azaltan birer entropi azaltma (entropy reduction) mekanizmasdr.
+Başka bir ifadeyle bu pratikler, sistemin bilgi geometrisini sadeleştirme sürecinin araçlardr.
+Bu bakş açsnn önemi, yapay zekâ destekli geliştirme çağnda belirginleşmektedir. Yapay
+zekâ araçlar, kod tabanndaki örüntülerden, isimlendirmelerden ve yapsal sinyallerden hareketle
+üretim yapar. Dolaysyla aşağda incelenen teknikler yalnzca kodu güzelleştirmek için uygulan-
+maz; bunlar ayn zamanda hem insan geliştiricinin hem de yapay zekânn kod tabann daha
+doğru anlamasn sağlayan yapsal iyileştirmelerdir.
+Çalşma iki bölümden oluşmaktadr. Birinci bölüm, sekiz temel yeniden düzenleme tekni-
+ğini tanmlamakta ve her birinin makine okunabilirliği üzerindeki etkisini incelemektedir. kinci
+bölüm, bu teknikleri entropi azaltma çerçevesinde birleştirmekte ve bilgi geometrisinin sadeleş-
+tirilmesi kavramn tartşmaktadr.
+Temel Yeniden Düzenleme Teknikleri
+Sabit Değerlerin Merkezileştirilmesi
+Kod içine doğrudan yazlmş ve özel anlam taşyan dizgi değerleri (magic strings), ksa vadede
+pratik görünen fakat sistem büyüdükçe risk üreten bir kullanm biçimidir. Örneğin bir durum
+karşlaştrmasnn doğrudan bir metin değeriyle yaplmas yaygn bir örnektir:
+if (status === "completed") {
+...
+}
+Bu kullanmda ayn değer farkl dosyalarda tekrar eder, yazm hatas riski taşr ve değer
+değiştiğinde tüm proje genelinde arama yapmay gerektirir. Daha sağlkl yaklaşm, değeri merkezi
+ve anlaml bir yapya taşmaktr:
+1
+
+-- 1 of 7 --
+
+if (status === TASK_STATUS.COMPLETED) {
+...
+}
+Bu dönüşüm yapay zekâ açsndan da anlamldr; çünkü model artk rastgele bir dizgi değil,
+adlandrlmş bir alan kavram görür. Sabit değerlerin merkezileştirilmesi şu kazanmlar sağlar:
+ tekrarlar azaltr,
+ yazm hatas riskini düşürür,
+ alan kavramlarn görünür klar,
+ yeniden düzenlemeyi kolaylaştrr,
+ modele daha net anlamsal sinyal verir.
+Entropi perspektinden bakldğnda bu teknik, dağnk dizgi değerlerini merkezi alan sem-
+bollerine dönüştürür; ayn kavramn tek bir noktadan temsil edilmesini sağlayarak sistemdeki
+rastgeleliği azaltr.
+Yardmc Fonksiyon Ayrştrma
+Yardmc fonksiyon ayrştrma (helper extraction), tekrar eden veya karmaşk küçük işlemleri
+ayr ve adlandrlmş fonksiyonlara taşmaktr. Örneğin bir bileşen içinde sürekli tekrarlanan
+tarih biçimlendirme işlemi:
+const formattedDate = new Date(value).toLocaleDateString(...);
+anlaml bir yardmc fonksiyona taşndğnda:
+formatEventDate(value)
+yalnzca kod ksalmaz; niyet açk hale gelir. Model açsndan bu dönüşüm değerlidir; çünkü
+model artk düşük seviyeli işlem detayn değil, anlam açk bir fonksiyon adn okur. Bu farkn
+özü şu şekilde ifade edilebilir:
+Kod, ne yaptğn saklamaz; fonksiyon adyla açklar.
+Entropi çerçevesinde yardmc fonksiyon ayrştrma, bileşen veya servis içinde gömülü kalan
+işlem detaylarn adlandrlmş niyetlere dönüştürür.
+AkllSunum Bileşeni Ayrm
+Akllsunum ayrm (smart/dumb separation), bileşenleri iki kategoriye ayrma yaklaşmdr.
+Akll bileşen; veri çekme, durum bağlama, eylem tetikleme ve iş akşn yönetme sorumluluğunu
+taşr. Sunum bileşeni ise yalnzca aldğ veriyi gösterir ve kullanc etkileşimlerini dşarya olay
+olarak bildirir.
+Bu ayrm özellikle arayüz katman ağrlkl projelerde önemlidir. Akll bileşen tipik olarak
+şunlar yapar:
+2
+
+-- 2 of 7 --
+
+ merkezi durum deposundan veri okur,
+ dş sistem çağrsn tetikler,
+ yükleme ve hata durumlarn yönetir,
+ alt bileşene işlenmiş veri iletir.
+Sunum bileşeni ise şunlarla snrldr:
+ kendisine verilen veriyi görüntüler,
+ kullanc etkileşimlerini olay olarak yaynlar,
+ iş mantğ bilmez,
+ küresel durum bilmez.
+Bu ayrm modelin işini belirgin biçimde kolaylaştrr; çünkü model bir bileşene baktğnda
+onun sorumluluğunu hzla kavrar. Ayrmn yokluğunda bileşenler şişer; arayüz, durum, dş iletişim
+ve mantk ayn dosyada yğlr. Bu yğlma hem insan hem modeli yavaşlatr. Entropi açsndan
+bu teknik, sistemin sorumluluk geometrisini netleştirir: akş yöneten yap ile görüntüleyen yap
+birbirinden ayrlr.
+Facade (Cephe) Deseni
+Facade deseni, karmaşk bir alt sistemi daha basit ve temiz bir arayüz arkasna saklama yön-
+temidir. Arayüz katmannda facade, bileşen ile durum yönetimi ve servis katmanlar arasnda
+konumlanr. Böylece bileşen şu detaylar bilmek zorunda kalmaz:
+ hangi eylemin tetiklendiği,
+ hangi seçicinin kullanldğ,
+ hangi yan etki yöneticisinin hangi dş sistemi çağrdğ,
+ yükleme durumunun nereden geldiği,
+ hata durumunun nasl yönetildiği.
+Bileşen yalnzca facade ile iletişim kurar:
+this.orderFacade.loadSummary(orderId);
+this.summary$ = this.orderFacade.summary$;
+Bu yaklaşm sistemi sadeleştirir; bileşenin bilişsel yükü azalr ve model için daha net bir
+mimari oluşur. Desenin ilettiği temel mesaj şudur:
+Bileşen detaylar bilmez; yalnzca niyeti ifade eder.
+Entropi çerçevesinde facade ayrm, karmaşk iç yapy sade bir kullanm yüzeyine dönüştürür;
+hem mimari snrlar netleştirir hem de modelin bileşen sorumluluğunu doğru anlamasn sağlar.
+3
+
+-- 3 of 7 --
+
+zole Test Ortam
+zole test ortam (isolated test rig), belirli bir özelliği veya akş ana uygulamadan bağmsz
+biçimde snamaya yarayan kontrollü ortamdr. Uzun süren bir üretim akşnn, bir arşivleme
+davranşnn, bir olay akş ayrştrma sürecinin veya farkl sunucu yant senaryolarnn izole bir
+yüzeyde denenmesi bu kapsama girer.
+Bu yaklaşmn kazanmlar şunlardr:
+ belirli akşlar ana uygulama kullanlmadan snanr,
+ snr durumlar hzla denenir,
+ taklit verilerle tekrarlanabilir senaryolar oluşturulur,
+ hata ayklama süresi ksalr,
+ gerileme riski daha erken görünür hale gelir.
+Model açsndan izole test ortam kritik bir işlev görür: model yalnzca kodu değiştirmekle
+kalmaz, değişikliğin belirli bir ortamda nasl doğrulanacağn da kavrayabilir. Böylece öneri-
+len değişiklik gerçekten bu akş düzeltiyor mu sorusu yantlanabilir hale gelir. Test ortamnn
+yokluğunda model teorik olarak doğru kod yazabilir; fakat akşn pratikte çalşp çalşmadğn
+doğrulamak zorlaşr. Entropi açsndan bu teknik, dağnk üretim davranşn kontrollü bir snama
+yüzeyine taşr ve model için güvenilir bir geri bildirim döngüsü oluşturur.
+Uç Nokta Snama Yüzeyi
+Uç nokta snama yüzeyi, uygulamadaki sunucu uç noktalarn doğrudan snamaya yarayan özel
+bir arayüzdür. Bu yüzey tipik olarak şu sorular yantlamak için kullanlr:
+ sunucu gerçekten yant veriyor mu,
+ istek yükü doğru mu,
+ yant format beklenen biçimde mi,
+ kimlik doğrulama bilgileri doğru iletiliyor mu,
+ hata durumlar nasl dönüyor,
+ problem istemciden mi yoksa sunucudan m kaynaklanyor.
+Bu yüzeyin temel değeri, problemi izole etmesidir. Normal kullanc ekrannda görülen bir
+hata; arayüz durumundan, form doğrulamasndan, istek eşlemesinden, sunucu uç noktasndan,
+kimlik doğrulamasndan, ağ katmanndan veya yant ayrştrmasndan kaynaklanyor olabilir.
+Snama yüzeyi bu katmanlarn bir ksmn devre dş brakr ve problemin kaynağ daha hzl
+bulunur. Model açsndan da bu yüzey faydaldr; çünkü model bir hata üzerinde çalşrken uç
+nokta davranşn ayr bir snama yüzeyinden doğrulayabilir.
+4
+
+-- 4 of 7 --
+
+Akş Ayrştrcsnn zolasyonu
+Sunucudan istemciye sürekli olay akş gönderen mekanizmalar (örneğin sunucu kaynakl olay
+akşlar), uzun süren işlemlerde yaygn olarak kullanlr. Bu akşlarn ayrştrma mantğ doğrudan
+bileşen içinde kaldğnda bileşen karmaşklaşr: bileşen hem arayüzü yönetir, hem akş okur, hem
+olay satrlarn ayrştrr, hem hatalar ele alr, hem de durumu günceller.
+Daha sağlkl yaklaşm, akş ayrştrcsn ayr bir yardmc yap veya servis içine almaktr:
+parseStreamLine(line)
+parseStreamEvent(rawEvent)
+requestGenerateStream(payload)
+Bu ayrştrma şu kazanmlar sağlar:
+ akş ayrştrma mantğ test edilebilir hale gelir,
+ bileşen sadeleşir,
+ snr durumlar daha kolay yönetilir,
+ hata ayklama kolaylaşr,
+ model hangi kodun ayrştrma, hangi kodun arayüz sorumluluğu taşdğn net görür.
+Bu teknik özünde bir snr çizme örneğidir: akş protokolü ile arayüz davranş birbirinden
+ayrlmş olur.
+Durum Yönetiminin Netleştirilmesi
+Merkezi durum yönetimi sistemleri güçlüdür; fakat kötü kullanldklarnda karmaşk bir teknik
+borç kaynağna dönüşebilirler. Durum netleştirme, uygulamadaki durum alanlarnn anlamn,
+kaynağn ve güncellenme biçimini belirgin hale getirmektir.
+En yaygn problem, ayn verinin birden fazla yerde tutulmasdr:
+state.summary
+state.current.summary
+recordDetail.summary
+recordDetail.manualSummary
+Bu durumda geliştiricinin sorduğu temel soru şudur: gerçek kaynak hangisidir? Durum net de-
+ğilse model de yanlş alan güncelleyebilir; bir hatay çözdüğünü sanrken gerçekte kullanlmayan
+bir alan değiştirebilir.
+Durum netleştirme çalşmas şu ilkeleri kapsar:
+ durum alanlarnn tekil sorumluluğa sahip olmas,
+ ayn verinin birden fazla yerde tutulmamas,
+ seçicilerin açk biçimde adlandrlmas,
+5
+
+-- 5 of 7 --
+
+ eylemlerin niyet odakl yazlmas,
+ indirgeyicinin yalnzca durum dönüşümü yapmas,
+ yan etkilerin ayr bir katmanda toplanmas,
+ bileşenin karmaşk depo detaylarn doğrudan bilmemesi.
+Bu yap kurulduğunda tek yönlü akş izlenebilir hale gelir: eylem tetiklenir, yan etki katman
+dş çağry yönetir, başar veya başarszlk eylemi döner, indirgeyici durumu günceller ve seçici
+bileşene işlenmiş veriyi taşr. Akş bu netlikte olduğunda hem hata ayklama kolaylaşr hem de
+model değişiklikleri daha güvenli önerebilir.
+Sözleşme ve Eşdeğerlik Testleri
+Sözleşme testleri (contract tests), sistem parçalar arasndaki anlaşmalarn bozulmadğn doğ-
+rular: yant formatlar, olay yükleri veya bileşen arayüzleri bu kapsama girer. Eşdeğerlik testleri
+(parity tests) ise iki farkl gerçekleştirimin ayn davranş üretip üretmediğini denetler; özellikle
+geçiş, yeniden düzenleme veya eskiyeni sistem karşlaştrmalarnda önemlidir.
+Bu testler model açsndan değerlidir; çünkü yaplan değişikliklerin davranşsal uyumu bozup
+bozmadğn daha net gösterirler. Entropi çerçevesinde sözleşme ve eşdeğerlik testleri, sistemin
+snrlarn davranşsal düzeyde sabitleyen yaplardr.
+Entropi Azaltma Çerçevesi
+Yukarda incelenen tekniklerin ortak paydas, tek tek kod iyileştirmelerinin ötesinde bir işlev
+taşmalardr:
+Bu çalşmalar, sistemin entropisini azaltr.
+Entropi azaltma; sistemdeki belirsizliği, tekrarlar, gizli bağmllklar ve kontrolsüz varyas-
+yonlar azaltma işidir. Başka bir ifadeyle sistemin bilgi geometrisini sadeleştirme sürecidir.
+Bir yazlm sisteminde her kavram, her bağmllk, her durum alan, her test ve her yan etki,
+sistemin bilgi geometrisini oluşturur. Teknik borç arttkça bu geometri karmaşklaşr: bağlantlar
+görünmez hale gelir, snrlar bulanklaşr, ayn kavram birden fazla yerde farkl biçimlerde temsil
+edilir ve sistemin anlam haritas bozulur.
+Entropi azaltma çalşmalar bu geometriyi sistematik biçimde sadeleştirir:
+ tekrar eden kavramlar merkezileştirilir,
+ sorumluluklar ayrştrlr,
+ veri akş görünür hale getirilir,
+ yan etkiler izole edilir,
+ testler davranş sabitler,
+6
+
+-- 6 of 7 --
+
+ sözleşmeler snrlar tanmlar,
+ isimlendirme alan anlamn taşr.
+Her tekniğin entropi azaltc katks şu dönüşümlerle özetlenebilir: sabit değerlerin merkezileş-
+tirilmesi, dağnk değerleri merkezi alan sembollerine dönüştürür; yardmc fonksiyon ayrştrma,
+işlem detayn adlandrlmş niyete dönüştürür; facade ayrm, karmaşk iç yapy sade kullanm
+yüzeyine dönüştürür; izole test ortam, dağnk üretim davranşn kontrollü snama yüzeyine
+taşr; akllsunum ayrm, akş yöneten yap ile görüntüleyen yapy birbirinden ayrr; durum
+netleştirme, çoklu doğruluk kaynaklarn tekil kaynağa indirger; sözleşme testleri ise snrlar
+davranşsal düzeyde sabitler.
+Yapay Zekâ Bağlamnda Entropi Azaltmann Değeri
+Entropi azaltma çerçevesinin yapay zekâ çağndaki önemi, modelin çalşma biçiminden kaynak-
+lanr. Model, olaslk tabanl örüntü tamamlama ile üretim yapar; sistemdeki varyasyon ve belir-
+sizlik arttkça olas doğru yollarn says artar ve modelin isabet oran düşer.
+Entropi azaltlmş bir sistemde ise:
+ ayn kavram tek biçimde temsil edildiği için model yanlş eşleştirme yapmaz,
+ sorumluluklar ayrştrldğ için model değişikliği doğru katmana yerleştirir,
+ yan etkiler izole edildiği için model etki alann doğru öngörür,
+ testler davranş sabitlediği için model güvenilir geri bildirim alr,
+ sözleşmeler tanml olduğu için model snr ihlallerini fark edebilir.
+Bu nedenle yeniden düzenleme, yapay zekâ destekli geliştirmede maliyet kalemi değil, yatrm
+kalemidir: entropisi düşürülmüş her sistem bölgesi, hem insan hem de makine için akl yürütme
+kapasitesini artrr.
+Sonuç
+Bu çalşmada incelenen yeniden düzenleme teknikleri  sabit değerlerin merkezileştirilmesi, yar-
+dmc fonksiyon ayrştrma, akllsunum ayrm, facade deseni, izole test ortam, uç nokta snama
+yüzeyi, akş ayrştrcsnn izolasyonu, durum netleştirme ve sözleşme testleri  klasik anlamda
+kod temizliği pratiklerinin ötesinde bir işlev taşmaktadr. Bu teknikler, sistemin bilgi geometri-
+sini sadeleştiren, belirsizliği ve varyasyonu azaltan entropi azaltma mekanizmalardr.
+Yapay zekâ destekli geliştirme çağnda bu çerçevenin stratejik değeri artmştr; çünkü modelin
+üretim kalitesi, sistemin sunduğu örüntü kalitesiyle snrldr. Dolaysyla temel sonuç şu şekilde
+ifade edilebilir:
+Yeniden düzenleme, yalnzca kodu güzelleştirmek değildir; sistem üzerinde daha doğru
+düşünebilmek için bilgi geometrisini yeniden düzenleme işidir.
+7
+
+-- 7 of 7 --

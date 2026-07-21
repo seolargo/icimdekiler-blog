@@ -1,0 +1,382 @@
+Yazılım Organizasyonlarında Fraktal Sahiplik:
+Hız ve Sürekliliği Birlikte Koruyan Bir Bölünme
+Modeli
+Ömer Faruk Yavuz
+Ekim 2025
+Özet
+Bu çalışma, yazılım organizasyonlarında sahipliğin dağıtımı için tek bir yerel
+kurala dayanan bir model önermektedir: bir sahiplik alanı yalnızca gerçek bir
+darboğaz ortaya çıktığında, mevcut sahibin r payını koruduğu ve yeni sahibin
+(1 − r) payını üstlendiği oranlı bir bölünmeyle genişler. Kuralın özyinelemeli
+uygulanması, toplam sahipliği koruyan ve her ölçekte kendine benzeyen bir yapı
+üretir. Model iki işletim modu tanımlar: gücün kalıcı olarak tabana yayıldığı
+kalıcı paylaşım modu (açık kaynak ve kurumsal bağlamlar) ile darboğaz çö-
+züldüğünde sahipliğin merkeze geri döndüğü emanet kapasite modu (startup
+bağlamı). Bölünme oranının iki basit kısıttan türetilmesi, sahiplik derinliğinin
+bir sağlık göstergesi olarak kullanımı ve gölge sahiplik mekanizmasıyla süreklilik
+güvencesi, modelin pratik çekirdeğini oluşturur.
+Giriş
+Bu çalışmanın sorusu şudur: hız ve sürekliliği aynı anda koruyan, gerektiğinde tekil
+sahipliğe inebilen ve gerektiğinde kalıcı paylaşımı sürdürebilen organizasyonlar nasıl
+tasarlanır?
+Sorunun arka planında Conway Yasası yatar: bir sistemin mimarisi, onu üreten
+organizasyonun iletişim yapısını yansıtır. Sahiplik dağıtımı bu nedenle yalnızca bir
+insan kaynakları sorunu değil, doğrudan bir mimari karardır. Önerilen model, sahip-
+liği önceden çizilmiş bir organizasyon şemasıyla değil, sistemin gerçek darboğazlarının
+tetiklediği yerel bölünmelerle dağıtır.
+Model iki işletim modu tanımlar. Mod-A (Kalıcı Paylaşım): kurumsal ve açık
+kaynak bağlamında bölünmeler kalıcıdır; güç zaman içinde tabana yayılır. Mod-B
+(Emanet Kapasite): startup bağlamında bölünme geçicidir; darboğaz çözüldüğünde
+pay merkeze geri döner ve birincil sahip yeniden tam sahipliğe ulaşır.
+Problem Tanımı
+Birçok ürün, başlangıçta tek bir bireyin uçtan uca sahipliğiyle (0 → 1) hayata geçer.
+Büyüme aşamasında alan güdümlü tasarım (DDD) ve mikroservis yaklaşımları altında
+sorumluluklar bölünür: yeni alım, yeni alan tanımları ve bu alanlar etrafında ekipler
+1
+
+-- 1 of 10 --
+
+oluşur. Bu bölünmeler kimi zaman gereklidir; ancak çoğu durumda erken veya ge-
+reksiz parçalanma sistem üzerinde yük yaratır. Öğrenme eğrisi dikleşir, koordinasyon
+ihtiyacı büyür, dokümantasyon ve test yükümlülükleri çoğalır ve yapılacak iş, personel
+sayısından hızlı artar.
+Startup ve scale-up ölçeğindeki şirketler, kurumsal ölçekli organizasyon yapılarını
+finanse edecek sermayeye çoğunlukla sahip değildir. Buna karşın kurumsal kaliteye
+yakın bir kod tabanı kurmak — özellikle teknik borcun erken birikmesini önlemek
+— uzun vadeli sürdürülebilirlik için kritiktir. Gerilim şudur: tam merkezi sahiplik
+ölçeklenmez; erken dağıtılmış sahiplik ise taşınamaz.
+Çözümün Özeti
+Fraktal Sahiplik modelinde her ürün tekil sahiplikle başlar; büyüme yalnızca gerçek
+bir darboğaz veya performans ihtiyacı ortaya çıktığında, oranlı bir bölünmeyle yöne-
+tilir. Böylece test, soyutlama, dokümantasyon gibi normalde tüm projede yapılması
+beklenen yatırımlar, yalnızca gerekli alanlarda devreye girer. Oranlı sahiplik ve gölge
+mekanizması, bireysel hesap verebilirliği ve sürekliliği birlikte korur. Model bir ekip
+şeması değil; ortak altyapı ve standartları (bölüm: Arayüz Dokusu) paylaşan, kendi
+kendini yenileyen bir ekosistem yaklaşımıdır.
+İlkeler
+1. Başlangıçta uçtan uca sahiplik. Her ürün veya dilim, tek bir bireyin tam
+sorumluluğunda geliştirilir: tasarım, üretim ve test dahil. Bu, hızı, netliği ve
+hesap verebilirliği artırır; koordinasyon yükünü düşürür.
+2. Sorun odaklı bölünme. Sahiplik yalnızca somut bir darboğaz, ölçek gerek-
+sinimi veya kritik risk ortaya çıktığında bölünür. Gereksiz parçalanma böylece
+engellenir; en sorunlu dilimin yeni gelen kişiye devredilebilmesi, onu güçlü bir
+gölge geliştiriciye dönüştürür.
+3. Oranlı dağıtım. Bölünmede mevcut sahip r payını korur, yeni sahip (1 − r)
+payını üstlenir. Çoğu bağlamda 1 − r ≤ 0,2 pratik bir üst sınırdır; istisnalar
+mimari kurul onayı gerektirir.
+4. Gölge sahiplik. Her sahibin atanmış bir gölgesi vardır; birincil sahip ayrılırsa
+gölge kesintisiz devralır. Bu, tek kişiye bağımlılık riskini (bus factor) doğrudan
+azaltır.
+5. Teknolojik evrim. Yeni sahipler kendi dilimlerinde alternatif teknolojiler kul-
+lanabilir; bütünlük, arayüz standartlarına uyumla korunur.
+6. Birleşme ve çeşitlenme. Aynı akışta çakışan iki dal, kalite kapıları sağlan-
+dığında tekleştirilir (birleşme); aynı kökten türeyen bir dal, farklı hedefler için
+arayüz sözleşmesi sabit kalmak koşuluyla varyanta ayrılabilir (çeşitlenme).
+2
+
+-- 2 of 10 --
+
+Matematiksel Model
+Tanım 1 (Fraktal bölünme kuralı). Ağırlığı w > 0 olan bir sahiplik düğümü için tek
+adımlı bölünme
+w 7 −→ (
+r w, (1 − r) w)
+, r ∈ (0, 1)
+şeklindedir; r mevcut sahibin koruduğu payı, (1 − r) yeni sahibin üstlendiği payı gös-
+terir. Her bölünme yerel korunum sağlar: r w + (1 − r) w = w.
+Kök ağırlığı w0 = 1 olan tek bir dal boyunca k bölünme sonrasında birincil sahibin
+payı ve ara dilimler:
+w(k)
+primary = rk, wdilim,i = (1 − r) r i−1 (i = 1, . . . , k),
+k ∑
+i=1
+(1 − r) r i−1 + rk = 1.
+k → ∞ limitinde rk → 0 ve dilimlerin toplamı 1’e yakınsar: güç tamamen tabana
+dağılır, tek bir birey baskın kalmaz. Bu limit davranışı Mod-A’nın matematiksel ka-
+rakteridir. Mod-B’de ise bölünme olay temellidir: dilim tamamlandığında pay merkeze
+geri döner ve birincil sahiplik 1’e normalize olur; kalıcı yakınsama yerine 1 ↔ r ara-
+sında salınım gözlenir.
+0 1 2 3 4 5 6 7 8 9 10
+0
+0.2
+0.4
+0.6
+0.8
+1
+Bölünme adımı k
+Birincil sahiplik
+ rk r = 0,95 (kurumsal)
+r = 0,90 (startup)
+r = 0,80 (açık kaynak)
+Şekil 1: Farklı r değerleri için bölünme adımı boyunca birincil sahipliğin azalması. r
+büyüdükçe kontrol daha uzun süre merkezde kalır; küçüldükçe demokratikleşme hız-
+lanır.
+Geometrik Sezgi: Sierpinski Analojisi
+Model, kendine benzerlik ilkesinin klasik örneği olan Sierpinski üçgenine kavramsal
+olarak benzetilebilir: tek bir yerel kuralın tekrarıyla, global ölçekte düzenli bir desen
+oluşur ve her yinelemede toplam kütle alt parçalara korunarak dağıtılır. Ancak eşleme
+birebir değildir: Sierpinski üçgeni üç parçalı ve sabit oranlı bölünürken, buradaki kural
+iki parçalı ve parametriktir. Analoji, matematiksel bir eşdeğerlik iddiası değil, yerel
+kuralın tekrarıyla dağılan kütle sezgisini görselleştiren bir düşünme aracıdır.
+3
+
+-- 3 of 10 --
+
+Bağlı Piramitler Zinciri (Mod-B)
+Emanet kapasite modunda her birey bir piramit düğümüyle temsil edilebilir: tepe,
+mevcut sahibin r payını; taban, yeni sahibin (1 − r) payını gösterir. Taban payı bir
+sonraki düğümün tepesine aktarılarak doğrusal bir zincir oluşur.
+r
+1 − r
+r
+1 − r
+r
+1 − r
+Şekil 2: Bağlı piramitler zinciri. Her düğüm bir bireyin sahiplik alanını temsil eder;
+taban payı bir sonraki düğümün tepesine aktarılır.
+Bölünme Oranının Seçimi
+Bölünme oranı r, hedeflere göre ayarlanabilir bir tasarım parametresidir ve iki basit
+kısıttan türetilir.
+En küçük işe yarar dilim: yeni gelenin payı anlamlı bir fark yaratacak kadar
+büyük olmalıdır:
+1 − r ≥ εmin =⇒ r ≤ 1 − εmin.
+Süreklilik tabanı: mevcut sahibin kontrolü belirli bir tabanın altına düşmemeli-
+dir:
+r ≥ Rmin.
+Önerme 1 (Fezibil aralık). Rmin ≤ r ≤ 1 − εmin aralığı boş değilse, r bu aralık içinde
+hedeflere göre seçilir: süreklilik öncelikliyse aralığın sağ ucuna, hızlı dağıtım öncelikliyse
+sol ucuna kaydırılır. Aralık boşsa öncelikli kısıt korunur.
+Yaygın oranların bu kesişimden doğal biçimde çıktığı görülür: emniyet kritik bağ-
+lamda Rmin ≈ 0,95 ve εmin ≈ 0,05 ile r = 0,95; startup bağlamında Rmin ≈ 0,90 ve
+εmin ≈ 0,10 ile r = 0,90; açık kaynak bağlamında Rmin ≈ 0,80 ve εmin ≈ 0,20 ile
+r = 0,80.
+Zamana bağlı bir demokratikleşme hedefi de r seçimini kısıtlayabilir: T bölünme
+sonunda merkez payının en fazla s olması isteniyorsa r ≤ s1/T alınır. Örneğin dört bö-
+lünmede merkez payının yüzde elliye inmesi hedefleniyorsa r ≤ 0,501/4 ≈ 0,84 gerekir.
+Son olarak mikro-parçalanma freni tanımlanır: tipik yaprak ağırlığı (1 − r) rk−1 be-
+lirlenen eşiğin (εstop) altına düştüğünde yeni bölünme yapılmaz veya komşu yapraklar
+birleştirilir.
+Sahiplik Derinliği: Yapısal Sağlık Göstergesi
+Sahiplik derinliği k, kök sahipten itibaren aynı dalda yapılan özyinelemeli bölünme
+sayısıdır ve modelin en önemli gözlemlenebilir göstergesidir:
+• k = 0: İdeal başlangıç. Tek kişi tam sahiptir; netlik ve hız en üst düzeydedir.
+4
+
+-- 4 of 10 --
+
+• k = 1: Sağlıklı büyüme. Gerçek bir darboğaz tek bir bölünmeyi tetiklemiştir;
+ölçeklenmenin doğal işaretidir.
+• k > 1: Uyarı sinyali. Aynı dalda tekrarlanan bölünmeler, altta yatan sorunlara
+işaret eder: aşırı teknik borç veya zayıf tasarım, eksik arayüz standartları, aşırı
+yüklenmiş sahiplik veya kapsam uyumsuzluğu.
+Yönetişim kuralı şudur: herhangi bir alt ağaçta k > 1 gözlendiğinde inceleme tetik-
+lenir — teknik değerlendirme (mimari, tasarım, borç), organizasyonel değerlendirme
+(kapsam, iş yükü dağılımı) ve sonucunda yeniden düzenleme, dilim birleştirme veya
+standart güçlendirme kararı. Böylece derinlik, yalnızca yapısal bir sonuç değil, müda-
+hale gerektiren sistemik stresi görünür kılan bir gözlemlenebilirlik metriğidir. Sürdü-
+rülebilir organizasyonlar k ∈ {0, 1} bölgesinde kalmayı hedefler.
+Süreklilik Mekanizmaları
+Gölge Sahiplik
+Her alanın birincil sahibi ve bir gölgesi bulunur. Birincil ayrılırsa gölge otomatik dev-
+ralır; atamalar güncellenir, ağırlıklar değişmez. Yol haritası, kararlar, ödün kayıtları ve
+operasyon talimatları ortak depoda güncel tutulur; yılda bir sınırlı süreli sahip–gölge
+rotasyonu yapılır. Teşvik tasarımı (hakediş, prim) sürekliliği ödüllendirir.
+Süreklilik Havuzu (Mod-B)
+Emanet kapasite modunda atama kuralı basittir: bir alan içinde daha önce (1 − r) dili-
+mini başarıyla tamamlamış geliştirici şirkette kaldığı sürece, aynı alanda doğan sonraki
+darboğaz dilimleri öncelikle ona atanır. Böylece geliştirici, o alanın tekrar eden darbo-
+ğazları için daimi sorumlu kabul edilir; alan bilgisi dağılmaz ve her yeni darboğazda
+öğrenme maliyeti sıfırdan ödenmez. Dilim tamamlandığında sahiplik merkeze döner;
+alan tekrar tekil sahipliğe normalize olur.
+Çıkış Durumunda Devir Politikası
+Bir geliştirici ayrıldığında sıralı politika uygulanır. Birincil kural gölge devridir: atan-
+mış gölge, kapasite ve yetkinlik uygunluğu teyit edilerek devralır. Gölge yoksa veya
+uygun değilse, aday havuzundan seçim yapılır; seçimde alan uyumu, alandaki geçmiş
+katkı, müsaitlik ve risk faktörleri birlikte değerlendirilir — bu değerlendirmenin ağırlık-
+ları organizasyonun politika tercihi olup bağlama göre belirlenir. Devralımın ardından
+alan ağırlığı yerel olarak 1’e normalize edilir ve gerekiyorsa bağlama uygun bir oranla
+yeniden bölünür.
+Devir, dört önkoşul tamamlanmadan bitmiş sayılmaz: operasyon talimatları ve
+mimari karar kayıtlarının güncelliği; hizmet düzeyi hedeflerinin ve açık risklerin devri;
+güvenlik ve uyum teyidi; kimlik, erişim ve dağıtım hattı yetkilerinin devri. Kritik
+alanlarda kalıcı atama tamamlanana kadar geçici bir bakıcı (mevcut üst sahip veya
+platform ekibi) atanabilir; bu süreçte hizmet düzeyleri izlenir.
+5
+
+-- 5 of 10 --
+
+Legacy Geçişi Uygulaması
+Modelin başlıca motivasyonlarından biri, eski (legacy) sistemlerin kademeli moder-
+nizasyonunu desteklemesidir. Yazılım yapıtları çoğu zaman bağlı oldukları çerçeve ve
+altyapının doğal ömrünü aşar: güncellenemeyen çalışma ortamları desteğini yitirir, test
+ve dokümantasyon eksikleri birikir, izlenmeyen ödünler teknik borca dönüşür.
+Geleneksel monolitik sahiplik, bu sistemlerin büyük çaplı yeniden yazım olmadan
+modernizasyonunu zorlaştırır. Fraktal bölünme ise yerel ikameyi mümkün kılar: legacy
+alan oranlı bölünür ve yeni dilime modern bir uygulama inşa etme görevi verilir. Bu
+yaklaşım, Fowler’ın strangler fig (boğan incir) deseninin sahiplik boyutuyla genişletil-
+miş halidir: eski ve yeni bir süre birlikte yaşar, geçiş büyük patlama yerine kademeli
+ilerler ve her bölünme teknik borcu sonlu bir dilime hapsederek sistemik bulaşmayı
+önler. Fraktal tekrar sayesinde her dilim gerektiğinde yeniden bölünebilir; legacy göçü
+tek seferlik dönüşüm yerine yinelenebilir bir kalıba dönüşür.
+Gizli Backlog: Bir İş, Bir İş Yükü Değildir
+Tamamlanan her görünür iş (hata düzeltme veya özellik), arka planda zincirleme ek
+işler doğurur: test, dokümantasyon, yeniden düzenleme, gözlemlenebilirlik, inceleme,
+operasyon ve güvenlik kontrolü. Bir işin gerçek maliyeti şöyle modellenebilir:
+GerçekMaliyet(1) = 1 + X, X = ∑
+j
+Tj , Tj ∼ Bernoulli(pj ) · cj ,
+burada pj ilgili ek işin ortaya çıkma olasılığı, cj çıktığında getirdiği yüktür. Beklenen
+toplam maliyet:
+E[GerçekMaliyet(1)] = 1 + ∑
+j
+pj cj .
+Bu modelin değeri kesin bir katsayı üretmesi değil, planlamada görünür işin sis-
+tematik olarak eksik tahmin edildiğini yapılandırılmış biçimde göstermesidir. Temsili
+parametrelerle (örneğin test için yüksek olasılık ve orta yük, inceleme için kesinlik, gü-
+venlik için düşük olasılık ve yüksek yük) beklenen çarpan kolayca birkaç katına ulaşır.
+Gerçek katsayı ekipten ekibe değişir ve ancak o ekibin kendi iş kayıtlarından, pj ve cj
+değerlerinin ampirik ölçümüyle kalibre edilebilir. Fraktal Sahiplik bağlamındaki önemi
+şudur: bu çarpan, bölünme kararlarında görünür işin değil gerçek yükün esas alınması
+gerektiğini ve erken parçalanmanın gizli backlog’u dilim sayısıyla çarptığını gösterir.
+Arayüz Dokusu: Çok Teknoloji Uyumu
+Her dilim kendi teknolojisini seçebilir; ancak bağ dokusu sabittir. Bu doku, tüm dilim-
+lerin birlikte çalışmasını güvence altına alan asgari standartlar kümesidir ve her yeni
+düğüm bu kurallara zorunlu olarak uyar:
+• API sözleşmesi: Tek protokol tercihi (REST veya gRPC), URI tabanlı sürüm-
+leme, sözleşme dosyasının tek gerçek kaynak olması ve sürekli entegrasyonda
+zorunlu sözleşme testleri; sabit hata zarfı ve idempotenslik desteği.
+6
+
+-- 6 of 10 --
+
+• Kimlik ve yetki: Güvenli taşıma, standart kimliklendirme, en az ayrıcalık ilkesi,
+denetim izi ve sırların merkezi yönetimi.
+• Gözlemlenebilirlik: Uçtan uca izleme, standart metrikler (gecikme, hata oranı,
+doygunluk), yapısal loglama ve her servis için tanımlı hizmet düzeyi hedefleri.
+• Dayanıklılık: Zaman aşımı yayılımı, idempotent isteklerde geri çekilmeli yeni-
+den deneme, devre kesici ve geri basınç sınırları.
+• Veri sözleşmeleri: Geriye uyumlu şema evrimi, sürümlü olay şemaları, tip gü-
+venliği ve veri kalitesi kontrolleri.
+• Dağıtım hattı: Kalite kapıları (statik analiz, güvenlik taraması, asgari test
+kapsamı, sözleşme testleri), kademeli yayın stratejileri ve otomatik geri alma
+kriterleri.
+• Uyumluluk ve kaldırma politikası: Veri koruma gereklilikleri; geriye uyum-
+suz değişiklikler için duyuru, göç rehberi ve çift sürüm penceresi.
+Farklı dil ve çatıların kullanımı serbesttir; aykırılıklar mimari kurul onayı ve kal-
+dırma planı gerektirir.
+Bağlama Göre Demokratiklik
+Demokratiklik, bağlama bağlı bir tasarım değişkenidir. Startup ve scale-up bağlamında
+hız ve tekil hesap verebilirlik önceliklidir; kurumsal ve açık kaynak ekosistemlerde geniş
+katılım daha sürdürülebilirdir.
+Bağlam Karar Tarzı Önerilen r
+Startup / scale-up Tek sorumlu birey (DRI) artı gölge; danış–karar ver–
+açıkla döngüsü, ardından karara bağlılık kültürü
+0,85–0,90
+Kurumsal Sorumlu birey artı inceleme kurulu ≈ 0,95
+Açık kaynak Bakımcı konseyi, öneri (RFC) ve konsensüs süreci ≈ 0,80
+Startup bağlamında konsensüs arayışının maliyeti dört başlıkta özetlenebilir: karar
+süresinin uzaması ve fırsat maliyeti; çok taraflı kararlarda hesap verebilirliğin bula-
+nıklaşması; küçük ekiplerde tören yükünün çıktıyı gölgelemesi; erken aşamada doğru-
+nun tartışarak değil deneyerek bulunması. Bu bağlamda sahiplik derinliği çoğunlukla
+k ∈ {0, 1} tutulur. Kurumsal ve açık kaynak bağlamında geniş katılım kabul edilebilir;
+karşılığında arayüz dokusu disiplini ve değişiklik inceleme süreçleri daha sıkı işletilir.
+Paralel Küçük Birimlerle Ölçekleme
+Tek bir büyük 1 → N geçişi yerine, hedef sistem birçok küçük ve özerk 0 → 1 biri-
+mine ayrılarak ölçeklenebilir. İşleyiş şöyledir: üst hedef, bağımsız veya zayıf bağımlı
+alt yeteneklere ayrıştırılır; her yetenek için gölgesiyle birlikte tek bir sahip atanır; tüm
+birimler arayüz dokusuna uyar; kısa entegrasyon ritmiyle (sözleşme testleri, kademeli
+7
+
+-- 7 of 10 --
+
+yayın) birleşme sağlanır; koordinasyon yalnızca arayüzler ve bağımlılıklar düzeyinde
+yapılır, birimler içeride özerktir.
+Birleşik teslimat süresi yaklaşık olarak en yavaş birimin süresi artı entegrasyon
+tamponudur:
+Ttoplam ≈ max
+j T (j)
+0→1 + ∆entegrasyon.
+Paralellik sayesinde teslim süresi birim sayısıyla değil, en yavaş birimle sınırlanır; tekil
+sahiplik hız ve hesap verebilirlik sağlar; her birim gerektiğinde kendi içinde aynı kuralla
+bölünebildiğinden model her ölçekte aynıdır.
+Alanın Dinamik Belirlenmesi
+Klasik alan güdümlü tasarımda alan sınırları büyük ölçüde önceden, iş alanının kav-
+ramsal analiziyle çizilir. Fraktal sahiplik bunu tersine çevirir: alan, darboğazın kendisi
+tarafından tanımlanır. Sistemin hangi noktasında gerçek bir darboğaz ortaya çıkıyorsa,
+yeni alan orasıdır. Böylece alan haritası statik bir çizim değil, organizasyonun gerçek
+problemleri tarafından şekillenen organik bir yapı olur. Bu yaklaşım, Evans’ın stratejik
+tasarım araçlarını reddetmez; sınır çizme kararının zamanlamasını değiştirir — sınır,
+ihtiyaç kanıtlanmadan değil, kanıtlandığında çizilir.
+Yeni gelen kişinin dar bir alanı tüm sisteme hâkim olmadan sahiplenmesi risk taşır;
+bu risk, problemi küçültme disipliniyle yönetilir. Dört adımlı çerçeveleme şablonu öne-
+rilir: gözlenen durum, beklenen durum, aradaki fark ve etki. Bu şablon, sorunun tüm
+sistemi bilmeden izole edilmesini sağlar ve yeni gelenin ilk katkısını güvenli biçimde
+sınırlar.
+Kapsam Notu: Modelin Vaadi ve Sınırı
+Fraktal Sahiplik, başlı başına yüksek nitelikli kod üretme yöntemi değildir. Modelin bi-
+rincil amacı, gereken yerde ve zamanda doğru müdahalenin yapılabilmesi için sahipliği
+yerel ve oranlı biçimde yeniden dağıtabilen hafif bir yönetişim mekanizması sunmaktır.
+Kod kalitesi; mimari prensipler, arayüz standartları ve kalite kapılarıyla sağlanır. Mo-
+delin önceliği müdahale edilebilirlik, süreklilik ve kontrol edilebilir büyümedir; hedefi
+mükemmel kalite değil, kabul edilebilir kaliteyi hızlı ve düşük maliyetle sunmaktır.
+Riskler ve Karşı Önlemler
+• Aşırı parçalanma: Dilim payı eşiğin altına düştüğünde yeni bölünme durdu-
+rulur veya yapraklar birleştirilir.
+• Teknoloji kaosu: Arayüz dokusuna uyum zorunludur; tasarım ve kod incele-
+meleriyle rehberlik edilir.
+• Adalet algısı: Oranlar, bölünme tetikleyicileri ve rotasyon kuralları şeffaf bi-
+çimde önceden ilan edilir; güven kültürü modelin ön koşuludur.
+8
+
+-- 8 of 10 --
+
+• İnsan yükü: Model, deneyimi merkeze alır: daha az koordinasyon, daha net
+sorumluluk ve daha yüksek otonomi hedeflenir; bölünme yalnızca gerçek darbo-
+ğazlarda yapılarak kısa vadeli hız ile uzun vadeli bakım yükü dengelenir; gölge
+ve rotasyon mekanizmaları bireysel gelişimi besler ve bilgiyi kurumsal belleğe
+akıtır.
+Sınırlar
+Modelin sınırları açıkça belirtilmelidir. Birincisi, çerçeve ampirik olarak doğrulanma-
+mıştır; oranlar ve eşikler kuramsal kısıtlardan türetilmiş olup gerçek organizasyonlarda
+kalibrasyon gerektirir. İkincisi, gizli backlog modelindeki olasılık ve maliyet paramet-
+releri ekiplere özgüdür ve ancak yerel iş kayıtlarından ölçülebilir; bu ölçüm yapılmadan
+modelin ürettiği çarpanlar yalnızca niteliksel uyarı değeri taşır. Üçüncüsü, darboğa-
+zın ne zaman gerçek sayılacağı — bölünme tetikleyicisinin tanımı — yargı gerektirir;
+eşiklerin (gecikme, hata oranı, operasyon yükü) önceden ilan edilmesi bu yargıyı di-
+sipline eder ama ortadan kaldırmaz. Dördüncüsü, model küçük ve orta ölçekte doğal
+işler; çok büyük organizasyonlarda arayüz dokusunun bakımı ve kurul süreçleri kendi
+koordinasyon maliyetini üretir ve bu maliyet izlenmelidir.
+Sonuç
+Bu çalışma, yazılım organizasyonlarında hız ve sürekliliği birlikte korumaya yönelik
+Fraktal Sahiplik modelini ortaya koymuştur. Modelin özü, tek ve basit bir yerel kuralın
+tekrarıyla sistem genelinde kendine benzer bir yapı kurmaktır: başlangıçta uçtan uca
+tekil sahiplik netlik ve hız sağlar; yalnızca gerçek darboğazlarda oranlı bölünme yapılır;
+gölge mekanizması sürekliliği, arayüz dokusu heterojen teknolojiler arasında bütünlüğü
+güvence altına alır.
+Matematiksel çerçeve, bölünme oranının demokratikleşme hızı ile kontrol yoğun-
+luğu arasındaki dengeyi belirlediğini ve iki basit kısıtın kesişiminden bağlama uygun
+oranların doğal biçimde türediğini göstermektedir. Sahiplik derinliği, yapısal bir sağ-
+lık göstergesi olarak işlev görür: birden büyük derinlik, teknik veya örgütsel inceleme
+tetikleyicisidir. Kalıcı paylaşım ve emanet kapasite modları, açık kaynak ve kurumsal
+ekosistemler ile startup bağlamlarının farklı ihtiyaçlarını aynı mekanizmayla karşıla-
+mayı mümkün kılar.
+Son tahlilde model, her yerde mükemmel kod vaadi değil; doğru anda, doğru yerde,
+doğru büyüklükte müdahaleyi mümkün kılan organizasyonel bir düzenektir. Conway
+Yasası’nın işaret ettiği organizasyon–mimari izomorfizmi veriyken, sahipliğin nasıl da-
+ğıtıldığı sorusu bir mimari sorudur — ve bu soruya verilen yanıtın, önceden çizilmiş
+şemalar yerine sistemin gerçek darboğazlarını izlemesi, hem yapıyı hem organizasyonu
+aynı disiplin altında evriltir.
+Kaynaklar
+[1] M. E. Conway, “How Do Committees Invent?,” Datamation, vol. 14, no. 4, 1968.
+9
+
+-- 9 of 10 --
+
+[2] E. Evans, Domain-Driven Design: Tackling Complexity in the Heart of Software,
+Addison-Wesley, Boston, 2003.
+[3] M. Fowler, “StranglerFigApplication,” martinfowler.com, 2004.
+[4] M. Skelton and M. Pais, Team Topologies: Organizing Business and Technology
+Teams for Fast Flow, IT Revolution Press, Portland, 2019.
+10
+
+-- 10 of 10 --

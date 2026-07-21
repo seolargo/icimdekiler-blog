@@ -1,0 +1,734 @@
+Yazılım Mühendisliği Ne Öğrenebilir: Sekiz
+Disiplinden Dersler
+ÖFY
+July 2026
+Giriş
+Yazılım mühendisliği, göreli olarak genç bir disiplindir ve hatanın yönetimi
+konusunda kendi başına geliştirdiği kurumsal disiplin, nükleer enerji, sivil havacılık
+ya da hukuk gibi yüzyıllık geleneklere sahip alanlarla karşılaştırıldığında hâlâ
+olgunlaşma sürecindedir. Bu durumun nedeni yetenek ya da özen eksikliği
+değildir; ilerleyen bölümlerde gösterileceği gibi, incelenen disiplinlerin sahip
+olduğu sistematik hata yönetimi büyük ölçüde dışarıdan dayatılmış kurumsal
+baskılardan (düzenleyici kurumlar, sigorta mekanizmaları, hukuki sorumluluk)
+doğmuştur; yazılımın bu baskılardan büyük ölçüde muaf kalması, disiplinin
+doğal olarak daha gevşek bir yapıda kalmasına yol açmıştır.
+Bu çalışmanın amacı, birbirinden çok farklı sekiz disiplini (nükleer enerji,
+sivil havacılık, kriz yönetimi, hukuk, denizcilik, profesyonel mutfak, orkestra
+yönetimi ve epidemiyoloji) tek tek tarayarak, her birinin geliştirdiği spesifik
+mekanizmaların yazılım mühendisliğine ne ölçüde ve nasıl aktarılabileceğini so-
+mut biçimde ortaya koymaktır. ˙Incelemenin odak noktası genel ilham verici ben-
+zetmeler değil, her disiplinin kendi pratiğinde neden o mekanizmayı geliştirdiğinin
+altında yatan gerekçedir — zira bir ilkenin yazılıma aktarılabilmesi için önce o
+ilkenin hangi somut soruna, hangi mekanizmayla çözüm ürettiğinin anlaşılması
+gerekir. Bu yaklaşım, incelenen örnekleri yüzeysel metaforlardan ayırmakta ve
+her birinin yazılım pratiğine doğrudan uygulanabilir bir protokol veya karar
+kuralı olarak tercüme edilmesini mümkün kılmaktadır.
+C alışmanın ikinci bölümü, sekiz disiplinden çıkarılan örneklerin ortak kuram-
+sal temelini oluşturan Yüksek Güvenilirlikli Örgütler (HRO) teorisini, sapmanın
+normalleşmesi kavramını ve Safety-I/Safety-II ayrımını ele almaktadır. Bu ku-
+ramsal çerçeve, tek tek disiplin örneklerinin rastgele bir koleksiyon olmadığını,
+aksine ortak bir akademik alanın (güvenilirlik mühendisliği ve örgütsel güvenlik
+kuramı) farklı mesleki görünümleri olduğunu göstermektedir.
+1
+
+-- 1 of 19 --
+
+Nükleer Enerji
+Derinlemesine Savunma: Yedeklilik ile C eşitlilik Arasındaki Fark
+Nükleer endüstride “derinlemesine savunma” kavramı yaygın biçimde yanlış
+anlaşılır: mesele yalnızca aynı kontrolü birden fazla kez tekrarlamak değil,
+birbirinden farklı mekanizmalarla çalışan katmanlar kurmaktır. Bir çekirdek
+reaktöründe soğutma sistemi hem aktif (pompa, elektrik gerektiren) hem pasif
+(yerçekimiyle çalışan, hiçbir güç kaynağına ihtiyaç duymayan) katmanlara sahip-
+tir — çünkü elektrik kesintisi gibi bir olay her iki aktif katmanı da aynı anda
+vurabilir, ama pasif bir katman bu ortak nedenden etkilenmez. Buna “ortak
+neden arızası” (common cause failure) direnci denir.
+Yazılımda bunun karşılığı, aynı teknolojiyle yazılmış iki doğrulama katmanının
+(örneğin hem frontend hem backend’de aynı kütüphaneyle yapılan input vali-
+dation) aslında tek bir katman sayılması gerektiğidir — çünkü kütüphanenin
+kendisindeki bir hata her ikisini de aynı anda geçersiz kılar. Gerçek derinleme-
+sine savunma, farklı teknolojiler/farklı ekipler tarafından yazılmış, birbirinden
+bağımsız varsayımlara dayanan kontrol katmanları kurmayı gerektirir: örneğin
+bir ödeme akışında hem uygulama seviyesinde bir tutar sınırı kontrolü hem de
+tamamen ayrı bir dolandırıcılık tespit sisteminin (farklı ekip, farklı veri kaynağı,
+farklı mantık) aynı işlemi bağımsız olarak değerlendirmesi.
+Normal Accident Theory: Perrow’un Matrisi ve Mikroservislerin Tehlikeli
+Bölgesi
+Charles Perrow’un kuramı, sistemleri iki eksende sınıflandırır: etkileşim karmaşıklığı
+(lineer mi, karmaşık mı — bir bileşenin etkisi öngörülebilir mi yoksa beklen-
+medik, dolaylı yollarla mı yayılıyor) ve bağlantı sıkılığı (gevşek mi, sıkı mı —
+bir arıza diğer bileşenlere yavaş mı yoksa anında mı sıçrıyor). Perrow’un id-
+diası şudur: bir sistem hem yüksek karmaşıklık hem yüksek sıkılık bölgesine
+girdiğinde (Perrow’un asıl örneği olan Three Mile Island kazasında olduğu gibi),
+kazalar bireysel hatalardan değil, sistemin bu yapısal konumundan kaynaklanır
+ve istatistiksel olarak kaçınılmaz hale gelir — Perrow bunu “normal kaza” olarak
+adlandırır, çünkü sistemin doğasının bir sonucudur, anomalisi değil.
+Mikroservis mimarileri, servis sayısı arttıkça karmaşıklık eksenini otomatik
+olarak yükseltir. Asıl kritik hata, bunu senkron çağrılarla (bir servisin diğerini
+bekleyerek çağırması) birleştirmektir — bu, sıkılık eksenini de yükseltir ve sis-
+temi Perrow’un tehlikeli bölgesine iter. Pratik çıkarım net ve sayısaldır: karmaşıklığı
+azaltmak (servis sayısını kısıtlamak) her zaman mümkün olmayabilir, ama sıkılığı
+azaltmak (asenkron mesajlaşma, devre kesiciler, zaman aşımı sınırları, kuyruk
+tamponları) mimari olarak bilinçli bir tercihtir. Bir sistemin “kaç mikroservisi
+var” sorusu yanlış sorudur; asıl soru “bu servisler birbirine ne kadar sıkı bağlı”
+sorusudur.
+2
+
+-- 2 of 19 --
+
+˙Isviçre Peyniri Modeli: Gizli ve Aktif Hatalar Ayrımı
+James Reason’ın modeli, bir kazanın tek bir hatadan değil, birbirinden bağımsız
+savunma katmanlarındaki deliklerin — tesadüfen — aynı anda hizalanmasından
+kaynaklandığını gösterir. Modelin asıl inceliği, iki farklı hata türünü ayırmasıdır:
+aktif hatalar (bir operatörün o an yaptığı yanlış hamle) ve gizli koşullar (sis-
+temde yıllardır var olan, kimsenin fark etmediği zayıf bir tasarım kararı, eksik
+bir eğitim, kötü bir arayüz). Aktif hata her zaman görünür ve suçlanabilir bir
+kişiye bağlanabilir; gizli koşullar ise görünmezdir ve genellikle kazadan sonra
+bile fark edilmez, çünkü kaza raporu doğal olarak en son hareket eden kişiye
+odaklanır.
+Yazılımdaki bir olay sonrası analizde (postmortem) bu ayrımı bilinçli uygula-
+mak şu anlama gelir: “kim hangi komutu çalıştırdı” sorusunun ötesine geçip, “bu
+komutun bu kadar kolay çalıştırılabilir olması neden mümkündü, bu yetki neden
+bu kişideydi, bu uyarı neden görünmüyordu” gibi, olaydan çok önce yerleşmiş
+gizli koşulları aramak gerekir. Bir olayda genellikle üç ila beş bağımsız gizli
+koşulun aynı anda hizalandığı görülür; yalnızca birini kapatmak (örneğin “bu
+kişiye artık bu izin verilmeyecek”) gelecekteki farklı bir hizalanmayı önlemez.
+Sivil Havacılık
+Kapalı Döngü ˙Iletişim: Crew Resource Management’ın Gerçek Mekaniz-
+ması
+CRM’in çoğunlukla yanlış anlaşılan yönü, onun bir “nezaket eğitimi” olmadığıdır;
+kapalı döngü iletişim (closed-loop communication) adı verilen kesin bir protokolü
+zorunlu kılar: bir komut verildiğinde, komutu alan kişi onu kendi kelimeleriyle
+geri okur (readback), komutu veren kişi bu geri okumayı doğrular (hearback).
+Bu üç adımlı döngü tamamlanmadan komut “alınmış” sayılmaz. Bunun nedeni,
+insan iletişiminde “duydum” ile “doğru anladım”ın aynı şey olmadığının kabul
+edilmesidir — sözlü onay (“tamam”, “anladım”) bir şeyin doğru anlaşıldığının
+kanıtı değildir.
+Yazılımda kritik bir operasyonel kararın (bir geri alma kararı, bir verita-
+banı işlemi) sözlü/yazılı olarak “tamam, yapıyorum” ile onaylanması, kapalı
+döngünün yalnızca ilk yarısıdır. Tam protokol, işlemi yapacak kişinin niyetini
+kendi cümleleriyle geri yazmasını (“üretim ortamındaki X tablosunun Y sütununu
+sıfırlıyorum, geri dönüşü yok, saat 14:00”) ve karar vericinin bu geri yazımı
+açıkça onaylamasını gerektirir. Bu, ekiplerde neredeyse hiç uygulanmayan ama
+uygulaması bir mesaj kadar ucuz olan bir disiplindir.
+Read-Do / Do-Verify Ayrımının Bilişsel Gerekçesi
+Bu ayrımın arkasında bilişsel bir gerekçe vardır: yüksek stres altında insan
+hafızası sistematik olarak adım atlar — özellikle sırayı değil, listenin ortasındaki
+bir adımı unutma eğilimindedir (seri pozisyon etkisi, ortadaki adımların hem
+başlangıç hem bitiş çapasından uzak olması). Bu yüzden havacılıkta nadir ve
+3
+
+-- 3 of 19 --
+
+geri dönüşü olmayan işlemler için (motor arızası prosedürü gibi) read-do zorun-
+ludur: pilot listeyi elinde tutar, her adımı okur, sonra yapar — hafızadan asla
+çalışmaz. Sık yapılan, düşük riskli işlemler için ise do-verify (önce yap, sonra
+listeyle kontrol et) yeterli kabul edilir, çünkü tekrar zaten hafızayı güvenilir
+kılmıştır.
+Yazılımda bu ayrımın kriteri netleştirilmelidir: bir operasyonun read-do’ya
+tabi tutulup tutulmayacağı “ne kadar deneyimli olduğunuza” değil, “bu işlemi
+ayda kaç kez yapıyorsunuz” ve “geri dönüşü var mı” sorularına göre belir-
+lenmelidir. Yılda bir kez yapılan bir felaket kurtarma tatbikatı, on yıllık bir
+mühendis tarafından bile hafızadan değil, ekranda açık bir kontrol listesiyle
+adım adım yürütülmelidir — deneyim burada yanıltıcı bir güven kaynağıdır.
+Incident Command System
+Birleşik Komuta: Farklı Ekiplerin Tek Bir Karar Yapısı Altında Birleşmesi
+ICS’nin en gelişmiş özelliği, tek bir kurumun değil, birden fazla bağımsız kuru-
+mun (itfaiye, polis, sağlık ekipleri) aynı krize aynı anda müdahale ettiği durum-
+lar için tasarlanmış “birleşik komuta” (unified command) yapısıdır: her kurum
+kendi iç hiyerarşisini korur, ama hepsi tek bir ortak “olay eylem planı”nı (Inci-
+dent Action Plan) kabul eder ve bu planın hangi öncelikleri taşıdığı konusunda
+anlaşır. Kimse birbirinin astı olmaz, ama herkes aynı plana bağlanır.
+Yazılımda bu, birden fazla ekibin (altyapı, ürün, güvenlik) aynı büyük kesin-
+tiye aynı anda müdahale ettiği durumlar için doğrudan uygulanabilir bir mod-
+eldir: her ekip kendi teknik liderine raporlamaya devam eder, ama tüm ekiplerin
+kabul ettiği tek bir “şu anki öncelik nedir, hangi sırayla ilerliyoruz” belgesi ol-
+malıdır — bu belge olmadan, her ekip kendi görüş açısından “en acil” gördüğü
+şeyi çözmeye çalışır ve çabalar birbirini nötralize edebilir.
+Kontrol Açıklığının Bilişsel Gerekçesi
+Üç ile yedi kişi sınırı keyfi değildir; bir kişinin aynı anda güvenilir biçimde takip
+edebileceği bağımsız bilgi akışı sayısıyla ilgilidir. Bir olay komutanının on beş
+kişiden gelen paralel güncellemeleri aynı anda değerlendirmesi beklenirse, sonuç
+bilgi kaybı değil, seçici dikkat (en yüksek sesle konuşanın öncelik kazanması)
+olur — ki bu tam olarak triyaj mantığının bozulması demektir. ICS’nin çözümü,
+kriz büyüdükçe hiyerarşiyi otomatik olarak genişletmektir: yeni bir alt-komutan
+atanır, o komutan kendi altındaki üç-yedi kişiyi yönetir ve yalnızca özetlenmiş
+bilgiyi yukarı iletir.
+Büyük bir yazılım kesintisinde tek bir kişinin (genellikle en kıdemli mühendisin)
+aynı anda hem teknik çözümü yönetip hem yönetime durum raporu verip hem
+müşteri iletişimini takip etmesi beklenir — bu, ICS’nin tam olarak önlemeye
+çalıştığı bilişsel aşırı yüklenmedir. Doğru yapı, bu üç işlevi (teknik çözüm,
+iletişim, durum takibi) baştan itibaren ayrı kişilere dağıtmaktır, kriz büyüdükçe
+değil, kriz başladığı an.
+4
+
+-- 4 of 19 --
+
+Hukuk Sistemi
+Ratio Decidendi ile Obiter Dictum Ayrımı
+Hukukta bir mahkeme kararının tamamı bağlayıcı emsal sayılmaz; yalnızca
+kararın sonucuna ulaşmak için zorunlu olan gerekçe (ratio decidendi) bağlayıcıdır,
+kararın gerekçesi dışında söylenen yorumlar (obiter dictum — “söylenmiş söz”)
+bağlayıcı değildir, yalnızca yol göstericidir. Bu ayrım, gelecekteki bir hâkimin
+“bu emsal kararın hangi kısmı gerçekten beni bağlıyor, hangi kısmı sadece o
+hâkimin genel görüşüydü” sorusunu sormasını zorunlu kılar.
+Yazılımdaki mimari karar kayıtlarının (ADR) neredeyse tamamı bu ayrımı
+yapmaz — bir ADR genellikle kararı, o anki bağlamı ve yazarın genel görüşlerini
+aynı paragrafta karıştırır. Sonuç olarak, iki yıl sonra o kararı gözden geçiren biri,
+kararın gerçekte hangi kısıtı zorunlu kıldığını (bu iki servis senkron konuşmayacak)
+hangi kısmının sadece o anki tercih olduğunu (ben şahsen X kütüphanesini sev-
+erim) ayırt edemez. ˙Iyi bir ADR, bu ikisini yapısal olarak ayrı başlıklar altında
+tutmalıdır: “Bağlayıcı Kısıt” ve “Bağlam/Gerekçe.”
+Distinguishing: Bir Emsali Geçersiz Kılmadan Kapsamını Daraltma
+Hukukta bir hâkim, önceki bir kararı tümüyle geçersiz kılmadan (overrule), “bu
+emsal geçerlidir ama önümdeki durum ondan yeterince farklı, dolayısıyla burada
+uygulanmaz” diyebilir (distinguishing). Bu, ikili bir seçim (kararı ya tamamen
+kabul et ya tamamen reddet) sunmayan, çok daha ince bir araçtır.
+Yazılımda eski bir mimari kararla çelişen yeni bir durumla karşılaşıldığında
+genellikle iki uç seçenek düşünülür: kararı olduğu gibi uygulamak ya da tama-
+men terk edip yeni bir ADR yazmak. Distinguishing mantığı üçüncü bir yol
+sunar: eski kararın hâlâ geçerli olduğunu ama bu spesifik durumun onun kap-
+samı dışında kaldığını açıkça belgelemek — “ADR-014 hâlâ geçerlidir, ancak X
+senaryosu onun varsaydığı koşulları karşılamadığından burada uygulanmamıştır.”
+Bu, eski kararı sessizce yok saymaktan (ki bu, aynı tartışmanın altı ay sonra
+tekrar açılmasına yol açar) çok daha sağlıklı bir kurumsal hafıza pratiğidir.
+Denizcilik
+Bridge Resource Management ve Meydan Okuma-Yanıt Protokolü
+CRM’in denizcilik versiyonu olan Bridge Resource Management, “meydan okuma
+ve yanıt” (challenge and response) adı verilen bir protokol içerir: herhangi bir
+mürettebat üyesi, kaptanın rütbesinden bağımsız olarak, güvenliği tehdit eden
+bir durum gördüğünde bunu açıkça sözlü olarak ifade etmek zorundadır — sessiz
+kalmak, sonradan “ben fark etmiştim ama söylemedim” demek, protokol ihlali
+sayılır. Bunun aynası kaptanın yükümlülüğüdür: bir meydan okuma aldığında
+bunu görmezden gelmek de ayrı bir ihlaldir; kaptan ya açıklama yapmak ya da
+rotayı değiştirmek zorundadır.
+Bu, CRM’den farklı olarak, sessizliği de aktif bir ihlal olarak tanımlaması
+bakımından daha katıdır. Yazılımda “endişemi dile getirmeliydim ama ge-
+5
+
+-- 5 of 19 --
+
+tirmedim” durumu genellikle hiçbir sonuç doğurmaz; oysa BRM mantığı, bir
+riski fark edip söylemeyen kişiyi de, o riski görmezden gelen kişi kadar sorumlu
+tutar — bu, ekip kültüründe “sessiz kalma hakkı yoktur” ilkesinin resmileştirilmesi
+anlamına gelir.
+COLREGs: Belirsizliği Ortadan Kaldıran Öncelik Kuralları
+COLREGs’in asıl gücü genel bir ilke değil, çok spesifik, durum bazlı kural-
+lardır. Örneğin “geçiş durumu”nda (crossing situation) iki gemi çapraz rotalarla
+yaklaşıyorsa, diğer gemiyi sancak (sağ) tarafında gören gemi otomatik olarak
+“yol veren gemi” (give-way vessel) sayılır ve rotasını değiştirmekle yükümlüdür;
+diğeri “duran gemi”dir (stand-on vessel) ve rotasını korumak zorundadır — ro-
+tasını da değiştirirse, iki gemi öngörülemez biçimde çarpışabilir. Kritik nokta,
+bu kuralın tartışmaya kapalı olmasıdır; iki kaptan o anda pazarlık etmez, kuralın
+kendisi zaten hangi geminin ne yapacağını belirlemiştir.
+Dağıtık sistemlerde iki servisin/ekibin aynı kaynağa aynı anda erişmek istediği
+durumlarda (örneğin iki deploy’un aynı anda aynı veritabanı migration’ını tetik-
+lemesi) genellikle önceden tanımlı bir öncelik kuralı yoktur; kim önce fark ederse
+Slack’te tartışarak çözer. COLREGs mantığının önerdiği şey, bu tür çakışmalar
+için durum bazlı, önceden anlaşılmış, tartışmaya kapalı kurallar tanımlamaktır:
+“eğer iki deploy aynı kaynağa çakışırsa, hangi servis ’stand-on’, hangisi ’give-
+way’ sayılır” sorusunun cevabı kriz anında değil, sakin bir zamanda belirlen-
+melidir.
+Profesyonel Mutfak: Sözlü Doğrulama Döngüsü
+Profesyonel mutfaklarda “mise en place” kavramı yazılım kültüründe zaten fa-
+zlasıyla klişeleşmiş bir metafordur; asıl az bilinen ve daha rijit disiplin, mutfağın
+sözlü çağrı-yanıt sistemidir. Bir aşçı bir siparişi aldığında yüksek sesle tekrar-
+lar (“iki orta pişmiş biftek”), diğer istasyonlar bunu duyduklarını yine yüksek
+sesle onaylar (“duyuldu”), tabak servise hazır olduğunda expediter yüksek sesle
+son kez okur ve mutfaktan çıkışını anons eder. Bu, tamamen CRM’deki kapalı
+döngü iletişimin mutfak versiyonudur, ama mutfağın farkı bunu hız ve gürültü
+altında, saniyeler içinde işletmesidir — sessiz onay (baş sallama) hiçbir zaman
+kabul edilmez, çünkü gürültülü bir ortamda yanlış anlaşılma riski çok yüksektir.
+Yazılım ekiplerinin çoğu, tam da bu “gürültülü ortam” durumunda (büyük
+bir incident sırasında, birden fazla kişi aynı anda konuşurken) sessiz onaya geri
+döner — biri bir komut önerir, kimse açıkça itiraz etmez, komut çalıştırılır.
+Mutfağın disiplini şunu önerir: kriz anında, özellikle yoğun mesaj trafiğinde, her
+kritik komutun yüksek sesle (yazılı kanalda açıkça) tekrarlanıp onaylanmadan
+çalıştırılmaması gerektiğidir.
+Orkestra: Prova Harfleri ve Kesin Referans Noktaları
+Bir orkestra partisyonu, ölçüler belirli aralıklarla harflendirilmiş referans nok-
+talarına (rehearsal letters/numbers) bölünmüştür; bir şef prova sırasında “E
+6
+
+-- 6 of 19 --
+
+harfinden devam edelim” dediğinde, elli kişilik bir orkestra saniyeler içinde,
+tartışmasız, aynı kesin noktadan başlar. Bu, büyük bir grubun karmaşık bir yapı
+içinde anında ve belirsizliğe yer bırakmadan senkronize olabilmesinin altyapısıdır;
+“baştan biraz ilerisinden” gibi göreli referanslar asla kullanılmaz.
+Yazılım ekiplerinde bir incident sırasında “şu log satırından” ya da “az önce
+konuştuğumuz kısımdan” gibi göreli referanslar zaman kaybettirir. Orkestra
+mantığının önerdiği disiplin, büyük bir olay sırasında paylaşılan bir belgede (olay
+zaman çizelgesi) her önemli bulgunun/kararın kesin bir numarayla işaretlenmesi
+ve tüm iletişimin bu numaralara referansla yapılmasıdır — “13 numaralı bulguya
+göre” demek, “az önce bulduğumuz şeye göre” demekten ölçülebilir derecede
+daha hızlı ve daha az hataya açıktır.
+Epidemiyoloji: Temas Takibi ve Nöbetçi Gözetim
+Epidemiyolojinin R0 ve sürü bağışıklığı gibi popüler kavramları yazılıma ak-
+tarılırken genellikle gevşek metaforlara dönüşür; daha sıkı ve doğrudan uygu-
+lanabilir iki yöntem şunlardır.
+Temas takibi (contact tracing), bir vakayla karşılaşıldığında yalnızca o vakayı
+değil, o vakanın kiminle, ne zaman, ne kadar süreyle temas ettiğini sistematik
+olarak geriye doğru izleyen bir metodolojidir — amaç yalnızca hastayı tedavi
+etmek değil, yayılımın tüm potansiyel yollarını haritalamaktır. Yazılımda bir
+güvenlik ihlali ya da veri bozulması tespit edildiğinde, yalnızca “bu kaydı düzelt”
+değil, “bu kayıtla aynı anda, aynı işlem yoluyla etkilenmiş olabilecek tüm diğer
+kayıtlar/kullanıcılar/sistemler hangileri” sorusunu sistematik olarak (rastgele
+örnekleme değil, tam haritalama) sormak, temas takibinin doğrudan karşılığıdır.
+Nöbetçi gözetim (sentinel surveillance) ise bir hastalığı popülasyonun tamamında
+değil, önceden seçilmiş, temsili küçük bir alt kümede (belirli kliniklerde) sürekli
+izleyerek erken sinyal yakalama yöntemidir — tüm popülasyonu izlemek pahalı
+ve yavaştır, ama doğru seçilmiş küçük bir örneklem erken uyarı için yeterlidir.
+Bu, canary deployment’ın epidemiyolojik kökenidir ve asıl ders şudur: nöbetçi
+noktaların rastgele değil, bilinçli olarak temsili seçilmesi gerekir — yazılımda
+canary grubu genellikle rastgele bir kullanıcı yüzdesidir, oysa nöbetçi gözetim
+mantığı, bu grubun sistemin farklı davranış modlarını (farklı bölge, farklı cihaz,
+farklı kullanım deseni) temsil edecek şekilde bilinçli kurgulanmasını önerir.
+7
+
+-- 7 of 19 --
+
+Kuramsal ˙Iskelet: Yüksek Güvenilirlikli Örgüt
+Teorisi
+High Reliability Organizations (HRO) Teorisi
+Karl Weick ve Kathleen Sutcliffe’in beş ilkesi (başarısızlıkla meşguliyet, ba-
+sitleştirmeye direnç, operasyona duyarlılık, dirençlilik taahhüdü, uzmanlığa saygı),
+yukarıdaki tüm örneklerin ortak dilbilgisidir ve tek tek disiplin biriktirmenin
+ötesinde asıl kazanılması gereken çerçevedir.
+Sapmanın Normalleşmesi, Başarısızlığa Sürüklenme ve Just
+Culture
+Diane Vaughan’ın normalization of deviance kavramı ve Sidney Dekker’in drift
+into failure genellemesi, bilinen bir riskin küçük kabul birikimleriyle zamanla
+“normal” hale gelişini açıklar. Dekker’in bu analizi tamamlayan ikinci önemli
+katkısı ise just culture (adil kültür) modelidir: bir hata olduğunda sorulması
+gereken soru “kim hata yaptı” değil, “bu hatayı makul, iyi niyetli bir profesyonel
+de yapabilir miydi” sorusudur. Dekker bu ayrımı somutlaştırmak için bir “hesap
+verebilirlik ağacı” önerir: davranış kasıtlı bir sabotaj mıydı (disiplin gerektirir),
+bilinçli bir risk alma mıydı (o riskin neden makul göründüğü sorgulanmalı, sis-
+temik), yoksa dürüst bir hata mıydı (öğrenme fırsatı, ceza değil)? Bu üç kat-
+egoriyi karıştırmak — yani her hatayı aynı ciddiyetle cezalandırmak ya da her
+hatayı aynı hoşgörüyle affetmek — adil kültürün tam olarak önlemeye çalıştığı
+iki simetrik hatadır. Yazılım ekiplerinde “blameless postmortem” kültürü genel-
+likle bu üçlü ayrımı yapmadan, her şeyi tek bir “suçlama yok” kategorisine
+sıkıştırır; oysa gerçek adil kültür, kasıtlı ihmal ile dürüst hatayı birbirinden
+ayırabilen, ama bu ayrımı yaparken de ilk izlenime değil sistemik bağlama bakan
+bir değerlendirme sürecini gerektirir.
+Safety-I / Safety-II Ayrımı
+Hollnagel’in ayrımı, kural ve prosedürlerin tek başına yetmediğini, gerçek dünyadaki
+günlük uyarlamaların (“work as done”) ne zaman güvenli ne zaman tehlikeli
+olduğunu ayırt etmenin asıl analitik görev olduğunu gösterir.
+Teşvik Yapısı Sorunu
+˙Incelenen disiplinlerin sistematik disiplinleri, içeriden gelen bir erdemden çok,
+dışarıdan dayatılmış kurumsal baskılardan (düzenleyici kurumlar, sigorta şirketleri,
+hukuki sorumluluk) kaynaklanmaktadır; yazılımın bu disiplinlerden yoksun kalması
+büyük ölçüde hata maliyetinin topluma dışsallaşması ve düzenleyici baskının
+zayıflığıyla açıklanabilir.
+8
+
+-- 8 of 19 --
+
+˙Israil Askeri ve Mühendislik Kültüründe Altı Dok-
+triner Unsur
+˙Israil’in askeri ve mühendislik eğitim kültürü, tek bir merkezi teori etrafında
+değil, birbirini tamamlayan altı ayrı unsur etrafında şekillenmektedir. Bu un-
+surlar aynı epistemik statüde değildir; bir kısmı neredeyse evrensel bir kültürel
+tutumken, bir kısmı yalnızca dar bir elit azınlığın deneyimlediği kurumsal yapılardır.
+Bu bölüm, önce altı unsuru tek tek ele almakta, ardından bunların kapsam fark-
+larını ve ortak kuramsal temelini tartışmaktadır.
+Rosh Gadol / Rosh Katan
+Doğrudan ˙Israil Savunma Kuvvetleri’nden (IDF) çıkmış bir kavram çifti olan
+rosh gadol (“büyük kafa”) inisiyatif alan, bağımsız düşünen ve açık talimatların
+ötesine geçen kişiyi; rosh katan (“küçük kafa”) ise yalnızca minimum düzeyde
+iş yapan, utanç verici sayılan kişiyi tanımlar. Klasik örnek öğreticidir: bir
+askere tüfeğinin namlusunu temizlemesi söylendiğinde, rosh katan yalnızca nam-
+luyu temizleyip tetik mekanizmasında kum bırakabilirken, rosh gadol tüm tüfeği
+temizleyip yağlar — çünkü asıl amacın “namluyu temizlemek” değil “tüfeği kul-
+lanıma hazır hale getirmek” olduğunu kavrar.
+Bu ayrım, ˙Istihbarat Birimi 8200’ün asker seçim sürecinde açıkça kullanılmaktadır:
+on yedi yaşında, askere gitmeden bir yıl önce uygulanan bir testin amaçlarından
+biri, öğrencilerin rosh katan mı rosh gadol mü olduğunu belirlemektir. Bu,
+HRO teorisindeki “uzmanlığa saygı” ve “operasyona duyarlılık” ilkelerinin, en
+alt rütbeden itibaren bilinçli olarak seçilip yetiştirilen bir kişilik özelliği haline
+getirilmesidir — örgütsel bir kural olarak değil, askere alma aşamasında test
+edilip filtrelenen bir insan kaynağı stratejisi olarak uygulanmaktadır.
+Rosh gadol/rosh katan ayrımının özünde yatan şey, bir görevi harfiyen yer-
+ine getirmek ile amacını yerine getirmek arasındaki farktır. Rosh katan kişi,
+kendisine verilen talimatı bir sözleşme gibi okur — talimatın lafzına uyduysa
+sorumluluğu bitmiştir, sonuç ne olursa olsun. Rosh gadol kişi ise talimatı bir
+niyet ifadesi olarak okur; “bana bunu söyleyen kişi aslında ne istiyor, hangi
+sonucu görmek istiyor” diye sorar ve o sonucu üretmek için gerekirse talimatın
+kelimenin tam anlamıyla söylemediği şeyleri de yapar.
+˙Ikinci bir örnek bunu daha da netleştirir: bir askere “falanca kişiye 16:00’da
+denetime hazır olacağımızı bildir” denir. Saat 17:00’de sorulduğunda rosh katan
+cevabı şudur: “ofisini aradım, mesaj bıraktım.” Rosh gadol cevabı ise: “ofisini
+aradım, kimse açmadı, sonra cep telefonunu aradım, o da açmadı, sonra bizzat
+gidip bulup söyledim, teyit aldım.” Aradaki fark, “yaptım mı” sorusuna teknik
+olarak evet cevabı verebilmek ile, gerçekte istenen sonucun gerçekleşmesini garanti
+altına almak arasındaki farktır.
+9
+
+-- 9 of 19 --
+
+8200’ün Seçim Sürecinde ˙Işleyişi
+˙Israil’de on yedi yaşında, askere gitmeden yaklaşık bir yıl önce, tüm gençlere
+psikometrik ve zekâ testlerine benzer bir dizi test uygulanmaktadır. Bu test-
+lerin bir kısmının amacı yalnızca zekâ ölçmek değil, kişinin karşılaştığı belirsiz
+ya da az tanımlanmış bir problem karşısında nasıl davrandığını gözlemlemektir
+— problemi olduğu gibi bırakıp mı geçtiği, yoksa kendiliğinden genişletip mi
+çözdüğü. ˙Istihbarat Birimi 8200 özellikle bu ikinci tipteki adayları aramak-
+tadır, çünkü birimin işi (şifreli iletişimi kırma, bilinmeyen bir sistemi tersine
+mühendislikle çözme) tam olarak kimsenin adım adım nasıl yapılacağını söylemeyeceği,
+adayın kendiliğinden bulması gereken bir iş türüdür.
+Bu Yaklaşımın Geleneksel Askeri Kültürden Farkı
+C oğu askeri kültürde ve çoğu geleneksel iş yerinde itaat en yüksek erdemdir
+— sorgulamadan yapma ideali. ˙Israil’in tersine çevirdiği şey şudur: bir sis-
+temin başarısı, en tepedeki birkaç kişinin her şeyi öngörüp doğru emri verme-
+sine bağlıysa, o sistem kırılgandır, çünkü savaş alanı öngörülemezdir, iletişim
+kesilebilir, plan bozulabilir. ˙Israil’in kısıtlı nüfus ve sürekli tehdit altında olma
+gibi coğrafi/stratejik koşulları, her düzeyde inisiyatif alabilen insanlara sahip
+olma zorunluluğunu doğurmuştur; bu bir tercih değil, hayatta kalma stratejisi
+olarak ortaya çıkmıştır.
+HRO Teorisiyle Bağlantının Gerekçesi
+Weick ve Sutcliffe’in “uzmanlığa saygı” ilkesi, kriz anında karar yetkisinin rütbeye
+değil probleme en yakın uzmanlığa kayması gerektiğini öngörür. Bunun gerçekleşebilmesi
+için iki koşul gereklidir: sistemin buna izin vermesi (hiyerarşinin esnek olması)
+ve alttaki kişinin bu yetkiyi kullanacak zihniyete sahip olması — yani emir bek-
+lemek yerine, “şu an ben en yakınım, ben karar vereceğim” diyebilmesi. Rosh
+gadol, tam olarak bu ikinci koşulu üretmektedir: askere alma aşamasında, emir
+bekleyen değil emri aşan kişileri seçip yetiştirerek, HRO teorisinin öngördüğü
+ama çoğu kurumun pratikte üretemediği zihniyeti baştan güvence altına almak-
+tadır.
+“Operasyona duyarlılık” ilkesiyle bağlantı ise şu noktada kurulur: rosh katan
+kişi, “namluyu temizle” dendiğinde yalnızca namluya bakar — o anki gerçek op-
+erasyonel ihtiyacı (tüfeğin gerçekten kullanılabilir olması) görmezden gelip tali-
+matın lafzına saplanır. Rosh gadol kişi ise her zaman “asıl operasyonel gerçeklik
+ne” sorusunu talimatın kendisinin önüne koyar; bu, HRO teorisinin “sahadan
+kopmama” ilkesinin bireysel bir zihinsel refleks düzeyinde içselleştirilmiş hâlidir.
+Talpiot Programı
+1979’da kurulan Talpiot, akademik ve liderlik potansiyeli en yüksek askerler
+için tasarlanmış elit bir IDF eğitim programıdır. Müfredatın merkezinde fizik,
+matematik ve bilgisayar bilimi yer alır. Programın ayırt edici özelliği, bu teorik
+eğitimin uygulamayla nasıl birleştirildiğidir: kadetler üniversitede fizik/matematik/bilgisayar
+10
+
+-- 10 of 19 --
+
+bilimi okurken aynı zamanda IDF’nin her biriminde (topçu, tank birlikleri,
+piyade, deniz kuvvetleri, hava kuvvetleri) rotasyonlu eğitim alarak her birimin
+işini nasıl yaptığını öğrenirler.
+Talpiot’un temel ilkesi şudur: soyut/teorik bilgi, her zaman somut/operasyonel
+deneyimle aynı anda ve kesintisiz verilmelidir — Fransız (soyut önce) ve Japon
+(somut önce) mühendislik gelenekleri arasında, ikisini zorla eş zamanlı kılan bir
+sentez. Bir Talpiot mezunu, bir topun nasıl çalıştığını hem diferansiyel den-
+klemlerle hem de o topu bizzat ateşleyerek öğrenir.
+Fransız/Alman geleneğindeki sıralı model (önce soyutlama, sonra uygulama)
+ile Japon shokunin geleneğindeki sıralı model (önce pratik, teori sonradan sızar),
+her ikisi de kendine özgü bir zaaf taşımaktadır. Fransız modelinde risk, teorisyenin
+gerçek operasyonel sürtünmeyi hiç yaşamadan bir model kurmasıdır; zarif bir
+teorik model, sahada hiç öngörülmemiş bir değişkenle karşılaştığında çökebilir ve
+bu, ancak sistem sahaya çıkıp başarısız olduğunda fark edilir. Japon modelinde
+ise risk tam tersidir: pratik bilgi bedenselleşir ama teoriye dönüşme işi genel-
+likle pratiğin içindeki kişinin değil, dışarıdan bakan bir üçüncü tarafın (Toyota
+Üretim Sistemi’ni teorileştiren MIT örneğinde olduğu gibi) işidir — bu da bir
+gecikme ve çeviri kaybı yaratır.
+Talpiot’un C özdüğü Sorun: Aracının Ortadan Kaldırılması
+Talpiot’un temel mantığı şudur: aynı kişi hem fizik denklemini kuran hem
+de o denklemin karşılığı olan silahı bizzat ateşleyen kişiyse, teori ile pratik
+arasında hiçbir çeviri kaybı oluşmaz, çünkü çeviri yapması gereken ikinci bir
+insan yoktur. Kişinin kendi zihninde, model kurduğu anda pratik deneyimden
+gelen bir iç düzeltme mekanizması otomatik olarak devreye girer. Eşzamanlılık,
+dışarıdan bir gözlemciye duyulan ihtiyacı, aynı kişinin içinde gerçek zamanlı
+olarak karşılamaktadır.
+Zamanla ˙Ilgili Gerekçe
+Shu-Ha-Ri modeli, soyutlamaya geçişi onlarca yıllık bir olgunlaşma sürecine
+yaymaktadır; bir usta ancak kariyerinin geç bir evresinde kendi pratiğini yo-
+rumlayabilir hâle gelir. ˙Israil’in stratejik koşulları (kısıtlı nüfus, sürekli tehdit,
+silah sistemlerinin kısa sürede sahaya çıkıp gerçek çatışmada sınanma zorun-
+luluğu) böylesi uzun bir olgunlaşma sürecine izin vermemektedir. Bu nedenle ol-
+gunlaşma zamana yayılmak yerine aynı kişide sıkıştırılıp hızlandırılmakta; teori
+ve pratik ardışık değil, üst üste bindirilerek verilmektedir.
+Somut Sonuç
+Bir Talpiot mezunu, daha sonra silah sistemi geliştirme kurumlarına (DDR&D,
+Rafael gibi) geçtiğinde, hem matematiksel modelleme yeteneğine hem de op-
+eratörün sistemi sahada gerçekte nasıl kullandığına dair sezgiye aynı anda sahip-
+tir. Bu, Iron Dome gibi sistemlerin geliştirme döngüsünün kısalığını açıklayan
+bir mekanizmadır: sahada gözlemlenen bir bulgu ile modelin buna göre düzeltilmesi
+11
+
+-- 11 of 19 --
+
+arasında çevirmesi gereken ikinci bir insan olmadığından, aynı zihin her iki süreci
+de birlikte yürütür.
+Özetle, eşzamanlılık ilkesi, ne Fransız modelinin “teori sahadan kopar” riskini
+ne de Japon modelinin “pratik hiçbir zaman teoriye dönüşmez” riskini kabul
+etmeme kararının bir sonucudur; bu kararın bedeli, kadetleri iki ayrı süreçten
+sırayla geçirmek yerine, her ikisine aynı anda ve fiziksel olarak maruz bırakmaktır.
+Tahkir (Debriefing) Kültürü
+˙Israil Hava Kuvvetleri’nde her görevden sonra — yalnızca başarısızlıklardan
+sonra değil — uygulanan brifing kültürü, rütbeden bağımsız radikal bir şeffaflık
+ilkesine dayanır: en genç pilotlar herkesin önünde o gün yaptıkları hataları
+anlatır, ardından komutan da kendi hatalarını aynı açıklıkla paylaşır. Yöntem
+üç soruya indirgenmiştir: ne oldu (yalnızca olgular), neden oldu, ve gelecek sefer
+ne farklı yapılmalı. Bu kültürün radikalliği, bir ˙Israil F-16’sının düşürülmesi
+gibi olaylarda brifing sonuçlarının kısa süre içinde kamuoyuyla paylaşılmasında
+görülür.
+Bu, tıp disiplinindeki M&M konferanslarının ve grand rounds’un askeri ver-
+siyonudur; ancak iki noktada daha katıdır: rütbe hiyerarşisi eleştiriyi hiçbir
+zaman durdurmaz, ve yalnızca felaketlerden sonra değil her görevden sonra
+uygulanır — Dekker’in “her operasyondan öğrenme, sadece başarısızlıklardan
+değil” ilkesinin otuz yıldır kurumsallaşmış hâlidir.
+Ipcha Mistabra
+1973 Yom Kippur Savaşı öncesinde ˙Israil askeri istihbaratının (AMAN) tek bir
+yoruma (“HaKonseptzia”) aşırı bağlı kalması, savaşın sürpriz biçimde patlak
+vermesine yol açmıştır. Agranat Komisyonu’nun tavsiyesiyle kurulan Ipcha
+Mistabra (Aramice, “tam tersi de muhtemeldir”), baskın istihbarat yorumuna
+karşı bilinçli olarak zıt bir pozisyon üretmekle görevli kalıcı bir birimdir.
+Birimin iki tasarım özelliği dikkat çekicidir: birincisi, subaylarının bilgiye
+sınırsız erişimi vardır ve raporlarını istihbaratı yöneten tümgeneralin üzerine
+çıkarak doğrudan en üst kademelere sunabilirler — karşıt görüş, hiyerarşinin
+süzgecinden geçmeden karar vericiye ulaşır. ˙Ikincisi, bu tek seferlik bir tatbikat
+değil, sürekli var olan kalıcı bir kurumdur; itiraz etmek bir görevin değil bir
+kariyerin konusudur.
+Bu, istihbarat tradecraft’ındaki “devil’s advocacy” kavramının en kurum-
+sallaşmış hâlidir ve Vaughan/Dekker’in “sapmanın normalleşmesi” kavramına
+yapısal bir kurumsal cevap sunar: sorunu bireysel dikkatle değil, bir azınlık
+görüşünün sürekli üretilmesini zorunlu kılan kalıcı bir kurumla çözer.
+Bunun Bir Grup Düşüncesi Sorunu Olması
+Buradaki asıl sorun bilgi eksikliği değildir; bilgi zaten mevcuttu. Sorun, bu bil-
+giyi yorumlayan herkesin aynı varsayımı paylaşmasıydı. Bir grubun tüm üyeleri
+aynı önyargıyla düşündüğünde, hepsi aynı yanlış sonuca ulaşır, çünkü kimse “ya
+12
+
+-- 12 of 19 --
+
+tam tersi doğruysa” diye sormaz. Bu, tek bir kişinin hatası değil, sistemin —
+hiç kimsenin resmı görüşe karşı çıkmasının beklenmediği bir kurumsal kültürün
+— hatasıdır.
+C özüm: Ipcha Mistabra’nın Temel ˙Işleyişi
+Savaş sonrası kurulan Agranat Komisyonu, istihbarat teşkilatı içinde, resmı
+görevi “herkesin inandığı şeye karşı çıkmak” olan küçük bir birim kurulmasını
+önermiştir. Bu birimin adı Ipcha Mistabra’dır (Aramice, kabaca “aslında tam
+tersi de mümkün” anlamına gelir). Birimin işi şudur: teşkilatın tamamı bir
+görüşte hemfikirse, bu birim resmı olarak o görüşün yanlış olabileceğine dair
+gerekçeli bir rapor hazırlamakla görevlidir — örgüt içinde kasıtlı olarak baskın
+görüşe karşı çıkan, başka bir işi olmayan ayrı bir ekip.
+˙Iki Ayırt Edici Tasarım Özelliği
+Hiyerarşiyi atlayabilme: Normal bir kurumda, alt seviyedeki bir kişinin üst
+yönetime bir bilgiyi iletmesi önce amirinden, sonra onun amirinden geçer; bu
+geçiş sırasında mesaj yumuşatılabilir, geciktirilebilir ya da tamamen durdurula-
+bilir. Ipcha Mistabra’daki subaylar bu kuralın dışında tutulmuştur: raporlarını
+kendi amirlerini, hatta istihbarat teşkilatının en tepesindeki generali atlayarak
+doğrudan en üst karar vericiye sunabilirler. Bu sayede bir üstün onayına ihtiyaç
+duyulmaz ve itiraz hiyerarşinin süzgecinde kaybolamaz.
+Geçici değil kalıcı olma: Birçok kurumda itiraz eden kişi rolü geçicidir;
+bir toplantıda biri o gün için bu rolü üstlenir ve toplantı bitince rol de sona erer.
+Ipcha Mistabra ise teşkilatın kalıcı, resmı, sürekli var olan bir parçasıdır. Orada
+çalışan subaylar için itiraz etmek bir günlük görev değil, yıllarca sürebilen bir
+kariyerdir.
+Kavramsal Önemi
+“Devil’s advocacy” (şeytanın avukatlığı) kavramı, bir karar toplantısında kasıtlı
+olarak birine baskın fikre karşı çıkma rolü vermeyi ifade eder. Ipcha Mistabra,
+bu fikrin en kurumsallaşmış hâlidir; diğer bağlamlarda bu rol geçici ve gönüllü
+iken, ˙Israil’de kalıcı, maaşlı ve resmı bir kurum hâline getirilmiştir.
+Diane Vaughan ve Sidney Dekker’in “sapmanın normalleşmesi” kavramı, bir
+yanlış inancın tek bir büyük kararla değil, küçük küçük göz ardı etmelerle za-
+manla “normal” hâle geldiğini öne sürer — tıpkı 1973’teki Konsept örneğinde
+olduğu gibi. ˙Israil’in bu soruna verdiği cevap, “herkes daha dikkatli ve eleştirel
+olsun” gibi zamanla unutulmaya mahkum bir davranışsal tavsiye değil, kalıcı bir
+kurum kurmaktır: bireylerin sürekli uyanık kalmasına güvenmek yerine, sürekli
+var olan yapısal bir mekanizmaya güvenmiştir.
+Miluim
+Zorunlu askerlik sonrasında bile, sivil hayata dönen mühendisler yıllarca, hatta
+on yıllarca düzenli olarak yedek hizmete çağrılmaya devam eder. Bu, bir eğitim
+13
+
+-- 13 of 19 --
+
+yöntemi değil, bilginin zamanla eskimesini yapısal olarak imkansız kılan bir
+kariyer sistemidir: sivil sektördeki en kıdemli teknik uzmanlar bile, kariyerleri
+boyunca düzenli aralıklarla operasyonel ortama geri döner. Bu sistemin kökeni,
+“akademik yedek” programının IDF’nin teknolojik üstünlüğünün merkezi bir
+bileşeni haline gelmesine ve kariyer subaylarının büyük kısmının mühendis ol-
+masına dayanır.
+Bu, genchi genbutsu ilkesinin ve HRO teorisindeki “operasyona duyarlılık”
+ilkesinin bir kurumsal politika değil, doğrudan bir hukuki zorunluluk olarak
+dayatılmasıdır. Bir mühendisin sahadan uzaklaşması, başka geleneklerde kültürel
+bir kusur sayılırken, ˙Israil’de yasal olarak mümkün değildir.
+Merkava: Optimizasyon Fonksiyonunun Tersine C evrilmesi
+1973 Yom Kippur Savaşı’ndaki ağır zırhlı araç kayıplarının ardından, General
+Israel Tal’ın yönettiği Merkava tankı tasarımı, standart mühendislik optimiza-
+syon fonksiyonunu tersine çevirmiştir: mürettebatın hayatta kalması, ateş gücü
+ve manevra kabiliyetinin önüne geçmiştir. Bunun en somut ifadesi, motorun
+— neredeyse tüm modern tankların aksine — gövdenin arkasına değil önüne,
+mürettebat bölmesinin önüne yerleştirilmesidir; motor bloğu, mürettebatı cepheden
+gelen isabetlere karşı ek bir koruma katmanı işlevi görür. Bu kararın kabul edilen
+maliyeti, cepheden gelen bir motor isabetinin tankı hareketsiz bırakmasıdır;
+ama mürettebat hayatta kalıp arka kapıdan tahliye edilebilir. ˙Israil doktrini
+bu değiş tokuşu açıkça kabul eder: devre dışı kalan bir tank kurtarılabilir, ölü
+bir mürettebat yerine konamaz.
+Bu, ulusal bir travmanın (1973’teki kayıplar) doğrudan ve kalıcı olarak bir
+tasarım kısıtları hiyerarşisine kodlanmasıdır; “hayatta kalma, ateş gücünün
+önüne geçer” ilkesi, sonraki her Merkava neslinde sorgusuz kabul edilen bir ak-
+siyom hâline gelmiştir.
+“Battle Lab” Etkisi
+Iron Dome’un geliştirme süreci, savunma sanayii standartlarına göre alışılmadık
+derecede hızlı olmuştur: öneriden konuşlandırmaya dört yıldan biraz fazla sürmüştür.
+Sistemin devreye girmesinden sonra da gelişimi durmamış, ˙Israil bunu bilinçli
+olarak “savaş laboratuvarı” etkisi olarak adlandırmıştır: savaşın operasyonel
+temposu, mühendislerin gerçek zamanlı olarak açıkları kapatmasına ve sistemi
+düşman taktiklerindeki değişimlere uyarlamasına imkân tanımaktadır.
+Bu, OODA döngüsünün endüstriyel ölçekte uygulanması, genchi genbutsu’nun
+silah sistemi geliştirmeye taşınması ve miluim sisteminin sağladığı sivil-asker
+mühendis döngüsünün somut bir çıktısıdır. Farkı, çoğu ülkede uzun ve ka-
+palı test döngülerine dayanan geliştirmenin aksine, aktif çatışmanın kendisini
+bir test/iterasyon ortamı olarak kullanmasıdır; tasarım değişikliği ile sahada
+gözlemlenen tehdit deseni arasındaki gecikme haftalar/aylar mertebesindedir.
+14
+
+-- 14 of 19 --
+
+Kapsam Farkları: Kim Gerçekten Neyi Bilir
+Bu altı unsur aynı epistemik statüde değildir ve bunları tek bir düzlemde “˙Israil’in
+öğrettiği şeyler” olarak sunmak yanıltıcıdır.
+• Neredeyse evrensel olanlar: Rosh gadol/rosh katan ayrımı, ordudan
+çıkıp gündelik dile ve iş kültürüne geçmiş bir halk kavramıdır; mühendis
+olsun olmasın, zorunlu askerlik yapan hemen herkes bunu bilir ve kullanır.
+Miluim ise bir bilgi değil, bir yasal zorunluluktur; askerliğini yapmış hemen
+her kişi bunu yaşar.
+• Combat birimlerinde yaygın, idari birimlerde zayıf olanlar: Tahkir
+kültürü, muharebe/operasyonel birimlerde neredeyse evrensel bir ritüeldir,
+ancak masabaşı görevdeki her askerin aynı yoğunlukta deneyimlediği bir
+şey değildir.
+• Dar bir elit azınlığa özgü olanlar: Talpiot’a yılda yaklaşık elli kişi
+seçilmektedir; dokuz milyonluk bir ülkede bu, ˙Israil mühendislerinin ezici
+çoğunluğunun hiç deneyimlemediği bir programdır. Ipcha Mistabra ise
+AMAN içinde muhtemelen düzine mertebesinde kişiden oluşan, varlığından
+çoğu askerin haberdar bile olmadığı özel bir birimdir.
+• Belirli bir programa özgü, genel kültür olmayanlar: Merkava tasarım
+felsefesi, zırhlı araç mühendisliğiyle ilgilenen dar bir grubun bildiği spesifik
+bir programın tasarım kararıdır; tüm ˙Israilli mühendislere öğretilen genel
+bir doktrin değildir.
+• Resmı doktrin değil, dışarıdan bir gözlem olanlar: “Battle lab” etk-
+isi, ˙Israil’in resmı olarak öğrettiği bir doktrin değil, savunma analistlerinin
+fiilı bir davranış örüntüsünü geriye dönük olarak adlandırmasıdır.
+Bu ayrım, konuşmanın başında ele alınan bir tuzağı hatırlatmaktadır: bir
+ülkenin en görünür, en çok konuşulan kurumsal başarısı (Talpiot mezunlarının
+teknoloji sektöründeki orantısız etkisi gibi), o ülkedeki ortalama mühendisin
+gerçek deneyimiyle karıştırılmamalıdır. ˙Istatistiksel olarak uç noktada duran,
+küçük ama etkili bir azınlığın varlığı, o unsurun “yüzde yüz öğretildiği” anlamına
+gelmez.
+Ortak Kuramsal Temel
+Kapsam farklılıklarına rağmen, altı unsur birbirini tamamlayan tutarlı bir resim
+sunmaktadır: inisiyatifi bir seçim kriteriyle filtreleyip ödüllendirmek (rosh gadol),
+teoriyi hiçbir zaman somut deneyimden koparmamak (Talpiot), hatayı rütbeden
+bağımsız olarak herkesin önünde konuşmak (tahkir), azınlık görüşünü geçici
+değil kalıcı bir kurum olarak güvence altına almak (Ipcha Mistabra), operasy-
+onel bağı yasal bir zorunlulukla ömür boyu sürdürmek (miluim), ve geri bildirim
+döngüsünü mümkün olduğunca kısaltmak (battle lab etkisi, Merkava’nın travma-
+kaynaklı tasarım aksiyomu). Bu altı unsur, Weick ve Sutcliffe’in HRO teorisin-
+deki beş ilkenin — özellikle uzmanlığa saygı, operasyona duyarlılık ve başarısızlıkla
+15
+
+-- 15 of 19 --
+
+meşguliyet — ulusal ölçekte, hukuki zorunluluklarla pekiştirilmiş, yaşayan bir
+uygulamasını temsil etmektedir.
+16
+
+-- 16 of 19 --
+
+“ Lab” Terminolojisi: Gerçek Ortamı Labo-
+ratuvar Olarak C erçeveleme Kalıbı
+“Battle lab” terimi, daha büyük bir dilsel kalıbın parçasıdır: gerçek, yaşanan
+bir ortamı bilinçli olarak bir deney/test alanı gibi çerçeveleme eğilimi. Bu alt
+bölüm, bu kalıbın farklı alanlardaki kullanımlarını incelemektedir.
+Sehircilik ve Politika Alanında
+Bu alan, söz konusu terminolojinin en yoğun kullanıldığı alandır. “Urban liv-
+ing lab” terimi genellikle “test alanı,” “kuluçka merkezi,” “inkübatör,” “yapım
+alanı,” “test yatağı,” “hub,” “şehir laboratuvarı,” “kentsel lab” ya da “saha
+laboratuvarı” gibi terimlerle iç içe kullanılmaktadır. Kavramın kökeni, “Living
+Lab” teriminin MIT’den William Mitchell tarafından ortaya atılmasına dayanır;
+terim, bir ev ya da şehir gibi gerçek bir ortamı, kullanıcıların ve yeni teknolojinin
+günlük etkileşimlerinin gözlemlenip kaydedildiği bir yer olarak tanımlamak için
+kullanılmıştır. Urban Lab’lar “urban living labs,” “transition labs” ve “real-
+world laboratories” gibi çeşitli biçimlerde var olmaktadır.
+Askeri/Savaş Alanında: “Battle Lab”ın Akrabaları
+Ukrayna savaşı için de aynı kalıp kullanılmaktadır: analistler bu savaşı “kill web
+laboratuvarı” olarak tanımlamaktadır — modern savaşta dron sistemlerinin hızlı
+adaptasyonunun izole biçimde değil, çeşitli demokratik müttefiklerin sağladığı
+sofistike bir istihbarat ağıyla desteklenerek gerçekleştiği ilk tam ölçekli labo-
+ratuvar olarak sunulmaktadır. Bir savunma dergisi doğrudan “Ukrayna: Yapay
+Zeka Savaşı ˙Için Yaşayan Bir Laboratuvar” başlığını kullanmaktadır. Cephedeki
+küçük ekipler bile bu şekilde tanımlanmaktadır: savaş alanı zorunluluğundan
+doğan, uluslararası ilgi çeken taban teknolojisi üreten bu ekipler, hızlı askeri
+inovasyonun laboratuvarları olarak nitelendirilmektedir.
+Burada dikkat çekici bir kavramsal ayrım bulunmaktadır: “test alanı” ile
+“laboratuvar” arasında temel bir fark vardır — bir test alanında başkalarının
+hipotezleri test edilir. “Bir ülkenin/kurumun Batı teknolojilerinin test sahası
+olması” ile “kendi teknolojisini üreten bir laboratuvar olması” arasında bir
+özne/statü farkı bulunmaktadır; biri pasif deneği, öbürü aktif araştırmacıyı ima
+etmektedir. Bu ayrım, “battle lab” gibi terimlerin bilinçli olarak seçilmesinin
+altında yatan gerekçeyi açıklamaktadır.
+Kurumsal/Sirket Dünyasında
+• Innovation Lab: Büyük şirketlerin çoğu, ayrı Ar-Ge birimlerini bu adla
+anmaktadır.
+• Media Lab (MIT): 1985’te kurulmuş, disiplinlerarası teknoloji/tasarım
+araştırma merkezidir.
+17
+
+-- 17 of 19 --
+
+• GovLab (NYU): Devlet politikalarını deneysel olarak test eden akademik
+merkezdir.
+• Policy Lab (˙Ingiltere hükümeti): Kamu politikalarını gerçek vatandaşlarla
+birlikte tasarlayıp test eden birimdir.
+Tarihsel/Toplumsal Kullanım
+Bu kalıbın kökleri 20. yüzyıl başına kadar uzanmaktadır; bazı eyaletler/ülkeler
+kendilerini bilinçli olarak “sosyal laboratuvar” olarak tanımlamıştır. Örneğin
+ABD’de Wisconsin eyaleti, erken dönem sosyal politika reformlarıyla “demokrasinin
+laboratuvarı” olarak anılmıştır; bu ifade daha sonra ABD federal sisteminde
+eyaletlerin farklı politikaları deneyebilmesini tanımlayan genel bir hukuki/siyasi
+metafora dönüşmüştür.
+Ortak Yapı
+Bu kullanımların tamamının altında yatan ortak mantık, gerçek ve geri dönüşü
+olan bir ortamı, kontrollü laboratuvar koşullarının dışında olmasına rağmen lab-
+oratuvarın epistemik iddiasıyla (sistematik gözlem, hipotez test etme, iterasyon)
+çerçevelemektir. Farklı alanlar bunu farklı amaçlarla yapmaktadır: şehircilikte
+vatandaş katılımını meşrulaştırmak, savaşta hız ve inovasyon kapasitesini öne
+çıkarmak, şirketlerde başarısızlığı önceden mazur göstermek için. Terim her
+bağlamda aynı işlevi görmektedir: riskli veya kontrolsüz bir ortamı, meşru ve
+değerli bir bilgi üretim süreci olarak yeniden çerçevelemek.
+18
+
+-- 18 of 19 --
+
+Sonuç
+Sekiz disiplinden derlenen ilkeler, yüzeysel olarak birbirinden bağımsız görünse
+de, incelendiğinde sınırlı sayıda ortak tema etrafında toplandığı görülmektedir.
+Nükleer enerjinin çeşitlilik temelli yedeklilik anlayışı, havacılığın kapalı döngü
+iletişimi, denizciliğin meydan okuma-yanıt protokolü ve mutfağın sözlü doğrulama
+döngüsü, farklı mesleki bağlamlarda aynı temel soruna — iletişimin varsayılan
+olarak güvenilmez sayılması gerektiği ilkesine — çözüm üretmektedir. Benzer
+biçimde, hukukun ratio decidendi/obiter dictum ayrımı ile ICS’nin birleşik ko-
+muta yapısı, farklı biçimlerde aynı sorunu — kararın hangi kısmının bağlayıcı
+olduğunun net biçimde ayrıştırılması gerektiği sorunu— ele almaktadır.
+Bu tekrarlayan örüntü, çalışmanın ikinci bölümünde ele alınan kuramsal
+çerçeveyle (HRO teorisi, sapmanın normalleşmesi, Safety-I/Safety-II) doğrulanmaktadır:
+incelenen disiplinler, aslında zaten var olan bir akademik alanın ampirik tezahürleridir
+ve bu alanın beş temel ilkesi (başarısızlıkla meşguliyet, basitleştirmeye direnç,
+operasyona duyarlılık, dirençlilik taahhüdü, uzmanlığa saygı), sekiz disiplinin
+tamamının altında yatan ortak dilbilgisini oluşturmaktadır.
+Bu çalışmanın pratik çıkarımı, yazılım mühendisliğinin bu ilkeleri benimsemesinin
+önündeki asıl engelin bilgi eksikliği değil, teşvik yapısı olduğudur. ˙Incelenen
+disiplinlerin sistematik hata yönetimi, büyük ölçüde dışarıdan dayatılmış ku-
+rumsal baskının bir sonucu olduğundan, yazılım mühendisliğinde benzer bir
+disiplinin kalıcı biçimde yerleşmesi, büyük ölçüde bireysel iyi niyete değil, bu
+ilkelerin kurumsal süreçlere (olay müdahale protokolleri, mimari karar kayıtları,
+devir teslim standartları) yapısal olarak gömülmesine bağlıdır. Vaughan ve
+Dekker’in gösterdiği gibi, bu tür disiplinler bir kez kurulduktan sonra dahi za-
+manla aşınabilir; dolayısıyla asıl sürdürülebilir kazanım, tek seferlik bir ilke ben-
+imseme eylemi değil, bu ilkelerin düzenli olarak sınandığı ve yeniden doğrulandığı
+bir kurumsal kültürün inşasıdır.
+19
+
+-- 19 of 19 --

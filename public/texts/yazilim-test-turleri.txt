@@ -1,0 +1,464 @@
+Yazlm Test Türleri
+Kapsaml Referans Klavuzu
+Ömer Faruk Yavuz
+December 2025
+Temel Fonksiyonel Testler
+Unit Test
+Tek bir fonksiyon veya snfn, tüm dş bağmllklar (DB, HTTP, dosya sistemi) mock'lanarak izole
+test edilmesi. Local geliştirme srasnda sürekli (npm test gibi) ve her PR açldğnda CI'da koşar.
+Örnek: calculateDiscount(price, isPremium) fonksiyonu için:
+calculateDiscount(100, false)  100 (indirim yok) calculateDiscount(100, true)  80
+(%20 indirim)
+Bu testlerde veritaban çağrs ve HTTP isteği yoktur; yalnzca girdi/çkt doğrulanr.
+Checklist: Önemli if/else dallar kapsanyor · tüm dş bağmllklar mock'lanmş · test isimleri açk-
+layc (should_apply_discount_for_premium_users) · deterministik (rastgele başarsz olmuyor)
+Mülakat: Unit test, dş bağmllklar mock'layarak tek bir fonksiyon veya snfn davranşn izole
+test eder; her PR'da hzlca koşup iş mantğn korumaya yardmc olur.
+Integration Test
+Birden fazla bileşenin (Controller + Service + Repository + DB, Service + Redis vb.) birlikte
+doğru çalşp çalşmadğn test eder. Büyük refactor veya kritik değişikliklerde geliştirici tarafndan;
+CI'da unit testlerden sonra koşar.
+Örnek: POST /users endpoint testi: Docker'da Postgres ayağa kaldrlr; istek atlr; beklenenler:
+HTTP status 201, response body'de id ve email, DB'de gerçekten kullanc kayd oluşmuş.
+Checklist: Testler gerçek (test) DB ile koşuyor · her test kendi verisini kurup temizliyor · hem
+happy path hem en az bir hata senaryosu var · CI'da deterministik
+Mülakat: Integration test, birden fazla bileşenin gerçeğe yakn ortamda birlikte doğru çalşp çalş-
+madğn doğrular; kritik endpoint'ler için mutlaka kullanrm.
+API Test
+Backend endpoint'lerinin HTTP seviyesinde doğru davranp davranmadğn test eder: status
+kodlar, response body, hata formatlar, auth davranş. CI'da PR sonras ve staging'de deploy
+sonras koşar.
+Örnek: POST /auth/login: geçerli credential  200 + accessToken; yanlş şifre  401 + anlaml
+hata mesaj. GET /users/:id: auth varken  200 + kullanc bilgileri; auth yoksa  401; kayt
+yoksa  404.
+Checklist: Ana endpoint'lerde happy path var · auth gereken yerlerde unauthorized (401) test edildi
+· validation hatalar (400) için test case var · response şemalar doğruland
+Mülakat: API testleri, backend endpoint'lerinin giriş/çkş davranşn HTTP seviyesinde doğrular;
+özellikle auth ve kritik domain endpoint'leri için bu testlere çok önem veririm.
+Contract Test
+Mikroservis mimarisinde servisler aras API sözleşmesinin bozulmamasn sağlar. Consumer
+servis beklediği şemay tanmlar; provider bu şemay karşlyor mu diye CI pipeline'nda her iki
+tarafta ayr ayr test edilir.
+Örnek: Consumer: GET /payments/:id için beklenen JSON şemas tanmlanr. Provider: payment
+
+-- 1 of 10 --
+
+servisi bu şemay gerçekten döndürüp döndürmediği açsndan test edilir. ema krlrsa merge
+engellenir.
+Checklist: Kritik endpoint'ler için contract tanm mevcut · CI'da hem provider hem consumer
+tarafnda koşuyor · contract krlrsa merge engelleniyor veya güçlü uyar üretiliyor
+Mülakat: Contract test, servisler aras API sözleşmesinin bozulmamasn sağlar; bir servisin yaptğ
+değişikliklerin diğerlerini krmamas için kullanlr.
+End-to-End (E2E) Test
+Gerçek kullanc gibi UI → Backend → Veritaban → (varsa) 3. taraf servisler zincirini uçtan uca
+test eder. Genellikle staging ortamnda; baz kritik senaryolar CI'da headless olarak da koşabilir.
+Örnek: Randevu sistemi için tipik bir E2E akş:
+1. Kullanc kayt olur.
+2. E-posta doğrulama adm tamamlanr (mock veya test inbox).
+3. Kullanc login olur.
+4. Yeni randevu oluşturur.
+5. Randevu liste ekrannda yeni randevuyu görür.
+Checklist: Yalnzca 35 kritik kullanc akş E2E ile test ediliyor · aky değil; CI pipeline'n
+gereksiz yere krmyor · test hesaplar kullanlyor · toplam süre makul (1015 dk)
+Mülakat: E2E testler, gerçek kullanc senaryolarn UI'dan başlayarak uçtan uca doğrular; says
+az ama iş açsndan en kritik akşlar için kullanrm.
+Doğrulama Testleri
+UAT  User Acceptance Test
+Geliştirilen özelliğin iş gereksinimlerini karşlayp karşlamadğn product owner, iş birimi veya müş-
+teri temsilcisiyle staging'de doğrular. Her user story için acceptance criteria yazlr; story ancak
+bu kriterler sağlandğnda done saylr.
+Örnek: Kullanc geçmiş 30 güne ait randevular tarih srasna göre görebilmeli kriteri, UAT
+srasnda ürün yöneticisi tarafndan staging'de adm adm kontrol edilir.
+Checklist: Her story için net acceptance kriterleri yazlmş · UAT srasnda her kriter gözden
+geçirilmiş · küçük UX/UI düzeltmeleri not alnmş · sonuçlar Jira/Conuence'da kayt altnda
+Mülakat: Acceptance/UAT testleri, geliştirilen özelliğin iş gereksinimlerini gerçekten karşladğn
+doğrulamak için product veya müşteriyle birlikte yaplan testlerdir.
+Smoke Test
+Her deploy sonras sistemin en temel fonksiyonlarnn çalştğn çok hzl kontrol eder. Makine
+yanyor mu, yanmyor mu? sorusunun cevabn arar. Staging'e her deploy sonras otomatik; büyük
+release'lerde prod'a çkmadan önce de koşulur.
+Otomatik smoke test için tipik endpoint'ler:
+ GET /health  status 200, body {"status":"ok"}
+ GET /version  status 200, body {"version":"...", "commit":"..."}
+ POST /auth/login (test kullancs)  status 200 + accessToken
+ Ana domain endpoint'lerinden 12 tane (ör. GET /appointments)
+Manuel smoke checklist:
+Checklist: Uygulama açlyor, ana sayfa hata vermeden yükleniyor · test kullancsyla login olun-
+abiliyor · ana iş akş baştan sona çalşyor · ağr hata mesajlar veya crash yok
+Mülakat: Smoke test, release sonras sistemin temel fonksiyonlarnn ayakta olduğunu hzlca doğru-
+layan basit test setidir; health check, login ve ana domain endpoint'leri genellikle bu sette yer alr.
+Sanity Test
+Küçük veya orta büyüklükte bir değişiklikten sonra, tam regresyon yapmadan ilgili fonksiyonun
+mantkl çalşp çalşmadğn hzlca kontrol eder. Geliştirici veya QA tarafndan staging'de
+2
+
+-- 2 of 10 --
+
+yaplr.
+Örnek: Görev listesinde sralama mantğ değişmiştir. Sanity test: görevler beklenen srada m?
+Filtreler hâlâ çalşyor mu? lgili ekranlarn temel fonksiyonlar bozulmamş m?
+Checklist: Değişiklik yaplan ekrann ana senaryolar denendi · bağl 12 ekrann temel fonksiyonlar
+bozulmad · kritik hata veya crash gözlenmedi
+Mülakat: Sanity test, belirli bir değişiklikten sonra tam regresyon yapmadan ilgili fonksiyonlarn
+mantkl çalştğn hzlca doğrular.
+Regression Test
+Yeni özellik veya bug x sonras önceden çalşan fonksiyonlarn bozulup bozulmadğn kon-
+trol eder. CI'da unit + integration + seçili E2E; büyük release'ler öncesinde daha geniş manuel +
+otomatik set koşulur.
+Örnek: Kritik happy path'ler (sign up, login, ödeme, ana iş akş) yeniden test edilir; geçmişte
+bulunan önemli bug'lar için yazlmş testler çalştrlarak tekrar çkmalar engellenir.
+Checklist: Kritik ana akşlar regresyon seti içinde yer alyor · önemli geçmiş bug'lar için regression
+test yazlmş · CI pipeline'nda düzenli koşuyor
+Mülakat: Regression test, yeni değişikliklerin mevcut çalşan fonksiyonellikleri bozmadğn doğrula-
+mak için daha geniş kapsaml bir test setini tekrar çalştrmaktr.
+Performans Testleri
+Load Test
+Sistemin beklenen normal yük altnda nasl davrandğn ölçer. Örneğin ayn anda 500 kullanc
+varken ortalama gecikme süresi ve hata oran ölçülür. Araçlar: k6, JMeter, Locust, Gatling.
+Checklist: Response time hedeerin altnda · hata oran eşik değerin altnda · sistem beklenen yük
+altnda stabil · kaynak kullanm (CPU, RAM) normal
+Mülakat: Load test, sistemin beklenen normal yük altnda tepki süresi ve hata orann ölçer.
+Stress Test
+Sistemin kapasitesinin üstüne çkarak nerede ve nasl bozulduğunu gösterir. Yük kademeli artrlr:
+500  1.000  2.000 eş zamanl istek. Krlma noktas, ilk ciddi hata oran ve toparlanma süresi
+kayt altna alnr.
+Checklist: Krlma noktas (breaking point) tespit edildi · sistem nasl ve nerede bozuluyor belli ·
+toparlanma davranş izlendi · ölçeklenme limitleri belgelendi
+Mülakat: Stress test, sistemi kapasitesinin üstüne yükleyerek nerede ve nasl bozulduğunu görmek
+için yaplr.
+Soak / Endurance Test
+Sistemi uzun süre (örneğin 624 saat) boyunca sabit bir yük altnda tutarak memory leak, con-
+nection leak, kaynak tükenmesi gibi uzun vadeli problemleri ortaya çkarr.
+Checklist: Uzun süreli testte memory kullanm artmyor · connection pool tükenmesi yok · hata
+oran zaman içinde artmyor · CPU kullanm stabil
+Mülakat: Soak test, sistemi uzun süre boyunca sürekli yük altnda tutarak hafza sznts ve kaynak
+tükenmesi gibi uzun vadeli problemleri ortaya çkarmay hedeer.
+Spike Test
+Trak veya istek says çok ksa sürede aniden arttğnda (ör. kampanya başlatma, viral içerik)
+sistemin buna verdiği tepkiyi test eder. Yük bir anda 10x50x artrlr, sistem çökmeden ayakta
+kalabiliyor mu gözlemlenir.
+Checklist: Spike srasnda sistem çökmüyor · otomatik ölçeklendirme devreye giriyor · spike sonras
+sistem normale dönüyor · kullanc deneyimi kabul edilebilir düzeyde
+Mülakat: Spike test, sistemin ani trak artşlarna verdiği tepkiyi ölçer.
+3
+
+-- 3 of 10 --
+
+Scalability Test
+Sistem yük arttkça (100  1.000  10.000 kullanc) performansn nasl değiştiğini ve yatay/dikey
+ölçeklemenin ne kadar etkili olduğunu ölçer. CPU, memory, response time ve error rate izlenir.
+Checklist: Response time yük arttkça kabul edilebilir seviyede · servisler otomatik ölçeklenebiliyor
+· kaynak kullanm optimize
+Mülakat: Scalability test, sistem yük arttğnda performansn nasl değiştiğini ve ölçeklemenin ne
+kadar verimli olduğunu ölçer.
+Volume Test
+Sistemin çok büyük veri kümeleri (milyonlarca kayt) altnda nasl çalştğn test eder. DB'ye
+büyük miktarda test verisi yüklenir; API performans ve query hzlar ölçülür.
+Checklist: Büyük veri altnda query süreleri kabul edilebilir · API time-out vermiyor · DB kaynak
+tüketimi izleniyor
+Mülakat: Volume test, sistemin çok büyük veri kümeleriyle nasl performans gösterdiğini ölçer.
+Concurrency Test
+Birden fazla kullanc ayn kaynağa ayn anda eriştiğinde race condition veya veri tutarszlğ
+olup olmadğn test eder. Transaction, optimistic/pessimistic locking davranşlar incelenir.
+Örnek: Ayn ürünü ayn anda düzenlemeye çalşan 10 paralel istek; stok miktarnn yanlş güncel-
+lenmesi veya kayt çakşmas izlenir.
+Checklist: Race condition gözlenmiyor · lock mekanizmalar doğru çalşyor · veri kayb yaşanmyor
+Mülakat: Concurrency test, ortak kaynağa ayn anda erişimde sistemin race condition'a karş
+dayankl olup olmadğn doğrular.
+Güvenlik ve Dayankllk Testleri
+Security / Penetration Test
+Güvenlik açklarn (yetkisiz erişim, veri sznts, SQL injection, XSS, CSRF vb.) tespit eder.
+Araçlar:
+ Otomatik: dependency vulnerability taramalar (Snyk, npm audit), OWASP ZAP benzeri scan-
+ner'lar.
+ Manuel: güvenlik uzmanlar tarafndan hedei saldr senaryolar (OWASP Top 10 esas alnr).
+Mülakat: Security/penetration testleri, sistemde yetkisiz erişim veya veri szntsna yol açabilecek
+güvenlik açklarn bulmak için yaplan testlerdir; genelde OWASP risklerine odaklanlr.
+Reliability Test
+Sistemin uzun süre boyunca hatasz çalşabilme orann ölçer. Error log, crash raporu, uptime ve
+error rate metrikleri izlenir.
+Checklist: Uzun süreli çalşmada hata oran stabil · memory artş yok/minimum · servis uptime
+değeri kabul edilebilir
+Mülakat: Reliability test, sistemin uzun süre boyunca hatasz çalşabilme yeteneğini ölçer; uptime
+gerektiren sistemlerde kritiktir.
+Recovery / Failover Test
+Çökme, servis kesintisi veya donma yaşandğnda sistemin kendini ne kadar hzl ve doğru topar-
+ladğn, veri kayb veya bozulmas yaşanp yaşanmadğn test eder. Sunucu kasten durdurulur,
+network kesilip geri verilir, DB restart senaryolar uygulanr.
+Checklist: Servis kesinti sonras otomatik toparlanyor · veri kayb minimum · retry mekanizmalar
+doğru çalşyor
+Mülakat: Recovery test, çökme veya servis kesintisi sonras sistemin kendini toparlama yeteneğini
+doğrular.
+4
+
+-- 4 of 10 --
+
+Chaos Test (Chaos Engineering)
+Üretim benzeri ortamda bilinçli arzalar çkararak sistemin dayankllğn ölçer: rastgele sunucu
+kapatma, network latency ekleme, CPU/RAM basks oluşturma. Araçlar: Chaos Monkey, Gremlin.
+Checklist: Servis kapannca diğer servisler fallback'e geçiyor · trak doğru yönlendiriliyor · sistem
+tamamen çökmüyor
+Mülakat: Chaos test, üretim benzeri ortamda bilinçli arzalar yaratarak sistemin dayankllğn ölçer
+ve SRE kültürünün temel parçalarndandr.
+Network Partition Test
+Dağtk sistemlerde (Kafka, Redis Cluster, Postgres Patroni) network bölünmesi (split-brain)
+yaşandğnda servislerin davranşn test eder. Leader election, eventual consistency, retry ve
+timeout mekanizmalar doğrulanr.
+Checklist: Partition srasnda servisler çalşmaya devam ediyor · partition bitince sistem toparlyor
+(reconciliation) · veri kayb veya duplicate event oluşmuyor · retry/timeout davranşlar doğru
+Mülakat: Network partition test, dağtk sistemlerde bağlant bölünmesi yaşandğnda sistemin tu-
+tarllğn ve dayankllğn doğrular.
+Kullanc Deneyimi ve Uyumluluk Testleri
+Usability Test
+510 gerçek kullancya görevler verilerek uygulamann ne kadar rahat ve sezgisel kullanldğ ölçülür.
+UX problemleri (kafa karşklğ, fazla adm, kötü yerleşim) bulunur. Yeni ekran tasarmndan sonra
+ve beta release öncesi yaplr.
+Örnek: Kullanclara Randevu oluştur, Filtreyi bul, Favoriye ekle gibi görevler verilir; nerede
+takldklar gözlemlenir.
+Not (Taze Kan Etkisi): Ürüne alşmş ekip zamanla kurumsal körlük yaşar. Yeni kullanclar
+bu kör noktalar doğal etkileşimleriyle çok hzl ortaya çkarr.
+Checklist: Kullanc görevleri 3060 saniyede tamamlayabiliyor · navigation gereksiz karmaşk değil
+· UI elementleri anlaşlr · kullanc geri bildirimleri topland
+Mülakat: Usability test, gerçek kullanclarn uygulamay ne kadar kolay ve sezgisel kullandğn
+ölçer; UX problemlerini erken yakalar.
+Heuristic Evaluation
+13 UX uzman, ekranlar Nielsen'in 10 heuristiği (tutarllk, görünürlük, kullanc kontrolü, hata
+engelleme, minimalist tasarm vb.) gibi standart UX prensiplerine göre inceler ve sorunlar listeler.
+Checklist: Ekran yaps tutarl · hatalar kullancy engellemez · navigasyon kullanc zihniyle
+uyumlu · UI elementleri sezgisel ve yeterince görünür
+Mülakat: Heuristic evaluation, kullanc arayüzünü bilinen UX ilkelerine göre uzman gözle değer-
+lendirerek kullanlabilirlik sorunlarn erken yakalar.
+Accessibility Test
+Engelli kullanclar için WCAG standartlarna uyum doğrulanr. Screen reader (Talk-
+Back/VoiceOver) testleri, renk körlüğü simülatörleri ve kontrast oran ölçümleri kullanlr.
+Checklist: Tüm butonlarn erişilebilirlik label'lar var · kontrast oran 4.5:1 altnda değil · odak
+sras mantkl · TalkBack ile ekran tamamen okunabiliyor
+Mülakat: Accessibility test, engelli kullanclarn uygulamay sorunsuz kullanabilmesini sağlamak
+için yaplan erişilebilirlik doğrulamasdr.
+Compatibility Test
+Uygulamann farkl cihazlarda, tarayclarda (Chrome, Safari, Firefox, Edge) ve işletim sistemlerinde
+doğru çalştğn doğrular. Araçlar: BrowserStack, LambdaTest.
+Checklist: En az 3 farkl ekran boyutunda test edildi · son 2 büyük OS sürümü destekleniyor · ana
+5
+
+-- 5 of 10 --
+
+fonksiyonlar tüm tarayclarda çalşyor
+Mülakat: Compatibility test, uygulamann farkl cihaz ve tarayclarda ayn kaliteyle çalştğn
+doğrular.
+A/B Test
+ki farkl tasarm, akş veya özellik arasnda kullanclarn bir ksm A, diğerleri B versiyonunu görür;
+click rate, conversion ve drop-o oranlar karşlaştrlarak hangi versiyonun daha iyi performans
+verdiği ölçülür.
+Checklist: Deneme yeterli kullanc saysna ulaşt · istatistiksel anlamllk (p-value) değerlendirildi
+Mülakat: A/B test, iki farkl tasarm veya akşn performansn karşlaştrarak en iyi seçeneği be-
+lirler.
+Localization / Internationalization Test
+Uygulamann farkl dil (TR/EN/DE/AR), tarih format, para birimi, RTL dilleri ve bölgesel
+ayarlarla doğru çalştğn doğrular.
+Checklist: Metin taşmas yok · RTL modunda ekran tasarm bozulmuyor · tarih/para formatlar
+doğru
+Mülakat: Localization test, uygulamann çok dilli ortamlarda ve farkl kültürel ayarlarda doğru
+çalştğn doğrular.
+Mobil Özel Testler
+Mobile-Specic: Network, Background, Permissions
+ Network: 3G → 4G → WiFi geçişlerinde session kopuyor mu? Oine mod davranş doğru mu?
+ Background: Uygulama arka plana alnnca state korunuyor mu? Timer, konum, audio recorder
+gibi süreçler devam ediyor mu?
+ Permissions: Kamera/konum/mikrofon izni reddedilince doğru fallback ekran geliyor mu?
+Checklist: Oine mod test edildi · background/foreground geçişlerinde state kayb yok · izin red-
+dedilince kullanc dostu hata gösteriliyor
+Mülakat: Mobil özel testler; ağ değişimleri, background davranş ve izin yönetimi gibi mobil cihazlara
+özgü riskleri doğrular.
+Monkey Test
+Uygulamay rastgele tklamalar, kaydrmalar ve kontrolsüz girişlerle krmaya çalşlr. Gerçek hayat-
+taki hatal kullanc davranşlarn simüle eder. Mobil uygulamalarda (özellikle Android) yaygndr;
+release öncesi hzl stabilite kontrolü.
+Örnek: Android: adb shell monkey -p com.example.app 5000 (uygulamaya 5000 rastgele
+dokunuş, swipe, rotate, back action)
+Web: rastgele tklamalar üreten custom script'ler.
+Checklist: 5k20k event ile çalştrld · crash report veya ANR çkt m? · navigation loop veya
+freeze yaşand m? · log'lar incelendi ve hata stack'leri kaydedildi
+Mülakat: Monkey test, rastgele kullanc davranşlaryla uygulamay zorlayarak crash ve stabilite
+sorunlarn ortaya çkarr.
+Gorilla Test
+Tek bir fonksiyonu aşr yükleyerek veya tekrar tekrar çalştrarak kararllğ test eder. Bir butona
+1000 kez tklama simülasyonu, ayn formu 100 defa ardşk gönderme, upload bileşenine art arda yük
+bindirme.
+Checklist: Seçilen modülde 5002000 tekrar yapld · memory artş/leak gözlendi mi? · UI freeze
+oluştu mu? · concurrency davranş incelendi
+Mülakat: Gorilla test, belirli bir fonksiyonu yüzlerce kez tekrar ederek stabilite sorunlarn tespit
+etmeye odaklanr.
+6
+
+-- 6 of 10 --
+
+Battery Usage Test
+Mobil uygulamann gereksiz pil tüketip tüketmediğini ölçer. Konum, kamera, mikrofon veya sürekli
+senkronizasyon kullanan uygulamalarda kritiktir.
+ Android: Battery Historian ile CPU, wakelock, network kullanm raporlar.
+ iOS: Xcode Instruments Energy Log ile enerji tüketim proli.
+ Uygulama 1020 dakika foreground ve background modlarnda test edilir.
+Checklist: CPU kullanm anormal değil · wakelock says düşük ve kontrollü · gereksiz sensör
+(GPS, accelerometer) kullanm yok · background modunda pil tüketimi minimum
+Mülakat: Battery test, mobil uygulamann pil tüketimini analiz eder; konum, kamera ve background
+görevleri olan uygulamalarda kritik bir kalite göstergesidir.
+Cold Start Test
+Uygulamann RAM'de yokken (soğuk başlatma) ilk açlş hzn ölçer: Splash ekranndan ilk interaktif
+ekrana kadar geçen süre optimize edilmiş mi?
+ Android: adb shell am force-stop com.app ile uygulama kapatlr; açlş süresi ölçülür.
+ iOS: App switcher'dan tamamen kapatlr; Xcode Instruments Time Proler ile prollenir.
+Ölçülen metrikler: startup time · rst paint · rst interactive · JS engine (Hermes/JSCore) load
+süresi · module initialization.
+Checklist: Splash → ilk ekran geçişi 12 saniye içinde · gereksiz modül açlşta yüklenmiyor · bundle
+boyutu optimize · başlangçta ağr network isteği yok
+Mülakat: Cold start test, uygulamann tamamen kapal durumdan ilk açlş hzn ölçer; mağaza
+kalite metrikleri için kritik bir performans göstergesidir.
+Keşif ve Fuzzing Testleri
+Exploratory Test
+Testçi belirli bir modül veya akş üzerinde serbestçe dolaşarak öğrendikçe yeni test kirleri üretir
+ve uygular. Ad-hoc'tan farkl olarak yönlendirilmiş ve deneyim odakldr; öğrenme, tasarlama ve
+uygulama aşamalar iç içe yürür.
+Checklist: Temel akşlar keşfedildi · beklenmeyen davranşlar not alnd · her adm için gözlem ve
+sonuç kaydedildi
+Mülakat: Exploratory test, testçinin deneyimiyle yön verdiği, öğrenme ve keşif aşamalarnn iç içe
+yürüdüğü sistematik bir keşif testidir.
+Ad-hoc Test
+Plansz, spontane şekilde hata bulmak; dokümantasyon olmadan keşif yapmak. Özellikle ilk prototip
+aşamalarnda kullanlr.
+Örnek: Edge-case denemeleri: çok uzun input, boş input, hzl tklama, oine/online geçişi, ayn
+anda birden fazla sekme açmak.
+Checklist: Kritik ekranlar rastgele keşfedildi · anormal davranşlar not alnd · en az 1 tane UI
+bug' yakalanmaya çalşld
+Mülakat: Ad-hoc test, plansz şekilde uygulamay keşfederek beklenmeyen davranşlar ortaya
+çkarma testidir.
+Fuzz Test
+Sisteme rastgele, bozuk, ekstrem veya beklenmeyen inputlar göndererek parser, validator ve hata
+yönetimi hatalarn ve güvenlik açklarn bulur. API endpoint'lerine yüzlerce/binlerce hatal istek
+gönderilir; JSON, XML, form alanlar bozuk formatlarla manipüle edilir.
+Checklist: Beklenmeyen inputlar sistem crash'ine yol açmyor · API 400/422 gibi anlaml hata
+döndürüyor · validation tüm alanlar için devrede
+Mülakat: Fuzz test, API veya parser gibi bileşenlere rastgele ve bozuk input göndererek beklenmeyen
+7
+
+-- 7 of 10 --
+
+hata ve güvenlik açklarn bulmaya yarar.
+Yaşam Döngüsü ve Yaplandrma Testleri
+Alpha Test
+Ürün dşa açlmadan önce şirket içinde (QA ekibi ve geliştiriciler) büyük hatalarn temizlenmesi
+amacyla yaplan ilk geniş kapsaml test.
+Checklist: Kritik bug'lar temizlendi · UI/UX akşlar kararl
+Mülakat: Alpha test, ürün dş kullancya açlmadan önce şirket içinde yaplan ilk geniş kapsaml
+testtir.
+Beta Test
+Seçili gerçek kullanclara beta sürümü dağtlr; gerçek ortam geri bildirimleri toplanr ve ürün
+iyileştirmelerine aktarlr.
+Checklist: Beta kullanclarndan geri bildirim topland · kritik hatalar düzeltildi
+Mülakat: Beta test, gerçek kullanclarn ürünü deneyerek geri bildirim sağladğ ve yayndan önce
+hatalarn yakalandğ ikinci aşama testidir.
+Installation / Deployment Test
+Uygulamann doğru kurulup başlatlabildiğini doğrular. Mobil: temiz cihazda ilk açlş testi; Back-
+end: deployment sonras servislerin doğru ayağa kalkmas.
+Checklist: Mobil uygulama ilk açlşta çökmedi · ENV yaplandrmalar doğru (API URL, analytics,
+cong) · deployment sonras health endpoint stabil
+Mülakat: Installation/deployment test, uygulamann doğru kurulup başlatlabildiğini doğrular ve
+özellikle mobilde kritiktir.
+Conguration Test
+Uygulamann doğru environment ayarlaryla çalştğn doğrular. Eksik, boş veya yanlş formatl
+ENV değerleri (API_URL, ANALYTICS_KEY, FEATURE_FLAGS) için otomatik validasyon
+koşulur; build sonras health testleri yaplr.
+Checklist: Tüm ENV değişkenleri tanml · API adresleri doğru ortam gösteriyor · gizli anahtarlar
+eksiksiz · feature ag'ler doğru aktif/pasif durumda
+Mülakat: Conguration test, uygulamann doğru environment ayarlaryla sorunsuz çalştğn doğru-
+lar; çoğu prod hatas aslnda yanlş ENV kaynakldr.
+Compliance Test
+Uygulamann KVKK, GDPR, HIPAA gibi yasal ve düzenleyici gereksinimlere uygun çalştğn
+doğrular. Loglama, anonimleştirme, veri saklama süreçleri incelenir.
+Checklist: Kişisel veriler şifreli/anonim · kullanc verisi gereksiz saklanmyor · yasal raporlama
+yükümlülükleri karşlanyor
+Mülakat: Compliance test, uygulamann KVKK/GDPR gibi yasal gereksinimlere uygunluğunu
+doğrular.
+Sistem ve Entegrasyon Testleri
+Database & Migration Test
+Veritaban sorgularnn, şema değişikliklerinin ve migration'larn doğru çalştğn doğrular. Migra-
+tion çalştrlr, DB şemas doğrulanr; CRUD işlemleri gerçek test DB'de denenir; foreign key, index
+ve constraint kontrolleri yaplr.
+Checklist: Migration sfrdan kurulumda sorunsuz çalşyor · eski veriyi bozmadan yükseltme yapla-
+biliyor · index ve FK yaplar doğru
+Mülakat: Database testleri ve migration testleri, veri bütünlüğünü ve şema değişikliklerinin güvenle
+uygulanmasn garanti eder.
+8
+
+-- 8 of 10 --
+
+Interoperability Test
+Uygulamann ödeme servisleri, kimlik doğrulama, ERP/CRM gibi üçüncü parti servislerle uyumlu
+çalştğn doğrular.
+Checklist: Üçüncü parti API çağrlar doğru şema ile yaplyor · rate limit ve hata yönetimi doğru
+Mülakat: Interoperability test, uygulamann diğer servis ve sistemlerle sorunsuz etkileşime gire-
+bildiğini doğrular.
+Portability Test
+Uygulamann farkl platformlara veya altyaplara (Docker → Kubernetes, Linux → macOS)
+taşndğnda doğru çalştğn test eder.
+Checklist: Ortam bağmllklar minimum · kongürasyonlar environment tabanl
+Mülakat: Portability test, uygulamann farkl ortamlara sorunsuz taşnabildiğini doğrular.
+Maintainability Test
+Kodun ne kadar kolay okunabilir, değiştirilebilir ve sürdürülebilir olduğunu ölçer: cyclomatic com-
+plexity, coupling, duplicate code ve dead code analizi.
+Checklist: Fonksiyonlar küçük ve tek sorumluluklu · karmaşklk metrikleri kabul edilebilir · ölü
+kod yok
+En çok kullanlan üçlü: ESLint + Prettier (JS/TS) SonarQube/SonarCloud (genel) Madge
++ Lizard (dependency + complexity)
+Mülakat: Maintainability test, kodun uzun vadede ne kadar kolay geliştirilebileceğini ölçer.
+Statik Analiz Araçlar
+Ekosistem Araçlar Açklama
+JS / TS ESLint, TSC strict,
+SonarQube
+Complexity, duplication, dead code, maintainability
+rating
+Java / Kotlin SonarQube, PMD, Spot-
+Bugs, Android Lint
+Bad practices, architectural violations, code smells
+Python Pylint, Flake8, MyPy,
+SonarQube
+Styling, type errors, complexity, smells
+Go GolangCI-Lint, static-
+check
+Haf ve hzl code quality kontrolü
+C / C++ cppcheck, Clang-Tidy,
+SonarQube
+Memory issues + complexity analizleri
+Metrik, Duplicate ve Dependency Araçlar
+Araç Ne Ölçer / Açklama
+SonarQube Maintainability AE arasnda maintainability puan; teknik borç ölçümü
+Code Climate / Codacy Maintainability, duplication, code smells, complexity metrikleri
+Lizard Cyclomatic complexity (dil bağmsz)
+jscpd / PMD CPD JS/TS ve Java için duplicate kod nder
+Madge Circular dependency graph çkarr; modülerlik analizi
+DepCheck (JS/TS) Kullanlmayan bağmllklar ve hatal importlar
+NDepend (C#) Coupling, dependency graph, architecture compliance
+Webpack Analyzer Bundle içi gereksiz paketlerin analizi
+9
+
+-- 9 of 10 --
+
+Refactoring, UI, Dokümantasyon ve Güvenlik Araçlar
+Araç Açklama
+IntelliJ IDEA Inspections Java/Kotlin için güçlü refactoring önerileri
+Android Studio Lint Android için lifecycle ve UI smell tespiti
+React DevTools Proler State karmaşklğ ve re-render performans analizi
+Storybook + Visual Regression UI component sürdürülebilirliği ve görsel tutarllk
+TypeDoc / JSDoc / Swagger TypeScript, JavaScript ve backend API dokümantasyonu
+GitHub CodeQL Güvenlik + maintainability analizleri birlikte
+Snyk / npm audit Vulnerable dependency tespiti
+Manuel vs Otomatik Test
+Manuel: nsan tarafndan elle yaplr (butonlara tklama, form doldurma, edge-case senaryolar
+deneme). Özellikle keşif testleri ve UX/görünüş testleri için önemlidir.
+Otomatik: Kod veya script ile yazlr (unit, integration, API, E2E, performans testleri); CI/CD
+pipeline'nda otomatik koşar.
+Mülakat: Manuel testler keşif ve kullanc deneyimi için önemli; ancak sürdürülebilir güvence için
+unit, integration ve kritik E2E senaryolarn otomatik hale getirmek zorunludur.
+10
+
+-- 10 of 10 --

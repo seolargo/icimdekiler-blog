@@ -1,0 +1,168 @@
+Kod Tabanı Geometrisi: Yazılım Mimarisinin
+Topolojik Teşhisi
+Ömer Yavuz
+May 2026
+Giriş
+Bu çalışma, bir yazılım kod tabanını yalnızca dosya ve satır sayılarından oluşan
+teknik bir varlık olarak değil; yönlü ilişkilerden, kütle yoğunluklarından, merkezı
+düğümlerden ve katmanlı akışlardan oluşan geometrik bir yapı olarak ele al-
+maktadır. Amaç, mimari sağlığı sezgisel değerlendirmenin ötesine taşıyarak
+ölçülebilir ve görselleştirilebilir göstergeler üzerinden değerlendirmektir. Bu
+yaklaşımda modüller düğüm, içe aktarma ilişkileri kenar, dosya hacmi kütle,
+içe aktarma yoğunluğu ise merkezı çekim olarak yorumlanmaktadır.
+C alışma iki temel soruya cevap aramaktadır: bağımlılık ilişkileri sağlıklı bir
+yönde mi akmaktadır ve yeniden yapılandırma önceliği hangi yapısal baskı nok-
+talarına göre belirlenmelidir?
+Temel Kavramlar
+Kütle: Bir modülün veya dosyanın kod tabanı içindeki hacmi. Pratik olarak
+LOC, dosya sayısı ya da sorumluluk yoğunluğu üzerinden temsil edilebilmekte-
+dir.
+Merkezılik: Bir modülün diğer modüller tarafından ne ölçüde içe aktarıldığı.
+C ok sayıda içe aktarma alan dosyalar yüksek merkezılik taşımaktadır.
+Gravity well: Sistemde olağan dışı miktarda sorumluluk, bağımlılık veya
+invariant çeken modül. Bu düğümler sistemin davranışını merkezıleştirir ve
+yeniden yapılandırma riskini artırır.
+Kardeş bağı: Aynı hiyerarşik düzeyde bulunması gereken iki modülün bir-
+birini doğrudan içe aktarması. Sağlıklı mimaride kardeşler birbirini bilmez;
+ortak ihtiyaçlar alt katmandaki paylaşımlı yapılara indirilir.
+Köprü düğüm: ˙Iki mimari alan arasında veri, tip veya sözleşme taşıyan ara
+düğüm. Köprü düğümün varlığı doğal olabilir; ancak tek dosyada aşırı şişmesi
+yapısal baskı üretir.
+1
+
+-- 1 of 6 --
+
+Niceliksel Sezginin Yetersizliği
+Yazılım mimarisinin değerlendirilmesinde sıklıkla ilk başvurulan ölçüt, modüller
+arası bağlantı yoğunluğudur. Bununla birlikte bu ölçüt tek başına ele alındığında
+yanıltıcı sonuçlar üretebilmektedir; mimari sağlığın gerçek belirleyicisi bağlantıların
+niceliği değil, yönelimi ve hedef katmanıdır.
+Bir kod tabanı, düğümleri modüllere ve kenarları içe aktarma ilişkilerine
+karşılık gelen yönlü bir grafik olarak modellendiğinde, ilk gözlenen nitelik kenar
+yoğunluğudur. Orta ölçekli bir sistemde — yaklaşık 14 ile 17 düğüm arasında
+— 25 ile 30 arasında kenar bulunması olağandır ve bu rakamlara sağlıklı bir mi-
+maride dahi rastlanabilmektedir. Dolayısıyla yüksek bağlantı sayısı, tek başına
+bir tanı oluşturmaz.
+Belirleyici sorgu şu biçimde formüle edilmelidir: bağlantılar hangi yönelimde
+ilerlemektedir? Aşağı doğru mu, yatay olarak mı, yoksa düzensiz biçimde mi?
+Mimari sağlığını belirleyen tek bir topolojik ilke vardır: akışın tek yönlü ve
+katmanlı olması, kardeş düğümlerin ise birbirinden bağımsız kalması.
+Üç Tipik Yapısal Bozulma
+Grafik bu çerçevede incelendiğinde üç tipik mimari kokunun doğrudan görsel
+olarak ayırt edilebildiği saptanmıştır.
+Kardeş bağı
+Aynı hiyerarşik düzeyde konumlanması gereken iki modülün birbirini içe ak-
+tarması durumunda kardeş bağı oluşur. Sayfa düzeyindeki modüllerin bir-
+birine bağımlı olmaması, ortak gereksinimlerin alt katmana bir paylaşımlı modül
+(örneğin ortak bir hook ya da bileşen) biçiminde indirgenmesi gerekmektedir.
+Kardeş bağının görsel olarak ayırt edilmesi, yeniden yapılandırma hedefinin de
+doğrudan saptanmasını sağlar: paylaşılan mantık, alt katmana taşınmalıdır.
+Aşırı merkezileşmiş tip dosyası
+C ok sayıda modül tarafından içe aktarılmasına karşın yanlış ad alanı içinde
+konumlanmış bir tip tanım dosyası. Örneğin FeatureX/types.ts dosyasının
+40 ayrı noktadan içe aktarılması durumunda, dosyanın adı belirli bir özelliğe
+ait olduğu izlenimini verse de davranışı paylaşılan bir çekirdek (shared ker-
+nel) niteliğindedir. Adlandırma ile gerçek arasındaki bu uyumsuzluk yüksek
+kaldıraçlı ve mekanik nitelikte bir yeniden yapılandırma adımına işaret etmek-
+tedir: dosyanın doğru ad alanına taşınması.
+Sınır katmanında çift yönlü baskı
+˙Istemci ve sunucu gibi iki ayrı kütle havzası arasında konumlanan bir köprü
+düğümün varlığı yapısal olarak doğaldır; iki taraftan da paylaşılan tipler bu nok-
+tada toplanma eğilimi göstermektedir. Yapısal anomali, söz konusu köprünün
+2
+
+-- 2 of 6 --
+
+tek bir dosya içinde yoğunlaşmasıdır: yüksek içe aktarma sayısı yüksek dosya
+hacmiyle birleştiğinde patolojik bir yığılma ortaya çıkar. Bu durumda köprü
+doğru konumda yer almakta, ancak iç düzeni parçalanmamış olmaktadır. C özüm,
+köprü işlevini bozmadan dosyayı etki alanı (domain) bazında bölmektir.
+3
+
+-- 3 of 6 --
+
+Görsel Kontrast: Yumak Topolojisi ve Katmanlı
+Yönlü C evrimsiz Grafik
+˙Iki topoloji görsel olarak belirgin biçimde farklıdır. Yumak topolojisinde düğümler
+merkezi bir küme oluşturur, kenarlar birbirini keser ve köprü düğüm iki kütle
+havzası arasında sıkışmış konumdadır. Katmanlı yönlü çevrimsiz grafik (Lay-
+ered DAG) topolojisinde ise yukarıdan aşağıya net bir akış gözlenir; yatay
+(kardeş) kenar bulunmaz ve sistemin omurgası ilk bakışta okunabilir hale gelir.
+Yumak topolojisi
+Page A
+Page B
+Page C
+Page D
+types
+api/types
+routes
+services
+Bu grafikte üç yapısal nitelik gözlenmektedir: kardeş kenarlar (kırmızı oklar)
+sayfaları yatay olarak birbirine bağlamaktadır; types düğümü tüm sayfaları
+kendine çeken bir merkezi yığılma noktasına dönüşmüş durumdadır; api/types
+köprü düğümü ise iki kütle havzası arasında sıkışmış konumdadır. Belirleyici
+tanı kriteri kenar sayısı değil, kenarların hangi düğümler arasında ilerlediğidir.
+4
+
+-- 4 of 6 --
+
+Katmanlı yönlü çevrimsiz grafik topolojisi
+Page A Page B Page C Page D
+shared/hooks shared/components
+shared/types
+api/types
+routes
+services
+core
+pages
+shared feature
+kernel
+contract
+http layer
+business
+foundation
+Düğüm sayısı ve kenar sayısı yumak topolojisi ile karşılaştırıldığında ben-
+zer düzeydedir; ancak yapısal organizasyon temelden farklıdır. Akış bütünüyle
+yukarıdan aşağıya yönelmiş, kardeş kenar yapı dışına çıkarılmış ve omurga (shared/types
+→ api/types → routes → services → core) belirgin biçimde ayırt edilebilir
+hale gelmiştir. Bu örnekte birincil bilgi taşıyıcısı görsel temsildir; metin yalnızca
+bu gözlemi pekiştirme işlevi görmektedir.
+5
+
+-- 5 of 6 --
+
+Yeniden Yapılandırma Sırası: Kaldıraç Etkisi ˙Ilkesi
+Mimari teşhis tamamlandıktan sonra yeniden yapılandırma adımları kod satırı
+sayısına göre değil, kaldıraç etkisine göre sıralanmalıdır. Sıralamada üç değişken
+birlikte değerlendirilmelidir: değişikliğin kaç modülü etkilediği (etki alanı), ne
+ölçüde otomatik yürütülebildiği (mekaniklik) ve sistemin genel topolojisini ne
+kadar iyileştirdiği (mimari kaldıraç). Uygulanan ilke şu biçimde özetlenebilir:
+yüksek etki ile düşük tasarım yükünü birleştiren adımlar önceliklidir.
+1. Aşırı merkezileşmiş tip dosyasının uygun ad alanına taşınması. Mekanik
+nitelikte tek bir konum kararı içermesine karşın 40 içe aktarma noktasını
+etkileyen geniş kapsamlı bir adımdır.
+2. Sınır katmanındaki yoğunlaşmış tip dosyasının etki alanı bazında bölünmesi.
+Etki alanı seçimi dışında tasarım kararı içermeyen mekanik bir işlemdir.
+3. Kardeş bağının ortadan kaldırılması. Yeni paylaşımlı hook veya bileşenin
+arayüzünün tasarlanmasını gerektirir; mekanik kısım bu tasarımın ardından
+yürütülür.
+4. ˙Içsel orkestrasyon parçalama (örneğin merkezi bir denetleyici hook’un du-
+rum yönetimi kütüphanesi veya kip-bazlı yapısal ayrım yoluyla bölünmesi).
+Tamamen tasarım odaklı bir adımdır ve sırası atlatılamaz.
+Bu sıralama keyfi değildir. ˙Ilk iki adım sistemin omurgasını yerine oturtur;
+kardeş bağının kaldırılması yalnızca omurga doğru biçimde konumlandığında uy-
+gun paylaşımlı modülün nereye yerleştirileceği belirlenebildiği için bu sırada yer
+almıştır; içsel parçalama ise yeniden yapılandırma öncesinde yapıldığı takdirde
+sonuçsuz kalır, çünkü parçalanmış yapının yeni omurga üzerinde nasıl konum-
+lanacağı ancak omurga oturduktan sonra netleşir.
+Sonuç
+Mimari sağlık, kenar sayısıyla değil kenar yönelimiyle ölçülmektedir. Görsel kon-
+trast — yumak topolojisi ile katmanlı yönlü çevrimsiz grafik karşılaştırması —
+bu ayrımın tek bakışta tespit edilmesini olanaklı kılmaktadır. Yeniden yapılandırma
+sırası ise dosya hacmine göre değil kaldıraç etkisine göre belirlenmelidir: omurga
+öncelikle yerine oturtulmalı, içsel parçalama en sona bırakılmalıdır. Bu çerçevenin
+niceliksel ölçümlerle desteklenmesi, kural haline getirilmesi ve geometri ötesi
+katmanlarla genişletilmesi ayrı çalışmaların konusudur.
+6
+
+-- 6 of 6 --

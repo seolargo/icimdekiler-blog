@@ -1,0 +1,480 @@
+Sessiz Etki: Yazılım Ekiplerinde Yapısal ve
+Davranışsal Denge
+Ömer Faruk Yavuz
+November 2025
+Giriş
+Modern yazılım projelerinde teknik borç kaçınılmazdır; mesele, bu borcun bilinçli biçimde
+izlenip ölçülmesi ve geri ödenebilir bir plana bağlanmasıdır. Bu dokümanın amacı, günlük
+teslim baskısını korurken uzun vadeli sürdürülebilirliği artıracak yönetilebilir teknik borç
+yaklaşımını pratik, ölçülebilir ve ekibe aktarılabilir ilkelerle sunmaktır.
+Belge önce yönetilebilir borcun tanımını ve temel özelliklerini açıklar; ardından borcun
+sahada tespiti, ölçümü ve önceliklendirilmesi için bir denetim rehberi sunar. Yetki sahibi
+olunmadığında dahi nasıl etki yaratılabileceğini gösterir; yeni bir kod tabanının sistematik
+biçimde anlaşılmasını ve yapısal risklerin görünür kılınmasını örnekler. Son bölümler, uy-
+gulanabilir bir tamamlanma tanımı ile teknik borcun davranışsal boyutunu (geri bildirim
+kültürü ve iletişim tonu) ele alır.
+Yönetilebilir Teknik Borç
+Yönetilebilir teknik borç, bir yazılım sisteminde kısa vadeli hedeflere ulaşmak için alınan
+teknik veya mimari ödünlerin bilinçli biçimde izlenmesi, belgelenmesi ve geri ödenmesi
+sürecidir. Borç burada bir başarısızlık değil, stratejik bir hız ve kalite dengesi aracıdır.
+Her karar — test kapsamını azaltmak, karmaşık bir modülün yeniden düzenlenme-
+sini ertelemek veya mimari soyutlamayı geciktirmek — görünmez bir faiz yaratır. Bu faiz
+yalnızca kodda değil; ekip belleğinde, iletişimde ve gelecekteki geliştirme maliyetlerinde
+birikir. Dolayısıyla teknik borç, yalnızca teknik bir eksiklik değil, aynı zamanda bir or-
+ganizasyonel öğrenme eksikliği olarak da okunabilir. Amaç borçtan kaçmak değil, borcu
+stratejik olarak taşımaktır: hangi hızda ilerlemenin kabul edilebilir olduğunu ve sistemin
+hangi noktada taşıyamaz hale geleceğini bilinçli biçimde tanımlamak. Bu, hem mühen-
+dislik disiplini (ölçüm, test, geri ödeme planı) hem de kültürel farkındalık (şeffaf iletişim,
+kararın gerekçesini paylaşma) gerektirir.
+1
+
+-- 1 of 12 --
+
+Özellikleri
+Özellik Açıklama
+Bilinçli alınmıştır “Zaman baskısı var, şimdilik testleri eksik bırakıyoruz
+ama sprint 12’de kapatacağız” gibi kararlar açıkça alınır.
+Dokümante
+edilmiştir
+Hangi modülde, hangi sebeple borç alındığı ve ne zaman
+ödeneceği yazılıdır.
+Ölçülür Kod kalitesi metrikleri, test kapsamı ve bakım
+yapılabilirlik göstergeleri düzenli izlenir.
+Geri ödeme planı
+vardır
+Borcu azaltmaya yönelik görevler backlog’da yer alır.
+Risk sınırlıdır Borç, kritik sistemleri bozmayacak biçimde modüler
+sınırlar içinde tutulur.
+Yönetilemez ve Yönetilebilir Borç Örnekleri
+Yönetilemez teknik borç, farkındalığın kaybolduğu ve niyetin unutulduğu borç türüdür;
+genellikle küçük bir erteleme olarak başlar, dokümantasyon eksikliği ve ekip sirkülasyonu
+nedeniyle kısa sürede görünmez hale gelir. Tipik biçimleri şunlardır:
+• Sahipsiz kararlar: Aceleyle yazılmış, nedenini kimsenin bilmediği karmaşık kod
+blokları.
+• Kayıt dışı borçlar: Backlog’a bile yazılmayan geçici çözümler.
+• Ekip belleği erozyonu: Ekip değiştiğinde kimsenin dokunamadığı legacy servisler.
+• Kritik bağımlılıklar: Tek bir kişinin bildiği altyapı betikleri veya manuel yayın
+adımları.
+• Yapısal yorgunluk: Küçük değişikliklerin bile zincirleme hataya yol açtığı mono-
+litik yapılar.
+Yönetilebilir borç ise farkında olunarak ve görünür biçimde taşınan borçtur; ne kadar
+süreceği, nasıl geri ödeneceği ve kim tarafından izleneceği bellidir:
+• Planlı eksiklik: Test kapsamını bilinçli olarak sınırlı bırakıp geri ödeme görevini
+tarihiyle birlikte backlog’a eklemek.
+• Roadmap entegrasyonu: Geri ödeme adımlarını ürün yol haritasına görünür
+biçimde dahil etmek.
+• Ölçüm kültürü: Kod kalitesi araçlarıyla borç oranını izlemek ve retrospektiflerde
+değerlendirmek.
+• Otomatik kontrol: Borç oranı belirli bir eşiği aştığında sürekli entegrasyon hattının
+uyarı üretmesi.
+• Kültürel şeffaflık: Borcun biriktiği modülleri açıkça dile getirebilen iletişim or-
+tamını korumak.
+2
+
+-- 2 of 12 --
+
+Pratik Denetim Rehberi: Tespit, Ölçüm ve Önceliklen-
+dirme
+˙Ilk Sinyaller
+Aşağıdakilerden birkaçının birlikte görülmesi, borcun hız ve kaliteyi baskıladığını gösterir:
+• Yeni özellik eklemek beklenenden çok zor ve uzun sürüyor.
+• Aynı hatalar tekrar ediyor; testler var ama kararsız (flaky).
+• Derleme ve sürekli entegrasyon süreçleri uzun sürüyor veya sık kırılıyor.
+• Kodda çok sayıda geçici çözüm işareti (TODO, FIXME, HACK) bulunuyor.
+• Tek sorumluluğu aşmış devasa dosyalar ve aynı dosyaya yoğunlaşan commit trafiği
+(hotspot) gözleniyor.
+• Dokümantasyon eksik veya güncel değil; ekibe katılım süreci zor.
+Otomatik Ölçümler
+Hızlı bir sağlık kontrolü için temel araç kategorileri şunlardır: statik analiz ve stil denetimi
+araçları, karmaşıklık ölçümü, kopya kod tespiti, test kapsamı raporları, sürüm geçmişi üze-
+rinden değişim yoğunluğu analizi, bağımlılık güvenliği taramaları ve sürekli entegrasyon
+metrikleri (ortalama derleme süresi, başarısızlık oranı).
+Etki ve C aba Matrisiyle Önceliklendirme
+Kategori Eylem
+Yüksek etki / Düşük çaba Hemen düzelt; kritik hızlı kazanım.
+Yüksek etki / Yüksek çaba Planla, böl ve ardışık iterasyonlara yay.
+Düşük etki / Düşük çaba Fırsatçı: mevcut değişikliklere ekle.
+Düşük etki / Yüksek çaba Gözden geçir; çoğu zaman ertele.
+Temel Kalite Kontrol Alanları
+Denetim sırasında öncelikli olarak izlenmesi gereken alanlar şunlardır: geçici çözüm işaretlerinin
+sayımı, kopya kod oranı, karmaşıklık ölçümü, değişim yoğunluğu (hotspot) analizi, test
+kapsamı, bağımlılık güvenliği ve güncelliği, büyük dosya ve aşırı sorumluluk taraması,
+dairesel bağımlılık ve katman ihlali tespiti, sırlar ve anahtar taraması ile değişiklik ka-
+lite kapıları. Bu alanların her biri için çıktılar tek bir özet sayfada toplanmalı ve düzenli
+aralıklarla güncellenmelidir.
+3
+
+-- 3 of 12 --
+
+Yetki Olmadan Etki Yaratmak
+Kurumsal yapılarda, teknik borç düzeyi yüksek bir kod tabanıyla karşılaşmak olasıdır;
+ancak bireyin doğrudan karar yetkisine sahip olmaması da sık rastlanan bir durumdur.
+Bu koşullarda izlenmesi gereken yaklaşım, eleştiriye dayalı değil, etki odaklı bir stratejidir.
+Anlamayı Önceliklendirmek
+Kod tabanı ilk bakışta düzensiz görünebilir; ancak bu duruma yol açan etkenleri anla-
+mak, etkili bir analizin temelidir. Proje geçmişinde zaman baskısı yaşanmış olabilir, ilgili
+modülün geliştiricisi ekipten ayrılmış olabilir veya test eksikliğinin belirli bir gerekçesi
+bulunabilir. Bu soruları eleştiriden önce sormak, borcun kök nedenlerini ve ekip dinamik-
+lerini görünür kılar.
+Sessiz Analiz
+Resmi bir talep oluşturmadan önce sistemi bireysel olarak analiz etmek ve yapısal ha-
+ritasını çıkarmak faydalıdır. Bu kapsamda hangi modüllerin en sık kullanıldığı ve hangi
+dosyaların en fazla değişikliğe uğradığı sürüm geçmişi üzerinden belirlenir; kritik akışlar
+(örneğin giriş, çağrı, yanıt, arayüz güncellemesi zinciri) diyagram biçiminde görselleştirilir;
+gözlemler kısa notlar halinde biriktirilir. Örnek gözlem notları: bir kod parçasının üç
+farklı yerde aynı biçimde tekrar etmesi, bir servis metodunun çok sayıda yerden doğrudan
+çağrılması ve soyutlama ihtiyacının doğması, bir bileşenin tek sorumluluk ilkesini aşacak
+kadar büyümesi, hata yönetiminin her uç noktada elle tekrarlanması. Bu bireysel analiz,
+gelecekteki iyileştirmelerde sessiz fakat stratejik bir avantaj sağlar.
+Küçük Kazanımlar ve Kültürel Etki
+Doğrudan karar yetkisi olmadan da küçük ve somut adımlarla pozitif etki yaratmak
+mümkündür. Kod incelemelerinde küçük ama anlamlı iyileştirmeler önerilebilir; eklenen
+veya değiştirilen her kodda küçük borçlar giderilerek yerel borçsuz alanlar oluşturulabilir;
+kalite araçları önce kişisel ortamda denenip somut verilerle desteklenerek ekiple paylaşılabilir.
+Ayrıca yapıcı ve teknik temelli geri bildirim vermek, kısa dokümantasyon katkıları yapmak
+ve iyi uygulamaları doğrudan kod üzerinden örneklemek, talimat vermeden standartların
+sessizce benimsenmesini sağlar.
+Bu süreç için gerçekçi zihinsel model, bakımı yapılan bir bahçedeki yabani otların
+düzenli temizlenmesidir: teknik borç bir kerede ortadan kaldırılamaz; her geliştirme ve
+inceleme sürecinde yapılan küçük düzeltmeler, uzun vadede sürdürülebilirliği artırır ve
+zamanla ekip içinde bir standart haline gelir.
+Yeni Bir Kod Tabanını Anlama
+Bir projeye dışarıdan katılan geliştirici için, sistemi doğrudan çözümlemeye çalışmak ye-
+rine önce genel mimari çerçeveyi kavramak daha etkindir. Önerilen aşamalar şunlardır:
+4
+
+-- 4 of 12 --
+
+1. Yüksek düzey dokümantasyonun incelenmesi: Mimari diyagramlar, tanıtım
+dosyaları ve teknik tasarım belgeleri, temel bileşenlerin ve etkileşimlerin genel görünümünü su-
+nar.
+2. Kütüphane keşfi ve mini deneyler: Sistemin temelindeki ana kütüphaneler önce
+belgeleri üzerinden kavramsal olarak incelenir; ardından her biri için izole küçük bir
+örnek hazırlanır. Kütüphane mantığı netleştikten sonra asıl kod tabanındaki kul-
+lanım biçimleri, kendi üretilen örneklerle karşılaştırılarak yorumlanır. Bu ön ısınma,
+bilişsel yükü azaltır ve öğrenme hızını artırır.
+3. Ana fonksiyonel akışların izlenmesi: Bir istek–yanıt zincirinin izlenmesi, modüller
+arası bağımlılıkları ve sorumluluk dağılımını ortaya çıkarır.
+4. Küçük kapsamlı bir işlevin eklenmesi: Sınırlı bir özellik eklemek; derleme
+süreci, bağımlılık yönetimi ve test altyapısına ilişkin pratik deneyim kazandırır.
+5. Görselleştirme: Sınıf ilişkileri ve veri akışları basit diyagramlarla somutlaştırılır.
+Katmanlar, Sorumluluklar ve C ağrı ˙Izleri
+˙Ilk adım; sunum, uygulama mantığı ve veri erişimi katmanlarını ayırarak her dizin veya
+modülün rolünü belirlemektir. Katman sınırları doğrulandıktan sonra kamuya açık arayüzler,
+yardımcı servisler ve aracı bileşenler tanımlanır. Ardından sistemin gerçek çalışma dav-
+ranışı gözlemlenir: tarayıcı geliştirici araçları veya HTTP izleme araçlarıyla istemci ve
+sunucu arasındaki gerçek çağrı sırası analiz edilir. Bu incelemede başlangıç tetikleyici-
+leri, kimlik doğrulama adımları, gecikme kaynakları ve dış entegrasyon noktaları özellikle
+değerlendirilir. Elde edilen izler, teorik mimari model ile gözlemlenen davranış arasında
+fark olup olmadığını ölçülebilir biçimde test etmeye yarar.
+Sequence Diyagramı
+Sequence diyagramı, bir kullanıcı senaryosunun zaman içindeki yürütülme sırasını ve
+bileşenler arası mesaj alışverişini görselleştirir. Diyagram yalnızca senaryonun iş sonucunu
+doğrudan üreten bileşenleri içermeli; asenkron loglama veya bağımsız izleme servisleri gibi
+dolaylı süreçler kapsam dışında bırakılmalıdır. Aşağıdaki örnek, kullanıcı girişi senaryo-
+sunun temel akışını göstermektedir:
+@startuml
+title Login Akışı
+actor User as U
+participant "_Istemci" as C
+participant "API Gateway" as API
+participant "Auth Servisi" as AUTH
+database "Kullanıcı DB" as DB
+U -> C: Giriş formunu gönder
+C -> API: POST /auth/login {email, password}
+5
+
+-- 5 of 12 --
+
+API -> AUTH: login(email, password)
+AUTH -> DB: SELECT user WHERE email
+DB --> AUTH: user(+passwordHash, roles)
+AUTH -> AUTH: verifyPassword(), issueJWT()
+AUTH --> API: 200 OK {token}
+API --> C: 200 OK {token}
+C -> C: token'ı güvenli sakla
+@enduml
+Diyagram, ağ izleriyle (durum kodları ve süreler) doğrulanmalıdır.
+Güvenli Dokunuş Fazı
+Katman yapısı ve çağrı akışı doğrulandıktan sonra geliştirici, sistemi yalnızca okuyan
+değil, dokunabilen bir konuma geçmelidir. Bu aşamanın adımları şunlardır:
+1. Veri yaşam döngüsünü haritalama: Her çağrının giriş, dönüş ve kullanım nok-
+taları tanımlanır; verinin nerede doğduğu, dönüştüğü ve gösterildiği netleştirilir. Bu
+sırada uç noktaların döndürdüğü tipler ve hata durumları istemci beklentileriyle
+karşılaştırılarak gizli bağımlılıklar erken fark edilir.
+2. Paylaşılan soyutlamaların keşfi: Projedeki ortak yardımcı yapılar belirlenir; bu
+bileşenler projenin kurumsal dilini oluşturur.
+3. Testlerden öğrenme: Testler sistemin niyetini açıklar; yoksa mevcut davranışı
+doğrulayan basit bir karakterizasyon testi yazılabilir.
+4. Küçük ve güvenli değişiklik: Düşük riskli bir değişiklikle dal, commit, inceleme
+ve birleştirme zinciri uçtan uca deneyimlenir. Hata durumları bilinçli olarak tetikle-
+nerek uygulamanın hata, boş ve başarı durumlarındaki davranış farkları gözlemlenir.
+5. Kod geçmişinden öğrenme ve doğrulama görüşmesi: Sık değişen dosyalar
+risk yoğunluğu haritası olarak işaretlenir; bulgular kısa bir notla özetlenip kıdemli
+bir geliştiriciyle doğrulanır.
+6. ˙Iyileştirme notları: Fark edilen kalıplar doğrudan değişiklik olarak değil, geri
+ödeme backlog’unda saklanır; önce sistem güvenli hale getirilir, kalite artırımına
+planlı biçimde dönülür.
+Bu yaklaşım, önce anlamak sonra dönüştürmek ilkesine dayanır.
+Bağımlılık Grafiği
+Kod tabanının yapısal bağımlılıklarını görünür kılmak için modül düzeyinde bir bağımlılık
+grafiği çıkarılabilir ve buradan ölçülebilir tablolar üretilebilir. Amaç; katman ihlallerini,
+döngüleri, aşırı merkezi düğümleri ve birlikte değişim riskini erken saptamaktır. Bu iş için
+modül tarama araçları, bağımlılık denetleyicileri ve derleme araçlarının modül grafikleri
+6
+
+-- 6 of 12 --
+
+kullanılabilir. Yapısal kısıt olarak grafik, döngüsüz ve tek yönlü bir akış sergilemelidir:
+bir modül birden fazla üst bileşen tarafından kullanılabilir, ancak kendi bağımlılık sayısı
+düşük tutulmalıdır. Böylece yapı dallanan değil, katmanlı ve izlenebilir kalır.
+Tamamlanma Tanımı (Definition of Done)
+Erken aşama veya hızlı ölçeklenen ekiplerde hedef, teknik borcun tamamen ortadan kaldırılması
+değil, kontrol altında tutulmasıdır. Bu nedenle tamamlanma kriterleri, ürün hızını korur-
+ken ileriki bakım maliyetini asgariye indirecek düzeyde tanımlanır:
+• Kod anlaşılır ve niyet şeffaftır: ˙Isimlendirme açık ve tutarlıdır; karmaşık mantık
+kısa bir açıklamayla desteklenir. Kod yalnızca nasıl çalıştığını değil, neden bu şekilde
+tasarlandığını da yansıtır. Bilişsel yük ve yazılım anlaşılırlığı araştırmaları, yeni bir
+geliştiricinin kodu kısa sürede zihinsel modeline yerleştirebilmesinin sürdürülebilirlik
+açısından kritik olduğunu göstermektedir.
+• Riskler belirlenmiştir: Hızlı ilerleme sırasında atlanan kısımlar not edilmiş ve
+görünür bir borç listesine eklenmiştir.
+• Kısa vadeli borç bilinçlidir: Geçici çözümler açıkça belirtilmiş ve kayıt altına
+alınmıştır.
+• Bilgi paylaşımı gerçekleşmiştir: Yeni modüller ve önemli kararlar ekiple kısa bir
+notla paylaşılmıştır.
+˙Iteratif Tamamlama ve Katmanlı Tanım
+Geliştiricilerden tek seferde kusursuz sonuç beklemek bilişsel gerçeklikle çelişir. Zihin,
+karmaşık bir problemi çözerken önce keşif modunda çalışır; amaç temiz kod üretmekten
+önce çalışan bir model kurmaktır. Bu nedenle bir görevin doğal üretim döngüsü; ilk uygu-
+lama, hata düzeltme, yeniden düzenleme ve dokümantasyon aşamalarından oluşur. Lider
+riskin tek teslimatta toplanmasını isterken, geliştirici konunun zihinsel oturması için birkaç
+iterasyona ihtiyaç duyar. Bu fark, iki katmanlı bir tamamlanma tanımıyla dengelenebilir:
+• Operasyonel katman: Kod çalışır, testler geçer, entegrasyon hattı yeşildir; ilk
+teslimatta sağlanır.
+• Evrimsel katman: Yeniden düzenleme, dokümantasyon ve önleyici düzeltmeler;
+takip eden teslimatta tamamlanır.
+Bu yaklaşım, liderin kontrol ihtiyacı ile geliştiricinin öğrenme ve kalite ihtiyacını aynı
+yapıya yerleştirir: ilk teslimat çalışabilirliği ve risk azaltımını sağlar; takip teslimatı kaliteyi
+ve sürdürülebilirliği pekiştirir.
+7
+
+-- 7 of 12 --
+
+Temel Kalite ˙Ilkeleri
+Hata Ciddiyeti ve Önceliklendirme
+Hata ciddiyeti, tespit edilen sorunların sistemin genel işlevselliği üzerindeki etki düze-
+yini ifade eder ve önceliklendirme ile kaynak tahsisinde belirleyicidir. Genel kabul gören
+sınıflandırma beş seviyeden oluşur: sistemi tamamen durduran engelleyici hatalar, ana
+fonksiyonları önemli ölçüde etkileyen kritik sorunlar, performans veya deneyimde belirgin
+bozulmaya yol açan büyük hatalar, çalışmayı engellemeyen küçük kusurlar ve iyileştirme
+önerisi niteliğindeki bilgilendirmeler. Bir hatanın önceliği yalnızca teknik ciddiyetine değil,
+ortaya çıktığı bağlamın önemine de bağlıdır; aynı seviyedeki iki hata, farklı operasyonel
+koşullarda farklı öncelik derecelerine sahip olabilir.
+Kalite Kapıları
+Kalite kapıları, bir sürümün veya kod değişikliğinin yayına alınabilir nitelikte olup ol-
+madığını belirleyen kontrol noktalarıdır. Test kapsamı, açık kritik hata sayısı ve kod
+karmaşıklığı gibi metrikler üzerinden otomatik değerlendirme yapılır; eşiğin altında kalan
+değişiklikler sisteme dahil edilmez. Bu yaklaşım kaliteyi kişisel tercihe bağlı bir davranış
+olmaktan çıkarıp süreç temelli bir standart haline getirir ve kaliteyi yaşam döngüsünün
+erken aşamalarına entegre eder.
+Yazarken Temizle Yaklaşımı
+Bu yaklaşım, yeni eklenen kodun mevcut borcu artırmadan yüksek kalite standartlarında
+üretilmesini esas alır. Geçmiş borçları tek seferde temizlemek yerine, geliştirme sürecinin
+her adımında küçük fakat sürekli iyileştirmeler yapılır; mevcut yapıya dokunulduğunda
+yapı önceki halinden daha sürdürülebilir bırakılır. Böylece kalite ayrı bir faaliyet değil,
+üretim sürecinin doğal bir uzantısı haline gelir.
+Ortak Dil ve Farkındalık Ölçümü
+Kalite yönetiminde başarı, ekip içinde ortak bir kavramsal dilin oluşturulmasına bağlıdır;
+terimlerin farklı anlamlarda kullanılması ölçüm süreçlerinde belirsizlik yaratır ve metrikle-
+rin güvenilirliğini düşürür. Bu nedenle temel kavramlar kurum genelinde standartlaştırılmalıdır.
+Ayrıca ekip içi bilgi testleri ve öz değerlendirme araçları, kalite refleksini ölçmek ve
+pekiştirmek için kullanılabilir; bu mekanizmalar yalnızca birer denetim değil, ekibin öğrenme
+hızını görünür kılan araçlar olarak değerlendirilmelidir.
+Bağımsız Üretkenliğe Geçiş
+Yeni bir geliştiricinin bağımsız katkı seviyesine ulaşması üç aşamalı bir süreçtir: kuruma
+ve araçlara ilk tanıtım (orientation), kültüre ve kod tabanına entegrasyon (onboarding) ve
+öngörülebilir katkı seviyesine geçiş (ramp-up). Tipik ilerleme şu adımları izler: kurulum
+8
+
+-- 8 of 12 --
+
+ve erişimlerin tamamlanması ile küçük bir dokümantasyon katkısı; temel iş akışlarının
+hatasız senaryoda uçtan uca çalıştırılması ve testlerin yerel ortamda koşturulması; mentor
+eşliğinde küçük bir uçtan uca değişiklik; ölçülebilir etki üreten bağımsız bir küçük özellik;
+sprint planına katkı ve bir mimari karar kaydının yazılması; son olarak tek bir akışın
+planlamadan dağıtıma kadar uçtan uca sahiplenilmesi. Bu sürecin tamamı için ortalama
+altı haftalık bir süre hedeflenebilir.
+Bilişsel Yaklaşım: Hibrit Döngü
+Yeni bir sistemi anlamada iki temel strateji vardır. Yukarıdan aşağıya yaklaşımda geliştirici
+önce beklenen mimariye ilişkin zihinsel bir model kurar, ardından bu modeli kod düzeyinde
+doğrular; bu yöntem arama uzayını daraltır, ancak model ile gerçeklik arasındaki fark
+başlangıçta gözden kaçabilir. Aşağıdan yukarıya yaklaşımda ise doğrudan kod, log ve trafik
+izlerinden gözlemlenen davranışlar analiz edilir; bu yöntem özellikle borçlu sistemlerde
+tasarım ile fiili işleyiş arasındaki farkları ortaya çıkarır, ancak dağınık ilerleyebilir.
+Uygulamada en rasyonel yöntem, iki stratejinin hibrit bir döngüde birleştirilmesidir:
+önce kısa bir hipotez olarak beklenen akış şeması oluşturulur; ardından kod tabanı statik
+olarak taranıp bağımlılık analiz araçlarıyla doğrulanır; çalışma zamanında gerçek çağrı
+sırası kaydedilerek dinamik doğrulama yapılır; beklenen ve gözlenen akışlar yan yana
+görselleştirilir; küçük sapmalar yerinde düzeltilir, sistematik farklılıklar kanıtlarıyla geri
+ödeme backlog’una aktarılır. Bu döngü, bilişsel yükü zamana yayarak dengeler ve sistemin
+hem tasarım niyetine hem de fiili davranışına ilişkin kalıcı bir kavrayış sağlar.
+Kurumsal Öğrenme Perspektifi
+Yazılım ekiplerinde gözlemlenen verimlilik farklılıkları, çoğu zaman bireysel yeterlilikten
+değil, sistemik öğrenme döngülerinin eksikliğinden kaynaklanır. Birçok organizasyon, yeni
+bir geliştiriciden erken dönemde bağımsız çalışma bekler; ancak bu beklenti, sistemin
+kendi öğrenme borçlarını (dokümantasyon eksikliği, mimari opaklık, karar izinin bulun-
+maması) görmezden gelir. Bu durumda bireysel bağımsızlık, aslında sistemin çözülmemiş
+bağımlılıklarının bir semptomuna dönüşür. Aynı asimetri yöneticiler için de geçerlidir:
+sistemin tarihsel bağlamını öğrenmeden ekipten bağımsız üretkenlik bekleyen yönetici,
+aslında bireysel performansı değil, sistemin belirsizlik derecesini ölçmektedir.
+Yeniden düzenleme (refactoring), yalnızca kod kalitesini artıran teknik bir eylem değil,
+kurumsal öğrenmenin operasyonel biçimidir: tutarsız adlandırmalar alan belirsizliklerini,
+kopyalanmış fonksiyonlar tekrarlanan karar kalıplarını açığa çıkarır. Bireysel öğrenmenin
+kurumsal bilgiye dönüşebilmesi için geri bildirim ve gözlemlerin sistematik biçimde kayıt
+altına alınması ve bir öğrenme backlog’u aracılığıyla kurumsallaştırılması gerekir. Nihai
+ölçüt şudur: kurumun öğrenme hızı, pazarın değişim hızından yüksek olduğu sürece orga-
+nizasyon canlılığını korur; gerçek verimlilik çıktı miktarıyla değil, öğrenme çevrimlerinin
+bütünlüğü ve geri besleme sürelerinin kısalığıyla ölçülmelidir.
+9
+
+-- 9 of 12 --
+
+˙Iç Kullanıcı Verisinin Sınırları
+Erken aşama dağıtımlarda ilk kullanıcı kitlesi ağırlıklı olarak organizasyon içi çalışanlardan
+oluşur. ˙Iç kullanıcılar ürünü görev bilinciyle ve bağlama aşina biçimde test ettiklerin-
+den hatalara daha toleranslıdır; dış kullanıcılar ise ürünü özgür irade, zaman ve bedel
+yatırımıyla deneyimler. Bu nedenle iç kullanıcı verileri ile dış kullanıcı verileri ayrı küme-
+lerde toplanmalı, çalışan kitlesinden elde edilen bulgular diğer nüfuslara doğrudan genel-
+lenmemeli ve iç geri bildirim görev tanımı veya performansla ilişkilendirilmemelidir. ˙Iç
+kullanıcı testleri işlevsel öğrenme açısından anlamlı fakat gürültülü sinyallerdir; ürünün
+gerçek pazar değerini, bilişsel olarak farklı ve bağımsız kullanıcıların yorumları belirler.
+˙Insan Odaklı Üretim ve Rosh Gadol ˙Ilkesi
+˙Insan zihni, karmaşık problem çözme süreçlerinde doğası gereği iteratiftir: keşif, öğrenme
+ve sadeleştirme aşamalarıyla ilerler; doğru çözüme kademeli olarak yaklaşır. Bu döngü bastırıldığında
+kaybolan şey üretkenlik değil, algısal netliktir. Sürdürülebilir mühendislik, tek seferde
+mükemmellik disiplininden çok, bu bilişsel ritme saygıyla mümkündür.
+Organizasyonlarda kontrol arttıkça bireyler telafi edici davranışlar geliştirir: sessiz di-
+renç, duygusal çekilme veya gizli özerklik. Bu tepki bir zayıflık değil, sistemin dengeleyici
+bir sinyalidir; insan, aşırı kontrol altında düşünme hakkını geri kazanmaya çalışır.
+Bu gerilime kültürel bir yanıt, ˙Israil’de hem askeri hem sivil yapılarda kökleşmiş olan
+Rosh Gadol (büyük kafa) ilkesidir: bağlamı anlayan, düşünerek uygulayan ve inisiyatif
+alan kişiyi tanımlar. Karşıtı Rosh Katan (küçük kafa), talimatı mekanik biçimde uygu-
+layan ancak niyetini kavramayan davranışı simgeler. Yaklaşımın özü, emre değil amaca
+sadakattir: disiplin, aklı susturmak değil, aklın enerjisini ortak hedefe yönlendirmektir.
+Kavram Davranış Biçimi Organizasyonel Etki
+Rosh Gadol Niyeti anlar, düşünerek uy-
+gular, inisiyatif alır
+Öğrenen, esnek ve yaratıcı
+kültür
+Rosh Katan Talimatı harfiyen uygular,
+sorumluluk almaz
+Donuk, korku temelli ve
+bürokratik kültür
+Rosh Gadol yaklaşımı, disiplinli özerklik ilkesini temsil eder: otoriteyi zayıflatmadan
+bireyin aklını sürece dahil eder. Öğrenen organizasyonların temel taşı, emirleri körü körüne
+uygulayan değil, amacı anlayarak katkı veren bireylerdir.
+Ürün, Ekip Kültürünün Aynasıdır
+Bir kurumun kültürel olgunluğu, resmi değer bildirgelerinde değil, ürettiği ürünün ni-
+teliğinde gözlemlenir. Kod tabanının yapısı; karar alma süreçlerinin açıklığının ve ekip
+içi iletişim kalitesinin doğrudan bir yansımasıdır. Katmanları karışmış ve tutarsız kod
+yapıları, genellikle karar mekanizmalarının net tanımlanmadığı ve sorumluluk sınırlarının
+belirsiz olduğu ekiplerde ortaya çıkar; yapısal düzensizlik yalnızca teknik borç değil, karar
+kalitesi borcu da üretir.
+Ürün üzerindeki kontrol azaldığında, organizasyonel enerji sıklıkla insan davranışlarını
+10
+
+-- 10 of 12 --
+
+düzenlemeye yönelir: yönetim, ürünü anlamlandırmakta zorlandıkça bireyler üzerinde
+daha sıkı denetim kurma eğilimine girer. Sonuç olarak ekip, odağını probleme değil prob-
+lemi kimin yaptığını bulmaya yönlendirir ve öğrenme hızı düşer. Gerçek öğrenme, birey-
+lerin davranışlarını değil sistemin hataya yol açan dinamiklerini hedefleyen sorgulamayla
+mümkündür: bu hatayı kim yaptı sorusu yerine, bu hatayı hangi süreç üretti sorusunu
+sorabilen kurumlar öğrenmeyi başlatabilir. Hata, suçlama nedeni değil, sistemin kendisini
+iyileştirmesi için bir veri noktasıdır.
+Geri Bildirim Kültürü
+Kurumsal geri bildirim sistemleri, görünürde öğrenme aracı olsa da çoğu zaman dışsal
+kontrol mekanizmasına dönüşür; bu durum organizasyonun öğrenme kapasitesi yerine de-
+netim kapasitesini güçlendirir. Bir geri bildirim sisteminin olgunluğu üç eksen üzerinden
+değerlendirilebilir: niyet (kontrol mü, anlam üretimi mi), yön (bireye mi, sisteme mi) ve
+zaman ufku (davranış düzeltme mi, öğrenme döngüsü mü).
+Seviye Yaklaşım Tanım Kültürel Sonuç
+1. Kontrol Odaklı Emir ve
+düzeltme
+Geri bildirim otorite
+aracıdır; yöneticiler hata
+arar, bireyler savunmaya
+geçer.
+Korku kültürü, sessiz di-
+renç, düşük inovasyon.
+2. Düzeltici Performans
+denetimi
+Hatalar bireye atfedilir; sis-
+tem hataları göz ardı edilir.
+Yüzeyde uyum, derinde
+tükenmişlik.
+3. Gelişimsel Koçluk yöne-
+limi
+Amaç bireyin gelişimidir;
+ancak süreç yöneticinin
+kontrolündedir. Bireyler
+öğrenir, sistem sabit kalır.
+Kısmi özerklik, yüksek
+bireysel baskı.
+4. Reflektif Sistemik sor-
+gulama
+Geri bildirim sisteme de
+yönelir; davranış değil yapı
+sorgulanır.
+Açık iletişim, artan
+öğrenme hızı.
+5. Öğrenen Organizasyon Kolektif
+yansıma
+Döngüler kurum-
+sallaşmıştır; hata öğrenme
+sinyalidir, esas olan anlam
+üretimidir.
+Psikolojik güven, sürekli
+gelişim, içsel motivasyon.
+Alt seviyelerde geri bildirim bireyleri düzenleme aracıdır; orta seviyede bireysel gelişim
+öne çıkar ancak sistem değişmez; üst seviyelerde geri bildirim sistemik öğrenmenin temel
+mekanizmasına dönüşür. Ürün hatalarının sürekli bireysel geri bildirime yönelmesi, organi-
+zasyonun kendi öğrenme kasını zayıflatır; kalıcı öğrenmeyi yalnızca sistemi konuşturabilen
+döngüler üretir.
+Ton Kalibrasyonu: Arkadaşın Olsaydı Testi
+Geri bildirimin amacı cezalandırmak değil, gelişime yardımcı olmaktır; bu nedenle duy-
+gusal tonu sorgulamak, iletişimin etkisini belirleyen kritik bir adımdır. Su soru güçlü bir
+öz farkındalık testi olarak kullanılabilir: bu kişi benim arkadaşım olsaydı, bu cümleyi bu
+tonda söyler miydim? Eleştiri yüksek, empati düşükse geri bildirim artık gelişim aracı
+değil, öfke ifadesidir.
+Uygulama üç aşamadan oluşur. Yansıma aşamasında birey, geri bildirimi hangi duy-
+11
+
+-- 11 of 12 --
+
+gusal zemin üzerinde verdiğini değerlendirir; temelde öfke veya çaresizlik varsa önce denge
+sağlanır. Empati değerlendirmesinde ton, ilişkisel bütünlüğü koruyacak biçimde gözden
+geçirilir. Ton kalibrasyonunda ise odak, bireyin kişiliğinden gözlemlenebilir davranışa
+kaydırılır: bu işi sürekli geciktiriyorsun demek yerine, teslim tarihlerine ulaşmakta güçlük
+yaşıyoruz, süreci birlikte nasıl iyileştirebiliriz demek tercih edilir.
+Kurumsal iletişimde öfke çoğu zaman kontrol kaybı veya çaresizlik hissinden doğar;
+bu test, öfkeyi meraka dönüştürür. Kişi hakkında değil durum hakkında meraklı olmak
+— ne oldu da bu hata tekrar etti, benim payım ne — öğrenme sürecini tetikler. Teknik
+borç yalnızca kod kalitesiyle değil, ekip içi iletişim kalitesiyle de ilgilidir; bu nedenle geri
+bildirimin tonunu yönetmek, teknik bağlamdan insani bağlama geçişte kritik bir beceridir.
+Sonuç
+Bu doküman, teknik borcun yönetilebilir hale getirilmesi için teknik ve davranışsal yaklaşımları
+bütünsel biçimde ele almıştır. Yönetilebilir teknik borç; ölçüm ve geri ödeme disiplini ka-
+dar, öğrenme kültürü ve ekip içi iletişim biçimiyle de ilgilidir. Amaç, sistematik farkındalık
+yoluyla ürün hızını korurken uzun vadeli sürdürülebilirliği sağlamaktır.
+Kaynaklar
+[1] A. J. Ko et al., ”How Do Programmers Understand Existing Code?”, International
+Journal of Human-Computer Studies, 2006.
+[2] J. Siegmund et al., ”Measuring and Modeling Programming Experience”, Empirical
+Software Engineering, 2014.
+[3] D. Senor and S. Singer, Start-Up Nation: The Story of Israel’s Economic Miracle,
+Twelve, New York, 2009.
+12
+
+-- 12 of 12 --

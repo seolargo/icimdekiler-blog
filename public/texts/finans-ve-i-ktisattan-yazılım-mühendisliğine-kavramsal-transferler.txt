@@ -1,0 +1,1450 @@
+Finans ve İktisattan Yazılım Mühendisliğine Kavramsal
+Transferler
+Temmuz 2026
+Özet
+Bu çalışma, iktisat ve finans literatüründe geliştirilmiş kavramların yazılım mühendisliği
+pratiğine aktarılabilir olanlarını derlemektedir. Temel tez şudur: iktisat, “kıt kaynakların,
+belirsizlik altında, birbirini etkileyen aktörler arasında paylaştırılması” problemini bir buçuk
+asırdır sistemli biçimde incelemiştir; yazılım mühendisliği de yapısal olarak aynı problemi
+yaşar. Bu nedenle aktarımlar süslü benzetmeler değil, aynı mekanizmanın iki farklı alandaki
+görünümleridir. Derlemeye yalnızca doğal ve zorlamasız eşleşmeler alınmış, her kavram finans
+bilgisi olmayan bir okurun takip edebileceği biçimde önce kendi alanında açıklanmış, sonra
+yazılım karşılığı verilmiştir.
+Giriş: Bu Aktarım Neden Mümkün?
+Yazılım mühendisliğinin eksiği, sanıldığının aksine bir felaket arşivi değildir: Therac-25 inceleme-
+sinden Ariane 5 raporuna, RISKS arşivinden olay-sonrası inceleme kültürüne uzanan, titizlikte
+havacılıkla yarışan bir vaka literatürü zaten vardır. Eksik olan, bu arşivi davranışa bağlayan
+yaptırım mekanizmasıdır: bir kaza raporu havacılıkta sertifikasyonu değiştirirken, yazılımda en
+iyi ihtimalle bir konferans sunumu olur. Finansın buradaki değeri de yaygın anlatının işaret
+ettiği yerde değildir. "Tarihin en pahalı hata laboratuvarı" olarak finansın makro felaketleri —
+krizler, çöküşler — aslında zayıf ders malzemesidir: onyılda bir gelirler, mekanizmaları üzerinde
+uzlaşma yoktur ve incelemeleri politik çekişme altında yazılır; nitekim en iyi belgelenmiş ders-
+leri bile tekrarı önleyememiştir. Finansın taşınabilir birikimi felaket anlatılarında değil, felaket
+öncesinde her gün işleyen mikro-yaptırım rejimindedir: pozisyonun sahipli olması, kâr-zararın
+tartışmasız ölçülmesi, riskin bütçelenmesi, kaybın anında ve kişiye atfedilebilir biçimde gelmesi.
+Yazılıma taşınmaya değer olan, bu gündelik ölçüm ve hesap verme disiplininin kavramlarıdır —
+risk bütçesi, opsiyon değeri, pozisyon boyutlama, drawdown. Ancak transfer kayıpsız değildir:
+finans kavramları likit piyasa, fiyatlanabilir risk ve tekrarlanan oyun varsayımlarıyla gelir ve bu
+varsayımların tutmadığı yerde metafor zehirlenir — faizi sözleşmeyle sabit olan borcun, faizi
+ölçülemez ve doğrusal olmayan "teknik borca" çevrilmesinde olduğu gibi. Dolayısıyla taşınan
+her kavram, yanında iki şeyle gelmelidir: onu işleten yaptırım mekanizması ve hangi varsayım
+kırıldığında geçersizleşeceğinin açık kaydı.
+Birincisi, finansın bütün kavramları ölçülebilir tek bir eksende (para) yaşar; bu keskinlik, kav-
+1
+
+-- 1 of 38 --
+
+ramların başka ölçülebilir alanlara (gecikme süresi, kapasite, hata oranı) temiz aktarılmasını
+sağlar.
+İkincisi, finans düşmanca bir ortamda evrimleşmiştir: piyasada her zayıflık onu sömürecek birini
+bulur, dolayısıyla hayatta kalan kavramlar kötüye kullanıma dirençlidir — yazılım sistemleri de
+giderek benzer bir ortamda yaşamaktadır.
+Üçüncüsü, iktisat betimlemekle yetinmeyen, karar üreten bir sosyal bilimdir: kavramları “al, sat,
+bekle, risk al” biçiminde eyleme bağlıdır ve mühendisin aradığı da tam olarak karar kurallarıdır.
+2
+
+-- 2 of 38 --
+
+Duvar Hipotezi: Disiplinlerin Gelişme Kapasitesi Üzerine Bir Geri
+Bildirim Kuramı
+Problem ve Çıkış Tezi
+Bu yazının çıkış tezi, farkın kaynağını yaptırımda arar: bir alan, ancak hataları sert sonuçlarla
+karşılaştığında — gündelik ifadeyle, “duvara vurduğunda” — gelişir. Tez doğru bir sezgi taşır
+ancak bu hâliyle eksiktir; zira sert duvara sahip olup gelişemeyen alanlar da vardır. Yazının
+amacı, tezi işler bir kurama dönüştürmek: duvarın hangi özellikleri gelişmeyi üretir, sertliğin
+sınırı nedir ve alanlar duvarlarını nereden edinir.
+Sertlikten Döngü Kalitesine
+Belirleyici değişken duvarın sertliği değil, geri bildirim döngüsünün bütünsel kalitesidir. Bu kalite
+üç bileşene ayrıştırılabilir.
+Birincisi hız: hata ile sonucun hissedilmesi arasındaki gecikme.
+İkincisi ölçülebilirlik: sonucun tartışmaya kapalı bir sinyal üretmesi.
+Üçüncüsü atfedilebilirlik: sinyalin belirli bir karara ve karar vericiye bağlanabilmesi.
+Önerilen model çarpımsaldır: gelişme kapasitesi, sertlik ile bu üç bileşenin çarpımı olarak dav-
+ranır — bileşenlerden herhangi biri sıfıra yaklaştığında, diğerleri ne kadar güçlü olursa olsun
+çarpım sıfıra yaklaşır.
+Çarpımsallığın kanıtı karşıt örneklerdedir. Yükseköğretim politikası, halk sağlığı ve şehir plan-
+lama gibi alanlarda duvarlar son derece serttir: hatalı kararların bedeli mahvolan kariyerler,
+kaybedilen yaşamlar ve çöken kentlerdir. Ancak sonuç onyıllar sonra gelir, ölçümü yorum savaş-
+larına açıktır ve sorumluluk kurumsal katmanlar içinde dağılır. Bu alanlarda sert duvara rağmen
+öğrenme zayıftır; çünkü uzak, yavaş ve anonim duvar, işlevsel olarak duvarsızlığa denktir. Ceza
+yeterince gecikir, bulanıklaşır ve sahipsizleşirse, hiç kimse için hiçbir şey öğretmez.
+Referans Vaka: Finans Neden İyi Öğrenir
+Finansın olağandışı kavram üretkenliğine ilişkin üç gözlem, bu çerçevede yeni bir anlam kazanır.
+Birinci gözlem, finansın bütün kavramlarının tek ölçülebilir eksende — parada — yaşadığıdır;
+bu keskinlik, kavramların başka ölçülebilir alanlara temiz aktarılmasını sağlar.
+İkinci gözlem, finansın düşmanca bir ortamda evrimleştiğidir: piyasada her zayıflık onu sömü-
+recek bir karşı taraf bulur, dolayısıyla hayatta kalan kavramlar kötüye kullanıma dirençlidir.
+Üçüncü gözlem, iktisadın betimlemekle yetinmeyen, karar üreten bir sosyal bilim olduğudur:
+kavramları “al, sat, bekle, ne kadar risk al” biçiminde eyleme bağlıdır.
+Duvar kuramı açısından bu üç gözlem, tesadüfi bir liste değil, iyi duvarın üç mühendislik özelliği-
+nin tam tarifidir. Tek eksenlilik, ölçülebilirliği ve onun üzerinden atfedilebilirliği kurar: kâr-zarar
+tablosu tartışmaya kapalıdır ve pozisyonun sahibi bellidir. Düşmanca ortam, çarpma sıklığını
+3
+
+-- 3 of 38 --
+
+belirler: piyasa katılımcıyı onyılda bir değil her gün sınar. Karar üretme zorunluluğu ise dön-
+günün kapanmasını garanti eder: iddiada bulunmayan disiplin duvara hiç vurmaz; finans her
+kavramını bir pozisyona bağladığı için her kavramı sürekli sınanır. Finansın ayrıcalığı, bu geri
+bildirim rejimini piyasa mekanizmasından bedelsiz edinmesidir — kurmak zorunda kalmamıştır,
+içine doğmuştur.
+Alanların Duvar Ekseninde Dizilişi
+Bu üç bileşenin bileşimi, alanları bir öğrenme kapasitesi spektrumuna dizer. Spektrumun doğal
+ucunda poker ve alım-satım gibi pratikler yer alır: sert, anlık ve tam atfedilebilir geri bildirim,
+bilinen en hızlı epistemik disiplinleri üretir — kendi yargısının kalibrasyonunu ölçmeyi meslek
+edinmiş topluluklar bu alanlardan çıkar.
+Havacılık, spektrumun kurumsal ucudur ve kritik bir dersi taşır: duvar doğal hâliyle atfedilebilir
+değildir — kaza karmaşık bir olaydır — ancak sektör atıf mekanizmasını zorla kurumsallaş-
+tırmıştır: zorunlu ve bağımsız kaza soruşturması, uçuş veri kayıtları, bulguların bütün sektöre
+yayımlanması. Sonuç, en sert duvarlı alanlardan birinin aynı zamanda en iyi öğrenen alan hâline
+gelmesidir; yüksek güvenilirlik literatürünün bu sektörden doğması rastlantı değildir.
+Yazılım mühendisliği öğretici bir ara vakadır. Üretim ortamının çökmesi sert ve anlık bir sinyal-
+dir; ancak karmaşık sistemlerde atıf doğal olarak bulanıktır — “sistem karmaşıktı” her zaman
+söylenebilir. Sektörün yanıtı, eksik bileşeni kültürel araçlarla inşa etmek olmuştur: olay sonrası
+inceleme, suçlamasız kök neden analizi, nöbet sorumluluğu. Bunlar, doğal duvarın vermediği
+atıf netliğini ritüelle kuran protez mekanizmalardır. Aynı mantığın üretim tarihindeki en radikal
+örneği Toyota’nın stok politikasıdır: envanteri kasıtlı olarak azaltmak, problemlerin küçükken,
+anında ve kaynağında hissedilmesini sağlar — duvar uzaktaysa, yaklaştırılır. Her iki örnek de
+aynı genel ilkeyi doğrular: doğuştan iyi duvara sahip olmayan alanlar, duvarlarını bilinçli olarak
+imal edebilir.
+Spektrumun öbür ucunda, duvarı fiilen bulunmayan alanlar yer alır. Yanlış teorinin kariyere
+maliyet üretmediği akademik sahalarda replikasyon krizi, bu yokluğun birikmiş faturasıdır: iddi-
+alar onyıllarca sınanmadan dolaşımda kalabilmiştir. Sınır durum ise öğreticidir: hiçbir öngörüsü
+hesap vermeye çağrılmayan bir disiplin, binyıllar boyunca içerik olarak hiç gelişmeden varlığını
+sürdürebilir — duvarsızlık, ölümsüzlükle birlikte kısırlık da bahşeder.
+Üst Sınır: Öldürücü Duvar Öğrenmeyi de Öldürür
+Kuramın ikinci düzeltmesi, sertliğin monoton işlemediğidir. “Çok sert bir duvar mı gerekir” so-
+rusunun yanıtı hayırdır: ölümcül duvar, öğrenmeyi de öldürür. Tek denemede yok olan ajan,
+deneyimini ne biriktirebilir ne aktarabilir; ceza hayatta kalınamaz olduğunda, geri bildirim dön-
+güsünün kapanacağı özne ortada kalmaz. Bu nedenle en iyi öğrenen sistemler, çarpmanın ma-
+liyetini kompartımanlaştıranlardır. Finansın kendi mimarisi bunu örnekler: fon batar, yönetici
+öğrenir, sektör devam eder — iflas, sistemin değil birimin ölümüdür. Evrimsel süreç aynı mi-
+mariyi kullanır: birey ölür, tür öğrenir. Buradan kuramın tamamlayıcı ilkesi çıkar: ideal duvar,
+kayıtsız kalınamayacak kadar sert, ancak çarpma başına maliyeti hayatta kalınabilir düzeyde tu-
+4
+
+-- 4 of 38 --
+
+tacak biçimde bölünmüş olandır. Gelişme, ne acısız ortamda ne de idam sehpasında gerçekleşir;
+ikisinin arasındaki dar bantta gerçekleşir.
+Sonuç: Duvar Tipolojisi ve Teşhis Ölçütü
+Tezin rafine edilmiş hâli şudur: bir alan, kendisine sık çarpılan, hızlı yanıt veren, sorumluluğu
+netleştiren ancak tek çarpışta öldürmeyen bir duvar edinebildiği ölçüde gelişir. Duvarın edinim
+biçimi alana göre değişir ve bir tipoloji oluşturur: kimi alanlar duvarı çevrelerinden bedelsiz
+alır (finans, poker); kimileri regülasyonla kurar (havacılık); kimileri ritüelle taklit eder (yazılım);
+kimileri kendi eliyle yaklaştırır (stoksuz üretim). Buradan pratik bir teşhis ölçütü de çıkar: bir
+alanın gelişme kapasitesini değerlendirmek için sorulacak soru “cezası ağır mı” değil, “cezası ne
+kadar sürede, ne kadar tartışmasız biçimde ve kimin hanesine geliyor” sorusudur. Gelişemeyen
+alanlar duvarsız olanlar değildir; duvarı uzak, yavaş veya anonim olanlardır — çünkü işlevsel
+açıdan uzak duvar, olmayan duvardır.
+5
+
+-- 5 of 38 --
+
+Duvar Mimarisi: Öğrenme Rejiminin Tasarım Bileşenleri
+Problemin Mühendislik Formülasyonu
+Bir alanı finans hızında öğrenir hâle getirmek, önceki bölümde tanımlanan geri bildirim bileşen-
+lerini kendiliğinden oluşmalarını beklemek yerine tasarlamak anlamına gelir. Finansın ayrıcalığı,
+bu bileşenleri piyasa mekanizmasından bedelsiz edinmesidir; diğer alanlar için aynı rejim, altı
+ayrı mimari katmanın bilinçli inşasını gerektirir. Aşağıda her katman, işlevi, somut araçları ve
+başlıca riskiyle birlikte ele alınmaktadır.
+Ölçüm Mimarisi: Tek Eksene İndirgeme
+İlk katman, alanın parasal eksene karşılık gelen skalerini bulmak veya icat etmektir. Kritik ay-
+rım, eksenin doğruluğu ile taahhüt edilmişliği arasındadır: para da değerin kusurlu bir ölçüsüdür,
+ancak bütün katılımcılar ona taahhüt ettiği için işlev görür. Yazılımda hizmet düzeyi hedefleri,
+sağlıkta risk-ayarlı mortalite, tahmincilikte Brier skoru aynı statüdedir — kusurlu ancak ta-
+ahhüt edilebilir eksenler. Eksenin yokluğunda her başarısızlık bir yorum savaşına dönüşür ve
+geri bildirim döngüsü hiç kapanmaz. Katmanın yapısal riski Goodhart yasasıdır: hedefe dönüşen
+ölçü bozulur. Çözüm eksensizliğe dönmek değil, ölçüyü sabitleyen ancak sorgulanabilir tutan bir
+revizyon düzenidir — eksenin periyodik olarak gözden geçirildiği bir ölçüm anayasası.
+Bahis Mimarisi: İddianın Pozisyona Çevrilmesi
+Finansta görüş beyan edilmez, pozisyon alınır. Diğer alanlardaki karşılığı, her iddianın önceden,
+yazılı, yanlışlanabilir ve sahipli bir tahmine dönüştürülmesidir. Somut araçları tahmin kayıtları,
+karar günlükleri (kararın hangi beklentiyle alındığının ve hangi tarihte hangi metrikle sınana-
+cağının kaydı), bilimsel ön-kayıt pratiği (hipotezin sonuç gelmeden kilitlenmesi) ve premortem
+tekniğidir. Katmanın özü, yaygın kanının aksine risk üstlenimi değil, ex-ante taahhüttür: insan-
+lar sonuç geldikten sonra ne beklediklerini yeniden yazma eğilimindedir (geriye dönük yanlılık)
+ve bahis mimarisinin işlevi tam olarak bu kaçış yolunu kapatmaktır.
+Frekans Mimarisi: Döngünün Kısaltılması
+Doğal sonucun onyıllar sonra geldiği alanlarda üç kısaltma stratejisi vardır. Birincisi öncü gös-
+tergeler inşa etmektir — ancak ara sinyalin nihai sonuçla korelasyonu ayrıca denetlenmelidir;
+aksi hâlde optimizasyon vekil metriğe kayar. İkincisi sentetik çarpışma üretimidir: havacılığın si-
+mülatörü, ordunun kızıl takım tatbikatı, yazılımın kaos mühendisliği ve tıbbın vaka tatbikatları,
+gerçek duvara çarpmadan çarpışma deneyimi üreten teknolojilerdir. Üçüncüsü parti küçültme-
+dir: büyük ihale yerine pilot uygulama, uzun vadeli plan yerine kısa iterasyon — her küçük
+parti bir çarpışma fırsatıdır. Stoksuz üretimin envanter azaltması bu ilkenin imalattaki, asgari
+uygulanabilir ürün ise girişimcilikteki hâlidir.
+Atıf Mimarisi: Sahipliğin Netleştirilmesi, Cezanın Ayrılması
+En ince kalibrasyonu gerektiren katman budur, çünkü iki zıt hedefin eşzamanlı tutturulmasını
+ister: kararlar sahipli olmalıdır — anonim komite kararı kimseye bir şey öğretmez — ancak
+6
+
+-- 6 of 38 --
+
+sonuçlar cezasız incelenebilmelidir, zira ceza rejimi altında veri saklanır ve uyarı mekanizmaları
+atıl kalır. Çözülmüş örnekler mevcuttur: havacılıkta olay raporları ceza muafiyetiyle verilir; ya-
+zılımın suçlamasız kök neden analizi “kim” yerine “hangi koşullar” sorusunu sorar ancak karar
+sahipliğini kayıt altında tutar. Katmanın formülü şöyle özetlenebilir: atıf kişiye, ders sisteme,
+ceza hiçbirine — yaptırım, hatanın kendisine değil, öğrenmemenin kanıtı olan tekrarına bağlanır.
+Risk Mimarisi: Ölümün Kompartımanlaştırılması
+Deneme birimi, başarısızlığı hayatta kalınabilir kılacak kadar küçük tasarlanmalıdır: fon batar,
+yönetici öğrenir; pilot proje batar, kurum öğrenir. Bu katman, “başarısızlığa hoşgörü” türünden
+bir kültür sloganı değil, yapısal tasarımdır: bütçe kompartımanları, geri alınabilir ve alınamaz
+kararların ayrıştırılması, kademeli devreye alma ortamları ve sigorta katmanları. Önceki bölümde
+ortaya konan üst sınır ilkesinin uygulamasıdır: öldürücü duvar öğrenmeyi de öldürdüğünden,
+çarpma başına maliyet bilinçli olarak bölünür.
+Hafıza Mimarisi: Çarpışmanın Kalıcılaştırılması
+Gözden en çok kaçan katman hafızadır. Finans bunu da bedelsiz edinir: kaybedilen para geri
+gelmez ve fiyat serisi kalıcıdır. Diğer alanlarda ise çarpışma unutulabilir — rapor yazılır, arşive
+gömülür ve aynı hata yıllar sonra tekrarlanır. Gereken, çarpışmayı kurumsal hafızaya işleyen
+mekanizmalardır: aranabilir inceleme arşivi, çözümün yatay yayılımı, işe alım eğitimine gömülü
+vaka etütleri ve en önemlisi standardın kendisinin güncellenmesi. Ölçüt keskindir: duvara çarpıp
+standardını değiştirmeyen örgüt, işlevsel olarak hiç çarpmamıştır.
+Bileşik Formül ve İki Sınır Kaydı
+Altı katman tek bir işlem zincirinde özetlenebilir: ölç, bahse çevir, sık çarptır, sahipli ancak
+cezasız incele, küçük öl, kaydet ve standardı değiştir. Bu zincire iki sınır kaydı düşülmelidir.
+Birincisi, mimarinin kendisi bir maliyettir: ölçüm, kayıt, inceleme ve tatbikat zaman tüketir;
+aşırı doz, alanı öğrenme bürokrasisine boğar ve asıl üretken işi yapamaz hâle getirir — kimi
+kurumsal metrik kültürleri tam bu patolojiyi sergiler. İkincisi, bazı alanlar gerçekten indirgene-
+mezdir: tek eksene sığmayan, onyıldan kısa doğal döngüsü bulunmayan uğraşlar (temel bilim,
+eğitim, diplomasi) vardır. Bu alanlarda dürüst yanıt, finans hızına ulaşılamayacağını kabul edip
+spektrumda mümkün olan en iyi noktaya ilerlemektir: eksen bulunamıyorsa tahmin kaydı tutu-
+lur, döngü kısaltılamıyorsa simüle edilir, hiçbiri olmuyorsa en azından ex-ante taahhütler yazılı
+hâle getirilir. Sıfır ile finans arasında geniş bir ara bölge vardır ve çoğu alan, bulunduğu yerden
+birkaç adım ileri taşınabilir.
+7
+
+-- 7 of 38 --
+
+Bilinçli Uygulayıcılar: Duvar Mimarisinin Ampirik Vakaları
+Bilinç Ölçütü
+Bu bölümde “bilinçli” uygulayıcı, duvar mimarisini sezgiyle değil yazılı doktrin düzeyinde kuran
+örgütleri adlandırmaktadır. Liste kısa ancak öğreticidir ve dört kümede incelenebilir: doktrini
+açıkça yazanlar, sektör ölçeğinde dönüşenler, piyasa duvarını doğuştan alıp bilinçle rafine edenler
+ve sınır vakalar.
+Doktrini Açıkça Yazanlar
+En saf vaka Bridgewater’dır: Dalio’nun Principles metni fiilen bir duvar mimarisi el kitabıdır.
+Her hata bir kayıt sistemine işlenir (hafıza mimarisi); her görüş sahiplidir ve görüş sahibinin
+geçmiş isabetine göre ağırlıklandırılır (atıf ve kalibrasyonun birleşimi); toplantılar kaydedilir ve
+çalışanlar birbirine gerçek zamanlı değerlendirme verir (döngü kısaltma). Dalio rejimi açıkça
+“hata artı yansıma eşittir ilerleme” formülüyle, bir makine olarak tarif eder. Aynı vaka, aşırı
+dozun da kanıtıdır: radikal şeffaflık rejimi, önemli sayıda çalışan için yaşanabilir bulunmamıştır.
+Koch Industries, kuramsal olarak en bilinçli vakadır: “piyasa temelli yönetim” doktrini, adının da
+beyan ettiği gibi, piyasanın duvarını şirketin içine taşıma girişimidir — iç fiyatlama, karar hakkı-
+nın kanıtlanmış yargı kalitesine göre dağıtılması ve her yatırımın fırsat maliyetiyle yargılanması.
+Doktrin, Hayek’in bilgi problemini açık referans olarak kullanır.
+Amazon, mimariyi tekil adlandırılmış mekanizmalar hâlinde kurumsallaştırmıştır: geri alınabilir-
+liğe göre karar sınıflandırması olarak tek yönlü–çift yönlü kapı ayrımı (risk mimarisi), havacılık
+soruşturmasının şirket içi karşılığı olan hata düzeltme belgesi, yüksek frekanslı metrik inceleme-
+leri, karar verilmeden gerekçenin yazılı kilitlenmesini zorlayan uzun memo disiplini ve iddianın
+önceden yanlışlanabilir biçimde yazılmasını isteyen geriye doğru çalışma yöntemi (bahis mima-
+risi).
+Danaher, az bilinen ancak sonuç itibarıyla belki en başarılı vakadır: Toyota sistemini bir holding
+işletim sistemine çevirmiş ve onyıllar boyunca satın aldığı her şirkete aynı mimariyi kurmuştur;
+kaizen disiplinini finansal yaptırıma bağlayan bu model, sanayi tarihinin en güçlü uzun vadeli
+bileşik getirilerinden birini üretmiştir.
+Sektör Ölçeğinde Dönüşümler
+Havacılık, tek bir örgütün değil bütün bir sektörün bilinçli dönüşümüdür: ceza muafiyetli olay
+raporlama sistemi, “atıf kişiye, ceza hiçbirine” formülünün icadıdır ve kendiliğinden oluşmamış,
+1970’lerde tasarlanmıştır. Anesteziyoloji, tıbbın içinde tek başına dönüşen uzmanlık olarak kri-
+tik bir kontrast sunar: 1980’lerde kapalı dava dosyalarının sistematik incelenmesiyle standartlar,
+izleme cihazları ve kontrol listeleri yeniden tasarlanmış, anestezi kaynaklı ölüm yaklaşık yüz
+kat düşürülmüştür; tıbbın geri kalanının aynı dönüşümü hâlâ tamamlayamamış olması, dönü-
+şümün mümkün ancak otomatik olmadığının en güçlü kanıtıdır. Askerî alanda, rütbenin askıya
+alındığı yapılandırılmış sorgulama — ne planlandı, ne oldu, neden, ne değişecek — 1970’lerde
+bilinçli olarak tasarlanmış ve merkezî ders arşivine bağlanmıştır; İsrail ordusunun brifing-sonrası
+8
+
+-- 8 of 38 --
+
+kültürü aynı ailedendir. Nükleer donanma programı ise en uç vakadır: sıfır kaza zorunluluğu al-
+tında öldürücü duvar sentetik sinyallere çevrilmiş — acımasız eğitim, her sapmanın istisnasız
+raporlanması — ancak komutanın mutlak hesap verirliğiyle kişisel sahiplik korunmuştur.
+Doğuştan Duvarlı Olup Bilinçle Rafine Edenler
+Nicel alım-satım firmaları piyasa duvarına zaten sahiptir ancak üzerine bilinçli katmanlar kurar:
+tahmin kalibrasyonunun bireysel ölçümü, olasılıksal oyunların eğitime gömülmesi, hata anla-
+tımının ritüelleşmesi. Tetlock’un iyi yargı programı, kalibrasyonu (Brier skoru) tek eksen alıp
+bir topluluğu bunun etrafında örgütleyen açık bir duvar-mimarisi manifestosudur ve istihbarat
+analizinin yorum kültürüne karşı kurulmuştur. Google’ın saha güvenilirlik mühendisliği, hata
+bütçesi kavramıyla güvenilirlik hedefini fiilen bir bahse çevirir — bütçe tükendiğinde yeni özellik
+geliştirme durur — ve suçlamasız inceleme ile aranabilir arşivi birleştirerek atıf ve hafıza mi-
+marilerinin ders kitabı uygulamasını verir. Formula 1 ve yeniden kullanılabilir roket geliştirme
+ise frekans mimarisinin uç örnekleridir: ilkinde iki haftada bir gelen, milisaniyeyle ölçülen ve
+telemetriyle tam atfedilebilir bir sınav; ikincisinde onyıllık geliştirme döngüsünü aylara indi-
+ren, prototipin patlamasını programın öğrenmesine dönüştüren kompartımanlaştırılmış deneme
+stratejisi.
+Sınır Vakalar ve Bir İroni
+Haier’in mikro-girişim modeli, şirketi binlerce birime bölüp her birini gerçek kâr-zarar sorumlu-
+luğuna bağlayarak Koch’un kuramda yaptığını radikal ölçekte uygulama denemesidir; sonuçları
+tartışmalı, bilinç düzeyi tamdır. Netflix, hataların açık anlatımı gibi pratiklerle kısmî bir va-
+kadır ancak eksen ve bahis mimarileri formel değildir. En öğretici sınır vakası ise Toyota’dır:
+bu mimariyi en derin kurmuş örgütlerden biri olmasına karşın, onu bu dille bilincinde taşıdığı
+söylenemez — sistem kendi kavramlarıyla (hansei, andon, genchi genbutsu) düşünür ve mima-
+rinin formülasyonu sonradan, dışarıdan bakan araştırmacılarca yapılmıştır. Uygulama derinliği
+ile kuramsal öz-bilinç arasındaki bu ayrışma, önceki bölümlerde ele alınan örtük bilgi tezinin
+duvar kuramı içindeki yansımasıdır.
+İki Örüntü ve Teşhis Ölçütünün Netleşmesi
+Toplu tablo iki örüntü sergiler. Birincisi köken örüntüsüdür: bilinçli dönüştürücülerin neredeyse
+tamamı ya finans kökenlidir ya da ölümle burun buruna sektörlerden gelir — duvarı ya bedelsiz
+edinmişler ya da duvar kendilerini almadan önce davranmak zorunda kalmışlardır. Bu gözlem,
+kuramın örtük bir öngörüsünü doğrular: duvar mimarisi kurma güdüsünün kendisi de bir duvara
+ihtiyaç duyar; rahat alanlar rejimi kendiliğinden kurmaz. İkincisi mekanizma örüntüsüdür: hiçbir
+vakada dönüşüm bir “kültür değişimi” çağrısıyla gerçekleşmemiştir; istisnasız hepsinde somut,
+adlandırılmış ve zorunlu mekanizmalar vardır — hata kaydı, düzeltme belgesi, eylem sonrası
+inceleme, hata bütçesi, kapalı dava analizi. Bu örüntü, bilincin işlevsel tanımını da netleştirir:
+bir örgütün duvar mimarisinin bilincinde olması, kültürüne dair genel beyanlarda bulunabilmesi
+değil, bu mekanizma listesinden hangilerinin kendi bünyesinde eksik olduğunu söyleyebilmesidir.
+9
+
+-- 9 of 38 --
+
+Tanım: Kıtlık Nedir, Ne Değildir?
+İktisadın kıtlık tanımı sezgisel “azlık” fikrinden ayrılır. Kıtlık mutlak bir miktar ifadesi değildir;
+bir kaynağın, ona yönelen isteklerin tamamını aynı anda karşılayamaması durumudur. Tanımın
+işlevsel çekirdeği şudur: kıt kaynak, kullanımları arasında seçim yapmaya zorlayan kaynaktır —
+bir yere harcandığında başka bir yere harcanamayan şey.
+Bu tanımın iki önemli sonucu vardır. Birincisi, kıtlık maddenin değil ilişkinin özelliğidir. Hava
+kıt değildir: herkesin isteği karşılanır, kimse seçim yapmak zorunda kalmaz. Ancak temiz hava
+büyük bir şehirde kıt olabilir; aynı madde, bağlama göre kıtlık statüsü değiştirir. İkincisi, bolluk
+içinde kıtlık mümkündür: bir kaynak toplamda bol olsa dahi, belirli bir anda ve yerde isteklerin
+tamamını karşılayamıyorsa oradaki davranışı kıt kaynak davranışıdır.
+Kavramın gücü, doğurduğu zincirdedir. Kıtlık olmasaydı seçim gerekmezdi: her istek karşılanır,
+hiçbir kullanım diğerini dışlamazdı. Kıtlık seçimi zorunlu kılar; seçim, vazgeçilen alternatifi ya-
+ratır; vazgeçilen en iyi alternatifin değeri fırsat maliyetidir. Fiyat, tahsis, verimlilik, ödünleşim
+(trade-off) — iktisadın bütün temel kavramları bu zincirin halkalarıdır. Robbins’in klasik ta-
+nımı bu yüzden iktisadı doğrudan kıtlık üzerinden kurar: iktisat, alternatif kullanımları olan kıt
+kaynaklar ile amaçlar arasındaki ilişkiyi inceleyen bilimdir.
+Kıtlığın Testleri
+Bir kaynağın kıt olup olmadığı iki basit soruyla sınanır.
+Birinci test dışlama testidir: bu kaynağın bir kullanımı, başka bir kullanımını engelliyor mu? Bir
+mühendisin bugünü bir projeye harcandığında diğer projeye harcanamıyorsa, o gün kıttır. Bir
+kod parçası ise aynı anda bin yerde çalışabilir; kullanımı başka kullanımı dışlamaz, dolayısıyla
+kıt değildir.
+İkinci test seçim testidir: bu kaynak için kimse önceliklendirme yapmak zorunda kalıyor mu?
+Kuyruk oluşuyorsa, kota konuyorsa, “hangisi önce” tartışması yaşanıyorsa kaynak kıttır. Ter-
+sinden okuma da geçerlidir: bir kaynağın etrafında hiç kuyruk, kota ve öncelik tartışması yoksa,
+ya kaynak gerçekten bol ya da kıtlığı henüz fark edilmemiştir — ikinci durum, fark edildiği gün
+kriz olarak yaşanır.
+10
+
+-- 10 of 38 --
+
+Yazılım Mühendisliğinde Kıt Kaynaklar
+Yazılım organizasyonundaki kıt kaynaklar dört katmanda sınıflandırılabilir; katmanlar somuttan
+soyuta doğru ilerler ve soyutlaştıkça kıtlıkları daha az görünür, dolayısıyla daha az yönetilir hale
+gelir.
+Hesaplama Kaynakları
+En görünür katman: işlemci, bellek, bant genişliği, disk, veritabanı bağlantı havuzu, eşzamanlı
+istek kapasitesi. Bunlar mühendisliğin kıtlığı en açık yaşadığı yerdir ve yönetim mekanizmaları
+da en olgun olanlardır: kota, istek sınırlama, kapasite planlama, otomatik ölçekleme. Dikkat
+edilecek nokta göreli kıtlığın bağlam bağımlılığıdır: bulut çağında hesaplama “bol” görünür,
+ancak belirli bir anda, belirli bir bütçede ve belirli bir gecikme hedefinde her zaman kıttır —
+otomatik ölçekleme kıtlığı ortadan kaldırmaz, kıtlığın birimini donanımdan paraya çevirir.
+İnsan Zamanı
+Mühendis-saat, planlamanın temel kıt kaynağıdır: bir sprint’e giren iş, girmeyeni dışlar — dış-
+lama testi en çıplak burada görülür. Ancak bu katmanın içinde daha kıt bir alt küme vardır:
+kıdemli dikkat. Mimari karar verebilen, krizi çözebilen, mentorluk yapabilen dikkatin toplam
+arzı, genel mühendis-saatten çok daha sınırlıdır ve ona yönelen istek her zaman arzı aşar. Birçok
+organizasyonel patolojinin ortak paydası, bu iki kaynağın ayrıştırılmamasıdır: mühendis-saat
+bol görünürken kıdemli dikkat tükenmiş olabilir. Sürüncemede bırakılan projelerin asıl zararı da
+budur: tükettikleri şey genel kapasite değil, en kıt kaynak olan kıdemli dikkattir.
+Organizasyonel Kapasiteler
+Üçüncü katman, süreçlerin içine gömülü kıt kaynaklardır: kod inceleme bant genişliği, test ortamı
+slotları, yayın pencereleri, nöbet kapasitesi, toplantı takvimindeki ortak zaman. Bunların ayırt
+edici özelliği, kıtlıklarının çoğu zaman fiyatlanmamış olmasıdır: kimse inceleme bant genişliğinin
+“fiyatını” hesaplamaz, ta ki kuyruk günlerce uzayana kadar. Optimizasyon teorisinin gölge fiyat
+kavramı tam burada işe yarar: her kısıtın örtük bir fiyatı vardır — o kısıtı bir birim gevşetmenin
+toplam çıktıya katkısı — ve bu fiyat hesaplanmadığında darboğaz, ancak kriz olarak görünür
+hale gelir.
+Soyut Stoklar
+En az görünür ama en kritik katman, tükenebilir soyut kaynaklardır: insan dikkati, kullanıcıların
+değişiklik toleransı, ekibin iyi niyet stoku, yönetimin sabrı, hata bütçesi. Bunlar kıtlığın bütün
+testlerini geçer — bir yere harcandıklarında başka yere harcanamazlar, tükenirler ve tükenme-
+leri seçim zorunluluğu doğurur — ancak muhasebeleri neredeyse hiç tutulmaz. İnsan dikkatinin
+kıtlığı, alarm tasarımının bütün teorisinin temelidir: bir sinyalin tetikleyeceği eylemin değeri,
+tükettiği dikkati aşmıyorsa o sinyal üretilmemelidir. Kullanıcı toleransının kıtlığı, kırıcı değişik-
+liklerin neden yığılamayacağının; iyi niyet stokunun kıtlığı, zor migrasyonların neden art arda
+istenemeyeceğinin açıklamasıdır. Bu stokların ortak özelliği yavaş dolup hızlı boşalmalarıdır;
+11
+
+-- 11 of 38 --
+
+harcama kararları bu asimetriye göre verilmelidir.
+Yazılımın Kıtlık Paradoksu
+Yazılım iktisadını tuhaflaştıran yapısal bir özellik vardır: üretilen malın kendisi kıt değildir. Kod
+ve veri, sıfıra yakın maliyetle sonsuz kopyalanır; bir kullanıcının yazılımı kullanması, diğerinin
+kullanımını dışlamaz. Dışlama testine göre yazılım, iktisadın “kamu malına” yaklaşan istisnai
+bir üründür.
+Paradoks şuradadır: kıt olmayan bir çıktı, tamamen kıt girdilerle üretilir — dikkat, zaman,
+yetkinlik — ve tamamen kıt bir altyapı üzerinde koşar — hesaplama, enerji, bant genişliği.
+Yazılım ekonomisinin karakteristik fenomenleri bu asimetriden doğar. Dağıtım maliyeti sıfıra
+düşünce en iyi ürün herkese ulaşır ve ikinci en iyiye talep kalmaz: kazanan-hepsini-alır dinamiği,
+çıktı kıtlığının yokluğunun doğrudan sonucudur. Açık kaynak yazılımın fonlama krizi de aynı
+asimetrinin ürünüdür: çıktı bedava kopyalandığı için fiyatlanamaz, ancak onu üreten bakım
+emeği kıttır ve fiyatlanmadığında tükenmektedir — milyarlık ekonomilerin iki gönüllünün baktığı
+kütüphanelere yaslanması, kıt girdinin kıt olmayan çıktı arkasında görünmezleşmesidir.
+Pratik sonuç: yazılım organizasyonunda kıtlık analizi ürüne değil, girdilere ve altyapıya bakma-
+lıdır. “Kod yazmak bedava” yanılsaması, kodu yazan dikkatin ve kodu yaşatan bakımın kıtlığını
+gizler; toplam sahip olma maliyeti kavramı, bu gizlenen kıtlığın muhasebesidir.
+Kıtlığın Yönetim Mekanizmaları
+Kıt kaynak, bir biçimde paylaştırılmak zorundadır; paylaştırma mekanizması seçilmediğinde de
+bir mekanizma fiilen işler — çoğu zaman “ilk gelen alır” ya da “en yüksek sesli alır” biçiminde.
+İktisadın kataloğundaki başlıca mekanizmalar ve yazılımdaki karşılıkları şöyledir.
+Fiyat mekanizması, kıtlığı en az bilgi kaybıyla ileten araçtır: kullanan öder, kıtlık fiyata yansır,
+talep kendini ayarlar. Bulut faturalandırması ve iç maliyet yansıtma (chargeback) bu mekaniz-
+madır. Kota ve tayınlama, fiyatın uygunsuz ya da yetersiz olduğu yerde miktar sınırı koyar:
+istek limitleri, kaynak kotaları, sprint kapasitesi. Kuyruk, kaynağı zamana yayar ve sıra ku-
+ralının kendisi bir tahsis kararıdır: kimin önce hizmet alacağını belirleyen kural (ilk gelen, en
+kısa iş, öncelik sınıfı) sonucu değiştirir. Önceliklendirme, merkezi yargıyla tahsistir ve ölçek bü-
+yüdükçe bilgi problemi yaşar: merkez, yerel bilgiyi taşıyamaz. Varsayılan tasarımı ise en sessiz
+mekanizmadır: kıt kaynağa erişimin zahmetli, bol kaynağa erişimin zahmetsiz kılınması, talebi
+hiç tartışma açmadan yönlendirir.
+Mekanizma seçiminin kendisi bir tasarım kararıdır ve her mekanizmanın bilinen patolojisi vardır:
+fiyat, ödeme gücü eşitsizliğini içeri taşır; kota, kıtlık bilgisini iletmez ve gölge kullanım üretir;
+kuyruk, bekleme maliyetini görünmezleştirir; merkezi öncelik, en yüksek sesliye kayar. Olgun
+tasarım çoğu zaman karmadır: temel erişim kotayla garanti edilir, zirve talep fiyatlanır, sıra
+kuralı yayınlanır.
+12
+
+-- 12 of 38 --
+
+Fiyatlama ve Değerleme
+Esnekliğin Değeri
+Opsiyon değeri. Finansta opsiyon, bir şeyi ileride belirli koşullarda alma ya da satma hakkıdır
+— yükümlülük değil. Bu hakkın kendisi para eder; çünkü karar vermeyi ertelemek, yeni bilgi
+geldikçe daha iyi karar vermeyi mümkün kılar. Yazılımda erken soyutlama yapmamak, tek bir
+kütüphaneye kilitlenmemek, bileşenler arasına arayüz koymak birer opsiyon satın almaktır. “İle-
+ride lazım olmayacak şeyi şimdiden inşa etme” (YAGNI) ilkesi, aynı sezginin tersten ifadesidir:
+kullanmayacağın esnekliğe bedel ödeme. Pratik kural: geri alınabilir kararları hızlı, geri alınamaz
+kararları yavaş ver.
+Zaman değerinin erimesi (theta). Bir opsiyonun değeri, hiçbir şey olmasa bile her gün biraz
+azalır; vade yaklaştıkça “bekleme hakkı” değersizleşir. Yazılımda da dururken değer kaybeden
+varlıklar vardır: yazılmış ama yayına alınmamış kod (çakışmalar birikir), toplanmış ama ince-
+lenmemiş veri (bağlam soğur), alınmış ama uygulanmamış karar (gerekçesi unutulur). Taşınan
+her “belki lazım olur” pozisyonu sessizce bedel öder; ya kullanılmalı ya bilinçli kapatılmalıdır.
+Alternatif Maliyet ve Kaynakların Gerçek Fiyatı
+Fırsat maliyeti. Bir kaynağın gerçek maliyeti, onunla yapılabilecek en iyi alternatif işin değe-
+ridir. İktisatçının temel refleksi budur ve planlamaya doğrudan taşınır: doğru soru “bu iş faydalı
+mı” değil, “yapabileceğimiz en faydalı iş bu mu” sorusudur.
+Gölge fiyat ve darboğaz. Optimizasyon teorisinde her kısıtın bir “gölge fiyatı” vardır: o kısıtı
+bir birim gevşetmenin toplam sonuca katkısı. Sprint kapasitesi, kod inceleme bant genişliği,
+kıdemli mühendisin dikkati — hepsinin gölge fiyatı vardır ama nadiren hesaplanır. “Bir kıdemli-
+saat daha olsaydı hangi iş açılırdı” sorusunun cevabı, o saatin gerçek fiyatıdır. Gölge fiyatı
+yüksek kısıt darboğazdır ve bütün iyileştirme oraya gitmelidir; Goldratt’ın kısıtlar teorisi bu
+fikrin mühendislik dilindeki halidir.
+Karşılaştırmalı üstünlük. Ricardo’nun sezgiye aykırı teoremi: iş bölümünü belirleyen, kimin
+bir işte mutlak olarak daha iyi olduğu değil, kimin o işi yaparken daha az değerli bir alternatiften
+vazgeçtiğidir. Kıdemli mühendis dokümantasyonu da gençten iyi yazabilir, ama yazmamalıdır;
+onun saatinin alternatifi mimari karardır. “Ben daha hızlı yaparım” refleksi, delegasyonu öldüren
+bir mutlak üstünlük yanılgısıdır.
+Yeniden inşa maliyeti kıyası (Tobin’in Q’su). Tobin’in yatırım kuralı: bir varlığın sana
+değeri, onu sıfırdan kurmanın maliyetini aşıyorsa kur; aşmıyorsa satın al. Bu, “kendimiz mi
+yazalım, hazır mı alalım” kararının çıplak formülüdür. Kritik uyarı da teoriden gelir: yeniden
+kurma maliyeti hesapları hep yanılır, çünkü kopyalanamayan görünmezleri — ekibin birikmiş
+bağlamını, entegrasyonların örtük bilgisini — hesaba katmaz.
+Fiyatın Davranışı Yönetmesi
+Fiyat sinyali. Hayek’in temel içgörüsü: fiyatlar bilgi taşır; neyin kıt, neyin bol olduğunu merkezi
+bir otorite olmadan herkese bildirir. Bulut faturası bu anlamda mimarinin dürüst eleştirmenidir:
+13
+
+-- 13 of 38 --
+
+hangi servisin pahalı, hangi sorgunun obur olduğu fiyat üzerinden görünür. Maliyeti mühendislik
+geri bildirim döngüsüne sokmak (FinOps), fiyat mekanizmasını organizasyonun içine taşımaktır.
+Zirve fiyatlaması. Şehir trafiği sorunu çoğu zaman yol azlığı değil, yolun her saatte “bedava”
+olmasıdır: herkes aynı saatte çıkar. Londra ve Singapur, yoğun saati ücretlendirerek talebi güne
+yaydı. Aynı mantık iç kaynaklara uygulanır: CI kuyruğunun sabah yoğunluğu, build’in her saatte
+aynı önceliğe sahip olmasındandır; yoğunluk dışı kullanıma avantaj tanımak talebi yayar. Kapa-
+site eklemeden önce sorulacak soru: bu tıkanıklık gerçek kapasite açığı mı, yoksa fiyatlanmamış
+zirve mi? Yeni şerit çoğu zaman sadece daha büyük tıkanıklığı davet eder.
+Aciliyet enflasyonu (senyoraj). Para basma yetkisini elinde tutan devlet, bastığı her bank-
+nottan gelir elde eder; ama aşırı basarsa paranın kendisi değersizleşir. Organizasyonların da iç
+para birimleri vardır: “kritik” etiketi, P0 önceliği, yönetici onayı. Bu birimleri ihraç etme yetkisi
+kimdeyse benzer bir güç kullanır — ve aynı ceza işler: her iş kritik ilan edilirse hiçbir şey kritik
+değildir. Öncelik etiketlerinin ihraç disiplini, bir para biriminin itibarı gibi korunmalıdır.
+Fonlama ve Muhasebe Zihniyeti
+Borçla mı, özkaynakla mı? Şirket büyümeyi iki yoldan fonlar: borç (hızlı ve ucuz başlar,
+ama sürekli faiz ödenir ve kriz anında şirketi kırabilir) ya da özkaynak (pahalı ve yavaştır,
+ama kimseye borçlu değilsindir). Hazır SaaS ya da framework kullanmak borçla fonlamadır:
+hızlı başlarsın, faizini vendor kısıtları ve fiyat artışları olarak ödersin. Kendi altyapını yazmak
+özkaynaktır: pahalı ama bağımsız. İkisi de meşrudur; hata, hangisini seçtiğini bilmemektir.
+Vade uyumu. Bankaların klasik ölüm sebebi, kısa vadeli borçla uzun vadeli varlık fonlamaktır:
+mevduat sahipleri parayı bugün isteyebilir, verilen kredi on yılda döner. Yazılım karşılığı: üç
+aylık sözleşmeli ekiple beş yıllık platform taahhüdü vermek, hackathon koduyla üretim sistemi
+taşımak. Varlığın ömrü ile onu ayakta tutan kaynağın ömrü uyumlu olmalıdır; kritik altyapı
+kalıcı ekip ister.
+Kâr başka, nakit başka. Muhasebe, kazanılmış görünen parayla kasaya girmiş parayı ayırır;
+şirketler kâğıt üzerinde kârlıyken nakitsizlikten batar. Yazılımda “tamamlandı” işaretlenen işler
+kâğıt üzerindeki kârdır; kullanıcıya ulaşmış çalışan özellik nakittir. Yayına alınmamış kod, bir-
+leştirilmemiş branch, bayrak arkasında bekleyen özellik — hepsi henüz tahsil edilmemiş alacaktır
+ve tahsil riski taşır.
+Piyasa değeriyle değerleme (mark-to-market). Finansta pozisyonunu her gün güncel pi-
+yasa fiyatıyla değerlemek zorundasın; “aslında değerli, piyasa anlamıyor” diyerek zararı sonsuza
+dek erteleyemezsin. Yazılım karşılığı: yarım projeleri ve “bir gün lazım olur” kodlarını gerçek
+değerleriyle görmek. Harcanmış emeğe rağmen pozisyonu kapatma — projeyi bitirme — becerisi
+finansçıda mesleki refleks, mühendiste nadirdir.
+Çift taraflı kayıt. Muhasebenin beş yüz yıllık buluşu: hiçbir şey silinmez, her hareket iki
+tarafıyla kaydedilir ve defterler her an birbiriyle mutabakata sokulabilir. Event sourcing’in —
+durumu değiştirmek yerine bütün değişiklik olaylarını saklamanın — atası budur; veri bütünlüğü
+gerektiren her sistemde altın standart, muhasebecinin “değiştirilemez kayıt artı denetim izi”
+14
+
+-- 14 of 38 --
+
+disiplinidir.
+Nominal ile reel ayrımı. Enflasyonlu ekonomide “rekor ciro” manşeti bilgi taşımaz; ciddi
+analiz her rakamı enflasyondan arındırır. Mühendislik metrikleri de arındırılmalıdır: büyüyen kod
+tabanında sabit kalan hata sayısı aslında iyileşmedir; büyüyen ekipte sabit kalan yayın sıklığı,
+kişi başına gerilemedir. Kıyaslanan her metrik bir tabana bölünmelidir — geliştirici başına, istek
+başına, satır başına.
+Risk ve Kırılganlık
+Riskin Doğru Ölçülmesi
+Risk ile belirsizlik farkı (Knight). Frank Knight’ın 1921’deki ayrımı: risk, olasılık dağılımı
+bilinen şansızlıktır (zar atışı, sigorta tablosu) ve hesaplanıp fiyatlanabilir; belirsizlik, dağılımın
+kendisinin bilinmediği durumdur ve hiçbir hesap ona işlemez. Sunucu arızası risktir: arıza is-
+tatistikleri vardır, yedeklilikle yönetilir. Yeni ürünün pazarda tutup tutmayacağı belirsizliktir:
+olasılık atamak uydurmadır, tahmin değil küçük deney gerekir. Hangi bilinmeyenle karşı karşıya
+olduğunu bilmek, araç setini belirler.
+Ortalamada iyi olmak yetmez (ergodiklik). Beklenen değeri pozitif ama iflas ihtimali ta-
+şıyan bir bahsi tekrar tekrar oynayan, eninde sonunda sıfırlanır — çünkü sıfırlandıktan sonra
+oyuna devam edemez. Her yayında yüzde birlik felaket riski, tek başına küçük görünür; yıllık
+ölçekte neredeyse kesin felakettir. “Ortalamada kârlı” stratejiler, oyunda kalmayı garanti etmi-
+yorsa kötü stratejilerdir; hata bütçesi (error budget) uygulaması bu sezgiyi kurumsallaştırır.
+Eşiğin ötesini görmek. Bankalar yıllarca riski “yüzde 99 ihtimalle kaybımız X’i geçmez”
+biçiminde ölçtü; 2008’de bu ölçünün kör noktası ortaya çıktı: eşik aşıldığında ne olacağını hiç
+söylemiyordu — kalan yüzde birde ister biraz fazla kaybet, ister her şeyi. “p99 gecikme 200
+milisaniye” hedefi aynı körlüğü taşır: kalan yüzde birin 250 milisaniye mi, 30 saniye mi olduğunu
+söylemez; kullanıcı deneyimini asıl belirleyen çoğu zaman o kuyruktur. Eşik metriğinin yanına
+“eşiği aşan isteklerin ortalaması” konulmalıdır.
+Hiç yaşanmamış olanın riski (peso problemi). 1970’lerde Meksika pesosu yıllarca devalüe
+olmadı; veriye bakan “risk yok” dedi — sonra devalüasyon bir gecede geldi. Ders: gözlem pence-
+resinde hiç görünmeyen olayın yokluğu, riskin yokluğu değildir. “Bu yedekleme mekanizması üç
+yıldır hiç tetiklenmedi, demek ki gereksiz” çıkarımı aynı yanılgıdır. Kayıtlarda olmayan felaket,
+tehdit modelinde olmalıdır.
+Emniyet payı. Değer yatırımcılığının kurucu ilkesi: hesabın doğru olsa bile hata payı bırak,
+çünkü hesap girdilerin yanlış olabilir. Kapasite planlamasında birebir geçerlidir: tahminine gü-
+venme, doluluk sınırına yaslanma. İkiz ilke “yetkinlik çemberi”dir: anlamadığın şeye yatırım
+yapma — anlamadığın soyutlamanın üzerine kritik sistem kurma.
+15
+
+-- 15 of 38 --
+
+Dağıtmak, Korunmak, Sigortalamak
+Çeşitlendirme ve korelasyon. Modern portföy teorisinin çekirdeği: riski belirleyen tek tek
+varlıklar değil, aralarındaki bağlantıdır — hepsi aynı anda düşecekse, on varlık bir varlıktır. Aynı
+bulut sağlayıcısına, aynı dil ekosistemine bağlı beş bağımlılık çeşitlendirme değildir. Finansın acı
+dersi de aynen taşınır: bağlantılar kriz anında güçlenir — normal zamanda bağımsız görünen
+servisler, yük altında aynı veritabanına çarpıp birlikte çöker.
+Halter stratejisi. Taleb’in önerisi: portföyün büyük kısmını aşırı güvenli, küçük kısmını aşırı
+deneysel varlıklara ayır ve ortayı boşalt — “orta riskli” görünen varlıklar, ölçülemeyen risklerini
+ılımlı getiriyle sattıkları için en kötü alışverişi sunar. Teknoloji seçiminde: çekirdek altyapıda
+sıkıcı ve kanıtlanmış araçlar, kenarda küçük ve yalıtılmış deneyler; ne güvenli ne öğretici olan
+“yarı olgun” orta yol araçlarından kaçın.
+Korunmanın kendi riski (baz riski). Havayolu, yakıt maliyetine karşı petrol sözleşmesiyle
+korunur; ama jet yakıtı ile ham petrol fiyatı birebir aynı hareket etmez — aradaki makas,
+korunmanın kendi riskidir. 2008’de “korunmuştuk” diyen herkesi bu makas vurdu. Yazılımda
+her yedeklilik bir korunmadır ve hiçbiri mükemmel değildir: staging ortamı üretimi temsil eder
+ama birebir değil; felaket bölgesi ana bölgeyi yedekler ama kopyalama gecikmesiyle. Olgunluk
+“yedeğimiz var” demek değil, aradaki makası ölçmektir: staging–üretim sapması, kopyalama
+gecikmesi birer izlenen metrik olmalıdır.
+Riskin katmanlanması. Sigorta sektörü riski dilimler: küçük hasarları kendisi öder, orta dilimi
+başka sigortacıya devreder, felaket dilimini ayrı araçlara satar — çünkü her dilim farklı sıklık ve
+şiddet profilindedir. Güvenilirlik mimarisi aynı yapıdadır: yeniden deneme (retry) ilk katman,
+devre kesici ikinci, yedek bölge üçüncü. Ders: tek mekanizmaya bütün risk yelpazesi yüklenmez.
+Otomatik tazminat (parametrik sigorta). Klasik sigortada hasarı kanıtlamak gerekir: eks-
+per, belgeler, aylar, ihtilaf. Parametrik sigorta bunu keser: ödeme, önceden tanımlı bir ölçüte
+bağlanır — deprem şu büyüklüğü aşarsa ödeme otomatiktir; kanıt yükü ve tartışma sıfırdır.
+“Mağduriyetinizi destek ekibine kanıtlayın” modeli klasik sigortadır; “hizmet süresi eşiğin altına
+düşerse iade otomatik yansır” modeli parametriktir ve güveni korur. Aynı ilke iç süreçlere uzanır:
+eskalasyonun ve olay sınıflamasının önceden tanımlı eşiklere bağlanması, her seferinde yeniden
+pazarlık maliyetini ortadan kaldırır.
+Henüz görünmeyen hasarlar için karşılık. Sigortacılar, bugünkü poliçelerin gerçekleşmiş
+ama henüz bildirilmemiş hasarları için bugünden para ayırır; çünkü geçmiş istatistik, hasarın
+geleceğini söyler. Bu dönem yazılan kodun içindeki henüz keşfedilmemiş hatalar da aynıdır:
+gelecek dönemin bilinen istatistiksel yüküdür, ama hiçbir plana girmez. Kapasite planına sabit
+bir “keşfedilmemiş hata rezervi” koymak, sürpriz kesintiyi bütçelenmiş kaleme çevirir.
+Tahminleri geçmişe göre kırpmak. Bankalar teminat alırken yüz liralık varlığı yüz saymaz;
+değeri oynaksa doksana, seksene “kırparak” sayar. Ekiplerin tahminleri de birer teminattır ve
+geçmiş sapmalarına göre kırpılarak plana girmelidir: tahminleri tarihsel olarak yüzde kırk sapan
+ekibin “iki haftası”, plana yüzde kırk payla girer. İncelik: kırpma gizli değil ilan edilerek yapılır
+ve tahmin isabetini kanıtlayan ekip nominal değere yaklaşır — böylece emniyet payı, yönetici
+16
+
+-- 16 of 38 --
+
+sezgisinden çıkıp kayıtlı kurala bağlanır.
+Kriz Nasıl Doğar?
+İstikrar istikrarsızlık doğurur (Minsky). Minsky’nin hipotezi: uzun sakin dönemler bizzat
+kriz üretir — güven arttıkça herkes daha fazla risk alır ve sistem farkına varmadan kırılganlaşır.
+Yazılımda birebir: uzun süre kesintisiz çalışan sistem, ekipte “bu zaten çökmez” rahatlığı yaratır;
+kılavuzlar bayatlar, yedeğe geçiş hiç denenmemiş hale gelir. Bilinçli olarak arıza enjekte etmek
+(chaos engineering), istikrarın biriktirdiği görünmez kırılganlığı düzenli boşaltan bir Minsky
+aşısıdır.
+Banka hücumu. Banka, mevduatın hepsini kasada tutmaz; herkes aynı anda parasını isterse
+sağlam banka bile batar — ve tam da “batabilir” söylentisi, herkesin aynı anda istemesine yol
+açar: panik kendi kendini doğrular. Dağıtık sistemlerdeki yeniden deneme fırtınası aynı mate-
+matiktir: yavaşlayan servise her istemci “rasyonel” biçimde tekrar dener, kolektif sonuç servisi
+tamamen öldürür. Finansın çözümleri de aynen taşınır: çekim limiti= istek sınırlama (rate limi-
+ting), paniği kıran ara mekanizmalar= devre kesici, rastgele aralıklı yeniden deneme (backoff +
+jitter)= çekim kuyruğunu zamana yaymak.
+Sistemik önem. 2008’in asıl dersi tek bankanın batışı değil, batışın ağ üzerinden yayılmasıydı;
+düzenleyiciler artık “sistemik önemli kurum” listesi tutar ve bunlardan ekstra güvence ister.
+Mimari soru aynıdır: bağımlılık grafiğinde hangi servis sistemik? Kimlik doğrulama, merkezi
+konfigürasyon — batınca herkesi batıran düğümler, daha yüksek güvence standardı ve daha sıkı
+değişiklik kontrolü hak eder. Gemi bölmelerinden adını alan bulkhead deseni, bulaşma kanallarını
+bilinçli kesmektir.
+Kendi kendini büyüten sarmallar. Kriz mekaniğinin çift döngüsü: fiyat düşer, teminat de-
+ğersizleşir, borçlu satmak zorunda kalır, satış fiyatı daha düşürür. Dağıtık sistemlerin ölüm
+sarmalları aynı yapıdadır: gecikme artar, zaman aşımları tetiklenir, yeniden denemeler yükü
+artırır, gecikme daha artar. Finansın kırma ilkesi sezgiye aykırıdır ve aynen taşınır: sarmalı bes-
+leyen kuralları yük altında gevşet — panik anında zaman aşımını sıkılaştırmak değil, yeniden
+denemeyi kısmak ve yükü kademeli, önceden tanımlı biçimde atmak gerekir.
+Küçülme sarmalı. İktisatçı Irving Fisher’ın 1933 gözlemi: borçlarını ödemeye çalışan herkes
+varlık satınca fiyatlar düşer ve borcun gerçek yükü artar — herkes borcunu azaltmaya çalışır-
+ken borç kolektif olarak büyür. Ekip küçültmelerinde aynı mekanik işler: küçülen ekip bakıma
+yetişemez, borç birikir, verim düşer, “verimsiz” görülen ekip daha da küçültülür. Her adım yerel
+olarak mantıklı, toplam yıkıcıdır; ve sarmal kendiliğinden durmaz — çıkış ya bilinçli takviye ya
+kapsam küçültme ister. “Kemer sıkarak çıkarız” stratejisi sarmalın yakıtıdır.
+En iyi modelin çöküşü (LTCM). 1998’de batan LTCM fonunda iki Nobel ödüllü vardı ve
+modelleri büyük ölçüde doğruydu; onları batıran, modele duyulan güvenin devasa kaldıraçla
+birleşmesiydi — model varsayımların dışına çıktığında, kaldıraç hatayı katladı. Mühendislik
+çevirisi: en isabetli tahmin modeli bile, tam otomasyonla ve geri dönüşsüz taahhütle birleşince
+felaketleşir. Tehlike, modelin en başarılı göründüğü anda birikir; çünkü başarı güveni, güven
+kaldıracı büyütür.
+17
+
+-- 17 of 38 --
+
+Akışın kesilmesi. Gelişen ülke krizlerinin imzası: yabancı sermaye girişinin yavaşlaması değil,
+bir anda durmasıdır — ve hasarı belirleyen, ülkenin akışa ne kadar alışmış olduğudur. Platform
+trafiğine göre büyümüş ürün (algoritma değişikliğiyle bir gecede kesilen yönlendirme), yatırım
+turlarına göre boyutlanmış şirket, ücretsiz kotaya göre kurgulanmış mimari — hepsi aynı kı-
+rılganlığı taşır. Stres testi “giriş yarıya inerse” değil, “giriş tamamen durursa” senaryosuyla
+yapılmalıdır.
+Buharlı silindirin önünde bozuk para toplamak. Bazı finansal stratejiler sakin dönemde
+küçük ama istikrarlı kazanç verir ve nadir kriz anında hepsini birden geri alır; piyasa deyimiyle,
+buharlı silindirin önünde bozuk para toplanır. Test yazmamak, izlemeyi ertelemek, doküman-
+tasyonu atlamak tam bu profildedir: her hafta küçük hız kazandırır, ta ki nadir ama büyük olay
+gelene kadar. Sorulacak soru: bu istikrarlı küçük kazanç, hangi nadir felaketi üstlenerek elde
+ediliyor?
+Geçici şokun kalıcı izi (histerezis). Avrupa işsizlik araştırmalarının bulgusu: durgunluk ge-
+çer ama işsizlik eski seviyesine dönmez — uzun işsizlik becerileri köreltir, bağları koparır; geçici
+şok yapısal hasara dönüşür. Altı aylık işe alım donması bittiğinde organizasyon da eski haline
+dönmez: giden kıdemlilerin taşıdığı bağlam gitmiştir, ertelenen bakım borçlanmıştır, “yapama-
+yız” hissi kültüre işlemiştir. Ders: bu tür kalıcılaşma riski varsa, şoku kısa kesmek her şeyden
+değerlidir — yarım tedbirle uzatılan sıkıntı, sert ama kısa kesintiden derin iz bırakır.
+Karşı taraf riski. Finansçı her sözleşmede “karşı taraf batarsa ne olur” diye sorar; 2008’in ana
+dersi budur. Yazılımda her bağımlılık bir karşı taraftır: SaaS sağlayıcın kapanırsa, açık kaynak
+projesinin bakımcısı bırakırsa, API sağlayıcın fiyatı üç katına çıkarırsa planın nedir? Vendor
+değerlendirmesi teknik yetenek kadar bu soru üzerinden yapılmalıdır.
+Krizle Baş Etme Araçları
+Devre kesiciler. Borsalar 1987 çöküşünden beri otomatik fren taşır: endeks belirli oranda
+düşerse işlem kendiliğinden durur. Amaç fiyatı yönetmek değil, panik zincirinin önüne zaman
+koymaktır — panik, düşünme hızından hızlı yayılır. (Yazılımdaki “circuit breaker” deseni adını
+buradan alır.) Finanstan alınacak incelik: fren seviyeleri kademelidir ve önceden ilan edilir; kriz
+anında icat edilen durdurma keyfi ve tartışmalıdır, önceden kodlanan fren meşrudur. Hata oranı
+eşiği aşıldığında yayın hattının kendini kilitlemesi, aynı ilkenin uygulamasıdır.
+Kriz kararını barışta vermek. 2008 sonrası finans mühendisliğinin buluşu: normal zamanda
+borç gibi davranan, ama bankanın sermayesi eşiğin altına düşünce otomatik olarak özkaynağa
+dönüşen tahviller. Zarafeti şurada: dönüşüm anında kimsenin karar vermesi gerekmez — ka-
+rar, sakin zamanda verilip sözleşmeye gömülmüştür. Sistemlerin kademeli küçülmesi (graceful
+degradation) aynı ilkeyi hak eder: “yük eşiği aşılırsa öneri motoru kapanır, basit liste döner”
+kuralı, kriz gecesi bir insanın vereceği karar olarak değil, sisteme gömülü otomatik tetik olarak
+yaşamalıdır. İnsan, en kötü anında karar vermeye zorlanmamalıdır.
+Ölüm vasiyeti (living will). Kriz sonrası düzenleme, her büyük bankadan “batarsam nasıl
+çözülürüm” planını önceden yazmasını ister: kim ne kaybeder, hangi sırayla, hangi kuralla. Kritik
+sistemler de aynısını hak eder: bu servis ölürse hangi bağımlılık ne kaybeder, kurtarma kimin
+18
+
+-- 18 of 38 --
+
+bütçesinden ve hangi kuralla gelir? Kriz anında pazarlıkla kurulan kurtarma hem pahalı hem
+keyfidir; barış zamanında yazılan plan, aynı zamanda “nasılsa kurtarılırız” rahatlığını da kırar.
+Önceden kurulmuş yardım hatları. 2008 ve 2020’de paniği söndüren görünmez araçlardan
+biri, merkez bankaları arasında önceden kurulmuş karşılıklı borç verme hatlarıydı: kriz anında
+müzakere edilmedi, yalnızca etkinleştirildi. Ekipler ve kurumlar arası karşılığı: olay anında kar-
+şılıklı destek protokolleri, önceden test edilmiş yedeğe geçiş anlaşmaları. Kriz anında kurulan
+yardım hattı yavaş ve pazarlıklıdır; hattın bütün değeri önceden var olmasında ve varlığının
+bilinmesindedir.
+Brüt yerine net taşımak. Bankalar arası günlük devasa ödeme trafiği, gün sonunda karşı-
+lıklı borçlar mahsuplaşınca küçücük net transferlere iner: A’nın B’ye yüz, B’nin A’ya doksan
+beş borcu, tek bir beşlik transferdir. Sistem tasarımında aynı ilke: her değişikliği tek tek uygu-
+lamak yerine pencere içindeki değişiklikleri birleştirip net farkı uygulamak — debounce, toplu
+güncelleme, arayüzlerde yalnızca değişen kısmı çizmek (diff) hep bu mahsuplaşmadır. Soru şab-
+lonlaşır: bu akışta brüt taşımanın meşru bir sebebi (denetim izi, sıra bağımlılığı) var mı; yoksa
+netleştirme, bant genişliğinin en ucuz ilacıdır.
+Büyük emri zamana yaymak. Milyarlık hisse pozisyonu tek emirle satılamaz; emrin kendisi
+fiyatı çökertir. Kurumsal yatırımcılar bu yüzden büyük emirleri saatlere, günlere yayar — pi-
+yasanın yoğunluğuna orantılı dilimlerle, iz bırakmadan. Büyük migrasyonların yürütme teorisi
+budur: milyon kullanıcıyı bir gecede taşımak, bloğu tek emirle satmaktır. Kademeli geçiş (canary,
+yüzdesel rollout) finansın emir yürütme algoritmalarının yazılım dilidir; hız ile hasar arasındaki
+denge, sezgiyle değil bilinçli dilimleme ile kurulur.
+Kontrol etmediğin birimde söz vermek. Gelişen ülkelerin laneti: kendi parasında borçlana-
+mayıp dolarla borçlanmak — kur oynayınca borç, hiçbir şey yapmadıkları halde büyür; kaderleri
+başkasının politikasına bağlanır. Yazılım karşılığı: taahhüdünü kontrol etmediğin bir değişkene
+kurmak — kendi hizmet sözünü üçüncü taraf API’nin çalışma süresine, maliyet modelini ven-
+dor’ın fiyat listesine bağlamak. Çıkış yolu da aynıdır: kritik taahhütleri kendi kontrolündeki bi-
+rimlere çevirmek — soyutlama katmanı, alternatif sağlayıcı, kritik açık kaynak projesine kendi
+bakımcını koymak.
+Sigorta piyasasının döngüsü. Sigortacılıkta bilinen bir sarkaç vardır: kârlı yıllarda sektöre
+para akar, rekabet fiyatları düşürür, kabul standartları gevşer; sonra büyük hasar yılı gelir,
+zayıflar elenir, fiyatlar ve disiplin geri döner — ve döngü yeniden başlar. Teknoloji işe alımı aynı
+sarkacı izler: bolluk döneminde bar düşer ve unvanlar şişer, daralmada bar yükselir. Döngüyü
+bilen sigortacının stratejisi taşınır: herkes gevşerken standardı korumak, herkes çekilirken agresif
+olmak — en iyi mühendisler, piyasanın en çekingen döneminde kazanılır.
+Teşvik ve Mekanizma Tasarımı
+Ölçütlerin Bozulması
+Goodhart Yasası. “Bir ölçüt hedef haline gelince iyi ölçüt olmaktan çıkar”: insanlar ölçütün
+temsil ettiği şeyi değil, ölçütün kendisini optimize etmeye başlar. Test kapsamı yüzdesinin boş
+19
+
+-- 19 of 38 --
+
+testlerle şişirilmesi, story point enflasyonu, yayın sıklığının anlamsız küçük yayınlarla kabar-
+tılması — hepsi aynı yasanın görünümleridir. Ölçüt tasarlayan herkes, ölçütün oyunlaştırılmış
+halini önceden hayal etmelidir.
+Cırcır etkisi. Sovyet planlamasından çıkan ders: bu yıl hedefi aşan fabrikaya gelecek yıl daha
+yüksek hedef verilir — bunu bilen müdür kapasitesini saklar, hedefi kıl payı aşar, asla parlamaz.
+Sprint hızını (velocity) dışarıya raporlanan hedef yapan her organizasyon aynı oyunu üretir:
+kapasitesini gösteren ekibin beklentisi kalıcı yükselir; düşük tahmin vermek karakter kusuru
+değil, rasyonel savunmadır. Çözüm, performans bilgisini beklenti güncellemesinden yalıtmaktır:
+hız, ekibin kendi planlama aracı kalmalı, dışa dönük karne olmamalıdır.
+Kötü para iyi parayı kovar (Gresham). Nominal değeri aynı ama gerçek değeri farklı iki
+para birlikte dolaşırsa, herkes iyisini saklar kötüsünü harcar. Kod kalitesinde aynı dinamik:
+inceleme standardı gevşek ortamda özenli kod yazan geliştiricinin emeği fark yaratmaz — ya
+standardını düşürür ya ayrılır. Kötü kod, iyi kodcuyu kovar; standardın değeri, onu herkes için
+bağlayıcı kılan mekanizmadadır.
+Girdiyi değil çıktıyı denetle. Getirisi “sermaye büyüklüğünün yüzdesi” olarak sınırlanan
+tekelci şirketler, tarihsel olarak sermayelerini gereksizce şişirdi — kâr, verimlilikten değil varlık
+büyüklüğünden geldiği için. Denetim kriteri “kontrol sayısı” olan kurumlar da kontrolü şişirir: beş
+imzalı onay zincirleri, kimsenin okumadığı risk kayıtları. Ölçüt girdiden (kaç kontrol var) çıktıya
+(olay sıklığı, tespit ve kurtarma süresi) çevrilmelidir; girdi ölçen her rejim kendi şişkinliğini üretir.
+Çıkarların Hizalanması
+Vekalet problemi. Şirket sahibinin çıkarı ile onu yöneten profesyonelin çıkarı aynı değildir;
+iktisat bu gerilimi “vekalet problemi” olarak inceler ve çözümü çıkar hizalamasında arar. “Yazan
+işletir” (you build it, you run it) ilkesi saf bir vekalet çözümüdür: kodu yazana onun gece yarısı
+arızasını da yükleyerek, kalite teşvikini en doğru yere koyar.
+Firma sınırları ve işlem maliyeti (Coase). Coase’un sorusu: madem piyasa verimli, şirketler
+neden var — neden her işi dışarıdan satın almıyoruz? Cevabı: her piyasa işleminin bir maliyeti
+vardır (arama, pazarlık, sözleşme) ve bazı koordinasyonlar şirket içinde daha ucuzdur; şirketin
+sınırı, bu maliyetlerin dengelendiği yerdir. Mikroservis–monolit tartışması aynı sorudur: her ser-
+vis sınırı bir işlem maliyetidir (API sözleşmesi, sürümleme, ağ gecikmesi). Williamson’ın eki de
+taşınır: iki birim sürekli birlikte değişiyorsa, aralarındaki sınır yapay demektir — aslında tek
+servistirler.
+Yatırımdan sonra pazarlık gücü çöker (hold-up). Tedarikçiye özel kalıp yaptıran fabrika,
+kalıp bittikten sonra fiyat artışına mahkûmdur; yatırım yapıldıktan sonra masadaki güç el de-
+ğiştirir. Platforma derin entegre olduktan sonraki vendor görüşmesi, entegrasyon öncesindekiyle
+aynı görüşme değildir. Ders nettir: fiyat artış tavanı, çıkış desteği, veri taşınabilirliği entegras-
+yondan önce pazarlık edilir — sonra pazarlık gücü kalmaz.
+Ekip işinde bireysel katkı ölçülemez. Yükü birlikte kaldıran iki kişiden kimin ne kadar
+kaldırdığı, çıktıdan okunamaz; iktisat buna “ekip üretimi problemi” der ve bireysel ölçüm giri-
+20
+
+-- 20 of 38 --
+
+şimlerinin işi bozacağını öngörür. Commit sayısı gibi metrikler tam öngörülen bozulmayı üretir:
+ölçülebilene kaçış, ölçülemeyen katkının (mentorluk, tasarım tartışması, inceleme kalitesi) çölleş-
+mesi. Ekip işi ağır ortamlarda değerlendirme, uzak metriklerle değil yakın gözlemle yapılmalıdır.
+Sert ve Yumuşak Kısıtlar
+Yumuşak bütçe kısıtı (Kornai). Macar iktisatçı Kornai’nin sosyalizm teşhisi: zarar eden
+devlet işletmesi kapanmaz, hep kurtarılır — ve bunu bildiği için maliyet disiplini baştan çöker.
+Kısıdın sertliği davranışı önceden şekillendirir. Hep uzatılan bitiş tarihi, yumuşak bütçe kısıtı-
+dır: ilk uzatma istisna, ikincisi emsal, üçüncüsü rejimdir ve o noktadan sonra tarih, planlama
+girdisi olmaktan çıkar. Kısıdı sertleştirmenin yolu tek tek kararlar değil, itibar inşasıdır: bir kez
+gerçekten kapatılan proje, sonraki on projenin disiplinini bedavaya kurar.
+Zombi projeler. Japonya’nın “kayıp on yılının” teşhisi: bankalar batık kredileri zarar yaz-
+mamak için sürekli yeniledi; ölü şirketler yapay yaşamda tutuldu ve kaynaklar canlı şirketlere
+akamadı. Kapatılmayıp yeniden adlandırılan, “ikinci faza” geçirilen, asgari kadroyla süründü-
+rülen projeler aynı hastalıktır: en kıt kaynağı — kıdemli dikkati — kilitler ve yeni girişimlerin
+alanını daraltır. Tedavi, projeleri savunucularının değil bağımsız bir gözün sınıflaması ve zarar
+yazmayı normalleştiren kültürdür.
+Erken tetikli sözleşme maddeleri. Banka krediyi verip vadeyi beklemez; sözleşmeye ara
+eşikler koyar: borçlunun belirli oranları bozulursa kredi erken sorgulanır. Maddenin dehası, fe-
+laketten çok önce, düzeltilebilir aşamada tetiklenmesidir. Aynı yapı teknik projelere yazılabilir:
+“build süresi on beş dakikayı aşarsa özellik geliştirme durur, kalite işine dönülür.” Eşik, soğuk-
+kanlı anda pazarlık edilir; ihlal anında tartışma değil, önceden kabul edilmiş prosedür işler.
+Söz değil mekanizma (zaman tutarsızlığı). Nobel getiren içgörü: bugün optimal olan söz,
+yarın optimal olmaktan çıkar — “acil durumda bile test atlanmaz” kuralı, ilk gerçek acilde
+delinir; delineceği herkesçe bilindiği için caydırıcılığı baştan sıfırdır. Çözüm, politikayı iradeye
+değil mekanizmaya gömmektir: test atlamanın yayın hattında teknik olarak mümkün olmaması,
+“atlamayacağız” sözünden sonsuz kat güçlüdür. Merkez bankalarının hükümetlerden bağımsız-
+laştırılması, aynı gömme işleminin kurumsal halidir.
+Ortak Kaynaklar ve Dışsallıklar
+Kirleten öder (Pigou). İktisadın temel teşhisi: bedeli ödenmeyen maliyet aşırı üretilir —
+fabrika, bacasının dumanının bedelini ödemiyorsa gereğinden çok tüttürür. Kod tabanında da
+böyledir: build süresini uzatan ağır bağımlılığı ekleyen, bedelini bütün organizasyona öder. Pi-
+gou’nun çözümü maliyeti sahibine yansıtmaktır: hata üreten ekibin nöbet yükünü kendisinin
+taşıması, kural koymaktan çoğu zaman daha az bürokrasiyle daha iyi davranış üretir.
+Bedavacılık ve ortak malın fonlanması. Faydası herkese dağılan, kimsenin dışlanamadığı
+mallar (sokak lambası, ulusal savunma) piyasa tarafından eksik üretilir; herkes başkasının öde-
+mesini bekler. Ortak geliştirici araçları ve iç platformlar aynı kaderdedir: faydası herkese, mali-
+yeti gönüllüye kalır — milyarlık ekonomilerin iki gönüllünün baktığı açık kaynak kütüphanelere
+21
+
+-- 21 of 38 --
+
+yaslanması bu problemin en çıplak halidir. Çözüm gönüllülük değil vergilendirmedir: her ekibin
+kapasitesinden ortak işe ayrılmış zorunlu pay.
+Ortak kaynak yönetilebilir (Ostrom). “Ortak malın trajedisi” bilinir; Ostrom’a Nobel ka-
+zandıran, trajedinin kaçınılmaz olmadığını göstermesiydi: yüzyıllarca çobanlar ve balıkçılar, mer-
+kezi otorite olmadan ortak kaynağı başarıyla yönetti. Çıkardığı ilkeler — net sınırlar, kuralları
+kullananların koyması, kademeli yaptırım, kullanımın herkese görünür olması — paylaşılan test
+ortamları ve ortak CI kapasitesi için birebir geçerlidir: tepeden dayatılan kotadan daha iyi çalışır.
+Çok veto, felç eder (anticommons). Ortak malın aynadaki tersi: bir kaynağa çok sayıda veto
+sahibi olursa kaynak eksik kullanılır — ilaç araştırmalarının patent yığınları arasında tıkanması
+gibi. Beş ekipten onay bekleyen yayın, her paydaşın veto ettiği API değişikliği aynı yapıdadır:
+sahiplik parçalanması bir noktadan sonra korumayı değil felci üretir. “Tek onaylayıcı artı itiraz
+süresi” modeli, veto sayısını azaltarak felci çözer.
+Değer üretmekle değer kapmak (rant kollama). İktisat, üretimle pay kapmayı ayırır:
+lobicilik ve yapay kıtlık, kaynağı üretimden pay kavgasına kaydırır. Bilgiyi paylaşmayıp vaz-
+geçilmezlik inşa eden geliştirici, inceleme sürecini güç aracına çeviren bekçi aynı kategoridedir.
+Tullock’un acı eki: pay kavgasına harcanan toplam çaba, kapılan payın kendisinden büyük ola-
+bilir — iç politikanın maliyeti, üzerine kavga edilen kaynağı aşar.
+Seçilim ve Eşleşme
+Limon piyasası (Akerlof). İkinci el araba pazarında alıcı, iyi arabayla kötüsünü (“limonu”)
+ayırt edemiyorsa ikisine de ortalama fiyat verir; iyi arabanın sahibi bu fiyata satmaz, pazarda
+limonlar kalır — kötü mal, iyi malı kovar. İşe alım, dış kaynak pazarı ve kütüphane seçimi aynı
+yapıdadır. Çözümler de teoriden gelir: sinyal (portfolyo, kanıtlanabilir iş örnekleri — taklidi
+maliyetli olduğu için bilgi taşır), tarama (deneme projesi, POC dönemi) ve garanti (deneme
+süresi, hizmet taahhüdü).
+Kazananın laneti. Değeri herkes için aşağı yukarı aynı olan bir şeyin açık artırmasında, en
+yüksek teklifi veren çoğu zaman değeri en çok abartan kişidir — kazanmak, yanılmış olmanın
+işaretidir. En agresif fiyatı veren vendor, işi en çok yanlış anlayandır ve farkı sonradan çıkarır;
+sprint’e en iddialı tahminle giren ekip, işi en az anlayandır. Çözüm: teklifini “kazandığım se-
+naryoda muhtemelen yanılmışım” varsayımıyla törpüle — ihalede en ucuzu değil, ikinci çeyreği
+ciddiye al.
+Yüksek fiyat, kötü havuz seçer. Bankalar talep fazlası varken bile faizi sonsuz yükseltmez;
+çünkü faiz arttıkça temkinli borçlular çekilir, kalan havuz kumarbazlara ayrışır. “Acil, iki kat
+öderiz” ilanı aynı ayrışmayı tetikler: o primi kabul edenler sistematik olarak prim avcıları ve
+başka yerde tutunamayanlardır. Bazen fiyatı yükseltmek yerine miktarı sınırlamak (daha az
+ama seçici almak), tam da bankanın mantığıyla doğru karardır.
+Turnuvanın karanlık yüzü. Terfi sistemleri birer turnuvadır: ödül mutlak performansa değil
+göreli sıralamaya gider. Teori, turnuva sertleştikçe sabotajın rasyonelleşeceğini öngörür: rakibin
+işini geciktirmek, bilgi saklamak turnuvanın öngörülen patolojisidir — zorunlu sıralama (stack
+22
+
+-- 22 of 38 --
+
+ranking) sistemlerinin ekip çalışmasını çökertmesinin teorisi budur. İşbirliği kritikse, bireysel
+sıralama yerine takım bazlı ödül teorik olarak öngörülebilir düzeltmedir.
+Piyasa üstü ödemenin mantığı. Ford 1914’te günlük ücreti bir anda ikiye katladı; hayırsever-
+lik değil hesaptı: piyasa üstü ücret, işi kaybetmeyi maliyetli kılar (özensizliği caydırır), en iyileri
+çeker ve işten ayrılma maliyetini düşürür. Geliştirici araçlarına, donanıma, eğitime “piyasa üstü”
+harcamak aynı mekanizmadır; her kalemi asgariye sıkıştıran organizasyonun sonucu da teorinin
+öngördüğü gibidir: kalanlar, başka yere gidemeyenlerdir.
+Genel beceri, özgü beceri (Becker). İnsan sermayesi teorisinin ayrımı: her yerde geçen be-
+ceriler (bir programlama dili, sistem tasarımı) ile yalnız bu şirkette değerli beceriler (iç araçlar,
+eski sistemin folkloru). Teorinin öngörüsü: genel eğitimin masrafını işveren istemez (eğitilen gide-
+bilir, yatırımı rakip toplar). Çalışan tarafındaki ayna ders daha önemlidir: kariyeri firmaya özgü
+becerilerde derinleşerek kurmak, tek alıcısı olan bir pazarda varlık biriktirmektir — iç araçların
+dehası olmak, pazarlık gücünü şirkete teslim eder. Beceri portföyünün genel–özgü dengesi, kişisel
+risk yönetimidir.
+Ayağıyla oy vermek (Tiebout). Yerel yönetim teorisinde vatandaş, beğenmediği belediyeden
+taşınarak “oy verir”; yönetimler arası bu rekabet, sandık olmadan disiplin sağlar. Ekipler arası iç
+mobilite aynı mekanizmadır: mühendislerin kötü yönetilen ekipten iyi yönetilene akışı, yöneticiler
+üzerindeki en dürüst geri bildirimdir. İç transferi zorlaştırmak (yönetici vetosu, bekleme cezaları)
+bu sinyali keser ve kötü yönetimin en güvenilir göstergesini karartır.
+Yıldız, platformuyla parlar. “Chasing Stars” araştırmasının bulgusu: yıldız finans analisti
+başka kuruma transfer olunca performansı sistematik düşer ve çoğu zaman geri gelmez — yıldız-
+lık, sanıldığından çok daha fazla kuruma gömülüdür: destek ekibi, iç veri akışları, örtük rutinler.
+İstisna da bulgunun parçasıdır: ekibiyle birlikte geçen yıldızlar performansını korur. Rakipten
+“10x mühendis” transfer ederken satın alınan, eski ortamla çarpımı değil, yalnız taşınabilir bile-
+şendir; referans performans, eski platformun ürünüdür.
+Davranışsal Mekanizmalar
+Yarının maliyetini küçümsemek. Davranış iktisadının gözlemi: insanlar “bugün ile yarın”
+arasındaki farkı devasa, “yüzüncü gün ile yüz birinci gün” arasındakini sıfır hisseder — diyet
+bu yüzden hep yarın başlar. Refactor’ın her sprint bir sonrakine atılması aynı mekanizmadır.
+Davranışsal çözümler taşınır: kendini bağlama araçları (bakım işinin kapasiteye otomatik ya-
+zılması), varsayılanı tersine çevirmek (borç işi vazgeçilmesi zahmetli bir varsayılan olsun) ve
+geleceği somutlaştırmak (borcun bileşik projeksiyonunu görünür kılan gösterge).
+Varsayılanın gücü. Emeklilik birikiminde tek değişiklik — katılımın “istersen gir”den “iste-
+mezsen çık”a çevrilmesi — katılımı yüzde otuzlardan doksanlara taşıdı: insanlar varsayılanda
+kalır, çünkü varsayılan hem zahmetsizdir hem örtük tavsiyedir. Güvenli-varsayılan (secure by
+default) tasarımı aynı ilkedir: şifreleme açık gelir, kapatmak mümkün ama zahmetlidir; doğru
+yol, en kısa yol yapılır. Meşruiyet şartı şeffaflıktır: varsayılanın ne olduğu ve neden seçildiği
+görünürse tasarım dürüsttür; gizlenirse manipülasyona dönüşür.
+23
+
+-- 23 of 38 --
+
+Bütçe kutuları (zihinsel muhasebe). Para tam ikame edilebilirken insanlar onu zihinsel
+kutulara ayırır ve kutular arası geçirmez davranır: “tatil parası” harcanmaz, beklenmedik ikra-
+miye savrulur — oysa ikisi aynı liradır. Organizasyon bütçelerinde aynı yapışkanlık vardır ve iki
+yönlü kullanılır: analiz yaparken kutular yıkılmalı (bütün kaynaklar tek havuz gibi değerlendi-
+rilmeli); tasarım yaparken bilinçli kurulmalıdır — refactor’a ayrılmış “dokunulmaz yüzde”, tam
+da kutuların yapışkanlığı sayesinde çalışır.
+Karar hijyeni. Kayıptan kaçınma, ilk sayının çapa etkisi, kendi işine aşırı güven — bunlar
+yatırımcı hataları olarak belgelendi ama teknik kararlarda da aynen işler: mevcut mimariden
+vazgeçememek, ilk tahminin bütün planı çapalaması. Panzehirler de aynı literatürden taşınır:
+proje başlamadan “bu neden battı” senaryosu yazmak (pre-mortem), tahminleri tartışmadan
+önce bağımsız toplamak, kararların gerekçesini anında kayda geçmek.
+Bilgi İktisadı
+Söylenen ve Bilinen
+Bedava sözün sınırı. Oyun teorisinin iletişim modeli: konuşmanın maliyeti yoksa, aktarılabi-
+lecek bilgi konuşanla dinleyenin çıkar hizasına bağlıdır — çıkarlar ayrıştıkça mesaj kabalaşır ve
+sonunda bilgi taşımaz olur. Durum raporlarının hep “yeşil” olması bu dengenin ta kendisidir:
+raporlayanın çıkarı iyi görünmek olduğu sürece rapor, şablon ne kadar detaylandırılırsa detay-
+landırılsın bilgi taşımaz. Çözüm iki yönlüdür: kötü haberi erken verenin ödüllendirilmesi (çıkar
+hizası) ya da söze maliyet eklenmesi — “yetişir” demek bedavadır; “yetişmezse şu taahhüdümü
+bozarım” demek bilgi taşır.
+Beyan değil davranış. İktisadın yöntemsel devrimi: insanın ne istediğini söylediği değil, kısıt
+altında ne seçtiği bilgidir. Ankette “bu özelliği çok isteriz” diyen kullanıcıların gerçek tercihi,
+özellik çıktığındaki kullanım oranıdır; müşteri görüşmesi beyan toplar, telemetri tercih toplar.
+Disiplin şudur: her beyan verisinin yanına bir davranış verisi iliştir ve çeliştiklerinde davranışa
+inan — çelişkinin kendisi de ayrıca değerli veridir.
+Tahmine bedel bağlamak. Anket ve toplantı, insanların söylemeye cesaret ettiğini toplar;
+iddiaya girmek, bildiklerini toplar — çünkü yanılmanın bedeli vardır. Teslim tarihi tahminle-
+rini statü kaygısından arındırmanın yolu buradan geçer: anonim ve bağımsız olasılık tahmini
+toplamak, açık toplantıda el kaldırtmaktan sistematik olarak daha dürüst bilgi üretir.
+Tahmin isabetinin karnesi (kalibrasyon). Profesyonel tahmincilik, tahmini geriye dönük
+puanlamayı kurumsallaştırmıştır: “yüzde yetmiş dedim; yüz denemede kaç kere tuttu?” Çoğu
+ekip tahmin tutmayınca tartışır ama tahmin geçmişini hiç puanlamaz. Kalibrasyon kaydı tutan
+ekip, kimin “yüzde doksanının” gerçek yüzde doksan olduğunu öğrenir ve tahminleri buna göre
+ağırlıklar; güven beyanı, ölçülebilir bir sicile dönüşür.
+Kalabalığın Bilgisi ve Yanılgısı
+Bilgi çağlayanları. Model şunu gösterir: sırayla karar veren rasyonel insanlar, kendi özel bilgi-
+lerini öncekilerin görünür davranışına feda edebilir — ilk iki kişi A’yı seçtiyse, üçüncünün kendi
+24
+
+-- 24 of 38 --
+
+bilgisi B dese bile A’yı seçmesi mantıklıdır; ve o andan sonra kimsenin özel bilgisi karara girmez,
+herkes herkesi taklit eder. “Herkes şu teknolojiye geçiyor” dalgası tam budur: bin şirketin kararı,
+iki şirketin bilgisini taşıyor olabilir. Pratik ders: karar süreçlerinde sıralı açık oylama yerine eşza-
+manlı bağımsız görüş toplayın (planlama pokerinde kartların aynı anda açılması bu tasarımdır)
+ve “kaç kişi kullanıyor” yerine “kullananlar ne öğrendi” sorusunu sorun.
+Herkes özete güvenirse (Grossman–Stiglitz). Paradoks: piyasa fiyatları bütün bilgiyi ku-
+sursuz yansıtsaydı, bilgi toplamak kâr getirmezdi; kimse bilgi toplamazsa fiyat bilgiyi nereden
+yansıtır? Sonuç: sistem ancak birileri araştırma zahmetine katlandığı için “yaklaşık doğru” ka-
+labilir. Gözlem panolarında aynı döngü işler: herkes özet metriğe güvenirse ham veriye kimse
+inmez; kimse inmezse özetin doğruluğunu kim garanti eder? Ham veriyi düzenli kazan insanların
+maliyeti, sistemin bilgi sağlığının zorunlu primidir — tamamen otomatize edilemez.
+Dikkat de kıt kaynaktır. İktisatçı Sims’in çerçevesi: bilgi işleme kapasitesi sınırlıdır, bu yüz-
+den bazı sinyalleri izlememek irrasyonellik değil optimizasyondur. Sürekli çalan alarm kanalını
+sessize alan mühendis tembellik yapmıyor, dikkat bütçesini yönetiyordur. Tasarım sonucu: alarm
+sistemi, insan dikkatini kıt kaynak kabul ederek kurulmalıdır — bir sinyalin tetikleyeceği eylemin
+değeri, tükettiği dikkati aşmıyorsa o sinyal hiç üretilmemelidir.
+Hikâyeler de veridir (Shiller). Shiller’in tezi: ekonomik dalgalanmaları çoğu zaman veriler
+değil, bulaşıcı hikâyeler sürer — “ev fiyatları asla düşmez” anlatısı 2008 balonunu şişirdi. “Mono-
+litler ölçeklenmez”, “herkes yapay zekâya geçiyor” türü cümleler de veri değil, bulaşma dinamiği
+taşıyan hikâyelerdir; mimari kararları ve kariyer seçimlerini verilerden çok onlar sürer. Kişisel
+disiplin: “bu inancım analiz mi, kaptığım bir anlatı mı” sorusunu düzenli sormak — anlatı olması
+yanlış olduğunu göstermez, ama kanıt yükünün nerede durduğunu gösterir.
+Hayatta kalanların ortalaması. Yatırım fonu istatistiklerinin bilinen kusuru: batan fonlar
+veri tabanından silinir, “ortalama getiri” hayatta kalanların ortalamasıdır — sistematik olarak
+şişkin. “Netflix böyle yapıyor” vaka analizleri aynı kusuru taşır: aynı şeyi yapıp batan yüz şirket
+görünmezdir; en iyi pratik literatürü bir sağkalım örneklemidir. Panzehir kredi riskçilerinden
+gelir: kohort analizi — her kuşağı (bu yılın işe alımları, geçen yılın mimari kararları) ayrı izle;
+toplam rakam sabitken son kuşağın bozulması, agreganın içinde gömülü kalır.
+Fazla pürüzsüz olan şüphelidir. Madoff’u ele veren şey, getirilerinin imkânsız düzgünlü-
+ğüydü; adli muhasebeciler “gerçek olamayacak kadar pürüzsüz” kalıpları sahtekârlık sinyali ola-
+rak tarar. Hiç kırmızıya düşmeyen gösterge paneli, hiç başarısız olmayan test paketi, her sprint
+tam tutan tahminler aynı şüpheyi hak eder: sağlıklı sistemler gürültülüdür; mükemmel düzgün-
+lük çoğu zaman ölçümün bozuk ya da oynanmış olduğunun işaretidir.
+Nedensellik ve Politika
+Kural değişince model geçersizleşir (Lucas eleştirisi). Makroiktisadın en derin uyarısı:
+geçmiş veriden çıkarılan davranış modeli, o günkü kurallar altındaki davranışın kaydıdır; kural
+değişince insanlar davranışını değiştirir ve model çöker. A/B testinin kısa vadeli kazancının
+uzun vadede tersyüz olması çoğu zaman budur: kullanıcı yeni kurala adapte olmuştur, model
+25
+
+-- 25 of 38 --
+
+olmamıştır. Geçmiş metrikten kurulan her model (kapasite projeksiyonu, kullanıcı davranışı),
+kural değişikliğinden sonra yeniden sınanmalıdır.
+Korelasyon yetmez, tanımlama gerekir. Ekonometrinin çekirdek azabı: gözlenen ilişkiyi
+üçüncü bir etken ya da ters yönlü nedensellik üretebilir. Ekonometrinin çözüm cephanesi mü-
+hendislik analitiğine taşınır: politikayı alan ekiple almayanın değişim farkını kıyaslamak (öncesi–
+sonrası kıyasının sahte trendlerini temizler), eşiğin hemen altı ve üstünü doğal deney olarak kul-
+lanmak (“inceleme zorunluluğu 500 satırda başlıyorsa, 490 ve 510 satırlık değişiklikler neredeyse
+özdeş gruplardır”). “Yeni süreci getirdik, metrik iyileşti” cümlesi, aynı dönemde başka nelerin
+değiştiği sorusu sorulmadan bir hikâyedir.
+Politikanın etkisi, ikinci hamleden sonra hesaplanır. İktisatta tanınan bir kalıp: kurala
+muhatap olanlar davranışlarını kurala göre ayarlar ve etki beklenenden sapar. Kod dondurma
+(freeze) ilanı, dondurma öncesi riskli birleştirme yığılması üretir: kuralın azalttığı risk, öne çekilip
+fazlasıyla geri gelir. Soru şablonu: bu kural davranışı gerçekten değiştiriyor mu, yoksa yalnızca
+zamanda ve biçimde mi kaydırıyor? Kaydırıyorsa gerçek etki, kayma maliyeti düşüldükten son-
+raki bakiyedir — çoğu zaman negatif.
+Merkez, dağınık bilgiyi taşıyamaz (Hayek). Yirminci yüzyılın büyük iktisat tartışması:
+ekonomi merkezi planla mı, piyasayla mı yönetilmeli? Hayek’in belirleyici argümanı hesap gü-
+cüyle ilgili değildi: bilgi, yerel ve örtüktür — her aktörün bildiği küçük şeyler merkeze asla tam
+taşınamaz. Mimari yönetişimin ezeli sorusu aynıdır ve cevap ölçekle keskinleşir: küçük organi-
+zasyonda merkezi kurul bilgiyi taşıyabilir; büyükte taşıyamaz — kurulun onayladığı tasarım,
+sahadaki örtük bilgiden (o veritabanının gerçek huyları, o müşterinin gerçek kullanımı) yoksun-
+dur. Hayek’çi çözüm: merkez kararları değil kuralları ve sinyalleri koysun; kararı, bilginin olduğu
+yere bıraksın.
+Dinamikler ve Döngüler
+Verimlilik ve Ölçek
+Verimlilik artışı tasarrufa dönüşmez (Jevons). On dokuzuncu yüzyıl paradoksu: buhar
+makinesi verimlenince kömür tüketimi azalmadı, patladı — birim maliyet düşünce toplam talep
+büyüdü. Sorguyu on kat hızlandırırsanız ekipler elli kat fazla sorgu atmaya başlar; optimizasyo-
+nun getirisi hesaplanırken, ucuzlamanın davet edeceği yeni talep hesaba katılmalıdır.
+Otomatikleşmeyen iş pahalılaşır (Baumol). Bir senfoni orkestrasının verimliliği yüz yıldır
+artmadı ama müzisyen maaşları arttı; çünkü verimliliği artan sektörler ücretleri yukarı çeker
+ve artmayan sektörler o ücretleri ödemek zorunda kalır. Otomasyonun dokunmadığı işler (elle
+test, elle devreye alma, insan gerektiren destek) zamanla görece pahalılaşır ve bütçede büyüyen
+kambura dönüşür. Ders: bir süreci otomatikleştirmemenin maliyeti sabit değildir; çevre otoma-
+tikleştikçe bileşik olarak artar.
+Öğrenme eğrisi satın alınır. Endüstri araştırmalarının yasası: kümülatif üretim her ikiye
+katlandığında birim maliyet sabit oranda düşer — aynı ekip aynı işi giderek hızlı yapar. Stra-
+tejik sonucu: yeni teknolojideki ilk projelere “zararına” girmek (yavaş, hatalı, pahalı) aslında
+26
+
+-- 26 of 38 --
+
+eğriyi satın almaktır. Eğriyi bilmeyen yönetici iki simetrik hata yapar: üçüncü projenin hızını
+ilk projeden beklemek, ya da ilk projenin yavaşlığına bakıp teknolojiyi mahkûm etmek.
+Çarpımsal iş, toplamsal iş (O-ring teorisi). Adını Challenger mekiğini düşüren tek contadan
+alan model: bazı işlerde sonuç, halkaların ortalamasına değil çarpımına bağlıdır — tek zayıf halka
+her şeyi sıfırlar. Bu işlerde yetenekler birbirini tamamlar: en iyiler en iyilerle eşleşmelidir; yıldızı
+zayıf ekibe “takviye” koymak iki tarafı da heba eder. Yazılımın hangi kısmı çarpımsal, hangi
+kısmı toplamsal — stratejik ayrımdır: güvenlik, veri bütünlüğü, API sözleşmesi çarpımsaldır
+(tek hata her şeyi götürür); içerik ve test üretimi büyük ölçüde toplamsaldır. Çarpımsal işe
+ortalama ekip koymak da, toplamsal işe yıldız harcamak da aynı tahsis hatasıdır.
+Kazanan hepsini alır (süperyıldız etkisi). Rosen’in 1981 öngörüsü: dağıtım maliyeti sıfıra
+düşen alanlarda, en iyi ile ikinci en iyi arasındaki küçük fark devasa gelir farkına dönüşür —
+herkes en iyiyi dinleyebiliyorsa, ikinciye talep kalmaz. Yazılım bu dinamiğin merkez üssüdür: en
+iyi kütüphane bedavaya kopyalanır, ikinci en iyinin varlık sebebi buharlaşır. İç ders de değerli-
+dir: “10x mühendis” kısmen bu etkidir — kod herkese dağıldığı için yetenek kaldıraçlanır; aynı
+kişi kaldıraçsız bir rolde çarpanını kaybeder. 10x, kişinin değil kişi çarpı kaldıraç çarpımının
+özelliğidir.
+Girdi artışı mı, öğrenme mi (Solow artığı)? Büyüme muhasebesinin şok bulgusu: Ame-
+rikan büyümesinin çoğu, sermaye ve işgücü artışıyla açıklanamıyordu — kalan kısım, girdileri
+birleştirme biçiminin (teknoloji, organizasyon) iyileşmesiydi. Ekip çıktısındaki artışın ne kadarı
+kadro büyümesinden, ne kadarı süreç ve araç iyileşmesinden? Bu ayrıştırma yapılmazsa iki hata
+mübahlaşır: verimlilik kazancını kadroya yazıp gereksiz işe alım yapmak, ya da kadro artışını ve-
+rimlilik sanmak. “Aynı girdiyle geçen yıla göre ne kadar fazla üretiyoruz” serisi, organizasyonun
+gerçek öğrenme hızıdır.
+Salınımlar
+Örümcek ağı salınımı. Tarım iktisadının klasik döngüsü: domates pahalanır, herkes eker; hasat
+gelince arz patlar, fiyat çöker; kimse ekmez, kıtlık gelir, fiyat fırlar. Salınımın motoru gecikmedir:
+bugünün kararı, geçen sezonun fiyatına bakar. “Veri bilimci maaşları uçtu” haberinden dört yıl
+sonra gelen mezun seli aynı mekaniktir; kapasite planlamasında da: darlık sinyali, herkesin aynı
+anda ön-ölçeklemesine, o da atıl kapasiteye yol açar. Karar ile sonucu arasında uzun gecikme
+olan her sistem, anlık sinyale bakarak karar verirse salınır; çözüm, ileriye dönük tahmine bakan
+karar kuralıdır.
+Kamçı etkisi. Tedarik zinciri araştırmasının keşfi: perakendede yüzde beşlik talep dalgası,
+zincirde yukarı çıktıkça büyür — toptancıda yüzde on beş, fabrikada yüzde kırk; çünkü her halka
+gördüğü dalgaya kendi emniyet payını ekleyerek sipariş verir. Mikroservis zincirlerinde birebir
+yaşanır: uçtaki küçük trafik dalgası, her katmanın kendi yeniden denemesi ve kendi tamponuyla
+içeri doğru büyür; en dipteki veritabanı, gerçek talebin katbekat salınımını görür. Çözümler de
+tedarik zincirinden: uç talebi zincirin tamamına görünür kılmak (uçtan uca izleme tam budur)
+ve kapasite kararlarını her katmanın bağımsız vermesi yerine ortak sinyale bağlamak.
+Disiplin en çok bollukta kırılır. Oligopol teorisinin sezgiye aykırı bulgusu: gizli fiyat anlaşma-
+27
+
+-- 27 of 38 --
+
+ları en çok talep patlamasında bozulur — pastanın büyüdüğü an, anlaşmayı bozup pay kapmanın
+getirisi en yüksek olduğu andır. Kalite mutabakatı ve süreç disiplini gibi örtük anlaşmalar da
+en çok büyüme sarhoşluğunda kırılır: fırsat penceresi açılınca “bu seferlik testi atlayalım.” Kriz
+disiplini kendiliğinden getirir; asıl tasarım sorusu bolluktur — fren, yokuş aşağıda değil, gaza en
+çok basılan yerde güçlendirilmelidir.
+Yapısal Dönüşüm
+Yaratıcı yıkım. Schumpeter’in kavramı: eskinin yıkılması kapitalizmin arızası değil, çalışma
+biçimidir. Christensen’in eklediği mekanizma: yerleşikler çoğu zaman alttan gelen “yetersiz ama
+ucuz” alternatiflere yenilir — alternatif, yerleşiğin ciddiye almadığı segmentte tutunur ve yukarı
+tırmanır. Bugünkü teknoloji yığınına aşırı yatırım, gelecekteki geçiş maliyetinin kendisidir; yıkımı
+anomali değil takvim olarak görmek, eski sistemlere bakışı değiştirir.
+Verimsizin kilitlenmesi (QWERTY). Klavye düzeni QWERTY, optimal olduğu için değil,
+erken yaygınlaşma ile geçiş maliyetinin birleşmesi yüzünden hayatta kaldı: herkes onu öğrendi,
+daktilolar ona göre üretildi, değiştirmek kimseye tek başına kâr etmez oldu. İki yönlü ders:
+kendi sisteminde erken kararların kilitleneceğini bil — ilk hafta seçilen veri formatı on yıl yaşar;
+pazarda ise yerleşiği devirmek için “daha iyi olmak” yetmez, geçiş maliyetini eriten strateji
+gerekir: uyumluluk katmanı, çift yönlü köprü, kademeli taşıma.
+Geç kalanın avantajı. İktisat tarihçisi Gerschenkron’un tezi: geç sanayileşen ülkeler öncülerin
+yüzyıllık patikasını yürümez, son duraktan başlar — sırtlarında amorti edilecek eski yatırım yok-
+tur. (Sabit telefon hattını atlayıp doğrudan mobile geçen ülkeler gibi.) Sıfırdan başlayan rakip,
+senin on yıllık göç patikanı yürümek zorunda değildir; “bizim geçtiğimiz yollardan geçecekler”
+varsayımı stratejik körlüktür. Geç kalan tarafta ayna ders: öncüyü adım adım taklit etmek, geç
+kalmanın tek avantajını çöpe atmaktır — atla, yürüme.
+Emtialaşan beceri ucuzlar. Kalkınma iktisadının uzun tartışması: hammadde ihraç eden
+ülkelerin ticaret koşulları uzun vadede aleyhine döner — teknolojik ilerleme, işlenmiş üründe
+kaliteye, hammaddede doğrudan fiyat düşüşüne yansır. Beceriler de emtialaşır: dün premium
+olan yetkinlik (temel web uygulaması, standart bulut kurulumu) bugün emtiadır ve fiyatı seküler
+düşer. Reçete de aynıdır: değer zincirinde yukarı tırmanmak — uygulayandan tasarlayana, araç
+kullanandan araç yapana. Değer zincirinde durduğun yer, uzun vadeli fiyat trendinin yönünü
+belirler.
+Yaş, ömrün göstergesidir (Lindy etkisi). Bozulmayan şeyler (kitaplar, fikirler, protokoller)
+insan gibi yaşlanmaz: elli yıldır okunan kitap muhtemelen elli yıl daha okunur — her yıl hayatta
+kalmak, hayatta kalma kabiliyetinin kanıtıdır. Teknoloji seçiminin aktüeryası: SQL kırk yaşın-
+dadır ve kırk yıl daha beklenir; üç yaşındaki framework’ün beklenen kalan ömrü üç yıl civarıdır.
+Kural: bağımlılığın beklenen ömrü, üzerine kurulan sistemin planlanan ömründen uzun olmalı.
+Lindy durağanlık savunusu değildir; yeniye kenar pozisyonda girilir — Lindy yalnızca çekirdeğin
+hangi malzemeden yapılacağını söyler.
+28
+
+-- 28 of 38 --
+
+Tuzaklar ve Eşikler
+Koordinasyon tuzağı ve büyük itki. Kalkınma iktisadının modeli: bazı ekonomiler yoksul-
+lukta kilitlidir — fabrika kârlı olurdu eğer diğer fabrikalar da kurulsaydı (birbirinin müşterisi
+olurlardı), ama tek başına kuran batar; herkes herkesi bekler. Altyapı geçişlerinin çoğu bu tu-
+zaktadır: yeni sisteme geçmek her ekip için ancak diğerleri de geçerse mantıklıdır; tek geçen iki
+sistemi birden taşır. Ders: bu tip geçişler organik gönüllülükle olmaz — kademeli gönüllülük
+tuzağın yakıtıdır; çözüm eşzamanlı taahhüttür: bağlayıcı tarih, kritik kütleyi tek seferde taşıyan
+merkezi yatırım, ilk geçenlerin çift-taşıma maliyetinin karşılanması.
+Eşiğin altında yardım erir. Yoksulluk tuzağı modeli: belirli eşiğin altında gelir yalnızca ha-
+yatta kalmaya yeter, birikime artık kalmaz — küçük yardımlar eşiğin altında buharlaşır; tu-
+zaktan çıkaran, eşiği aşırtacak yoğunlaşmış destektir. Teknik borcu eşiğin üstündeki ekip aynı
+durumdadır: bütün kapasite yangına gider, iyileştirmeye artık kalmaz. Böyle bir ekibe “her sp-
+rint yüzde on iyileştirme” vermek, eşiğin altında eriyen mikro-yardımdır; gereken, eşiği aşırtacak
+tek seferlik yoğun itkidir (adanmış istikrar dönemi, dış takviye) — eşik aşıldıktan sonra normal
+bakım kendini taşır.
+Bekleme sarmalı. Fiyatların düştüğü ekonomide harcamayı ertelemek bireysel olarak akıl-
+lıcadır — yarın daha ucuz; ama kolektif erteleme ekonomiyi kilitler. “Altı ay sonra daha iyi
+framework çıkar” beklentisi kararları aynı biçimde sonsuz erteletir. Çözüm de iktisattan: bek-
+lentiyi kıran taahhüt — karar tarihini sabitle, “o gün eldeki en iyi seçenekle gidiyoruz” de; çünkü
+ertelemenin bileşik maliyeti, yanlış seçimin maliyetini çoğu zaman aşar.
+Tek başarının kuraklığı (Hollanda hastalığı). Hollanda doğalgaz bulunca parası değerlendi
+ve diğer bütün ihracat sektörleri rekabet gücünü kaybetti: tek başarı, geri kalan her şeyi kuruttu.
+Patlayan tek ürün de bütün yeteneği, bütçeyi ve yönetim dikkatini kendine çeker; diğer ürünler
+ve altyapı yatırımı kuraklığa girer. Norveç’in çözümü taşınabilir: petrol gelirini ayrı fona koyup
+ekonomiden yalıtmak — başarılı ürünün getirisinin bir kısmını mekanik kuralla platform ve keşif
+yatırımına ayırmak.
+Evrenin hayat evresine uygun harcama. Tüketim teorisinin çapası: insanlar harcamayı
+anlık gelire değil, ömür boyu beklenen gelire göre düzler — gençken borçlanılır, orta yaşta
+biriktirilir. Projeler de yaşam evresine göre fonlanmalıdır: keşif evresi borçlanır (yatırım alır, çıktı
+vermez), olgunluk biriktirir (platform katkısı, dokümantasyon, yedek yetiştirme), gün batımı
+çözer (bilgiyi devreder). Patoloji, evre–davranış uyumsuzluğudur: olgun sistemin hâlâ sürekli
+yatırım isteyip birikim bırakmaması — ya da geçici bütçe rüzgârını kalıcı gelir sanıp yapısal
+taahhüde çevirmek.
+Kurumsal Tasarım
+Mülkiyet ve Kolektif Karar
+Tanımsız mülkiyet en pahalısıdır. Coase’un mülkiyet hakları dersi: hakların kime ait ol-
+duğu net olduğu sürece taraflar pazarlıkla verimli sonuca ulaşabilir; asıl felç, sahipliğin belirsiz
+olduğu yerde başlar. Sahibi belirsiz modül, iki ekibin ortasında kalan servis, “herkesin” olduğu
+29
+
+-- 29 of 38 --
+
+için kimsenin bakmadığı betik — bütün ihtilaflar orada patlar. Kod sahipliği dosyası (CODE-
+OWNERS) hukuki bir belgedir: net, güncel ve tartışmasız tutulması, pazarlık maliyetini düşüren
+tapu sicilidir.
+Oylamanın kendisi sonucu belirler (Arrow). Sosyal seçim teorisinin çifte dersi. Arrow’un
+imkânsızlık teoremi: bireysel tercihleri birleştirmenin, makul adalet koşullarını aynı anda sağla-
+yan hiçbir yolu yoktur — “ekibin tercihi” diye nötr bir şey teknik olarak var olamaz; puanlama,
+sıralama, nokta oylaması aynı tercihlerden farklı sonuç çıkarır. Medyan seçmen teoremi: çoğun-
+luk oylaması ortadaki seçmenin tercihine yakınsar, uçlar asla kazanmaz. Komiteyle yapılan ürün
+yol haritasının sistematik olarak “kimsenin nefret etmediği ama kimsenin de sevmediği” vasatlığa
+yakınsaması bu teoremin öngörüsüdür; cesur ürün kararları komiteden çıkmaz — farklılaşma,
+oylamayla değil vizyonla gelir.
+Bozuk sistemde parça mükemmelliği (ikinci en iyi teoremi). Refah iktisadının rahat-
+sız edici sonucu: bir sistemin optimallik koşullarından biri ihlal edilmişse, kalan koşulları tek
+tek sağlamak toplamı iyileştirme garantisi vermez — hatta kötüleştirebilir. Her bileşeni ders
+kitabına uygun hale getirmek, bütünü iyileştirmeyebilir: kusursuz mikroservis tasarımı, monolit
+disipliniyle çalışan organizasyonda net zarar olabilir. Teoremin yapıcı yüzü: kaldırılamayan bir
+kısıt varsa, doğru politika çoğu zaman kitaba aykırı ama kısıtı telafi eden ikinci bir sapmadır.
+En iyi pratik, ancak bütün sistem en iyi olduğunda pratiktir.
+Üçünden ikisini seç. Uluslararası iktisadın “imkânsız üçlemesi”: sabit döviz kuru, serbest
+sermaye hareketi ve bağımsız para politikası aynı anda tutulamaz — ikisi seçilir, üçüncüsü feda
+edilir. Bu “üçünden ikisi” kalıbı genel bir düşünme aracıdır: ekip özerkliği, teknoloji tutarlılığı
+ve hızlı teslimat da böyle bir üçlüdür. Üçünü birden ilan eden yönetim, hangisinin sessizce feda
+edildiğini kriz anında öğrenir; üçlemeyi açıkça adlandırmak, fedayı bilinçli seçme imkânı verir.
+Ortak standart ne zaman iyi fikirdir? Euro’nun teorik temeli “optimal para alanı” analizidir:
+ortak para birimi işlem maliyetini düşürür ama üyelerin kendi başına ayarlanma esnekliğini
+alır; birlik ancak üyeler benzer şoklar yaşıyorsa, işgücü aralarında hareketliyse ve zora düşene
+merkezi destek varsa iyi çalışır — Yunanistan krizi, koşulsuz kurulan birliğin ders kitabıdır.
+Ortak monorepo, tek framework, zorunlu ortak stack aynı analizi hak eder: ekiplerin işleri benzer
+mi, mühendisler ekipler arası hareketli mi, zorlanana merkezi destek var mı? Üçü de hayırsa,
+dayatılan ortaklık kendi Yunanistan’ını üretir — standarda uymaya çalışıp sürekli krizde yaşayan
+ekip.
+Herkesin baktığı yer (Schelling noktası). Oyun teorisinin gözlemi: koordinasyon çoğu za-
+man iletişimle değil, “herkesin, herkesin seçeceğini bildiği” doğal odak noktalarıyla sağlanır.
+Anlamsal sürümleme (semver), “ana dal her zaman yayınlanabilir” kuralı birer odak noktasıdır:
+optimal oldukları için değil, herkes herkesin oraya bakacağını bildiği için çalışırlar. İkiz kavram
+güvenilir taahhüttür: “bu API’yi iki yıl kırmayacağız” sözü ancak kendini bağlama mekanizma-
+sıyla (yayınlanmış sürümleme politikası, sözleşme testleri) inandırıcıdır — niyet beyanı yetmez,
+sözü bozmayı maliyetli kılan yapı gerekir.
+İlk ihlale verilen tepki, sonrakilerin fiyatıdır. Tekrarlı oyun teorisinin dersi: caydırıcılık,
+30
+
+-- 30 of 38 --
+
+tek tek cezalardan değil itibardan gelir — yerleşik firma ilk meydan okuyana karşı zararına
+savaşarak “savaşan tip” itibarı satın alır ve sonraki on meydan okuyan hiç gelmez. Standartları
+savunan ekibin ilk istisnaya tepkisi aynı işlevi görür: ilk ihlali sineye çeken, “pazarlıkla esner”
+itibarını satın almıştır ve herkes pazarlığa gelir. Aynı çerçeve sözleşmesiz işbirliklerini de açıklar:
+açık kaynak bakımı ve ekipler arası centilmenlik anlaşmaları hukuki değil itibari yaptırımla
+ayakta durur — tekrarlanmayacak ilişkide itibar çalışmaz (sözleşmeyi sıkılaştır), tekrarlanan
+ilişkide aşırı sözleşme itibar mekanizmasını zayıflatır.
+Regülasyon Dersleri
+Üç sütunlu güvence. Bankacılık düzenlemesi (Basel çerçevesi) tek mekanizmaya güvenmez:
+sayısal asgari kurallar, denetçinin insani yargısı ve şeffaflık yoluyla piyasa baskısı — üç sütun
+birbirinin kör noktasını kapatır. Yazılım kalite güvencesi aynı mimariyi hak eder: otomatik
+kurallar (lint, test, politika kodu), insan yargısı (inceleme, mimari değerlendirme) ve şeffaflık
+(açık metrikler, olay raporları). Tek sütuna yaslanmanın patolojileri bilinir: yalnız kural, kural
+oyunculuğu üretir; yalnız yargı, ölçeklenmez ve keyfileşir; yalnız şeffaflık, utandırma kültürüne
+döner.
+Tekele yükümlülük karşılığında izin. Elektrik ve su şebekelerinde rekabet israftır (altyapıyı
+iki kez döşemek); bu yüzden tekel kabul edilir ama yükümlülükle regüle edilir: fiyat tavanı, hizmet
+standardı, evrensel erişim. İç platform ekipleri doğal tekeldir (ikinci CI altyapısı kurmak israftır)
+ve aynı çerçeveyi hak eder: yayınlanmış hizmet standardı, şeffaf yol haritası ve kritik madde —
+standart tutmazsa ekiplerin kendi çözümüne gitme hakkının meşrulaşması. Çıkış tehdidi olmayan
+regülasyon dişsizdir.
+Bütçe büyüten bürokrasi. Kamu tercihi okulunun modeli: kâr maksimize edemeyen birim,
+büyüklük maksimize eder — daha çok kapsam, daha çok kadro, daha büyük bütçe; ve hizmetin
+gerçek maliyetini yalnız kendisi bildiği için üstleri talebi denetleyemez. İç platform ve altyapı
+ekipleri aynı teşvik yapısında yaşar. Panzehirler de teoriden: kıyaslanabilir alternatif (aynı hizme-
+tin dış SaaS fiyatı), birim maliyet şeffaflığı ve bütçeyi onaylayan tarafta bağımsız değerlendirme
+kapasitesi.
+Rekabetsizliğin gevşekliği. İktisatçı Leibenstein’ın gözlemi: rekabet baskısı olmayan firmalar
+teorik verimliliklerinin belirgin altında çalışır — kimse kötü niyetli değildir, sadece kimseyi
+zorlayan yoktur; “bu kadarı yeterli” normu kolektif öğrenilir ve orada durulur. Rakipsiz iç aracın
+yavaşlığı, alternatifi olmayan sürecin hantallığı aynı durumdur. Panzehir normatiftir: dış kıyasın
+görünür kılınması, “bu aracı bugün sıfırdan seçer miydik” sorusunun dönemsel sorulması, taze
+bakış.
+Denetleyeni, denetlenen ele geçirir (Stigler). Chicago okulunun acı teoremi: regülasyon
+kamuyu korumak için kurulur ama zamanla endüstri onu ele geçirir — çünkü endüstrinin regüla-
+törle ilgilenme motivasyonu yoğun, kamununki dağınıktır; bilgi, personel ve gündem endüstriden
+akar. Mimari kurullarda aynı dinamik: en büyük ve en dertli ekip toplantılara en kalabalık gelir,
+gündemi onun acilleri doldurur, standartlar zamanla onun mevcut pratiğine benzemeye başlar.
+Panzehirler: küçük ekiplere ayrılmış temsil, dönüşümlü üyelik, gündemi çıkar sahibinin yazma-
+31
+
+-- 31 of 38 --
+
+ması, karar gerekçelerinin yayınlanması — ele geçirme karanlıkta büyür.
+Gölge bankacılık, gölge IT. 2008’i büyüten, denetlenen bankalar değil, banka gibi davranıp
+banka gibi denetlenmeyen yapılardı; regülasyon sıkılaştıkça faaliyet gölgeye kaçar — yasaklamak
+yok etmez, görünmez kılar. Merkezi IT ağırlaştıkça ekiplerin kişisel kredi kartıyla SaaS alması,
+üretim verisini onaysız tablolarda tutması aynı dinamiktir ve asıl risk faaliyetin kendisinden değil
+görünmezliğinden gelir. Kriz sonrası finansın dersi aynen geçerli: gölgeyi yasaklamak yerine kayda
+alıp hafifçe düzenlemek (onaylı katalog, kayıtlı self-servis yollar), yeraltına itmekten güvenlidir.
+Faturanın kesildiği yer, yükün gittiği yer değildir. Kamu maliyesinin temel dersi: verginin
+faturası kime kesilirse kesilsin, gerçek yük kaçma imkânı olmayan tarafa kayar — işverene kesilen
+prim, ücret ayarlamasıyla çalışana yansır. “Bu maliyeti şu ekip karşılasın” kararı faturadır; gerçek
+yük, alternatifi olmayana akar: zorunlu güvenlik incelemesinin faturası güvenlik ekibine kesilir,
+gerçek yükünü bekleyecek başka yolu olmayan küçük ekipler taşır. Politika tasarlarken soru “kim
+ödesin” değil, “bu yük gerçekte kime yansıyacak”tır.
+Değerlendirmeyi kim finanse ediyor? 2008’in yapısal skandalı: kredi notunu veren kuruluş-
+ları, notu alan şirketler finanse ediyordu — en yüksek not, satılık hale geldi. Vendor’ın parasıyla
+yapılmış güvenlik denetimi, sponsorlu performans kıyaslaması, satıcının seçtiği referans müşteri
+aynı çıkar çatışmasını taşır. “Kim ödüyor” sorusu, her üçüncü taraf güvencesinin ilk sorusudur;
+bağımsız test ve kendi yük denemen, alıcının finanse ettiği değerlendirmedir.
+Güven Altyapısı
+Mutabakat kurumları. Finansın görünmez kahramanı takas odalarıdır: taraflar arasındaki
+işlemleri netleştirir, atomikliği garanti eder — ve tutarlılığın anlık değil süreçsel olabileceğini
+yüzyıllar önce kabullenmiştir: hisse alım satımı bugün yapılır, mülkiyet iki gün sonra kesinleşir.
+Dağıtık sistemlerdeki saga deseni, idempotens ve gece çalışan mutabakat işleri aynı problemi
+çözer; “eventual consistency”, finansın yüzyıllık kurumsal pratiğinin yazılım adıdır.
+Güveni zincirlemek (akreditif). Uluslararası ticaretin kadim problemi: birbirini hiç tanı-
+mayan, farklı hukuklardaki alıcı ve satıcı nasıl işlem yapar? Çözüm akreditiftir: iki taraf da
+karşı tarafa değil kendi bankasına güvenir, bankalar birbirine güvenir — güven, tanıdık halkalar
+üzerinden zincirlenir. TLS sertifika zincirleri ve federatif kimlik aynı mantıktır: doğrudan gü-
+venilmeyen tarafla, ortak güvenilen aracı üzerinden işlem. İnce ders de taşınır: zincir, en zayıf
+halkası kadardır — “güvendiğin aracıyı kim denetliyor” sorusu hiç kapanmaz.
+Aynı teminatın zinciri. Finansın tesisatında aynı teminat, ödünç zincirlerinde defalarca yeni-
+den kullanılır; sistem müthiş verimlidir ama tek teminatın değeri sorgulanınca bütün zincir donar
+— 2008’de yaşanan buydu. Yazılımın aynı tesisatı vardır: aynı temel kütüphane (OpenSSL, log4j)
+yüzlerce katman tarafından örtük olarak yeniden kullanılır; log4shell açığı bir teminat krizi gibi
+yayıldı, çünkü kimse zincirin nereye uzandığını bilmiyordu. Yazılım malzeme listesi (SBOM)
+hareketi, finansın kriz sonrası “teminat kaydı” reformunun birebir karşılığıdır.
+Soyutlamanın opaklık sınırı. Riskleri havuzlayıp dilimlere ayırmak (menkul kıymetleştirme)
+finans mühendisliğinin gücüdür: her yatırımcıya uygun risk profili sunar — hizmet seviyesi ka-
+32
+
+-- 32 of 38 --
+
+demeleri tam budur. 2008’in uyarısı katman sayısıyla ilgilidir: türevin türevi üst üste binince,
+kimse altta yatan riski göremez oldu. Sarmalayıcının sarmalayıcısını saran, üç kat soyutlama
+altındaki bağımlılığın gerçek davranışını kimsenin bilmediği kod tabanları aynı opaklık krizini
+taşır: soyutlama meşrudur, görüşü tamamen kesen derinlik değildir.
+Küçük ayarı ertelemenin bedeli. Fiyatlar neden anında güncellenmez? Çünkü değiştirmenin
+kendisi maliyetlidir (restoranın menüyü yeniden bastırması) ve küçük sapmalar katlanılabilirdir
+— ta ki birikip büyük, sancılı bir düzeltmeyi zorunlu kılana dek. Bağımlılık güncellemeleri
+aynı mekaniği yaşar: her küçük güncellemenin zahmeti vardır, ertelenir, erteleme birikir ve “iki
+ana sürüm birden atlama” travmasına dönüşür. Ders: ayar maliyetini düşüren altyapı (otomatik
+güncelleme botları, sürekli küçük düzeltme) birikimli krizi önler — sık küçük ayar, seyrek büyük
+ayardan toplamda ucuzdur.
+Kayıtsız varlık, sermaye değildir (de Soto). Kalkınma iktisatçısı de Soto’nun tezi: yok-
+sul ülkelerde muazzam varlık vardır ama tapusuz olduğu için teminat gösterilemez, satılamaz,
+sermayeye dönüşemez — varlık var, kaldıraç yok. Dokümansız modül, tek kişinin kafasındaki
+sistem bilgisi, açıklamasız iç araç aynı durumdadır: değer üretir ama kaldıraçlanamaz — yeni
+gelen kullanamaz, başka projeye taşınamaz, sahibi gidince buharlaşır. Reçete de aynıdır: varlığı
+sermayeye çeviren şey varlığın kendisi değil, kayıt sistemidir; dokümantasyon ve karar arşivi
+birer tapu dairesidir.
+Bir tarafı bilerek zararına beslemek. Kredi kartı sistemleri kart sahibinden neredeyse para
+almaz, esnaftan alır; çünkü platformlar iki tarafı aynı anda kazanmak zorundadır ve doğru st-
+rateji çoğu zaman ağ etkisini tetikleyen tarafı zararına beslemektir. Geliştirici ekosistemi kuran
+herkesin sorusu budur: API’de kim beslenir? Genel cevap: geliştiriciler bedava araç alır, gelir ku-
+rumsal taraftan gelir; ve kritik kütleye kadar bir taraf yapay olarak beslenir — ilk entegrasyonları
+platformun kendisinin yazması, tavuk–yumurta kilidini kıran bilinçli zarardır.
+Tur tur fonlama. Girişim sermayesi bütün parayı baştan vermez; kilometre taşına bağlı turlarla
+fonlar — her tur bir gözden geçirmedir ve ölmesi gereken şirket erken ve ucuz ölür. Kurumsal
+proje yönetimi çoğu zaman tersini yapar: yıllık bütçe baştan bağlanır, başarısızlık geç ve pahalı
+gelir. Model aynen taşınır: büyük girişimler aşamalı fonlanır, her aşamanın “bir sonraki turu hak
+etme” kriteri baştan yazılır ve kriteri tutmayan projeye ek kaynak vermemek normalleştirilir —
+küçülerek devam etmek utanç değil, gerçeğin fiyatlanmasıdır.
+33
+
+-- 33 of 38 --
+
+Sermaye Disiplini: Ortak Dil
+Sermaye Disiplini Nedir?
+Sermaye disiplini (capital discipline), finans dünyasında gerçek ve yerleşik bir terimdir. Dar
+anlamı şudur: bir şirketin elindeki sermayeyi harcarken kendine katı kurallar koyması — her
+yatırımın belirli bir getiri eşiğini geçmesi, geçmeyene kaynak bağlanmaması, bağlanan kayna-
+ğın hesabının sorulması. Terim özellikle petrol ve madencilik sektörlerinden yaygınlaşmıştır: bu
+sektörler bolluk dönemlerinde ellerine geçen parayla kontrolsüz yatırım yapar, fiyatlar düşünce
+batarlardı; “sermaye disiplini”, yatırımcıların onlara dayattığı reçetenin adı oldu — her doları,
+son dolarınmış gibi, getirisini ispatlayarak harca.
+Bu notun kullandığı anlam, kavramın genişletilmiş halidir: sermaye yalnızca para değil, üretken
+kapasite taşıyan her kıt kaynaktır — para, parça, makine, mühendis-saat, dikkat. Bu genişlet-
+meyle sermaye disiplini, birbirinden bağımsız görünen üç geleneğin ortak omurgası olarak oku-
+nabilir hale gelir. Finans bu disiplini para diliyle konuşur (işletme sermayesi, devir hızı, zarar
+realizasyonu); Toyota Üretim Sistemi malzeme diliyle konuşur (envanter, akış, andon); Musk’ın
+Algoritması fizik diliyle konuşur (sil, hızlandır, birim maliyet). Üçünün söylediği şey aynıdır:
+duran kaynak maliyettir, değer harekette üretilir, gerçeklik beyandan üstündür, hata erken ve
+ucuzken kesilir.
+Disiplinin Kelime Dağarcığı
+Aşağıdaki dağarcık bilinçli olarak süzülmüştür: yalnızca mühendislikte doğal, zorlamasız karşı-
+lığı olan finans terimleri alınmış; ancak eğip bükerek taşınabilecek olanlar (hurdle rate, cost of
+capital, DuPont ayrıştırması, impairment, stewardship ve benzerleri) dışarıda bırakılmıştır.
+Bağlanan Kaynağın Kelimeleri
+Fırsat maliyeti. Bir kaynağın gerçek maliyeti, onunla yapılabilecek en iyi alternatif işin değeri-
+dir. Sprint’e giren her iş, giremeyen en iyi işin kaybıdır; önceliklendirme tartışmalarının tamamı
+bu tek kavramın etrafında döner. Doğru soru “bu iş iyi mi” değil, “yapabileceğimiz en iyi şey
+bu mu” sorusudur.
+İşletme sermayesi (working capital). Süreçte bağlı duran, henüz değere dönüşmemiş kay-
+nak. Mühendislik karşılığı birebirdir: başlanmış-bitmemiş iş (work-in-progress) — birleşmemiş
+dal, inceleme bekleyen değişiklik, bayrak arkasında bekleyen özellik. Bunların hepsi bağlanmış
+sermayedir: değer üretmeden eskime riski ve bakım yükü taşır. Kanban’daki eşzamanlı iş limiti,
+işletme sermayesi tavanıdır.
+Döndürmenin Kelimeleri
+Nakit dönüşüm döngüsü (cash conversion cycle). Paranın yatırılıp geri dönmesine kadar
+geçen süre. Mühendislik karşılığı lead time’dır: fikrin karara, kararın koda, kodun kullanıcıya
+dönme süresi. Kısalan döngü, aynı ekiple daha çok tur demektir.
+Devir hızı (asset turnover). Aynı sermayenin yılda kaç kez değere dönüştüğü. Mühendislik
+34
+
+-- 34 of 38 --
+
+karşılığı yayın sıklığıdır: küçük ve sık yayın yapan ekip, büyük ve seyrek yayın yapanla aynı “kâr
+marjında” çalışsa bile devir hızıyla kazanır. Toyota’nın finansal sırrı da tam budur: olağanüstü
+marj değil, olağanüstü devir.
+Yatırılan sermayenin getirisi (ROIC). Disiplinin karnesi: bağlanan kaynak birimi başına
+üretilen değer. Mühendislik çevirisi: kadro büyüklüğüyle övünmek, sermaye büyüklüğüyle övün-
+mektir; disiplinin sorusu “kaç kişiyiz” değil, “kişi başına ne dönüyor” sorusudur.
+Gerçekle Ölçmenin Kelimeleri
+Piyasa değeriyle değerleme (mark-to-market). Pozisyonu alış fiyatınla ya da umudunla
+değil, bugünün gerçeğiyle değerlemek. Mühendislik karşılığı: projenin durumunu statü raporuyla
+değil çalışan yazılımla ölçmek. “Yüzde doksanı bitti” beyanı defter değeridir; demo, piyasa değe-
+ridir — ve ikisi arasındaki makas, kötü sürprizin saklandığı yerdir. Çevik manifestonun “kapsamlı
+dokümantasyondan çok çalışan yazılım” ilkesi, mark-to-market’ın mühendislik cümlesidir.
+Zarar yazmak (write-off). Ölmüş varlığı defterden resmen silmek. Mühendislik karşılığı: öl-
+müş projeyi resmen kapatmak, çalışmayan modülü silmek. Yazılmayan zarar bilançoda yaşayan
+yalansa, kapatılmayan proje de yol haritasında yaşayan yalandır — ve en kıt kaynağı, kıdemli
+dikkati, kilitlemeye devam eder.
+Erken Kesmenin Kelimeleri
+Batık maliyet (sunk cost). Geri gelmeyecek geçmiş harcama; geleceğe gerekçe olamaz. Mü-
+hendislikte her gün kurulan cümle: “bu mimariye bu kadar emek verdik, devam edelim.” Geçmiş
+emek geleceğin gerekçesi olamaz; refactor-mu-yeniden-yazım-mı tartışmalarının zehirleyicisi bu
+yanılgıdır.
+Zarar durdurma eşiği (stop-loss). Önceden belirlenmiş zarar seviyesinde pozisyonu otomatik
+kapatmak — kararı duygunun elinden alıp kurala vermek. Mühendislik karşılığı: deneye başlar-
+ken vazgeçme eşiğini tanımlamak (“şu tarihe kadar şu sinyal gelmezse kapatıyoruz”). Kararı,
+projeye duygusal yatırım yapmış gelecekteki halinden alıp bugünün soğukkanlı kuralına vermek.
+Hata bütçesi (error budget) aynı ailedendir: eşik aşılınca özellik geliştirme durur, kural işler.
+Pozisyon boyutlandırma (position sizing). Hiçbir tek pozisyonun, sahibini batıracak bo-
+yuta ulaşmaması; zarar kesilebilir kalmalı ki kesilebilsin. Mühendislik karşılığı: hiçbir tek bahsin
+— tek migrasyon, tek yeniden yazım, tek vendor — organizasyonu batıracak boyuta ulaşma-
+ması. Büyük patlamalı yeniden yazım, bütün sermayeyi tek pozisyona koymaktır; kademeli geçiş
+(strangler pattern) pozisyon boyutlandırmadır.
+Bağlılık tırmanışı (escalation of commitment). Kesilmeyen zararın psikolojisi: kaybeden
+pozisyona, önceki yatırımı kurtarma gerekçesiyle daha çok kaynak bağlama sarmalı. Mühendis-
+likteki “ölüm yürüyüşü” projelerinin mekanizması budur: her ek yatırım bir öncekini kurtarmak
+için yapılır ve çukur derinleşir.
+Çıkış ve likidite (exit). Pozisyondan çıkabilme kabiliyeti; girişte sorulacak ilk soru, çıkışın var
+olup olmadığıdır. Mühendislik karşılığı: vendor seçiminde, framework kararında, veri formatında
+35
+
+-- 35 of 38 --
+
+ilk soru geçiş yolunun (migration path) varlığıdır — geçiş yolu, mühendisliğin likiditesidir. Çıkışı
+olmayan pozisyon, fiyatı ne olursa olsun pahalıdır.
+Bileşiklemenin Kelimeleri
+Bileşik getiri (compounding). Getirinin getirisi; zamanla çarpılan küçük oran. Mühendislik
+karşılığı bileşiklenen altyapıdır: iyi test altyapısı her değişikliği hızlandırır, hızlanan değişiklik
+daha çok öğrenme üretir, öğrenme altyapıyı iyileştirir. Geliştirici verimliliği yatırımlarının ma-
+tematiği doğrusal değil bileşiktir — ve tersi de bileşiktir: teknik borcun faizi de katlanır.
+Geri yatırım oranı (reinvestment rate). Kazanılanın ne kadarının dağıtıldığı, ne kadarının
+büyümeye geri yatırıldığı. Mühendislik karşılığı: ekip kapasitesinin ne kadarı özellik üretimine
+(temettü), ne kadarı altyapıya ve borç ödemeye (geri yatırım) gidiyor? Kazancının yüzde yüzünü
+temettü olarak dağıtan şirket büyüyemez; kapasitesinin yüzde yüzünü özelliğe harcayan ekip de.
+Zaman ufku ve oyunda kalma (time horizon). Bileşiklenmenin tek şartı kesintisiz zaman-
+dır; kısa ufuk, bileşik faizin katilidir. Mühendislik karşılığı iki katmanlıdır. Birincisi süreklilik:
+sürekli reorganizasyon, sürekli teknoloji değişimi, sürekli yön değiştirme — her biri bileşik sayacı
+sıfırlar. İkincisi hayatta kalma (ergodiklik dersi): her yayında küçük felaket riski taşıyan ekip,
+yıllık ölçekte neredeyse kesin felakete gider; bileşiklenme ancak oyunda kalana işler, iflas bütün
+gelecek turların iptalidir. Önce hayatta kal; katlanma sonra gelir.
+Beş Hareket
+Yukarıdaki dağarcığın tamamı, bir mühendisin günlük pratiğine beş fiil olarak indirgenebilir.
+Her fiil, dağarcığın bir alt kümesini tek bir alışkanlığa sıkıştırır.
+Birinci Hareket: Bağlama
+Buradaki fiil olumsuz emirdir: kaynağını boş yere bağlı tutma. Her başlanmış-bitmemiş iş — açık
+değişiklik, birleşmemiş dal, yarım özellik — kapasiteyi bir yere bağlamıştır ve değer üretmeden
+orada durur. Pratik hali iki alışkanlıktır: aynı anda yürüyen iş sayısına sınır koymak (eşzamanlı
+iş limiti) ve her yeni işe başlarken “bu kapasite başka nereye gidebilirdi” sorusunu sormak (fırsat
+maliyeti). Özet: az işe başla, başladığını bitir.
+İkinci Hareket: Döndür
+Bağlanan kaynağı olabildiğince hızlı değere çevirip geri almak. Fikirden yayına giden süre ne
+kadar kısaysa, aynı ekip aynı yılda o kadar çok tur atar — getiri, kapasite büyüklüğünden çok
+devir hızından gelir. Pratik hali: küçük parçalarla çalışmak, sık yayınlamak, işi kuyruklarda
+bekletmemek. Özet: başladığın işin üstünde oturma, akıt.
+Üçüncü Hareket: Gerçekle Ölç
+İlerlemeyi rapora, tahmine, “yüzde doksanı bitti” beyanına göre değil, çalışan ve gösterilebilen
+şeye göre değerlemek. Statü raporu defterdeki değerdir, demo gerçek değerdir; ikisi arasındaki
+36
+
+-- 36 of 38 --
+
+fark, kötü sürprizin saklandığı yerdir. Özet: kendine anlattığın hikâyeye değil, ekranda çalışana
+inan.
+Dördüncü Hareket: Erken Kes
+İşlemeyen şeyi küçükken ve ucuzken durdurmak. Üç aracı vardır: deneye başlarken vazgeçme
+eşiğini önceden tanımlamak (kararı bugünün soğukkanlı kuralına emanet etmek), ölmüş projeyi
+resmen kapatmak (zarar yazmak, sürüncemede bırakmamak) ve hiçbir tek bahsi batıracak bo-
+yuta büyütmemek (büyük yeniden yazım yerine kademeli geçiş). Özet: “bu kadar emek verdik”
+cümlesine karar verdirme.
+Beşinci Hareket: Bileşikle
+Kazanılanın bir kısmını kapasiteyi büyüten şeylere geri yatırmak — test altyapısı, araçlar, öğ-
+renme — çünkü bunların getirisi düz değil katlanarak büyür: iyi altyapı her sonraki işi hızlandırır,
+hızlanan iş daha çok öğrenme üretir. Bileşiklenmenin tek şartı kesintisiz zamandır: sürekli yön
+değiştiren ya da her yayında felaket riski taşıyan ekip, sayacı hep sıfırlar. Özet: geri yatır ve
+oyunda kal ki katlanma işlesin.
+Zincir ve Sonuç
+Beş hareket bağımsız kurallar değil, tek bir zincirin halkalarıdır: az işe başlayan hızlı döndürebi-
+lir; hızlı döndüren gerçek geri bildirimi erken alır; gerçeği erken gören yanlışı ucuzken keser; ve
+ancak bunların tümü işliyorsa kazanç birikip katlanır. Zincirin en zayıf halkası bütünü belirler:
+sınırsız iş alan ekip döndüremez, döndüremeyen gerçeği geç görür, geç gören zararı büyümüşken
+keser — ve bileşik sayaç hiç işlemeye başlamaz.
+Kavramın adındaki “disiplin” kelimesi bilinçli seçilmiştir: bu beş hareketin hiçbiri zekâ meselesi
+değil, alışkanlık meselesidir. Doğal eğilim her adımda tersini fısıldar — biriktirmek, beklemek,
+kendi hikâyesine inanmak, zararı seyretmek, kazancı bugün tüketmek. Finans bu eğilimlere karşı
+kuralları para diliyle, Toyota malzeme diliyle, Musk fizik diliyle yazmıştır; sermaye disiplini,
+üç yazımın ortak grameridir ve mühendisin günlük pratiğine beş fiil olarak çevrilir: bağlama,
+döndür, gerçekle ölç, erken kes, bileşikle.
+Sonuç
+Derlemenin toplam iddiası tek cümleye iner: iktisat ve finans, sonuçları belirsiz, kaynakları kıt,
+aktörleri stratejik sistemlerde karar vermenin en uzun süre sınanmış dilidir; yazılım da tam
+böyle bir sistem olduğundan bu dil, süslü benzetme değil, sökülüp takılabilir makine parçası
+taşır. Finans özetle, mühendisin genellikle sezgiye bıraktığı üç şeyi formalize etmiştir: belirsizliği
+fiyatlamak, esnekliği fiyatlamak ve teşvikleri tasarlamak.
+Sınırlar da kaydedilmelidir. Kas haline getirilmeye değer çekirdek küçüktür — opsiyon değeri,
+fırsat maliyeti, Goodhart, teşvik hizası, korelasyon, Minsky, ergodiklik ve benzeri on beş kadar
+kavram günlük karara doğrudan dokunur; geniş kümenin kalanı, karşılaşınca tanımak üzere rafta
+37
+
+-- 37 of 38 --
+
+durur. Transfer edilen set, zamanın eleğinden geçmiş bir sağkalım örneklemidir ve alanın toplam
+isabetini olduğundan parlak gösterir. Son olarak, eşlemeler yapısal benzerliğe dayanır; yapının
+benzemesi, sayıların aynı olması demek değildir — her mekanizmanın niceliksel ayarı, yazılım
+bağlamında yeniden yapılmak zorundadır. Bu çekincelerle birlikte sonuç değişmez: düşman or-
+tamda evrimleşmiş, kararı içine gömmüş bir buçuk asırlık bir literatür, genç bir mühendislik
+disiplini için nadir yoğunlukta hazır bir bilgi stokudur. Ve belki de, herhangi bir probleme finans
+çevresinden bakmak, kısa ve daha hızlı bir çözüm sunabilir hepimize.
+38
+
+-- 38 of 38 --

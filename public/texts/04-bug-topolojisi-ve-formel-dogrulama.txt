@@ -1,0 +1,478 @@
+Yazlm Sistemlerinde Davranş Uzay, Yüksek
+Boyutlu Hata Topolojisi ve Formel Doğrulama
+Ömer Faruk Yavuz
+May 2026
+Yazlm Sistemlerinde Davranş Uzay, Yüksek Boyutlu
+Hata Topolojisi ve Formel Doğrulama
+Giriş
+Yazlm mühendisliğinde bir fonksiyonun ya da sistemin davranş, geleneksel
+olarak girişişlemçkş üçlüsü içinde düşünülür. Geliştirici, kodu yazarken
+zihninde tek bir senaryo canlandrr: kullanc eylemi gerçekleşir, beklenen yol
+izlenir ve sonuç döner. Bu zihinsel model işlevsel olmakla birlikte, sistemin
+gerçek davranş kümesinin yalnzca küçük bir bölgesini kapsar. Bir sistemin
+alabileceği tüm hâllerin oluşturduğu kümeye davranş uzay ad verilir. Bu
+çalşma; davranş uzaynn yapsn, yüksek boyutlu doğasn, insan zihninin
+bu uzay kavrama stratejilerini ve formel doğrulama yöntemlerinin söz konusu
+uzay sistematik biçimde tarama yeteneğini ele almaktadr.
+Davranş Uzay Kavram
+Tek Nokta ile Uzay Ayrm
+Ağ üzerinden bir kaynak oluşturan örnek bir fonksiyon ele alndğnda, geliştiricinin
+zihnindeki tipik temsil tek bir akştan ibarettir: kullanc bir eylem başlatr,
+fonksiyon çağrlr, istek bir depolama servisine aktarlr ve başar bildirimi döner.
+Söz konusu temsil, davranş uzaynn yalnzca tek bir noktasdr. Ayn fonksiyon,
+gerçek bir üretim ortamnda çok sayda alternatif yörüngeye girebilir: istek ile-
+timi yarda kesilebilir, kullanc oturumu sona erebilir, eş zamanl ikinci bir
+istek başlatlabilir ya da ağ kesintisi sonras yeniden bağlanma srasnda durum
+tutarszlğ oluşabilir. Bu alternatif yörüngelerin her biri, davranş uzaynda
+ayr birer noktadr. Bunlarn tümünün oluşturduğu küme ise sistemin gerçek
+davranş uzayn tanmlar.
+1
+
+-- 1 of 13 --
+
+Davranş Uzaynn Topografyas
+Davranş uzay homojen bir yapda değildir; belirli bir topografyaya sahiptir.
+Söz konusu topografya dört temel bölgeye ayrlabilir:
+ Merkez (mutlu yol): Tek kullanc, kararl ağ, geçerli yetkilendirme ve
+makul girdi boyutu gibi olağan koşullarn oluşturduğu, uzayn geniş ve
+düz bölgesi. Test edilen alan büyük ölçüde burasdr.
+ Kenarlar (uç durumlar): Tek bir boyutta sapmann gerçekleştiği böl-
+geler. Oturum süresinin dolmas, yavaş bağlant veya büyük girdi bu kat-
+egoriye girer. Bu vakalar tek seferlik gözlemle tespit edilip düzeltilebilir.
+ Uzak köşeler: Birden fazla boyutta sapmann eş zamanl oluştuğu, üre-
+tim ortamnda düşük olaslkla ortaya çkan ve yeniden üretilmesi güç böl-
+geler.
+ Çatlaklar: Sistemin sessizce tutarsz davrandğ bölgeler. Bu bölgelerde
+hata mesaj oluşmaz; veri yanlş anahtarla saklanr ya da hatal bir kayt
+geçerli saylr. Bu vakalar genellikle aylar sonra fark edilir.
+Davranş uzay (tüm olas hâller)
+Mutlu yol
+Tek kullanc, hzl ağ
+Normal akş
+Yavaş ağ
+3G, paket kayb
+Token süresi doldu
+Oturum sonu Bayat önbellek
+Eski durum
+Zaman aşm Çevrimdş/çevrimiçi
+Yarş koşulu
+Eşzamanl yazma Yeniden bağlanma + retry
+Token yenilemesi çakşmas
+Ksmî hata
+Sessiz başarszlk
+Figure 1: Davranş uzaynn iki boyutlu temsili. Merkez bölge mutlu yolu; sar
+bölgeler kenar vakalarn; krmz bölgeler uzak köşe vakalarn; kesik krmz
+çizgiler ise sistemin sessizce bozulduğu çatlaklar temsil eder.
+Boyutsallk ve Köşe Saysndaki Üstel Artş
+Davranş uzaynn köşeleri, boyut saysna bağl olarak üstel biçimde artar. Her
+yeni boyut, mevcut köşe saysn ikiye katlar. Bir sistemde N ikili boyut bu-
+2
+
+-- 2 of 13 --
+
+lunuyorsa, köşe says 2N ile orantldr. Sürekli ya da çoklu değer alan boyutlar
+söz konusu olduğunda ise bu say çok daha hzl büyür.
+1 boyut
+Sadece giriş
+2 köşe
+2 boyut
++ Ağ durumu
+4 köşe
+3 boyut
++ Eşzamanllk
+8 köşe
+N boyut
++ Token, retry, önbellek...
+2N köşe
+Her yeni boyut köşe saysn ikiye katlar.
+Geliştirici 3 boyutu görür; gerçek uzay 20'nin üzerinde boyutludur.
+Figure 2: Boyut saysnn artmasyla köşe saysndaki üstel artş. Test edilen
+mutlu yol bölgesi, N büyüdükçe görece daha küçük bir hacim kaplar.
+Söz konusu üstel büyüme, ölçeklenebilirlik açsndan temel bir gerilim yaratr.
+Bir sistemde alt bağmsz boyut tanmlandğnda ve her boyutun üç olas du-
+rumu bulunduğunda, toplam durum says 36 = 729'a ulaşr. Geliştirme sürecinde
+test edilen senaryo says ise tipik olarak bunun yalnzca küçük bir alt kümesidir;
+geri kalan büyük çoğunluk gözlemlenmeden kalr.
+Pratik Vaka: Örnek Bir stek Fonksiyonu
+Ağ üzerinden bir kaynak oluşturan bir fonksiyon, davranş uzay analizine so-
+mut bir zemin sağlar. Söz konusu fonksiyonun durumlar aşağdaki kategorilere
+ayrlabilir.
+Mutlu Yol
+Kullanc bir eylem başlatr; geçerli oturum, kararl ağ ve makul veri boyutu
+koşullar altnda istek depolama servisine iletilir ve başar bildirimi döner. Bu
+vaka, davranş uzaynda tek bir noktay temsil eder ve geliştirme sürecinde temel
+referans noktas olarak kullanlr.
+Kenar Vakalar
+Tek bir boyutta sapma içeren durumlardr. Tipik örnekler şunlar kapsar:
+ şlem srasnda ağ bağlantsnn kopmas ve yeniden bağlanma gerekliliği.
+ şlem süresince oturumun sona ermesi ve yetkilendirme hatasnn tetiklen-
+mesi.
+ Ayn isteğin iki kez gönderilmesi sonucu oluşan tekrarl kayt.
+ Bellek snrn zorlayan büyük veri yüklerinin parçal (chunk) aktarm.
+3
+
+-- 3 of 13 --
+
+ Mobil cihazlarda uygulamann arka plana alnmas srasnda yarda kalan
+iletim.
+Bu vakalar, tek bir günlük (log) girdisi incelenerek tanmlanabilir ve düzeltilebilir.
+Uzak Köşeler
+Birden fazla boyutta eş zamanl sapmann bulunduğu vakalardr. Bunlar arasnda
+özellikle dikkat çekici örnekler şunlardr:
+ Depolama servisinin zaman aşm bildirmesine karşn iletimin sunucu tarafnda
+başaryla tamamlanmş olmas ve yeniden deneme sonucunda mükerrer
+kayt oluşmas.
+ Yeniden bağlanma, token yenileme ve isteğin yeniden gönderimi süreç-
+lerinin kesişmesi sonucu iki eş zamanl işlem oturumunun başlamas.
+ Birden fazla sekme açkken ayn isteğin paralel biçimde gönderilmesi ve
+ayn anahtara yazm yarşnn yaşanmas.
+ Sunucu yeniden başlatlrken WebSocket olaylarnn kaybolmas ve istem-
+cinin sonuç bekleyişinde kilitlenmesi.
+Bu vakalarn ortak özelliği, hiçbir bireysel boyutun aşr bir değere ulaşma-
+masdr; hatay tetikleyen şey, sapmalarn eş zamanl oluşumudur. Söz konusu
+olaylar günlüklerde belirgin bir hata izi brakmadğndan, yeniden üretilmeleri
+büyük güçlük arz eder.
+Çatlaklar
+Sistemin sessizce tutarsz davrandğ bölgelerdir. Birbirine yakn iki tanm-
+laycnn (örneğin bir sra numaras ile bir kayt kimliğinin) karşmas sonucu
+yanlş anahtarla yazm gerçekleştirilmesi ya da veritaban kaydnn oluşturulup
+depolama yazmnn başarsz olmas nedeniyle iki kaynak arasnda tutarszlk
+doğmas bu kategoriye örnek teşkil eder. Söz konusu vakalar hata frlatmaz;
+bunun yerine sistem başarl yantn döndürür ve sorun aylar sonra, çoğu za-
+man başka bir bağlamda fark edilir.
+Yüksek Boyutlu Uzaylarn Görselleştirilmesi
+ki boyutlu temsiller, yüksek boyutlu davranş uzayn sadk biçimde aktaramaz.
+Görselleştirme literatüründe bu kstla başa çkmak üzere geliştirilmiş çok sayda
+yöntem bulunur. Bu bölümde iki temel yaklaşm ele alnmaktadr.
+4
+
+-- 4 of 13 --
+
+Paralel Koordinatlar Yöntemi
+Bu yöntem, her boyutu dikey bir eksenle temsil eder ve her vakay bu eksenleri
+kesen bir krk çizgiyle gösterir. Vakalarn imzas çizginin şeklinden okunur.
+Mutlu yol, her eksende güvenli düzeyde kaldğndan düz bir yatay çizgi oluştu-
+rur; tek boyutlu sapmalar tek bir noktada keskin bir dip yaparken, çok boyutlu
+sapmalar birden fazla eksende orta seviyede gezinir.
+güvenli
+riskli
+kritik
+Yük Ağ Sunucu Eşzaman Token WS
+Mutlu yol Token süresi Yavaş + büyük
+Yeniden bağlanma frtnas (5 boyut orta sapma) Kyamet
+3 × 6 = 729 olas durum; test edilen yaklaşk 5 durum.
+Figure 3: Paralel koordinatlar yöntemiyle örnek fonksiyonun davranş uzay.
+Her vakann imzas, eksenler arasndaki krk çizginin şeklinden okunabilir.
+Söz konusu temsil, yeniden bağlanma frtnas gibi çok sapmal vakalarn
+neden gözden kaçtğn açklar. lgili çizgi hiçbir eksende kritik düzeye inmediği
+hâlde, sapmalarn eş zamanl oluşumu sistemi başarszlğa sürükler.
+Kaotik zdüşüm: Hipergraf Temsili
+Daha sadk, ancak daha az okunabilir bir yaklaşm, davranş uzayndaki nokta-
+lar (durumlar) ve bunlar arasndaki geçişleri (kenarlar) doğrudan çizmektir.
+Ortaya çkan görsel bir hipergraf temsilidir; eksenler bulutun içinden geçer, fakat
+asl yap eksenlerden bağmsz olarak şekillenir.
+Söz konusu temsil, eksenlerin bir yanlsama olduğu gerçeğini görselleştirir:
+gerçek uzay daha yüksek boyutludur ve görseldeki düzlemsel yap, bilgi kaybnn
+kaçnlmaz bir sonucudur.
+nsanlarn Yüksek Boyutlu Uzaylar Kavrayş Stratejileri
+nsan zihninin geometrik sezgisi üç boyutla snrldr. Dördüncü boyut ve ötesinde
+geometrik kavrayş, yerini başka bilişsel stratejilere brakr. Yazlm mühendis-
+leri, matematikçiler ve diğer alanlardaki uzmanlar, yüksek boyutlu uzaylar zi-
+hinde tutabilmek için alt temel stratejiye başvurur.
+5
+
+-- 5 of 13 --
+
+X
+Ağ
+Y
+Token
+Z
+Yük
+T
+Eşzaman
+U
+Sunucu
+V
+WS
+W
+Önbellek
+Figure 4: Yedi boyutlu davranş uzaynn iki boyutlu kaotik izdüşümü. Eksenler
+yalnzca referans çubuklardr; davranş uzaynn gerçek geometrisi, noktalarn
+birbirine bağlanma yapsnda sakldr. Merkezdeki yeşil nokta mutlu yolu temsil
+eder.
+Boyut ndirgeme
+Bu strateji, yüksek boyutlu noktalarn bir alt uzaya yanstlmas ilkesine dayanr.
+Temel bileşen analizi (PCA), t-SNE ve UMAP gibi yöntemler bu kategoriye
+girer. Söz konusu yöntemler bilgi kaybn kaçnlmaz kabul eder ve hangi tür
+ilişkilerin korunacağna dair açk seçimler yapar. Tipik bir tercih, yakn olanlar
+yakn kalsn, uzak ilişkiler önemsiz saylsn yönündedir. Bu çalşmada sunulan
+kaotik izdüşüm görseli de ayn kategoriye girer.
+Yerel Kalma
+Bu strateji, uzayn tamamn gözden geçirmek yerine belirli bir noktann yakn
+çevresine odaklanma yaklaşmdr. Matematikte komşuluk kavram bu ilkeyi
+formelleştirir. Bir geliştirici, hata ayklama sürecinde tüm sistem topolojisini
+değil, hata noktasnn yakn çevresini inceler. Yüz boyutlu bir uzayda dahi, tek
+bir noktann küçük bir komşuluğu üç boyutlu zihinsel temsile sğar.
+Kategorize Etme
+Bu strateji, uzayn bölgelerine isim vererek navigasyon için bir harita oluşturma
+ilkesidir. Yarş koşulu, zaman aşm ve bayat durum gibi etiketler, aslnda
+uzayn belirli bölgelerini tanmlar. Bin farkl yarş koşulu birbirinden tikel olarak
+farkldr; ancak hepsi tek bir kavramsal kutu altnda toplandğnda zihinsel yük
+6
+
+-- 6 of 13 --
+
+büyük ölçüde azalr. Bu yaklaşmda geometrik bilgi kaybedilir; buna karşlk
+yapsal navigasyon imkân kazanlr.
+Sembolik Çalşma
+Bu strateji, matematikçilerin tercih ettiği yaklaşmdr. On bir boyutlu bir uzay
+(R11) görselleştirilmez; cebirsel olarak işlenir. Formüller uygulanr ve sonuç elde
+edilir. Bu yaklaşmda anlamak ili, görselleştirebilmek anlamndan ayrşr
+ve denklemin akşnn takip edilebilmesi olarak yeniden tanmlanr. Söz konusu
+zihinsel kip, geometrik sezginin tümüyle terk edildiği bir alternatiftir.
+Hikâye ve Sekans
+Bu strateji, geometriyi değil zamansal akş kavrama ilkesine dayanr. Bir
+geliştirici hata ayklama yaparken zihninde uzayn haritas değil, uzaydaki tek
+bir yörünge canlanr: Önce şu eylem gerçekleşti, ardndan şu durum oluştu,
+bu srada şu olay tetiklendi. Bu yaklaşm, uzayn geometrisini değil, uzayda
+izlenen yolu modellemeyi öne çkarr. nsan zihni, nerede sorusundan çok ne
+zaman sorusunu yantlamaya elverişlidir.
+Tecrübe ve Örüntü Tanma
+Bu strateji, uzun süreli pratik sonucunda uzayn dokusuna aşinalk geliştir-
+ilmesi ilkesidir. Satranç ustalarnn bir pozisyonu hissetmesi ya da deneyimli
+mühendislerin bir hata raporunu okuyup nedenini sezmesi bu kategoriye girer.
+Söz konusu bilgi açk biçimde ifade edilmez; örtük bir örüntü kümesi olarak
+depolanr. Büyük dil modellerinin yaptğ işlem, ayn stratejinin sanayi ölçeğine
+taşnmş hâli olarak yorumlanabilir: milyonlarca hata raporu ve kaynak kodu
+örneğinden türetilen bir örüntü eşleştirme kapasitesi.
+Matematiksel Formalizm
+Davranş uzay, geometrik olarak görselleştirilmek yerine sembolik biçimde de
+tanmlanabilir. Bu yaklaşm, makine destekli doğrulama olanağn açar.
+Durum Uzaynn Formel Tanm
+Örnek istek fonksiyonu için durum uzay, bireysel boyutlarn Kartezyen çarpm
+olarak tanmlanr:
+S = N × T × P × C × B × W
+Her boyut kendi değer kümesine sahiptir:
+7
+
+-- 7 of 13 --
+
+N = {stable, slow, oine}
+T = [0, Tmax] (token kalan süre, saniye)
+P = R+ (veri yükü boyutu)
+C ∈ N (eş zamanl istek says)
+B = [0, 1] (sunucu yükü, normalize edilmiş)
+W = {connected, reconnecting, dropped}
+Bir durum s ∈ S olarak yazlr. Fonksiyonun kendisi ise bir dönüşüm olarak
+ifade edilir:
+U : S → S ∪ {⊥}
+Burada ⊥, tanmsz ya da hatal durumu temsil eder. Mutlu yol noktas şu
+şekilde belirlenir:
+s0 = (stable, valid, small, 1, healthy, connected) ∈ S
+Model Denetleme ve TLA+
+Sembolik tanmlamann temel kazanm, makinenin tüm durum uzayn ayr
+ayr taramasnn olanakl hâle gelmesidir. Bu ilke model denetleme (model
+checking) olarak adlandrlr.
+Leslie Lamport ve TLA+ Dilinin Doğuşu
+Leslie Lamport, dağtk sistemlerin matematiksel temellerini 1970'lerden itibaren
+oluşturan bir bilgisayar bilimcisidir ve 2013 ylnda Turing Ödülü'nü almştr.
+LATEX dizgi sistemi de Lamport'un eserlerindendir. Geliştirdiği TLA+ (Tem-
+poral Logic of Actions Plus) dili, sistemlerin doğal dilde değil matematiksel
+dilde anlatlmas gerektiği önermesine dayanr. Doğal dilin eksik brakmaya,
+yoruma ve belirsizliğe açk olmas, kritik sistemlerin tasarmnda güvenilir bir
+temel oluşturmay engeller.
+TLA+ Spesikasyonunun Yaps
+Bir TLA+ spesikasyonu dört temel bileşenden oluşur:
+ Değişkenler: Sistemin durumunu oluşturan büyüklükler.
+ Başlangç koşulu (Init): Değişkenlerin başlangç değerleri.
+ Eylemler (Actions): Bir durumdan diğerine geçiş kurallar.
+ Değişmezler (Invariants): Sistemin hiçbir durumda ihlal etmemesi
+gereken özellikler.
+8
+
+-- 8 of 13 --
+
+Söz konusu spesikasyon yürütülebilir bir kod değil, sistemin matematiksel
+bir tanmdr. Doğrulama ise TLC ad verilen model denetleyici tarafndan
+gerçekleştirilir.
+TLC Model Denetleyicisinin şleyişi
+TLC, başlangç durumundan itibaren tüm olas eylem dizilerini ve eş zamanl
+eylem birleşimlerini sistematik biçimde tarar. Bir sistemde beş değişken bu-
+lunuyor ve her birinin on olas değeri varsa, toplam durum says 105 = 100,000'e
+ulaşr. Eylemler arasnda eş zamanllk tanmlandğnda, tüm iç içe geçme (in-
+terleaving) sralar da denetlenir; bu da yarş koşullarnn tespitini olanakl klar.
+Tarama sonucunda iki sonuç ortaya çkabilir: ya spesikasyonun tüm du-
+rumlarda değişmezleri koruduğu doğrulanr ya da değişmezi ihlal eden somut bir
+adm dizisi raporlanr. kinci durumda elde edilen karş örnek, hata senaryosu-
+nun tam yeniden üretim yolunu verir.
+Örnek Bir TLA+ Spesikasyonu
+Aşağda, örnek istek fonksiyonunun basitleştirilmiş bir spesikasyonu sunulmak-
+tadr:
+VARIABLES network , token , payload , reqState
+Init ==
+/\ network = " stable "
+/\ token = " valid "
+/\ payload = NULL
+/\ reqState = " idle "
+RequestStart ==
+/\ reqState = " idle "
+/\ token = " valid "
+/\ network /= " offline "
+/\ reqState ' = " sending "
+TokenExpire ==
+/\ token = " valid "
+/\ token ' = " expired "
+/\ UNCHANGED << network , payload , reqState > >
+NetworkDrop ==
+/\ network /= " offline "
+/\ network ' = " offline "
+/\ UNCHANGED << token , payload , reqState > >
+Next == RequestStart \/ TokenExpire \/ NetworkDrop \/ ...
+Invariant ==
+( reqState = " done ") = > ( payload /= NULL )
+9
+
+-- 9 of 13 --
+
+TLC, bu spesikasyonu işlerken belirli bir eylem srasnda Invariant koşulu-
+nun ihlal edildiği durumu tespit edebilir. Örneğin RequestStart → NetworkDrop
+→ TokenExpire srasnda reqState = done, ancak payload = NULL biçiminde
+bir hata izi raporlanabilir.
+TLA+ Spec TLC Denetleyici
+Doğruland
+Karş örnek Tüm durum uzay
+sistematik tarama
+Değişmezler
+her durumda korunur
+Hata izini
+tam admlaryla verir
+Figure 5: TLA+ ve TLC model denetleyicisinin iş akş. Spesikasyon girdi
+olarak verilir; model denetleyici tüm durum uzayn tarar ve ya değişmezlerin
+korunduğunu doğrular ya da ihlali oluşturan somut adm dizisini raporlar.
+Endüstriyel Vaka: AWS ve Formel Yöntemlerin Yaygnlaş-
+mas
+Formel doğrulama uzun süre akademik bir araştrma alan olarak kalmş ve
+endüstriyel yaygnlğ snrl düzeyde seyretmiştir. Bu durumun değişiminde
+belirleyici rol oynayan çalşma, Newcombe ve arkadaşlarnn 2015 ylnda Com-
+munications of the ACM dergisinde yaymladğ How Amazon Web Services
+Uses Formal Methods başlkl makaledir.
+Makalenin Bağlam ve Yazar Kadrosu
+Makale, AWS'nin dağtk sistemler ekiplerinde ilen çalşan alt mühendis tarafn-
+dan kaleme alnmştr: Chris Newcombe, Tim Rath, Fan Zhang, Bogdan Munteanu,
+Marc Brooker ve Michael Deardeu. Yazarlarn akademisyen değil, S3, Dy-
+namoDB ve EBS gibi temel hizmetleri tasarlayan, sahada çalşan mühendisler
+olmas, makaleye endüstriyel açdan özel bir ağrlk kazandrmştr.
+Benimseme Sürecinin Doğuşu
+Chris Newcombe, Paxos uzlaşma (consensus) algoritmasna ilişkin akademik bir
+makalenin ekinde TLA+ ile yazlmş bir spesikasyon bulup incelemiştir. Söz
+konusu dilin yaratcsnn (Leslie Lamport) ayn zamanda Paxos'un da yaratcs
+olduğunu fark etmesi, dili pratik uygulanabilirliği açsndan değerli bulmasna
+yol açmştr. Newcombe'n meslektaşlarn ikna girişimleri başlangçta sonuç
+vermemiş; ancak DynamoDB'nin tasarm sürecinde Tim Rath'n çalştğ rep-
+likasyon algoritmasnn doğrulanmas sorunu, TLA+ için uygun bir vaka oluş-
+turmuştur.
+10
+
+-- 10 of 13 --
+
+DynamoDB Vakas ve Otuz Beş Admlk Hata zi
+Tim Rath, DynamoDB replikasyon ve grup üyelik protokollerinin TLA+ spesi-
+kasyonunu 939 satrlk bir kod olarak yazmş ve TLC üzerinde modeli çalştr-
+mştr. Sonuç, sistem tasarmnn makale incelemesi, kod incelemesi ve testler
+dâhil hiçbir geleneksel yöntemle tespit edilemeyen bir hatay ortaya çkarmştr.
+Hata izinin uzunluğu otuz beş admdr; yani ancak belirli otuz beş olayn belirli
+bir srayla yaşanmas durumunda algoritma veri tutarszlğ üretmektedir.
+Bu hatann tespit edilmesi, insan zihninin sezgisel kapasitesinin ötesindedir;
+ancak sistematik durum uzay taramasyla mümkün olmuştur. Ayn sistemde
+sonradan iki ciddi hata daha ayn yöntemle yakalanmştr.
+Tespit Edilen Hatalarn Özeti
+Makalede sunulan tablo, formel yöntemlerin tespit ettiği hatalar sistem baznda
+özetlemektedir:
+Sistem Bileşeni Spec Uzunluğu Hata Says
+DynamoDB replikasyon ve grup
+üyeliği
+939 satr TLA+ 3 (35 admlk hata izi)
+S3 hata toleransl ağ algoritmas 804 satr PlusCal 2 (ve optimizasyonlarda ek hatalar)
+S3 arka plan veri yeniden dağtm 645 satr PlusCal 1 (ve düzeltmesinde 1 ek)
+EBS birim (volume) yönetimi 102 satr PlusCal 3
+Yüz iki satrlk görece ksa bir spesikasyonun dahi üç ciddi hata tespit etmiş
+olmas, yöntemin ölçeklenebilirliği açsndan dikkat çekicidir.
+Yeniden Çerçeveleme Stratejisi
+Newcombe ve arkadaşlar, formel yöntemleri yazlm mühendislerine tantrken
+belirli kelimelerden özellikle kaçnmşlardr. Formel, doğrulama ve kant
+terimleri, mühendis topluluğunda akademik ve pratik olmayan bir alg yarat-
+maktadr. Bu nedenle TLA+ tantlrken söz konusu kavramlar yerine her
+ihtimali test edilebilen sözde kod (exhaustively testable pseudo-code) ifadesi
+kullanlmştr. Bu yeniden çerçeveleme, dilin mühendis topluluğu içinde benim-
+senmesinde belirleyici rol oynamştr.
+Güncel Durum
+2024 ylnda ACM Queue dergisinde yaymlanan ve yazarlardan Marc Brooker'n
+da içinde yer aldğ bir takip makalesi, AWS'nin mevcut araç yelpazesini gün-
+cellemektedir. TLA+'a ek olarak P programlama dili, Dafny, Kani ve Lean gibi
+araçlar da kullanlmaktadr. P dili özellikle dikkat çekicidir; durum makinesi
+tabanl bir yaklaşm benimsediği için programclar açsndan TLA+'tan daha
+erişilebilir bulunmaktadr. S3, EBS, DynamoDB ve Aurora gibi temel servisler,
+ilgili formel yöntemlerle desteklenerek geliştirilmektedir.
+11
+
+-- 11 of 13 --
+
+Ödünleşimler ve Pratik Snrlar
+Formel doğrulama yöntemleri, tüm pratik sorunlar çözen evrensel bir araç
+değildir. Yaygn benimsemenin önündeki dört temel engel aşağda ele alnmak-
+tadr.
+Spesikasyon Yazma Maliyeti
+Bir özelliğin TLA+ ile modellenmesi, ayn özelliğin doğrudan kodlanmasndan
+üç ila beş kat daha fazla zaman gerektirebilir. Bu maliyet, hata maliyetinin
+yüksek olduğu kritik sistemlerde anlamldr; buna karşn günlük ürün geliştirme
+döngülerinde getiri-maliyet dengesi çoğu zaman olumlu çkmaz.
+Spesikasyon-Kod Sapmas
+Spesikasyon ve kod, ayr yaplar olarak sürdürülür. Kodda yaplan değişiklik-
+ler spesikasyona yanstlmazsa, spesikasyonun kantladğ özelliklerin gerçek
+kod üzerinde bağlayclğ kalmaz. Bu sapma problemi, formel yöntemlerin
+endüstriyel kullanmnda en sk karşlaşlan operasyonel zorluktur.
+Spesikasyonun Eksiklik Problemi
+Spesikasyon, gerçekliğin bir modelidir ve model her zaman gerçeklikten daha
+azn içerir. Belirli boyutlarn spesikasyona dâhil edilmemesi, model denet-
+leyicinin o boyutlardaki hatalar görememesi sonucunu doğurur. Formel doğru-
+lama, spesikasyona göre doğru garantisini verir; gerçeğe göre doğru garan-
+tisini vermez. Spesikasyon ile gerçek arasnda kapatlamayan bir mesafe her
+zaman korunur.
+Endüstriyel Erişilebilirlik
+Sembolik mantk notasyonuna aşinalk, mühendis topluluğunda yaygn değildir.
+Bu durum, formel yöntemlerin uygulanmasnn yalnzca özel olarak eğitilmiş
+ekiplerle snrl kalmasna yol açar. Söz konusu yöntemlerin yaygn biçimde ben-
+imsenmesi, eğitim altyapsnn ve araçlarn erişilebilirliğinin gelişmesine bağldr.
+Sonuç
+Bir yazlm sisteminin davranş, geleneksel olarak düşünüldüğü gibi tek bir akş-
+tan ibaret değildir; yüksek boyutlu bir uzayda dağlmş saysz vakann oluştur-
+duğu bir yapdr. Söz konusu uzayn merkezinde mutlu yol, kenarlarnda tek
+boyutlu sapmalar, uzak köşelerinde çoklu sapmalarn kesiştiği nadir vakalar ve
+sessiz çatlaklar yer alr. Geleneksel test yöntemleri uzayn merkezî bölgelerini
+kapsar; kenar vakalar genellikle deneyim yoluyla, uzak köşeler ise çoğunlukla
+üretim ortamnda öğrenilir.
+nsan zihninin geometrik sezgisi düşük boyutlarla snrl olduğundan, yük-
+sek boyutlu uzaylar kavramak için boyut indirgeme, yerel kalma, kategorize
+12
+
+-- 12 of 13 --
+
+etme, sembolik çalşma, hikâye anlatm ve örüntü tanma gibi bilişsel stratejiler
+kullanlr. Bu stratejilerin her biri, belirli bir bilgi kayb pahasna navigasyon
+kazanm sağlar.
+Matematiksel formalizm, davranş uzayn görselleştirmek yerine sembolik
+olarak tanmlama olanağ sunar. Model denetleme araçlar, makinenin tüm
+durum uzayn sistematik biçimde tarayarak insan sezgisinin ulaşamayacağ hata
+vakalarn tespit etmesini sağlar. TLA+ ve sonrasnda geliştirilen P, Dafny ve
+Kani gibi diller, kritik dağtk sistemlerde bu yaklaşmn endüstriyel ölçekte
+uygulanabilirliğini göstermiştir. AWS'nin S3, DynamoDB ve EBS gibi temel
+servislerinde söz konusu yöntemler bugün rutin biçimde kullanlmaktadr.
+Sezgi ile kapsama arasndaki gerilim, yazlm mühendisliğinin temel episte-
+molojik tartşmalarndan birini oluşturur. Sezgi hzl ve esnek, ancak eksik-
+tir; kapsama ise bütüncül ve güvenilir, ancak yavaş ve maliyetlidir. ki yak-
+laşmn uygun bir bileşimi, sistemin kritikliğine ve kaynak kstlarna göre belir-
+lenmelidir.
+13
+
+-- 13 of 13 --

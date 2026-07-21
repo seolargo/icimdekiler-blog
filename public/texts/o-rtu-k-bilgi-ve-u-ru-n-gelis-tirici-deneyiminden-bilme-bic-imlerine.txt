@@ -1,0 +1,205 @@
+Örtük Bilgi ve Ürün:
+Geliştirici Deneyiminden Bilme Biçimlerine
+Ömer Faruk Yavuz
+Temmuz 2026
+Giriş
+Bu çalışma iki düzlemi birbirine bağlamaktadır. Birinci düzlem pratiktir: geliştirici
+deneyimi (DX) ile kullanıcı deneyimi (UX) arasındaki ilişki — ürüne dokunan herkesin
+deneyiminin, nihayetinde kullanıcıya çıkan şeye nasıl yazıldığı. İkinci düzlem epistemo-
+lojiktir: analizin ötesindeki bilme biçimleri — içgüdü, sezgi, hikmet, beden bilgisi ve
+empati.
+İki düzlemi bağlayan ortak omurga şudur: bir ürünün kalitesi, yalnızca açıkça ifade
+edilebilen bilgiyle (gereksinimler, testler, metrikler) değil, büyük ölçüde örtük bilgiyle
+— geliştiricinin sisteme dair hissiyle, ustanın malzemeye dair sezgisiyle, tasarımcının
+kullanıcıya dair empatisiyle — üretilir. Bu örtük katman ihmal edildiğinde ürün
+kısa vadede ayakta kalır, uzun vadede aşınır. Çalışmanın ilk bölümü bu aşınmanın
+mekanizmasını, ikinci bölümü ise örtük bilginin türlerini ve birbirleriyle ilişkilerini ele
+alır.
+Geliştirici Deneyimi ve Kullanıcı Deneyimi
+İki Deneyim, Bir Ürün
+Kullanıcı deneyimi çoğunlukla arayüz tasarımı meselesi olarak ele alınır. Oysa ürüne
+dokunan herkesin deneyimi — geliştiricinin deneyimi dahil — nihayetinde kullanıcıya
+çıkan şeye yazılır. İlişki tek yönlü değildir: geliştirici deneyimi ile kullanıcı deneyimi
+birbirini besleyen iki katmandır; birini ihmal etmek diğerini zaman içinde aşındırır.
+Geliştiricinin Deneyimi Ürüne Yazılır
+Kodun okunabilirliği, modülerliği ve test edilebilirliği doğrudan ürünün kalite katman-
+larına yansır. Dağınık bir kod tabanında çalışan geliştirici kaçınılmaz olarak köşe keser:
+her değişiklik yük, her ekleme risk haline gelir ve o yük ürüne döner — yavaş iterasyon,
+kırılgan özellikler, birikmiş teknik borç. Tersinden bakıldığında, temiz ve iyi tasarlanmış
+bir sistemde çalışan geliştirici daha cesur kararlar alır: dener, geri alır, tekrar dener.
+Bu ritim ürüne yansır.
+Bu dinamiğin bilinen bir anlatısı, ilk Macintosh’un iç devre kartına gösterilen estetik
+özendir. Isaacson’ın aktardığı biçimiyle Jobs, kimsenin görmeyeceği bir devre kartının
+1
+
+-- 1 of 5 --
+
+bile güzel olmasında ısrar etmiştir; anlatının işaret ettiği ilke, mühendisin yaptığı işe
+duyduğu sahiplenmenin çalışma kalitesine dönüşmesidir. Yapılan işten duyulan gurur,
+davranışa yazılır.
+DX Kavramı
+Geliştirici deneyimi şu öğeleri kapsar: API tasarımının açıklığı, dokümantasyonun
+kalitesi, yerel ortam kurulum hızı ve hata mesajlarının anlaşılırlığı. Bunlar geliştiricinin
+günlük sürtünme düzeyini belirler; sürtünme yüksekse zihinsel enerji ürüne değil,
+sisteme harcanır. Stripe, bu denklemi iyi anlayan bir şirket örneği olarak anılabilir:
+API’si mutlak teknik üstünlük iddiasında değildir; ancak kullanımı açık, hata mesajları
+net ve geliştiricinin doğru şeyi yapmak istediği bir ortam sunar. Bu istek ürüne geçer.
+İyi UX, Kötü DX: Mümkün mü?
+Kısa vadede evet — sürdürülemez biçimde. Disiplinli ve yetenekli bir ekip, kötü bir
+kod tabanından iyi kullanıcı deneyimi çıkarabilir: ekstra efor, dikkat ve elle yapılan
+müdahaleler bunu mümkün kılar; kullanıcı hiçbir şey fark etmez. Ancak bu kaliteyi
+üretmek için geliştirici normalden çok daha fazla enerji harcar ve sürtünmeye karşı
+sürekli savaşır. Zamanla iki senaryodan biri gerçekleşir.
+Birikim ve erozyon: Ekip yorulur. Köşeler önce görünmez yerlerde, sonra kullanı-
+cıya dokunan yerlerde kesilmeye başlar. Kimse bilinçli bir kararla deneyimi bozmaz;
+yalnızca enerji biter ve her şey biraz daha geç, biraz daha kırılgan hale gelir.
+Ekip değişimi: Yeni bir geliştirici gelir, kod tabanını görür, anlayamaz. Öğrenme
+süreci iterasyonu yavaşlatır, hata oranı artar. Kullanıcı deneyimi hâlâ iyi görünür ama
+artık gelişmez; sistem her hareketi pahalı kılmıştır.
+Somut bir örnek üzerinden: ilk iki yılında olağanüstü bir deneyim üretmiş bir erken
+dönem ürünü düşünelim — hızlı, canlı, her şey yerinde. Üç yıl sonra ekip değişmiş,
+kod tabanı büyümüş, hiç yeniden düzenlenmemiştir. Yeni özellik eklemek iki haftadan
+altı haftaya çıkmış, hatalar artmıştır. Deneyim hâlâ iyi görünür — ama artık gelişmez.
+Sistem her hareketi pahalı kıldığı için iterasyon durmuştur.
+Denge
+İyi DX olmadan iyi UX anlık bir fotoğraftır; iyi DX ile iyi UX, zaman içinde gelişen ve
+iterasyon yapabilen bir filme dönüşür. Öte yandan DX’i UX’in önüne koymak da bir köşe
+kesme biçimidir: temiz kod yazdığını söyleyip kullanıcıya kötü deneyim çıkaran ekipler
+bu hatayı yapar. İyi DX, iyi UX için zemindir — garantisi değil; öncelik nihayetinde
+kullanıcıya çıkan şeyde kalmalıdır.
+Solo geliştirici bağlamında bu denge daha da kritikleşir: fazla eforu kompanse edecek
+bir ekip yoktur. Kod tabanı dağınıksa geliştirici hem savaşçı hem kurbandır.
+Bilme Biçimleri
+Ürüne yazılan deneyimin önemli bölümü, açıkça ifade edilemeyen bilgiden gelir. Bu
+bölüm, analitik bilginin ötesindeki beş bilme biçimini ayırt eder.
+2
+
+-- 2 of 5 --
+
+İçgüdü
+İçgüdü, türe ait kodlanmış davranış kalıplarıdır; öğrenilmez, doğuştan gelir. Bebek
+emmeyi bilir, kimse öğretmez. Tehlike karşısında donmak, kaçmak ya da savaşmak
+— bunlar öğrenilmemiş, evrimsel olarak kodlanmış tepkilerdir. İçgüdü anında gelir,
+milisaniyeler içinde devreye girer; bedenseldir ve düşünce öncesidir.
+Modern karar kültüründe içgüdüye itibar edilmez: bir karar meşru sayılabilmek
+için gerekçe göstermek zorundadır — veriye göre, analize göre. İçgüdüye dayalı karar
+savunulamaz, gösterilemez, denetlenemez sayılır. Bu tutumun kökleri büyük ölçüde
+Aydınlanma dönemine uzanır: on yedinci ve on sekizinci yüzyılda Batı düşüncesinin
+baskın kanadı, gerçeğe ulaşmanın yolunu akıl ve gözlemde buldu; duygular, sezgiler
+ve içgüdüler öznel ve yanıltıcı sayıldı. Bu genellemenin istisnaları vardır — Pascal’ın
+kalbin kendine özgü nedenleri olduğu görüşü, sonrasında Romantizmin itirazı — ancak
+mühendislik ve eğitim kurumlarını şekillendiren, rasyonalist ana damar olmuştur. Eğitim
+sistemi de aynı kalıbı öğretir: doğru cevabı bul, göster, gerekçelendir. Belirsizlikte
+durmak öğretilir; belirsizlikte hareket etmek öğretilmez.
+Bununla birlikte içgüdü her zaman temiz değildir. Önyargılar, korkular ve geçmiş
+deneyimler de içgüdü gibi hissettirir: zihin tanıdık olanı doğru, yabancı olanı tehli-
+keli olarak işaretler — bu sezgi değil, evrimsel bir kısayoldur. Gerçek içgüdüyü bu
+kısayollardan ayırt etmek, Shu-Ha-Ri’nin ri düzeyinde bir beceridir.
+Sezgi
+Sezgi, bilincin henüz işlemediği bir şeyi bilmektir. Tahmin değildir; tahmin, bilgisizlikte
+yapılan bir seçimdir. Sezgi ise bir şeyin bilindiği ama nasıl bilindiğinin açıklanamadığı
+haldir. Zihin her an bilinç düzeyinin altında büyük miktarda veri işler: yüz ifadeleri,
+ses tonu, ortamdaki küçük tutarsızlıklar, geçmiş deneyimlerden gelen örüntüler. Bu
+işlemin sonucu bir his olarak yüzeye çıkar — bu doğru, bu yanlış, bir şeyler tutmuyor.
+O his sezgidir: zihnin sonucu gösterip gerekçeyi göstermediği an.
+İçgüdüden farkı: İçgüdü türe aittir; sezgi bireye. Bütün insanlar yüksekten
+düşme korkusu taşır — bu içgüdüdür. Deneyimli bir mimarın yapıya bakıp duvarın
+tutmayacağını söylemesi ise sezgidir; yalnızca onun zihni o örüntüyü tanır. İçgüdü
+doğuştan gelir, sezgi deneyimle büyür: hiç satranç oynamamış biri bir hamlenin yanlış
+hissettirdiğini söyleyemez; usta oyuncu söyleyebilir, çünkü binlerce pozisyon işlenmiş
+ve örüntüler içselleşmiştir. Deneyim ilerledikçe ikisi yakınsar: ustanın sezgisi o kadar
+içselleşir ki içgüdü hızında ve bedensel gelir. Shu-Ha-Ri’nin ri’si tam oradadır —
+öğrenilmiş olan, doğuştan geliyormuş gibi hissettirir.
+Hayattaki ağırlığı: Gündelik kararların büyük çoğunluğu sezgiyle şekillenir; her
+karar bilinçli analizden geçseydi zihinsel kapasite buna yetmezdi — sezgi bu yükü
+taşır. Büyük kararlarda da sezgi belirleyicidir, ancak bu kabul edilmek istenmez: iş
+değiştirmek, ilişkiye girmek, bir ürüne yatırım yapmak — veriler toplanır, analizler
+yapılır, ama son noktada bir his devreye girer. Her büyük fikir de önce bir sezgi olarak
+gelir: burada bir şey var hissi. Sezgi kapıyı açar, analiz içeri girer.
+Güvenilirliği: Sezginin güvenilirliği deneyimle doğru orantılıdır; ancak bu orantının
+koşulları vardır. Kahneman ile Klein’ın uzman sezgisi üzerine vardığı uzlaşıya göre sezgi
+iki koşul altında güvenilirleşir: çevrenin yeterince düzenli olması (örüntülerin gerçekten
+var olması) ve uzun süreli pratiğin hızlı ve net geri bildirimle desteklenmesi. Satranç ve
+3
+
+-- 3 of 5 --
+
+cerrahi bu koşulları sağlar; hisse senedi seçimi gibi düşük düzenlilikte alanlar sağlamaz
+— orada güçlü hisler deneyimli kişilerde bile yanıltıcıdır. Japon geleneğinin on yıllık
+pratik ısrarı bu çerçevede anlam kazanır: sezgiye güvenebilmek için önce sezginin temiz
+olması gerekir ve temizlik, doğru koşullarda biriken deneyimle gelir.
+Analizle birlikte kullanımı: İki uç da yanlıştır. Yalnızca sezgiyle karar vermek,
+deneyim yetersizse önyargıyı ve korkuyu konuşturur; bazı kararlar veri gerektirir — bir
+işletmenin mali durumu sezgiyle değil sayılarla anlaşılır. Yalnızca analizle karar vermek
+ise verinin söylemediklerini kaçırır: bir insanın karakteri, bir projenin ruhu, bir kararın
+uzun vadeli hissi. Üstelik her şeyi bilinçli işlemek zihinsel kapasiteyi tüketir — karar
+yorgunluğu budur. Doğru kullanım şudur: analiz, verilerin ne söylediğini ve risklerin
+ne olduğunu cevaplar; sezgi, bunun doğru hissettirip hissettirmediğini. Rutin kararlar
+sezgiye bırakılır; büyük kararlarda ikisi birlikte çalışır. Aynı yönü gösteriyorlarsa güven
+artar; çelişiyorlarsa beklemek gerekir.
+Hikmet
+Hikmet; analiz, sezgi ve içgüdünün üzerinde bir katmandır: bunların hangisini ne
+zaman kullanacağını bilmek. Analiz mi gerekiyor, sezgiye mi güvenilmeli, içgüdü mü
+dinlenmeli — buna karar vermek ayrı bir yetkinliktir ve deneyimle birlikte yansımayla
+gelir; yalnızca bilgi biriktirmekle değil. Hikmet bir bilgi türü değil, bilgi türleri arasında
+gezinen bir yetkinliktir: hangi sorunun hangi araçla çözüleceğini bilmek — ayrımın
+kendisi hikmettir.
+Beden Bilgisi
+Beden bilgisi sezgiden farklıdır: zihin değil, beden bilir. Deneyimli bir marangoz tahtayı
+eliyle hisseder — nemin durumunu, damarın yönünü. Kelimeye dökemez ama elleri
+bilir. Kata’nın içselleştirdiği şey çoğunlukla buraya yazılır: bilince değil, bedene.
+Polanyi bu alanı örtük bilgi kavramıyla tanımlar: söyleyebildiğimizden fazlasını
+biliriz. Bir şey yapılabilir ama nasıl yapıldığı anlatılamaz — dilin ulaşamadığı, yalnızca
+pratiğin yazabildiği bilgidir. Beden bilgisi bu nedenle aktarılamaz, yalnızca edinilir; usta–
+çırak ilişkisinin geçerliliğini korumasının nedeni budur: bazı şeyler kitaba yazılamaz,
+yalnızca yapılarak öğrenilir.
+Empati
+Empati, başkasını hissetmek yoluyla bilmektir: ne analiz, ne sezgi, ne içgüdü — başka-
+sının iç dünyasına geçici olarak girmektir. İyi bir terapist, iyi bir lider, iyi bir tasarımcı
+bunu kullanır: kullanıcının ne hissettiğini veri toplamadan, doğrudan hissederek kavrar.
+Bu bilgi türü ilişkide yaşar; yalnız başına erişilemez.
+Empati ile sempati arasındaki fark belirleyicidir: sempati dışarıdan bakar (zor
+olmalı); empati içeriye girer (bu his böyle). Sempati mesafeyi korur; empati mesafeyi
+geçici olarak kaldırır. Tasarımda empati, kullanıcı araştırmasının ulaşamadığı yere
+ulaşır: veri neyin yapıldığını gösterir, empati nasıl hissettirdiğini bilir. Bununla birlikte
+empati de yanılmaz değildir: kişi kendi iç dünyasını karşısındakine yansıtabilir ve buna
+empati sanabilir. Bu nedenle empatik okuma, mümkün olduğunda gözlem ve geri
+bildirimle sınanmalıdır — empati kapıyı açar, doğrulama içeri girer.
+4
+
+-- 4 of 5 --
+
+Sentez: Örtük Bilgi Ürüne Nasıl Yazılır
+İki düzlem burada birleşir. Geliştirici deneyimi bölümünün gösterdiği aşınma me-
+kanizması, aslında örtük bilginin kaybının mekanizmasıdır: dağınık bir kod tabanı,
+geliştiricinin sezgisini kirletir (örüntüler tutarsızlaşır, geri bildirim gecikir — Kahneman-
+Klein koşulları bozulur); sürtünme, beden bilgisinin oluşmasını engeller (akış kesildikçe
+pratik derinleşemez); ve tükenmişlik, empatiyi kapatır (kendi savaşını veren geliştirici,
+kullanıcıyı hissedecek alanı bulamaz). İyi DX bu üç kanalı açık tutar: temiz sistem
+sezgiyi eğitir, akıcı araç zinciri pratiği derinleştirir, düşük sürtünme kullanıcıya dönük
+dikkat için alan bırakır.
+Buradan pratik bir sonuç çıkar: geliştirici deneyimine yapılan yatırım, yalnızca
+verimlilik yatırımı değil, organizasyonun örtük bilgi üretme kapasitesine yapılan yatı-
+rımdır. Metrikler açık bilgiyi yönetir; DX, örtük olanı besler. İkisi birlikte, ürünün hem
+bugünkü fotoğrafını hem yarınki filmini belirler.
+Sonuç
+Bu çalışma iki iddiayı savunmuştur. Birincisi: geliştirici deneyimi ile kullanıcı deneyimi
+arasındaki ilişki nedenseldir ve gecikmelidir — kötü DX’in faturası kullanıcıya hemen
+değil, erozyonla kesilir; bu yüzden iyi UX’in fotoğrafı yanıltıcı, filmi belirleyicidir.
+İkincisi: bu nedenselliğin taşıyıcısı örtük bilgidir — sezgi, beden bilgisi ve empati;
+bunlar ölçülmedikleri için yönetim panellerinde görünmez, ama ürünün uzun vadeli
+kalitesini açık bilgiden daha çok belirler. Hikmet, bu bilme biçimleri arasında doğru
+geçişi yapabilme yetkinliği olarak, hem bireyin hem organizasyonun olgunluk ölçüsüdür:
+neyi sayacağını, neyi hissedeceğini ve neyi yalnızca yaparak öğrenebileceğini bilmek.
+Kaynaklar
+[1] M. Polanyi, The Tacit Dimension, University of Chicago Press, Chicago, 1966.
+[2] D. Kahneman and G. Klein, “Conditions for Intuitive Expertise: A Failure to
+Disagree,” American Psychologist, vol. 64, no. 6, 2009.
+[3] D. Kahneman, Thinking, Fast and Slow, Farrar, Straus and Giroux, New York,
+2011.
+[4] W. Isaacson, Steve Jobs, Simon & Schuster, New York, 2011.
+[5] G. Klein, Sources of Power: How People Make Decisions, MIT Press, Cambridge,
+1998.
+5
+
+-- 5 of 5 --

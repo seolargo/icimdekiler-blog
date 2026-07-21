@@ -1,10 +1,12 @@
-// Tüm PDF'lerin metnini çıkarır ve iki çıktı üretir:
+// Tüm PDF'lerin metnini çıkarır ve üç çıktı üretir:
 //   1) public/search-index.json  -> katlanmış (folded) metin, istemci araması için
 //   2) .fulltext-cache.json (kök) -> temizlenmiş okunabilir tam metin; prerender bunu
 //      kullanarak llms-full.txt üretir (AI/LLM'lerin içeriği yutması için).
+//   3) public/texts/<slug>.txt   -> yazı başına indirilebilir/kopyalanabilir düz metin
+//      ("Metni Kopyala" / "Metni İndir" butonları için).
 // Artımlı: her iki önbellekte de bulunan slug'lar yeniden parse edilmez.
 // generate-manifest.js'ten SONRA çalışmalı (posts.json'a ihtiyaç duyar).
-import { readFileSync, writeFileSync, existsSync } from 'node:fs'
+import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync, unlinkSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createRequire } from 'node:module'
@@ -18,6 +20,7 @@ const pdfDir = join(root, 'public', 'pdfs')
 const manifestPath = join(root, 'public', 'posts.json')
 const indexPath = join(root, 'public', 'search-index.json')
 const fulltextPath = join(root, '.fulltext-cache.json')
+const textsDir = join(root, 'public', 'texts')
 
 // LaTeX/PDF çıkarımındaki Türkçe karakter bozulmalarını okunabilir hale getirir.
 // (Bazı 'ı/İ' harfleri çıkarımda tamamen düştüğü için en iyi çaba düzeyindedir.)
@@ -84,7 +87,20 @@ for (const p of posts) {
 
 writeFileSync(indexPath, JSON.stringify(index))
 writeFileSync(fulltextPath, JSON.stringify(fulltext))
+
+// Yazı başına düz metin dosyaları (kopyala/indir butonları için)
+mkdirSync(textsDir, { recursive: true })
+const validSlugs = new Set(fulltext.map((e) => e.slug))
+for (const e of fulltext) {
+  writeFileSync(join(textsDir, `${e.slug}.txt`), e.text)
+}
+// Kaldırılmış yazıların artık dosyalarını temizle
+for (const f of readdirSync(textsDir)) {
+  const slug = f.replace(/\.txt$/, '')
+  if (!validSlugs.has(slug)) unlinkSync(join(textsDir, f))
+}
+
 const kb = Math.round(Buffer.byteLength(JSON.stringify(index)) / 1024)
 console.log(
-  `[search-index] ${index.length} yazı indekslendi (${parsed} yeni parse) -> search-index.json (${kb} KB) + .fulltext-cache.json`,
+  `[search-index] ${index.length} yazı indekslendi (${parsed} yeni parse) -> search-index.json (${kb} KB) + .fulltext-cache.json + public/texts/`,
 )

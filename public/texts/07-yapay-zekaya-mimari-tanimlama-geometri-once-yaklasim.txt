@@ -1,0 +1,233 @@
+Yapay Zekâya Mimari Tanmlama:
+Geometri-Önce Yaklaşmyla Sistem Tasarm
+Ömer Faruk Yavuz
+Temmuz 2026
+Giriş
+Modern yapay zekâ sistemleri kod üretme konusunda güçlüdür; ancak doğru yönlendirilmedik-
+lerinde çoğu zaman yalnzca yerel problemleri çözen, ksa vadeli ve yüksek teknik borç üreten
+yaplar ortaya çkarrlar. Bu nedenle yapay zekâya yalnzca kod yaz demek yeterli değildir. Asl
+belirleyici olan, sistemin geometrisini tanmlamak ve modelin akl yürütebileceği yapsal snrlar
+oluşturmaktr.
+Bu çalşma, yapay zekâ destekli sistem geliştirmede geometri-önce (geometry-rst) olarak
+adlandrlabilecek bir yaklaşm sistematikleştirmektedir. Yaklaşmn özü şudur: kod üretiminden
+önce sistemin amac, alan modeli, snrlar, durum organizasyonu, veri akş yönleri, hata modeli,
+ölçek varsaymlar, kod organizasyonu, test yaps ve mimari prensipleri açk biçimde tanmlanr;
+model bu tanml uzay içinde üretim yapar.
+Çalşma boyunca örnekler, jenerik bir gerçek zamanl iş birliği platformu üzerinden verilmek-
+tedir: çok katlmcl oturumlar, gerçek zamanl veri akşn, yapay zekâ destekli özetlemeyi ve
+kayt yönetimini destekleyen bir sistem. Örneklerin amac belirli bir teknolojiyi önermek değil,
+tanmlama pratiğinin biçimini göstermektir.
+Sistem Amacnn Tanmlanmas
+Mimari üretimin ilk adm, sistemin neden var olduğunun net biçimde tanmlanmasdr. Örneğin:
+A collaboration platform that supports realtime transcription,
+AI-assisted summaries, session recording,
+and multi-participant sessions.
+Amaç net tanmlanmadğnda model tipik olarak şu hatalar üretir:
+ yanlş soyutlamalar kurabilir,
+ gereksiz karmaşklk üretebilir,
+ alanla uyuşmayan yaplar oluşturabilir.
+Amaç tanm, modelin tüm sonraki kararlarn ltreleyen bir referans çerçevesi işlevi görür: her
+soyutlama, her katman ve her bağmllk bu amaca hizmet edip etmediğine göre değerlendirilebilir
+hale gelir.
+1
+
+-- 1 of 7 --
+
+Alan Modelinin Kurulmas
+Yapay zekâ için en kritik yaplardan biri alan (domain) modelidir. Bu nedenle şunlar açk biçimde
+tanmlanmaldr:
+ ana varlklar,
+ ilişkiler,
+ yaşam döngüleri,
+ değişmezler (invariant'lar).
+Örneğin:
+Entities:
+- Session
+- Participant
+- Transcript
+- Recording
+- Summary
+Rules:
+- One session can have many participants
+- Transcript belongs to exactly one session
+- Recording exists only during an active session
+Alan modeli net olmadğnda sistemin farkl bölümleri farkl gerçeklikler üretmeye başlar:
+ayn varlk farkl modüllerde farkl ilişki ve kstlarla temsil edilir ve bu ayrşma zamanla veri
+tutarszlklarna dönüşür. Açk alan modeli, hem insan hem de model için ortak bir kavramsal
+sözlük oluşturur.
+Snr Tanmlar
+Yapay zekânn en çok ihtiyaç duyduğu yaplardan biri, açk biçimde tanmlanmş snrlardr
+(boundary). Katmanl bir snr tanm şu şekilde ifade edilebilir:
+UI Layer
+|
+v
+Facade Layer
+|
+v
+Application Services
+|
+v
+2
+
+-- 2 of 7 --
+
+Domain Layer
+|
+v
+Infrastructure Layer
+Bu yap, aşağdaki gibi açk kurallarla desteklenmelidir:
+UI cannot directly call API.
+Only facades orchestrate state changes.
+Bu tür kurallar, modelin kontrolsüz bağlaşm üretmesini belirgin biçimde azaltr. Snr tanm
+yaplmadğnda tipik bozulmalar şunlardr:
+ iş mantğ arayüz katmanna gömülür,
+ yan etkiler sisteme dağlr,
+ bağmllk graği karmaşklaşr.
+Snrlar, modelin bu kod nereye yazlmal sorusunu her seferinde yeniden çözmesini engeller;
+karar, mimari düzeyde bir kez verilmiş olur.
+Durum Geometrisinin Tanmlanmas
+Modern arayüz mimarisinde durum organizasyonu kritik öneme sahiptir. Bu nedenle modele
+durum sahipliği açk kurallarla verilmelidir:
+Global state:
+- auth
+- session
+- workspace context
+Local state:
+- modal visibility
+- temporary form edits
+Never store transient UI state globally.
+Bu ayrm yaplmadğnda model tipik olarak şu hatalar üretir:
+ her durumu küresel depoya taşr,
+ eşitleme problemleri üretir,
+ kontrolsüz yeniden çizim zincirleri oluşturur.
+Durum geometrisi tanm, özünde bir sahiplik haritasdr: hangi bilginin nerede yaşadğ,
+kimin tarafndan değiştirilebildiği ve hangi ömre sahip olduğu önceden belirlenir.
+3
+
+-- 3 of 7 --
+
+Veri Akş Yönlerinin Tanmlanmas
+Modele veri akşnn yönü açk biçimde verilmelidir. Tek yönlü bir akş tanm şu şekilde ifade
+edilebilir:
+UI -> Action -> Effect -> API -> Reducer -> Store -> UI
+Bu yaklaşm üç temel bozulmay önlemeye yardmc olur:
+ çift yönlü ve izlenemez veri akş,
+ gizli yan etkiler,
+ durum belirsizliği.
+Akş yönü tanmlandğnda, model bir değişikliğin etki zincirini deterministik biçimde izleye-
+bilir: hangi eylemin hangi dönüşümü tetiklediği ve verinin hangi yoldan arayüze döndüğü önceden
+bellidir.
+Hata Modelinin Tasarlanmas
+Modern sistemlerde yalnzca mutlu yol (happy path) senaryosunu tanmlamak yeterli değildir.
+Bu nedenle modele sistemin başarszlk koşullar açk sorular olarak yöneltilmelidir:
+What happens if:
+- the realtime connection disconnects?
+- an upload fails?
+- retry exceeds its limit?
+- a race condition occurs?
+Bu sorularn yantlar, sistemin davranş geometrisini dayankl hale getirir. Hata modeli
+tanmlanmadğnda model, başarszlk durumlarn ya hiç ele almaz ya da her modülde farkl ve
+tutarsz biçimlerde ele alr. Merkezî bir hata modeli, başarszlğn da tasarlanmş bir davranş
+olmasn sağlar.
+Ölçek Varsaymlarnn Belirlenmesi
+Modelin doğru karmaşklk seviyesini kurabilmesi için sistemin hedef ölçeği belirtilmelidir:
+Expected scale:
+- realtime communication
+- 10k concurrent users
+- distributed architecture
+- offline capability
+Bu bilgi verilmediğinde model iki yönde de hata yapabilir:
+4
+
+-- 4 of 7 --
+
+ gereksiz karmaşklk üretebilir,
+ yetersiz ölçeklenebilirlik kurabilir,
+ yanlş soyutlama seviyesi seçebilir.
+Ölçek varsaym, mimari kararlarn maliyetfayda dengesini belirleyen temel parametredir:
+bin kullancl bir sistem için doğru olan mimari, milyon kullancl bir sistem için yanlş olabilir
+ve tersi de geçerlidir.
+Kod Organizasyonunun Tanmlanmas
+Modele proje yaps ve organizasyon biçimi açkça verilmelidir. Örneğin dizin düzeyinde:
+apps/
+libs/
+shared/
+features/
+domain/
+infrastructure/
+veya ilke düzeyinde:
+Feature-first architecture
+gibi yönlendirmeler sistem bütünlüğünü artrr. Kod organizasyonu tanm, modelin ürettiği
+her yeni dosyann öngörülebilir bir konuma yerleşmesini sağlar; böylece sistem büyüdükçe yapsal
+tutarllk korunur.
+Test Geometrisinin Tanmlanmas
+Modelin yalnzca kod değil, doğrulama yaps da üretmesi gerekir. Bu nedenle test katmanlar
+açk biçimde belirtilmelidir:
+- unit
+- contract
+- integration
+- E2E
+- concurrency
+- drift guards
+Test geometrisi tanmlanmadğnda model tipik olarak şu davranşlar gösterir:
+ yetersiz test üretir,
+ yüzeysel anlk görüntü testlerine yönelir,
+ davranş geometrisini doğrulayamaz.
+Test katmanlarnn önceden tanmlanmas, doğrulamann sonradan eklenen bir katman değil,
+mimarinin kurucu unsuru olmasn sağlar.
+5
+
+-- 5 of 7 --
+
+Mimari Prensiplerin Tanmlanmas
+Son olarak, modele sistemin temel prensipleri açk biçimde verilmelidir:
+Principles:
+- deterministic state transitions
+- minimal side effects
+- explicit boundaries
+- modular design
+- typed contracts
+- low coupling
+- high cohesion
+- AI-readable structure
+Bu prensipler, sistemin entropi üretme eğilimini baştan snrlar. Prensip listesi, modelin kar-
+şlaştğ her belirsiz durumda başvurabileceği bir karar hiyerarşisi işlevi görür: iki geçerli çözüm
+arasnda seçim yaplmas gerektiğinde, prensiplere daha uygun olan tercih edilir.
+Yaklaşmn Bütünsel Değerlendirmesi
+Yukardaki on tanmlama adm birlikte ele alndğnda, yapay zekâya iyi mimari hazrlatmann
+özü şu şekilde ifade edilebilir:
+Yapay zekâya mimari tanmlamak, ona bir düşünme uzay vermek anlamna gelir.
+Bu fark iki istem biçimi üzerinden karşlaştrmak öğreticidir. Kötü yaklaşm, tanmsz bir
+uzayda üretim talep eder:
+Build me a collaboration app.
+yi yaklaşm ise üretimin gerçekleşeceği geometriyi önceden kurar:
+Design a modular collaboration platform with deterministic
+state flow, explicit orchestration boundaries,
+typed contracts, streaming-safe concurrency handling,
+and scalable testing architecture.
+Birinci istem, modeli sonsuz bir olaslk uzaynda serbest brakr; üretilen sistem, modelin
+o anki örüntü tercihlerinin rastgele bir birleşimi olur. kinci istem ise olaslk uzayn mimari
+kstlarla daraltr; üretilen sistem, önceden tanmlanmş geometrinin bir gerçekleştirimi olur.
+Bu karşlaştrma, yaklaşmn adn da gerekçelendirir: geometri-önce yaklaşmda kod, tasarm
+sürecinin başlangc değil sonucudur. Sistemin amac, snrlar, akşlar ve prensipleri  yani
+geometrisi  önce tanmlanr; kod bu geometrinin içinde üretilir.
+6
+
+-- 6 of 7 --
+
+Sonuç
+Yapay zekâ destekli mühendislikte üretim kalitesi, modelin kapasitesinden çok, modele sunulan
+yapsal çerçevenin kalitesiyle belirlenir. Bu çalşmada sistematikleştirilen on tanmlama adm 
+sistem amac, alan modeli, snrlar, durum geometrisi, veri akş yönleri, hata modeli, ölçek var-
+saymlar, kod organizasyonu, test geometrisi ve mimari prensipler  birlikte, modelin güvenilir
+biçimde akl yürütebileceği bir uzay kurar.
+Bu çerçevenin temel prensibi şu şekilde özetlenebilir:
+Önce sistemin geometrisi tasarlanr, daha sonra kod üretilir. Kod sonuçtur; geometri
+ise sebeptir.
+Bu bakş açs, yapay zekâ çağnda mühendislik rolünün dönüşümünü de işaret eder: mühen-
+disin asli katks artk kodun kendisini yazmak değil, kodun içinde üretileceği geometriyi doğru
+kurmaktr. yi kurulmuş bir geometri, hem insan hem de makine için üretimin doğruluğunu
+yapsal olarak güvence altna alr.
+7
+
+-- 7 of 7 --

@@ -1,0 +1,127 @@
+Davranş Uzay Kavramnn Akademik ve
+Endüstriyel Karşlklar
+Ömer Faruk Yavuz
+May 2026
+Davranş Uzay Kavramnn Akademik ve Endüstriyel
+Karşlklar
+Kavramsal Konum
+Davranş uzay (behavior space) ve davranş geometrisi (behavior geome-
+try) ifadeleri, bilgisayar biliminin resmi terminolojisine ait yerleşik kavramlar
+değildir. Bununla birlikte, mühendislik pratiğinde güçlü açklayc metaforlar
+sunduklar için belirgin bir kullanm değeri taşrlar. şaret ettikleri olgu öze-
+tle şudur: bir sistemin yalnzca olağan koşullardaki davranş değil, olas tüm
+koşullar altnda sergilediği davranşlarn bütünü.
+Bu çerçevede kod, sklkla varsayldğnn aksine, yalnzca
+girdi -> cikti
+ilişkisinden ibaret değildir. Her sistemin etrafnda, doğrudan görünmeyen
+geniş bir davranş alan uzanr.
+Basit Bir Örnek
+Tek bir buton bileşeni ele alndğnda, ideal akş şu biçimdedir:
+Kullanici -> Butona bas -> Istek -> Sonuc goster
+Ancak gerçek davranş uzay bu akşla snrl değildir; aşağdaki senaryolar
+da kapsar. Kullancnn ardşk ve hzl biçimde çok sayda tklama gerçek-
+leştirmesi, internet bağlantsnn kesilmesi, yantn gecikmeli olarak ulaşmas,
+eş zamanl iki isteğin sralamasnn değişmesi, bileşenin (component) yaşam
+döngüsü srasnda kaldrlmas (unmount), kimlik doğrulama token'nn süresinin
+dolmas, WebSocket bağlantsnn yeniden kurulmas (reconnect), bayatlamş ön-
+bellek (stale cache) verisinin sunulmas, yükleme durumu (loading state) yöneti-
+minin eksik braklmas ve yeniden deneme (retry) mekanizmasnn mükerrer veri
+üretmesi bu senaryolar arasndadr. Bu olaslklarn toplam, sistemin davranş
+uzayn oluşturur.
+1
+
+-- 1 of 4 --
+
+Davranş Geometrisi
+Davranş geometrisi kavram bir adm daha ileri giderek, bu davranşlarn sis-
+tem içinde nasl örgütlendiğini sorgular.
+yi Geometri
+Kullanici eylemi
+|
+v
+Niyet
+|
+v
+Durum gecisi
+|
+v
+Etki
+|
+v
+Arayuz guncellemesi
+Bu yapda akş açktr, yön bellidir ve sebep-sonuç ilişkisi izlenebilirdir.
+Kötü Geometri
+Arayuz <-> Store <-> Servis
+\ | /
+rastgele yardimci
+Bu yapda ise davranşlar birbirine szar, yan etkiler örtük hâle gelir, du-
+rum (state) değişikliklerinin nerede gerçekleştiği anlaşlmaz olur ve sistemin
+öngörülebilirliği belirgin biçimde azalr.
+Bilişsel Maliyet
+Dikkate değer bir gözlem şudur: kötü tasarlanmş davranş geometrilerini hem
+insan zihni hem de yapay zekâ modelleri kavramakta güçlük çeker. Örneğin du-
+rum yönetimi ağr bir ön yüz sisteminde  eş zamanl bağlantlarn, canl veri
+akşnn, yükleme durumu geçişlerinin, rota (route) değişimlerinin, yeniden den-
+eme mantğnn, token yenilemesinin ve temizleme (cleanup) mekanizmalarnn
+iç içe geçtiği bir senaryoda  ortaya çkan davranş ağ tipik bir örnek teşkil
+eder.
+Yapay zekânn belirli uç durumlar (edge-case) tespit edebilmesinin altnda
+yatan neden, modelin yalnzca kodun söz dizimine (syntax ) değil, bu davranş
+ağnn şekline de bakyor olmasdr.
+2
+
+-- 2 of 4 --
+
+Mühendisliğin Dönüşen Tanm
+Bu çerçevede, nitelikli yazlm mühendisliğinin giderek aşağdaki katmanl yapya
+doğru evrildiği söylenebilir:
+Kod yazmak
+|
+v
+Davranis sekillendirmek
+|
+v
+Karmasiklik geometrisini yonetmek
+Buna göre değerlendirme kriteri de Bu çalşyor mu? sorusundan, Bu
+sistem tüm davranş uzaynda kararl m? sorusuna doğru kaymaktadr.
+Endüstrideki Resmi Karşlklar
+Yukarda metaforik biçimde tanmlanan kavramlarn, akademik ve endüstriyel
+düzlemde yerleşik karşlklar mevcuttur. Bunlarn başlcalar şöyle sralanabilir.
+Formal yöntemler (formal methods), sistemin olas durumlarnn matematiksel
+olarak doğrulanmasn hedeer. Model denetleme (model checking), Bu sistem
+tüm durum uzay içinde herhangi bir noktada bozuluyor mu? sorusunun sistem-
+atik biçimde taranmasdr. Model temelli test (model-based testing), test senary-
+olarnn sistemin davranş modelinden türetilmesine dayanr. Kaos mühendisliği
+(chaos engineering), sisteme kontrollü arzalar enjekte ederek dayankllğ ölçer.
+Dayankllk mühendisliği ve site güvenilirliği mühendisliği (resilience engineer-
+ing, site reliability engineering) ise sistemin gerçek dünya koşullarndaki stres
+davranşlarn inceler.
+Davranş uzay ve davranş geometrisi metaforlar, bu disiplinlerin daha
+sezgisel, mimari ve yaratc bir sentezi olarak okunabilir.
+Durum Uzay Patlamas
+Model denetleme yöntemi doğrudan durum uzayn (state space) gezer; ne var
+ki çoğu gerçek sistemde durum uzay üstel biçimde büyür ve hzla işlenemez
+hâle gelir. Bu kst nedeniyle pratik araçlar, genellikle yalnzca kritik davranş
+bölgelerini tarayacak şekilde yaplandrlr.
+Kaos mühendisliği ise tümüyle farkl bir soruyu temel alr. Normal koşullarda
+çalşyor mu? sorusu yerine, Ağ gecikirse, servis çökerse veya bir bağmllk
+(dependency) yant vermezse sistem hâlâ ayakta kalr m? sorusunu sorar.
+Kavramsal Hiyerarşi
+Bu çerçeve, aşağdaki katmanl yapyla özetlenebilir. Kod, sistemin statik yapsdr.
+Davranş, bu yapnn zaman içindeki hareketidir. Davranş uzay, olas tüm
+hareketlerin kümesidir. Davranş geometrisi ise bu hareketlerin sistem içinde
+aldğ şekil ve topolojidir.
+3
+
+-- 3 of 4 --
+
+Sektördeki Karşlk: Davranşsal Mimari
+Bu kavramlaştrmann endüstrideki en yakn karşlğ, yazlm sistemlerinin davranşsal
+mimarisi (behavioral architecture of software systems) olarak adlandrlabilir. Bu
+alan üzerinde çalşan araştrmac ve mühendisler mevcuttur; ancak söz konusu
+kavramlarn yalnzca akademik ya da formal düzlemde değil, ayn zamanda ya-
+pay zekâ, mimari tasarm, test stratejisi ve sezgisel geometri ekseninde birlikte
+ele alnmas, görece yeni ve verimli bir araştrma hatt oluşturmaktadr.
+4
+
+-- 4 of 4 --

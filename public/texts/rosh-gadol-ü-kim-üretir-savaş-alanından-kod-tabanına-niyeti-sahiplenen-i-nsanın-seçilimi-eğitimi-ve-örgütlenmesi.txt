@@ -1,0 +1,211 @@
+Rosh Gadol’ü Kim Üretir?
+Savaş Alanından Kod Tabanına, Niyeti Sahiplenen
+İnsanın Seçilimi, Eğitimi ve Örgütlenmesi
+Temmuz 2026
+Özet
+Bu çalışma, iki ayrı görünen literatürü tek bir sorunun etrafında birleştirmektedir: kar-
+maşık sosyo-teknik sistemlerde bilgi nerede yaşar ve nasıl korunur? İlk hat, yazılım mühen-
+disliğini güvenlik bilimleri ve örtük bilgi kuramıyla okuyan ekoldür (Wayne, Allspaw, Cook,
+Leveson, Naur, Bellotti); ikinci hat, Netflix Culture Deck ile askeri komuta doktrinlerinin
+(Auftragstaktik, rosh gadol ) organizasyon teorisidir. Çalışmanın savı, bu hatların aynı ya-
+pısal probleme — belirsizlik hızının merkezi kontrolün bant genişliğini aşması — verilen
+yakınsak cevaplar olduğudur: Ashby’nin gerekli çeşitlilik yasası uyarınca, hayatta kalan sis-
+temler zekâyı kenara dağıtmak zorundadır ve bunu yapan her sistem aynı üç mekanizmayı
+— yargı gücü seçilimi, niyet aktarımı, hatadan öğrenme — birbirinden habersiz yeniden icat
+eder.
+Giriş: Ortak Problem
+Yazılım mühendisliği doğduğu günden beri bir meşruiyet sorusuyla yaşar: “Biz gerçekten mühen-
+dis miyiz?” 2010’lardan itibaren bu soruyu polemikten çıkarıp ampirik zemine taşıyan bir kuşak,
+yazılımı havacılık, tıp, nükleer enerji ve sosyolojinin kavramsal aynasında incelemeye başladı.
+Aynı yıllarda, görünüşte alakasız bir belge — Netflix’in 2009 tarihli Culture Deck’i — organi-
+zasyon teorisinde paralel bir devrim öneriyordu: kaliteyi süreçle değil seçilimle güvence altına
+almak.
+Bu çalışma iki hattın aynı sorunun iki yüzü olduğunu savunur. Soru şudur: bir sistemin asıl
+varlığı — onu ayakta tutan bilgi — nerede yaşar ve ortamın belirsizliği merkezin kavrayışını
+aştığında bu bilgi nasıl seferber edilir? İlk bölümler bilginin doğasını ve kaybını (yazılım hattı),
+sonraki bölümler bilginin örgütlenmesini (Netflix ve askeri hat), son bölüm ise yakınsamanın
+yapısal açıklamasını sunar.
+Yazılımın Özgün Kısıtı
+Hillel Wayne’in Crossover Project’i, geleneksel mühendislikten yazılıma geçen düzinelerce kişiyle
+yapılan görüşmelerle iki dünyanın folklorik kıyaslamasını veriyle sınamıştır. Bulgular dört miti
+çürütür. Geleneksel mühendislik de birinci prensiplerden inşa edilmez; ampirik kurallara ve yama
+çözümlere dayanır. Yazılımda tasarımın esnek bırakılması disiplinsizlik değil, medyumun ucuz ite-
+rasyona izin vermesinin rasyonel sonucudur — dökülen kalıp geri alınamaz, kod alınır. Yazılımın
+asıl düşmanı fizik değil, durum uzayının büyüklüğü ve bilişsel yüktür. Güvenilirlik ise bir disiplin
+değil ekonomi meselesidir: hata maliyeti yüksek alanlarda yazılım da formel yöntemlerden geçer,
+düşük alanlarda hız tercih edilir.
+1
+
+-- 1 of 5 --
+
+Nihai bulgu nettir: her iki dünyayı deneyimleyen katılımcıların tamamı yazılımın gerçek bir mü-
+hendislik olduğunu savunmuştur. Fark mesleğin özünde değil, malzemededir — ve yazılımın mal-
+zemesi bilgidir. Bu tespit, izleyen her şeyin zeminidir.
+Dayanıklılık Paradigması
+Dört Kavramsal Araç
+Resilience Engineering, havacılık psikolojisi (Woods) ve tıp güvenliği (Cook) birikimini yazılıma
+taşır; paradigma, çökmeyi engellemekten çöküşten toparlanma kapasitesine kayar. Dört araç
+üzerine kuruludur.
+Çizginin altı ve üstü: çalışan gerçek sistem hiçbir zaman doğrudan gözlemlenemez; operatör-
+ler onu ancak zihinsel modeller aracılığıyla tahmin eder. Öncelik kodu kusursuzlaştırmak değil,
+gözlemlenebilirliği güçlendirmektir.
+Tasarlanan iş ve yapılan iş: prosedürdeki iş (Work-as-Imagined) ile sahadaki iş (Work-as-Done)
+asla örtüşmez. Dayanıklı organizasyon bu farkı cezalandırmak yerine haritalayan organizasyon-
+dur.
+Suçlamasız kriz incelemesi: “pilotaj hatası” tespiti analizi bitirmez, başlatır — tecrübeli operatör
+o bağlamda neden bu kararın doğru olduğuna inandı? İnsan hatası neden değil, sonuçtur.
+Tek kök neden efsanesi: karmaşık sistemler tek bir nedenle değil, tek başına zararsız varyasyon-
+ların rezonansa girmesiyle çöker. Soru “kim bozdu” değil, “sistem neden bu kadar kırılgandı”
+sorusudur.
+Analiz Çerçeveleri
+Rezonans modelini pratikte haritalamak için üç çerçeve kullanılır. Leveson’ın STAMP teorisinden
+türeyen CAST, krizleri bileşen arızası değil “yetersiz kontrol” problemi olarak okur: her bileşen
+tasarlandığı gibi çalışsa bile aralarındaki kontrol bağı zayıfsa sistem çöker. Hollnagel’in FRAM’ı
+bileşenlere değil fonksiyonlara bakar ve gündelik varyasyonların nasıl yıkıcı bir dalgaya dönüştü-
+ğünü tek haritada gösterir. Sektörün pragmatik uyarlaması LIR ise akademik çizim yerine metin
+tabanlı sorularla ilerler: operatörün zihinsel modeli ile sistemin gerçeği arasındaki fark neydi,
+müdahale edenleri en çok ne şaşırttı? Mühendis sanık değil, kaosu çözmeye çalışan uzman olarak
+dinlenir.
+Kaos Mühendisliği
+Kaos Mühendisliği, dayanıklılık iddialarını üretim ortamında bilimsel yöntemle sınar: kararlı
+durumu tanımla, arıza tepkisine dair hipotez kur, etki alanını sınırla, hatayı enjekte edip gözlemle.
+Sistem hipotezdeki gibi davranmadığında, tasarlanan iş ile yapılan iş arasındaki fark deneysel
+olarak açığa çıkar. Netflix bunu Simian Army ile otomatikleştirmiştir: Chaos Monkey rastgele
+sunucu öldürerek servisleri durumsuz yazılmaya zorlar, Chaos Kong bütün bir bölgeyi kapatarak
+yönlendirmeyi sınar, Latency Monkey suni gecikmeyle zaman aşımı mekanizmalarını test eder.
+Dayanıklılık bir umut olmaktan çıkıp kanıtlanabilir bir gerçeğe dönüşür.
+Teknolojik Hafızanın Kaybı
+Naur: Program Bir Teoridir
+Peter Naur’un 1985 tarihli “Programming as Theory Building” makalesi, Polanyi’nin örtük bilgi
+kavramını yazılıma uygulayan kurucu metindir. Program, kodun kendisi değil, onu yazan ekibin
+2
+
+-- 2 of 5 --
+
+zihninde yaşayan teoridir: kararların gerekçelerine ve olası değişikliklerin nasıl yapılacağına dair
+bütünsel kavrayış. Bu teori dokümana aktarılamaz; ekip dağıldığında kod yerinde dursa bile
+program ölür.
+Bellotti: Kaybın Dört Mekanizması
+Marianne Bellotti bilgi kaybını teknik yetersizlikle değil organizasyonel sosyolojiyle açıklar. Or-
+ganizasyonel atrofi: kurum, yazılımın teknik yapısını değil, onu anlamlandıran sosyal yapıyı kay-
+beder. Bağlam kaybı: kod makinenin ne yaptığını söyler ama kararın neden alındığını söylemez;
+dönemsel kısıtlar insanlarla birlikte ayrılır ve geriye “bunu yazanlar aptalmış” yanılgısı kalır. Teş-
+vik çarpıklığı: kimse çalışan sistemi hayatta tuttuğu için terfi almaz; hafıza kazara kaybolmaz,
+teşvik sistemi tarafından dışarı itilir. Başarının görünmezliği: legacy olacak kadar yaşayan sistem
+kritik değer üretiyor demektir, ama sessiz çalıştığı için kaynak alamaz ve unutulur. Sistemi yakıp
+baştan yazma refleksi bir mühendislik çözümü değil, kaybedilen hafızayla yüzleşmekten kaçıştır.
+Winters: Zaman Boyutu
+Titus Winters’ın formülü damarı tamamlar: programlama ile yazılım mühendisliği arasındaki fark
+zaman ve ölçektir. Kod, ekipler yenilenirken on yıl hayatta kalmak zorundaysa, problem artık
+kod yazma değil, bilginin zamana karşı korunması problemidir. Yazılım mühendisliği, teknolojik
+hafızanın zamana karşı savunulması disiplinidir.
+Seçilimle Yönetim: Netflix Culture Deck
+Kural Yaratma Döngüsü
+Culture Deck’in arkasındaki teori, Hastings’in ilk şirketi Pure Software’de yaşadığı ölüm sarma-
+lıdır: hata olur, süreç eklenir, süreçler birikir, kendi kendini yöneten insanlar sıkılıp ayrılır, geriye
+talimat bekleyenler kalır, ortalama yetenek düşer, daha çok kural gerekir. Piyasa değiştiğinde
+süreç-optimize şirket dönemez. Dokümanın radikal önerisi sarmalın ilk halkasını kırmaktır: hata
+olduğunda süreç ekleme; kalite kontrolünü seçilime devret.
+İlkeler
+Merkezi kavram yetenek yoğunluğudur: kurala ihtiyaç duymayan insan oranını artır. Kültürel
+ifadesi serttir: “Biz aile değil, profesyonel spor takımıyız.” Buradan keeper test doğar — yönetici
+her ekip üyesi için sorar: bu kişi ayrılacağını söylese, tutmak için kıyasıya mücadele eder miydim?
+Hayırsa, kişiye dört ila dokuz aylık cömert tazminatla yol verilir; vasat performansı yıllarca
+sürüklemek iki tarafa da zulümdür. Bedel saklanmaz: Netflix’te iş güvencesi yoktur ve bu bir
+tasarım tercihidir.
+Özgürlük ve sorumluluk aynı mantığın devamıdır: tatil politikası yok, harcama politikası beş
+kelime. Gerekçe ekonomiktir — süreçler en kötü yüzde üçe karşı tasarlanır ama bedelini en iyi
+yüzde doksan yedi öder. Özgürlüğün iki önkoşulu vardır: yüksek yetenek yoğunluğu ve bağlamın
+cömert paylaşımı. Taklitçilerin başarısız olma nedeni özgürlüğü alıp bu iki ayağı atlamalarıdır.
+“Bağlam ver, kontrol etme”: yöneticinin işi karar onaylamak değil, doğru kararın verilebileceği
+bağlamı sağlamaktır; çalışan kötü karar verdiğinde ilk şüpheli, verilmeyen bağlamdır. “Gevşek
+bağlı, sıkı hizalı”: her ekip kendi servisini onaysız yayınlar, hizalama koddan değil stratejiden gelir
+— Conway Yasası’nın bilinçli tersten kullanımı ve Chaos Monkey felsefesinin insan katmanına
+izdüşümü. Ücret ise performans notuyla değil piyasa sorusuyla belirlenir: bu kişi bugün piyasaya
+çıksa ne alır?
+3
+
+-- 3 of 5 --
+
+Hata Değil, Yargı Gücü
+Netflix hata yapmayan insan aramaz; ayıklanan şey yargı gücü eksikliğidir. Kabul edilen hata, iyi
+bağlamla düşünerek alınmış ama sonucu kötü çıkmış karardır — Hastings, Qwikster fiyaskosunu
+şirket içinde örnek anlatı olarak kullanır. Kabul edilmeyen tip özensizlik, hata tekrarı ve karar
+kaçınmasıdır: her şeyi onaya bağlayan, “bana söyleneni yaptım” diyen profil. Süreçlerin koruduğu
+asıl tip budur.
+Seçilim dört mekanizmayla işler. Mülakatta davranış arkeolojisi: geçmiş kararlar sorgulanır, kural
+bekleyen insan “süreç şöyleydi, uyguladım” cevaplarıyla kendini ele verir. Dokuz değerli stunning
+colleague filtresi: her değer için gözlemlenebilir davranış tanımı. Sürekli seçilim: yanlış işe alım
+utanç değil, hızla kapatılan kötü bir bahistir. Sunshining: hata yapan kişi bunu kamusal olarak
+anlatır — ne denedim, neden mantıklıydı, ne öğrendim; anlatacak muhakemesi olmayan görünür
+hale gelir.
+Güvenlik bilimi diliyle: klasik şirket Work-as-Done’ı Work-as-Imagined’a zorla benzetmek için
+süreç ekler; Netflix, Work-as-Done’ı iyi yapacak insanı seçip Work-as-Imagined katmanını inceltir.
+Modelin sınırı da buradadır: ancak yüksek maaş ödeyebilen ve hata maliyeti felaket düzeyinde
+olmayan işte çalışır. Hastane veya nükleer santralde süreç, seçilimin lüks olduğu yerde devreye
+giren asıl güvenlik katmanıdır.
+Askeri Muadiller
+Auftragstaktik ve Rosh Gadol
+“Bağlam ver, kontrol etme,” Prusya ordusunun Napolyon yenilgilerinden damıttığı Auftragstaktik
+doktrininin kurumsal çevirisidir: komutan niyeti verir, yöntemi sahadaki birlik seçer. Epistemolo-
+jik zemini Clausewitz’in sürtünme ve sis kavramlarıdır — plan ilk temasta ölür, cephe karargâhın
+haritasından her zaman öndedir.
+Doktrinin insan tipini İsrail ordusundan çıkan rosh gadol (“büyük kafa”) kavramı tanımlar. Karşıtı
+rosh katan, talimatın lafzına sığınır: söyleneni, söylendiği kadar yapar; sorumluluğu minimize
+etmek için görevi minimize eder — Netflix’in ayıkladığı profil birebir budur. Rosh gadol ise
+emri değil niyeti icra eder, boşluğu sormadan doldurur, yanlış yapma riskini bilerek alır çünkü
+hiçbir şey yapmamayı daha büyük hata sayar. Zincir şöyle kurulur: Auftragstaktik → rosh gadol
+→ context not control. Üçü aynı ilkenin askeri, kültürel ve kurumsal versiyonlarıdır: sistemi
+kurallarla değil, amacı içselleştirmiş insanlarla yönet.
+Fark üretim biçimindedir: Netflix bu profili seçilimle ayıklar, İsrail zorunlu askerlikle kitlesel
+olarak yetiştirir. Biri filtre, diğeri fabrikadır.
+Yakınsamanın Yapısal Açıklaması
+Kilit Aynı: Belirsizlik Hızı ve Kontrol Bant Genişliği
+Bu sistemlerin aynı çözüme varması tesadüf değil, yakınsak evrimdir — köpekbalığı ile yunusun
+ayrı soylardan aynı biçime varması gibi. Ortak problem: belirsizlik hızı, merkezi kontrolün bant
+genişliğini aştığında ne yapılır? Prusya bunu Napolyon karşısında, İsrail çok cepheli coğrafya-
+sında, Netflix DVD’den streaming’e savrulan piyasada yaşadı. Problemin karşısında iki strateji
+vardır. Birincisi merkezi kontrolü hızlandırmaktır — daha çok rapor, onay, prosedür; bu yol bir
+yere kadar çalışır, sonra kendi ağırlığında boğulur. İkincisi kontrolü dağıtıp niyeti merkezileştir-
+mektir: karar yetkisini bilginin olduğu yere itmek, tutarlılığı emirle değil amacın içselleştirilme-
+siyle sağlamak.
+4
+
+-- 4 of 5 --
+
+Dağıtık Kontrolün Zorunlu Üç Bileşeni
+İkinci yol seçildiğinde sistem insanın kalitesine bağımlı hale gelir: prosedür yoksa, yerini doldura-
+cak yargı gücü olmak zorundadır. Bu yüzden ikinci yolu seçen her sistem, birbirinden habersiz,
+aynı üç bileşeni icat eder. Yargı gücü olan insanı bulma veya üretme mekanizması: İsrail’in asker-
+lik fabrikası ile Netflix’in mülakat filtresi ve keeper testi. Niyeti aktarma mekanizması: komutanın
+maksadı ile context not control. Hatayı öğrenmeye çevirme mekanizması: İsrail ordusunun rütbe
+gözetmeyen operasyon sonrası debrief kültürü ile suçlamasız kriz incelemesi ve sunshining.
+Üçüncü bileşen, çalışmanın iki hattını birleştiren menteşedir: Resilience Engineering de aynı
+listeye çıkar. Havacılık ve tıp aynı duvara çarpmıştır — karmaşık sistem, prosedürün öngöre-
+meyeceği durumlar üretir ve o anda sahadaki insanın adaptasyonu tek güvenlik katmanıdır.
+Work-as-Done’ın sapmasını cezalandırmak yerine öğrenme kaynağı yapmak, rosh gadol’e alan
+açmakla aynı harekettir.
+Sibernetik Temel
+Kapının aynı olmasının nedeni kilidin aynı olmasıdır. Ashby’nin gerekli çeşitlilik yasası uyarınca,
+bir sistemi kontrol eden mekanizma en az sistemin ürettiği çeşitlilik kadar çeşitlilik üretebilmeli-
+dir. Ortamın çeşitliliği merkezin kapasitesini aşınca tek yol kontrolü çoğaltmak, yani dağıtmaktır.
+Ordu, hastane, streaming şirketi ve mikroservis mimarisi aynı yasanın farklı cisimleşmeleridir.
+Fark yalnızca bedeldedir: Prusya subay eğitimine yüz yıl yatırarak, İsrail askerliği topluma ya-
+yarak, Netflix yüksek maaş ve acımasız seçilimle satın alarak öder. Çözüm yakınsar, maliyet
+fonksiyonu ayrışır.
+Sonuç
+İki hat tek tezde birleşir: sosyo-teknik sistemlerin asıl varlığı kodda, prosedürde veya organizas-
+yon şemasında değil, bunları çevreleyen insan ağının örtük bilgisindedir. Dayanıklılık bu bilginin
+kriz anında seferber edilebilmesi, bakım zamana karşı korunması, kriz incelemesi kör noktalarının
+haritalanması, kaos mühendisliği deneysel sınanması, seçilim ve komuta doktrini ise örgütlenme-
+sidir. Naur’un teorisi ile rosh gadol aynı varlığın iki adıdır: dokümana aktarılamayan, yalnızca
+insanda yaşayan kavrayış.
+Culture Deck’in taklitçilerinin akıbeti bu tezi doğrular: cömert tazminat ve piyasa ücreti ayak-
+larını atlayıp yalnızca kolay işten çıkarmayı uygulayanlar, tasarlanan işi kopyalamış, yapılan işi
+kopyalayamamıştır. Dağıtık kontrol bir politika seti değil, birbirine bağımlı bir mekanizma bütü-
+nüdür: seçilim olmadan özgürlük, şeffaflık olmadan inisiyatif, öğrenme kültürü olmadan hata tole-
+ransı çalışmaz. Zekâyı kenara dağıtan sistem, kenardaki zekânın kalitesini üretecek mekanizmaya
+sahip olmak zorundadır; mekanizmasız kopyalanan model dağıtık kontrol değil, kontrolsüzlüktür.
+5
+
+-- 5 of 5 --

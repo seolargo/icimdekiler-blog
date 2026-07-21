@@ -1,0 +1,286 @@
+Yapay Zekâ Destekli Yazlm Geliştirmede Teknik Borç:
+Snrlar, Riskler ve Yapsal Bileşenler
+Ömer Faruk Yavuz
+Temmuz 2026
+Giriş
+Yazlm geliştirme süreçlerine yapay zekâ destekli araçlarn dahil olmas, üretim hzn belirgin
+biçimde artrmştr. Ancak bu dönüşüm, yazlm mühendisliğinin köklü problemlerinden biri olan
+teknik borç kavramn ortadan kaldrmamş; aksine bu kavramn niteliğini ve stratejik önemini
+değiştirmiştir. Bu çalşma, yapay zekâ destekli geliştirme ile teknik borç arasndaki ilişkiyi ince-
+lemekte; teknik borcun temel bileşenlerini tanmlamakta ve bu borcun yapay zekâ sistemlerinin
+üretkenliği üzerindeki snrlayc etkilerini tartşmaktadr.
+Temel tez şudur: Yapay zekâ, teknik borcu yüksek bir kod taban üzerinde de üretim yapabilir;
+fakat belirli bir eşikten sonra teknik borç, yalnzca insan geliştiricilerin değil, yapay zekâ sistemle-
+rinin de doğruluğunu, hzn ve güvenilirliğini snrlamaya başlar. Bu nedenle teknik borç, yapay
+zekâ çağnda yalnzca bir bakm maliyeti değil, insanmakine ortak üretim kapasitesini belirleyen
+stratejik bir değişken haline gelmiştir.
+Yapay Zekânn Kod Üretim Mekanizmas ve Teknik Borç
+Yapay zekâ destekli geliştirme araçlar, mevcut kod tabanndaki örüntülerden, soyutlamalardan
+ve mimari tercihlerden hareketle öneriler üretir. Bu mekanizma, kod tabannn kalitesi ile üretilen
+kodun kalitesi arasnda doğrudan bir bağmllk oluşturur. Kod tabannda yanlş soyutlamalar,
+tutarsz yaplar, gizli bağmllklar ve krlgan akşlar bulunduğunda, yapay zekâ bu problemleri
+çoğu zaman düzelterek değil, onlar temel alarak üretim yapar.
+Bu nedenle yapay zekâ, teknik borçlu bir sistemde ilk aşamada yüksek üretim hz sağlyor
+gibi görünebilir. Ancak zamanla mevcut bozuk yapnn üzerine yeni katmanlar eklenir ve sistemin
+toplam karmaşklğ artar. lk hz yanltcdr; çünkü üretimin hz ile üretimin sistem düzeyindeki
+doğruluğu birbirinden farkl ölçütlerdir.
+Yanlş Soyutlamalarn Öğrenilmesi
+Yapay zekâ, kod üretirken mevcut projedeki yaplara referans verir. Projede yanlş veya zayf
+soyutlamalar bulunuyorsa, model bunlar sistemin geçerli mimarisi olarak alglayabilir.
+Örneğin bir bileşen gereğinden fazla sorumluluk taşyorsa, yapay zekâ yeni bileşenleri de
+benzer şekilde tasarlama eğilimi gösterir. Bir servis ayn anda dş sistem çağrs yapyor, veri
+1
+
+-- 1 of 8 --
+
+dönüştürüyor, küresel durumu değiştiriyor ve arayüz davranşn etkiliyorsa, model bu yapy
+projenin standard olarak kabul edebilir. Bu durumda yapay zekâ yalnzca kod üretmekle kalmaz;
+mevcut mimari hatalar da yeniden üretir.
+Kötü Örüntülerin Çoğaltlmas
+Teknik borçlu sistemlerde kötü örüntüler genellikle tek bir noktada kalmaz; zamanla tekrar edi-
+lir, kopyalanr ve sistemin farkl bölgelerine yaylr. Yapay zekâ, kod tabanndaki tekrar eden
+örüntüleri güçlü sinyaller olarak okur. Dolaysyla kötü bir örüntü sistemde ne kadar yaygnsa,
+modelin onu doğru proje standard olarak yorumlama olaslğ o kadar artar.
+Bu durumun sonucu şu şekilde ifade edilebilir:
+Model, mevcut bozuk yapy temizlemek yerine, ayn yapnn yeni örneklerini üretir.
+Bu mekanizma, teknik borcun yalnzca varlğn sürdürmesine değil, daha yüksek bir hzla
+yaylmasna neden olabilir.
+Regression Riski
+Teknik borcu yüksek sistemlerde parçalar arasndaki ilişkiler açk değildir. Bir değişikliğin hangi
+ekran, servisi, durum alann veya kullanc akşn etkileyeceği kolayca öngörülemez. Bu koşul-
+larda yapay zekâ tarafndan yaplan bir değişiklik, yerel düzeyde doğru görünse bile sistemin
+başka bir bölgesinde beklenmeyen hatalara, yani regression'lara yol açabilir.
+Regression riski özellikle şu koşullarda artar:
+ sistemde gizli bağmllklarn bulunmas,
+ test kapsamnn zayf olmas,
+ iş kurallarnn açkça belgelenmemiş olmas,
+ ayn verinin farkl bağlamlarda farkl anlamlarla kullanlmas,
+ durum akşlarnn belirsiz olmas,
+ geçmiş snr durumlarnn kod içinde örtük biçimde gömülü kalmas.
+Bu nedenle yapay zekâ ile üretilen kodun güvenilirliği, yalnzca modelin kapasitesine değil,
+kod tabannn anlaşlabilirliğine de bağldr.
+Bağlam Penceresi Snr
+Yapay zekâ modelleri snrl bir bağlam penceresi içinde çalşr; yani ayn anda yalnzca belirli
+miktarda kodu, dokümantasyonu ve geçmiş bilgiyi dikkate alabilir. Teknik borcu düşük bir sis-
+temde bu snrllk büyük bir problem oluşturmayabilir; çünkü sistemin snrlar, sorumluluklar
+ve ilişkileri görece nettir. Ancak teknik borcu yüksek bir sistemde gerçek davranş birçok dosyaya,
+geçmiş kararlara, gizli durumlara ve dolayl bağmllklara yaylmştr.
+Bu koşullarda modelin bağlam penceresi yetersiz kalr ve değiştirilen kodun sistemin diğer
+bölgeleriyle ilişkisi tam olarak görülemez. Sonuç şu şekilde özetlenebilir:
+2
+
+-- 2 of 8 --
+
+Model, yerel düzeyde doğru görünen değişiklikler üretebilir; fakat sistem düzeyindeki
+etkileri gözden kaçrabilir.
+Değişikliklerin Etki Alannn Belirsizliği
+Teknik borçlu sistemlerde değişikliklerin etki alan öngörülemezdir. Küçük bir güncelleme, bek-
+lenmedik biçimde başka bir modülü bozabilir. Örneğin bir fonksiyondaki veri format değişikliği
+yalnzca o fonksiyonu değil; ona bağl bileşenleri, testleri, önbellekleme mekanizmasn, istemci
+tarafndaki kalc kaytlar, sunucu tarafndaki veri eşlemesini veya kullanc akşlarn da etkile-
+yebilir.
+Bu durum insan geliştirici için de zorlaycdr; ancak yapay zekâ için daha kritiktir. Çünkü
+model, sistemin tarihsel bağlamn ve organizasyonel hafzasn doğal olarak taşmaz; kendisine
+açkça verilmeyen bağmllklar göremez. Dolaysyla teknik borç arttkça, modelin yaptğ deği-
+şikliklerin güvenilirliği azalr.
+Test Güvenilirliği ve Geri Bildirim Mekanizmas
+Yapay zekâ destekli geliştirmede testler yalnzca bir kalite güvence arac değildir; ayn zamanda
+modelin temel geri bildirim mekanizmasdr. Güvenilir testler mevcutsa, model yaptğ değişikliğin
+sistemi bozup bozmadğn daha net değerlendirebilir. Ancak testler eksik, krlgan, yüzeysel veya
+güncel değilse, model sağlkl geri bildirim alamaz.
+Bu koşullarda model şu sorular yantlayamaz:
+ yaplan değişiklik gerçekten doğru mu,
+ yalnzca mevcut testler mi geçirildi,
+ kritik bir kullanc akş bozuldu mu,
+ geçmiş bir snr durumu ihlal edildi mi,
+ sistem davranş beklendiği gibi korundu mu.
+Testlerin güvenilir olmadğ sistemlerde model, bir noktadan sonra işlevsel olarak körleşir: kod
+üretmeye devam eder, fakat ürettiği kodun sistem üzerindeki gerçek etkisini değerlendiremez.
+Yapay Zekâ Teknik Borcu Ortadan Kaldrmaz
+Yapay zekâ, teknik borcu otomatik olarak çözmez. Teknik borç; mimari, bağlam, sorumluluk,
+bağmllk ve karar hafzas problemidir. Yapay zekâ bu alanlarn her birinde yardmc olabilir;
+fakat sistemin yapsal problemleri çözülmeden yalnzca yeni kod üretmek çoğu zaman yeterli
+değildir.
+Teknik borcun yüksek olduğu koşullarda yapay zekâ genellikle iki sonuçtan birini üretir:
+ teknik borcu geçici olarak maskeler,
+ teknik borcun daha hzl büyümesine neden olur.
+3
+
+-- 3 of 8 --
+
+Maskeleme etkisi, ksa vadede yeni özelliklerin eklenmiş görünmesinden kaynaklanr. Büyütme
+etkisi ise mevcut bozuk örüntülerin üzerine yeni kod katmanlarnn eklenmesinden doğar. Bu
+nedenle yapay zekâ ile geliştirilen sistemlerde teknik borç yönetimi önemini kaybetmez; aksine
+daha kritik hale gelir.
+Teknik Borcun Temel Bileşenleri
+Teknik borç, yalnzca kötü yazlmş kod anlamna gelmez. Daha kapsayc bir tanmla teknik borç;
+sistemin iç yapsnda biriken tutarszlklarn, belirsizliklerin, gizli bağmllklarn ve kontrolsüz
+yan etkilerin toplamdr. Bu borç arttkça sistemin davranşn anlamak, değiştirmek, test etmek
+ve güvenle geliştirmek zorlaşr.
+Tutarszlk
+Tutarszlk, sistemin farkl bölgelerinde ayn problemin farkl yöntemlerle çözülmesi durumudur.
+Bir modülde belirli bir mimari kural uygulanrken başka bir modülde farkl bir yaklaşm kulla-
+nlyorsa, sistemin zihinsel modeli bozulur.
+Örneğin hata yönetimi bir modülde merkezi bir yardmc yap üzerinden yürütülürken, başka
+bir modülde doğrudan yerel yakalama bloklaryla, bir diğerinde ise sessizce yutulan hatalarla ele
+alnyorsa, sistem tutarsz hale gelmiş demektir. Geliştiricinin bu projede doğru yöntem hangisi
+sorusunu sk sormas, teknik borcun yalnzca kod düzeyinde değil, mimari anlayş düzeyinde de
+biriktiğinin göstergesidir.
+Gizli Bağmllk
+Gizli bağmllk, bir parçann başka bir parçaya açkça görünmeyen biçimde bağl olmasdr. Kod
+ilk bakşta bağmsz görünür; fakat gerçekte belirli bir çalşma sras, belirli bir durum, belirli bir
+ortam değişkeni, belirli bir sunucu yant veya önceki bir işlemin yan etkisi olmadan çalşmaz.
+Örneğin bir bileşen, doğrudan parametre alyor gibi görünürken, arka planda küresel durum-
+daki eski bir değere, istemci tarafnda kalc olarak saklanmş bir kayda veya daha önce yürü-
+tülmüş bir işlemin yan etkisine bağml olabilir. Bu durumda bağlantlar görünmez hale gelir ve
+geliştirici neyin neye bağl olduğunu izleyemez.
+Krlgan Akş
+Krlgan akş, sistemin yalnzca belirli koşullar altnda doğru çalşmas durumudur. Akşn küçük
+bir parças değiştiğinde beklenmeyen noktalar bozuluyorsa, akş krlgandr.
+Örneğin kullanc belirli bir ekrana yalnzca belirli bir sradan geçerek ulaştğnda sistem doğru
+çalşyor, fakat doğrudan erişimde durum eksik kalyorsa; bir sunucu yant geciktiğinde yükleme
+göstergesi kapanmyorsa; bir düğmeye ardşk iki kez basldğnda yinelenen kayt oluşuyorsa akş
+krlgandr. Krlgan akşlarn ortak özelliği şudur:
+Sistem çalşyor görünür; fakat güvenilir değildir.
+Bu tür akşlarda problem çoğu zaman sözdizimsel değildir; akşn tasarmnda yeterli snrlarn
+ve garantilerin bulunmamasdr.
+4
+
+-- 4 of 8 --
+
+Belirsiz Mimari
+Belirsiz mimari, sistemin hangi parçalarnn hangi sorumluluklara sahip olduğunun net olmamas
+durumudur. Bir bileşen ayn anda arayüz çiziyor, dş sistem çağrs yapyor, durumu değiştiriyor,
+doğrulama yürütüyor ve iş kural çalştryorsa mimari bulanklaşr.
+Bu durumda sistemde şu sorumluluk ayrmlar kaybolur:
+ arayüz sorumluluğu,
+ durum yönetimi sorumluluğu,
+ dş sistem iletişimi sorumluluğu,
+ iş kural sorumluluğu,
+ hata yönetimi sorumluluğu,
+ veri dönüştürme sorumluluğu.
+Mimari belirsizleştiğinde yeni özellik eklemek zorlaşr; çünkü geliştirici kodu nereye yerleşti-
+receğini bilemez. Bu belirsizlik zamanla rastgele eklemelere, tekrar eden çözümlere ve daha fazla
+teknik borca yol açar.
+Eski Varsaymlar
+Eski varsaymlar, sistemin geçmişte geçerli olan fakat artk geçerliliğini yitirmiş kabuller üzerinde
+çalşmaya devam etmesidir. Örneğin başlangçta tek kullanc için tasarlanmş bir sistem çok
+kullancl hale gelmiş, fakat veri modeli hâlâ tek kullanc varsaymn taşyor olabilir. Benzer
+biçimde, başlangçta tek bir veri formatn destekleyen bir sistem zamanla farkl format ve girdi
+türlerini desteklemeye başlamş, fakat eski servisler ilk formatn varsaymlaryla yazlmş olabilir.
+Eski varsaymlarn tehlikesi, kodda açkça görünmemelerinden kaynaklanr; sistemin davra-
+nşn içeriden ve sessizce belirlerler.
+Kontrolsüz Yan Etkiler
+Yan etki, bir işlemin kendi ana sonucunun dşnda sistemde başka bir değişiklik üretmesidir. Her
+yan etki zararl değildir; ancak kontrolsüz, belirsiz ve rastgele yan etkiler ciddi teknik borç üretir.
+Örneğin yalnzca veri getirmesi beklenen bir fonksiyon, ayn zamanda küresel durumu de-
+ğiştiriyor, istemci tarafnda kalc kayt yazyor, başka bir olay tetikliyor veya arayüzde bildirim
+gösteriyorsa artk saf değildir; çağrlmas sistemde öngörülemeyen sonuçlar doğurur. Bu koşul-
+larda geliştiricinin karşlaştğ temel risk şudur: yalnzca bir fonksiyon çağrlmştr, fakat sistemin
+başka bir bölgesi bozulmuştur. Kontrolsüz yan etkiler sistemin tahmin edilebilirliğini azaltr ve
+test yazmn zorlaştrr; çünkü tek bir davranş test edilirken başka davranşlar da tetiklenir.
+Karar Hafzasnn Kayb
+Teknik borcun en tehlikeli biçimlerinden biri, bir kodun neden o şekilde yazldğnn artk bi-
+linmemesidir. Kod çalşyor olabilir; fakat arkasndaki karar kaybolmuştur. Bu durumda ekip,
+5
+
+-- 5 of 8 --
+
+yapnn gerçekten gerekli olup olmadğn, hangi hatay engellediğini veya hangi geçmiş ihtiyaca
+yant verdiğini bilmediği için kodu değiştirmekten kaçnr.
+Bu tür kodlar sistemde dokunulmaz bölgeler oluşturur. Bir projede buna dokunmayalm, bir
+şeyleri bozabilir ifadesi sk duyuluyorsa, teknik borç artk yalnzca teknik bir problem değil,
+organizasyonel hafza problemine de dönüşmüştür.
+Teknik Borcun Yapay Zekâ Destekli Süreçte Görünür Hale Gelmesi
+Yapay zekâ destekli geliştirme süreçlerinde teknik borcun etkisi başlangçta çoğu zaman hisse-
+dilmez; hatta ilk aşamada model, borçlu sistemlerde bile yüksek üretim hz sağlayabilir. Yeni
+özellikler hzla eklenir, tekrar eden kodlar hzla üretilir ve ekip belirgin bir verimlilik artş yaşa-
+dğn düşünebilir.
+Ancak sistem büyüdükçe bu ilk hzn snrlar belirginleşir. Kod taban karmaşklaştkça, mi-
+mari tutarszlklar arttkça ve gizli bağmllklar çoğaldkça modelin performans düşmeye başlar.
+Bu aşamada tipik olarak şu belirtiler gözlemlenir:
+ modele verilen talimatlar giderek uzar,
+ bağlam yönetimi karmaşklaşr,
+ ayn hata tekrar tekrar ortaya çkar,
+ model eski ve kötü örüntüleri kopyalar,
+ regression says artar,
+ küçük değişiklikler beklenmeyen bölgeleri bozar,
+ değişikliklerin etki alan öngörülemez hale gelir.
+Bu tablo, teknik borcun arka planda duran bir kalite problemi olmaktan çkp, yapay zekâ
+destekli geliştirme sürecinin verimliliğini doğrudan snrlayan bir engel haline geldiğini gösterir.
+Yapay Zekâ Performansn Düşüren Teknik Borç Türleri
+Yapay zekâ, kod tabanndaki düzenli örüntülerden, isimlendirme standartlarndan, veri akşlarn-
+dan ve mimari snrlardan faydalanarak öneri üretir. Dolaysyla sistem ne kadar tutarlysa model
+o kadar etkili çalşr. Buna karşlk aşağdaki koşullarda model performans belirgin biçimde düşer:
+ ayn durumun birden fazla kaynağnn bulunmas,
+ isimlendirme standardnn tutarsz olmas,
+ örtük yan etkilerin varlğ,
+ bileşen sorumluluklarnn belirsizliği,
+ iş kurallarnn arayüz katmanna gömülmesi,
+6
+
+-- 6 of 8 --
+
+ testlerin kararsz davranmas,
+ ayn işin birden fazla farkl gerçekleştirimle yaplmas,
+ geçici çözümlerin kalc hale gelmesi,
+ veri akşnn izlenememesi.
+Bu problemlerin ortak noktas, sistemin okunabilirliğini ve tahmin edilebilirliğini azaltmala-
+rdr. nsan geliştirici için zorlayc olan bu koşullar, yapay zekâ için daha da kstlaycdr; çünkü
+model, sistemin gerçek niyetini değil, büyük ölçüde mevcut kod yapsndan çkardğ örüntüleri
+izler.
+Tekil Doğruluk Kaynağnn Yokluğu
+Ayn verinin sistemde birden fazla yerde, farkl biçimlerde tutulmas hem insan hem de model
+için temel bir belirsizlik üretir: gerçek kaynak hangisidir? Bu sorunun yant net değilse, model
+yanlş durum alann güncelleyebilir, kullanlmayan bir alan düzeltebilir veya gerçek kullanc
+akşn etkilemeyen bir değişiklik yapabilir. Bu nedenle tekil doğruluk kaynağ ilkesi, yapay zekâ
+destekli geliştirmede daha da kritik hale gelir.
+Tutarsz simlendirme
+simlendirme, kod tabannn anlam sistemidir. Ayn kavramn farkl bölgelerde farkl adlarla tem-
+sil edilmesi, bunlarn gerçekten farkl kavramlar m yoksa ayn alan nesnesinin farkl adlar m
+olduğu konusunda belirsizlik üretir. Model bu belirsizlikte yanlş eşleştirmeler yapabilir. Dolay-
+syla tutarl isimlendirme yalnzca okunabilirlik sağlamaz; model için anlam kararllğ üretir.
+Kararsz Testler
+Kararsz test, ayn koşullarda bazen geçen bazen başarsz olan testtir; güvenilir geri bildirim
+üretmez. Testler güvenilir değilse, test başarsz olduğunda gerçekten kod mu bozuk, yoksa
+test mi güvenilmez sorusu yantlanamaz. Bu belirsizlik hem insan geliştiriciyi hem de modeli
+yavaşlatr ve geri bildirim döngüsünün değerini düşürür.
+Geçici Çözümlerin Kalclaşmas
+Geçici çözümler çoğu zaman hz kazanmak amacyla eklenir; ancak belgelenmez, testle güvence
+altna alnmaz ve zamannda temizlenmezse kalc teknik borca dönüşür. Model, böyle bir çö-
+zümün neden var olduğunu bilemez; onu gereksiz görüp kaldrabilir ya da tersine, doğru örüntü
+sanp sistemin diğer bölgelerine yayabilir. Bu nedenle geçici çözümler açkça işaretlenmeli ve
+izlenebilir kaytlarla takip edilmelidir.
+Sektörel Krlma: Kötü Kodun Yeni Maliyeti
+Yazlm sektöründe önemli bir krlma yaşanmaktadr. Geçmişte kötü kodun temel sonucu insan
+geliştiricinin yavaşlamasyd: kod taban karmaşklaştkça geliştirici daha fazla zaman harcar,
+7
+
+-- 7 of 8 --
+
+daha çok hata yapar ve değişikliklerden kaçnrd. Günümüzde ise kötü kod yalnzca insan değil,
+yapay zekâ destekli geliştirme sistemlerini de yavaşlatmaktadr.
+Bu farkn stratejik anlam şudur:
+Geçmişte kötü kod, insan geliştiricinin üretkenliğini düşürüyordu. Bugün kötü kod,
+yapay zekâ destekli geliştirme kapasitesinin doğruluğunu, hzn ve güvenilirliğini de
+düşürmektedir.
+Geçmişte teknik borcun temel sorusu insan geliştirici bu kodu anlayabiliyor mu iken, bugün
+bu soru genişlemiştir: insan ve yapay zekâ bu sistem üzerinde birlikte akl yürütebiliyor mu?
+Modern yazlm geliştirmede verimlilik artk yalnzca insann kodu tek başna anlamasna değil,
+insan ile yapay zekânn ortak çalşma kapasitesine bağldr.
+Sonuç
+Yapay zekâ, yazlm üretim hzn artran güçlü bir araçtr; ancak teknik borcu ortadan kaldrmaz.
+Aksine, teknik borçlu sistemlerde ya borcu geçici olarak maskeler ya da onun daha hzl büyü-
+mesine araclk eder. Bunun nedeni, modelin mevcut kod tabanndaki örüntüleri temel almasdr:
+bozuk örüntüler, model için yanlş öğrenme sinyalleri üretir.
+Teknik borcun bileşenleri  tutarszlk, gizli bağmllk, krlgan akş, belirsiz mimari, eski
+varsaymlar, kontrolsüz yan etkiler ve karar hafzasnn kayb  yalnzca insan üretkenliğini
+değil, yapay zekâ destekli üretim kapasitesini de snrlar. Bağlam penceresi snrllğ ve test
+güvenilirliğine bağmllk, bu snrlamay daha da belirginleştirir.
+Sonuç olarak yapay zekâ çağnda teknik borç, klasik anlamyla bir bakm maliyeti olmaktan
+çkmş; insanmakine ortak akl yürütme kapasitesini belirleyen stratejik bir engel haline gelmiş-
+tir. Bu nedenle yapay zekâ ile geliştirilen sistemlerde teknik borç yönetimi, önemini yitirmek bir
+yana, geliştirme stratejisinin merkezî unsurlarndan biri olarak ele alnmaldr.
+8
+
+-- 8 of 8 --

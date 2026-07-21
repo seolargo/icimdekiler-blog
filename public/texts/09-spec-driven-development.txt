@@ -1,0 +1,261 @@
+Spec-Driven Development:
+Yapay Zekâ Çağnda Davranş Tanm Odakl Yazlm
+Geliştirme
+Ömer Faruk Yavuz
+Temmuz 2026
+Giriş
+Spec-driven development, yani şartname veya davranş tanm odakl geliştirme; yazlm geliş-
+tirme sürecinde kod yazmadan önce sistemin nasl davranmas gerektiğini açk biçimde tanmla-
+maya dayanan bir yaklaşmdr. Bu yaklaşmda asl amaç, yazlmn yalnzca teknik olarak çalş-
+masn sağlamak değildir; daha önemli amaç, sistemin beklenen davranşlarn, snrlarn, hata
+durumlarn, kullanc akşlarn ve kalite beklentilerini önceden netleştirmektir.
+Klasik yazlm geliştirme sürecinde geliştirici çoğu zaman önce kod yazar, sonra gerekirse
+dokümantasyon ekler. Spec-driven development ise bu sray tersine çevirir:
+Önce sistemin ne yapacağ tanmlanr, sonra bu tanma uygun kod üretilir.
+Bu çalşma, spec-driven development yaklaşmn dört boyutta incelemektedir: klasik yakla-
+şmla karşlaştrma, spec kavramnn içeriği ve nitelikleri, yaklaşmn yapay zekâ destekli geliştir-
+medeki özel rolü ile doğru ve yanlş uygulama biçimleri. Çalşmann temel sav şudur: yapay zekâ
+çağnda asl mesele kodu kimin yazdğ değil, sistemin ne yapmas gerektiğinin ne kadar doğru
+tarif edildiğidir.
+Klasik Geliştirme Yaklaşm ve Snrlar
+Klasik geliştirme yaklaşm çoğu zaman şu srayla işler:
+Ihtiyac ortaya cikar
+|
+v
+Gelistirici kod yazmaya baslar
+|
+v
+Kod calisir hale getirilir
+|
+v
+Testler ve dokumantasyon sonradan eklenir
+1
+
+-- 1 of 8 --
+
+Bu yaklaşm pratik ve hzl görünebilir; ancak özellikle karmaşk sistemlerde belirli problemler
+doğurur:
+ sistem davranş baştan net değildir,
+ snr durumlar geç fark edilir,
+ hata durumlar eksik düşünülür,
+ iş beklentisi ile kod davranş ayrşabilir,
+ test yazmak sonradan zorlaşr,
+ dokümantasyon koddan kopuk hale gelir.
+Bu koşullarda kod çalşyor gibi görünse bile, sistemin gerçekten doğru davranp davranmadğ
+belirsiz kalabilir.
+Spec-Driven Yaklaşmn Yaps
+Spec-driven development süreci şu şekilde kurar:
+Sistem davranisi tanimlanir
+|
+v
+Kabul kriterleri yazilir
+|
+v
+Arayuz, durum ve hata kosullari netlestirilir
+|
+v
+Kod bu tanima gore uretilir
+|
+v
+Testler bu tanima gore dogrulama yapar
+Bu yaklaşmda spec, yalnzca açklayc bir doküman değildir; sistemin davranş kontratdr:
+Spec, yazlmn ne yapacağn ve ne yapmayacağn belirleyen davranş haritasdr.
+Spec'in çeriği
+Nitelikli bir spec genellikle şu konular kapsar:
+ özelliğin amac,
+ kullanc senaryolar,
+ kabul kriterleri,
+2
+
+-- 2 of 8 --
+
+ girdi ve çkt yaplar,
+ arayüz sözleşmeleri,
+ arayüz durumlar,
+ yükleme durumlar,
+ hata durumlar,
+ boş durumlar,
+ yetki ve izin kurallar,
+ snr durumlar,
+ sistemin yapmamas gereken davranşlar,
+ test edilmesi gereken durumlar.
+Belirsiz ve Nitelikli Tanm Karşlaştrmas
+Fark somutlaştrmak için bir giriş ekran örneği ele alnabilir. Belirsiz bir istek şu biçimdedir:
+Giriş sayfas yap.
+Bu ifade son derece belirsizdir: yapay zekâ veya insan geliştirici böyle bir istekle bir ekran
+üretebilir; fakat sistemin doğru davranşlarn eksik brakabilir. Nitelikli bir spec ise şöyle görünür:
+Giriş ekran e-posta ve şifre alanlarndan oluşmaldr. E-posta boş braklrsa kullan-
+cya hata mesaj gösterilmelidir. ifre alan boşsa form gönderilmemelidir. Gönderim
+srasnda düğme devre dş kalmal ve yükleme durumu gösterilmelidir. Sunucudan
+yetkisiz erişim yant dönerse kullancya geçersiz giriş bilgisi mesaj gösterilmelidir.
+Başarl girişten sonra kullanc ana panele yönlendirilmelidir.
+kinci tanm yalnzca bir ekran istemez; sistem davranşn tarif eder. Belirsiz tanmn açk
+braktğ sorular  hangi alanlar olacak, doğrulama nasl yaplacak, hata mesajlar ne olacak,
+yükleme durumu gösterilecek mi, başarl ve başarsz girişte ne olacak, kullanc zaten giriş
+yapmşsa ne olacak  nitelikli tanmda önceden yantlanmştr.
+Neden Sadece Kod Yazmak Yetmez?
+Kod, sistemin görünen gerçekleştirimidir. Ancak koddan önce yantlanmas gereken daha temel
+sorular vardr:
+ Bu özellik tam olarak ne yapacak?
+ Hangi kullanc bunu kullanacak?
+ Hangi durumda başarl saylacak?
+3
+
+-- 3 of 8 --
+
+ Hangi durumda hata verecek?
+ Kullanc yanlş veri girerse ne olacak?
+ Sistem yavaş yant verirse arayüz nasl davranacak?
+ Kullancnn yetkisi yoksa ne gösterilecek?
+ Veri yoksa ekran nasl görünecek?
+ Dş sistem başarsz olursa sistem nasl toparlanacak?
+Bu sorular yantlanmadan kod yazldğnda, yazlm hzl üretilmiş gibi görünür; fakat çoğu
+zaman sistem davranş eksik kalr. Spec-driven development'n temel iddias budur:
+Kod yazmadan önce davranş netleştirilmelidir.
+Spec ile Klasik Dokümantasyon Arasndaki Fark
+Spec-driven development, klasik anlamda uzun ve statik dokümantasyon yazmak anlamna gel-
+mez. Klasik dokümantasyon çoğu zaman uzun açklamalar içerir, koddan kopuk kalabilir, zamanla
+güncelliğini kaybeder ve geliştiriciler tarafndan nadiren okunur.
+Nitelikli bir spec ise farkldr:
+ ksa ve nettir,
+ davranş odakldr,
+ test edilebilir,
+ yapay zekâya doğrudan verilebilir,
+ kabul kriteri olarak kullanlabilir,
+ kodla birlikte güncellenebilir,
+ sistemin doğruluğunu ölçmeye yarar.
+Bu nedenle spec, ölü bir doküman değil, yaşayan bir davranş kontrat olmaldr.
+Spec ve Test lişkisi
+Spec-driven development doğal olarak test odakl düşünmeyi destekler; çünkü nitelikli bir spec,
+test edilebilir ifadelerden oluşur. Örneğin sunucudan yetkisiz erişim yant dönerse kullancya
+geçersiz giriş bilgisi mesaj gösterilmelidir biçimindeki bir spec maddesi, doğrudan bir davranş
+testine dönüştürülebilir: kullanc yanlş giriş bilgisi gönderdiğinde ve sunucu yetkisiz erişim yant
+döndürdüğünde, ekranda geçersiz giriş bilgisi mesaj görünmelidir.
+Bu dönüşüm zinciri şu şekilde gösterilebilir:
+4
+
+-- 4 of 8 --
+
+Spec maddesi
+|
+v
+Kabul kriteri
+|
+v
+Test senaryosu
+|
+v
+Gerceklestirim dogrulamasi
+Böylece spec, testlerin kaynağ haline gelir: her spec maddesi bir kabul kriterine, her kabul
+kriteri bir test senaryosuna karşlk gelir ve gerileme hatalar bu zincir üzerinden yakalanabilir.
+Yapay Zekâ Çağnda Spec-Driven Development
+Yapay zekâ destekli yazlm geliştirmede spec-driven development daha da önemli hale gelmiştir;
+çünkü yapay zekâ, verilen talimata göre kod üretir. Talimat belirsizse, üretilen kod da belirsiz,
+eksik veya yanlş olabilir. Yapay zekâ için spec şu işlevi görür:
+Spec, yapay zekânn kod üretirken izleyeceği davranş mimarisidir.
+Yapay zekâ destekli süreçte spec, şu zincirin başlangc olabilir:
+Spec
+|
+v
+Yapay zeka ile kod uretimi
+|
+v
+Test uretimi
+|
+v
+Kod incelemesi
+|
+v
+Davranis dogrulamasi
+Yani iyi yazlmş bir spec yalnzca kod üretmek için kullanlmaz; ayn zamanda test üretmek,
+kabul kriterleri belirlemek ve gerileme hatalarn yakalamak için de kullanlabilir. Bu çok işlevlilik
+şu şekilde özetlenebilir:
+Spec; yapay zekâ için talimat, geliştirici için kontrol listesi, test sistemi için doğrulama
+kriteridir.
+5
+
+-- 5 of 8 --
+
+Spec ve Davranş Geometrisi
+Spec-driven development, bir sistemin davranş geometrisini önceden tarif etme çabas olarak da
+görülebilir. Burada davranş geometrisi şu anlama gelir:
+Sistemin hangi durumda hangi yöne akacağn, hangi snrlar içinde çalşacağn ve
+hangi durumlarda nasl tepki vereceğini belirleyen yap.
+Bir sistemin davranş geometrisi net değilse, kod yazmak yalnzca belirsizliği hzlandrr: yapay
+zekâ bu durumda daha hzl üretim yapar, fakat ürettiği şey daha hzl kaos da olabilir. Bu nedenle
+yapay zekâ çağnda şu ilke belirleyicidir:
+Yapay zekâ kodu hzl yazabilir; fakat sistemin davranş geometrisini insan tarif et-
+melidir.
+Geliştiricinin Rolündeki Dönüşüm
+Yapay zekâ öncesi dönemde geliştiricinin temel değeri çoğu zaman kod yazma becerisiyle ölçülü-
+yordu. Yapay zekâ destekli geliştirmede ise geliştiricinin değeri şu alanlara kaymaktadr:
+ doğru problemi tanmlamak,
+ sistem snrlarn belirlemek,
+ davranşlar açk ifade etmek,
+ yapay zekânn ürettiği kodu denetlemek,
+ mimari kaliteyi korumak,
+ test edilebilirlik sağlamak,
+ snr durumlarn görmek,
+ ürün hede ile teknik çözümü hizalamak.
+Bu dönüşüm geliştiricinin önemsizleşmesi anlamna gelmez; aksine geliştiricinin rolü daha
+soyut, daha mimari ve daha karar odakl hale gelir. Geliştirici, yalnzca gerçekleştirim yapan kişi
+olmaktan çkar; sistemin davranşn tasarlayan ve doğruluğunu denetleyen kişiye dönüşür.
+Yaklaşmn Tartşmal Yönü
+Spec-driven development, özellikle yapay zekâ çağnda tartşmaldr; çünkü birçok geliştirici için
+kod yazmak işin en keyii ksmdr. Spec yazmak ise skc, yavaşlatc ve bürokratik görünebilir.
+Bu itiraz şu şekilde özetlenebilir:
+Neden işin eğlenceli ksm olan kodlamay yapay zekâya verip, geliştiriciye doküman
+yazmay brakyoruz?
+6
+
+-- 6 of 8 --
+
+Bu itiraz hakl bir taraf taşr: eğer spec-driven development yalnzca geliştiriciye daha fazla
+doküman yazdrmak anlamna gelirse, yaklaşm verimsiz ve motivasyon krc hale gelir. Ancak
+doğru uygulandğnda spec yazmak, klasik doküman yazmak değildir; sistemin davranşn net-
+leştiren ksa, test edilebilir ve üretime bağl bir yap kurmaktr.
+Doğru ve Yanlş Uygulama Karşlaştrmas
+Yanlş Uygulama
+Yaklaşmn kötü uygulanmas şu görünümü alr:
+ uzun ve okunmayan dokümanlar yazlr,
+ spec koddan ayr yaşar,
+ geliştirici yalnzca dokümantasyon işçisi gibi kullanlr,
+ yapay zekâ kontrolsüz kod üretir,
+ testler spec ile bağlantl değildir,
+ doküman güncel kalmaz.
+Bu uygulama biçimi ek riskler de üretir: süreç gereksiz bürokratikleşir, gerçek ihtiyaçlar yerine
+kâğt üzerindeki tanmlar takip edilir ve yaratclk ile hzl deneme kültürü zayar.
+Doğru Uygulama
+Doğru uygulama ise şu ilkelere dayanr:
+ spec ksa ve davranş odakldr,
+ her spec maddesi test edilebilir,
+ yapay zekâ kod üretirken spec'i kullanr,
+ testler spec'ten türetilir,
+ geliştirici kodu ve davranş denetler,
+ spec sistemin yaşayan kontrat haline gelir.
+ki uygulama biçimi arasndaki ayrt edici ölçüt şudur: spec, üretim sürecinin dşnda duran bir
+rapor mudur, yoksa üretim sürecinin içinde işleyen bir kontrat mdr? Birinci durumda yaklaşm
+yüke, ikinci durumda kaldraca dönüşür.
+7
+
+-- 7 of 8 --
+
+Sonuç
+Spec-driven development, doğru anlaşldğnda yazlm geliştirmeyi yavaşlatan bir dokümantas-
+yon yükü değildir; aksine, sistemin ne yapacağn netleştirerek hem insan geliştiricinin hem de
+yapay zekâ aracnn daha doğru üretim yapmasn sağlar. Yaklaşm şu şekilde tanmlanabilir:
+Spec-driven development, kod yazmadan önce sistemin davranşn, snrlarn, hata
+durumlarn ve kabul kriterlerini tanmlama yaklaşmdr.
+Yapay zekâ çağndaki daha özel tanm ise şudur:
+Yapay zekâ destekli spec-driven development; insann sistem davranşn tarif ettiği,
+yapay zekânn bu tarife göre kod ürettiği ve geliştiricinin üretilen kodu kalite, mimari
+ve doğruluk açsndan denetlediği geliştirme yaklaşmdr.
+Yaklaşmn başars, spec'in uzun, soyut ve güncellenmeyen bir doküman olmamasna bağldr:
+spec ksa, davranş odakl, test edilebilir ve kodla birlikte yaşayan bir yap olmaldr. Sonuç olarak
+yapay zekâ çağnda asl mesele kodu kimin yazdğ değildir; asl mesele, sistemin ne yapmas
+gerektiğinin ne kadar doğru tarif edildiğidir:
+Yapay zekâ gerçekleştirimi hzlandrabilir; fakat doğru sistemi tarif etmek hâlâ insann
+sorumluluğundadr.
+8
+
+-- 8 of 8 --

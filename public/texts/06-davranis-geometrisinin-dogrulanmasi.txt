@@ -1,0 +1,307 @@
+Sistemin Davranş Geometrisinin Doğrulanmas:
+Modern Test Mühendisliğine Yapsal Bir Bakş
+Ömer Faruk Yavuz
+Temmuz 2026
+Giriş
+Modern yazlm sistemlerinde test kavram, yalnzca tek tek özelliklerin doğruluğunu kontrol et-
+mekten ibaret değildir. Giderek daha önemli hale gelen konu, sistemin bütünsel davranş yapsnn
+kararl olup olmadğn doğrulamaktr.
+Bu bağlamda davranş geometrisi kavram; bir sistemin durum geçişlerini, veri akşlarn,
+zamanlama ilişkilerini, bağmllk yaplarn, hata yaylmn ve geri toparlanma mekanizmalarn
+bir bütün olarak incelemeyi ifade eder. Dolaysyla modern test yaklaşm yalnzca girdi doğru
+çkty üretiyor mu sorusunu değil, ayn zamanda şu soruyu da araştrmaktadr:
+Sistem zaman içinde nasl davranyor?
+Bu çalşma, davranş geometrisi kavramn alt doğrulama boyutu üzerinden incelemektedir:
+durum geometrisi, akş geometrisi, zaman geometrisi, ölçek geometrisi, bilgi geometrisi ve insan
+davranş geometrisi. Ardndan büyük sistemlerde beliren davranş (emergent behavior) problemi
+tartşlmakta ve test mühendisliğinin bir sistem bilimine dönüşme eğilimi değerlendirilmektedir.
+Durum Geometrisinin Doğrulanmas
+Bir uygulamada durum yönetimi, çoğu zaman davranş geometrisinin merkezinde yer alr. Kötü
+yaplandrlmş sistemlerde şu problemler gözlemlenir:
+ durum farkl bölgelere yaylr,
+ gizli yan etkiler oluşur,
+ olay zincirleri izlenemez hale gelir,
+ ayn olay farkl sonuçlar üretmeye başlar.
+Tipik bir problemli zincir şu şekilde gösterilebilir:
+Component A changes store
+|
+v
+1
+
+-- 1 of 8 --
+
+Component C rerenders
+|
+v
+Hidden effect fires
+|
+v
+API call happens
+|
+v
+Modal closes
+Bu tür yaplarda davranş deterministik olmaktan çkar: bir bileşendeki değişiklik, görünürde
+ilgisiz bir arayüz öğesinin kapanmasyla sonuçlanabilir ve bu zincirin ara halkalar koddan oku-
+namaz. Bu nedenle durum geometrisini doğrulayan test türleri kritik hale gelir:
+ durum testleri,
+ indirgeyici (reducer) testleri,
+ geçiş (transition) testleri,
+ olay sralama testleri.
+Bu testlerin ortak amac, durumun kim tarafndan, hangi koşulda ve hangi srayla değiştiril-
+diğini davranşsal düzeyde sabitlemektir.
+Akş Geometrisinin Doğrulanmas
+Modern uygulamalar yalnzca ekranlardan değil, kullanc akşlarndan oluşur. Örneğin bir kayt
+ve karşlama akş şu şekilde tasarlanabilir:
+Login
+|
+v
+Verify
+|
+v
+Profile
+|
+v
+Dashboard
+Ancak kötü davranş geometrisinde bu akşn bütünlüğü bozulabilir:
+ geri gezinme davranş bozulabilir,
+ sayfa yenileme işlemi durum kaybna yol açabilir,
+2
+
+-- 2 of 8 --
+
+ yarş koşullar oluşabilir,
+ yükleme durumu kararszlaşabilir.
+Bu nedenle gezinme testleri, yönlendirme testleri, uçtan uca akş testleri ve sabrsz kullanc
+testleri yalnzca özellik doğrulamaz; akş geometrisinin bütünlüğünü de doğrular. Akş testlerinin
+ayrt edici özelliği, tek bir ekrann değil, ekranlar aras geçişlerin ve bu geçişlerde taşnan durumun
+snanmasdr.
+Zaman Geometrisinin Doğrulanmas
+Modern sistemlerde zaman ilişkileri kritik hale gelmiştir. Özellikle şu mekanizmalarn bulunduğu
+sistemlerde zaman, davranşn belirleyici boyutudur:
+ kesilen bağlantnn yeniden kurulmas,
+ yeniden deneme mantğ,
+ girdi geciktirme (debounce),
+ zaman aşm,
+ eşzamanl güncellemeler.
+Bu koşullarda temel soru artk şudur:
+Sistem zaman basks altnda nasl davranyor?
+Zaman geometrisini doğrulayan test türleri şunlardr:
+ eşzamanllk testleri,
+ yeniden deneme testleri,
+ yarş koşulu testleri,
+ saat kaymas testleri,
+ nihai tutarllk testleri.
+Zaman geometrisi testlerinin ortak niteliği, sistemin yalnzca ideal zamanlama koşullarnda
+değil, gecikme, kesinti ve eşzamanllk koşullarnda da öngörülebilir davranp davranmadğn
+snamalardr.
+3
+
+-- 3 of 8 --
+
+Ölçek Geometrisinin Doğrulanmas
+Küçük yük altnda çalşan sistemler, ölçek büyüdüğünde geometrik kararllklarn kaybedebilir.
+Bu kayp tipik olarak şu biçimlerde ortaya çkar:
+ kuyruk birikmesi,
+ önbellek geçersizleştirme problemleri,
+ gecikme sçramalar,
+ sralama kayb,
+ eşitleme bozulmas.
+Bu nedenle yük testleri, stres testleri, uzun süreli dayankllk (soak) testleri ve geri basnç
+(backpressure) testleri yalnzca performans değil, ölçek altndaki davranş geometrisini de doğ-
+rular. Burada kritik ayrm şudur: performans testi sistem ne kadar hzl sorusunu yantlarken,
+ölçek geometrisi testi sistem büyürken şeklini koruyor mu sorusunu yantlar.
+Bilgi Geometrisinin Doğrulanmas
+Bilginin sistem içindeki organizasyonu da davranş geometrisinin temel parçalarndan biridir. u
+belirtiler, bilgi geometrisinin bozulduğunu gösterir:
+ ayn bilginin farkl kaynaklarda tutulmas,
+ ayn kavramn farkl adlarla temsil edilmesi,
+ şema kaymas (schema drift),
+ eşitleme problemleri.
+Bu bozulmalara karş şu test türleri kritik hale gelir:
+ sözleşme (contract) testleri,
+ şema doğrulama testleri,
+ eşdeğerlik (parity) testleri,
+ kayma korumas (drift guard) testleri.
+Bu testler, sistem parçalar arasndaki anlaşmalarn zaman içinde sessizce bozulmasn engel-
+leyen yapsal güvencelerdir.
+4
+
+-- 4 of 8 --
+
+nsan Davranş Geometrisinin Doğrulanmas
+Gerçek kullanc davranş çoğu zaman deterministik değildir. Kullanclar:
+ ayn düğmeye ardşk hzl tklamalar yapabilir,
+ bağlanty kaybedebilir,
+ formu yarda brakabilir,
+ sekmeler arasnda geçiş yapabilir,
+ beklenmeyen sralarda işlem gerçekleştirebilir.
+Dolaysyla sistem yalnzca ideal senaryolara göre test edilemez. nsan kaynakl davranş ge-
+ometrisini doğrulamak için şu test türleri önemlidir:
+ rastgele etkileşim (monkey) testleri,
+ keşif testleri,
+ kullanlabilirlik testleri,
+ sabrsz kullanc testleri.
+Bu test ailesinin varsaym şudur: sistemin gerçek davranş uzay, tasarmcnn öngördüğü
+senaryolarla snrl değildir; kullanc, sistemi tasarmn öngörmediği yollardan kullanacaktr.
+Davranş Uzay ve Beliren Davranş
+Büyük sistemlerde problem çoğu zaman tek bir hata değildir. Asl problem, beliren davranştr
+(emergent behavior): parçalar tek tek doğru çalşrken bütünün beklenmeyen davranş üretmesi.
+Beliren davranş, indirgemeci test yaklaşmnn snrn gösterir. Her birim testi geçen bir
+sistem, birimlerin etkileşiminden doğan bütünsel davranşta yine de hatal olabilir; çünkü hata
+hiçbir parçada değil, parçalar arasndaki ilişki düzeninde yatmaktadr. Bu nedenle modern test
+mühendisliği giderek şu probleme dönüşmektedir:
+Sistemin mümkün davranş uzayn keşfetmek.
+Bu keşif problemi, özellikle şu sistem snarn test edilmesi en zor sistemler arasna yerleş-
+tirir:
+ dağtk sistemler,
+ olay güdümlü sistemler,
+ gerçek zamanl sistemler,
+ yapay zekâ sistemleri.
+Bu sistemlerin ortak özelliği, davranş uzaylarnn bileşenlerin durumlarnn kombinasyonla-
+ryla üstel biçimde büyümesi ve dolaysyla tüketici (exhaustive) snamann pratikte imkânsz
+olmasdr. Bu koşullarda test stratejisi, tüm uzay taramaktan uzayn riskli bölgelerini sistematik
+biçimde keşfetmeye kayar.
+5
+
+-- 5 of 8 --
+
+Test Türlerinin Genişleyen Yelpazesi
+Davranş geometrisi perspekti, test türlerinin neden bu kadar çeşitlendiğini açklar: her test
+türü, davranş uzaynn farkl bir bölgesini veya boyutunu snar. Aşağdaki liste, yaygn test
+türlerinin kapsaml fakat tüketici olmayan bir dökümünü sunmaktadr:
+ birim testleri
+ bileşen testleri
+ görsel gerileme testleri
+ erişilebilirlik testleri
+ çapraz tarayc testleri
+ duyarl yerleşim testleri
+ hata durumu testleri
+ boş durum testleri
+ yükleme durumu testleri
+ yetkilendirme testleri
+ kimlik doğrulama akş testleri
+ oturum sonlanma testleri
+ çevrimdş ve yeniden bağlanma testleri
+ yeniden deneme ve zaman aşm testleri
+ veri taşma testleri
+ geriye dönük uyumluluk testleri
+ idempotentlik testleri
+ yarş koşulu testleri
+ bellek sznts testleri
+ kaynak temizleme testleri
+ akş (streaming) testleri
+ dosya yükleme ve indirme testleri
+ pano, dşa ve içe aktarma testleri
+ uluslararaslaştrma testleri
+ saat dilimi ve tarih format testleri
+ analitik ve izleme testleri
+ gözlemlenebilirlik ve kayt testleri
+ özellik bayrağ testleri
+ önbellek geçersizleştirme testleri
+ veri tohumu ve kstür testleri
+ şema doğrulama testleri
+ arayüz geriye uyumluluk testleri
+ sözleşme kaymas testleri
+ dayankllk ve kaos testleri
+ yük testleri
+ uzun süreli dayankllk testleri
+ kurtarma testleri
+ geri alma testleri
+ kullanlabilirlik testleri
+ kullanc kabul testleri
+ kabul testleri
+ mutasyon testleri
+ anlk görüntü testleri
+ uyumluluk testleri
+ gizlilik ve mevzuat uyum testleri
+ felaket kurtarma testleri
+ bulanklaştrma (fuzz) testleri
+ özellik tabanl testler
+ diferansiyel testler
+ altn referans testleri
+6
+
+-- 6 of 8 --
+
+ kanarya testleri
+ maviyeşil dağtm testleri
+ sentetik izleme testleri
+ üretim doğrulama testleri
+ gölge trak testleri
+ yeniden oynatma testleri
+ olay sralama testleri
+ dağtk tutarllk testleri
+ yük devretme testleri
+ devre kesici testleri
+ hz snrlama testleri
+ kstlama (throttling) testleri
+ geri basnç testleri
+ kuyruk dayankllğ testleri
+ mesaj sralama testleri
+ nihai tutarllk testleri
+ serileştirme testleri
+ veri bütünlüğü testleri
+ şifreleme testleri
+ gizli bilgi sznts testleri
+ bağmllk güvenlik açğ testleri
+ tedarik zinciri güvenliği testleri
+ szma testleri
+ bot tespiti testleri
+ dolandrclk tespiti testleri
+ kötüye kullanm önleme testleri
+ klavye gezinme testleri
+ ekran okuyucu testleri
+ animasyon ve çizim testleri
+ çizim performans testleri
+ mobil hareket testleri
+ pil tüketimi testleri
+ termal kstlama testleri
+ soğuk başlatma testleri
+ başlatma ve önyükleme testleri
+ kurulum ve dağtm testleri
+ yükseltme ve düşürme testleri
+ çok kiracl izolasyon testleri
+ kirac veri sznts testleri
+ denetim izi testleri
+ yedekleme bütünlüğü testleri
+ zaman yolculuğu testleri
+ saat kaymas testleri
+ yüksek gecikmeli ağ testleri
+ paket kayb simülasyon testleri
+ alan ad çözümleme hatas testleri
+ içerik dağtm ağ yedekleme testleri
+ yapay zekâ halüsinasyon değerlendirme
+testleri
+ istem enjeksiyonu testleri
+ büyük dil modeli güvenlik testleri
+ getirme kalitesi testleri
+ gömme kaymas testleri
+Bu listenin uzunluğu bir tesadüf değildir. Sistem davranş uzay genişledikçe, bu uzayn farkl
+7
+
+-- 7 of 8 --
+
+bölgelerini snayan uzmanlaşmş test biçimleri de çoğalmaktadr. Listenin son grubu, yapay zekâ
+sistemlerinin test mühendisliğine kattğ yeni doğrulama boyutlarn göstermektedir: davranş
+olaslksal olan bileşenlerin snanmas, klasik deterministik test paradigmasnn ötesine geçen
+değerlendirme yaklaşmlar gerektirmektedir.
+Sonuç
+Modern test yaklaşm artk yalnzca özellik çalşyor mu sorusuna değil, sistemin davranş
+yaps kararl m sorusuna yant aramaktadr. Bu dönüşüm, testin kapsamn tek tek fonksiyon-
+lardan sistemin bütünsel geometrisine genişletmiştir.
+Bu çerçevede test mühendisliği giderek şunlar inceleyen daha geniş bir sistem bilimine dö-
+nüşmektedir:
+ davranş topolojisi,
+ durum grakleri,
+ bağmllk yaplar,
+ zaman ilişkileri,
+ hata yaylm mekanizmalar,
+ kurtarma yollar.
+Davranş geometrisi perspektinin temel katks, bu çeşitliliği tek bir kavramsal çat altnda
+birleştirmesidir: her test türü, sistemin davranş uzaynn belirli bir bölgesini sabitleyen bir ge-
+ometrik güvencedir. Sistem büyüdükçe ve davranş uzay genişledikçe, bu güvencelerin kapsam
+ve çeşitliliği de büyümek zorundadr. Dolaysyla test stratejisi tasarlamak, özünde sistemin dav-
+ranş geometrisinin hangi bölgelerinin sabitlenmeye değer olduğuna karar vermektir.
+8
+
+-- 8 of 8 --

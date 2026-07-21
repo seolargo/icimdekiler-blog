@@ -1,0 +1,351 @@
+AI-Readable Architecture:
+Yapay Zekâ Çağnda Yazlm Mimarisinin Yeniden
+Tanmlanmas
+Ömer Faruk Yavuz
+Temmuz 2026
+Giriş
+Yapay zekâ destekli yazlm geliştirme çağnda baz mimari pratikler yalnzca temiz kod yakla-
+şmnn uzants olarak görülemez. Bu pratikler artk daha geniş bir işlev üstlenmektedir: sistemi
+yalnzca insan geliştiriciler tarafndan değil, yapay zekâ araçlar tarafndan da okunabilir, anla-
+şlabilir ve güvenli biçimde değiştirilebilir hale getirmek. Bu çalşma, söz konusu yaklaşm ifade
+etmek üzere AI-readable architecture kavramn incelemektedir.
+AI-readable architecture, bir kod tabannn snrlarnn, veri akşlarnn, testlerinin, isimlen-
+dirmelerinin, sorumluluklarnn ve bağmllklarnn hem insan hem de makine tarafndan doğru
+yorumlanabilecek biçimde tasarlanmasdr. Bu yaklaşmda amaç yalnzca çalşan kod üretmek
+değildir; amaç, insan ve yapay zekânn ayn sistem üzerinde birlikte güvenilir biçimde akl yürü-
+tebilmesini sağlamaktr.
+Çalşmann temel sav şudur: Yapay zekânn kod üretimindeki başars yalnzca modelin kapa-
+sitesine değil, üzerinde çalştğ kod tabannn yapsal niteliklerine de bağldr. Bu nedenle yapay
+zekâ çağnda mimari kalite, rekabetçi bir değişken haline gelmiştir ve önümüzdeki dönemde kod
+tabanlar iki kutup arasnda ayrşacaktr: yapay zekâ ile ortak çalşmaya uygun tasarlanmş sis-
+temler ile teknik borcun temel işleyiş biçimine dönüştüğü sistemler.
+Yapay Zekânn Örüntü Tamamlama Doğas
+Yapay zekâ sistemleri büyük ölçüde olaslk tabanl örüntü tamamlama mekanizmasyla çalşr;
+verilen bağlamdan hareketle bir sonraki en olas yapy üretmeye çalşrlar. Bu mekanizmann
+mimari açdan önemli bir sonucu vardr: kod taban tutarlysa doğru sonraki adm tahmin etmek
+kolaylaşr, çünkü tekrar eden yaplar anlamldr, isimlendirmeler kararldr, snrlar açktr ve
+testler davranş tarif eder.
+Kod taban kaotikse, olas doğru yollarn says artar. Ayn problem için birden fazla çözüm
+biçimi mevcutsa, model hangi yolun geçerli olduğunu ayrt etmekte zorlanr. Bu ilişki şu şekilde
+özetlenebilir:
+Tutarl kod taban, yapay zekânn olaslk uzayn daraltr; kaotik kod taban ise bu
+uzay genişleterek belirsizliği artrr.
+1
+
+-- 1 of 10 --
+
+Dolaysyla yapay zekânn güvenilirliği, yalnzca modelin gücünün değil, sistemin sunduğu
+örüntü kalitesinin de bir fonksiyonudur.
+Yapay Zekânn Etkinliğini Artran Mimari Özellikler
+Yapay zekâ, sistemi anlamak için mevcut kodun isimlendirmelerine, dosya snrlarna, sorumluluk
+dağlmna, testlerine ve tekrar eden örüntülerine bakar. Bu nedenle iyi mimari, yalnzca insan
+geliştirici için değil, yapay zekâ için de bir yön bulma haritas işlevi görür.
+Açk Mimari
+Açk mimari, sistem parçalarnn işlevlerinin ve birbirleriyle kurduklar ilişkilerin kolayca anlaş-
+labilmesidir. Hangi dosyann arayüzden, hangisinin durum yönetiminden, hangisinin dş sistem
+iletişiminden, hangisinin iş kuralndan sorumlu olduğu netse, yapay zekâ da değişikliği doğru
+konuma yerleştirebilir.
+Açk mimarinin yokluğunda model tipik bir hata üretir: yeni kodu çalşabileceği ilk yere
+yerleştirir, fakat mimari açdan doğru yere yerleştirmez. Bu davranş ksa vadede işlevsel görünür;
+ancak uzun vadede teknik borcu artrr.
+yi Tanmlanmş Snrlar
+Snr (boundary), sistem parçalar arasndaki ayrm çizgisidir: arayüz ile iş mantğ arasnda, dş
+sistem istemcisi ile durum yönetimi arasnda, bileşen ile servis arasnda snrlar bulunmaldr.
+yi tanmlanmş snrlar mevcut olduğunda model şu sorular daha isabetli yantlar: kod nereye
+yazlmal, hangi dosya hangi sorumluluğu taşyor, hangi değişiklik hangi alan etkilemeli, hangi
+alanlara dokunulmamal. Snrlarn yokluğunda model her şeyi her yere yerleştirebilir; bu da
+sistemi zamanla daha fazla karştrr.
+simlendirme
+simlendirme, yazlm sisteminin dilidir. yi adlandrlmş değişkenler, fonksiyonlar, bileşenler ve
+servisler, model için güçlü anlamsal sinyaller üretir. Belirsiz bir fonksiyon ad yalnzca bir işlemin
+varlğn bildirirken, bağlam ve amac içeren bir ad; fonksiyonun ait olduğu alan kavramn,
+kullanm amacn ve muhtemel etki alann da iletir.
+Bu nedenle iyi isimlendirme yalnzca okunabilirlik meselesi değildir; yapay zekâya doğru bağ-
+lam aktarmann temel yöntemlerinden biridir.
+Modülerlik
+Modülerlik, sistemin küçük, anlaml ve bağmsz parçalara ayrlmasdr. Her modülün net bir
+sorumluluğu olduğunda, model o parçay daha kolay anlayabilir, değiştirebilir ve test edebilir.
+Büyük ve karmaşk dosyalar model için zorlaycdr; çünkü model arayüz detayn, durum
+değişimini, dş sistem çağrsn, hata yönetimini ve iş kuraln ayn anda izlemek zorunda kalr.
+Modüler yapda ise model daha dar bir problem alanna odaklanr. Bu durumun kritik bir sonucu
+vardr:
+2
+
+-- 2 of 10 --
+
+Modülerlik, yapay zekânn bağlam yükünü azaltr.
+Modelin bağlam penceresi snrl olduğundan, kod ne kadar iyi bölünmüşse doğru parçann
+anlaşlmas o kadar kolaylaşr.
+Test Kapsam
+Test kapsam, sistem davranşlarnn ne ölçüde testlerle güvence altna alndğn gösterir. Yapay
+zekâ açsndan testler yalnzca hata yakalama arac değildir; sistemin beklenen davranşn tarif
+eden canl dokümantasyondur.
+Nitelikli testler mevcutsa model şunlar görebilir: sistem ne yapmal, hangi davranş korun-
+mal, snr durumlar nelerdir, değişiklikten sonra ne bozuldu, önerilen çözüm gerçekten güvenli
+mi. Testlerin zayf olduğu koşullarda model kod üretir; fakat ürettiği kodun sistemi bozup boz-
+madğn sağlkl biçimde değerlendiremez.
+Deterministik Akş
+Deterministik akş, ayn girdi verildiğinde sistemin ayn sonucu üretmesidir; akşlarn rastgele
+yan etkilere, gizli duruma, sra bağmllklarna veya belirsiz koşullara bağl olmamasdr.
+Yapay zekâ deterministik sistemlerde daha iyi çalşr; çünkü nedensonuç ilişkisini daha net
+kurabilir. Bir eylemin hangi durum dönüşümünü tetiklediği, hangi verinin nereden okunduğu ve
+arayüzün nasl güncellendiği izlenebilir olduğunda model doğru analiz yapabilir. Buna karşlk
+sistemde kontrolsüz yan etkiler mevcutsa, model şu temel soruda zorlanr: bu değişiklik gerçekten
+yalnzca bu bölgeyi mi etkiler, yoksa başka bir yerde sessizce başka bir davranş m tetikler?
+Yapay Zekânn Güçlü Olduğu Alanlar
+Yapay zekâ, özellikle düzenli, tekrar eden ve açk örüntülere sahip kod tabanlarnda yüksek
+performans gösterir. Bu güçlü alanlar sekiz başlk altnda incelenebilir.
+Örüntü Devamllğ
+Örüntü devamllğ (pattern continuation), modelin mevcut kod tabanndaki tekrar eden yaplar
+anlayp ayn yapnn devamn üretebilmesidir. Örneğin durum yönetimi akşnn bileşenleri tutarl
+biçimde yazlmşsa, model yeni bir özellik için benzer akş doğru biçimde oluşturabilir.
+Ancak bu mekanizmann sağlkl çalşmas için mevcut örüntünün gerçekten doğru olmas
+gerekir. Sistemde kötü örüntüler tekrar ediyorsa, model bu yaplar da ayn güvenle sürdürür.
+Dolaysyla örüntü devamllğ yalnzca iyi mimaride avantajdr; kötü mimaride teknik borcu
+çoğaltan bir mekanizmaya dönüşür.
+Yerel Tutarllk
+Yerel tutarllk (local consistency), modelin belirli bir dosya veya modül içindeki mevcut yapya
+uyumlu kod üretebilmesidir. Bir modül içinde belirli bir isimlendirme standard, hata yönetimi
+biçimi veya yardmc yap kullanm mevcutsa, model yeni eklemeleri genellikle buna uygun
+biçimde yapar.
+3
+
+-- 3 of 10 --
+
+Bu güçlü bir özelliktir; fakat sistemin genel mimarisi tutarszsa yerel tutarllk yeterli olmaz.
+Model, dar bölgede doğru görünen ancak sistem genelinde yanlş olan çözümler üretebilir.
+Tekrarlayan Refactor şlemleri
+Model, tekrar eden yeniden düzenleme işlerinde oldukça etkilidir: dağnk sabit değerleri merkezi
+yaplara taşmak, tekrar eden biçimlendirme kodlarn yardmc fonksiyonlara çkarmak veya
+benzer bileşen yaplarn tek tipe indirgemek gibi işler bu kapsamdadr. Bu tür işler insan için
+zaman alc ve yorucudur; model burada belirgin hz kazandrr.
+Ancak hedef mimarinin insan tarafndan belirlenmesi gerekliliği devam eder. Model, iyi baş-
+latlmş bir refactor yönünü sürdürebilir; fakat hangi mimari yönün doğru olduğuna her zaman
+kendi başna karar veremez.
+Test Üretimi
+Model, test üretiminde güçlüdür; özellikle fonksiyonlarn girdiçkt davranş net, bileşen ara-
+yüzleri açk ve veri sözleşmeleri belirliyse anlaml test senaryolar oluşturabilir. Ancak kritik bir
+snrlama mevcuttur:
+Model test yazabilir; fakat hangi davranşn iş açsndan gerçekten doğru olduğunu
+her zaman bilemez.
+Bu nedenle test üretiminde alan bilgisinin, iş kurallarnn ve beklenen davranşn açkça ta-
+nmlanmş olmas belirleyicidir.
+Kalp Kod Üretiminin Azaltlmas
+Tekrar eden mekanik kodlarn (boilerplate) üretimi veya azaltlmas modelin verimli olduğu alan-
+lardandr. Yeni bir özellik için gerekli iskelet yaplarn oluşturulmas çoğu zaman mekanik bir iştir
+ve model bu tür işleri hzla tamamlayabilir. Bu, geliştiricinin enerjisini daha değerli alanlara 
+doğru iş mantğ, doğru snrlar, doğru durum modeli, doğru kullanc akş ve doğru hata yönetimi
+ yöneltmesini sağlar.
+Geçiş (Migration) Desteği
+Model, çerçeve veya mimari geçiş süreçlerinde de yardmc olabilir: eski bir yapy yeni bir örün-
+tüye taşmak, kullanmdan kaldrlmş arayüzleri güncellemek veya bileşen yapsn yeni standarda
+uyarlamak gibi. Ancak eski sistemde gömülü iş mantğ, geçici çözümler ve üretim ortamna özgü
+snr durumlar mevcutsa, model bunlar gözden kaçrabilir. Bu nedenle geçiş süreçlerinde model
+hzlandrcdr; fakat mimari karar verici olarak tek başna yeterli değildir.
+Tip Yaylm
+Tipli sistemlerde model daha güçlü çalşr. Tipler, sistemin anlamn görünür klar: bir veri modeli
+değiştiğinde ilgili tiplerin, arayüz tanmlarnn, fonksiyon imzalarnn ve kullanm noktalarnn
+güncellenmesi gerekir ve model bu yaylm işlerinde oldukça etkilidir.
+Tipler, model için yalnzca derleyici bilgisi değildir; alan kavramlarnn yapsal haritasdr:
+4
+
+-- 4 of 10 --
+
+Tip sistemi, yapay zekâya sistemin geometrisini gösteren temel araçlardan biridir.
+Büyük Ölçekli Yeniden Adlandrma
+Bir kavramn ad değiştirildiğinde bu değişikliğin dosya adlarna, fonksiyonlara, bileşenlere, test-
+lere ve dokümantasyona yanstlmas gerekir. Bu tür işler dikkat gerektirir ve insan için yoru-
+cudur; model burada ciddi hz kazandrr. Ancak temel ilke değişmez: kavramn neye dönüşmesi
+gerektiğine insan karar verir; model bu dönüşümü sistem geneline yayar.
+Yapay Zekânn Zorlandğ Alanlar
+Yapay zekâ her alanda eşit derecede güçlü değildir. Özellikle kodda açkça görünmeyen tarihsel,
+organizasyonel veya alana özgü bilgilerde belirgin biçimde zorlanr.
+Örtük ş Mantğ
+Örtük iş mantğ, kodda açkça ifade edilmeyen fakat sistemin davranşn belirleyen kurallardr:
+belirli bir alann belirli müşteri gruplar için farkl çalşmas, baz kullanclarn özel yetkilere
+sahip olmas veya eski verilerin farkl yorumlanmas gibi. Bu kurallar kodda açk değilse model
+onlar göremez ve teknik açdan doğru görünen fakat iş açsndan yanlş olan çözümler üretebilir.
+Tarihsel Kararlarn Gerekçesi
+Bir sistemdeki baz kararlar, geçmişteki özel koşullar nedeniyle alnmştr: bir uç noktann alşl-
+madk davranş eski bir dş entegrasyonu korumak için tasarlanmş, bir veri modelindeki tuhaf
+alan geçmiş bir veri taşma probleminden kalmş olabilir. Model mevcut kodu görebilir; fakat
+kararn tarihsel gerekçesini bilemez. Bu nedenle dokümantasyon, sürüm geçmişi, kayt sistemleri
+ve ekip hafzas değerini korumaktadr.
+Geçici Çözümlerin Varlk Nedeni
+Baz kodlar ilk bakşta hatal görünür; fakat üretim ortamnda yaşanmş özel bir problemi çöz-
+mek için yazlmştr. Rastgele görünen bir zaman aşm değeri belirli bir üçüncü taraf servisin
+davranşna göre seçilmiş, gereksiz görünen bir koşul bloğu eski bir veri formatn desteklemek
+için eklenmiş olabilir.
+Model bu tür yaplar kolayca silebilir veya sadeleştirebilir; bu da gerçek üretim hatalarna
+yol açar. Dolaysyla geçici çözümler mümkün olduğunca açklama, test veya dokümantasyonla
+desteklenmelidir.
+Organizasyonel Bağlam
+Baz teknik kararlar yalnzca teknik gerekçelerle alnmaz. Kurum içi ekip yaps, sahiplik snrlar,
+müşteri ilişkileri, yönetsel öncelikler, teslim takvimleri veya güvenlik politikalar da mimariyi
+etkiler. Model bu bağlam doğal olarak taşmaz; bu nedenle dşardan bakldğnda tuhaf görünen
+baz mimari kararlar, organizasyonel olarak zorunlu olabilir.
+5
+
+-- 5 of 10 --
+
+Üretim Ortam Snr Durumlar
+Üretim ortam snr durumlar, gerçek kullanclarn, gerçek verinin ve gerçek sistem koşullar-
+nn ortaya çkardğ özel durumlardr: eksik geçmiş veriler, bozuk taşma kaytlar, yavaş üçüncü
+taraf servisler, beklenmeyen ağ kesintileri, ardşk hzl kullanc etkileşimleri, farkl saat dilimi
+davranşlar veya eski istemci ortamlar. Bu durumlar çoğu zaman yerel geliştirme ortamnda gö-
+rünmez ve testlerde yakalanmamş olabilir. Model bu snr durumlarn ancak açkça verildiğinde
+veya testlerle görünür klndğnda dikkate alabilir.
+Örtük Varsaymlar
+Örtük varsaymlar, sistemde açkça yazlmamş fakat herkesin doğru kabul ettiği kabullerdir: her
+kaydn mutlaka bir sahibi olduğu, her dosyann belirli bir formatta geldiği, her sunucu yantnn
+belirli alanlar içerdiği veya belirli bir tanmlaycnn küresel olarak benzersiz olduğu gibi. Bu
+varsaymlar kodda görünür değilse model onlar fark etmeyebilir. Teknik borç arttkça örtük
+varsaym says da artar ve modelin güvenilirliği buna paralel olarak düşer.
+Alan Gerçekliği
+Alan gerçekliği (domain truth), sistemin bağl olduğu gerçek dünyann bilgisidir ve her zaman
+koddan çkarlamaz. Bir ölçümün klinik anlam, bir medya varlğnn kullanm bağlam veya bir
+işlem türünün hukuki karşlğ bu kapsama girer. Model kodu okuyabilir; fakat alann gerçekliğini
+her zaman koddan çkaramaz. Bu nedenle alan gerçekliği açkça modellenmeli, test edilmeli ve
+dokümante edilmelidir.
+Teknik Borç ile Zorlanma Alanlarnn Genişlemesi
+Teknik borç arttkça sistemde açk bilgi azalr, gizli bilgi artar: snrlar zayar, akşlar bulank-
+laşr, testlere güven azalr ve kararlarn gerekçesi kaybolur. Bu koşullarda yapay zekânn güçlü
+olduğu alanlarn etkisi daralr; zorlandğ alanlarn etkisi genişler.
+Bu kayma şu şekilde ifade edilebilir:
+Teknik borç arttkça sistem; açk örüntülerden gizli varsaymlara, deterministik akş-
+lardan belirsiz yan etkilere, test edilebilir davranşlardan üretim ortam sürprizlerine
+doğru kayar.
+Bu nedenle model, teknik borçlu sistemlerde başlangçta hzl görünse bile zamanla daha fazla
+hata üretmeye başlar.
+ki Tip Kod Taban: Yapsal Ayrşma
+Yapay zekâ destekli geliştirme yaygnlaştkça, kod tabanlar kalite açsndan daha keskin biçimde
+ayrşacaktr. Bu ayrşma iki ideal tip üzerinden tanmlanabilir.
+6
+
+-- 6 of 10 --
+
+AI-Native Kod Taban
+AI-native kod taban, yapay zekâ ile ortak çalşmaya uygun biçimde tasarlanmş sistemdir. Bu
+tür sistemlerin ortak özellikleri şunlardr:
+ net snrlar,
+ güçlü ve güvenilir testler,
+ deterministik mimari,
+ güncel dokümantasyon,
+ tipli sistemler,
+ gözlemlenebilir akşlar,
+ açk alan modelleri,
+ tutarl isimlendirme standard,
+ izole edilebilir modüller,
+ güvenilir sürekli entegrasyon ve dağtm akşlar.
+Bu yaplarda küçük ekipler, yapay zekâ desteğiyle çok büyük çktlar üretebilir; çünkü model
+yalnzca kod yazmakla kalmaz, mevcut mimariyle uyumlu biçimde yeniden düzenleme yapabilir,
+test üretebilir, geçiş süreçlerini destekleyebilir ve sistem genelinde tutarllk sağlayabilir. Bu ko-
+şullarda beş kişilik bir ekip, yapay zekâ desteğiyle klasik dönemin çok daha kalabalk ekiplerinin
+çktsna yaklaşabilir veya onu aşabilir. Buradaki belirleyici fark yalnzca yapay zekâ kullanmak
+değildir; kod tabannn yapay zekâ ile ortak çalşmaya uygun olmasdr.
+Teknik Borç Bataklğ
+Teknik borç bataklğ (technical debt swamp), teknik borcun sistemin temel işleyiş biçimine
+dönüştüğü kod tabandr. Bu sistemlerde şu problemler yaygndr:
+ düğümlenmiş eski kod yaplar,
+ örtük mantk,
+ rastgele bağlaşm,
+ güven vermeyen testler,
+ belgelenmemiş akşlar,
+ krlgan dağtm süreçleri,
+ belirsiz sahiplik,
+ eski varsaymlar,
+7
+
+-- 7 of 10 --
+
+ gerekçesi bilinmeyen geçici çözümler,
+ üretim ortamnda öğrenilmiş fakat kodda belgelenmemiş davranşlar.
+Bu tür sistemlerde model sistemin gerçek davranşn göremez; kodda görünen yap ile üre-
+timde çalşan gerçek mantk farkllaşmştr. Daha tehlikeli olan, modelin yanlş güven üretebilme-
+sidir: yanlş çözümü doğruymuş gibi, hzl ve ikna edici biçimde sunabilir. Bu davranş deneyimsiz
+geliştirici davranşna benzer; ancak hz ve ikna edicilik nedeniyle baz durumlarda daha riskli-
+dir. Bu nedenle teknik borç bataklğnda yapay zekâ kullanm özel dikkat gerektirir; aksi halde
+sistem daha hzl gelişmez, daha hzl karşr.
+Örtük Uzman Hafzasndan Makineyle Paylaşlabilir Mimariye
+Geleneksel yazlm geliştirme döneminde teknik borç, baz durumlarda yönetilebilir görünüyordu.
+Bunun önemli nedenlerinden biri, sistemi yazan veya uzun süredir bakmn üstlenen kdemli
+mühendislerin sistemin bağmllk yapsn zihinsel olarak taşyabilmesiydi. Kod taban dşardan
+karmaşk görünse bile, belirli kişiler sistemin tarihini, geçici çözümlerini, snr durumlarn ve
+kritik akşlarn biliyordu.
+Yapay zekâ çağnda bu model yetersizdir; çünkü üretkenlik artk yalnzca insann sistemi an-
+lamasna değil, insan ve yapay zekânn birlikte akl yürütebilmesine bağldr. Bu nedenle sistem
+bilgisi yalnzca kdemli mühendisin zihninde kalmamal; mimariye, tiplere, testlere, dokümantas-
+yona, gözlemlenebilir akşlara ve açk sözleşmelere taşnmaldr.
+Bu geçiş şu şekilde özetlenebilir:
+Kdemli mühendisin zihninde taşnan örtük sistem bilgisi, makine tarafndan da oku-
+nabilir açk mimariye dönüştürülmelidir.
+Yapay Zekâ Çağnda Değer Kazanan Mimari Nitelikler
+Yukardaki analiz şğnda, yapay zekâ çağnda alt mimari nitelik önceki dönemlere kyasla be-
+lirgin biçimde değer kazanmştr.
+Açk (Explicit) Mimari
+Açk mimari, sistemin mimari yapsnn yalnzca ekip içinde sözlü olarak bilinmesi değil; kod
+organizasyonu, dokümantasyon, dosya yaps ve örüntüler araclğyla görünür olmasdr. Model,
+sistemin nereye ve nasl genişletileceğini mevcut yapdan okuyabildiği için açk mimari doğrudan
+üretim kalitesine yansr.
+Tipli Snrlar
+Tipli snrlar, sistemin katmanlar ve modülleri arasndaki veri geçişlerinin açk tiplerle tanm-
+lanmasdr. Tipler; verinin biçimini, zorunlu alanlar ve alan ilişkilerini görünür klar. Böylece
+yalnzca derleme güvenliği değil, sistemin anlam haritasnn makine tarafndan okunabilirliği de
+sağlanr.
+8
+
+-- 8 of 10 --
+
+Deterministik Akşlar
+Ayn girdi ve ayn koşullar altnda ayn sonucu üreten akşlar, nedensonuç ilişkisini izlenebilir
+klar. Bir eylemin hangi dönüşümü tetiklediği ve verinin hangi yoldan aktğ belirli olduğunda,
+model değişikliklerin etkisini daha isabetli öngörebilir.
+Güçlü Sözleşmeler
+Güçlü sözleşmeler (contracts), sistemin farkl parçalar arasndaki anlaşmalarn açkça tanmlan-
+masdr: istekyant şemalar, bileşen arayüzleri, olay yükleri, durum modelleri ve test beklentileri
+birer sözleşme olarak görülebilir. Sözleşmeler güçlü olduğunda model, değişikliklerin snrlarn
+daha doğru kavrar.
+Modülerlik
+Sistemi küçük ve anlaml parçalara ayran modülerlik, modelin bağlam yükünü azaltr. Büyük ve
+karmaşk dosyalarda model çok sayda sorumluluğu ayn anda izlemek zorunda kalrken, modüler
+sistemlerde her parça daha net bir anlam taşr.
+Gözlemlenebilirlik
+Gözlemlenebilirlik, sistemin çalşma zaman davranşnn izlenebilir olmasdr: kaytlar, metrikler,
+izler, hata ayklama yüzeyleri ve kontrollü test ortamlar bu kapsama girer. Model yalnzca statik
+kodu değil, sistemin davranşsal sinyallerini de kullanabildiğinde daha güvenilir öneriler üretir.
+Anlam Mimarisi ve Sistem Akş
+AI-readable architecture kavram, iki tamamlayc düşünceyle doğrudan ilişkilidir: anlam mima-
+risi ve sistem akş.
+Anlam mimarisi, sistemdeki kavramlarn, sorumluluklarn, ilişkilerin ve kararlarn okunabilir
+bir yap içinde düzenlenmesidir. Sistem akş ise verinin, olaylarn, durum değişimlerinin ve kul-
+lanc etkileşimlerinin hangi yoldan ilerlediğini açk hale getirmektir. Bu iki unsur birleştiğinde
+ortaya çkan şey şudur:
+Hem insann hem yapay zekânn üzerinde düşünebildiği, izleyebildiği ve güvenle de-
+ğiştirebildiği bir yazlm yaps.
+Bu çerçevede, gelecekte en değerli mühendislik rollerinden biri yalnzca kod yazan kişi ol-
+mayacaktr. Daha değerli rol, yapay zekânn azami verimle çalşabileceği sistemleri tasarlayan
+kişidir. Bu mühendis; sistemi modüler hale getirir, alan kavramlarn açklaştrr, snrlar net
+çizer, testleri davranş dokümantasyonu gibi tasarlar, akşlar gözlemlenebilir klar, örtük var-
+saymlar açk hale getirir ve teknik borcu yalnzca temizlik değil, bir akl yürütme problemi
+olarak ele alr. Bu yaklaşm klasik anlamda yalnzca yeniden düzenleme değildir; sistemin anlam
+mimarisini kurmaktr.
+9
+
+-- 9 of 10 --
+
+Sonuç
+Yapay zekâ yazlm geliştirmeyi hzlandrr; fakat bu hzn kalitesi ve sürdürülebilirliği, kod ta-
+bannn yapsal niteliklerine bağldr. AI-readable architecture mevcut olduğunda yapay zekâ
+güçlü bir kaldraç etkisi üretir: örüntüleri sürdürür, test yazar, yeniden düzenleme yapar, geçiş
+süreçlerini destekler, tipleri yayar ve tekrar eden işleri azaltr. Buna karşlk teknik borç batakl-
+ğnda model ayn güvenilirlikle çalşamaz; örtük iş mantğ, tarihsel kararlar, üretim ortam snr
+durumlar, örtük varsaymlar ve alan gerçekliği eksikliği modeli sistematik biçimde yanltr.
+Bu nedenle yapay zekâ çağnda teknik borç daha pahaldr ve mimari düşünce daha az değil,
+daha fazla önem kazanmştr. Mesele artk yalnzca insann kodu anlayp anlayamamas değil;
+insan ve yapay zekânn ayn sistem üzerinde birlikte akl yürütüp yürütemediğidir.
+Bu çalşmann temel sonucu şu şekilde özetlenebilir:
+Geleceğin güçlü kod tabanlar yalnzca insan tarafndan okunabilir (human-readable)
+değil, ayn zamanda makine tarafndan okunabilir (AI-readable) olacaktr.
+10
+
+-- 10 of 10 --

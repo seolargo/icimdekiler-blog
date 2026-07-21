@@ -1,0 +1,190 @@
+Formal Yöntemler: Yazlm ve Donanm
+Doğruluğunun Matematiksel Temelleri
+Ömer Faruk Yavuz
+May 2026
+Formal Yöntemler: Yazlm ve Donanm Doğru-
+luğunun Matematiksel Temelleri
+Tanm ve Temel Yaklaşm
+Formal yöntemler (formal methods), yazlm ve donanm sistemlerinin doğru-
+luğunu deneysel test yerine matematiksel ispat yoluyla göstermeye çalşan disi-
+plini ifade eder. Geleneksel yazlm geliştirme pratiğinde sistem kodlanr, çeşitli
+test senaryolaryla denenir ve hatal bir davranş gözlemlenmediği sürece kabul
+edilebilir saylr. Bu yaklaşmn temel epistemolojik kst şudur: test edilen
+vakalar başaryla geçilse dahi, test edilmemiş vakalar hakknda hiçbir bilgi elde
+edilmez. Söz konusu snrllk, daha önce ele alnan davranş uzay kavram
+çerçevesinde şöyle ifade edilebilir: test, davranş uzaynn yalnzca küçük bir
+bölgesini ziyaret eder ve geri kalan bölge için herhangi bir garanti üretmez.
+Formal yöntemler, bu epistemolojik açğ kapatma iddiasn taşr. Yaklaşm
+üç temel hamleden oluşur: sistem matematiksel olarak tanmlanr; sistemin
+sağlamas beklenen kurallar (değişmezler) matematiksel olarak formüle edilir;
+ardndan otomatik veya yar-otomatik bir mekanizma, söz konusu kurallarn tüm
+olas durumlarda sağlandğn ispatlar. Elde edilen sonuç deneysel bir doğrulama
+değil, davranş uzaynn tamam üzerinde geçerli olan matematiksel bir ifadedir.
+Temel Bileşenler
+Bir formal yöntem altyaps üç bileşen üzerine kurulur.
+Spesikasyon Dili
+Sistemin matematiksel olarak ifade edilebilmesini sağlayan dildir. Bu kategoride
+çeşitli diller geliştirilmiştir; başlcalar TLA+ (Leslie Lamport), Alloy (Daniel
+Jackson), Z notation (Jean-Raymond Abrial ve ardndan J.M. Spivey), Coq,
+Lean, Isabelle, Dafny, P ve F⋆ dilleridir. Her dilin temel felsefesi farkl olmakla
+birlikte, hepsi sembolik mantk ve küme teorisi üzerine inşa edilmiştir ve sistemin
+durum geçişlerini, eylemlerini ve snrlarn ifade etmeye olanak tanr.
+1
+
+-- 1 of 6 --
+
+Özellik Dili
+Sistemin asla ihlal etmemesi gereken kurallar (invariants) ya da eninde so-
+nunda sağlamas gereken özellikleri (liveness properties) ifade etmek için kul-
+lanlan dildir. Söz konusu diller genellikle birinci dereceden mantğa zamansal
+işleçler eklenmiş hâliyle (temporal logic) tanmlanr; zira yazlm sistemleri za-
+man içinde durum değiştirir ve birçok özellik her zaman, eninde sonunda
+veya şu olduğunda mutlaka şu olmal biçiminde ifade edilmeyi gerektirir.
+Doğrulama Mekanizmas
+Tanmlanan sistemin, yazlan özellikleri ihlal edip etmediğini denetleyen bileşendir.
+TLC (TLA+ için), SPIN ve NuSMV gibi araçlar bu kategoride yer alr. Doğru-
+lama mekanizmalar iki temel yaklaşmdan birini benimser.
+ki Ana Doğrulama Stratejisi
+Model Denetleme
+Model denetleme (model checking), sonlu sayda duruma sahip sistemlerin tüm
+olas yürütmelerinin sistematik biçimde taranmas ilkesine dayanr. Yaklaşm
+otomatiktir; geliştiricinin yapmas gereken tek şey sistemi ve özellikleri yaz-
+maktr. Durum uzay sonsuz olduğunda yöntem doğrudan uygulanamaz; bu
+durumda soyutlama (abstraction) ya da snrlandrma (bounded model check-
+ing) teknikleri devreye girer. Yöntemin pratikteki en güçlü yan, bir özellik ih-
+lali tespit edildiğinde somut bir karş örnek (counter-example) sunmasdr: şu
+srayla şu eylemleri gerçekleştiren bir yürütme, ilgili değişmezi ihlal eder. Söz
+konusu somut izler, mühendisin sorunu doğrudan kavramasna ve düzeltmesine
+olanak tanr.
+Teorem spat
+Teorem ispat, sistemin doğruluğunun matematiksel bir kant inşa edilerek gös-
+terilmesi yaklaşmdr. Geliştirici bir teorem yazar (bu sistem şu özelliği sağlar)
+ve adm adm bir ispat üretir; makine ise her ispat admnn geçerliliğini doğru-
+lar. Coq, Isabelle/HOL ve Lean bu kategorideki başlca araçlardr. Yöntem
+sonsuz durum uzaylarna da uygulanabilir, ancak insan emeği maliyeti çok yük-
+sektir. Bir karşlaştrma olarak, formel olarak doğrulanmş seL4 mikroçekirdeği
+yaklaşk yirmi beş kişi-yl insan emeği gerektirmiştir.
+Formal Yöntemlerin Spektrumu
+Formal yöntemler tek bir maliyet ve fayda seviyesinde değildir; bir spektrum
+oluştururlar.
+2
+
+-- 2 of 6 --
+
+Ağr Formal Yöntemler
+Coq, Isabelle veya Lean ile yaplan tam teorem ispat bu kategoriye girer. Serti-
+kal C derleyicisi CompCert ve formel olarak doğrulanmş mikroçekirdek seL4
+örnek olarak gösterilebilir. Bu seviyedeki projeler genellikle on milyonlarca dolar
+büyüklüğünde olup yllar süren bir ekip çalşmas gerektirir.
+Orta Düzey Formal Yöntemler
+TLA+ ve PlusCal ile yaplan model denetleme, sözleşmeye dayal tasarm (design-
+by-contract, ilk olarak Bertrand Meyer'in Eiel dilinde sistematikleştirilmiştir)
+ve artm tipleri (renement types) bu kategoride yer alr. AWS'nin iç pratik-
+lerinde yaygn olarak kullanlan seviye budur.
+Haf Formal Yöntemler
+Endüstride haf formal yöntemler (lightweight formal methods) olarak ad-
+landrlan bu kategori, formel düşüncenin günlük geliştirme pratiğine taşnmş
+hâlidir. Güçlü tip sistemleri (Rust'n ödünç alma denetleyicisi, Haskell'in tip
+sistemi, TypeScript), özellik tabanl test (property-based testing: QuickCheck,
+Hypothesis) ve statik analiz araçlar (CodeQL, Semgrep) bu kategoride yer
+alr. Söz konusu araçlar tam bir ispat sunmaz, ancak belirli hata kategorilerini
+matematiksel kesinliğe yakn garantilerle eler. Çoğu modern geliştirici, farknda
+olmakszn bu seviyede formal yöntemlerle çalşmaktadr.
+Tarihsel Gelişim
+Formal yöntemlerin temelleri, 1960'larn sonu ile 1970'lerin başnda atlmştr.
+Tony Hoare'n Hoare mantğ ve Edsger Dijkstra'nn en zayf önkoşul (weak-
+est precondition) kavram, programlarn matematiksel olarak ispatlanabileceği
+krinin ilk sistematik ifadeleridir. Söz konusu dönem akademik bir hareket
+olarak başlamş ve endüstriyel uygulamadan uzak kalmştr.
+1980'lerde önemli diller geliştirilmiştir: Leslie Lamport TLA'y, Tony Hoare
+CSP'yi ve J.M. Spivey Z notation' bu dönemde formüle etmiştir. Ayn dönemde
+model denetleme, Edmund Clarke ve E. Allen Emerson tarafndan icat edilmiş;
+bu çalşmalar nedeniyle 2007 ylnda Joseph Sifakis ile birlikte Turing Ödülü'nü
+almşlardr.
+1990'larda araçlar olgunlaşmş; SPIN ve NuSMV gibi model denetleyiciler
+endüstride ilk ciddi uygulamalara konu olmuştur. Intel'in 1994 ylndaki Pen-
+tium FDIV hatas (yaklaşk 475 milyon dolarlk bir geri çağrma maliyetiyle
+sonuçlanmştr) sonrasnda şirket, çip tasarmnda formel doğrulamay rutin bir
+prosedüre dönüştürmüştür.
+2000'lerde Coq ve Isabelle olgunluğa erişmiş; Microsoft Research'ün SLAM
+projesi, Windows aygt sürücülerini statik olarak doğrulayarak milyonlarca hatay
+tespit etmiştir.
+2010'larda AWS'nin 2011 itibaryla TLA+' benimsemesi, endüstri için bir
+dönüm noktas olmuştur. Ayn dönemde FoundationDB ekibi, deterministik
+3
+
+-- 3 of 6 --
+
+simülasyon testi (deterministic simulation testing) yaklaşmyla yeni bir alt disi-
+plin başlatmştr.
+2020'lerde Lean matematik camiasnda popülerleşmiş; Dafny ve P dili pro-
+gramc topluluğuna daha yakn bir arayüz sunmuştur. Haf formal yöntem-
+ler terimi yaygnlaşmş; Marc Brooker'n 2024 ylnda ACM Queue dergisinde
+yaymladğ Systems Correctness Practices at AWS makalesi, bu hareketin
+programatik bir manifestosu niteliği taşmaktadr.
+4
+
+-- 4 of 6 --
+
+Endüstriyel Uygulamalar
+Formel yöntemler bugün birçok farkl sektörde rutin kullanm bulmaktadr.
+Kuruluş Araç / Yaklaşm Uygulama Alan
+Amazon Web Services TLA+, P, Dafny, Kani S3, DynamoDB, EBS, IAM
+Microsoft SDV, TLA+ Windows sürücüleri, Azure Cos-
+mos DB
+Intel Çeşitli Çip tasarm, önbellek tutarllğ
+NASA SPIN Mars gezgini, kritik aviyonik
+Airbus SCADE A380 y-by-wire kontrol yazlm
+NICTA / seL4 ekibi Isabelle/HOL Mikroçekirdek formel ispat
+Jane Street OCaml + QuickCheck Finansal işlem kodlar
+FoundationDB, TigerBee-
+tle, Antithesis
+Deterministik simülasyon Veritaban doğruluğu
+Söz konusu liste, formel yöntemlerin tamamen niş bir alan olmadğn, ancak
+hâlâ özel ve snrl bir uzmanlk alan olduğunu göstermektedir.
+Yaygn Benimsenmenin Önündeki Engeller
+Formel yöntemlerin yaygn endüstriyel benimsenmesinin önünde dört yapsal
+engel bulunur.
+lki, öğrenme eğrisinin dikliğidir. Yöntem; sembolik mantk, küme teorisi ve
+zamansal mantk (temporal logic) bilgisi gerektirir. Söz konusu birikim, yazlm
+mühendisliği eğitiminin standart müfredatnda yer almaz.
+kincisi, spesikasyon yazma maliyetidir. Bir özelliğin TLA+ veya benzeri
+bir dilde modellenmesi, ayn özelliğin doğrudan kodlanmasndan üç ila beş kat
+daha fazla zaman gerektirebilir.
+Üçüncüsü, fayda-maliyet dengesidir. Çoğu yazlm projesinde hata maliyeti,
+formel doğrulamann getirdiği yatrm maliyetini hakl klacak düzeyde değildir.
+Yöntem, hata maliyetinin çok yüksek olduğu kritik sistemlerde anlaml hâle
+gelir: havaclk, nansal işlem altyaplar, dağtk veritabanlar ve kriptograk
+protokoller bu alanlarn başnda gelir.
+Dördüncüsü, eğitim altyapsnn yetersizliğidir. Üniversitelerin bilgisayar bil-
+imleri programlarnn büyük çoğunluğu formal yöntemleri zorunlu ders olarak
+içermez; konu ya seçmeli braklr ya da yüksek lisans seviyesine ertelenir.
+Haf Formal Yöntemlerin Ana Akma Szmas
+Formal yöntemler dar anlamyla yaygn olmasa da, haf versiyonlar günümüz
+yazlm pratiğine derinlemesine nüfuz etmiş durumdadr. TypeScript ile yazlan
+her satr, tip sisteminin sağladğ küçük bir ispattan geçer. Rust'n ödünç alma
+denetleyicisi, bellek güvenliğini derleme zamannda formel olarak garanti eder.
+Bir assert ifadesi, çalşma zamannda bir değişmezin denetimidir ve formel
+5
+
+-- 5 of 6 --
+
+düşüncenin günlük bir tezahürüdür. Özellik tabanl test ise, küçük ölçekli bir
+formel doğrulama deneyi olarak değerlendirilebilir.
+Söz konusu nüfuz, sektörün farknda olmakszn formel disipline doğru kay-
+makta olduğunu gösterir. Haf araçlar, ağr formal yöntemlerin doğruluğu
+garanti etme misyonunun bir alt kümesini, çok daha düşük bir maliyetle ve dik
+bir öğrenme eğrisi olmakszn yerine getirir.
+Sonuç
+Formel yöntemler, doğruluğu deneysel testten matematiksel ispata taşyan bir
+paradigma kaymasn temsil eder. Yaklaşm pahaldr ve çoğu yazlm pro-
+jesinde aşr bir yatrm saylr; ancak davranş uzay geniş ve hata maliyeti yük-
+sek olan sistemlerde, mevcut yöntemler arasnda en güçlü doğruluk garantisini
+sunar. Tarihsel olarak altmş yllk bir akademik birikime sahip olmakla bir-
+likte, endüstriyel olgunluğu yalnzca son on yllarda belirgin hâle gelmiştir. Haf
+versiyonlarnn modern dillerin tip sistemleri ve test çerçeveleri içinde yaygn-
+laşmas, sektörün uzun vadeli yöneliminin matematiksel doğruluk garantilerine
+doğru kaydğn göstermektedir.
+6
+
+-- 6 of 6 --

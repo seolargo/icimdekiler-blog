@@ -1,0 +1,129 @@
+Davranş Uzay ve Davranş Geometrisi
+Ömer Faruk Yavuz
+May 2026
+Davranş Uzay ve Davranş Geometrisi
+Yazlm mühendisliğinin üzerinde nadiren durulan, ancak en derin katmanlarn-
+dan birini oluşturan mesele, bir sistemin yalnzca işleyen hâlini değil, alabileceği
+tüm hâlleri kavrayabilme yetisidir.
+Tek Nokta ve Uzay
+Bir fonksiyon tasarlanrken zihinde genellikle tek bir davranş canlandrlr:
+girdi -> islem -> cikti
+Örneğin ağ üzerinden bir istek gönderen bir fonksiyon ele alndğnda, zi-
+hindeki tasavvur şu biçimdedir: kullanc bir eylem başlatr, fonksiyon çağrlr,
+istek sunucuya iletilir ve başarl bir yant döner. Bu tasavvur tek bir noktaya
+karşlk gelir; yani tek bir senaryoyu ve tek bir yörüngeyi temsil eder.
+Ne var ki söz konusu fonksiyon, gerçek dünyada bu tek nokta ile snrl
+değildir; etrafnda geniş bir olaslklar alan uzanr. Bu alan, aşağdaki gibi çok
+sayda alternatif durumu kapsar:
+ steğin iletimi srasnda bağlantnn yarda kesilmesi,
+ Kullancnn işlem srasnda sekmeyi kapatmas,
+ Ağ bağlantsnn kopup yeniden kurulmas,
+ Ayn isteğin mükerrer biçimde gönderilmesi,
+ Sunucunun zaman aşm (timeout) bildirmesine karşn işlemin aslnda başaryla
+tamamlanmş olmas,
+ Token'n süresi dolarken, yeniden deneme (retry) esnasnda yenileme (re-
+fresh) mekanizmasnn tetiklenmesi,
+ Belleği aşan büyük veri yüklerinin işlenmesi,
+ Mobil cihazda uygulamann arka plana alnmas.
+Bu olaslklarn her biri birer noktadr; tamam bir araya geldiğinde ise
+bir uzay oluşturur.
+1
+
+-- 1 of 4 --
+
+Davranş Uzay Kavram
+Söz konusu yapya davranş uzay (behavior space) ad verilir; bu kavram,
+bir sistemin alabileceği tüm hâllerin kümesini ifade eder. Bu küme yalnzca
+sistemin beklenen biçimde işlediği hâli değil; krldğ, yarm kaldğ, çakştğ,
+hatal sralandğ, geciktiği, erken döndüğü ya da hiç dönmediği tüm hâllerin
+toplamn içerir.
+Geometri: Uzayn ekli
+Geometri nitelemesi tesadü değildir. Söz konusu uzay rastgele bir yapya
+sahip olmayp belirli bir şekle sahiptir. Baz bölgeleri birbirine yakn, bazlar
+uzaktr; baz bölgeler skça ziyaret edilirken bazlarna neredeyse hiç girilmez.
+Benzer biçimde sistem, kimi bölgelerde kararl davranrken kimi bölgelerde be-
+lirgin biçimde tutarszlaşr.
+Merkez: Mutlu Yol
+Tek kullanc, hzl bağlant, olağan akş senaryosu uzayn merkezini oluşturur;
+bu merkez geniş, düz ve görece kararl bir bölgedir. Testlerin büyük çoğunluğu
+da bu bölgede yürütülür.
+Uzak Köşeler
+Yeniden bağlanma srasnda yeniden deneme, eş zamanl token yenileme ve
+mükerrer istek bileşimi, uzayn uzak bir köşesini temsil eder. Üç düşük olaslkl
+olayn eş zamanl gerçekleşmesiyle girilen bu dar bölgelerde sistem sklkla çöker;
+zira bu bölgeler nadiren incelenir.
+Çatlaklar
+Bayatlamş durum (stale state) ile eş zamanl yazma birleşimi, uzayda bir
+çatlak oluşturur. Bu çatlak doğrudan görünür değildir; ancak içine düşülmesi
+hâlinde veri bütünlüğü bozulur.
+Geometri kavramnn tercih edilme gerekçesi de buradan ileri gelir: uzayn
+bir şekli, eğrilikleri, çatlaklar ve uçurumlar vardr. Yetkin bir mühendis kod
+yazarken yalnzca merkezi değil, kenarlar da görmeye çalşr. Bu yetkinlik ise
+tecrübe gerektirir; zira çatlaklarn büyük çoğunluğu ancak üretim ortamnda,
+gerçek kullanclarla ve beklenmedik kombinasyonlar altnda kendini açğa vu-
+rur.
+nsan Geliştiricinin Doğal Eğilimi
+nsan geliştiricinin bilişsel eğilimi şu yöndedir: önce mutlu yol yazlr, buna
+göre test koşulur ve sonuçta çalşyor yargsna varlr. Ancak bu yarg, esasen
+şu anlama gelir: Sistem uzayn merkezinde çalşyor; kenarlardaki davranş ise
+belirsizdir.
+2
+
+-- 2 of 4 --
+
+Yapay Zekânn şlevi
+Yapay zekâ destekli araçlarn belirli bağlamlarda yerine getirdiği işlev  örneğin
+kod yazmnn ardndan sinir testi yap yönergesi verildiğinde  uzayn ke-
+narlarn taramaktr. Model, Bu kod hangi koşullarda krlr? sorusunu
+işletir; çünkü eğitim verisinde saysz olay sonras inceleme (post-mortem) ra-
+poru, hata kayd ve uç durum analizi bulunur. Benzer çatlaklar daha önce farkl
+kod tabanlarnda gözlemlemiş olmas, ona buray kontrol et önerisini sunma
+kapasitesi kazandrr.
+Geliştirici kod yazarken tek bir yörüngeyi imgelerken, yapay zekâ kodu
+okurken olas yörüngelerin dağlmn değerlendirir. Bu epistemik fark son
+derece belirleyicidir.
+Yüksek Boyutlu Uzay Metaforu
+Bir sistemin davranş uzay yüksek boyutlu bir yapdr. Her girdi bir boyut,
+her durum değişkeni bir boyut, her zamanlama fark ise ayr bir boyut oluşturur.
+Elli boyutlu bir uzay tasavvur edildiğinde, geliştirici bu uzayda yalnzca üç
+boyutlu bir gözlemci konumundadr ve yalnzca yakn çevresini alglayabilir.
+Hatalarn büyük bölümü de, geliştiricinin doğrudan göremediği, ancak uzayda
+var olmay sürdüren uzak köşelerde barnr.
+yi Mimari: Uzayn Sadeleştirilmesi
+Sağlam mühendislik pratiği, esasen bu boyutlarn azaltlmasna dayanr. Bu
+azaltma, çeşitli mimari araçlarla gerçekleştirilir. Değişmez durum (immutable
+state) bir boyutu ortadan kaldrr; çünkü mutasyon olanağn eler. Saf fonksiyon
+(pure function) birden fazla boyutu ortadan kaldrr; zira yan etkiyi devre dş
+brakr. dempotent uç nokta bir boyutu sabitler; böylece çağr says sonucu
+etkilemez. Durum makinesi (state machine) uzay sonlu parçalara böler ve
+geçişleri açkça tanmlar. Tip sistemi ise uzay daraltr; geçersiz hâlleri daha
+derleme (compile) aşamasnda eler.
+Bu çerçevede her isabetli mimari karar, özünde davranş uzayn sadeleştirme
+hareketi olarak okunabilir: daha az köşe, daha az çatlak ve daha az uçurum.
+Davranş Uzaynn Köşelerinden Tipik Hâller
+Bir kodun yalnzca çalşan hâli yoktur; ayn zamanda çok sayda arza hâli de
+mevcuttur. Bunlar arasnda yarş koşulu (race condition), zaman aşm (time-
+out), ksmi başarszlk (partial failure), çift tklama (double click ), bayatlamş
+önbellek (stale cache), WebSocket yeniden bağlanmas, token yenileme çakş-
+mas (overlap), çevrimdşçevrimiçi geçişi, animasyon kesintisi (interrupt) ve
+bozulmuş durum (corrupted state) hâlleri saylabilir. Bu hâllerin büyük çoğun-
+luğu ise yaşanmadan tam olarak kavranamaz.
+3
+
+-- 3 of 4 --
+
+Test Türleri: Uzay Tarama Yöntemleri
+Davranş uzaynn farkl bölgeleri, farkl test yöntemleriyle taranr. Sinir testi
+(nerve test), sistemi kasten rahatsz ederek tepkisini gözlemlemeyi amaçlar.
+Stres testi, merkezden uzağa doğru artan bir yük bindirir. Maymun testi (mon-
+key test), rastgele noktalara müdahale eder. Sabrsz kullanc testi, gerçekçi bir
+kullanc sabrszlğn taklit eder. Kaos testi (chaos engineering) ise altyapy
+kasten bozarak uzayn dayankllğn ölçer.
+Yapay Zekânn Yeni Konumu
+Bu çerçevede dikkat çeken nokta şudur: yapay zekâ artk yalnzca bir kod
+tamamlayc araç olmaktan çkmaktadr. Bunun yerine giderek davranş denetçisi,
+sistem stresi gözlemcisi, uç durum avcs ve mimari rezonans okuyucusu gibi
+rollere bürünmektedir.
+4
+
+-- 4 of 4 --

@@ -1,0 +1,106 @@
+Davranş Uzay Analizinden Operasyonel
+Düzeltmeye: Yedi Adml Yöntem
+Ömer Faruk Yavuz
+May 2026
+Davranş Uzay Analizinden Operasyonel Düzelt-
+meye: Yedi Adml Yöntem
+Bu çalşma, soyut bir sistem analizinden başlayp operasyonel bir kod düzeltme-
+sine ulaşan, örnekten bağmsz bir yöntem önermektedir. Söz konusu yöntem,
+daha önce ele alnan davranş uzay kavramnn pratik bir uygulamasn ifade
+eder. Yöntem yedi admdan oluşur ve her adm, bir öncekinden daha somut bir
+çkt üretir.
+Admlar
+Sistemi Haritalandr
+lk admda sistemin yapsal proli çkarlr: girdi eksenleri, akş dallar, durum
+makinesi, kalclk (persistans) katman ve dş kenarlar tanmlanr. Bu aşamada
+henüz hata tespiti yaplmaz; yalnzca sistemin geometrik şekli kavranr. Admn
+çkts, bir paragrak bir sistem prolidir.
+nvariantlar Listele
+kinci admda, sistemin hiçbir durumda ihlal etmemesi gereken kurallar açkça
+yazlr ve önem srasna dizilir. nvariantlar, sonraki admlarda kurulacak test
+stratejisinin omurgasn oluşturur. Admn çkts, numaralandrlmş bir invari-
+ant listesidir.
+hlal Yollarn Çkar
+Üçüncü admda her invariantn altna inilir ve hangi olay sralamalarnn ilgili
+invariant ihlal edebileceği araştrlr. Bu admda varsaym yerine kodun doğru-
+dan okunmas esastr; gerçek satr numaralar ve dosya yollar kaydedilir. Her
+ihlal yolunun karşsna, bir savunma mekanizmas var m, varsa hangisi? notu
+düşülür. Admn çkts, ihlal yolunu savunma mekanizmasyla eşleyen bir ma-
+tristir.
+1
+
+-- 1 of 3 --
+
+hlal Yollarn Test Türüne Eşle
+Dördüncü admda her ihlal yolu, kendisine uygun test türüyle eşleştirilir. Baz
+ihlaller klasik birim testle yakalanabilirken, bazlar özellik tabanl test (property-
+based testing), durum kapsamas (state coverage) veya kaos enjeksiyonu (chaos
+injection) gerektirir. Test türü, ihlalin şekline göre seçilir; zira tek bir paradigma
+tüm ihlalleri kapsayamaz. Admn çkts, ihlal ile test türü arasnda kurulan
+eşleme tablosudur.
+Önceliklendirme Tablosu Kur
+Beşinci admda her ihlal için dört değer hesaplanr: gerçekleşme olaslğ, canl
+sistemde tespit zorluğu, düzeltme maliyeti ve test maliyeti. Bu değerler bir-
+likte değerlendirilerek bir öncelik sralamas üretilir. Admn çkts, risk-efor
+matrisine göre sralanmş bir listedir.
+Sentezi Gözden Geçir
+Altnc admda, üretilen test stratejisi eleştirel biçimde sorgulanr: strateji gerçek-
+ten yeterli midir? Bir test, yakalamas gereken davranş uzayn yeterince geniş
+kapsyor mudur, yoksa fazla dar m tanmlanmştr? Önceliklendirme doğru
+mudur, yoksa küçük hata olarak etiketlenen bir vaka, aslnda daha geniş bir
+yapsal kök nedenin yalnzca bir yüzü müdür? Bu adm, analiz hatalarnn tespit
+edildiği düzeydir. Admn çkts, tashih edilmiş analizdir.
+En Kritik Tek Vakay Uygula
+Yedinci admda şu soru sorulur: u anda canl sistemde gerçekleşebilecek en
+kötü ihlal hangisidir? Belirlenen kök neden düzeltilir, bir regresyon testi eklenir
+ve dokümantasyon güncellenir. Listenin tamam tek seferde uygulanmaz; geri
+kalan vakalar sonraki sprintlere dağtlr. Admn çkts; çalşan kod, regresyon
+testi ve güncellenmiş notlardr.
+Yöntemin Omurgas: Üç lke
+Yedi admlk iskelet, birbirini destekleyen üç ilkeye dayanr.
+Soyuttan Somuta Zorlanmş Geçiş
+Her adm, bir öncekinden daha somut olmak zorundadr; kavramsal düzeyde
+kalmak bu yöntemde kabul edilmez. Her aşamada satr numaras, test senaryosu
+ya da dosya yolu gibi izlenebilir bir çkt üretilmelidir. Aksi hâlde admlar aras
+bağ kopar ve yöntem teorik bir egzersize dönüşür.
+2
+
+-- 2 of 3 --
+
+Geriye Dönük Tashih Zorunluluğu
+Altnc adm atlanmamaldr. Pratikte mühendisler çoğunlukla dördüncü ve
+beşinci admda durur ve ürettikleri analizi yeterli sayar. Oysa asl içgörüler al-
+tnc admda ortaya çkar; küçük olarak etiketlenen bir vakann, yapsal bir kök
+nedenin tek yüzü olduğu türünden tashihler bu düzeyde yaplr. Bu adm, yön-
+temin diğer test stratejisi yaklaşmlarndan ayrldğ kritik nokta olarak değer-
+lendirilebilir.
+Tek Nokta Uygulamas
+Yedinci admda tüm listenin bir defada uygulanmas hedeenmez. Bunun yerine
+bugün canlda gerçekleşebilecek en kritik tek vaka belirlenir ve önce o çözülür;
+geri kalan vakalar sprintlere dağtlr. Aksi hâlde liste sonsuza kadar liste olarak
+kalr ve hiçbir gerçek düzeltme üretilmez. Bu ilke, analizin yalnzca analiz olarak
+kalmamasn, kod tabanna ilen dokunmasn güvence altna alr.
+Uygulanabilirlik
+Yöntemin Uygun Olduğu Sistemler
+Söz konusu yöntem, durum uzay matematiksel olarak temsil edilebilen kod ta-
+banlarnda işler. Örnekler arasnda WebSocket protokol uygulamalar, dağtk
+sistemler, durum güdümlü kullanc arayüzleri, asenkron orkestrasyon mekaniz-
+malar ve kalclk katmanl uygulamalar yer alr. Modern yazlmn büyük
+çoğunluğu bu kategoriye girer.
+Yöntemin Aşr Yatrm Sayldğ Sistemler
+Tümüyle kategorik iş kurallarndan oluşan yaplar (örneğin form doğrulama veya
+basit CRUD uçlar) ile saf işlevsel dönüşümler (kütüphane fonksiyonlar), bu
+yöntemin maliyetini hak etmez. Bu tür kod parçalar, klasik birim testler ya da
+özellik tabanl test ile yeterince kapsanr; davranş uzay analizi ise söz konusu
+durumlarda gereksiz bir yük yaratr. Yöntem, davranş uzaynn karmaşklğyla
+orantl bir araçtr.
+Yöntemin Tanmlayc Özelliği
+Söz konusu yöntem, geleneksel hata bul ve düzelt döngüsünden farkl bir
+paradigma önerir. Burada izlenen sra şudur: önce sistemin nereden bozulabile-
+ceğinin haritas çkarlr, ardndan bu olas bozulmalar önceliklendirilir, sonra
+haritann doğruluğu sorgulanr ve nihayet en kritik noktaya odaklanlr. Bu
+yaklaşmda hatalar, sürecin girdisi değil çkts olarak ortaya çkar. Yöntem bu
+yönüyle, reaktif hata yönetiminden proaktif sistem analizine geçişi temsil eder.
+3
+
+-- 3 of 3 --

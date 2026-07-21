@@ -1,0 +1,182 @@
+Artımlı Teslimat ve Sıfır Kesintili Şema Geçişi:
+Risk Sınıflandırmasından Beş Aşamalı Migrasyon
+Modeline
+Ömer Faruk Yavuz
+Temmuz 2026
+Özet
+Bu çalışma, artımlı değişiklik teslimatının (incremental PR) yalnızca bir
+kodlama tercihi değil, yönetsel risk azaltma ve organizasyonel güven inşası
+mekanizması olduğunu savunmaktadır. Bu tez, öncelikle bilişsel yük kuramı ve
+yazılım değişiklik risk literatürüyle temellendirilmekte; ardından veritabanı şema
+değişiklikleri için dört seviyeli bir risk sınıflandırması ve beş aşamalı, kesintisiz
+bir migrasyon modeli önerilmektedir. Model, her aşama için geri alınabilirlik
+koşullarını açıkça tanımlayarak riskin nasıl kademeli olarak yönetilebileceğini
+göstermektedir.
+Giriş
+Yazılım değişikliklerinin büyüklüğü ile bu değişikliklerin taşıdığı risk arasındaki ilişki,
+ampirik yazılım mühendisliği literatüründe iyi belgelenmiştir: değişiklik boyutu arttıkça
+hata olasılığı ve inceleme kalitesi orantısız biçimde kötüleşir. Bu çalışma, bu bulguyu
+iki düzlemde ele almaktadır. Birinci düzlem davranışsaldır: küçük ve sık teslimatların
+(artımlı PR, mutlu yol öncelikli teslimat) yönetsel bilişsel yükü nasıl azalttığı ve
+kurumsal güveni nasıl inşa ettiği. İkinci düzlem tekniktir: özellikle veritabanı şeması
+gibi geri alınması pahalı değişikliklerde, riskin nasıl sınıflandırılacağı ve büyük ölçekli
+bir değişikliğin nasıl kesintisiz, geri alınabilir aşamalara bölüneceği.
+1 Artımlı Teslimatın Yönetsel Mantığı
+1.1 Bilişsel Yük ve İnceleme Kalitesi
+Büyük değişiklik kümeleri yüksek bilişsel yük taşır; bir incelemecinin aynı anda tutması
+gereken bağlam miktarı arttıkça, incelemenin gerçek hata yakalama kapasitesi düşer. Bu
+gözlem, Sweller’in bilişsel yük kuramındaki çalışma belleği sınırlarıyla uyumludur: sınırlı
+kapasiteli bir sistem, karmaşıklık belirli bir eşiği aştığında derinlemesine değerlendirme
+yerine yüzeysel onaya yönelir. Küçük ve artımlı değişiklikler bu sınırın altında kalarak
+öngörülebilirlik sağlar, inceleme maliyetini düşürür ve karar sürecini hızlandırır.
+1
+
+-- 1 of 5 --
+
+1.2 Görünürlük ve Sürpriz Azaltımı
+Artımlı teslimat, yöneticinin ihtiyaç duyduğu ilerleme sinyalini düzenli aralıklarla üretir:
+engellerin erken tespiti ve düşük sürpriz riski, bu sinyalin iki bileşenidir. Bu, önceki
+çalışmada ele alınan psikolojik sözleşme çerçevesiyle doğrudan ilişkilidir — yöneticinin
+belirsizlik yükünün azalması, güven birikiminin bir kanalıdır. Kısa değişiklik döngüleri
+aynı zamanda geri bildirim döngüsünü hızlandırarak, sorunun büyük bir teslimatın
+sonunda değil, oluştuğu anda fark edilmesini sağlar.
+1.3 Mutlu Yol Önceliklendirmesi
+Mutlu yol (happy path) yaklaşımı, temel akışın önce ve ayrı olarak teslim edilmesini
+ifade eder. Bu, yalnızca temel işlevin çalışması anlamına gelmez; risk ayrıştırma ve
+kapsam yönetimi stratejisidir: temel akış erken tamamlandığında ürün yöneticisi akışı
+doğrulayabilir, kalite güvence ekibi erken test yapabilir ve kalan risk (residual risk)
+kenar durumlarına (edge case) izole edilir. Kritik yolu belirleme ve kenar durumlarını
+yönetilebilir parçalara ayırma becerisi, bu yaklaşımın mühendislik yetkinliği boyutunu
+oluşturur.
+Artımlı PR ve mutlu yol önceliklendirmesi birlikte uygulandığında, ortak etkileri
+risk azaltma, öngörülebilirlik ve yönetsel bilişsel yükün düşürülmesi olarak özetlenebilir;
+bu davranış kümesi, incelemecinin ve yöneticinin sürekli görünür ilerleme algılamasını
+sağlar.
+2 Büyük Değişikliklerin Maliyeti
+2.1 Büyük PR’ın Zararları
+Yöneticinin taşıdığı yük, PR sayısıyla değil; belirsizlik, risk, bağlam maliyeti ve öngörü-
+lemezlikle ölçülür. Büyük tekil değişiklikler yüksek inceleme maliyeti, yüksek regresyon
+riski, güçleşen geri alma ve planlamada belirsizlik üretir. Artımlı değişiklikler bu dört
+boyutta da yükü azaltır: risk düşer, geri bildirim maliyeti düşer ve yöneticinin sürekli
+kontrol ihtiyacı azalır.
+2.2 Büyük Patlama Yaklaşımının Riskleri
+Büyük patlama (big bang) yaklaşımı — yapısal bir değişikliğin tek ve devasa bir deği-
+şiklik kümesiyle uygulanması — özellikle veritabanı şeması gibi alanlarda ciddi riskler
+taşır: tüm referansların aynı anda kırılması, indeks ve kısıt (constraint) tutarsızlıkları,
+replikasyon gecikmesi kaynaklı tutarsızlıklar, geri döndürülemez dağıtım ve üretim
+ortamında gözlemlenemeyen hatalar. Bu risklerin birleşik etkisi nedeniyle, büyük ölçekli
+şema değişiklikleri büyük patlama biçiminde uygulanmamalıdır; bu ilke, aşağıdaki risk
+sınıflandırmasının ve aşamalı migrasyon modelinin gerekçesini oluşturur.
+3 Şema Değişiklikleri İçin Risk Sınıflandırması
+Veritabanı şema değişiklikleri, geri alınabilirlik ve etki kapsamına göre dört seviyeye
+ayrılabilir. Bu sınıflandırma, bir değişikliğin tek bir değişiklik kümesinde mi yoksa
+2
+
+-- 2 of 5 --
+
+aşamalı bir migrasyonla mı uygulanması gerektiğine karar vermek için bir ilk filtre
+işlevi görür.
+Seviye Tanım Örnekler Uygulama Biçimi
+R1 Düşük risk Nullable kolon ekleme, salt okunur
+alan ekleme, eşzamanlı indeks oluş-
+turma, küçük geriye uyumlu değişik-
+likler
+Tek değişiklik kü-
+mesi yeterli
+R2 Orta risk Non-nullable kolon ekleme, kısıt ek-
+leme, benzersiz indeks oluşturma, te-
+tikleyici değişiklikleri
+Tek değişiklik kü-
+mesi mümkün, ek ön-
+lem gerekir
+R3 Yüksek risk Tablo veya kolon yeniden adlan-
+dırma, kolon silme, tip değişikliği, bi-
+rincil anahtar değişimi
+Aşamalı migrasyon
+zorunlu
+R4 Kritik risk Ödeme tabloları, muhasebe kayıtları
+(ledger), kimlik doğrulama/oturum
+yapıları, parçalanmış (sharded) sis-
+temler
+Aşamalı migrasyon
+zorunlu, ek onay ve
+izleme gerektirir
+R1 ve R2 seviyeleri, tek bir değişiklik kümesiyle güvenle uygulanabilecek değişiklik-
+leri kapsar; R3 ve R4 seviyeleri ise aşağıda tanımlanan beş aşamalı modeli gerektirir.
+Bu ayrım, önceki bölümdeki "büyük patlama" riskini büyüklük değil, geri alınabilirlik
+ekseninde tanımlar: küçük görünen bir değişiklik (örneğin bir birincil anahtar değişimi)
+satır sayısı bakımından küçük olsa da R3 seviyesindedir, çünkü geri alınması pahalıdır.
+3.1 Karar Ağacı
+Bir değişikliğin aşamalı migrasyon gerektirip gerektirmediği, aşağıdaki sorulardan
+herhangi birine hayır yanıtı verilmesi durumunda kesinleşir: değişiklik geriye uyumlu
+mu; geri alma kolay mı; sorgu davranışı değişiyor mu; kesinti riski var mı; veri bütünlüğü
+etkileniyor mu; özellik bayrağı (feature flag) uygulanabiliyor mu. Bu altı soru, R1–R2
+ile R3–R4 arasındaki sınıflandırmayı operasyonel bir kontrol listesine dönüştürür.
+4 Beş Aşamalı Artımlı Migrasyon Modeli
+R3 ve R4 seviyesindeki değişiklikler için önerilen model, değişikliği beş ayrı ve her biri
+bağımsız olarak geri alınabilir aşamaya böler.
+1. Çift şema hazırlığı: Yeni tablo veya kolon eklenir; uygulama hem eski hem yeni
+yapıyı okuyabilir hale getirilir. Bu aşamada yeni yapı henüz kullanılmadığından
+geri alma risksizdir.
+2. Çift yazma: Her yazma işlemi eş zamanlı olarak hem eski hem yeni yapıya
+uygulanır:
+write(old) ∧ write(new)
+İki yapı bu aşamada senkron tutulur; geri alma, çift yazmanın kapatılmasıyla
+gerçekleşir.
+3
+
+-- 3 of 5 --
+
+3. Veri migrasyonu: Mevcut veri, toplu (batch) veya akış (stream) biçiminde yeni
+yapıya taşınır. Geri alma, migrasyonun durdurulmasıyla mümkündür.
+4. Okuma geçişi: Uygulama yalnızca yeni yapıdan okumaya başlar; eski yapı hâlâ
+güncel tutulmaktadır. Geri alma, okuma yolunun eski yapıya döndürülmesiyle
+gerçekleşir.
+5. Yazma geçişi ve temizlik: Eski yapıya yazma durdurulur, ilgili kod temizlenir
+ve eski yapı kaldırılır. Bu aşamanın geri alınması, önceki aşamaların tersine
+daha maliyetlidir; bu nedenle yalnızca sistem yeni yapı altında yeterince stabil
+gözlemlendikten sonra uygulanmalıdır.
+Bu modelin temel özelliği, her aşamanın kendi geri alma stratejisine sahip olmasıdır
+— risk, tek bir büyük kararda değil, beş küçük ve bağımsız olarak geri alınabilir kararda
+dağıtılır.
+4.1 Sıfır Kesintili Dağıtım İlkeleri
+Modelin güvenle uygulanabilmesi için beş ilke gereklidir: geriye uyumluluk (yeni şema
+eski istemcilerle çalışabilmeli), ileriye uyumluluk (eski şema yeni istemcilerle çalışabil-
+meli), şema öncelikli dağıtım (şema değişikliği kod değişikliğinden önce uygulanmalı),
+idempotent migrasyon (migrasyon işleminin tekrar çalıştırılması güvenli olmalı) ve
+gözlemlenebilirlik (metrik, günlük kaydı ve izleme, her aşamada anormalliklerin erken
+tespitini sağlamalı).
+5 Sınırlar
+Bu modelin sınırları belirtilmelidir. Birincisi, beş aşamalı model işlem maliyeti taşır:
+küçük ölçekli değişiklikler için bu düzeyde bir aşamalandırma orantısız bir yük olabilir;
+modelin uygulanabilirliği R3–R4 sınıflandırmasıyla sınırlandırılmalıdır. İkincisi, çift
+yazma aşaması (Aşama 2) uygulama karmaşıklığını geçici olarak artırır ve bu aşamanın
+süresi uzadıkça senkronizasyon hatası riski birikir; bu aşamanın mümkün olduğunca kısa
+tutulması önerilir. Üçüncüsü, risk sınıflandırması burada dört kategoriyle sunulmuştur,
+ancak sınır durumlar (örneğin küçük ölçekli fakat yüksek trafikli bir tabloda nullable
+kolon ekleme) kategoriler arası yargı gerektirebilir; sınıflandırma bir karar destek aracı
+olarak görülmeli, otomatik bir kural kümesi olarak değil.
+6 Sonuç
+Bu çalışma, artımlı teslimatın davranışsal gerekçesini (bilişsel yük azaltımı, görünürlük,
+güven inşası) yazılım mühendisliğinin teknik pratiğiyle (risk sınıflandırması, aşamalı
+migrasyon) birleştiren bütünleşik bir çerçeve sunmuştur. Merkezi iddia şudur: büyüklük
+ile risk arasındaki ilişki hem insan (inceleme kalitesi, yönetsel bilişsel yük) hem sistem
+(geri alınabilirlik, kesinti riski) düzeyinde geçerlidir ve her iki düzeyde de çözüm aynı
+ilkeye dayanır — değişikliği, her biri bağımsız olarak değerlendirilebilir ve geri alınabilir
+küçük parçalara bölmek.
+4
+
+-- 4 of 5 --
+
+Kaynaklar
+[1] J. Sweller, “Cognitive Load During Problem Solving: Effects on Learning,” Cognitive
+Science, vol. 12, no. 2, 1988.
+[2] M. Fowler, “Evolutionary Database Design,” martinfowler.com, 2004 (güncel sü-
+rüm).
+[3] G. Kim, K. Behr, and G. Spafford, The Phoenix Project: A Novel About IT, DevOps,
+and Helping Your Business Win, IT Revolution Press, Portland, 2013.
+[4] J. Humble and D. Farley, Continuous Delivery: Reliable Software Releases through
+Build, Test, and Deployment Automation, Addison-Wesley, Boston, 2010.
+5
+
+-- 5 of 5 --

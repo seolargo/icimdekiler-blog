@@ -1,0 +1,195 @@
+Görünmeyeni Bilmenin Taksonomisi:
+Yirmi Dört İlke, On Aile
+Ömer Faruk Yavuz
+June 2026
+Giriş
+Bu çerçeve, doğrudan gözlemlenemeyen bir gerçeğin yalnızca bıraktığı izler üzerinden nasıl bi-
+linebileceğini ele alır. Kara delik fiziğinden ilham alınarak türetilen ilkeler, soyut bir epistemoloji
+düzeyine indirgenmiş ve yazılım mühendisliğindeki test pratikleriyle eşleştirilmiştir. Üst başlık
+epistemoloji, daha dar anlamda ise çıkarımsal bilgidir: gözlemlenebilir kanıtlardan gözlemlen-
+emeyen nedene varma problemi. Toplam yirmi dört ilke, ait oldukları on çözüm ailesine göre
+düzenlenmiştir. İlkeler sonsuz çoğaltılabilir, çünkü her bilim dalı kendi varyasyonunu üretir;
+ancak çözüm aileleri bu yaklaşık on tanede doyar.
+Birinci Aile: Pasif Gözlem
+Bu ailenin ortak mantığı, görünmeyene dokunmadan yalnızca bıraktığı izi okumaktır.
+Dolaylılık İlkesi
+Erişilemeyen bir şey, eriştiği şeyler üzerindeki etkisinden bilinir; her gizli unsur görünür dünyada
+bir iz bırakır. Yazılımdaki karşılığı gözlemlenebilirliktir: üretim ortamındaki bir servisin içine
+girilemez, ancak log, metrik ve trace kayıtları üzerinden davranışı okunur. Ingress loglarının ayrı
+bir depolama alanına aktarılıp incelenebilir kılınması bu mantığın tipik örneğidir.
+Çıkarım İlkesi
+Görülemeyen merkez, görülebilen çevrenin biçiminden okunur; negatif, pozitiften çıkarsanır.
+Yazılımda bir hatanın kendisi görülemez, ancak etkilediği bozuk veri üzerinden, çıktının bozulma
+biçimine bakılarak hatanın kaynağına geriye doğru ulaşılır.
+İmza İlkesi
+Her olay kendine özgü bir iz bırakır; o iz tanınırsa olay tanınır. Yazılımdaki karşılığı gerileme
+testidir: bir hata bir kez çözüldüğünde, onu tetikleyen tam girdi bir teste gömülür ve hatanın
+imzası, tekrarının tanınabilmesi için arşivlenir.
+Zamansal İz İlkesi
+Bazı gerçekler şu an görünmez, ancak geçmişte bıraktıkları katmanlarda okunur. Yazılımda bir
+hatanın hangi değişiklikle girdiğini sürüm geçmişi üzerinden ikili aramayla bulmak ve log zaman
+damgalarıyla “ne zaman bozuldu” sorusunu yanıtlamak bu mantığı taşır; arkeolojinin katman
+okuması ve jeolojinin tortu okuması da aynı ailededir.
+1
+
+-- 1 of 5 --
+
+İkinci Aile: Hipotez Önceliği
+Bu ailenin mantığı, aramaya başlamadan önce ne aranacağını tanımlamaktır.
+Önceleme İlkesi
+Önce ne görülmesi gerektiği tanımlanır, sonra aranır; gözlem, hipotezin peşinden gider. Yazılım-
+daki karşılığı test güdümlü geliştirmedir: kod yazılmadan önce, doğru çalışması durumunda hangi
+çıktının gözleneceği bir test olarak tanımlanır.
+Sınır Çizme İlkesi
+Her soru bu yöntemle bilinemez; önce sorunun bilinebilir olup olmadığı ayırt edilmelidir. Çürütüle-
+mez bir iddia derin değil boştur. Yazılımda “kod bazen yavaş” ifadesi test edilemezken, “kod yüz
+milisaniyeyi geçmemeli” ifadesi test edilebilir; soruyu ölçülebilir ve çürütülebilir bir biçime sok-
+mak ilk adımdır.
+Üçüncü Aile: Sınır ve Uç Koşul
+Bu ailenin mantığı, bir şeyin doğasının en çok kenarında açığa çıkmasıdır.
+Sınır İlkesi
+Sıradan koşullar her şeyi örter; ayrışma ve kırılma daima kenarda gerçekleşir. Yazılımda hatalar
+çoğunlukla normal girdilerde değil, boş, sıfır, negatif, aşırı büyük veya bozuk veri gibi uç durum-
+larda ortaya çıkar. Normal ses dosyalarında sorunsuz çalışan bir dönüştürücünün yalnızca bozuk
+bir veri çerçevesi ve dosya sonu sınır durumunda çökmesi bu ilkenin tipik örneğidir.
+Dördüncü Aile: Yokluk ve Negatiflik
+Bu ailenin mantığı, olmayandan çıkarsama yapmaktır.
+Yokluk İlkesi
+Olması gerekeni bulamamak da bir bilgidir; beklenen bir şeyin yokluğu, görünmez bir nedenin
+varlığına işaret eder. Yazılımdaki karşılığı olumsuz testtir: bir kullanıcının yetkisiz erişim sağlaya-
+maması veya bir sayacın negatife düşmemesi doğrulanır.
+Karşıolgusal İlke
+Bir şeyin etkisi, “o olmasaydı ne olurdu” sorusuyla ölçülür. Yokluk İlkesi olmayandan çıkarsama
+yaparken, bu ilke olmayan bir dünyayı kasıtlı olarak kurup gerçek dünyayla kıyaslar. Yazılımda
+bir özelliğin işe yarayıp yaramadığını anlamak için, o özelliği görmeyen bir kontrol grubu tutulur
+ve iki dünyanın sonuçları karşılaştırılır.
+Beşinci Aile: Çoğulluk
+Bu ailenin mantığı, tek bir bakışın yanıltıcı olması ve gerçeğin kesişen bakışlarda belirmesidir.
+2
+
+-- 2 of 5 --
+
+Çokluk İlkesi
+Her tekil gözlem kısmidir; gözlemler üst üste bindiğinde hiçbirinin tek başına gösteremediği
+bütün ortaya çıkar. Yazılımda birim, bütünleşme ve uçtan uca testler bir arada kullanıldığında,
+parçaların arasında kalan hatalar görünür hale gelir.
+Katman İlkesi
+Aynı gerçek, farklı bir mercekten bakıldığında farklı bir yüzünü gösterir. Yazılımda aynı kod
+fonksiyonel, performans, yük ve güvenlik eksenlerinden ayrı ayrı sınanır; doğru çıktı üreten bir
+bileşen yalnızca performans merceğinden görülebilecek bir sorun taşıyor olabilir.
+Altıncı Aile: Aktif Müdahale
+Bu ailenin mantığı, yalnızca izlemenin korelasyon, değiştirip gözlemenin ise nedensellik verme-
+sidir.
+Müdahaleyle Test İlkesi
+Bir değişken değiştirilip sonucun değişip değişmediğine bakılır. Yazılımda bir satır devre dışı
+bırakıldığında hata kayboluyorsa, nedenin orada olduğu anlaşılır; bilimdeki kontrollü deney ve
+A/B testi de aynı mantığı taşır. Bu ilke, çerçevenin pasif gözleme dayanan yapısındaki en belirgin
+boşluğu kapatır.
+İzolasyon İlkesi
+Görünmeyeni anlamak için, çevredeki gürültü kısılıp tek değişken dışında her şey sabit tutu-
+lur. Yazılımdaki karşılığı, bir hatayı onu üreten en küçük koda indirgemektir; çevre temizlenip
+yalnızca ilgili değişken bırakıldığında, daha önce görünmeyen neden açığa çıkar.
+Yedinci Aile: Gözlemci Hatası
+Bu ailenin mantığı, gözlemin yalnızca nesneyi değil, gözlemciyi de yanıltabilmesidir.
+Müdahale İlkesi
+Gözlemin kendisi gözlenen şeyi değiştirebilir; bazı gerçekler üzerlerine ışık tutulduğu anda kay-
+bolur. Yazılımdaki karşılığı, log veya hata ayıklayıcı eklendiğinde zamanlama değiştiği için kay-
+bolan, genellikle yarış koşulundan kaynaklanan hatalardır. Çözüm, sistemi yavaşlatmadan dolaylı
+izler üzerinden hatayı yakalamaktır.
+Gözlemcinin Yanlılığı İlkesi
+Gören kişi, beklentisiyle gördüğünü çarpıtır. Müdahale İlkesi gözlemin nesneyi değiştirebileceğini
+söylerken, bu ilke gözlemin gözlemciyi yanıltabileceğini ekler. Yazılımda görülmek istenen hata
+görülür, istenmeyen atlanır; bilimdeki kör deney bunun panzehiridir.
+Eşik İlkesi
+Her iz gerçek değildir; bazıları yalnızca gürültüdür ve sinyali gürültüden ayırmak ayrı bir iştir.
+Yazılımda bir log anomalisinin gerçek bir sorun mu yoksa rastgele bir dalgalanma mı olduğu ayırt
+edilmelidir; istatistiksel anlamlılık eşikleri, yanlış pozitiflerle yanlış negatifler arasında bilinçli bir
+denge kurar.
+3
+
+-- 3 of 5 --
+
+Sekizinci Aile: Doğrulama ve Sağlamlık
+Bu ailenin mantığı, bir izin ancak bağımsız olarak doğrulanabildiğinde bilgi sayılmasıdır.
+Tekrarlanabilirlik İlkesi
+Bir iz, ancak başkası da bağımsız olarak görebiliyorsa bilgidir; tek seferlik gözlem kanıt değil anek-
+dottur. Yazılımda bir hata ancak tutarlı şekilde yeniden üretilebildiğinde gerçek sayılır; “bende
+çalışıyordu” durumu bu ilkenin ihlalidir. Bilimin akran denetimi de aynı ilkenin kurumsallaşmış
+hâlidir.
+Tutumluluk İlkesi
+Bir izi açıklayan birden çok hipotez olduğunda, en az varsayım gerektiren seçilir; gereksiz kar-
+maşıklık yalnızca yanılma yüzeyini büyütür. Yazılımda bir hatanın olası nedenleri arasında en
+basit ve en olası olandan başlanır, egzotik senaryolar sona bırakılır.
+Dokuzuncu Aile: Dolaylı Ölçüm
+Bu ailenin mantığı, ölçülemeyen şeyin yerine onunla birlikte değişen ölçülebilir bir şeyi ölçmektir.
+Vekil İlkesi
+Aranan şey doğrudan ölçülemediğinde, onunla birlikte değişen ölçülebilir bir vekil kullanılır;
+termometre sıcaklığı değil cıvanın genleşmesini ölçer. Yazılımda kullanıcı memnuniyeti doğrudan
+ölçülemez, ancak geri dönüş oranı gibi ilişkili bir gösterge ölçülür. Tehlike, vekil ile gerçek şey
+arasındaki bağ koptuğunda yanlış şeyin ölçülmesidir: bir ölçü hedef hâline geldiğinde ölçü olma
+niteliğini yitirir.
+Ölçek ve Çözünürlük İlkesi
+Hangi ölçekte bakıldığı, ne görülebileceğini belirler; yanlış çözünürlük gerçeği gizler. Yazılımda
+bir performans sorunu saniye ölçeğinde görünmezken mikrosaniye ölçeğinde belirgin hale gelebilir.
+Ölçüm aracının çözünürlüğü, erişilebilecek gerçeğin sınırını çizer.
+Onuncu Aile: Epistemik Tevazu ve Durma
+Bu ailenin mantığı, hiçbir gözlemin mutlak ispat sağlamaması ve ne zaman durulacağını bilmenin
+de bir ilke olmasıdır.
+Mütevazılık İlkesi
+Hiçbir gözlem mutlak ispat sağlamaz; bilgi “kesin doğru” üzerine değil “henüz çürütülmedi” üz-
+erine kuruludur. Bu Dijkstra’nın ilkesidir: test, hataların varlığını gösterebilir ama yokluğunu
+asla. Tam test kapsamı bile yalnızca sınanan senaryolarda sapma bulunmadığını söyler; başarılı
+testler “hata yok” değil, “bilinen hatalar yok” anlamına gelir.
+Yeterlilik İlkesi
+Ne zaman “yeterince bilindi” denileceğini bilmek de bir ilkedir; sonsuz kanıt aramak, hiç karar
+vermemekle aynı kapıya çıkar. Yazılımda test, kabul edilebilir risk eşiğine inildiğinde durur;
+mühendislik, mükemmel bilgiyle değil yeterli bilgiyle karar vermektir. Bu ilke Mütevazılık
+4
+
+-- 4 of 5 --
+
+İlkesi’ni tamamlar: ilki kesinliğin imkânsızlığını, bu ise o imkânsızlığa rağmen nasıl karar verile-
+ceğini söyler.
+Erken Çarpışma İlkesi
+Beklenti, gerçekle olabildiğince erken ve sık karşılaştırılır; model ile gözlem arasındaki açık ne
+kadar geç fark edilirse bedeli o kadar büyük olur. Yazılımdaki karşılığı sürekli bütünleşme ve
+sürekli testtir: her değişiklikte testler otomatik çalışır, hata aylar sonra değil dakikalar sonra
+yakalanır.
+Özet Eşleme Tablosu
+Aile İlke Yazılım Karşılığı
+Pasif Gözlem Dolaylılık Loglama / gözlemlenebilirlik
+Çıkarım Çıktıdan geriye hata izleme
+İmza Gerileme testi
+Zamansal İz Sürüm geçmişi / ikili arama
+Hipotez Önceliği Önceleme TDD / assertion
+Sınır Çizme Test edilebilir gereksinim
+Sınır ve Uç Koşul Sınır Sınır değer testi
+Yokluk ve Negatiflik Yokluk Olumsuz test
+Karşıolgusal Kontrol grubu / etki ölçümü
+Çoğulluk Çokluk Birim + bütünleşme + uçtan uca
+Katman Performans / yük / güvenlik testi
+Aktif Müdahale Müdahaleyle Test Kontrollü deney / A/B testi
+İzolasyon Minimal yeniden üretilebilir örnek
+Gözlemci Hatası Müdahale Heisenbug / yarış koşulu
+Gözlemcinin Yanlılığı Kör deney / tarafsız okuma
+Eşik Sinyal-gürültü ayrımı
+Doğrulama ve Sağlamlık Tekrarlanabilirlik Yeniden üretilebilir hata
+Tutumluluk En olası nedenden başlama
+Dolaylı Ölçüm Vekil Dolaylı gösterge / Goodhart
+Ölçek ve Çözünürlük Log granülerliği / profilleme
+Epistemik Tevazu ve Durma Mütevazılık Test kapsamının sınırı
+Yeterlilik Kabul edilebilir risk eşiği
+Erken Çarpışma Sürekli bütünleşme (CI/CD)
+Sonuç
+Bu taksonomi yirmi dört ilkeyi on çözüm ailesine yerleştirir. Çerçevenin özü tek bir önermede
+toplanabilir: görünmez olan bilinemez değildir; yalnızca doğrudan değil, bıraktığı izler üzerinden
+bilinir. İlk çerçevenin pasif gözlem ağırlıklı yapısı, sonradan eklenen aktif müdahale, gözlemci
+hatası, doğrulama ve dolaylı ölçüm aileleriyle dengelenmiştir. İlkelerin sayısının yirmi dörtte
+değil, ailelerin sayısının yaklaşık onda doyması, çerçevenin asıl bulgusudur: bundan sonra ek-
+lenecek her ilke, bu ailelerden birinin yeni bir örneği olma eğilimindedir. Bu doyma gözleminin
+kendisi Mütevazılık İlkesi’nin çerçeveye uygulanmış hâlidir. Çerçevenin nihai değeri, görünmeyeni
+izinden bilme probleminin fizik, yazılım, teşhis, istihbarat, arkeoloji ve ekonomi gibi pek çok alana
+ortak bir düşünme iskeleti sunmasıdır.
+5
+
+-- 5 of 5 --
