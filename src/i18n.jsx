@@ -5,11 +5,15 @@ export const TRANSLATIONS = {
   tr: {
     role: 'Bilgisayar Mühendisi, Yıldız Teknik Üniversitesi',
     intro1:
-      'Yazılım mühendisliğinde bilişsel evrim çerçevesini uyguluyorum — benzerlik tanıma, kümeleme, görsel ve soyut düşünme, modüler ve genelleştirilmiş tasarımdan; evrimsel, niyet-odaklı ve düşünümsel-uyarlanabilir sistem düşüncesine ve kendini geliştiren mimarilere uzanan bir yelpazede.',
+      'Farklı disiplinlerde aynı yapıyı arıyorum — mühendislik, felsefe, istihbarat, üretim sistemleri, Talmud. Onlarca alanda tekrar eden aynı fikirleri (izomorfizm, çeviri katmanları, görünürlük, örtük bilgi) uzun metinlerde işliyorum.',
     intro2:
-      'Öğrenen, evrilen ve insanın niyet ve ihtiyaçlarıyla hizalanan sistemler kurmaya odaklıyım.',
+      '148 belge var; ama hepsini okumana gerek yok — aşağıdan başla.',
     introQuote:
       'Her problem, mühendisliğe ulaşmadan önce tasarımda çözülmelidir — açıklık koddan daha iyi ölçeklenir.',
+    startHere: 'Buradan başla',
+    themesLabel: 'Temalar',
+    themeCount: 'yazı',
+    exploreTheme: 'Temayı incele →',
     loading: 'Yükleniyor…',
     error: 'Hata',
     allPosts: '← Tüm yazılar',
@@ -40,11 +44,15 @@ export const TRANSLATIONS = {
   en: {
     role: 'Computer Engineer, Yıldız Technical University',
     intro1:
-      'Applying a cognitive evolution framework in software engineering — spanning similarity recognition, clustering, visual, abstraction, modular and generalized design, to evolutionary, intent-oriented, and reflective–adaptive system thinking with self-improving architectures.',
+      'I look for the same structure across different disciplines — engineering, philosophy, intelligence, production systems, the Talmud. The same recurring ideas (isomorphism, translation layers, visibility, tacit knowledge) worked out across dozens of fields in long-form pieces.',
     intro2:
-      'Focused on building systems that learn, evolve, and align with human intent and needs.',
+      "148 documents — but you don't have to read them all. Start below.",
     introQuote:
       'Every problem must be solved in design before it reaches engineering — clarity scales better than code.',
+    startHere: 'Start here',
+    themesLabel: 'Themes',
+    themeCount: 'posts',
+    exploreTheme: 'Explore theme →',
     loading: 'Loading…',
     error: 'Error',
     allPosts: '← All posts',

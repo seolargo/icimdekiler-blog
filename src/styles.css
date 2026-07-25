@@ -581,3 +581,160 @@ code {
 .empty p {
   margin: 0 0 8px;
 }
+
+/* Bölüm başlıkları (Buradan başla / Temalar / Yazılar) */
+.section-head {
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  margin: 0 0 14px;
+}
+
+.all-head {
+  margin-top: 36px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+/* Buradan başla — amiral gemisi yazılar */
+.featured {
+  padding: 24px 0 4px;
+}
+
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.featured-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--fg);
+  background: var(--btn-bg);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.featured-card:hover {
+  border-color: var(--muted);
+  transform: translateY(-2px);
+}
+
+.featured-thumb {
+  width: 52px;
+  height: 68px;
+  flex-shrink: 0;
+  object-fit: cover;
+  object-position: top center;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+}
+
+.featured-title {
+  font-size: 0.98rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+/* Tema haritası */
+.themes {
+  padding: 28px 0 4px;
+}
+
+.theme-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.theme-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: transparent;
+  color: var(--fg);
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+}
+
+.theme-card:hover {
+  border-color: var(--muted);
+  background: var(--btn-bg);
+  transform: translateY(-2px);
+}
+
+.theme-title {
+  font-size: 1.02rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.theme-blurb {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.theme-more {
+  margin-top: 2px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent);
+  opacity: 0.85;
+}
+
+/* Tema görünümü başlığı */
+.theme-head {
+  padding: 4px 0 12px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+
+.back-link {
+  border: none;
+  background: none;
+  padding: 0;
+  margin-bottom: 12px;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.back-link:hover {
+  color: var(--fg);
+}
+
+.theme-head .section-head {
+  text-transform: none;
+  letter-spacing: -0.01em;
+  font-size: 1.35rem;
+  color: var(--fg);
+  margin-bottom: 8px;
+}
+
+.theme-head-blurb {
+  margin: 0;
+  font-size: 0.98rem;
+}
+
+@media (max-width: 560px) {
+  .featured-grid,
+  .theme-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -87,6 +87,55 @@ function Pagination({ page, pageCount, onChange }) {
   )
 }
 
+function FeaturedShelf({ items, t }) {
+  if (!items.length) return null
+  return (
+    <section className="featured">
+      <h2 className="section-head">{t('startHere')}</h2>
+      <div className="featured-grid">
+        {items.map((post) => (
+          <Link key={post.slug} to={`/post/${post.slug}`} className="featured-card">
+            {post.thumb && (
+              <img
+                className="featured-thumb"
+                src={`${import.meta.env.BASE_URL}${post.thumb}`}
+                alt=""
+                loading="lazy"
+              />
+            )}
+            <span className="featured-title">{post.title}</span>
+          </Link>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function ThemeGrid({ themes, onPick, t }) {
+  if (!themes?.length) return null
+  return (
+    <section className="themes">
+      <h2 className="section-head">{t('themesLabel')}</h2>
+      <div className="theme-grid">
+        {themes.map((th) => (
+          <button
+            key={th.id}
+            type="button"
+            className="theme-card"
+            onClick={() => onPick(th.id)}
+          >
+            <span className="theme-title">{th.title}</span>
+            <span className="theme-blurb">{th.blurb}</span>
+            <span className="theme-more">
+              {th.slugs.length} {t('themeCount')} · {t('exploreTheme')}
+            </span>
+          </button>
+        ))}
+      </div>
+    </section>
+  )
+}
+
 export default function Home() {
   const { posts, loading, error } = usePosts()
   const { t } = useLang()
@@ -99,6 +148,7 @@ export default function Home() {
   const page = Math.max(1, parseInt(searchParams.get('sayfa') || '1', 10) || 1)
   const series = searchParams.get('seri') || null
   const query = searchParams.get('q') || ''
+  const tema = searchParams.get('tema') || null
 
   const update = (patch) => {
     const next = new URLSearchParams(searchParams)
@@ -111,6 +161,19 @@ export default function Home() {
 
   const setQuery = (v) => update({ q: v || null, sayfa: null })
   const setSeries = (v) => update({ seri: v || null, sayfa: null })
+  const setTheme = (v) => {
+    update({ tema: v || null, sayfa: null, seri: null, q: null })
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  // Tema haritası + "Buradan başla" seçkisi (public/themes.json) — tembel yüklenir
+  const [themes, setThemes] = useState(null)
+  useEffect(() => {
+    fetch(`${import.meta.env.BASE_URL}themes.json`)
+      .then((r) => r.json())
+      .then(setThemes)
+      .catch(() => {})
+  }, [])
 
   // Tam metin arama indeksi (PDF içerikleri) — tembel yüklenir
   const [index, setIndex] = useState(null)
@@ -176,7 +239,16 @@ export default function Home() {
     return [...counts.entries()].map(([name, count]) => ({ name, count }))
   }, [writings])
 
+  const bySlug = useMemo(() => new Map(writings.map((p) => [p.slug, p])), [writings])
+  const themeObj = tema ? themes?.themes.find((th) => th.id === tema) : null
+  const featuredPosts = useMemo(
+    () => (themes ? themes.featured.map((s) => bySlug.get(s)).filter(Boolean) : []),
+    [themes, bySlug],
+  )
+
   const filtered = useMemo(() => {
+    // Tema seçiliyken küratör sırasını koru
+    if (themeObj) return themeObj.slugs.map((s) => bySlug.get(s)).filter(Boolean)
     const fq = fold(query.trim())
     return writings.filter((p) => {
       if (series && p.series !== series) return false
@@ -185,7 +257,10 @@ export default function Home() {
         fold(p.title) + ' ' + fold(p.description) + ' ' + (index?.get(p.slug) || '')
       return matchesTokens(fq, hay, true)
     })
-  }, [writings, query, series, index])
+  }, [writings, query, series, index, themeObj, bySlug])
+
+  // "Buradan başla" + tema ızgarası yalnızca temiz açılış görünümünde
+  const showLanding = !query && !series && !tema && page === 1
 
   const pageCount = Math.ceil(filtered.length / PER_PAGE)
   const current = Math.min(page, pageCount || 1)
@@ -206,6 +281,25 @@ export default function Home() {
 
       {!loading && !error && posts.length > 0 && (
         <>
+          {showLanding && themes && (
+            <>
+              <FeaturedShelf items={featuredPosts} t={t} />
+              <ThemeGrid themes={themes.themes} onPick={setTheme} t={t} />
+              <h2 className="section-head all-head">{t('writings')}</h2>
+            </>
+          )}
+
+          {themeObj && (
+            <div className="theme-head">
+              <button type="button" className="back-link" onClick={() => setTheme(null)}>
+                {t('allPosts')}
+              </button>
+              <h2 className="section-head">{themeObj.title}</h2>
+              <p className="muted theme-head-blurb">{themeObj.blurb}</p>
+            </div>
+          )}
+
+          {!themeObj && (
           <div className="discover">
             <input
               type="search"
@@ -239,6 +333,7 @@ export default function Home() {
               ))}
             </div>
           </div>
+          )}
 
           {(query || series) && filtered.length > 0 && (
             <p className="muted result-count">
