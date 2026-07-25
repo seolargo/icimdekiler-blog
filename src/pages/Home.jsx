@@ -18,6 +18,20 @@ function Intro() {
   )
 }
 
+// Görünür sayfa öğelerini üretir: her zaman ilk ve son sayfa, mevcut sayfanın
+// çevresinde bir pencere; aradaki boşluklar '…' ile kısaltılır. Böylece çok
+// sayıda sayfada butonlar tek satıra sığar (kayma olmaz).
+function pageItems(page, pageCount, delta = 1) {
+  const items = [1]
+  const left = Math.max(2, page - delta)
+  const right = Math.min(pageCount - 1, page + delta)
+  if (left > 2) items.push('…')
+  for (let i = left; i <= right; i++) items.push(i)
+  if (right < pageCount - 1) items.push('…')
+  if (pageCount > 1) items.push(pageCount)
+  return items
+}
+
 function Pagination({ page, pageCount, onChange }) {
   const { t } = useLang()
   if (pageCount <= 1) return null
@@ -31,16 +45,22 @@ function Pagination({ page, pageCount, onChange }) {
       >
         ‹
       </button>
-      {Array.from({ length: pageCount }, (_, i) => i + 1).map((n) => (
-        <button
-          key={n}
-          className={`page-btn${n === page ? ' is-active' : ''}`}
-          onClick={() => onChange(n)}
-          aria-current={n === page ? 'page' : undefined}
-        >
-          {n}
-        </button>
-      ))}
+      {pageItems(page, pageCount).map((n, i) =>
+        n === '…' ? (
+          <span key={`gap-${i}`} className="page-ellipsis" aria-hidden="true">
+            …
+          </span>
+        ) : (
+          <button
+            key={n}
+            className={`page-btn${n === page ? ' is-active' : ''}`}
+            onClick={() => onChange(n)}
+            aria-current={n === page ? 'page' : undefined}
+          >
+            {n}
+          </button>
+        ),
+      )}
       <button
         className="page-btn"
         onClick={() => onChange(page + 1)}
