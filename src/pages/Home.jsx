@@ -18,17 +18,31 @@ function Intro() {
   )
 }
 
-// Görünür sayfa öğelerini üretir: her zaman ilk ve son sayfa, mevcut sayfanın
-// çevresinde bir pencere; aradaki boşluklar '…' ile kısaltılır. Böylece çok
-// sayıda sayfada butonlar tek satıra sığar (kayma olmaz).
-function pageItems(page, pageCount, delta = 1) {
-  const items = [1]
-  const left = Math.max(2, page - delta)
-  const right = Math.min(pageCount - 1, page + delta)
-  if (left > 2) items.push('…')
-  for (let i = left; i <= right; i++) items.push(i)
-  if (right < pageCount - 1) items.push('…')
-  if (pageCount > 1) items.push(pageCount)
+// Görünür sayfa öğelerini üretir: mevcut sayfayı içeren en fazla `windowSize`
+// (varsayılan 10) ardışık sayfalık bir pencere gösterir; pencere ile son sayfa
+// arasındaki boşluk '…' ile kısaltılır. Örn. 14 sayfada 1. sayfadayken:
+// 1 2 3 4 5 6 7 8 9 10 … 14
+function pageItems(page, pageCount, windowSize = 10) {
+  // Kısaltmaya gerek yok — hepsini göster
+  if (pageCount <= windowSize + 1) {
+    return Array.from({ length: pageCount }, (_, i) => i + 1)
+  }
+  let start = Math.max(1, page - Math.floor(windowSize / 2))
+  let end = start + windowSize - 1
+  if (end > pageCount) {
+    end = pageCount
+    start = end - windowSize + 1
+  }
+  const items = []
+  if (start > 1) {
+    items.push(1)
+    if (start > 2) items.push('…')
+  }
+  for (let i = start; i <= end; i++) items.push(i)
+  if (end < pageCount) {
+    if (end < pageCount - 1) items.push('…')
+    items.push(pageCount)
+  }
   return items
 }
 
