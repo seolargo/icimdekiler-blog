@@ -1,17 +1,39 @@
 Yapısal ˙Izomorfizm: Kaynaklar, Gelenekler,
 Sentez
-ÖFY
+Ömer Faruk Yavuz
 July 2026
-Giriş: Soru ve Cevabın Haritası
-Bu fikrin farkında olan var mıydı? Cevap olumludur — hem de tek bir öncüden
-değil, birbirinden büyük ölçüde bağımsız gelişmiş en az beş gelenekten oluşan bir
-soy ağacı söz konusudur. Gelenekler sırasıyla incelenecektir: prosedürü veren
-TRIZ; yapı taksonomisini veren sistem dinamiği; kuramsal çatıyı kuran genel
-sistem teorisi ve sibernetik; bilişsel mekanizmayı doğrulayan bilişsel bilim; kişisel
-pratik olarak formüle eden Munger geleneği. Kapanışta, fikri teorize etmeden
-doğrudan uygulayan pratisyenler ve soy ağacının ortak zaafı — dağınıklık — ele
-alınacaktır.
+Giriş: Dağınık Bir Soy Ağacı
+Disiplinler arası kavram transferini bir yöntem hâline getirme fikri — bir alan-
+daki yapıyı soyup başka bir alanda giydirme prosedürü — kulağa yeni bir öneri
+gibi gelir. Değildir. Yirminci yüzyıl boyunca en az beş ayrı gelenek aynı fikre,
+birbirinden büyük ölçüde habersiz biçimde ulaşmıştır; üstelik her biri fikrin
+farklı bir parçasını, kendi köşesinden ve kendi diliyle olgunlaştırmıştır. Sovyet
+patent ofisinde yüz binlerce buluşu tarayan bir mühendis, MIT’de şehir ve dünya
+modelleri kuran bir sistem teorisyeni, kapalı sistem termodinamiğinin canlıya
+uymadığını fark eden bir biyolog, satranç ustalarının düşünme protokollerini
+kaydeden bir psikolog ve yatırım kararlarını “zihinsel modeller kafesi”ne asan
+bir hukukçu-yatırımcı — hepsi aynı yapıyı, birbirine değmeden tarif etmiştir.
+Bu bölümün amacı iki yönlüdür. Birincisi soy ağacını çıkarmak: her ge-
+leneğin fikre tam olarak ne kattığını, hangi adımı sağlamlaştırdığını göstermek.
+TRIZ prosedürü verir; sistem dinamiği prosedürün dar boğazı olan teşhis adımının
+sözlüğünü verir; genel sistem teorisi ile sibernetik, transferin neden mümkün
+olduğunun kuramsal cevabını ve denetim yasalarını kurar; bilişsel bilim mekaniz-
+mayı deneysel olarak doğrular; Munger geleneği fikri kişisel bir yaşam pratiğine
+indirger. ˙Ikincisi ise bir eksiği adlandırmak: geleneklerin her biri kendi parçasında
+güçlü, bütünün geri kalanında zayıftır ve parçaları birleştiren sentez şaşırtıcı
+derecede az kalmıştır. Fikrin öncülleri vardır; eksik olan öncülleri toplayan
+çatıdır.
+Bölüm, beş geleneğin ardından fikri hiç teorize etmeden doğrudan uygu-
+layan pratisyenlerle — Ohno’dan Alexander’a, Goldratt’tan Thorp’a — ka-
+panacaktır. Onların varlığı tezin en güçlü kanıtıdır: transfer, teorisi bilinmeden
+de çalışmıştır. Buradan çıkan asıl soru da odur: teorisi bilinerek yapıldığında
+sistematikleşebilir mi?
+1
+
+-- 1 of 12 --
+
 TRIZ: Prosedürün Ampirik Keşfi
+Ampirik C ıkış, Kırk Prensip ve C elişki Matrisi
 C eviri prosedürüyle en birebir örtüşme, Sovyet mühendis ve mucit Genrich Alt-
 shuller’in 1940’lardan itibaren geliştirdiği TRIZ’dir (Rusça açılımıyla “Yaratıcı
 Problem C özme Teorisi”). Altshuller’in çıkış noktası ampirikti: donanma patent
@@ -32,10 +54,6 @@ işe yaramış prensipleri veren tablo — prosedürün üçüncü adımındaki 
 rafının” fiziksel cismidir. Matrisin ayırt edici özelliği önerilerinin teorik değil
 istatistiksel olmasıdır: Altshuller “bence bu çelişkiye şu iyi gider” dememekte,
 “bu çelişkiyi çözen patentlerde en sık bu prensipler görüldü” demektedir — in-
-1
-
--- 1 of 9 --
-
 sanlığın icat deneyiminin frekans tablosu. TRIZ’in soy ağacındaki özel yeri bu-
 radadır: soy-teşhis-raf-geri çevir döngüsü, felsefi bir iddia olarak değil, patent
 literatürü üzerinde ampirik olarak doğrulanmış bir üretim yöntemi olarak dur-
@@ -43,6 +61,83 @@ maktadır. Altshuller’in biyografisi de kayda değerdir: 1950’de icat süre�
 verimsizliğini eleştiren bir mektup yüzünden Gulag’a gönderilmiş, teorinin bir
 kısmını kampta geliştirmiştir — TRIZ, Sovyet sisteminin hem içinde hem ona
 rağmen doğmuş bir üründür.
+ARIZ: Buluşsal Problemleri C özme Algoritması
+Kırk prensip ve çelişki matrisi kataloğu verir; kataloğun hangi problem karşısında
+nasıl kullanılacağını veren şey ise ayrı bir araçtır. ARIZ, TRIZ’in zor ve çelişkili
+problemler için geliştirilmiş adım adım problem çözme prosedürüdür. Açılımı
+Rusçadan gelir: Algoritm Resheniya Izobretatelskikh Zadach, yani Buluşsal Prob-
+lemleri C özme Algoritması. Altshuller bunu, “40 yaratıcı prensipten rastgele
+birini seçmek” yerine problemi sistematik biçimde yeniden kurmak için geliştirdi.
+En yaygın sürümü ARIZ-85C’dir ve dokuz ana bölümden oluşur.1
+1Bkz. Innovation on Demand içindeki “Algorithm for Inventive Problem Solving (ARIZ)”
+bölümü, Cambridge University Press.
+2
+
+-- 2 of 12 --
+
+Temel Hareket
+ARIZ’in temel hareketi şudur:
+Belirsiz problem
+↓
+asıl çatışmayı bul
+↓
+çelişkiyi keskinleştir
+↓
+ideal sonucu tanımla
+↓
+mevcut kaynakları çıkar
+↓
+çelişkiyi ortadan kaldıran çözüm ara
+↓
+çözümü değerlendir ve genelleştir
+Basit Bir Örnek: Loglama C elişkisi
+Söyle bir yazılım problemi düşünelim: sistemin daha fazla log üretmesini istiy-
+oruz; çünkü hataları teşhis etmeliyiz. Fakat daha fazla log, maliyeti ve gürültüyü
+artırıyor.
+Normal yaklaşım hemen çözüm üretmeye çalışabilir:
+• log seviyesini azalt,
+• daha fazla disk al,
+• eski logları sil,
+• örnekleme uygula.
+ARIZ ise önce problemi keskinleştirir: sistem hata olduğunda ayrıntılı, hata
+olmadığında ise neredeyse sessiz olmalıdır. Bu, bir fiziksel çelişki gibi ifade edilir:
+Loglama aynı anda hem yoğun hem seyrek olmalıdır.
+Sonra ideal sonuç sorulur: ek maliyet veya sürekli gürültü oluşturmadan,
+sistem gerekli teşhis bilgisini yalnızca ihtiyaç anında üretseydi nasıl olurdu?
+Buradan daha yapısal çözümler çıkabilir:
+• normalde yalnızca hata sinyalleri tutulur,
+• hata algılandığında geçici olarak ayrıntılı izleme açılır,
+• olay öncesindeki sınırlı telemetri dairesel tamponda saklanır,
+• yalnızca ilgili servis zincirinin ayrıntıları toplanır.
+3
+
+-- 3 of 12 --
+
+ARIZ’in ayırt edici yönü, çözümü doğrudan söylemekten çok problemi çözümün
+görünür olacağı biçime dönüştürmesidir. Cambridge’deki açıklamada da üç ana
+amacı; problemi doğru formüle etmek, zihinsel ataleti kırmak ve farklı TRIZ
+araçlarını birlikte kullanmak olarak verilir.
+ARIZ-85C’nin Dokuz Bölümü
+1. Problemi ve sistem çatışmasını analiz etme
+2. Problem modelini kurma
+3. ˙Ideal nihai sonucu ve fiziksel çelişkiyi tanımlama
+4. Sistem içindeki mevcut kaynakları kullanma
+5. TRIZ bilgi tabanından yararlanma
+6. Problem tanımını değiştirme veya yeniden kurma
+7. Üretilen çözümü değerlendirme
+8. C özümü sistem içinde geliştirme
+9. C özüm sürecinden genel ders çıkarma
+Değerlendirme
+“Altshuller okuyanı mucit yapmayı hedefliyordu” önermesinin asıl dayanağı 40
+prensipten ziyade ARIZ’dir: okura yalnızca fikir vermek değil, kendi problem
+düşünme sürecini zorunlu bir sıraya sokmak ister. Ancak ARIZ, bir bilgisayar
+algoritması gibi “uygula ve kesin çözüm çıkar” yapısında değildir; daha çok
+ayrıntılı bir mühendislik düşünme protokolüdür. Özellikle çözüm aramadan
+önce, yanlış tanımlanmış problemi doğru çelişkiye dönüştürmeye ağırlık verir.
+Soy ağacı açısından anlamı şudur: çeviri prosedürünün birinci adımı — “soyma”
+— TRIZ’de bir tavsiye olarak değil, dokuz bölümlük zorunlu bir protokol olarak
+yazılmıştır; sonraki geleneklerin teşhis adımına getireceği katkı, bu protokolün
+eksik bıraktığı sözlüğü doldurmak olacaktır.
 Sistem Dinamiği: Taksonominin Kaynağı
 Forrester ve Tek Gramer Tezi
 C eviri prosedürünün ikinci adımı — soyulmuş olayı sınırlı sayıda temel yapıdan
@@ -52,6 +147,10 @@ metaforuyla özetlenebilir: nasıl sonsuz çeşitlilikteki cümle bir avuç gram
 (özne, yüklem, nesne) kombinasyonuysa, sonsuz çeşitlilikteki sistem de dört öğeli
 bir gramerin kombinasyonudur — stok (birikebilen şey: depo, hesap bakiyesi,
 nüfus, teknik borç), akış (stoku dolduran ve boşaltan musluklar), gecikme (kararla
+4
+
+-- 4 of 12 --
+
 sonuç arasındaki zaman) ve geri besleme (stokun durumunun muslukları geri
 etkilemesi; güçlendiren döngü: para para getirir; dengeleyen döngü: depo dol-
 unca üretim kısılır). Yüzeyler farklıdır, gramer tektir.
@@ -78,10 +177,6 @@ bulgusu sarsıcıdır: insanların en çok uğraştığı müdahale yeri — say
 parametreler (bütçe, kota, oran) — en zayıf kaldıraçtır; etki yukarı çıktıkça
 sırasıyla yapılar, gecikmeler, geri besleme güçleri, bilgi akışları, sistemin kural-
 ları, sistemin hedefi ve en tepede sistemin üzerine kurulduğu paradigma gelir.
-2
-
--- 2 of 9 --
-
 Yazılım çevirisi doğrudandır: konfigürasyon parametresini ayarlamak en alt
 basamak, bilgi akışını (izleme, geri bildirim) değiştirmek orta, teşvik kurallarını
 değiştirmek yüksek, “bu sistemin amacı ne” sorusunu değiştirmek en yüksek
@@ -98,6 +193,10 @@ güçlendiren sarmala dönüşür — silahlanma yarışı, departmanlar arası 
 yarışı. Ortak malın trajedisi: bireysel kazancın bireye, aşınmanın herkese yazıldığı
 ortak kaynak çöküşü. Büyümenin sınırları: güçlendiren döngünün coşkusu
 sürerken görünmez dengeleyen döngü (kapasite, karmaşıklık) sessizce güçlenir;
+5
+
+-- 5 of 12 --
+
 tipik yanlış tepki büyüme motoruna daha çok basmaktır, doğru hamle sınırı
 gevşetmektir — Brooks yasası bu arketipin içindedir. Hedef erozyonu: hedefle
 gerçek arasındaki açık, her krizde hedefin “bu seferlik” indirilmesiyle kapatılır
@@ -108,7 +207,8 @@ hedefi biraz esnetelim”) ve öngörülebilir finali vardır; toplantıda o rep
 filmin hangi sahnesinde olduğunu bilir. Sistem dinamiğinin soy ağacındaki
 katkısı böylece netleşir: TRIZ prosedürü vermişti; bu gelenek, prosedürün dar
 boğazı olan teşhis adımının sözlüğünü vermiştir.
-Genel Sistem Teorisi ve Sibernetik: Kuramsal C atı
+Genel Sistem Teorisi ve Sibernetik: Kuramsal
+C atı
 Bertalanffy: ˙Izomorfizm, Açık Sistemler ve Eşsonluluk
 Fikrin en geniş kuramsal ifadesi, biyolog Ludwig von Bertalanffy’nin genel sis-
 tem teorisidir. Kurucu iddia yapısal izomorfizm kavramında toplanır: farklı bil-
@@ -124,10 +224,6 @@ canlı, çevresiyle sürekli madde ve enerji alışverişi yapan bir sistemdir v
 sistem sonuçları ona uygulanmaz; açık sistem denge durumunda değil, kararlı
 hal durumunda yaşar — nehirdeki girdap gibi: su sürekli değişir, desen kalır. Or-
 ganizasyonlar ve yazılım sistemleri de açık sistemlerdir; “bitmiş sistem” fikrinin
-3
-
--- 3 of 9 --
-
 yanlışlığı, kapalı-sistem sezgisinin açık sisteme uygulanmasıdır. ˙Ikinci kurucu
 kavram eşsonluluktur (equifinality): kapalı sistemde son durum başlangıç koşullarınca
 belirlenir; açık sistem aynı sona farklı yollardan ulaşabilir — ikiye bölünen
@@ -141,6 +237,10 @@ ton of Science” makalesi, çatının manifestosudur: disiplinler arası izomor
 leri sistematik toplayacak bir “yapılar bilimi” çağrısı ve bilimlerin uzmanlaşma
 yüzünden birbirinin çözümlerinden habersizleştiği teşhisi — Altshuller’in patentlerde
 gördüğü israfın akademik versiyonu. Makalenin kalbi, dokuz seviyeli sistem
+6
+
+-- 6 of 12 --
+
 karmaşıklık hiyerarşisidir; her basamak altındakilerin özelliklerini içerip yenisini
 ekler: çerçeveler (statik yapılar: harita, organizasyon şeması), saat mekaniz-
 maları (önceden belirlenmiş hareket), termostatlar (geri beslemeli kontrol), hücreler
@@ -170,10 +270,6 @@ rağmen korunması) kavramı bu çevrenin ortak dili olmuştur.
 Geleneğin mühendislik yönetimine en doğrudan armağanı, W. Ross Ashby’nin
 gerekli çeşitlilik yasasıdır: bir denetleyici, ancak denetlediği sistemin durum
 çeşitliliğine denk bir tepki çeşitliliğine sahipse kontrol sağlayabilir — “yalnızca
-4
-
--- 4 of 9 --
-
 çeşitlilik, çeşitliliği emebilir.” C evirileri kendiliğinden dizilir: üretim sisteminin
 arıza çeşitliliği, izleme ve müdahale repertuvarını aşıyorsa kesintiler yönetilemez;
 mikro-yönetimin imkânsızlığının matematiği de budur — tek yöneticinin karar
@@ -189,6 +285,10 @@ kurdular — sonradan Society for General Systems Research adını alan dernek.
 Dört kurucunun dört ayrı disiplinden gelmesi, programın kendisiydi. Derneğin
 akademik etkisi umulanın altında kaldı: uzmanlaşmanın kurumsal rüzgârına
 karşı kurulmuştu ve o rüzgâr kazandı; ancak tohumları başka bahçelerde yeşerdi.
+7
+
+-- 7 of 12 --
+
 Soy ağacına düşülecek not şudur: fikrin farkında olanlar örgütlenmişti; dağınıklık,
 farkındalık eksikliğinden değil, kurumsal rüzgârın yönünden kaynaklanmıştır.
 Bilişsel Bilim: Mekanizmanın Doğrulanması
@@ -212,17 +312,13 @@ gusu kalıpların yapıya bağlılığını gösterir — rastgele dizilmiş ta�
 hafıza üstünlüğü kaybolur, çünkü rastgele dizilim hiçbir kalıba oturmaz. Bu
 kütüphanenin normalde yirmi yılda kazara biriktiği ve bilinçli yüklenebileceği
 iddiası, deneysel zeminini burada bulur.
-5
-
--- 5 of 9 --
-
 Gentner ve Hofstadter: Yapı Eşleme ve Analoji Tezi
 Dedre Gentner’ın yapı eşleme (structure-mapping) teorisi, çeviri prosedürünün
 birinci adımının bilişsel formülasyonudur: analoji, nesnelerin yüzey özelliklerinin
 değil, aralarındaki ilişki yapısının eşlenmesidir. Deneysel bulgusu uzman-acemi
 farkını açıklar: acemiler yüzey benzerliğine kapılır, uzmanlar yapı benzerliğini
-görür; prosedürün “soyma” adımı, acemi hatasını mekanik olarak engelleyen bir
-yöntemleştirmedir.
+görür; prosedürün “soyma” adımı — ARIZ’in protokolleştirdiği adım — acemi
+hatasını mekanik olarak engelleyen bir yöntemleştirmedir.
 Douglas Hofstadter iddiayı en uç noktasına taşır. Sander’la yazdığı “Sur-
 faces and Essences”, tezi iki katta savunur. Birinci kat kavram oluşumudur:
 en sıradan kavramlar bile — “anne”, “sandalye” — ömür boyu karşılaşılan
@@ -232,6 +328,10 @@ stein’ın büyük adımlarını birer analoji sıçraması olarak okur. Başl�
 uyarısını da taşır: kötü düşünce yüzeylere, iyi düşünce özlere — ilişki iskelet-
 lerine — yapılan analojidir. Hofstadter’ın soy ağacındaki yeri böylece belir-
 ginleşir: diğer gelenekler analojiyi kullanılacak bir araç olarak sunar; Hofstadter,
+8
+
+-- 8 of 12 --
+
 araç sandığımız şeyin düşüncenin ta kendisi olduğunu, dolayısıyla analoji reper-
 tuvarını genişletmenin doğrudan düşünme kapasitesini genişletmek olduğunu
 söyler.
@@ -258,10 +358,6 @@ formülasyonudur: “elinde çekiç olana her şey çivi görünür” — tek m
 her olayı o modele indirgeme körlüğü; Munger’a göre çok-disiplinlilik zenginlik
 değil zorunluluktur, çünkü tek raf, çözemediği problemlerde kişiyi çözüyormuş
 yanılsamasına sokar.
-6
-
--- 6 of 9 --
-
 Pratisyenler: Teorisiz Transfer
 Soy ağacının belki en güçlü kanıtı, fikri teorize etmeden doğrudan uygulayan ve
 bu uygulamayla tarih yazan pratisyenlerdir; başlıca vakalar ayrı ayrı incelenm-
@@ -271,6 +367,10 @@ Taiichi Ohno, çekme sistemini üretim literatüründen değil Amerikan süperma
 almıştır: raf boşaldıkça dolduran market, kanban’ın açık ilham kaynağıdır —
 üretimi tahminin değil gerçek talebin tetiklediği yapı, perakendeden fabrikaya
 giydirilmiştir.
+9
+
+-- 9 of 12 --
+
 Alexander: Örüntü Dili ve Yazılıma Büyük Transfer
 Mimar Christopher Alexander’ın 1977 tarihli “A Pattern Language”i, 253 mi-
 mari örüntünün kataloğudur; ölçek bölge planlamasından pencere pervazına
@@ -301,10 +401,6 @@ değerli işle doldur — darboğaz makine molaya çıkmaz); her şeyi kısıta 
 (kısıt-dışı istasyonun yüzde yüz doluluğu erdem değil envanter üretimidir); kısıtı
 yükselt (yatırımı ancak sömürme bitince yap); kısıt kırıldıysa başa dön. Üretim
 uygulaması drum-buffer-rope adını taşır: davul (kısıtın temposu fabrikanın tem-
-7
-
--- 7 of 9 --
-
 posudur), tampon (kısıtı koruyan stok) ve ip (hammadde girişini kısıtın hızına
 bağlayan sinyal — kanban’ın kuzeni).
 Teorinin finansal kanadı throughput accounting, geleneksel maliyet muhasebe-
@@ -315,7 +411,12 @@ temin bir saatidir; darboğaz-dışında kazanılan bir saat hiçbir şeydir. Bu
 gölge fiyat kavramının mühendislik ağzıyla söylenmiş halidir: ekibin kısıtı kod
 incelemesiyse, geliştiricilerin daha hızlı kod yazması hiçbir şeydir — inceleme
 kapasitesine yapılan her şey, her şeydir.
-Bachelier ve Black–Scholes: Fizikle Finans Arasında C ift Yönlü Akış
+10
+
+-- 10 of 12 --
+
+Bachelier ve Black–Scholes: Fizikle Finans Arasında C ift
+Yönlü Akış
 Black–Scholes opsiyon fiyatlama formülünün hikâyesi, transfer tezinin ders kitabı
 vakasıdır ve iki yönlü akar. ˙Ilk yön şaşırtıcı biçimde finanstan fiziğe doğrudur:
 1900’de Louis Bachelier, doktora tezinde Paris borsası fiyat hareketleri için rast-
@@ -332,7 +433,8 @@ olduğu LTCM fonunun 1998 çöküşü, formülün değil formüle duyulan sını
 güvenin iflasıydı. Vaka, transfer tezine çift ders bırakır: yapı gerçekten taşınır
 ve taşınan yapının varsayım sınırları da birlikte taşınmalıdır — difüzyon modeli,
 kuyruk olaylarını hafife alır.
-Shannon–Kelly–Thorp Hattı: Enformasyondan Kumarhaneye
+Shannon–Kelly–Thorp Hattı: Enformasyondan Kumarhan-
+eye
 Teorisiz transferin en renkli vakası, Bell Laboratuvarları’ndan kumarhaneye
 ve borsaya uzanan hattır. Shannon 1948’de enformasyon teorisini kurmuştu;
 1956’da meslektaşı John Kelly beklenmedik bir sonuç türetti: elinde kısmi özel
@@ -347,10 +449,6 @@ ayarladı, yöntemi “Beat the Dealer” (1962) ile yayımladı — kumarhanele
 kural değiştirmesine yol açan kitap; Shannon’la birlikte rulet yörüngesini tah-
 min eden, ayakkabıya gizlenen dünyanın ilk giyilebilir bilgisayarını yapıp ku-
 marhanede denediler; Thorp ardından opsiyon fiyatlamasının pratik bir ver-
-8
-
--- 8 of 9 --
-
 siyonunu Black–Scholes’tan yıllar önce türetip kendi fonunda kullandı ve nicel
 yatırımcılığın kurucularından oldu. Hattın dersi yoğundur: iletişim mühendisliği
 için kurulmuş bir teori, dört alan değiştirdi ve her durakta çalıştı.
@@ -359,9 +457,14 @@ epistemolojik bir iddia değil, yirminci yüzyılın en yüksek getirili buluşl
 bir kısmının fiilı üretim yöntemidir; transfer, teorisi bilinmeden de çalışmıştır —
 teorisi bilinerek yapıldığında sistematikleşebileceği iddiası, bu vakaların üzerine
 kurulur.
+11
+
+-- 11 of 12 --
+
 Sentez ˙Ihtiyacı ve Sonuç
 Soy ağacı toplandığında ortaya çıkan tablo şudur: fikir yeni değildir, ancak
-dağınıktır. TRIZ prosedürü vermiştir ama mühendislik çelişkileriyle sınırlı kalmıştır;
+dağınıktır. TRIZ prosedürü vermiştir — ARIZ’le birlikte en gelişkin, adım
+adım protokolleşmiş haliyle — ama mühendislik çelişkileriyle sınırlı kalmıştır;
 sistem dinamiği taksonomiyi ve kaldıraç analizini vermiştir ama reçete kata-
 logları zayıftır; genel sistem teorisi ve sibernetik kuramsal çatıyı kurmuş, gerekli
 çeşitlilik gibi yasalar üretmiş, ancak pratiğe inen bir yöntem bırakmadan akademik
@@ -370,18 +473,18 @@ olarak marjinalleşmiştir; bilişsel bilim mekanizmayı — kalıp kütüphanes
 programına çevirmemiştir; Munger kişisel pratiği vaaz etmiş ama sistematik bir
 prosedür bırakmamıştır. Her gelenek, bütünün bir parçasını kendi köşesinden
 yazmış; parçaları bir araya getiren sentez şaşırtıcı derecede az kalmıştır.
-Bu tablo, disiplinler arası kişisel arşiv pratiği için hem bir konum hem bir pro-
-gram tanımlar. Konum: böyle bir arşiv, dağınık soy ağacının bilinçli bir sentezi
-olarak okunabilir — prosedürü TRIZ’den, taksonomiyi sistem dinamiğinden,
-meşruiyeti Bertalanffy’den, denetim yasasını Ashby’den, mekanizma güvencesini
-de Groot–Chase–Simon–Gentner hattından, pratiği Munger’dan alan bir birleştirme.
-Program: sentezin özgün katkısı, parçaların hiçbirinde tam bulunmayan şeydir
-— belirli bir hedef alan (yazılım mühendisliği) için, belirli kaynak alanların (fi-
-nans, iktisat, üretim) raflarını sistematik taramak ve her eşlemeyi verimlilik
-testinden (yeni soru ya da yeni hamle üretiyor mu) geçirmek. Öncüllerin varlığı
-bu projenin değerini düşürmez; tam tersine, zeminini sağlamlaştırır: omuzlarına
-basılacak devler bellidir ve devlerin her biri, kendi köşesinden aynı yöne işaret
-etmektedir.
-9
+Bu tablo, disiplinler arası kişisel arşiv pratiği için hem bir konum hem
+bir program tanımlar. Konum: böyle bir arşiv, dağınık soy ağacının bilinçli
+bir sentezi olarak okunabilir — prosedürü TRIZ ve ARIZ’den, taksonomiyi
+sistem dinamiğinden, meşruiyeti Bertalanffy’den, denetim yasasını Ashby’den,
+mekanizma güvencesini de Groot–Chase–Simon–Gentner hattından, pratiği Munger’dan
+alan bir birleştirme. Program: sentezin özgün katkısı, parçaların hiçbirinde
+tam bulunmayan şeydir — belirli bir hedef alan (yazılım mühendisliği) için,
+belirli kaynak alanların (finans, iktisat, üretim) raflarını sistematik taramak
+ve her eşlemeyi verimlilik testinden (yeni soru ya da yeni hamle üretiyor mu)
+geçirmek. Öncüllerin varlığı bu projenin değerini düşürmez; tam tersine, zem-
+inini sağlamlaştırır: omuzlarına basılacak devler bellidir ve devlerin her biri,
+kendi köşesinden aynı yöne işaret etmektedir.
+12
 
--- 9 of 9 --
+-- 12 of 12 --
