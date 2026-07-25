@@ -5,9 +5,9 @@ export const TRANSLATIONS = {
   tr: {
     role: 'Bilgisayar Mühendisi, Yıldız Teknik Üniversitesi',
     intro1:
-      'Farklı disiplinlerde aynı yapıyı arıyorum — mühendislik, felsefe, istihbarat, üretim sistemleri, Talmud. Onlarca alanda tekrar eden aynı fikirleri (izomorfizm, çeviri katmanları, görünürlük, örtük bilgi) uzun metinlerde işliyorum.',
+      'Üzerine düşünmeye değer bulduğum konuları uzun metinler halinde burada topluyorum. Alanlar geniş bir yelpazeye yayılır — mühendislik, felsefe, jeopolitik, üretim sistemleri, estetik — ve her biri kendi bağlamında, ayrıntılı biçimde ele alınır.',
     intro2:
-      '148 belge var; ama hepsini okumana gerek yok — aşağıdan başla.',
+      'Kimi zaman alanlar arasında beklenmedik bağlar belirir, kimi zaman bir konu tek başına derinleşir; her iki durumu da olduğu gibi bırakıyorum.',
     introQuote:
       'Her problem, mühendisliğe ulaşmadan önce tasarımda çözülmelidir — açıklık koddan daha iyi ölçeklenir.',
     startHere: 'Buradan başla',
@@ -44,9 +44,9 @@ export const TRANSLATIONS = {
   en: {
     role: 'Computer Engineer, Yıldız Technical University',
     intro1:
-      'I look for the same structure across different disciplines — engineering, philosophy, intelligence, production systems, the Talmud. The same recurring ideas (isomorphism, translation layers, visibility, tacit knowledge) worked out across dozens of fields in long-form pieces.',
+      'I collect the topics I find worth thinking about here, as long-form pieces. They span a wide range — engineering, philosophy, geopolitics, production systems, aesthetics — and each is treated in its own context, in detail.',
     intro2:
-      "148 documents — but you don't have to read them all. Start below.",
+      'Sometimes unexpected connections appear between fields; sometimes a single topic deepens on its own. I leave both as they are.',
     introQuote:
       'Every problem must be solved in design before it reaches engineering — clarity scales better than code.',
     startHere: 'Start here',
