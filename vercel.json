@@ -1,5 +1,12 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/post/sabah-tasarım-ritüeli-manifestosu-tr",
+      "destination": "/post/tasarım-gözden-geçirme-pratiği-tr",
+      "permanent": true
+    }
+  ],
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
