@@ -25,13 +25,17 @@ düzeyinde kalınmıştır. Bunun nedeni, domain odaklı tasarımın esas zorlu�
 sözdizimsel değil, kavramsal olmasıdır.
 1
 
--- 1 of 32 --
+-- 1 of 42 --
 
 Anahtar Kavramların Açıklamaları
 Bu bölümde, çalışmada geçen kavramlar tanımlanmakta ve her biri için günlük
 hayattan veya yazılım dışı alanlardan anlaşılır örnekler verilmektedir. Örneklerin
 çoğunda, tutarlılık sağlamak amacıyla bir restoran zinciri ve bir kargo şirketi
 benzetmesi kullanılmaktadır.
+2
+
+-- 2 of 42 --
+
 Mimari Katmanlar
 C ekirdek katman (core layer)
 Uygulamanın iş kurallarının toplandığı, hiçbir arayüze bağlı olmayan merkezi
@@ -60,22 +64,26 @@ Henüz tam bir domain modeli kurulmamışken, ileride kurulabilmesi için zemin
 hazırlayan ara yapı.
 Örnek : Bir eve tadilat öncesi yapılan boşaltma işlemi. Duvar örülmemiştir,
 ama örülebilmesi için ortam açılmıştır.
-2
-
--- 2 of 32 --
-
 Bağımlılık yönü (dependency direction)
 Hangi bölümün hangisini tanıdığını belirleyen kural: dış bölümler içi tanır, iç
 bölümler dışı tanımaz.
 Örnek : Anayasa ile yönetmelik ilişkisi. Yönetmelik anayasaya atıf yapar;
 anayasa hiçbir yönetmelikten haberdar değildir. Yönetmelik değişince anayasa
 değişmez.
+3
+
+-- 3 of 42 --
+
 Bağımlılığın tersine çevrilmesi (dependency inversion)
 ˙Iç katmanın ihtiyacını kendi diliyle bir talep olarak tanımlaması, bu talebin nasıl
 karşılanacağını ise dış katmana bırakması.
 Örnek : Bir aşçının “bana 200 gram taze fesleğen lazım” demesi. Fesleğenin
 hangi tedarikçiden, hangi araçla geleceği satın alma biriminin işidir; aşçı bunu
 bilmez.
+4
+
+-- 4 of 42 --
+
 Dil ve Anlam
 Ortak dil (ubiquitous language)
 ˙Işi bilen kişi ile yazılımı yapan kişinin aynı kavramı aynı kelimeyle ifade etmesi.
@@ -99,14 +107,14 @@ gusudur.
 Örnek : Yukarıdaki “teslim edildi” durumunun toplantıda ortaya çıkması.
 Doğru tepki, tek bir tanımda uzlaşmaya çalışmak değil, iki ayrı alanın varlığını
 kabul etmektir.
-3
-
--- 3 of 32 --
-
 Domain uzmanı (domain expert)
 ˙Işin kendisini bilen, ancak yazılım geliştirmeyen kişi.
 Örnek : Otuz yıllık dağıtım şefi. Hangi durumda paketin şubeye geri döneceğini,
 hangi durumda komşuya bırakılabileceğini kimsenin yazmadığı biçimde bilir.
+5
+
+-- 5 of 42 --
+
 Sınırlar ve Bağlamlar
 Sınırlı bağlam (bounded context)
 Belirli bir modelin ve terimlerinin geçerli olduğu alan. ˙Içeride her terimin tek
@@ -134,14 +142,14 @@ Müşteri–tedarikçi (customer–supplier)
 Aşağı akış tarafın ihtiyaçlarının, yukarı akış tarafın planına girebildiği ilişki.
 Örnek : Restoran ile düzenli çalıştığı sebze tedarikçisi. Restoran “önümüzdeki
 ay menüde enginar olacak” dediğinde tedarikçi buna göre hazırlık yapar.
-4
-
--- 4 of 32 --
-
 Uyum sağlayan (conformist)
 Aşağı akış tarafın, karşı tarafın modelini olduğu gibi kabul etmesi.
 Örnek : Küçük bir işletmenin vergi dairesinin beyan formatını aynen kullan-
 ması. Pazarlık gücü yoktur; formatı tartışmak yerine ona uyar.
+6
+
+-- 6 of 42 --
+
 Yozlaşma önleyici katman (anti-corruption layer)
 Dış dünyanın modelini kendi diline çeviren ara katman.
 Örnek : Yabancı bir heyetle yapılan görüşmedeki çevirmen. Karşı tarafın
@@ -163,6 +171,10 @@ keşfinde ölçülebilir bir göstergedir.
 Örnek : Bir mağazada indirim politikası her değiştiğinde etiket basımının da
 değişmesi, ama stok sayımının hiç etkilenmemesi. ˙Ilk ikisi aynı alana, üçüncüsü
 ayrı bir alana aittir.
+7
+
+-- 7 of 42 --
+
 Model Yapı Taşları
 Kimlikli nesne (entity)
 Nitelikleri değişse bile aynı kalan, sürekliliği olan kavram.
@@ -172,10 +184,6 @@ Değer nesnesi (value object)
 Yalnızca taşıdığı değerle tanımlanan, kimliği olmayan kavram.
 Örnek : Yüz lira. “Hangi yüz lira” diye sorulmaz; iki yüz liralık aynı şeydir.
 Cüzdandaki banknotun seri numarası kimseyi ilgilendirmez.
-5
-
--- 5 of 32 --
-
 Bütünlük birimi (aggregate)
 Birlikte tutarlı kalması gereken nesnelerin oluşturduğu, dışarıya tek kapıdan
 açılan küme.
@@ -201,6 +209,10 @@ Bütünlük birimlerinin saklanmasını ve geri getirilmesini işin diliyle ifad
 soyutlama.
 Örnek : Kütüphane görevlisi. “Su yazarın son kitabını istiyorum” denir;
 görevlinin kitabı hangi rafta, hangi depoda bulduğu istekte bulunanı ilgilendirmez.
+8
+
+-- 8 of 42 --
+
 Üretim noktası (factory)
 Bir nesnenin oluşturulması sırasında sağlanması gereken kuralları tek yerde
 uygulayan sorumluluk.
@@ -209,10 +221,6 @@ trollerden geçmiş bir başvuru sonucunda tek bir noktadan çıkar. Böylece ge
 bir kimlik hiçbir zaman var olmaz.
 Kullanım senaryosu (use case)
 Kullanıcının bakış açısından anlamlı, baştan sona bir iş akışı.
-6
-
--- 6 of 32 --
-
 Örnek : “Randevu iptal et.” ˙Içinde birden çok adım vardır (randevuyu bul,
 iptal edilebilir mi kontrol et, iptal et, bilgilendirme gönder), ama dışarıdan tek
 bir eylemdir.
@@ -221,6 +229,10 @@ Yalnızca veri taşımak amacıyla oluşturulan, hiçbir kural içermeyen sade y
 Örnek : Bir kurumun gönderdiği özet bilgilendirme yazısı. Kurumun iç
 kayıtlarının kendisi değildir; dışarıya gösterilmek üzere hazırlanmış sade bir
 özettir.
+9
+
+-- 9 of 42 --
+
 Tutarlılık ve Kalıcılık
 Değişmez (invariant)
 Her koşulda geçerli olması gereken, ihlal edilmesine hiçbir an izin verilmeyen
@@ -244,10 +256,6 @@ Sema baskısı (schema pressure)
 Veri saklama biçiminin, iş modelinin şeklini bozmaya başlaması.
 Örnek : Bir arşiv dolabının çekmece boyutuna göre belgelerin katlanması.
 Zamanla belgelerin içeriği değil, dolaba sığma kaygısı belirleyici hâle gelir.
-7
-
--- 7 of 32 --
-
 Okuma–yazma ayrımı (read–write separation)
 Veri değiştiren işlemlerle yalnızca görüntüleme yapan işlemlerin farklı disiplin-
 lere tabi tutulması.
@@ -258,6 +266,10 @@ Bir nesnenin oluşturulduktan sonra değiştirilmemesi; değişiklik gerektiğin
 yenisinin üretilmesi.
 Örnek : Bir fatura. Yanlış kesilen fatura üzerinde düzeltme yapılmaz; iptal
 edilip yenisi kesilir. Eski belge olduğu gibi durur.
+10
+
+-- 10 of 42 --
+
 Model Kalitesi
 Anemik model (anemic model)
 Nesnelerin yalnızca veri taşıdığı, tüm kuralların dışarıdaki işlevlerde biriktiği
@@ -282,9 +294,9 @@ Bir nesnenin hangi durumdan hangi duruma geçebileceğinin açıkça tanımlanma
 ve geçersiz geçişlerin reddedilmesi.
 Örnek : Teslim edilmiş bir kargonun tekrar “yola çıktı” durumuna geçememesi.
 Bu geçişi engelleyen, kargo kaydının kendisidir.
-8
+11
 
--- 8 of 32 --
+-- 11 of 42 --
 
 Dönüşüm Süreci
 Olay tabanlı keşif (event storming)
@@ -313,15 +325,15 @@ Erken soyutlama maliyeti (premature abstraction cost)
 Henüz ihtiyaç doğmamışken kurulan yapının doğurduğu gereksiz yük.
 Örnek : Üç kişilik bir aile için yirmi kişilik yemek düzeni kurmak. Kurulum
 zaman alır, bakımı süreklidir ve hiçbir zaman karşılığı alınmaz.
+12
+
+-- 12 of 42 --
+
 Paketleme ve Dağıtım
 Yerel dosya bağımlılığı (local file dependency)
 Ortak bölümün, aynı makinedeki bir klasör üzerinden doğrudan kullanılması.
 Örnek : Aynı evde oturan iki kişinin ortak alışveriş listesini mutfak dolabına
 asması. Ev içinde işler; başka eve taşınıldığında çalışmaz.
-9
-
--- 9 of 32 --
-
 Paket deposu (package registry)
 Ortak bölümün sürüm numarasıyla yayımlandığı merkezi kaynak.
 Örnek : Bir yayınevinin kitap baskıları. Herkes “üçüncü baskı” der ve aynı
@@ -340,9 +352,9 @@ Her alanın ayrı bir paket olarak dağıtılması.
 Örnek : Bir ansiklopedinin tek cilt yerine konu bazlı ciltler hâlinde basılması.
 ˙Ihtiyaç duyan yalnızca ilgili cildi edinir; bir cildin yeni baskısı diğerlerini etkile-
 mez.
-10
+13
 
--- 10 of 32 --
+-- 13 of 42 --
 
 Birinci Kısım: Hazırlık Mimarisi
 Üç Bileşenli Yapı
@@ -379,9 +391,9 @@ Buna karşılık aşağıdaki koşullar bu ayrımdan türemez ve bağımsız ola
 çalışılmayı gerektirir:
 • Ortak dil: Domain terimlerinin ekip ile domain uzmanı arasında tek ve
 tutarlı bir anlamla kullanılması, bir klasör düzeninin sonucu değildir.
-11
+14
 
--- 11 of 32 --
+-- 14 of 42 --
 
 • Bağlam sınırlarının isabeti: Sınırlı bağlamların nerede başlayıp nerede
 biteceği, teknik bağımlılıklara değil işin gerçek ayrım çizgilerine göre be-
@@ -395,9 +407,9 @@ Bu nedenle hazırlık mimarisi, domain odaklı tasarımın ne yeterli ne de
 zorunlu koşuludur; geçişin maliyetini yeniden yazımdan yeniden düzenlemeye in-
 diren bir ara aşamadır. C alışmanın izleyen kısımları, yukarıda sıralanan karşılanmamış
 koşulların nasıl karşılanacağını konu edinmektedir.
-12
+15
 
--- 12 of 32 --
+-- 15 of 42 --
 
 ˙Ikinci Kısım: Ortak Dilin Kurulması
 Ortak Dilin ˙Işlevi
@@ -432,9 +444,9 @@ değildir. Böyle bir zorlama modeli işin gerçekliğinden uzaklaştırır ve s
 her iki tarafa da uymayan aşırı genel bir kavram üretir. Doğru yaklaşım, terimin
 her bağlamda kendi anlamıyla yaşamasına izin vermek ve bağlamlar arası geçişte
 açık bir çeviri tanımlamaktır.
-13
+16
 
--- 13 of 32 --
+-- 16 of 42 --
 
 Üçüncü Kısım: Sınırlı Bağlamların Keşfi
 Sınırlı Bağlam Kavramı
@@ -471,9 +483,9 @@ zaman sırasına dizilmesi.
 kabul edilebilir hale geldiği noktaların işaretlenmesi.
 • ˙Işaretlenen noktaların aday sınır olarak değerlendirilmesi ve her adayın
 yukarıdaki göstergeler karşısında sınanması.
-14
+17
 
--- 14 of 32 --
+-- 17 of 42 --
 
 Sınır Sayısına ˙Ilişkin Denge
 Bağlam sayısının fazla tutulması, entegrasyon maliyetini ve çeviri yükünü artırır;
@@ -484,9 +496,9 @@ abilir olmasıdır. Bir bağlamı anlatmak için sürekli istisna belirtmek gere
 orsa bağlam fazla geniştir. Buna karşılık iki bağlam arasında sürekli veri gidip
 geliyor ve neredeyse her değişiklik ikisini birden etkiliyorsa, sınır yanlış yerden
 geçmektedir.
-15
+18
 
--- 15 of 32 --
+-- 18 of 42 --
 
 Dördüncü Kısım: Bağlam Haritası ve Bağlamlar
 Arası ˙Ilişkiler
@@ -522,9 +534,9 @@ modeline ait olmayan, açıkça tanımlanmış ortak bir sözleşme üzerinden
 yürütülmesidir. C ok sayıda tüketicinin bulunduğu durumlarda uygundur.
 • Ayrı yollar: ˙Iki bağlam arasında entegrasyon kurulmamasıdır. Ente-
 grasyonun maliyeti sağlayacağı değeri aştığında meşru bir seçimdir.
-16
+19
 
--- 16 of 32 --
+-- 19 of 42 --
 
 Yozlaşma Önleyici Katmanın Konumu
 C ekirdek–mobil–web yapısında yozlaşma önleyici katmanın en sık gerekli olduğu
@@ -535,9 +547,9 @@ Bu katman, dış temsili domain nesnelerine çeviren ve ters yönde domain
 kararlarını dış temsile dönüştüren bir sınır oluşturur. Katmanın varlığı, dış
 servis sözleşmesindeki bir değişikliğin etkisini tek bir çeviri noktasında hapseder;
 bu noktanın dışında domain modeli değişiklikten habersiz kalır.
-17
+20
 
--- 17 of 32 --
+-- 20 of 42 --
 
 Beşinci Kısım: Domain Modelinin Yapı Taşları
 Kimlikli Nesneler ve Değer Nesneleri
@@ -578,9 +590,9 @@ edilebildiği her yer, bir sınır adayıdır.
 • Değişiklik işlemi kapsamı: Bir bütünlük birimi, tek bir işlemde bütünüyle
 değiştirilebilecek büyüklükte olmalıdır. Birden fazla birimi aynı işlemde
 değiştirme ihtiyacı, sınırların yanlış çizildiğinin göstergesidir.
-18
+21
 
--- 18 of 32 --
+-- 21 of 42 --
 
 • Boyut: Birim büyüdükçe yükleme maliyeti ve eşzamanlı erişim çakışması
 artar. Kural olarak birimler mümkün olan en küçük boyutta tutulmalıdır.
@@ -620,9 +632,9 @@ Depoların tasarımında üç ilke geçerlidir:
 neler için ayrı depo oluşturulmaz.
 • Depo arayüzü domain katmanında, gerçekleştirimi ise dış katmanda kon-
 umlandırılır. Böylece domain, kalıcılık teknolojisinden habersiz kalır.
-19
+22
 
--- 19 of 32 --
+-- 22 of 42 --
 
 • Depo, bütünlük birimini bütün olarak döndürür; kısmi yükleme, birimin
 bütünlük güvencesini zedeler.
@@ -635,9 +647,9 @@ Bu nedenle oluşturma sorumluluğu, kuralları tek bir yerde uygulayan bir
 üretim noktasında toplanır. Üretim noktası, geçerli olmayan bir nesnenin hiçbir
 zaman var olamamasını güvence altına alır; bu, model bütünlüğünün en ucuz
 koruma biçimidir.
-20
+23
 
--- 20 of 32 --
+-- 23 of 42 --
 
 Altıncı Kısım: Katmanların Ayrıştırılması
 Domain ve Uygulama Katmanları
@@ -673,9 +685,9 @@ başlar.
 ˙Istemcilere döndürülen veriler bu nedenle domain nesneleri değil, yalnızca
 aktarım amacı taşıyan sade yapılar olmalıdır. Bu yapılar arayüz ihtiyaçlarına
 göre serbestçe biçimlenebilir; model üzerinde hiçbir etkileri olmaz.
-21
+24
 
--- 21 of 32 --
+-- 24 of 42 --
 
 Yedinci Kısım: Kalıcılık ve Model Arasındaki Ger-
 ilim
@@ -714,9 +726,9 @@ Bu baskıya karşı korunma, domain nesneleri ile kalıcılık temsillerinin ayr
 masıyla sağlanır. Kalıcılık temsili tabloyu bilinçli olarak yansıtır ve yansıtması
 beklenir; domain nesnesi ise işin kavramını yansıtır. ˙Ikisi arasındaki eşleme
 deponun içinde, tek bir yerde yapılır.
-22
+25
 
--- 22 of 32 --
+-- 25 of 42 --
 
 Ayrım bir dönüşüm maliyeti doğurur. Bu maliyet elle yazılan eşleme ko-
 dudur ve küçük ölçekte gereksiz görünür. Ancak maliyetin karşılığı, modelin
@@ -750,9 +762,9 @@ ve bütünlük biriminin sağladığı güvence tümüyle ortadan kalkar.
 Koşul korunduğu sürece okuma yolu bir izdüşümden ibarettir: veriyi ekranın
 istediği biçimde sunar, hakkında karar vermez. Karar verme yetkisi bütünüyle
 yazma yolunda kaldığı için model bütünlüğü zedelenmez.
-23
+26
 
--- 23 of 32 --
+-- 26 of 42 --
 
 Sekizinci Kısım: Anemik Modelden Zengin Mod-
 ele Geçiş
@@ -790,9 +802,9 @@ edilir ve o nesnenin sorumluluğuna taşınır. Ölçüt basittir: kuralın doğ
 için yalnızca o nesnenin kendi verisi yeterliyse, kuralın yeri o nesnedir.
 Bu adım henüz yapıyı değiştirmez; yalnızca dağınık kuralların adreslerini
 belirler ve sonraki adımların üzerinde çalışacağı listeyi oluşturur.
-24
+27
 
--- 24 of 32 --
+-- 27 of 42 --
 
 Değer Nesnelerinin C ıkarılması
 Birlikte anlam taşıyan ve birlikte doğrulanan alan kümeleri ayrı değer nesneleri
@@ -829,9 +841,9 @@ zaten modele ait değildir ve dışarıda kalmaları doğrudur.
 sinyalidir. Böyle bir kural genellikle henüz adı konmamış bir kavrama
 işaret eder; bu durumda yapılması gereken kuralı zorla bir yere yerleştirmek
 değil, modeli yeniden gözden geçirmektir.
-25
+28
 
--- 25 of 32 --
+-- 28 of 42 --
 
 Zengin Modelin Sınırı
 Her nesnenin davranışla doldurulması bir amaç değildir. Bazı kavramlar gerçekten
@@ -848,9 +860,9 @@ runması ele alınmıştı. Bu kısımda ele alınan ise modelin uygulama katman
 tarafından boşaltılmasına karşı korunmasıdır. ˙Iki durum farklı yönlerden gelen
 aynı sorunu gösterir: modelin kendi sınırını ve kendi sorumluluğunu koruyama-
 ması.
-26
+29
 
--- 26 of 32 --
+-- 29 of 42 --
 
 Dokuzuncu Kısım: C ekirdek Katmanın Projeler
 Arasında Paylaşımı
@@ -887,9 +899,9 @@ Buna karşılık paket sayısının artması sürüm eşgüdüm maliyetini yüks
 Ayrıştırma kararı, bağlamların gerçekten bağımsız evrilip evrilmediğine bakılarak
 verilmelidir; birlikte değişen bağlamların ayrı paketlere bölünmesi yalnızca ek
 yük üretir.
-27
+30
 
--- 27 of 32 --
+-- 30 of 42 --
 
 Onuncu Kısım: Evrimsel Yol Haritası
 Birinci Aşama: C alışan ˙Ilk Sürüm
@@ -926,9 +938,9 @@ lirlenmesi.
 • Toplanan terimlerin sözlükleştirilmesi ve anlam çatışmalarının işaretlenmesi.
 • Geçmiş değişiklik kayıtlarının incelenerek birlikte değişen kural kümelerinin
 tespiti.
-28
+31
 
--- 28 of 32 --
+-- 31 of 42 --
 
 • Aday sınırların belirlenmesi ve her adayın dil kırılması, değişim birlikteliği,
 sorumluluk ayrımı ve tutarlılık gereksinimi ölçütleri karşısında sınanması.
@@ -966,9 +978,9 @@ bazında yürütüldüğü için sınırlı bir maliyetle mümkün olur.
 Sekizinci Aşama: Süreklilik
 Domain odaklı tasarım bir varış noktası değil, sürdürülen bir uygulamadır.
 Süreklilik için gereken pratikler şunlardır:
-29
+32
 
--- 29 of 32 --
+-- 32 of 42 --
 
 • Ortak dilin canlı tutulması: yeni terimlerin sözlüğe eklenmesi, kullanımdan
 düşen terimlerin çıkarılması.
@@ -993,9 +1005,9 @@ döngüsünün yeni yapıyla tamamlanmış olması ve yapının değişiklik hı
 yavaşlatmadığının gözlenmesi.
 Bu göstergelerin hiçbiri gözlenmiyorsa mevcut yapı yeterlidir ve geçiş erte-
 lenmelidir.
-30
+33
 
--- 30 of 32 --
+-- 33 of 42 --
 
 On Birinci Kısım: Yaygın Hatalar
 Dönüşüm sırasında sık karşılaşılan hatalar ve bunların teşhis göstergeleri aşağıda
@@ -1024,9 +1036,300 @@ yalnızca alan eşleyen katmanların çoğalması.
 • Tüm sistemi aynı anda dönüştürmeye çalışmak: Dönüşüm bağlam
 bazında değil bütünsel yürütülmektedir. Teşhis: uzun süre teslim edilebilir
 çıktı üretilememesi.
-31
+34
 
--- 31 of 32 --
+-- 34 of 42 --
+
+On ˙Ikinci Kısım: Epistemolojik Okuma
+Bölümün Konumu ve Amacı
+Buraya kadar olan kısımlarda domain odaklı tasarım, uygulayıcının bakış açısından
+ele alınmıştır: sınırların hangi göstergelerle keşfedileceği, model yapı taşlarının
+hangi ölçütlerle seçileceği, kalıcılık baskısının nasıl yalıtılacağı ve dönüşümün
+hangi sırayla yürütüleceği. Bu kısımda ise aynı yöntem, bir yazılım tekniği
+olarak değil, bir bilme ve kurumsallaştırma pratiği olarak incelenmektedir.
+Bu okumanın gerekçesi, yaklaşımın yanıtladığı sorunun yazılım üretiminden
+daha temel bir düzeye ait olmasıdır. Söz konusu sorun şudur: karmaşık bir
+gerçeklik nasıl gözlemlenir, hangi kavramlarla adlandırılır, hangi sınırlar içinde
+geçerli sayılır ve nasıl aktarılabilir bir temsile dönüştürülür? Bu, tanımı gereği
+bir bilgi kuramı sorusudur; domain odaklı tasarımın terimlerinin önemli bölümü
+de bu sorunun mühendislik diline tercüme edilmiş karşılıklarıdır.
+Aşağıdaki inceleme, önceki kısımlarda tanımlanan kavramları yeniden tanımlamaz;
+onları oluşturan bilgi kuramsal savları görünür kılmayı amaçlar. Bu savların
+açığa çıkarılmasının pratik bir karşılığı da vardır: bir kuralın hangi gerekçeye
+dayandığı bilinmediğinde, kural yalnızca bir biçim olarak uygulanır ve ilk maliyet
+baskısında terk edilir.
+Temsilin Seçiciliği
+Modelleme pratiğinin en yaygın hatası, modeli temsil ettiği gerçeklikle özdeşleştirmektir.
+Domain odaklı tasarımın çıkış noktası bu özdeşleştirmenin reddidir. Model,
+gerçekliğin kendisi değil, belirli bir amaç doğrultusunda oluşturulmuş seçilmiş
+bir temsildir. Seçicilik burada bir kusur değil, temsilin var olma koşuludur:
+hiçbir yönü elenmemiş bir temsil, temsil ettiği gerçeklik kadar karmaşık olacağı
+için hiçbir bilişsel kazanç sağlamaz.
+Bu savın doğrudan sonucu, bir kavramın tek ve nihai tanımını aramanın
+yöntemsel bir hata olduğudur. Üçüncü Kısım’da sınırlı bağlam kavramı tanıtılırken
+verilen örnekler — aynı kavramın farklı alanlarda farklı içerikle yaşaması — bu
+sonucun kendisidir. Bir kargo işletmesinde “müşteri”, muhasebe alanında bir
+ödeme ilişkisine, operasyon alanında bir teslimat alıcısına, destek alanında bir
+sorun bildiricisine karşılık gelir. Bu tanımlardan hangisinin doğru olduğu sorusu
+yanlış kurulmuştur; üçü de kendi alanı içinde doğrudur ve hiçbiri diğerlerinin
+yerini alamaz.
+Buradan türeyen ilke, temsil ile temsil edilen arasındaki ayrımın kalıcı biçimde
+korunmasıdır. Modelin gerçekliği tüketmediği kabul edildiğinde, modeldeki bir
+eksiklik gerçekliğin bir kusuru olarak değil, temsilin sınırının bir göstergesi
+olarak okunur. Bu ayrımın yitirilmesi, modelde bulunmayan her olgunun istisna
+sayılmasına ve istisnaların modele ek alanlar biçiminde iliştirilmesine yol açar;
+bu da Sekizinci Kısım’da tarif edilen anemikleşmenin en sessiz güzergâhıdır.
+35
+
+-- 35 of 42 --
+
+Akış Yönü ve Aracın Önceliği Sorunu
+Sağlıklı bir modelleme akışı gerçeklikten başlar ve teknik gerçekleştirimde son
+bulur: gözlem, kavramsallaştırma, model, sistem. Bozulmuş yapılarda bu akış
+tersine döner. Veri şeması kod yapısını, kod yapısı ise ilgililerin işi düşünme
+biçimini belirlemeye başlar. Sürecin kendini pekiştirme özelliği vardır; çünkü
+aracın dayattığı ayrımlar yeterince uzun süre kullanıldığında işin doğal ayrımları
+sanılır ve sorgulanamaz hâle gelir.
+Yedinci Kısım’da ele alınan şema baskısı, bu ters akışın en somut biçimidir.
+Kalıcılık teknolojisinin gerektirdiği alanların domain nesnelerine yerleşmesi yalnızca
+teknik bir kirlenme değildir. ˙Işin dilinde karşılığı bulunmayan öğelerin kavramın
+parçasıymış gibi görünmeye başlaması, kavramın kendisinin bozulmasıdır. Aynı
+şekilde nesne yapısının tablo yapısını birebir yansıtması, domainde bölünmez
+sayılan bir kavramın parçalanmasına ve kuralın dayatılabileceği bir yerin or-
+tadan kalkmasına yol açar; burada kaybedilen şey bir kod düzeni değil, bir
+kavramın bütünlüğüdür.
+Yozlaşma önleyici katmanın işlevi de bu düzeyde okunmalıdır. Katmanın
+koruduğu şey veri biçimi değil, düşünme çerçevesidir. Dış sistemin kavramları iç
+modele doğrudan girdiğinde, dışarıdan gelen ayrımlar içeride sorgulanmaksızın
+benimsenir ve zamanla iç modelin kendi ayrımlarının yerini alır. Bu nedenle
+söz konusu katman teknik bir çeviri aracı değil, bir yalıtım mekanizmasıdır:
+dışarıdaki modelin bozulmalarının içerideki kavram düzenine sızmasını engeller.
+Sınır C izme ve Geçerlilik Alanı
+Sınırlı bağlam kavramı, bilginin evrensel ve tek anlamlı olmadığı savının biçimselleştirilmiş
+hâlidir. Bir önermenin geçerliliği, geçerli olduğu alanla birlikte tanımlanmadığı
+sürece belirsizdir; bağlamından koparılmış bir tanım, doğru ya da yanlış olmak-
+tan çok eksik kalmış bir tanımdır.
+˙Ikinci Kısım’da ele alınan dil kırılması olgusu bu belirsizliğin gözlemlenebilir
+biçimidir. “Teslim edildi” ifadesinin dağıtım alanında paketin fiziksel ulaşımını,
+muhasebe alanında ödemenin tahsilini ve hukuki alanda yükümlülüğün yer-
+ine getirilmesini ifade etmesi, üç ayrı kullanım arasındaki bir iletişim kusuru
+değildir. Üç ayrı geçerlilik alanının varlığının işaretidir.
+Bu tespitin yöntemsel sonucu belirleyicidir ve ˙Ikinci Kısım’da verilen ku-
+ralın gerekçesini oluşturur. Terim çatışmasıyla karşılaşıldığında izlenecek yol,
+tarafları tek bir tanımda uzlaştırmak değildir. Böyle bir uzlaşma, her iki alana
+da tam uymayan aşırı genel bir kavram üretir ve — daha önemlisi — gerçek
+ayrımı ortadan kaldırmaz, yalnızca görünmez kılar. Ayrım modelden çıkarıldığında
+ortadan kalkmaz; kodun içinde koşullu denetimler biçiminde yeniden belirir.
+Doğru yaklaşım, terimin her alanda kendi anlamıyla yaşamasına izin vermek ve
+alanlar arası geçişte açık bir çeviri tanımlamaktır.
+Bu nedenle çatışma bir hata değil, bir bulgudur. Anlamın değiştiği yer,
+çoğu zaman bir sınırın geçtiği yerdir; ve sınır, tasarlanan değil keşfedilen bir şey
+olduğu için, çatışma keşfin başlıca aracıdır.
+36
+
+-- 36 of 42 --
+
+Dilin Altyapısal ˙Işlevi
+Ortak dil çalışması sıklıkla terminoloji birliği sağlayan bir düzenleme olarak
+anlaşılır. Bu okuma yetersizdir. Ortak dilin asıl işlevi, kurumun paylaşılan
+zihinsel modelini standartlaştırmaktır; terim birliği bu standartlaşmanın nedeni
+değil, gözlemlenebilir sonucudur.
+Ayrım şu durumla netleşir: bir hekim “hasta kabul edildi” dediğinde ve
+geliştirici bunu “kayıt oluşturuldu” biçiminde anladığında, ortada bir çeviri
+sorunu bulunmaz. ˙Iki taraf farklı gerçeklik modelleri taşımaktadır ve terimlerin
+eşleştirilmesi bu farkı gidermez, yalnızca örter. Kabul işlemi tıbbi anlamda bir
+sorumluluk devri iken, kayıt işlemi teknik anlamda bir durum değişikliğidir; ik-
+isinin aynı sayılması, sorumluluk devrine ilişkin kuralların modelde hiçbir yere
+yerleşememesiyle sonuçlanır.
+Ortak dilin ˙Ikinci Kısım’da vurgulanan tek yönlü olmama özelliği de bu
+çerçevede anlam kazanır. Dilin yalnızca işten koda taşınması, kodu işin bir
+kopyası hâline getirir. Modelleme sırasında fark edilen bir ayrımın işin di-
+line geri beslenmesi ve domain uzmanınca benimsenmesi ise farklı bir şeyin
+göstergesidir: modelleme çalışması yalnızca mevcut bilgiyi kaydetmemiş, yeni
+bir ayrım üretmiştir. Bu, dilin bir kayıt aracı değil, bir düşünme aracı olduğunun
+kanıtıdır.
+Zımni Bilginin Açığa C ıkarılması
+Kurumların işleyişini fiilen belirleyen bilginin önemli bölümü belgelerde değil,
+uzun süre çalışmış kişilerin deneyiminde bulunur. Hangi durumun istisna sayılacağı,
+hangi işlemin geri döneceği, hangi hatanın kritik olduğu — bunlar çoğu zaman
+yazılı değildir, ölçülmez ve kişiye bağlıdır. Bu tür bilgi, dile getirilebilirliği sınırlı
+olduğu için zımni niteliktedir; taşıyıcısı çoğu zaman bildiğini bildiğinin farkında
+bile değildir.
+Domain uzmanıyla yürütülen çalışmanın işlevi bu noktada tanımlanır. Amaç,
+uzmanın söylediklerini olduğu gibi koda aktarmak değildir; söylediklerinin arkasındaki
+ayrım düzenini ortaya çıkarmaktır. Üçüncü Kısım’da tarif edilen olay tabanlı
+keşif yöntemi tam olarak bunu yapar: uzmandan tanım istemek yerine akışı
+anlattırmak, dile getirilemeyen bilginin dolaylı yoldan gözlemlenmesini sağlar.
+Kişi hangi kuralı uyguladığını söyleyemese bile, hangi olayın hangi kararı tetik-
+lediğini anlatabilir; kural bu anlatımdan çıkarsanır.
+Bu çalışmanın sonucu, bilginin kişiden kuruma aktarılmasıdır. Terim sözlüğü
+bu aktarımın en yalın biçimidir: taşıyıcısı olmayan, kişiden bağımsız hâle gelmiş
+bilgi. Domain olayları ise aynı işlevi zaman boyutunda görür; gerçekleşmiş du-
+rumların değişmez biçimde kaydedilmesi, sistemin geçmişini yeniden kurulabilir
+kılar. Beşinci Kısım’da teknik gerekçeleriyle ele alınan domain olayı kavramının
+ikinci bir işlevi bu nedenle kurumsal hafızadır.
+37
+
+-- 37 of 42 --
+
+Soyutlamanın Doğru Tanımı
+Soyutlama yaygın olarak ayrıntıların elenmesi biçiminde anlaşılır. Bu tanım ek-
+siktir ve pratikte yanıltıcıdır; zira hangi ayrıntının eleneceği sorusunu yanıtsız
+bırakır. Domain odaklı tasarımın örtük tanımı daha kesindir: soyutlama, hangi
+farkların önemli, hangilerinin önemsiz olduğunun seçilmesidir. Elenen şey ayrıntı
+değil, seçilen amaç bakımından ayrım gücü taşımayan farktır.
+Bu tanımın iki sonucu vardır. Birincisi, soyutlamanın amaçtan bağımsız
+yapılamayacağıdır: aynı fark bir bağlamda belirleyici, diğerinde önemsiz olabilir.
+˙Ikincisi, kötü soyutlamanın az ayrıntı içermesi değil, yanlış farkları seçmesidir.
+Her şeyi tek bir genel kavram altında toplayan bir yapı, ayrıntı elediği için değil,
+birbirinden ayrılması gereken gerçeklikleri aynı sayarak ayrım gücünü yitirdiği
+için başarısızdır.
+Onuncu Kısım’da ele alınan erken soyutlama maliyeti bu çerçevede yeniden
+okunabilir. Erken soyutlamanın sorunu erken olması değil, gerçeklik henüz
+yeterince gözlemlenmemişken hangi farkların önemli olduğuna karar verilme-
+sidir. Karar, gözlem yerine tahmine dayandığı için isabetsizdir ve bir kez yapıya
+işlendiğinde sonraki gözlemleri de kendi kategorilerine göre yorumlamaya zorlar.
+Değişmez kavramı bu tartışmanın karşı ucunu oluşturur. Değişmezler, karmaşık
+bir gerçeklik içinde koşullardan bağımsız olarak geçerli kalan yapıyı ifade eder
+ve bu yönüyle soyutlama çalışmasının en yoğunlaşmış çıktısıdır. Bir domainde
+kaç değişmez tespit edilebildiği, o domainin ne ölçüde anlaşıldığının doğrudan
+göstergesidir.
+Gözleme Dayalı Sınır Tespiti
+Sınırların keşfinde kullanılan ölçütler arasında değişim birlikteliği ayrı bir kon-
+uma sahiptir; çünkü diğerlerinden farklı olarak bir yorum değil, bir ölçümdür.
+Hangi kuralların birlikte değiştiğini gösteren geçmiş kayıtlar, tarafların beyanından
+bağımsız bir veri kaynağıdır.
+Bu ölçütün epistemolojik değeri, sistemin kendi hakkındaki iddiasıyla fiilı
+davranışını karşılaştırma olanağı sunmasıdır. Bir kurum, iki alanın birbirinden
+bağımsız olduğunu düşünüyor olabilir; ancak değişiklik kayıtları o iki alanın her
+seferinde birlikte değiştiğini gösteriyorsa, bağımsızlık iddiası yanlıştır. Tersi de
+geçerlidir: birlikte anıldığı hâlde hiçbir zaman birlikte değişmeyen alanlar, dil
+düzeyinde bitişik ama yapısal olarak ayrıktır.
+Buradan çıkan genel ilke, sınırların ilan edilen değil gözlemlenen bir olgu
+olduğudur. Bu ilke Üçüncü Kısım’daki “sınırlar tasarlanmaz, keşfedilir” formülasyonunun
+gerekçesidir ve aynı zamanda Yedinci Aşama’da bazı sınırların yanlış çizildiğinin
+anlaşılmasının neden bir başarısızlık sayılmadığını açıklar: gözleme dayalı bir
+tespit, yeni gözlemle düzeltilir.
+Ölçek Bağımsızlığı
+Bu kısımda çıkarılan savların hiçbiri yazılıma özgü değildir. Gözlemden kavrama,
+kavramdan sınıra, sınırdan modele ve modelden kurumsallaşmış bilgiye giden
+38
+
+-- 38 of 42 --
+
+hat, bilgi üreten her örgütlü yapıda görülen bir dizidir. Ölçüm standartlarının
+oluşturulması, mesleki terminolojilerin yerleşmesi, disiplin sınırlarının çizilmesi
+ve kurumsal belleğin kurulması aynı dizinin farklı ölçeklerdeki tezahürleridir.
+Domain odaklı tasarımın ayırt edici yanı, bu diziyi kısa bir zaman ölçeğinde
+ve gözlemlenebilir bir alanda yürütmesidir. Bir toplumda yüzyıllar süren kavram-
+sallaştırma süreci, bir yazılım sisteminde birkaç yıl içinde tamamlanır ve her
+aşaması kayıt altındadır. Bu yönüyle yaklaşım, yalnızca bir mühendislik yöntemi
+değil, bilgi kurumsallaşmasının hızlandırılmış bir örneği olarak da incelenebilir.
+Bu ölçek bağımsızlığının pratik karşılığı, Onuncu Kısım’ın son aşamasında
+belirtilen süreklilik gereğidir. Kurumsallaşmış bilgi bakımsız kaldığında dağılır:
+terimler anlam kaymasına uğrar, sınırlar gerçekliğin gerisinde kalır, kurallar
+taşıyıcılarını yitirir. Modelin bakımı bu nedenle teknik bir düzen işi değil, ku-
+rumun kendi gerçeklik kavrayışını güncel tutma çalışmasıdır. Yapının değeri
+kurulduğu andan değil, sürdürüldüğü süreden gelir — ve bu, yazılım mimarisi
+kadar bilgi kurumları için de geçerli bir ilkedir.
+39
+
+-- 39 of 42 --
+
+Teknik Kavramların Epistemolojik Karşılıkları
+Teknik kavram Epistemolojik karşılığı Genel karşılık
+Domain odaklı
+tasarım
+Gerçekliği temsil edecek zi-
+hinsel modelin kurulması
+Modelleme ve soyut-
+lama
+Domain modeli Gerçekliğin amaca göre
+seçilmiş bir temsili
+Harita arazi değildir
+Sınırlı bağlam Bilginin geçerli olduğu
+alanın çizilmesi
+Bağlam bağımlılığı
+Ortak dil Aynı gerçekliğin aynı
+kavramlarla ifade edilmesi
+Kavramsal netlik
+Terim sözlüğü Kurumsal hafızanın
+dışsallaştırılması
+Bilginin kişiden
+bağımsızlaşması
+Dil kırılması Aynı sözcüğün farklı
+gerçekliklere işaret ettiğinin
+fark edilmesi
+Kavram çatışması
+Terim çatışması C atışmanın hata değil bilgi
+sinyali sayılması
+Keşif mekanizması
+Domain uzmanı Zımni bilgiyi taşıyan kişi Örtük bilgi
+Olay tabanlı keşif Gerçekliğin olaylar
+üzerinden yeniden kurulması
+Nedensel model
+çıkarımı
+Bağlam haritası Sistemdeki bilgi akışının har-
+italanması
+Sistem düşüncesi
+Bağımlılık yönü Bilginin nereden türediğinin
+belirlenmesi
+Nedensellik ve hiy-
+erarşi
+Bağımlılığın tersine
+çevrilmesi
+Bilginin doğru katmana
+yerleştirilmesi
+Soyutlama düzeyi
+Bütünlük birimi Hangi öğelerin birlikte tu-
+tarlı kalacağının belirlenmesi
+Sistem sınırı
+Değişmez Koşullardan bağımsız geçerli
+kalan yapı
+Temel ilke
+Domain olayı Gerçekleşmiş durumların
+kayda geçirilmesi
+Kurumsal hafıza
+Depo soyutlaması Teknik ayrıntı ile kavramın
+ayrılması
+Soyutlama
+Yozlaşma önleyici kat-
+man
+Dış kavramların iç modeli
+bozmasının engellenmesi
+Epistemik yalıtım
+Sema baskısı Veri yapısının düşünceyi
+biçimlendirmesi
+Aracın modele
+hükmetmesi
+Anemik model Bilginin ait olduğu nesneden
+kopması
+Bilginin parçalanması
+Zengin model Bilginin ait olduğu yerde tu-
+tulması
+Bilginin bağlama
+gömülmesi
+Aşamalı dönüşüm Bilginin kademeli olarak
+geliştirilmesi
+Evrimsel öğrenme
+40
+
+-- 40 of 42 --
+
+Teknik kavram Epistemolojik karşılığı Genel karşılık
+Geçiş göstergeleri Değişim zamanının
+ölçülmesi
+Sinyal okuma
+Erken soyutlama Gözlem öncesi genellemenin
+maliyeti
+Yanlış soyutlama
+Değişim birlikteliği Hangi öğelerin fiilen birlikte
+hareket ettiğinin tespiti
+Nedensel bağlantı
+çözümlemesi
+41
+
+-- 41 of 42 --
 
 Sonuç
 Bu çalışma, çok istemcili bir uygulamada iş mantığının merkezileştirilmesinden
@@ -1053,6 +1356,6 @@ malıdır. Ortak dil canlı tutulmadığında, bağlam haritası güncellenmedi�
 ve bütünlük birimi sınırları gözden geçirilmediğinde, en özenle kurulmuş model
 dahi zamanla anemikleşir. Yapının değeri, kurulduğu andan değil sürdürüldüğü
 süreden gelir.
-32
+42
 
--- 32 of 32 --
+-- 42 of 42 --
