@@ -24,6 +24,19 @@ export const TRANSLATIONS = {
     portraitFooter: 'yazıdan üretildi',
     portraitClose: 'Kapat',
     portraitLoading: 'Yükleniyor…',
+    askAiButton: 'Yazılarımı yapay zekâna ver',
+    askAiEyebrow: 'Kendi sohbetinde konuş',
+    askAiIntro:
+      'Tüm yazıları kendi yapay zekâna aktar ve orada konuş — özet iste, soru sor, hangisini okuman gerektiğini sor. Kendi hesabın, kendi sohbetin.',
+    askAiCopy: 'Yazıları kopyala',
+    askAiCopied: 'Kopyalandı ✓ — sohbetine yapıştır',
+    askAiChatGPT: "ChatGPT'de aç",
+    askAiClaude: "Claude'da aç",
+    askAiFullNote: 'Tam metin (NotebookLM veya uzun-bağlam için):',
+    askAiPrefix:
+      'Aşağıda Ömer Faruk Yavuz’un tüm yazılarının başlık ve özetleri var. Bunları oku ve benimle bu yazılar üzerine konuş: özetle, soru sorduğumda yanıtla, ilgime göre hangisini okumam gerektiğini öner.',
+    askAiPrompt:
+      'Ömer Faruk Yavuz’un yazılarını şu adresten oku ve benimle bunlar üzerine konuş (özet, öneri, soru-cevap):',
     loading: 'Yükleniyor…',
     error: 'Hata',
     allPosts: '← Tüm yazılar',
@@ -76,6 +89,19 @@ export const TRANSLATIONS = {
     portraitFooter: 'pieces',
     portraitClose: 'Close',
     portraitLoading: 'Loading…',
+    askAiButton: 'Give my writing to your AI',
+    askAiEyebrow: 'Talk in your own chat',
+    askAiIntro:
+      'Load all the writing into your own AI and talk to it there — ask for a summary, ask questions, ask what to read. Your account, your chat.',
+    askAiCopy: 'Copy the writing',
+    askAiCopied: 'Copied ✓ — paste into your chat',
+    askAiChatGPT: 'Open in ChatGPT',
+    askAiClaude: 'Open in Claude',
+    askAiFullNote: 'Full text (for NotebookLM or long context):',
+    askAiPrefix:
+      "Below are the titles and summaries of all of Ömer Faruk Yavuz's writing. Read them and talk with me about them: summarize, answer my questions, and suggest what I should read based on my interests.",
+    askAiPrompt:
+      "Read Ömer Faruk Yavuz's writing from this URL and talk with me about it (summary, suggestions, Q&A):",
     loading: 'Loading…',
     error: 'Error',
     allPosts: '← All posts',

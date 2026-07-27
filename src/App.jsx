@@ -1,6 +1,7 @@
 import { Link, NavLink, Outlet } from 'react-router-dom'
 import { useLang } from './i18n.jsx'
 import AuthorPortrait from './AuthorPortrait.jsx'
+import AskAI from './AskAI.jsx'
 
 // blog başlığı ve alt bilgi — buradan kişiselleştirebilirsin
 export const SITE = {
@@ -48,7 +49,10 @@ export default function App() {
             <span className="brand-name">{SITE.title}</span>
             <span className="brand-role">{t('role')}</span>
           </Link>
-          <AuthorPortrait />
+          <div className="ai-actions">
+            <AuthorPortrait />
+            <AskAI />
+          </div>
           <Link to="/" className="brand-title">İçimdekiler</Link>
         </div>
       </header>

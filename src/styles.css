@@ -948,6 +948,47 @@ code {
   font-size: 0.8rem;
 }
 
+/* İki yapay zekâ butonu bir satırda */
+.ai-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* "Yapay zekâna ver" modalı */
+.askai-modal {
+  max-width: 520px;
+}
+
+.askai-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0 4px;
+}
+
+.askai-primary.btn {
+  background: var(--fg);
+  color: var(--bg);
+  border-color: var(--fg);
+}
+
+.askai-primary.btn:hover {
+  opacity: 0.88;
+}
+
+.askai-note {
+  margin: 18px 0 0;
+  font-size: 0.85rem;
+}
+
+.askai-note a {
+  color: var(--fg);
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+}
+
 /* Öneriler sekmesi */
 .rec-intro {
   margin: 8px 0 24px;
