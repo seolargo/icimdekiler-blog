@@ -319,7 +319,7 @@ for (const p of posts) {
   const readableUrl = `${SITE_URL}${base}post/${p.slug}`
   const citeText = `[1] ${ieeeAuthor}, "${p.title}," İçimdekiler, ${citeYear}. [Çevrimiçi]. Erişim: ${readableUrl}`
   const cite =
-    `<section class="cite"><h2 class="cite-title">Bu yazıya atıf</h2>` +
+    `<section class="cite"><h2 class="cite-title">Bu yazıya şöyle atıf yapabilirsin</h2>` +
     `<p class="cite-text">${esc(citeText)}</p>` +
     `<div class="cite-actions"><button type="button" class="btn">Atfı kopyala</button>` +
     `<button type="button" class="btn">BibTeX</button></div></section>`
