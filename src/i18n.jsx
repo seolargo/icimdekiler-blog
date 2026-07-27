@@ -24,7 +24,7 @@ export const TRANSLATIONS = {
     portraitFooter: 'yazıdan üretildi',
     portraitClose: 'Kapat',
     portraitLoading: 'Yükleniyor…',
-    askAiButton: 'Yazılarımı yapay zekâna ver',
+    askAiButton: 'Yazdıklarımı kendi yapay zekânda incele',
     askAiEyebrow: 'Kendi sohbetinde konuş',
     askAiIntro:
       'Tüm yazıları kendi yapay zekâna aktar ve orada konuş — özet iste, soru sor, hangisini okuman gerektiğini sor. Kendi hesabın, kendi sohbetin.',
@@ -89,7 +89,7 @@ export const TRANSLATIONS = {
     portraitFooter: 'pieces',
     portraitClose: 'Close',
     portraitLoading: 'Loading…',
-    askAiButton: 'Give my writing to your AI',
+    askAiButton: 'Explore my writing in your own AI',
     askAiEyebrow: 'Talk in your own chat',
     askAiIntro:
       'Load all the writing into your own AI and talk to it there — ask for a summary, ask questions, ask what to read. Your account, your chat.',
