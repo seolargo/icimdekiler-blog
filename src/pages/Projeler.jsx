@@ -1,0 +1,57 @@
+import { useEffect, useState } from 'react'
+import { useHead } from '../seo.js'
+import { useLang } from '../i18n.jsx'
+
+// Projelerim — public/projects.json'dan okunur (GitHub public repo'larından üretildi):
+//   [{ "name": "...", "desc": "...", "lang": "...", "url": "https://github.com/...", "homepage": "..." }]
+export default function Projeler() {
+  const { t } = useLang()
+  const [items, setItems] = useState(null)
+
+  useHead({ title: t('projects'), image: '/profile.jpeg' })
+
+  useEffect(() => {
+    fetch(`${import.meta.env.BASE_URL}projects.json`)
+      .then((r) => r.json())
+      .then((d) => setItems(Array.isArray(d) ? d : []))
+      .catch(() => setItems([]))
+  }, [])
+
+  return (
+    <>
+      <p className="rec-intro muted">{t('projectsIntro')}</p>
+
+      {items === null && <p className="muted">{t('loading')}</p>}
+      {items?.length === 0 && <p className="muted rec-empty">{t('recEmpty')}</p>}
+
+      {items?.length > 0 && (
+        <ul className="proj-list">
+          {items.map((it) => (
+            <li key={it.name} className="proj-item">
+              <a
+                className="proj-link"
+                href={it.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span className="proj-name">{it.name}</span>
+                {it.lang && <span className="proj-lang">{it.lang}</span>}
+              </a>
+              {it.desc && <p className="proj-desc">{it.desc}</p>}
+              {it.homepage && (
+                <a
+                  className="proj-live"
+                  href={it.homepage}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {t('projectsLive')}
+                </a>
+              )}
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
+  )
+}

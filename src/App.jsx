@@ -80,6 +80,9 @@ export default function App() {
         <NavLink to="/oneriler" className="nav-tab">
           {t('recommendations')}
         </NavLink>
+        <NavLink to="/projeler" className="nav-tab">
+          {t('projects')}
+        </NavLink>
       </nav>
 
       <main className="site-main">

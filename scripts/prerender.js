@@ -74,6 +74,7 @@ function header(active) {
     tab(base + 'rehberler', 'Rehberler', 'rehber') +
     tab(base + 'muzik', 'Müzik', 'muzik') +
     tab(base + 'oneriler', 'Öneriler', 'oneriler') +
+    tab(base + 'projeler', 'Projeler', 'projeler') +
     `</nav>` +
     `<main class="site-main">`
 }
@@ -275,6 +276,35 @@ const recBody =
   footer()
 write('oneriler', renderPage({ head: recHead, bodyHtml: recBody }))
 
+// --- PROJELER SEKMESİ --------------------------------------------------------
+const projects = existsSync(join(dist, 'projects.json'))
+  ? JSON.parse(readFileSync(join(dist, 'projects.json'), 'utf8'))
+  : []
+const projItem = (it) =>
+  `<li class="proj-item"><a class="proj-link" href="${escAttr(it.url)}" target="_blank" rel="noopener noreferrer">` +
+  `<span class="proj-name">${esc(it.name)}</span>` +
+  (it.lang ? `<span class="proj-lang">${esc(it.lang)}</span>` : '') +
+  `</a>${it.desc ? `<p class="proj-desc">${esc(it.desc)}</p>` : ''}` +
+  (it.homepage
+    ? `<a class="proj-live" href="${escAttr(it.homepage)}" target="_blank" rel="noopener noreferrer">Canlı ↗</a>`
+    : '') +
+  `</li>`
+const projHead = buildHead({
+  title: 'Projeler',
+  description: 'GitHub’daki açık kaynak projelerim.',
+  canonical: `${SITE_URL}${base}projeler`,
+  type: 'website',
+  image: '/profile.jpeg',
+})
+const projBody =
+  header('projeler') +
+  `<p class="rec-intro muted">GitHub’daki açık kaynak projelerim.</p>` +
+  (projects.length
+    ? `<ul class="proj-list">${projects.map(projItem).join('')}</ul>`
+    : '') +
+  footer()
+write('projeler', renderPage({ head: projHead, bodyHtml: projBody }))
+
 // --- YAZI SAYFALARI --------------------------------------------------------
 const postsBySlug = new Map(posts.map((p) => [p.slug, p]))
 for (const p of posts) {
@@ -369,6 +399,7 @@ const urls = [
   { loc: `${SITE_URL}${base}muzik` },
   { loc: `${SITE_URL}${base}rehberler` },
   { loc: `${SITE_URL}${base}oneriler` },
+  { loc: `${SITE_URL}${base}projeler` },
   ...writings.map((p) => ({
     loc: `${SITE_URL}${base}post/${encodeURIComponent(p.slug)}`,
     lastmod: p.date,
