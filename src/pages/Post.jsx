@@ -83,10 +83,13 @@ export default function Post() {
   const pdfUrl = `${import.meta.env.BASE_URL}pdfs/${post.pdf}`
   const textUrl = `${import.meta.env.BASE_URL}texts/${post.slug}.txt`
 
-  // Atıf bilgileri
-  const citeUrl = window.location.origin + window.location.pathname
+  // Atıf bilgileri (IEEE stili) — URL okunur (decode edilmiş) gösterilir
+  const citeUrl = window.location.origin + decodeURIComponent(window.location.pathname)
   const citeYear = (post.date || '').slice(0, 4) || String(new Date().getFullYear())
-  const citeText = `${SITE_NAME}. "${dTitle(post)}." İçimdekiler, ${citeYear}. ${citeUrl}`
+  const nameParts = SITE_NAME.split(' ')
+  const ieeeAuthor = `${nameParts.slice(0, -1).map((w) => w[0] + '.').join(' ')} ${nameParts.at(-1)}`
+  const online = lang === 'en' ? '[Online]. Available:' : '[Çevrimiçi]. Erişim:'
+  const citeText = `[1] ${ieeeAuthor}, "${dTitle(post)}," İçimdekiler, ${citeYear}. ${online} ${citeUrl}`
   const citeKey = 'oyavuz' + citeYear + post.slug.replace(/[^a-zA-Z0-9]/g, '').slice(0, 16)
   const citeBib =
     `@misc{${citeKey},\n` +

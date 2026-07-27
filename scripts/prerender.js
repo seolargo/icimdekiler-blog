@@ -314,7 +314,10 @@ for (const p of posts) {
         .join('')}</ul></div>`
     : ''
   const citeYear = (p.date || '').slice(0, 4) || String(new Date().getFullYear())
-  const citeText = `${SITE_NAME}. "${p.title}." İçimdekiler, ${citeYear}. ${canonical}`
+  const nameParts = SITE_NAME.split(' ')
+  const ieeeAuthor = `${nameParts.slice(0, -1).map((w) => w[0] + '.').join(' ')} ${nameParts.at(-1)}`
+  const readableUrl = `${SITE_URL}${base}post/${p.slug}`
+  const citeText = `[1] ${ieeeAuthor}, "${p.title}," İçimdekiler, ${citeYear}. [Çevrimiçi]. Erişim: ${readableUrl}`
   const cite =
     `<section class="cite"><h2 class="cite-title">Bu yazıya atıf</h2>` +
     `<p class="cite-text">${esc(citeText)}</p>` +
