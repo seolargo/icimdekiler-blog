@@ -4,6 +4,7 @@ import { usePosts } from '../usePosts.js'
 import { useHead } from '../seo.js'
 import { useLang } from '../i18n.jsx'
 import { fold, matchesTokens } from '../search.js'
+import AuthorPortrait from '../AuthorPortrait.jsx'
 
 const PER_PAGE = 10
 
@@ -269,6 +270,7 @@ export default function Home() {
   return (
     <>
       <Intro />
+      <AuthorPortrait />
 
       {loading && <p className="muted">{t('loading')}</p>}
       {error && <p className="error">{t('error')}: {error.message}</p>}

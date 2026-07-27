@@ -738,3 +738,179 @@ code {
     grid-template-columns: 1fr;
   }
 }
+
+/* "Bu yazar kim?" butonu + portre modalı */
+.portrait-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 0 4px;
+  padding: 10px 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--btn-bg);
+  color: var(--fg);
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.portrait-btn:hover {
+  border-color: var(--muted);
+  transform: translateY(-1px);
+}
+
+.portrait-btn-spark {
+  color: var(--accent);
+  opacity: 0.8;
+}
+
+.portrait-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 5vh 16px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  overflow-y: auto;
+}
+
+.portrait-modal {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 32px 28px 28px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
+.portrait-x {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  border: none;
+  background: none;
+  color: var(--muted);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+.portrait-x:hover {
+  color: var(--fg);
+}
+
+.portrait-loading {
+  padding: 16px 0;
+}
+
+.portrait-eyebrow {
+  margin: 0 0 16px;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.portrait-intro {
+  margin: 0 0 14px;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--fg);
+}
+
+.portrait-section {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.portrait-section h3 {
+  margin: 0 0 12px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+.portrait-section p {
+  margin: 0;
+  line-height: 1.6;
+  color: var(--fg);
+}
+
+.portrait-ideas,
+.portrait-moves,
+.portrait-starters {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.portrait-idea-name {
+  display: block;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.portrait-idea-desc {
+  display: block;
+  margin-top: 2px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.portrait-moves li {
+  padding-left: 18px;
+  position: relative;
+  line-height: 1.55;
+}
+
+.portrait-moves li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--muted);
+}
+
+.portrait-honest p {
+  border-left: 2px solid var(--accent);
+  padding-left: 14px;
+  color: var(--fg);
+}
+
+.portrait-starters a {
+  font-weight: 600;
+  color: var(--fg);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+}
+
+.portrait-starters a:hover {
+  border-color: var(--muted);
+}
+
+.portrait-why {
+  display: block;
+  margin-top: 3px;
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.portrait-foot {
+  margin: 24px 0 0;
+  font-size: 0.8rem;
+}
