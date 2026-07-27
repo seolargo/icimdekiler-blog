@@ -5,6 +5,7 @@ import { useHead } from '../seo.js'
 import { useLang } from '../i18n.jsx'
 import { fold, matchesTokens } from '../search.js'
 import AuthorPortrait from '../AuthorPortrait.jsx'
+import ThemeIcon from '../ThemeIcon.jsx'
 
 const PER_PAGE = 10
 
@@ -125,6 +126,7 @@ function ThemeGrid({ themes, onPick, t }) {
             className="theme-card"
             onClick={() => onPick(th.id)}
           >
+            <span className="theme-icon"><ThemeIcon id={th.id} /></span>
             <span className="theme-title">{th.title}</span>
             <span className="theme-blurb">{th.blurb}</span>
             <span className="theme-more">

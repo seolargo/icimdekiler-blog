@@ -677,6 +677,17 @@ code {
   transform: translateY(-2px);
 }
 
+.theme-icon {
+  display: inline-flex;
+  color: var(--muted);
+  margin-bottom: 4px;
+  transition: color 0.15s ease;
+}
+
+.theme-card:hover .theme-icon {
+  color: var(--accent);
+}
+
 .theme-title {
   font-size: 1.02rem;
   font-weight: 600;
