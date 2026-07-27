@@ -92,9 +92,9 @@ const lastChangeText = new Date(LAST_CHANGE).toLocaleString('tr-TR', {
 
 // İletişim bağlantıları (src/App.jsx'teki CONTACTS ile eşitle)
 const CONTACTS = [
-  { label: 'E-posta', url: '' },
+  { label: 'E-posta', url: 'mailto:mail.omerfaruk@gmail.com' },
+  { label: 'LinkedIn', url: 'https://www.linkedin.com/in/ömer-faruk-y-15343a147/' },
   { label: 'GitHub', url: 'https://github.com/seolargo' },
-  { label: 'LinkedIn', url: '' },
   { label: 'X', url: '' },
   { label: 'Medium', url: '' },
 ].filter((c) => c.url)
