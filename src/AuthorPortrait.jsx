@@ -6,7 +6,7 @@ import { useLang } from './i18n.jsx'
 // bir modalde gösteren buton. Portre build zamanında (scripts/build-portrait.js) üretilir;
 // burada yalnızca tembel yüklenir. Tıklama başına maliyet yoktur.
 export default function AuthorPortrait() {
-  const { t } = useLang()
+  const { t, lang } = useLang()
   const [open, setOpen] = useState(false)
   const [data, setData] = useState(null)
   const reqRef = useRef(null)
@@ -65,18 +65,21 @@ export default function AuthorPortrait() {
             {!data ? (
               <p className="muted portrait-loading">{t('portraitLoading')}</p>
             ) : (
+              (() => {
+                const d = lang === 'en' && data.en ? { ...data, ...data.en } : data
+                return (
               <div className="portrait-body">
                 <p className="portrait-eyebrow">{t('portraitSubtitle')}</p>
 
-                {paras(data.intro).map((p, i) => (
+                {paras(d.intro).map((p, i) => (
                   <p key={i} className="portrait-intro">{p}</p>
                 ))}
 
-                {data.recurringIdeas?.length > 0 && (
+                {d.recurringIdeas?.length > 0 && (
                   <section className="portrait-section">
                     <h3>{t('portraitIdeas')}</h3>
                     <ul className="portrait-ideas">
-                      {data.recurringIdeas.map((it, i) => (
+                      {d.recurringIdeas.map((it, i) => (
                         <li key={i}>
                           <span className="portrait-idea-name">{it.name}</span>
                           <span className="portrait-idea-desc">{it.description}</span>
@@ -86,36 +89,36 @@ export default function AuthorPortrait() {
                   </section>
                 )}
 
-                {data.moves?.length > 0 && (
+                {d.moves?.length > 0 && (
                   <section className="portrait-section">
                     <h3>{t('portraitMoves')}</h3>
                     <ul className="portrait-moves">
-                      {data.moves.map((m, i) => (
+                      {d.moves.map((m, i) => (
                         <li key={i}>{m}</li>
                       ))}
                     </ul>
                   </section>
                 )}
 
-                {data.range && (
+                {d.range && (
                   <section className="portrait-section">
                     <h3>{t('portraitRange')}</h3>
-                    <p>{data.range}</p>
+                    <p>{d.range}</p>
                   </section>
                 )}
 
-                {data.honestNote && (
+                {d.honestNote && (
                   <section className="portrait-section portrait-honest">
                     <h3>{t('portraitHonest')}</h3>
-                    <p>{data.honestNote}</p>
+                    <p>{d.honestNote}</p>
                   </section>
                 )}
 
-                {data.starters?.length > 0 && (
+                {d.starters?.length > 0 && (
                   <section className="portrait-section">
                     <h3>{t('portraitStarters')}</h3>
                     <ul className="portrait-starters">
-                      {data.starters.map((s, i) => (
+                      {d.starters.map((s, i) => (
                         <li key={i}>
                           <Link to={`/post/${s.slug}`} onClick={() => setOpen(false)}>
                             {s.title}
@@ -127,13 +130,15 @@ export default function AuthorPortrait() {
                   </section>
                 )}
 
-                {data.postCount && (
+                {d.postCount && (
                   <p className="portrait-foot muted">
-                    {data.postCount} {t('portraitFooter')}
-                    {data.generatedAt ? ` · ${data.generatedAt}` : ''}
+                    {d.postCount} {t('portraitFooter')}
+                    {d.generatedAt ? ` · ${d.generatedAt}` : ''}
                   </p>
                 )}
               </div>
+                )
+              })()
             )}
           </div>
         </div>

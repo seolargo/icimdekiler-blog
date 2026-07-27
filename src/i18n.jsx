@@ -134,6 +134,25 @@ export const TRANSLATIONS = {
   },
 }
 
+// Seri (kategori) adlarının İngilizce karşılıkları — chip'ler ve yazı meta satırı için.
+export const SERIES_EN = {
+  'Öğrenen Sistemler & Organizasyon': 'Learning Systems & Organization',
+  'Yazılım Pratiği & Rehberler': 'Software Practice & Guides',
+  'Tasarım, Strateji & Toplum': 'Design, Strategy & Society',
+  'İnsan, Zihin & Davranış': 'Mind, Behavior & the Human',
+  'Sistem & Düşünme': 'Systems & Thinking',
+  'Yapay Zekâ Çağı': 'The AI Era',
+  'Kurumlar & Bilim Tarihi': 'Institutions & History of Science',
+  Müzik: 'Music',
+  'Studiolo & Entelektüel Mekân': 'Studiolo & Intellectual Space',
+  'Mühendislik Felsefesi & Kültürü': 'Engineering Philosophy & Culture',
+  'Davranış Uzayı & Yazılım': 'Behavior Space & Software',
+}
+
+export function seriesLabel(name, lang) {
+  return lang === 'en' ? SERIES_EN[name] || name : name
+}
+
 const LangContext = createContext({ lang: 'tr', setLang: () => {}, t: (k) => k })
 
 function initialLang() {

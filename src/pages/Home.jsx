@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useLocation, useSearchParams } from 'react-router-dom'
 import { usePosts } from '../usePosts.js'
 import { useHead } from '../seo.js'
-import { useLang } from '../i18n.jsx'
+import { useLang, seriesLabel } from '../i18n.jsx'
 import { fold, matchesTokens } from '../search.js'
 import ThemeIcon from '../ThemeIcon.jsx'
 
@@ -112,8 +112,10 @@ function FeaturedShelf({ items, t }) {
   )
 }
 
-function ThemeGrid({ themes, onPick, t }) {
+function ThemeGrid({ themes, onPick, t, lang }) {
   if (!themes?.length) return null
+  const title = (th) => (lang === 'en' && th.title_en ? th.title_en : th.title)
+  const blurb = (th) => (lang === 'en' && th.blurb_en ? th.blurb_en : th.blurb)
   return (
     <section className="themes">
       <h2 className="section-head">{t('themesLabel')}</h2>
@@ -126,8 +128,8 @@ function ThemeGrid({ themes, onPick, t }) {
             onClick={() => onPick(th.id)}
           >
             <span className="theme-icon"><ThemeIcon id={th.id} /></span>
-            <span className="theme-title">{th.title}</span>
-            <span className="theme-blurb">{th.blurb}</span>
+            <span className="theme-title">{title(th)}</span>
+            <span className="theme-blurb">{blurb(th)}</span>
             <span className="theme-more">
               {th.slugs.length} {t('themeCount')} · {t('exploreTheme')}
             </span>
@@ -140,7 +142,7 @@ function ThemeGrid({ themes, onPick, t }) {
 
 export default function Home() {
   const { posts, loading, error } = usePosts()
-  const { t } = useLang()
+  const { t, lang } = useLang()
   const [searchParams, setSearchParams] = useSearchParams()
   const location = useLocation()
 
@@ -286,7 +288,7 @@ export default function Home() {
           {showLanding && themes && (
             <>
               <FeaturedShelf items={featuredPosts} t={t} />
-              <ThemeGrid themes={themes.themes} onPick={setTheme} t={t} />
+              <ThemeGrid themes={themes.themes} onPick={setTheme} t={t} lang={lang} />
               <h2 className="section-head all-head">{t('writings')}</h2>
             </>
           )}
@@ -296,8 +298,12 @@ export default function Home() {
               <button type="button" className="back-link" onClick={() => setTheme(null)}>
                 {t('allPosts')}
               </button>
-              <h2 className="section-head">{themeObj.title}</h2>
-              <p className="muted theme-head-blurb">{themeObj.blurb}</p>
+              <h2 className="section-head">
+                {lang === 'en' && themeObj.title_en ? themeObj.title_en : themeObj.title}
+              </h2>
+              <p className="muted theme-head-blurb">
+                {lang === 'en' && themeObj.blurb_en ? themeObj.blurb_en : themeObj.blurb}
+              </p>
             </div>
           )}
 
@@ -330,7 +336,7 @@ export default function Home() {
                   className={`chip${series === name ? ' is-active' : ''}`}
                   onClick={() => setSeries(series === name ? null : name)}
                 >
-                  {name} <span className="chip-count">{count}</span>
+                  {seriesLabel(name, lang)} <span className="chip-count">{count}</span>
                 </button>
               ))}
             </div>
@@ -363,7 +369,10 @@ export default function Home() {
                         <span className="post-title">{post.title}</span>
                         {(post.series || post.pages > 0) && (
                           <span className="post-series">
-                            {[post.series, post.pages > 0 ? `${post.pages} ${t('pagesUnit')}` : null]
+                            {[
+                              seriesLabel(post.series, lang),
+                              post.pages > 0 ? `${post.pages} ${t('pagesUnit')}` : null,
+                            ]
                               .filter(Boolean)
                               .join(' · ')}
                           </span>

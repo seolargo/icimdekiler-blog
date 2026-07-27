@@ -36,7 +36,15 @@ const schema = `{
   "moves": ["yazarın karakteristik hamleleri, kısa cümleler"],
   "range": "kapsamı anlatan tek paragraf",
   "honestNote": "yağcı olmayan, dürüst bir gözlem: güçlü yön ve risk",
-  "starters": [{ "slug": "posts.json'daki bir slug", "title": "başlık", "why": "neden buradan başlanmalı" }]
+  "starters": [{ "slug": "posts.json'daki bir slug", "title": "başlık", "why": "neden buradan başlanmalı" }],
+  "en": {
+    "intro": "İngilizce çeviri (aynı içerik)",
+    "recurringIdeas": [{ "name": "...", "description": "..." }],
+    "moves": ["..."],
+    "range": "...",
+    "honestNote": "...",
+    "starters": [{ "slug": "aynı slug", "title": "aynı Türkçe başlık", "why": "İngilizce" }]
+  }
 }`
 
 const prompt = `Aşağıda tek bir yazarın ${posts.length} uzun makalesinin başlıkları ve özet açıklamaları var, ardından temaların haritası. Bu korpustan hareketle, siteye yeni gelen bir okuyucuya "bu yazar kim, nasıl düşünüyor, nelerden bahsetmiş" diye anlatan bir PORTRE üret.
@@ -46,7 +54,7 @@ Ton: ağırbaşlı, ölçülü, akademik-ama-erişilebilir Türkçe. YAĞCILIK Y
 Yalnızca şu JSON şemasında, başka hiçbir metin olmadan yanıt ver:
 ${schema}
 
-recurringIdeas 4-6 madde, moves 3-5 madde, starters 3-4 madde olsun. starters yalnızca aşağıdaki listede GEÇEN slug'ları kullanmalı.
+recurringIdeas 4-6 madde, moves 3-5 madde, starters 3-4 madde olsun. starters yalnızca aşağıdaki listede GEÇEN slug'ları kullanmalı. "en" alanı TR içeriğin İngilizce çevirisidir; starters başlıkları (title) Türkçe kalır (makale adları), yalnızca "why" İngilizceye çevrilir.
 
 === MAKALELER ===
 ${corpus}
@@ -75,14 +83,17 @@ try {
   process.exit(1)
 }
 
-// starters slug doğrulaması
+// starters slug doğrulaması (hem TR hem EN)
 const valid = new Set(posts.map((p) => p.slug))
-if (Array.isArray(data.starters)) {
-  const before = data.starters.length
-  data.starters = data.starters.filter((s) => valid.has(s.slug))
-  if (data.starters.length !== before)
-    console.warn(`[portrait] uyarı: ${before - data.starters.length} geçersiz starter slug elendi`)
+const filterStarters = (obj, label) => {
+  if (!obj || !Array.isArray(obj.starters)) return
+  const before = obj.starters.length
+  obj.starters = obj.starters.filter((s) => valid.has(s.slug))
+  if (obj.starters.length !== before)
+    console.warn(`[portrait] uyarı: ${before - obj.starters.length} geçersiz ${label} starter slug elendi`)
 }
+filterStarters(data, 'TR')
+filterStarters(data.en, 'EN')
 
 data.generatedAt = new Date().toISOString().slice(0, 10)
 data.postCount = posts.length

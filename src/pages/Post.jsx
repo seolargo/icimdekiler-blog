@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { usePosts } from '../usePosts.js'
 import { useHead, SITE_NAME } from '../seo.js'
-import { useLang } from '../i18n.jsx'
+import { useLang, seriesLabel } from '../i18n.jsx'
 
 export default function Post() {
   const { slug } = useParams()
   const { posts, loading, error } = usePosts()
-  const { t } = useLang()
+  const { t, lang } = useLang()
   const [copied, setCopied] = useState(false)
   const [textCopied, setTextCopied] = useState(false)
 
@@ -110,7 +110,7 @@ export default function Post() {
           <h1 className="post-heading">{post.title}</h1>
           {(post.series || post.pages > 0) && (
             <p className="post-meta">
-              {[post.series, post.pages > 0 ? `${post.pages} ${t('pagesUnit')}` : null]
+              {[seriesLabel(post.series, lang), post.pages > 0 ? `${post.pages} ${t('pagesUnit')}` : null]
                 .filter(Boolean)
                 .join(' · ')}
             </p>
