@@ -1,5 +1,6 @@
 import { Link, NavLink, Outlet } from 'react-router-dom'
 import { useLang } from './i18n.jsx'
+import AuthorPortrait from './AuthorPortrait.jsx'
 
 // blog başlığı ve alt bilgi — buradan kişiselleştirebilirsin
 export const SITE = {
@@ -37,16 +38,19 @@ export default function App() {
     <div className="site">
       <LangSwitch />
       <header className="site-header">
-        <Link to="/" className="brand">
-          <img
-            className="brand-photo"
-            src={`${import.meta.env.BASE_URL}profile.jpeg`}
-            alt={SITE.title}
-          />
-          <span className="brand-name">{SITE.title}</span>
-          <span className="brand-role">{t('role')}</span>
-          <span className="brand-title">İçimdekiler</span>
-        </Link>
+        <div className="brand">
+          <Link to="/" className="brand-person">
+            <img
+              className="brand-photo"
+              src={`${import.meta.env.BASE_URL}profile.jpeg`}
+              alt={SITE.title}
+            />
+            <span className="brand-name">{SITE.title}</span>
+            <span className="brand-role">{t('role')}</span>
+          </Link>
+          <AuthorPortrait />
+          <Link to="/" className="brand-title">İçimdekiler</Link>
+        </div>
       </header>
 
       <nav className="site-nav" aria-label={t('sections')}>

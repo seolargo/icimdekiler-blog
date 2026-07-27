@@ -118,6 +118,15 @@ code {
   margin: 0 auto;
 }
 
+.brand-person {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  color: inherit;
+}
+
 .brand-photo {
   width: 220px;
   height: 220px;
@@ -141,12 +150,13 @@ code {
 
 .brand-title {
   margin-top: 14px;
-  padding-top: 14px;
+  padding-top: 20px;
   border-top: 1px solid var(--line);
   font-size: 1.6rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+  text-decoration: none;
   background: linear-gradient(90deg, var(--fg), var(--muted));
   -webkit-background-clip: text;
   background-clip: text;
@@ -755,7 +765,7 @@ code {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin: 16px 0 4px;
+  margin: 0;
   padding: 10px 16px;
   border: 1px solid var(--line);
   border-radius: 999px;
