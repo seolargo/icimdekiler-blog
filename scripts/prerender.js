@@ -90,9 +90,28 @@ const lastChangeText = new Date(LAST_CHANGE).toLocaleString('tr-TR', {
   timeZone: 'Europe/Istanbul', // build makinesi UTC olabilir (ör. Vercel)
 })
 
-const footer = () =>
-  `</main><footer class="site-footer"><span>© ${new Date().getFullYear()} ${esc(SITE_NAME)}</span>` +
-  `<span class="footer-updated">Son güncelleme: ${esc(lastChangeText)}</span></footer></div>`
+// İletişim bağlantıları (src/App.jsx'teki CONTACTS ile eşitle)
+const CONTACTS = [
+  { label: 'E-posta', url: '' },
+  { label: 'GitHub', url: 'https://github.com/seolargo' },
+  { label: 'LinkedIn', url: '' },
+  { label: 'X', url: '' },
+  { label: 'Medium', url: '' },
+].filter((c) => c.url)
+const footer = () => {
+  const links = CONTACTS.map(
+    (c) =>
+      `<a href="${escAttr(c.url)}"${c.url.startsWith('http') ? ' target="_blank" rel="noopener noreferrer"' : ''}>${esc(c.label)}</a>`,
+  ).join('')
+  const contact = CONTACTS.length
+    ? `<div class="footer-contact"><span class="footer-label">İletişim</span>${links}</div>`
+    : ''
+  return (
+    `</main><footer class="site-footer">${contact}<div class="footer-meta">` +
+    `<span>© ${new Date().getFullYear()} ${esc(SITE_NAME)}</span>` +
+    `<span class="footer-updated">Son güncelleme: ${esc(lastChangeText)}</span></div></footer></div>`
+  )
+}
 
 const introHtml =
   '<section class="intro">' +

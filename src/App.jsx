@@ -8,6 +8,16 @@ export const SITE = {
   title: 'Ömer Faruk Yavuz',
 }
 
+// İletişim bağlantıları — buradan düzenleyebilirsin. `url` boş bırakılan atlanır.
+// E-posta için "mailto:...", diğerleri için tam adres yaz.
+export const CONTACTS = [
+  { label: 'E-posta', url: '' },
+  { label: 'GitHub', url: 'https://github.com/seolargo' },
+  { label: 'LinkedIn', url: '' },
+  { label: 'X', url: '' },
+  { label: 'Medium', url: '' },
+].filter((c) => c.url)
+
 function LangSwitch() {
   const { lang, setLang } = useLang()
   return (
@@ -77,14 +87,33 @@ export default function App() {
       </main>
 
       <footer className="site-footer">
-        <span>© {new Date().getFullYear()} {SITE.title}</span>
-        <span className="footer-updated">
-          {t('lastUpdate')}:{' '}
-          {new Date(__LAST_CHANGE__).toLocaleString(t('locale'), {
-            dateStyle: 'medium',
-            timeStyle: 'short',
-          })}
-        </span>
+        {CONTACTS.length > 0 && (
+          <div className="footer-contact">
+            <span className="footer-label">{t('contact')}</span>
+            {CONTACTS.map((c) => {
+              const external = c.url.startsWith('http')
+              return (
+                <a
+                  key={c.label}
+                  href={c.url}
+                  {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                >
+                  {c.label}
+                </a>
+              )
+            })}
+          </div>
+        )}
+        <div className="footer-meta">
+          <span>© {new Date().getFullYear()} {SITE.title}</span>
+          <span className="footer-updated">
+            {t('lastUpdate')}:{' '}
+            {new Date(__LAST_CHANGE__).toLocaleString(t('locale'), {
+              dateStyle: 'medium',
+              timeStyle: 'short',
+            })}
+          </span>
+        </div>
       </footer>
     </div>
   )
