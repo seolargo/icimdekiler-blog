@@ -10,6 +10,7 @@ export default function Post() {
   const { t, lang } = useLang()
   const [copied, setCopied] = useState(false)
   const [textCopied, setTextCopied] = useState(false)
+  const [citeCopied, setCiteCopied] = useState(false)
 
   // Yeni bir yazıya girildiğinde en üstten başla
   useEffect(() => {
@@ -81,6 +82,26 @@ export default function Post() {
 
   const pdfUrl = `${import.meta.env.BASE_URL}pdfs/${post.pdf}`
   const textUrl = `${import.meta.env.BASE_URL}texts/${post.slug}.txt`
+
+  // Atıf bilgileri
+  const citeUrl = window.location.origin + window.location.pathname
+  const citeYear = (post.date || '').slice(0, 4) || String(new Date().getFullYear())
+  const citeText = `${SITE_NAME}. "${dTitle(post)}." İçimdekiler, ${citeYear}. ${citeUrl}`
+  const citeKey = 'oyavuz' + citeYear + post.slug.replace(/[^a-zA-Z0-9]/g, '').slice(0, 16)
+  const citeBib =
+    `@misc{${citeKey},\n` +
+    `  author = {${SITE_NAME}},\n` +
+    `  title  = {${dTitle(post)}},\n` +
+    `  year   = {${citeYear}},\n` +
+    `  howpublished = {İçimdekiler},\n` +
+    `  url    = {${citeUrl}}\n` +
+    `}`
+  function copyCite(text) {
+    navigator.clipboard.writeText(text).then(() => {
+      setCiteCopied(true)
+      setTimeout(() => setCiteCopied(false), 2000)
+    })
+  }
 
   function copyText() {
     fetch(textUrl)
@@ -171,6 +192,19 @@ export default function Post() {
           </ul>
         </div>
       )}
+
+      <section className="cite">
+        <h2 className="cite-title">{t('citeTitle')}</h2>
+        <p className="cite-text">{citeText}</p>
+        <div className="cite-actions">
+          <button type="button" className="btn" onClick={() => copyCite(citeText)}>
+            {citeCopied ? t('citeCopied') : t('citeCopy')}
+          </button>
+          <button type="button" className="btn" onClick={() => copyCite(citeBib)}>
+            {t('citeBibtex')}
+          </button>
+        </div>
+      </section>
     </article>
   )
 }

@@ -65,6 +65,10 @@ export const TRANSLATIONS = {
     recIntro: 'Takip etmeye değer bulduğum isimler ve siteleri.',
     recEmpty: 'Yakında — önerilen isimler ve siteleri burada paylaşılacak.',
     relatedPosts: 'İlgili Yazılar',
+    citeTitle: 'Bu yazıya atıf',
+    citeCopy: 'Atfı kopyala',
+    citeBibtex: 'BibTeX',
+    citeCopied: 'Kopyalandı ✓',
     locale: 'tr-TR',
   },
   en: {
@@ -130,6 +134,10 @@ export const TRANSLATIONS = {
     recIntro: 'People and sites worth following.',
     recEmpty: 'Coming soon — recommended names and their sites will appear here.',
     relatedPosts: 'Related Writings',
+    citeTitle: 'Cite this',
+    citeCopy: 'Copy citation',
+    citeBibtex: 'BibTeX',
+    citeCopied: 'Copied ✓',
     locale: 'en-US',
   },
 }

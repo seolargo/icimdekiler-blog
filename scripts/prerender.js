@@ -313,6 +313,13 @@ for (const p of posts) {
         })
         .join('')}</ul></div>`
     : ''
+  const citeYear = (p.date || '').slice(0, 4) || String(new Date().getFullYear())
+  const citeText = `${SITE_NAME}. "${p.title}." İçimdekiler, ${citeYear}. ${canonical}`
+  const cite =
+    `<section class="cite"><h2 class="cite-title">Bu yazıya atıf</h2>` +
+    `<p class="cite-text">${esc(citeText)}</p>` +
+    `<div class="cite-actions"><button type="button" class="btn">Atfı kopyala</button>` +
+    `<button type="button" class="btn">BibTeX</button></div></section>`
   const body =
     header(isMusic ? 'muzik' : isGuide ? 'rehber' : 'yazilar') +
     `<article class="post">` +
@@ -328,6 +335,7 @@ for (const p of posts) {
     `</div>` +
     `<div class="pdf-frame"><iframe title="${escAttr(p.title)}" src="${escAttr(pdfUrl)}"></iframe></div>` +
     related +
+    cite +
     `</article>` +
     footer()
   write(`post/${p.slug}`, renderPage({ head, bodyHtml: body }))

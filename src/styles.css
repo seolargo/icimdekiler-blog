@@ -520,6 +520,40 @@ code {
   border-top: 1px solid var(--line);
 }
 
+/* Atıf kutusu */
+.cite {
+  margin: 32px 0 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.cite-title {
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  margin: 0 0 12px;
+}
+
+.cite-text {
+  margin: 0 0 12px;
+  padding: 12px 14px;
+  background: var(--btn-bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--fg);
+  word-break: break-word;
+}
+
+.cite-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 .post-related-title {
   font-size: 0.95rem;
   font-weight: 600;
