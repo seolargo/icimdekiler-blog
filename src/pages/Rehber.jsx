@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { usePosts } from '../usePosts.js'
 import { useHead } from '../seo.js'
 import { useLang } from '../i18n.jsx'
@@ -9,6 +8,8 @@ export default function Rehber() {
 
   useHead({ title: t('guides'), image: '/profile.jpeg' })
 
+  // Rehber paperları şimdilik dışa kapalı: yalnızca başlık listelenir,
+  // tıklanamaz/önizlenemez, içi açılamaz.
   const list = posts.filter((p) => p.tab === 'rehber')
 
   return (
@@ -19,28 +20,8 @@ export default function Rehber() {
       {!loading && !error && (
         <ul className="post-list">
           {list.map((post) => (
-            <li key={post.slug} className="post-item">
-              <Link to={`/post/${post.slug}`} className="post-link">
-                {post.thumb && (
-                  <img
-                    className="post-thumb"
-                    src={`${import.meta.env.BASE_URL}${post.thumb}`}
-                    alt=""
-                    loading="lazy"
-                  />
-                )}
-                <div className="post-body">
-                  <span className="post-title">{post.title}</span>
-                  {post.pages > 0 && (
-                    <span className="post-series">
-                      {post.pages} {t('pagesUnit')}
-                    </span>
-                  )}
-                  {post.description && (
-                    <span className="post-desc">{post.description}</span>
-                  )}
-                </div>
-              </Link>
+            <li key={post.slug} className="post-item hidden-item">
+              <span className="post-title">{post.title}</span>
             </li>
           ))}
         </ul>

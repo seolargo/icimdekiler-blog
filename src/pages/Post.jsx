@@ -16,7 +16,9 @@ export default function Post() {
     window.scrollTo(0, 0)
   }, [slug])
 
-  const post = posts.find((p) => p.slug === slug)
+  const found = posts.find((p) => p.slug === slug)
+  // Müzik/rehber paperları şimdilik dışa kapalı: içi açılamaz (bulunamadı gibi davran)
+  const post = found && found.tab ? undefined : found
   const curatedRelated = (post?.related || [])
     .map((s) => posts.find((p) => p.slug === s))
     .filter(Boolean)

@@ -352,6 +352,18 @@ code {
   opacity: 0.62;
 }
 
+/* Dışa kapalı (müzik/rehber) paperlar: tıklanamaz, yalnızca başlık */
+.hidden-item {
+  padding: 18px 0;
+}
+
+.hidden-item .post-title {
+  color: var(--muted);
+  font-weight: 500;
+  font-size: 1.05rem;
+  cursor: default;
+}
+
 .post-thumb {
   flex: 0 0 auto;
   width: 96px;

@@ -6,7 +6,7 @@
 // Yapılandırma (ortam değişkenleri):
 //   SITE_URL   -> yayınlanacak tam adres, ör. https://ornek.com  (canonical/sitemap için)
 //   BASE_PATH  -> alt dizinde barındırma yolu, ör. /repo/ (vite.config.js ile aynı)
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs'
+import { readFileSync, writeFileSync, mkdirSync, existsSync, rmSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { execSync } from 'node:child_process'
@@ -118,6 +118,11 @@ function postListItem(p) {
   )
 }
 
+// Gizli (müzik/rehber) paperlar: yalnızca başlık — tıklanamaz, önizleme yok.
+function hiddenListItem(p) {
+  return `<li class="post-item hidden-item"><span class="post-title">${esc(p.title)}</span></li>`
+}
+
 // --- <head> enjeksiyonu ----------------------------------------------------
 function buildHead({ title, description, canonical, type, image, jsonLd }) {
   const fullTitle = title ? `${title} — ${SITE_NAME}` : SITE_NAME
@@ -201,7 +206,7 @@ const muzikHead = buildHead({
 })
 const muzikBody =
   header('muzik') +
-  `<ul class="post-list">${musicPosts.map(postListItem).join('')}</ul>` +
+  `<ul class="post-list">${musicPosts.map(hiddenListItem).join('')}</ul>` +
   footer()
 write('muzik', renderPage({ head: muzikHead, bodyHtml: muzikBody }))
 
@@ -215,7 +220,7 @@ const rehberHead = buildHead({
 })
 const rehberBody =
   header('rehber') +
-  `<ul class="post-list">${guidePosts.map(postListItem).join('')}</ul>` +
+  `<ul class="post-list">${guidePosts.map(hiddenListItem).join('')}</ul>` +
   footer()
 write('rehberler', renderPage({ head: rehberHead, bodyHtml: rehberBody }))
 
@@ -254,6 +259,7 @@ write('oneriler', renderPage({ head: recHead, bodyHtml: recBody }))
 // --- YAZI SAYFALARI --------------------------------------------------------
 const postsBySlug = new Map(posts.map((p) => [p.slug, p]))
 for (const p of posts) {
+  if (p.tab) continue // müzik/rehber paperlarının yazı sayfası dışa üretilmez
   const canonical = `${SITE_URL}${base}post/${encodeURIComponent(p.slug)}`
   const pdfUrl = asset(`pdfs/${p.pdf}`)
   const textUrl = asset(`texts/${p.slug}.txt`)
@@ -333,7 +339,7 @@ const urls = [
   { loc: `${SITE_URL}${base}muzik` },
   { loc: `${SITE_URL}${base}rehberler` },
   { loc: `${SITE_URL}${base}oneriler` },
-  ...posts.map((p) => ({
+  ...writings.map((p) => ({
     loc: `${SITE_URL}${base}post/${encodeURIComponent(p.slug)}`,
     lastmod: p.date,
   })),
@@ -394,7 +400,7 @@ const llms =
     // serilere göre grupla (yazı sırasındaki ilk görülme sırasıyla)
     const groups = []
     const idx = new Map()
-    for (const p of posts) {
+    for (const p of writings) {
       const key = p.series || 'Diğer'
       if (!idx.has(key)) {
         idx.set(key, groups.length)
@@ -426,7 +432,7 @@ if (fulltext.size) {
     `> ${SITE_DESCRIPTION}\n\n` +
     `Bu dosya tüm makalelerin tam metnini içerir. Kaynak PDF'lerden çıkarılmıştır; ` +
     `bazı Türkçe karakterler çıkarım nedeniyle eksik olabilir.\n\n` +
-    posts
+    writings
       .map((p) => {
         const url = `${SITE_URL}${base}post/${encodeURIComponent(p.slug)}`
         const body = (fulltext.get(p.slug) || '').trim()
@@ -484,8 +490,36 @@ writeFileSync(join(dist, '_redirects'), '/*    /index.html    200\n')
 // GitHub Pages: bilinmeyen rota -> 404.html; içindeki BrowserRouter doğru rotayı render eder
 writeFileSync(join(dist, '404.html'), template)
 
+// --- GİZLİ PAPERLAR: dağıtımdan (dist) erişimi kapat --------------------------
+// Müzik/rehber sekmesindeki paperlar şimdilik dışa kapalı: yazı sayfası zaten
+// üretilmedi; burada PDF, önizleme ve metin dosyalarını dist'ten siler,
+// posts.json ve search-index.json'daki kayıtlarını da kısıtlar. (Kaynak
+// public/ dosyaları değişmez; yalnızca yayınlanan kopya kısıtlanır.)
+const hidden = posts.filter((p) => p.tab)
+const rm = (rel) => {
+  const f = join(dist, rel)
+  if (existsSync(f)) rmSync(f)
+}
+for (const p of hidden) {
+  if (p.pdf) rm(`pdfs/${p.pdf}`)
+  if (p.thumb) rm(p.thumb)
+  rm(`texts/${p.slug}.txt`)
+}
+// dist/posts.json: gizli paperlar yalnızca başlık olarak kalsın (pdf/açıklama/thumb dışa sızmasın)
+const distPosts = posts.map((p) =>
+  p.tab ? { slug: p.slug, title: p.title, tab: p.tab } : p,
+)
+writeFileSync(join(dist, 'posts.json'), JSON.stringify(distPosts))
+// dist/search-index.json: gizli paperların tam metnini indeksten çıkar
+const idxPath = join(dist, 'search-index.json')
+if (existsSync(idxPath)) {
+  const hiddenSlugs = new Set(hidden.map((p) => p.slug))
+  const idx = JSON.parse(readFileSync(idxPath, 'utf8')).filter((e) => !hiddenSlugs.has(e.slug))
+  writeFileSync(idxPath, JSON.stringify(idx))
+}
+
 console.log(
-  `[prerender] ${posts.length} yazı + ana sayfa statik HTML üretildi; ` +
+  `[prerender] ${writings.length} açık + ${hidden.length} gizli yazı işlendi; ana sayfa statik HTML üretildi; ` +
     `sitemap.xml, robots.txt (AI botlarına açık), llms.txt, feed.xml, _redirects, 404.html yazıldı ` +
     `(SITE_URL=${SITE_URL})`,
 )
