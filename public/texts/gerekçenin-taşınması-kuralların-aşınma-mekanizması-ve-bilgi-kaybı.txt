@@ -1,0 +1,427 @@
+Gerekçenin Taşınması: Kuralların Aşınma
+Mekanizması ve Bilgi Kaybı
+Ömer Faruk Yavuz
+Temmuz 2026
+C erçeve
+Havacılık, tıp, nükleer enerji, endüstriyel işletme ve uzay uçuşu, başarısızlığın
+bedeli yüksek olduğu için başarısızlığı sistematik biçimde incelemek zorunda
+kalmış alanlardır. Bu zorunluluğun ürünü, kaza raporları ve resmı inceleme
+komisyonları biçiminde birikmiş kapsamlı bir literatürdür. Söz konusu literatürün
+yazılım mühendisliği bakımından değeri, benzer teknolojileri konu almasından
+değil, benzer örgütsel ve bilişsel mekanizmaları belgelemesinden gelir.
+Bu çalışma, söz konusu literatürü tek bir tez etrafında okumaktadır: bir ku-
+ralın hayatta kalma kapasitesi, doğruluğuyla değil, gerekçesinin taşınıp taşınmadığıyla
+belirlenir. Vakaların önemli bölümü doğrudan bu mekanizmanın örnekleridir;
+geri kalanı ise aynı çerçevenin komşu biçimlerini — göstergenin niyeti mi du-
+rumu mu bildirdiği, otorite eğiminin bilgi akışını nasıl kestiği, yedekliliğin ne
+zaman görünüşten ibaret kaldığı — ortaya koyar.
+˙Inceleme üç bölümden oluşur. ˙Ilk bölüm tezi ve işleyiş mekanizmasını tanımlar.
+˙Ikinci bölüm, mekanizması iyi belgelenmiş vakaları alan alan sıralar. Üçüncü
+bölüm, bu vakalardan yazılım mühendisliğine yapılabilecek aktarımları tem-
+atik olarak ele alır ve aktarımın sınırlarını belirler. Sıralama bilinçli olarak bu
+yöndedir: vakaların önce kendi bağlamlarında anlaşılması, çıkarılan derslerin
+genel geçer sloganlara indirgenmesini önler.
+Tez ve Mekanizma
+Temel Önerme
+Kural ihlallerine ilişkin yaygın açıklama — disiplinsizlik, ihmal, kısa vadeci
+düşünme — olguyu bir karakter sorunu olarak kurar ve çözümü eğitim ile
+uyarıda arar. Bu çalışmanın önerisi yapısal olarak farklıdır: sorun bir bilgi
+aktarımı sorunudur ve çözümü de aynı düzeydedir.
+Mekanizma bir asimetriye dayanır. Gerekçesi aktarılmamış bir kural, uygu-
+layıcı için maliyeti görünür, faydası görünmez bir yük hâline gelir. Kuralın
+gerektirdiği ek adım her uygulamada somut biçimde ödenir; engellediği başarısızlık
+ise tanımı gereği hiçbir zaman gözlenmez. Böyle bir asimetride kuralın terk
+1
+
+-- 1 of 10 --
+
+edilmesi bir disiplinsizlik değil, rasyonel bir karardır — zira uygulayıcının elin-
+deki bilgiyle bakıldığında kural gerçekten gereksizdir. Bu tespitin doğrudan
+sonucu şudur: sorun, uygulayıcının tutumu değiştirilerek çözülemez; yalnızca
+gerekçenin kuralla birlikte taşınmasıyla çözülür.
+Aşınmanın Teşhis Edilemezliği
+Tezin en önemli sonucu, kuralın bozulma anının gözlemlenebilir olmamasıdır.
+Kural bir kriz anında tartışılarak kaldırılmaz; sessizce, tekil bir istisna biçiminde
+delinir. Gerekçe bilinmediği için istisnanın maliyeti hesaplanamaz ve karar,
+maliyeti sıfır varsayılan bir esneme olarak kaydedilir.
+Belirleyici olan ikinci adımdır: ikinci istisna, birincisine dayanarak meşrulaşır.
+Referans noktası artık kuralın kendisi değil, en son gözlenen sapmadır. Aşınan
+hedefler arketipinin tam olarak işlediği yer burasıdır — her sapma bir sonrakinin
+ölçütü hâline gelir ve süreç, hiçbir aşamasında açık bir karar içermediği için iti-
+raz edilebilir bir an da sunmaz. Sistem, kuralın hâlâ yürürlükte olduğu inancını
+koruyarak fiilen kuralsız hâle gelir.
+˙Iki Uygulama ˙Ilkesi
+Buradan iki ilke türer.
+Birincisi, kural ile gerekçesinin aynı yerde saklanması gerektiğidir. Ayrı
+belgelerde tutulduklarında gerekçe her zaman önce kaybolur; çünkü işletim
+sırasında okunan şey kuraldır ve gerekçe belgesi ancak kural sorgulandığında
+— yani çoktan delinmişken — aranır.
+˙Ikincisi, gerekçenin genel bir ilke olarak değil, engellediği somut başarısızlık
+olarak kaydedilmesidir. Aradaki fark önemsiz değildir. “Domain katmanı kalıcılıktan
+habersiz olmalıdır” cümlesi bir kuraldır ve zayıftır: buyruk niteliğindedir, sınanamaz
+ve hangi koşulda gevşetilebileceğine dair hiçbir bilgi taşımaz. “Sema değiştiğinde
+domain katmanının değişmemesi için” cümlesi ise bir gerekçedir; kuralın ko-
+ruduğu şeyi adlandırdığı için, o şeyin söz konusu olmadığı durumları da tanımlar.
+Gerekçe biçiminde kaydedilen bir kural, kendi geçerlilik sınırını da beraberinde
+taşır.
+Teknolojik Bilgi Kaybıyla ˙Ilişki
+Bu olgu, teknolojik bilgi kaybı literatüründe incelenen sürecin mikro ölçekli
+hâlidir. Saturn V örneğinde kaybolan şey teknik çizimler değil, çizimlerdeki
+kararların gerekçeleriydi; bir kod tabanında kaybolan da mimari kalıbın kendisi
+değil, o kalıbı gerektiren koşulun bilgisidir. Her iki durumda da elde kalan arte-
+fakt, onu üreten yargıyı yeniden kurmaya yetmez. Artefakt neyin yapıldığını
+kaydeder, neden yapıldığını kaydetmez; ve yeniden üretim için gerekli olan ik-
+incisidir.
+2
+
+-- 2 of 10 --
+
+Vakalar
+Aktarım Zincirinin Kopması: Nixtamalizasyon
+Mekanizmanın en yalın örneği mısırın işlenmesine ilişkindir. Mezoamerika’da
+mısır, alkali bir çözeltide bekletilerek işlenmekteydi; bu işlem tanedeki niasini
+biyolojik olarak erişilebilir hâle getirir. Mısır Avrupa’ya aktarıldığında bitkinin
+kendisi, ekim tekniği ve öğütme yöntemi taşındı; ancak alkali işlem taşınmadı,
+zira gerekçesi bilinmiyordu ve fazladan bir emek adımı olarak görünüyordu.
+Sonuç, ˙Italya’dan Amerika Birleşik Devletleri’nin güney eyaletlerine uzanan
+geniş bir coğrafyada görülen pellagra salgınlarıdır. Kural yanlış değildi; taşınabilir
+olmayan tek unsur nedeniydi.
+Kuşaklar Arası Kayıp: Tsunami Taşları
+Japon kıyılarındaki uyarı taşları aynı mekanizmanın zaman boyutundaki biçimidir.
+Bazıları yüzyıllar öncesine tarihlenen bu taşlar, belirli bir yükseltinin altına
+yerleşim kurulmaması gerektiğini bildirir. Sınırın altına inilmeyen yerleşimler
+mevcuttur; ancak çoğu bölgede nüfus baskısı ve arazi maliyeti karşısında sınır
+kademe kademe aşağı taşınmıştır. Taşı yerleştirenler için kural bir felaketin
+kaydıydı; üç kuşak sonrası için ise gerekçesi görünmeyen bir kısıttı. Örnek,
+gerekçenin yalnızca örgütler içinde yatay olarak değil, kuşaklar boyunca dikey
+olarak da taşınması gerektiğini göstermesi bakımından önemlidir.
+Havacılık
+Tenerife (1977) kazasında iki geniş gövdeli uçak pistte çarpışmıştır. Belirleyici
+etken kaptanın kıdemi ve otoritesiydi: uçuş mühendisi ile yardımcı pilot, kalkış
+izninin alınmadığına dair kuşkularını dile getirmiş ancak ısrar etmemiştir. ˙Ikinci
+etken dil belirsizliğidir; kullanılan ifade hem konum bildirimi hem de eylem
+bildirimi olarak okunabilecek nitelikteydi. Vaka, ekip kaynak yönetimi (crew
+resource management) disiplininin doğrudan doğuş nedenidir.
+United 173 (1978) vakasında ekip, iniş takımı gösterge lambasıyla ilgilenirken
+yakıt tükenmiş ve uçak düşmüştür. Sorunun kendisi yönetilebilir nitelikteydi;
+ölümcül olan, tüm dikkatin tek bir belirtiye yoğunlaşması ve temel uçuş parame-
+trelerinin izlenmemesidir. Aynı örüntü Eastern 401 vakasında bir gösterge am-
+pulü etrafında tekrarlanmıştır.
+Air France 447 (2009) vakasında pitot tüplerinin buzlanması hız verisini
+geçersiz kılmış, otopilot devreden çıkmış ve uçak farklı bir kontrol kipine geçmiştir.
+Ekip, içinde bulunduğu kipin hangi koruma katmanlarını devre dışı bıraktığını
+kavrayamamış ve girdileri yeni kipte yanlış sonuç üretmiştir. Vaka, otomasyonun
+sessizce kip değiştirmesinin operatör zihinsel modeliyle sistem durumu arasında
+açtığı ayrışmayı — otomasyon sürprizi — örneklendirir.
+737 MAX (2018–2019) vakasında, tek bir hücum açısı sensöründen besle-
+nen ve pilot dokümantasyonunda yer almayan bir yazılım işlevi, arızalı sensör
+verisiyle tekrarlayan biçimde devreye girmiştir. Burada üç kusur bir aradadır:
+tek noktadan besleme, davranışın belgelenmemiş olması ve sistemin varlık gerekçesinin
+3
+
+-- 3 of 10 --
+
+operatöre hiç aktarılmaması. Sonuncusu, bu çalışmanın tezinin doğrudan bir
+örneğidir; operatör yalnızca sistemin ne yaptığını değil, neden var olduğunu da
+bilmediği için karşı müdahalesini yanlış çerçevede kurmuştur.
+Tıp
+Elaine Bromiley vakasında (2005) rutin bir işlem sırasında hava yolu açılamamış,
+hekimler girişimi tekrarlamaya devam ederken zaman kaybedilmiştir. Hemşireler
+alternatif yolun hazır olduğunu bildirmiş, ancak bunu doğrudan bir müdahale
+biçiminde ifade etmemiştir. Vaka, tıp alanında insan faktörleri çalışmalarının
+yaygınlaşmasında dönüm noktası sayılır ve Tenerife’deki otorite eğimiyle yapısal
+olarak aynıdır.
+Yanlış taraf ameliyatları, bireysel dikkatsizlikle açıklanamayacak sıklıkta
+gözlenmiştir. C özüm uyarı ve eğitim yerine yapısal olmuştur: ameliyat öncesi
+sözlü doğrulama, taraf işaretleme ve ekip üyelerinin adlarıyla tanışmasını içeren
+kontrol listeleri. Aynı yaklaşım kateter enfeksiyonlarının azaltılmasında da
+uygulanmış ve ölçülebilir sonuç vermiştir.
+Konsantre potasyum klorür ampullerinin seyreltilmeden uygulanması sonucu
+meydana gelen ölümler ise uzun süre eğitim ve etiketleme yoluyla önlenmeye
+çalışılmıştır. Kalıcı çözüm farklı olmuştur: ampuller servis dolaplarından tümüyle
+kaldırılmıştır. Hatanın yasaklanması yerine olanaksızlaştırılması ilkesi burada
+nettir ve gerekçe taşıma sorununa yapısal bir yanıt oluşturur — ortadan kaldırılmış
+bir olanağın gerekçesinin hatırlanması gerekmez.
+Nükleer ve Endüstriyel Tesisler
+Three Mile Island (1979) vakasında bir basınç tahliye vanası açık kalmış, ancak
+kontrol odasındaki gösterge vananın durumunu değil, kendisine gönderilen ko-
+mutu yansıtmıştır. Operatörler saatlerce, kapalı sandıkları bir vanadan soğutucu
+kaybederken doğru varsaydıkları bir gösterge okumuşlardır. Vaka, telemetrinin
+niyeti mi yoksa gerçekleşmiş durumu mu bildirdiği ayrımının kritikliğini gösterir.
+C ernobil (1986) vakasında mekanizma bir derece daha ağırdır: gerekçe yalnızca
+aktarılmamış değil, bilinçli olarak erişime kapatılmıştır. Reaktörün belirli koşullardaki
+davranışına ilişkin bilgi sınıflandırılmış olduğundan, test sırasında güvenlik kısıtlarını
+esneten operatörler esnettikleri kısıtın neyi koruduğunu bilmiyorlardı. Vaka,
+gerekçe taşınmadığında kuralın yalnızca terk edilmekle kalmayıp, terk eden
+aktörün kendi kararını makul saymasına da yol açtığını göstermesi bakımından
+ayrıca değerlidir.
+Piper Alpha (1988) vakasında, bakım için sökülmüş bir emniyet valfinin du-
+rumu vardiya devrinde eksik aktarılmış, sonraki vardiya ilgili pompayı çalıştırılabilir
+varsaymıştır. Devir teslim anı, sistemin bilgi bakımından en zayıf olduğu andır
+ve kazaların orantısız bir bölümü bu ana denk gelir.
+Texas City rafinerisi (2005) vakasına ilişkin inceleme, kuruluşun güvenlik
+performansını kişisel yaralanma istatistikleriyle ölçtüğünü ortaya koymuştur.
+Bu göstergeler iyileşirken, felaket riskini belirleyen süreç güvenliği göstergeleri
+4
+
+-- 4 of 10 --
+
+kötüleşmekteydi. Ölçülen şeyin yönetilen şey hâline gelmesi, yanlış göstergeyi
+yalnızca yararsız değil tehlikeli kılar.
+Fukushima (2011) vakasında yedek jeneratörlerin tümü aynı fiziksel tehdide
+— su basmasına — açık konumdaydı. Yedeklilik sayısal olarak mevcut, ancak
+ortak arıza kipi paylaşıldığı için işlevsel olarak yoktu.
+Uzay Uçuşu
+Challenger (1986) ve Columbia (2003) kazaları birlikte okunmalıdır. ˙Ilkinde
+conta aşınması, ikincisinde yalıtım köpüğü çarpması, yinelenen gözlemlere rağmen
+“bilinen ve kabul edilebilir” kategorisine yerleşmiştir. Diane Vaughan’ın sap-
+manın normalleşmesi olarak kavramsallaştırdığı süreç, yukarıda tarif edilen
+aşınma yapısının birebir karşılığıdır: hiçbir aşamada kural açıkça kaldırılmamış,
+her sapma bir sonrakinin referans noktası olmuştur. Columbia vakasında ayrıca,
+hasarın görüntülenmesi yönündeki mühendis talebi örgütsel kanallarda yükselememiştir.
+Vakaların öğreticiliği, sürecin tek tek adımlarının hiçbirinin geriye dönüp bakıldığında
+dahi bariz bir hata olarak ayırt edilememesinden gelir.
+Mars Climate Orbiter (1999) vakasında iki ekip arasındaki arayüzde birim
+sistemi uyuşmazlığı bulunmaktaydı. Her iki bileşen de kendi içinde doğru çalışmıştır;
+hata, bileşenlerin hiçbirinde değil, aralarındaki sözleşmenin belirsizliğindedir.
+Ariane 5 Uçuş 501 (1996) vakasında, önceki nesil taşıyıcıdan devralınan
+atalet referans yazılımı, yeni aracın farklı uçuş profilinde taşma üretmiştir.
+˙Ilgili hesaplama, kalkıştan sonra hiçbir işlevi olmayan bir koddu. Bileşen kendi
+doğrulama zarfı içinde kusursuzdu; kusurlu olan, o zarfın dışında yeniden kul-
+lanılmasıydı. Burada taşınmayan gerekçe, kodun hangi varsayımlar altında
+doğrulandığı bilgisidir.
+Apollo 11 iniş alarmları (1969) karşı örnek niteliğindedir. Bilgisayar aşırı
+yüklendiğinde çökmemiş, öncelik sırasına göre düşük öncelikli görevleri düşürerek
+kritik işlevleri sürdürmüştür. Aşırı yük altındaki davranış, bir arıza değil bir
+tasarım kararıydı.
+Yazılım Alanının Kendi Vakaları
+Therac-25 (1985–1987) vakasında, cihazın önceki modelinde bulunan donanımsal
+kilitler, yazılımın kendini kanıtlamış olduğu gerekçesiyle yeni modelde kaldırılmıştır.
+Kilidin var olma nedeni, yazılım hatasının fiziksel düzeyde durdurulabilme-
+siydi; bu neden aktarılmadığı için kilit, işlevi olmayan bir maliyet kalemi olarak
+değerlendirilmiştir. Yarış durumu içeren bir hata, kilitler yokken doğrudan hasta
+dozuna yansımıştır. Vaka, yedekli bir güvenlik katmanının — işlevi tanımı gereği
+görünmez olduğu için — gerekçesi kayıtlı değilse ilk sadeleştirme çalışmasında
+kaldırılacağını gösterir.
+Knight Capital (2012) vakasında dağıtım sekiz sunucunun yedisinde tamam-
+lanmıştır. Yeni kod, yıllar önce kullanımdan kalkmış bir işlevin bayrağını yeniden
+kullanmaktaydı; güncellenmeyen sunucuda aynı bayrak eski davranışı tetik-
+lemiştir. Kısmi dağıtım ile bayrak yeniden kullanımının birleşimi, kırk beş
+dakika içinde şirketi iflasa götürmüştür.
+5
+
+-- 5 of 10 --
+
+Bulut altyapısı kesintilerinde yaygın bir örüntü, durum sayfasının izlediği
+sisteme bağımlı olmasıdır; kesinti sırasında yalnızca hizmet değil, hizmetin du-
+rumunu bildirme yeteneği de kaybedilir. Benzer biçimde, ağ yapılandırma hata-
+larında uzaktan erişim yolunun bozulan ağın üzerinden geçmesi kurtarma süresini
+katlamıştır.
+Gündelik yazılım pratiğindeki karşılıklar ise daha az görünür oldukları için
+daha öğreticidir. Nedeni bilinmeyen bir bekleme çağrısı, gereksiz görünen bir
+yeniden deneme mantığı, sürekli kırıldığı için devre dışı bırakılan bir sınama,
+yavaşlattığı gerekçesiyle atlanan bir doğrulama adımı — bunların hiçbiri bir
+tartışma sonucunda kaldırılmaz. Tümü bir temizlik çalışması sırasında sessizce
+silinir ve etkileri ancak aylar sonra, ilgisiz görünen bir arıza biçiminde ortaya
+çıkar. Mimari kısıtlar için de aynı süreç işler: bir yalıtım kuralı, teslim baskısı
+altındaki ilk yinelemede tekil bir istisna olarak delinir, ikinci delme birincisine
+dayanarak meşrulaşır ve kısıt, resmen yürürlükte kalmaya devam ederken fiilen
+ortadan kalkar.
+Kurumsal Düzey
+Kurumsal ölçekte kural genellikle tek bir kişiye bağlı olduğu için kaybolur. Be-
+lirli bir müşteri için belirli bir denetimin yapılması veya belirli bir işlemin belirli
+sırayla yürütülmesi gibi pratikler, uzun süreli bir çalışanın ayrılmasıyla birlikte
+yalnızca uygulanmaz hâle gelmez; böyle bir kuralın var olduğu da hatırlanmaz.
+Burada kaybolan şey bilginin kendisi değil, bilginin varlığına ilişkin bilgidir —
+ve bu ikinci tür kayıp, eksikliğin fark edilmesini de imkânsız kıldığı için daha
+ağırdır.
+Aktarımlar
+Sapmanın Değil Sapma Eğiliminin ˙Izlenmesi
+Challenger, Columbia ve endüstriyel vakaların ortak dersi, tekil sapmanın değil
+sapma eğiliminin izlenmesi gereğidir. Her anomali sonrasında sistemin ayakta
+kalmış olması, güvenlik payının korunduğu anlamına gelmez; yalnızca payın
+henüz tükenmediğini gösterir.
+Yazılımda karşılığı doğrudandır. Aralıklı olarak başarısız olan sınamalar,
+düzenli biçimde susturulan uyarılar, tekrarlayan ancak kendiliğinden düzelen
+hata kayıtları ve her yayında bir kez daha esnetilen bir eşik — bunların tümü
+sapma sinyalidir. ˙Izlenmesi gereken büyüklük anomalinin son sonucu değil,
+sıklığındaki değişimdir. Bir sapmanın kabul edilebilir sayılması gerekiyorsa,
+bu kararın tarihiyle ve gerekçesiyle kaydedilmesi, sonraki kararın referans nok-
+tasının önceki sapma değil özgün kural olmasını sağlar. Bu, aşınma mekaniz-
+masına karşı en doğrudan yapısal önlemdir.
+Niyetin Değil Durumun Bildirilmesi
+Three Mile Island’daki vana göstergesi, gözlemlenebilirlik tasarımının en öz der-
+sini verir: bir gösterge, gönderilen komutu değil gerçekleşmiş durumu bildirme-
+6
+
+-- 6 of 10 --
+
+lidir. Aradaki fark normal işleyişte görünmez, arıza anında ise belirleyicidir —
+zira arıza, tam olarak komutun gerçekleşmediği durumdur.
+Yazılımda bu ayrım sıklıkla ihlal edilir. Bir kuyruğa yazma işleminin başarılı
+dönmesi mesajın işlendiğini, bir dağıtım aracının başarı bildirmesi yeni sürümün
+çalıştığını, bir yapılandırma değişikliğinin uygulanması hedef davranışın oluştuğunu
+göstermez. Sağlıklı bir gözlemlenebilirlik katmanı, arzulanan durum ile gözlemlenen
+durumu ayrı büyüklükler olarak taşır ve ikisi arasındaki farkı birinci sınıf bir
+gösterge sayar.
+Otorite Eğimi ve ˙Itiraz Kanalı
+Tenerife, Bromiley ve Columbia vakalarında bilgi sistemde mevcuttu; eksik olan,
+o bilginin karar noktasına ulaşmasıydı. Her üç durumda da kıdemsiz taraf
+kuşkusunu dile getirmiş, ancak yumuşatılmış bir biçimde ifade etmiştir.
+Havacılığın buna karşı geliştirdiği çözüm tutum değişikliği değil, protokoldür:
+belirli ifade kalıplarının doğrudan durdurma yetkisi taşıması ve kıdemsiz üyenin
+bu kalıbı kullanmasının beklenen davranış sayılması. Yazılımda karşılığı, kıdemsiz
+bir mühendisin bir yayını durdurabilmesinin kurumsal olarak tanımlanmış ol-
+masıdır. Suçlamayan olay incelemesi (blameless postmortem) pratiği de doğrudan
+bu literatürden aktarılmıştır ve amacı nezaket değil veri kalitesidir: cezalandırılan
+bilgi bildirilmez.
+Sınır Sözleşmelerinin Açıklığı
+Mars Climate Orbiter, bileşenlerin kendi içinde doğru olmasının sistemin doğru
+olmasını sağlamadığını gösterir. Hata, hiçbir bileşenin içinde değil, ikisi arasındaki
+örtük varsayımda bulunmaktaydı.
+Aktarımın pratik biçimi, birimin, para biriminin, zaman diliminin ve ko-
+ordinat sisteminin sayısal değerin yanında değil içinde taşınmasıdır; çıplak bir
+sayı, taşıdığı varsayımı taşımaz. Aynı ilke servis arayüzleri için de geçerlidir:
+sözleşmenin belgelenmiş olması yetmez, çalışma zamanında doğrulanabilir ol-
+ması gerekir. Belgelenmiş bir sözleşme, gerekçesi ayrı yerde saklanan bir kuralla
+aynı kırılganlığı taşır.
+Doğrulama Zarfının Devralınmaması
+Ariane 5, bir bileşenin doğruluğunun mutlak değil, üretildiği varsayımlar kümesine
+göreli olduğunu gösterir. Yeniden kullanılan yazılım, kendisiyle birlikte doğrulandığı
+koşulları taşımaz.
+Bu ders, bağımlılık yönetiminin en çok ihmal edilen boyutudur. Bir kütüphane,
+belirli bir yük profili, belirli bir veri dağılımı ve belirli bir hata modeli varsayarak
+yazılmıştır; bu varsayımların hiçbiri sürüm numarasında görünmez. Aktarım,
+bağımlılığın hangi zarf içinde doğrulandığının açıkça sorgulanması ve kendi kul-
+lanım profilinin bu zarfla karşılaştırılmasıdır. Vakanın ek dersi ise şudur: işlevi
+kalmamış kodun sistemde bırakılması nötr bir karar değildir.
+7
+
+-- 7 of 10 --
+
+Otomasyon Kipi ve Zihinsel Model
+Air France 447 ve 737 MAX vakaları, otomasyonun operatörü yalnızca yükten
+değil bağlamdan da kopardığını gösterir. Sistem sessizce kip değiştirdiğinde,
+operatörün zihinsel modeli gerçek durumdan ayrışır ve o modele göre verilen
+doğru kararlar yanlış sonuç üretir.
+Yazılım işletiminde aynı yapı otomatik ölçeklendirme, otomatik devir, devre
+kesici ve özellik bayrakları etrafında oluşur. Sistem kendini yeniden yapılandırdığında
+bu değişimin görünür kılınması, otomasyonun kendisi kadar önemlidir. Kip
+değişikliği bir kayıt satırı değil, birinci sınıf bir olay olarak ele alınmalıdır; aksi
+hâlde olay müdahalesi, sistemin fiilen bulunmadığı bir yapılandırma varsayılarak
+yürütülür.
+Ortak Arıza Kipi ve Bant Dışı Yol
+Fukushima’daki jeneratörler ile durum sayfasının izlediği sisteme bağımlı olması
+aynı hatanın iki örneğidir: yedekli görünen bileşenlerin ortak bir arıza kipini
+paylaşması.
+Aktarım iki yönlüdür. Birincisi, yedekliliğin sayıyla değil paylaşılan bağımlılıkla
+ölçülmesidir; farklı bölgelerde çalışan iki kopya aynı yapılandırma kaynağına
+bağlıysa yedekli değildir. ˙Ikincisi, kurtarma yolunun kurtarılacak sistemden
+bağımsız olması gereğidir. Erişim, kimlik doğrulama ve iletişim kanallarının
+arızalı sistemin üzerinden geçmesi, en sık karşılaşılan ve en pahalı yapısal kusurdur.
+Göstergenin Doğru Seçilmesi
+Texas City vakası, iyileşen bir güvenlik göstergesinin kötüleşen bir riski gizleye-
+bileceğini gösterir. Kişisel yaralanma istatistikleri gerçek ve ölçülebilir bir şeyi
+ölçmekteydi; yalnızca sorulan soruyla ilgisizdi.
+Yazılımda karşılığı, çalışma süresi ve olay sayısı gibi geriye dönük göstergelerin
+felaket riskiyle karıştırılmasıdır. Uzun süredir kesinti yaşanmamış olması, sis-
+temin kurtarma yeteneğinin sınandığı anlamına gelmez — çoğu zaman tersini
+gösterir. Anlamlı göstergeler ileriye dönük olanlardır: yedekten geri dönüşün en
+son ne zaman sınandığı, bir bileşenin kaybının en son ne zaman denendiği, olay
+müdahale prosedürünün en son ne zaman uygulandığı.
+Devir Teslim Anının Tasarlanması
+Piper Alpha, bilginin en çok sorumluluk el değiştirirken kaybolduğunu gösterir.
+Havacılık ve tıp bu ana özel biçimler tanımlamıştır; devir, hafızaya değil yapılandırılmış
+bir forma dayanır.
+Yazılımda karşılığı nöbet devri, olay komutasının aktarılması ve yarım kalmış
+işin bırakılmasıdır. Aktarılması gereken bilgi tamamlanmış işler değil, tamam-
+lanmamış olanlar ve geçici olarak devre dışı bırakılmış korumalardır. Bakım
+için kapatılan bir uyarı kuralının yeniden açılmamış olması, Piper Alpha’daki
+sökülmüş valfle yapısal olarak aynıdır.
+8
+
+-- 8 of 10 --
+
+Yasaklama Yerine Olanaksızlaştırma
+Konsantre elektrolitlerin servisten kaldırılması, güvenlik müdahalelerinin en etk-
+ili biçiminin uyarı değil zorlayıcı işlev olduğunu gösterir. Aynı ilke Therac-25’te
+ters yönden doğrulanır: kaldırılan donanımsal kilit, tam olarak bir zorlayıcı
+işlevdi.
+Bu aktarımın tez açısından özel bir konumu vardır. Zorlayıcı işlev, gerekçe
+taşıma sorununu ortadan kaldırmaz ancak etkisiz kılar: yapılamayan bir şeyin
+neden yapılmaması gerektiğinin hatırlanması gerekmez. Yazılımdaki karşılıkları
+tanıdıktır — tehlikeli durumu temsil edemeyen tipler, üretim ortamında geri
+alınamaz komutu engelleyen ara katmanlar, elle atlanamayan dağıtım kapıları,
+ayrıcalıklı işlem için ikinci onay gerektiren mekanizmalar. Ölçüt şudur: yanlış
+davranış belgede yasaklanmışsa kural zayıftır; sistemde ifade edilemiyorsa güçlüdür.
+Aşırı Yük Altındaki Davranışın Tasarlanması
+Apollo örneği olumlu tarafı gösterir. Kapasite aşıldığında sistemin ne yapacağı,
+kapasite dahilindeki davranışı kadar tasarım konusudur. Öncelik sırasının önceden
+tanımlanmış olması, aşırı yükü bir arıza olmaktan çıkarıp öngörülmüş bir çalışma
+kipine dönüştürmüştür.
+Yazılımda karşılığı yük atma, öncelikli kuyruklama ve kademeli işlev kaybıdır.
+Bu tasarımın yokluğunda sistem, aşırı yük altında rastgele bir bileşenden —
+genellikle en kritik olanından — kopar.
+Fiksasyon ve Rol Ayrımı
+United 173 ve Eastern 401, ekibin tümünün aynı belirtiye yoğunlaşmasının asıl
+tehlikeyi görünmez kıldığını gösterir. Havacılığın çözümü rol ayrımıdır: bir kişi
+sorunu incelerken, başka bir kişinin yalnızca uçağı uçurmakla yükümlü olması.
+Olay müdahalesinde aynı ayrım, araştırma yürüten kişiyle olayı yöneten
+kişinin farklı olmasıdır. Yöneticinin işi hatayı bulmak değil, hizmetin genel du-
+rumunu izlemek, iletişimi sürdürmek ve zamanı yönetmektir. Bu ayrım yapılmadığında,
+ekibin tamamı kök nedene odaklanırken temel göstergeler izlenmez.
+˙Işleyen Aktarım Biçimleri
+Aktarımın hangi biçimde başarılı olduğu, olumlu örneklerde görülebilir.
+Sivil havacılıkta kuralların önemli bölümü belirli bir kazaya bağlanarak öğretilir.
+Kontrol listesindeki bir maddenin arkasında adı ve tarihi bilinen bir olay bulunur
+ve bu bağ eğitim sırasında açıkça kurulur. Kural, soyut bir buyruk olarak değil,
+engellediği somut başarısızlığın kısaltılmış hâli olarak taşınır.
+Tıp literatüründe benzer bir uygulama, protokolün yanına onu doğuran
+çalışmanın yerleştirilmesidir. Bu yerleştirme protokolün yalnızca gerekçesini
+değil, geçerlilik koşullarını da tanımlar; hangi hasta grubunda ve hangi kanıt
+düzeyiyle geçerli olduğu birlikte taşınır.
+Her iki örnekte de ortak olan nitelik şudur: gerekçe kuralla aynı yerde ve
+somut biçimde saklandığı için, kuralın hangi koşulda gevşetilebileceği bilgisi
+9
+
+-- 9 of 10 --
+
+de kendiliğinden aktarılır. Bu, gerekçe taşımanın yalnızca kuralı korumakla
+kalmayıp gereksiz katılığı da önlediğini gösterir — gerekçesi bilinen bir kural
+gerektiğinde bilinçli olarak esnetilebilir; bilinmeyen bir kural ise ya körü körüne
+uygulanır ya da körü körüne terk edilir.
+Aktarımın Sınırları
+Bu literatürün yazılıma taşınmasında iki yaygın yanlış bulunur.
+Birincisi, bedel ölçeğinin göz ardı edilmesidir. Havacılık ve tıptaki süreç
+ağırlığı, hatanın geri alınamazlığından türer. Yazılımın büyük bölümünde hata
+geri alınabilir ve yineleme ucuzdur; bu koşulda aynı ağırlıkta bir süreç uygu-
+lamak, koruduğundan fazlasını maliyet olarak üretir. Doğru yaklaşım, sis-
+tem içindeki geri alınamaz işlemlerin — veri silme, para transferi, dış dünyaya
+yapılan bildirim, fiziksel etki — ayrıştırılması ve ağır sürecin yalnızca bu kümeye
+uygulanmasıdır.
+˙Ikincisi, biçimin gerekçeden koparılmasıdır. Kontrol listeleri, suçlamayan
+incelemeler ve devir formları, kendi bağlamlarında belirli bir başarısızlık kipini
+engellemek üzere tasarlanmıştır. Aynı biçimlerin gerekçeleri aktarılmadan kopy-
+alanması, bu çalışmanın konu edindiği mekanizmanın kendisini üretir: uygu-
+lanan ama nedeni bilinmeyen bir ritüel, ilk maliyet baskısında terk edilir. Bu
+literatürden alınacak asıl şey, prosedürlerin listesi değil, prosedürleri üreten in-
+celeme disiplinidir.
+Sonuç
+˙Incelenen vakalar, teknoloji ve ölçek bakımından birbirinden uzak olmalarına
+rağmen tek bir yapısal örüntüyü paylaşır. Hiçbirinde kural açıkça kaldırılmamış,
+hiçbirinde karar veren aktör kendi kararını mantıksız bulmamıştır. Belirleyici
+olan, kuralın koruduğu şeyin bilgisinin karar anında mevcut olmamasıdır.
+Bu tespitin en önemli sonucu, güvenliğin bir tutum değil bir bilgi altyapısı
+sorunu olarak ele alınması gereğidir. Uyarı, eğitim ve dikkat çağrıları, gerekçe
+eksikliğini gidermedikleri sürece aşınmayı yavaşlatır ancak durdurmaz. Kalıcı
+çözüm üç biçimden birini alır: gerekçenin kuralla aynı yerde saklanması, sap-
+manın kendi tarihiyle birlikte kaydedilmesi ve — mümkün olduğu yerde — yanlış
+davranışın yasaklanması yerine ifade edilemez kılınması.
+Yazılım mühendisliği açısından bu literatürün değeri, hazır prosedürler sun-
+masında değil, kendi alanındaki sessiz aşınmaları tanınabilir hâle getirmesindedir.
+Susturulan bir uyarı, devre dışı bırakılan bir sınama veya nedeni bilinmediği
+için silinen bir koruma, kendi ölçeğinde Therac-25’teki kaldırılmış kilitle aynı
+yapıdadır. Aradaki fark bedelde değil, bedelin ne kadar sonra ödendiğindedir.
+10
+
+-- 10 of 10 --
