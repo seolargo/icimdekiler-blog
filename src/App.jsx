@@ -63,6 +63,9 @@ export default function App() {
         <NavLink to="/muzik" className="nav-tab">
           {t('music')}
         </NavLink>
+        <NavLink to="/oneriler" className="nav-tab">
+          {t('recommendations')}
+        </NavLink>
       </nav>
 
       <main className="site-main">

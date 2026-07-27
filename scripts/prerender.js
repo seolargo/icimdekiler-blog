@@ -73,6 +73,7 @@ function header(active) {
     tab(base, 'Yazılar', 'yazilar') +
     tab(base + 'rehberler', 'Rehberler', 'rehber') +
     tab(base + 'muzik', 'Müzik', 'muzik') +
+    tab(base + 'oneriler', 'Öneriler', 'oneriler') +
     `</nav>` +
     `<main class="site-main">`
 }
@@ -218,6 +219,38 @@ const rehberBody =
   footer()
 write('rehberler', renderPage({ head: rehberHead, bodyHtml: rehberBody }))
 
+// --- ÖNERİLER SEKMESİ --------------------------------------------------------
+const recs = existsSync(join(dist, 'recommendations.json'))
+  ? JSON.parse(readFileSync(join(dist, 'recommendations.json'), 'utf8'))
+  : []
+const recHost = (url) => {
+  try {
+    return new URL(url).hostname.replace(/^www\./, '')
+  } catch {
+    return url
+  }
+}
+const recItem = (it) =>
+  `<li class="rec-item"><a class="rec-link" href="${escAttr(it.url)}" target="_blank" rel="noopener noreferrer">` +
+  `<span class="rec-name">${esc(it.name)}</span>` +
+  (it.url ? `<span class="rec-host">${esc(recHost(it.url))} ↗</span>` : '') +
+  `</a>${it.note ? `<p class="rec-note">${esc(it.note)}</p>` : ''}</li>`
+const recHead = buildHead({
+  title: 'Öneriler',
+  description: 'Takip etmeye değer bulduğum isimler ve siteleri.',
+  canonical: `${SITE_URL}${base}oneriler`,
+  type: 'website',
+  image: '/profile.jpeg',
+})
+const recBody =
+  header('oneriler') +
+  `<p class="rec-intro muted">Takip etmeye değer bulduğum isimler ve siteleri.</p>` +
+  (recs.length
+    ? `<ul class="rec-list">${recs.map(recItem).join('')}</ul>`
+    : `<p class="muted rec-empty">Yakında — önerilen isimler ve siteleri burada paylaşılacak.</p>`) +
+  footer()
+write('oneriler', renderPage({ head: recHead, bodyHtml: recBody }))
+
 // --- YAZI SAYFALARI --------------------------------------------------------
 const postsBySlug = new Map(posts.map((p) => [p.slug, p]))
 for (const p of posts) {
@@ -299,6 +332,7 @@ const urls = [
   { loc: SITE_URL + base, lastmod: posts[0]?.date },
   { loc: `${SITE_URL}${base}muzik` },
   { loc: `${SITE_URL}${base}rehberler` },
+  { loc: `${SITE_URL}${base}oneriler` },
   ...posts.map((p) => ({
     loc: `${SITE_URL}${base}post/${encodeURIComponent(p.slug)}`,
     lastmod: p.date,

@@ -935,3 +935,58 @@ code {
   margin: 24px 0 0;
   font-size: 0.8rem;
 }
+
+/* Öneriler sekmesi */
+.rec-intro {
+  margin: 8px 0 24px;
+}
+
+.rec-empty {
+  padding: 16px 0;
+}
+
+.rec-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.rec-item {
+  padding: 18px 0;
+  border-top: 1px solid var(--line);
+}
+
+.rec-item:first-child {
+  border-top: none;
+}
+
+.rec-link {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+  text-decoration: none;
+  color: var(--fg);
+}
+
+.rec-name {
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.rec-link:hover .rec-name {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.rec-host {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.rec-note {
+  margin: 6px 0 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
