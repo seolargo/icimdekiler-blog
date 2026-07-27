@@ -19,6 +19,9 @@ export default function Post() {
   const found = posts.find((p) => p.slug === slug)
   // Müzik/rehber paperları şimdilik dışa kapalı: içi açılamaz (bulunamadı gibi davran)
   const post = found && found.tab ? undefined : found
+  // EN modda çeviri varsa göster, yoksa TR'ye düş
+  const dTitle = (p) => (p ? (lang === 'en' && p.title_en ? p.title_en : p.title) : '')
+  const dDesc = (p) => (p ? (lang === 'en' && p.description_en ? p.description_en : p.description) : '')
   const curatedRelated = (post?.related || [])
     .map((s) => posts.find((p) => p.slug === s))
     .filter(Boolean)
@@ -47,15 +50,15 @@ export default function Post() {
   useHead(
     post
       ? {
-          title: post.title,
-          description: post.description,
+          title: dTitle(post),
+          description: dDesc(post),
           type: 'article',
           image: post.thumb ? `/${post.thumb}` : '/profile.jpeg',
           jsonLd: {
             '@context': 'https://schema.org',
             '@type': 'Article',
-            headline: post.title,
-            description: post.description || undefined,
+            headline: dTitle(post),
+            description: dDesc(post) || undefined,
             datePublished: post.date || undefined,
             author: { '@type': 'Person', name: SITE_NAME },
             url: window.location.origin + window.location.pathname,
@@ -107,7 +110,7 @@ export default function Post() {
 
       <div className="post-head">
         <div>
-          <h1 className="post-heading">{post.title}</h1>
+          <h1 className="post-heading">{dTitle(post)}</h1>
           {(post.series || post.pages > 0) && (
             <p className="post-meta">
               {[seriesLabel(post.series, lang), post.pages > 0 ? `${post.pages} ${t('pagesUnit')}` : null]
@@ -115,7 +118,7 @@ export default function Post() {
                 .join(' · ')}
             </p>
           )}
-          {post.description && <p className="post-lead">{post.description}</p>}
+          {post.description && <p className="post-lead">{dDesc(post)}</p>}
         </div>
       </div>
 
@@ -158,9 +161,9 @@ export default function Post() {
                       loading="lazy"
                     />
                   )}
-                  <span className="post-related-name">{rp.title}</span>
+                  <span className="post-related-name">{dTitle(rp)}</span>
                   {rp.description && (
-                    <span className="post-related-desc">{rp.description}</span>
+                    <span className="post-related-desc">{dDesc(rp)}</span>
                   )}
                 </Link>
               </li>

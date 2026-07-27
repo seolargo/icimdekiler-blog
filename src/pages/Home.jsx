@@ -366,7 +366,9 @@ export default function Home() {
                         />
                       )}
                       <div className="post-body">
-                        <span className="post-title">{post.title}</span>
+                        <span className="post-title">
+                          {lang === 'en' && post.title_en ? post.title_en : post.title}
+                        </span>
                         {(post.series || post.pages > 0) && (
                           <span className="post-series">
                             {[
@@ -378,7 +380,11 @@ export default function Home() {
                           </span>
                         )}
                         {post.description && (
-                          <span className="post-desc">{post.description}</span>
+                          <span className="post-desc">
+                            {lang === 'en' && post.description_en
+                              ? post.description_en
+                              : post.description}
+                          </span>
                         )}
                       </div>
                     </Link>
