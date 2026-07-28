@@ -1,0 +1,197 @@
+Yenilikçi Düşünme Yöntemlerinin Yazılım
+Tasarımına Uygulanması: Bir ˙Indirme ˙Izleme
+(Download Tracking) Vaka C alışması
+Ömer Faruk Yavuz
+July 2026
+Kapsam ve Yöntemsel Uyarı
+Bu metin, Ergün Kırlıkovalı tarafından ortaya konan yenilikçi düşünme başlıklarının
+bir bölümünü, somut bir yazılım tasarımı problemi üzerinden örneklendirmektedir.
+Söz konusu çerçevenin yayımlanmış kaynaklarında yalnızca başlıkların adlandırıldığı,
+her bir maddenin ayrıntılı yöntemsel içeriğinin veya alan uygulamalarının ver-
+ilmediği belirtilmelidir. Dolayısıyla aşağıdaki uygulamalar, çerçevenin yazarına
+atfedilebilecek tanımlar değil, başlıkların yazılım mühendisliği bağlamına ak-
+tarılmasına yönelik yorumlardır.
+C erçevenin başlıkları şunlardır:
+1. Gözlem
+2. Merak
+3. Geçmiş–şimdi–gelecek taraması
+4. Doğayı taklit
+5. Sistematik deneyim kaydı
+6. ˙Inovasyon
+7. Tezatlar cetveli
+8. Öncesi–sırası–sonrası karşılaştırması
+9. Kısa–orta–uzun vade planlaması
+10. Mutlu tesadüfler
+Aşağıda bu başlıklardan dördü (7–10) ele alınmaktadır.
+1
+
+-- 1 of 5 --
+
+Problem Tanımı
+˙Incelenen tasarım problemi tek cümleyle ifade edilebilir: bir ses varlığının (audio
+cut) kaç kez indirildiğinin kalıcı biçimde kaydedilmesi. Problemin görünürdeki
+basitliği, kayıt granülerliği, zamanlama, kimlik saklama politikası, veri saklama
+süresi ve güven sınırı gibi birbirinden bağımsız tasarım eksenlerini gizlemektedir.
+Tezatlar Cetveli
+Tezatlar cetveli, varsayılan çözümün karşıtının sistematik olarak sorgulanmasına
+dayanır. Amaç karşıt seçeneğin benimsenmesi değil, tasarım uzayının varsayılan
+çözümün ötesine genişletilmesidir.
+Varsayılan yaklaşım Karşıt soru Ortaya çıkan seçenek
+Her indirme olayı ayrı
+kaydedilir
+Hiçbir olay ayrı
+kaydedilmese?
+Yalnızca toplam sayaç tutan, düşük
+maliyetli bir model
+Kayıt indirme tamam-
+landıktan sonra yazılır
+Kayıt indirme
+başlamadan önce yazılsa?
+Başarısız indirme girişimlerinin de
+gözlenebilmesi
+Kullanıcı kimliği saklanır Kullanıcı kimliği hiç sak-
+lanmasa?
+Gizliliği koruyan anonim istatistik
+modeli
+Veri süresiz saklanır Veri derhal silinse? Ayrıntıların sınırlı süre, toplamların
+kalıcı tutulduğu katmanlı saklama
+Kayıt sorumluluğu arka
+uçtadır
+Kayıt ön uçta tutulsa? Ön ucun güvenilmez bir kay-
+nak olduğunun ve kaydın arka
+uçta yapılması gerektiğinin açıkça
+gerekçelendirilmesi
+Son satır yöntemin karakteristik faydasını göstermektedir: karşıt seçenek
+reddedilse dahi, reddedilme gerekçesi tasarım kararını örtük bir alışkanlık ol-
+maktan çıkarıp bilinçli bir tercihe dönüştürür.
+Öncesi–Sırası–Sonrası Karşılaştırması
+Bu yöntem, bir işlemin tek bir atomik olay gibi ele alınması yerine zamansal
+olarak üç evreye ayrılmasını öngörür. Ayrıştırma hem tasarım hem de hata
+ayıklama açısından işlevseldir.
+Öncesi
+Kullanıcı isteği alındığında doğrulanması gereken önkoşullar: yetkilendirme du-
+rumu, hedef cut’ın varlığı ve ilgili ses kaydının erişilebilirliği.
+Sırası
+Aktarımın kendisine ilişkin gözlemler: indirmenin başlatılıp başlatılmadığı, nesne
+deposu (S3) bağlantısının kurulup kurulmadığı, aktarımın eksiksiz tamamlanıp
+tamamlanmadığı ve hata oluşup oluşmadığı.
+2
+
+-- 2 of 5 --
+
+Sonrası
+˙Işlem sonrası kalıcılık adımları: indirme olayının yazılıp yazılmadığı, sayacın
+artırılıp artırılmadığı ve sonucun başarılı/başarısız olarak doğru sınıflandırılıp
+sınıflandırılmadığı.
+Tanısal Değer
+“˙Indirme gerçekleşti fakat sayaç artmadı” biçimindeki bir kullanıcı bildirimi, üç
+evrenin ayrı ayrı sınanmasıyla hızla yerelleştirilebilir. Yetkilendirmenin geçtiği,
+aktarımın başarıyla tamamlandığı, buna karşılık veritabanı yazma işleminin
+hata verdiği tespit edildiğinde, arızanın indirme yolunda değil indirme sonrası
+kayıt yolunda bulunduğu sonucuna varılır. Böylece hata arama alanı üçte bire
+indirgenmiş olur.
+Kısa–Orta–Uzun Vade Planlaması
+Yöntem, tüm yeteneklerin tek bir teslimatta gerçekleştirilmesi yerine kademeli
+olgunlaşmayı öngörür.
+Kısa Vade: Olayın Kaydedilmesi
+Asgari veri modeli cut id, system id, downloaded at ve success alanlarından
+oluşur. Bu aşamanın amacı, mekanizmanın gerçek koşullar altında çalıştığının
+doğrulanmasıdır.
+Orta Vade: Verinin Görünür Kılınması
+Raporlama katmanı eklenir: en çok indirilen cut’lar, günlük indirme hacmi,
+radyo/televizyon dağılımı ve dahili/harici kullanım dağılımı. Amaç, ham kaydın
+insan tarafından yorumlanabilir bilgiye dönüştürülmesidir.
+Uzun Vade: Veriden Karar Üretilmesi
+Hangi içeriklerin talep gördüğü, hangilerinin hiç kullanılmadığı, indirme yoğunluğunun
+zamansal dağılımı ve iştiraklerin (affiliate) içerik türü tercihleri incelenir. Amaç,
+kayıt tutmanın ötesinde içerik stratejisinin yönlendirilmesidir.
+Kademeler tek cümleyle özetlenebilir: kısa vadede çalıştır, orta vadede görünür
+kıl, uzun vadede karar destekleyici hâle getir.
+Mutlu Tesadüf
+Mutlu tesadüf, aranmayan fakat değerli bir bulgunun gözlem sürecinde ortaya
+çıkması ve ürünleştirilmesidir. ˙Ilgili örnekte sistem yalnızca indirme sayısını
+ölçmek üzere kurulmuşken, veride belirli bir cut için 12 başarılı ve 340 başarısız
+indirme girişimi gözlenmiştir. ˙Inceleme, dosyanın bozuk olması veya kullanıcıların
+yetkilendirme sorunu yaşaması yönünde bir nedene işaret etmiştir.
+3
+
+-- 3 of 5 --
+
+Bu bulgu, başlangıçtaki soruyla ilgisiz olmasına karşın yeni bir yetenek doğurmuştur:
+yüksek oranda başarısız indirme alan varlıklar için uyarı üretilmesi. Böylece
+“kaç kez indirildi?” sorusu için kurulan altyapı, “hangi dosyalarda teknik sorun
+var?” sorusuna da yanıt veren bir gözlem aracına dönüşmüştür.
+Bu dönüşümün önkoşulu, ölçüm hedefiyle örtüşmeyen verilerin gürültü sayılıp
+atılmaması, aksine incelenmesidir.
+Özet
+Kavram Yazılım tasarımındaki karşılığı
+Tezatlar cetveli Varsayılan çözümün karşıtını sorgulayarak tasarım uzayını
+genişletmek
+Öncesi–sırası–sonrası ˙Işlemi evrelere ayırarak arıza yerini yerelleştirmek
+Kısa–orta–uzun vade Önce asgari mekanizmayı, sonra raporlamayı, sonra karar
+desteğini inşa etmek
+Mutlu tesadüf Hedeflenmemiş fakat değerli bulguyu fark edip ürün
+yeteneğine dönüştürmek
+Genel ilke: karşıt düşünerek seçenek üret, süreci bölerek hatayı yerelleştir,
+kademeli geliştir, beklenmedik sonuçları elemekten kaçın.
+Kaynakça
+References
+[1] ˙Istanbul Teknik Üniversitesi Medya ve ˙Iletişim Ofisi. Hayalet
+Uçaklarda Görünmezlik Sağlayan Polimer Teknolojisinin Mucidi
+Ergün Kırlıkovalı, ˙IT Ü’deydi. ˙IT Ü Haberler, 24 Nisan 2026.
+https://haberler.itu.edu.tr/haberdetay/2026/04/24/ [C erçevenin
+on başlığının adlandırıldığı birincil kurumsal kayıt; “˙Inovasyon Öğretilebilir
+Bir Beceridir” semineri, 20 Nisan 2026.]
+[2] Ekonomim (Dünya Gazetesi). Ergun Kırlıkovalı: Türkiye bağımsızlık savaşı
+veriyor, yarı yolu geçmiş durumda. Söyleşi, Subat 2026. [“Mutlu tesadüfleri
+fark etmek” maddesinin ve sistematik kayıt tutma koşulunun yazarın kendi
+ifadeleriyle aktarıldığı kaynak.]
+[3] Bigpara / Hürriyet. F-35’e görünmezlik sağlayan Türk mühendisten müjde:
+Üzerinde çalıştığımız 6 yeni malzeme var. Ekim 2025. [“Tezatlar sis-
+temi”nin yazar tarafından tanımlandığı kaynak: yaklaşık kırk zıt kavram
+çifti üzerinden beyin fırtınası; fikirlerin %95’inin elenmesi, kalan %5’lik
+aralığın yeniliği taşıması.]
+[4] Yeni Birlik Gazetesi. F-35’i görünmez yapan Türk mucit Kırlıkovalı’dan
+gençlere kritik tavsiyeler. Ekim 2025. [Yaratıcılık ile inovasyon ayrımı ve
+yedi aşamalı sistem tanımı.]
+4
+
+-- 4 of 5 --
+
+[5] Osborn, A. F. Applied Imagination: Principles and Procedures of Creative
+Thinking. Charles Scribner’s Sons, New York, 1953.
+[6] Altshuller, G. S. Creativity as an Exact Science: The Theory of the Solution
+of Inventive Problems. Gordon and Breach, New York, 1984. [TRIZ’de
+çelişki (contradiction) çözümlemesi; tezatlar cetvelinin en yakın yöntemsel
+akrabası.]
+[7] de Bono, E. Lateral Thinking: Creativity Step by Step. Harper & Row,
+New York, 1970.
+[8] Merton, R. K.; Barber, E. The Travels and Adventures of Serendipity:
+A Study in Sociological Semantics and the Sociology of Science. Prince-
+ton University Press, Princeton, 2004. [Mutlu tesadüf kavramının bilim
+sosyolojisindeki karşılığı.]
+[9] Saltzer, J. H.; Reed, D. P.; Clark, D. D. End-to-End Arguments in Sys-
+tem Design. ACM Transactions on Computer Systems, 2(4):277–288, 1984.
+[Sorumluluğun hangi katmana yerleştirileceği tartışması; ön uç – arka uç
+kayıt kararının kuramsal dayanağı.]
+[10] Saltzer, J. H.; Schroeder, M. D. The Protection of Information in Computer
+Systems. Proceedings of the IEEE, 63(9):1278–1308, 1975. [Güven sınırı ve
+en az yetki ilkeleri; istemci kaynaklı verinin güvenilmezliği.]
+[11] Kleppmann, M. Designing Data-Intensive Applications. O’Reilly Media,
+Sebastopol, 2017. [Olay günlüğü (event log) ile türetilmiş toplam (aggre-
+gate) arasındaki ayrım; kayıt granülerliği kararı.]
+[12] Majors, C.; Fong-Jones, L.; Miranda, G. Observability Engineer-
+ing: Achieving Production Excellence. O’Reilly Media, Sebastopol,
+2022. [ Öncesi–sırası–sonrası ayrıştırmasının gözlemlenebilirlik karşılığı;
+başarısızlık oranlarından uyarı üretimi.]
+[13] Humble, J.; Farley, D. Continuous Delivery: Reliable Software Re-
+leases through Build, Test, and Deployment Automation. Addison-Wesley,
+Boston, 2010. [Kısa–orta–uzun vade kademelendirmesinin artımlı teslimat
+karşılığı.]
+[14] Cavoukian, A. Privacy by Design: The 7 Foundational Principles. In-
+formation and Privacy Commissioner of Ontario, Toronto, 2009. [Kullanıcı
+kimliğinin saklanmaması ve katmanlı veri saklama seçeneklerinin gerekçesi;
+ayrıca bkz. GDPR md. 5(1)(e), saklama sınırlaması ilkesi.]
+5
+
+-- 5 of 5 --
