@@ -5,7 +5,7 @@ import { useLang } from '../i18n.jsx'
 // Projelerim — public/projects.json'dan okunur (GitHub public repo'larından üretildi):
 //   [{ "name": "...", "desc": "...", "lang": "...", "url": "https://github.com/...", "homepage": "..." }]
 export default function Projeler() {
-  const { t } = useLang()
+  const { t, lang } = useLang()
   const [items, setItems] = useState(null)
 
   useHead({ title: t('projects'), image: '/profile.jpeg' })
@@ -37,7 +37,11 @@ export default function Projeler() {
                 <span className="proj-name">{it.name}</span>
                 {it.lang && <span className="proj-lang">{it.lang}</span>}
               </a>
-              {it.desc && <p className="proj-desc">{it.desc}</p>}
+              {(lang === 'en' && it.desc_en ? it.desc_en : it.desc) && (
+                <p className="proj-desc">
+                  {lang === 'en' && it.desc_en ? it.desc_en : it.desc}
+                </p>
+              )}
               {it.homepage && (
                 <a
                   className="proj-live"
