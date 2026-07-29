@@ -171,8 +171,9 @@ code {
 /* Sekme navigasyonu */
 .site-nav {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  gap: 28px;
+  gap: 10px 28px;
   padding: 20px 0 4px;
   border-bottom: 1px solid var(--line);
 }
@@ -828,6 +829,12 @@ code {
   .featured-grid,
   .theme-grid {
     grid-template-columns: 1fr;
+  }
+  .site-nav {
+    gap: 8px 16px;
+  }
+  .nav-tab {
+    font-size: 0.9rem;
   }
 }
 

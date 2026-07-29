@@ -380,7 +380,7 @@ for (const p of posts) {
     (p.note ? `<p class="post-note">${esc(p.note)}</p>` : '') +
     `<div class="post-actions">` +
     `<a href="${escAttr(pdfUrl)}" target="_blank" rel="noreferrer" class="btn">Yeni sekmede aç</a>` +
-    `<a href="${escAttr(pdfUrl)}" download class="btn">İndir</a>` +
+    `<a href="${escAttr(pdfUrl)}" download class="btn">PDF indir</a>` +
     `<button type="button" class="btn">Metni Kopyala</button>` +
     `<a href="${escAttr(textUrl)}" download="${escAttr(p.slug)}.txt" class="btn">Metni İndir</a>` +
     `<button type="button" class="btn">Paylaş</button>` +
