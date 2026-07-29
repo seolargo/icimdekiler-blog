@@ -185,10 +185,12 @@ export default function Post() {
                       loading="lazy"
                     />
                   )}
-                  <span className="post-related-name">{dTitle(rp)}</span>
-                  {rp.description && (
-                    <span className="post-related-desc">{dDesc(rp)}</span>
-                  )}
+                  <span className="post-related-body">
+                    <span className="post-related-name">{dTitle(rp)}</span>
+                    {rp.description && (
+                      <span className="post-related-desc">{dDesc(rp)}</span>
+                    )}
+                  </span>
                 </Link>
               </li>
             ))}

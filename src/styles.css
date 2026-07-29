@@ -590,60 +590,53 @@ code {
 .post-related-list {
   list-style: none;
   margin: 0;
-  padding: 0 0 8px;
-  display: flex;
-  gap: 16px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
+  padding: 0;
 }
 
-.post-related-item {
-  flex: 0 0 auto;
-  width: 210px;
-  scroll-snap-align: start;
+.post-related-item + .post-related-item {
+  border-top: 1px solid var(--line);
 }
 
 .post-related-item a {
-  display: block;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 16px 0;
   color: inherit;
   text-decoration: none;
-}
-
-.post-related-thumb {
-  display: block;
-  width: 100%;
-  height: 260px;
-  object-fit: cover;
-  border-radius: 8px;
-  border: 1px solid var(--line);
-  background: var(--btn-bg);
-  margin-bottom: 8px;
   transition: opacity 0.15s ease;
 }
 
-.post-related-item a:hover .post-related-thumb {
-  opacity: 0.65;
+.post-related-item a:hover {
+  opacity: 0.62;
+}
+
+.post-related-thumb {
+  flex: 0 0 auto;
+  width: 72px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: var(--btn-bg);
+}
+
+.post-related-body {
+  display: flex;
+  flex-direction: column;
 }
 
 .post-related-name {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  font-size: 0.84rem;
+  font-size: 1.02rem;
   font-weight: 600;
   line-height: 1.3;
-  margin-bottom: 3px;
+  letter-spacing: -0.01em;
+  margin-bottom: 5px;
 }
 
 .post-related-desc {
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  font-size: 0.76rem;
-  line-height: 1.4;
+  font-size: 0.9rem;
+  line-height: 1.55;
   color: var(--muted);
 }
 

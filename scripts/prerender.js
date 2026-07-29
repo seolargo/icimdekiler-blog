@@ -355,9 +355,9 @@ for (const p of posts) {
           return (
             `<li class="post-related-item"><a href="${base}post/${encodeURIComponent(rp.slug)}">` +
             thumb +
-            `<span class="post-related-name">${esc(rp.title)}</span>` +
+            `<span class="post-related-body"><span class="post-related-name">${esc(rp.title)}</span>` +
             desc +
-            `</a></li>`
+            `</span></a></li>`
           )
         })
         .join('')}</ul></div>`
