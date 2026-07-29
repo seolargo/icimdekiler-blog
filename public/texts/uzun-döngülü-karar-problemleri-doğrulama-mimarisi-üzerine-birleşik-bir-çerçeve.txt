@@ -1,0 +1,691 @@
+Uzun Döngülü Karar Problemleri: Doğrulama
+Mimarisi Üzerine Birleşik Bir C erçeve
+Ömer Faruk Yavuz
+July 2026
+Kapsam ve Yöntem
+Bu metin, birbirinden bağımsız beş inceleme hattının — yazılım geliştirmede
+sınama öncelikli tasarım, Amerikan pragmatizminin kurumsal biçimleri, askerı
+istihbarat kurumlarında denetim ve revizyon, savunma sanayii program yönetimi
+ve ileri teknoloji yetkinliklerinin edinilebilirliği — ortak kavramsal iskeletini
+çıkarmayı amaçlamaktadır.
+Tez şudur: bu beş hat, farklı ölçeklerde tek bir problemin görünümleridir.
+Söz konusu problem, bir sistemin yanıldığının kendisine söylenebilmesi ve bu
+söylemenin olağanüstü erdem gerektirmeyecek biçimde yapıya yazılmasıdır.
+1
+
+-- 1 of 21 --
+
+I. Ortak C ekirdek
+Temel Önerme
+Yetkinlik bilgi değildir; yetkinlik, doğrulama döngüsünden sağ çıkmış
+bilgidir.
+Sınanmamış bilgi, epistemik olarak bilgi değil hipotezdir. Bir öznenin bir şeyi
+bilmesi ile onu yapabilmesi arasındaki mesafe, aradaki doğrulanmış yineleme
+sayısıdır.
+Buradan çıkan temel koşul şudur: bir öznenin tek bir problem üzerinde
+kalabildiği süre, o problemin gerektirdiği yineleme sayısı ile tek bir yinelemenin
+süresinin çarpımını aşmalıdır. Aşmadığı takdirde yetkinlik oluşmaz; yineleme
+zinciri tamamlanmadan özne alandan ayrılmış olur.
+Bu koşulun belirleyici özelliği, sermaye düzeyinden bağımsız olmasıdır. Ser-
+maye, tek bir yinelemenin maliyetini düşürebilir ve birbirinden bağımsız yinelemeleri
+paralelleştirebilir; ancak birbirine bağımlı yinelemelerden oluşan bir zinciri kısaltamaz
+ve öznenin problemde kalabildiği süreyi uzatamaz. Dolayısıyla kaynak bakımından
+zengin aktörlerin başarısızlığı ile kaynak bakımından yoksul aktörlerin zaman
+zaman elde ettiği başarı, aynı koşulun iki ayrı görünümüdür.
+Kırılma Noktaları ve Karşılık Gelen Patolojiler
+Yukarıda verilen döngü, tek parça bir mekanizma değil, birbirine bağlı halkalar-
+dan oluşan bir zincirdir. Zincirin bütünüyle kopması gerekmez; tek bir halkanın
+kopması dahi öğrenmeyi durdurmaya yeter. Bu nedenle “öğrenemeyen sistem”
+tek bir arıza değil, en az altı ayrı arıza türünü kapsayan bir üst kategoridir. Tanı
+koyabilmek için hangi halkanın koptuğunun belirlenmesi gerekir; zira her kopuş
+farklı bir görünüm üretir ve farklı bir müdahale gerektirir.
+Kopan bağlantı Ortaya çıkan hâl Kaybedilen
+Hipotez Tahmin Dogma Yanlışlanabilirlik
+Eylem Sonuç Spekülasyon Gerçeklikle temas
+Sonuç Ölçüm Ustalık Aktarılabilirlik
+Kıyas Revizyon ˙Inat Düzeltme
+Revizyon Kayıt Unutulma Kurumsallaşma
+Kayıt Sorun Tekerrür Erişilebilirlik
+Hipotez ile Tahmin Arasındaki Kopuş
+˙Iddia mevcuttur, ancak iddiadan önce “hangi gözlemi elde edersem bu iddiadan
+vazgeçerim” önermesi kurulmamıştır. Bu durumda zincirin geri kalan halkaları
+işlese dahi öğrenme gerçekleşmez, çünkü her sonuç iddiayla uyumlu hâle ge-
+tirilebilecek biçimde yorumlanabilir. Zincirin taşıyıcı halkası budur; kopması
+hâlinde geriye kalan bütün faaliyet, öğrenme görünümü altında yürüyen bir
+doğrulama arayışına dönüşür.
+2
+
+-- 2 of 21 --
+
+Eylem ile Sonuç Arasındaki Kopuş
+˙Iddia hiçbir zaman uygulamaya geçirilmez. Fikir gerçeklikle temas etmediği
+için ne doğrulanır ne yanlışlanır; belirsiz kalır. Bu hâl, yanlışlığı gösterilmemiş
+olmayı doğrulukla karıştırma eğilimi ürettiği için, ilk bakışta dogmadan daha
+zararsız görünmesine karşın uzun vadede benzer bir bağışıklık üretir.
+Sonuç ile Ölçüm Arasındaki Kopuş
+Sonuç elde edilmiş, ancak ölçülmemiş ve kaydedilmemiştir. Değerlendirme,
+ilgili kişinin gözlemine ve sezgisine bırakılır. Bilgi bu durumda kaybolmuş
+değildir; ancak yalnızca bir bireyin yargısında bulunduğu için ne sınanabilir
+ne aktarılabilir. Zanaat bilgisinin usta ile birlikte yok olmasının mekanizması
+budur.
+Kıyas ile Revizyon Arasındaki Kopuş
+Tahmin ile sonuç karşılaştırılmış, uyuşmazlık tespit edilmiş, fakat model değiştirilmemiştir.
+Ölçüm işlevini yerine getirmiş, düzeltme işlevi gerçekleşmemiştir. Bu, mekaniz-
+manın en aldatıcı arızasıdır: dışarıdan bakıldığında sistemin ölçüm altyapısı
+çalışır durumdadır ve bu görüntü, öğrenmenin sürdüğü izlenimini verir. Delilin
+çerçeveyi değiştirmek yerine çerçeve tarafından soğurulduğu vakalar bu başlık
+altında toplanır.
+Revizyon ile Kayıt Arasındaki Kopuş
+Model değiştirilmiş, ancak değişikliğin gerekçesiyle birlikte kaydı tutulmamıştır.
+Birey öğrenmiş, kurum öğrenmemiştir. Bilgi ekip dağıldığında, kadro değiştiğinde
+veya program sona erdiğinde birlikte kaybolur. Bu kopuş, aynı hatanın aynı ku-
+rumda kuşak aralıklarıyla tekrarlanmasının başlıca nedenidir.
+Kayıt ile Sorun Arasındaki Kopuş
+Kayıt mevcuttur, fakat benzer bir sorunla karşılaşıldığında erişilmemektedir.
+Rapor yazılmış, arşive konulmuş ve okunmamıştır. Bu, dokümantasyon ek-
+sikliğinden farklı bir arızadır; çözümü daha fazla yazmak değil, kaydı karar
+anına bağlayan bir tetikleyici mekanizma kurmaktır.
+Dogma Kavramının Tanımı Üzerine
+Yukarıdaki tabloda dogma, inancın şiddetiyle değil yapısıyla tanımlanmaktadır.
+Belirleyici ölçüt, öznenin fikrine ne kadar sıkı bağlı olduğu değil, fikrin yanlışlanabilir
+biçimde kurulup kurulmadığıdır.
+Bu tanım iki sezgiye aykırı sonuç üretir. Birincisi, bir fikre son derece güçlü
+biçimde bağlı olan ancak vazgeçme şartını önceden ve açıkça belirlemiş bir özne
+dogmatik değildir. ˙Ikincisi, fikrine gevşek biçimde bağlı olmakla birlikte iddiayı
+hiçbir gözlemin sarsamayacağı biçimde kurmuş bir özne dogmatiktir. Dogma,
+bir bağlılık derecesi değil, bir kurgu biçimidir.
+3
+
+-- 3 of 21 --
+
+II. Birinci Eksen: Ölçütün Zamanlaması
+Kalıbın Soyut Hâli
+Alan-özgül terimler kaldırıldığında geriye tek bir ilke kalır:
+Başarı ölçütünü, üretimden önce ve üretilen şeye bakmadan yaz.
+Bu ilkenin dikkat çekici yanı, birbirinden habersiz gelenekler tarafından
+bağımsız olarak keşfedilmiş olmasıdır. Klinik araştırmada çalışma protokolünün
+ön kaydı, yazılımda sınamanın koddan önce yazılması, imalatta geçer–geçmez
+mastarının parça işlenmeden hazırlanması, hukukta usul kurallarının uyuşmazlıktan
+önce belirlenmesi ve eğitimde değerlendirme ölçütünün ders tasarımından önce
+yazılması — bunların tamamı aynı yapının farklı alanlardaki örnekleridir. Yakınsamanın
+bu denli geniş olması, ilkenin alan-özgül bir teknik değil, öz denetime ilişkin genel
+bir çözüm olduğunu göstermektedir.
+˙Ilkeyi ˙Işler Kılan Üç Mekanizma
+˙Ilke tek bir nedenle değil, birbirinden bağımsız üç mekanizmayla çalışır. Bu
+ayrımın önemi pratiktir: bir uygulama üç mekanizmadan yalnızca birini sağlıyorsa,
+biçimsel olarak ilkeye uygun görünmesine karşın koruyucu işlevini büyük ölçüde
+yitirmiş olur.
+Ölçütün Kaymasının Engellenmesi
+Sonuç görüldükten sonra yazılan ölçüt, kaçınılmaz biçimde elde edilen sonuca
+göre biçimlenir. Bu, öznenin dürüstlüğünden bağımsız bir etkidir; ölçütü yazan
+kişi sonucu bildiğinde, o sonucu başarı sayan formülasyon diğerlerinden daha
+doğal görünür. Ölçütün önceden sabitlenmesi, bu uyarlamayı mekanik olarak
+imkânsız kılar — iradeye ve öz disipline başvurmaya gerek bırakmadan.
+Ölçüm Aletinin Doğrulanması
+Bir ölçütün ayırt edici olduğunu, ancak başarısız durumu da başarısız olarak
+işaretlediğini görerek bilebiliriz. Sınamanın önce başarısız olduğunun gözlenmesi
+bu nedenle bir formalite değil, negatif kontrol işlevi görür. Bu adım atlandığında,
+hiçbir şeyi ölçmeyen ve dolayısıyla her koşulda geçer veren bir ölçütle çalışılıyor
+olma ihtimali dışlanamaz. Deneysel bilimlerde kör numunenin, imalatta kali-
+brasyon standardının ve yazılımda sınama mutasyonunun gördüğü işlev aynıdır.
+˙Iki Bağımsız Türetmenin Elde Edilmesi
+Üç mekanizma içinde en yük taşıyanı budur. Ölçüt ile üretilen şey birbirinden
+bağımsız olarak türetildiğinde, aralarındaki uyuşma bir kanıt değeri kazanır;
+zira iki ayrı yoldan aynı noktaya varılmıştır. Bağımsızlık ortadan kalktığında
+uyuşma kanıt olmaktan çıkar ve totolojiye dönüşür: aynı kaynaktan türeyen iki
+ifadenin birbirini doğrulaması beklenen sonuçtur, bilgi taşımaz.
+4
+
+-- 4 of 21 --
+
+Bağımsızlığın C öküşü
+Yukarıdaki üçüncü mekanizmanın ihlali, yüzeyde birbirinden tamamen farklı
+görünen bir dizi hatanın ortak kökenidir. Sınama nesnesinin, sınadığı bileşenin iç
+yapısını yeniden anlatacak ölçüde ayrıntılandırılması; sınamanın uygulamadan
+sonra yazılması; hipotezin veri görüldükten sonra kurulup önceden kurulmuş gibi
+sunulması; ayrılmış sınama kümesinin model geliştirme sürecinde incelenmesi —
+dördü de aynı hatanın farklı alanlardaki görünümüdür.
+Bu birleştirmenin tanısal değeri yüksektir. Söz konusu hatalar genellikle ayrı
+ayrı adlandırıldıkları ve ayrı gerekçelerle eleştirildikleri için, aralarındaki yapısal
+akrabalık gözden kaçmaktadır. Oysa hepsinde bozulan tek bir nitelik vardır ve
+kontrol için sorulması gereken tek bir soru bulunmaktadır: ölçüt, ölçtüğü şeyden
+haberdar olmadan mı üretildi?
+Dondurma Zamanının Bir Ayar Olması
+˙Ilkenin kendisi ölçütün önceden yazılmasını gerektirir; ancak ne kadar önceden
+yazılacağı sabit değil, ayarlanabilir bir parametredir. Bu parametre bir ödünleşim
+ekseni üzerinde konumlanır. Eksenin bir ucunda ölçütün geç dondurulması yer
+alır; buna karşılık gelen çalışma biçimleri kısa süreli araştırma denemeleri ve
+ilk örnek üretimidir ve bu uçta öne çıkan nitelik keşif kapasitesidir. Diğer uçta
+ölçütün erken dondurulması bulunur; karşılık gelen biçimler ayrıntılı şartname
+ve standarttır ve bu uçta öne çıkan nitelik ölçeklenebilirliktir.
+Ölçütün erken dondurulması öngörülebilirlik ve ölçeklenebilirlik sağlar, buna
+karşılık problem tanımının kendisinin yeniden düşünülmesini güçleştirir. Geç
+dondurulması keşif alanını açık tutar, ancak koordinasyonu ve devri zorlaştırır.
+Bu bir doğru–yanlış ekseni değildir. Ayarın nereye konulacağını belirleyen,
+problem tanımının ne ölçüde yerleşik olduğudur: tanımın kendisi henüz tartışmalıysa
+erken dondurma, yanlış problemi verimli biçimde çözme riskini üretir; tanım
+yerleşikse geç dondurma, hiçbir kazanç sağlamadan koordinasyon maliyeti doğurur.
+Tutumların Sınıflandırılması
+˙Ilke, epistemik tutumların sınıflandırılması için de kullanılabilir. ˙Iki ölçüt yeter-
+lidir: vazgeçme şartının önceden konulup konulmadığı ve öznenin fikrini fiilen
+neyin değiştirdiği.
+Tutum Sart önceden kondu mu Fikri değiştiren
+Pragmatizm Evet Sonuç
+˙Inat Evet Hiçbir şey
+Dogma Hayır Hiçbir şey
+Savrulma Hayır Anlık his
+Oportünizm Hayır C ıkar
+Konformizm Hayır Ortam
+Tablodan çıkan iki gözlem kayda değerdir.
+5
+
+-- 5 of 21 --
+
+Birincisi, tutarlılık tek başına erdem değildir. Dogma ile inat, fikri hiçbir
+şeyin değiştirmemesi bakımından aynıdır ve dışarıdan bakıldığında ikisi de kararlılık
+görünümü verir. Aralarındaki fark, inadın en azından bir vazgeçme şartı içermesi
+— yani ilkesel olarak yanlışlanabilir olması — ancak öznenin bu şart gerçekleştiğinde
+gereğini yapmamasıdır. ˙Inat uygulama arızası, dogma ise tasarım arızasıdır.
+˙Ikincisi, esneklik de tek başına erdem değildir. Savrulma, oportünizm ve
+konformizm, fikir değiştirme yeteneği bakımından pragmatizmle aynı kategoride
+görünür. Ayırt edici olan değişimin gerçekleşmesi değil, değişimi tetikleyen
+etkendir: pragmatizmde önceden ilan edilmiş bir ölçüte göre sonuç, diğerlerinde
+sırasıyla anlık duygu durumu, çıkar hesabı ve çevresel baskı. Fikir değiştirme
+kapasitesi, ancak önceden konulmuş bir şarta bağlandığında epistemik değer
+taşır.
+6
+
+-- 6 of 21 --
+
+III. ˙Ikinci Eksen: Hakemin Konumu
+Dört Kurumsal Önkoşul
+Güvenilirlik sıralamasının tepesindeki bütün alanlarda — havacılık, anesteziy-
+oloji, nükleer güç, yarı iletken üretimi — aynı dört özellik gözlenmektedir:
+1. Hakem dışarıdadır ve pazarlığa kapalıdır (fizik, verim oranı, mortalite).
+2. Ölçüt sonuçtan önce ilan edilmiştir.
+3. ˙Itirafın maliyeti kurumsal olarak sıfırlanmıştır.
+4. Soruşturan kurum, karar veren kurumdan ayrıdır.
+Dördüncü koşul, en sık atlanan ve en belirleyici olandır.
+Sinyalin Üç Aşaması ve Karakteristik Arızaları
+Üretim
+Uyarıyı veren, maliyeti bireysel olarak taşır; kazanç ise dağınık ve görünmezdir
+(gerçekleşmeyen felaket). Rasyonel tercih susmaktır. Sorun karakter değil,
+muhasebedir. Kurumsal çözüm cesaret talebi değil görev tanımıdır: karşı tezin
+yazılmasının maaş karşılığı bir iş hâline getirilmesi, ve bildirenin yaptırımdan
+yapısal olarak korunması.
+˙Iletim
+Sinyal, kendisinden mahcup olacak düğümlerden geçmek zorundadır. C özüm,
+muhalefetin belgeyle birlikte yolculuk etmesi ve itirazın hangi kademede söndüğünün
+kaydedilmesidir. Burada içerik değil dağılım incelenir: itirazlar sistematik olarak
+aynı kademede ölüyorsa, sorun o kademededir — itirazların haklı olup olmadığından
+bağımsız olarak.
+Eylem
+Harekete geçmesi gereken merci, çoğu zaman incelemenin hedefidir. Yapısal
+çözümler: tetiğin hedefte olmaması, görev süresinin atayanı aşması ve yenilen-
+emez olması, çift raporlama, ve soruşturma yetkisinin düzenleme yetkisinden
+ayrılması.
+Ölçekten Bağımsız Tekrar
+Bu üçlü yapı her ölçekte kendini yineler: analist–amir, kurum–hükümet, komisyon–
+kabine, denetçi–yürütme. Yapı fraktaldır.
+7
+
+-- 7 of 21 --
+
+IV. Üçüncü Eksen: Ufuk ve Döngü Süresi
+Yöntemi Belirleyen Değişken
+Deney ucuz → deneme-yanılma yeter, soyutlamaya ihtiyaç yok
+Deney pahalı → soyutlama zorunlu, ama doğrulanamaz
+Buradan çıkan ters orantı belirleyicidir: en çok soyutlama gerektiren yerde,
+soyutlamanın doğruluğu en az denetlenebilir durumdadır.
+Taklidin Kaynağı
+Geri besleme kırıldığında yerini öğrenme değil izomorfizm alır. Karar ufku ile
+kariyer ufku örtüştüğünde — her ikisi de otuz yıl mertebesinde olduğunda —
+sonuç geldiğinde kararı veren kadro ortalıkta yoktur. Bu boşluğu kopya doldu-
+rur.
+Düzeltilmiş tez şudur: taklit, geri beslemenin yokluğundan değil, geri besleme
+mimarisinin bilinçli olarak kurulmamasından doğar. Bu formülasyon gözlenebilirdir;
+bir programın emsal sınıfı analizi yapıp yapmadığı ve öncül gösterge tanımlayıp
+tanımlamadığı ölçülebilir niceliklerdir.
+Döngü ˙Inşasının Dört Yolu
+1. Başkasının deneyini kullanmak: emsal sınıfı, kaza soruşturması, kişi trans-
+feri.
+2. Soruyu değiştirmek: sonucu değil öncülü ölçmek.
+3. Muhalifi hakem yapmak: ön-otopsi, kırmızı takım, tarihli tahmin.
+4. Öğrenmekten vazgeçip yanılmayı ucuzlatmak: iki kaynak, modülerlik, geri
+alma.
+Paranın Etki Haritası
+Terim Sermaye etkili mi
+Yineleme başına maliyet Evet
+Bağımsız yinelemelerin paralelleştirilmesi Evet
+Bağımlı yineleme zinciri Hayır
+Bilginin dağınıklık derecesi Hayır
+Ufuk (H) Hayır
+Bu tablo, sermaye açısından zengin aktörlerin başarısızlığı ile kaynak açısından
+yoksul bireylerin ara sıra başarısını aynı anda açıklamaktadır. Sermaye, başarısızlığın
+gerçekleştiği terimlere temas etmemektedir.
+8
+
+-- 8 of 21 --
+
+V. Dördüncü Eksen: Bilginin Taşınabilirliği
+Durum ve Yol Ayrımı
+Bir nesnenin mevcut hâli ilgili bilgiyi taşıyor mu, yoksa bilgi yalnızca o hâle
+gelme sürecinin içinde mi mevcuttu? Birinci durumda bilgi ölçülüp kopyalan-
+abilir; ikincisinde kopyalanamaz, ancak yeniden türetilebilir.
+Geometri bir dosyadır; metalurji bir tarihtir.
+Bu ayrım termodinamikteki durum fonksiyonu ile yol fonksiyonu ayrımının
+mühendislik karşılığıdır. Kurumsal düzlemdeki eşleniği, mevzuat metninin kopy-
+alanabilirken denetim kültürünün kopyalanamamasıdır; yazında izomorfik taklit
+olarak adlandırılan olgu tam olarak budur.
+Arama ve Teyit Ayrımı
+Bileşen ˙Işlevi Sıkıştırılabilirliği
+Narama Doğru mimariyi bulmak Yüksek
+Nteyit Güvenilir çalıştırmak Düşük
+Yayımlanan bilgi asimetrik olarak arama tarafında birikir; entegrasyon ve
+güvenilirlik bilgisi yayımlanmaz, çünkü çoğu zaman hiçbir aktör onu ifade edilebilir
+hâlde bulundurmaz. Bunun sonucu, bedava olan kısmın aynı zamanda küçük
+olan kısım olmasıdır.
+Yoğunlaşma Derecesi
+Bir yetkinliğin satın alınabilirliği, o yetkinliğin kaç bağımsız aktöre ve kaç yıla
+dağıldığıyla ters orantılıdır. Tek bir kurumda yoğunlaşmış bilgi personel trans-
+feriyle edinilebilir; binlerce tedarikçilik ilişkisine ve on yıllara yayılmış bilgi için
+işleyen bir edinim yöntemi bulunmamaktadır.
+Enformasyon ve Bilgi Ayrımı
+Gönderilebilen şey ile alıcının aldıktan sonra yapabildiği şey aynı değildir. Bir
+mesajın taşıdığı bilgi, mesajın kendisinde değil, mesaj ile alıcının önceki durumu
+arasındaki farkta bulunur. Dolayısıyla edinim maliyetini metin değil, alıcının
+hazır olma derecesi belirler. Aynı üretim aracının farklı kurumlarda farklı verim
+üretmesi bu ilkenin doğrudan gözlemidir.
+9
+
+-- 9 of 21 --
+
+VI. Beşinci Eksen: Zekânın Konumlandırılması
+Sorunun Kuruluşu
+Kurumsal tasarımda sıkça karşılaşılan bir yanlış kuruluş, meselenin “nitelikli
+insan mı yoksa iyi süreç mi” biçiminde ikili bir tercih olarak ele alınmasıdır.
+Bu kuruluş yanıltıcıdır, çünkü her işleyen sistemde zekâ mevcuttur; değişen,
+zekânın ne zaman harcandığı ve nereye gömüldüğüdür.
+Bir kontrol listesi, bir kalıp veya bir prosedür, zekânın yokluğunun değil, bir
+kez harcanıp nesneye aktarılmış olmasının göstergesidir. Bu nedenle iki rejim
+arasındaki fark zekâ miktarı değil, zekânın zaman içindeki dağılımıdır: yetenek
+rejiminde her çalışma anında yeniden harcanır, süreç rejiminde başlangıçta bir
+kez harcanıp amortize edilir.
+˙Iki Rejimin Karşılaştırılması
+Yetenek rejimi Süreç rejimi
+Zekâ ne zaman harcanır Her çalışmada Bir kez, başlangıçta
+Nereye gömülüdür Kişilerde Araçta ve akışta
+Varyansa etkisi ˙Iki kuyruk da açık ˙Iki kuyruk da kesik
+Kazandırdığı Sıçrama Felaketin önlenmesi
+Kaybettirdiği Öngörülebilirlik Buluş
+Karakteristik arızası Ölçeklenmeme Kemikleşme
+Tablonun üçüncü satırı belirleyicidir ve diğerlerinin çoğunu açıklar. Süreç
+rejimi dağılımın her iki ucunu da keser: felaketi engellerken sıçramayı da en-
+geller. Yetenek rejimi ise her iki ucu açık bırakır; olağanüstü sonuç ihtimaliyle
+birlikte olağanüstü başarısızlık ihtimalini de taşır. ˙Iki rejim arasındaki tercih,
+dolayısıyla, bir kalite tercihi değil bir dağılım tercihidir.
+Her rejimin kendine özgü bir bozulma biçimi bulunmaktadır. Yetenek re-
+jimi ölçeklenmez ve kilit kişilerin ayrılmasına karşı savunmasızdır. Süreç rejimi
+ise zamanla kemikleşir ve uygulayıcıların yargı kapasitesini aşındırır; prosedür
+yeterli göründüğü sürece, prosedürün dışına çıkma becerisi kullanılmadığı için
+körelir.
+Seçim Kuralı
+Rejim tercihi için üç ön eleme sorusu kullanılabilir: problem tekrar ediyor mu,
+bozulma biçimleri önceden sayılabilir mi ve ödeme yapısı konkav mı konveks
+mi? Üçünde de olumlu yanıt süreç rejimine işaret eder.
+Ancak bu üç sorunun tamamını kapsayan tek bir belirleyici ölçüt vardır:
+varyans bilgi midir, kusur mudur?
+Kestirim ve değerlendirme faaliyetlerinde uzmanlar arasındaki uyuşmazlık,
+konunun kendisindeki belirsizliğin gerçek boyutuna ilişkin bilgi taşır. Uyuşmazlığın
+yöntemsel olarak bastırılması, görünürde tutarlılık üretirken fiilen bilgi imha
+eder; ortaya çıkan tek sesli çıktı, altındaki belirsizliği gizlediği için gerçekte daha
+10
+
+-- 10 of 21 --
+
+az bilgilendiricidir. Buna karşılık bakım, imalat ve benzeri yürütme faaliyet-
+lerinde iki uygulayıcının farklı davranması hiçbir bilgi taşımaz; doğrudan kusurdur
+ve ortadan kaldırılması gerekir.
+Ölçek düzeyinde bundan ikincil bir kural türer. Büyük kadrolarda anlamlı
+soru, istisnai yeteneğin gerekli olup olmadığı değil, nereye yerleştirileceğidir.
+Cevap neredeyse istisnasız biçimde aynıdır: istisnai yetenek, işin yürütüldüğü
+hatta değil, hattı tasarlayan katmana konumlandırılmalıdır. Bir kez düşünülmüş
+iyi bir akış, her seferinde yeniden düşünen çok sayıda iyi uygulayıcıdan daha
+ölçeklenebilir sonuç üretir.
+Süreçleştirmenin Sınırı
+Süreçleştirme belirli bir noktaya kadar ilerleyebilir. Üç katman ayırt etmek
+gerekir; bunlardan yalnızca birinde istisnai yetenek ihtiyacı sıfıra indirilebilir.
+Birinci katman işletmedir : mevcut modelin sınırları içinde işin yürütülmesi.
+Bu katmanda süreçleştirme tam anlamıyla mümkündür ve hedef de budur.
+˙Ikinci katman sınır farkının tespitidir : sistemin, artık kendi geçerlilik alanının
+dışına çıkmış olduğunu fark etmesi. Bu katman süreçleştirilemez, çünkü her
+prosedür geçmiş bir dünyanın donmuş modelidir ve kendi geçerliliğini yine kendi
+varsayımlarıyla ölçer. Modelin dışına çıkıldığının tespiti, tanımı gereği model
+içinden yapılamaz.
+Üçüncü katman revizyondur : modelin kendisinin değiştirilmesi. Dünya dur-
+madığı için bu katmanın ihtiyacı hiçbir zaman ortadan kalkmaz.
+Doğru Hedefin Formülasyonu
+Buradan çıkan sonuç, yaygın hedef formülasyonunun düzeltilmesini gerektirir.
+Amaç istisnai yetenek gerektirmeyen bir sistem kurmak değildir:
+C alışmak için istisnai yetenek istemeyen, ancak değişmek için onu
+içine alabilen sistem.
+Bu iki katmanın aynı kurumsal metabolizma içinde bir arada tutulması
+mümkün değildir; yapısal yalıtım gerekmektedir. Kütlesel bir süreç kurumunun
+içinde yetenek rejimi ancak ayrı seçilim ölçütleri, ayrı yükselme kanalları ve ayrı
+bütçe kalemleriyle korunabilir. Yalıtımın kaldırıldığı durumlarda ana kurumun
+insan kaynağı ve bütçe süreçleri, istisna alanını kısa sürede kendi ortalamasına
+doğru çeker.
+Bu yalıtımın kurumsal örnekleri geniş bir yelpazede gözlenmektedir: büyük
+savunma yapıları içindeki özel harekât teşkilatları, kamu araştırma sistemleri
+içindeki yüksek riskli program ajansları, büyük imalatçılar içindeki ayrık geliştirme
+birimleri ve düzenli askerı yapılar içindeki seçilmiş teknik programlar. Ortak
+özellikleri, ana kurumla kaynak paylaşmakla birlikte seçilim ve terfi mekaniz-
+malarını paylaşmamalarıdır.
+11
+
+-- 11 of 21 --
+
+VII. Kurumsal Arızaların Yapısal C özümlemesi
+Bu bölümde sıralanan önermeler, kurumsal başarısızlıkların ahlaki değil yapısal
+nedenlere dayandığı ortak varsayımını paylaşmaktadır. Her birinde, gözlenen
+davranış ilgili aktörler açısından rasyoneldir; dolayısıyla düzeltme, aktörlerin
+niteliğini yükseltmekle değil, teşvik yapısını değiştirmekle mümkündür.
+Seçilim ve ˙Itibar Üzerine
+Eğitim kurumları üretici değil yükselteçtir
+Bir okulun çıktı kalitesi, iki dışsal değişkenin çarpımıdır: giriş aşamasındaki
+aday havuzunun niteliği ve mezuniyet sonrasındaki teşvik yapısı. Kurum bu iki
+değişkeni çarpar, ancak yoktan var etmez. Bu nedenle bir eğitim kurumunun
+performansına ilişkin tartışmalar çoğunlukla yanlış adreslidir; kurum sorunun
+kendisi değil, sorunun nerede bulunduğunun göstergesidir.
+˙Itibar, seçimin çıktısı değil girdisidir
+“En nitelikli adaylar nasıl seçilir” biçimindeki soru, seçim yönteminin iyileştirilmesiyle
+çözülebilecek bir sorun varsayar. Oysa seçim ancak mevcut havuz üzerinde işlem
+yapabilir; havuzun bileşimini belirleyen itibardır. Sorunun doğru formülasyonu
+bu nedenle “neden başvursunlar” biçimindedir.
+Bu formülasyonun sezgiye aykırı bir sonucu vardır: çıkış serbestisi, giriş
+niteliğinin belirleyicilerindendir. Ayrılmanın kolay olduğu kurumlar, yüksek
+alternatif maliyeti olan adaylar için düşük riskli bir tercih oluşturur; uzun süreli
+hizmet yükümlülükleri ise ters seçilim üretir, zira dışarıda en güçlü seçeneklere
+sahip olan adayları elemektedir.
+Kendi Sınırını Gözleme Sorunu
+Sistem, geçerlilik sınırını içeriden tespit edemez
+Her prosedür, yazıldığı dönemin dünyasına ilişkin donmuş bir modeldir. Modelin
+geçerliliğini denetleyen mekanizma da aynı model içinden işlediği için, modelin
+kendisinin artık geçerli olmadığı durum tanımı gereği gözlenemez. Beklentiyle
+gerçeklik arasındaki uyuşmazlık ancak model içinde bir sapma olarak görünür;
+modelin bütünüyle kapsam dışına çıkmış olduğu ihtimali, model içi bir gözlem
+kategorisi değildir.
+Düzeltme de bir sapmadır
+Sapmayı engellemek üzere kurulmuş her mekanizma, düzeltme girişimlerini de
+engeller; zira ikisi de kurala uygun davranıştan ayrılma biçimindedir. Kritik
+olan nokta, ayrımın o an yapılamıyor olmasıdır. Yerinde bir uyarı ile yersiz bir
+itiraz, gerçekleşme anında birbirinden ayırt edilemez; hangisinin hangisi olduğu
+ancak sonuç ortaya çıktıktan sonra belirlenebilir. Dolayısıyla itirazı doğruluğuna
+göre filtrelemeyi öngören her tasarım gerçekleştirilemezdir.
+12
+
+-- 12 of 21 --
+
+Denetimin Yapısal Sınırları
+Denetim kapasitesi konumla ters orantılıdır
+Denetlenmenin bedeli hiyerarşide yukarı çıkıldıkça arttığı için, denetim kapa-
+sitesi aynı yönde zayıflar. Bunun sonucu, kurumların alt kademeleri titizlikle
+denetlerken karar merciine yaklaştıkça denetim yoğunluğunun düşmesidir. Bu
+bir istisna değil, denetim mekanizmalarının varsayılan dağılımıdır.
+Soruşturma yönü seçicidir
+˙Inceleme mekanizmaları, sorumluluk aşağı veya yana işaret ettiğinde işletilir;
+yukarı işaret ettiğinde işletilmez. Buna bağlı ikincil bir düzenlilik, incelemenin
+kapsamının kurumsal tehdit düzeyine göre belirlenmesidir: kurumu utandıran
+başarısızlıklar ayrıntılı biçimde incelenirken, kurumun varlık gerekçesini sorgu-
+latan başarısızlıklar incelenmez. Ayrım, olayın ciddiyetine değil, bulgunun kimi
+bağlayacağına göre yapılır.
+Her mekanizma körelir
+Kurulan bir denetim mekanizmasının bir süre işleyip ardından sessizce işlevsiz
+hâle gelmesi, tasarım hatası değil varsayılan davranıştır. Bu nedenle mekanizma
+kurmak tek seferlik bir müdahale olarak tasarlanamaz; yenilenme ve canlılık
+denetimi mekanizmanın kendisine yazılmak zorundadır.
+Doğrulama Katmanının Gerçek C ıktısı
+Bağımsız denetim katmanının başarısızlıkları önlediği varsayımı ampirik olarak
+desteklenmemektedir; gelişmiş denetim altyapısına sahip sistemlerde de büyük
+ölçekli program başarısızlıkları gözlenmektedir. Katmanın işlevi başkadır ve
+doğru anlaşılması gerekir.
+Denetim katmanının bulunmadığı bir sistemde başarısızlık sonrasında üretilen
+ifade “öngörülemezdi” biçimindedir. Katmanın bulunduğu bir sistemde ise
+üretilen ifade, belirli bir riskin belirli bir tarihte, belirli bir merci tarafından,
+belirli bir gerekçeyle kabul edildiğini kayda geçirir. Birinci ifade hiçbir öğrenme
+üretmez; ikincisi, sonraki programların erişebileceği bir kayıt oluşturur.
+Bu nedenle denetim mekanizmalarının ürettiği çıktı bir veto değil bir imzadır.
+Karar kapıları, bağımsız kestirim yükümlülüğü, teknoloji olgunluk eşikleri ve
+bağımlılık kayıtları — bunların tamamı aşılabilir düzeneklerdir. Sağladıkları
+şey engelleme değil, aşan tarafın kimliğinin ve gerekçesinin kaydedilmesidir.
+Buradan çıkan genel ilke şudur:
+Kişi hesap verebilir kılınamaz, karar kılınabilir.
+Uzun döngülü kararlarda sonuç, kararı veren kadronun görev süresinden
+sonra ortaya çıkar; bu, değiştirilemeyecek bir zamanlama gerçeğidir. Değiştirilebilecek
+13
+
+-- 13 of 21 --
+
+olan, kararın gerekçesiyle birlikte kaydedilip kaydedilmediğidir. Hesap verebilir-
+lik kişiye bağlandığında uygulanamaz kalır; karara bağlandığında uygulanabilir
+hâle gelir.
+14
+
+-- 14 of 21 --
+
+VIII. Öğrenmenin Maliyeti
+Temel Özdeşlik
+Öğrenme, beklenen ile gerçekleşen arasındaki farkın kayda geçmesidir. Bu fark
+ise tanımı gereği bir maliyettir: beklentinin tutmaması, kaynak, zaman, itibar
+veya daha ağır biçimlerde bedel doğurur. Dolayısıyla maliyetsiz öğrenme diye
+bir kategori yoktur; farkın hiç oluşmadığı yerde öğrenilecek bir şey de yoktur.
+Bu özdeşliğin pratik sonucu, doğru hedefin maliyetin ortadan kaldırılması
+olamayacağıdır. Hedef, maliyetin üç değişkeninin ayrı ayrı küçültülmesidir:
+maliyeti kimin ödediği, ne kadar ödendiği ve hangi hızda ödendiği.
+Üç Değişken Üzerinde C alışan Düzenekler
+Birbirinden bağımsız görünen bir dizi kurumsal ve teknik düzenek, tek bir işlevi
+yerine getirmektedir: yanılmayı ucuzlatmak.
+Tarihli kestirim defteri, farkın büyümeden ve ucuzken kayda geçmesini sağlar.
+Benzetim ve ilk örnek üretimi, bedeli gerçek sistemden test ortamına aktarır. Pi-
+lot uygulama, maliyeti bütün alan yerine sınırlı bir alt kümeye yükler. Geri alma
+imkânı, ödenen bedelin kalıcı olmasını engeller. Başkasının arşivinden yararlan-
+mak, bedelin önceden ve başka bir aktör tarafından ödenmiş olmasından fay-
+dalanır. Tasarımla önleme ise belirli hata sınıflarının maliyetini gerçekleşmeden
+düşürür.
+Bu düzenekler farklı alanlarda farklı adlarla anılmalarına karşın aynı yapısal
+işlevi görürler; aralarındaki seçim, hangi değişkenin — kim, ne kadar, ne hızda
+— söz konusu bağlamda en kritik olduğuna göre yapılır.
+Maliyetin Yüksekliğinin Ürettiği Sapma
+Yanılmanın bedelinin yüksek olduğu ortamlarda aktörler yanılmayı bırakmaz;
+yanılgıyı bildirmeyi bırakır. Bu, ahlaki bir zaaf değil, teşvik yapısının öngörülebilir
+sonucudur: bildirimin maliyeti bireysel ve kesin, faydası dağınık ve gecikmelidir.
+Buradan çıkan sonuç, hata maliyetini yükselterek dikkat artırmayı amaçlayan
+tasarımların çoğunlukla ters etki ürettiğidir. Yükselen maliyet, hata sayısını
+değil, kayda geçen hata sayısını azaltır. Sistem bu durumda daha güvenilir hâle
+gelmez; yalnızca kendi durumu hakkında daha az bilgi sahibi olur.
+Amortisman ˙Ilkesi
+Bu bölümün sonucu, öğrenme mekanizmalarının amacının yeniden tanımlanmasını
+gerektirir. Amaç bedelin ödenmemesi değildir; bedel bir kez ödendikten sonra
+sınırsız sayıda kullanılabilir hâle getirilmesidir.
+Bunun kanonik örnekleri, ağır kayıplar sonrasında geliştirilen ve o kayıptan
+itibaren bütün alanda zorunlu kılınan usul kurallarıdır. Kaybın kendisi geri
+alınamaz; ancak kayıt ve zorunlu yayım mekanizmaları sayesinde, aynı bedelin
+bir daha ödenmesi gereksiz hâle gelir.
+15
+
+-- 15 of 21 --
+
+Bu çerçevede kayıt tutmamak yalnızca bir ihmal değil, doğrudan bir israftır:
+ödenmiş bir bedelin karşılığının alınmadan atılması anlamına gelir.
+16
+
+-- 16 of 21 --
+
+IX. C erçevenin Kendi Üzerine Uygulanması
+Öz Göndergesel Yükümlülük
+Yanlışlanabilirliği ölçüt olarak öne süren her çerçeve, bu ölçütü kendisine uygu-
+lamakla yükümlüdür. Bu tür çerçevelerin karakteristik kusuru, tam da bu nok-
+tada ortaya çıkar: kendi vazgeçme şartlarını yazmazlar.
+“Her iddia yanlışlanabilir biçimde kurulmalıdır” önermesinin kendi yanlışlanma
+koşulu belirtilmediğinde, bu bölümde tanımlanan zincirin hipotezden tahmine
+uzanan halkası, çerçevenin kendisinde kopmuş olur. Ortaya çıkan yapı, biçimsel
+olarak yanlışlanabilirliği savunurken kendisi yanlışlanamaz durumdadır.
+Bu yükümlülüğün gereği olarak, çerçevenin geçersiz sayılacağı koşulların
+açıkça belirtilmesi gerekir. Burada geliştirilen çerçeve, en azından şu üç gözlem
+karşısında geçerliliğini yitirir: doğrulama döngüsü kapatılamayan alanlarda tekrar-
+lanabilir yetkinlik oluşumu gözlenmesi; bağımsız denetim mekanizması bulun-
+mayan sistemlerin uzun dönemde bulunanlarla eşdeğer düzeltme performansı
+sergilemesi; ve ölçütün sonradan konulduğu süreçlerin, önceden konulduğu süreçlerle
+kıyaslanabilir doğruluk üretmesi.
+˙Inceleme Sürecinde Tespit Edilen Akıl Yürütme Hataları
+Aşağıda sıralanan hata örüntüleri, bu çalışmanın hazırlık sürecinde tekrarlanmış
+ve düzeltilmiştir. Kayda geçirilmelerinin gerekçesi, ulaşılan sonuçlardan daha
+öğretici olmalarıdır; zira aynı örüntüler, benzer nitelikteki çözümlemelerde sis-
+tematik olarak yeniden üretilmektedir.
+Maliyet iddialarının imkânsızlık iddiası olarak kurulması
+“Aşılamaz”, “yazılamaz”, “toplanamaz” biçimindeki ifadelerin tamamının doğru
+karşılığı “pahalıdır” idi. Aradaki fark yöntemsel olarak belirleyicidir: imkânsızlık
+iddiası araştırmayı durdururken, maliyet iddiası fiyatın sorulmasına ve ucu-
+zlatma yollarının aranmasına imkân verir.
+˙Iki karşı örnek bu düzeltmeyi gerektirmiştir. Yüksek hassasiyetli optik yüzey
+işleme, uzun süre aktarılamaz bir zanaat bilgisi olarak değerlendirilmiş, ancak
+ölçüm ve deterministik süreç kontrolüne dayalı yöntemlerle ikame edilmiştir.
+Sivil havacılık ise, olumsuz sonuçların ve arıza bilgisinin sistematik olarak kaydedilebildiğini
+ve zorunlu kılınabildiğini göstermektedir. Her iki durumda da sınır sanılan şey,
+o dönemin fiyat düzeyiydi.
+Türetilmemiş nicel tahmin
+Gerekçelendirilmemiş sayısal tahminlerin, özellikle ondalık basamak içerenlerin
+kullanılması, mevcut olmayan bir hassasiyet iması üretir. Bu, çözümlemeyi
+titiz göstermekle birlikte fiilen dekoratif kılar; okuyucu, türetilmemiş bir sayıyı
+türetilmiş sayılarla aynı statüde değerlendirmek durumunda kalır.
+17
+
+-- 17 of 21 --
+
+Kanıtın kendi bileşenleriyle çarpılması
+Bir müdahale kümesinin net etkisini ölçen ampirik bir bulgunun, o kümenin
+bileşenlerinden biri gibi ele alınıp diğer bileşenlerle çarpılması. Bu, aynı etkinin
+mükerrer sayılmasına yol açar ve elde edilen bileşik çarpanı geçersiz kılar.
+Hayatta kalanlar üzerinden çıkarım
+Mimari değiştirme stratejisi önerilirken yalnızca başarılı örneklerin sayılması,
+başarısız girişimlerin dışarıda bırakılması. Taban oran hesaba katıldığında,
+söz konusu strateji güvenilir bir kaldıraç değil düşük olasılıklı bir bahis olarak
+sınıflandırılmalıdır.
+Tartışmalı kuramsal konumun yerleşik bulgu gibi sunulması
+Belirli bir siyasal iktisat pozisyonunun, karşı argümanları ve ampirik itirazları
+sunulmaksızın, alanda uzlaşılmış bir bulgu gibi aktarılması.
+Ortak kök
+Sıralanan hataların ortak kaynağı, akılda kalıcı tek bir cümleye sığmayan mekaniz-
+maların o cümleye sıkıştırılmasıdır. Bu bir üslup tercihi değil, bir çıkarım
+hatasıdır: retorik olarak vurucu olan ifade, çoğunlukla aşırı genellenmiş olandır
+ve genelleme fazlası, cümlenin akılda kalıcılığını sağlayan şeyin ta kendisidir.
+Soyutlamanın Geçerlilik Koşulu
+Soyutlamaktan kaçınmak bir seçenek değildir; her öğrenme edimi, tekil deneyimi
+genel bir kurala çevirmek zorundadır. Ayrım soyutlamanın yapılıp yapılmamasında
+değil, geçerlilik zarfının açıkça yazılıp yazılmamasındadır.
+Geçerlilik sınırı belirtilerek yapılan soyutlama öğrenme üretir; sınır belir-
+tilmediğinde ortaya çıkan örtük evrensellik iddiası, bu metnin daha önce tanımladığı
+anlamda dogma üretir. Sınırın yazılmaması çoğunlukla bilinçli bir iddia değil,
+bir ihmaldir; ancak sonuçları bakımından bilinçli bir evrensellik iddiasından
+ayırt edilemez, zira her iki durumda da hiçbir gözlem soyutlamayı rahatsız ede-
+mez.
+18
+
+-- 18 of 21 --
+
+X. C özülemeyen Kalıntı
+Dışsallığın Sınırı
+Hiçbir denetim mekanizması tamamen dışsal olamaz. Denetleyeni bir merci
+atar, bir merci fonlar ve bir merci erişim yetkisi verir. Bu bağımlılık zin-
+cirinin kırılabileceği bir tasarım bulunmamaktadır; dolayısıyla kalıcı bağışıklık
+üretilebilir bir nitelik değildir.
+Üretilebilir olan, denetimin devre dışı bırakılmasını maliyetli kılan üç nitelik-
+tir. Birincisi sürtünmedir: mekanizmayı işlevsiz kılmak zaman ve işlem gerek-
+tirir. ˙Ikincisi görünürlüktür: devre dışı bırakma işlemi kendisi gözlenebilir bir
+olaydır. Üçüncüsü bedeldir: işlemi gerçekleştiren taraf bir maliyete katlanır.
+Bu üç niteliğin hiçbiri korumayı garanti etmez; birlikte sağladıkları şey, ko-
+ruma değil gecikme ve kayıttır. Nitekim bu, bir önceki bölümde denetim kat-
+manının gerçek çıktısı olarak tanımlanan işlevle örtüşmektedir.
+Hedefin Yeniden Tanımlanması
+Yukarıdaki sınır kabul edildiğinde, hatanın önlenmesi gerçekçi bir hedef olmak-
+tan çıkar. Gerçekçi hedef şudur:
+Hata ile düzeltme arasındaki sürenin kısaltılması.
+Bu formülasyonun ampirik dayanağı, incelenen vakalarda başarısızlığın ilk
+hatadan değil, düzeltme mekanizmasının aradan geçen sürede körelmesinden
+kaynaklanmış olmasıdır. ˙Ilk hatayı takiben kurulan düzeltme mekanizmaları
+işlevlerini yerine getirmiş, ancak canlılıkları düzenli olarak denetlenmediği için
+sessizce işlevsiz hâle gelmiş ve bu durum ancak ikinci bir başarısızlıkla fark
+edilmiştir.
+Dolayısıyla tasarım hedefi hatasız sistem değil, hatasını kısa sürede fark eden
+ve bu farkındalık kapasitesini düzenli olarak sınayan sistemdir.
+19
+
+-- 19 of 21 --
+
+XI. Sonuç
+Bulguların Toparlanması
+Bu çalışmanın çıkış noktası, birbirinden bağımsız beş inceleme hattının ortak
+bir kavramsal iskelet paylaştığı savıydı. Yürütülen çözümleme bu savı destek-
+lemektedir: söz konusu hatların tamamında karşılaşılan sorun, bir sistemin
+yanıldığının kendisine söylenebilmesi ve bu söylemenin olağanüstü nitelikler
+gerektirmeyecek biçimde yapıya yazılabilmesidir.
+Ulaşılan sonuçlar üç önermede toplanabilir.
+Birinci önerme
+Bir sistemin değeri ürettiği nesnede değil, dayattığı disiplindedir. Nesne yıpranır
+ve teknolojik olarak eskir; nesnenin üretilebilmesi için kurulmak zorunda kalınan
+kalite, izlenebilirlik ve koordinasyon rejimi ise kalır. Bu nedenle bir programın
+değerlendirilmesinde kullanılabilecek en ayırt edici ölçüt şudur: program sona
+erdiğinde geriye ne kalmaktadır? Yanıt yalnızca ürünse değer geçicidir; kabiliyet,
+kurum ve yetişmiş insan ise kalıcıdır.
+˙Ikinci önerme
+Bir kararın sonucu ne kadar geç ortaya çıkıyorsa, karar o kadar çok soyutlama
+gerektirir ve soyutlamanın doğruluğu o kadar az denetlenebilir. Bu iki eğilimin
+ters yönlü olması, uzun döngülü kararların yapısal güçlüğünü oluşturur. Or-
+taya çıkan boşluğu öğrenme değil taklit doldurur; benzer konumdaki aktörlerin
+benzer programlar üretmesi ortak akıldan değil, ortak kopyadan kaynaklanır.
+Bu sonuç, geri besleme mimarisinin bilinçli olarak kurulduğu durumlar dışında
+geçerlidir.
+Üçüncü önerme
+Söz konusu mimarinin çıktısı bir uyarı değil bir kayıttır. Uzun döngülü karar-
+larda sonuç, kararı veren kadronun görev süresinden sonra ortaya çıktığı için
+kişi düzeyinde hesap verebilirlik uygulanabilir değildir. Buna karşılık karar
+düzeyinde hesap verebilirlik uygulanabilirdir: kararın kimin tarafından, hangi
+tarihte ve hangi gerekçeyle alındığının kaydedilmesi, sonraki programların erişebileceği
+bir öğrenme kaynağı oluşturur.
+Ölçek Asimetrisi
+C alışmanın kuruluşundan doğan ve önceden öngörülmeyen bir bulgu, kurumsal
+ve bireysel ölçeklerin aynı kısıt karşısında ters yönde konumlanmasıdır.
+Kurumlar için bağlayıcı kısıt zamandır. Yönetim değişimi, strateji revizyonu,
+bütçe döngüsü ve batık sermayenin ürettiği direnç nedeniyle bir kurumun tek bir
+problem üzerinde on yıl mertebesinde kalması istisnaidir. Bireyler için ise aynı
+değişken göreli bir avantaj oluşturur; süreklilik kararı tek bir öznenin elindedir.
+20
+
+-- 20 of 21 --
+
+Buradan sezgiye aykırı bir sonuç türemektedir: bireyin, kurumdan daha fazla
+strateji değiştirme riski alması rasyoneldir. Bunun gerekçesi cesaret veya risk
+iştahı değil, kayıp fonksiyonunun büyüklüğüdür. Kurum için başarısız uzun
+vadeli bir yönelim bir nesle mal olurken, birey için başarısız bir teknik yönelim
+çoğunlukla telafi edilebilir bir maliyettir — edinilen yetkinliklerin bir bölümü
+taşınabilir olduğu ölçüde.
+Bireysel ölçekte alan seçimi ölçütü tek bir soruya indirgenmektedir: doğrulama
+döngüsü, öznenin kendi imkânlarıyla kapatılabilir mi? Kapatılabildiği alanlarda
+— derleyiciler, sıkıştırma algoritmaları, sayısal çözücüler, kriptografi ve biçimsel
+doğrulama bu alanlara örnektir — tek bir öznenin dünya sınırında çıktı üretmesi
+gözlenmiş bir olgudur. Kapatılamadığı alanlarda ise öznenin niteliği belirleyici
+değildir; kısıt yetenekten önce erişimdir.
+Genel Sonuç
+C alışma boyunca incelenen bütün mekanizmaların ortak özelliği, erdem talep et-
+mek yerine yapı kurmalarıdır. ˙Işleyen kurumlar, üyelerinden olağanüstü dürüstlük
+veya cesaret beklemez; doğruyu söylemenin maliyetini yapısal olarak düşürür ve
+söylememenin maliyetini yükseltir.
+Doğruyu söylemenin olağanüstülük gerektirmediği bir yapı kurmak,
+olağanüstü insan aramaktan daha güvenilir bir stratejidir.
+Bu ölçüt, incelenen bütün ölçeklerde uygulanabilir tek bir tanı sorusuna in-
+dirgenebilir: sistemin yanıldığını söyleyen kişi, bunu söyleyebilmek için cesarete
+ihtiyaç duyuyor mu? Yanıt olumluysa, sistem er ya da geç sessizce yanılacak ve
+bu yanılgı ancak dışarıdan gelen bir başarısızlıkla görünür hâle gelecektir.
+21
+
+-- 21 of 21 --

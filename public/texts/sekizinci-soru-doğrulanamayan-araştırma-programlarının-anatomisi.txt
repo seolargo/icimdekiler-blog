@@ -1,0 +1,450 @@
+Sekizinci Soru: Doğrulanamayan Araştırma
+Programlarının Anatomisi
+Ömer Faruk Yavuz
+July 2026
+Giriş ve Kapsam
+Bu çalışma, ABD Savunma ˙Ileri Araştırma Projeleri Ajansı (DARPA) direktörü
+George H. Heilmeier’in 1975–1977 arasında kurumsallaştırdığı sekiz soruluk değerlendirme
+listesini bir analiz çerçevesi olarak alır ve bu çerçeveyi somut bir araştırma pro-
+gramı üzerinde sınar: bir insanın — özel olarak bir rakip devlet liderinin —
+dijital ikizinin oluşturulması.
+Vakanın seçilme nedeni yöntemseldir. Söz konusu program, kateşizmin ilk
+yedi sorusuna görece tatmin edici cevaplar üretebilirken sekizinci soruda —
+başarının nasıl ölçüleceği — kırk yıldır çözülmemiş bir tıkanıklık sergiler. Bu
+asimetri, kateşizmin hangi tür başarısızlıkları yakaladığını ve hangilerini yakalaya-
+madığını görünür kılar.
+C alışmanın iddiası iki katmanlıdır. Birincisi, araştırma programlarının başarısızlığında
+belirleyici değişkenin teknik yetersizlik değil, cevaplanmamış soru olduğu. ˙Ikincisi,
+sekizinci sorunun diğerlerinden yapısal olarak farklı olduğu: ölçüt yokluğu bir
+eksiklik değil, çoğu zaman araştırma probleminin kendisidir.
+Kateşizmin Kökeni ve Kurumsal Konumu
+Tarihsel bağlam
+Heilmeier, sıvı kristal ekran teknolojisindeki çalışmalarının ardından 1975’te
+DARPA direktörlüğüne getirildi. Kurumun o dönemki temel sorunu fikir kıtlığı
+değil, seçim ölçütü yokluğuydu: teknik olarak ilginç fakat hedefi, alıcısı ve sınavı
+belirsiz tekliflerin ayıklanamaması. Heilmeier’in getirdiği liste bir buluş yöntemi
+değil, bir eleme filtresidir (Heilmeier, 1992).
+Bu ayrım çalışmanın geri kalanı için belirleyicidir. Filtre iyi fikir üretmez;
+kötü fikri erken keser. ˙Iki işlev birbirinin yerine geçmez.
+Kronolojik olarak dikkat çeken nokta şudur: DARPA’nın en çok atıf alan
+çıktıları — ARPANET dahil — listeden önce üretilmiştir. Dolayısıyla kateşizme
+nedensel bir başarı payı atfetmek tarihsel olarak savunulamaz. Kurumun asıl
+mekanizması, süreli görevlendirilen program yöneticilerine geniş yetki verilmesi,
+kalıcı laboratuvar kurulmaması ve başarısızlığın normal sayılmasıydı. Kateşizm
+bunun üzerine eklenen bir disiplin katmanıdır.
+1
+
+-- 1 of 12 --
+
+Soru listesi
+1. Ne yapmaya çalışıyorsunuz? Hiçbir teknik terim kullanmadan açıklayın.
+2. Bu iş bugün nasıl yapılıyor ve mevcut yöntemin sınırları nelerdir?
+3. Yaklaşımınızda yeni olan nedir ve neden başarılı olacağını düşünüyorsunuz?
+4. Kimin umurunda? Başarılı olursanız ne değişir?
+5. Riskler nelerdir?
+6. Maliyet ne olacak?
+7. Ne kadar sürecek?
+8. Başarıyı sınamak için hangi ara ve nihai ölçütler kullanılacak?
+Kateşizmin Vakaya Uygulanması
+Birinci soru: jargonsuz tanım
+Talep şu biçimde ifade edilebilir: belirli bir kişinin, o kişi gibi karar veren bir
+kopyasını bilgisayarda çalıştırmak.
+Bu formülasyon jargonsuz olma sınavını geçer fakat aynı anda kavramsal
+belirsizliği açığa çıkarır. “Gibi karar vermek” ifadesi üç ayrı iddiaya karşılık
+gelebilir: aynı çıktıyı üretmek, aynı süreçten geçmek, ya da aynı öznel deneyime
+sahip olmak. Bunlar farklı doğrulama rejimleri gerektirir ve literatürde düzenli
+olarak birbirine karıştırılır.
+Terimin mühendislikteki asli tanımı bu belirsizliğe izin vermez. Dijital ikiz,
+belirli bir fiziksel varlığın, o varlıktan gelen canlı telemetriyle sürekli senkronize
+edilen çalışan modelidir (Grieves, 2014; Shafto ve diğerleri, 2010). Tanım üç
+şart içerir: yönetilebilir bir durum uzayı, durumu ölçen sensörler, ve tahminin
+gerçeklikle karşılaştırılabilmesi. ˙Insana taşındığında üç şart da bozulur, fakat
+eşit ölçüde değil.
+˙Ikinci soru: mevcut yöntem ve sınırı
+Rakip karar modellemesi yeni bir alan değildir; yetmiş yıllık kurumsal bir pratik-
+tir.
+• Operasyonel kod analizi. Leites’in (1951) Politbüro çalışması ve George’un
+(1969) bunu araştırma programına dönüştürmesi. Liderin siyasal inanç
+kümesinin metinlerden çıkarılması.
+• Liderlik özellik analizi. Hermann’ın (2003) hazırlıksız konuşma üzerinden
+yedi özelliği ölçen yöntemi.
+• Uzaktan profilleme. Post (2003) ve CIA’in kişilik–siyasal davranış
+analiz birimi; Camp David 1978 kanonik başarı örneği olarak anılır.
+2
+
+-- 2 of 12 --
+
+• Beklenen fayda ve pazarlık modelleri. Dar soru sınıflarında ölçülü is-
+abet; değerin önemli kısmının matematikten değil, uzman girdisini yapılandırılmış
+biçimde toplamaktan geldiği yönünde eleştiriler mevcuttur.
+Mevcut yöntemin sınırı ampirik olarak belgelenmiştir. Tetlock’un (2005)
+uzun vadeli çalışması uzman siyasal tahminin uzun ufuklarda şansı zar zor
+geçtiğini göstermiştir. Sonraki tahmin turnuvaları iyileşmenin kaynağını ne-
+tleştirmiştir: kazandıran değişken daha iyi kaynak erişimi değil, kalibrasyon
+disiplinidir (Tetlock ve Gardner, 2015).
+Üçüncü soru: yeni olan ne
+Güncel programlarda yeni olan unsur, büyük dil modellerinin mevcut profilleme
+altyapısının üzerine bindirilmesidir. DARPA hattı bu yönelimin en sürekli
+örneğidir:
+• RAID (2000’lerin ortası): taktik ölçekte, tabur ve altı kademede düşman
+hedef, aldatma ve konumlarının gerçek zamanlı kestirimi (Ownby ve Kott,
+2006).
+• COMPASS (2017–): stratejik gri bölgeye taşınma; yöntemsel yeniliği
+pasif kestirim yerine aktif sondalama — rakibin niyeti hakkında en çok
+bilgi verecek uyaranın belirlenmesi.
+• Theory of Mind / Kallisti (2024–): rakibin durum farkındalığını, risk–
+ödül yapısını ve gelecek projeksiyon stratejilerini modelleyen algoritmik bir
+zihin kuramı hedefi. Program, rakibin kendi öngörü stratejilerini modelle-
+meyi kapsadığı ölçüde ikinci dereceden bir model iddiası taşır.
+Paralel hatlar: IARPA’nın tahmin turnuvaları (kişiyi değil tahminciyi kalibre
+etme yaklaşımı), harp akademilerinde dil modeli destekli savaş oyunu uygula-
+maları, Johns Hopkins APL bünyesinde 2026’da açılan GenWar laboratuvarı, ve
+Birleşik Krallık ile Hollanda savunma araştırma kurumlarının dil modeli çıktısını
+insan uzman çıktısıyla kör karşılaştırmaya sokan ölçüm çalışmaları (Meerveld ve
+diğerleri, 2026).
+Buradaki kritik ayrım gözden kaçırılmamalıdır: son gruptaki çalışmalarda
+ölçülen görevler senaryo yazımı, brifing hazırlama ve hakemliktir — yani üretim
+işleri, kestirim değil.
+Dördüncü soru: kimin umurunda
+Talep tarafı somuttur ve devlet bütçelerinde görünürdür. Ancak bu soru, vaka
+için yanıltıcı biçimde kolaydır: yüksek talep, programın gerçekleştirilebilirliğine
+dair hiçbir kanıt sağlamaz. Aksine, dördüncü soruya güçlü cevap verebilen pro-
+gramlar sekizinci soruyu atlama eğilimi gösterir; çünkü finansman zaten temin
+edilmiştir.
+3
+
+-- 3 of 12 --
+
+Beşinci soru: riskler
+Vakaya özgü riskler, standart teknik risk kategorilerinin dışındadır.
+• Ayna yansıtması. Modelin, hedefi analistin kendi rasyonellik ölçütleriyle
+kurgulaması. 1973 ˙Israil istihbarat başarısızlığı bu hata sınıfının kanonik
+örneğidir: “Konsepsiyon” adı verilen model tutarlıydı, geçmiş davranışa
+uyuyordu ve yanlıştı (Bar-Joseph ve Kruglanski, 2003). Heuer’in (1999)
+analitik yöntem kılavuzu büyük ölçüde bu hata sınıfının panzehri olarak
+yazılmıştır.
+• Düşmanlık ve refleksivite. Modellenen özne modellendiğini bilir. Sovyet
+doktrinindeki refleksif kontrol geleneği, rakibin modellemesini engellemeyi
+değil yanlış modellemesini sağlamayı hedefler (Lefebvre, 1977; Thomas,
+2004). Model ne kadar güvenilir sayılırsa onu zehirlemenin getirisi o kadar
+artar.
+• Modelin geri etkisi. Tahmin politikaya dönüştüğünde ölçülen dünya
+değişir; kapalı doğrulama halkası mantıksal olarak kurulamaz.
+• Model artefaktının gerçeklik sanılması. Dil modeli ajanlarının simüle
+kriz senaryolarında sistematik tırmanma eğilimi gösterdiğine dair bulgular
+(Rivera ve diğerleri, 2024) dünyaya değil modele ilişkin olgulardır; karar
+masasına “simülasyon şunu gösteriyor” formunda girdiğinde ayırt edilemez
+hale gelirler.
+• Siyasallaşma. 1976 Team B vakası, kırmızı takım yönteminin önceden
+belirlenmiş bir sonucu meşrulaştırmaya koşulabileceğini göstermiştir.
+Altıncı ve yedinci sorular: maliyet ve süre
+Karşılaştırmalı veri, bu iki sorunun tarihsel olarak sistematik biçimde yanlış
+cevaplandığını gösterir. Human Brain Project (2013–2023) yaklaşık bir milyar
+avro bütçeyle ve on yıllık bir ufukla başlamış, 2014’te alanın kendi içinden ge-
+len açık mektupla hedefleri yeniden yazılmış, kapanışta vaat edilen bütün-beyin
+simülasyonunu teslim etmemiştir (Fr´egnac, 2017). Daha küçük ölçekte Open-
+Worm, 302 nöronlu bir organizmanın davranışsal olarak ikna edici emülasyonunu
+2011’den beri tamamlayamamıştır (Sarma ve diğerleri, 2018).
+Buna karşılık aynı dönemde yapısal haritalama alanında gerçek ilerleme
+kaydedilmiştir: yetişkin Drosophila konnektomunun tamamlanması (Dorken-
+wald ve diğerleri, 2024). Harita çıkarılabilmekte, haritadan çalışan bir zihin
+çıkmamaktadır. Yapı ile mekanizma arasındaki bu fark, maliyet tahminlerindeki
+sistematik sapmanın kaynağıdır.
+Sekizinci soru: ölçüt
+Bu soru vakanın kırılma noktasıdır ve ayrı bir başlık gerektirir.
+4
+
+-- 4 of 12 --
+
+Sekizinci Sorunun Ayrıcalıklı Konumu
+Katmanlara göre ayrışma
+Vaka tek bir program değildir; üç ayrı katmana ayrıldığında sekizinci soruya üç
+farklı cevap verir.
+Katman Durum Doğrulama
+Fizyolojik klinik kullanımda mümkün
+Davranışsal istatistiksel benzerlik belirsiz
+Kimlik / bilinç spekülatif tanımsız
+Fizyolojik katman gerçek bir dijital ikizdir ve çalışır: hastaya özgü görüntülemeden
+çıkarılan geometriyle kurulan elektrofizyolojik simülasyonlar cerrahi planlamada
+kullanılmaktadır. C alışmasının nedeni tam olarak sekizinci sorunun cevaplan-
+abilir olmasıdır — durum uzayı sonlu, ölçüm mevcut, tahmin yanlışsa hasta
+ölçülebilir biçimde farklı davranır.
+Davranışsal katmanda üretilen şey ikiz değil regresyondur: kişinin geçmiş
+çıktılarına uydurulmuş bir tahmin yüzeyi. Uzun mülakat verisiyle koşullandırılan
+ajanların, kişilerin anket ve oyun-teorik yanıtlarını yüksek oranda tutturduğu
+gösterilmiştir (Park ve diğerleri, 2023; 2024). Ancak dağılımsal eşleşmenin
+mekanizma eşleşmesi anlamına gelmediği, Block’un (1981) arama tablosu argümanında
+dil modellerinden kırk yıl önce formüle edilmiştir: yeterince büyük bir tablo her
+davranışsal testi geçer, hiçbir zihinsel süreç barındırmadan.
+Kimlik katmanı için hedefin ne olduğu tanımlı olmadığından mühendislik
+problemi dahi kurulamaz. Bu alanın felsefi omurgası Parfit (1984), Chalmers
+(1995) ve Searle (1980) hattında yer alır; Chalmers’ın organizasyonel değişmezlik
+argümanı doğrulama sorununa getirilmiş en ciddi olumlu öneri olmakla birlikte
+kabul görmüş bir uzlaşı oluşturmamıştır.
+Bu alandaki tek sistematik mühendislik incelemesi olan Sandberg ve Bostrom
+(2008) raporunun ayırt edici özelliği, doğrulama sorununu ayrı bir başlık altında
+ele almasıdır — ki bu, sonraki literatürün büyük ölçüde terk ettiği bir titizliktir.
+Ölçüt yokluğunun tarihsel bilançosu
+Ölçüt yokluğunun sonucu, yanlış sonuç değil, düzeltilemeyen sonuçtur.
+• N-ışınları (1903–1904). Ölçüm, karanlık odada bir kıvılcımın par-
+laklığını gözle değerlendirmeye dayanıyordu. Yüzlerce makale yayımlandı.
+Wood’un (1904) laboratuvarda aletin kilit parçasını gizlice çıkarması ve
+gözlemcinin ışınları görmeye devam etmesi üzerine alan bir yıl içinde tas-
+fiye oldu (Nye, 1980).
+• Flojiston kuramı. Metallerin yanma sonrası ağırlaşması, kuramı çürütmek
+yerine yardımcı varsayımla soğuruldu (negatif ağırlıklı flojiston). Kapalı
+kapta hassas tartımla kütle korunumunun gösterilmesi kuramı tek ölçümle
+bitirdi (Lavoisier, 1789). Lakatos’un (1970) dejenere araştırma programı
+ölçütü tam olarak bu yapıyı tanımlar.
+5
+
+-- 5 of 12 --
+
+• Millikan verisi. Elektron yükünün sonraki ölçümlerinin doğru değere
+kademeli yaklaşması, bireysel sahtekârlıkla değil, modele uymayan verinin
+“hata yapmış olmalıyım” gerekçesiyle sistematik olarak elenmesiyle açıklanır
+(Franklin, 1981).
+Ölçüt inşasının bir araştırma çıktısı olarak konumu
+Kateşizmin en sık yapılan yanlış uygulaması, sekizinci soruya cevap verilememesini
+fikrin değersizliği olarak okumaktır. Karşı örnek, kateşizmin uygulandığı kuru-
+mun kendi tarihinden gelir.
+DARPA’nın 1971–1976 arası konuşma anlama programı sonlandırıldığında
+ortaya çıkan sistemler çalışıyordu; sonlandırma gerekçesi performansın karşılaştırılabilir
+biçimde ifade edilememesiydi (Klatt, 1977). Alan on yıl sonra geri döndüğünde
+dönüşü sağlayan şey yeni bir algoritma değil, ölçütün inşasıydı: ortak test
+kümeleri ve tek bir skaler başarım göstergesi (kelime hata oranı) üzerinden
+yürütülen kıyaslama rejimi (Pallett, 2003). Bu düzenleme sonradan “ortak
+görev çerçevesi” adıyla veri biliminin genel yöntemi olarak kavramsallaştırılmıştır
+(Donoho, 2017).
+Aynı mantığın diğer örnekleri:
+• Kör enjeksiyon. Yerçekimi dalgası araştırmasında küçük bir grubun
+sisteme habersiz sahte sinyal yerleştirme yetkisine sahip olması. 2010’da
+tam analiz sürecinden geçirilip makale aşamasına gelen bir sinyalin sahte
+olduğunun açıklanması, ekibin kendi ölçütünü sınamasını sağladı; 2015’teki
+gerçek tespitin güvenilirliği bu önceki sınavın kaydına dayanır.
+• Ön kayıt. Psikolojide tekrarlanabilirlik krizinin (Open Science Collabo-
+ration, 2015) ardından hipotez ve analiz planının veri toplanmadan önce
+tescillenmesi (Nosek ve diğerleri, 2018).
+• C ift kör tasarım. Beklentinin ölçümü bozmasını yapısal olarak en-
+gelleyen düzenleme.
+Bu örneklerin ortak niteliği şudur: hiçbiri daha yetkin araştırmacı gerek-
+tirmez; hepsi araştırmacının kendini kandırmasını yapısal olarak imkânsız kılan
+bir kural getirir. Ölçüt bir ürün değil, bir alettir — terazi ya da teleskop gibi.
+Tek başına hiçbir soruyu cevaplamaz; onsuz hiçbir soru cevaplanamaz.
+Kateşizmin Sınırları
+Görünmez maliyet ve seçim yanlılığı
+Filtre, hata türlerine karşı asimetriktir. Yanlış kabul edilen projeler (Tip I)
+görünürdür ve maliyeti muhasebeleştirilir. Yanlış reddedilen projeler (Tip II)
+görünmez; kesilen tekliflerin sistematik kaydı tutulmaz ve karşılaştırılacak karşı-
+olgusal bir durum bulunmaz.
+6
+
+-- 6 of 12 --
+
+Konuşma anlama vakası bu maliyetin nadir görünür örneğidir — ancak
+yalnızca alan geri döndüğü için görünür hale gelmiştir. Dönmeyen alanlar
+hakkında hiçbir şey bilinmemektedir. Bu, seçim yanlılığının en saf biçimidir.
+Yapısal sorun şudur: getirinin az sayıda büyük vuruştan geldiği alanlarda
+riski azaltmak, getiriyi de kesebilir.
+Kendine uygulanamama
+Kateşizm kendi sekizinci sorusuna cevap veremez. “Bu filtre başarılı mı” sorusu-
+nun ölçütü yoktur; karşılaştırılacak, filtresiz işletilmiş ikinci bir kurum bulun-
+mamaktadır. Araç, kendi ölçütünü kendi üzerinde uygulayamamaktadır — bu,
+incelenen problemin aracın kendisinde tekrarlanmasıdır.
+Zaman penceresi ve pragmatizm
+“˙Işe yarıyor mu” sorusu doğru sorudur; hatalı olan, sorulduğu ufuktur. Peirce’in
+özgün formülasyonu anlamı kavranabilir pratik sonuçlara bağlarken doğruluğu,
+araştırmacı topluluğunun uzun vadede yakınsadığı yere yerleştirir. Dewey’de
+araç kavramı yalnızca çıktı üreten aleti değil, soruşturmanın kendi aletlerini de
+kapsar.
+DARPA uygulamasında bu ufuk beş yıla indirilmiştir. Doktrin değişmemiş,
+zaman penceresi değişmiştir. Buradan çıkan pratik ayrım şudur: bir proje ürün
+mü yoksa ölçüt mü üretmektedir? Birincinin sınavı bugün olmalıdır; ikincinin
+sınavı, o ölçütü kullanan üçüncü tarafların ilerleyip ilerlemediğidir ve yıllar sonra
+alınır. Bu ayrımı yapmayan bir pragmatizm kendi altını oymaktadır.
+Vaka Kümesi: Cevaplanmamış Soru ve Başarısızlık Biçimi
+Aşağıdaki tablo, teknik olarak çalışan fakat cevaplanmamış soru nedeniyle başarısız
+olan programları listeler. Ortak nitelikleri, hiçbirinin mühendislik başarısızlığı
+olmamasıdır.
+Vaka Atlanan soru Sonuç
+Theranos 8 bağımsız doğrulama hiç yayımlanmadı
+IBM Watson (onkoloji) 8 sonuç üstünlüğü gösterilemedi
+Human Brain Project 6, 7, 8 hedefler yeniden yazıldı
+Segway 4 talep oluşmadı
+Google Glass 4 sorun tanımı yoktu
+Juicero 4 işlev elle çoğaltılabilir çıktı
+Concorde 6 birim maliyet hiç kapanmadı
+Iridium 6, 7 pencere kapandı, dokuz ayda iflas
+Lavi (˙Israil) 6, 7 alternatif daha ucuz çıktı
+Better Place (˙Israil) 4, 5, 6 altyapı talepten önce kuruldu
+Devrim Arabaları 4, 6 üretim ve tedarik planı yoktu
+Altay (motor sorunu) 5 tek dış bağımlılık projeyi durdurdu
+7
+
+-- 7 of 12 --
+
+Türkiye vakalarına ilişkin değerlendirmeler kamuya açık arşiv ve basın kaydına
+dayanmakta olup hakemli literatürde sistematik biçimde incelenmemiştir.
+˙Iki vaka ayrıca ele alınmayı hak eder.
+Better Place: sıralama hatası
+Başarısızlık nedeni fikrin kendisi değil, uygulama sırasıdır. Sermaye yoğun
+altyapı, talep gerçekleşmeden inşa edildi; sistem, şirketin kontrolünde olmayan
+bir karara (üreticilerin uyumlu model çıkarma tercihi) bağımlıydı; tek tedarikçiye
+kilitlenme müşteri açısından caydırıcı bir risk oluşturdu; ve nihayet çözülmeye
+çalışılan sorun — sınırlı pil kapasitesi — teknolojik gelişmeyle ortadan kalktı
+(Noel ve Sovacool, 2016). Karşıt strateji, ürünü önce satıp gelirle altyapıyı
+kuran ve kademeli ölçeklenen yaklaşımdır.
+Lavi: batık maliyet ve kısmi getiri
+Program teknik olarak başarılıydı; iptal gerekçesi karşılaştırmalı maliyetti (Za-
+kheim, 1996). Ancak vaka, batık maliyetin tamamen kayıp sayılamayacağını da
+gösterir: dağılan ekipler sonraki uydu, elektronik ve füze programlarının insan
+sermayesini oluşturdu. Bu, kateşizmin muhasebeleştiremediği ikinci kalemdir —
+kapatılan programın kalıntı getirisi.
+Tıkanıklık Taksonomisi ve Kaynakları
+Kateşizmin pratik kullanımı, bir fikrin neden bugüne dek tamamlanmadığının
+teşhisine indirgenebilir. Aşağıdaki dörtlü ayrım, mevcut literatürdeki kavram-
+ların birleştirilmesiyle oluşturulmuştur ve özgün bir taksonomi iddiası taşımaz.
+• Engel teknolojiydi ve teknoloji sonradan geldi. Stent’in (1972)
+“erken keşif” kavramı: bağlanacağı bilgi ağı henüz yokken ortaya çıkan
+fikir anlaşılmaz ve unutulur. Bibliyometrideki karşılığı “uyuyan güzel”
+yayınlardır (van Raan, 2004).
+• Engel tek bir ayrıntıydı ve kimse uğraşmadı. Kimyadaki hız sınırlayıcı
+basamak kavramının örgütsel karşılığı Goldratt’ın (1984) kısıtlar teorisidir:
+darboğaz dışındaki her iyileştirme sistem çıktısını değiştirmez.
+• Engel sorunun ölçeğiydi. Simon’ın (1962) problem ayrıştırma çerçevesi;
+kurumsal karşılığı kateşizmin kendisidir.
+• Engel ölçüt yokluğuydu ve hâlâ yok. Popper’ın (1959) yanlışlanabilirlik
+ölçütü ve Lakatos’un (1970) dejenere program tanısı. Bu durumda tek
+meşru araştırma hedefi problemin kendisi değil, ölçütün inşasıdır.
+Sonuç
+Üç bulgu öne çıkar.
+8
+
+-- 8 of 12 --
+
+Birincisi, incelenen vaka kümesinde başarısızlık ile teknik yetersizlik arasında
+sistematik bir ilişki bulunmamaktadır. Listelenen programların tamamı çalışmıştır.
+Belirleyici değişken cevaplanmamış sorudur.
+˙Ikincisi, sekizinci soru diğer yedisinden kategorik olarak farklıdır. Diğerleri
+projenin niteliğine ilişkindir; sekizinci soru, proje üzerinde iyileştirme yapılıp
+yapılamayacağını belirler. Ölçüt yoksa yanlışlık tespit edilemez, düzeltme yapılamaz
+ve ilerleme ölçülemez — program yürür fakat birikmez.
+Üçüncüsü ve pratik açıdan en önemlisi: sekizinci soruya cevap verilememesi
+fikrin değersizliğine değil, asıl araştırma probleminin henüz tanımlanmadığına
+işaret eder. Konuşma tanıma alanının tarihi bunun kanıtıdır — alanı açan buluş
+bir algoritma değil, bir sınavdı.
+˙Insanın dijital ikizi vakasında bugünkü konum tam olarak budur. Fizyolojik
+katmanda ölçüt mevcuttur ve alan ilerlemektedir. Davranışsal ve kimlik kat-
+manlarında ölçüt yoktur; bu katmanlarda savunulabilir tek araştırma gündemi,
+ikizin kendisi değil, bir ikizin doğruluğunu sınayacak ölçütün inşasıdır. Bu ölçüt
+kurulana kadar üretilen her çıktı, tanım gereği dijital ikiz değil, doğrulanmamış
+bir benzetim olarak kalacaktır.
+Kaynakça
+• Bar-Joseph, U. ve Kruglanski, A. W. (2003). Intelligence Failure and Need
+for Cognitive Closure: On the Psychology of the Yom Kippur Surprise.
+Political Psychology, 24(1), 75–99.
+• Block, N. (1981). Psychologism and Behaviorism. The Philosophical Re-
+view, 90(1), 5–43.
+• Chalmers, D. J. (1995). Absent Qualia, Fading Qualia, Dancing Qualia.
+T. Metzinger (Ed.), Conscious Experience içinde. Ferdinand Schöningh.
+• Donoho, D. (2017). 50 Years of Data Science. Journal of Computational
+and Graphical Statistics, 26(4), 745–766.
+• Dorkenwald, S. ve diğerleri (2024). Neuronal wiring diagram of an adult
+brain. Nature, 634, 124–138.
+• Franklin, A. (1981). Millikan’s Published and Unpublished Data on Oil
+Drops. Historical Studies in the Physical Sciences, 11(2), 185–201.
+• Fr´egnac, Y. (2017). Big data and the industrialization of neuroscience: A
+safe roadmap for understanding the brain? Science, 358(6362), 470–477.
+• George, A. L. (1969). The “Operational Code”: A Neglected Approach to
+the Study of Political Leaders and Decision-Making. International Studies
+Quarterly, 13(2), 190–222.
+• Goldratt, E. M. ve Cox, J. (1984). The Goal: A Process of Ongoing
+Improvement. North River Press.
+9
+
+-- 9 of 12 --
+
+• Grieves, M. (2014). Digital Twin: Manufacturing Excellence through Vir-
+tual Factory Replication. Beyaz rapor.
+• Heilmeier, G. H. (1992). Some Reflections on Innovation and Invention.
+The Bridge, 22(4). National Academy of Engineering.
+• Hermann, M. G. (2003). Assessing Leadership Style: Trait Analysis. J.
+M. Post (Ed.), The Psychological Assessment of Political Leaders içinde.
+University of Michigan Press.
+• Heuer, R. J. (1999). Psychology of Intelligence Analysis. Center for the
+Study of Intelligence, CIA.
+• Klatt, D. H. (1977). Review of the ARPA Speech Understanding Project.
+Journal of the Acoustical Society of America, 62(6), 1345–1366.
+• Lakatos, I. (1970). Falsification and the Methodology of Scientific Re-
+search Programmes. I. Lakatos ve A. Musgrave (Ed.), Criticism and the
+Growth of Knowledge içinde. Cambridge University Press.
+• Lavoisier, A. (1789). Trait´e ´el´ementaire de chimie. Cuchet.
+• Lefebvre, V. A. (1977). The Structure of Awareness: Toward a Symbolic
+Language of Human Reflexion. Sage.
+• Leites, N. (1951). The Operational Code of the Politburo. McGraw-Hill.
+• Meerveld, H., Brighton, H., Lindelauf, R. ve Postma, M. ˇS. (2026). Effec-
+tive and responsible use of large language models in strategic wargaming.
+The Journal of Defense Modeling and Simulation.
+• Noel, L. ve Sovacool, B. K. (2016). Why Did Better Place Fail? Range
+anxiety, interpretive flexibility, and electric vehicle promotion in Denmark
+and Israel. Energy Policy, 94, 377–386.
+• Nosek, B. A., Ebersole, C. R., DeHaven, A. C. ve Mellor, D. T. (2018).
+The Preregistration Revolution. PNAS, 115(11), 2600–2606.
+• Nye, M. J. (1980). N-rays: An Episode in the History and Psychology of
+Science. Historical Studies in the Physical Sciences, 11(1), 125–156.
+• Open Science Collaboration (2015). Estimating the Reproducibility of
+Psychological Science. Science, 349(6251).
+• Ownby, M. ve Kott, A. (2006). Reading the Mind of the Enemy: Pre-
+dictive Analysis and Command Effectiveness. Command and Control Re-
+search and Technology Symposium (CCRTS).
+• Pallett, D. S. (2003). A Look at NIST’s Benchmark ASR Tests: Past,
+Present, and Future. IEEE ASRU Workshop.
+10
+
+-- 10 of 12 --
+
+• Parfit, D. (1984). Reasons and Persons. Oxford University Press.
+• Park, J. S., O’Brien, J. C., Cai, C. J., Morris, M. R., Liang, P. ve Bern-
+stein, M. S. (2023). Generative Agents: Interactive Simulacra of Human
+Behavior. UIST ’23.
+• Park, J. S. ve diğerleri (2024). Generative Agent Simulations of 1,000
+People. arXiv:2411.10109.
+• Popper, K. R. (1959). The Logic of Scientific Discovery. Hutchinson.
+( Özgün baskı: Logik der Forschung, 1934.)
+• Post, J. M. (Ed.) (2003). The Psychological Assessment of Political Lead-
+ers. University of Michigan Press.
+• Rivera, J.-P., Mukobi, G., Reuel, A., Lamparth, M., Smith, C. ve Schnei-
+der, J. (2024). Escalation Risks from Language Models in Military and
+Diplomatic Decision-Making. ACM FAccT ’24.
+• Sandberg, A. ve Bostrom, N. (2008). Whole Brain Emulation: A Roadmap.
+Technical Report 2008-3, Future of Humanity Institute, University of Ox-
+ford.
+• Sarma, G. P. ve diğerleri (2018). OpenWorm: Overview and Recent
+Advances in Integrative Biological Simulation of Caenorhabditis elegans.
+Philosophical Transactions of the Royal Society B, 373(1758).
+• Searle, J. R. (1980). Minds, Brains, and Programs. Behavioral and Brain
+Sciences, 3(3), 417–457.
+• Shafto, M. ve diğerleri (2010). DRAFT Modeling, Simulation, Informa-
+tion Technology & Processing Roadmap. NASA Technology Area 11.
+• Simon, H. A. (1962). The Architecture of Complexity. Proceedings of the
+American Philosophical Society, 106(6), 467–482.
+• Stent, G. S. (1972). Prematurity and Uniqueness in Scientific Discovery.
+Scientific American, 227(6), 84–93.
+• Tetlock, P. E. (2005). Expert Political Judgment: How Good Is It? How
+Can We Know? Princeton University Press.
+• Tetlock, P. E. ve Gardner, D. (2015). Superforecasting: The Art and
+Science of Prediction. Crown.
+• Thomas, T. L. (2004). Russia’s Reflexive Control Theory and the Military.
+Journal of Slavic Military Studies, 17(2), 237–256.
+• van Raan, A. F. J. (2004). Sleeping Beauties in Science. Scientometrics,
+59(3), 467–472.
+11
+
+-- 11 of 12 --
+
+• Wood, R. W. (1904). The n-Rays. Nature, 70(1822), 530–531.
+• Zakheim, D. S. (1996). Flight of the Lavi: Inside a U.S.-Israeli Crisis.
+Brassey’s.
+12
+
+-- 12 of 12 --

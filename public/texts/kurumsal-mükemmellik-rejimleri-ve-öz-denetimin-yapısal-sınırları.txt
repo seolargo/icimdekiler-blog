@@ -1,0 +1,942 @@
+Kurumsal Mükemmellik Rejimleri ve Öz
+Denetimin Yapısal Sınırları
+Ömer Faruk Yavuz
+Temmuz 2026
+Giriş: Problemin Konumlandırılması
+Merkezı Soru
+Bu metnin ele aldığı problem şudur: bir kurum, kendi temel varsayımlarının
+yanlışlandığını nasıl fark eder ve bu fark etme kapasitesini zaman içinde nasıl
+korur?
+Sorunun zorluğu, kurumların başarısızlığa giden yolda genellikle kural ih-
+lali yapmamalarından kaynaklanır. ˙Incelenecek vakaların büyük çoğunluğunda
+prosedür çiğnenmemiş, aksine tam olarak tasarlandığı biçimde işlemiştir. Dolayısıyla
+aranan çözüm bir uyum sorunu değil, bir tasarım sorunudur.
+Argümanın Mimarisi
+Metin sekiz bölümde ilerler. Birinci bölüm, kurumsal mükemmelliğin üretilebileceği
+iki farklı rejimi tanımlar ve aralarındaki seçimin hangi değişkene bağlı olduğunu
+gösterir. ˙Ikinci bölüm, bu rejimlerden birinin — yetenek rejiminin — girdi prob-
+lemini inceler. Üçüncü bölüm, kurumsal başarısızlıkların önemli bir bölümünün
+rejim yokluğundan değil rejim ile katmanın uyumsuzluğundan doğduğunu iki
+simetrik vaka üzerinden gösterir. Dördüncü bölüm, sistemlerin olağanüstü yargıdan
+bağımsızlaşma sınırını belirler. Beşinci bölüm, bu sınırın gerektirdiği revizyon
+organının neden yapısal olarak kırılgan olduğunu açıklar. Altıncı bölüm bu or-
+ganın tasarım parametrelerini önerir. Yedinci bölüm iki ulusal modeli karşılaştırır.
+Sekizinci bölüm, bu tür karşılaştırmalarda oluşan sistematik yanılsamaları lis-
+teler.
+Yöntem ve Sınırlar
+Argüman, askerı, sınai, havacılık ve istihbarat alanlarından vaka karşılaştırmasına
+dayanır. Vakalar kanıt değil örneklem işlevi görür; iddia edilen şey istatistiksel
+genelleme değil, mekanizma tespitidir. Metinde geçen güncel siyasi tartışmalar,
+yapısal analiz düzeyinde ve taraf tutulmaksızın aktarılmıştır.
+1
+
+-- 1 of 24 --
+
+Birinci Bölüm: ˙Iki Mükemmellik Rejimi
+Tanımlar
+Kurumsal mükemmellik, birbirine indirgenemeyen iki tutarlı stratejiden biriyle
+üretilebilir.
+• Yetenek-maksimalizmi. Az sayıda olağanüstü insan bulunur ve önlerindeki
+engeller kaldırılır. Kanonik örnekler: Bell Laboratuvarları, Talpiot pro-
+gramı, özel harekât birlikleri, kriptanaliz kurumları.
+• Süreç-maksimalizmi. Ortalama nitelikli personelin dünya standardında
+çıktı üretmesini sağlayan bir sistem kurulur. Kanonik örnekler: Toyota
+Üretim Sistemi, havacılık kontrol listeleri, büyük ölçekli askerı lojistik,
+cerrahi protokoller.
+˙Ikinci strateji tarihsel olarak daha az ilgi görmüş olmakla birlikte sıklıkla
+daha ölçeklenebilirdir.
+Zekânın Amortismanı
+Süreç-maksimalizminin yaygın yanlış okuması, onun düşünmeyi ortadan kaldırdığı
+varsayımıdır. Toyota Üretim Sistemi’nin “deha gerektirmediği” önermesi hatalıdır;
+doğru önerme, dehayı başka bir zaman dilimine taşıdığıdır.
+Yetenek rejimi zekâyı çalışma anında harcar; süreç rejimi zekâyı bir
+kez harcayıp sistemin yapısına gömer.
+Yazılım terminolojisiyle: yetenek rejimi olağanüstü yargıyı çalışma zamanında
+çağırır; süreç rejimi onu derleme zamanında bir kez çalıştırıp sonuca dönüştürür.
+Ohno Taiichi’nin, Shingo Shigeo’nun ve Toyoda Eiji’nin yargısı 1950’lerde bir
+kez harcanmış, ardından donanıma, akış tasarımına, kanban kartına ve andon
+ipine gömülmüştür. Hattaki personel o yargıyı her gün yeniden üretmez; tüketir.
+Aynı zekâ, farklı amortisman.
+Bu okumanın ikinci düzeltmesi de gereklidir: söz konusu sistemler düşünmeyi
+ortadan kaldırmaz, dağıtır. En kıdemsiz operatöre tüm hattı durdurma yetkisi
+verilmesi ve yılda milyonlarla ifade edilen iyileştirme önerisinin toplanıp yüksek
+oranda uygulanması, merkezı dehanın sistematik biçimde toplanan çok sayıda
+küçük yargıyla ikame edilmesidir.
+Belirleyici Eksen: Varyans
+˙Iki rejim arasındaki seçim bir personel kalitesi sorusu değildir. Belirleyici olan
+şudur: süreç, dağılımın her iki kuyruğunu birden keser. Sol kuyruğu (felaket)
+kestiği için hayat kurtarır; sağ kuyruğu (sıçrama) kestiği için buluşu engeller.
+Takas tam olarak budur ve başka bir şey değildir.
+2
+
+-- 2 of 24 --
+
+Rejim Seçim Kriterleri
+Üç Soru
+1. Problem tekrar ediyor mu? Tekrar ediyorsa yargı bir kez harcanıp
+dondurulabilir; ilk kez oluyorsa dondurulacak bir çıktı yoktur.
+2. Hata modları önceden sayılabiliyor mu? Bir uçağın düşme biçimleri
+sonlu ve bilinirdir; transistörün icat edilme biçimlerinin listesi yoktur.
+3. Ödeme hangi yöne? Kazancın tavanlı, kaybın dipsiz olduğu konkav
+maruziyette amaç sol kuyruğu kesmektir; kaybın tabanlı, kazancın ta-
+vansız olduğu konveks maruziyette amaç sağ kuyruğu yakalamaktır.
+Karar Matrisi
+Hata modları sayılabilir Sayılamaz
+Yüksek tekrar Süreç Hibrit / yüksek güvenilirlik
+Düşük tekrar Hibrit Yetenek
+Sağ üst hücre, havacılık harekât yönetimi, acil servis ve nükleer tesis işletimi
+gibi yüksek güvenilirlikli örgüt (HRO) alanına karşılık gelir.
+Ölçek Kısıtı
+Yetenek rejimi ölçeklenmez. Yüz binlerce kişilik bir kadro olağanüstü bireylerle
+doldurulamaz; böyle bir havuz mevcut değildir. Dolayısıyla büyük kurumlarda
+soru “dâhi mi ortalama mı” değil, elde bulunan sınırlı sayıda olağanüstü yargının
+nereye konumlandırılacağıdır.
+Bu kısıtın tarihsel örneği ˙Ikinci Dünya Savaşı’dır. Wehrmacht küçük birlik
+liderliğinde ve taktik inisiyatifte rakiplerine belirgin biçimde üstündü ve kay-
+betti; Kızıl Ordu bu boyutta uzun süre vasat kaldı ve kazandı. Belirleyici olan
+küçük birlik kalitesi değil, kütlesel üretim, ikmal, standardizasyon ve harekât
+seviyesinde ölçeklenebilir planlama oldu. Bu, taktik üstünlüğün önemsiz olduğu
+anlamına gelmez; bir ordunun bağlayıcı kısıtının çoğu zaman taktik katmanda
+bulunmadığı anlamına gelir.
+Bundan çıkan yerleştirme kuralı şudur: olağanüstü yargı hatta değil, hattı
+kuran sisteme konumlandırılır.
+Rejimlerin Patolojileri
+Yetenek Rejiminin Zaafları
+• Ölçeklenmez; kütlesel örgütlere uygulanamaz.
+• Bilgi kişilerde kaldığından kurumsal hafıza kırılgandır; bilginin taşıyıcısı
+ayrıldığında kapasite geri getirilemez.
+3
+
+-- 3 of 24 --
+
+• Dışarıdan denetlenebilir olmadığından bütçe ve meşruiyet bakımından ko-
+runmasızdır.
+• Sert eleme kültürleri psikolojik güvenliği düşürür; düşen güvenlik dürüst
+başarısızlığı cezalandırır; cezalandırılan başarısızlık ise rejimin varlık se-
+bebi olan risk almayı ortadan kaldırır. Ayrıca değerlendirici vasatsa, eleme
+mekanizması vasatı çoğaltır.
+Süreç Rejiminin Zaafları
+• Kemikleşme. Süreç, kurulduğu dönemin ortamına aşırı uyumlanmış bir
+modeldir. Ortam kaydığında süreç nötr değil, etkin biçimde zararlı hale
+gelir.
+• Ölçüt bozulması. Ölçülen süreç, oynanan sürece dönüşür.
+• Beceri erozyonu. Süreç işi üstlendiğinde personel gerekçeyi anlamayı
+bırakır; süreç sınırına çarptığında doğaçlama kapasitesi kalmaz.
+• Mimar kaybı. Bu patoloji genellikle gözden kaçar. Bir sistemi düzeltebilecek
+kişiler, çoğunlukla o sistemi işletmiş ve nerede tıkandığını deneyimlemiş
+kişilerdir. Ohno tezgâh kökenlidir. Her şeyi prosedüre bağlayan bir ku-
+rum, gelecekteki mimarlarını yetiştiren çıraklık zincirini keser.
+Beceri erozyonunun kanonik örneği, otomasyonun en gelişmiş olduğu alanda
+ortaya çıkmıştır. 2009’daki Air France 447 kazasında pitot tüplerinin buzlanması
+üzerine otomasyon kontrolü mürettebata devretmiş, elle uçuş becerisi yetersiz
+kalmıştır. Havacılığı güvenli kılan mekanizmanın kendisi yeni bir kaza sınıfı
+doğurmuştur.
+Kasıtlı Heterojenlik ve Yapısal Yalıtım
+Olgun kurumlar tek rejim seçmez; alt sistemlere göre farklı rejimler işletir ve
+asıl zorluk arayüzdedir.
+• Toyota’da hatta katı süreç işlerken, shusa (baş mühendis) sistemi saf
+yetenek rejimidir: tek kişi tüm araç programını sahiplenir, geniş fiilı otorit-
+eye ve neredeyse sıfır formel kadro gücüne sahiptir.
+• Büyük ordularda kütle süreçle yönetilirken özel harekât yapıları ayrı bir re-
+jim olarak oyulmuştur; ABD’de SOCOM kendi seçilimi, kendi terfi otoritesi
+ve kendi kariyer patikasıyla ana kurumun insan kaynağı makinesinden ko-
+runmuştur.
+• DARPA yaklaşık yüz program yöneticisiyle, sabit süreli görevlendirme,
+kadro yokluğu ve kalıcı laboratuvar bulunmaması ilkeleri üzerine kuru-
+ludur.
+• Skunk Works modelinin ilk kuralı, program yöneticisine tam yetki ver-
+ilmesidir.
+4
+
+-- 4 of 24 --
+
+• Bell Laboratuvarları, AT&T’nin içinde ama AT&T’nin işletme kurallarına
+tabi olmayan bir yapıydı.
+Buradan çıkan pratik kural:
+Kütlesel bir süreç kurumunun içinde yetenek rejimi ancak yapısal
+yalıtımla yaşar: ayrı seçilim, ayrı terfi yetkisi, ayrı ücret rejimi ve
+ana kurumun personel mevzuatından muafiyet.
+Yalıtım kaldırıldığında ana kurumun insan kaynağı metabolizması yalıtılmış
+birimi sindirir.
+Yetkinin Göçü: Üç Gelenekte Aynı ˙Ilke
+Süreç rejiminin olgun biçimi, dağıtık yargıyı kenarlardan geri ithal eder. Aynı
+ilke birbirinden bağımsız üç gelenekte farklı adlarla ortaya çıkmıştır.
+• Auftragstaktik. Prusya kurmaylık geleneğinin ayırt edici özelliği itaat
+değil, plana itiraz edebilen kurmay yetiştirmesiydi. Emrin lafzı değil niyeti
+icra edilir; bu, eğitimli muhalifi zorunlu kılar. Kriegsakademie’nin işlevi
+uygulayıcı değil yargı sahibi üretmekti.
+• Rosh gadol / rosh katan. ˙Israil askerı kültüründeki ayrım aynı ekseni
+tanımlar. Rosh katan (küçük kafa) talimatı bir sözleşme olarak okur; lafza
+uyduysa sorumluluğu biter. Rosh gadol (büyük kafa) talimatı bir niyet
+ifadesi olarak okur ve o niyeti gerçekleştirmek için talimatın söylemediklerini
+de yapar. Seçilim ve eğitim, bu ikinci tipi üretecek biçimde kurgulanmıştır.
+• Uzmanlığa yetki devri. HRO literatürünün beş ilkesinden biri, kriz
+anında karar yetkisinin rütbeye değil probleme en yakın uzmanlığa göç
+etmesidir. Nükleer uçak gemisinde prosedür katıdır ve güvertedeki en
+kıdemsiz personel tüm uçuş harekâtını durdurabilir. Bu, andon ipinin
+askerı karşılığıdır.
+Üçü de aynı yapısal gereksinimi ifade eder: dağıtık, iletişimin kesildiği ve
+öngörülemez ortamlarda merkezı planın yerini alt kademenin yargısı almak zorun-
+dadır. Ve üçü de, kurumun bu yargıyı bir erdem olarak değil bir beklenti olarak
+tanımlamasını gerektirir.
+˙Ikinci Bölüm: Yetenek Rejiminin Girdi Problemi
+Boru Hattı ve Darboğaz
+Yetenek rejimi altı aşamalı bir boru hattına dayanır:
+çekim → seçim → biçimlendirme → görevlendirme → terfi → tutundurma
+Amdahl mantığı burada da geçerlidir: darboğaz olmayan aşamayı iyileştirmek
+sistem çıktısını değiştirmez. Kurumların büyük çoğunluğu enerjisini ortadaki
+iki aşamaya (seçim ve biçimlendirme) yatırır; oysa bağlayıcı kısıt tipik olarak
+uçlardadır — girişte çekim gücü, çıkışta terfi ve tutundurma.
+5
+
+-- 5 of 24 --
+
+Seçim ile C ekim Ayrımı
+“En iyileri almak” önermesi mevcut bir havuz varsayar. Oysa seçim, gelmeyen
+bir havuzdan yapılamaz.
+Seçkin programların niteliği, seçim yönteminin isabetinden çok kurumun
+çekim gücünden kaynaklanır. Talpiot’un elit olmasının nedeni en iyileri seçmesi
+değil, on sekiz yaşındaki bir bireyin yapabileceği en yüksek statülü seçenek ol-
+masıdır. Prestij, seçimin çıktısı değil girdisidir. Dolayısıyla “en iyileri nasıl
+alırız” sorusu, fiilen “neden gelsinler” sorusudur ve ücret, özerklik, statü ve
+çıkış seçenekleriyle cevaplanır.
+C ıkış Hakkı Paradoksu
+Seçkin birimlerin niteliğini koruyan mekanizmalardan biri, mezunlarının ayrılabilme
+serbestisidir. 8200 biriminin ekosistem etkisi, mezunlarının ayrılıp şirket kura-
+bilmesine dayanır; oluşan ağın değeri kurumun prestijine geri yansır ve bir son-
+raki kohortu güçlendirir.
+Buna karşılık birçok askerı sistemde asgari fiilı hizmet yükümlülüğü, per-
+sonelin belirli bir süre dolmadan ayrılmasını engeller. Tutundurma politikası
+olarak tasarlanmış bu düzenleme ters seçilim üretir: çıkışın kapalı olduğu bir
+kuruma, dışarıdaki seçenekleri zayıf olanlar orantısız biçimde başvurur; seçeneği
+güçlü olan zaten başvurmaz. Kilit, ortalamayı korur ve dağılımın üst kuyruğunu
+kaybettirir. Rakip sektörlerle rekabette kaybedilen şey ücret farkından çok bu
+asimetridir.
+“En ˙Iyi” Kavramının Ölçülebilirliği
+Seçim geçerli bir yordayıcı gerektirir. Konvansiyonel akademik başarı ölçütleri
+— not ortalaması, merkezı sınav puanı, lisansüstü giriş sınavı — bu işlevi kısıtlı
+biçimde görür.
+Tetlock’un uzun soluklu tahmin çalışmaları, iyi tahmincileri ayıran niteliğin
+diploma, unvan, alan uzmanlığı veya ham zekâ değil bilişsel stil olduğunu göstermiştir:
+kanıt karşısında güncelleyebilme, ihtimalleri ince taneli düşünebilme ve kendi
+tezine saldırabilme. Aynı literatür, tek bir kapsayıcı çerçeveye bağlanan uzman-
+ların — “kirpilerin” — en zayıf performansı gösterdiğini ve kıdemli uzmanların
+birçok kategoride eğitimli meslek dışı kişilerden daha kötü sonuç verdiğini ortaya
+koymuştur. IARPA turnuvalarında gizli erişimi bulunmayan “süpertahmincilerin”
+kurum analistlerini kalibrasyon skorunda geçmesi, aynı bulgunun uygulamalı
+doğrulamasıdır.
+Bunun doğrudan sonucu şudur: yüksek notla mezuniyeti sağlayan uyumluluk
+ile, kurumsal uzlaşının yanıldığını söyleyebilme kapasitesi aynı bireyde zorunlu
+olarak birleşmez; zaman zaman ters yönlüdür. “En iyiyi al” önermesi pratikte
+“ölçebildiğini al” anlamına gelir ve ölçülebilen nitelik nadiren ihtiyaç duyulan
+niteliktir.
+6
+
+-- 6 of 24 --
+
+Erken Seçimin Sınırları
+Erken seçim yordama doğruluğunu düşürür. Matematik gibi erken sinyal veren
+yeteneklerde on dört yaşındaki seçim işleyebilir — Sovyet matematik internatları
+bu ilkeye dayanıyordu. Komuta kapasitesi ise geç olgunlaşan, sosyal olarak
+karmaşık ve yargı temelli bir beceridir; Talpiot bile on yedi–on sekiz yaşında
+seçim yapar.
+Dolayısıyla erken başlayan askerı ortaöğretim kurumlarının gerçek işlevi daha
+isabetli seçim değildi. ˙Iki başka şeydi: ilave biçimlendirme süresi (kimlik,
+aidiyet, disiplin) ve yoğun matematik-fizik eğitimi. Bu kurumların savunul-
+ması gereken gerekçe “en iyiyi erken yakalamak” değil, “yeterince iyiyi daha
+uzun süre işlemek”tir.
+Okullar Üreteç Değil Yükselteçtir
+Okullar üreteç değil yükselteçtir. ˙Içlerine giren seçilim kalitesini ve
+dışarıda onları bekleyen teşvik yapısını çarpanla büyütürler; yoktan
+var etmezler.
+Dale ve Krueger’in seçkin üniversitelere kabul edilip devam etmeyenlerle
+devam edenlerin sonuçlarını karşılaştıran çalışması, farkın büyük ölçüde kay-
+boldığunu göstermiştir. Bu bulgu, seçkin kurumların katma değerinin önemli
+kısmının eğitim değil seçilim olduğuna işaret eder; “en iyiyi al” stratejisi çoğu
+kurumda fiilen bir etiketleme stratejisidir.
+Sonuç şudur: okul kültürün girdisi değil çıktısıdır. Bir kurum, mezuniyet
+sonrası terfi sistemi liyakati net biçimde ödüllendirmiyorsa, okulun ürettiği değeri
+aşağı akışta buharlaştırır. Kurum kendi mezununu yanlış terfi ettirerek eğitim
+yatırımını sıfırlayabilir.
+Üçüncü Bölüm: Rejim ile Katman Uyumsuzluğu
+Kurumsal başarısızlıkların önemli bir bölümü rejim seçmemekten değil, doğru
+rejimi yanlış katmana uygulamaktan doğar. Aşağıda iki simetrik hata ince-
+lenmiştir.
+Birinci Hata: Süreç Disiplininin Kestirime Uygulanması
+Vaka: 1973
+Yom Kippur Savaşı öncesinde toplama başarısızlığı yoktu. Kanal boyunca görünür
+yığınak, Sovyet danışman ailelerinin tahliyesi, Ürdün Kralı Hüseyin’in doğrudan
+uyarısı ve üst düzey bir kaynak mevcuttu.
+Başarısızlık, ha-Konseptzia adı verilen kurumsal modelin hipotez olmak-
+tan çıkıp çerçeveye dönüşmesinden kaynaklandı: Mısır belirli kabiliyetleri ed-
+inmeden saldırmaz, Suriye Mısır’sız saldırmaz, dolayısıyla savaş yoktur. Model
+kurulduğunda makuldü. Sorun yanlışlığı değil, çerçeveye dönüştükten sonra her
+7
+
+-- 7 of 24 --
+
+yeni göstergenin onu güncellemek yerine onun içine yerleştirilmesiydi; yığınak
+bir tatbikat olarak sınıflandırıldı.
+Vakanın en öğretici ayrıntısı, Güney Komutanlığı’nda görevli Teğmen Binyamin
+Siman-Tov’un 1 ve 3 Ekim tarihli iki notunda tatbikatın savaş hazırlığı olduğunu
+savunması ve bu notların amiri tarafından yukarı iletilmemesidir. Sistemin en
+alt kademesindeki isabetli sinyal, sistemin kendi filtresince temizlenmiştir.
+Süreç Erdemlerinin Kestirimdeki Karşılığı
+Süreç erdemi Üretimde Kestirimde
+Varyans azaltma Kusur eleme Muhalefetin bastırılması
+Denetlenebilirlik ˙Izlenebilirlik Savunulabilir cevap yanlılığı
+Net yetki hattı Koordinasyon Tekil epistemik arıza noktası
+Tekrarlanabilirlik Standart çıktı Önceki kestirime çıpalama
+Temel ayrım şudur: hiyerarşi eylem için doğru, inanç için yanlıştır. Eylem
+tekil olmak zorundadır; inanç toplanmalıdır. Süreç disiplini bu ikisini ayırmayarak
+inancı da tekilleştirir.
+Kapalı Döngü
+Altta yatan mantık kapalıdır: süreç, dünyanın dondurulmuş bir modelidir; is-
+tihbaratın işi ise dünyanın modele uymayı bıraktığı anı saptamaktır. Süreç
+odaklı istihbarat, dünün modelinin geçerliliğini dünün modeliyle değerlendirir;
+çemberin dışına çıkacak bir mekanizma bulunmaz.
+Bu, Vaughan’ın Challenger vakasında adlandırdığı sapmanın kademeli nor-
+malleştirilmesi olgusunun istihbarat alanındaki eşleniğidir. Contalardaki erozyon
+her gözlemlendiğinde kusursuz işleyen bir süreç tarafından “tecrübe aralığı içinde”
+olarak sindirilmişti; mekanizma aynı, alan farklıdır.
+Katmanlı Türetme ve Belirsizlik Dilinin Aşınması
+˙Ikinci bir alt patoloji, değerlendirmelerin ham veriden değil önceki değerlendirmelerden
+türetilmesidir. 2003 kitle imha silahları vakasını inceleyen Silberman-Robb
+Komisyonu bunu “katmanlama” olarak adlandırmıştır. Her özetleme katmanında
+belirsizlik dili biraz daha kırpılır; yönetici özeti formatı belirsizliği taşıyamaz.
+Tüketilebilir hale getirme süreci, bozulmanın kendisidir.
+Sorun kelime düzeyinde de mevcuttur. Sherman Kent’in 1951’de bir değerlendirmede
+kullandığı “ciddi bir ihtimal” ifadesinin meslektaşlarınca yüzde yirmi ile yüzde
+seksen arasında yorumlandığını saptaması, sözel olasılık dilinin taşıma kapa-
+sitesinin sınırını gösteren erken bir bulgudur.
+Doğru Tasarım
+• Resmı değerlendirmenin karşı tezini üretmekle görevlendirilmiş, doğrudan
+en üst kademeye raporlayan bir birim. Agranat Komisyonu sonrası AMAN
+8
+
+-- 8 of 24 --
+
+içinde kurulan Ipcha Mistabra (“tersi muhtemeldir”) birimi bu tasarımın
+prototipidir.
+• Değerlendirme çoğulculuğu: birden fazla kurumun bağımsız ulusal ke-
+stirim üretmesi ve bunların birbirini görmeden hazırlanması.
+• Rakip hipotezlerin sistematik analizi (ACH): favori hipotezi destekleyen
+kanıt toplamak yerine hipotezlerin matrise dizilmesi ve sıralamanın destek-
+leyici değil ayırt edici ve yalanlayıcı kanıta göre yapılması.
+• Sözel yerine sayısal olasılık ve bu tahminlerin kayda geçirilip kalibrasyon
+açısından skorlanması. Geri besleme süreç uyumuna değil isabete kurul-
+malıdır.
+• Ön-mortem: kararın belirli bir süre sonra çökmüş olduğu varsayımından
+geriye doğru gerekçelendirme.
+Kural şu biçimde formüle edilebilir:
+Kestirimde yöntem standartlaştırılır, sonuç çoğullaştırılır.
+Kuralın Sınırı
+Bu kural yalnızca analiz katmanı için geçerlidir. Toplama, kaynak yönetimi,
+karşı istihbarat hijyeni ve operasyonel güvenlik saf süreç alanlarıdır ve orada
+doğaçlama can kaybına yol açar. Aynı kurumun içinden bir rejim sınırı geçer;
+hataların önemli bölümü bu sınırın konumunun bilinmemesinden doğar.
+˙Ikinci Hata: Yetenek Kültünün ˙Idame-Bakıma Uygulan-
+ması
+Kontrol Listesinin Doğuşu
+1935’te Wright Field’da Boeing Model 299 prototipi ilk uçuşunda düştü. Uçağı
+kullanan Binbaşı Ployer Hill, Ordu’nun test uçuşları şefiydi — mevcut en iyi
+pilot. Kalkışta kumanda kilitlerini açmayı ihmal etmişti. Dönemin basını uçağı
+“tek bir adamın uçuramayacağı kadar karmaşık” olarak nitelendirdi.
+Cevap “daha iyi pilot bulmak” olamazdı, çünkü en iyisi ölmüştü. Cevap
+kontrol listesi oldu. Ders yapısaldır: mevcut en iyi birey başarısız olduğunda
+çözüm bireysel olamaz. Yetenek rejimi bu noktada mantıksal olarak tükenir.
+Ödeme Yapısı ve Kapasite Tuzağı
+˙Idame faaliyetinde başarı görünmezdir (olay gerçekleşmemiştir); başarısızlık ise
+gösterişlidir. Yetenek kültürü ise statüyü görünür problem çözümüne dağıtır.
+Sonuç şudur: arızalı platformu gece yarısı ayağa kaldıran personel kahraman
+sayılır; koyduğu önleyici bakım planı sayesinde o platformun hiç arızalanmamasını
+sağlayan personel hiçbir tanınma almaz. Kurum, farkında olmadan, söndürdüğü
+krizi üreten davranış kalıbını seçmeye başlar.
+9
+
+-- 9 of 24 --
+
+Repenning ve Sterman’ın kapasite tuzağı modeli bu döngünün sistem di-
+namiğini verir: baskı altında çaba iyileştirmeden acil müdahaleye kayar, kapa-
+site düşer, müdahale ihtiyacı artar. Döngünün her adımı yerel olarak akılcı ve
+görsel olarak kahramancadır.
+C arpımsal Hazır Olma
+Hazır olma toplamsal değil çarpımsaldır. Bir platformun görev yapabilmesi için
+k alt sistemin tamamının çalışması gerekiyorsa, filo düzeyindeki kullanılabilirlik
+yaklaşık olarak
+A ≈ pk
+ile verilir. k = 20 için:
+0,98020 ≈ 0,67 0,99520 ≈ 0,90
+Kalem başına yüzde 1,5’lik disiplin farkı, filo düzeyinde 23 puanlık bir farka
+dönüşür. C arpımsal yapı ayrıca varyansı ağır biçimde cezalandırır: yetenek
+rejimi yüksek ortalama ve yüksek varyans üretirken, idame yüksek ortalama ve
+düşük varyans gerektirir. Birkaç kalemdeki kahramanca ama tutarsız iş, çarpımı
+tek başına aşağı çeker.
+Bu ilişkinin doğrudan bir politika sonucu vardır: envanter çeşitliliğini artırmak
+k’yi büyütür ve p sabit kalsa dahi filo hazırlığını düşürür. Platform sayısı ar-
+tarken kullanılabilir platform sayısının artmaması tipik olarak böyle oluşur; bu
+bir personel kalitesi değil, konfigürasyon ve tedarik yönetimi meselesidir.
+Konfigürasyon Kayması
+Yetenek rejimi doğaçlar; idame alanında doğaçlama belgelenmemiş modifikasyon
+demektir. Bu durumda yedek parça talebi öngörülemez, filo çapında güvenilirlik
+istatistiği üretilemez, servis bülteni yayımlanamaz ve eğitim standartlaştırılamaz.
+Filo, tekil örneklerin toplamına dönüşür. Ticari havayollarının konfigürasyon
+kontrolünde gösterdiği katılık bu nedenledir.
+Vaka: Luftwaffe
+˙Ikinci Dünya Savaşı’nda Alman avcı pilotlarının olağanüstü bireysel skorları
+— Hartmann 352, Barkhorn 301, yüzü aşan düzinelerce pilot; karşı tarafta en
+yüksek skor kırk civarında — üstün seçilimden değil rotasyon yokluğundan kay-
+naklandı.
+Amerikan ve ˙Ingiliz sistemleri tecrübeli pilotu eğitim komutanlığına döndürüyordu;
+Alman sistemi asını ölene kadar cephede tutuyordu. Sonuç bir avuç istisnai
+performans ve sürekli kötüleşen bir ortalama oldu; 1944’e gelindiğinde ikmal
+pilotları yaklaşık yüz uçuş saatiyle cepheye çıkarken karşılarındakiler üç yüzün
+üzerindeydi. Aynı dönemde kronik hazır olma sorunları ve kontrolsüz varyant
+çoğalması gözlendi; bağlayıcı kısıt platform sayısı değil yakıt, eğitimli personel
+ve idame oldu. Uçurulamayan uçaklar park halinde bekliyordu.
+10
+
+-- 10 of 24 --
+
+Kahramanca doğaçlama ve uçmayan bir filo: bu vaka, tezin tarihsel saf
+halidir.
+Modern Örnekler
+2017’de USS Fitzgerald ve USS John S. McCain çarpışmalarında on yedi per-
+sonel kaybedildi. Donanma’nın kendi kapsamlı incelemesi ve GAO bulguları,
+ileri konuşlu birliklerde bakımın sistematik olarak ertelendiğini, eğitim serti-
+fikasyonlarının süresi dolmuş halde muafiyetle geçiştirildiğini ve tükenmiş mürettebatla
+görev kabul edildiğini saptadı. Hâkim kültür “can-do” idi: hazır olmadığı halde
+görevi üstlenmek erdem sayılıyordu.
+Karşı örnek aynı kuvvetten gelir. 1963’te Thresher kaybının ardından ku-
+rulan SUBSAFE programı — uç noktada konfigürasyon kontrolü ve malzeme
+sertifikasyonu — yürürlüğe girdiğinden bu yana kapsamındaki hiçbir denizaltı
+kaybedilmemiştir.
+Zanaat Sezgisinin Yanılması
+Nowlan ve Heap’in United Airlines için hazırladığı 1978 tarihli çalışma, güvenilirlik
+merkezli bakımın temelini oluşturur ve bakım zanaatinin en yerleşik inancını
+yıkar: “daha çok planlı revizyon daha çok güvenilirlik” önermesi geçersizdir.
+˙Incelenen kalemlerin yaklaşık yüzde 89’u yaşa bağlı bir aşınma-yıpranma deseni
+göstermemiştir; yalnızca küçük bir azınlık planlı revizyondan fayda görmektedir.
+Geri kalanında zamanlı sökme güvenilirliği artırmaz, erken arıza riskini yeniden
+üretir.
+˙Idame mükemmelliği bir el becerisi değil; ağırlıklı olarak güvenilirlik is-
+tatistiği, envanter teorisi ve tedarik zinciri problemidir. Yetenek kültürü bu
+alanlara sistematik olarak az yatırım yapar, çünkü görünür kahramanlık üretmezler.
+Ayrım Kuralı ve Katman Mimarisi
+Varyansın bilgi mi kusur mu olduğuna bakılır.
+• Kestirimde varyans bilgidir; analistler arasındaki anlaşmazlık, belirsizliğin
+gerçek büyüklüğü hakkında sinyal taşır. Bastırıldığında tam olarak ihtiyaç
+duyulan bilgi silinir.
+• ˙Icrada varyans kusurdur; iki uygulayıcının farklı davranması, birinin hatalı
+olduğu anlamına gelir.
+Buradan iki alanın doğru mimarisi türetilir:
+Alan Katman Rejim
+˙Istihbarat Yöntem Katı süreç
+˙Istihbarat Sonuç Zorunlu çoğulluk
+˙Idame ˙Icra Katı süreç
+˙Idame Sistem tasarımı Yetenek
+11
+
+-- 11 of 24 --
+
+Her iki alanda da yetenek mevcuttur; yalnızca farklı katmanlarda konum-
+lanır.
+˙Iki Hatanın Geri Besleme Patolojisi
+Her iki hatanın da kalıcı olmasının nedeni, geri besleme yapılarının — birbirine
+zıt biçimde — bozuk olmasıdır.
+• Kestirim hatası nadir, tekil ve gecikmelidir. Savaşın taban oranı düşük
+olduğundan “savaş yok” diyen süreç yıllarca sürekli haklı çıkar ve her
+doğru tahmin modeli daha da pekiştirir. Geri besleme, bir kez katastrofik
+biçimde yanılana kadar tamamen olumludur.
+• ˙Idame hatası sürekli, dağınık ve inkâr edilebilirdir. Hazır olma oranı
+yavaşça erir; her tekil olay “sonuçta görev yerine getirildi” ile kapanır.
+Toplamda felakettir, tanesi tanesine savunulabilir.
+Biri çok geç, diğeri çok zayıf sinyal verir. ˙Ikisi de yanlış rejimi haklı gösterir.
+Dördüncü Bölüm: Sistemlerin Dâhiden Bağımsızlaşma
+Sınırı
+Üç Katman
+Mühendislik tarihinin genel eğilimi, bir kez düşünülmüş zekânın nesneye gömülerek
+tekrar tekrar kullanılabilir hale getirilmesidir: yazı, çift taraflı muhasebe, kon-
+trol listesi, montaj hattı, derleyici, tip sistemi. Ancak bu hedef her katmanda
+gerçekleştirilemez.
+• ˙Işletme katmanı. Olağanüstü yargı ihtiyacı sıfıra indirilebilir ve in-
+dirilmelidir. Günlük iş dâhi istememelidir.
+• Sınır tespiti katmanı. ˙Indirilemez.
+• Revizyon katmanı. ˙Indirilemez.
+Sınır Tespitinin ˙Içeriden Yapılamaması
+Sistem, öngörülen durumlarda ne yapılacağını söyler; öngörülmemiş durumda
+susar — ancak sustuğunu bildirmez. “Bu durum sistemin kapsama alanı dışındadır”
+tespiti, tanım gereği sistemin içinden yapılamaz; bunu yapacak prosedürün,
+prosedürlerin ne zaman geçersizleştiğini bilen bir prosedür olması gerekirdi.
+Böyle bir yapı mevcut değildir.
+Revizyon katmanının indirgenemezliği ise farklı bir nedene dayanır: sistem,
+dünyanın dondurulmuş modelidir ve dünya durağan değildir. Sistem kurulduğu
+andan itibaren, ortamın kayma hızıyla orantılı olarak bozulmaya başlar. Kaizen
+mekanizması bu katmanın sistem içine gömülme denemesidir.
+12
+
+-- 12 of 24 --
+
+Doğru Formülasyon
+Hedef, dâhi gerektirmeyen sistem değil; çalışmak için olağanüstü
+yargı istemeyen, ancak değişmek için onu içine alabilen sistemdir.
+Azaltılması gereken şey yargının varlığı değil, tüketim sıklığıdır. Her gün
+yargı gerektiren bir sistem, birkaç yılda bir yargı gerektiren bir sisteme dönüştürülebilir.
+Sıfıra indirme ancak ortamın durağan olması halinde anlamlı olurdu.
+˙Iki Bağımsız Ölçüt
+Bir sistem birbirinden bağımsız iki ölçütle değerlendirilmelidir: olağanüstü yargı
+yokken ne kadar dayanıklı çalıştığı ve olağanüstü yargı varken ne kadar hızlı
+güncellenebildiği. ˙Ikincisini yitirmiş bir sistem, kusursuz çalıştığı anda işlevsel
+olarak ölmüştür; bunun görünür hale gelmesi yalnızca zaman alır.
+Beşinci Bölüm: Revizyon Organının Kırılganlığı
+Bilginin Yeterli Olmaması: ˙Israil Vakası
+Bu alandaki kavramsal birikimin en zengin olduğu örnek ˙Israil’dir.
+• Zvi Lanir (1983), durumsal sürpriz ile temel sürpriz ayrımını kavram-
+sallaştırmıştır. Birincisi model içinde yanılmaktır ve düzeltilebilir; ikincisi
+modelin kendisinin yanlış olmasıdır ve daha fazla bilgiyle düzelmez, çünkü
+bilgi zaten modelin içine yerleşerek gelir.
+• Isaac Ben-Israel, istihbarat değerlendirmesine Popper’cı yanlışlamacı
+bilim felsefesini uygulamış; analistin işinin tezini doğrulamak değil yanlışlamaya
+çalışmak olduğunu savunmuştur.
+• Israel Tal, doğaçlamaya dayalı bir zırhlı birlik kültürüne standardiza-
+syon disiplini — atış standartları, bakım düzeni, teknik prosedür — day-
+atmıştır. Ardından tasarladığı Merkava, mürettebat hayatını diğer parame-
+trelerin önüne koyan bir doktrinin metale gömülmüş halidir; derleme za-
+manında harcanmış yargının ders kitabı örneğidir.
+• Shimon Naveh ve OTRI, doğrudan revizyon katmanını kurumsallaştırma
+denemesiydi: kıdemli komutanlara çerçeve içinde çalışmayı değil çerçeveyi
+yeniden kurmayı öğretmek üzere kurulmuş bir enstitü. Enstitü 2005–06’da
+kapatıldı; dili, 2006 Lübnan Savaşı’ndaki komuta karmaşasından sorumlu
+tutuldu.
+• Tachkir kültürü — rütbe tanımayan, sistematik harekât sonrası sorgu-
+lama — taktik seviyede kaizen’in askerı karşılığıdır ve gerçekten işleyen
+bileşendir.
+• Agranat Komisyonu (1974) sonrası kurulan Ipcha Mistabra ve değerlendirme
+çoğulculuğunun güçlendirilmesi tavsiyeleri, sürecin panzehiri olarak tasar-
+lanmıştı.
+13
+
+-- 13 of 24 --
+
+Elli Yıl Arayla Aynı Katman
+Buna rağmen aynı arıza tekrarlanmıştır. 1973’te Teğmen Siman-Tov’un iki notu
+amiri tarafından yukarı iletilmemiştir. 2023’te 8200 biriminde görevli bir ast-
+subay, Hamas’ın bir tatbikatının “Eriha Duvarı” planını yakından takip ettiği
+ve örgütün bunu icra edecek kapasiteyi kurduğu değerlendirmesini yazmış; bu
+değerlendirme ne ordu üst komutasıyla ne de siyasi kademeyle paylaşılmıştır.
+Elli yıl, aynı katman, aynı arıza. Üstelik 1973’ün ˙Ibranice adı olan conceptzia
+kelimesi, 2023 sonrasında hiçbir açıklamaya gerek duyulmadan yeniden kamusal
+dolaşıma girmiştir. Kurumsal hafıza, kelime hazinesi ve mekanizma mevcuttu.
+Bağlayıcı kısıt bilgi eksikliği değildir.
+Sistem Bozulmuyor, Tasarlandığı Gibi C alışıyor
+˙Incelenen vakalarda kural ihlali yoktur. Alt kademe rapor üretmiştir: sistem
+çalışmıştır. Ara kademe raporu süzmüştür: bu da sistemdir, çünkü ara kade-
+menin tanımlı işlevi süzmektir. Sistem tasarlandığı biçimde işlemiş ve tam da
+bu nedenle başarısız olmuştur.
+Dolayısıyla çatışma insan ile sistem arasında değil, iki farklı insan konumu
+arasındadır: sistemi tamir edecek olan ile tamirden kendi konumunu koruyan.
+Sapmanın Ayrıştırılamazlığı
+“C erçeve yanlıştır” önermesi, tanım gereği prosedür dışına çıkmaktır. Sapmayı
+engelleyen bir sistem, tamir mekanizmasını da engeller.
+Dahası, gerçek zamanlı olarak isabetli itiraz ile isabetsiz itiraz ayrıştırılamaz.
+Siman-Tov, haddini aşan bir genç subaya biçimsel olarak birebir benzemekteydi;
+ayırt edici bilgi ancak sonradan oluşmuştur. Kötü sapmaları filtreleyen her
+mekanizma, iyi olanı da filtreler.
+Maliyetin Asimetrisi
+Uyarıyı veren kişi maliyeti bireysel olarak taşır: küstah görünmek, yanılması
+halinde itibar kaybetmek. Kazanç ise dağınık ve görünmezdir — gerçekleşmemiş
+bir felaket. Kimse teşekkür etmez, çünkü olay yaşanmamıştır.
+Bu denklemde susmak bireysel olarak akılcı tercihtir. Sorun karakter değil,
+teşvik muhasebesidir.
+C özüm: Erdem Yerine Görev Tanımı
+Kurumsallaşmış muhalefetin işlevsel olmasının nedeni, muhalefeti teşvik etmesi
+değil, karşı tez üretmeyi bir iş tanımı haline getirmesidir. Ipcha Mistabra’nın
+tasarım dehası “muhalefeti destekliyoruz” demesi değil, “karşı tezi yazmak senin
+görevindir ve performansın buna göre ölçülür” demesidir. Bu, cesaret şartını
+denklemden çıkarır.
+14
+
+-- 14 of 24 --
+
+Aynı biçimde andon ipini çekmek bir kahramanlık değil bir beklentidir;
+çekmeyen sorgulanır.
+Hedef, doğruyu söyleyecek olağanüstü insanı bulmak değil; doğruyu
+söylemenin olağanüstülük gerektirmediği bir yapı kurmaktır.
+Cesaret gerektiren sistem uzun vadede çöker, çünkü cesaret nadir ve dağılımı
+düzensizdir. Yalnızca görev tanımına uymayı gerektiren sistem, sıradan bireylerle
+çalışır. Birinci bölümdeki formülün tamamlanmış hali budur: dâhi sisteme
+gömülür, cesaret ise görev tanımına.
+Altıncı Bölüm: Denetimin Tasarımı
+Frekans Sorusunun Yanlışlığı
+Sürekli denetim uygulanamaz: denetim, denetlediği kurumun kapasitesini tüketir
+ve personeli doğru olanı değil savunulabilir olanı yapmaya yöneltir.
+Her sinyalde denetim de uygulanamaz. Sinyal sonsuzdur; ayrıca incelenen
+vakalarda sorun sinyal eksikliği değil fazlalığıydı. Yıllarca uyarı gelmiş, her
+biri incelenmiş ve sonuçsuz kalmıştı — bu da uyarıların değersizleşmesine, yani
+alarm yorgunluğuna yol açtı.
+Doğru cevap frekans ayarında değil, denetimin nesnesindedir.
+Denetimin Nesnesi: Dünya Değil ˙Inanç
+Denetim dünyayı değil, kurumun dünya hakkındaki inancını denetleme-
+lidir.
+“Rakip saldıracak mı” sorusu analistin işidir. Denetçinin bunu tekrarlaması
+bilgi üretmez; aynı veriyle aynı sonuca varır. Denetlenmesi gereken sorular bir
+kademe yukarıdadır:
+• Bu kararın dayandığı taşıyıcı varsayım nedir ve en son ne zaman resmen
+sınanmıştır?
+• Bu varsayımı yanlışlayacak kanıt ne olurdu ve o kanıt aranmış mıdır?
+• Belirli bir dönemde reddedilen uyarıların tamamı aynı gerekçeyle mi red-
+dedilmiştir?
+Son soru belirleyicidir ve nadiren sorulur, çünkü tekil ret kararlarının her
+biri isabetli görünür. Ancak aynı gerekçenin defalarca kullanılması, gerekçenin
+kendisinin sınanmadığının kanıtıdır.
+Yöntemsel avantaj şudur: dünya sonsuz, inanç sonludur. Denetlenebilir olan
+ikincisidir.
+15
+
+-- 15 of 24 --
+
+Tetiklerin Önceden Tanımlanması
+Tetik, kriz yokken tanımlanır; kriz anında yorumlanmaz.
+Tetiğin çekilmesi gereken anda tüm tarafların çıkarı eşiğin aşılmadığını savun-
+makta olduğundan, o anda yargıya bırakılan mekanizma sistematik olarak susar.
+Havacılıkta bildirimi zorunlu olayların nesnel eşiklerle — belirli bir irtifa sap-
+ması, belirli bir ayrım kaybı — tanımlanmış olması bu ilkenin uygulamasıdır.
+Tanım karar verir, o anki yargı değil.
+Dört Nesnel Tetik
+1. Bayatlık. Belirli bir yaşı aşan her taşıyıcı varsayım, yanlış olduğu için
+değil eski olduğu ve gerekçesi hatırlanmadığı için otomatik karşı tez in-
+celemesine girer.
+2. Ramak kala olayları. Felaket nadirdir ve tek gözlem sunar; öğrenildiği
+anda iş işten geçmiştir. Ramak kala olayları boldur ve bedelsiz öğretir.
+3. Bastırılmış itiraz. Her resmı muhalif değerlendirme kayda geçirilir ve
+hangi kademede durduğu loglanır. ˙Içeriğe bakılmaz; incelenen şey dağılımdır.
+˙Itirazlar sistematik olarak aynı kademede sonlanıyorsa sorun o kademededir.
+Bu ölçüt, incelenen her iki tarihsel vakayı da — itirazın isabetli olup ol-
+madığından tümüyle bağımsız olarak — yakalardı; “bu değerlendirme ne-
+den yukarı çıkmadı” sorusu, “bu kişi haklı mı” sorusundan yapısal olarak
+daha güçlüdür.
+4. Kalibrasyon sapması. Düşük olasılık atfedilen olayların gerçekleşmesi
+nesnel veridir; tahminler kayda geçirilip skorlandığında sapma birikimi
+incelemeyi tetikler.
+Yoğunluk ile Derinliğin Ters Orantısı
+Periyot Biçim Nitelik
+Günlük Gömülü, otomatik Sistemin özelliği, dış organ değil
+Aylık Sapma ve ramak kala taraması Ucuz, rutin, tartışmasız
+Yıllık Taşıyıcı varsayımların sınanması Takvime bağlı, koşulsuz
+Beş yıllık Dışarıdan tam yetkili denetim ˙Izne bağlı olmayan
+Felaket sonrası Bağımsız komisyon Sık kullanımı çöküş göstergesi
+Sık olan ucuz ve sığ, seyrek olan pahalı ve derin olmak zorundadır; derin ve
+sürekli denetim yalnızca kendini denetleyen bir kurum üretir.
+Uygulamada en sık atlanan satır yıllık olandır; oysa hiçbir olumsuz gösterge
+yokken çalışması gereken tek katman odur. Yangın tatbikatı yangın çıktığında
+yapılmaz.
+16
+
+-- 16 of 24 --
+
+Ölçülebilir Göstergeler
+Mekanizmanın canlı olup olmadığı, sonuç değil öncü göstergelerle ölçülür:
+• Belirli bir dönemde resmı görüşe aykırı kaç değerlendirme üst kademeye
+ulaştı?
+• Bu değerlendirmeleri hazırlayanların kariyer seyri ne oldu?
+• Üst yönetimin taşıyıcı varsayımı en son ne zaman resmen sorgulandı?
+• Tahminler kayda geçirilip skorlanıyor mu?
+Bu sayılar sıfırsa mekanizma işlevsel olarak ölmüştür; ölümün fark edilmesi
+yalnızca ertelenmiştir.
+Yedinci Bölüm: Tetiğin Konumu — Karşılaştırmalı
+Analiz
+˙Israil Modeli
+˙Israil mekanizmayı tasarım olarak sağlam kurmuştur. 1968 tarihli Soruşturma
+Komisyonları Yasası kapsamındaki devlet soruşturma komisyonunun üyeleri Yüksek
+Mahkeme Başkanı tarafından atanır, başkanlığını görevdeki veya emekli bir
+yargıç yapar; tanık celbi ve kişiler hakkında isim vererek sorumluluk atfetme
+yetkisi vardır. Buna Ipcha Mistabra, güçlü bir devlet denetçiliği, Knesset’in
+ilgili komiteleri ve ordu içi sorgulama kültürü eklenir.
+Kusur mekanizmada değil, tetiğindedir: yasa hükümetin komisyon kura-
+bileceğini düzenler, kurmak zorunda olduğunu değil; yasada kurulmasını zorunlu
+kılan bir mekanizma bulunmaz ve yargı bugüne kadar hükümeti zorlamaktan
+kaçınmıştır. Alternatif yol olan parlamento komitesi de parlamenter sistemde
+koalisyon aritmetiğine tabidir.
+Soruşturulacak kurum, soruşturmayı başlatma yetkisini elinde tut-
+maktadır.
+Bu tasarımın yapısal nedenleri şunlardır: yazılı anayasanın bulunmaması ve
+kurumsal bağımsızlığın anayasal değil yasal, dolayısıyla basit çoğunlukla geri
+alınabilir olması; yürütme ile yasamanın parlamenter sistemde iç içe geçmiş
+olması ve yürütmeden bağımsız bir yasama denetiminin yapısal olarak bulun-
+maması; süreklilik arz eden olağanüstü hal koşullarının “şu anda uygun değil”
+argümanını kalıcı biçimde elverişli kılması; ve elit havuzunun küçüklüğünden
+kaynaklanan sosyal maliyet ile döner kapı etkisi.
+Ayrıca 2006 sonrasında oluşan emsal önemlidir: ˙Ikinci Lübnan Savaşı için
+kurulan Winograd Komisyonu, devlet komisyonu yetkilerini kullanmakla bir-
+likte fiilen bir hükümet komisyonuydu ve bu yetkiler ona özel olarak verilmişti.
+Böylece devlet komisyonunun yerine hükümet komisyonunun ikame edilebileceği
+ve bunun siyaseten sürdürülebilir olduğu kanıtlanmış, sonraki uygulamalar için
+şablon oluşmuştur.
+17
+
+-- 17 of 24 --
+
+Mekanizmalar tek seferde ilga edilmez; bir kez atlanır ve atlama
+normalleşir.
+2023 sonrası süreçte 1968 yasası kapsamında bağımsız bir komisyon ku-
+rulmamıştır; bu konu güncel bir siyasi tartışma başlığıdır. Koalisyon tarafı,
+çatışma sürerken böyle bir soruşturmanın uygun olmadığını ve yargısal atama
+mekanizmasının tarafsız sayılamayacağını savunmakta; muhalefet ve kamuoyu-
+nun büyük kısmı yalnızca yasadaki mekanizmanın gerçek bağımsızlığa ve meşruiyete
+sahip olduğunu ileri sürmektedir. Bu metnin konusu tartışmanın esası değil,
+gösterdiği yapısal desendir.
+Amerika Birleşik Devletleri Modeli
+Katmanlar
+Mimari, ardışık felaketlerin ardından kurulan organların birikimidir.
+• Daimı istihbarat gözetimi. Church Komitesi (1975) sonrası kurulan
+SSCI ve HPSCI. Kritik fark, bunların felaket sonrası komisyon değil, kendi
+güvenlik erişimi ve profesyonel personeli olan sürekli organlar olmasıdır.
+• Müfettiş Genelleri. 1978 yasasıyla kurulan yaklaşık yetmiş kurum-
+luk ağ. Tasarım özelliği çift raporlamadır: hem kurum başkanına hem
+doğrudan Kongre’ye. Bulgular ara kademede gömülemez.
+• GAO. Yasama organına bağlıdır ve Comptroller General’ın görev süresi
+on beş yıl olup yenilenemez; görevden alma yalnızca Kongre’nin ortak
+kararıyla veya azille mümkündür.
+• CBO. Bütçe rakamlarında yürütmenin tekelini kırar; değerlendirme çoğulculuğunun
+mali alandaki karşılığıdır.
+• Ordu içi öğrenme yapıları. Fort Irwin’deki Ulusal Eğitim Merkezi
+ve daimı profesyonel muhalif kuvvet (OPFOR); harekât sonrası inceleme
+metodolojisi; Leavenworth’taki dersler merkezi (CALL) ve kırmızı takım
+eğitim programı (UFMCS).
+• NTSB. Kaza soruşturur ancak düzenleme yetkisi yoktur. Bu, mimarinin
+can damarıdır: soruşturmacının bulgudan kurumsal çıkarı bulunmaz.
+• ASRS. Havacılıkta gönüllü olay bildirim sistemi; düzenleyici otorite tarafından
+değil NASA tarafından işletilir ve bildirim yapana yaptırımdan sınırlı
+muafiyet sağlar. Beşinci bölümde saptanan maliyet asimetrisi problem-
+inin doğrudan çözümüdür; yılda yüz bin mertebesinde bildirim üretir.
+• Muhalefet şerhi mekanizması. Ulusal istihbarat tahminlerinde kurum-
+lar resmı şerh düşer ve şerh belgeyle birlikte dolaşır; ara kademe silemez.
+Siman-Tov probleminin biçimsel çözümüdür.
+• PCLOB ve FISA amicus curiae. Gözetim programlarında hükümetin
+karşı tezini savunmakla görevli dış katman.
+18
+
+-- 18 of 24 --
+
+Aktarılabilir Tasarım ˙Ilkeleri
+Kurum adlarından daha genellenebilir olan unsurlar şunlardır:
+1. Görev süresinin, atamayı yapan makamın süresini aşması.
+2. Görev süresinin yenilenemez olması; yeniden atanma umudunun ortadan
+kalkması.
+3. C ift raporlama yoluyla bulguların ara kademede gömülememesi.
+4. Soruşturma işlevinin düzenleme ve yaptırım işlevinden ayrılması.
+5. Bildirim yapana yaptırım muafiyeti tanınması.
+6. Muhalefet şerhinin belgeyle birlikte dolaşması.
+7. Daimı, finanse edilmiş ve kazanmakla görevlendirilmiş muhalif kuvvet.
+8. Bağımsız olgu tabanı yoluyla değerlendirme tekelinin kırılması.
+Başarısızlık Sicili
+Bu mimarinin varlığı yeterli koşul değildir.
+• 2003. Tüm mimari yerindeyken kitle imha silahları değerlendirmesi hatalı
+çıkmıştır. Dışişleri araştırma birimi INR alüminyum tüpler konusunda
+resmı şerh düşmüş ve isabetli olmuştur; şerh mekanizması çalışmış, sonuç
+bağlayıcı olmamıştır. Muhalefetin var olması ile bağlayıcı olması ayrı
+meselelerdir.
+• Team B (1976). Sovyet stratejik kabiliyetlerine ilişkin ulusal tahmine
+karşı kurulan dış panel, ideolojik olarak tek yönlü teşkil edilmiş ve sis-
+tematik biçimde hatalı — kabiliyetleri abartan — tahminler üretmiştir.
+Kırmızı takımın ele geçirilebileceğini ve önceden belirlenmiş bir sonucun
+aracına dönüşebileceğini gösteren kanonik vakadır.
+• Millennium Challenge (2002). Muhalif kuvvet komutanı Van Riper
+mavi kuvvete karşı erken üstünlük sağladığında tatbikat kısıtlarla yeniden
+başlatılmış ve komutan protesto ederek çekilmiştir. Revizyon organının
+işlevini yerine getirdiği anda bastırılmasının örneğidir.
+• Boeing 737 MAX. En öğretici vakadır, çünkü bu metnin altın standart
+olarak gösterdiği sektörde gerçekleşmiştir. Düzenleyici, sertifikasyon yetk-
+isinin önemli bölümünü üreticinin kendi personeline devretmişti; denetle-
+nenin denetçiyi yetkilendirmesi hatası, en gelişmiş denetim kültürünün
+içinde 346 ölümle tekrarlanmıştır. Aynı ülkede ve aynı sektörde kaza
+soruşturma ve gönüllü bildirim sistemleri örnek düzeyde işlerken serti-
+fikasyon katmanı içi boşaltılmıştı.
+19
+
+-- 19 of 24 --
+
+Kırılganlık Merdiveni
+Doğru soru bir organın bağımsız olup olmadığı değil, kimin ve kaç kişinin
+anlaşmasıyla işlevsizleştirilebileceğidir.
+˙Işlevsizleştirme eşiği Dayanıklılık
+Tek makamın kararı Kırılgan
+Tek makam artı prosedürel sürtünme Sınırlı koruma
+Yasa değişikliği gerektiren Yüksek
+Yasama organının ortak kararını gerektiren C ok yüksek
+Bu merdiven, ABD mimarisinin 2025–26 döneminde fiilen sınanmasıyla gözlemlenebilir
+hale gelmiştir: müfettiş genellerinin toplu görevden alınması — otuz gün önceden
+bildirim ve gerekçe sunma yükümlülüğüne aykırılık iddiasıyla dava konusu edilmiştir
+— ve gözetim kurulunun üye kaybı nedeniyle çoğunluğunu yitirip rapor üretemez
+duruma gelmesi, tek makam kararıyla işlevsizleştirilebilen katmanların kırılganlığını
+göstermiştir. Buna karşılık ortak karar eşiğine tabi organlar aynı dönemde etk-
+ilenmemiştir. Konunun hukuki ve siyasi boyutu tartışmalıdır ve yargı süreçleri
+devam etmektedir; yapısal ders ise taraf tanımaz.
+Ayrıca ikinci bir kırılganlık türü vardır ve düğmeye basılmasını gerektirmez:
+yasama organı ile yürütmenin aynı siyasi çoğunlukta birleşmesi, gözetim komitelerini
+ilga etmeden işlevsizleştirir. Bu bir anahtar değil, bir eğimdir.
+Hukuk Dışı Korumalar
+En dayanıklı mekanizmaların bir bölümü yasal güvenceyle değil, bozulmalarının
+anında maliyet doğurmasıyla korunur.
+• Gönüllü bildirim sisteminde muafiyet kaldırılırsa bildirimler aynı gün du-
+rur; sistemin değeri gönüllü katılımdan gelir ve gönüllülük emredilemez.
+• Kaza soruşturma kurulunun otoritesi hukuki değil itibaridir; raporlar ka-
+muya açıktır ve ardından hukuki süreçler gelir. ˙Itibar iptal edilemez.
+• Bazı organların çıktısı uluslararası anlaşmalara bağlanmıştır; işlevsizleşmesi
+doğrudan dışsal maliyet üretir. Bu, kimsenin tasarlamadığı ama işleyen
+bir korumadır.
+Ortak ilke, bozan tarafın bozduğu anda bedel ödemesidir.
+Yedeklilik
+˙Israil örneğindeki temel zaaf tekilliktir: tek mekanizma ve merkezıleşmiş değerlendirme.
+Karşı örnekte ise müfettiş genelleri, sayıştay, Kongre komiteleri, mahkeme am-
+icus’u, muhalefet şerhi, kaza kurulu ve bildirim sistemi birbirinin üstüne biner.
+Her biri tek başına kırılgandır; ancak tümünün eşzamanlı işlevsizleştirilmesi çok
+sayıda ayrı ve görünür işlem gerektirir.
+Bu, yüksek güvenilirlikli örgüt tasarımının temel ilkesidir: tek katmanı sağlamlaştırmak
+yerine eşzamanlı bozulma olasılığını düşürmek.
+20
+
+-- 20 of 24 --
+
+Yapısal Tavan
+Hiçbir denetim tümüyle dışsal olamaz; atama, finansman ve erişim daima bir
+merciden gelir. Bunun çaresi yoktur.
+Satın alınabilecek olan bağışıklık değil, üç niceliktir:
+• Sürtünme — işlevsizleştirmenin zaman ve prosedür maliyeti.
+• Görünürlük — işlemin gizlenememesi.
+• Bedel — işlemi yapanın ödediği maliyet.
+Kalıcı bağışıklık diye bir ürün mevcut değildir; yalnızca maliyet düzeyi vardır.
+Sekizinci Bölüm: Karşılaştırmalı Değerlendirmede
+Yanılsamalar
+Yayın Yanlılığı
+Bir ülkenin kurumsal titizliğine ilişkin izlenim, o ülkenin yayımlanmış öz eleştirisiyle
+diğerlerinin yayımlanmamış öz eleştirisinin karşılaştırılmasından doğar. ˙Ingilizce
+ve kamuya açık üretim literatürde orantısız temsil edilir; bu, bir titizlik farkı
+değil bir görünürlük farkıdır.
+Kurumların Kökeni: Tasarım Değil Yara ˙Izi
+˙Incelenen denetim kurumlarının tamamı bir felaketin ardından tesis edilmiştir:
+istihbarat gözetim komiteleri skandalların, müfettiş genelleri yasası Watergate’in,
+SUBSAFE bir denizaltı kaybının, gözetim kurulu 11 Eylül’ün ardından. Bu, sis-
+tematik öngörünün değil birikmiş hasarın ürünüdür.
+Karşı Örnekler
+• Ombudsmanlık kurumu 1809’da ˙Isveç’te kurulmuştur ve kavramın kendisi
+˙Isveççedir; resmı belgelere kamu erişimi ilkesi 1766’ya dayanır.
+• Almanya’da sayıştay üyeleri anayasal olarak hâkim bağımsızlığına sahiptir
+ve parlamentoya rapor veren bir asker ombudsmanlığı bulunur.
+• Belirli savaş kararlarına ilişkin en kapsamlı ulusal soruşturma — yıllara ve
+milyonlarca kelimeye yayılan, doğrudan hükümet başkanının karar süreçlerini
+hedef alan — Britanya’da yürütülmüştür.
+• Nükleer felaket sonrası hazırlanan Japon parlamento raporu, nedenleri
+açıkça itaat ve grupçuluk kültürüne bağlayan istisnai sertlikte bir belgedir.
+• Norveç’te 2011 saldırısını inceleyen komisyon olayın önlenebilir olduğunu
+açıkça yazmış ve üst düzey istifayla sonuçlanmıştır.
+21
+
+-- 21 of 24 --
+
+• Hollanda’nın istihbarat gözetim kurulu, habersiz ve gerçek zamanlı erişim
+yetkisiyle en güçlüler arasındadır.
+Ciddiyetin Birimi: Ülke Değil Alan
+Denetim ciddiyeti ülkeye değil alana aittir.
+Sivil havacılık, bağımsız kaza soruşturmasını uluslararası yükümlülük haline
+getiren düzenlemeler, sektörün ulusötesi yapısı ve başarısızlığın kamuya açık
+ve tartışmasız olması nedeniyle hemen her ülkede görece yüksek standarttadır.
+Buna karşılık sağlık hizmetlerinde hata oranları, aynı ülkelerde dahi belirgin
+biçimde daha kötüdür. Karşılaştırma ülkeler arasında değil, alanlar arasında
+yapılmalıdır.
+Yara Tezi ve Sınırları
+“Daha çok yara daha çok kurum üretir” önermesi eksiktir. Belirleyici değişken
+yaranın büyüklüğü değil, soruşturulabilirliğidir :
+Rejimin varlığını tehdit eden yara gizlenir; utandıran ancak varlığı
+tehdit etmeyen yara incelenir.
+Buna iki değişken eklenir. Birincisi işletilen sistemlerin yüzey alanıdır: daha
+çok faaliyet daha çok arıza üretir. ˙Ikincisi — muhtemelen en belirleyicisi —
+baskının merkezı olarak organize edilebilirliğidir. C ok sayıda bağımsız yargı
+yetkisi, ayrı bir yasama organı, delil ibrazına dayalı özel dava kültürü ve federal
+yapı, açıklığı erdemden bağımsız olarak üretir. Açıklığı organize etmek, baskıyı
+organize etmekten kolaydır.
+Sayım Yanlılığı
+Soruşturma yapmayan kurumun başarısızlık kaydı da yoktur. En kapsamlı bel-
+gelenmiş başarısızlık siciline sahip kurum, ya en çok hata yapandır ya da en
+şeffaf olandır; kayda bakarak ayırt edilemez.
+Soruşturmanın Yön Kuralı
+Sorumluluk aşağıyı veya yanı gösterdiğinde soruşturma kurulur; yukarıyı
+gösterdiğinde kurulmaz.
+Bu kuralın evrenselliğinin kanıtı, en gelişmiş denetim mimarisine sahip ülkede
+de gözlenmesidir: 2003 istihbarat başarısızlığı için kurulan komisyonun görev
+tanımı, istihbaratın siyasi kademece nasıl kullanıldığını inceleme yetkisini kap-
+sam dışında bırakacak biçimde çizilmişti. Mekanizma aynıdır; bir örnekte komisy-
+onun hiç kurulmamasıyla, diğerinde görev tanımının daraltılmasıyla işletilir.
+Farklı olan incelik düzeyidir, refleks değil.
+22
+
+-- 22 of 24 --
+
+Sonuç
+Birikmiş Önermeler
+1. Kabiliyet tek boyutlu değildir; alt sistemler farklı hızlarda hareket eder ve
+bileşik değerlendirmeler yanıltıcıdır.
+2. Mükemmellik iki rejimle üretilebilir; ayırt edici değişken personel kalitesi
+değil, varyansın bilgi mi kusur mu olduğudur.
+3. Süreç rejimi zekâyı bir kez harcayıp yapıya gömer; bu, zekânın gereksi-
+zleşmesi değil amortismanıdır.
+4. Yetenek rejimi ölçeklenmez; kütlesel örgütlerde soru dâhinin varlığı değil
+konumudur. Olağanüstü yargı hatta değil, hattı kuran sisteme yerleştirilir.
+5. Kütlesel bir süreç kurumu içinde yetenek rejimi ancak yapısal yalıtımla
+yaşar.
+6. Emrin lafzı yerine niyetini icra eden ast — Auftragstaktik, rosh gadol,
+uzmanlığa yetki devri — üç ayrı gelenekte aynı yapısal gereksinimin adıdır.
+7. Eğitim kurumları üreteç değil yükselteçtir; girdi seçilimini ve çıkış teşvik
+yapısını çarparlar, ikame etmezler.
+8. Seçim, çekim gücü olmadan anlamsızdır; çıkış hakkının kısıtlanması ters
+seçilim üretir.
+9. Ölçülebilen nitelik ile ihtiyaç duyulan nitelik nadiren örtüşür; “en iyiyi al”
+çoğu kurumda bir etiketleme stratejisidir.
+10. Kurumsal başarısızlıkların önemli bölümü rejim yokluğundan değil, rejim
+ile katmanın uyumsuzluğundan doğar.
+11. Kestirimde yöntem standartlaştırılır, sonuç çoğullaştırılır; icrada ikisi de
+standartlaştırılır.
+12. Sistemlerin işletme katmanı olağanüstü yargıdan bağımsızlaştırılabilir; sınır
+tespiti ve revizyon katmanları bağımsızlaştırılamaz.
+13. Sistem tasarlandığı gibi çalışarak da başarısız olabilir; çatışma insan ile
+sistem arasında değil, iki insan konumu arasındadır.
+14. Revizyon katmanı her sistemin politik olarak en kırılgan bileşenidir; işlevi
+gereği yetkilendiricisini mahcup eder.
+15. Uyarı mekanizmaları cesaret üzerine değil görev tanımı üzerine kurul-
+malıdır; cesaret nadir ve dağılımı düzensizdir.
+16. Denetim, dünyayı değil kurumun inancını hedef almalı; tetikleri kriz öncesinde
+nesnel olarak tanımlanmalı ve yoğunluğu derinlikle ters orantılı olmalıdır.
+23
+
+-- 23 of 24 --
+
+17. Denetlenen taraf denetimin başlama zamanına karar veriyorsa, mekaniz-
+manın geri kalanı işlevsizdir.
+18. Tam dışsal denetim mümkün değildir; satın alınabilen nicelikler sürtünme,
+görünürlük ve bedeldir.
+19. Denetim ciddiyeti ulusal karakterin değil alan yapısının ve anayasal mi-
+marinin fonksiyonudur; dolayısıyla aktarılabilir.
+Kapanış Önermesi
+Bu metnin izlediği zincir, tekil bir kabiliyet sorusundan başlayıp bir yönetişim
+sorusuna varmıştır. Vardığı nokta şudur: bir sistemi olağanüstü bireylerden
+bağımsız çalışır hale getirmek bir mühendislik problemidir ve çözülebilir. Sis-
+temin kendini düzeltmesini sağlayan organı canlı tutmak ise bir siyaset prob-
+lemidir ve tekrar tekrar kaybedilmektedir. Birincisinin çözülmüş olması, ikin-
+cisinin çözüldüğü anlamına gelmez; ve kurumların ömrünü belirleyen ikincisidir.
+Kaynakça Notu
+Metinde yararlanılan başlıca kavramsal çerçeveler: temel sürpriz kavramı üzerine
+Z. Lanir; istihbaratın yanlışlamacı epistemolojisi üzerine I. Ben-Israel; rakip
+hipotezlerin analizi ve bilişsel yanlılıklar üzerine R. Heuer; olasılık dilinin be-
+lirsizliği üzerine S. Kent; yargı kalitesi, kirpi-tilki ayrımı ve kalibrasyon üzerine
+P. Tetlock; ön-mortem yöntemi üzerine G. Klein; sapmanın normalleştirilmesi
+üzerine D. Vaughan; yüksek güvenilirlikli örgütler ve uzmanlığa yetki devri
+üzerine K. Weick ve K. Sutcliffe; kapasite tuzağı üzerine N. Repenning ve J.
+Sterman; güvenilirlik merkezli bakım üzerine F. Nowlan ve H. Heap; kontrol lis-
+tesi metodolojisi üzerine A. Gawande; Toyota Üretim Sistemi üzerine T. Ohno
+ve S. Shingo; seçkin eğitim kurumlarının katma değeri üzerine S. Dale ve A.
+Krueger; operasyonel teori ve sistemik tasarım üzerine S. Naveh; 1973 istih-
+barat başarısızlığı üzerine U. Bar-Joseph; Auftragstaktik ve Prusya kurmaylık
+geleneği üzerine ilgili harp tarihi literatürü.
+24
+
+-- 24 of 24 --
