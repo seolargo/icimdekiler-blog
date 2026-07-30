@@ -1,0 +1,623 @@
+Öğrenme Hızının Örgütsel Ekonomisi: ˙Ikinci
+Düzey Öğrenme, Deneyim Eğrileri ve
+Donanım-Zengin ˙Iterasyonun Sınırları
+Ömer Faruk Yavuz
+July 2026
+Giriş
+Sav
+Mühendislik organizasyonlarının performans farklarını açıklamakta yaygın olarak
+kullanılan iki çerçeve vardır: kaynak temelli görüş ve yetenek temelli görüş. Bu
+çalışmanın konusu üçüncü bir çerçevedir: organizasyonun öğrenme çevriminin
+ekonomisi. Sav şudur: uzun vadeli performans farkı, tek tek doğru karar-
+ların toplamından değil, birim bilgiyi üretmenin maliyeti, gecikmesi ve nedensel
+çözünürlüğünden doğar.
+Bu sav popüler yazında sıkça dolaşıma girmekte, ancak genellikle yanlışlanamaz
+biçimde formüle edilmektedir. Başarılı firmanın hızlı öğrendiği, hızlı öğrenenin
+de başarılı olduğu şeklindeki döngüsel akıl yürütme açıklayıcı değil betimleyi-
+cidir. Bu metnin amacı savı reddetmek değil, onu (i) bileşenlerine ayırmak,
+(ii) bileşenlerin nasıl birleştiğine dair açık bir fonksiyonel form önermek, (iii)
+uygulanabilirlik ön koşullarını belirtmek ve (iv) sınanabilir önermelere ölçüm
+stratejisi eklemektir.
+Metnin Statüsü ve Yöntemsel Sınırlar
+Bu metin ampirik bir çalışma değil, kavramsal bir ayrıştırma ve eleştiridir. Bu
+nedenle üç sınırın baştan belirtilmesi gerekir.
+Birincisi, kullanılan vaka malzemesi ikincil kaynaklara dayanır ve vakalar
+arasında eşzamanlı olarak çok sayıda değişken farklılaşmaktadır. Dolayısıyla
+vakalar yalnızca olumsuz iddiaları (bir koşulun yeterli olmadığını) destekle-
+mek için kullanılabilir; hangi bileşenin bağlayıcı olduğunu belirlemek için kul-
+lanılamaz. Bu sınır, metnin kendi kavramsal aracının — atıf gücünün — vaka
+seçimine uygulanmasının sonucudur.
+˙Ikincisi, metin üç ayrı analiz düzeyi arasında geçiş yapmaktadır: model
+düzeyi (makine öğrenmesi), tesis veya program düzeyi (deneyim eğrileri) ve
+örgüt düzeyi (deutero-learning). Bu düzeyler arasında eşyapılılık varsayılmamakta,
+1
+
+-- 1 of 16 --
+
+yalnızca kavramsal sözlük ödünç alınmaktadır. Doğrudan ölçüme açık olan tek
+düzey program düzeyidir; önerilen sınamalar bu düzeyde formüle edilmiştir.
+Üçüncüsü, makine öğrenmesinden alınan analojiler — credit assignment,
+meta-learning, grokking — burada biçimsel model olarak değil, sezgi düzenleyici
+sözlük olarak kullanılmaktadır. Bir örgütün öğrenme dinamiğinin bir sinir ağıyla
+aynı fonksiyonel biçimi paylaşacağı iddia edilmemektedir.
+Öğrenme C evriminin Bileşenleri
+Geri Bildirimin Girdi Olarak Tanımlanması
+Kendi kendine öğrenen sistem yoktur; her öğrenme süreci dışsal bir sinyale
+bağımlıdır. Kontrol kuramsal terimlerle çevrim şu bileşenlerden oluşur: hipotez,
+müdahale, gözlem, modelin güncellenmesi, yeni hipotez. Bu yapı Shewhart’ın is-
+tatistiksel kalite kontrol çevriminden [43] Deming’in yönetsel uyarlamasına [17],
+Boyd’un OODA formülasyonundan [35] deneysel tasarım geleneğine [21] kadar
+farklı disiplinlerde yeniden keşfedilmiştir.
+Buradan çıkan ilk önerme şudur: bir mühendislik organizasyonunun birincil
+sermaye yatırımı ürün değil, güvenilir geri bildirimi düşük maliyetle üretebilen
+düzenektir.
+Geri Bildirimin Dört Boyutu
+Yazında “geri bildirim kalitesi” çoğunlukla tek boyutlu bir büyüklük gibi ele
+alınır. Oysa birbirinden bağımsız olarak optimize edilebilen en az dört boyut
+vardır:
+Boyut ˙Işlevsel karşılığı
+Gecikme Müdahale ile sinyal arasındaki süre
+C özünürlük Enstrümantasyon yoğunluğu, sinyal-gürültü oranı
+Atıf gücü Sonucu hangi değişikliğe bağlayabilme kapasitesi
+Birim maliyet Deney başına kaynak tüketimi
+Dördüncü boyut yönetsel dikkati tekelleştirme eğilimindedir, ancak belir-
+leyici olan çoğunlukla üçüncüsüdür. Bir çevrimde eşzamanlı olarak çok sayıda
+değişken değiştirilmişse, elde edilen sonuç yüksek çözünürlüklü olsa dahi düşük
+bilgi değerlidir. Faktöriyel tasarım literatürünün temel bulgusu tam olarak
+budur [13]: deney sayısını artırmak, deney tasarımını iyileştirmenin yerini tut-
+maz.
+˙Ikinci önerme buradan çıkar: veri hacmi ile öğrenme hızı arasındaki ilişki
+zorunlu değildir. Yüksek hacimli ancak atıf gücü düşük bir ölçüm rejimi, öğrenmeyen
+bir organizasyona bilgi üretiyor izlenimi verebilir.
+2
+
+-- 2 of 16 --
+
+Atıf Gücünün Tanımı
+Terminolojik Not
+“Atıf gücü” Türkçe yazında yerleşik bir terim değildir; bu metne özgü bir
+türetmedir. ˙Ingilizce karşılığı olarak attribution power ya da causal resolu-
+tion önerilebilir. Kavramın kaynağı, pekiştirmeli öğrenmedeki credit assign-
+ment problemidir [31, 47]; ancak aşağıdaki tanım o literatürden bağımsız olarak,
+deney tasarımı terimleriyle verilmektedir.
+Bilgi Kuramsal Tanım
+X bir çevrimde uygulanan tasarım değişikliği vektörünü, Y ise gözlenen sonucu
+göstersin. Atıf gücü, sonucun taşıdığı belirsizliğin ne kadarının değişiklik vektörüne
+geri bağlanabildiğidir:
+A = I(X; Y )
+H(Y ) , A ∈ [0, 1]
+Burada I(X; Y ) karşılıklı bilgi, H(Y ) ise sonucun entropisidir [16]. A →
+0 durumu, sonucun gözlemlenmiş fakat hiçbir değişikliğe atfedilememiş olması
+demektir; bu durumda çevrim veri üretir, bilgi üretmez. A → 1 durumu ise her
+sonucun tek bir değişikliğe kesin biçimde bağlanabilmesidir.
+Deney Tasarımı Karşılığı
+Uygulamada A doğrudan hesaplanamaz; ancak deney tasarımının çözünürlüğü
+onun üst sınırını belirler. Kesirli faktöriyel tasarımlarda III. dereceden çözünürlük
+ana etkileri ikili etkileşimlerle karıştırır ve A üzerinde düşük bir tavan koyar; V.
+dereceden çözünürlük ana etkileri ve ikili etkileşimleri ayrıştırılabilir kılar [13].
+Dolayısıyla tasarım çözünürlüğü, atıf gücünün önsel göstergesidir.
+Operasyonel Vekil
+Ölçülebilir bir vekil olarak şu oran önerilir: belirli bir zaman penceresinde
+kök nedeni doğrulanmış anomalilerin sayısının, aynı pencerede gözlenen toplam
+anomali sayısına bölümü. Bu oran sıfır ile bir arasında değer alır; sıfıra yaklaşması
+gözlenen başarısızlıkların hiçbirinin belirli bir tasarım değişikliğine bağlanamadığını,
+bire yaklaşması ise her anomalinin ayrıştırılabilir bir nedene indirgenebildiğini
+gösterir.
+Oranın hesaplanabilmesi için iki tanımın önceden sabitlenmiş olması gerekir:
+anomalinin ne sayıldığı ve bir kök nedenin hangi ölçütle doğrulanmış kabul
+edildiği. Bu tanımlar sonradan gevşetilirse oran, öğrenme kapasitesindeki artışı
+değil raporlama eşiğindeki düşüşü ölçer. Anomali çözüm oranının çevrimler
+arası seyri, bu koşullar altında, ikinci düzey öğrenmenin en doğrudan gözlemlenebilir
+izidir.
+Bu oran, belirli bir zaman penceresi içinde ve doğrulama ölçütü önceden
+tanımlanmış olarak hesaplandığında, program düzeyinde izlenebilir bir büyüklüktür.
+3
+
+-- 3 of 16 --
+
+Anomali çözüm oranının çevrimler arası seyri, ikinci düzey öğrenmenin en doğrudan
+gözlemlenebilir izidir.
+Emici Kapasite: Geri Bildirimin Kullanılabilirlik Koşulu
+Geri bildirimin yakıt olarak tanımlanması, sinyalin alınabilir olduğunu örtük
+biçimde varsayar. Cohen ve Levinthal’in emici kapasite kavramı bu varsayımı
+sınırlandırır [15]: dışarıdan gelen bilginin değerlendirilebilmesi ve kullanılabilmesi,
+ilgili alandaki mevcut bilgi birikimine bağlıdır ve bu birikim büyük ölçüde önceki
+AR-GE yatırımının bir yan ürünüdür.
+Bunun çerçeve açısından sonucu şudur: aynı sinyal, farklı emici kapasiteye
+sahip iki organizasyonda farklı miktarda öğrenme üretir. Dolayısıyla çevrim
+ekonomisi yalnızca sinyal üretim maliyetiyle değil, sinyalin yorumlanabilirliğiyle
+de sınırlıdır. Emici kapasitenin kendisi de bir birikim değişkenidir; kısa vadede
+sabit, uzun vadede içseldir.
+Mekanizmanın Fonksiyonel Formu
+Bileşenler
+C erçevenin dört bileşeni şöyle tanımlanır:
+• Λ: efektif çevrim gecikmesi.
+• A: çevrim başına atıf gücü, A ∈ [0, 1].
+• ρ: elde tutma oranı; bir çevrimde kazanılan bilginin sonraki çevrime
+taşınan payı, ρ ∈ [0, 1].
+• δ: karar hakları ile bilginin eşleşme derecesi; üretilen bilginin eyleme
+dönüşebilme oranı, δ ∈ [0, 1].
+Birleşme Biçimi
+Önceki formülasyonların en önemli eksiği, bu bileşenlerin nasıl birleştiğini belirt-
+memesiydi. Toplamsal bir form ikame edilebilirlik anlamına gelir: bir bileşendeki
+eksiklik diğerlerinin artırılmasıyla telafi edilebilir. C arpımsal bir form ise tamam-
+layıcılık anlamına gelir: herhangi bir bileşenin sıfıra yaklaşması, diğerlerinin
+değerinden bağımsız olarak sistemi durdurur.
+Bu metin çarpımsal formu önermektedir:
+dK
+dt ∝ 1
+Λ · A · ρ · δ
+Bu, betimleyici değil sınanabilir bir iddiadır. C arpımsal formun ampirik
+imzası, bileşenler arasında pozitif etkileşim terimleri ve tek bileşenli iyileştirmelerde
+azalan getiridir. Toplamsal formun imzası ise etkileşim teriminin istatistiksel
+olarak sıfırdan ayrılamamasıdır. ˙Iki form, bileşenlerin bağımsız olarak ölçülebildiği
+çok programlı bir veri setinde birbirinden ayırt edilebilir.
+4
+
+-- 4 of 16 --
+
+Kısıt Yapısı
+C evrim gecikmesi iki bileşenin maksimumudur:
+Λ = max(Λi, Λd)
+Burada Λi içsel çevrim süresi, Λd ise dışsal saatlerin (ruhsatlandırma, çevresel
+inceleme, menzil ve fırlatma penceresi tahsisi) dayattığı alt sınırdır. Bu mak-
+simum operatörü, kısıt yapısının Liebig minimum yasası niteliğinde olduğunu
+ifade eder ve aşağıdaki bağlayıcı kısıt tartışmasının biçimsel karşılığıdır.
+C evrim sayısı ise bütçe kısıtına tabidir: n = B/c, burada c deney başına
+maliyet, B ise tahsis edilebilir sermayedir. Bu nedenle finansman, çerçevenin
+dışsal bir gözlemi değil, doğrudan bir parametresidir.
+Birinci ve ˙Ikinci Düzey Öğrenme
+Kavramsal Ayrım
+Bateson, öğrenmeyi mantıksal tiplere göre katmanlandırmış ve bir bağlam içinde
+öğrenme ile bağlamın kendisini öğrenmeyi ayırt ederek ikincisini deutero-learning
+olarak adlandırmıştır [10]. Argyris ve Schön aynı ayrımı örgütsel eylem ku-
+ramına taşımış, tek-döngü öğrenme ile çift-döngü öğrenme arasında ayrım yapmıştır
+[5]. ˙Incelenen bağlamdaki karşılık şudur: birinci düzey aracın tasarımını, ikinci
+düzey aracın tasarımını iyileştirme yöntemini iyileştirmektir.
+March’ın keşif–sömürü ayrımı [29] bu katmanlanmanın bir kaynak tahsisi
+problemi olduğunu göstermektedir: ikinci düzeye ayrılan kapasite kısa vadede
+ölçülebilir çıktı üretmez ve bu nedenle sistematik olarak yetersiz finanse edilir.
+˙Iktisadi Karşılık: Rutinler ve Dinamik Yetenekler
+˙Ikinci düzey öğrenmenin iktisadi karşılığı, evrimci firma kuramındaki rutin kavramında
+bulunur. Nelson ve Winter, firma davranışını rutinlerin taşıyıcısı olarak mod-
+ellemiş ve rutinlerin değişimini arama süreçleriyle ilişkilendirmiştir [33]. Zollo
+ve Winter, dinamik yeteneklerin kendiliğinden değil, deneyim birikimi, bilgi
+eklemlemesi ve bilgi kodlaması olmak üzere üç kasıtlı öğrenme mekanizmasıyla
+oluştuğunu göstermiştir [56]. Teece ve arkadaşlarının dinamik yetenekler formülasyonu
+[48] bu katmanı stratejik yönetim diline bağlar.
+Bu literatürün çerçeveye katkısı şudur: ikinci düzey öğrenme bir kültürel
+eğilim değil, kaynak tahsisi gerektiren ve kodlama maliyeti taşıyan bir yatırım
+kalemidir.
+Kendiliğindenlik Varsayımının Reddi
+Popüler formülasyonların en yaygın hatası, maliyet düşüşünün ikinci düzey
+öğrenmeyi kendiliğinden doğuracağını varsaymaktır. Argyris’in bulgusu bunun
+tersidir: çift-döngü öğrenme örgütsel savunmacı rutinlerle etkin biçimde en-
+gellenir [6]. Yönetişim değişkenlerinin hatalı olduğunu kabul etmenin politik
+5
+
+-- 5 of 16 --
+
+maliyeti teknik maliyetinden yüksektir ve bu maliyet en çok geçmiş kararların
+sahibi olan kıdemli aktörler üzerine biner. Dolayısıyla ikinci düzey öğrenme bir
+yönetişim tasarımı problemidir.
+Ölçülebilir Karşılık
+Thomke’nin deney yönetimi üzerine çalışması iki metriği öne çıkarmaktadır [49,
+50]: deney başına maliyet ve deney başına çevrim süresi. Bu metinde önerilen
+ölçüm seti bunlara üçüncü bir kalem ekler: yukarıda tanımlanan anomali çözüm
+oranı A.
+˙Ikinci düzey öğrenmenin varlığı, bu üç büyüklüğün zaman içindeki seyriyle
+ve bu seyrin ürün metriklerinden bağımsız olarak birinci sınıf hedef statüsünde
+izlenmesiyle sınanabilir. Maliyet ve süre düşerken A de düşüyorsa, gözlenen şey
+öğrenme hızlanması değil ölçüm rejiminin seyrelmesidir.
+Deneyim Eğrisi
+Ampirik Düzenlilik
+Kümülatif üretim ile birim maliyet arasındaki logaritmik ilişki ilk kez Wright
+tarafından uçak gövdesi üretimi üzerinde belgelenmiştir [54]. Arrow bu ilişkiyi
+“yaparak öğrenme” başlığı altında içsel büyüme kuramına bağlamış [7], Alchian
+aynı verilerin tahmin gücünü ve varyansını incelemiştir [1]. Kavramın mod-
+ern teknoloji tahmini uygulamalarındaki karşılaştırmalı performansı Nagy ve
+arkadaşları tarafından değerlendirilmiştir [32].
+Tanımlama Problemi
+Wright ilişkisi betimleyici bir düzenliliktir, açıklayıcı bir mekanizma değildir.
+Gözlenen maliyet düşüşü en az dört süreci bir arada barındırır: ölçek ekonomi-
+leri, girdi fiyatlarındaki dışsal düşüş, tasarım basitleşmesi ve örgütsel öğrenme
+[55].
+Bu, önceki formülasyonda “totoloji” olarak nitelenmişti; nitelemenin kendisi
+hatalıdır. Problem mantıksal değil ekonometriktir ve adı tanımlama (identifica-
+tion) problemidir: kümülatif üretim dışsal bir değişken değildir, çünkü maliyetin
+başka nedenlerle düşmesi üretim hacmini artırır. Kümülatif üretimle maliyet
+arasındaki katsayı, uygun bir araç değişken ya da dışsal şok kullanılmadıkça
+öğrenme etkisi olarak yorumlanamaz [28, 2].
+Hayatta Kalma Yanlılığı
+Deneyim eğrileri hayatta kalan üretim hatları ve firmalar üzerinde tahmin edilir.
+Öğrenme çevrimini kurmayı deneyip başarısız olan aktörler örneklem dışında
+kalır. Denrell’in gösterdiği gibi, başarısızlığın yetersiz örneklenmesi yönetim
+yazınındaki nedensel çıkarımları sistematik biçimde yanlı hale getirir [18]. Bu
+6
+
+-- 6 of 16 --
+
+yanlılık, çevrim ekonomisi tezini destekleyen tüm vaka temelli kanıtın gücünü
+doğrudan azaltır.
+Eğimin Değişkenliği
+Öğrenme oranı bir doğa sabiti değildir. Dutton ve Thomas, farklı endüstrilerden
+derledikleri ilerleme fonksiyonlarında öğrenme oranlarının geniş bir dağılım gösterdiğini
+ortaya koymuştur [19]. Eğimi belirleyen aday faktörler arasında çevrim sıklığı,
+tasarım modülerliği [45, 9] ve süreç bilgisinin biçimselleştirilme derecesi [12]
+bulunmaktadır.
+Örgütsel Unutma ve Zımni Bilgi
+Deneyim eğrisi tek yönlü değildir. Argote ve arkadaşları örgütsel bilginin amor-
+tismana tabi olduğunu, üretime ara verilmesi ve personel devri durumlarında
+eğrinin geri kaydığını göstermiştir [4, 3]. Benkard, uçak üretiminde unutma etk-
+isinin öğrenme etkisiyle karşılaştırılabilir büyüklükte olduğunu tahmin etmiştir
+[11].
+Unutma mekanizmasının kuramsal dayanağı zımni bilgi kavramıdır: bilinen
+her şey söylenebilir değildir [37], ve zımni bilginin açık bilgiye dönüştürülmesi
+ayrı bir örgütsel süreç gerektirir [34]. Elde tutma oranı ρ, tam olarak bu
+dönüştürme sürecinin verimidir.
+Bunun yönetsel sonucu şudur: çevrim sıklığı yalnızca öğrenme kazancını
+hızlandırmaz, unutma kaybını da bastırır. Sık iterasyonun değerinin bir bölümü
+kazanımdan değil, kaybın engellenmesinden gelir.
+C evrim Gecikmesi ve Dikey Bütünleşme
+Dikey bütünleşme geleneksel olarak işlem maliyeti çerçevesinde, sözleşme ek-
+sikliği ve varlık özgüllüğü üzerinden açıklanır [53, 14]. Öğrenme çevrimi çerçevesinde
+farklı bir gerekçe ortaya çıkar.
+Bir bileşen dışarıdan tedarik ediliyorsa, o bileşene ilişkin çevrim gecikmesi
+tedarik süresiyle alt sınırlanır. Organizasyonun analitik kapasitesi ne olursa ol-
+sun, dokuz ay teslim süreli bir bileşende çevrim süresi dokuz aydır. Dolayısıyla
+bütünleşme kararı öncelikle bir maliyet kararı değil, çevrim gecikmesinin kon-
+trolünü içselleştirme kararıdır.
+Üçüncü önerme buradan çıkar: bütünleşmenin getirisi, ilgili bileşendeki tasarım
+belirsizliğiyle orantılıdır. Tasarımı oturmuş bileşenlerde içselleştirmenin öğrenme
+getirisi sıfıra yakındır; asıl kazanç, çevrimin en sık döndüğü bileşenlerde yoğunlaşır.
+Bu önerme reel opsiyon diliyle yeniden ifade edilebilir. Ucuz ve hızlı deney,
+gelecekteki tasarım seçenekleri üzerinde bir opsiyon satın alır; opsiyonun değeri
+altta yatan belirsizlikle artar [30, 9]. Belirsizliğin düşük olduğu bileşende opsiy-
+onun zaman değeri sıfıra yakındır. Bu, “her şeyi içeride üret” önerisinin neden
+genel bir kural olmadığının biçimsel gerekçesidir.
+7
+
+-- 7 of 16 --
+
+Simülasyon ˙Ikamesi
+C evrim Maliyetini Düşürmenin ˙Iki Yolu
+Önceki formülasyonun en büyük eksiği, çevrim maliyetinin yalnızca fiziksel testi
+ucuzlatarak düşürülebileceğini varsaymasıydı. Modern mühendislik pratiğinde
+ikinci ve çoğu zaman baskın yol, çevrimin bir vekil modele — simülasyona —
+taşınmasıdır. Thomke’nin deney yönetimi çalışması zaten bu ikamenin ekonomisini
+konu alır [49, 50].
+Bu ayrım çerçevenin iki bölümünü doğrudan değiştirir.
+Alan Bağımlılığı Argümanının Yeniden Formülasyonu
+Geri döndürülemez sonuçlu alanlarda donanım-zengin iterasyonun uygulanamaz
+olduğu savı, bu alanlarda öğrenmenin de yavaş olduğu anlamına gelmez. Nükleer
+silah stok yönetiminin deneme sonrası döneme geçişi, ilaç geliştirmede in-silico
+tarama ve adaptif klinik tasarım, havacılıkta hesaplamalı akışkanlar dinamiğinin
+yer testini büyük ölçüde ikame etmesi aynı hamlenin örnekleridir: çevrim fiziksel
+uzaydan model uzayına taşınmıştır.
+Dolayısıyla ayrımın doğru ekseni geri dönülebilirlik değil, yüksek sadakatli
+ve doğrulanmış bir vekilin mevcudiyetidir. Yeniden formüle edilmiş önerme
+şudur: donanım-zengin iterasyon, vekil sadakatinin düşük olduğu ve başarısızlık
+maliyetinin sınırlandırılabildiği alanlara özgü bir stratejidir.
+Kuram Aşınması Argümanının Tersine Dönmesi
+Test ucuzladıkça kuramsal modele yatırımın azalacağı savı, yalnızca maliyet
+düşüşü fiziksel test yoluyla sağlandığında geçerlidir. Simülasyon yoluyla sağlanan
+düşüş bunun tersini gerektirir: bir vekil model kurmak, kalibre etmek ve doğrulamak
+kuramsal yatırımın kendisidir. Bu durumda ucuz çevrim, kurama yatırımı ceza-
+landırmaz, ödüllendirir.
+Bu, önceki formülasyonun düzeltilmesidir: kuramın aşınması evrensel bir
+risk değil, maliyet düşüşünün hangi yoldan sağlandığına bağlı bir risktir.
+Vekilin Kendi Hata Modu ve Fiziksel Testin Yeni ˙Işlevi
+Simülasyon kendi hata modunu getirir: doğrulanmamış rejimlerde ekstrapo-
+lasyon ve model riski. Bu nedenle fiziksel test ile simülasyon ikame değil tamam-
+layıcıdır ve fiziksel testin işlevi kayar. Fiziksel deney artık öncelikle bilgi üretmez;
+vekili kalibre eder ve geçerlilik sınırını belirler.
+Buradan sınanabilir bir tahsis kuralı çıkar: fiziksel test bütçesi, vekil be-
+lirsizliğinin en yüksek olduğu rejimlere orantılı biçimde dağıtılmalıdır. Testin
+vekilin zaten güvenilir olduğu bölgede yoğunlaşması, yüksek maliyetli ve düşük
+bilgi değerli bir rejimin göstergesidir.
+8
+
+-- 8 of 16 --
+
+Donanım-Zengin ˙Iterasyonun Ön Koşulları
+Yeterli Koşul Yanılgısı
+Az sayıda kusursuz prototip yerine çok sayıda fiziksel prototip üretme yaklaşımı
+çevrim ekonomisi açısından tutarlıdır. Ancak bu yaklaşımın tek başına yeterli
+olduğu savı ampirik olarak yanlıştır.
+Sovyet N1 programı bu iddianın karşı örneğidir: dört fırlatma denemesi,
+dördü de başarısız, program iptal edilmiştir [44, 22]. Programda donanım it-
+erasyonu mevcuttu. Buna karşılık ilk kademenin otuz motorunun bütünleşik yer
+testi hiç yapılmamış, uçuşa giden motorlar tek kullanımlık oldukları için parti
+örneklemesiyle kabul edilmiş, motor kontrol sistemi kendisi bir arıza kaynağı
+olduğu için başarısızlıkların kök nedeni ayrıştırılamamıştır. Benzer biçimde
+havacılıkta 1950’lerin “uç–onar–uç” doktrini yüksek kayıp oranları nedeniyle
+terk edilmiştir.
+Bu vakaların desteklediği çıkarım şudur: iterasyon sıklığı tek başına yeterli
+koşul değildir; belirleyici olan iterasyon başına elde edilen atıf gücüdür.
+Vaka Seçiminin Sınırı
+Yukarıdaki çıkarımın kapsamı sınırlıdır ve bu sınırın açıkça belirtilmesi gerekir.
+N1 ile çağdaş karşılaştırma vakaları arasında eşzamanlı olarak değişen değişkenler
+şunlardır: yer test altyapısı, karar hakları yapısı, finansman düzeyi, çevrim
+süresi, tedarik mimarisi, siyasi rejim ve motor teknolojisi. Bu, metnin kendi
+terimleriyle düşük atıf güçlü bir karşılaştırmadır.
+Dolayısıyla N1 vakası yalnızca olumsuz iddiayı — iterasyonun yeterli ol-
+madığını — destekler. Hangi bileşenin bağlayıcı olduğunu belirlemek için kul-
+lanılamaz. Test altyapısı eksikliğine yapılan vurgu bir yorumdur, veriden çıkarılmış
+bir sonuç değildir; aynı veriyle karar haklarının parçalılığı veya finansman yeter-
+sizliği de savunulabilir.
+Enformasyon Problemi mi, Karar Hakları Prob-
+lemi mi?
+Darboğazın Yeri
+C erçevenin örtük varsayımlarından biri, örgütsel öğrenme darboğazının enfor-
+masyonel olduğudur. Ampirik olarak çoğu organizasyonun çevrimi bilgi ek-
+sikliğinde değil, mevcut bilgiye göre hareket edememe noktasında kırılır.
+Hayek’in bilginin dağıtık doğasına ilişkin analizi [23] ve Jensen ile Meck-
+ling’in özgül bilgi ile karar haklarının eşleştirilmesi üzerine formülasyonu [25] bu
+noktayı doğrudan ele alır: bilgi, onu kullanma yetkisiyle aynı yerde bulunmuy-
+orsa öğrenme eyleme dönüşmez. Yukarıdaki fonksiyonel formda δ parametresi
+bu eşleşmenin derecesini temsil eder.
+9
+
+-- 9 of 16 --
+
+˙Iki Karar Sınıfının Ayrıştırılması
+Yüksek güvenilirlikli örgütler yazını, durdurma yetkisinin hiyerarşide aşağıya
+dağıtılmasının güvenilirliğin temel koşulu olduğunu göstermektedir [39, 52, 41].
+Bu bulgu, çevrimi disipline eden unsurun tekil bir karar mercii olduğu savıyla
+ilk bakışta çelişir.
+C elişki, iki farklı karar sınıfının ayrıştırılmasıyla çözülür:
+• Durdurma kararı: devam eden bir işlemi askıya alma yetkisi. Bu yetkinin
+dağıtık ve sinyale en yakın konumda olması gerekir.
+• Tahsis ve iptal kararı: bir tasarım hattına kaynak ayırma ya da onu son-
+landırma yetkisi. Bu yetkinin merkezı ve tekil olması gerekir.
+C evrimin kapanması için gereken yapı simetrik değil asimetriktir: dağıtık
+durdurma yetkisi ile merkezı iptal yetkisinin birlikte bulunması. Bu ayrım
+yapılmadığında, iki literatür birbirini yanlışlıyormuş gibi görünür.
+Ölçüt Seçimi ve Goodhart Riski
+Tartışmayı sonlandırabilecek kadar basit ve tek boyutlu bir başarı ölçütünün
+varlığı, iptal kararının işleyebilmesinin koşuludur. Ancak bu öneri, ölçütün
+hedefe dönüştüğünde bozulacağı gerçeğini göz ardı edemez: bir gösterge yönetsel
+hedef haline geldiğinde ölçüm niteliğini yitirir [46].
+Bu nedenle öneri “basit ölçüt” değil, şu iki koşulu sağlayan basit ölçüttür:
+• Dışsal olarak doğrulanabilir olması; yani raporlanan değil fiziksel olarak
+ölçülen bir büyüklük olması.
+• Organizasyonun tek bir kaleminde yapılacak değişiklikle manipüle edile-
+memesi; yani birden çok alt sistemin ortak sonucu olması.
+Bu koşulları sağlamayan bir ölçüt, çevrimi disipline etmek yerine ölçüt opti-
+mizasyonuna yönelten bir sapma üretir.
+Bağlayıcı Kısıtın Yeri
+Dışsal Saatler
+˙Içsel çevrim süresi yeterince kısaldığında bağlayıcı kısıt organizasyonun dışına
+kayar. Ruhsatlandırma süreçleri, çevresel inceleme yükümlülükleri, menzil ve
+fırlatma penceresi tahsisi ne fiziksel ne bütçesel olan bir üst sınır oluşturur. Bu,
+yukarıdaki Λ = max(Λi, Λd) formülasyonunun içeriğidir.
+Sonuç şudur: “öğrenme hızını artır” önermesinin getirisi ancak Λi > Λd
+olduğu sürece pozitiftir. Kısıt dışsallaştıktan sonra iterasyon kapasitesine yapılan
+ek yatırımın marjinal getirisi hızla düşer ve kaynak, düzenleyici sürecin kendisini
+kısaltmaya kaydırılmadıkça boşa gider.
+10
+
+-- 10 of 16 --
+
+Finansman Kısıtı
+Öğrenme altyapısına yapılan yatırım, deneyim eğrisinin düz bölgesinde uzun
+süre çıktı üretmeyen sermaye gerektirir. Bu, stratejinin en az tartışılan ön
+koşuludur. Fırlatma maliyetlerindeki düşüşün ampirik incelemeleri [26], gözlenen
+maliyet eğrilerinin arkasında olgun bir gelir kaynağının çapraz sübvansiyonunun
+bulunduğuna işaret etmektedir.
+Bu koşul, hayatta kalma yanlılığıyla birlikte okunmalıdır: sermayeye erişemeyen
+aktörler yalnızca stratejiyi uygulayamamakla kalmaz, aynı zamanda başarı vakalarını
+üreten örneklemin dışında kalırlar. Böylece stratejinin gözlenen başarı oranı
+yukarı yanlıdır.
+Kavramsal Düzeltmeler
+Meta-optimizasyon Teriminin Kullanımı
+Bilgisayar biliminde meta-optimization terimi dar anlamda hiperparametre op-
+timizasyonunu ifade eder ve burada tarif edilen olgunun karşılığı değildir. Daha
+yakın karşılıklar, öğrenme yordamının kendisinin öğrenilmesi anlamında meta-
+learning [20] ve iktisadi tarafta araç ile tezgâh sermayesine yapılan bileşik yatırımdır.
+Türev Benzetmesinin Yeri
+Optimumu bulmak ile optimize ediciyi iyileştirmek arasındaki fark, bir fonksiy-
+onun türevini almakla değil, arama yordamının kendisinin güncellenmesiyle tem-
+sil edilir. Gradyan tabanlı öğrenmede [40] birinci düzey parametrelerin güncellenmesidir;
+ikinci düzey güncelleme kuralının kendisinin öğrenilmesidir. Örgütsel karşılık bu
+ikinci düzeydedir.
+Süreksizlik Sezgisinin Karşılığı
+Sürekli iyileşmenin belirli bir eşikten sonra niteliksel bir sıçramaya dönüştüğü
+sezgisinin literatürde karşılığı vardır. Makine öğrenmesi tarafında bu, ezberden
+genellenebilir temsile geçişi tanımlayan grokking [38] ve ölçekle birlikte beliren
+yetenekler [51] başlıkları altında incelenmektedir; ikinci başlığın büyük ölçüde
+ölçüm artefaktı olabileceğine ilişkin eleştiriler mevcuttur [42]. ˙Iktisadi tarafta
+artan getiriler ve kilitlenme dinamikleri [8] aynı olgunun kurumsal karşılığını
+sunar.
+Her iki literatür de ortak bir uyarı içerir: gözlenen sıçrama sınırsız bir üstel
+büyüme değil, S-eğrisinin dik bölgesidir. Doyum noktasının yeri, içselleştirilemeyen
+girdi tarafından belirlenir. Ayrıca bu analojilerin statüsü yukarıda belirtildiği
+gibi sözlük düzeyindedir; ölçek ile beliren yetenek arasındaki ilişkinin örgütsel
+karşılığı ampirik olarak gösterilmemiştir.
+11
+
+-- 11 of 16 --
+
+Yanlışlanabilir Önermeler ve Ölçüm Stratejileri
+Önceki formülasyonda önermeler sıralanmış ancak nasıl sınanacakları belirtilmemişti.
+Aşağıda her önerme için gerekli veri ve yanlışlayıcı gözlem verilmektedir.
+Önerme Gerekli veri Yanlışlayıcı gözlem
+C evrim metriklerindeki Program içi deney maliyeti Düşüşün ürün
+düşüş ürün performansını ve süre serisi, ürün performansıyla eşzamanlı
+öncelemelidir performans serisi ya da gecikmeli olması
+Düşük A yüksek hacim, Anomali çözüm oranı, Yüksek hacimli düşük A
+yüksek A düşük hacimden çevrim sayısı, hata rejiminin daha hızlı
+yavaş öğrenmelidir tekrar oranı yakınsaması
+Bütünleşme getirisi tasarım Bileşen bazında değişiklik Getirinin belirsizlikten
+belirsizliğiyle pozitif sıklığı ve tedarik bağımsız olması
+korele olmalıdır süresi
+Üretim araları, personel Üretim kesinti kayıtları, Kesinti sonrası birim
+devri kontrol edildiğinde devir oranı, birim maliyette geri kayma
+geri kayma üretmelidir maliyet görülmemesi
+Kısıt dışsallaştıktan sonra Düzenleyici bekleme Dışsal kısıt altında da
+ek iterasyon yatırımının süreleri, kapasite kapasite getirisinin
+getirisi düşmelidir yatırım serisi sürmesi
+Fiziksel test tahsisi vekil Simülasyon doğrulama Testin vekilin güvenilir
+belirsizliğiyle orantılı kayıtları, test olduğu rejimde
+olmalıdır programı yoğunlaşması
+Bileşenler çarpımsal C ok programlı panel, Etkileşim terimlerinin
+birleşmelidir dört bileşenin ayrı sıfırdan ayrılamaması
+ölçümü
+Bu önermelerin çoğu firma içi veriye bağımlıdır ve bu veri genellikle ka-
+muya açık değildir. Dolayısıyla yanlışlanabilirlik burada bir tasarım önerisidir,
+gerçekleştirilmiş bir sınama değildir.
+Sonuç
+Tartışılan olgu için önerilen adlandırma, ikinci düzey örgütsel öğrenmeyle besle-
+nen deneyim eğrisidir. Bu adlandırma kendi başına bir açıklama değil, dört
+bileşenli bir mekanizmanın kısaltmasıdır: çevrim gecikmesinin içselleştirilmesi,
+atıf gücünün korunması, unutmanın bastırılması ve karar haklarının bilgiyle
+eşleştirilmesi. Bu metnin önceki formülasyonlara eklediği üç unsur şunlardır:
+atıf gücünün bilgi kuramsal tanımı ve operasyonel vekili, bileşenlerin çarpımsal
+birleştiğine dair açık ve sınanabilir fonksiyonel form, ve çevrim maliyetinin
+simülasyon yoluyla düşürülmesinin alan bağımlılığı ile kuram aşınması argümanlarını
+nasıl değiştirdiği.
+C erçevenin en zayıf noktası, destekleyici kanıtının tek bir başarılı vakadan
+genellenmiş olması ve hayatta kalma yanlılığına açık bulunmasıdır. N1 karşı
+12
+
+-- 12 of 16 --
+
+örneği yalnızca yeterlilik iddiasını çürütür; bağlayıcı bileşeni belirlemez. Buna
+sermaye erişimi, dışsal düzenleyici saatler, emici kapasite kısıtı ve Goodhart riski
+eklendiğinde ortaya çıkan tablo evrensel bir yönetim ilkesi değil, belirli bir kısıt
+yapısı altında geçerli bir stratejidir.
+References
+[1] Alchian, A. A. (1963). Reliability of Progress Curves in Airframe Produc-
+tion. Econometrica, 31(4), 679–693.
+[2] Angrist, J. D., & Pischke, J.-S. (2009). Mostly Harmless Econometrics: An
+Empiricist’s Companion. Princeton: Princeton University Press.
+[3] Argote, L., & Epple, D. (1990). Learning Curves in Manufacturing. Science,
+247(4945), 920–924.
+[4] Argote, L., Beckman, S. L., & Epple, D. (1990). The Persistence and Trans-
+fer of Learning in Industrial Settings. Management Science, 36(2), 140–154.
+[5] Argyris, C., & Schön, D. A. (1978). Organizational Learning: A Theory of
+Action Perspective. Reading, MA: Addison-Wesley.
+[6] Argyris, C. (1991). Teaching Smart People How to Learn. Harvard Business
+Review, 69(3), 99–109.
+[7] Arrow, K. J. (1962). The Economic Implications of Learning by Doing. The
+Review of Economic Studies, 29(3), 155–173.
+[8] Arthur, W. B. (1994). Increasing Returns and Path Dependence in the
+Economy. Ann Arbor: University of Michigan Press.
+[9] Baldwin, C. Y., & Clark, K. B. (2000). Design Rules, Volume 1: The Power
+of Modularity. Cambridge, MA: MIT Press.
+[10] Bateson, G. (1972). Steps to an Ecology of Mind. New York: Ballantine
+Books.
+[11] Benkard, C. L. (2000). Learning and Forgetting: The Dynamics of Aircraft
+Production. American Economic Review, 90(4), 1034–1054.
+[12] Bohn, R. E. (1994). Measuring and Managing Technological Knowledge.
+Sloan Management Review, 36(1), 61–73.
+[13] Box, G. E. P., Hunter, J. S., & Hunter, W. G. (2005). Statistics for Exper-
+imenters: Design, Innovation, and Discovery (2nd ed.). Hoboken: Wiley.
+[14] Chandler, A. D. (1977). The Visible Hand: The Managerial Revolution in
+American Business. Cambridge, MA: Harvard University Press.
+13
+
+-- 13 of 16 --
+
+[15] Cohen, W. M., & Levinthal, D. A. (1990). Absorptive Capacity: A New
+Perspective on Learning and Innovation. Administrative Science Quarterly,
+35(1), 128–152.
+[16] Cover, T. M., & Thomas, J. A. (2006). Elements of Information Theory
+(2nd ed.). Hoboken: Wiley.
+[17] Deming, W. E. (1986). Out of the Crisis. Cambridge, MA: MIT Press.
+[18] Denrell, J. (2003). Vicarious Learning, Undersampling of Failure, and the
+Myths of Management. Organization Science, 14(3), 227–243.
+[19] Dutton, J. M., & Thomas, A. (1984). Treating Progress Functions as a
+Managerial Opportunity. Academy of Management Review, 9(2), 235–247.
+[20] Finn, C., Abbeel, P., & Levine, S. (2017). Model-Agnostic Meta-Learning
+for Fast Adaptation of Deep Networks. Proceedings of the 34th International
+Conference on Machine Learning, 1126–1135.
+[21] Fisher, R. A. (1935). The Design of Experiments. Edinburgh: Oliver &
+Boyd.
+[22] Harford, J. (1997). Korolev: How One Man Masterminded the Soviet Drive
+to Beat America to the Moon. New York: Wiley.
+[23] Hayek, F. A. (1945). The Use of Knowledge in Society. American Economic
+Review, 35(4), 519–530.
+[24] Henderson, R. M., & Clark, K. B. (1990). Architectural Innovation: The
+Reconfiguration of Existing Product Technologies and the Failure of Es-
+tablished Firms. Administrative Science Quarterly, 35(1), 9–30.
+[25] Jensen, M. C., & Meckling, W. H. (1992). Specific and General Knowledge,
+and Organizational Structure. In L. Werin & H. Wijkander (Eds.), Contract
+Economics. Oxford: Blackwell.
+[26] Jones, H. W. (2018). The Recent Large Reduction in Space Launch Cost.
+48th International Conference on Environmental Systems, ICES-2018-81.
+[27] Levinthal, D. A., & March, J. G. (1993). The Myopia of Learning. Strategic
+Management Journal, 14(S2), 95–112.
+[28] Lieberman, M. B. (1984). The Learning Curve and Pricing in the Chemical
+Processing Industries. RAND Journal of Economics, 15(2), 213–228.
+[29] March, J. G. (1991). Exploration and Exploitation in Organizational Learn-
+ing. Organization Science, 2(1), 71–87.
+[30] McGrath, R. G. (1999). Falling Forward: Real Options Reasoning and
+Entrepreneurial Failure. Academy of Management Review, 24(1), 13–30.
+14
+
+-- 14 of 16 --
+
+[31] Minsky, M. (1961). Steps Toward Artificial Intelligence. Proceedings of the
+IRE, 49(1), 8–30.
+[32] Nagy, B., Farmer, J. D., Bui, Q. M., & Trancik, J. E. (2013). Statistical
+Basis for Predicting Technological Progress. PLoS ONE, 8(2), e52669.
+[33] Nelson, R. R., & Winter, S. G. (1982). An Evolutionary Theory of Economic
+Change. Cambridge, MA: Harvard University Press.
+[34] Nonaka, I., & Takeuchi, H. (1995). The Knowledge-Creating Company. New
+York: Oxford University Press.
+[35] Osinga, F. P. B. (2007). Science, Strategy and War: The Strategic Theory
+of John Boyd. London: Routledge.
+[36] Perrow, C. (1984). Normal Accidents: Living with High-Risk Technologies.
+New York: Basic Books.
+[37] Polanyi, M. (1966). The Tacit Dimension. London: Routledge & Kegan
+Paul.
+[38] Power, A., Burda, Y., Edwards, H., Babuschkin, I., & Misra, V.
+(2022). Grokking: Generalization Beyond Overfitting on Small Algorith-
+mic Datasets. arXiv:2201.02177.
+[39] Roberts, K. H. (1990). Some Characteristics of One Type of High Reliability
+Organization. Organization Science, 1(2), 160–176.
+[40] Rumelhart, D. E., Hinton, G. E., & Williams, R. J. (1986). Learning Rep-
+resentations by Back-Propagating Errors. Nature, 323(6088), 533–536.
+[41] Sagan, S. D. (1993). The Limits of Safety: Organizations, Accidents, and
+Nuclear Weapons. Princeton: Princeton University Press.
+[42] Schaeffer, R., Miranda, B., & Koyejo, S. (2023). Are Emergent Abilities
+of Large Language Models a Mirage? Advances in Neural Information
+Processing Systems, 36.
+[43] Shewhart, W. A. (1939). Statistical Method from the Viewpoint of Quality
+Control. Washington, DC: Graduate School of the Department of Agricul-
+ture.
+[44] Siddiqi, A. A. (2000). Challenge to Apollo: The Soviet Union and the Space
+Race, 1945–1974. Washington, DC: NASA SP-2000-4408.
+[45] Simon, H. A. (1962). The Architecture of Complexity. Proceedings of the
+American Philosophical Society, 106(6), 467–482.
+[46] Strathern, M. (1997). “Improving Ratings”: Audit in the British University
+System. European Review, 5(3), 305–321.
+15
+
+-- 15 of 16 --
+
+[47] Sutton, R. S., & Barto, A. G. (2018). Reinforcement Learning: An Intro-
+duction (2nd ed.). Cambridge, MA: MIT Press.
+[48] Teece, D. J., Pisano, G., & Shuen, A. (1997). Dynamic Capabilities and
+Strategic Management. Strategic Management Journal, 18(7), 509–533.
+[49] Thomke, S. H. (1998). Managing Experimentation in the Design of New
+Products. Management Science, 44(6), 743–762.
+[50] Thomke, S. H. (2003). Experimentation Matters: Unlocking the Potential of
+New Technologies for Innovation. Boston: Harvard Business School Press.
+[51] Wei, J., Tay, Y., Bommasani, R., et al. (2022). Emergent Abilities of Large
+Language Models. Transactions on Machine Learning Research.
+[52] Weick, K. E., & Sutcliffe, K. M. (2007). Managing the Unexpected: Resilient
+Performance in an Age of Uncertainty (2nd ed.). San Francisco: Jossey-
+Bass.
+[53] Williamson, O. E. (1985). The Economic Institutions of Capitalism. New
+York: Free Press.
+[54] Wright, T. P. (1936). Factors Affecting the Cost of Airplanes. Journal of
+the Aeronautical Sciences, 3(4), 122–128.
+[55] Yelle, L. E. (1979). The Learning Curve: Historical Review and Compre-
+hensive Survey. Decision Sciences, 10(2), 302–328.
+[56] Zollo, M., & Winter, S. G. (2002). Deliberate Learning and the Evolution
+of Dynamic Capabilities. Organization Science, 13(3), 339–351.
+16
+
+-- 16 of 16 --
