@@ -75,6 +75,7 @@ function header(active) {
     tab(base + 'muzik', 'Müzik', 'muzik') +
     tab(base + 'oneriler', 'Öneriler', 'oneriler') +
     tab(base + 'projeler', 'Projeler', 'projeler') +
+    tab(base + 'duvarlar', 'Duvarlar', 'duvarlar') +
     `</nav>` +
     `<main class="site-main">`
 }
@@ -305,6 +306,41 @@ const projBody =
   footer()
 write('projeler', renderPage({ head: projHead, bodyHtml: projBody }))
 
+// --- DUVARLAR (korpus kural kataloğu) --------------------------------------
+const duvarlar = existsSync(join(dist, 'duvarlar.json'))
+  ? JSON.parse(readFileSync(join(dist, 'duvarlar.json'), 'utf8'))
+  : { themes: {}, walls: [] }
+const dvIntro =
+  'Arşivdeki makalelerden süzülmüş taşınabilir kurallar. Her kural bir duvar: nerede geçerli, ' +
+  'nerede kırıldığı ve neyi engellediği yazılıdır. Bir sorunla karşılaştığında “bu duvara daha ' +
+  'önce çarpılmış mı, nedeni neydi” diye sor.'
+const dvThemeName = (k) => duvarlar.themes?.[k]?.name || k
+const dvCard = (w) =>
+  `<li class="dv-card" data-theme="${escAttr(w.t)}">` +
+  `<div class="dv-head"><span class="dv-id" data-theme="${escAttr(w.t)}">${esc(w.id)}</span>` +
+  `<span class="dv-tag"><span class="dv-dot" data-theme="${escAttr(w.t)}"></span>${esc(dvThemeName(w.t))}</span></div>` +
+  `<h2 class="dv-title">${esc(w.title)}</h2>` +
+  `<div class="dv-fields">` +
+  `<div class="dv-field"><span class="dv-lbl">Kural</span><p>${esc(w.kural)}</p></div>` +
+  `<div class="dv-field dv-breaks"><span class="dv-lbl">Kırılır</span><p>${esc(w.kirilir)}</p></div>` +
+  `<div class="dv-field dv-reason"><span class="dv-lbl">Neden</span><p>${esc(w.neden)}</p></div>` +
+  `<div class="dv-sources">${(w.kaynak || []).map((k) => `<span class="dv-src">${esc(k)}</span>`).join('')}</div>` +
+  `</div></li>`
+const dvHead = buildHead({
+  title: 'Duvarlar',
+  description:
+    'Korpustan türetilmiş taşınabilir kurallar: her kural nerede geçerli, nerede kırılır ve neyi engeller.',
+  canonical: `${SITE_URL}${base}duvarlar`,
+  type: 'website',
+  image: '/profile.jpeg',
+})
+const dvBody =
+  header('duvarlar') +
+  `<div class="dv"><p class="dv-intro">${esc(dvIntro)}</p>` +
+  `<ul class="dv-list">${(duvarlar.walls || []).map(dvCard).join('')}</ul></div>` +
+  footer()
+write('duvarlar', renderPage({ head: dvHead, bodyHtml: dvBody }))
+
 // --- YAZI SAYFALARI --------------------------------------------------------
 const postsBySlug = new Map(posts.map((p) => [p.slug, p]))
 for (const p of posts) {
@@ -400,6 +436,7 @@ const urls = [
   { loc: `${SITE_URL}${base}rehberler` },
   { loc: `${SITE_URL}${base}oneriler` },
   { loc: `${SITE_URL}${base}projeler` },
+  { loc: `${SITE_URL}${base}duvarlar` },
   ...writings.map((p) => ({
     loc: `${SITE_URL}${base}post/${encodeURIComponent(p.slug)}`,
     lastmod: p.date,

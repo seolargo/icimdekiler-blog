@@ -1161,3 +1161,283 @@ code {
   color: var(--accent);
   text-decoration: none;
 }
+
+/* ===================== Duvarlar (korpus kural kataloğu) ===================== */
+:root {
+  --dv-crack: #a8481c; /* Kırılır — tek anlamlı renk (kırılma sınırı) */
+  --dv-crack-bg: #f4ece6;
+  --dv-a: #2f7d88;
+  --dv-b: #5763a8;
+  --dv-c: #4a8156;
+  --dv-d: #9c6a34;
+  --dv-e: #7d5390;
+  --dv-f: #9f5464;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --dv-crack: #dc9257;
+    --dv-crack-bg: #2a211a;
+    --dv-a: #52adba;
+    --dv-b: #8791d6;
+    --dv-c: #6fb37c;
+    --dv-d: #c79355;
+    --dv-e: #ab84be;
+    --dv-f: #cd8494;
+  }
+}
+
+.dv-intro {
+  color: var(--muted);
+  margin: 0 0 22px;
+  max-width: 60ch;
+}
+
+.dv-controls {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background: color-mix(in srgb, var(--bg) 90%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 12px 0 10px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+.dv-search {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  background: var(--btn-bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 9px 13px;
+  margin-bottom: 12px;
+}
+.dv-search:focus-within {
+  border-color: var(--accent);
+}
+.dv-search svg {
+  flex: none;
+  color: var(--muted);
+}
+.dv-search input {
+  border: 0;
+  background: transparent;
+  color: var(--fg);
+  font: inherit;
+  font-size: 0.95rem;
+  width: 100%;
+  outline: none;
+}
+.dv-search input::placeholder {
+  color: var(--muted);
+}
+
+.dv-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.dv-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font: inherit;
+  font-size: 0.8rem;
+  padding: 6px 11px;
+  border-radius: 100px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--muted);
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+.dv-chip:hover {
+  border-color: var(--muted);
+  color: var(--fg);
+}
+.dv-chip.is-active {
+  background: var(--fg);
+  color: var(--bg);
+  border-color: var(--fg);
+}
+.dv-n {
+  font-variant-numeric: tabular-nums;
+  opacity: 0.6;
+}
+.dv-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 100px;
+  flex: none;
+  background: var(--muted);
+}
+.dv-dot[data-theme='A'] { background: var(--dv-a); }
+.dv-dot[data-theme='B'] { background: var(--dv-b); }
+.dv-dot[data-theme='C'] { background: var(--dv-c); }
+.dv-dot[data-theme='D'] { background: var(--dv-d); }
+.dv-dot[data-theme='E'] { background: var(--dv-e); }
+.dv-dot[data-theme='F'] { background: var(--dv-f); }
+
+.dv-count {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 10px 0 0;
+  font-variant-numeric: tabular-nums;
+}
+.dv-count b {
+  color: var(--fg);
+}
+
+.dv-list {
+  list-style: none;
+  margin: 18px 0 40px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.dv-card {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 16px 18px 16px 20px;
+  background: var(--bg);
+  overflow: hidden;
+}
+.dv-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--muted);
+}
+.dv-card[data-theme='A']::before { background: var(--dv-a); }
+.dv-card[data-theme='B']::before { background: var(--dv-b); }
+.dv-card[data-theme='C']::before { background: var(--dv-c); }
+.dv-card[data-theme='D']::before { background: var(--dv-d); }
+.dv-card[data-theme='E']::before { background: var(--dv-e); }
+.dv-card[data-theme='F']::before { background: var(--dv-f); }
+
+.dv-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+.dv-id {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: #fff;
+  background: var(--muted);
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+.dv-id[data-theme='A'] { background: var(--dv-a); }
+.dv-id[data-theme='B'] { background: var(--dv-b); }
+.dv-id[data-theme='C'] { background: var(--dv-c); }
+.dv-id[data-theme='D'] { background: var(--dv-d); }
+.dv-id[data-theme='E'] { background: var(--dv-e); }
+.dv-id[data-theme='F'] { background: var(--dv-f); }
+.dv-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-left: auto;
+}
+.dv-title {
+  font-size: 1.08rem;
+  line-height: 1.32;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  margin: 0 0 12px;
+  text-wrap: balance;
+}
+
+.dv-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+.dv-field p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+.dv-lbl {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 3px;
+}
+.dv-breaks {
+  background: var(--dv-crack-bg);
+  border-left: 2px solid var(--dv-crack);
+  padding: 8px 11px;
+  border-radius: 0 6px 6px 0;
+}
+.dv-breaks .dv-lbl {
+  color: var(--dv-crack);
+}
+.dv-reason p {
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.dv-sources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 2px;
+}
+.dv-src {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.72rem;
+  color: var(--fg);
+  background: var(--btn-bg);
+  border: 1px solid var(--line);
+  padding: 3px 9px;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.dv-src:hover {
+  border-color: var(--muted);
+  background: var(--btn-hover);
+}
+
+.dv mark {
+  background: color-mix(in srgb, var(--dv-crack) 26%, transparent);
+  color: inherit;
+  border-radius: 2px;
+  padding: 0 1px;
+}
+.dv-empty {
+  padding: 40px 0;
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .dv-card {
+    animation: dv-rise 0.35s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+  }
+  @keyframes dv-rise {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: none; }
+  }
+}
