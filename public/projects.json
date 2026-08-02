@@ -33,26 +33,26 @@
   },
   {
     "name": "drone-simulation",
-    "desc": "Python ile geliştirilmiş bir drone uçuş simülasyonu.",
+    "desc": "Sıfırdan yazılmış, modüler bir drone uçuş simülasyonu. Çekirdeğinde katı-cisim (6 serbestlik dereceli) uçuş dinamiği bulunur: itki, yerçekimi, atmosfer, dış bozanlar ve sayısal integrasyonla çözülen gövde hareketi, PID denetleyicilerle stabilize edilir. Simüle edilmiş tam bir sensör yığını (IMU, GPS, barometre, manyetometre, optik akış, ToF/ultrasonik) ve bunları birleştiren kestirim katmanı (Kalman ve tümleyici filtre) içerir; ayrıca PID otomatik ayarı, telemetri, SVG grafikli rapor üretimi ve bir web görüntüleyici sunar. Python ile geliştirildi.",
     "lang": "Python",
     "url": "https://github.com/seolargo/drone-simulation",
     "homepage": "",
-    "desc_en": "A drone flight simulation built in Python."
+    "desc_en": "A modular drone flight simulator built from scratch. At its core is a rigid-body (6-DOF) flight-dynamics engine — thrust, gravity, atmosphere, disturbances, and body motion resolved through numerical integration — stabilized by PID controllers. It includes a full simulated sensor suite (IMU, GPS, barometer, magnetometer, optical flow, ToF/ultrasonic) with a state-estimation layer that fuses them (Kalman and complementary filters), plus PID auto-tuning, telemetry, SVG-chart report generation, and a web viewer. Built in Python."
   },
   {
-    "name": "miray-web-landing",
+    "name": "Miray",
     "desc": "Miray için hazırlanmış statik bir tanıtım sayfası.",
     "lang": "HTML",
     "url": "https://github.com/seolargo/miray-web-landing",
-    "homepage": "",
+    "homepage": "https://mirayapp.com",
     "desc_en": "A static landing page built for Miray."
   },
   {
     "name": "cambazim",
-    "desc": "Hayvan alım satımı için geliştirilmiş bir çevrimiçi platform.",
+    "desc": "Hayvan alım satımı için geliştirilmiş, uçtan uca bir çevrimiçi pazar yeri. Kategori, etiket ve görselli ilanlar; reaktif/faceted arama; sepet ve profil akışları; JWT ile kimlik doğrulama ve Google/Facebook girişi; ve Türkiye'nin 81 ilinin ilçe–köy verisiyle Google Haritalar entegrasyonu üzerinden köy düzeyine inen konum seçimi sunar. Yönetim paneli ve blog dahil. Next.js ve React ile geliştirildi.",
     "lang": "JavaScript",
     "url": "https://github.com/seolargo/cambazim",
     "homepage": "",
-    "desc_en": "An online platform for buying and selling livestock."
+    "desc_en": "An end-to-end online marketplace for buying and selling livestock. It offers image-rich listings by category and tag, reactive/faceted search, cart and profile flows, JWT authentication with Google/Facebook login, and location selection that drills down to the village across all 81 Turkish provinces via Google Maps integration. Includes an admin panel and a blog. Built with Next.js and React."
   }
 ]
