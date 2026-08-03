@@ -1,147 +1,409 @@
 {
   "themes": {
-    "A": { "name": "Öğrenme döngüsü", "name_en": "Learning cycle" },
-    "B": { "name": "Negatif bilgi & kısıt geometrisi", "name_en": "Negative knowledge & constraint geometry" },
-    "C": { "name": "Ölçüt & doğrulama", "name_en": "Criteria & verification" },
-    "D": { "name": "Taşınma & aşınma", "name_en": "Transfer & erosion" },
-    "E": { "name": "Kurum tasarımı", "name_en": "Institutional design" },
-    "F": { "name": "Ölçüm & temsil", "name_en": "Measurement & representation" }
+    "A": {
+      "name": "Öğrenme döngüsü",
+      "name_en": "Learning cycle"
+    },
+    "B": {
+      "name": "Negatif bilgi & kısıt geometrisi",
+      "name_en": "Negative knowledge & constraint geometry"
+    },
+    "C": {
+      "name": "Ölçüt & doğrulama",
+      "name_en": "Criteria & verification"
+    },
+    "D": {
+      "name": "Taşınma & aşınma",
+      "name_en": "Transfer & erosion"
+    },
+    "E": {
+      "name": "Kurum tasarımı",
+      "name_en": "Institutional design"
+    },
+    "F": {
+      "name": "Ölçüm & temsil",
+      "name_en": "Measurement & representation"
+    }
   },
   "walls": [
-    { "id": "D-01", "t": "A", "title": "Hızlı öğrenmek çok denemek değil, her denemeden net ders çıkarmaktır",
+    {
+      "id": "D-01",
+      "t": "A",
+      "title": "Hızlı öğrenmek çok denemek değil, her denemeden net ders çıkarmaktır",
       "kural": "Daha çok deneme yapmadan önce şunu sağla: bir denemenin sonucunu tek bir nedene bağlayabil. Aynı anda beş şeyi birden değiştirirsen, sonuç iyi ya da kötü çıksa da neyin işe yaradığını bilemezsin. Önce “ne değişti”yi tek bir değişkene indir.",
       "kirilir": "Zaten her denemeden net ders çıkarabiliyorsan, o zaman daha çok deneme gerçekten hızlandırır. Ama sorun deneme sayısında değil de “sonucu bir türlü bir nedene bağlayamıyorum”daysa, deneme sayısını artırmak hiçbir işe yaramaz.",
       "neden": "Çok şeyi aynı anda değiştiren bir ekip bol bol veri toplar ama aslında hiçbir şey öğrenmez. Sovyet N1 roketi bunun klasik örneği: dört kez denendi, dördü de başarısız oldu — deneme vardı ama her başarısızlığın sebebi ayrıştırılamadığı için ders çıkmadı.",
-      "kaynak": ["Öğrenme Hızı", "Kavramsal Çarpıştırma"] },
-    { "id": "D-02", "t": "A", "title": "Öğrenme bir zincirdir; en zayıf halka koptuğunda gerisi işe yaramaz",
+      "kaynak": [
+        "Öğrenme Hızı",
+        "Kavramsal Çarpıştırma"
+      ]
+    },
+    {
+      "id": "D-02",
+      "t": "A",
+      "title": "Öğrenme bir zincirdir; en zayıf halka koptuğunda gerisi işe yaramaz",
       "kural": "Öğrenmen dört şeye bağlı: (1) sonucu ne kadar çabuk görüyorsun, (2) sonucu bir nedene bağlayabiliyor musun, (3) öğrendiğini bir sonraki sefere taşıyor musun yoksa unutuluyor mu, (4) bilgiyle karar verme yetkisi aynı yerde mi. Bunlardan en kötü durumdakini düzelt; zaten iyi olanı daha da parlatma.",
       "kirilir": "Eğer bu dördü birbirinin yerini tutabiliyorsa (birindeki eksiği ötekiyle kapatabiliyorsan), tek birine yüklenmek mantıklı. Ama çoğu ekipte bunlar zincir gibi çalışır: biri koparsa gerisi boşa gider.",
       "neden": "Zincir mantığında en zayıf halka her şeyi belirler. Öğrenmeni saatler süren tek bir onay adımı yavaşlatıyorsa, dünyanın en hızlı test aracını almak hiçbir şey değiştirmez.",
-      "kaynak": ["Öğrenme Hızı"] },
-    { "id": "D-03", "t": "A", "title": "Bir Ar-Ge ekibini “kaç fikir üretti” ile değil, “kaç yanlış yolu ucuza eledi” ile ölç",
+      "kaynak": [
+        "Öğrenme Hızı"
+      ]
+    },
+    {
+      "id": "D-03",
+      "t": "A",
+      "title": "Bir Ar-Ge ekibini “kaç fikir üretti” ile değil, “kaç yanlış yolu ucuza eledi” ile ölç",
       "kural": "Keşif yapan bir ekibi başarıyla değil, hızlı ve ucuz elemeyle ölç. “Bu yıl kaç fikri deneyip, işlemediğini görüp bir daha peşine düşmedik” iyi bir ölçü. Başarısızlığı bir ceza değil, üretilmiş bir sonuç say.",
       "kirilir": "Bu ölçüyü ham “kaç deneme yaptık” sayısına indirirsen ekip bunu kandırır: sonucu zaten belli, önemsiz şeyleri deneyip sayıyı şişirir. O yüzden “bu deneme çökerse kaç şey birden çöker” diye önemine göre ağırlık ver.",
       "neden": "Ekibi “başarı” ile ölçersen, riskli ama öğretici işlerden kaçıp sonucu garanti işlere yönelir. Elemeyle ölçersen, hızlı ve cesur denemeye teşvik olur.",
-      "kaynak": ["Keşif Organizasyonları"] },
-    { "id": "D-04", "t": "A", "title": "Seni asıl bekleten şey sende değilse, kendini hızlandırman işe yaramaz",
+      "kaynak": [
+        "Keşif Organizasyonları"
+      ]
+    },
+    {
+      "id": "D-04",
+      "t": "A",
+      "title": "Seni asıl bekleten şey sende değilse, kendini hızlandırman işe yaramaz",
       "kural": "İç sürecini hızlandırmaya para dökmeden önce sor: beni bekleten şey benim hızım mı, yoksa dışarıdaki bir şey mi — ruhsat, izin süreci, tedarikçinin teslim süresi, pazara çıkış? Darboğaz dışarıdaysa, kendi hızını artırmak sırada beklemeni değiştirmez.",
       "kirilir": "Seni bekleten şey hâlâ kendi iç sürecinse, hızlanmak işe yarar. Ama dış bir engel devreye girdiyse (mesela her sürüm 3 ay onay bekliyorsa), test hızını ikiye katlamak boşa yatırımdır; enerjiyi o onay süresini kısaltmaya çevir.",
       "neden": "Toplam süreyi iki şeyin büyüğü belirler: senin süren ve dış sürecin süresi. Küçük olanı iyileştirmek toplamı değiştirmez.",
-      "kaynak": ["Öğrenme Hızı", "Keşif Organizasyonları"] },
-    { "id": "D-05", "t": "A", "title": "Sadece projeleri değil, projelerin dayandığı gizli varsayımları da düzenli sorgula",
+      "kaynak": [
+        "Öğrenme Hızı",
+        "Keşif Organizasyonları"
+      ]
+    },
+    {
+      "id": "D-05",
+      "t": "A",
+      "title": "Sadece projeleri değil, projelerin dayandığı gizli varsayımları da düzenli sorgula",
       "kural": "Her projenin altında “bu böyledir” diye kabul ettiğin varsayımlar yatar. Bunları açıkça yaz: neye inandığını, bu inancı neyin çürüteceğini, çökerse hangi işlerin boşa gideceğini. Yazılmayan varsayım sorgulanamaz.",
       "kirilir": "İşin teknik tarafında ne kadar iyiysen tehlike o kadar büyük: günlük problemleri çözmede öyle başarılısındır ki “temeldeki varsayımı da gözden geçireyim” adımını gereksiz görürsün. Asıl tuzak bu.",
       "neden": "Dünya değişince dün doğru olan varsayım bugün yanlış olabilir. Uzun projelerde bunu geç fark etmek, yılların yanlış yöne harcanması demektir: bir üretim yöntemi yeni bir malzemeyle geçersizleşir ve o yöntem üstüne kurulu bütün plan çöker.",
-      "kaynak": ["Keşif Organizasyonları"] },
-
-    { "id": "D-06", "t": "B", "title": "Tek tek “şu olmadı” demek yetmez; “neden olmadı”yı bir kurala çevir",
+      "kaynak": [
+        "Keşif Organizasyonları"
+      ]
+    },
+    {
+      "id": "D-06",
+      "t": "B",
+      "title": "Tek tek “şu olmadı” demek yetmez; “neden olmadı”yı bir kurala çevir",
       "kural": "“Şu deneme tutmadı” bilgisini biriktirme; neden tutmadığını anla ve onu bir kurala dönüştür. “Bu ayar çalışmadı” tek bir nokta; “sıcaklık şu değerin üstündeyse hep çatlıyor” ise bir kural — ve o kural, hiç denemediğin yüzlerce durumu da baştan eler.",
       "kirilir": "Bu, benzer durumların benzer sonuç verdiği “düzenli” problemlerde işler. Ama şifreleme, kaos ya da her seçeneğin diğerinden bağımsız olduğu problemlerde bir başarısızlık, komşusu hakkında hiçbir şey söylemez; orada bu mantık çöker, problemin kendi yapısını kullanman gerekir.",
       "neden": "Tek bir başarısız nokta, koca bir olasılık denizinde iğne kadar yer kaplar; yüz tane biriktirsen de arama alanın küçülmez. Bir kural ise bir çizgi çeker ve o çizginin bütün bir tarafını eler.",
-      "kaynak": ["Kavramsal Çarpıştırma"] },
-    { "id": "D-07", "t": "B", "title": "En iyi çözüm neredeyse her zaman sınırların kesiştiği yerdedir",
+      "kaynak": [
+        "Kavramsal Çarpıştırma"
+      ]
+    },
+    {
+      "id": "D-07",
+      "t": "B",
+      "title": "En iyi çözüm neredeyse her zaman sınırların kesiştiği yerdedir",
       "kural": "Kendine sor: “Şu anki çözümüm hangi sınırlara dayanıyor?” — bütçe, süre, fizik, kapasite gibi. Hiçbirine dayanmıyorsa ya en iyi noktada değilsin ya da sınırlarının farkında değilsin (ikisi de üstüne gitmen gereken bir durum). Tek bir sınıra dayanıyorsan o sınır boyunca hâlâ ilerleyebilirsin. İki sınıra birden dayanıyorsan gerçekten sıkışmışsın: artık çözümü zorlamak yerine sınırlardan birini gevşetmeyi konuş — ve o sınırın gerçek bir “yasa” mı (fizik, değişmez) yoksa sadece bir “kurulum” mu (biz öyle kurduk, değiştirilebilir) olduğunu sor.",
       "kirilir": "Matematiksel olarak en iyi nokta her zaman tam köşede olmayabilir; ama pratik kural değişmez: en iyi çözüm neredeyse her zaman bir sınırın dibindedir. Hiçbir sınıra değmiyorsan, gidebileceğin halde daha ileri gitmemişsin demektir.",
       "neden": "İyileştirmen gereken yönde hep bir “daha” vardır. Ortada bir yerde durduğun sürece o yönde bir adım daha atabilirsin — yani orası en iyi nokta değildir. Ancak birden fazla sınır aynı anda seni durdurduğunda gerçekten ilerleyemez hale gelirsin.",
-      "kaynak": ["Kavramsal Çarpıştırma"] },
-    { "id": "D-08", "t": "B", "title": "Sınır koymak işi zorlaştırmaz, kolaylaştırır; en zor proje her şeyin serbest olduğu projedir",
+      "kaynak": [
+        "Kavramsal Çarpıştırma"
+      ]
+    },
+    {
+      "id": "D-08",
+      "t": "B",
+      "title": "Sınır koymak işi zorlaştırmaz, kolaylaştırır; en zor proje her şeyin serbest olduğu projedir",
       "kural": "Seçenekleri budayan bir sınır yoksa, kendin bir sınır koy — bütçe, teslim tarihi, teknik şartname. “Bu kısıtlarla çözüm çıkmıyor” sonucu bile bir kayıp değil, en değerli bulgulardan biridir: artık ayar denemekten vazgeçip hangi sınırı gevşeteceğine bakarsın.",
       "kirilir": "Kabul edilebilir çözüm alanı zaten çok genişse (neredeyse her şey işe yarıyorsa), sınır örmenin zahmeti kazancından fazla olur; orada rastgele bir seçim yapıp geçmek doğrudur — sadece “sebebini araştırmadan seçtim” diye not düş.",
       "neden": "Büyük mühendislik sıçramaları çoğu zaman “çözümü bulduk”la değil, “şu sınırı kaldırdık”la olur. Sınırsız kaynak, uğraşacağın alanı sonsuz büyük tutar; hiçbir şey seni bir yöne itmez.",
-      "kaynak": ["Kavramsal Çarpıştırma"] },
-    { "id": "D-09", "t": "B", "title": "İnsanlara “başarısızlıklarınızı yazın” demek işe yaramaz; ya kurala çevir ya konuşarak topla",
+      "kaynak": [
+        "Kavramsal Çarpıştırma"
+      ]
+    },
+    {
+      "id": "D-09",
+      "t": "B",
+      "title": "İnsanlara “başarısızlıklarınızı yazın” demek işe yaramaz; ya kurala çevir ya konuşarak topla",
       "kural": "Herkesten hatalarını rapor etmesini bekleme — olmuyor. Bunun yerine: çıkan dersi bir kurala ya da koda göm (kimse rapor okumaz ama kuralı uygular); dersi bilenden yazmasını isteme, sen dinleyip yaz; “proje çöktü, sence neden çökmüş olabilir” diye önceden sor; birine “biz bunu denemiştik” dedirtecek bir açık kapı bırak.",
       "kirilir": "“Zaten yazdığın yere tek cümle ekle” ölçeğinde yazmak yürür. Ama “herkes tüm başarısızlıklarını sistematik yazsın” diye bir program kurarsan çöker — çünkü başarısızlığın anlatısı olmaz, yazması insanın itibarına mal olur ve yanlış yollar sonsuzdur, hepsi yazılamaz.",
       "neden": "“Denedim, olmadı, bıraktım” bir hikâye oluşturmadığı için kimse anlatmaz, kimse yazmaz. Doğru yol tektir ama yanlış yollar sayısızdır; hepsini yazmaya kalkmak baştan imkânsızdır.",
-      "kaynak": ["Kavramsal Çarpıştırma", "Gerekçenin Taşınması"] },
-    { "id": "D-10", "t": "B", "title": "Bilgi yukarı akmıyorsa sorun “takip etmemek” değil, söyleyenin boşuna konuştuğunu görmesidir",
+      "kaynak": [
+        "Kavramsal Çarpıştırma",
+        "Gerekçenin Taşınması"
+      ]
+    },
+    {
+      "id": "D-10",
+      "t": "B",
+      "title": "Bilgi yukarı akmıyorsa sorun “takip etmemek” değil, söyleyenin boşuna konuştuğunu görmesidir",
       "kural": "İnsanlar sorunları söylemiyorsa, üstlerine kamera/kayıt koyma. Önce nedenini bul: söyleyen ceza mı alıyor? Söylüyor ama hiçbir şey değişmiyor mu? Yoksa kimse ona sormuyor mu? İşin en pahalı kısmı dinlemek değil, söylenenin gerçekten bir şeyi değiştirdiğini göstermektir.",
       "kirilir": "Her şeyi kaydetmek neredeyse her zaman ters teper: kaydedildiğini bilen insan resmî diline geçer ve asıl anlatacağı şeyi anlatmaz. Havacılıkta işi çözen şey daha çok kayıt değil, hatayı bildirenle onu suçlamayı birbirinden ayırmak oldu.",
       "neden": "Bir kez söyleyip hiçbir şeyin değişmediğini gören insan bir daha söylemez. Susmasının sebebi tembellik değil, boşuna konuştuğunu öğrenmiş olmasıdır.",
-      "kaynak": ["Kavramsal Çarpıştırma", "Gerekçenin Taşınması"] },
-
-    { "id": "D-11", "t": "C", "title": "Başarının ölçüsünü işe başlamadan ve dışarıdan koy, sonra o hedefe yürü",
+      "kaynak": [
+        "Kavramsal Çarpıştırma",
+        "Gerekçenin Taşınması"
+      ]
+    },
+    {
+      "id": "D-11",
+      "t": "C",
+      "title": "Başarının ölçüsünü işe başlamadan ve dışarıdan koy, sonra o hedefe yürü",
       "kural": "Neyi başaracağını, daha üretime başlamadan, dışarıdan bakan birinin de kontrol edebileceği biçimde yaz. Sonra “şu an oraya varmadım”ı doğrula ve küçük, geri alınabilir adımlarla oraya yürü. (Yazılımda testi önce yazmak bunun mekanikleşmiş hali.)",
       "kirilir": "Daha “ne yapacağım”ın cevabı belli değilken bu yöntem seni erken dondurur ve beklenmedik iyi fikri dışlar. Keşif aşamasında değil, hedefin belli olduğu “iniş” aşamasında işe yarar; keşifte önce serbest dene, öğren, sonra ölçüt koy.",
       "neden": "Ölçüyü üretimden sonra koyarsan elindeki sonuca göre şekillenir ve kendini onaylar. “Zaten bunu hedefliyordum” demek çok kolaydır — o yüzden hedef önce yazılmalı.",
-      "kaynak": ["Duvarlarla İlerlemek"] },
-    { "id": "D-12", "t": "C", "title": "Test, kontrol ettiği şeyin kopyası olmamalı; bağımsız bir ikinci kontrol olmalı",
+      "kaynak": [
+        "Duvarlarla İlerlemek"
+      ]
+    },
+    {
+      "id": "D-12",
+      "t": "C",
+      "title": "Test, kontrol ettiği şeyin kopyası olmamalı; bağımsız bir ikinci kontrol olmalı",
       "kural": "Bir testin değeri, kodun ne yaptığını tekrar etmesinde değil, aynı amacı bağımsız bir yoldan doğrulamasında. Muhasebede iki tarafın tutması gibi: iki bağımsız hesap aynı sonucu veriyorsa güven doğar.",
       "kirilir": "Test, kodun iç yapısına göre yazılırsa (her iç adımı taklit edip “şunu şu sırayla çağırdın mı” diye kontrol ederse) bağımsızlık biter, geriye kendini onaylayan bir tekrar kalır: testlerin hepsi yeşil yanar ama sistem çalışmaz.",
       "neden": "Kendi ürettiğine bakarak kendini denetleyen ölçü hatayı gösteremez; “kod koddur” diyen bir test hiçbir zaman kırmızı yanmaz.",
-      "kaynak": ["Duvarlarla İlerlemek"] },
-    { "id": "D-13", "t": "C", "title": "Ölçüt koymak aç-kapa değil, bir ayar düğmesidir: ne kadar erken ve katı, o kadar çok ölçek ama o kadar az keşif",
+      "kaynak": [
+        "Duvarlarla İlerlemek"
+      ]
+    },
+    {
+      "id": "D-13",
+      "t": "C",
+      "title": "Ölçüt koymak aç-kapa değil, bir ayar düğmesidir: ne kadar erken ve katı, o kadar çok ölçek ama o kadar az keşif",
       "kural": "Ölçütü ne kadar erken ve katı koyarsan iş o kadar ölçeklenir (herkes aynı standardı tutturur) ama o kadar az yeni şey keşfedilir. Bunu bilinçli ayarla; ve ölçemediğin her şeyin gözden kaybolacağını hesaba kat.",
       "kirilir": "Tanımadığın insanlarla çalışıp büyümen gereken yerde ölçüt kazandırır (sözleşme, standart parça, tolerans). Ama keşif, zanaat ya da sözle aktarılamayan ustalık gereken yerde aynı ölçüt bunları yok eder.",
       "neden": "Bir ölçüt hedef haline geldiğinde, iyileştirmek istediğin asıl şeyin yerini almaya başlar (Goodhart yasası): sınav notunu yükseltmek öğrenmenin, çağrı sayısı müşteri memnuniyetinin yerine geçer.",
-      "kaynak": ["Duvarlarla İlerlemek"] },
-    { "id": "D-14", "t": "C", "title": "Biri seni kandırmaya çalışıyorsa, kanıtın içeriği kadar “bu kanıt elime nasıl geçti” de önemlidir",
+      "kaynak": [
+        "Duvarlarla İlerlemek"
+      ]
+    },
+    {
+      "id": "D-14",
+      "t": "C",
+      "title": "Biri seni kandırmaya çalışıyorsa, kanıtın içeriği kadar “bu kanıt elime nasıl geçti” de önemlidir",
       "kural": "Karşında seni yanıltmak isteyen biri varsa, “bu bilgi doğru mu”nun yanına “bu bilgi neden ve nasıl önüme geldi”yi ekle. “Birbirini doğrulayan üç ayrı kaynak” güçlü görünür — ama o üçü aynı kişinin kurgusuysa, bağımsızlıkları sahtedir. Bağımsızlığı varsayma, kanıtla.",
       "kirilir": "Kimse seni kandırmaya çalışmıyorsa (kanıtlar öylece oradaysa) klasik “doğru, kanıtlı, tutarlı” ölçütü yeter. Ama aktif bir rakip varken tam da bu ölçütler hedef alınır: II. Dünya Savaşı’nda sahte bir ordu (Fortitude) ya da bir cesetle taşınan sahte belgeler (Mincemeat) böyle işe yaradı.",
       "neden": "Birbirini destekleyen kanıtların gücü, gerçekten bağımsız olmalarına dayanır. Hepsi aynı aldatma operasyonundan besleniyorsa, “doğrulama” dediğin şey aldatmanın kendisidir.",
-      "kaynak": ["Nereden Biliyoruz"] },
-    { "id": "D-15", "t": "C", "title": "Bir görüşü savunmadan önce “beni bundan ne vazgeçirir”i yaz",
+      "kaynak": [
+        "Nereden Biliyoruz"
+      ]
+    },
+    {
+      "id": "D-15",
+      "t": "C",
+      "title": "Bir görüşü savunmadan önce “beni bundan ne vazgeçirir”i yaz",
       "kural": "Bir tahmine ya da görüşe bağlanırken önceden şunu cevapla: “Hangi somut şey gerçekleşirse bu görüşten vazgeçerim?” Bunu baştan yaz.",
       "kirilir": "Bu eşiği önceden koymazsan, görüşün zamanla her yeni kanıtı kendine uyduran kapalı bir inanca dönüşür. 1973’te İsrail bunu yaşadı: “yakında savaş çıkmaz” inancı öyle sabitlenmişti ki gelen her uyarı (“tatbikattır”, “gösteriştir”) diye buna uyduruldu ve baskına uğradılar.",
       "neden": "“Beni ne vazgeçirir” sorusunun cevabı yoksa, ne kadar güçlü kanıt gelirse gelsin fikrin oynamaz; elindeki artık bilgi değil, korunan bir inançtır.",
-      "kaynak": ["Nereden Biliyoruz", "Keşif Organizasyonları"] },
-
-    { "id": "D-16", "t": "D", "title": "Kuralı, sebebiyle aynı yerde sakla; ayrı yere yazılan sebep ilk unutulan şeydir",
+      "kaynak": [
+        "Nereden Biliyoruz",
+        "Keşif Organizasyonları"
+      ]
+    },
+    {
+      "id": "D-16",
+      "t": "D",
+      "title": "Kuralı, sebebiyle aynı yerde sakla; ayrı yere yazılan sebep ilk unutulan şeydir",
       "kural": "Bir kuralı kuru bir emir gibi değil, “neyi engellediğini” söyleyerek yaz. “Şu katman şundan habersiz olmalı” zayıf; “şema değiştiğinde bu katman etkilenmesin diye” güçlü — çünkü sebebi söyleyince kuralın ne zaman gevşetilebileceği de kendiliğinden belli olur.",
       "kirilir": "Sebep kuralla birlikte durursa kural hem korunur hem gerektiğinde bilinçli gevşetilebilir. Sebep ayrı bir belgeye yazılırsa: iş sırasında kurala bakılır, sebep belgesine ise ancak kural çoktan delindikten sonra bakılır — yani hep geç.",
       "neden": "Sebebi bilinmeyen kural ya körü körüne uygulanır ya körü körüne atılır. Klasik örnek: mısırı işleme yöntemi Avrupa’ya taşınırken “neden” kısmı taşınmadı, gereksiz bir adım sanılıp atıldı ve pellagra salgınları çıktı.",
-      "kaynak": ["Gerekçenin Taşınması"] },
-    { "id": "D-17", "t": "D", "title": "Tehlikeli şeyi “yasak” diye yazma; mümkünse yapılamaz hale getir",
+      "kaynak": [
+        "Gerekçenin Taşınması"
+      ]
+    },
+    {
+      "id": "D-17",
+      "t": "D",
+      "title": "Tehlikeli şeyi “yasak” diye yazma; mümkünse yapılamaz hale getir",
       "kural": "Bir şeyin yapılmamasını istiyorsan, belgeye “yasak” yazmak yerine sistemde imkânsız kıl: tehlikeli durumu temsil bile edemeyen bir yapı kur, geri alınamaz komutu bir kapıyla engelle, kritik işlem için ikinci onay iste. Ölçü şu: yanlış davranış sadece belgede yasaksa kural zayıftır; sistemde ifade dahi edilemiyorsa güçlüdür.",
       "kirilir": "Bu ağır koruma, geri alınabilir ve ucuz-tekrarlanabilir işlerde koruduğundan fazla maliyet çıkarır. O yüzden ağırlığı sadece geri dönüşü olmayan işlere sakla: veri silme, para transferi, dışarıya gönderilen bildirim, fiziksel etki.",
       "neden": "Yapılamayan bir şeyin neden yapılmaması gerektiğini kimsenin hatırlamasına gerek kalmaz — böylece “sebebi unutuldu, kural delindi” sorunu baştan ortadan kalkar.",
-      "kaynak": ["Gerekçenin Taşınması"] },
-    { "id": "D-18", "t": "D", "title": "Bir yerden aldığın parçayı, “hangi koşullarda test edilmişti” bilgisiyle birlikte al",
+      "kaynak": [
+        "Gerekçenin Taşınması"
+      ]
+    },
+    {
+      "id": "D-18",
+      "t": "D",
+      "title": "Bir yerden aldığın parçayı, “hangi koşullarda test edilmişti” bilgisiyle birlikte al",
       "kural": "Hazır bir kodu, kütüphaneyi ya da sayıyı yeniden kullanırken “bu hangi yük altında, hangi birimle, hangi hata durumuna göre doğrulanmıştı” bilgisini de yanında taşı. Arayüzdeki sözleşmeyi (birim, para birimi, zaman dilimi) sayının içine göm, çalışırken doğrula.",
       "kirilir": "Parça, kendi test edildiği koşulların içinde kusursuz çalışır; sorun onu o koşulların dışına taşıyıp yeniden kullanınca çıkar. Ariane 5 roketi, eski roketten alınan bir yazılım yeni uçuş koşulunda çalışınca patladı; Mars aracı, iki ekip farklı ölçü birimi kullandığı için kayboldu.",
       "neden": "Bir parçanın “doğru” olması mutlak değildir; test edildiği varsayımlara görelidir — ve bu varsayımlar sürüm numarasında görünmez.",
-      "kaynak": ["Gerekçenin Taşınması"] },
-    { "id": "D-19", "t": "D", "title": "Tek bir sapmaya değil, sapmanın gitgide artmasına bak",
+      "kaynak": [
+        "Gerekçenin Taşınması"
+      ]
+    },
+    {
+      "id": "D-19",
+      "t": "D",
+      "title": "Tek bir sapmaya değil, sapmanın gitgide artmasına bak",
       "kural": "Bir kuraldan sapmaya izin vereceksen, bunu tarihini ve sebebini yazarak yap ki bir sonraki karar “en son ne kadar saptık”a değil, asıl kurala göre verilsin. İzlemen gereken şey tek bir olayın sonucu değil, sapmaların sıklaşması.",
       "kirilir": "Her sapmadan sonra sistemin hâlâ ayakta olması, güvenlik payının korunduğunu değil, sadece henüz tükenmediğini gösterir. Bunu “demek ki sorun yok” diye okumak felakete giden yoldur: Challenger ve Columbia mekiklerinde tam bu oldu — “bu hasar hep oluyor, kabul edilebilir” diye diye normalleşti.",
       "neden": "Kural bir kriz toplantısında değil, sessizce tek tek istisnalarla delinir; ikinci istisna birincisini örnek gösterip meşrulaşır ve kimse “kuralı kaldıralım mı” diye sormadan kural fiilen ortadan kalkar.",
-      "kaynak": ["Gerekçenin Taşınması"] },
-    { "id": "D-20", "t": "D", "title": "Yedeklilik sayıyla ölçülmez; hepsi aynı anda çökebiliyorsa yedek değildir",
+      "kaynak": [
+        "Gerekçenin Taşınması"
+      ]
+    },
+    {
+      "id": "D-20",
+      "t": "D",
+      "title": "Yedeklilik sayıyla ölçülmez; hepsi aynı anda çökebiliyorsa yedek değildir",
       "kural": "İki kopyan aynı elektriğe, aynı ayara ya da aynı ağa bağlıysa bu yedek değildir — biri giderse ikisi de gider. Kurtarma yolun, kurtaracağın sistemden bağımsız olmalı; durum sayfan izlediği sisteme bağlıysa, o çöktüğünde sen de kör kalırsın.",
       "kirilir": "Kopyalar gerçekten ayrı şeylere bağlıysa (ortak bir çökme noktaları yoksa) yedeklilik gerçektir. Ortak bir noktaları varsa, sayıca üç yedeğin olsa da işlevsel olarak sıfır yedeğin var demektir. Fukushima’da bütün jeneratörler aynı sele açık yerdeydi.",
       "neden": "Kâğıt üstündeki “3 yedek” rakamı, hepsinin aynı tek tehdide açık olduğu gerçeğini gizler.",
-      "kaynak": ["Gerekçenin Taşınması"] },
-
-    { "id": "D-21", "t": "E", "title": "İyi fikir kendiliğinden hayata geçmez; fikri uygulamaya taşımak ayrı bir iştir",
+      "kaynak": [
+        "Gerekçenin Taşınması"
+      ]
+    },
+    {
+      "id": "D-21",
+      "t": "E",
+      "title": "İyi fikir kendiliğinden hayata geçmez; fikri uygulamaya taşımak ayrı bir iştir",
       "kural": "Bir fikir ile onun gerçekten uygulanması arasına ayrıca planlanan, parası ve insanı ayrılan bir “geçiş işi” koy. “İyi fikir er geç yolunu bulur” diye bekleme; bulmaz.",
       "kirilir": "Şu dördü bir aradaysa fikir uygulamaya geçer: sabırlı (uzun vadeli) para, farklı sektörler arasında insan dolaşımı, dışarıdan denetim ve başarısızlıkların arşivi. Biri bile eksikse fikir ne ölür ne işe yarar — ortada asılı kalır (Şili’nin Cybersyn’i, Sovyet OGAS’ı böyle asılı kaldı).",
       "neden": "Fikri uygulamaya taşımak, fikir üretmenin doğal bir yan ürünü değildir; başlı başına, ayrıca kurulması gereken bir iştir.",
-      "kaynak": ["Teori Vadisi"] },
-    { "id": "D-22", "t": "E", "title": "Farklı ekipleri kaynaştıran şey aynı binada olmak değil, birbirlerine çarpmak zorunda kalmalarıdır",
+      "kaynak": [
+        "Teori Vadisi"
+      ]
+    },
+    {
+      "id": "D-22",
+      "t": "E",
+      "title": "Farklı ekipleri kaynaştıran şey aynı binada olmak değil, birbirlerine çarpmak zorunda kalmalarıdır",
       "kural": "Farklı ekipleri aynı çatı altına koymak yetmez. Gün içinde istemeden karşılaşacakları bir düzen kur: tek giriş, herkesin geçtiği uzun bir koridor, ortak mutfak/çay noktası, zorunlu ortak projeler, ara ara yer değiştirme.",
       "kirilir": "Zorunlu ortak güzergâh varsa insanlar gerçekten karşılaşır ve fikir alışverişi olur. Yoksa, aynı binada olsalar bile yan yana ama birbirine değmeyen ayrı departmanlara dönüşürler. Sadece görüntüyü kopyalamak (şık bir kampüs yapmak) ruhu getirmez.",
       "neden": "İki kişinin düzenli konuşma ihtimali, aralarındaki mesafe arttıkça hızla düşer. Etkileşmesini beklediğin iki ekibi uzak köşelere koyarsan, pratikte iki ayrı kurum olurlar.",
-      "kaynak": ["Teori Vadisi"] },
-    { "id": "D-23", "t": "E", "title": "Kendi işine kendi not veren kurum uzun ömürlü olmaz",
+      "kaynak": [
+        "Teori Vadisi"
+      ]
+    },
+    {
+      "id": "D-23",
+      "t": "E",
+      "title": "Kendi işine kendi not veren kurum uzun ömürlü olmaz",
       "kural": "Dışarıdan denetimin gerçek olmasını istiyorsan üç şart gerekir: denetleyenin parası denetlenenden gelmesin, kararı bağlayıcı olsun (tavsiye değil), ve neye göre değerlendireceğini önceden ilan etsin.",
       "kirilir": "Üçü bir aradaysa denetim gerçektir. Biri bile eksikse denetim, kurumun kendini haklı çıkarma aracına döner — dışarıdan denetim gibi görünür, aslında kendi kendini onaylamadır.",
       "neden": "Kendi çıktısını kendi değerlendiren kurum, ölçütü sonuç çıktıktan sonra belirleyerek her sonucu başarı gibi gösterebilir.",
-      "kaynak": ["Teori Vadisi"] },
-    { "id": "D-24", "t": "E", "title": "Kişileri sınavla değil, ortaya koydukları eserle ölç; başarısız denemeyi de eser say",
+      "kaynak": [
+        "Teori Vadisi"
+      ]
+    },
+    {
+      "id": "D-24",
+      "t": "E",
+      "title": "Kişileri sınavla değil, ortaya koydukları eserle ölç; başarısız denemeyi de eser say",
       "kural": "Tez, çalışan bir prototip, patent, kurulan bir sistem, bir veri kümesi, kamuya verilen bir ders — hepsi eşit değerde çıktı sayılsın. “Şunu denedik, işlemediğini gösterdik” de bir eserdir, kayda geçsin.",
       "kirilir": "Sonucu önceden bilinmeyen işler için (yani gerçek keşif için) “eser” ölçüsü doğru insanı seçer. Ama cevabı belli, kapalı-uçlu işler için sınav zaten yeterli. Not: “ölçülebilir eser” baskısı insanları kısa vadeli, garantili işlere iter — o yüzden ekibin bir kısmını bu baskıdan muaf tut.",
       "neden": "Sadece “makale/yayın”ı çıktı sayan bir sistem, işin uygulama tarafını yapan herkesi sistematik olarak cezalandırır.",
-      "kaynak": ["Teori Vadisi"] },
-
-    { "id": "D-25", "t": "F", "title": "Ölçtüğün sayı ile insanın hissettiği şey aynı değildir: önemli olan oran ve bağlamdır",
+      "kaynak": [
+        "Teori Vadisi"
+      ]
+    },
+    {
+      "id": "D-25",
+      "t": "F",
+      "title": "Ölçtüğün sayı ile insanın hissettiği şey aynı değildir: önemli olan oran ve bağlamdır",
       "kural": "Performansı ham artışla değil oranla değerlendir; ortalamaya değil en kötü dilime bak; bir sayıyı içinde bulunduğu durumdan (yük, normal davranış) koparıp yorumlama; sabit bir eşik yerine “normalden ne kadar saptı”ya bak.",
       "kirilir": "Bu, insan algısının farka değil orana duyarlı olduğu her yerde geçerli. Ölçtüğün şeyin bir insan deneyimiyle ilgisi yoksa (salt fiziksel bir büyüklükse) buna gerek yok.",
       "neden": "Bir işlemi 100 ms’den 200 ms’ye çıkarmak hemen hissedilir; ama 2000 ms’ye 100 ms eklemek fark edilmez — eklenen süre aynı, etkisi değil. Sabit eşik ise ya boş yere sürekli alarm çalar ya gerçek olayı kaçırır.",
-      "kaynak": ["Renk Teorisi"] },
-    { "id": "D-26", "t": "F", "title": "Tek tek örnek seçme; “nasıl üretileceğinin kuralını” yaz",
+      "kaynak": [
+        "Renk Teorisi"
+      ]
+    },
+    {
+      "id": "D-26",
+      "t": "F",
+      "title": "Tek tek örnek seçme; “nasıl üretileceğinin kuralını” yaz",
       "kural": "Elle tek tek değer belirlemek yerine “bu değer neye göre türetilir” kuralını yaz; her ortam için ayrı ayar dosyası yerine tek şablon + parametre kullan; serbest metin yerine sınırlı bir seçenek listesi koy (böylece geçersiz durum yazılamaz bile).",
       "kirilir": "Küçük ve tanımlı bir alanda tutarlılık ucuza korunur. Ama alanı geniş bırakırsan, tutarlılık ancak sürekli elle müdahaleyle ayakta kalır.",
       "neden": "Tek tek seçilmiş değerler, yeni bir örnek gerektiğinde yeniden karar vermeyi zorunlu kılar ve bu kararlar zamanla birbirinden ayrışır. Bir üretim kuralı ise yeni örneği kendiliğinden uyumlu üretir.",
-      "kaynak": ["Renk Teorisi"] }
+      "kaynak": [
+        "Renk Teorisi"
+      ]
+    },
+    {
+      "id": "D-27",
+      "t": "D",
+      "title": "Bir çözümü kopyalamadan önce sor: bu şey ayakta kalmak için sürekli bakım mı istiyor?",
+      "kural": "Aktarmadan önce şu testi yap: kaynak sistemde bakım/yenileme faaliyetini durdursan, işlev ne kadar sürede bozulur? Cevap “kısa sürede” ise, kopyaladığın donmuş görüntü değil, o bakım süreci asıl taşınması gereken şeydir.",
+      "kirilir": "İşlev yapının kendisinde taşınıyorsa (bir kafes kirişin geometrisi, bir kaldıraç düzeneği) yapı kendi başına uzun süre ayakta kalır; orada durağan kopya yeterlidir. Ayrıca bir sistemin bakım bağımlılığı zamanla düşebilir: aşınmaya dayanıklı bir malzeme çıkarsa aynı aktarım artık kolaylaşır.",
+      "neden": "Bakım bağımlılığı yüksek sistemlerde kopya ilk anda çalışır, sonra sönümlenir — ve bu gecikme yüzünden sorun genellikle “kötü uygulama” sanılır. Lotus yaprağını taklit eden kendini temizleyen kaplamalar buna örnek: yaprak mum tabakasını sürekli yeniliyordu, kaplama yenilemiyordu. Aşınma kaynak sistemde de vardı, ama sürekli onarıldığı için gözlemde hiç görünmedi.",
+      "kaynak": [
+        "Lotus, Termit ve Wright Kardeşler"
+      ]
+    },
+    {
+      "id": "D-28",
+      "t": "D",
+      "title": "Çıkardığın kuralda hâlâ kaynağın adı geçiyorsa, o kural taşınmaz",
+      "kural": "Bir çözümden çıkardığın ifadeden kaynak sistemin adını sil ve ifadenin ayakta kalıp kalmadığına bak. “Lotus gibi yüzey yap” ayakta kalmaz; “yüzey enerjisini düşürmek yerine yüzey geometrisiyle temas açısını artır” kalır.",
+      "kirilir": "Hedef bağlamda kaynak sistemin o özel bileşeni gerçekten mevcutsa (aynı malzeme, aynı ortam) isme bağlı ifade de çalışır. Sorun, karşılığı olmayan bir yere taşırken çıkar.",
+      "neden": "Kaynağın adına yapışmış bir ifade, hedefte karşılığı olmayan bir varlığa bağımlıdır; taşındığında elde kalan şey benzetmedir, kullanılabilir bir tasarım kısıtı değil.",
+      "kaynak": [
+        "Lotus, Termit ve Wright Kardeşler"
+      ]
+    },
+    {
+      "id": "D-29",
+      "t": "D",
+      "title": "Bir şeyi başka bir bağlama taşırken “neye benziyor”u değil, “ne işe yarıyor”u al",
+      "kural": "Bir çözümü okurken hangi katmandan baktığını açıkça söyle: neye benzediğinden mi (biçim), nasıl düzenlendiğinden mi (yapı), nasıl çalıştığından mı (mekanizma), ne işe yaradığından mı (işlev). Sonra sor: aldığım katman, o sistemin işlevini gerçekten taşıyor mu?",
+      "kirilir": "Her zaman “yukarı” çıkmak doğru değildir: çok soyut bir okuma (“verimli ol”) hiçbir tasarım seçeneğini elemez ve boştur. Doğru katman hedef bağlam tanımlanmadan da belirlenemez — işlev nesnenin içinde değil, nesne ile ortamı arasındadır.",
+      "neden": "Ondokuzuncu yüzyıl uçuş denemeleri kuşu biçim ve hareket katmanından okudu: kanat çırpmak. Wright kardeşler kuştan kanat çırpmayı değil denetimi aldı ve taşıma kuvvetini itkiden ayırdı. Aynı olgu, aynı gözlem, farklı katman — ve farklı sonuç.",
+      "kaynak": [
+        "Lotus, Termit ve Wright Kardeşler"
+      ]
+    },
+    {
+      "id": "D-30",
+      "t": "A",
+      "title": "Sıfırdan yeniden üretme süresi = deneme sayısı × bir denemenin süresi; yöntem sadece ilkini kısaltır",
+      "kural": "Bir şeyi kendin bulmak zorundaysan, süreyi iki çarpan olarak düşün: kaç deneme gerekecek ve bir deneme fiziksel olarak ne kadar sürüyor. İyi yöntem (nereye bakacağını bilmek, belirsizliğin en yüksek olduğu noktada denemek) yalnızca deneme sayısını düşürür. Planını buna göre yap: çevrim süresi uzunsa, hızlanmayı yöntemden değil paralel yürüyen ayrı hatlardan bekle.",
+      "kirilir": "Çevrim süresi kısa alanlarda (yazılım) her iki çarpanda da hareket vardır; mesafe hızla kapanır. Uzun çevrimli alanlarda (motor, optik, klinik) yalnızca deneme sayısı düşürülebilir; hızlanma gerçektir ama sınırlıdır.",
+      "neden": "Bir malzemenin belirli bir çalışma saatinde nasıl davrandığını görmek paralelleştirilerek kısaltılamaz. Bu, hangi alanda geriden gelenin hızla yetiştiğini, hangisinde yetişemediğini zekâ ya da sermaye farkına başvurmadan açıklar.",
+      "kaynak": [
+        "Lotus, Termit ve Wright Kardeşler"
+      ]
+    },
+    {
+      "id": "D-31",
+      "t": "A",
+      "title": "Model, hesaba katmadığı şeyi “belirsiz” diye de işaretlemez",
+      "kural": "“Belirsizliğin en yüksek olduğu yerde dene” kuralını uygularken, belirsizlik tahmininin modelin kendisinden geldiğini unutma. Modelin hiç bilmediği bir olgu, modelde belirsiz görünmez — orada kendinden emin ve yanlıştır. Bu yüzden hesabın dışından gelen sinyale (sahada ortaya çıkan aşınma, öngörülmemiş kirlilik) ayrıca yer aç.",
+      "kirilir": "Modelin kapsamı gerçekten problemin tamamını içeriyorsa yöntem güvenilirdir. Kapsam dışı bir etken varsa, aramayı ne kadar akıllı yaparsan yap o bölgeyi hiç ziyaret etmezsin.",
+      "neden": "Aktif öğrenme yalnızca bilinen bilinmeyenleri tarar. Öğrenmenin en pahalı kısmı ise genellikle modelin dışından gelir; simülasyonla gerçek arasındaki boşluk buradan doğar.",
+      "kaynak": [
+        "Lotus, Termit ve Wright Kardeşler"
+      ]
+    },
+    {
+      "id": "D-32",
+      "t": "D",
+      "title": "Bir katmanı ancak orada bir kez yanılmışsan görebilirsin; bu yüzden ucuz yanılma üret",
+      "kural": "Ekibin göremediği bir şeyi anlatarak göstermeye çalışma; o katmanda küçük ve ucuz bir beklenti ihlali üret. Hattı durdurma yetkisi, aşamalı dağıtım, hızlandırılmış ömür testi — hepsi aynı mantığın kurumsallaşmış hâlidir: küçük sapmayı görünür kılarak büyük sapmayı önlemek.",
+      "kirilir": "Bu bir hipotezdir, sınanmış bir bulgu değil. Ayrıca döngüseldir: kontrollü sapma üretebilmek zaten belli bir olgunluk ister; hiç ölçüm döngüsü olmayan yerde bu yöntem de tutmaz.",
+      "neden": "Bir gözlem ancak bir beklentiyi ihlal ettiğinde bilgi taşır; beklentisi olmayan için sapma yoktur, yalnızca olay vardır. Bunun doğal sonucu, işleyen bir sistemin kendini sorgulatacak sinyali hiç üretmemesidir — en tehlikeli konum cehalet değil, işe yaramış bir geçmiştir.",
+      "kaynak": [
+        "Lotus, Termit ve Wright Kardeşler"
+      ]
+    },
+    {
+      "id": "D-33",
+      "t": "D",
+      "title": "Dışarıdan alabileceğin şey “çözüm var” bilgisidir, “nasıl varılır” bilgisi değil",
+      "kural": "Rakibin ürününe bakarken ne aldığını ayır: bir problemin çözülebilir olduğunu görmek (varlık bilgisi) ile oraya nasıl varıldığını bilmek (yol bilgisi) farklı şeylerdir. Birincisi görmekle alınır, ikincisi ancak kendi eleme sürecinle üretilir. Planını yol bilgisi almış gibi değil, varlık bilgisi almış gibi kur.",
+      "kirilir": "Varlık bilgisi değersiz değildir: “belki bu yol hiç yoktur” ihtimaliyle çalışmakla “yol var, sadece bulunmadı” bilgisiyle çalışmak bambaşka maliyet yapılarıdır. Ayrıca kendi arama hattı zaten kurulu olan bir firma, dışarıdan yalnızca hedefi alıp kalanını kendisi bulabilir.",
+      "neden": "Bir ürün, elenmiş alternatiflerin geriye kalanıdır. Hangi alaşımın hangi saatte çatladığı, hangi işlem sırasının yüzeyi bozduğu bilgisi üründe bulunmaz — çünkü ürün yalnızca ayakta kalan seçenektir. Bu yüzden kısıtlar kalksa bile eleme geçmişi olmayan taraf sapmayı teşhis edemez ve ikinci nesle geçemez.",
+      "kaynak": [
+        "Lotus, Termit ve Wright Kardeşler"
+      ]
+    },
+    {
+      "id": "D-34",
+      "t": "C",
+      "title": "Tasarımın çalışması, ilham aldığın şey hakkındaki açıklamanın doğru olduğunu kanıtlamaz",
+      "kural": "Bir tasarım işe yaradığında, onu türetirken kullandığın kaynak açıklamayı doğrulanmış sayma. İkisini ayrı ayrı sına: tasarım çalışıyor mu, ve kaynak sistem gerçekten senin sandığın gibi mi çalışıyor?",
+      "kirilir": "Tasarımın başarısı, yalnızca o açıklamadan türetilebilecek ve başka hiçbir yoldan çıkmayacak bir tahmin içeriyorsa, kaynak açıklama için gerçek kanıt olur. Bu nadirdir.",
+      "neden": "Harare'deki Eastgate Centre, termit yuvalarının sürekli baca akımıyla sıcaklık düzenlediği açıklamasından esinlenerek tasarlandı ve enerji açısından başarılı oldu. Sonraki biyoloji araştırmaları bu açıklamanın yanlış olduğunu gösterdi; bina yine de çalışıyordu. Başarı, kaynak hakkındaki hikâyeyi test etmez.",
+      "kaynak": [
+        "Lotus, Termit ve Wright Kardeşler"
+      ]
+    }
   ]
 }

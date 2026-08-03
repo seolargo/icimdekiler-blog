@@ -26,9 +26,10 @@ Her madde dört alan taşır:
 - **Neden** — engellediği başarısızlık / mekanizma.
 - **Kaynak** — hangi makale(ler).
 
-> Kapsam: bu ilk parti **8 makaleden** türetildi (Öğrenme Hızının Örgütsel
+> Kapsam: ilk parti **8 makaleden** türetildi (Öğrenme Hızının Örgütsel
 > Ekonomisi, Kavramsal Çarpıştırma, Keşif Organizasyonları, Duvarlarla İlerlemek,
-> Gerekçenin Taşınması, Teori Vadisi, Nereden Biliyoruz, Renk Teorisi). Korpusun
+> Gerekçenin Taşınması, Teori Vadisi, Nereden Biliyoruz, Renk Teorisi). İkinci
+> parti (D-27…D-34) **Lotus, Termit ve Wright Kardeşler**'den türetildi. Korpusun
 > geri kalanı henüz taranmadı; katalog artımlı büyür.
 
 ---
@@ -64,6 +65,18 @@ Her madde dört alan taşır:
 - **Kırılır:** Teknik yetkinlik tek-döngü öğrenmeyi çok verimli kıldığında, bu ikinci döngüyü (varsayım denetimini) gereksiz gösteren bir yanılsama üretir — asıl tehlike burada.
 - **Neden:** Ortam değişince dün geçerli varsayım bugün geçersizleşir; geç fark ediş, uzun Ar-Ge döngülerinde yılların yanlış yöne yatırılmasıdır.
 - **Kaynak:** Keşif Organizasyonları (çift-döngü öğrenme).
+
+### D-30 — Sıfırdan yeniden üretme süresi = deneme sayısı × bir denemenin süresi; yöntem sadece ilkini kısaltır
+- **Kural:** Bir şeyi kendin bulmak zorundaysan, süreyi iki çarpan olarak düşün: kaç deneme gerekecek ve bir deneme fiziksel olarak ne kadar sürüyor. İyi yöntem (nereye bakacağını bilmek, belirsizliğin en yüksek olduğu noktada denemek) yalnızca deneme sayısını düşürür. Planını buna göre yap: çevrim süresi uzunsa, hızlanmayı yöntemden değil paralel yürüyen ayrı hatlardan bekle.
+- **Kırılır:** Çevrim süresi kısa alanlarda (yazılım) her iki çarpanda da hareket vardır; mesafe hızla kapanır. Uzun çevrimli alanlarda (motor, optik, klinik) yalnızca deneme sayısı düşürülebilir; hızlanma gerçektir ama sınırlıdır.
+- **Neden:** Bir malzemenin belirli bir çalışma saatinde nasıl davrandığını görmek paralelleştirilerek kısaltılamaz. Bu, hangi alanda geriden gelenin hızla yetiştiğini, hangisinde yetişemediğini zekâ ya da sermaye farkına başvurmadan açıklar.
+- **Kaynak:** Lotus, Termit ve Wright Kardeşler.
+
+### D-31 — Model, hesaba katmadığı şeyi “belirsiz” diye de işaretlemez
+- **Kural:** “Belirsizliğin en yüksek olduğu yerde dene” kuralını uygularken, belirsizlik tahmininin modelin kendisinden geldiğini unutma. Modelin hiç bilmediği bir olgu, modelde belirsiz görünmez — orada kendinden emin ve yanlıştır. Bu yüzden hesabın dışından gelen sinyale (sahada ortaya çıkan aşınma, öngörülmemiş kirlilik) ayrıca yer aç.
+- **Kırılır:** Modelin kapsamı gerçekten problemin tamamını içeriyorsa yöntem güvenilirdir. Kapsam dışı bir etken varsa, aramayı ne kadar akıllı yaparsan yap o bölgeyi hiç ziyaret etmezsin.
+- **Neden:** Aktif öğrenme yalnızca bilinen bilinmeyenleri tarar. Öğrenmenin en pahalı kısmı ise genellikle modelin dışından gelir; simülasyonla gerçek arasındaki boşluk buradan doğar.
+- **Kaynak:** Lotus, Termit ve Wright Kardeşler.
 
 ---
 
@@ -133,6 +146,12 @@ Her madde dört alan taşır:
 - **Neden:** Yanlışlanabilirlik kaybolduğunda birikmiş güçlü göstergeler bile sonsal olasılığı hareket ettiremez.
 - **Kaynak:** Nereden Biliyoruz; Keşif Organizasyonları (varsayım denetimi).
 
+### D-34 — Tasarımın çalışması, ilham aldığın şey hakkındaki açıklamanın doğru olduğunu kanıtlamaz
+- **Kural:** Bir tasarım işe yaradığında, onu türetirken kullandığın kaynak açıklamayı doğrulanmış sayma. İkisini ayrı ayrı sına: tasarım çalışıyor mu, ve kaynak sistem gerçekten senin sandığın gibi mi çalışıyor?
+- **Kırılır:** Tasarımın başarısı, yalnızca o açıklamadan türetilebilecek ve başka hiçbir yoldan çıkmayacak bir tahmin içeriyorsa, kaynak açıklama için gerçek kanıt olur. Bu nadirdir.
+- **Neden:** Harare'deki Eastgate Centre, termit yuvalarının sürekli baca akımıyla sıcaklık düzenlediği açıklamasından esinlenerek tasarlandı ve enerji açısından başarılı oldu. Sonraki biyoloji araştırmaları bu açıklamanın yanlış olduğunu gösterdi; bina yine de çalışıyordu. Başarı, kaynak hakkındaki hikâyeyi test etmez.
+- **Kaynak:** Lotus, Termit ve Wright Kardeşler.
+
 ---
 
 ## D. Bilginin taşınması ve aşınması
@@ -166,6 +185,36 @@ Her madde dört alan taşır:
 - **Kırılır:** Ortak arıza kipi paylaşılmıyorsa yedeklilik gerçektir; paylaşılıyorsa sayısal olarak var, işlevsel olarak yok (Fukushima jeneratörleri).
 - **Neden:** Sayısal yedeklilik, ortak tehdide açık konumu gizler.
 - **Kaynak:** Gerekçenin Taşınması.
+
+### D-27 — Bir çözümü kopyalamadan önce sor: bu şey ayakta kalmak için sürekli bakım mı istiyor?
+- **Kural:** Aktarmadan önce şu testi yap: kaynak sistemde bakım/yenileme faaliyetini durdursan, işlev ne kadar sürede bozulur? Cevap “kısa sürede” ise, kopyaladığın donmuş görüntü değil, o bakım süreci asıl taşınması gereken şeydir.
+- **Kırılır:** İşlev yapının kendisinde taşınıyorsa (bir kafes kirişin geometrisi, bir kaldıraç düzeneği) yapı kendi başına uzun süre ayakta kalır; orada durağan kopya yeterlidir. Ayrıca bir sistemin bakım bağımlılığı zamanla düşebilir: aşınmaya dayanıklı bir malzeme çıkarsa aynı aktarım artık kolaylaşır.
+- **Neden:** Bakım bağımlılığı yüksek sistemlerde kopya ilk anda çalışır, sonra sönümlenir — ve bu gecikme yüzünden sorun genellikle “kötü uygulama” sanılır. Lotus yaprağını taklit eden kendini temizleyen kaplamalar buna örnek: yaprak mum tabakasını sürekli yeniliyordu, kaplama yenilemiyordu. Aşınma kaynak sistemde de vardı, ama sürekli onarıldığı için gözlemde hiç görünmedi.
+- **Kaynak:** Lotus, Termit ve Wright Kardeşler.
+
+### D-28 — Çıkardığın kuralda hâlâ kaynağın adı geçiyorsa, o kural taşınmaz
+- **Kural:** Bir çözümden çıkardığın ifadeden kaynak sistemin adını sil ve ifadenin ayakta kalıp kalmadığına bak. “Lotus gibi yüzey yap” ayakta kalmaz; “yüzey enerjisini düşürmek yerine yüzey geometrisiyle temas açısını artır” kalır.
+- **Kırılır:** Hedef bağlamda kaynak sistemin o özel bileşeni gerçekten mevcutsa (aynı malzeme, aynı ortam) isme bağlı ifade de çalışır. Sorun, karşılığı olmayan bir yere taşırken çıkar.
+- **Neden:** Kaynağın adına yapışmış bir ifade, hedefte karşılığı olmayan bir varlığa bağımlıdır; taşındığında elde kalan şey benzetmedir, kullanılabilir bir tasarım kısıtı değil.
+- **Kaynak:** Lotus, Termit ve Wright Kardeşler.
+
+### D-29 — Bir şeyi başka bir bağlama taşırken “neye benziyor”u değil, “ne işe yarıyor”u al
+- **Kural:** Bir çözümü okurken hangi katmandan baktığını açıkça söyle: neye benzediğinden mi (biçim), nasıl düzenlendiğinden mi (yapı), nasıl çalıştığından mı (mekanizma), ne işe yaradığından mı (işlev). Sonra sor: aldığım katman, o sistemin işlevini gerçekten taşıyor mu?
+- **Kırılır:** Her zaman “yukarı” çıkmak doğru değildir: çok soyut bir okuma (“verimli ol”) hiçbir tasarım seçeneğini elemez ve boştur. Doğru katman hedef bağlam tanımlanmadan da belirlenemez — işlev nesnenin içinde değil, nesne ile ortamı arasındadır.
+- **Neden:** Ondokuzuncu yüzyıl uçuş denemeleri kuşu biçim ve hareket katmanından okudu: kanat çırpmak. Wright kardeşler kuştan kanat çırpmayı değil denetimi aldı ve taşıma kuvvetini itkiden ayırdı. Aynı olgu, aynı gözlem, farklı katman — ve farklı sonuç.
+- **Kaynak:** Lotus, Termit ve Wright Kardeşler.
+
+### D-32 — Bir katmanı ancak orada bir kez yanılmışsan görebilirsin; bu yüzden ucuz yanılma üret
+- **Kural:** Ekibin göremediği bir şeyi anlatarak göstermeye çalışma; o katmanda küçük ve ucuz bir beklenti ihlali üret. Hattı durdurma yetkisi, aşamalı dağıtım, hızlandırılmış ömür testi — hepsi aynı mantığın kurumsallaşmış hâlidir: küçük sapmayı görünür kılarak büyük sapmayı önlemek.
+- **Kırılır:** Bu bir hipotezdir, sınanmış bir bulgu değil. Ayrıca döngüseldir: kontrollü sapma üretebilmek zaten belli bir olgunluk ister; hiç ölçüm döngüsü olmayan yerde bu yöntem de tutmaz.
+- **Neden:** Bir gözlem ancak bir beklentiyi ihlal ettiğinde bilgi taşır; beklentisi olmayan için sapma yoktur, yalnızca olay vardır. Bunun doğal sonucu, işleyen bir sistemin kendini sorgulatacak sinyali hiç üretmemesidir — en tehlikeli konum cehalet değil, işe yaramış bir geçmiştir.
+- **Kaynak:** Lotus, Termit ve Wright Kardeşler.
+
+### D-33 — Dışarıdan alabileceğin şey “çözüm var” bilgisidir, “nasıl varılır” bilgisi değil
+- **Kural:** Rakibin ürününe bakarken ne aldığını ayır: bir problemin çözülebilir olduğunu görmek (varlık bilgisi) ile oraya nasıl varıldığını bilmek (yol bilgisi) farklı şeylerdir. Birincisi görmekle alınır, ikincisi ancak kendi eleme sürecinle üretilir. Planını yol bilgisi almış gibi değil, varlık bilgisi almış gibi kur.
+- **Kırılır:** Varlık bilgisi değersiz değildir: “belki bu yol hiç yoktur” ihtimaliyle çalışmakla “yol var, sadece bulunmadı” bilgisiyle çalışmak bambaşka maliyet yapılarıdır. Ayrıca kendi arama hattı zaten kurulu olan bir firma, dışarıdan yalnızca hedefi alıp kalanını kendisi bulabilir.
+- **Neden:** Bir ürün, elenmiş alternatiflerin geriye kalanıdır. Hangi alaşımın hangi saatte çatladığı, hangi işlem sırasının yüzeyi bozduğu bilgisi üründe bulunmaz — çünkü ürün yalnızca ayakta kalan seçenektir. Bu yüzden kısıtlar kalksa bile eleme geçmişi olmayan taraf sapmayı teşhis edemez ve ikinci nesle geçemez.
+- **Kaynak:** Lotus, Termit ve Wright Kardeşler.
 
 ---
 

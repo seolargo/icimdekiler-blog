@@ -1,0 +1,645 @@
+Lotus, Termit ve Wright Kardeşler: Katman Seçiminin Üç
+Vakası
+Ömer Faruk Yavuz
+Ağustos 2026
+Özet
+Bir çözüm başka bir bağlama taşındığında sıklıkla çalışmaz ve bu başarısızlık genellikle
+eksik bilgiye atfedilir. Bu çalışma alternatif bir okuma önerir: aktarılan şey çoğu zaman
+bir sistemin durağan kesitidir, oysa işlev bu kesit ile onu ayakta tutan bakım süreçlerinin
+birleşiminden doğar. Buradan iki ayrım türetilir. Birincisi, bir çözümün hangi soyutlama
+katmanından okunduğu ile o okumanın işlevi taşıyıp taşımadığı arasındaki ayrım.
+İkincisi, bir sistemin bakım bağımlılığının derecesi ile aktarılabilirliği arasındaki ilişki.
+Bakım bağımlılığı yüksek sistemlerde durağan aktarım yetersiz kalır ve işlev ancak
+bağımsız bir arama süreciyle yeniden üretilebilir; bu sürecin alt sınırı, deneme sayısı
+ile fiziksel çevrim süresinin çarpımıyla belirlenir ve yöntemsel iyileştirmeler yalnızca
+birinci çarpanı düşürür.
+Çalışmanın kendi statüsü açıkça belirtilmelidir: burada sunulan şey sınanmış bir
+ampirik bulgu değil, bir kavramsal çerçeve ve buna bağlı bir terminolojidir. Vakalar
+çerçeveyi sınamak için değil, ayrımların ne işe yaradığını göstermek için kullanılmıştır.
+Her vaka için rakip açıklamalar ayrıca tartışılmakta ve son bölümde çerçevenin ileriye
+dönük olarak nasıl yanlışlanabileceğine ilişkin bir tasarım önerilmektedir.
+Anahtar kelimeler: soyutlama katmanları, bakım bağımlılığı, teknoloji aktarımı,
+örtük bilgi, arama maliyeti, kurumsal öğrenme
+İçindekiler
+1 Giriş 4
+1.1 Problem . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+1.2 Çalışmanın Statüsü . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+1.3 Yapı . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+2 Kavramsal Zemin 5
+2.1 Dört Ayrı İşlem . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+1
+
+-- 1 of 20 --
+
+2.2 İki Eksenli Okuma Düzlemi . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+2.2.1 Öncelik Notu . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+2.3 Yerleşik Karşılıklar . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+3 Bakım Bağımlılığı 8
+3.1 Kavramın Tanımı . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+3.2 Neden Bu Formülasyon Daha İyi . . . . . . . . . . . . . . . . . . . . . . . . 8
+3.3 Aktarım Kararı . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+3.4 Kalibrasyon Testleri . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+3.4.1 Kaynak Bağımsızlığı Testi . . . . . . . . . . . . . . . . . . . . . . . . 9
+3.4.2 Eleme Gücü Testi . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+3.4.3 Bakım Testi . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+4 Vakalar 9
+4.1 Vakaların Statüsü . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+4.2 Yüzey Kaplamaları . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+4.3 Pasif İklimlendirme . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+4.4 Uçuş . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+4.5 Üretim Sistemi Aktarımı . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+4.6 İleri Ekipman ve Motor . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+4.7 Karşı Örnek: Kendi Araması Olan Taraf . . . . . . . . . . . . . . . . . . . . 12
+5 Yeniden Üretimin Maliyet Yapısı 12
+5.1 İki Çarpan . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+5.2 Deneme Sayısı Düşürülebilir . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+5.2.1 Yöntemin Kör Noktası . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+5.3 Çevrim Süresi Düşürülemez . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+5.4 Yakalanabilirliğin Yapısal Açıklaması . . . . . . . . . . . . . . . . . . . . . . 14
+6 Uygulanabilirliğin Ön Koşulu 14
+6.1 Sorun . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+2
+
+-- 2 of 20 --
+
+6.2 Öncelik Notu . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
+6.3 Başarının Körleştirici Etkisi . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
+6.4 Kontrollü Sapma . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
+7 Çerçevenin Sınırları 16
+7.1 Kendi Eleme Gücü Testinden Geçmemesi . . . . . . . . . . . . . . . . . . . 16
+7.2 Rakip Açıklamaları Kapsamaması . . . . . . . . . . . . . . . . . . . . . . . . 16
+7.3 Diğer Kısıtlar . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+8 Sınama Tasarımı 16
+8.1 Örneklem . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+8.2 Kodlama . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+8.3 Öngörü . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+8.4 Yanlışlama Koşulları . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+9 Sonuç 18
+A Terminolojik Ek: “İşlevsel Soyutlama” Derken Yapılan İşlem 19
+A.1 Mantıksal Yapı . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+A.2 Yüklem Düzeyi . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+A.3 Kavram Düzeyi . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+A.4 Ontolojik Düzey . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+A.5 Bilim Felsefesi Düzeyi . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+A.6 Sonuç . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+3
+
+-- 3 of 20 --
+
+1 Giriş
+1.1 Problem
+Bir çözümün bir bağlamdan diğerine taşınması yaygın bir pratiktir: doğadan mühendisliğe,
+bir firmadan diğerine, bir ülkeden bir başkasına. Bu girişimlerin önemli bir bölümü başarısız
+olur ve başarısızlık genellikle şöyle açıklanır: kaynak yeterince anlaşılmamıştır, bilgi eksiktir,
+ayrıntılar kaçırılmıştır.
+Bu açıklama iki nedenle yetersizdir. Birincisi, kolayca çürütülemediği için neredeyse her
+başarısızlığa uydurulabilir. İkincisi ve daha önemlisi, bir düzeltme yönü göstermez: “daha
+iyi anlamak gerekirdi” ifadesi, neyin nasıl daha iyi anlaşılacağını söylemez.
+Bu çalışma alternatif bir okuma önerir. Aktarımda taşınan şey genellikle bir sistemin
+belirli bir andaki durumudur; oysa pek çok sistemde işlev, bu durum ile onu sürekli yeniden
+üreten bakım süreçlerinin birleşiminden doğar. Bu durumda başarısızlık bilgi eksikliğinden
+değil, taşınan şeyin eksik seçilmesinden kaynaklanır.
+1.2 Çalışmanın Statüsü
+Bu noktanın baştan açık edilmesi gerekir, çünkü metnin geri kalanı buna göre okunmalıdır.
+Burada sunulan şey sınanmış bir ampirik iddia değil, bir kavramsal çerçeve
+önerisidir. Vakalar çerçeveyi sınamaz; çerçevenin ne işe yaradığını gösterir.
+Ayrım şu nedenle önemlidir. “Aktarım başarısızlıklarının büyük kısmı katman hatasın-
+dan kaynaklanır” biçimindeki bir cümle nicel bir iddiadır ve bu çalışmada böyle bir ölçüm
+yapılmamıştır. Vakalar, tez kurulduktan sonra ve sonuçları bilinerek seçilmiştir; dolayısıyla
+kanıt değil örnekleme değeri taşırlar. Bir çerçevenin geriye dönük olarak her vakayı kendi
+diline çevirebilmesi, o çerçevenin doğru olduğunu göstermez — yalnızca yeterince esnek
+olduğunu gösterir. Bu risk Bölüm 7’de ayrıca ele alınmakta ve Bölüm 8’da çerçevenin ileriye
+dönük olarak nasıl sınanabileceğine ilişkin bir tasarım önerilmektedir.
+Çalışmanın iddia ettiği şey daha mütevazıdır:
+Önerme 1 (Çerçevenin işlevi) Aktarım problemlerinde “ne kopyalandı?” sorusu, kat-
+man ve bakım bağımlılığı ayrımlarıyla birlikte sorulduğunda, tek başına sorulduğundan daha
+konumlandırılabilir bir teşhis üretir.
+Bu, ölçülebilir bir iddiadır ve Bölüm 8’da ölçüm tasarımı verilmektedir.
+4
+
+-- 4 of 20 --
+
+1.3 Yapı
+Bölüm 2 terimsel zemini kurar ve iki eksenli okuma düzlemini tanıtır. Bölüm 3 çalışmanın
+merkez kavramı olan bakım bağımlılığını tanımlar ve ölçülebilir hâle getirir. Bölüm 4
+vakaları, her biri için rakip açıklamalarla birlikte sunar. Bölüm 5 yeniden üretimin maliyet
+yapısını inceler. Bölüm 6 çerçevenin uygulanabilirlik ön koşulunu tartışır. Bölüm 7 kısıtları,
+Bölüm 8 sınama tasarımını sunar.
+2 Kavramsal Zemin
+2.1 Dört Ayrı İşlem
+Aktarım tartışmalarında birbirinin yerine kullanılan dört işlem farklıdır. Ayrım yapılmadı-
+ğında sonraki bütün tartışma bulanıklaşır.
+Tanım 1 (Soyutlama) Tek bir vakadan, taşınmayacak ayrıntıların çıkarılması. Belirli bir
+yapışma mekanizmasının tarifinden “temas alanını artıran hiyerarşik lifli yapı” ifadesine
+geçmek bir soyutlamadır. Vaka sayısı değişmez, çözünürlük düşer.
+Tanım 2 (Genelleme) Birden çok vakadan ortak bir iddia türetilmesi. “Dağıtık kontrol
+dayanıklılık sağlar” bir soyutlama değil genellemedir; tek bir örnekten değil, çok sayıda
+örnekten çıkarılır.
+Bu ayrım kanıt standardını belirlediği için kritiktir. Bir mekanizma tek bir sistemde
+gözlemlenerek doğrulanabilir; bir genelleme doğrulanamaz, yalnızca çok sayıda vakayla
+desteklenir. İlerideki tabloda strateji ve ilke olarak anılan düzeyler bu ikinci türdendir ve
+diğerleriyle aynı epistemik statüde değildir.
+Tanım 3 (Ayrıştırma) Bütünün parçalarına bölünmesi. Bu soyutluk değil ölçek değişi-
+midir. Parçadan alt sisteme, alt sistemden sisteme geçmek soyutlama değildir; incelenen
+bütünün sınırının değişmesidir.
+Tanım 4 (İdealleştirme) Bilinerek yanlış fakat işlevsel bir varsayımın devreye sokulması:
+sürtünmesiz yüzey, sonsuz kaynak, homojen popülasyon. Soyutlama ayrıntıyı atarken,
+idealleştirme gerçekte var olmayan bir özelliği ekler.
+Son ayrım aktarım bağlamında sıkça gözden kaçar: kaynak sistemde gözlemlendiği
+sanılan bir özellik, aslında modele sonradan eklenmiş bir idealleştirme olabilir.
+5
+
+-- 5 of 20 --
+
+2.2 İki Eksenli Okuma Düzlemi
+Yaygın bir hata, yukarıdaki işlemlerin ürünlerini tek bir merdivenin eşdeğer basamakları
+gibi sıralamaktır. En az iki bağımsız eksen vardır (Şekil 1).
+Fiziksel biçim
+Yapı
+Mekanizma / Süreç
+Davranış
+İşlev NEDEN?
+NASIL?
+Parça İlişki Sistem Çevre
+BÜTÜN–PARÇA / ÖLÇEK EKSENİ
+SOYUTLAMA EKSENİ
+Şekil 1: Soyutlama ve ayrıştırma eksenleri. Dikey eksende yukarı çıkarken “neden?”, aşağı inerken
+“nasıl?” sorusu sorulur. Yatay eksende soru değişmez; yalnızca incelenen bütünün sınırı genişler. Bir
+okuma bu düzlemde bir hücreye karşılık gelir, bir basamağa değil.
+Katman Soru Aktarımda ne taşınır?
+Biçim Neye benziyor? Geometri, oran, görünüş
+Yapı Nasıl düzenlenmiş? Parçalar ve aralarındaki taşıyıcı ilişki
+Mekanizma Nasıl çalışıyor? Sonucu üreten fiziksel zincir
+Süreç Nasıl oluşuyor ve sürüyor? Üretim, büyüme, bakım, onarım adımları
+Davranış Nasıl tepki veriyor? Algılama, karar, uyarlanma örüntüsü
+İşlev Ne işe yarıyor? Bağlamdan bağımsız görev tanımı
+Strateji Hangi genel yaklaşım? Çok vakadan türetilmiş çözüm mantığı
+İlke En genel mantık nedir? Alanlar arası taşınabilen soyut kavram
+Tablo 1: Dikey eksenin katmanları. Alt bölmedeki iki düzey soyutlamanın değil genellemenin
+ürünüdür ve farklı bir kanıt standardına tabidir.
+2.2.1 Öncelik Notu
+Bu düzlem özgün bir buluş değildir. Rasmussen’in abstraction–decomposition space kavramı
+tam olarak bunu tanımlar: soyutlama hiyerarşisi bir eksende, parça–bütün ayrıştırması
+diğerinde. Çalışmanın katkısı düzlemin kendisi değil, aktarım problemine uygulanması
+ve Bölüm 3’deki bakım bağımlılığı kavramıyla birleştirilmesidir. Yeniden keşfi kaynağına
+6
+
+-- 6 of 20 --
+
+bağlamak, çerçeveyi zayıflatmaz; Rasmussen’in insan–makine sistemlerinde birikmiş ampirik
+desteğini devralmasını sağlar.
+2.3 Yerleşik Karşılıklar
+Düzlemin parçaları birbirinden habersiz gelişmiş birden çok gelenekte ayrı ayrı ortaya
+çıkmıştır. Bu yakınsama, ayrımların keyfî olmadığına dair zayıf fakat gerçek bir kanıttır.
+Gelenek Katkısı
+Aristoteles (dört neden) Maddi/formel neden yapı ve biçime, fail neden mekanizma ve sürece,
+gai neden işleve karşılık gelir. Modern tasarım ontolojileri büyük
+ölçüde bu dörtlünün yeniden formülasyonudur.
+Gero (FBS) İşlev doğrudan yapıya çevrilemez; aradaki köprü davranıştır. Bekle-
+nen ile gerçekleşen davranış farkı tasarım döngüsünün geri besleme
+sinyalidir.
+Goel (SBF) Mevcut bir çözümü geriye doğru sökme mantığı. Aktarım her ikisini
+de kullanır: kaynak SBF ile sökülür, hedef FBS ile kurulur.
+Rasmussen İki eksenin ayrılması ve means–ends ilişkileri. Aynı sistem her düzeyde
+bütünüyle tarif edilebilir.
+Marr Bir düzeydeki açıklama diğerinin yerini tutmaz; yanlış düzeyden
+yapılan açıklama sistematik olarak yanıltır.
+Dennett Düzey seçimi bir doğruluk değil öngörü verimliliği meselesidir. Bu,
+katman seçimini ontolojik bir sorudan yöntemsel bir karara dönüştü-
+rür.
+Simon İşlev nesnenin kendisinde değil, nesne ile ortamı arasındaki arayüzde
+bulunur; dolayısıyla hedef bağlam tanımlanmadan belirlenemez.
+Tablo 2: Düzlemin parçalarının bağımsız keşifleri.
+FBS döngüsü, Bölüm 6’teki tartışmanın doğrudan öncülü olduğu için ayrıca gösteril-
+mektedir (Şekil 2).
+İşlev Beklenen
+davranış Yapı Gerçekleşen
+davranış
+fark: öğrenme sinyali
+Şekil 2: FBS döngüsü. Beklenen ile gerçekleşen davranış arasındaki fark ölçülemiyorsa döngü
+kapanmaz ve tasarım süreci bilgi üretmez.
+7
+
+-- 7 of 20 --
+
+3 Bakım Bağımlılığı
+3.1 Kavramın Tanımı
+Çalışmanın merkez kavramı burada tanımlanmaktadır. Önceki taslaklarda bu kavram “işlev
+hiçbir durağan katmanda bulunmaz” biçiminde ifade edilmişti; bu formülasyon gereksiz
+biçimde metafiziktir ve yanlışlanabilir değildir. Aşağıdaki tanım aynı olguyu ölçülebilir bir
+kısıt olarak ifade eder.
+Tanım 5 (Bakım bağımlılığı) Bir sistemin bakım bağımlılığı, işlevini sürdürebilmek için
+ihtiyaç duyduğu sürekli yenileme, onarım veya düzeltme faaliyetinin derecesidir. Ölçüt,
+faaliyet durdurulduğunda işlevin ne kadar sürede kabul edilebilir eşiğin altına düşmesidir.
+Buna göre iki uç tanımlanabilir:
+Bakım bağımlılığı düşük sistemler İşlev yapıda taşınır ve yapı kendi başına uzun süre
+ayakta kalır. Kafes kirişin topolojisi, bir kanat kesitinin geometrisi, bir kaldıraç
+düzeneği. Bu sistemlerde durağan aktarım yeterlidir.
+Bakım bağımlılığı yüksek sistemler İşlev, yapı ile onu sürekli yenileyen faaliyetin
+birleşiminden doğar. Faaliyet durduğunda yapı bozulur ve işlev sönümlenir. Bu
+sistemlerde durağan aktarım, ilk anda başarılı görünen fakat zamanla bozulan bir
+sonuç üretir.
+3.2 Neden Bu Formülasyon Daha İyi
+Üç nedenle:
+Yanlışlanabilirdir. “Bakım bağımlılığı yüksek” bir iddia, faaliyet durdurulduğunda
+işlevin ne kadar sürdüğü ölçülerek sınanabilir. “İşlev süreçte bulunur” cümlesi sınanamaz.
+Derece kabul eder. İkili bir sınıflandırma yerine sürekli bir değişkendir. Gerçek
+sistemler bu skalanın çeşitli yerlerine düşer.
+Tarihsel olarak değişkendir. Bir sistemin bakım bağımlılığı malzeme ve yöntem
+gelişmesiyle düşebilir. Aşınmaya dayanıklı bir yüzey geliştirilirse, o vakada bakım bağımlılığı
+azalır ve aktarım kolaylaşır. Bu, çerçevenin bir zayıflığı değil, doğru öngörüsüdür: iddia bir
+doğa yasası değil, mevcut kısıtlara ilişkin bir tespittir.
+3.3 Aktarım Kararı
+Bu tanımla birlikte aktarım kararı iki soruya indirgenir:
+8
+
+-- 8 of 20 --
+
+1. Bu okumayı hangi katmandan yapıyorum?
+2. Kaynak sistemin bakım bağımlılığı nedir; aldığım katman o bağımlılığı kapsıyor mu?
+İkinci soru olumsuz yanıtlanıyorsa, aktarılan şey işlevin tamamı değil, durağan kesitidir.
+Bu durumda üçüncü bir soru devreye girer ve Bölüm 5’ya bağlanır: bakım sürecini yeniden
+üretmenin maliyet yapısı nedir?
+3.4 Kalibrasyon Testleri
+“Orta katmanlar en verimlidir” ifadesi doğru fakat operasyonel değildir. Üç test bunu
+uygulanabilir kılar.
+3.4.1 Kaynak Bağımsızlığı Testi
+Soyutlama ifadesinde hâlâ yalnızca kaynak sisteme özgü bir terim geçiyor mu? İfade,
+kaynak sistemin adı silindiğinde anlamını koruyabilmelidir. Aksi hâlde aktarılacak bağlamda
+karşılığı olmayan bir varlığa bağımlıdır.
+3.4.2 Eleme Gücü Testi
+İfade en az bir tasarım alternatifini dışarıda bırakıyor mu? “Verimli ol” hiçbir seçeneği
+elemez ve bu nedenle tasarım açısından boştur. “Yüzey enerjisini düşürmek yerine yüzey
+geometrisiyle temas açısını artır” bir dizi alternatifi eler ve kullanılabilir bir soyutlamadır.
+Bu testin çalışmanın kendisine uygulanması Bölüm 7’de yapılmaktadır.
+3.4.3 Bakım Testi
+Kaynak sistem, işlevini sürdürmek için sürekli bir faaliyete bağımlı mı? Bağımlıysa ve
+aktarılan katman bu faaliyeti kapsamıyorsa, aktarım eksiktir. Bu test bakım bağımlılığı
+kavramının doğrudan operasyonel karşılığıdır.
+4 Vakalar
+4.1 Vakaların Statüsü
+Aşağıdaki vakalar tezi sınamaz. Hepsi sonuçları bilinerek ve çerçeve kurulduktan sonra
+seçilmiştir; dolayısıyla illüstrasyon değeri taşır, kanıt değeri taşımaz. Bu sınırlamayı ciddiye
+almak için her vaka, çerçevenin sunduğu okumanın yanı sıra en güçlü rakip açıklamayla
+9
+
+-- 9 of 20 --
+
+birlikte verilmektedir. Rakip açıklamaların çoğu tümüyle geçerlidir; çerçeve onların yerini
+almaz, yanlarına bir okuma ekler.
+4.2 Yüzey Kaplamaları
+Çerçevenin okuması. Bazı bitki yapraklarının kendini temizleme özelliği, mikro ve nano
+ölçekli yüzey pürüzlülüğü ile mum tabakasının birlikte ürettiği yüksek temas açısına dayanır.
+Yapı katmanından yapılan bu okuma doğrudur ve süperhidrofobik kaplamalar bunun
+üzerine kurulmuştur. Erken nesil kaplamaların sahada beklenen ömrü göstermemesinin
+nedeni, yaprağın mum tabakasını sürekli yenilemesi, kaplamanın ise yenilememesidir. Bakım
+bağımlılığı aktarılmamıştır.
+Rakip açıklama. Sorun kavramsal değil, tümüyle malzeme mühendisliğine ilişkin
+olabilir: mevcut kaplama malzemeleri aşınmaya yeterince dayanıklı değildi. Bu açıklama
+daha basittir ve muhtemelen doğrudur.
+İkisinin ilişkisi. Çerçevenin katkısı, bu iki açıklamanın rakip olmadığını göstermektir.
+Malzeme kısıtı nedendir; bakım bağımlılığı ise bu nedenin neden öngörülemediğini açıklar
+— kaynak sistemde aşınma zaten oluyordu, fakat sürekli onarıldığı için gözlemde görünmü-
+yordu. Aktarımdan önce bakım testi uygulanmış olsaydı, malzeme kısıtı bir sürpriz değil
+bir tasarım gereksinimi olarak ortaya çıkardı.
+4.3 Pasif İklimlendirme
+Çerçevenin okuması. Harare’deki Eastgate Centre, termit yuvalarının pasif iklimlendirme
+yaptığı yönündeki dönemin yerleşik açıklamasından esinlenerek tasarlandı ve enerji tüketimi
+açısından başarılı oldu. Sonraki biyoloji araştırmaları — özellikle Turner’ın çalışmaları
+— yuvaların sürekli baca akımıyla sıcaklık düzenleyen yapılar olmadığını, esas olarak
+rüzgâr kaynaklı basınç dalgalanmalarıyla gaz değişimi sağladığını gösterdi. Mekanizma
+okuması yanlıştı; bina yine de çalıştı. Bunun nedeni tasarımın gerçekte işlev katmanından
+beslenmesidir.
+Rakip açıklama — ve bu vaka çerçeve için bir sorundur. Buradaki kurtarma
+post hoc’tur. Çerçeve, başarıyı “demek ki işlev katmanından okumuşlar”, başarısızlığı ise
+“demek ki yanlış katmandan okumuşlar” diye açıklayabilir. Bu esneklik, çerçevenin kendi
+eleme gücü testinden geçmediği anlamına gelir.
+Bu vakadan çıkarılabilecek savunulabilir tek sonuç şudur ve daha dardır: bina,
+kaynak sistemdeki mekanizmanın yanlış anlaşılmasına rağmen çalıştığı için, biyomimetik
+bir tasarımın başarısı kaynak sisteme ilişkin açıklamanın doğruluğunun kanıtı sayılamaz.
+Bu, çerçeveden bağımsız olarak doğrudur ve vakanın gerçek dersi budur.
+10
+
+-- 10 of 20 --
+
+4.4 Uçuş
+Çerçevenin okuması. Ondokuzuncu yüzyıl ornitopter denemeleri kuş uçuşunu ağırlıklı
+olarak biçim ve hareket katmanından okudu: kanat çırpmak. Wright kardeşlerin farkı,
+kaldırma kuvvetini itki üretiminden ayırmaları ve kuş gözleminden asıl olarak denetim
+bilgisini almaları oldu. Aynı olgu, aynı gözlem verisi, farklı katman.
+Rakip açıklama. Wright kardeşlerin başarısının büyük kısmı kuş gözlemiyle değil,
+kendi rüzgâr tüneli ölçümleriyle ve mevcut kaldırma katsayısı tablolarındaki hataları
+düzeltmeleriyle ilgilidir. Yani belirleyici olan katman seçimi değil, kendi ölçüm ve düzeltme
+döngüleri olmuş olabilir.
+Değerlendirme. Rakip açıklama güçlüdür ve muhtemelen daha belirleyicidir. Ancak
+dikkat çekici olan, bu rakip açıklamanın çerçevenin Bölüm 6’teki savıyla aynı yöne işaret
+etmesidir: kendi ölçüm döngüsü kuran taraf, kurmayana göre daha çok katman görmüştür.
+4.5 Üretim Sistemi Aktarımı
+Çerçevenin okuması. Toyota Üretim Sistemi’nin yaygınlaştırılma girişimlerinde taşınan
+şey büyük ölçüde görünür yapı oldu: kart sistemleri, hat durdurma donanımı, hücresel
+yerleşim, görsel yönetim panoları. Taşınmayan şey Spear ve Bowen’ın belgelediği örtük
+kurallardı: her işin bir hipotez olarak tasarlanması ve sapmanın anında, yerel olarak
+sınanması. Kartlar süreç katmanının çıktısıdır, girdisi değil.
+Rakip açıklama. Bu vakada rakip açıklamalar özellikle güçlüdür ve büyük olasılıkla
+daha ağır basar: işgücü ilişkileri, yönetim teşvik yapıları, tedarikçi sözleşmelerinin biçimi,
+kısa vadeli finansal raporlama baskısı. Bir Amerikan otomobil üreticisinin hattı durdurma
+yetkisini gerçekten devredememesi, kavramsal bir yanlış anlamadan çok kurumsal bir
+kısıttır.
+Değerlendirme. Çerçeve burada eksiktir. Aktarımın neden başarısız olduğunu değil,
+ne aktarıldığını tarif eder. “Ne aktarıldı?” sorusu “neden tutmadı?” sorusunun yalnızca
+bir bileşenidir; teşvik yapısı ve güç ilişkileri en az onun kadar belirleyicidir ve bu çerçeve
+onları kapsamaz.
+4.6 İleri Ekipman ve Motor
+Çerçevenin okuması. İleri litografi ekipmanı ve yüksek performanslı türbin motoru
+vakalarında, mevcut tasarımın elde edilmesi ürünü yeniden üretmeye yetmez. Bunun nedeni
+tasarımın gizli olması değil, tasarımın elenmiş alternatifler kümesinin kalıntısı olmasıdır.
+Hangi alaşımın hangi çalışma saatinde çatladığı, hangi işlem sırasının yüzeyi bozduğu —
+bu bilgi üründe bulunmaz, çünkü ürün yalnızca ayakta kalan seçenektir.
+Rakip açıklama. Bu vakalarda ihracat kontrolleri, tedarikçi erişiminin engellenmesi
+11
+
+-- 11 of 20 --
+
+ve ölçüm ekipmanına erişim kısıtları doğrudan ve yeterli açıklamalardır. Kavramsal bir
+katman analizine gerek yoktur.
+Değerlendirme. Rakip açıklama doğrudur. Çerçevenin ekleyebileceği tek şey, kısıtlar
+kalksa dahi bir gecikmenin kalacağı öngörüsüdür: eleme geçmişi olmayan taraf, ürünü
+üretebilse bile sapmayı teşhis edemez ve ikinci nesle geçemez. Bu öngörü sınanabilir fakat
+henüz sınanmamıştır.
+4.7 Karşı Örnek: Kendi Araması Olan Taraf
+Bir firmanın olgun bir pazara sonradan girip rekabet edebilir hâle gelmesi çerçeveye aykırı
+görünebilir. Aykırı değildir: bu firmalar tipik olarak ürünü kopyalamaz, kendi aramalarını
+yaparlar. Bileşen üretiminde onlarca yıllık bir arama hattı zaten mevcuttur ve bu hat yeni
+bir ürün kategorisine yöneltilir.
+Dışarıdan alınan şey yol bilgisi değil, varlık bilgisidir (Tablo 3).
+Varlık bilgisi Yol bilgisi
+Soru Çözüm var mı? Nasıl varılır?
+Kaynağı Gözlem Kendi eleme süreci
+Aktarımı Görmek yeter Aktarılamaz
+Kaldırdığı Hedef belirsizliği Çözüm belirsizliği
+Tablo 3: Aktarımda ayrılması gereken iki bilgi türü.
+Varlık bilgisi değersiz değildir: bir problemin çözülebilir olduğunu bilmek, arama sü-
+recinin en pahalı belirsizliğini kaldırır. Uzun bir program boyunca “belki de bu yol hiç
+yoktur” ihtimaliyle çalışmak ile “yol var, yalnızca bulunmadı” bilgisiyle çalışmak farklı
+maliyet yapılarıdır.
+5 Yeniden Üretimin Maliyet Yapısı
+5.1 İki Çarpan
+Bakım bağımlılığı yüksek bir sistem durağan olarak aktarılamıyorsa, geriye tek seçenek
+kalır: bağımsız bir arama süreciyle yeniden üretmek. Bu sürecin süresi iki çarpandan oluşur:
+Ttoplam = Ndeneme × tçevrim (1)
+Ayrıca deneme sayısının indirgenemez bir alt sınırı vardır; hiçbir model, en az bir gerçek
+doğrulamanın yerini tutmaz:
+12
+
+-- 12 of 20 --
+
+Tmin = Nindirgenemez × tçevrim (2)
+5.2 Deneme Sayısı Düşürülebilir
+Bütün denemeler eşit bilgi taşımaz. Sonucu önceden tahmin edilebilen bir deneme, gerçekleş-
+tiğinde beklenti kalıbını değiştirmez ve bilgi üretmez. Bilgi yalnızca sonucun öngörülemediği
+noktalarda doğar.
+Bu ilkenin biçimsel karşılığı aktif öğrenmedir: sistem, kendi belirsizliğinin en yüksek
+olduğu noktada deneme yapar (Şekil 3).
+x
+ölçüm ölçüm ölçüm
+dar aralık
+geniş aralık
+sonraki deneme buraya
+Şekil 3: Deneme seçimi. Belirsizlik ölçüm noktalarında sıfıra iner, aralarda genişler; en geniş aralık
+en yüksek beklenen bilgi kazancını taşır.
+Aynı mantığın mühendislikteki yerleşik uygulaması ikili aramadır. n adımlık şüpheli
+bir aralıkta hatayı doğrusal taramak O(n) adım gerektirirken, her adımda aralığı ortadan
+bölmek O(log2 n) adımda sonuca ulaşır. Ortayı seçmenin nedeni, sonucun orada en az
+tahmin edilebilir olmasıdır.
+5.2.1 Yöntemin Kör Noktası
+Belirsizlik tahmini modelin kendisinden gelir. Model, hesaba katmadığı bir olguyu belirsiz
+olarak da işaretlemez; o bölgede kendinden emin fakat yanlıştır. Dolayısıyla aktif öğrenme
+yalnızca bilinen bilinmeyenleri tarar.
+Öğrenmenin bilgi yükü en ağır kısmı ise genellikle modelin dışından gelir: hesaba katıl-
+mamış kirlilik, öngörülmemiş çevrim etkisi, sahada ortaya çıkan aşınma deseni. Simülasyon
+tabanlı aramanın reality gap olarak bilinen sınırı buradan doğar.
+5.3 Çevrim Süresi Düşürülemez
+İkinci çarpan fizikseldir: bir yüzeyin işlenip ölçülmesi, bir malzemenin belirli bir çalışma
+saatinde nasıl davrandığının görülmesi, bir klinik sonucun ortaya çıkması. Bu süreler
+paralelleştirilerek kısaltılamaz (Şekil 4).
+13
+
+-- 13 of 20 --
+
+tçevrim
+Ndeneme
+N · t = sabit
+Yazılım
+Optik
+Klinik Motor
+yöntemsel
+iyileştirme
+×
+fizik
+saniye hafta ay yıl
+Şekil 4: Arama maliyeti düzlemi. Sabit toplam süre bir hiperbol çizer. Yöntemsel iyileştirmeler
+noktayı yalnızca dikey eksende aşağı çeker; yatay eksende hareket fiziksel olarak engellidir.
+5.4 Yakalanabilirliğin Yapısal Açıklaması
+Bu, çalışmanın en savunulabilir kısmıdır ve neredeyse tanım gereği doğrudur. Teknoloji
+alanları arasındaki yakalama hızı farkları, zekâ veya sermaye farkına başvurulmadan
+açıklanabilir:
+• Çevrim süresi kısa alanlarda her iki eksende de hareket vardır; mesafe hızla kapanır.
+• Çevrim süresi uzun alanlarda yalnızca dikey eksende hareket vardır; hızlanma gerçektir
+fakat sınırlıdır.
+• Sahada birikmesi gereken veriye bağımlı alanlarda çevrim, ürünün kullanımda olmasını
+gerektirir; bu durumda arama, önce yetersiz bir ürünü sahaya sokmayı zorunlu kılar.
+• Birden çok tedarikçi hattının eşzamanlı olgunlaşmasını gerektiren alanlarda çevrimler
+birbirine bağımlıdır; tek bir hattın bağımsız hızlandırılması etkisizdir.
+6 Uygulanabilirliğin Ön Koşulu
+6.1 Sorun
+Önceki bölümler hangi katmanın taşınması gerektiğini belirleme yöntemini verdi. Ancak
+incelenen vakaların çoğunda eksik olan şey yöntem değildi; doğru okuma çoğu durumda
+ilgili kurumun içinde zaten mevcuttu ve dile getirilmişti. Buradan çerçevenin en kısıtlayıcı
+sonucu çıkar.
+14
+
+-- 14 of 20 --
+
+Önerme 2 (Görünürlük koşulu) Bir katmanı fiilen görebilmek, o katmanda daha önce
+bir beklenti ihlali yaşamış olmayı gerektirir.
+Bu önerme sınanmamıştır ve şu hâliyle bir hipotezdir. Ancak ampirik öğrenme literatü-
+ründeki yerleşik bir bulguya dayanır: bir gözlem, ancak bir beklentiyi ihlal ettiğinde bilgi
+taşır. Beklentisi olmayan için sapma yoktur; yalnızca olay vardır.
+6.2 Öncelik Notu
+Bu fikir bu çalışmanın buluşu değildir. En az üç ayrı gelenekte mevcuttur: Popper’ın
+yanlışlama merkezli bilgi kuramında, Argyris ve Schön’ün çift-döngülü öğrenme çerçevesinde,
+ve tahmin hatası temelli öğrenme modellerinde. Çalışmanın yaptığı şey bunu katman diline
+bağlamaktır; bu bağ makuldür fakat gösterilmiş değildir.
+6.3 Başarının Körleştirici Etkisi
+Önermenin doğal sonucu, işleyen bir sistemin kendisini sorgulatacak sapmayı üretmemesidir.
+Kazanan taraf, kazandığı katmanda bir ihlal yaşamadığı için o katmanı sorgulamaz;
+kaybeden taraf sormak zorunda kalır ve bu zorunluluk onu başka bir katmana iter.
+Bu, yaygın kurumsal gözlemin yapısal açıklamasıdır: en tehlikeli konum cehalet değil,
+işe yaramış bir geçmiştir.
+6.4 Kontrollü Sapma
+Öğrenme beklenti ihlaline bağlıysa ve ihlal doğal olarak ancak maliyetli bir başarısızlıkla
+geliyorsa, öğrenme hızı ihlalin maliyetiyle ters orantılıdır. Yöntemsel sonuç: ihlali beklemek
+yerine üretmek ve üretirken maliyetini düşürmek.
+Üretim sistemlerindeki hat durdurma yetkisi bu mantığın kurumsallaşmış hâlidir.
+Bir kalite aracı olmaktan çok, küçük ve ucuz sapmayı görünür kılarak büyük ve pahalı
+sapmayı önleyen bir mekanizmadır. Aynı yapı, yazılımda test altyapıları ve aşamalı dağıtım
+pratiklerinde; mühendislikte hızlandırılmış ömür testlerinde tekrar eder.
+Bu, Bölüm 4’deki aktarım sorununu da yeniden çerçeveler: donanım ve kart sistemleri
+durağan çıktılardır ve taşınabilir; sapma üretme kapasitesi ise bir süreçtir ve bakım
+bağımlılığı yüksektir.
+15
+
+-- 15 of 20 --
+
+7 Çerçevenin Sınırları
+7.1 Kendi Eleme Gücü Testinden Geçmemesi
+En ciddi kısıt budur ve açıkça belirtilmelidir. Çerçeve, Bölüm 3’de kendi önerdiği eleme
+gücü testini şu hâliyle geçemez. Bir aktarım başarısız olduğunda “yanlış katman”, başarılı
+olduğunda “doğru katman” denebildiği sürece, çerçeve hiçbir sonucu dışarıda bırakmaz ve
+dolayısıyla hiçbir şeyi öngörmez.
+Bu kusur, Bölüm 8’daki tasarımla giderilebilir: katman kodlaması sonuç bilinmeden
+yapılırsa, çerçeve öngörüde bulunmuş olur ve yanlışlanabilir hâle gelir. Bu yapılana kadar
+çalışma bir çerçeve önerisi statüsünde kalır.
+7.2 Rakip Açıklamaları Kapsamaması
+Çerçeve “ne aktarıldı?” sorusunu ele alır. Aktarımın başarısını belirleyen başka bileşenler —
+teşvik yapıları, güç ilişkileri, düzenleyici kısıtlar, kaynak erişimi — bu çerçeveye girmez.
+Bölüm 4’deki endüstriyel vakalarda bu bileşenlerin çoğu zaman daha belirleyici olduğu
+görülmektedir. Çerçeve, onların yerini almadığı sürece geçerlidir; aldığı anda yanlıştır.
+7.3 Diğer Kısıtlar
+Geriye dönük açıklayıcılık Harita tamamlanmış vakaları çözümlemede güçlüdür; he-
+nüz yapılmamış bir tasarımda hangi katmanın doğru olduğunu önceden söylemez.
+Kalibrasyon testleri bu boşluğu daraltır, kapatmaz.
+Katman sınırlarının bulanıklığı Mekanizma ile süreç, davranış ile ilişki arasındaki sınır
+her vakada net değildir. Harita kesin bir sınıflandırma değil, bir denetim listesidir.
+İşlev tanımının bağlam bağımlılığı Simon’ın işaret ettiği gibi işlev, nesnenin kendi-
+sinde değil nesne ile ortamı arasındaki arayüzde bulunur; hedef bağlam tanımlanmadan
+“doğru soyutlama” belirlenemez.
+Görünürlük koşulunun döngüselliği Bir katmanı görebilmek o katmanda deneyim
+gerektiriyorsa, çerçeve kendisini uygulayacak tarafın zaten belirli bir olgunlukta
+olmasını varsayar. Kontrollü sapma yöntemleri bunu yalnızca kısmen hafifletir.
+8 Sınama Tasarımı
+Çerçevenin bir çerçeve önerisi olmaktan çıkıp sınanmış bir iddiaya dönüşebilmesi için
+aşağıdaki tasarım önerilmektedir.
+16
+
+-- 16 of 20 --
+
+8.1 Örneklem
+Belgelenmiş aktarım girişimlerinden oluşan bir havuz oluşturulur. Havuz, sonuçlarına bakıl-
+maksızın ve önceden tanımlanmış kapsam ölçütlerine göre seçilir; bu, mevcut çalışmadaki
+seçim yanlılığını ortadan kaldırmanın ön koşuludur. Başarısız girişimlerin belgelenme oranı
+başarılılardan düşük olduğu için, yayın yanlılığını sınırlamak amacıyla firma içi kayıtlar ve
+program raporları gibi kaynaklar öncelenmelidir.
+8.2 Kodlama
+İki bağımsız kodlayıcı, her vakada iki değişkeni sonuç bilgisine erişmeden kodlar:
+• Aktarılan katman: Tablo 1’deki kategorilerden hangisi.
+• Kaynak sistemin bakım bağımlılığı: Bakım faaliyeti durdurulduğunda işlevin
+kabul edilebilir eşiğin altına düşme süresine göre üç kategoriden biri (düşük / orta /
+yüksek).
+Kodlayıcılar arası uyum ölçülür ve raporlanır. Uyum düşükse, kategorilerin kendisi
+yeterince ayrık değil demektir ve bu, çerçeveye karşı bir bulgudur.
+8.3 Öngörü
+Çerçeve şu öngörüyü yapar ve bu öngörü yanlışlanabilirdir:
+Kaynak sistemin bakım bağımlılığı yüksekse ve aktarılan katman bu bağımlılığı
+kapsamıyorsa, aktarım ilk dönemde başarılı görünüp sonraki dönemde işlev
+kaybına uğrar. Bakım bağımlılığı düşük sistemlerde bu örüntü görülmez.
+Kritik nokta, öngörünün yalnızca başarı/başarısızlık değil, zaman içindeki örüntü üzerine
+olmasıdır. Bu, post hoc kurtarmayı zorlaştırır: gecikmeli bozulma ile baştan çalışmama
+farklı gözlemlerdir ve çerçeve yalnızca birincisini öngörür.
+8.4 Yanlışlama Koşulları
+Çerçeve şu durumlarda yanlışlanmış sayılır:
+• Bakım bağımlılığı yüksek ve katman eksik kodlanan vakalarda gecikmeli işlev kaybı
+örüntüsü, diğer vakalardan anlamlı ölçüde sık görülmüyorsa.
+• Kodlayıcılar arası uyum kabul edilebilir eşiğin altında kalıyorsa.
+17
+
+-- 17 of 20 --
+
+• Gözlenen örüntü, teşvik yapısı veya kaynak erişimi gibi rakip değişkenler kontrol
+edildiğinde ortadan kalkıyorsa.
+Üçüncü koşul özellikle önemlidir: çerçevenin katkısı ancak rakip açıklamaların üzerine
+bir şey ekliyorsa gerçektir.
+9 Sonuç
+Bu çalışma, çözümlerin taşındıklarında neden çalışmadığına dair bir kavramsal çerçeve
+önermektedir. Çerçevenin üç bileşeni vardır.
+Birincisi, bir çözümün hangi soyutlama katmanından okunduğunu ve hangi ölçekte
+ele alındığını ayıran iki eksenli bir düzlem. Bu düzlem Rasmussen’den devralınmıştır;
+çalışmanın katkısı aktarım problemine uygulanmasıdır.
+İkincisi, bakım bağımlılığı kavramı: bir sistemin işlevini sürdürmek için ihtiyaç duyduğu
+sürekli faaliyetin derecesi. Bakım bağımlılığı yüksek sistemlerde durağan aktarım, ilk
+anda başarılı görünen fakat zamanla bozulan bir sonuç üretir. Bu, “işlev süreçte bulunur”
+gibi metafizik bir iddia değil, ölçülebilir bir kısıttır ve malzeme veya yöntem gelişmesiyle
+değişebilir.
+Üçüncüsü, yeniden üretimin maliyet yapısı: Denklem (1) . Yöntemsel iyileştirmeler
+deneme sayısını düşürür; çevrim süresi fizikseldir ve kısaltılamaz. Bu bileşen çalışmanın en
+savunulabilir kısmıdır ve teknoloji alanları arasındaki yakalama hızı farklarını başka bir
+varsayıma gerek kalmadan açıklar.
+Çerçeveye eşlik eden bir hipotez, katman görünürlüğünün o katmanda yaşanmış bir
+beklenti ihlalini ön koşul olarak gerektirdiğini ileri sürer. Bu hipotez yerleşik öğrenme
+kuramlarına dayanır fakat katman diliyle bağı gösterilmiş değildir.
+Çalışmanın pratik çıktısı bir tez değil, üç sorudan oluşan bir denetim listesidir:
+Bu okumayı hangi katmandan yapıyorum? Kaynak sistemin bakım bağımlılığı
+nedir ve aldığım katman onu kapsıyor mu? Kapsamıyorsa, bakım sürecini
+yeniden üretmenin çevrim süresi nedir?
+Bu listenin değeri, doğru cevabı vermesinde değil, sorulmadığında hiç sorulmayacak
+soruları zorunlu kılmasındadır. Çerçevenin sınanmış bir iddiaya dönüşmesi için Bölüm 8’daki
+tasarımın uygulanması gerekir; o zamana kadar burada sunulan şey bir düşünme aracıdır.
+18
+
+-- 18 of 20 --
+
+A Terminolojik Ek: “İşlevsel Soyutlama” Derken Yapılan
+İşlem
+Çalışma boyunca kullanılan terimlerin çoğu aynı kalıptan üretilmiştir: soyutlama kavra-
+mının önüne bir belirleyici eklenmiştir — biçimsel soyutlama, işlevsel soyutlama, süreçsel
+soyutlama. Bu işlemin adlandırılması, terimlerin keyfî etiketler gibi görünmesini önler.
+A.1 Mantıksal Yapı
+Klasik adı belirlenimdir (Lat. determinatio). Aristotelesçi tanım şemasına göre bir terim,
+yakın cinsine ayırıcı bir fark eklenerek üretilir:
+işlevsel soyutlama = soyutlama
+︸ ︷︷ ︸
+yakın cins
++ [işlev boyutunda]
+︸ ︷︷ ︸
+ayırıcı fark
+Belirlenim, soyutlamanın tersi yönde çalışır: soyutlama ayrıntı atar, belirlenim ay-
+rıntı ekler. Yani çalışmanın yaptığı işlem, soyutlama kavramının kendisine belirlenim
+uygulamaktır.
+A.2 Yüklem Düzeyi
+Aynı işlem, tek argümanlı bir yüklemin iki argümanlıya çevrilmesidir:
+S(x) 7 −→ S(x, d)
+Burada S(x) “x soyutlandı”, S(x, d) ise “x, d boyutu bakımından soyutlandı” anlamına
+gelir. Mantıkta buna yüklemin görelileştirilmesi, yöntembilimde parametreleştirme denir.
+Eklenen kelime bir niteleyici değil bir indekstir: soyutlamanın türünü değil, hangi eksende
+gerçekleştiğini bildirir.
+A.3 Kavram Düzeyi
+Nitel yöntembilimde bir kategorinin özellik ve boyutlarına ayrıştırılmasına boyutlandırma
+denir. Bilgi düzenleme kuramında buna en yakın araç Ranganathan’ın faset analizidir:
+bir konu tek bir hiyerarşiye sıkıştırılmak yerine bağımsız fasetlere ayrılır ve her nesne bu
+fasetlerin kesişiminde konumlandırılır.
+Bu, Şekil 1’deki düzlemin biçimsel karşılığıdır. Düzlem bir hiyerarşi değil bir faset
+yapısıdır.
+19
+
+-- 19 of 20 --
+
+A.4 Ontolojik Düzey
+Johnson’ın determinable–determinate ayrımı ilişkinin doğasını netleştirir. “Renk” belirle-
+nebilir, “kırmızı” belirlenmiş bir hâldir; kırmızı, rengin bir alt türü değildir. Aynı ilişki
+burada geçerlidir: işlevsel soyutlama, soyutlamanın alt türü değil, belirli bir hâlidir.
+Pratik değeri, katmanların yanlışlıkla birbirini dışlayan “soyutlama türleri” taksonomi-
+sine dönüştürülmesini önlemesidir.
+A.5 Bilim Felsefesi Düzeyi
+Carnap’ın explication kavramı, bulanık bir gündelik kavramın (explicandum) daha kesin bir
+kavram takımıyla (explicatum) değiştirilmesini tanımlar. Bölüm 2’in tamamı bu türden bir
+işlemdir: gündelik kullanımda tek ve bulanık olan “soyutlama” kavramı, dört ayrı işleme
+ve iki eksen üzerindeki katmanlara ayrılmaktadır.
+A.6 Sonuç
+Yapılan işlemin en isabetli adlandırması:
+Soyutlamanın boyutlandırılması yoluyla açımlanması.
+Kısa hâliyle soyutlamanın fasetlenmesi. Eklenen belirleyicinin teknik adı ise faset
+göstergesi veya boyut indeksidir; çünkü o kelime soyutlamanın bir türünü değil, gerçekleştiği
+ekseni adlandırır.
+20
+
+-- 20 of 20 --
