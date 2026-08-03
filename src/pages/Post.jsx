@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { usePosts } from '../usePosts.js'
 import { useHead, SITE_NAME } from '../seo.js'
 import { useLang, seriesLabel } from '../i18n.jsx'
+import { excerpt, RELATED_WORDS } from '../excerpt.js'
 
 export default function Post() {
   const { slug } = useParams()
@@ -188,7 +189,9 @@ export default function Post() {
                   <span className="post-related-body">
                     <span className="post-related-name">{dTitle(rp)}</span>
                     {rp.description && (
-                      <span className="post-related-desc">{dDesc(rp)}</span>
+                      <span className="post-related-desc">
+                        {excerpt(dDesc(rp), RELATED_WORDS)}
+                      </span>
                     )}
                   </span>
                 </Link>

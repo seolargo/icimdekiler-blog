@@ -10,6 +10,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync, rmSync } from 'node
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { execSync } from 'node:child_process'
+import { excerpt, RELATED_WORDS } from '../src/excerpt.js'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const dist = join(root, 'dist')
@@ -128,7 +129,7 @@ function postListItem(p) {
     : ''
   const meta = [p.series, p.pages > 0 ? `${p.pages} sayfa` : null].filter(Boolean).join(' · ')
   const ser = meta ? `<span class="post-series">${esc(meta)}</span>` : ''
-  const desc = p.description ? `<span class="post-desc">${esc(p.description)}</span>` : ''
+  const desc = p.description ? `<span class="post-desc">${esc(excerpt(p.description))}</span>` : ''
   return (
     `<li class="post-item"><a href="${base}post/${encodeURIComponent(p.slug)}" class="post-link">` +
     thumb +
@@ -386,7 +387,7 @@ for (const p of posts) {
             ? `<img class="post-related-thumb" src="${asset(rp.thumb)}" alt="" loading="lazy" />`
             : ''
           const desc = rp.description
-            ? `<span class="post-related-desc">${esc(rp.description)}</span>`
+            ? `<span class="post-related-desc">${esc(excerpt(rp.description, RELATED_WORDS))}</span>`
             : ''
           return (
             `<li class="post-related-item"><a href="${base}post/${encodeURIComponent(rp.slug)}">` +

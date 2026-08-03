@@ -4,6 +4,7 @@ import { usePosts } from '../usePosts.js'
 import { useHead } from '../seo.js'
 import { useLang, seriesLabel } from '../i18n.jsx'
 import { fold, matchesTokens } from '../search.js'
+import { excerpt } from '../excerpt.js'
 import ThemeIcon from '../ThemeIcon.jsx'
 
 const PER_PAGE = 10
@@ -381,9 +382,11 @@ export default function Home() {
                         )}
                         {post.description && (
                           <span className="post-desc">
-                            {lang === 'en' && post.description_en
-                              ? post.description_en
-                              : post.description}
+                            {excerpt(
+                              lang === 'en' && post.description_en
+                                ? post.description_en
+                                : post.description
+                            )}
                           </span>
                         )}
                       </div>
