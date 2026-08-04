@@ -283,17 +283,22 @@ const projects = existsSync(join(dist, 'projects.json'))
   ? JSON.parse(readFileSync(join(dist, 'projects.json'), 'utf8'))
   : []
 const projItem = (it) =>
-  `<li class="proj-item"><a class="proj-link" href="${escAttr(it.url)}" target="_blank" rel="noopener noreferrer">` +
+  `<li class="proj-item">` +
+  // deposu olmayan proje (ör. özel repo) linksiz görünür
+  (it.url
+    ? `<a class="proj-link" href="${escAttr(it.url)}" target="_blank" rel="noopener noreferrer">`
+    : `<span class="proj-link">`) +
   `<span class="proj-name">${esc(it.name)}</span>` +
   (it.lang ? `<span class="proj-lang">${esc(it.lang)}</span>` : '') +
-  `</a>${it.desc ? `<p class="proj-desc">${esc(it.desc)}</p>` : ''}` +
+  (it.url ? `</a>` : `</span>`) +
+  `${it.desc ? `<p class="proj-desc">${esc(it.desc)}</p>` : ''}` +
   (it.homepage
     ? `<a class="proj-live" href="${escAttr(it.homepage)}" target="_blank" rel="noopener noreferrer">Canlı ↗</a>`
     : '') +
   `</li>`
 const projHead = buildHead({
   title: 'Projeler',
-  description: 'GitHub’daki açık kaynak projelerim.',
+  description: 'Geliştirdiğim projeler.',
   canonical: `${SITE_URL}${base}projeler`,
   type: 'website',
   image: '/profile.jpeg',

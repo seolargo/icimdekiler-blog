@@ -66,7 +66,7 @@ export const TRANSLATIONS = {
     recIntro: 'Takip etmeye değer bulduğum isimler ve siteleri.',
     recEmpty: 'Yakında — önerilen isimler ve siteleri burada paylaşılacak.',
     projects: 'Projeler',
-    projectsIntro: 'GitHub’daki açık kaynak projelerim.',
+    projectsIntro: 'Geliştirdiğim projeler.',
     projectsLive: 'Canlı ↗',
     walls: 'Duvarlar',
     wallsIntro:
@@ -147,7 +147,7 @@ export const TRANSLATIONS = {
     recIntro: 'People and sites worth following.',
     recEmpty: 'Coming soon — recommended names and their sites will appear here.',
     projects: 'Projects',
-    projectsIntro: 'My open-source projects on GitHub.',
+    projectsIntro: 'Projects I have built.',
     projectsLive: 'Live ↗',
     walls: 'Walls',
     wallsIntro:

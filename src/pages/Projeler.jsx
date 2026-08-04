@@ -28,15 +28,23 @@ export default function Projeler() {
         <ul className="proj-list">
           {items.map((it) => (
             <li key={it.name} className="proj-item">
-              <a
-                className="proj-link"
-                href={it.url}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span className="proj-name">{it.name}</span>
-                {it.lang && <span className="proj-lang">{it.lang}</span>}
-              </a>
+              {/* deposu olmayan proje (ör. özel repo) linksiz görünür */}
+              {it.url ? (
+                <a
+                  className="proj-link"
+                  href={it.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span className="proj-name">{it.name}</span>
+                  {it.lang && <span className="proj-lang">{it.lang}</span>}
+                </a>
+              ) : (
+                <span className="proj-link">
+                  <span className="proj-name">{it.name}</span>
+                  {it.lang && <span className="proj-lang">{it.lang}</span>}
+                </span>
+              )}
               {(lang === 'en' && it.desc_en ? it.desc_en : it.desc) && (
                 <p className="proj-desc">
                   {lang === 'en' && it.desc_en ? it.desc_en : it.desc}
