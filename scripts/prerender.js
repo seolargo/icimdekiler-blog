@@ -288,7 +288,7 @@ const projItem = (it) =>
   (it.url
     ? `<a class="proj-link" href="${escAttr(it.url)}" target="_blank" rel="noopener noreferrer">`
     : `<span class="proj-link">`) +
-  `<span class="proj-name">${esc(it.name)}</span>` +
+  `<span class="proj-name">${esc(it.title || it.name)}</span>` +
   (it.lang ? `<span class="proj-lang">${esc(it.lang)}</span>` : '') +
   (it.url ? `</a>` : `</span>`) +
   `${it.desc ? `<p class="proj-desc">${esc(it.desc)}</p>` : ''}` +

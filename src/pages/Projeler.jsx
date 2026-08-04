@@ -3,10 +3,14 @@ import { useHead } from '../seo.js'
 import { useLang } from '../i18n.jsx'
 
 // Projelerim — public/projects.json'dan okunur (GitHub public repo'larından üretildi):
-//   [{ "name": "...", "desc": "...", "lang": "...", "url": "https://github.com/...", "homepage": "..." }]
+//   [{ "name": "...", "title": "...", "title_en": "...", "desc": "...", "lang": "...",
+//     "url": "https://github.com/...", "homepage": "..." }]
+// `name` depo kimliğidir (link ve React key); ekranda okunur ad (`title`) gösterilir.
 export default function Projeler() {
   const { t, lang } = useLang()
   const [items, setItems] = useState(null)
+  const projTitle = (it) =>
+    (lang === 'en' && it.title_en ? it.title_en : it.title) || it.name
 
   useHead({ title: t('projects'), image: '/profile.jpeg' })
 
@@ -36,12 +40,12 @@ export default function Projeler() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <span className="proj-name">{it.name}</span>
+                  <span className="proj-name">{projTitle(it)}</span>
                   {it.lang && <span className="proj-lang">{it.lang}</span>}
                 </a>
               ) : (
                 <span className="proj-link">
-                  <span className="proj-name">{it.name}</span>
+                  <span className="proj-name">{projTitle(it)}</span>
                   {it.lang && <span className="proj-lang">{it.lang}</span>}
                 </span>
               )}
