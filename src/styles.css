@@ -1480,23 +1480,33 @@ code {
   color: var(--fg);
 }
 
-/* Puan rozeti — 8+ vurgulu, düşükler sessiz */
+/* Puan rozeti — yuvarlak; 8+ vurgulu, 10 dolu, düşükler sessiz */
 .post-priority {
-  display: inline-block;
-  min-width: 20px;
-  padding: 1px 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
   margin-right: 8px;
-  border-radius: 999px;
+  vertical-align: middle;
+  border-radius: 50%;
   border: 1px solid var(--border);
-  font-size: 0.74rem;
+  font-size: 0.72rem;
+  line-height: 1;
   font-variant-numeric: tabular-nums;
-  text-align: center;
+  letter-spacing: 0;
   color: var(--muted);
 }
-.post-priority.p10,
-.post-priority.p9,
-.post-priority.p8 {
+.post-priority.p8,
+.post-priority.p9 {
   border-color: var(--accent);
   color: var(--accent);
+  font-weight: 600;
+}
+.post-priority.p10 {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
   font-weight: 600;
 }
