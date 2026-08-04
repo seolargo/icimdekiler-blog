@@ -128,7 +128,10 @@ function postListItem(p) {
     ? `<img class="post-thumb" src="${asset(p.thumb)}" alt="" loading="lazy" />`
     : ''
   const meta = [p.series, p.pages > 0 ? `${p.pages} sayfa` : null].filter(Boolean).join(' · ')
-  const ser = meta ? `<span class="post-series">${esc(meta)}</span>` : ''
+  const prio = p.priority
+    ? `<span class="post-priority p${p.priority}">${p.priority}</span>`
+    : ''
+  const ser = meta || prio ? `<span class="post-series">${prio}${esc(meta)}</span>` : ''
   const desc = p.description ? `<span class="post-desc">${esc(excerpt(p.description))}</span>` : ''
   return (
     `<li class="post-item"><a href="${base}post/${encodeURIComponent(p.slug)}" class="post-link">` +

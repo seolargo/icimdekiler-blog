@@ -251,6 +251,8 @@ export default function Home() {
     [themes, bySlug],
   )
 
+  const [sort, setSort] = useState('yeni')
+
   const filtered = useMemo(() => {
     // Tema seçiliyken küratör sırasını koru
     if (themeObj) return themeObj.slugs.map((s) => bySlug.get(s)).filter(Boolean)
@@ -264,12 +266,21 @@ export default function Home() {
     })
   }, [writings, query, series, index, themeObj, bySlug])
 
+  // Kriz sıralaması: puana göre azalan; eşitlikte mevcut (yeni önce) sıra korunur
+  const ordered = useMemo(() => {
+    if (sort !== 'oncelik') return filtered
+    return filtered
+      .map((p, i) => [p, i])
+      .sort((a, b) => (b[0].priority || 0) - (a[0].priority || 0) || a[1] - b[1])
+      .map(([p]) => p)
+  }, [filtered, sort])
+
   // "Buradan başla" + tema ızgarası yalnızca temiz açılış görünümünde
   const showLanding = !query && !series && !tema && page === 1
 
-  const pageCount = Math.ceil(filtered.length / PER_PAGE)
+  const pageCount = Math.ceil(ordered.length / PER_PAGE)
   const current = Math.min(page, pageCount || 1)
-  const visible = filtered.slice((current - 1) * PER_PAGE, current * PER_PAGE)
+  const visible = ordered.slice((current - 1) * PER_PAGE, current * PER_PAGE)
 
   return (
     <>
@@ -344,13 +355,33 @@ export default function Home() {
           </div>
           )}
 
-          {(query || series) && filtered.length > 0 && (
-            <p className="muted result-count">
-              {filtered.length} {t('results')}
-            </p>
+          {ordered.length > 0 && (
+            <div className="list-controls">
+              {(query || series) && (
+                <p className="muted result-count">
+                  {ordered.length} {t('results')}
+                </p>
+              )}
+              <div className="sort-switch" role="group" aria-label={t('sortLabel')}>
+                <button
+                  type="button"
+                  className={`sort-btn${sort === 'yeni' ? ' is-active' : ''}`}
+                  onClick={() => { setSort('yeni'); goTo(1) }}
+                >
+                  {t('sortNewest')}
+                </button>
+                <button
+                  type="button"
+                  className={`sort-btn${sort === 'oncelik' ? ' is-active' : ''}`}
+                  onClick={() => { setSort('oncelik'); goTo(1) }}
+                >
+                  {t('sortPriority')}
+                </button>
+              </div>
+            </div>
           )}
 
-          {filtered.length === 0 ? (
+          {ordered.length === 0 ? (
             <p className="muted no-results">{t('noResults')}</p>
           ) : (
             <>
@@ -370,8 +401,16 @@ export default function Home() {
                         <span className="post-title">
                           {lang === 'en' && post.title_en ? post.title_en : post.title}
                         </span>
-                        {(post.series || post.pages > 0) && (
+                        {(post.series || post.pages > 0 || post.priority) && (
                           <span className="post-series">
+                            {post.priority ? (
+                              <span
+                                className={`post-priority p${post.priority}`}
+                                title={t('priorityHint')}
+                              >
+                                {post.priority}
+                              </span>
+                            ) : null}
                             {[
                               seriesLabel(post.series, lang),
                               post.pages > 0 ? `${post.pages} ${t('pagesUnit')}` : null,

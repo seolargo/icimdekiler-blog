@@ -1441,3 +1441,62 @@ code {
     to { opacity: 1; transform: none; }
   }
 }
+
+/* Kriz önceliği: liste kontrolleri + kart rozeti */
+.list-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 0 0 12px;
+}
+.list-controls .result-count {
+  margin: 0;
+}
+.sort-switch {
+  display: inline-flex;
+  gap: 2px;
+  margin-left: auto;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 2px;
+}
+.sort-btn {
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.82rem;
+  padding: 4px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.sort-btn:hover {
+  color: var(--fg);
+}
+.sort-btn.is-active {
+  background: var(--btn-bg);
+  color: var(--fg);
+}
+
+/* Puan rozeti — 8+ vurgulu, düşükler sessiz */
+.post-priority {
+  display: inline-block;
+  min-width: 20px;
+  padding: 1px 6px;
+  margin-right: 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  font-size: 0.74rem;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  color: var(--muted);
+}
+.post-priority.p10,
+.post-priority.p9,
+.post-priority.p8 {
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+}
