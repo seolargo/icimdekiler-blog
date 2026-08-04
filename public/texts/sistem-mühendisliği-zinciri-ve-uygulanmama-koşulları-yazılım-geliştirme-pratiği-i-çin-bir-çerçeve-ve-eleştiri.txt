@@ -1,0 +1,759 @@
+Sistem Mühendisliği Zinciri ve Uygulanmama Koşulları:
+Yazılım Geliştirme Pratiği İçin Bir Çerçeve ve Eleştiri
+Özet
+Sistem mühendisliği, bir ihtiyacın fiziksel bir sisteme dönüşümünü tanımlı bir adımlar
+dizisi üzerinden yürütür. Bu dizi altmış yılı aşkın bir süredir standartlaştırılmış olmasına
+rağmen, savunma sanayii, havacılık ve düzenlemeye tabi alanlar dışında büyük ölçüde
+uygulanmamaktadır. Bu çalışma iki soruyu birlikte ele alır: zincirin ne olduğu ve neden
+uygulanmadığı. İkinci soru, birincisinin pratik değerini belirlediği için ihmal edilemez;
+disiplinin yalnızca normatif yönünün aktarılması, uygulayıcıyı ideal ile gözlenen arasındaki
+farkı bireysel bir yetersizlik olarak yorumlamaya yöneltir. Çalışmanın merkezî tezi, zincirin
+üst katmanlarının — amaç ve gereksinim — en yüksek hata maliyetini taşımasına karşın
+örgütsel olarak en az sahiplenilen katmanlar olduğu ve bu ters orantının ölçülebilirlik
+asimetrisinden kaynaklandığıdır. Son bölümler, bu koşullar altında yetkisiz konumdaki bir
+uygulayıcının izleyebileceği pratikleri sistematize eder.
+Giriş
+Problemin Konumlandırılması
+Mühendislik eğitiminde sistem mühendisliği, çoğunlukla normatif bir süreç modeli olarak
+aktarılır: izlenmesi gereken adımlar, üretilmesi gereken belgeler, geçilmesi gereken kilometre
+taşları. Bu aktarım eksiktir. Modelin kendisi doğrudur; ancak modelin uygulanma koşulları,
+uygulanmama sebepleri ve uygulanmadığı durumlarda geçerli olan davranış stratejileri
+aynı ciddiyetle ele alınmaz.
+Bu eksikliğin sonucu somuttur. Disiplini yalnızca normatif yönüyle öğrenmiş bir uygulayıcı,
+sahada karşılaştığı sapmayı iki yanlış teşhisten biriyle açıklama eğilimindedir: ya kendi
+yetersizliği, ya çevresindeki aktörlerin ihmali. Her iki teşhis de yanlıştır. Sapma yapısaldır
+ve sebepleri — bu çalışmanın göstermeye çalıştığı üzere — tanımlanabilir teşvik yapılarına
+dayanır.
+Çalışmanın Kapsamı ve Statüsü
+Bu metin, sistem mühendisliği zincirinin standart tanımını verir, zincirin sıradan yazılım
+geliştirme bağlamındaki karşılıklarını kurar, uygulanmama sebeplerini örgütsel ve bilişsel
+düzeyde sınıflandırır ve son olarak yetkisiz konumdaki uygulayıcı için bir pratikler kümesi
+önerir.
+Metnin statüsü açıkça belirtilmelidir. Zincirin tanımı yerleşik literatüre dayanır ve tartışmalı
+değildir. Uygulanmama sebeplerine ilişkin sınıflandırma ise gözlem düzeyinde kalmakta
+1
+
+-- 1 of 19 --
+
+olup nicel bir ölçüme dayanmamaktadır; sunulan altı sebep, bir tümevarımsal bulgu değil,
+bir çerçeve önerisidir. Son bölümlerdeki pratikler ise normatif önerilerdir ve etkinlikleri
+sınanmamıştır.
+Sistem Mühendisliğinin Konusu ve Doğuş Bağlamı
+Disiplinin Ayırt Edici Konusu
+Sistem mühendisliği, klasik anlamda bir mühendislik dalı değildir. Elektrik mühendisliğinin
+konusu elektriksel olgular, makine mühendisliğinin konusu mekanik sistemlerdir. Sistem
+mühendisliğinin konusu ise belirli bir fiziksel alan değil, parçaların birbirine bağlanması ve
+bu bağlanmanın yönetilmesidir.
+Bu tanım, disiplinin neden ancak belirli bir ölçek eşiğinin üzerinde anlamlı hâle geldiğini
+de açıklar. Tek bir mühendisin kavrayabildiği bir sistemde bağlanma problemi zaten örtük
+olarak çözülmüştür.
+Doğuş Bağlamı
+Disiplinin kurumsallaşması, İkinci Dünya Savaşı sonrası dönemde ortaya çıkan büyük ölçekli
+sistemlerle — füze programları, entegre hava savunma ağları, uzay araçları — eşzamanlıdır.
+Bell Laboratuvarları, RAND Corporation ve ardından ABD savunma tedarik yapısı, tek
+bir disiplinin kavrayamayacağı ölçekteki sistemlerde yeni bir hata sınıfıyla karşılaştı.
+Bu hata sınıfının ayırt edici özelliği şudur: hiçbir alt sistem kendi içinde yanlış tasarlanma-
+mıştır, ancak birleşim çalışmamaktadır. Hatalar hesaplarda değil, arayüzlerde, paylaşılma-
+yan varsayımlarda ve hiçbir aktörün sahiplenmediği boşluklarda birikmektedir.
+Sistem mühendisliğinin cevabı iki bileşenlidir: bu boşlukların tanımlı bir sahibi olması ve
+bu sahibin izleyeceği tanımlı bir yolun bulunması.
+Merkezî İlke
+Disiplinin tek cümlelik özeti şudur:
+Önce ne yapılacağı, ardından neyin yapacağı belirlenir.
+Bu ayrım kavramsal olarak bariz görünmekle birlikte pratikte sürekli ihlal edilir. Bir
+problem ifadesi duyulduğunda bilişsel süreç doğrudan çözüm üretimine yönelir. Disiplinin
+işlevi bu yönelimi yasaklamak — ki yasaklanamaz — değil, onu sıralı ve izlenebilir adımlara
+ayrıştırmaktır.
+Zincirin Yapısı
+Katmanlar
+Bir ihtiyacın fiziksel bir sisteme dönüşümü aşağıdaki adımlar üzerinden yürütülür:
+Paydaş ihtiyacı Hangi aktör hangi problemi yaşıyor?
+|
+Misyon / amaç Sistem hangi gerekçeyle var olacak?
+|
+Operasyon senaryosu Sistem gerçek koşullarda nasıl kullanılacak?
+2
+
+-- 2 of 19 --
+
+|
+Gereksinimler Ölçülebilir ve sınanabilir koşullar
+|
+İşlevsel analiz Sistem hangi işlevleri yerine getirmeli?
+|
+Mantıksal mimari İşlevler arasındaki ilişki ve akış nedir?
+|
+İşlev tahsisi Her işlev hangi unsura atanacak?
+|
+Fiziksel mimari Somut bileşenler ve aralarındaki bağlantılar
+|
+Bileşen tasarımı Her bileşenin ayrıntılı tasarımı
+|
+Entegrasyon ve test Doğrulama ve geçerleme
+Teknoloji Yasağı Kuralı
+Zincirin en sık ihlal edilen kuralı şudur: işlevsel analiz tamamlanana kadar hiçbir fiziksel
+bileşen veya teknoloji adı kullanılmaz.
+Kuralın gerekçesi yapısaldır. Teknoloji erken seçildiğinde, işlevsel ayrıştırma seçilen tek-
+nolojinin yapabildiklerine göre şekillenir. Bu durumda zincir tersine döner: işlevler ge-
+reksinimden değil, mevcut çözümün kısıtlarından türetilmiş olur. Literatürde bu ayrım
+requirements pull ile solution push arasındaki karşıtlık olarak adlandırılır.
+Katmanları Ayıran Sorular
+Katmanların birbirine karışmasını önlemenin en ekonomik yolu, her katmanın kendine ait
+sorusunu ayırt etmektir:
+Neden var? -> Amaç
+Neyi başarmalı? -> Gereksinim
+Ne yapmalı? -> İşlev
+Nasıl çalışmalı? -> Mekanizma / mantıksal mimari
+Ne gerçekleştirecek? -> Fiziksel yapı
+Bu yapı, Rasmussen’ın araç–amaç hiyerarşisi olarak tanımladığı düzenin tasarım yönünde
+aşağı inilmiş hâline karşılık gelir. Hiyerarşide yukarı doğru hareket “neden?”, aşağı doğru
+hareket “nasıl?” sorusuyla yapılır.
+Doğrulama Ekseni
+Zincir tek yönlü değildir. İniş adımlarının her birinin bir sınama karşılığı bulunur:
+Misyon <-> Ürün metriği (problem çözüldü mü?)
+Operasyon senaryosu <-> Uçtan uca test
+Gereksinimler <-> Kabul testi
+Mantıksal mimari <-> Sözleşme testi
+Fiziksel mimari <-> Entegrasyon testi
+Bileşen tasarımı <-> Birim testi
+Bu yapıdan, karıştırılmaması gereken iki kavram türer:
+3
+
+-- 3 of 19 --
+
+• Doğrulama (verification): Sistem doğru mu inşa edildi? Gerçekleşen davranışın
+tanımlı gereksinime uygunluğu sorgulanır.
+• Geçerleme (validation): Doğru sistem mi inşa edildi? Gereksinimin gerçek ihtiyaca
+uygunluğu sorgulanır.
+Bu çalışmanın odak noktası, ikinci sorunun neden sistematik olarak ihmal edildiğidir.
+Zincirin Doğrusal Olmadığına Dair Not
+Yukarıdaki gösterim zorunlu olarak sadeleştirilmiştir. Gerçek pratikte adımlar arası hareket
+çift yönlüdür: mimari kısıtlar gereksinimleri değiştirir, tahsis denemeleri işlevsel ayrıştırmayı
+yeniden şekillendirir. Gereksinim değişkenliği (requirements churn) bu olgunun yerleşik
+adıdır.
+Zincirin buradaki işlevi bir süreç sırası dayatmak değil, hangi adımların var olduğunu
+görünür kılmaktır. Pratikte gözlenen sorun adımların sırası değil, bazı adımlara hiç uğran-
+mamasıdır.
+Zincirin Yazılım Geliştirme Bağlamındaki Karşılığı
+Zincir savunma tedariki bağlamında geliştirilmiş olmakla birlikte yapısı ölçekten bağım-
+sızdır. Aşağıda, sıradan bir e-ticaret uygulamasına iade işlevi eklenmesi örneği üzerinden
+katman karşılıkları kurulmuştur.
+Paydaş İhtiyacı
+Müşteri hizmetleri biriminin ifadesi: iade talepleri telefonla alınmakta, günde yaklaşık
+iki yüz çağrı elle bir hesap tablosuna işlenmekte ve kayıtların bir kısmı izlenemez hâle
+gelmektedir.
+Bu ifadede henüz bir çözüm bulunmamaktadır. Masadaki seçenekler yazılım geliştirmeyi zo-
+runlu kılmaz; süreç değişikliği, dış hizmet alımı veya iade oranının kaynağında düşürülmesi
+de geçerli alternatiflerdir.
+Misyon
+“Müşteri iade sürecini insan aracısı gerektirmeden ve izlenebilir biçimde yürütmek.”
+Bu ifade sistemin varlık gerekçesini belirtir; gerçekleştirme biçimine ilişkin hiçbir taahhüt
+içermez.
+Operasyon Senaryosu
+Müşteri sipariş geçmişini görüntüler
+-> İade edilecek kalemi seçer
+-> Gerekçe belirtir
+-> Kargo etiketi alır
+-> Ürünü gönderir
+-> Depo birimi ürünü doğrular
+-> Para iadesi tetiklenir
+-> Müşteri bilgilendirilir
+4
+
+-- 4 of 19 --
+
+Yazılım literatüründeki karşılıkları: kullanıcı yolculuğu, akış diyagramı, event storming
+çalışmasının bütünsel aşaması.
+Gereksinimler
+• Teslimattan sonraki on dört gün içinde iade talebi açılabilmelidir.
+• Aynı sipariş kalemi birden fazla kez iade edilememelidir.
+• Depo onayını izleyen yirmi dört saat içinde para iadesi tetiklenmelidir.
+• Ödeme sağlayıcısına erişilememesi durumunda talep kaybedilmemeli, kuyruğa alın-
+malıdır.
+Son iki madde işlevsel olmayan gereksinimlerdir ve pratikte en sık ihmal edilen kategoriyi
+oluştururlar.
+İşlevsel Analiz
+Sipariş geçmişini getirme, uygunluk değerlendirme, talep oluşturma, kargo etiketi üretme,
+ürün girişini doğrulama, para iadesi başlatma, bildirim gönderme, durum geçişlerini
+kaydetme.
+Bu listede hiçbir teknoloji adı bulunmamaktadır; bu, teknoloji yasağı kuralının doğrudan
+sonucudur.
+Mantıksal Mimari
+UygunlukDeğerlendir
+-> TalepOluştur
+-> KargoEtiketiÜret
+-> BildirimGönder
+-> (bekleme: fiziksel teslim)
+-> ÜrünGirişiDoğrula
+-> ParaİadesiBaşlat
+-> BildirimGönder
+Yazılım literatüründeki karşılıkları: alan modeli (domain model), sınırlı bağlam haritası,
+durum makinesi. Alan Odaklı Tasarım (DDD) yaklaşımının varlık gerekçesi, tam olarak
+bu katmanın altyapıdan ayrı tutulmasıdır.
+İşlev Tahsisi
+Her işlevin bir teknik unsura atanması: uygunluk değerlendirme → alan kuralları; etiket
+üretme → kargo adaptörü; para iadesi → ödeme adaptörü; kesinti dayanıklılığı → mesaj
+kuyruğu, yeniden deneme mekanizması ve idempotency anahtarı.
+Bu tablo, savunma sanayiindeki function allocation tablosuyla yapısal olarak özdeştir.
+Ölçeğe Göre Zincirin Ağırlığı
+Zincirin her bağlamda aynı ağırlıkta uygulanması ne mümkün ne de gereklidir:
+5
+
+-- 5 of 19 --
+
+Zincirin ağırlaşması gereken koşullar
+Çok ekipli ve çok servisli sistemler
+Uzun ömürlü sistemler (beş yıl ve üzeri bakım ufku)
+Düzenlemeye tabi alanlar
+Geri alınamaz etkiler (finansal işlem, tıbbi karar)
+Zincirin hafifleyebileceği koşullar
+İç araçlar ve tek seferlik betikler
+Prototip ve keşif çalışmaları
+Tek sahipli, kısa ömürlü kod
+Özellik anahtarı ile kapatılabilen değişiklikler
+Metodolojik hata, zinciri hafifletmek değil, hafifletilip hafifletilmeyeceğine dair bilinçli
+bir karar verilmemesidir. Gözlenen pratikte bu çoğunlukla bir karar değil, varsayılan
+davranıştır.
+Üst Katmanların Ayrıcalıklı Konumu
+Geri Alınamazlık
+Zincirin alt katmanlarındaki hatalar düzeltilebilir; ilk iki katmandaki hatalar düzeltilemez.
+Bunun sebebi çözüm alanının kapanmasıdır.
+Paydaş ihtiyacı katmanında birden çok çözüm seçeneği açıktır. Bir çözüm ismi telaffuz
+edildiği anda — örneğin “iade ekranı yapılsın” — alan tek seçeneğe daralır. Bu daraltma
+çoğunlukla bir toplantı içinde, açık bir karar biçimi almadan gerçekleşir. İzleyen dönemde
+tüm optimizasyon çabası daralmış alanın içinde yürütülür ve ilk daraltma sorgulanmaz.
+Hata Maliyeti Merdiveni
+Bileşen hatası -> saatler (kod düzeltmesi)
+Fiziksel mimari -> haftalar (yeniden yapılandırma)
+Mantıksal mimari -> aylar (yeniden yazım)
+Gereksinim hatası -> çeyrekler (yanlış ürün)
+Misyon hatası -> kurtarılamaz (sistem hiç var olmamalıydı)
+Bu merdiven, çalışmanın geri kalanının dayandığı temel yapıdır.
+Paydaş İhtiyacı ile Misyonun İşlevsel Farkı
+İki katman sıklıkla birbirine karıştırılmakla birlikte farklı işlevler görürler:
+Paydaş ihtiyacı Misyon / amaç
+Kaynağı Problemi yaşayan aktör Çözüme karar veren aktör
+İçeriği Semptom Hedeflenen durum
+İşlevi Çözüm alanını açık Çözüm alanını bilinçli
+tutmak daraltmak
+Bozulma biçimi Çözüm kılığında ifade Hiç yazılı hâle
+edilmek getirilmemek
+Birinci katmanın bozulması erken kapanma olarak adlandırılabilir: ihtiyaç, ihtiyaç olarak
+değil çözüm olarak ifade edilir ve arkasındaki problem hiç sorulmaz.
+6
+
+-- 6 of 19 --
+
+İkinci katmanın bozulması sessiz kalmadır: amaç hiçbir yerde yazılı olmadığı için her
+aktör kendi amacını varsayar. Ürün yönetimi çağrı hacminin düşmesini, geliştirme ekibi
+sistemin teknik sağlığını, destek birimi kendi iş yükünün azalmasını hedef olarak varsayar.
+Üç aktör farklı sistemler inşa eder ve bu ayrışmanın fark edilmesi aylar alır.
+Yazılı Amacın Hakem İşlevi
+Yazılı bir amaç ifadesinin işlevi karar üretmek değil, sonraki kararları sınamaktır. Amaç
+ifadesi mevcutsa, ileride ortaya çıkacak tasarım tartışmalarında bir ölçüt bulunur. Mevcut
+değilse, aynı tartışma kıdem hiyerarşisine göre çözülür.
+Sahiplik Yapısı
+Savunma Tedarikinde Rol Dağılımı
+Bu bağlamda roller resmî olarak tanımlanmış ve isimlendirilmiştir:
+Katman Sahibi
+------------------------------------------------------
+Paydaş ihtiyacı Kullanıcı kurum
+Misyon, ConOps Kullanıcı kurum + program ofisi
+Gereksinimler Program ofisi (tedarik eden taraf)
+İşlevsel analiz Yüklenici sistem mühendisi
+Mantıksal mimari Baş mimar
+İşlev tahsisi Baş mühendis
+Fiziksel mimari Alt sistem sorumluları
+Doğrulama Bağımsız test kurumu
+Yapının en önemli özelliği şudur: gereksinimi tanımlayan taraf ile onu karşılayan taraf
+farklıdır ve doğrulamayı üçüncü, bağımsız bir taraf yürütür. ABD uygulamasında bağımsız
+test kurumu doğrudan yasama organına rapor eder.
+Bu ayrım, aynı aktörün hem hedefi belirlemesini hem de hedefe ulaşıldığını ilan etmesini
+engellemek üzere tasarlanmıştır.
+Zincirin bütününün de tanımlı bir sahibi vardır: baş mühendis. Bu rolün görevi bileşen
+tasarımı değil, katmanlar arası tutarlılığın korunmasıdır ve tam zamanlı bir görevdir.
+Yazılım Geliştirmede Rol Dağılımı
+Aynı roller mevcuttur ancak isimleri belirsiz, sınırları bulanıktır:
+Katman Tipik sahibi
+------------------------------------------------------
+Paydaş ihtiyacı Müşteri, destek birimi
+Misyon Ürün yöneticisi
+Operasyon senaryosu Ürün yöneticisi + kullanıcı deneyimi
+Gereksinimler Ürün yöneticisi (işlevsel),
+teknik lider (işlevsel olmayan)
+İşlevsel analiz Teknik lider / kıdemli geliştirici
+Mantıksal mimari Çoğunlukla tanımsız
+İşlev tahsisi Teknik lider + ekip
+7
+
+-- 7 of 19 --
+
+Fiziksel mimari Ekip
+Doğrulama Test birimi, kod incelemesi, üretim metrikleri
+Sahipsiz Kalan Katmanlar
+İşlevsel olmayan gereksinimler. Ürün yönetimi işlevsel gereksinimleri tanımlar; dayanıklılık,
+tutarlılık ve kesinti davranışına ilişkin gereksinimler ise ne ürün yönetiminin diline ne de iş
+tanımına girer. Savunma bağlamında bu kategorinin sahibi tanımlıdır; yazılım bağlamında
+çoğunlukla tanımsızdır. Sonuç, sistemin beklenen akışta çalışması ancak kenar durumlarda
+sessiz veri kaybı üretmesidir.
+Mantıksal mimari. Ekiplerin önemli bir kısmı gereksinimden doğrudan fiziksel mimariye
+geçer ve alan modeli hiç üretilmez. Bu olgu, Conway yasasının bir uzantısı olarak okunabilir:
+sistemin yapısı organizasyonun iletişim yapısını yansıtmakla kalmaz, organizasyonda
+karşılığı bulunmayan roller sistemde karşılığı bulunmayan katmanlar üretir.
+Katmanlar arası tutarlılık. Savunma bağlamında bu görevin tam zamanlı bir sahibi vardır.
+Yazılım bağlamında karşılık gelen rol genellikle yoktur; teknik lider bu görevi diğer
+görevleriyle birlikte yürütür ve kaynak kısıtı altında ilk feda edilen bileşen tutarlılık
+denetimi olur.
+Tanımsız Kalan Hesap Verebilirlik
+Karar konusu Hesap veren
+------------------------------------------------
+Ne yapılacağı Ürün yönetimi / sponsor
+Nasıl yapılacağı Teknik lider / mimar
+Ne kadar süreceği Ekip + yönetim
+Beklendiği gibi çalışıyor mu Test birimi + üretim metrikleri
+Doğru şey mi yapıldı Tanımsız
+Son satır bu çalışmanın merkezindedir. Doğrulama sorusunun tanımlı bir sahibi vardır;
+geçerleme sorusunun — gereksinimlerin doğru gereksinimler olup olmadığı — sahibi
+çoğunlukla yoktur. Bunun örgütsel sebebi açıktır: soruyu sormak, gereksinimi tanımlayan
+aktörü sorgulamak anlamına gelir ve bu aktör tipik olarak soruyu sorabilecek konumdaki
+kişiden daha kıdemlidir.
+Zincirin Uygulanmama Sebepleri
+Bu bölüm, uygulanmamanın bireysel ihmalle açıklanamayacağını ve altı ayrı yapısal
+baskının aynı yönde işlediğini savunur.
+Bilişsel Yönelim
+İnsan bilişi, problem ifadesi karşısında çözüm üretmeye yönelir. Bu bir kusur değil, olağan
+işleyiştir. Ancak bir çözüm temsili oluştuktan sonra dikkat problemden temsile kayar ve
+alternatif arama süreci durur.
+Bunun sonucu, katman atlamanın bilinçli bir karar olmamasıdır. Hiçbir aktör amaç
+katmanının atlanmasına karar vermez; katman zaten atlanmış olur ve atlandığı fark
+edilmez.
+8
+
+-- 8 of 19 --
+
+Ölçülebilirlik Asimetrisi
+Kapatılan iş kalemi sayısı -> ölçülebilir
+Teslim edilen yineleme sayısı -> ölçülebilir
+Doğru ürünün yapılıp yapılmadığı -> ölçülemez
+İhtiyacın doğru anlaşılıp anlaşılmadığı -> ölçülemez
+Ölçülen yönetilir, ölçülmeyen ihmal edilir. Üst katmana ayrılan zaman, mevcut ölçüm
+sistemlerinde üretken olmayan zaman olarak görünür. Bu, bireysel değil kurumsal bir
+yanlılıktır.
+Maliyetin Zamansal Asimetrisi
+Amaç katmanının atlanmasından doğan maliyet gecikmeli olarak ortaya çıkar ve ortaya
+çıktığında başka sebeplere atfedilir: gereksinimlerin değişmesi, pazar koşulları, kullanıcı
+davranışı. Amaç katmanına ayrılan zamanın maliyeti ise derhal ve açık biçimde görünür.
+Kesin ve yakın maliyet ile belirsiz ve uzak maliyet karşılaştırıldığında karar verici sistematik
+olarak birincisini önceler. Bu, zamansal ıskontolamanın standart bir tezahürüdür.
+Buna sorumluluk atfındaki asimetri eklenir: erken sorgulama sonucu doğan gecikme belirli
+bir aktöre atfedilebilirken, geç ortaya çıkan yanlış ürün sonucu dağıtık biçimde atfedilir.
+Sorgulamanın Sosyal Maliyeti
+Amaç sorgulaması teknik bir işlem olmakla birlikte sosyal olarak öyle algılanmaz. Sorgula-
+yan aktör, işi talep eden aktörü sorgulamış olur; talep eden aktör tipik olarak hiyerarşide
+daha üsttedir; ve hazırlıksız yakalanma riski taşır.
+Ayrıca “amaç nedir?” sorusu örtük olarak amacın tanımlanmamış olduğu iddiasını taşır —
+yani bir aktörün görevini yerine getirmediği yönünde bir imada bulunur.
+Sahiplik Boşluğu
+Tanımlı bir sahibi olmayan görev yerine getirilmez. Bu bir erdem meselesi değil, örgüt-
+sel mekanizma meselesidir. Bu tespit, izleyen bölümdeki kurumsal çözüm önerilerinin
+dayanağını oluşturur.
+Meşguliyetin İlerlemeyle Karıştırılması
+Üretim faaliyeti — kod yazımı — öznel olarak ilerleme hissi üretir; amaç tartışması
+üretmez. Bu his yanıltıcı olmakla birlikte güçlüdür ve ekiplerin gözlenebilir çıktı üretimine
+yönelmesini teşvik eder.
+Sonuç, yanlış yönde yüksek hızla ilerleme ve bu hızın verimlilik olarak yorumlanmasıdır.
+Sebeplerin Ortak Yapısı
+Altı sebebin ortak özelliği, her birinin kısa vadede rasyonel, uzun vadede maliyetli olmasıdır.
+Hiçbir aktör irrasyonel davranmaz; her aktör kendi teşvik yapısına göre optimal hareket
+eder ve toplam sonuç sistemik olarak yanlış yönde oluşur.
+9
+
+-- 9 of 19 --
+
+Bu tespitin doğrudan sonucu, çözümün bireysel dikkat çağrısı olamayacağıdır. İşleyebilecek
+tek müdahale, üst katmanın tanımlı bir sahibe atanması ve bu katmana ölçülebilir bir
+ölçüt bağlanmasıdır.
+Askerî Planlama ile Yapısal Karşılaştırma
+Kökensel İlişki
+Zincirin bu biçimi askerî planlama geleneğinden türemiştir. Concept of Operations teriminin
+her iki alanda aynı sözcükle ifade edilmesi, bu türeyişin doğrudan bir izidir.
+Sistem mühendisliği Askerî planlama
+------------------------------------------------
+Paydaş ihtiyacı Siyasi hedef
+Misyon Görev tanımı
+Operasyon senaryosu Concept of Operations
+Gereksinim Komutan niyeti + hedeflenen son durum
+İşlevsel analiz Görev ayrıştırma
+İşlev tahsisi Kuvvet tahsisi
+Fiziksel mimari Muharebe düzeni
+Doğrulama Harekât sonrası değerlendirme
+Yöntemsel Uyarı
+Bu karşılaştırmadan çıkarılabilecek dersler, kültürel veya karakterolojik iddialar değildir.
+“Belirli bir ordunun baskı altında iyi karar verdiği” türünden ifadeler büyük ölçüde ge-
+riye dönük anlatılardır ve yöntemsel değer taşımazlar. Aktarılabilir olan karakter değil,
+tanımlanmış mekanizmadır. Aşağıda üç mekanizma ele alınmıştır.
+Niyet Temelli Emir
+Görev tipi komuta (Auftragstaktik) doktrininde üst kademe üç unsuru bildirir: ne başarıla-
+cağı, hangi gerekçeyle başarılacağı ve tamamlandığında hedeflenen durumun ne olacağı.
+Gerçekleştirme biçimi bilinçli olarak alt kademeye bırakılır.
+Doktrinin gerekçesi şudur: plan temas sonrası geçerliliğini yitirir, niyet yitirmez. İletişim
+kesildiğinde alt kademenin elinde gerçekleştirme tarifi değil, gerekçe tarifi bulunur.
+Yazılım bağlamındaki karşılığı doğrudandır. Uygulama düzeyinde tanımlanmış bir görev
+ile amaç ve gerekçesiyle birlikte tanımlanmış bir görev arasındaki fark, geliştiricinin
+öngörülmemiş durumda karar verebilme kapasitesini belirler. Bu bağlamda iletişim yapısal
+olarak kesiktir: geliştirici, gereksinimi tanımlayan aktörün bulunmadığı ortamda çok sayıda
+küçük karar verir.
+Karşı Tezin Rol Tanımına Yazılması
+1973 Arap–İsrail Savaşı öncesinde İsrail istihbaratının hazırlıksız yakalanması, veri eksikli-
+ğinden değil, hâkim bir değerlendirme çerçevesinin veriyi filtrelemesinden kaynaklanmıştır.
+Zincir diliyle ifade edilirse: hata gereksinim katmanında değil, varsayım katmanında
+oluşmuştur ve bu katmanın tanımlı bir sınayıcısı bulunmamaktaydı.
+10
+
+-- 10 of 19 --
+
+Savaş sonrası kurulan soruşturma komisyonunun önerisi doğrudan bu boşluğa yöneliktir:
+istihbarat yapısı içinde, görevi hâkim değerlendirmenin karşı tezini üretmek olan ayrı bir
+birim oluşturulması. Uygulamanın adı Aramice bir ifadeden gelir: ipcha mistabra.
+Tasarım fikrinin özü şudur: karşı tez üretimini bireysel bir erdem veya cesaret mese-
+lesi olmaktan çıkarıp tanımlı bir role bağlamak. Sahiplik boşluğu tespitinin doğrudan
+uygulanışıdır.
+Yazılım bağlamındaki karşılığı — büyük ölçekli bir mimari kararda bir aktörün açıkça
+karşı tez üretmekle görevlendirilmesi — pratikte neredeyse hiç uygulanmaz.
+Hata Bildirimi ile Yaptırımın Ayrılması
+Harekât sonrası değerlendirme uygulaması, hiyerarşik farkın askıya alındığı ve yaptırım
+üretmeyen bir çözümleme olarak kurgulanmıştır. Gerekçesi doğrudandır: yaptırım riski
+mevcutken doğru bilgi bildirilmez, bildirilmediğinde öğrenme durur.
+Yazılım bağlamındaki karşılığı olan suçlamasız olay sonrası değerlendirme (blameless
+postmortem) bu geleneğin doğrudan uzantısıdır.
+Analojinin Sınırı
+İki alan arasında yapısal bir fark bulunmaktadır ve gözden kaçırıldığında yanlış çıkarımlara
+yol açar.
+Sistem mühendisliğinde karşı taraf yoktur. Fiziksel kısıtlar tasarıma göre kendini uyarlamaz.
+Askerî planlamada ise karşı taraf plana göre kendini değiştiren bir zekâdır. Askerî planlama
+kültürünün hız, esneklik ve inisiyatif vurgusu bu ikinci koşula göre kalibre edilmiştir.
+Yazılım işlerinin büyük kısmı birinci koşula aittir. İki alan istisnadır: güvenlik ve rekabetçi
+ürün geliştirme. Bu ayrım gözden kaçırıldığında, askerî bağlamda rasyonel olan aceleci
+karar verme, düşmansız bir alanda erdem olarak yorumlanır.
+Her İki Alanda Gözlenen Ortak Arıza
+Askerî literatürde bu arızanın yerleşik adı taktik başarı ile stratejik başarısızlığın bir-
+likteliğidir. Zincir diliyle: işlevler kusursuz yerine getirilmiş, ancak gereksinimler yanlış
+türetilmiştir; çünkü misyon gerçek amaçla eşleşmemektedir.
+Yazılım bağlamındaki karşılığı, her yinelemeyi teslim eden, tanımlı kalite ölçütlerini
+karşılayan ve buna rağmen kullanılmayan bir ürün üreten ekiptir.
+Her iki alanda da arızanın kaynağı aynıdır: alt katmanlar ölçülebilir, üst katmanlar
+ölçülemez. Ölçülen yönetilir, ölçülmeyen ihmal edilir — ve zincir en yüksek maliyetli
+noktada kopar.
+Semptom Bildirimi Karşısında İzlenecek Yol
+Bu bölümden itibaren metin betimleyici düzeyden normatif düzeye geçmektedir.
+Bölüm 4’te örnek olarak verilen ifade — taleplerin izlenemez hâle gelmesi — bir çözüm
+talebi değil, bir semptom bildirimidir. İzlenmesi gereken ilk işlem çözüm üretimi değil,
+semptomun tanımlı bir probleme dönüştürülmesidir.
+11
+
+-- 11 of 19 --
+
+İfadenin Ayrıştırılması
+“Kaybolma” ifadesi, tek başına en az dört farklı problem sınıfına karşılık gelebilir:
+Kayıt hiç oluşturulmuyor -> veri girişi problemi
+Kayıt oluşturuluyor, bulunamıyor -> arama ve indeksleme problemi
+Kayıt oluşturuluyor, izlenmiyor -> süreç ve sahiplik problemi
+Kayıt oluşturuluyor, sonuçlanmıyor -> iş akışı problemi
+Dört sınıf farklı çözümler gerektirir ve bir arayüz geliştirmek yalnızca birincisine karşılık
+gelir.
+Büyüklüğün Ölçülmesi
+Semptomun büyüklüğü belirlenmeden çözümün büyüklüğü seçilemez. Belirlenmesi gereken
+nicelikler: birim zamandaki talep hacmi, kayıp oranı, kayıp başına maliyet, sürece ayrılan
+insan-saat ve zaman içindeki eğilim.
+Bu niceliklerin bilinmemesi kendi başına bir bulgudur. Tanımlanmamış bir problem çözül-
+mez; üzerine yalnızca bir yapı inşa edilir.
+Yerinde Gözlem
+Gözlenen sürecin doğrudan izlenmesi, getirisi en yüksek ve en sık atlanan adımdır. Aktarılan
+süreç ile fiilen yürütülen süreç sistematik olarak farklıdır.
+Yerinde gözlemin tipik olarak ortaya çıkardığı unsurlar: birden fazla ve senkron olmayan
+kayıt kaynağı, kayıpların belirli zaman dilimlerinde yoğunlaşması, talep kategorilerinin
+yanlış sınıflandırılmış olması ve resmî olmayan bir kayıt kaynağının fiilen birincil kaynak
+işlevi görmesi.
+Bu bulguların hiçbiri toplantı ortamında aktarılmaz; aktaran aktör bunları süreç olarak
+değil, olağan düzensizlik olarak sınıflandırır. Toyota Üretim Sistemi literatüründe bu ilkenin
+adı genchi genbutsudur.
+Kök Nedene İniş
+Talepler izlenemiyor
+Neden? Kayıt sistemine işlenmiyor
+Neden? Yoğun dönemde işleme zamanı bulunamıyor
+Neden? Çağrı süresinin yarısı veri girişine ayrılıyor
+Neden? Aynı veri üç ayrı sisteme giriliyor
+Neden? Sipariş, kargo ve kayıt sistemleri entegre değil
+Zincirin sonucu, başlangıçtaki çözüm önerisinden bağımsız bir noktaya çıkar: problem
+arayüz eksikliği değil, sistemler arası entegrasyon eksikliğidir.
+Yöntemsel uyarı: kök neden çözümlemesi sonlu olmalıdır. Uygulayıcının müdahale edebildiği
+ilk katmanda durulmalıdır; aksi hâlde her problem denetlenemez üst yapılara indirgenir.
+Çözüm Alanının Bilinçli Açılması
+Seçenek Uygun olduğu koşul
+12
+
+-- 12 of 19 --
+
+------------------------------------------------------------
+Müdahale etmemek Ölçülen etki düşük çıktığında
+Süreç değişikliği Kayıp belirli bir noktada yoğunlaştığında
+Mevcut aracın iyileştirilmesi Basit bir araç yeterli olduğunda
+Hazır ürün tedariki Akış standart olduğunda
+Dış hizmet alımı Hacim düşük ve çekirdek iş olmadığında
+Yazılım geliştirme Diğer seçenekler elendiğinde
+Talebin kaynağında azaltılması Asıl problem talep hacmi olduğunda
+Son satır yöntemsel olarak özellikle önemlidir: bazı durumlarda en etkin çözüm sistemi
+iyileştirmek değil, sistemi gereksiz kılmaktır.
+Asgari Sınama
+Kök nedene ilişkin bir hipotez oluşturulduğunda, tam çözüm inşa edilmeden hipotezin
+sınanması gerekir. Sınanan şey çözüm değil hipotezdir; hata maliyeti buna göre düşer.
+Başarı Ölçütünün Tanımlanması
+Bölüm 7’nin sonucu, üst katmana ölçülebilir bir ölçüt bağlanması gerekliliğiydi. Bu bölüm
+ölçütün nasıl tanımlanacağını ele alır.
+Yönlendirici soru şudur: sistem amacına ulaştığında hangi ölçülebilir büyüklük değişecektir?
+Geçersiz ve Geçerli Ölçüt Biçimleri
+Geçersiz biçimler: ölçülemez nitel ifadeler; sistemin kendisine ilişkin ifadeler; çıktıyı betim-
+leyen ancak sonuç belirtmeyen ifadeler.
+Geçerli biçim, mevcut değeri, hedef değeri ve zaman ufkunu birlikte içerir ve sistemin
+kendisine değil probleme ilişkindir. Örnek: birim zamandaki destek çağrısı hacminin
+belirtilen başlangıç değerinden belirtilen hedef değere, belirtilen süre içinde inmesi.
+Karşı Ölçüt Gerekliliği
+Tek başına tanımlanan her ölçüt istismara açıktır. Ölçütlerin çift olarak tanımlanması
+gerekir:
+Ana ölçüt Karşı ölçüt Engellediği davranış
+--------------------------------------------------------------------------
+Destek çağrısı azalsın Tamamlanma oranı artsın Süreci zorlaştırmak
+Yanıt süresi düşsün Dönüşüm oranı artsın İşlevsellik azaltmak
+Dağıtım sıklığı artsın Olay sayısı azalsın Sınamayı atlamak
+İş kalemi hızı artsın Yeniden açılma azalsın Eksik tamamlamak
+İş Tiplerine Göre Ölçüt Örnekleri
+Başarım çalışmaları. Yüzde doksan beşinci yüzdelik gecikme değeri üzerinden tanımlan-
+malıdır; ortalama değer kullanıcı deneyimini temsil etmez.
+Yeniden yapılandırma. Kullanıcıya doğrudan yansımadığı için en zor kategoridir. Ölçüt,
+kod niteliğine ilişkin öznel değerlendirmelerle değil değişim maliyetiyle tanımlanmalıdır:
+13
+
+-- 13 of 19 --
+
+ilgili modüldeki değişikliklerin ortalama tamamlanma süresi veya modül kaynaklı olay
+sayısı.
+Yeni işlev. Benimseme oranı ve zaman ufku birlikte tanımlanmalıdır. Hedefin önceden
+konmasının asıl işlevi, gerçekleşen değerin bilgi taşımasını sağlamaktır; hedef tanımlanma-
+dığında herhangi bir gerçekleşme değeri olumlu yorumlanabilir.
+Güvenlik çalışmaları. Doğrudan sonuç ölçütü tanımlanamaz; vekil ölçütler kullanılır: açık
+sayısı, yama uygulama süresi.
+Belirleyici Sınama
+Tanımlanan ölçütün sistemi değil problemi ölçmesi gerekir. Sınama şudur: ölçüt, sistem
+henüz mevcut değilken de ölçülebiliyor mu?
+Ölçülemiyorsa, tanımlanan büyüklük sistemin kendisini ölçmektedir. Ölçülebiliyorsa, aynı
+işlem başlangıç değerini de üretir — ki hedefin anlamlı olması bu değerin varlığına bağlıdır.
+Nicel Ölçüt Tanımlanamadığında
+İki alternatif mevcuttur. Birincisi, tanımlı bir başarı koşuluna bağlanmış gözlenebilir olay.
+İkincisi, terk edilebilirlik sınaması: sistemin kaldırılması durumunda hangi aktörün olumsuz
+etkileneceği. İkinci sınamanın cevapsız kalması, amaç katmanının hiç tanımlanmamış
+olduğunu gösterir.
+Eksik Tanımlı Görev Karşısında Uygulayıcının Konumu
+Bu bölüm, zincirin üst katmanları tanımsızken alt katmanda çalışan uygulayıcının izle-
+yebileceği pratikleri ele alır. Amaç ikilidir: hatalı varsayımdan doğan sonuçların doğru
+aktöre atfedilmesi ve doğru çözüme ulaşma olasılığının artırılması. İki amaç aynı işlemlerle
+sağlanır.
+Temel İlke
+Eksik bilgi görevin verilmesiyle birlikte zaten mevcuttur. Sorgulanmaması bilgiyi üretmez;
+yalnızca eksikliği bir varsayıma dönüştürür ve varsayımın sahipliğini uygulayıcıya devreder.
+Varsayımın yazılı hâle getirilmesi, sahipliği bilginin gerçek sahibine geri verir.
+Görevin Katmanına Yerleştirilmesi
+Görev ifadesi biçimi Katman Eksik olan
+--------------------------------------------------------------
+Amaç düzeyinde ifade Amaç Gereksinim ve işlev
+Gereksinim düzeyinde ifade Gereksinim İşlev ve kenar durumlar
+Bileşen düzeyinde ifade Bileşen Gerekçe
+Üçüncü biçim yöntemsel olarak en riskli olanıdır: çözüm seçilmiş, ancak seçimin hangi
+katmanda ve hangi aktör tarafından yapıldığı belirsiz kalmıştır.
+14
+
+-- 14 of 19 --
+
+Sorgulama Yerine Anlayışın Yazılı Beyanı
+Doğrudan soru biçimindeki talepler karşı tarafa bilişsel yük bindirir ve yüksek oranda
+cevapsız kalır. Anlaşılan durumun yazılı olarak beyan edilmesi daha etkindir: düzeltilmesi
+düşük maliyetlidir ve cevapsızlık zımni onay üretir.
+Beyanın kapsam dışı bırakılan unsurları içermesi kritiktir; anlaşmazlık tipik olarak kapsam
+sınırında ortaya çıkar.
+Varsayımların ve Maliyetlerinin Birlikte Kaydı
+Cevap alınamadığında ilerlemeyi durdurmak yerine varsayımların açıkça kaydedilmesi ve
+çalışmanın sürdürülmesi gerekir. Kayıt, varsayımın kendisiyle birlikte yanlış olması hâlinde
+doğacak değişim maliyetini de içermelidir.
+Bu son unsur, pratikte cevabı tetikleyen asıl bileşendir: karar verici sorunun sorulması
+nedeniyle değil, maliyetin görünür olması nedeniyle harekete geçer.
+İlerlemenin durdurulmaması ayrıca konumsal bir gerekliliktir; bekleme hâli, uygulayıcıyı
+engellenen taraf değil engelleyen taraf konumuna yerleştirir.
+Kenar Durumların Sistematik Taranması
+Eksik tanımlı görevlerde tanımsız kalan unsurlar tekrar eden bir küme oluşturur:
+- İşlemin tekrarlanması durumunda davranış (idempotency)
+- Bağımlı servisin erişilemez olması durumunda davranış
+- Yetkisiz erişim denemesi karşısında davranış
+- Veri yokluğu veya boş küme durumunda davranış
+- Eşzamanlı isteklerde tutarlılık
+- Geri alınabilirlik ve geri alma yolu
+- Mevcut kayıtların dönüşümü
+- İzlenebilirlik: kayıt, ölçüt, uyarı
+Kararın Kalıcı Ortama Kaydedilmesi
+Mimari karar kaydı (Architecture Decision Record) biçimi — bağlam, değerlendirilen
+seçenekler, verilen karar, gerekçe, beklenen sonuç — kalıcı ve aranabilir bir ortamda
+tutulmalıdır.
+Anlık iletişim kanallarındaki kayıtlar pratikte erişilemez hâle gelir; sürüm kontrol siste-
+mindeki kayıtlar kalır. Kararların gerekçesine sahip olmak, zaman içinde kurumsal etki
+alanına dönüşen bir konum üretir.
+Sözlü Mutabakatın Yazılıya Aktarılması
+Toplantı sonrasında alınan kararların kısa bir yazılı özetle kayda geçirilmesi, birim çabaya
+düşen getirisi en yüksek pratiktir. İtiraz gelmemesi mutabakat üretir; itiraz gelmesi ise
+uyuşmazlığın erken aşamada ortaya çıkmasını sağlar.
+15
+
+-- 15 of 19 --
+
+Biçim ve Çerçeveleme
+Yukarıdaki pratiklerin tamamı savunmacı veya işbirlikçi biçimde ifade edilebilir. Ayrım
+tek bir unsurda yoğunlaşır: eksikliğin kimin problemi olarak çerçevelendiği.
+Eksikliği karşı tarafın kusuru olarak çerçeveleyen ifade ile kendi yorum ihtiyacını belirten
+ifade aynı bilgiyi kayda geçirir; kayıt değerleri özdeş, sosyal maliyetleri farklıdır.
+Ölçü
+Bu pratikler orantısız uygulandığında kendi işlem yüklerini üretir. Ölçünün belirleyicisi,
+işin geri alınabilirlik derecesidir: kolayca geri alınabilen değişikliklerde ayrıntılı varsayım
+kaydı gereksiz, geri alınamaz etki üreten akışlarda zorunludur.
+Karşı Tarafın Cevap Üretemediği Durum
+Önceki bölümün örtük varsayımı, sorgulama karşılığında cevap alınacağıydı. Pratikte bu
+varsayım çoğunlukla sağlanmaz.
+Durum Ayrımı
+Cevap vermeme ile cevabı bilmeme farklı durumlardır ve farklı müdahaleler gerektirir:
+Durum Uygun müdahale
+--------------------------------------------------------------
+Bilmiyor, bilmediğinin farkında Birlikte üretmek
+Bilmiyor, bildiğini varsayıyor Nicel veriyle sınamak
+Biliyor, aktaramıyor Kurumsal kısıt; ısrar etmemek
+Aracı konumunda, sahibi değil Asıl sahibi tespit etmek
+Dördüncü durum en yaygın ve en kolay çözülenidir; bilgiyi ileten aktör ile bilgiyi üreten
+aktör farklıdır.
+Sorunun Somutlaştırılması
+Cevapsızlığın en yaygın sebebi sorunun soyutluk düzeyidir. Soyut sorular karşı tarafta
+savunma tepkisi üretir ve hazırlık gerektirir; somut sorular anlatı tetikler ve anlatı veri
+içerir.
+Yöntemsel kural: genel süreç soruları yerine belirli bir olaya, belirli bir zaman dilimine
+veya belirli bir gözleme yönelik sorular tercih edilmelidir.
+Cevabın Üretilip Onaya Sunulması
+Boş bir bilgi alanını doldurmak yüksek maliyetli, mevcut bir değeri düzeltmek düşük
+maliyetlidir. Bu asimetri, bilgi elde etmenin en etkin yöntemlerinden birini üretir: eksik
+niceliklerin gerekçeli bir tahminle doldurulup düzeltmeye açık biçimde sunulması.
+Bağımsız Ölçüm Kurulması
+Nicel veri hiçbir aktörde mevcut değilse, verinin üretilmesi kısa süreli bir çalışmayla
+mümkün olabilir: kısa dönemli sayım, mevcut kayıtların çözümlenmesi, örneklem üzerinden
+gözlem.
+16
+
+-- 16 of 19 --
+
+Bu, yetki gerektirmeyen ve tartışmayı sonlandıran tek müdahaledir. Nicel veriye sahip
+aktör, hiyerarşik konumdan bağımsız olarak avantajlı konumdadır. Ayrıca gözlenen sonuç
+sıklıkla aktarılan problem tanımından farklı çıkar.
+Kapsamın Küçültülmesi
+Yüksek belirsizlik + büyük kapsam -> yüksek kayıp riski
+Yüksek belirsizlik + küçük kapsam -> öğrenme
+Belirsizlik giderilemediğinde doğru strateji, belirsizliğin giderilmesini beklemek değil, yanlış
+olma maliyetini düşürecek ölçekte ilerlemektir. Küçük ölçekli bir gerçekleştirme ayrıca
+gözlenebilir veri üretir; aktörler çalışan bir yapı karşısında, soyut tartışmada üretemedikleri
+değerlendirmeleri üretirler.
+Genel kural şu biçimde ifade edilebilir: sorunun cevaplanmasını sağlamaya çalışmak yerine,
+cevabı ortaya çıkaracak en düşük maliyetli yapıyı inşa etmek.
+Sorunun Karar Biçimine Dönüştürülmesi
+Bazı durumlarda eksiklik bilgi düzeyinde değil karar düzeyindedir; belirtisi, soruların
+cevaplanabilir olmasına rağmen hiçbir aktörün cevaplamaya yetkili hissetmemesidir.
+Bu durumda etkin müdahale, sorunun tanımlı seçenekler ve bir zaman sınırı içeren bir
+karar talebine dönüştürülmesidir. Seçenek sunumu, açık uçlu sorulara kıyasla belirgin
+biçimde daha yüksek cevap oranı üretir; zaman sınırı ise cevapsızlığı da tanımlı bir sonuca
+bağlar.
+Kabul Edilmesi Gereken Sınır
+Bazı örgütsel koşullarda ilgili bilgi hiçbir aktörde mevcut değildir ve üretilmesine yönelik
+bir istek de bulunmaz. Bu koşulda uygulanabilir strateji şu biçimi alır:
+Doğru sonucu garanti etmek mümkün değilse, yanlış sonucun maliyetini düşük
+tutmak garanti edilmelidir.
+Bu, ideal değil sınır koşuludur ve üst katmanların sahipsiz olduğu bir yapıda alt katmandan
+yürütülebilecek en yüksek getirili davranıştır.
+Yetkisiz Konumdan Değiştirilebilir Olanlar
+Beklentinin Kalibrasyonu
+Zinciri bütünüyle uygulayan kuruluşların oranı düşüktür. Düzenlemeye tabi sektörler, uzun
+ömürlü platformlar ve büyük ölçekli entegratörler dışında uygulama büyük ölçüde kısmidir.
+Dolayısıyla gözlenen sapma istisna değil, kuraldır.
+Ayrıca birçok kuruluş için kısmi uygulama rasyonel bir tercihtir. Kısa ömürlü bir ürün
+üzerinde çalışan küçük bir ekibin tam izlenebilirlik altyapısı kurmaması bir ihmal değil,
+doğru bir maliyet değerlendirmesidir. Sorun, ağırlığın gerekli olduğu koşullarda uygulan-
+mamasıdır.
+17
+
+-- 17 of 19 --
+
+Yetki Gerektirmeyen Müdahaleler
+Süreç dayatması yetki gerektirir ve yetkisiz uygulanması ters etki üretir. Ancak zincirin
+faydasının önemli bir kısmı süreç kurulmadan elde edilebilir:
+1. Tartışmaya katman adının dâhil edilmesi. Bir tartışmanın hangi katmanda yürütül-
+düğünün sorulması yetki gerektirmez ve verimsiz tartışmaların önemli bir kısmını
+sonlandırır; aktörler farklı katmanlarda konuşurken aynı katmanda konuştuklarını
+varsayma eğilimindedir.
+2. Gereksinimin gerekçesinin ve başarı ölçütünün geri sorulması. Cevabın bulunmaması
+yeni bir problem üretmez; mevcut bir eksikliği görünür kılar.
+3. İşlevsel olmayan gereksinimlerin yazılı hâle getirilmesi. En sahipsiz katman budur ve
+kayıt, yetki gerektirmez.
+4. Kararların ve gerekçelerinin kalıcı ortama kaydedilmesi.
+5. Kendi sorumluluk alanında katmanların ayrı tutulması; alan mantığının altyapıdan
+ayrılması örgütsel onay gerektirmez.
+Zamanlama
+Süreç gerekçesine dayanan öneriler nadiren kabul görür; maliyet gerekçesine dayanan
+öneriler görece daha yüksek kabul oranına sahiptir. Tekrarlanan yeniden yazım maliyetinin
+nicel olarak ifade edilmesi bir süreç önerisi değil, bir gözlem bildirimidir.
+Ayrıca yapısal fırsat pencereleri mevcuttur: bir olay sonrası değerlendirme, yeni bir progra-
+mın başlangıcı, ekip ölçeğinin büyümesi. Aynı öneri bu pencereler içinde makul, dışında
+ise gereksiz bürokrasi olarak yorumlanır. Zamanlama, içerikten daha belirleyicidir.
+Bireysel Düzeydeki Getiri
+Bir kuruluşun süreç olgunluğunun içeriden ve yetkisiz olarak değiştirilmesi genellikle
+mümkün değildir. Değişim ya hiyerarşinin üst düzeyinden başlatılır, ya bir kriz tarafından
+zorlanır, ya da gerçekleşmez. Üçüncü olasılık gerçek ve yaygındır.
+Dolayısıyla bu çerçevenin asıl getirisi örgütsel dönüşüm değildir. Aynı koşullar altında,
+katmanları ayırt edebilen uygulayıcı ile edemeyen uygulayıcı arasındaki karar niteliği farkı
+orta vadede belirgin hâle gelir. Bu, hiçbir örgütsel onaya bağlı olmayan tek bileşendir.
+Sonuç
+Zincirin Özeti
+Amaç → gereksinim → işlev → mantıksal mimari → işlev tahsisi → fiziksel mimari →
+bileşen. İlke: önce ne yapılacağı, ardından neyin yapacağı.
+Zincirin Epistemik Statüsü
+Zincir, tasarımın fiilen nasıl yürütüldüğünün betimlemesi değil, nasıl yürütüldüğünün
+denetlenebilir kaydıdır. Pratikte hiçbir program yukarıdan aşağı tek geçişte yürütülmez.
+Zincirin varlığı tasarımın rasyonel biçimde yürütüldüğünü kanıtlamaz; yalnızca rasyonel
+bir gerekçelendirmenin üretilebildiğini gösterir.
+18
+
+-- 18 of 19 --
+
+Bu iki durumun ayırt edilmesi, disiplinin doğru kullanımının ön koşuludur.
+Temel Yapısal Arıza
+Hata maliyeti zincirde yukarı doğru katlanarak artar; sahiplik yukarı doğru belirsizleşir.
+En yüksek maliyetli katman, en az denetlenen katmandır.
+Bu ters orantının kaynağı ölçülebilirlik asimetrisidir. Alt katmanlar sayılabilir çıktılar
+üretir, üst katmanlar üretmez. Ölçülen yönetilir, ölçülmeyen ihmal edilir.
+Aktarılabilir Üç Mekanizma
+1. Görev tanımının gerçekleştirme biçimi üzerinden değil, hedef, gerekçe ve son durum
+üzerinden yapılması.
+2. Karşı tez üretiminin bireysel erdem olmaktan çıkarılıp tanımlı bir role bağlanması.
+3. Hata bildiriminin yaptırım mekanizmasından ayrılması.
+Uygulayıcı Düzeyinde Beş Pratik
+1. Gelen görevin zincirdeki katmanının belirlenmesi ve eksik katmanın buradan tespiti.
+2. Sorgulama yerine anlaşılan durumun yazılı beyanı.
+3. Varsayımın ve yanlış olması hâlindeki maliyetinin birlikte kaydı.
+4. Sözlü mutabakatın yazılıya ve kalıcı ortama aktarılması.
+5. Belirsizlik giderilemediğinde kapsamın küçültülmesi yoluyla hata maliyetinin düşü-
+rülmesi.
+Kapanış Önermesi
+Çalışmanın tamamı tek bir önermeye indirgenebilir:
+Bir problem tanımının geçerliliği, onu ifade eden aktörün konumuyla değil,
+tanımın hangi ölçülebilir büyüklüğe bağlandığıyla belirlenir.
+19
+
+-- 19 of 19 --
