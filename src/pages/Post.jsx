@@ -26,7 +26,7 @@ export default function Post() {
   const dDesc = (p) => (p ? (lang === 'en' && p.description_en ? p.description_en : p.description) : '')
   const curatedRelated = (post?.related || [])
     .map((s) => posts.find((p) => p.slug === s))
-    .filter(Boolean)
+    .filter((p) => p && !p.tab) // gizli yazıların yazı sayfası üretilmiyor
   // Elle küratörlü ilişki yoksa aynı seriden diğer yazılara düş
   const relatedPosts = curatedRelated.length
     ? curatedRelated

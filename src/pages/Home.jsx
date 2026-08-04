@@ -253,6 +253,30 @@ export default function Home() {
 
   const [sort, setSort] = useState('yeni')
 
+  // Duvarlar aramaya dahil: katalog yalnızca arama yapılınca çekilir
+  const [walls, setWalls] = useState(null)
+  useEffect(() => {
+    if (!query.trim() || walls) return
+    fetch(`${import.meta.env.BASE_URL}duvarlar.json`)
+      .then((r) => r.json())
+      .then((d) => setWalls(d.walls || []))
+      .catch(() => setWalls([]))
+  }, [query, walls])
+
+  const wallHits = useMemo(() => {
+    const fq = fold(query.trim())
+    if (!fq || !walls) return []
+    return walls
+      .filter((w) =>
+        matchesTokens(
+          fq,
+          fold(`${w.id} ${w.title} ${w.kural} ${w.kirilir} ${w.neden} ${w.kaynak.join(' ')}`),
+          true,
+        ),
+      )
+      .slice(0, 4)
+  }, [walls, query])
+
   const filtered = useMemo(() => {
     // Tema seçiliyken küratör sırasını koru
     if (themeObj) return themeObj.slugs.map((s) => bySlug.get(s)).filter(Boolean)
@@ -353,6 +377,22 @@ export default function Home() {
               ))}
             </div>
           </div>
+          )}
+
+          {wallHits.length > 0 && (
+            <div className="wall-hits">
+              <h3 className="wall-hits-head">{t('wallsFound')}</h3>
+              <ul>
+                {wallHits.map((w) => (
+                  <li key={w.id}>
+                    <Link to={`/duvarlar?q=${encodeURIComponent(query.trim())}`}>
+                      <span className="wall-hits-id">{w.id}</span>
+                      <span className="wall-hits-title">{w.title}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           )}
 
           {ordered.length > 0 && (

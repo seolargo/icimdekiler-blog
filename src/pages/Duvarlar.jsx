@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { useHead } from '../seo.js'
 import { useLang } from '../i18n.jsx'
 
@@ -22,8 +23,15 @@ function highlight(text, q) {
 export default function Duvarlar() {
   const { t, lang } = useLang()
   const [data, setData] = useState(null)
-  const [q, setQ] = useState('')
+  const [params] = useSearchParams()
+  const [q, setQ] = useState(params.get('q') || '')
   const [theme, setTheme] = useState('all')
+
+  // ana sayfadaki aramadan gelindiğinde sorguyu devral
+  useEffect(() => {
+    const incoming = params.get('q')
+    if (incoming) setQ(incoming)
+  }, [params])
 
   useHead({ title: t('walls'), description: t('wallsIntro'), image: '/profile.jpeg' })
 

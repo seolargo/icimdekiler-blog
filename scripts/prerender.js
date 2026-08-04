@@ -381,7 +381,7 @@ for (const p of posts) {
   const isGuide = p.tab === 'rehber'
   const backHref = isMusic ? base + 'muzik' : isGuide ? base + 'rehberler' : base
   const backLabel = isMusic ? '← Müzik' : isGuide ? '← Rehberler' : '← Tüm yazılar'
-  const curatedRelated = (p.related || []).map((s) => postsBySlug.get(s)).filter(Boolean)
+  const curatedRelated = (p.related || []).map((s) => postsBySlug.get(s)).filter((r) => r && !r.tab)
   const relatedPosts = curatedRelated.length
     ? curatedRelated
     : p.series
