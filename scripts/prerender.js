@@ -267,14 +267,14 @@ const recItem = (it) =>
   `</a>${it.note ? `<p class="rec-note">${esc(it.note)}</p>` : ''}</li>`
 const recHead = buildHead({
   title: 'Öneriler',
-  description: 'Takip etmeye değer bulduğum isimler ve siteleri.',
+  description: 'Okuduğum ve işime yarayan kaynaklar — isimler, siteler, belgeler.',
   canonical: `${SITE_URL}${base}oneriler`,
   type: 'website',
   image: '/profile.jpeg',
 })
 const recBody =
   header('oneriler') +
-  `<p class="rec-intro muted">Takip etmeye değer bulduğum isimler ve siteleri.</p>` +
+  `<p class="rec-intro muted">Okuduğum ve işime yarayan kaynaklar — isimler, siteler, belgeler.</p>` +
   (recs.length
     ? `<ul class="rec-list">${recs.map(recItem).join('')}</ul>`
     : `<p class="muted rec-empty">Yakında — önerilen isimler ve siteleri burada paylaşılacak.</p>`) +

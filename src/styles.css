@@ -1546,3 +1546,21 @@ code {
   font-variant-numeric: tabular-nums;
   color: var(--muted);
 }
+
+/* Yerel kütüphane rafı (yalnızca dev sunucusunda görünür) */
+.local-shelf {
+  margin-top: 36px;
+  padding-top: 24px;
+  border-top: 1px dashed var(--line);
+}
+.local-shelf-head {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+.local-shelf-note {
+  margin: 4px 0 16px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
