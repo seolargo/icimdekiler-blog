@@ -34,3 +34,8 @@ pnpm-debug.log*
 Thumbs.db
 .vercel
 .env*
+
+# Yerel-yalnız kütüphane: üçüncü taraf PDF'ler ve yerel manifest.
+# Bu klasör bilerek depoya girmez ve derlemeye kopyalanmaz — yalnızca
+# `npm run dev` ile localhost'ta görünür. Ayrıntı: yerel/BENIOKU.md
+yerel/

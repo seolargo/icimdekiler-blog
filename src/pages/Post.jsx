@@ -81,7 +81,11 @@ export default function Post() {
     )
   }
 
-  const pdfUrl = `${import.meta.env.BASE_URL}pdfs/${post.pdf}`
+  // Yerel-yalnız kayıtlar dev sunucusundaki /yerel/ kökünden servis edilir;
+  // düz metin çıkarımı yalnızca korpus PDF'leri için üretiliyor.
+  const pdfUrl = post.local
+    ? `/yerel/pdfs/${post.pdf}`
+    : `${import.meta.env.BASE_URL}pdfs/${post.pdf}`
   const textUrl = `${import.meta.env.BASE_URL}texts/${post.slug}.txt`
 
   // Atıf bilgileri (IEEE stili) — URL okunur (decode edilmiş) gösterilir
@@ -156,12 +160,16 @@ export default function Post() {
         <a href={pdfUrl} download className="btn">
           {t('download')}
         </a>
-        <button type="button" onClick={copyText} className="btn">
-          {textCopied ? t('textCopied') : t('copyText')}
-        </button>
-        <a href={textUrl} download={`${post.slug}.txt`} className="btn">
-          {t('downloadText')}
-        </a>
+        {!post.local && (
+          <>
+            <button type="button" onClick={copyText} className="btn">
+              {textCopied ? t('textCopied') : t('copyText')}
+            </button>
+            <a href={textUrl} download={`${post.slug}.txt`} className="btn">
+              {t('downloadText')}
+            </a>
+          </>
+        )}
         <button type="button" onClick={share} className="btn">
           {copied ? t('copied') : t('share')}
         </button>
