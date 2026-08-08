@@ -57,7 +57,11 @@ export default function Duvarlar() {
     return walls.filter((w) => {
       if (theme !== 'all' && w.t !== theme) return false
       if (!needle) return true
-      const hay = `${w.id} ${w.title} ${w.kural} ${w.kirilir} ${w.neden} ${w.kaynak.join(' ')}`.toLocaleLowerCase('tr')
+      const sinama = (w.sinama || [])
+        .map((x) => `${x.kaynak} ${x.not} ${x.sonuc}`)
+        .join(' ')
+      const hay =
+        `${w.id} ${w.title} ${w.kural} ${w.kirilir} ${w.neden} ${w.kaynak.join(' ')} ${sinama}`.toLocaleLowerCase('tr')
       return hay.includes(needle)
     })
   }, [walls, q, theme])
@@ -150,6 +154,29 @@ export default function Duvarlar() {
                   <span className="dv-lbl">{t('lblReason')}</span>
                   <p>{highlight(w.neden, q.trim())}</p>
                 </div>
+                {(w.sinama || []).length > 0 && (
+                  <div className="dv-field dv-tested">
+                    <span className="dv-lbl">{t('lblTested')}</span>
+                    {w.sinama.map((x, i) => (
+                      <div key={i} className="dv-test">
+                        <span className={`dv-test-verdict v-${x.sonuc.replace(/[^a-zçğıöşü]/gi, '')}`}>
+                          {x.sonuc}
+                        </span>
+                        <span className="dv-test-date">{x.tarih}</span>
+                        <p className="dv-test-note">{highlight(x.not, q.trim())}</p>
+                        <a
+                          className="dv-test-src"
+                          href={x.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {x.kaynak} ↗
+                        </a>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
                 <div className="dv-sources">
                   {w.kaynak.map((k) => (
                     <button key={k} type="button" className="dv-src" onClick={() => pickSource(k)}>

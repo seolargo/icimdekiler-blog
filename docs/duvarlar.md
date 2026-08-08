@@ -25,6 +25,10 @@ Her madde dört alan taşır:
 - **Kırılır** — hangi koşulda geçersizleşir (duvarın sınırı).
 - **Neden** — engellediği başarısızlık / mekanizma.
 - **Kaynak** — hangi makale(ler).
+- **Sınandı** *(varsa)* — duvar dışarıdan bir şeye çarptığında yazılır: tarih,
+  sonuç (**desteklendi** / **daraltıldı** / **kırıldı**), ne bulunduğu ve kaynağı.
+  Bu alan kataloğun geri alma mekanizmasıdır; yalnızca ekleme yapan bir katalog
+  birikim yapar, öğrenmez.
 
 > Kapsam: ilk parti **8 makaleden** türetildi (Öğrenme Hızının Örgütsel
 > Ekonomisi, Kavramsal Çarpıştırma, Keşif Organizasyonları, Duvarlarla İlerlemek,
@@ -53,6 +57,7 @@ Her madde dört alan taşır:
 - **Kırılır:** Ham sayı olarak kullanılırsa ekip, sonucu zaten belli önemsiz hipotezleri sınayarak ölçütü sömürür. Ölçüt, hipotezin bilgi değeriyle (çökerse kaç alt-projeyi çökertir) ağırlıklandırılmalıdır.
 - **Neden:** Başarı üzerinden ölçülen ekip riskli hipotezden kaçınır; sınanan hipotez üzerinden ölçülen ekip hızlı-ucuz çürütmeye teşvik edilir.
 - **Kaynak:** Keşif Organizasyonları; (Goodhart: Duvarlarla İlerlemek).
+- **Sınandı (2026-08-06, daraltıldı):** Weaver, Rockefeller Doğa Bilimleri bütçesinin yaklaşık %80'ini yirmi yıl boyunca tek bir bahse — moleküler biyolojiye — ayırmış; çeşitlendirmemiş, hızlı elemeye de gitmemiş. On beşinci yılda alanın yürüyeceği hâlâ tartışmalıymış ve sonuç tuttu. Eleme temelli ölçüt, sonucun yıllarca görünmediği alanlarda uygulanamıyor: orada ölçüt “kaç yolu eledin” değil, bahsin sürdürülebilmesi oluyor. — [Eric Gilliam — “Turning Risk Appetite Into Impact” (FreakTakes), Warren Weaver üzerine](https://www.freaktakes.com/p/turning-risk-appetite-into-impact)
 
 ### D-04 — Bağlayıcı kısıt dışarı kaydıysa, iterasyona ek yatırım boşa gider
 - **Kural:** İç döngünü hızlandırmadan önce bağlayıcı kısıt hâlâ sende mi, yoksa dışsal bir saatte mi (ruhsat, düzenleme, tedarik süresi, dağıtım/maliyet duvarı) diye bak.
@@ -71,6 +76,8 @@ Her madde dört alan taşır:
 - **Kırılır:** Çevrim süresi kısa alanlarda (yazılım) her iki çarpanda da hareket vardır; mesafe hızla kapanır. Uzun çevrimli alanlarda (motor, optik, klinik) yalnızca deneme sayısı düşürülebilir; hızlanma gerçektir ama sınırlıdır.
 - **Neden:** Bir malzemenin belirli bir çalışma saatinde nasıl davrandığını görmek paralelleştirilerek kısaltılamaz. Bu, hangi alanda geriden gelenin hızla yetiştiğini, hangisinde yetişemediğini zekâ ya da sermaye farkına başvurmadan açıklar.
 - **Kaynak:** Lotus, Termit ve Wright Kardeşler.
+- **Sınandı (2026-08-06, daraltıldı):** 87 teknolojilik derlemede geçmiş öğrenme hızı ile gelecekteki hız arasında kayda değer bir ilişki çıkmıyor; veri setleri ikiye bölünüp erken ve geç dönem karşılaştırıldığında korelasyon asgari kalıyor ve birçok seride hız aniden değişiyor. Çarpım yapısı ayakta, ama “kaç deneme gerekecek” sorusunu geçmiş hıza bakarak cevaplayamazsın: eğri geriye dönük tarif edici, ileriye dönük tahmin edici değil. — [Brian Potter — “How Accurate Are Learning Curves?” (Construction Physics)](https://www.construction-physics.com/p/how-accurate-are-learning-curves)
+- **Sınandı (2026-08-06, daraltıldı):** “Çevrim süresi fizikseldir, kısaltılamaz” fazla güçlü bir ifadeymiş. Gerçek takvimin büyük kısmı teklif hazırlama, üretim planlama, kuyruk ve faturalama; SendCutSend bunları devreden çıkararak aylık teslimi günlere indirmiş, ekipman kullanımı %10-20'den neredeyse %100'e çıkmış. t ikiye ayrılmalı: fiziksel çevrim gerçekten taban, idari çevrim sıkıştırılabilir ve çoğu zaman toplamın büyük kısmı. — [Austin Vernon — “Speed Can Reindustrialize America”](https://www.austinvernon.site/blog/manufacturing.html)
 
 ### D-31 — Model, hesaba katmadığı şeyi “belirsiz” diye de işaretlemez
 - **Kural:** “Belirsizliğin en yüksek olduğu yerde dene” kuralını uygularken, belirsizlik tahmininin modelin kendisinden geldiğini unutma. Modelin hiç bilmediği bir olgu, modelde belirsiz görünmez — orada kendinden emin ve yanlıştır. Bu yüzden hesabın dışından gelen sinyale (sahada ortaya çıkan aşınma, öngörülmemiş kirlilik) ayrıca yer aç.
@@ -87,6 +94,7 @@ Her madde dört alan taşır:
 - **Kırılır:** Uzay "düzgün" değilse — kaotik sistemler, kriptografik uzaylar, kombinatoryal problemler, faz geçişleri — komşuluk argümanı çöker; başarısız nokta komşusu hakkında bilgi vermez. O zaman komşuluk yerine problemin kendi yapısını (dal-sınır, rejim eşikleri) kullan.
 - **Neden:** Sürekli uzayda sonlu nokta kümesinin ölçüsü sıfırdır; nokta biriktirmek aramayı daraltmaz. Kısıt bir yüzeydir, hiç denenmemiş bölgeleri de eler.
 - **Kaynak:** Kavramsal Çarpıştırma.
+- **Sınandı (2026-08-06, desteklendi):** PDC matkap uçlarının kırk yıllık gelişimi bu kuralın sanayideki hâli: her bozulan uç, arızanın nedenini anlayıp tasarımı değiştirmek için fırsat sayılmış. 1984'te kesici tutunmasını artıran arayüz, 80'lerin sonunda kil ve şeylde “bit balling” görülünce fishtail tasarımı. Sonuç TUNU sahasında on yılda hız %800, uç ömrü %1000, maliyet %85 düşüş. Başarısızlık nokta olarak değil kural olarak biriktirilmiş. — [Brian Potter — “What Learning by Doing Looks Like” (Construction Physics)](https://www.construction-physics.com/p/what-learning-by-doing-looks-like)
 
 ### D-07 — En iyi çözüm neredeyse her zaman kısıtların kesiştiği *köşededir*
 - **Kural:** "Şu anki çözümüm hangi duvarlara değiyor?" diye sor. **Hiçbirine:** ya optimumda değilsin ya kısıtlarını keşfetmedin. **Birine:** o duvar boyunca hâlâ yürüyebilirsin. **İkisine birden:** gerçekten sıkıştın — yol değiştirme, duvarlardan birini müzakere et (hangisi *yasa*, hangisi *kurulum*?).
@@ -209,6 +217,7 @@ Her madde dört alan taşır:
 - **Kırılır:** Bu bir hipotezdir, sınanmış bir bulgu değil. Ayrıca döngüseldir: kontrollü sapma üretebilmek zaten belli bir olgunluk ister; hiç ölçüm döngüsü olmayan yerde bu yöntem de tutmaz.
 - **Neden:** Bir gözlem ancak bir beklentiyi ihlal ettiğinde bilgi taşır; beklentisi olmayan için sapma yoktur, yalnızca olay vardır. Bunun doğal sonucu, işleyen bir sistemin kendini sorgulatacak sinyali hiç üretmemesidir — en tehlikeli konum cehalet değil, işe yaramış bir geçmiştir.
 - **Kaynak:** Lotus, Termit ve Wright Kardeşler.
+- **Sınandı (2026-08-06, daraltıldı):** Beklenti ihlali yaşamak gerekli ama yeterli değilmiş: önemli ayrıntılar doğrudan onlara çarparken bile kendiliğinden görünmüyor, ancak kasıtlı incelemeyle fark ediliyor (alkollü termometrelerin doğrusal olmadığı yıllarca kullananlarca değil, araştıranlarca bulunmuş). Ayrıca duvarın hiç kapsamadığı ikinci bir kör nokta var: öğrenilen ayrıntı saydamlaşıyor, uzman artık ona bakmıyor içinden bakıyor — görünürlük penceresi iki ucundan da dar. — [John Salvatier — “Reality Has a Surprising Amount of Detail”](https://johnsalvatier.org/blog/2017/reality-has-a-surprising-amount-of-detail)
 
 ### D-33 — Dışarıdan alabileceğin şey “çözüm var” bilgisidir, “nasıl varılır” bilgisi değil
 - **Kural:** Rakibin ürününe bakarken ne aldığını ayır: bir problemin çözülebilir olduğunu görmek (varlık bilgisi) ile oraya nasıl varıldığını bilmek (yol bilgisi) farklı şeylerdir. Birincisi görmekle alınır, ikincisi ancak kendi eleme sürecinle üretilir. Planını yol bilgisi almış gibi değil, varlık bilgisi almış gibi kur.
@@ -225,6 +234,7 @@ Her madde dört alan taşır:
 - **Kırılır:** Uzun-ufuklu (görece koşulsuz) finansman + sektörler arası kadro dolaşımı + dış denetim + başarısızlık arşivi birlikteyse vadi kapanır; biri eksikse teori ne yok olur ne etki eder, "vadide birikir" (Cybersyn, OGAS).
 - **Neden:** Geçiş, teori üretiminin yan ürünü değil bağımsız bir kurumsal iştir.
 - **Kaynak:** Teori Vadisi.
+- **Sınandı (2026-08-06, daraltıldı):** Erken ARPA'da olağanüstü projeler olağanüstü yüklenicilerden çıkmış ve BBN modelinin yapısal özellikleri şunlar: tek kaynağa değil karma sözleşme+hibe finansmanına dayanmak, araştırma yönünü müşteri talebiyle belirlemek, uzun vadeli bir teknik kuzey yıldızı. Yani vadiyi kapatan şey finansmanın koşulsuzluğu değil, ödeme yapan bir müşterinin sürekli disiplin uygulaması olabilir. — [Eric Gilliam — “Frontier Research Contractor Launchpad” (FreakTakes), ARPA ve BBN üzerine](https://www.freaktakes.com/p/frontier-research-contractor-launchpad)
 
 ### D-22 — Vadiyi kapatan mimari değil, mimarinin *zorladığı temas*tır
 - **Kural:** Farklı okulları/ekipleri aynı binaya koymak yetmez; günlük hareketin yan ürünü olarak zorunlu karşılaşma tasarla (tek giriş, uzun ortak koridor, merkezî hizmet, zorunlu çapraz proje, kat rotasyonu).

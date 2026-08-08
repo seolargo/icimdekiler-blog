@@ -1564,3 +1564,47 @@ code {
   color: var(--muted);
   font-size: 0.85rem;
 }
+
+/* Sınama kayıtları: duvarın gerçeğe çarptığı yer */
+.dv-tested {
+  border-left: 2px solid var(--line);
+  padding-left: 12px;
+}
+.dv-test + .dv-test {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--line);
+}
+.dv-test-verdict {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.dv-test-verdict.vdaraltıldı,
+.dv-test-verdict.vkırıldı {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.dv-test-date {
+  margin-left: 8px;
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-variant-numeric: tabular-nums;
+}
+.dv-test-note {
+  margin: 6px 0 4px;
+}
+.dv-test-src {
+  color: var(--muted);
+  font-size: 0.8rem;
+  border-bottom: 1px solid var(--line);
+}
+.dv-test-src:hover {
+  color: var(--fg);
+}
