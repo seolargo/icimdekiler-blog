@@ -285,7 +285,7 @@ export default function Home() {
       if (series && p.series !== series) return false
       if (!fq) return true
       const hay =
-        fold(p.title) + ' ' + fold(p.description) + ' ' + (index?.get(p.slug) || '')
+        fold(p.belge || '') + ' ' + fold(p.title) + ' ' + fold(p.description) + ' ' + (index?.get(p.slug) || '')
       return matchesTokens(fq, hay, true)
     })
   }, [writings, query, series, index, themeObj, bySlug])
@@ -441,7 +441,7 @@ export default function Home() {
                         <span className="post-title">
                           {lang === 'en' && post.title_en ? post.title_en : post.title}
                         </span>
-                        {(post.series || post.pages > 0 || post.priority) && (
+                        {(post.belge || post.series || post.pages > 0 || post.priority) && (
                           <span className="post-series">
                             {post.priority ? (
                               <span
@@ -452,6 +452,7 @@ export default function Home() {
                               </span>
                             ) : null}
                             {[
+                              post.belge,
                               seriesLabel(post.series, lang),
                               post.pages > 0 ? `${post.pages} ${t('pagesUnit')}` : null,
                             ]

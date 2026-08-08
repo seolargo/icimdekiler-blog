@@ -136,9 +136,13 @@ export default function Post() {
       <div className="post-head">
         <div>
           <h1 className="post-heading">{dTitle(post)}</h1>
-          {(post.series || post.pages > 0) && (
+          {(post.belge || post.series || post.pages > 0) && (
             <p className="post-meta">
-              {[seriesLabel(post.series, lang), post.pages > 0 ? `${post.pages} ${t('pagesUnit')}` : null]
+              {[
+                post.belge,
+                seriesLabel(post.series, lang),
+                post.pages > 0 ? `${post.pages} ${t('pagesUnit')}` : null,
+              ]
                 .filter(Boolean)
                 .join(' · ')}
             </p>

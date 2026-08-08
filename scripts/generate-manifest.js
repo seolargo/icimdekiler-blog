@@ -102,6 +102,17 @@ for (const file of files) {
   posts.push({ ...base, thumb, addedAt, pages })
 }
 
+// Belge numarası: eklenme sırasına göre BİR KEZ atanır ve bir daha değişmez.
+// Yeni belge her zaman sıranın sonuna eklenir; silinen numara boş kalır.
+const enBuyuk = posts.reduce((m, p) => {
+  const n = parseInt((p.belge || '').replace('BELGE-', ''), 10)
+  return Number.isFinite(n) && n > m ? n : m
+}, 0)
+let siradaki = enBuyuk
+for (const p of [...posts].sort((a, b) => (a.addedAt < b.addedAt ? -1 : 1))) {
+  if (!p.belge) p.belge = `BELGE-${String(++siradaki).padStart(3, '0')}`
+}
+
 // En son EKLENEN en üstte (eklenme zamanına göre)
 posts.sort((a, b) => (a.addedAt < b.addedAt ? 1 : a.addedAt > b.addedAt ? -1 : 0))
 

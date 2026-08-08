@@ -127,7 +127,7 @@ function postListItem(p) {
   const thumb = p.thumb
     ? `<img class="post-thumb" src="${asset(p.thumb)}" alt="" loading="lazy" />`
     : ''
-  const meta = [p.series, p.pages > 0 ? `${p.pages} sayfa` : null].filter(Boolean).join(' · ')
+  const meta = [p.belge, p.series, p.pages > 0 ? `${p.pages} sayfa` : null].filter(Boolean).join(' · ')
   const prio = p.priority
     ? `<span class="post-priority p${p.priority}">${p.priority}</span>`
     : ''

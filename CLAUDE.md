@@ -28,11 +28,17 @@ Derleme her zaman `SITE_URL` ile:
 5. `priority` ver: kriz anında acele referans arayan biri için 1–10.
    10 = doğrudan uygulanabilir adım/denetim listesi. 1 = bağlam/tarih.
 
+## Kimlikler
+
+Belgeler `BELGE-001`…, duvarlar `DUVAR-01`… Eklenme sırasına göre bir kez
+atanır, **bir daha değişmez** — silinen numara boş kalır, yeni kayıt sona
+eklenir. Sesle konuşurken slug yerine bunu kullan.
+
 ## Yapı
 
 | Yer | Ne |
 |---|---|
-| `public/posts.json` | manifest: title, description (TR/EN), related, priority |
+| `public/posts.json` | manifest: belge, title, description (TR/EN), related, priority |
 | `public/duvarlar.json` + `docs/duvarlar.md` | kural kataloğu — **ikisi eşit tutulacak** |
 | `public/texts/*.txt` | düz metin (arama + llms.txt buradan) |
 | `yerel/` | gitignore'da, telifli üçüncü taraf belgeler, yalnızca localhost |
