@@ -86,9 +86,6 @@ export default function App() {
         <NavLink to="/duvarlar" className="nav-tab">
           {t('walls')}
         </NavLink>
-        <NavLink to="/sor" className="nav-tab">
-          {t('ask')}
-        </NavLink>
       </nav>
 
       <main className="site-main">

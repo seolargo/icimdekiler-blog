@@ -1,35 +1,32 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { useHead } from '../seo.js'
 import { useLang } from '../i18n.jsx'
-import { usePosts } from '../usePosts.js'
 import { fold, matchesTokens } from '../search.js'
-import { sor as sorClaude, KEY_STORAGE } from '../ask.js'
 
-// Sor — "şu makaleye bak" yerine doğrudan cevap.
+// Sor — şimdilik gezinmede gizli (App.jsx ve prerender'da sekmesi yok);
+// yalnızca doğrudan /sor adresiyle açılır.
 //
-// İki kip var:
-//  1. Anahtar girilmişse: soru, duvar kataloğunun tamamıyla birlikte modele
-//     gider ve cevap oradan kurulur. Kelime değil anlam eşleşir.
-//  2. Anahtar yoksa: kelime eşleştirmeli yedek. Sorunu anlamaz, sadece
-//     eşleşen duvarları listeler — bu sınır arayüzde açıkça söyleniyor.
-export default function Sor() {
-  const { t, lang } = useLang()
-  const { posts } = usePosts()
-  const [params, setParams] = useSearchParams()
+// API anahtarı alan katman kaldırıldı. Sayfa artık dışarıya hiçbir istek
+// atmıyor: eşleştirme tamamen tarayıcıda, duvar kataloğu üzerinde yapılıyor.
+// Daha önce tarayıcıda saklanmış bir anahtar varsa aşağıdaki temizlik onu
+// siler — arayüzü kaldırmak kayıtlı sırrı kendiliğinden silmez.
+const ESKI_ANAHTAR = 'anthropic-api-key'
 
+export default function Sor() {
+  const { t } = useLang()
+  const [params, setParams] = useSearchParams()
   const [soru, setSoru] = useState(params.get('q') || '')
   const [walls, setWalls] = useState(null)
-  const [apiKey, setApiKey] = useState(() => localStorage.getItem(KEY_STORAGE) || '')
-  const [keyAcik, setKeyAcik] = useState(false)
-  const [cevap, setCevap] = useState('')
-  const [calisiyor, setCalisiyor] = useState(false)
-  const [hata, setHata] = useState(null)
-  const iptal = useRef(null)
 
   useHead({ title: t('ask'), description: t('askIntro'), image: '/profile.jpeg' })
 
   useEffect(() => {
+    try {
+      localStorage.removeItem(ESKI_ANAHTAR)
+    } catch {
+      /* depolama kapalıysa geç */
+    }
     fetch(`${import.meta.env.BASE_URL}duvarlar.json`)
       .then((r) => r.json())
       .then((d) => setWalls(d.walls || []))
@@ -38,7 +35,6 @@ export default function Sor() {
 
   const q = soru.trim()
 
-  // --- yedek kip: kelime eşleştirme (anahtar yokken) ---------------------
   const terimler = useMemo(() => {
     const dur = new Set(
       ('nasil ne neden nicin nedir mi mu ve ile bir bu su icin gibi daha ama ancak veya ' +
@@ -62,63 +58,11 @@ export default function Sor() {
       .slice(0, 4)
   }, [walls, terimler])
 
-  // --- gönder -------------------------------------------------------------
-  async function gonder(e) {
-    e.preventDefault()
-    if (!q) return
-    setParams({ q }, { replace: true })
-    setHata(null)
-
-    if (!apiKey) return // yedek kip zaten render ediliyor
-
-    iptal.current?.abort()
-    const ctrl = new AbortController()
-    iptal.current = ctrl
-    setCevap('')
-    setCalisiyor(true)
-    try {
-      const { reddedildi, kesildi } = await sorClaude({
-        apiKey,
-        soru: q,
-        walls: walls || [],
-        posts,
-        signal: ctrl.signal,
-        onDelta: (d) => setCevap((c) => c + d),
-      })
-      if (reddedildi) setHata(t('askRefused'))
-      else if (kesildi) setHata(t('askTruncated'))
-    } catch (err) {
-      if (err?.name !== 'AbortError') setHata(err?.message || String(err))
-    } finally {
-      setCalisiyor(false)
-    }
-  }
-
-  function anahtarKaydet(v) {
-    setApiKey(v)
-    if (v) localStorage.setItem(KEY_STORAGE, v)
-    else localStorage.removeItem(KEY_STORAGE)
-  }
-
-  // Cevaptaki [D-27] kimliklerini duvar sayfasına bağla
-  const cevapHtml = useMemo(() => {
-    const parcalar = cevap.split(/(\[D-\d{2}\])/g)
-    return parcalar.map((p, i) => {
-      const m = p.match(/^\[(D-\d{2})\]$/)
-      if (!m) return <span key={i}>{p}</span>
-      return (
-        <Link key={i} className="sor-ref" to={`/duvarlar?q=${encodeURIComponent(m[1])}`}>
-          {m[1]}
-        </Link>
-      )
-    })
-  }, [cevap])
-
   return (
     <div className="sor">
       <p className="sor-intro muted">{t('askIntro')}</p>
 
-      <form className="sor-form" onSubmit={gonder}>
+      <form className="sor-form" onSubmit={(e) => { e.preventDefault(); setParams(q ? { q } : {}, { replace: true }) }}>
         <input
           type="search"
           className="search-input"
@@ -127,49 +71,9 @@ export default function Sor() {
           onChange={(e) => setSoru(e.target.value)}
           aria-label={t('askPlaceholder')}
         />
-        {apiKey && (
-          <button type="submit" className="btn sor-send" disabled={calisiyor || !q}>
-            {calisiyor ? t('askThinking') : t('askSend')}
-          </button>
-        )}
       </form>
 
-      {/* --- anahtar --- */}
-      <div className="sor-key">
-        <button type="button" className="sor-key-toggle" onClick={() => setKeyAcik((v) => !v)}>
-          {apiKey ? t('askKeySet') : t('askKeyMissing')}
-        </button>
-        {keyAcik && (
-          <div className="sor-key-panel">
-            <p className="muted">{t('askKeyNote')}</p>
-            <input
-              type="password"
-              className="search-input"
-              placeholder="sk-ant-..."
-              value={apiKey}
-              onChange={(e) => anahtarKaydet(e.target.value)}
-              autoComplete="off"
-              spellCheck="false"
-            />
-          </div>
-        )}
-      </div>
-
-      {hata && <p className="error sor-error">{hata}</p>}
-
-      {/* --- cevap (model) --- */}
-      {apiKey && (cevap || calisiyor) && (
-        <div className="sor-answer">
-          <p className="sor-lede">{t('askLede')}</p>
-          <div className="sor-text">
-            {cevapHtml}
-            {calisiyor && <span className="sor-caret" aria-hidden="true" />}
-          </div>
-        </div>
-      )}
-
-      {/* --- yedek kip: anahtar yoksa --- */}
-      {!apiKey && q && (
+      {q && walls && (
         <div className="sor-fallback">
           <p className="sor-lede">{t('askFallbackNote')}</p>
           {eslesen.length === 0 ? (

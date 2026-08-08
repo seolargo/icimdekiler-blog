@@ -77,7 +77,6 @@ function header(active) {
     tab(base + 'oneriler', 'Öneriler', 'oneriler') +
     tab(base + 'projeler', 'Projeler', 'projeler') +
     tab(base + 'duvarlar', 'Duvarlar', 'duvarlar') +
-    tab(base + 'sor', 'Sor', 'sor') +
     `</nav>` +
     `<main class="site-main">`
 }
@@ -282,27 +281,6 @@ const recBody =
   footer()
 write('oneriler', renderPage({ head: recHead, bodyHtml: recBody }))
 
-// --- SOR SEKMESİ -------------------------------------------------------------
-// Cevap istemcide duvar kataloğundan derleniyor; burada yalnızca sayfanın
-// kabuğu ve <head>'i üretilir (crawler + JS kapalı durum için).
-const SOR_INTRO =
-  'Bir durum yaz, sana makale değil kural döner: ne yapılacak, nerede geçmez, sınandı mı.'
-const sorHead = buildHead({
-  title: 'Sor',
-  description: SOR_INTRO,
-  canonical: `${SITE_URL}${base}sor`,
-  type: 'website',
-  image: '/profile.jpeg',
-})
-const sorWallCount = existsSync(join(dist, 'duvarlar.json'))
-  ? (JSON.parse(readFileSync(join(dist, 'duvarlar.json'), 'utf8')).walls || []).length
-  : 0
-const sorBody =
-  header('sor') +
-  `<div class="sor"><p class="sor-intro muted">${esc(SOR_INTRO)}</p>` +
-  `<p class="muted">Duvar kataloğu: <a href="${base}duvarlar">${sorWallCount} kural</a>.</p></div>` +
-  footer()
-write('sor', renderPage({ head: sorHead, bodyHtml: sorBody }))
 
 // --- PROJELER SEKMESİ --------------------------------------------------------
 const projects = existsSync(join(dist, 'projects.json'))
