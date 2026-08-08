@@ -45,12 +45,16 @@ Her madde dört alan taşır:
 - **Kırılır:** Zaten yüksek atıf güçlü bir rejimde deneme sayısını artırmak faydalıdır; asıl darboğaz atıf gücüyse sayı hiçbir şeyi çözmez.
 - **Neden:** Sonuç birçok değişkene birden bağlıysa çevrim *veri* üretir, *bilgi* üretmez. Sovyet N1 roketi: dört deneme, dördü başarısız — iterasyon vardı, atıf gücü yoktu.
 - **Kaynak:** Öğrenme Hızının Örgütsel Ekonomisi; Kavramsal Çarpıştırma (nokta/duvar).
+- **Sınandı (2026-08-06, desteklendi):** Sondajda ikiye katlanma başına %5-15 öğrenme ölçülüyor ve yazar sebebini açıkça yazıyor: geri bildirim “sürekli, ucuz, yüksek sinyalli ve anlık — ya delik açıyorsundur ya açmıyorsundur.” Bu, atıf gücünün tarifi: sonucu tek bir değişikliğe bağlayabildiğin için her çevrim bilgi üretiyor. — [Austin Vernon — “Evaluating Geothermal Learning Curves”](https://www.austinvernon.site/blog/drillinglearningcurve.html)
+- **Sınandı (2026-08-06, desteklendi):** Ters yönden kanıt: girdileri değişken olan gıda işleme şirketlerinde öğrenme eğrisi hiç oluşmamış. Tekrar var, hatta bol; ama girdi her seferinde farklı olduğu için sonuç kendi değişikliğine bağlanamıyor ve çevrim veri üretip bilgi üretmiyor. — [Brian Potter — “Where Are My Damn Learning Curves?” (Construction Physics)](https://www.construction-physics.com/p/where-are-my-damn-learning-curves)
 
 ### D-02 — Öğrenme çevriminin bileşenleri çarpımsaldır; en zayıf halkayı bul
 - **Kural:** Çevrim gecikmesi, atıf gücü, elde tutma (unutmama) ve karar-hakkı eşleşmesinden **en zayıf** olanı iyileştir; güçlü olanı daha da güçlendirme.
 - **Kırılır:** Bileşenler gerçekten ikame edilebiliyorsa (toplamsal sistem) birini çok iyileştirip diğerini telafi edebilirsin. Sınama: bileşenler arası pozitif etkileşim ve tek-bileşenli iyileştirmede azalan getiri varsa çarpımsaldır.
 - **Neden:** Çarpımsal sistemde herhangi bir bileşenin sıfıra yaklaşması, diğerlerinin değerinden bağımsız olarak sistemi durdurur.
 - **Kaynak:** Öğrenme Hızının Örgütsel Ekonomisi.
+- **Sınandı (2026-08-06, desteklendi):** Elde tutma bileşeni tek başına zinciri durdurabiliyor: inşaatta öğrenme tek bir proje içinde oluşuyor ama her yeni proje başladığında sıfırlanıyor. Bir yıl duran betonarme binada ve yalnızca Paskalya tatili kadar duraklamada bile üretkenlik düşüşü ölçülmüş; bir konfeksiyon firmasının eğrisi ikinci bir model eklendiği anda kesilmiş. 1950'den beri 100 milyondan fazla konut yapılmasına rağmen sektörde eğri görünmemesinin sebebi bu. — [Brian Potter — “Where Are My Damn Learning Curves?” (Construction Physics)](https://www.construction-physics.com/p/where-are-my-damn-learning-curves)
+- **Sınandı (2026-08-06, desteklendi):** Aynı mekanizma başka bir sanayide, rakamla: ABD 100 binden fazla işçiyle çalışırken Japonya ~70 bin işçiyle yaklaşık 20 kat tonaj üretiyor. Sebepler arasında işgücünün tersaneler arası geçememesi, az sayıda gövdeye yayılan sabit maliyet ve ayrıntılı tasarım bitmeden inşaata başlanması var — yani süreklilik ve atıf gücü aynı anda kırılıyor. — [Austin Vernon — “Revitalizing US Navy Shipbuilding”](https://www.austinvernon.site/blog/navyshipbuilding.html)
 
 ### D-03 — Performansı üretilen fikir/proje sayısıyla değil, *sınanan* hipotez sayısıyla ölç
 - **Kural:** Keşif örgütünü "kaç fikir üretti" ile değil, "yılda kaç yanlış yolu ucuza ve net biçimde eledi" ile ölç. Başarısızlığı cezalandırılan değil, üretilen çıktı say.
@@ -169,6 +173,7 @@ Her madde dört alan taşır:
 - **Kırılır:** Gerekçe taşınırsa kural hem korunur hem gerektiğinde bilinçli gevşetilebilir; taşınmazsa kural ya körü körüne uygulanır ya körü körüne terk edilir (nixtamalizasyon → pellagra; Therac-25 kilitleri).
 - **Neden:** İşletim sırasında okunan şey kuraldır; gerekçe belgesi ancak kural çoktan delinmişken aranır.
 - **Kaynak:** Gerekçenin Taşınması.
+- **Sınandı (2026-08-06, desteklendi):** Gerekçesi yanında saklanmayan kuralın faturası dolarla ölçülmüş. ABD'de tünel bağlantı geçitleri arası azami mesafe 800 fit; sayı 1970'te Atlanta MARTA tasarımından geliyor ve gerekçesi yangında yolcunun flashover'dan önce yürüyebileceği mesafeydi. Vagonlar yanmaz malzemeye geçtiğinde gerekçe ortadan kalktı, kural kaldı. NFPA'nın kendisi gereksinim için teknik dayanak eksikliğini kabul ediyor; fayda-maliyet oranı 10'un çok üzerinde. — [Brian Potter — “US Subways Build Too Many Cross Passages” (Construction Physics)](https://www.construction-physics.com/p/us-subways-build-too-many-cross-passages)
 
 ### D-17 — Yanlış davranışı *yasaklama*, *ifade edilemez* kıl
 - **Kural:** Mümkün olan yerde zorlayıcı işlev kullan — tehlikeli durumu temsil edemeyen tipler, geri-alınamaz komutu engelleyen kapı, ikinci onay. Ölçüt: **belgede yasaksa kural zayıf, sistemde ifade edilemiyorsa güçlü.**
@@ -181,6 +186,7 @@ Her madde dört alan taşır:
 - **Kırılır:** Bileşen kendi zarfı içinde kusursuzdur; kusur zarfın *dışında* yeniden kullanımdadır (Ariane 5 taşması; Mars Climate Orbiter birim uyuşmazlığı).
 - **Neden:** Bir bileşenin doğruluğu mutlak değil, üretildiği varsayımlar kümesine görelidir; bu varsayımlar sürüm numarasında görünmez.
 - **Kaynak:** Gerekçenin Taşınması.
+- **Sınandı (2026-08-06, desteklendi):** Devralınan gereksinimin doğrulama zarfı taşınmayınca ne olduğunun örneği. AB standardı iki kattan fazlasına — 1640 fite — izin veriyor, Elizabeth Line ~1600 fit kullanıyor, bazı kesimlerde 2275 fite çıkıyor ve 2010'daki bir analiz bu geçitlerin çoğu Avrupa ve Japon metrosunda zaten yaygın olmadığını buluyor. Aynı işlev, farklı zarf. Sayı taşındı, hangi koşullarda türetildiği taşınmadı. — [Brian Potter — “US Subways Build Too Many Cross Passages” (Construction Physics)](https://www.construction-physics.com/p/us-subways-build-too-many-cross-passages)
 
 ### D-19 — Tekil sapmayı değil *sapma eğilimini* izle
 - **Kural:** Bir sapma kabul edilecekse tarihiyle ve gerekçesiyle kaydet ki sonraki kararın referansı önceki sapma değil özgün kural olsun. İzlenecek büyüklük anomalinin son sonucu değil, sıklığındaki değişimdir.

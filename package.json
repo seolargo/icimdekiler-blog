@@ -13,7 +13,8 @@
     "dev": "vite",
     "prebuild": "node scripts/generate-manifest.js && node scripts/build-search-index.js",
     "build": "vite build && node scripts/prerender.js",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "duvar": "node scripts/duvar.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.110.0",
