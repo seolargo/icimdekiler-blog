@@ -1,26 +1,31 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { useHead } from '../seo.js'
 import { useLang } from '../i18n.jsx'
 import { usePosts } from '../usePosts.js'
 import { fold, matchesTokens } from '../search.js'
+import { sor as sorClaude, KEY_STORAGE } from '../ask.js'
 
 // Sor — "şu makaleye bak" yerine doğrudan cevap.
 //
-// Cevap uydurulmuyor: duvar kataloğundan derleniyor. Bir soru geldiğinde
-// eşleşen duvarlar bulunur ve cevap şu biçimde kurulur — ne yapılacak (kural),
-// nerede geçmez (kırılma koşulu), doğrulanmış mı (sınama kaydı), nereden
-// geliyor (kaynak). Yani cevabın her cümlesinin arkasında kayıtlı bir madde
-// var; model çıkarımı yok.
-//
-// Duvar tutmazsa yazılara düşülür ve bu açıkça söylenir: elde kural yok,
-// yalnızca okuyacak metin var.
+// İki kip var:
+//  1. Anahtar girilmişse: soru, duvar kataloğunun tamamıyla birlikte modele
+//     gider ve cevap oradan kurulur. Kelime değil anlam eşleşir.
+//  2. Anahtar yoksa: kelime eşleştirmeli yedek. Sorunu anlamaz, sadece
+//     eşleşen duvarları listeler — bu sınır arayüzde açıkça söyleniyor.
 export default function Sor() {
   const { t, lang } = useLang()
   const { posts } = usePosts()
   const [params, setParams] = useSearchParams()
+
   const [soru, setSoru] = useState(params.get('q') || '')
   const [walls, setWalls] = useState(null)
+  const [apiKey, setApiKey] = useState(() => localStorage.getItem(KEY_STORAGE) || '')
+  const [keyAcik, setKeyAcik] = useState(false)
+  const [cevap, setCevap] = useState('')
+  const [calisiyor, setCalisiyor] = useState(false)
+  const [hata, setHata] = useState(null)
+  const iptal = useRef(null)
 
   useHead({ title: t('ask'), description: t('askIntro'), image: '/profile.jpeg' })
 
@@ -33,56 +38,81 @@ export default function Sor() {
 
   const q = soru.trim()
 
-  // Soru cümlesinden anlamlı sözcükleri ayıkla: soru kalıpları ve bağlaçlar
-  // elenir, kalanların her biri ayrı bir arama terimi olur.
+  // --- yedek kip: kelime eşleştirme (anahtar yokken) ---------------------
   const terimler = useMemo(() => {
     const dur = new Set(
-      ('nasil ne neden nicin nedir mi mu mı mü ve ile bir bu su o icin gibi daha en ama ancak veya ' +
-        'yapmali yapmaliyim etmeli olur olmali lazim gerek gerekir hangi kim nerede ne zaman ' +
-        'the a an is are how why what when should i we my our to of in on for and or').split(' '),
+      ('nasil ne neden nicin nedir mi mu ve ile bir bu su icin gibi daha ama ancak veya ' +
+        'yapmali yapmaliyim etmeli olur olmali lazim gerek gerekir hangi kim nerede ' +
+        'the a an is are how why what when should we my our to of in on for and or').split(' '),
     )
-    return fold(q)
-      .split(/\s+/)
-      .filter((w) => w.length > 2 && !dur.has(w))
+    return fold(q).split(/\s+/).filter((w) => w.length > 2 && !dur.has(w))
   }, [q])
 
-  const alan = (w) =>
-    fold(
-      `${w.id} ${w.title} ${w.kural} ${w.kirilir} ${w.neden} ${w.kaynak.join(' ')} ` +
-        (w.sinama || []).map((x) => `${x.kaynak} ${x.not}`).join(' '),
-    )
-
-  const cevap = useMemo(() => {
+  const eslesen = useMemo(() => {
     if (!terimler.length || !walls) return []
+    const alan = (w) =>
+      fold(
+        `${w.id} ${w.title} ${w.kural} ${w.kirilir} ${w.neden} ${w.kaynak.join(' ')} ` +
+          (w.sinama || []).map((x) => `${x.kaynak} ${x.not}`).join(' '),
+      )
     return walls
-      .map((w) => {
-        const hay = alan(w)
-        const tutan = terimler.filter((tk) => matchesTokens(tk, hay, true))
-        return { w, n: tutan.length }
-      })
+      .map((w) => ({ w, n: terimler.filter((tk) => matchesTokens(tk, alan(w), true)).length }))
       .filter((x) => x.n > 0)
       .sort((a, b) => b.n - a.n || a.w.id.localeCompare(b.w.id))
       .slice(0, 4)
   }, [walls, terimler])
 
-  // Duvar tutmazsa okunacak metne düş
-  const yazilar = useMemo(() => {
-    if (!terimler.length || cevap.length) return []
-    return posts
-      .filter((p) => !p.tab)
-      .map((p) => {
-        const hay = fold(`${p.title} ${p.description || ''}`)
-        return { p, n: terimler.filter((tk) => matchesTokens(tk, hay, true)).length }
-      })
-      .filter((x) => x.n > 0)
-      .sort((a, b) => b.n - a.n || (b.p.priority || 0) - (a.p.priority || 0))
-      .slice(0, 3)
-  }, [posts, terimler, cevap.length])
-
-  const gonder = (e) => {
+  // --- gönder -------------------------------------------------------------
+  async function gonder(e) {
     e.preventDefault()
-    setParams(q ? { q } : {}, { replace: true })
+    if (!q) return
+    setParams({ q }, { replace: true })
+    setHata(null)
+
+    if (!apiKey) return // yedek kip zaten render ediliyor
+
+    iptal.current?.abort()
+    const ctrl = new AbortController()
+    iptal.current = ctrl
+    setCevap('')
+    setCalisiyor(true)
+    try {
+      const { reddedildi, kesildi } = await sorClaude({
+        apiKey,
+        soru: q,
+        walls: walls || [],
+        posts,
+        signal: ctrl.signal,
+        onDelta: (d) => setCevap((c) => c + d),
+      })
+      if (reddedildi) setHata(t('askRefused'))
+      else if (kesildi) setHata(t('askTruncated'))
+    } catch (err) {
+      if (err?.name !== 'AbortError') setHata(err?.message || String(err))
+    } finally {
+      setCalisiyor(false)
+    }
   }
+
+  function anahtarKaydet(v) {
+    setApiKey(v)
+    if (v) localStorage.setItem(KEY_STORAGE, v)
+    else localStorage.removeItem(KEY_STORAGE)
+  }
+
+  // Cevaptaki [D-27] kimliklerini duvar sayfasına bağla
+  const cevapHtml = useMemo(() => {
+    const parcalar = cevap.split(/(\[D-\d{2}\])/g)
+    return parcalar.map((p, i) => {
+      const m = p.match(/^\[(D-\d{2})\]$/)
+      if (!m) return <span key={i}>{p}</span>
+      return (
+        <Link key={i} className="sor-ref" to={`/duvarlar?q=${encodeURIComponent(m[1])}`}>
+          {m[1]}
+        </Link>
+      )
+    })
+  }, [cevap])
 
   return (
     <div className="sor">
@@ -97,62 +127,68 @@ export default function Sor() {
           onChange={(e) => setSoru(e.target.value)}
           aria-label={t('askPlaceholder')}
         />
+        {apiKey && (
+          <button type="submit" className="btn sor-send" disabled={calisiyor || !q}>
+            {calisiyor ? t('askThinking') : t('askSend')}
+          </button>
+        )}
       </form>
 
-      {q && walls && cevap.length === 0 && yazilar.length === 0 && (
-        <p className="muted sor-empty">{t('askNothing')}</p>
-      )}
+      {/* --- anahtar --- */}
+      <div className="sor-key">
+        <button type="button" className="sor-key-toggle" onClick={() => setKeyAcik((v) => !v)}>
+          {apiKey ? t('askKeySet') : t('askKeyMissing')}
+        </button>
+        {keyAcik && (
+          <div className="sor-key-panel">
+            <p className="muted">{t('askKeyNote')}</p>
+            <input
+              type="password"
+              className="search-input"
+              placeholder="sk-ant-..."
+              value={apiKey}
+              onChange={(e) => anahtarKaydet(e.target.value)}
+              autoComplete="off"
+              spellCheck="false"
+            />
+          </div>
+        )}
+      </div>
 
-      {cevap.length > 0 && (
+      {hata && <p className="error sor-error">{hata}</p>}
+
+      {/* --- cevap (model) --- */}
+      {apiKey && (cevap || calisiyor) && (
         <div className="sor-answer">
           <p className="sor-lede">{t('askLede')}</p>
-
-          {cevap.map(({ w }) => (
-            <article key={w.id} className="sor-card">
-              <h2 className="sor-do">{w.kural}</h2>
-
-              <div className="sor-row sor-breaks">
-                <span className="sor-lbl">{t('askBreaks')}</span>
-                <p>{w.kirilir}</p>
-              </div>
-
-              {(w.sinama || []).length > 0 ? (
-                (w.sinama || []).map((x, i) => (
-                  <div key={i} className="sor-row sor-tested">
-                    <span className="sor-lbl">
-                      {t('askTested')} · {x.sonuc} · {x.tarih}
-                    </span>
-                    <p>{x.not}</p>
-                    <a href={x.url} target="_blank" rel="noopener noreferrer">
-                      {x.kaynak} ↗
-                    </a>
-                  </div>
-                ))
-              ) : (
-                <p className="sor-untested muted">{t('askUntested')}</p>
-              )}
-
-              <p className="sor-from">
-                <Link to={`/duvarlar?q=${encodeURIComponent(w.id)}`}>{w.id}</Link>
-                <span className="muted"> · {w.kaynak.join(' · ')}</span>
-              </p>
-            </article>
-          ))}
+          <div className="sor-text">
+            {cevapHtml}
+            {calisiyor && <span className="sor-caret" aria-hidden="true" />}
+          </div>
         </div>
       )}
 
-      {yazilar.length > 0 && (
+      {/* --- yedek kip: anahtar yoksa --- */}
+      {!apiKey && q && (
         <div className="sor-fallback">
-          <p className="sor-lede">{t('askNoRule')}</p>
-          <ul className="sor-posts">
-            {yazilar.map(({ p }) => (
-              <li key={p.slug}>
-                <Link to={`/post/${p.slug}`}>
-                  {lang === 'en' && p.title_en ? p.title_en : p.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <p className="sor-lede">{t('askFallbackNote')}</p>
+          {eslesen.length === 0 ? (
+            <p className="muted sor-empty">{t('askNothing')}</p>
+          ) : (
+            eslesen.map(({ w }) => (
+              <article key={w.id} className="sor-card">
+                <h2 className="sor-do">{w.kural}</h2>
+                <div className="sor-row sor-breaks">
+                  <span className="sor-lbl">{t('askBreaks')}</span>
+                  <p>{w.kirilir}</p>
+                </div>
+                <p className="sor-from">
+                  <Link to={`/duvarlar?q=${encodeURIComponent(w.id)}`}>{w.id}</Link>
+                  <span className="muted"> · {w.kaynak.join(' · ')}</span>
+                </p>
+              </article>
+            ))
+          )}
         </div>
       )}
     </div>

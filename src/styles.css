@@ -1661,3 +1661,31 @@ code {
 .sor-posts { margin: 0; padding-left: 18px; }
 .sor-posts a { border-bottom: 1px solid var(--line); }
 .sor-empty { padding: 24px 0; }
+
+/* Sor — model cevabı ve anahtar paneli */
+.sor-form { display: flex; gap: 8px; align-items: center; }
+.sor-form .search-input { flex: 1; }
+.sor-send { white-space: nowrap; }
+.sor-key { margin: 10px 0 18px; }
+.sor-key-toggle {
+  border: 0; background: none; padding: 0;
+  color: var(--muted); font: inherit; font-size: 0.82rem;
+  text-decoration: underline; text-underline-offset: 3px; cursor: pointer;
+}
+.sor-key-toggle:hover { color: var(--fg); }
+.sor-key-panel { margin-top: 10px; display: grid; gap: 8px; }
+.sor-key-panel p { margin: 0; font-size: 0.85rem; max-width: 62ch; }
+.sor-text { white-space: pre-wrap; line-height: 1.7; }
+.sor-ref {
+  font-size: 0.82em; font-variant-numeric: tabular-nums;
+  padding: 0 4px; border-radius: 4px;
+  border: 1px solid var(--line); color: var(--muted);
+}
+.sor-ref:hover { color: var(--fg); border-color: var(--accent); }
+.sor-caret {
+  display: inline-block; width: 7px; height: 1.05em;
+  margin-left: 2px; vertical-align: text-bottom;
+  background: var(--accent); animation: sor-blink 1s steps(2) infinite;
+}
+@keyframes sor-blink { 50% { opacity: 0 } }
+.sor-error { margin: 12px 0; font-size: 0.9rem; }
