@@ -1,0 +1,1312 @@
+Bilinen Yapıya ˙Indirgeme: Bir Problem Teşhis
+Protokolü
+öfy
+August 2026
+Giriş ve Motivasyon
+Mühendislik pratiğinde bir problemle karşılaşan kişinin sorduğu ilk soru genel-
+likle “bunu nasıl çözerim?” biçimindedir. Bu soru, çözüm arayışını doğrudan
+başlatması bakımından doğal görünse de, problemin daha önce çözülmüş bir
+problem sınıfının örneği olma ihtimalini gözden kaçırır. Bu çalışmanın temel id-
+diası şudur: problem çözmenin verimliliği, çoğu durumda yeni çözüm üretme ka-
+pasitesinden çok, problemin ait olduğu yapıyı teşhis etme kapasitesine bağlıdır.
+Sorunun aşamalı olarak dönüşümü şu biçimde ifade edilebilir:
+"Bunu nasil cozerim?"
+-> "Bunu daha once cozen bir algoritma var mi?"
+-> "Bu hangi problem sinifina ait?"
+-> "Ben bunu yanlis problem sinifina mi sokuyorum?"
+-> "Bu problemi hangi matematiksel dile tasirsam,
+oradaki hazir bilgi calismaya baslar?"
+Son iki soru, önceki üçünün üzerinde yer alır. Bir problemi uygun bir
+biçimselleştirmeye taşımak, o alanın teoremlerini, algoritmalarını ve — en az
+bunlar kadar önemli olmak üzere — imkânsızlık sonuçlarını tek hamlede prob-
+leme bağlar.
+Teşhis Farkının Somut Görünümü
+Aynı problem ifadesi, teşhis düzeyine göre bütünüyle farklı çözüm uzaylarına
+açılır.
+1
+
+-- 1 of 33 --
+
+Problem ifadesi Yüzeysel yaklaşım Yapısal teşhis
+100M kullanıcıya mesaj hangi kuyruk ürünü? kuyruk kuramı
+˙Iki servis aynı veriyi yazıyor hangi veritabanı? dağıtık tutarlılık
+Kod çok karmaşık yeniden düzenleyelim bağlaşım mı, temsil mi?
+Sonuçları nasıl birleştiririm? döngüyle toplayalım monoid, yarı latis
+Servisler birbirini kilitliyor zaman aşımı koyalım çizge, çevrim
+CPU doyunca gecikme patlıyor sunucu ekleyelim kuyruk kuramı
+Metrik iyileşti, ürün kötüleşti metriği düzeltelim Goodhart
+Aynı olay tekrar gelince bozuyor yinelemeyi engelleyelim idempotentlik
+˙Ikinci sütun bir teknoloji seçimini, üçüncü sütun bir literatürü çağırır. Aradaki
+fark, çözümün niteliğinden çok erişilen bilgi hacmindedir.
+Tarihsel Örüntü
+Aynı refleks bilim tarihinde tekrar eder. Newton’un sorusu elmanın neden
+düştüğü değil, elma, ay, top ve gezegen hareketlerinin ortak problem sınıfının ne
+olduğuydu. Einstein, ışık, yerçekimi ve ivmenin aynı geometrik yapının farklı
+görünümleri olduğunu saptadı. Shannon iletişimi bir bilgi problemi, Turing
+hesaplanabilirliği bir mekanizma problemi, Bellman ardışık kararı bir eniyileme
+problemi olarak yeniden çerçeveledi.
+Bilgisayar biliminde de aynı örüntü görülür. Dosya sistemi, belge nesne
+modeli, kurum şeması, XML ve derleyici sözdizim ağacı ilk bakışta ilişkisizdir;
+ortak yapının ağaç olduğunun saptanması, onlarca yıllık kuramı tek hamlede
+beş ayrı alana bağlamıştır.
+Kavramsal C erçeve
+Üç Katman
+˙Incelenen yapı üç katmandan oluşur:
+KATMAN 3 FORMALIZM Problemi hangi dilde yaziyorum?
+KATMAN 2 YAPI Problemin iskeleti ne?
+KATMAN 1 LENS Probleme hangi soruyu soruyorum?
+Lens katmanı, probleme yöneltilebilecek soruların envanterinden oluşur ve
+niceliksel olarak en geniş katmandır. Yapı katmanı problemin iskeletini, biçimselleştirme
+katmanı ise bu iskeletin içinde yaşadığı kuramsal dünyayı verir. Kaldıraç etkisi
+en yüksek katman üçüncüsüdür.
+2
+
+-- 2 of 33 --
+
+Merkezı Sema
+Yöntemin iskeleti aşağıdaki dönüşüm zinciridir:
+zor problem
+|
+| PHI
+v
+kolay uzay --- coz burada ---> uzayda cozum
+|
+| PHI^-1
+v
+gercek cozum
+Bu şema disiplinler arasında değişmez kalır; değişen yalnızca Φ eşlemesinin
+niteliği ve Φ−1’in var olup olmadığıdır. Fourier dönüşümünde Φ bir integral
+dönüşümü, kuramsal bilgisayar biliminde bir indirgeme, cebirsel tasarımda bir
+temsil değişimi, dualite argümanlarında ise bir taraf değiştirmedir.
+Eşleme Türlerinin Spektrumu
+Yöntemin adlandırılmasında sık yapılan bir hata, tüm indirgemelerin homomor-
+fizma sayılmasıdır. Gerçekte Φ bir spektrum üzerinde yer alır ve koruduğu bilgi
+miktarı türüne göre değişir.
+Φ türü Korunan Geri dönüş
+˙Izomorfizma tüm yapı tam
+Homomorfizma işlem yapısı kısmı
+Gömme yapı, alt küme içinde alt kümede
+Soyutlama seçili özellikler tek yönlü
+Simülasyon davranış, yapı değil gözlemsel
+Kodlama bilgi, yapı değil çözülebilir
+Yaklaşıklama hata payı içinde sınırlı
+Karp indirgemesi hesaplanabilirlik çözüm çevirisiyle
+Bu ayrım pratikte belirleyicidir. Ortalamanın (sum, count) ikilisiyle değiştirilmesi
+bir homomorfizmadır; soyut yorumlama bir soyutlamadır; t-digest bir yaklaşıklamadır;
+protokol modelleri birer simülasyondur. Üst terim olarak structure-preserving
+reduction kullanılmalıdır.
+3
+
+-- 3 of 33 --
+
+Terminolojik Konum
+Yöntemin tek bir yerleşik adı bulunmamaktadır. Farklı disiplinler aynı reflekse
+bağımsız olarak ad vermiştir.
+Terim Alan Vurgusu
+Problem formalization Genel doğal dilden matematiğe geçiş
+Reduction to known problem Kuramsal BB çözüm çevirisi
+Mathematical modeling Fizik, mühendislik basitleştirilmiş dünya
+Structure identification Cebir, sistem kuramı yasa kontrolü
+Change of representation Yapay zekâ temsil değişimi
+Algebraic design Yazılım mühendisliği yasa güdümlü tasarım
+Denotational design Fonksiyonel programlama anlam önce, kod sonra
+Analogical transfer Bilişsel bilim derin yapı eşlemesi
+Model-based reasoning Bilim felsefesi modelle akıl yürütme
+Akraba Kavramlar
+Yöntemin kavramsal komşuluğu dört yönde uzanır. Yön ayrımı önemlidir, zira
+bu kavramların yöntemle mesafeleri eşit değildir.
+Aynı hamlenin farklı disiplindeki adları. ˙Indirgeme (kuramsal BB), eşleniklik
+(matematik; f = g−1 ◦ h ◦ g), izomorfizma ve homomorfizma (cebir), temsil
+değişimi (yapay zekâ), analojik aktarım (bilişsel bilim), modelleme (genel).
+Aynı ailenin diğer üyeleri. Dualite, aynı problemin karşı taraftan görülmesidir;
+doğrusal programlamanın duali ve en büyük akış – en küçük kesit teoremi
+bu sınıftandır. ˙Izleç (functor), yalnızca nesneleri değil dönüşümleri de bir-
+likte taşıyarak indirgemeyi kategorik düzeye genelleştirir. Galois bağlantısı,
+iki dünya arasında birbirine yaslanan çift eşlemedir ve soyut yorumlamanın
+temelini oluşturur. Normal form, farklı görünen nesneleri tek kanonik temsile
+indirger. Değişmez (invariant), dönüşüm altında korunan büyüklüğü adlandırır
+ve eşlemenin ne kadarının korunduğunu ölçer. Curry–Howard karşılıklığı, pro-
+gram ile ispatın özdeşliğini kurarak disiplinler arası en bilinen eşlemeyi verir.
+Ters yöndeki akrabalar. Bunlar eşleme kurmak yerine eşlemenin kurula-
+mayacağını gösterir ve yöntemin asıl getirisini oluşturur. Engel (obstruction)
+ve olanaksızlık teoremleri — CAP, FLP, Arrow, Rice, durma problemi — be-
+lirli eşlemelerin ilkesel olarak kurulamayacağını kanıtlar. Karar verilemezlik,
+hiçbir temsil değişiminin kurtaramayacağı durumu adlandırır. Alt sınırlar, tem-
+sil seçiminden bağımsız olarak aşılamayan eşikleri verir. Bedava öğle yemeği
+yoktur teoremi, tüm problemlere uyan tek bir eşlemenin var olmadığını söyler.
+Sızan soyutlama ve sahte analoji ise eşlemenin çoğu zaman tutup bazen tutma-
+ması hâlini betimler.
+Uzak kuzenler. Fizikte boyut analizi, problemi boyutsuz sayılara indirger
+(Buckingham π teoremi); yeniden normalleştirme, ölçek değiştirerek problemi
+kendine benzer hâle getirir. Mühendislikte TRIZ, somut problemi tipik çelişkiye
+indirger ve tipik çözümü geri taşır. Yapay zekâda vaka tabanlı akıl yürütme,
+4
+
+-- 4 of 33 --
+
+yeni vakayı geçmiş vakaya eşler. Alan güdümlü tasarımda sınırlı bağlam ve ortak
+dil kavramları, alanın biçimselleştirilmesi ve sınırının çizilmesi işlevini görür.
+Φ Protokolü
+Yöntemin işletilebilir biçimi on iki soruluk bir teşhis protokolüdür. Protokol iki
+evreye ayrılır: kurulum ve kontrol.
+Kurulum Evresi
+1. Hangi türler var? Problemi bir cümleyle yazıp adların altını çizmek,
+taşıyıcı kümeleri verir. Ardından hangi adların gerçekten ayrı tür, hangi-
+lerinin aynı türün farklı hâli olduğu ayrıştırılır.
+2. Hangi işlemler var? Fiillerin altı çizilir. Birleştirme, dönüştürme, sıralama,
+karşılaştırma ve seçme temel işlem türleridir.
+3. ˙Işlem hangi yasaları sağlıyor?
+4. Sağlamıyorsa temsil değişimiyle sağlatılabilir mi?
+5. Yapının adı ne?
+6. Sistem zamanla nasıl evriliyor?
+7. Neyi bilmiyorum?
+8. Neyi enbüyütüyor veya enküçültüyorum?
+Üçüncü adım protokolün ağırlık merkezidir. Kontrol edilecek yasalar şunlardır:
+f(f(a,b),c) = f(a,f(b,c)) assoc -> paralellestirilebilir
+f(a,b) = f(b,a) comm -> sira onemsiz
+f(a,e) = a identity -> bos durum tanimli
+f(a,a^-1) = e inverse -> geri alinabilir
+f(a,a) = a idempotent -> tekrar zararsiz
+Bu yasaların kombinasyonu doğrudan bir yapı adına karşılık gelir:
+Sağlanan yasalar Yapı
+assoc yarı grup
+assoc + identity monoid
+assoc + identity + inverse grup
+assoc + comm + idempotent yarı latis
+iki işlemin birlikte çalışması semiring
+işlem yok, yalnızca bağlantı çizge
+bağlantı + çevrimsizlik DAG
+kısmı karşılaştırılabilirlik kısmı sıra
+5
+
+-- 5 of 33 --
+
+Altıncı ve yedinci adımlar, cebirsel yapının bulunmadığı durumlarda devreye
+girer:
+Gözlem C erçeve
+durum yok, saf hesap fonksiyon bileşimi
+sonlu durum + geçiş otomata
+gelecek yalnızca şimdiye bağlı Markov zinciri
+çıktı girdiyi etkiliyor geri besleme, kontrol kuramı
+iş gelip bekliyor kuyruk kuramı
+belirsizlik dağılım biçiminde olasılık kuramı
+kanıtla güncelleme Bayes çıkarımı
+kural yok, veri var istatistiksel öğrenme
+karşı taraf da seçim yapıyor oyun kuramı
+Kontrol Evresi
+1. Seçilen dil bana neyi yasaklıyor?
+2. Φ neyi koruyor, neyi düşürüyor?
+3. Düşen özellik ilerde önem kazanabilir mi?
+4. Yaslanılan yasa property test biçiminde kodlanmış mı?
+Dokuzuncu soru, protokolün en yüksek getirili maddesidir. Bir biçimselleştirmenin
+sağladığı asıl kazanç çoğu zaman pozitif bir çözüm değil, arama uzayının ka-
+patılmasıdır.
+Notasyon
+Protokolün günlük kullanımında aşağıdaki kısaltmalar işlevseldir:
+PHI problemi tasiyan esleme
+PHI^-1 cozumu geri getiren esleme
+PHI tutmuyor -> adim 4’e don, temsili degistir
+PHI siziyor -> adim 10, dusen ozellik geri geldi
+PHI yok -> cebirsel yapi yok, adim 6’ya gec
+Temsil Değişimi Yoluyla Yapı Kazanma
+Protokolün dördüncü adımı bağımsız bir mühendislik tekniği oluşturur. Doğrudan
+birleştirilemeyen bir büyüklük, uygun bir temsille birleştirilebilir hâle getir-
+ilebilir.
+Kanonik örnek aritmetik ortalamadır. Ortalama birleşme özelliği taşımadığından
+bölünmüş veri üzerinde doğrudan hesaplanamaz:
+6
+
+-- 6 of 33 --
+
+makine1 -> 30 (100 kayit)
+makine2 -> 50 (9.999.900 kayit)
+(30 + 50) / 2 = 40 <- hatali
+Hata, farklı büyüklükteki iki kümenin ortalamalarının eşit ağırlıkla toplan-
+masından kaynaklanır. Taşınan büyüklük (sum, count) ikilisine dönüştürüldüğünde
+işlem monoid yapısı kazanır:
+makine1 -> {sum: 3000, count: 100}
+makine2 -> {sum: 499995000, count: 9999900}
+birlestir {sum: 499998000, count: 10000000}
+nihai 499998000 / 10000000 = 50.0
+Değişen şey hesap değil, taşınan temsildir. Aynı hamlenin diğer örnekleri
+aşağıda verilmiştir.
+Birleştirilemeyen Taşınan temsil Kazanılan yapı
+ortalama (sum, count) monoid
+varyans (n, mean, M2), Welford monoid
+son yazan kazansın (timestamp, value) yarı latis
+distinct count HyperLogLog monoid
+top-K count-min sketch monoid
+medyan t-digest yaklaşık monoid
+nedensel öncelik vektör saat kısmı sıra
+Bu hamlenin kazandırdıkları toplu hâlde şunlardır: paralel çalışma, artımlı
+güncelleme, yeniden deneme güvenliği, dağıtık hesaplama ve parça başına bağımsız
+işleme.
+Biçimselleştirme Eşlemesi
+Problem imzasından biçimselleştirmeye geçiş için başvuru tablosu:
+7
+
+-- 7 of 33 --
+
+Problem imzası Biçimselleştirme Hazır sonuç
+şeyler + bağlantılar çizge kuramı en kısa yol, akış
+bağımlılık, çevrim yok DAG sıralama, artımlı hesap
+bağımsız hesap + birleştirme monoid paralel indirgeme
+iki birleştirme birlikte semiring en kısa yol, DP
+sonlu durum + geçiş otomata protokol doğrulama
+girdinin bir dili var gramer ayrıştırma kuramı
+geçmiş önemsiz Markov zinciri durağan dağılım
+kanıtla güncelleme Bayes çıkarımı sonsal dağılım
+gelme, bekleme, işlenme kuyruk kuramı Little, M/M/1
+amaç + kısıt dışbükey eniyileme küresel optimum
+ayrık seçim + kısıt ILP, SAT çözücüye devir
+karşılıklı bağımlı karar oyun kuramı denge çözümleri
+hedef + sensör + düzeltici kontrol kuramı kararlılık
+veriden kural istatistiksel öğrenme genelleme sınırları
+bilgi miktarı bilgi kuramı entropi, kapasite
+kim ne zaman ne görüyor dağıtık hesaplama CAP, FLP
+yakınlık, süreklilik, delik topoloji gömme, komşuluk
+dönüşüm ve tersi grup kuramı simetri indirgemesi
+yapı koruyan eşleme kategori kuramı izleç, dualite
+Lens Envanteri
+Katman 1, probleme yöneltilebilecek soruların envanterinden oluşur. Envanterin
+tamamı yaklaşık iki yüz otuz maddedir; aşağıda aileler ve her ailenin temsilı
+lensleri verilmiştir. Envanterin doğrudan getirisi düşüktür; işlevi, protokolün
+adımlarında hangi soruların sorulabileceğini hatırlatmaktır.
+8
+
+-- 8 of 33 --
+
+On Beş Aile
+Aile Ana soru Temsilı lensler
+Varlık Neler var? ontoloji, taksonomi, sınır
+Temsil Nasıl gösteriliyor? kodlama, normal form, hash
+Yapı Nasıl bağlılar? çizge, ağaç, DAG, latis
+Davranış Nasıl değişiyor? durum makinesi, sabit nokta
+Bilgi Ne biliyorum? entropi, karşılıklı bilgi
+Belirsizlik Ne kadar eminim? Bayes, varyans, kuyruk riski
+Akış Ne hareket ediyor? kuyruk, geri basınç, darboğaz
+Eniyileme Neyi iyileştiriyorum? dışbükeylik, gradyan, ödünleşim
+Karar Ne zaman seçiyorum? seçenek değeri, keşif–sömürü
+Doğruluk Nasıl biliyorum? değişmez, sağlamlık, tamlık
+Dayanıklılık Nasıl bozuluyor? tek nokta arıza, bölme duvarı
+Ölçek Büyüyünce ne olur? ölçek yasası, Amdahl, doğrusalsızlık
+Eşgüdüm Aktörler nasıl çalışır? uzlaşı, oyun kuramı, teşvik
+Öğrenme Deneyim nasıl kullanılır? kredi ataması, dağılım kayması
+˙Indirgeme Bu hangi problem? indirgenebilirlik, NP-zorluk
+Hızlı Tarama Zinciri
+Envanterin tamamının madde madde uygulanması pratik değildir. ˙Ilk teşhis
+için aşağıdaki zincir yeterlidir:
+Bu sey nedir?
+-> Neler bagli?
+-> Ne sabit kalmali?
+-> Neyi birlestiriyorum?
+-> Neyi olcuyorum?
+-> Sebep ne?
+-> Zaman icinde nasil degisiyor?
+-> Nerede darbogaz var?
+-> Belirsizlik nerede?
+-> Kim neyi optimize ediyor?
+-> Nasil bozulur?
+-> Neyi geri alabilirim?
+-> Bunu bilinen bir yapiya indirebilir miyim?
+Son halka belirleyicidir; zira o noktada soru “ben bunu nasıl çözerim?” ol-
+maktan çıkıp “bu problem hangi sınıfa aittir?” hâlini alır.
+Kavramların Üç Sınıfı
+Envanterdeki maddeler işlevleri bakımından eşdeğer değildir.
+9
+
+-- 9 of 33 --
+
+Sınıf ˙Işlev Örnekler
+˙Indirgeme yapanlar hesap sağlar monoid, sabit nokta, latis,
+Little yasası, entropi, dualite
+Öngörü üretenler sonuç bildirir Goodhart, Conway, ergodiklik,
+Jevons, kamçı etkisi
+Yalnızca ad verenler adlandırır holizm, kompleksite,
+emergence, antikırılganlık
+Birinci sınıf bir hesap yapma hakkı verir, ikinci sınıf bir öngörü üretir, üçüncü
+sınıf ise yalnızca bir adlandırma sunar. Üçünün karıştırılması bu tür envanter-
+lerin başlıca yanılgısıdır.
+Uygulamalı Vakalar
+Vaka 1: Dağıtık Yüzdelik Hesabı
+Yaklaşık iki yüz milyon kayıt üzerinden anlık istatistik üretimi.
+1 Turler log satiri, metrik, zaman penceresi
+2 Islemler filtrele, agregala, birlestir
+3 Yasalar count -> assoc, comm, identity (0) saglaniyor
+sum -> assoc, comm, identity (0) saglaniyor
+p95 -> assoc saglanmiyor
+4 Temsil p95 yerine t-digest ozeti tasi
+ozet birlestirme -> assoc, comm, identity saglaniyor
+5 Yapi MONOID
+6 Zaman surekli akis, pencereleme
+7 Bilinmeyen yok, deterministik
+8 Amac gecikme
+9 Yasak kesin p95 dagitik olarak ucuza elde edilemez;
+yaklasik deger kabul edilmelidir
+Üçüncü adımdaki tek olumsuz yanıt mimarinin tamamını belirlemiştir. Sonuç:
+parça başına bağımsız hesap, gece toplu işleme ihtiyacının ortadan kalkması,
+artımlı güncelleme ve yeniden deneme güvenliği.
+Vaka 2: C evrimdışı Eşzamanlama
+˙Iki kullanıcının aynı belgeyi bağlantısız durumda düzenlemesi.
+1 Turler belge durumu, duzenleme, kopya
+2 Islemler merge(a, b)
+3 Yasalar assoc saglaniyor (birlestirme sirasi onemsiz)
+comm saglaniyor (kim once senkronlanirsa)
+idempotent saglaniyor (tekrar gelen guncelleme)
+inverse saglanmiyor
+4 Temsil son deger yerine mezar tasli islem kumesi
+10
+
+-- 10 of 33 --
+
+5 Yapi JOIN-SEMILATTICE (CRDT)
+6 Zaman eventual consistency
+7 Bilinmeyen ag gecikmesi, baglanma sirasi
+8 Amac erisilebilirlik
+9 Yasak CAP geregi bolunme aninda tutarlilik ve
+erisilebilirlik ayni anda saglanamaz
+Üç olumlu yanıt, kilit mekanizmasını, merkezı eşzamanlama sunucusunu ve
+eşgüdüm protokolünü gereksiz kılmıştır.
+Vaka 3: Doyum Noktasında Gecikme Patlaması
+Kaynak kullanımı yüzde yetmişte kabul edilebilir olan gecikmenin, yüzde doksan
+beşte hızla bozulması.
+1 Turler istek, isci, kuyruk
+2 Islemler kuyruga al, isle, cikar
+3 Yasalar cebirsel yapi yok, islem birlestirmiyorum
+4 Temsil uygulanamaz
+5 Yapi akis ve bekleme
+6 Zaman gelis orani ve servis orani -> KUYRUK KURAMI
+7 Bilinmeyen gelis zamanlari rastgele
+8 Amac p99 gecikme
+9 Yasak M/M/1’de W = 1 / (mu - lambda)
+rho -> 1 iken bekleme sinirsiz buyur
+Üçüncü adımın boş çıkması burada bilgi taşır: cebirsel çerçeve zorlanmamalı,
+dinamik çerçeveye geçilmelidir. Gözlenen davranış bir kusur değil matematiksel
+bir zorunluluktur; dolayısıyla çözüm kod düzeyinde eniyileme değil, kapasite
+planlaması veya geri basınç tasarımıdır.
+Vakaların Karşılaştırması
+Vaka Adım 3 sonucu Belirleyici hamle
+Yüzdelik hesabı kısmı olumsuz temsil değişimi
+C evrimdışı eşzamanlama üç olumlu eşgüdümün kaldırılması
+Gecikme patlaması yapı yok çerçeve değişimi
+Üç vakanın ortak yanı, belirleyici bilginin teknoloji seçiminden değil üçüncü
+adımın çıktısından gelmesidir.
+Yöntemin Sınırları
+Eşlemenin Sessiz Bozulması
+Yöntemin başlıca risk yüzeyi, kuruluş anında geçerli olan Φ eşlemesinin sistem
+evrildikçe geçerliliğini yitirmesi ve bu yitimin gözlemlenmemesidir.
+11
+
+-- 11 of 33 --
+
+kurulus ani olaylar idempotent -> at-least-once yeterli
+alti ay sonra yeni olay tipi idempotent degil
+PHI hala kodda, varsayim artik gecersiz
+sistem sessizce hatali sonuc uretiyor
+Bu durumun literatürdeki karşılığı zayıftır; en yakın terim sızan soyutla-
+madır, ancak o daha gevşek bir kavramdır. Karşı önlem, eşlemenin dayandığı
+yasanın özellik tabanlı testler biçiminde kodlanmasıdır:
+for all a,b,c: merge(merge(a,b),c) == merge(a,merge(b,c))
+for all a: merge(a, identity) == a
+for all a: merge(a, a) == a
+Bu üç satır, eşlemenin dayandığı varsayımı kod içinde canlı tutar. Yeni bir
+tür eklendiğinde test başarısız olur ve sessiz bozulma önlenir.
+Etiketlemenin Açıklama Yerine Geçmesi
+˙Ikinci risk kavramsaldır. Geniş bir terim envanteri, her duruma bir ad yapıştırmayı
+kolaylaştırır ve etiket, açıklamanın yerine geçebilir. Ayırt edici ölçüt şudur:
+terim çıkarıldığında geriye somut bir hesap veya sınanabilir bir öngörü kalıyorsa
+terim iş görmüştür; yalnızca daha yetkin görünen bir cümle kalıyorsa terim
+süstür.
+Bu risk protokolün adlandırılmasıyla artar. “Bu bir Φ problemidir” cümlesi,
+karşı taraf protokolün adımlarını bilmiyorsa hiçbir bilgi taşımaz. Adın işlevi
+yordamı çağırmaktır; yordamın yerine geçmesi durumunda ad zararlıdır.
+Yüzeysel Benzerlik
+Üçüncü risk, yapısal benzerlik sanılan yüzeysel benzerliktir. ˙Iki problem gözle
+görülür biçimde benzeşebilir; ancak çözüm için kritik olan özellik Φ tarafından
+korunmuyorsa aktarım geçersizdir. Sızan soyutlama, hatalı analoji ve yanlış yapı
+teşhisi vakalarının üçü de aynı kaynaktan doğar: eşlemenin düşürdüğü özelliğin
+sonradan belirleyici hâle gelmesi.
+Envanterin Marjinal Getirisi
+Dördüncü sınır niceliksel değil niteliksel bir eşiğe ilişkindir. Kavram envanterinin
+genişletilmesi ilkece sınırsızdır; ancak marjinal getirisi hızla sıfıra yaklaşır. Yüz
+otuz veya iki yüz otuz terimi bilmek, hiçbirini bilmemekle benzer sonuç verir;
+zira envanter bir araç değil bir dökümdür. Araca dönüşmesinin tek yolu, bir
+maddenin gerçek bir vakada işletilmesi ve hangi öngörüyü yapma hakkı kazandırdığının
+görülmesidir.
+Sonuç
+Bu çalışmada ele alınan yöntem yeni bir keşif değildir; matematiksel modelleme,
+indirgeme, temsil değişimi ve yapı teşhisi geleneklerinin tek bir işletilebilir akışta
+12
+
+-- 12 of 33 --
+
+birleştirilmesidir. Yöntemin üç ayrı getirisi bulunmaktadır ve bunların büyüklükleri
+eşit değildir.
+Doğrudan kazanç, bir problemin çözülmüş bir problem olduğunun fark edilme-
+sidir. Gerçektir, ancak seyrektir ve yalnızca o an ele alınan problemle sınırlıdır.
+Negatif bilgi, hangi çözüm yollarının yapı gereği kapalı olduğunun bilin-
+mesidir. Medyanın monoid olmaması ilgili sorgunun paralelleştirilemeyeceğini,
+doyum noktasındaki bekleme davranışı gecikmenin kod eniyilemesiyle çözülemeyeceğini,
+CAP üç özelliğin aynı anda elde edilemeyeceğini söyler. Yanlış yola hiç girmemek,
+doğru yolu bulmaktan daha fazla zaman kazandırır; mühendislik kıdeminin
+büyük bölümü bu birikimden oluşur.
+Tasarım hamlesi ise temsil değişimi yoluyla yapı kazanmadır ve doğrudan
+kod düzeyinde karşılık üretir. Bu hamleyi bilen ve bilmeyen mühendisler farklı
+sistemler yazar.
+Yöntemin kendisi bir envanter değil, işletilecek bir yordamdır. Bu nedenle
+kavram listesini genişletmenin marjinal getirisi hızla sıfıra yaklaşırken, protokolü
+tek bir gerçek vakada baştan sona işletmenin getirisi yüksektir. Elde tutmanın
+ölçütü, bir yapının nerede çalıştığını değil, nerede çalışmadığını görmüş olmaktır.
+13
+
+-- 13 of 33 --
+
+Ek A: On Altı Aile Taksonomisi
+Lens envanterindeki kavramlar on altı ana aileye ayrılır. Aileler, bir probleme
+yöneltilecek soruların üst düzey kategorilerini oluşturur.
+Aile Ana soru Kapsam
+Varlık (Ontology) Neler var? türler, sınırlar, taksonomi
+Temsil (Representation) Nasıl gösteriliyor? kodlama, normal form
+˙Ilişki (Structure) Nasıl bağlılar? çizge, ağaç, latis
+Davranış (Behavior) Nasıl değişiyor? durum, geçiş, sabit nokta
+Bilgi (Information) Ne biliyorum? entropi, sinyal, sıkıştırma
+Belirsizlik (Uncertainty) Ne kadar eminim? olasılık, risk, varyans
+Akış (Flow) Ne hareket ediyor? kuyruk, darboğaz, geri basınç
+Eniyileme (Optimization) Neyi iyileştiriyorum? amaç, gradyan, ödünleşim
+Karar (Decision) Ne zaman seçiyorum? seçenek, keşif–sömürü
+Doğruluk (Correctness) Doğru olduğunu nasıl biliyorum? değişmez, tamlık
+Dayanıklılık (Reliability) Nasıl bozuluyor? arıza kipleri, yedeklilik
+Ölçek (Scalability) Büyüyünce ne oluyor? ölçek yasası, Amdahl
+Eşgüdüm (Coordination) Aktörler nasıl birlikte çalışıyor? uzlaşı, teşvik
+Öğrenme (Learning) Deneyimden nasıl yararlanıyor? kredi ataması, transfer
+˙Indirgeme (Reduction) Bu aslında hangi problem? indirgenebilirlik, karmaşıklık
+Dil ve Anlam (Semantics) Neyi neyle ifade ediyorum? kullanım anlamı, çerçeveleme
+14
+
+-- 14 of 33 --
+
+Ek B: Lens Envanteri
+Bu bölüm okunmak için değil, tarama için düzenlenmiştir. Envanterin doğrudan
+getirisi düşüktür; işlevi, protokolün adımlarında hangi soruların sorulabileceğini
+hatırlatmaktır. Bir problemle karşılaşıldığında maddelerin tek tek uygulanması
+amaçlanmamıştır.
+B.1 Temel Yapılar ve Soyutlama
+Lens Probleme sorulacak soru Kazandırdığı
+Soyutlama Ayrıntıları atınca geriye ne kalıyor? Problemin iskeleti
+Ontoloji Sistemde hangi tür şeyler var? Yanlış sınıflandırmayı önler
+Sınır Sistem nerede başlıyor, nerede bitiyor? Kapsam
+Durum (state) Geleceği belirlemek için geçmişten neyi
+bilmem yeterli?
+Durum makinesi
+Değişmez (invariant) Ne olursa olsun ne aynı kalmalı? Doğruluk ölçütü
+Korunum yasası Sistemde ne kaybolamaz, ne yoktan
+oluşamaz?
+Muhasebe, veri denetimi
+Eşdeğerlik Hangi farklı görünen şeyleri aynı saya-
+bilirim?
+Durum uzayı küçültme
+Simetri Hangi dönüşüm problemi değiştirmiyor? Gereksiz vaka eleme
+Normal form Aynı şeyi tek standart temsile indirebilir
+miyim?
+Karşılaştırma, dedup
+Boyut indirgeme Hangi değişkenler aslında gereksiz? Karmaşıklık azaltma
+B.2 ˙Ilişkisel Yapılar
+Lens Probleme sorulacak soru Kazandırdığı
+C izge (graph) Burada şeyler ve ilişkiler var mı? Rota, bağımlılık,
+erişilebilirlik
+Ağaç ˙Ilişkiler hiyerarşik ve çevrimsiz mi? Dosya sistemi, AST
+DAG Bağımlılık var ama çevrim yok mu? Build, iş akışı, çizelgeleme
+Kısmı sıra Bazıları sıralanabiliyor ama hepsi
+karşılaştırılamıyor mu?
+Bağımlılık, nedensellik
+Latis (lattice) ˙Iki durumun ortak birleştirme sonucu var
+mı?
+CRDT, dağıtık durum
+15
+
+-- 15 of 33 --
+
+B.3 Cebirsel Yapılar
+Lens Probleme sorulacak soru Kazandırdığı
+Monoid Parçaların sonuçlarını güvenle
+birleştirebilir miyim?
+Paralel indirgeme
+Semiring ˙Iki farklı birleştirme birlikte mi çalışıyor? En kısa yol, DP, ayrıştırma
+Grup Her dönüşümün tersi var mı? Tersinir dönüşümler
+Fonksiyon bileşimi Büyük davranışı küçük dönüşüm zinciri
+olarak görebilir miyim?
+Boru hattı, derleyici
+Sabit nokta Tekrar uygulayınca sistem bir noktada
+değişmez mi?
+Özyineleme, denge
+Birleşmelilik Gruplama önemli mi? Paralelleştirme
+Değişmelilik ˙Işlem sırası önemli mi? Eşzamanlı tasarım
+Birim (identity) “Hiçbir şey” durumunun karşılığı ne? Başlangıç, indirgeme
+Kapalılık (closure) ˙Işlemin sonucu aynı temsil dünyasında
+kalıyor mu?
+Bileşim güvenliği
+Etkisizlik (idempo-
+tence)
+Aynı işlemi iki kez yapmak bir kezle aynı
+mı?
+Yeniden deneme güvenliği
+Tersinirlik Kararı veya işlemi geri alabiliyor
+muyum?
+Risk yönetimi
+B.4 Hesaplama Stratejileri
+Lens Probleme sorulacak soru Kazandırdığı
+Özyineleme Problem kendisinin daha küçük hâli mi? Böl ve yönet
+Dinamik program-
+lama
+Aynı alt problemi tekrar mı çözüyorum? Hesap tasarrufu
+Belleğe alma (memo-
+ization)
+Sonucu yeniden kullanabilir miyim? Hız
+Yerellik (locality) Sonuç için tüm sistemi bilmem gerekiyor
+mu?
+Dağıtım, eniyileme
+Tembel
+değerlendirme
+Simdi hesaplamak zorunda mıyım? Kaynak tasarrufu
+˙Istekli değerlendirme Erken hesaplamak daha mı ucuz? Basitlik
+Akış (streaming) Her şeyi beklemeden işleyebilir miyim? Büyük veri
+Pencereleme Sonsuz akışı parçalara bölebilir miyim? Akış işleme
+Toplu işleme (batch-
+ing)
+Tek tek yerine toplu işlemek avantajlı
+mı?
+˙Iş hacmi
+16
+
+-- 16 of 33 --
+
+B.5 Tasarım ve Modülerlik
+Lens Probleme sorulacak soru Kazandırdığı
+Bileşim (composi-
+tion)
+Küçük doğru parçalar büyük doğru sis-
+temi kuruyor mu?
+Modüler tasarım
+Bağlaşım / uyum Neyi birlikte tutmalı, neyi ayırmalıyım? Mimari
+Bilgi gizleme Bir parçanın içini diğerleri bilmeli mi? Değişiklik izolasyonu
+Arayüz ˙Iki parça arasında minimum hangi
+sözleşme yeterli?
+Bağımsız geliştirme
+ADT Davranış mı önemli, temsil mi? Doğru veri modeli
+Temsil değişmezi Veri bellekte hangi kuralları bozmamalı? Veri bütünlüğü
+Kanonik temsil Aynı şey tek biçimde tutulabilir mi? Kolay karşılaştırma
+B.6 Veri ve Temsil
+Lens Probleme sorulacak soru Kazandırdığı
+Kodlama Bilgiyi nasıl temsil ediyorum? Depolama, verim
+Serileştirme Bu yapı başka sisteme nasıl aktarılır? Ağ, disk
+Sıkıştırma Aynı bilgiyi daha az yerle tutabilir
+miyim?
+Başarım
+Özetleme (hashing) Kimlik yerine kısa parmak izi yeterli mi? Arama, dedup
+Parmak izi Tam eşitlik yerine yüksek olasılıkla
+eşitlik yeterli mi?
+Büyük veri
+Kimlik / eşitlik Aynı nesne mi, sadece aynı değere mi
+sahip?
+Önbellek, ORM
+Takma ad (aliasing) Aynı veriye birden fazla başvuru mu var? Yan etki analizi
+Sahiplik Bu verinin sahibi kim? Yaşam süresi, bellek
+Yaşam süresi Veri ne zaman oluşur, ne zaman ölür? Kaynak yönetimi
+Değişmezlik Veri değişmeden yeni kopya üretilebilir
+mi?
+˙Iş parçacığı güvenliği
+Değiştirme (muta-
+tion)
+Gerçekten değiştirmem gerekiyor mu? Yan etki denetimi
+17
+
+-- 17 of 33 --
+
+B.7 Hesaplama Anlambilimi
+Lens Probleme sorulacak soru Kazandırdığı
+Saflık (purity) Aynı giriş her zaman aynı sonucu mu
+verir?
+Test edilebilirlik
+Yan etki Bu fonksiyon sadece hesap mı yapıyor? Belirlenimcilik
+Başvurusal say-
+damlık
+C ağrıyı sonucuyla değiştirebilir miyim? Fonksiyonel programlama
+Belirlenimcilik Aynı koşul aynı sonucu mu üretir? Hata ayıklama
+Belirlenimsizlik Birden fazla geçerli yürütme var mı? Eşzamanlı sistemler
+Durum makinesi Sistem hangi durumlarda dolaşıyor? ˙Iş akışları
+Sonlu özdevinir Problem sonlu durumlarla çözülebilir
+mi?
+Ayrıştırıcı, protokol
+Gramer Girdinin dili nedir? Ayrıştırma
+Ayrıştırıcı (parser) Yapıyı metinden çıkarıyor muyum? Derleyici
+Sözdizim ağacı
+(AST)
+Kodun gerçek yapısı nedir? Analiz
+Yorumlayıcı / der-
+leyici
+Simdi mi çalıştırıyorum, önce mi
+dönüştürüyorum?
+Mimari
+Ara temsil (IR) Ara temsil işimi kolaylaştırır mı? Derleyici, eniyileyici
+Eniyileme geçişi Aynı davranışı daha iyi nasıl elde ed-
+erim?
+Başarım
+B.8 Bilgi Kuramı
+Lens Probleme sorulacak soru Kazandırdığı
+Entropi Belirsizlik ne kadar? Bilgi miktarı
+Karşılıklı bilgi Bir değişken diğerini ne kadar açıklıyor? Öznitelik seçimi
+Sinyal–gürültü Gözlediğimin ne kadarı gerçek sinyal? Ölçüm kalitesi
+Sıkıştırılabilirlik Veride tekrar eden yapı var mı? Örüntü keşfi
+Bilgi kuramsal sınır Daha fazla bilgi olmadan çözülebilir mi? ˙Imkânsızlık analizi
+18
+
+-- 18 of 33 --
+
+B.9 Olasılık ve Risk
+Lens Probleme sorulacak soru Kazandırdığı
+Bayes Yeni kanıt gelince inancımı nasıl
+güncellemeliyim?
+Belirsizlik altında öğrenme
+Koşullu olasılık Bu olasılık hangi bilgiye bağlı? Yanlış bağımsızlık
+varsayımı
+Taban oran Başlangıç sıklığını unutuyor muyum? Yanlış pozitif azaltma
+Beklenen değer Uzun vadede ortalama sonuç ne? Karar
+Varyans Ortalama aynı olsa bile sonuç ne kadar
+oynuyor?
+Risk
+Kuyruk riski C ok nadir ama çok büyük sonuç var mı? Güvenlik
+Ergodiklik Topluluk ortalaması bireyin zaman sonu-
+cunu temsil ediyor mu?
+Yıkım riski
+Monte Carlo Analitik çözemiyorsam senaryo simüle
+edebilir miyim?
+Olasılıksal analiz
+Duyarlılık analizi Hangi varsayım değişince sonuç çöküyor? Kritik parametre
+B.10 Nedensellik
+Lens Probleme sorulacak soru Kazandırdığı
+Nedensellik A gerçekten B’yi mi yaratıyor, yoksa bir-
+likte mi değişiyor?
+Müdahale tasarımı
+Karıştırıcı (con-
+founder)
+A ile B’yi üçüncü bir şey mi açıklıyor? Sahte korelasyon
+Karşıolgusal A olmasaydı ne olurdu? Nedensel düşünme
+Mekanizma A, B’yi tam olarak nasıl üretiyor? Açıklama
+Ters problem Gördüğüm sonuç kaç farklı sebepten
+çıkabilir?
+Teşhis
+19
+
+-- 19 of 33 --
+
+B.11 Dinamik ve Geri Besleme
+Lens Probleme sorulacak soru Kazandırdığı
+Geri besleme Sonuç tekrar sebebi etkiliyor mu? Dinamik sistem
+Pozitif geri besleme Küçük fark kendini büyütüyor mu? Patlama, ağ etkisi
+Negatif geri besleme Sapma kendini bastırıyor mu? Kararlılaştırma
+Kontrol kuramı Hedef, algılayıcı, hata ve düzeltici var
+mı?
+Otomatik düzenleme
+Gecikme Geri besleme geç mi geliyor? Salınım, kararsızlık
+Histerezis Bugünkü durum geçmiş yola bağlı mı? Yol bağımlılığı
+Yol bağımlılığı Aynı noktaya farklı yoldan gelmek fark
+yaratıyor mu?
+Tarihsel kilitlenme
+Eşik Sistem bir noktaya kadar sessiz, sonra
+ani mi değişiyor?
+Faz geçişi
+Kritik kütle Davranışın başlaması için minimum
+yoğunluk var mı?
+Ağ, toplumsal sistem
+Doğrusalsızlık ˙Iki kat girdi gerçekten iki kat çıktı mı? Yanlış doğrusal tahmin
+Beliriş (emergence) Parçalarda olmayan özellik bütünde mi
+çıkıyor?
+Karmaşık sistem
+Ölçek yasası Boyut büyüyünce davranış nasıl
+değişiyor?
+Ölçekleme
+B.12 Akış ve Kapasite
+Lens Probleme sorulacak soru Kazandırdığı
+Kuyruk kuramı ˙Işler bekliyor mu? Gecikme, kapasite
+Little yasası WIP = iş hacmi × gecikme ilişkisi var
+mı?
+Operasyon tasarımı
+Darboğaz Sistemin hızını hangi tek nokta
+sınırlıyor?
+Eniyileme
+Doyum (utilization) Kaynağı tam doldurmak beklemeyi pat-
+latıyor mu?
+Kapasite planlama
+Geri basınç Üretici tüketiciden hızlı mı? Kararlılık
+Amdahl yasası Paralelleştirilemeyen bölüm hızlanmayı
+sınırlıyor mu?
+Başarım
+Kritik yol Toplam süreyi hangi zincir belirliyor? C izelgeleme
+Sıcak / soğuk yol En çok çalışan yol hangisi? Profilleme
+˙Iş çalma Boşta kalan işçi iş alabilir mi? Paralellik
+20
+
+-- 20 of 33 --
+
+B.13 Eniyileme
+Lens Probleme sorulacak soru Kazandırdığı
+Pareto Sonucun çoğunu az sayıda neden mi
+üretiyor?
+Önceliklendirme
+Dışbükeylik Yerel iyileşme küresele götürüyor mu? Eniyileme
+Yerel / küresel opti-
+mum
+Yakındaki en iyi noktada mı sıkıştım? Arama stratejisi
+Gradyan Hangi yönde küçük değişiklik sonucu iy-
+ileştirir?
+Eniyileme
+Kısıt Ne yapamayız? C özüm uzayı küçültme
+Ödünleşim Bir şeyi artırırken neyi kaybediyorum? Gerçekçi tasarım
+Dualite Aynı probleme başka taraftan bakmak
+kolaylaştırır mı?
+Alternatif çözüm
+Lagrange, gölge fiyat Bir kısıtı gevşetmenin değeri ne? Kaynak tahsisi
+Fırsat maliyeti Bunu seçince hangi alternatifi kaybediy-
+orum?
+Karar
+Marjinal değer Bir birim daha eklemek ne kadar değer
+üretir?
+Durma noktası
+Azalan verim Daha fazla kaynak artık az fayda mı ge-
+tiriyor?
+Aşırı mühendisliği önler
+Uzay–zaman
+ödünleşimi
+Bellek mi zaman mı harcayacağım? Eniyileme
+21
+
+-- 21 of 33 --
+
+B.14 Teşvik ve Eşgüdüm
+Lens Probleme sorulacak soru Kazandırdığı
+Jevons etkisi Verimlilik kullanımı artırıp tasarrufu yok
+ediyor mu?
+˙Ikincil etkiler
+Goodhart yasası Metrik hedef olunca insanlar metriği mi
+eniyileyecek?
+Metrik tasarımı
+Vekâlet (principal–
+agent)
+Kararı veren ile sonucu yaşayanın
+çıkarları aynı mı?
+Örgüt tasarımı
+Teşvik uyumu Ödül sistemi istediğim davranışı
+gerçekten teşvik ediyor mu?
+Kurum tasarımı
+Oyun kuramı Sonuç başkalarının kararlarına bağlı mı? Stratejik davranış
+Nash dengesi Kimsenin tek başına ayrılmak istemediği
+kötü noktada mıyız?
+Sistemik kilitlenme
+Eşgüdüm problemi Herkes aynı şeyi isterken yine de
+başarısız olabilir mi?
+Standart, protokol
+Ortak malın trajedisi Bireysel mantık ortak kaynağı tüketiyor
+mu?
+Kaynak yönetimi
+Ters seçilim Sistem kötü tipleri özellikle mi çekiyor? Piyasa tasarımı
+Ahlaki tehlike Bedeli başkası ödediği için risk artıyor
+mu?
+Teşvik
+Dışsallık Kararımın bedelini veya faydasını
+başkası mı taşıyor?
+Gerçek maliyet
+Geri tepme etkisi ˙Iyileştirme yeni kullanım yaratıp kazancı
+geri mi alıyor?
+Sistem etkisi
+˙Ikincil etkiler ˙Ilk sonuçtan sonra ne olacak? Stratejik düşünme
+N’inci derece etkiler O sonuç başka neyi tetikleyecek? Sistem düşüncesi
+B.15 Karar ve Seçenek
+Lens Probleme sorulacak soru Kazandırdığı
+Seçenek değeri (op-
+tionality)
+Bugün küçük maliyetle gelecekte seçenek
+açık tutabilir miyim?
+Belirsizlik altında tasarım
+Keşif / sömürü Bildiğimi mi kullanmalıyım, yeni mi den-
+emeliyim?
+Ar-Ge, öğrenme
+Bilginin değeri Öğrenmenin değeri maliyetinden büyük
+mü?
+Araştırma kararı
+Aktif öğrenme Bir sonraki hangi soru belirsizliği en çok
+azaltır?
+Deney tasarımı
+Son sorumlu an Bu kararı şimdi vermek zorunda mıyım? Erken bağlanmayı önler
+Gerçek opsiyonlar Küçük yatırım gelecekte büyük hareket
+alanı açıyor mu?
+Strateji
+Tersinirlik Deneyi ucuzca geri alabilir miyim? Hızlı deney
+22
+
+-- 22 of 33 --
+
+B.16 Ölçme
+Lens Probleme sorulacak soru Kazandırdığı
+Ölçek türleri Nominal, sıralı, aralık, oran: hangisi? Meşru işlemleri belirler
+˙Işevuruklaştırma Soyut hedefi hangi gözlenebilir değişkene
+çevireceğim?
+Ölçülebilirlik
+Geçerlilik Ölçtüğüm şey gerçekten istediğim şey
+mi?
+Doğru metrik
+Güvenilirlik Tekrar ölçsem benzer sonuç alır mıyım? Tutarlılık
+Gözlemci etkisi Ölçmek ölçüleni değiştiriyor mu? Ölçüm tasarımı
+Kesinlik / duyarlılık Hangi hata daha pahalı: kaçırmak mı
+yanlış alarm mı?
+Saptama sistemleri
+Ayarlama (calibra-
+tion)
+Yüzde seksen dediğim olayların yaklaşık
+o kadarı oluyor mu?
+Tahmin kalitesi
+Ölçüm hatası,
+seyreltme
+Gürültülü ölçüm ilişkiyi zayıf mı
+gösteriyor?
+˙Istatistiksel yorum
+Gözlemlenebilirlik Sistemin iç durumunu çıktılardan an-
+layabiliyor muyum?
+˙Izleme
+Denetlenebilirlik Elimdeki müdahalelerle istediğim du-
+ruma ulaşabiliyor muyum?
+Kontrol tasarımı
+˙Izlenebilirlik (trac-
+ing)
+Bir isteğin yolculuğunu takip edebilir
+miyim?
+Hata ayıklama
+Metrikler Sağlığı hangi sayılar anlatıyor? ˙Izleme
+Günlükleme Olay geçmişini görebiliyor muyum? ˙Inceleme
+Profilleme Zaman gerçekten nereye gidiyor? Eniyileme
+Kıyaslama Hızlı olduğunu ölçtüm mü? Kanıt
+23
+
+-- 23 of 33 --
+
+B.17 Dayanıklılık ve Arıza
+Lens Probleme sorulacak soru Kazandırdığı
+Sağlamlık Varsayımlar biraz değişince sistem
+çalışmayı sürdürüyor mu?
+Dayanıklılık
+Kırılganlık Küçük değişiklik büyük zarar yaratıyor
+mu?
+Risk
+Yedeklilik Kritik işlevin başka yolu var mı? Hata toleransı
+Tek nokta arıza Tek bir şey bozulunca her şey ölüyor mu? Mimari risk
+Bölme duvarı (bulk-
+head)
+Arızanın yayılmasını engelleyebilir
+miyim?
+˙Izolasyon
+Erken başarısızlık Yanlış durumda hemen durmalı mıyım? Hata görünürlüğü
+Güvenli başarısızlık Hata olunca hangi güvenli duruma
+geçilmeli?
+Emniyet
+Kademeli çöküş Tamamen ölmek yerine düşük kapa-
+siteyle sürebilir mi?
+Esneklik
+Derinlemesine
+savunma
+Tek koruma katmanı kırılırsa başkaları
+var mı?
+Güvenlik
+Sapmanın nor-
+malleşmesi
+Küçük ihlaller normalleşiyor mu? Büyük kaza önleme
+˙Isviçre peyniri mod-
+eli
+Birden fazla küçük açık hizalanınca fe-
+laket mi oluyor?
+Emniyet
+FMEA Her parça hangi yollarla bozulabilir? Sistematik arıza analizi
+Arıza ağacı Bu kötü sonuca hangi kombinasyonlar
+yol açabilir?
+Yukarıdan aşağı risk
+Zaman aşımı Beklemeyi ne zaman bırakacağım? Sağlamlık
+Devre kesici Karşı taraf çökerse ben de çökmeli
+miyim?
+Mikroservis
+24
+
+-- 24 of 33 --
+
+B.18 Dağıtık Sistemler
+Lens Probleme sorulacak soru Kazandırdığı
+Tutarlılık modeli Herkes aynı veriyi ne zaman görmeli? Dağıtık sistem
+Doğrusallaştırılabilirlik Tek makine varmış gibi davranıyor mu? Güçlü tutarlılık
+Nihai tutarlılık Bir süre sonra uzlaşması yeterli mi? Bulut
+Uzlaşı (consensus) Herkes aynı kararı nasıl alacak? Raft, Paxos
+Yetersayı (quorum) Kaç düğüm yeterli? Dağıtık karar
+C oğaltma Kaç kopya tutmalıyım? Erişilebilirlik
+Bölümleme (shard-
+ing)
+Veriyi nasıl bölerim? Ölçek
+Başvuru yerelliği Yakın veri gerçekten önemli mi? Önbellek
+Önbellek
+geçersizleştirme
+Eski bilgi ne zaman geçersiz olur? Başarım
+Kilit çekişmesi Herkes aynı kilidi mi bekliyor? Eşzamanlılık
+Kilitlenme (dead-
+lock)
+Kim kimi bekliyor? Paralellik
+Canlı kilit Herkes hareket ediyor ama ilerleme yok
+mu?
+Sistem analizi
+Açlık (starvation) Bir iş hiç sıra alamıyor mu? C izelgeleyici
+Adillik Kaynaklar adil dağılıyor mu? ˙Işletim sistemi
+Öncelik tersinmesi Düşük öncelik yükseği mi engelliyor? Gerçek zamanlı sistem
+Teslimat semantiği Aynı mesaj kaç kez işlenebilir? Mesajlaşma
+Yeniden deneme se-
+mantiği
+Tekrar denemek güvenli mi? API tasarımı
+Saga örüntüsü Dağıtık işlem yerine telafi edebilir
+miyim?
+˙Iş akışı
+Denetim noktası Buradan devam edebilir miyim? Hata toleransı
+Anlık görüntü Sistemin o andaki fotoğrafını alabilir
+miyim?
+Kurtarma
+Olay kaynaklama Durumu değil olayları mı saklamalıyım? Denetim izi
+CQRS Okuma ve yazmayı ayırmalı mıyım? Ölçeklenebilirlik
+25
+
+-- 25 of 33 --
+
+B.19 Öğrenme ve Model
+Lens Probleme sorulacak soru Kazandırdığı
+Yanlılık–varyans Fazla basit miyim, fazla hassas mı? Model seçimi
+Aşırı uyum C özümüm vakaya mı uydu, sınıfa mı? Genellenebilirlik
+Düzenlileştirme Esnekliği azaltıp genellemeyi artırabilir
+miyim?
+Sağlam model
+Dağılım kayması C alıştığım dünya ile üretimdeki dünya
+aynı mı?
+Model kırılması
+Transfer C özüm başka probleme aynı yapı ne-
+deniyle mi taşınıyor?
+Alanlar arası öğrenme
+Kredi ataması Başarıyı veya başarısızlığı hangi adıma
+bağlayacağım?
+Öğrenme
+Belirlenebilirlik Veriden bu parametreyi gerçekten
+çıkarabilir miyim?
+Boşuna model kurmayı
+önler
+Geri besleme
+gecikmesi
+Yanlış yaptığımı ne kadar hızlı
+öğreniyorum?
+Öğrenme hızı
+OODA Gözlem, yönelim, karar, eylem döngüm
+ne kadar hızlı?
+Rekabet, operasyon
+Öğrenme döngüsü Sonucun bilgisi sisteme gerçekten geri
+giriyor mu?
+Kurumsal öğrenme
+26
+
+-- 26 of 33 --
+
+B.20 Mantık ve Kanıt
+Lens Probleme sorulacak soru Kazandırdığı
+Yanlışlanabilirlik Hangi gözlem fikrimin yanlış olduğunu
+gösterebilir?
+Bilimsel düşünme
+Tümdengelim Varsayımlarım doğruysa zorunlu sonuç
+ne?
+Kanıt
+Tümevarım Örneklerden hangi genel kuralı
+çıkarabilirim?
+Öğrenme
+Kaçırım (abduction) Gözlemler için en iyi açıklama hangisi? Teşhis
+Gerekli / yeterli Bu koşul gerekli mi, yeterli mi, ikisi de
+mi?
+Mantık hatası azaltma
+Karşı örnek Tek bir karşı örnek iddiamı yıkabilir mi? Hızlı sınama
+Sınır durumu Uçlarda ne oluyor: sıfır, bir, sonsuz, boş
+küme?
+Hata ve kuram sınaması
+Boyut analizi Birimler birbirini tutuyor mu? Saçma sonucu anında
+yakalar
+Büyüklük mertebesi Tam hesap yapmadan yaklaşık büyüklük
+ne?
+Fermi tahmini
+Üst / alt sınır Kesin cevabı bilmesem de sınır koyabilir
+miyim?
+Hızlı karar
+Güvercin yuvası Seçenekten fazla nesne varsa zorunlu
+çakışma var mı?
+˙Imkânsızlık sonucu
+Tamlık C özüm bütün vakaları kapsıyor mu? Doğruluk
+Sağlamlık (sound-
+ness)
+Yanlış sonucu doğru diye üretir mi? Doğrulama
+˙Ispat yükümlülüğü Gerçekten neyi ispatlamam gerekiyor? Biçimsel doğrulama
+27
+
+-- 27 of 33 --
+
+B.21 Karmaşıklık ve ˙Indirgeme
+Lens Probleme sorulacak soru Kazandırdığı
+Hesaplama
+karmaşıklığı
+C özüm veri büyüdükçe nasıl patlıyor? Algoritma seçimi
+˙Indirgenebilirlik Problemimi bilinen başka probleme
+çevirebilir miyim?
+Hazır kuram kullanımı
+NP-zorluk Kusursuz çözüm yerine yaklaşık mı kul-
+lanmalıyım?
+Zaman kazancı
+CAP benzeri
+imkânsızlık
+˙Istediğim özelliklerin hepsini aynı anda
+alabilir miyim?
+Boşuna tasarımı önler
+Bedava öğle yemeği
+yok
+Her problemde üstün tek yöntem bek-
+liyor muyum?
+Yöntem seçimi
+Alt sınır Bundan hızlısı kuramsal olarak mümkün
+mü?
+Beklenti yönetimi
+Amortize analiz Pahalı işlem uzun vadede aslında ucuz
+mu?
+Algoritma analizi
+En kötü / ortalama
+durum
+En kötü durum gerçekten önemli mi? Tasarım
+Sezgisel yöntem Kanıtlanmış optimum yerine yeterince
+iyi yol var mı?
+Pratik çözüm
+Herhangi zaman al-
+goritması
+Zaman verirsem çözüm iyileşebilir mi? Süre kısıtlı sistemler
+B.22 Dil ve Anlam
+Lens Probleme sorulacak soru Kazandırdığı
+Kullanım anlamı Kelimenin anlamı tanımında mı, kul-
+lanımında mı?
+Kavram netliği
+Söz edimi Bu söz bir eylem mi gerçekleştiriyor? Protokol, sözleşme
+Bulanıklık /
+çokanlamlılık
+Sınır mı belirsiz, yoksa birden fazla an-
+lam mı var?
+Gereksinim analizi
+C erçeveleme Aynı içeriğin sunumu kararı değiştiriyor
+mu?
+˙Iletişim, karar
+Kurucu / düzenleyici
+kural
+Kural oyunu mu yaratıyor, mevcut
+davranışı mı düzenliyor?
+Kural tasarımı
+Taksonomi Bunları nasıl sınıflandırıyorum? Bilgi düzenleme
+28
+
+-- 28 of 33 --
+
+B.23 Kurum ve Toplum
+Lens Probleme sorulacak soru Kazandırdığı
+Meşruiyet Güç rızayla mı destekleniyor? Yönetim maliyeti
+Örtük bilgi Dokümana yazılamayan hangi bilgi
+kişide?
+Otobüs faktörü
+Kurumsal hafıza “Bunu neden böyle yapıyoruz?” cevabı
+korunuyor mu?
+Tekrar hata önleme
+Bürokratik ruti-
+nleşme
+Karizmatik olan kurala mı dönüşüyor? Kurum evrimi
+Eşbiçimlilik Kurumlar işlevden bağımsız olarak bir-
+birini mi taklit ediyor?
+Kurum analizi
+Gizli müfredat Resmı amaç dışında hangi davranış
+öğretiliyor?
+Kültür analizi
+Rant kollama Değer üretmeden pay alma yönelimi var
+mı?
+Teşvik analizi
+Eşik ve kritik kütle Kolektif davranış bireysel eşiklerin
+dağılımına mı bağlı?
+Toplumsal sistem
+Conway yasası Sistem mimarisi örgüt yapısını mı
+kopyalıyor?
+Örgüt ve mimari
+Ashby gerekli
+çeşitlilik
+Kontrol eden sistem, kontrol ettiği kadar
+çeşitli mi?
+Yönetim, kontrol
+B.24 Görme Biçimi
+Lens Probleme sorulacak soru Kazandırdığı
+Sekil–zemin Neye bakıyorum, neyi arka plan
+sayıyorum?
+C erçeve farkındalığı
+Gestalt ilkeleri Bütün parçalardan önce mi algılanıyor? Algı, tasarım
+Ölçek seçimi Bu olgu hangi büyüklükte bakınca
+görünür oluyor?
+Analiz düzeyi
+Görünürlük yanlılığı Kaydedilen, gerçekleşenin yerine mi
+geçiyor?
+Veri yorumu
+Paradigma Bu probleme hangi bakış açısıyla
+yaklaşıyorum?
+C erçeve seçimi
+Zihinsel model Kafamda hangi model çalışıyor? Örtük varsayım
+Sezgisel kısayol Kesin değil ama genelde işe yarayan yol
+ne?
+Pratik karar
+29
+
+-- 29 of 33 --
+
+Ek C: Akraba Kavramlar Haritası
+Yöntemin kavramsal komşuluğu dört yönde uzanır. Yön ayrımı önemlidir; bu
+kavramların yöntemle mesafeleri ve işlevleri eşdeğer değildir.
+C.1 Aynı Hamlenin Farklı Disiplindeki Adları
+Ad Alan Nüans
+Reduction Kuramsal BB A → B çevrimi ve çözümün geri taşınması
+Conjugation Matematik f = g−1 ◦ h ◦ g; başka uzaya git, çöz, dön
+Isomorphism Cebir ˙Iki yapının özdeşliği; en güçlü aktarım
+Homomorphism Cebir Yapıyı koruyan, tersi olmayan eşleme
+Change of representa-
+tion
+Yapay zekâ Temsil değişimiyle kolaylaştırma
+Analogical transfer Bilişsel bilim Derin yapısı aynı problemleri eşleme
+Modeling Genel En gevşek üst terim
+C.2 Aynı Ailenin Diğer Üyeleri
+Kavram ˙Işlevi
+Duality Aynı problemi karşı taraftan görme; LP duali, en büyük akış–en
+küçük kesit
+Functor Nesnelerle birlikte dönüşümleri de taşıma; indirgemenin kategorik
+genellemesi
+Galois connection ˙Iki dünya arasında birbirine yaslanan çift eşleme; soyut yorumla-
+manın temeli
+Abstract interpreta-
+tion
+Programı kaba ama karar verilebilir uzaya taşıyıp orada analiz etme
+Curry–Howard Program ile ispatın özdeşliği; disiplinler arası en bilinen eşleme
+Normal form Farklı görünen nesneleri tek kanonik temsile indirgeme
+Invariant Dönüşüm altında korunan büyüklük; eşlemenin ne kadarının ko-
+runduğunu ölçer
+30
+
+-- 30 of 33 --
+
+C.3 Ters Yöndeki Akrabalar
+Bunlar eşleme kurmak yerine eşlemenin kurulamayacağını gösterir ve yöntemin
+asıl getirisini oluşturur.
+Kavram ˙Işlevi
+Obstruction Belirli eşlemelerin ilkesel olarak kurulamayacağının kanıtı
+No-go teoremleri CAP, FLP, Arrow, Rice, durma problemi
+Undecidability Hiçbir temsil değişiminin kurtaramayacağı durum
+Lower bound Temsil seçiminden bağımsız olarak aşılamayan eşik
+No free lunch Tüm problemlere uyan tek eşlemenin olmaması
+Leaky abstraction Eşlemenin çoğu zaman tutup bazen sızması
+Spurious analogy Yüzey benzerliğinin derin yapı sanılması
+C.4 Uzak Kuzenler
+Kavram Alan Hamle
+Boyut analizi Fizik Birimleri sadeleştirip boyutsuz sayılara in-
+dirgeme
+Renormalizasyon Fizik Ölçek değiştirip kendine benzer hâle getirme
+TRIZ Mühendislik Somut problemi tipik çelişkiye indirgeme
+Case-based reasoning Yapay zekâ Yeni vakayı geçmiş vakaya eşleme
+Bounded context Alan güdümlü
+tasarım
+Alanı biçimselleştirip sınırını çizme
+Ontology alignment Bilgi mühendisliği ˙Iki farklı temsili birbirine eşleme
+Ek D: Eşleme Türlerinin Spektrumu
+Φ eşlemesi tek türden değildir; koruduğu bilgi miktarı ve geri dönüş olanağı
+türüne göre değişir. Bu ayrım, yöntemin sınırlarının belirlenmesinde belirleyi-
+cidir.
+Φ türü Korunan Geri dönüş Örnek
+˙Izomorfizma tüm yapı tam sayı sistemleri
+Homomorfizma işlem yapısı kısmı (sum, count)
+Gömme yapı, alt küme içinde alt kümede çizge gömme
+Soyutlama seçili özellikler tek yönlü soyut yorum-
+lama
+Simülasyon davranış, yapı değil gözlemsel protokol modeli
+Kodlama bilgi, yapı değil çözülebilir serileştirme
+Yaklaşıklama hata payı içinde sınırlı t-digest
+Karp indirgemesi hesaplanabilirlik çözüm çevirisiyle SAT in-
+dirgemesi
+31
+
+-- 31 of 33 --
+
+Ek E: Problem Sınıfı Tanıma Örnekleri
+Aynı problem ifadesi, teşhis düzeyine göre bütünüyle farklı çözüm uzaylarına
+açılır. ˙Ikinci sütun bir teknoloji seçimini, üçüncü sütun bir literatürü çağırır.
+Problem ifadesi Yüzeysel yaklaşım Yapısal teşhis
+100M kullanıcıya mesaj hangi kuyruk ürünü? kuyruk kuramı: Little, geri basınç, iş
+hacmi
+˙Iki servis aynı veriyi
+yazıyor
+hangi veritabanı? dağıtık tutarlılık: CAP, uzlaşı, CRDT
+Kod çok karmaşık yeniden düzenleyelim bağlaşım mı, temsil mi, yanlış soyut-
+lama mı?
+Sonuçları nasıl
+birleştiririm?
+döngüyle toplayalım monoid, yarı latis
+Servisler birbirini kil-
+itliyor
+zaman aşımı koyalım çizge, çevrim, kilitlenme
+CPU doyunca gecikme
+patlıyor
+sunucu ekleyelim kuyruk kuramı, doyum eğrisi
+Metrik iyileşti, ürün
+kötüleşti
+metriği düzeltelim Goodhart, teşvik uyumu
+Aynı olay tekrar gelince
+bozuyor
+yinelemeyi engelleye-
+lim
+etkisizlik, teslimat semantiği
+Dosya, belge, şema, AST ayrı ayrı çözelim hepsi ağaç: tek kuram
+Ek F: Bilim Tarihinden Örüntü
+Aynı refleks bilim tarihinde tekrar eder. Her durumda soru, olgunun kendisine
+ilişkin değil, olgunun ait olduğu sınıfa ilişkindir.
+Kişi Sorulan soru Birleştirilen olgular
+Newton Bu hangi hareket sınıfı? elma, ay, top, gezegen
+Einstein Bu hangi geometrik yapı? ışık, yerçekimi, ivme
+Shannon Bu bir bilgi problemi mi? telgraf, dil, gürültü, sıkıştırma
+Turing Bu bir hesaplama problemi mi? mekanik hesap, karar verilebilirlik
+Bellman Bu bir eniyileme problemi mi? ardışık karar, envanter, rota
+Hopcroft Bu bir özdevinir problemi mi? dil tanıma, protokol, ayrıştırma
+Knuth Bu bir algoritma problemi mi? sıralama, arama, dizgi eşleme
+Bilgisayar biliminde de aynı örüntü görülür. Dosya sistemi, belge nesne
+modeli, kurum şeması, XML ve derleyici sözdizim ağacı ilk bakışta ilişkisizdir;
+ortak yapının ağaç olduğunun saptanması, birikmiş kuramı tek hamlede beş ayrı
+alana bağlamıştır.
+32
+
+-- 32 of 33 --
+
+Ek G: Kavramların Üç ˙Işlevsel Sınıfı
+Envanterdeki maddeler işlevleri bakımından eşdeğer değildir. Bu ayrımın gözden
+kaçırılması, bu tür envanterlerin başlıca yanılgısıdır.
+Sınıf ˙Işlev Örnekler
+˙Indirgeme yapanlar Hesap yapma hakkı verir monoid, sabit nokta, çizge, latis, Little yasası,
+entropi, dualite, Markov zinciri, dışbükeylik
+Öngörü üretenler Sonuç bildirir, teorem ver-
+mez
+Goodhart, Conway, ergodiklik, yol bağımlılığı,
+Ashby gerekli çeşitliliği, Jevons, kamçı etkisi
+Yalnızca ad veren-
+ler
+Adlandırır, işlem
+sağlamaz
+sistem düşüncesi, holizm, kompleksite, beliriş,
+antikırılganlık
+Birinci sınıf bir hesap yapma hakkı verir; ikinci sınıf sınanabilir bir öngörü
+üretir; üçüncü sınıf yalnızca bir adlandırma sunar. Üçüncü sınıf yararsız değildir,
+ancak eyleme geçirilebilir bir imkân sağlamaz.
+33
+
+-- 33 of 33 --

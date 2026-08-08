@@ -1,0 +1,1255 @@
+Otonomi ve Bozulabilirlik: ˙Iki Eksenli Bir
+Değerlendirme C erçevesi
+ÖFY
+August 2026
+Kapsam ve Amaç
+Bu belge, tıklama tabanlı etkileşimden niyet tabanlı etkileşime geçiş üzerine
+yürütülen bir tartışmanın tam dökümünü, tartışma boyunca üretilen eleştirel
+itirazları ve bunlardan türetilen bir değerlendirme protokolünü içerir. Bel-
+genin iki bileşeni vardır. Birinci bileşen kavramsaldır ve tartışmanın tezini,
+tezin dayandığı varsayımları, bu varsayımların literatürdeki karşılıklarını ve karşı
+argümanları sistematik biçimde sunar. ˙Ikinci bileşen operasyoneldir ve bir sis-
+temin hangi anlamda ve hangi katmanda otonom sayılabileceğini sınamak üzere
+tasarlanmış katmanlı bir kontrol listesi sağlar.
+Protokolün tasarım hedefi çift kutupludur ve bu ikilik belgenin tamamını be-
+lirler. Birinci kutup, sistemin tam otonom çalışabilmesidir; yani rutin işleyişte
+hiçbir insan müdahalesine ihtiyaç duymaması. ˙Ikinci kutup, bu tam otonomluğun
+insan tarafından her an, kasıtlı olarak ve düşük maliyetle bozulabilmesidir. Bu
+iki hedef çelişkili görünür fakat değildir: birincisi sistemin varsayılan işleyişine,
+ikincisi sistemin sınır davranışına ilişkindir. Protokolün özgün iddiası, tam
+otonomluğun ancak bozulabilirlik güvence altına alındığında sorumlu biçimde
+hedeflenebileceğidir.
+1
+
+-- 1 of 35 --
+
+Yöntem Üzerine: ˙Itirazla Düşünmenin Adı ve Sınırı
+Yöntemin Gerekçesi
+Belge boyunca izlenen yol, tezi doğrulamak değil sınamak olmuştur. Bunun
+gerekçesi şudur: tezin çekirdeği olgun bir literatürün yeniden keşfidir ve doğrulanması
+bilgi eklemez. Bilgi ekleyen tek işlem, tezin hangi koşullarda çöktüğünü ara-
+maktır. Bir iddianın içeriği yasakladığı olguların kümesi olduğuna göre, “manuel
+adım oranını sıfırla” formülasyonu neredeyse hiçbir şeyi yasakladığından neredeyse
+hiçbir şey söylemektedir. ˙Itirazlar sonunda ulaşılan B ≥ K kuralı ise çok şey
+yasaklar; belge o kurala tez üzerinden değil, itirazlar üzerinden varmıştır.
+Yöntemin Adları
+˙Izlenen yolun tek bir adı yoktur; birbirine yakın fakat işlevleri farklı birkaç
+geleneğin kesişiminde durur.
+• Quaestio ve disputatio. Yöntemin kurumsallaşmış en eski hali. Soru
+sorulur, karşı görüşün en güçlü biçimi sıralanır, cevap verilir ve her itiraza
+tek tek yanıt yazılır. Belgede bu şablonun yalnızca ilk yarısı uygulanmıştır.
+• Diyalektik. Kesin öncüllerden değil, kabul edilebilir görünen öncüllerden
+hareketle tezi sınama yöntemi. Kanıtlama değil sınama tekniğidir.
+• Elenchus. Tezi doğrudan reddetmek yerine, tez sahibinin kendi kabul
+ettiği başka önermelerle çeliştiğini göstermek. Belgedeki en güçlü itirazlar
+bu tiptedir; ˙Itiraz III, dağıtık biliş kavramının kavram listesine tez sahibi
+tarafından eklenmiş olmasına rağmen tezle çeliştiğinin fark edilmemesi
+üzerinden işler.
+• Yanlışlamacılık. Doğrulama arayışı bilgi eklemez, çürütme arayışı ekler.
+Bir teorinin bilgi içeriği yasakladığı olguların kümesidir.
+• Karşı görüşün en güçlü halini kurma yükümlülüğü. ˙Itiraz, savunula-
+bilir en zayıf biçimiyle değil en güçlü biçimiyle kurulur.
+• Kırmızı takım ve zorunlu karşı değerlendirme. Yöntemin örgütsel
+hali; resmı değerlendirmenin karşısına yapılandırılmış bir karşı değerlendirme
+koymayı zorunlu kılan birimler.
+• Ön ölüm muayenesi. Başarısızlığın gerçekleşmiş sayılıp sebeplerinin
+geçmiş kipinde yazılması. ˙Ileriye dönük geriye bakış, sebep üretimini ko-
+laylaştırır.
+• Tehlike ve işletilebilirlik çalışması, hata türü ve etkileri analizi,
+sistem teorik süreç analizi. Yöntemin mühendislikteki karşılıkları. Her
+sürece kılavuz kelimeler uygulanır ve her kombinasyon için sonuç sorulur;
+itiraz üretmenin mekanize edilmiş halidir.
+2
+
+-- 2 of 35 --
+
+Belgede Fiilen Uygulanan Bileşim
+Bu yaklaşımlardan hiçbiri saf haliyle uygulanmamıştır; izlenen yol üç adımlı
+bir bileşimdir. Birinci adımda tez, kullanıcının kendi önerisi olarak konmuştur.
+˙Ikinci adımda itirazlar, kısmen tezin kendi kabullerinden çelişki çıkararak, kısmen
+her boyuta sistematik biçimde “ya tersi olursa” sorusu uygulanarak üretilmiştir.
+Üçüncü adımda her itiraz, protokolde bir maddeye çevrilmiştir.
+Ayırt edici olan üçüncü adımdır. Klasik disputatio itirazı yanıtlayıp tezi
+kurtarır. Burada itirazlar yanıtlanmamış, gereksinime dönüştürülmüştür. Bu,
+felsefe yöntemi değil güvenlik mühendisliği yöntemidir; tehlike analizinde de
+tehlikeler çürütülmez, her biri bir tasarım kısıtına çevrilir. Bileşimin yerleşik bir
+adı yoktur; en yakın etiket engel güdümlü gereksinim türetmedir, fakat orada
+engeller hedef ağacından formel olarak türetilirken burada serbest eleştiriyle
+üretilmiştir.
+Yöntemin Bu Belgedeki Üç Kusuru
+Birincisi: itirazlar ağırlıklandırılmamıştır. Kırk sekiz madde aynı ağırlıkta
+sunulmaktadır, oysa değildirler. ˙Itiraz I, IV, VI, VIII ve XV belgenin taşıyıcı
+kirişleridir; geri kalanların önemli kısmı bunların özel durumları veya farklı alan-
+lara uygulanmış halleridir. Ağırlıklandırma yapılmadığından okuyucu neyin
+merkezı olduğunu kendisi çıkarmak zorundadır.
+˙Ikincisi: hiçbir itiraz sınanmamış, hepsi kabul edilmiştir. Bu asimetri
+belgenin en zayıf yeridir. Üretilen itiraza da itiraz edilmesi gerekirdi. Örnek
+olarak ˙Itiraz IX ile ˙Itiraz XXXIV aynı yöne gitmez: biri niyet arayüzünün uz-
+manı yavaşlattığını, diğeri acemiyi cezalandırdığını söyler. ˙Ikisi birden koşulsuz
+doğruysa niyet arayüzü hiç kimseye yaramıyor demektir, ki bu yanlıştır. Gerçek
+cevap koşulludur ve görev sıklığı ile alan genişliğine bağlıdır; belge bu koşulu
+çözmez, iki itirazı yan yana bırakır.
+Üçüncüsü: itiraz üretme yöntemi, itiraz edilmeyen tek şeydir. Bel-
+genin kendi ˙Itiraz XXIX’u haritayı çıkarma işinin de bir maliyet olduğunu ve tam
+otomasyon hedefi kendine uygulandığında ilk kurbanın harita olacağını söyler.
+Aynı özyineleme eleştiriye de uygulanır: kırk sekiz maddelik bir kontrol listesi,
+uygulanma olasılığı düşük olduğu için pratikte sıfır madde kadar bağlayıcıdır.
+Eksiksizlik ile uygulanabilirlik arasında bir takas vardır ve belge, konusu tam
+da takas farkındalığı olduğu halde bu takası görmez.
+Durma Kuralının Yokluğu
+˙Itiraz üretiminin doğal bir durma noktası yoktur; her itiraz yeni bir yüzey
+açar ve süreç dışarıdan bir kural konmadıkça bitmez. ˙Ilgili geleneklerin her
+birinin bir durma kuralı vardır: disputatio’da itirazların tek tek yanıtlanması
+ve yanıtlananın kapanması, tehlike analizinde kılavuz kelime kümesinin sonlu
+olması, yanlışlamacılıkta bir itirazın ancak tezi yanlışlayacak bir gözlem be-
+lirttiğinde itiraz sayılması.
+Belgede bu üç kuralın hiçbiri yoktur. Kırk sekiz sayısı bu nedenle keyfıdir;
+elli beş de otuz da olabilirdi. Sayının keyfıliği tek başına kusur değildir, fakat
+3
+
+-- 3 of 35 --
+
+hangi itirazın taşıyıcı hangisinin türev olduğunu belirleyen bir ölçüt de bulun-
+madığından liste ağırlıksız kalmaktadır.
+Önerilen Düzeltme: Uygulama Profilleri
+Kırk sekiz itiraz olduğu gibi korunur, önlerine bir seçim katmanı konur. Hangi
+projede hangi maddelerin bağlayıcı olduğu, adımın hata yarıçapı ve tersinmezlik
+derecesine göre belirlenir.
+Profil Ölçüt Bağlayıcı madde kümesi
+Hafif Düşük yarıçap, tam tersinir C ekirdek maddeler
+Standart Orta yarıçap, kısmi tersinir C ekirdek + yönetişim maddeleri
+Kritik Yüksek yarıçap veya tersinmez Tüm zorunlu maddeler
+Böylece belge tam kalır fakat uygulanabilir hale gelir. Mevcut haliyle refer-
+ans dokümanı olarak güçlü, işletim dokümanı olarak kullanılamaz durumdadır
+ve bu ayrımın belgede açıkça belirtilmesi gerekir.
+4
+
+-- 4 of 35 --
+
+Tartışmanın Yeniden ˙Inşası
+Açılış Problemi: Jest Kontrolünün Gerekçesi
+Tartışma somut bir şüpheyle başlamıştır: bir insansız hava aracını el hareket-
+leriyle kontrol etmenin, aynı işi bir joystick ile yapmaya kıyasla hangi ek faydayı
+sağladığı sorusu. Sorunun altında yatan sezgi doğrudur; jest kontrolü, sürekli
+kontrol görevlerinde joystick’e karşı belirgin bir üstünlük iddia edemez.
+Verilen yanıt, problemi girdi cihazı seçimi düzleminden çıkarıp bilişsel yük
+düzlemine taşımıştır. Buna göre asıl dönüşüm, komutun biçiminde değil, komu-
+tun soyutlama seviyesinde gerçekleşir. “Sağa git, yukarı çık” biçimindeki sürekli
+kontrol komutları ile “şu binayı üç tur dolaş, çatıda çatlak var mı kontrol et”
+biçimindeki görev tarifi arasındaki fark niteldir. Birinci durumda operatör aracı
+uçurmaktadır; ikinci durumda tarif etmektedir. Navigasyon alanındaki paralel
+örnek bu geçişi görünür kılar: “şuradan sağa dön” ile “beni havaalanına götür”
+arasındaki fark, ayrıntının makineye devredilmesi ve insan dikkatinin hedef be-
+lirlemeye kaymasıdır.
+Bu çerçevede jest kontrolü, manuel kontrol ile niyet tabanlı kontrol arasında
+bir ara durak olarak konumlandırılmıştır. Nihai yön, insanın makinenin kası
+olmaktan çıkıp niyeti belirleyen taraf haline gelmesidir.
+Askeri Bağlam
+Tartışmanın ikinci aşamasında, bu dönüşümün askeri araştırma programlarındaki
+karşılığı sorgulanmıştır. Verilen yanıtta, ilgili çalışmaların hedefinin “işaretleme
+cihazını jestle değiştirmek” olmadığı, insan–makine bant genişliğini artırmak
+biçiminde tanımlandığı belirtilmiştir. Bu başlık altında çok modlu arayüzler,
+insan–makine ekip çalışması ve deneysel düzeyde beyin–bilgisayar arayüzleri
+sayılmış, çalışmaların büyük kısmının araştırma ve prototip seviyesinde olduğu
+vurgulanmıştır.
+Aşamanın en dikkate değer saptaması, değerlendirme sorusunun kaymasıdır:
+“asker silahı ne kadar iyi kullanıyor” sorusundan “insan ile yapay zeka birlikte
+ne kadar iyi karar veriyor” sorusuna geçiş. Rekabetin nesnesi daha iyi makine
+üretmekten daha iyi takım kurmaya evrilmiştir.
+Arayüz ile Takım Performansı Arasındaki Bağ
+Üçüncü aşamada, tıklamasız etkileşim ile takım performansı arasındaki ne-
+densel bağın ne olduğu sorulmuştur. Yanıt iki bileşenlidir. Birincisi dikkat
+bileşenidir: arayüz doğallaştıkça zihin kontrolden karara kayar. ˙Ikincisi ve daha
+güçlü olanı ölçek bileşenidir: “birini seç, yakınlaştır, rota çiz” dizisi yerine “şu
+köyün kuzeyini gözetle, hareket görürsen bildir” tarifi, tek bir operatörün on-
+larca sistemi yönetebilmesini mümkün kılar. Bu, hız kazancı değil, kombinatorik
+bir kazançtır.
+Aşamanın sonuç önermesi şudur: esas mesele tıklamayı kaldırmak değil, in-
+san niyetini en az sürtünmeyle aktarmaktır.
+5
+
+-- 5 of 35 --
+
+Kullanıcının Kendi Deneyimi ve Tam Otomasyon Hedefi
+Dördüncü aşamada tartışma somut bir uygulama deneyimine bağlanmıştır. Kul-
+lanıcı, bir sistemin tüm adımlarını ve kullanıcı hikâyelerini ayrıntılı biçimde
+belgelemiş, ardından bu belgelenmiş akışın tıklama içermeyen, tamamen doğal
+dille sürülen bir hale getirilmesini talep etmiştir. Süreçten çıkardığı gözlem
+şudur: otomasyon sağlandıktan sonra dahi arka planda otomatize edilebilecek
+adımlar ve fark edilmemiş bakış açıları kalmaktadır. Bunları yakalayabilmek
+için ayrıntılı bir ilişki grafiğine ihtiyaç duyulduğu, hiçbir adımın manuel desteğe
+dayanmadığından emin olunması gerektiği belirtilmiştir.
+Niyet Modelleme Önerisi
+Beşinci aşamada bu gözlem daha geniş bir çerçeveye taşınmıştır. Öneri, mese-
+lenin tıklamaları kaldırmak değil insan niyetini modellemek olduğudur. Dayandığı
+önerme: her tıklama, sistemin sahip olmadığı bir bilginin göstergesidir. Buradan
+hareketle, adım listesi yerine görev ontolojisi çıkarılması, her adımın arkasındaki
+niyetin ve kullanıcının devreye girmesine yol açan bilgi eksikliğinin tanımlanması
+önerilmiştir. Alanın adlandırması olarak “intent engineering” ve “task model-
+ing” önerilmiş, faaliyet arayüz tasarımı değil sürtünme yok etme mühendisliği
+olarak nitelenmiştir.
+Kavram Haritası Talebi
+Altıncı ve son aşamada, niyet aktarımıyla ilgili bilinmesi gereken kavramların
+haritası istenmiştir. Verilen kavram kümesi şudur: niyet modelleme, görev
+modelleme, bağlam modelleme, bilgi grafiği, ontolojiler, insan–bilgisayar etk-
+ileşimi, doğal kullanıcı arayüzleri, yapay zeka ajanları, otonom planlama, karar
+modelleme, bilişsel ergonomi, dağıtık biliş, sistem düşüncesi. Üst katmanda ka-
+biliyet mühendisliği, yani bir sistemin zaman içinde neyi yapabilir hale geldiğinin
+tasarımı konumlandırılmıştır. Omurga olarak Niyet → Görev → Karar → Eylem
+zinciri verilmiştir.
+Otomasyonun konusu arayüzden tıklamayı silmek değil, insan niyetinin makin-
+eye en az sürtünmeyle aktarılmasıdır; bunun için adım listeleri değil niyet–
+görev–karar ontolojisi gereklidir.
+Licklider’ın insan–bilgisayar simbiyozu formülasyonu (1960) aynı yapıyı önerir:
+insan hedefi koyar, makine rutini yürütür. 1997 tarihli Shneiderman–Maes
+tartışması ise ekseni açıkça çizer; doğrudan manipülasyon (kullanıcı nesneyi
+görür, dokunur, kontrol hissi tamdır) ile ajan delegasyonu (kullanıcı niyeti bildirir,
+sonucu bekler) arasındaki gerilim, bugünkü tartışmanın doğrudan atasıdır.
+Ölçek argümanı tezin en sağlam bileşenidir. Tek bir aracı joystick ile uçurmak
+kötü bir arayüz değildir; kırk aracı joystick ile uçurmak imkânsızdır. Dolayısıyla
+niyet düzeyine çıkışın gerekçesi konfor değil kombinatoriktir ve bu gerekçe sürtünme
+argümanından bağımsız olarak ayakta durur.
+6
+
+-- 6 of 35 --
+
+˙Itiraz I: Tam Otomasyon Hedefinin Kendisi
+“Hiçbir adım manuel kalmasın” hedefi, otomasyon literatürünün en iyi bel-
+gelenmiş tuzağıdır. Bainbridge’in Ironies of Automation (1983) çalışması şu
+paradoksu ortaya koyar: otomasyon arttıkça insanın kalan rolü hem daha kritik
+hem de daha kötü icra edilebilir hale gelir. ˙Insan yalnızca sistemin başarısız
+olduğu, yani en zor durumlarda devreye girer; oysa devreye girmek için gereken
+beceriyi rutin işleri yaparak koruyordu ve o rutin elinden alınmıştır. Literatürdeki
+adı döngü dışı performans problemidir.
+Doğru hedef formülasyonu, hangi adımların manuel kalmaması gerektiği
+değil, hangi adımların manuel kalmasının sistemin sağlığı için gerekli
+olduğudur. Bu bir eksik listesi değil, bir tasarım kararıdır.
+˙Itiraz II: “Her Tıklama Eksik Bilgidir” Önermesinin Ayrıştırılması
+Önerme kısmen doğrudur. Tıklamalar en az üç farklı işlevin taşıyıcısıdır ve bu
+üçü ayrıştırılmadan görev ontolojisi kurulamaz.
+1. Epistemik boşluk. Sistem bilmez, insan bilir. Bilgi sisteme taşındığında
+tıklama kaybolur. Otomasyon mühendisliğinin meşru konusu budur.
+2. Yetki ve taahhüt noktası. Sistem bilir fakat karar hakkı onda değildir.
+“Gönder” düğmesi bilgi eksikliği değil, sorumluluğun el değiştirdiği nok-
+tadır. Otomasyonu bilgi eklemekle değil sorumluluk devriyle olur; bu
+teknik değil hukuki ve etik bir karardır. Askeri karşılığı anlamlı insan
+kontrolü tartışmasıdır.
+3. Değer yargısı ve risk iştahı. Doğru cevap yoktur, tercih vardır. Sistem
+bunu çıkarsayamaz, ancak tercih fonksiyonunu öğrenerek tahmin edebilir.
+˙Istenen ilişki grafiğinin asıl değeri adımları listelemesinde değil, her adımı
+bu üç sınıftan birine yerleştirmesindedir. Birinci sınıf mühendislik, ikinci sınıf
+yönetişim, üçüncü sınıf kişiselleştirme problemidir.
+˙Itiraz III: Niyetin Hazır Bir Nesne Sayılması
+“Niyet haritası” ifadesi, niyetin kullanıcı zihninde tamamlanmış halde bulunduğunu
+ve tek problemin onu düşük sürtünmeyle aktarmak olduğunu varsayar. Pratikte
+insan çoğu zaman ne istediğini ara sonuçları görene kadar bilmez. Eksik tarif
+bir kusur değil, kimi zaman çalışma yönteminin kendisidir; tıklamalar niyeti
+aktarmaz, niyeti oluşturur.
+Bu, kavram listesinde yer alan dağıtık biliş kavramının doğrudan sonucudur
+ve listeye eklenmiş olmasına rağmen tezle çelişkisi fark edilmemiştir. Niyet
+insan, arayüz ve ortamdan oluşan bileşik sistemde oluşuyorsa, “niyeti zihinden
+çıkarıp makineye taşıma” metaforu yanlış metafordur.
+7
+
+-- 7 of 35 --
+
+˙Itiraz IV: Darboğazın Korunumu
+“Su köyün kuzeyini gözetle” komutu bir saniye sürer; kırk sistemin kırk ra-
+porunu doğrulamak saniyelerle ölçülmez. Komut maliyeti düştüğünde sınırlayıcı
+faktör otomatik olarak doğrulama maliyetine kayar. Tek operatörün çok sistem
+yönetmesinin gerçek tavanı emir verme hızı değil, güven kalibrasyonu ve du-
+rum farkındalığıdır. Endsley’nin durum farkındalığı seviyeleri (algı, anlama,
+öngörü) burada tanısaldır: otomasyon tipik olarak birinci seviyeyi iyileştirirken
+üçüncüyü aşındırır.
+Bu nedenle “sürtünme yok etme mühendisliği” tanımı eksiktir. Doğru tanım
+sürtünmeyi doğru yere taşıma mühendisliğidir: sürtünmenin sıfırlanacağı
+yer rutin, korunacağı yer taahhüt ve doğrulamadır.
+˙Itiraz V: Bant Genişliği Argümanının Tersine Dönmesi
+Niyet düzeyine çıkmak bant genişliğini artırmaz, azaltır. Sürekli kontrol sinyali
+saniyede yüzlerce bit taşır; bir görev tarifi çok daha azdır. Artan şey bant
+genişliği değil bit başına kaldıraçtır. Ayrım işlevseldir çünkü iki büyüklük
+farklı çözümlere işaret eder: bant genişliği için göz takibi, jest, beyin–bilgisayar
+arayüzü; kaldıraç için ortak bağlam ve paylaşılan model. Kaldıraç arttıkça her
+bit değerlenir, dolayısıyla yanlış yorumlanan her bit pahalılaşır.
+˙Itiraz VI: Hata Yarıçapı
+Tıklamalı sistemde hata yerel ve görünürdür. Niyet düzeyinde hata sessiz ve
+geneldir: yanlış yorumlanan tek bir niyet, kırk sistemde eşzamanlı, hızlı ve tu-
+tarlı biçimde uygulanır. Otomasyon hata sayısını azaltırken hata büyüklüğünü
+artırır. Haritada gösterilmesi gereken değişken adımın otomatize edilebilirliği
+değil, otomatize edildiğinde yanlış giderse yarıçapıdır. ˙Iki eksenli bir sınıflandırma
+(otomasyon kolaylığı × hata yarıçapı), tek eksenli manuellik listesinden karar
+verdirici olarak üstündür.
+˙Itiraz VII: Geri Besleme Kanalının Yokluğu
+Tartışmanın tamamı girdi yönündedir. Makineden insana bilgi akışı, yani neyin,
+ne zaman, hangi ayrıntı düzeyinde raporlanacağı hiç ele alınmamıştır. Oysa çok
+sistemli işletimin gerçek tavanı rapor sindirme hızıdır. Tasarlanması gereken
+alt problemler şunlardır: kesinti eşikleri, alarm politikası, sessizliğin anlamı (iyi
+gidiyor mu, kanal mı koptu), ayrıntı derinliğinin talebe göre açılması. Norman’ın
+değerlendirme uçurumu kavramı bu boşluğun teorik adıdır.
+˙Itiraz VIII: Geri Alınabilirlik Kriteri
+Tıklama dünyasında geri alma ucuzdur; fiziksel otonomide çoğu zaman yoktur.
+Buradan pratik bir kural çıkar: otomasyonun doğal sınırı bilgi eksikliği
+değil, geri alınamazlıktır. Bir adım tersine çevrilemiyorsa, sistem tüm bilgiye
+sahip olsa dahi orada bir taahhüt noktası bırakmak rasyoneldir.
+8
+
+-- 8 of 35 --
+
+˙Itiraz IX: Uzman Eğrisinin Tersine Dönmesi
+Niyet arayüzleri acemi için hızlandırıcı, uzman için yavaşlatıcıdır. Klavye kısayollarının
+varlık nedeni budur: uzman tarif etmek istemez, kas hafızasıyla icra eder.
+Doğal dil her seferinde belirsizlik payı, gecikme ve doğrulama turu getirir.
+Dolayısıyla “tıklama eşittir sürtünme” denklemi kullanıcı yetkinliğine bağlıdır;
+bazı bağlamlarda tıklama sürtünme değil kesinlik ve hızdır. Olgun sistemler bu
+nedenle iki modu birlikte taşır.
+˙Itiraz X: Askeri Otonominin Gerçek Sürücüsü
+Tartışma askeri bağlamı ergonomi üzerinden okumaktadır. ˙Ilgili doktrin bel-
+gelerindeki gerekçeler farklıdır: iletişimin engellendiği veya bozulduğu ortam-
+larda çalışabilme, insan tepki süresinin altına inen karar hızları, personel maliyeti.
+Otonomi operatörün işini kolaylaştırmak için değil, operatörle bağlantı koptuğunda
+sistemin çalışmaya devam etmesi için istenir. Bu, ters yönlü bir tasarım kısıtı
+doğurur: niyetin önceden, düşük bant genişliğiyle ve bağlantı kopmadan ak-
+tarılabilmesi. Doktrinsel karşılığı komutanın niyeti ve görev taktiği (Auftragstak-
+tik) kavramlarıdır; aranan niyet ontolojisinin en olgun insani örneği burada bu-
+lunur: emir değil, amaç, kısıt ve kabul edilebilir sapma payının aktarımı.
+˙Itiraz XI: Niyet Kanalının Saldırı Yüzeyi Oluşu
+Doğal dille sürülen sistemde girdi kanalı aynı zamanda manipülasyon kanalıdır.
+Tıklama kaldırıldığında, kimlik ve yetki doğrulamasının tutunduğu somut nok-
+talar da kaldırılmış olur. Askeri karşılığı aldatma operasyonları, sivil karşılığı
+istem enjeksiyonudur. Haritada “niyet nereden geliyor ve nasıl doğrulanıyor”
+katmanı yoksa harita eksiktir.
+˙Itiraz XII: Otomasyondan Önce ˙Iptal
+Tüm adımları çıkarıp her birini otomatize etmeye çalışmak, o adımların var
+olması gerektiği varsayımını sabitler. Adımların önemli kısmı eski bir kısıtın
+fosilidir: bir onay adımı geçmişte güvenilmeyen bir sistem yüzünden, bir form
+iki birimin konuşmaması yüzünden vardır. Adım grafiğinin en yüksek getirili
+kullanımı otomasyon planı değil iptal listesi üretmesidir. Otomatize edilmiş
+gereksiz adım, gereksiz adımın pahalı ve kalıcı halidir.
+˙Itiraz XIII: Ontoloji Bakım Maliyeti
+Elle kurulan görev ve niyet ontolojileri çürür. ˙Ilk gün doğru olan grafik altıncı
+ayda yanlıştır ve yanlışlığı fark edilmez. Asıl tasarım sorusu grafiği çıkarmak
+değil, grafiğin gerçeklikle uyumsuzlaştığını tespit eden mekanizmayı kurmaktır;
+yani grafiğin kendi geri besleme döngüsü.
+9
+
+-- 9 of 35 --
+
+˙Itiraz XIV: Ölçümün Yokluğu
+“Manuel adım kalmadı” ispatlanamaz bir iddiadır; yalnızca ampirik olarak ölçülebilir.
+Otonom araç alanının kavramı doğrudan uyarlanabilir: müdahaleler arası orta-
+lama süre veya iş hacmi. Uyarlanmış metrik seti şudur: görev başına insan
+müdahalesi sayısı, müdahalenin sınıfı (bilgi eksikliği, yetki, tercih), müdahaleye
+kadar geçen süre, devralma gecikmesi. Bu dört büyüklük haritayı kendiliğinden
+üretir, çünkü müdahalelerin yoğunlaştığı yer otomasyon açığının haritasıdır.
+˙Itiraz XV: Kesinleşen Doğal Dilin Programlamaya Dönüşmesi
+Doğal dilin kolaylığı belirsizliğinden gelir; belirsizlik giderildiğinde geriye formel
+bir dil kalır, yalnızca daha kötü bir sözdizimiyle. “Su köyün kuzeyini gözetle”
+kolaydır çünkü eksiktir: kuzey ne kadar kuzey, gözetleme ne kadar süre, neyin
+hareketi hareket sayılır. Boşluklar dolduruldukça cümle bir spesifikasyona dönüşür.
+Buradan bir korunum ilkesi türer: belirsizlik yok edilmez, ötelenir. Ya kul-
+lanıcı önden doldurur (zahmet), ya sistem varsayar (risk), ya da sistem geri
+sorar (adı değişmiş tıklama).
+˙Itiraz XVI: Eksik Sözleşmeler ve Vekâlet Problemi
+Niyet aktarımı doğası gereği eksik bir sözleşmedir; her olasılık yazılamaz. Ek-
+sik sözleşme teorisinin çözümü daha çok madde yazmak değil, artık kontrol
+hakkının kimde olduğunu belirlemektir: yazılmamış durum gerçekleştiğinde
+kim karar verir. Adım listeleri “ne yapılıyor”u gösterir; “tarif edilmemiş du-
+rumda yetki kimde” sorusunun cevabı hiçbir kullanıcı hikâyesinde yazmaz ve
+otonomlaştırma tam olarak o cevabı sessizce değiştirir. Buna bağlı ikinci risk
+spesifikasyon oyunudur: niyet operasyonel bir hedefe çevrildiği anda sistem
+hedefi optimize eder, niyeti değil.
+˙Itiraz XVII: Uzun Kuyruk ve Doğrusal Olmayan Maliyet
+Vakaların büyük kısmı kolay, bir kısmı zor, küçük bir kısmı pratikte sınırsız
+zordur. Kapsamı yüksek oranlardan daha yüksek oranlara çıkarmanın maliyeti
+üstel artar. Buna Amdahl tipi bir sınır eklenir: adımların büyük kısmını otoma-
+tize etmek toplam süreyi aynı oranda kısaltmaz, çünkü kalan manuel adım artık
+darboğazdır ve üstelik insan onu bağlamdan kopuk biçimde icra etmektedir.
+˙Itiraz XVIII: Sorumluluk Boşluğu
+Yüksek otonomili sistemlerde kaza sonrası sorumluluk, tasarımcıya değil döngüde
+kalan son insana yıkılır; bu kişi genellikle müdahale için gerekli zamana, bilgiye
+ve yetkiye sahip değildir. Kavramın adı ahlaki tampon bölgedir. Tasarım sonucu
+şudur: döngüde bir insan bırakmak sorumluluğu düzgün dağıtmaz, yalnızca
+kâğıt üstünde bir sorumlu üretir. Haritadaki her “insan onayı” kutusunun
+işlevinin güvenlik mi yoksa hukuki kalkan mı olduğu ayrıştırılmalıdır.
+10
+
+-- 10 of 35 --
+
+˙Itiraz XIX: Okunabilir Kılmanın Bedeli
+Bir süreci makineye okunabilir kılmak onu basitleştirmektir; basitleştirme yerel
+ve örtük bilgiyi sistem dışına atar. Atılan bilgi çoğunlukla sürecin neden çalıştığının
+cevabıdır. Formalize edilmiş süreç daha yönetilebilir fakat daha kırılgandır,
+çünkü sapmayı emen tampon tam da atılan gayri resmi kısımdır. Buna örgütsel
+bir ek gelir: haritalama siyasi bir eylemdir; insanların işi haritada göründüğü
+anda harita bir müzakere nesnesine dönüşür ve gerçeği değil gerçeğin müzakere
+edilmiş halini gösterir.
+˙Itiraz XX: Ortak Zemin Kurma Maliyeti
+˙Iletişim mesajın iletilmesiyle değil, karşılıklı anlaşıldığının teyidiyle tamamlanır.
+Doğal dil arayüzlerinde en pahalı işlem komutu söylemek değil, karşı tarafın onu
+doğru anladığını doğrulamaktır. Paylaşılan bağlam zenginleştikçe teyit ucu-
+zlar; ortak geçmişi olmayan sistemle her komut baştan pazarlıktır. Bu, niyet
+arayüzlerinin dar ve tekrarlı alanlarda parlayıp geniş alanlarda tökezlemesini
+açıklar.
+˙Itiraz XXI: C ırak Boru Hattının C öküşü
+Uzman, rutini yıllarca icra ederek uzman olur. Rutin bütünüyle otomatize
+edildiğinde mevcut uzmanların becerisi körelir ve daha önemlisi yeni uzman
+üretilemez. ˙Istisnayı çözecek kişi, istisnaya hazırlanacağı sıradan vakaları hiç
+görmemiş olacaktır. Bazı adımların manuel kalması verimsizlik değil yetiştirme
+yatırımı olabilir.
+˙Itiraz XXII: Güvenin ˙Iki Yönlü Sapması
+Otomasyona güven ikili değil, kalibre edilmesi gereken sürekli bir büyüklüktür.
+˙Iki yönde sapar: sistem yanılırken insanın onaylaması (otomasyon yanlılığı) ve
+sistem haklıyken insanın devre dışı bırakması (kullanmama). C özüm arayüzde
+değil, sistemin kendi belirsizliğini kalibre biçimde iletmesindedir: “yaptım” değil,
+“yaptım, şu koşulda emin değilim”. Sistemin kendi bilmediğini bilmesi, niyet
+düzeyinde arayüzden daha belirleyicidir.
+˙Itiraz XXIII: C oklu Niyet ve Hakemlik
+Tartışma tek operatör ve tek niyet varsayar. Gerçek sistemlerde eşzamanlı ve
+çelişkili niyet sahipleri vardır. Tıklamalı arayüzde çelişki görünür ve insanlar
+arasında çözülür; otonom katmanda çelişki sistemin içine gömülür ve görünmez
+biçimde bir tarafın lehine çözülür. Niyet haritasının zorunlu bileşeni hakemlik
+kurallarıdır: öncelik nasıl belirlenir, kim ezilir, karar kayıt altına alınıyor mu.
+˙Itiraz XXIV: Zaman Ölçeği ve Niyetin Bayatlaması
+Tartışmanın tamamı niyetin bildirildiği an ile eylemin gerçekleştiği anın çakıştığını
+varsayar. Soyutlama yükseldikçe bu iki an arasındaki mesafe büyür ve niyetin
+11
+
+-- 11 of 35 --
+
+geçersizleşme ihtimali artar. Üç tasarım sorusu doğar: niyetin geçerlilik süresi
+nedir, koşullar değiştiğinde sistem devam mı eder yoksa durup sorar mı, yürütme
+sırasında iptal ve revizyon kanalı var mıdır. Sonuncusu kritiktir: tıklamalı
+arayüzde her adım doğal bir iptal noktasıdır; niyet arayüzünde iptal noktaları
+açıkça tasarlanmazsa hiç bulunmazlar.
+˙Itiraz XXV: Doğrulanabilirliğin Düşmesi
+Sonlu ve deterministik bir tıklama akışı test edilebilir. Niyet düzeyinde girdi
+uzayı sınırsız, davranış olasılıklıdır. Otomasyon arttıkça test edilebilirlik düşer
+ve bu, güvenceye en çok ihtiyaç duyulan anda gerçekleşir. Pratik sonuç: iddia
+(“şunu yapsın”) yerine değişmez ve kısıt (“şunu asla yapmasın”) düşünmek.
+Bunun karşılığı çalışma zamanı doğrulaması ve güvenlik zarfıdır. Kritik nokta:
+izleyici katman, otonom katmandan daha basit olmalıdır ki doğrulanabilsin.
+˙Itiraz XXVI: Gözlemlenebilirlik ve Olay Sonrası Soruşturma
+Tıklama akışının doğal bir denetim izi vardır. Niyet katmanı bu izi siler. Olay
+sonrası cevaplanması gereken soru “hangi düğmeye basıldı” değil, “sistem o anda
+ne olduğunu sanıyordu ve neden o eylemi seçti”dir. Bu, kararın alındığı anda
+niyetin, bağlamın, alternatiflerin ve seçim gerekçesinin kaydedilmesini gerek-
+tirir. Karar günlüğü sonradan eklenemez, çünkü kaydedilmemiş bağlam geri
+getirilemez.
+˙Itiraz XXVII: Ara Temsil Zorunluluğu
+Aynı niyetin aynı koşulda farklı davranış üretmesi hata ayıklamayı, gerileme
+takibini ve belgelendirmeyi çökertir. C özüm, niyet ile yürütme arasına kararın
+dondurulduğu bir plan nesnesi yerleştirmektir: niyet → plan (deterministik,
+denetlenebilir, saklanabilir) → yürütme. Olasılıklı kısım tek noktada toplanır
+ve o noktada onaylanabilir. Bu ara temsil, doğrulama, denetim ve iptal için
+ortak ön koşuldur.
+˙Itiraz XXVIII: Bileşim ve Okların Görünmezliği
+Her adım tek başına otomatize edilmiş olsa bile zincir bozuk çalışabilir. Manuel
+iş genellikle kutuların içinde değil oklarda saklıdır: biçim dönüşümleri, elle
+taşımalar, kopyalamalar. Bunlar hiçbir adım listesinde görünmez çünkü adım
+değil, adımlar arasıdır. Ayrıca kısmi otomasyonun kendi vergisi vardır: yarı
+otomatik zincir, tam manuel zincirden fazla denetim gerektirebilir, çünkü insan
+hem işi hem makineyi izlemek zorundadır.
+˙Itiraz XXIX: Otomasyon Sisteminin Kendisi Bir Yük Olarak
+Haritayı çıkarma, güncelleme ve ontolojiyi bakımda tutma işi manuel bir süreçtir.
+Tam otomasyon hedefi kendine uygulandığında ilk kurban haritadır. Sorul-
+ması gereken soru şudur: bu adımı otomatize etmenin toplam yaşam döngüsü
+12
+
+-- 12 of 35 --
+
+maliyeti, adımı elle yapmaya devam etmenin maliyetinden düşük müdür. Seyrek,
+değişken ve düşük hacimli adımlar için cevap genellikle olumsuzdur.
+˙Itiraz XXX: Kilitlenme ve Bağımlılık
+Niyet katmanı dışarıdan bir servise devredildiğinde süreç bilgisi de oraya taşınır.
+Sağlayıcı davranışı veya politikayı değiştirdiğinde süreç mantığı değişmiş olur ve
+eski adım bilgisi elde kalmadığı için geri dönülemez. Haritanın bir sütunu, her
+adımın hangi dış bağımlılığa yaslandığı olmalıdır.
+˙Itiraz XXXI: ˙Işin Yok Olmaması, Yer Değiştirmesi
+Tarihsel örüntü tutarlıdır: otomasyon bir eylemi ucuzlatır, ucuzlayan eylemin
+talebi artar, iş bir üst seviyeye kayar. Otonom sistemlerde kayışın adresi bellidir:
+denetim, istisna yönetimi, niyet yazımı, doğrulama. Buna eşlik eden gizli emek,
+otonom görünen sistemlerin arkasındaki görünmez kılınmış insan çalışmasıdır;
+otomasyon oranı ölçülürken bu emek genellikle sayılmaz çünkü sistemin dışında
+sayılır.
+˙Itiraz XXXII: Fiziksel Kısıtların Görünmezleşmesi
+Niyet düzeyine çıkmak alt katman kısıtlarını ortadan kaldırmaz, görünmez kılar:
+enerji, gecikme, bant genişliği, algılayıcı menzili, çevre koşulları. ˙Iyi bir niyet
+arayüzünün en zor problemi, gerçekleştirilemeyecek bir niyeti ne zaman ve nasıl
+reddedeceğidir. Sessizce yaklaşık bir sonuç üretmek en kötü davranıştır, çünkü
+katman zaten ayrıntıyı gizlemek üzere kurulmuştur ve sapma fark edilemez.
+Fizibilite kontrolü ve kısmi başarının açık raporlanması zorunlu bileşenlerdir.
+˙Itiraz XXXIII: Bedenlenmiş Kontrolün Ayrı Bir Eksen Oluşu
+Jest ve sürekli kontrolün değeri, komut vermenin ilkel bir hali olması değil,
+farklı bir bilme biçimi olmasıdır. Doğru çalışan alet elden çıkar ve şeffaflaşır;
+deneyimli operatör aracı düşünmez, hisseder. Rüzgârı, ataleti, enerji düşüşünü
+kol direncinden okur. Doğal dil arayüzü bu duyusal kuplajı kapatır. Dolayısıyla
+tartışmanın örtük olarak kurduğu tek boyutlu merdiven (manuel, jest, dil, otonom)
+yanlıştır; uzay en az iki boyutludur: soyutlama seviyesi ve duyusal bağlantı.
+Havacılıkta uçuş kumandaları elektroniğe taşınırken yapay kuvvet geri beslemesi
+eklenmesinin nedeni budur.
+˙Itiraz XXXIV: ˙Ifade Becerisinin Eşitsiz Dağılımı
+Niyet arayüzü, kullanıcıdan istediğini açık, sıralı ve eksiksiz ifade edebilmesini
+talep eder. Tıklamalı arayüz ifade becerisi zayıf kullanıcıyı taşır; menü neyin
+mümkün olduğunu gösterir, kullanıcı tanır. Niyet arayüzünde hatırlama, tanımanın
+yerini alır ve bilişsel maliyet artar. Keşfedilebilirlik çöker: ne isteyebileceğini
+bilmiyorsan sistemin yeteneği senin için yoktur. Sonuç sessiz bir eşitsizliktir;
+aynı sistem iyi tarif edenle kötü tarif edene farklı güç verir.
+13
+
+-- 13 of 35 --
+
+˙Itiraz XXXV: Bazı Adımların Amaç Olması
+Her adım maliyet değildir; bir kısmı ürünün kendisidir. C ıktı ile sürecin değeri
+iç içe olduğunda süreci kaldırmak çıktıyı bırakır fakat çıktıyı üreten kişiyi or-
+tadan kaldırır. Tam otomasyon hedefi, örtük olarak hiçbir adımın anlamlı ol-
+madığı varsayımını taşır. Haritanın bir sütunu, adımı icra eden kişinin ondan
+ne kazandığı olmalıdır: beceri, bağlam, sahiplik, tatmin.
+˙Itiraz XXXVI: Niyet Kaydının Mahremiyet Boyutu
+Tıklama kaydı ne yapıldığını gösterir; niyet kaydı ne istendiğini gösterir ve
+niyet davranıştan daha mahremdir. Sistemi ne kadar iyi tarif edersen o kadar
+iyi hizmet alır ve o kadar eksiksiz profil bırakırsın. Kurumsal sonuç, niyet
+günlüğünün performans ölçüm aracına dönüşmeye açık olmasıdır. Teknik sonuç,
+niyet günlüğünün sızma halinde en pahalı veri türü olmasıdır, çünkü yalnızca
+geçmişi değil planı da içerir.
+˙Itiraz XXXVII: Haritanın Örgütü Resmetmesi
+C ıkarılan adım grafiği büyük ölçüde kimin kiminle konuşmadığının haritasıdır.
+Onay adımları güven eksikliğinin, form adımları entegrasyon yokluğunun, elle
+taşımalar bütçe sınırlarının izidir. Bir süreci otomatize etmek çoğu zaman
+örgütsel bir sınırı otomatize etmektir; sınır kalır, koda gömülür ve müzakere
+edilemez hale gelir.
+˙Itiraz XXXVIII: Niyet Dilinin Sahipliği
+Tıklamalı arayüzler kurum içinde tanımlanır. Niyet katmanında ifade biçimini,
+kavram kümesini ve ontolojiyi büyük ölçüde kullanılan platform belirler. ˙Iki
+sonucu vardır: taşınabilirlik kaybı ve kavramsal çerçeve dayatması. Sistemin
+ifade edebildiği niyetler, düşünülebilen niyetlerin sınırını çizer; menülü arayüzde
+bu sınır görünürdü, dil arayüzünde görünmez.
+˙Itiraz XXXIX: Benimseme Problemi
+Otomasyon projelerinin çoğu model yetersizliğinden değil benimsenmemekten
+başarısız olur. Nedenleri: kontrol kaybı hissi, iş güvencesi endişesi, hata halinde
+sorumluluğun belirsizliği ve en yaygını, geçiş döneminde iş yükünün artması.
+Yeni sistem izlenirken eski iş de paralel yürütülür. Bu dönemi finanse eden bir
+plan yoksa sistem teknik olarak hazır olduğu halde kullanılmaz. Ayrıca güven
+asimetriktir: otonom sisteme ilk hatasında, insan meslektaşa gösterilenden çok
+daha az tolerans gösterilir.
+˙Itiraz XL: Kolaylaşan Eylemin C oğalması
+Bir eylemin maliyeti düştüğünde miktarı artar. Otomasyon bağlamında bu,
+riskli eylemlerin eşiğinin düşmesi demektir. Onay adımı kaldırıldığında işlem
+sayısı artar; adım başına hata oranı düşse bile toplam hata sayısı artabilir.
+14
+
+-- 14 of 35 --
+
+Sürtünmeyi kaldırmak nötr bir iyileştirme değil, davranış değiştiren bir müdahaledir.
+Bazı sürtünmeler yavaşlatmak için değil düşündürmek için vardır.
+˙Itiraz XLI: C oklu Otonom Aktör ve ˙Istemsiz Eskalasyon
+Birden fazla otonom sistem birbirinin çıktısına tepki verdiğinde, her biri tek
+başına doğru davranırken toplamları patolojik olabilir. Geri besleme döngüsünün
+periyodu insan müdahale süresinin altına indiğinde olay bitmeden anlaşılamaz.
+Askeri karşılığı istemsiz eskalasyondur. Haritaya çevirisi şu ek sorudur: bu adım,
+başka bir otonom aktörün gözlemleyip tepki verebileceği bir sinyal üretiyor mu.
+˙Itiraz XLII: Öngörülebilirliğin Zafiyete Dönüşmesi
+Otomasyonun erdemi olan tutarlılık, rekabetçi ortamda sömürülebilir bir özelliktir.
+Kuralları öğrenmek için sistemin içini görmek gerekmez, davranışını gözlemlemek
+yeterlidir. Buradan az dile getirilen bir gerekçe doğar: insanın döngüde kalması
+sistemi modellenmeye karşı dirençli kılar.
+˙Itiraz XLIII: Monokültür ve Korelasyonlu Hata
+C ok sayıda insan operatör birbirinden bağımsız hatalar yapar ve hatalar kısmen
+sönümlenir. Aynı modeli kullanan çok sayıda sistem eşzamanlı olarak aynı
+hatayı yapar. Bireysel hata oranı düşerken sistemik risk artar. Kritik alan-
+larda çeşitliliğin bilerek korunması bu yüzdendir; niyet katmanı ise doğası gereği
+merkezileşmeye eğilimlidir.
+˙Itiraz XLIV: Sapmanın Normalleşmesi
+Sistem beklenenden farklı davranır, kötü sonuç doğmaz, davranış yeni normal
+sayılır ve sınır sessizce kayar. Otonom sistemlerde süreç daha hızlı işler, çünkü
+sapmayı gözleyen insan sayısı azdır ve sapma “sistem hallediyor” biçiminde yo-
+rumlanır. Kaydedilmeyen küçük müdahaleler büyük arızanın erken uyarı sinyal-
+leridir; otomasyon tam olarak onları görünmez kılar.
+˙Itiraz XLV: Otomasyonun Tek Yönlü Kapı Olması
+Otomatize edilen sürecin geri dönüş seçeneği kâğıt üstünde kalır: elle yapan
+personel ayrılır, araçlar çürür, belgeler bayatlar, elle yapılan halin ölçeği yetmez
+hale gelir. Tersinir kararlar hızlı, tersinmez kararlar yavaş verilmelidir. Tam
+otomasyon hedefi tersinmez bir karar dizisidir; asgari önlem, bir süre boyunca
+çift yürütme kapasitesinin bilerek finanse edilmesidir.
+˙Itiraz XLVI: Niyet Katmanının Kendi Gecikmesi
+Soyutlama seviyesi yükseldikçe karar başına hesap maliyeti ve gecikme artar.
+Refleks seviyesindeki hiçbir karar niyet katmanına çıkamaz. Gerçek mimari
+zorunlu olarak katmanlıdır: altta hızlı, basit, deterministik döngüler; üstte
+15
+
+-- 15 of 35 --
+
+yavaş, olasılıklı katman. Bağlantı kopması eklendiğinde soru netleşir: üst kat-
+man erişilemez olduğunda geriye ne kalır.
+˙Itiraz XLVII: Dil ve Kültür Dolayımı
+Doğal dil arayüzü, doğal dilin bütün yükünü içeri alır: belirsizlik, deyim, kibarlık
+dolayımı, kültürel varsayım. Dolaylı söz edimleri niyet çıkarımının en zor kısmıdır
+ve çok kültürlü ortamda sistemin çıkarımı sessizce bir kültürel varsayıma yaslanır.
+Ayrıca baskın eğitim dili dışındaki dillerde başarım belirgin biçimde düşer ve
+bu kayıp hata olarak değil, makul görünen bir yorum olarak ortaya çıkar.
+˙Itiraz XLVIII: Niyet Düzeyinde Birlikte C alışabilirliğin Yokluğu
+Adım seviyesinde entegrasyon standartları vardır; niyet seviyesinde yoktur. ˙Iki
+otonom sistemin aynı görevi paylaşması ortak bir görev temsili gerektirir ve
+bugün bu temsiller platforma özgüdür. Otonomi arttıkça sistemler arası ente-
+grasyon kolaylaşmaz, zorlaşır; çünkü artık veri değil anlam eşlenmektedir.
+˙Itiraz XLIX: Kütlenin ˙Ikame Edilemezliği
+“Rekabetin nesnesi daha iyi makine üretmekten daha iyi takım kurmaya evrilmiştir”
+saptamasından, fiziksel üretim kapasitesinin öneminin azaldığı sonucu çıkarılabilir
+görünmektedir. Bu çıkarım geçersizdir.
+Otomatik ateşli silah, operatör başına etki probleminin on dokuzuncu yüzyıldaki
+çözümüdür: tek asker bir müfrezenin ateş hacmini üretir. Niyet katmanı aynı
+problemin farklı bir katmandaki çözümüdür: tek operatör çok sayıda platformun
+görev hacmini üretir. Bunlar rakip çözümler değil, aynı eğrinin iki noktasıdır;
+kaldıraç kolunun uzaması kolun ucundaki kütlenin ortadan kalkmasını gerek-
+tirmez.
+Dahası otonomi, platformu korunacak bir varlıktan tüketilecek bir kaleme
+çevirir. Niyet katmanı iyi çalıştıkça birim zamanda tüketilen platform sayısı
+artar; bu, kütle probleminin çözülmesi değil yeniden formüle edilmesidir. ˙Itiraz
+IV, XVII, XXXII ve XLIII bu sonucu bağımsız yollardan destekler: kısıtlar
+görünmez olur fakat kalkmaz, marjinal kapsama maliyeti üsteldir, darboğaz
+doğrulamaya ve oradan tedarike kayar, korelasyonlu hataya karşı tek sigorta
+fazlalıktır.
+Doğru formülasyon şudur: marjinal avantajın kaynağı platform kalitesin-
+den kuplaj katmanına kaymıştır; “kaymıştır” ile “yok olmuştur” farklı ifadel-
+erdir. Kuplaj katmanı bir çarpandır ve çarpanın uygulanacağı taban yoksa
+sonuç sıfırdır. Değişen tek şey darboğazın adresidir: eski darboğaz namlu ve
+mühimmat üretimi, yeni darboğaz ˙Itiraz X’te tarif edilen durumdur.
+˙Itiraz L: Makinenin Niyetinin Okunamaması
+Tartışmanın tamamı insandan makineye yönelen tek bir modelleme varsayar.
+Oysa insan da sistemin niyetini modeller ve bu ikinci model genellikle tasarlan-
+maz, kazara oluşur.
+16
+
+-- 16 of 35 --
+
+˙Iki büyüklük ayrılmalıdır. Öngörülebilirlik, insan hedefi biliyorken eylemin
+beklendiği gibi olmasıdır. Okunabilirlik, insanın eylemi görüp hedefi çıkarabilmesidir.
+˙Ikisi çatışır: okunabilir davranış tanım gereği optimal olmayan davranıştır,
+çünkü sistem niyetini erken belli edebilmek için verimden feragat eder. Kat-
+man 7’deki devralma gecikmesi maddesi, davranış okunabilir değilse ölçülse dahi
+anlamsızdır; insan neyin olduğunu anlayamadığı bir süreci zamanında kesemez.
+Buna bağlı ikinci sonuç, karşılıklı modellemenin özyineli olmasıdır: sistem,
+insanın kendisini nasıl modellediğini de modellemek zorundadır. Aksi halde
+insanın yanlış zihinsel modeli sessizce kalıcılaşır; bu, ˙Itiraz XLIV’te tarif edilen
+sapma normalleşmesinin bilişsel yüzüdür.
+˙Itiraz LI: Ontolojinin Kaynağı Problemi
+Görev ontolojisinin nereden geleceği sorusu açık bırakılmıştır. Uzmana ne yaptığını
+sormak yeterli değildir. Tanıma güdümlü karar modeli sebebi açıklar: uzman
+seçenekleri karşılaştırmaz, durumu tanır ve ilk makul çözümü zihinsel olarak
+simüle eder. Uzmandan alınan karar ağacı gerçek süreç değil, sonradan üretilmiş
+bir rasyonelleştirmedir. Bu, ˙Itiraz XXXVII’nin epistemik tamamlayıcısıdır:
+harita yalnızca siyasi olarak değil bilişsel olarak da bozuktur.
+Kullanılabilir çıkarma yöntemleri şunlardır. Kritik karar yöntemi, sıradan
+vakalar yerine zor tekil vakalar üzerinden geriye dönük sorgulama yapar ve çıktısı
+doğrudan karar günlüğü şemasına eşlenir. Sesli protokol analizi, iş yapılırken
+düşünülenin kaydını alır; sonradan anlatılanla arasındaki fark ontolojinin gizli
+kısmıdır. Merdiven tekniği, “neden bu adım” sorusunu tekrarlayarak araç–amaç
+zinciri çıkarır ve ˙Itiraz XII’nin fosil adım tespitini kendiliğinden üretir: zincir
+bir noktada geçmişte var olmuş bir güvensizliğe çıkıyorsa o adım fosildir. Süreç
+madenciliği ise olay günlüklerinden gerçek akışı keşfeder ve uygunluk kontrolüyle
+belgelenmiş akışla karşılaştırır; ˙Itiraz XIII’ün talep ettiği çürüme dedektörünün
+olgun karşılığı budur.
+˙Itiraz LII: Ters Problemin Tekil Olmaması
+Davranıştan niyete geri gidiş kötü konulmuş bir problemdir: sonsuz sayıda
+hedef veya ödül fonksiyonu aynı gözlenen davranışı üretir. C özüm daima bir
+düzenlileştirmedir, yani bir önseldir. Pratik anlamı şudur: niyet hiçbir zaman
+keşfedilmez, kısmen dayatılır. Kurulan ontoloji, çıkarımın tarafsız aracı değil,
+çıkarımın önselidir. Bu, ˙Itiraz XXXVIII’in matematiksel yüzüdür ve “niyeti
+zihinden okuma” metaforunun ikinci kez çürütülmesidir.
+˙Itiraz LIII: Hakemliğin Formel ˙Imkânsızlığı
+˙Itiraz XXIII hakemliği zorunlu bileşen olarak koyar fakat problemin çözülemez
+kısmını belirtmez. Sosyal seçim kuramının imkânsızlık sonucu doğrudan uygu-
+lanır: çelişkili tercih sıralamalarını makul koşulların tümünü sağlayarak tek
+bir sıralamaya indirgeyen bir kural yoktur. Sisteme gömülen hakemlik kuralı
+kaçınılmaz olarak keyfıdir; tasarım hedefi onu doğru yapmak değil, keyfıliğini
+görünür ve kayıtlı kılmaktır.
+17
+
+-- 17 of 35 --
+
+Üç kalıp vardır. Sözlükografik öncelikte roller sıralanır, üst rol her za-
+man kazanır; şeffaf fakat kabadır. Kısıt kesişiminde yalnızca tüm tarafların
+kısıtlarını sağlayan eylemler kalır, kesişim boşsa sistem durup insana devreder;
+en savunulabilir olan budur, çünkü boş kesişim bir hata değil doğru bir tırmandırma
+sinyalidir. Ağırlıklı fayda toplamı pürüzsüzdür fakat en tehlikelisidir, zira bir
+tarafın tamamen ezilmesi sayısal olarak görünmez.
+˙Itiraz LIV: Örtük Bilginin Depo Değil Akış Olması
+Otomasyonun örtük bilgiyi yok edeceği kaygısı doğru fakat yanlış yerde ku-
+rulmuştur. Örtük bilgi tek tür değildir. ˙Ilişkisel tür söylenebilirdi fakat söylenmemiştir;
+örtüklüğü tarihsel bir kazadır ve otomasyon çabası onu açığa çıkarır, öldürmez.
+Somatik tür bedende yerleşik icra becerisidir; makineye kısmen aktarılır, insanda
+körelir. Kolektif tür sosyal bağlamdan türeyen anlamdır, kuralın ne zaman
+bozulacağını bilmektir; kopyalanamaz fakat onu üreten sosyal yapı dağıtılabilir.
+Asıl mekanizma şudur: örtük bilgi depolanan değil, sürekli yeniden üretilen
+bir varlıktır. Otomasyon depoyu boşaltmaz, fabrikayı kapatır. Kayıp ani değildir;
+mevcut uzmanlar bir süre daha yeterlidir ve boşluk ancak bir kuşak sonra
+görünür. Bu gecikme, kararı veren yönetim dönemi ile sonucun ortaya çıktığı
+dönemin çakışmamasına yol açar; otomasyon kararının yapısal olarak fazla ko-
+lay verilmesinin sebebi budur. ˙Itiraz XXI’in ve Katman 10’daki eğitim amaçlı
+manuel adım maddesinin gerekçesi verimlilik kaybı değil, yeniden üretim kapa-
+sitesinin korunmasıdır.
+˙Itiraz LV: ˙Ikincil Örtük Bilginin Daha Hızlı Bayatlaması
+Otomatize sistemle çalışan operatör yeni bir örtük bilgi gövdesi kazanır: sistemin
+ne zaman yanıldığı, hangi girdide tuhaflaştığı, hangi çıktının güvenilmez olduğu.
+Bu gövde de belgelenmez ve aynı kırılganlığı taşır; üstelik daha hızlı bayatlar,
+çünkü model güncellendiğinde operatörün kalibrasyonu bir gecede geçersizleşir
+ve sistem bunu haber vermez.
+Net etki bilgi kaybı değil tür ikamesidir: alan bilgisi yerine sistem davranışı
+bilgisi. ˙Ikinci tür, sistem çöktüğünde işi yapma becerisi sağlamaz; geriye çalışmayan
+bir sistemin sezgisi kalır.
+˙Itiraz LVI: Sertifikasyon Duvarı
+Kritik sektörlerdeki direncin kaynağı sezgisel değil belgeseldir. Yürürlükteki
+güvenlik standartlarının tamamı deterministik yazılım varsayar ve üç şey talep
+eder: gereksinimden koda izlenebilirlik, yapısal kapsama ölçümü, belirlenmiş
+davranış. Olasılıklı bir sistem üçünü de sağlayamaz; aynı girdi aynı çıktıyı
+vermiyorsa izlenebilirlik kurulamaz, girdi uzayı sınırsızsa kapsama ölçülemez.
+Buradan çıkan çözüm ˙Itiraz XXVII’de zaten formüle edilmiştir ve sektörün
+fiilen benimsediği kalıptır: olasılıklı kısım tek noktada dondurulur, yürütme
+deterministik tutulur, sertifikasyon monitöre ve yürütme katmanına uygulanır.
+Niyet katmanı sertifikasyon sınırının dışında, öneri üreten bir bileşen olarak
+18
+
+-- 18 of 35 --
+
+kalır. Kurumlar otomasyonu reddetmemekte, sertifikalanamayan otomasyonu
+sertifikalanabilir bir kabuğun içine hapsetmektedir.
+Niyet Modellemenin Anatomisi
+Faaliyetin Üç Problemi
+“˙Insan niyetini modellemek” tek bir faaliyet değil, üç ayrı problemin üst üste
+binmiş halidir: niyet hangi yapıda temsil edilir, o yapı nasıl doldurulur, doldu-
+rulmuş yapı gerçeklikle nasıl hizada tutulur. Uygulamaların çoğu birinciyi
+çözer, ikinciyi kısmen yapar, üçüncüyü hiç yapmaz. ˙Itiraz XIII’te tarif edilen
+çürümenin mekanizması budur.
+Temsil: Niyetin Alan Yapısı
+Modellenebilir bir niyet serbest metin değildir ve en az sekiz alandan oluşur.
+1. Amaç: ulaşılmak istenen durum yüklemi.
+2. Kısıt: ihlal edilemez sınırlar.
+3. Tercih: sıralı yumuşak hedefler.
+4. Sapma payı: kabul edilebilir tolerans aralığı.
+5. Bağlam varsayımları: sistemin doğru saydığı dünya durumu.
+6. Geçerlilik: zaman penceresi ve revizyon koşulu.
+7. Yetki kaynağı: niyeti bildirenin kimliği ve kapsamı.
+8. Başarı yüklemi: bitişin nasıl tespit edileceği.
+Bu şema, ˙Itiraz X’te en olgun insani niyet ontolojisi olarak işaret edilen
+görev taktiği formülasyonunun makine okunur halidir. En sık atlanan alan
+başarı yüklemidir ve yokluğu spesifikasyon oyununun doğrudan sebebidir: başarı
+ölçütünü sistem kendisi türetiyorsa, optimize ettiği şey niyet değil o türetimdir.
+Temsil: Formalizm Seçenekleri
+˙Inanç–arzu–niyet mimarisinin katkısı niyeti taahhüt olarak tanımlamasıdır; niyet
+yeni seçenekleri süzer ve zaman içinde kalıcıdır. Taahhüdün ne zaman düşürüleceği
+sorusu bağlanma stratejisi olarak formalize edilmiştir ve ˙Itiraz XXIV’ün teorik
+zeminidir.
+Hiyerarşik görev ağları görev–yöntem–alt görev ayrışımı sağlar; aranan görev
+ontolojisi tam olarak bir yöntem kütüphanesidir. Planlama alanı tanım dil-
+leri ön koşul–etki çiftleriyle çalışır ve ˙Itiraz XXVII’deki plan nesnesinin hazır
+altyapısıdır. Hedef modelleme yaklaşımları her hedefe engel analizi uygular; bu,
+niyet tarafındaki hata türü ve etkileri analizidir.
+19
+
+-- 19 of 35 --
+
+Fayda ve ödül fonksiyonları tercihleri sayısallaştırır. Güçlü olduğu yer takas
+kararları, zayıf olduğu yer kısıtlardır: bir kısıt ödüle gömüldüğü anda ihlal
+edilebilir hale gelir. Kural şudur: kısıtlar ödül fonksiyonundan ayrı bir kat-
+manda tutulur; bu, ˙Itiraz XXV’in güvenlik zarfı ilkesiyle özdeştir.
+Elde Etme: Üç Kanal
+Birinci kanal bildirimdir; en ucuz ve en eksik olanıdır. Sınırı ˙Itiraz XV’in ko-
+runum ilkesidir. Buradaki tasarım kararı hangi alanın önden zorunlu dolduru-
+lacağıdır ve uygulanabilir ayrım şudur: kısıt ile yetki önden zorunludur, tercih
+ile sapma payı öğrenilebilir. Gerekçesi, ilk ikisinin ihlalinin geri alınamaz, son
+ikisinin ihlalinin yalnızca kötü sonuç üretmesidir.
+˙Ikinci kanal davranıştan çıkarımdır. Bayesçi ters planlama, insanın yaklaşık
+rasyonel bir planlayıcı olduğu varsayımıyla eylemden hedefe geri gider; insanın
+optimali kesin değil olasılıklı seçtiği kabul edildiğinden hatalı davranış modeli
+çökertmez. Ters pekiştirmeli öğrenme davranıştan ödül fonksiyonu çıkarır fakat
+˙Itiraz LII uyarınca sonucu tekil değildir. Tercih öğrenimi ikili karşılaştırmalardan
+sıralama çıkarır ve doğru cevabın bulunmadığı, yalnızca tercihin olduğu üçüncü
+tıklama sınıfı için tek uygulanabilir yöntemdir. Kısmi gözlemlenebilir karar
+süreci çerçevesinde niyet gizli bir durum olarak ele alınır ve soru sorma, bilgi
+toplayan bir eylem olarak aynı optimizasyonun içine girer.
+Üçüncü kanal etkileşimli inşadır. ˙Itiraz III uyarınca niyet zihinde hazır bekle-
+mez, ara sonuç görüldükçe oluşur; bu, çıkarım yönteminin eksiği değil problemin
+yapısıdır. Dolayısıyla niyet modeli tek atışlık bir okuma değil yakınsayan bir
+süreçtir: sistem ucuz bir taslak üretir, insan düzeltir, düzeltme niyet kaydına
+yazılır.
+Sorma ve Varsayma Kararının Fiyatlandırılması
+Sistemin ne zaman soracağı, ne zaman varsayacağı kararı bilginin değeri hesabına
+bağlanır. Sorma kararı, yanlış varsayımın beklenen maliyeti sorma maliyetini
+aştığında verilir; birinci büyüklük hata yarıçapı ile belirsizliğin çarpımı, ikincisi
+kesinti ve gecikmenin toplamıdır.
+Bu formülasyon ˙Itiraz VI’daki hata yarıçapı eksenini çalışma zamanı davranışına
+bağlar ve “sistem geri sorar, dolayısıyla adı değişmiş tıklama” itirazını çürütmez
+fakat fiyatlandırır: tıklama kalır, yalnızca kendini finanse ettiği yerde. Sabit eşik
+bu nedenle yanlıştır; eşik yarıçapın fonksiyonudur.
+Bozulabilirliğin Belirsizlikten Türetilmesi
+Yardım oyunu kurulumunda sistem, hedef fonksiyonunu bilmediğini bilerek hareket
+eder ve insanın onu bildiğini varsayar. Kurulumun sonucu şudur: sistem kendi
+hedef tahmininden ne kadar emin değilse, insan müdahalesine o kadar izin verir.
+Kapatılmaya razı olma davranışı dışarıdan bir itaat kuralı olarak dayatılmaz,
+belirsizlikten türetilir.
+Bunun protokole sonucu doğrudandır. B ≥ K kuralının karar teorisi içinde
+bir türevi vardır: hedef belirsizliği sıfırlandığında sistem müdahaleyi reddetmeyi
+20
+
+-- 20 of 35 --
+
+rasyonel bulur. Dolayısıyla bozulabilirlik, sistemin kendi niyet modelinden asla
+tam emin olmamasını gerektirir ve Katman 2’deki kalibrasyon maddesi Katman
+7’nin ön koşuludur. Belgenin ilk halinde bu bağımlılık örtüktür.
+Soyutlama Hiyerarşisi ve Kısıtların Temsili
+Niyet–görev–karar–eylem omurgasının güvenlik kritik alandaki olgun karşılığı,
+bilişsel iş analizindeki soyutlama hiyerarşisidir: işlevsel amaç, değer ve öncelik
+ölçütleri, amaca ilişkin işlevler, nesneye ilişkin süreçler, fiziksel nesneler. Kat-
+manlar arası bağlantı neden–nasıl ilişkisidir; niyet düzeyine çıkmak bu hiy-
+erarşide bir veya iki katman yukarı kaymaktır.
+˙Iki kazanımı vardır. Birincisi, hata yarıçapı hiyerarşiden okunabilir: üst kat-
+mandaki yanlış yorum altındaki tüm dalları etkilediğinden yarıçap, hiyerarşideki
+yüksekliğin fonksiyonudur. ˙Ikincisi, ekolojik arayüz tasarımı ˙Itiraz XXXIII’e ce-
+vap verir. ˙Ilkesi kısıtları gizlemek yerine görünür kılmaktır; operatör alt katman
+kısıtlarını doğrudan algılar, çıkarım yapmak zorunda kalmaz. Duyusal kuplajı
+korumak soyutlama seviyesinden vazgeçmeyi değil, kısıtların üst katmanda tem-
+sil edilmesini gerektirir. ˙Itiraz XXXIII’te tarif edilen iki boyutlu uzayın yüksek
+soyutlama ve yüksek duyusal bağlantı köşesi boş değildir.
+Beceri–kural–bilgi ayrımı ek bir kesit verir: otomasyon beceri ve kural se-
+viyesini devralır, insana en yavaş ve en hata eğilimli mod olan bilgi seviyesi kalır.
+Döngü dışı performans probleminin mekanizması budur.
+Dilbilimsel Katman
+Doğal dille niyet aktarımı dilin kendi mekanizmalarını sisteme dahil eder. Söz
+edimleri kuramı uyarınca bir ifade betimleme değil eylemdir ve çıkarımın zor
+kısmı dolaylı olanlardır. ˙Işbirliği ilkeleri uyarınca insan az söyler çünkü çok şeyin
+paylaşıldığını varsayar; söylenmeyen kısım paylaşılan zeminin büyüklüğüyle ters
+orantılıdır. Zeminleme kuramı uyarınca iletişim mesajla değil teyit ediminin
+kabulüyle tamamlanır; tasarım sonucu, sistemin anladığını yeniden ifade ederek
+göstermesi, onay sinyaliyle yetinmemesidir. Diyalog durum takibi ise niyetin
+tek turda tamamlanmadığını kabul eder: niyet nesnesi değişmez bir kayıt değil
+versiyonlanan bir yapıdır.
+Zamansal Mantık ve Değişmezlerin Yazımı
+Niyet, zamansal kısıt biçiminde yazıldığında doğrulanabilir hale gelir. Dört
+kalıp protokole doğrudan eşlenir: hiçbir zaman gerçekleşmemesi gereken durum
+ifadesi Katman 8’in değişmezlerine, eninde sonunda gerçekleşmesi gereken du-
+rum ifadesi başarı yüklemine, bir koşul geçerliyken korunması gereken durum
+ifadesi yürütme kısıtına, bir olayı zorunlu olarak izleyen durum ifadesi taahhüt
+noktasına karşılık gelir.
+Kazanım ˙Itiraz XXV’e cevaptır: girdi uzayı sınırsız ve davranış olasılıklı
+olsa dahi değişmezler sonlu ve denetlenebilirdir. C alışma zamanı doğrulaması
+bu formülleri izleyen bir monitörden ibarettir ve monitör izlediği katmandan
+21
+
+-- 21 of 35 --
+
+yapısal olarak basittir; protokolün basitlik ilkesi burada teknik olarak sağlanır.
+Olay hesabı ise niyetin bayatlaması için uygun formalizmdir; geçerlilik süresi bir
+zaman aşımı değil bir sonlandırma koşulu olarak yazılır.
+Bakım: Müdahale Madenciliği
+Elle yazılan ontoloji ölür. Tek sürdürülebilir kaynak, insanın devreye girdiği her
+noktanın niyet modelinin hata haritası olarak okunmasıdır. Müdahale kaydı
+sınıflandırılır: epistemik olanlar ontolojiye yeni alan olarak eklenir, yetki kay-
+naklı olanlar otomatize edilmeyip taahhüt noktası olarak sabitlenir, tercih kay-
+naklı olanlar tercih öğrenimine beslenir, hata kaynaklı olanlar gerileme sınamasına
+dönüşür.
+Bu, Katman 7’deki müdahale sınıflandırma maddesinin ikinci işlevini or-
+taya koyar: kayıt yalnızca denetim için değil, niyet modelinin tek eğitim verisi
+olduğu için tutulur. C ürüme dedektörü için üç sinyal kullanılabilir: aynı görevde
+müdahale oranının artması, bildirilen güven ile gerçekleşen doğruluk arasındaki
+kalibrasyon hatasının büyümesi, ontolojide hiç kullanılmayan dalların birikmesi.
+Niyet Modelinin Sınanması
+Dört ölçüt kullanılır. Tutulmuş müdahale tahmini: model, insanın nerede
+araya gireceğini önceden kestirebiliyorsa kendi açığını biliyor demektir. Karşı-
+olgusal tutarlılık: bağlam değiştiğinde modelin çıkardığı niyet, insanın gerçekten
+değiştirdiği yönde değişmelidir. Kalibrasyon eğrisi: bildirilen güven ile gerçekleşen
+doğruluk farkı. Ayrıştırma sınaması: aynı gözlemden birden fazla niyet açıklanabiliyorsa
+model bunu belirtebilmeli, tekil bir cevaba çökmemelidir. ˙Itiraz LII nedeniyle
+en tanısal ölçüt sonuncusudur.
+Sektörel Kanıt: Otomasyonun Fiili Sınırı
+Reddetme Değil Katmanlaştırma
+Kritik sektörler otomasyonu reddetmez; konumunu sıkı biçimde kısıtlar. Havacılıkta
+seyir ve iniş yüksek oranda otomatiktir, anormal durum yönetimi ve mod geçiş
+kararı insanda tutulur; belirli kazalar sonrası zorunlu elle uçuş kotaları getir-
+ilmiştir. Nükleerde güvenlik durdurması tam otomatiktir, yeniden başlatma ve
+arıza teşhisi değildir. Raylı sistemde sürücüsüz işletim yaygındır fakat yalnızca
+kapalı güzergâhta uygulanır. Finansta emir icrası tam otomatiktir, buna karşılık
+zorunlu kesme anahtarları, devre kesiciler ve pozisyon limitleri getirilmiştir.
+Askeri alanda nokta savunma sistemleri otomatik ateş açar, hedef sınıflandırma
+yetkisi insanda kalır.
+Ayırt Edici Değişkenler
+Örüntü tek kurala indirgenir: otomasyon, tepki süresi insan reflekslerinin altında
+olan ve karar uzayı kapalı olan yerlerde tamdır; karar uzayı açık olan yerde
+bilinçli olarak eksik bırakılır. Ayırt edici değişken kritiklik değildir, zira nükleer
+22
+
+-- 22 of 35 --
+
+santral ile metro hattı ikisi de kritiktir ve otomasyon dereceleri farklıdır. Be-
+lirleyici üç değişken şunlardır: çevrenin kapalılığı ve modellenebilirliği, eylemin
+tersinirliği, düzenleyiciye belgelenebilirlik.
+Kırılganlığın Üç Bileşeni
+Tam otomasyonun kırılgan olduğu sezgisi doğrudur fakat mekanizması üç ol-
+guya ayrışır. Kuyruk kalınlaşması: otomasyon hata sayısını düşürürken hata
+büyüklüğünün dağılımını kalınlaştırır, ortalama iyileşirken en kötü durum kötüleşir.
+Korelasyon: bağımsız insan hataları kısmen sönümlenirken aynı modeli koşan
+sistemler eşzamanlı olarak aynı hatayı yapar, bireysel varyans düşerken ko-
+varyans bire yaklaşır. Kenar kırılganlığı: otomasyon tasarlandığı zarfın içinde
+insandan iyi, dışında belirgin biçimde kötüdür ve zarf sınırı işaretlenmemiştir,
+sistem sınırı geçtiğini bildirmez.
+Simetrik gerçek, elle yürütülen sistemlerin de kırılgan olduğu ve kaza rapor-
+larında insan hatasının baskın kalem olduğudur. Karşılaştırma güvenli manuel
+ile riskli otonom arasında değil, iki risk profili arasındadır. Kritik sektörlerin
+tercihi ortalamayı değil kuyruğu optimize etmektir, çünkü düzenleyici, sigortacı
+ve kamuoyu ortalamayla değil en kötü olayla ilgilenir.
+Elle Kapasitenin Prim Olarak Bütçelenmesi
+Gözlenen davranış, elle yürütme kapasitesinin bilinçli bir maliyet kalemi olarak
+taşınmasıdır: zorunlu elle icra kotaları, düzenli tatbikat ve tam ölçekli senaryo
+koşuları, çift yürütme dönemleri, çırak boru hattının bilerek yavaş tutulması.
+Bunların tamamı verimsizliktir fakat verimsizlik olarak değil prim olarak bütçelenir.
+Karşılığı, zarf dışı olay olasılığı ile hata yarıçapı ve tersinmezliğin çarpımıdır;
+sol taraf küçük ve kesin, sağ taraf büyük ve olasılıklıdır. Kritik sektörde sağ
+taraf kurumu bitirebildiği için prim ödenir, kritik olmayan sektörde ödenmez ve
+bu rasyoneldir. Sektörlerin fiilen yaptığı şey, kapsamayı bozulabilirliğin ötesine
+taşımamaktır; B ≥ K kuralının ampirik gerekçesi budur.
+Protokolün Genişletilmiş Maddeleri
+Aşağıdaki maddeler, ikinci tur itirazlardan türeyen ve ilgili katmanlara ekle-
+nen zorunlu ve önerilen kalemlerdir. Numaralandırma ve sınıflandırma esasları
+değişmemiştir.
+Katman 1 — Niyet Yakalama
+• □ [Z] Niyet şeması zorunlu alan listesiyle sabitlenmiştir; serbest metin
+yalnızca giriş biçimidir, saklama biçimi değildir.
+• □ [Z] Başarı yüklemi niyet kaydının zorunlu alanıdır ve sistem tarafından
+türetilmez.
+• □ [Z] Kısıtlar tercih ve fayda temsilinden ayrı bir katmanda tutulur; ödül
+fonksiyonuna gömülmez.
+23
+
+-- 23 of 35 --
+
+Katman 2 — Belirsizlik ve Ortak Zemin
+• □ [Z] Sistem anladığını yeniden ifade ederek teyit eder; onay sinyali teyit
+sayılmaz.
+• □ [Z] Sorma ve varsayma eşiği, hata yarıçapı ile belirsizliğin çarpımına
+bağlı olarak belirlenir; sabit eşik kullanılmaz.
+• □ [Z] Kalibrasyon ölçümü Katman 7’nin ön koşuludur; hedef belirsizliğinin
+sıfırlandığı iddiası bozulabilirlik iddiasını geçersiz kılar.
+• □ [ Ö] Aynı gözlemden birden fazla niyet açıklanabildiğinde sistem bunu
+bildirir, tekil bir yoruma çökmez.
+Katman 3 — Plan ve Ara Temsil
+• □ [Z] Plan nesnesi, alt katman kısıtlarını gizlemek yerine üst katmanda
+temsil eder.
+Katman 4 — Yetki, Taahhüt ve Hakemlik
+• □ [Z] Hakemlik kuralının keyfı olduğu açıkça kabul edilir ve gerekçesiyle
+kaydedilir.
+• □ [Z] Kısıt kesişimi boş olduğunda sistem durur; ağırlıklı toplamla sessiz
+ezilme üretilmez.
+Katman 5 — Yürütme ve Zaman
+• □ [Z] Hata yarıçapı yüksek adımlarda okunabilirlik verimin önünde tutu-
+lur; sistem niyetini erken belli edecek biçimde davranır.
+• □ [ Ö] Sistemin insan tarafından nasıl modellendiği düzenli olarak sınanır;
+yanlış zihinsel model tespit edilir.
+Katman 7 — Bozulabilirlik ve Devir–Teslim
+• □ [Z] Müdahale kaydı, denetim işlevine ek olarak niyet modelinin eğitim
+verisi olarak kullanılır ve bu kullanım belgelenir.
+• □ [ Ö] Modelin, insanın nerede müdahale edeceğini önceden tahmin etme
+başarımı ölçülür.
+Katman 8 — Doğrulama ve Güvenlik Zarfı
+• □ [Z] Değişmezler zamansal mantıkta yazılır ve monitör bu formülleri
+çalışma zamanında izler.
+• □ [Z] Sertifikasyon sınırı açıkça çizilir; olasılıklı bileşen sınırın dışında,
+yürütme ve monitör sınırın içinde kalır.
+24
+
+-- 24 of 35 --
+
+Katman 10 — Sürdürülebilirlik ve Zaman ˙Içinde Bozulma
+• □ [Z] Ontoloji ile gerçeklik arasındaki sapma, süreç madenciliği uygunluk
+kontrolüyle sürekli ölçülür.
+• □ [Z] Elle yürütme kapasitesinin yıllık maliyeti prim olarak bütçelenir ve
+karşılığı zarf dışı olay riskiyle karşılaştırılarak belgelenir.
+• □ [ Ö] Operatörün sistem davranışına ilişkin kalibrasyonu, her model güncellemesinden
+sonra yeniden sınanır.
+• □ [ Ö] Ontoloji, uzman anlatısından değil kritik vaka sorgulaması ve olay
+günlüğü analizinden türetilir.
+25
+
+-- 25 of 35 --
+
+Sentez: Problemin Dört Farklı Kuruluşu
+Yürütülen eleştiri, tartışmanın problemi tek bir biçimde kurmuş olmasının yeter-
+sizliğini gösterir. Problemin dört ayrı ve birbirini tamamlayan kuruluşu vardır.
+1. Arayüz problemi. Sorulan soru: girdi nasıl daha az sürtünmeli hale
+gelir. Bu, tartışmanın başlangıç kuruluşudur ve en dar olanıdır.
+2. Kontrol devri problemi. Sorulan soru: kontrol nerede, ne zaman ve
+hangi bilgiyle el değiştirir. Bu kuruluşta yüzde yüz otomasyon diye bir
+hedef yoktur; iyi tasarlanmış geçiş noktaları vardır.
+3. Delegasyon problemi. Sorulan soru: yetki, sorumluluk ve artık karar
+hakkı kimdedir. ˙Ilgili literatür insan–bilgisayar etkileşiminde değil, sözleşme
+teorisinde, örgüt tasarımında ve komuta doktrinindedir.
+4. Sürdürülebilirlik problemi. Sorulan soru: sistem zaman içinde nasıl
+bozulur, kim bakar, beceri nasıl korunur, geri dönüş mümkün müdür.
+Birinci kuruluşta hedef doğal olarak yüzde yüzdür. Diğer üçünde yüzde yüz
+bir hedef değil, bir risk göstergesidir.
+26
+
+-- 26 of 35 --
+
+Kavram Haritası
+Niyet ve Görev Temsili
+Niyet modelleme, görev modelleme, hiyerarşik görev analizi, GOMS, görev on-
+tolojileri, bilgi grafikleri, inanç–arzu–niyet mimarisi, planlama alanı tanım dil-
+leri, amaç ve kısıt ayrımı, komutanın niyeti ve görev taktiği.
+Etkileşim ve Biliş
+˙Insan–bilgisayar etkileşimi, doğrudan manipülasyon ile ajan delegasyonu ek-
+seni, doğal kullanıcı arayüzleri, yürütme ve değerlendirme uçurumları, bilişsel
+ergonomi, zihinsel iş yükü, durum farkındalığı seviyeleri, dağıtık biliş, beden-
+lenmiş biliş ve alet şeffaflığı, ortak zemin kurma, dolaylı söz edimleri.
+Otomasyon ve Kontrol
+Otomasyon seviyeleri, dört aşamalı otomasyon çerçevesi (bilgi toplama, analiz,
+karar seçimi, eylem uygulama), döngü içi ve döngü üstü insan, döngü dışı perfor-
+mans problemi, otomasyon yanlılığı ve kullanmama, güven kalibrasyonu, anlamlı
+insan kontrolü, devir–teslim tasarımı.
+Güvenlik ve Doğrulama
+Değişmezler ve güvenlik zarfı, çalışma zamanı doğrulaması, izleyici katmanın
+basitliği ilkesi, karar günlüğü, gözlemlenebilirlik, hata yarıçapı, geri alınabilirlik,
+sapmanın normalleşmesi, korelasyonlu hata ve çeşitlilik, saldırı yüzeyi ve istem
+enjeksiyonu.
+Ekonomi ve Örgüt
+Eksik sözleşmeler, artık kontrol hakkı, vekâlet problemi, spesifikasyon oyunu
+ve hedef sapması, uzun kuyruk maliyeti, kolaylaşan eylemin çoğalması, ahlaki
+tampon bölge, görünmez emek, Conway yasası, benimseme ve geçiş dönemi
+maliyeti, beceri aktarımı ve çıraklık.
+Üst Katman
+Kabiliyet mühendisliği: bir sistemin zaman içinde neyi yapabilir hale geldiğinin
+ve neyi yapamaz kalması gerektiğinin tasarımı.
+27
+
+-- 27 of 35 --
+
+Otonomi Değerlendirme Protokolü
+Protokolün Mantığı
+Protokol, bir sistemin otonom olup olmadığını ikili biçimde değil, iki bağımsız
+eksende ölçer.
+• K ekseni (Kapsama). Sistem rutin işleyişte insan müdahalesi olmadan
+ne ölçüde çalışabiliyor.
+• B ekseni (Bozulabilirlik). ˙Insan, bu otonom işleyişi ne ölçüde, ne hızda
+ve hangi ayrıntı düzeyinde kasıtlı olarak kesebiliyor, değiştirebiliyor ve geri
+alabiliyor.
+Protokolün yönlendirici kuralı şudur: K ekseninde bir seviyeye hak
+kazanmak için B ekseninde aynı seviyenin karşılanmış olması zorun-
+ludur. K ilerlemesi B ilerlemesinin önüne geçtiğinde sistem otonom değil, dene-
+timsizdir.
+Maddeler iki sınıfa ayrılır. [Z] zorunlu maddeyi, [ Ö] önerilen maddeyi
+gösterir. Bir katman, tüm zorunlu maddeleri karşılandığında geçilmiş sayılır.
+Katman 0 — Kapsam, Amaç ve ˙Iptal
+• □ [Z] Otomasyon kapsamındaki her adım, üç sınıftan birine atanmıştır:
+epistemik boşluk, yetki/taahhüt noktası, değer yargısı.
+• □ [Z] Adımların hangilerinin tarihsel bir kısıtın fosili olduğu incelenmiş ve
+iptal listesi üretilmiştir.
+• □ [Z] Her adım için otomasyonun toplam yaşam döngüsü maliyeti ile elle
+yürütme maliyeti karşılaştırılmıştır.
+• □ [Z] Her adım için hata yarıçapı (yanlış icra edilirse etkinin genişliği)
+kaydedilmiştir.
+• □ [Z] Her adım için geri alınabilirlik derecesi kaydedilmiştir: tam tersinir,
+kısmi tersinir, tersinmez.
+• □ [ Ö] Her adım için icra edenin ondan elde ettiği değer (beceri, bağlam,
+sahiplik) değerlendirilmiştir.
+• □ [ Ö] Adımın hangi örgütsel sınırın izi olduğu ve o sınırın hâlâ geçerli olup
+olmadığı sorgulanmıştır.
+Katman 1 — Niyet Yakalama
+• □ [Z] Sistem, amaç, kısıt ve kabul edilebilir sapma payını ayrı alanlar
+olarak temsil eder; niyet tek bir serbest metin dizisine indirgenmemiştir.
+• □ [Z] Niyetin kaynağı kimlik doğrulamalıdır ve kaynağın yetki kapsamı
+tanımlıdır.
+28
+
+-- 28 of 35 --
+
+• □ [Z] Niyet kanalına dışarıdan enjekte edilen içeriğin komut olarak yorum-
+lanmasını engelleyen bir ayrım mekanizması vardır.
+• □ [Z] Sistem, ifade edemediği niyet türlerini açıkça reddeder; sessizce yakın
+bir yorum üretmez.
+• □ [ Ö] Kullanıcının neyi isteyebileceğini keşfetmesini sağlayan bir yetenek
+görünürlüğü mekanizması vardır.
+• □ [ Ö] Uzman kullanıcı için kısa, kesin ve deterministik bir ikinci giriş yolu
+korunmuştur.
+Katman 2 — Belirsizlik ve Ortak Zemin
+• □ [Z] Sistem, niyeti yorumlarken yaptığı varsayımları açıkça listeler.
+• □ [Z] Belirsizlik eşiği aşıldığında sistem varsaymak yerine sorar; eşik yapılandırılabilirdir.
+• □ [Z] Sistem kendi güven derecesini kalibre biçimde raporlar; “yaptım” ile
+“yaptım, şu koşulda emin değilim” ayrımı vardır.
+• □ [ Ö] Tekrarlanan niyetlerden ortak bağlam biriktirilir ve teyit turu maliyeti
+zamanla azalır.
+• □ [ Ö] Dil ve kültür kaynaklı yorum kaymaları için ayrı bir sınama kümesi
+vardır.
+Katman 3 — Plan ve Ara Temsil
+• □ [Z] Niyet ile yürütme arasında, incelenebilir ve saklanabilir bir plan
+nesnesi üretilir.
+• □ [Z] Plan nesnesi deterministiktir; aynı plan aynı koşulda aynı yürütmeyi
+verir.
+• □ [Z] Plan, fizibilite kontrolünden geçirilir; fiziksel veya kaynak kısıtları
+nedeniyle gerçekleştirilemeyecek planlar reddedilir.
+• □ [Z] Plan, kısmi başarı halinde hangi bileşenin gerçekleştiğini ayrıştırılabilir
+kılar.
+• □ [ Ö] Plan, dış bağımlılıklarını açıkça bildirir.
+Katman 4 — Yetki, Taahhüt ve Hakemlik
+• □ [Z] Tersinmez her eylem için açık bir taahhüt noktası tanımlıdır.
+• □ [Z] Tarif edilmemiş durumda artık karar hakkının kimde olduğu yazılıdır.
+• □ [Z] C elişen niyet sahipleri için hakemlik kuralı tanımlıdır ve hakemlik
+kararı kaydedilir.
+29
+
+-- 29 of 35 --
+
+• □ [Z] Her insan onayı kutusunun işlevi sınıflandırılmıştır: gerçek güvenlik
+kontrolü mü, hukuki kalkan mı.
+• □ [Z] Onay verecek kişinin, onay anında karar için gerekli bilgiye ve za-
+mana sahip olduğu doğrulanmıştır.
+• □ [ Ö] Yetki devri süreli ve kapsamlıdır; süresiz genel devir yoktur.
+Katman 5 — Yürütme ve Zaman
+• □ [Z] Her niyetin bir geçerlilik süresi vardır ve süre dolduğunda niyet
+kendiliğinden düşer.
+• □ [Z] Yürütme sırasında koşullar tanımlı eşiğin ötesinde değiştiğinde sis-
+tem durur ve yeniden onay ister.
+• □ [Z] Yürütme sırasında iptal ve revizyon kanalı açıktır; iptal noktaları
+açıkça tasarlanmıştır.
+• □ [Z] Alt seviyede, üst katmandan bağımsız çalışan hızlı ve deterministik
+bir güvenlik döngüsü mevcuttur.
+• □ [Z] Üst katmanla bağlantı koptuğunda sistemin davranışı tanımlıdır ve
+sınanmıştır.
+• □ [ Ö] Uzun süren görevlerde ara durum bildirimleri düzenli aralıklarla
+üretilir.
+Katman 6 — Geri Besleme ve Gözlemlenebilirlik
+• □ [Z] Karar günlüğü tutulur: niyet, bağlam, değerlendirilen alternatifler,
+seçim gerekçesi, güven derecesi.
+• □ [Z] Sessizliğin anlamı tanımlıdır; sistem düzenli canlılık sinyali üretir.
+• □ [Z] Alarm ve kesinti eşikleri tanımlıdır ve operatörün dikkat bütçesine
+göre boyutlandırılmıştır.
+• □ [Z] Rapor ayrıntısı talep üzerine derinleşebilir; özet ile kanıt arasında
+gezinme mümkündür.
+• □ [Z] Kısmi başarı, başarı olarak raporlanmaz.
+• □ [ Ö] Operatörün durum farkındalığı düzenli olarak ölçülür, yalnızca sis-
+tem çıktısı değil.
+30
+
+-- 30 of 35 --
+
+Katman 7 — Bozulabilirlik ve Devir–Teslim
+Bu katman protokolün ayırt edici bileşenidir. Tam otonomluk iddiası, ancak bu
+katmanın tüm zorunlu maddeleri karşılandığında meşrudur.
+• □ [Z] ˙Insan, otonom işleyişi her an ve tek bir eylemle durdurabilir; dur-
+durma yolu her modda erişilebilirdir.
+• □ [Z] Durdurma çok kademelidir: askıya al, yavaşlat, yalnızca öner, tama-
+men elle geç.
+• □ [Z] Devralma sonrası sistemin durumu insana anlaşılır biçimde sunulur;
+insan boşluğa devralmaz.
+• □ [Z] Devralma gecikmesi ölçülmüş ve görevin gerektirdiği tepki süresinin
+altında olduğu gösterilmiştir.
+• □ [Z] ˙Insan müdahalesi, sistemin planını yalnızca reddetmekle kalmaz,
+tekil adım düzeyinde değiştirebilir.
+• □ [Z] Müdahale kaydı tutulur ve sınıflandırılır: bilgi eksikliği, yetki, tercih,
+hata.
+• □ [Z] Müdahalenin kendisi sistem tarafından cezalandırılmaz veya zorlaştırılmaz;
+müdahale maliyeti düşük tutulur.
+• □ [Z] ˙Insan, sistemin bir eylemi gerçekleştirmesini kalıcı olarak yasaklaya-
+bilir ve bu yasak sistem tarafından geçersiz kılınamaz.
+• □ [ Ö] Müdahale sonrası sistem, hangi varsayımının yanlış olduğuna dair
+geri besleme alır.
+Katman 8 — Doğrulama ve Güvenlik Zarfı
+• □ [Z] Sistem için “asla yapmamalı” biçiminde ifade edilmiş değişmezler
+tanımlanmıştır.
+• □ [Z] Bu değişmezleri çalışma zamanında denetleyen bağımsız bir izleyici
+katman vardır.
+• □ [Z] ˙Izleyici katman, denetlediği katmandan yapısal olarak daha basittir
+ve ayrı doğrulanmıştır.
+• □ [Z] Olasılıklı bileşenin etkisi plan nesnesiyle sınırlanmıştır; yürütme kat-
+manı deterministiktir.
+• □ [ Ö] Karşıt senaryolar ve kenar vakalar için düzenli olarak yürütülen bir
+sınama kümesi vardır.
+31
+
+-- 31 of 35 --
+
+Katman 9 — C oklu Aktör ve Etkileşim
+• □ [Z] Sistemin ürettiği ve başka otonom aktörlerin gözlemleyebileceği
+sinyaller listelenmiştir.
+• □ [Z] Otonom aktörler arası geri besleme döngülerinin periyodu insan
+müdahale süresiyle karşılaştırılmıştır.
+• □ [Z] Eskalasyon veya salınım belirtisi tespit edildiğinde otomatik yavaşlatma
+mekanizması vardır.
+• □ [ Ö] Davranışta öngörülemezlik gerektiren bağlamlar için kasıtlı değişkenlik
+tanımlanmıştır.
+• □ [ Ö] Aynı modele bağlı korelasyonlu hata riski değerlendirilmiş, kritik
+yollarda çeşitlilik korunmuştur.
+Katman 10 — Sürdürülebilirlik ve Zaman ˙Içinde Bozulma
+• □ [Z] Görev ontolojisinin gerçeklikle uyumsuzlaştığını tespit eden bir mekanizma
+vardır.
+• □ [Z] Küçük ve rutin operatör düzeltmeleri kayıt altına alınır; sapmanın
+normalleşmesi izlenir.
+• □ [Z] Elle yürütme kapasitesi belirli bir süre boyunca korunur ve düzenli
+tatbikatla sınanır.
+• □ [Z] Yeni uzman yetiştirme yolu tanımlıdır; hangi adımların eğitim amacıyla
+manuel bırakıldığı yazılıdır.
+• □ [Z] Dış bağımlılıkların değişmesi halinde geri dönüş planı vardır.
+• □ [ Ö] Geçiş döneminde çift yürütmenin maliyeti bütçelenmiştir.
+• □ [ Ö] Sistem arkasındaki görünmez insan emeği ölçülür ve otomasyon
+oranı hesabına dahil edilir.
+32
+
+-- 32 of 35 --
+
+Ölçüm C erçevesi
+Kapsama Eksenine ˙Ilişkin Metrikler
+• Görev başına insan müdahalesi sayısı.
+• Müdahaleler arası ortalama süre veya iş hacmi.
+• Müdahale sınıf dağılımı: bilgi eksikliği, yetki, tercih, hata.
+• Otomatik tamamlanan görev oranı ile insan düzeltmesiyle tamamlanan
+görev oranı.
+• Kenar vaka kapsama oranı ve marjinal kapsama maliyeti.
+Bozulabilirlik Eksenine ˙Ilişkin Metrikler
+• Durdurma gecikmesi: müdahale kararından sistemin durmasına kadar
+geçen süre.
+• Devralma gecikmesi: devralma anından insanın etkin kontrolü sağlamasına
+kadar geçen süre.
+• Devralma sonrası durum farkındalığı doğruluğu.
+• Müdahale maliyeti: müdahalenin gerektirdiği adım sayısı ve bilişsel yük.
+• Müdahale granülerliği: değiştirilebilen en küçük karar birimi.
+Risk Eksenine ˙Ilişkin Metrikler
+• Ortalama ve azami hata yarıçapı.
+• Tersinmez eylem oranı.
+• Korelasyonlu hata olaylarının sıklığı.
+• Kaydedilmemiş sapma tahmini.
+• Kalibrasyon hatası: sistemin bildirdiği güven ile gerçekleşen doğruluk
+arasındaki fark.
+Seviye Tanımları
+Seviye Kapsama (K) Bozulabilirlik (B)
+0 Tümüyle manuel Uygulanamaz
+1 Sistem önerir, insan yürütür ˙Insan zaten yürütücüdür
+2 Sistem yürütür, insan her adımı onaylar Adım düzeyinde reddetme
+3 Sistem yürütür, insan istisnaları onaylar Eşik ve istisna tanımlama
+4 Sistem yürütür, insan izler Anında durdurma ve devralma
+5 Sistem yürütür, insan yalnızca niyet verir C ok kademeli kesme, kalıcı yasak
+33
+
+-- 33 of 35 --
+
+Seviye iddiası, K ve B değerlerinin çifti olarak bildirilmelidir. K5 fakat B3
+olan bir sistem, seviye 5 otonom değil, denetim açığı bulunan bir sistemdir.
+Protokolün kabul kriteri B ≥ K eşitsizliğidir.
+34
+
+-- 34 of 35 --
+
+Sonuç
+Tartışmanın çıkış tezi, insan dikkatinin mekanik icradan hedef belirlemeye kay-
+ması yönündeki eğilimi doğru tespit etmektedir ve bu eğilim gerçektir. Tezin
+zayıf noktası, bu eğilimi tek boyutlu bir merdiven ve tek hedefli bir optimizasyon
+olarak kurmasıdır: manuel adım oranının sıfıra indirilmesi.
+Belge boyunca gösterildiği üzere, bu formülasyon tıklamaların yalnızca bir
+sınıfı için, yani epistemik boşluk sınıfı için geçerlidir. Yetki noktaları ve değer
+yargıları için aynı formülasyon, sorumluluğu görünmez kılan, doğrulanabilirliği
+düşüren, beceri aktarımını kesen ve geri dönüşü kapatan tersinmez bir karar
+dizisi üretir.
+Buradan çıkan tasarım ilkesi şudur: tam otonomluk meşru bir hedeftir,
+fakat yalnızca bozulabilirlik aynı titizlikle inşa edildiğinde. Sistemin varsayılan
+hali insansız çalışmak olmalı, sınır hali ise insanın her an, düşük maliyetle ve
+ayrıntı düzeyinde araya girebilmesi olmalıdır. Protokolün B ≥ K kuralı bu
+ilkenin operasyonel ifadesidir. Otonomluk, insanın yokluğuyla değil, insanın
+geri dönebilme kapasitesiyle ölçülür.
+35
+
+-- 35 of 35 --

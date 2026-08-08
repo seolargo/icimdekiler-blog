@@ -1,0 +1,196 @@
+Titiz İnceleme İçin Bir Yöntembilim
+Mühendislik Denetim Sorularının Katmanlı Bir İnceleme Kitabına İndirgenmesi
+8 Ağustos 2026
+Özet
+Bu belge, teknik ürünlerin (kod, hesap, tasarım belgesi) incelenmesinde kullanılan çok sayıda
+denetim sorusunu tek bir kavramsal çerçeveye indirger. Temel iddia şudur: inceleme kalitesi,
+sorulan soruların sayısıyla değil, dikkatin doğru yere yığılmasıyla belirlenir. Literatürde ve
+pratikte dolaşan onlarca soru, birbirinden bağımsız teknikler değil; on iki temel kalite ekseninin
+farklı ifadeleridir. Belge bu eksenleri tanımlar, her ekseni tehlike düzeyine göre katmanlar ve
+incelemenin ne zaman derinleştirileceğini belirleyen bir tetikleme kuralı önerir. Son bölümde,
+aynı çerçevenin büyük dil modellerine (LLM) inceleme yaptırırken nasıl uygulanacağı ele
+alınır.
+İçindekiler
+1 Motivasyon ve Temel İlke 1
+2 On İki Kalite Ekseni 2
+3 Tehlikeye Göre Katmanlama 3
+4 Tetikleme Kuralı 3
+5 Uygulama: Bağımsız Doğrulama ve Kanıt 4
+6 Çerçevenin Dil Modellerine Uygulanması 4
+7 Ek: Katmanlı İnceleme Kontrol Listesi 4
+Kaynakların Kavramsal Kökeni 5
+1 Motivasyon ve Temel İlke
+Mühendislik kalitesi üzerine sıkça anlatılan bir anekdot vardır: kıdemli birden çok mühendisin
+onayından geçen seksen sayfalık bir termal analizde, en tepedeki kişi 34. sayfadaki tek bir hatalı
+varsayımı — kararlı durum kabulünün geçici bir çalışma döngüsüne yanlış uygulanmasını —
+yakalar. Bu hikâye genellikle bir kahramanlık anlatısı olarak sunulur. Oysa mühendislik açısından
+asıl dersi bir sistem başarısızlığıdır: üç bağımsız inceleme, belgede yazılı olmayan bir varsayımı
+görememiştir.
+Bu belgenin çıkış noktası şu gözlemdir:
+En pahalı hatalar, incelemecinin “gördü” sandığı ama aslında beklentisine dayanarak
+“tahmin ettiği” yerlerde saklanır.
+1
+
+-- 1 of 5 --
+
+Hem insan incelemeciler hem de dil modelleri metni bütünsel (gestalt) olarak okur: tanıdık
+bir kalıp görüldüğünde, ayrıntı çoğu zaman okunmaz, kalıba göre tahmin edilir. Titiz inceleme,
+bu bilişsel kestirmeyi kırmayı hedefler. Bunun iki temel mekanizması vardır:
+1. Örtük olanı dışa vurmak. Zihinde sessizce kabul edilen varsayımları, sınırları ve gerekçeleri
+açık metne dönüştürmek. Yazıya dökülmeyen varsayım denetlenemez, çünkü görünmez.
+2. Hasım gözüyle bakmak. İncelenen nesneyi onaylamak için değil, çürütmek için okumak.
+Nötr “incele” talimatı, incelemeciyi fazla iyi niyetli okumaya iter.
+Bu belgedeki tüm eksenler ve sorular, nihayetinde bu iki mekanizmanın uygulamalarıdır.
+2 On İki Kalite Ekseni
+Pratikte kullanılan denetim sorularının neredeyse tamamı aşağıdaki on iki eksenin kombinasyon-
+larından türetilebilir. Eksenler, sordukları temel soruyla birlikte verilmiştir.
+1. Doğruluk (Correctness) Belirtilen davranışı gerçekten üretiyor mu? Hesap, mantık ve
+birimler tutarlı mı?
+2. Tamlık (Completeness) Olması gerekip de olmayan ne var? Atlanan durum, ele alınmayan
+hata yolu, eksik gereksinim.
+3. Tutarlılık (Consistency) Belgenin/kodun bir yeri başka bir yeriyle çelişiyor mu? İç çelişkiler
+ve isim/kavram kaymaları.
+4. Varsayımlar (Assumptions) Hangi koşullar sessizce doğru kabul edilmiş? (örn. ağ her
+zaman erişilebilir, saat geri gitmez, girdi UTF-8.)
+5. Sınırlar (Boundaries) Uç ve dejenere girdilerde ne olur? (0, 1, −1, boş, tekil, çok büyük,
+taşma.)
+6. Değişmezler (Invariants) Sistemin asla ihlal edilmemesi gereken kuralları neler ve nerede
+korunuyor? (örn. para yaratılamaz/yok edilemez, kimlik iki kez üretilemez.)
+7. Dayanıklılık (Resilience) Bir bağımlılık çökerse ne olur? Zaman aşımı, 503, disk/bellek
+tükenmesi, kısmi başarısızlık.
+8. Eşzamanlılık ve Sıra (Concurrency & Ordering) Adımların sırası değişirse ne olur? Ya-
+rış koşulları, tek hata noktaları, atomik olmayan işlemler.
+9. Gözlemlenebilirlik (Observability) Yarın bir hata olduğunda anlaşılabilir mi? Hangi met-
+rikler ölçülüyor, hangi olaylar loglanıyor?
+10. Geri Alınabilirlik (Reversibility) Karar/değişiklik geri alınabilir mi? Hangi kararlar geri
+döndürülemez ve bu nedenle daha yüksek kanıt gerektirir?
+11. Bakım Yapılabilirlik ve Basitlik (Maintainability & Simplicity) Beş yıl sonra kimin,
+hangi maliyetle sürdüreceği. Gizli karmaşıklık, erken/yanlış soyutlama, ölü kod.
+12. İnsan Faktörü (Human Factors) Tasarım, kullanıcıyı/geliştiriciyi hata yapmaya teşvik
+ediyor mu? Yanlış kullanımı kolay arayüzler, aşırı parametre, yanıltıcı isimler.
+Bu on iki eksene ek olarak, tüm inceleme sürecini kapsayan bir meta-eksen bulunur — Kanıt
+ve Doğrulama (Evidence & Verification): her tespit bir alıntıyla veya çalıştırılabilir bir
+karşı örnekle desteklenmeli; her öneri bir gerekçeyle (“neden?”) savunulabilmelidir. Bu meta-eksen,
+incelemenin kendisini incelemeye tabi tutar.
+2
+
+-- 2 of 5 --
+
+3 Tehlikeye Göre Katmanlama
+Bütün eksenler her incelemede eşit ağırlık taşımaz. Bir değişmez ihlali sistemi patlatabilirken,
+tutarsız bir isim yalnızca okunabilirliği düşürür. Aşağıdaki sınıflandırma, eksenleri başarısızlığın
+maliyetine göre üç katmana ayırır. Amaç, sınırlı dikkati en yüksek getirili yere yığmaktır.
+Katman Eksenler Gerekçe
+K1 — Kritik Doğruluk, Değişmezler,
+Varsayımlar, Dayanıklılık,
+Eşzamanlılık
+İhlali geri döndürülemez veya yüksek maliyetli
+sonuç (veri/para kaybı, güvenlik açığı, donanım
+hasarı) doğurur. Her ciddi incelemede zorunlu.
+K2 — Önemli Tamlık, Sınırlar, Gözlemle-
+nebilirlik, Geri Alınabilirlik
+İhlali genellikle onarılabilir ama operasyonel yük
+yaratır; teşhis ve kurtarma kabiliyetini belirler.
+K3 — Nitelik Tutarlılık, Bakım/Basitlik,
+İnsan Faktörü
+Uzun vadeli maliyet ve okunabilirlik. Önemlidir
+ama acil başarısızlık üretmez; düşük riskli değişik-
+liklerde ertelenebilir.
+Bu katmanlama mutlak değildir; bağlama göre bir eksen katman değiştirebilir. Örneğin bir
+kütüphane API’sinde İnsan Faktörü (yanlış kullanım kolaylığı) pekâlâ K1’e yükselebilir.
+4 Tetikleme Kuralı
+Elli maddelik bir kontrol listesini her değişiklikte uygulamak pratikte sürdürülemez; sonuçta
+ya inceleme yapılmaz ya da mekanik biçimde yapılıp değersizleşir. Bu nedenle asıl mühendislik
+kararı, incelemenin derinliğini nesnenin tehlikesine göre ayarlamaktır. Aşağıdaki kural bunu üç
+değişkenle belirler:
+Tehlike Skoru = f( Geri Alınabilirlik, Etki Yarıçapı, Maruziyet )
+• Geri Alınabilirlik: Hata fark edilince kolayca geri alınabiliyor mu, yoksa kalıcı mı? (örn.
+bir migration ile veritabanı şeması değişikliği — düşük geri alınabilirlik.)
+• Etki Yarıçapı: Başarısızlık kaç kullanıcıyı / bileşeni etkiler? Tek bir ekranı mı, tüm ödeme
+hattını mı?
+• Maruziyet: Değer riski var mı? Para, kişisel veri, güvenlik, can, yasal yükümlülük.
+Buna göre uygulanacak inceleme derinliği:
+Tehlike Uygulanacak kat-
+man
+Ek gereklilik
+Düşük K1’den 3–4 çekirdek
+soru
+Alıntı zorunluluğu.
+Orta K1 + K2 Alıntı + varsayım listesi.
+Yüksek K1 + K2 + K3 (tam
+liste)
+Alıntı + bağımsız ikinci geçiş + çalıştırılabilir doğ-
+rulama.
+İlke: ucuz ve geri alınabilir kararlarda hız, pahalı ve geri döndürülemez kararlarda titizlik öncelik-
+lidir. Tehlike skoru yükseldikçe incelemeye harcanan çabanın süper-lineer artması beklenir.
+3
+
+-- 3 of 5 --
+
+5 Uygulama: Bağımsız Doğrulama ve Kanıt
+Kritik incelemelerde tek bir okuma yeterli değildir; çünkü aynı incelemeci (veya aynı model) kendi
+kör noktasını tekrar eder. İki tamamlayıcı teknik önerilir:
+Bağımsız ikinci geçiş. İnceleme nesnesinin sonucunu, ona hiç bakmadan sıfırdan yeniden
+üretmek ve iki sonucu karşılaştırmak. Ayrışan her nokta, paylaşılan gizli bir varsayıma işaret eder.
+Bu, anekdottaki başarısızlığın çözümüdür: üç incelemeci aynı belgeyi okumuş, kimse işi bağımsız
+olarak yeniden yapmamıştır.
+Çalıştırılabilir kanıt. Mümkün olduğunda okumaya değil yürütmeye güvenmek. Bir kod
+incelemesinde, “burada sorun olabilir” ifadesi yerine sistemi çökerten somut bir girdi üretmek çok
+daha kesindir. Okuma kandırılabilir; geçmeyen bir test geçmez.
+6 Çerçevenin Dil Modellerine Uygulanması
+Aynı ilkeler, bir dil modeline inceleme yaptırırken de geçerlidir; çünkü model de metni beklentiyle
+okur ve tanıdık kalıplarda ayrıntıyı kaçırabilir. Etkili yönlendirme ilkeleri şunlardır:
+• Göreve dök, sıfata değil. “Dikkatlice incele” yerine mekanik, tek tek yapılabilir eylemler
+verin (örn. “her fonksiyonun girdi tipini imzasıyla karşılaştır”).
+• Önce çıkar, sonra yargıla. Tarama ve değerlendirmeyi iki ayrı adıma bölün: önce tüm
+varsayımları yorumsuz listeletin, ardından her birini tek tek sınayın.
+• Alıntı zorunlu kılın. Her tespitin ilgili satırı/cümleyi birebir alıntılaması istendiğinde,
+“tahmin edip geçme” yolu kapanır.
+• Hasım rolü verin. Nötr inceleme yerine “bunu reddetmen gerekiyor, gerekçe bul” türü bir
+çerçeveleme, aşırı iyi niyetli okumayı azaltır.
+• Parçalayın. Çok uzun girdilerde orta bölüm dikkati zayıflar (lost in the middle); kritik
+bölümü ayrı ve tek başına verin.
+• Yapılandırılmış çıktı ve güven puanı. Her bulguyu (satır | sorun | kanıt | önem | güven)
+sütunlarıyla tabloya zorlamak, atlanacak alanları görünür kılar; düşük güven puanları
+öncelikli doğrulama noktalarını işaretler.
+Uyarı. Kota koyan yönlendirmeler (“en az N hata bul”) modeli yok yere sorun uydurmaya itebilir.
+Bu nedenle çıktı, “her tespit kanıtlı mı?” süzgecinden geçirilmelidir. Hiçbir yönlendirme, yüksek
+maruziyetli işlerde insan veya test doğrulamasının yerini tutmaz.
+7 Ek: Katmanlı İnceleme Kontrol Listesi
+Aşağıdaki liste, yukarıdaki eksenlerin doğrudan uygulanabilir sorulara dönüştürülmüş hâlidir.
+Tetikleme kuralına göre uygun katmana kadar uygulanır.
+K1 — Kritik (her ciddi incelemede)
+1. Hesap/mantık doğru mu; birimler ve büyüklük mertebeleri tutuyor mu?
+2. Burada sessizce doğru kabul edilen varsayımlar neler? Her biri yanlış olsaydı sonuç nasıl
+değişirdi?
+3. Sistemin ihlal edilmemesi gereken değişmezleri neler ve nerede korunuyor?
+4
+
+-- 4 of 5 --
+
+4. Bir bağımlılık (veritabanı, ağ, disk, bellek) çökerse ne olur?
+5. Adımların sırası değişirse (yarış koşulu) sonuç bozulur mu? Tek hata noktası var mı?
+K2 — Önemli (orta ve yüksek tehlikede)
+6. Olması gerekip de olmayan ne var? (Atlama / eksiklik.)
+7. Uç ve dejenere girdilerde (0, boş, tekil, çok büyük, taşma) davranış nedir?
+8. Yarın bir hata olduğunda anlaşılabilir mi? Hangi metrik ve loglar gerekli?
+9. Bu değişiklik nasıl geri alınır? Hangi kararlar geri döndürülemez?
+K3 — Nitelik (yüksek tehlikede / tam inceleme)
+10. İç çelişki veya isim/kavram kayması var mı?
+11. En karmaşık bölüm hangisi ve bu karmaşıklık zorunlu mu? Ölü kod var mı?
+12. Tasarım, kullanıcıyı/geliştiriciyi hata yapmaya teşvik ediyor mu? (Yanlış kullanımı kolay
+mı?)
+Meta (tüm katmanlar için)
+13. Her tespit bir alıntı veya çalıştırılabilir karşı örnekle destekleniyor mu?
+14. Bu inceleme neyi kapsamadı? (örn. performans, güvenlik, dağıtım.)
+15. Sonucu bağımsız bir ikinci geçişle doğruladım mı?
+Kaynakların Kavramsal Kökeni
+Buradaki sorular tekil “ipuçları” değil, yerleşik mühendislik disiplinlerinin yansımalarıdır: Hata
+Türü ve Etkileri Analizi (FMEA), tehlike analizi ve emniyet mühendisliği, güvenilirlik mühendisliği,
+biçimsel Fagan denetimleri (formal inspection), kök neden analizi, ön-mortem (pre-mortem),
+doğrulama ve geçerleme (V&V) ile kaos mühendisliği. Ortak çekirdek, birkaç kalite ekseni etrafında
+sistematik ve kanıt-temelli bir sorgulamadır. Bu nedenle bu sorular geçici tekniklerden değil, kalıcı
+yöntembilimden gelir.
+5
+
+-- 5 of 5 --

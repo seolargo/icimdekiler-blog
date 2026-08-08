@@ -1,0 +1,568 @@
+˙Isveç Özelinde Teknolojik Uzmanlaşma: Kabiliyet
+Birikimi ve Sistem C özümlemesi Üzerine Bir
+˙Inceleme
+Ömer Faruk Yavuz
+August 2026
+Problemin Ortaya Konulması
+Bu inceleme, karşılaştırmalı sanayi tarihinde sıklıkla gözlemlenen ancak nadi-
+ren tatmin edici biçimde açıklanan bir olguyu konu edinmektedir: nüfus ve
+yüzölçümü bakımından sınırlı kalan bazı devletlerin, birbirinden nitelik olarak
+belirgin biçimde ayrışan alanlarda eşzamanlı olarak yüksek teknolojik yetkinlik
+sergilemesi.
+˙Incelemenin çıkış noktası ˙Isveç örneğidir. Yaklaşık on milyon nüfuslu bu
+ülkenin telekomünikasyon, otomotiv, savunma havacılığı, hassas makine imalatı,
+perakende lojistiği ve tüketici yazılımı gibi birbiriyle doğrudan ilişkili olmayan
+alanlarda küresel ölçekte aktörler çıkarmış olması, tarafsızlık politikası veya
+savunma zorunluluğu gibi tekil nedenlerle açıklanamamaktadır. Söz konusu
+çıktıların önemli bir bölümü, ayrıca, yakın dönemin değil on dokuzuncu yüzyıl
+sonunun ürünüdür; bu durum güncel politika tercihlerine dayalı açıklamaların
+yetersizliğini ayrıca göstermektedir.
+˙Inceleme üç düzeyde ilerlemektedir: tarihsel açıklama düzeyi, kavramsal
+çerçeve düzeyi ve yöntem eleştirisi düzeyi. Son düzey özellikle önem taşımaktadır;
+zira tartışma boyunca üretilen açıklayıcı kavramların önemli bir bölümünün
+sınanabilirlik ölçütünü karşılamadığı tespit edilmiştir.
+Birinci Açıklama C erçevesi ve Yetersizlikleri
+˙Ilk Formülasyon
+˙Isveç örneğine ilişkin olarak öncelikle şu unsurlar öne sürülmüştür:
+• Kaynakların tüketimden ziyade üretim kapasitesine yönlendirilmesi suretiyle
+gerçekleşen erken sanayileşme.
+• ˙Iç pazarın sınırlılığı nedeniyle işletmelerin kuruluş aşamasından itibaren
+uluslararası rekabet koşullarına göre konumlanma zorunluluğu.
+• Devletin doğrudan üretici rol üstlenmek yerine araştırma-geliştirme faaliyet-
+lerini, yükseköğretim kurumlarını ve uzun vadeli projeleri desteklemesi.
+1
+
+-- 1 of 15 --
+
+• Tekil ürün geliştirme yerine teknoloji platformu geliştirme yönelimi. Bu
+bağlamda SKF’nin rulman değil hassas üretim teknolojisi, Ericsson’un
+santral değil haberleşme teknolojisi, Saab’ın uçak değil sistem entegrasy-
+onu kabiliyeti geliştirdiği ileri sürülmüştür.
+• Mühendislik mesleğinin toplumsal statüsü ve teknik derinliğin yönetsel
+kariyer karşısında değer kaybetmemesi.
+C erçeveye Yöneltilen Eleştiriler
+˙Incelemenin ilerleyen aşamalarında yukarıdaki çerçevenin ciddi metodolojik ve
+olgusal sorunlar taşıdığı saptanmıştır.
+Hayatta kalanların yanlılığı. C erçeve yalnızca ayakta kalan örnekler
+üzerine kurulmuştur. Oysa Saab Automobile iflas etmiş, Volvo’nun binek oto-
+mobil bölümü Geely’ye devredilmiş, Ericsson mobil telefon pazarından tamamen
+çekilmiş, Northvolt 2025 yılında iflas etmiştir. Bir açıklama çerçevesinin geçerli
+sayılabilmesi için başarısız vakaları da kapsaması gerekir.
+Sermaye yapısının ihmali. Söz konusu şirketlerin önemli bir bölümü
+Wallenberg ailesinin Investor AB aracılığıyla yürüttüğü yoğunlaşmış mülkiyet
+yapısı altında bulunmaktadır. C ift sınıflı hisse düzeni, sınırlı sermaye ile uzun
+vadeli kontrolü mümkün kılmakta ve şirketleri kısa vadeli piyasa baskısından
+yalıtmaktadır. Bu mekanizma, kültürel açıklamalardan hem daha somut hem
+de daha izlenebilirdir.
+Kaynak anlatısının hatalı kurulması. ˙Isveç’in doğal kaynak yoksunluğu
+nedeniyle mühendisliğe yöneldiği iddiası olgusal olarak yanlıştır. Ülke demir
+cevheri, hidroelektrik potansiyel ve orman varlığı bakımından zengindir. Nitekim
+Kiruna cevheri olmaksızın SKF ve Sandvik geleneğinin ortaya çıkması güçtür.
+Konjonktürel etkenin göz ardı edilmesi. ˙Iki dünya savaşına taraf ol-
+mamak, 1945–1970 döneminde Avrupa sanayisinin büyük ölçüde tahrip olduğu
+koşullarda ˙Isveç’e rakipsiz bir talep penceresi sağlamıştır. Bu husus kabiliyet
+birikiminin değil tarihsel konjonktürün sonucudur ve ayrıştırılması gerekir.
+Kategori karışıklığı. IKEA bir lojistik ve perakende yeniliği, Spotify bir
+lisanslama ve kullanıcı deneyimi girişimi, Gripen ise bir sistem entegrasyonu
+ürünüdür. Bu üç çıktının tek bir mühendislik kültürü açıklamasına indirgen-
+mesi, açıklamanın ayırt edici gücünü zayıflatmaktadır.
+˙Isveç Sanayileşmesinin Tarihsel Temelleri
+Madencilik ve Kimya Geleneği
+˙Isveç sanayileşmesi hazır bir teknik taban üzerine oturmuştur. Falun bakır
+madeni ve demir madenciliği ortaçağa uzanmakta olup, madencilik on yedinci
+yüzyıldan itibaren merkezı bir devlet meselesi olarak ele alınmış ve Bergskol-
+legium (Maden Kurulu) bu amaçla kurulmuştur. On sekizinci yüzyılda Uppsala
+merkezli kimya geleneği (Scheele, Bergman, Berzelius) dönemin en ileri düzeyine
+ulaşmıştır. Dolayısıyla on dokuzuncu yüzyıl sanayileşmesi, metalurji ve analitik
+kimyada iki yüzyıllık birikimin üzerine inşa edilmiştir.
+2
+
+-- 2 of 15 --
+
+Kısıtın Yön Belirleyici Etkisi
+Kömür kaynağının bulunmaması, ˙Ingiltere ve Almanya’da izlenen kömür-buhar-
+kütlesel üretim güzergâhını kapatmıştır. Buna karşılık hidroelektrik potansiyel
+ve düşük fosforlu yüksek kaliteli cevher, hacim yerine kaliteye ve erken elektri-
+fikasyona dayalı bir güzergâhı mümkün kılmıştır. ASEA bu tercihin kurumsal
+ürünüdür.
+Patent Merkezli Sirket Kuruluş Modeli
+1870–1910 dönemindeki kuruluş dalgasının ortak yapısal kalıbı, somut bir teknik
+problemin çözülmesi, çözümün patentlenmesi ve şirketin doğrudan bu patent
+etrafında kurulmasıdır.
+• Gustaf de Laval, santrifüjlü ayırıcı, Alfa Laval.
+• Sven Wingquist, kendinden hizalamalı bilyalı rulman, SKF.
+• Jonas Wenström, üç fazlı sistem, ASEA.
+• Lars Magnus Ericsson, telefon teknolojisi, Ericsson.
+• Ruben Rausing, aseptik ambalaj, Tetra Pak.
+Bu kalıbı besleyen kurumsal altyapı 1834 tarihli patent düzenlemesi ile 1827’de
+kurulan KTH ve 1829’da kurulan Chalmers’tır. Teknik yükseköğretim ku-
+rumlarının sanayi kuruluşlarından önce tesis edilmiş olması, kurumsal sıralama
+açısından dikkate değerdir.
+Finansman Modeli
+Stockholms Enskilda Bank (1856) Alman evrensel bankacılık modelini ben-
+imsemiş; krediyi hisseye dönüştürerek yönetim kurulunda yer almış, teknik
+yönetimi ise mühendislere bırakmıştır. Bu yapı, Ericsson’un 1990’lardaki krizi
+ve ABB’nin 2002’deki asbest davaları döneminde kurumsal sürekliliği sağlamıştır.
+Ancak yapının maliyeti de kaydedilmelidir: yoğunlaşmış oy hakkı hesap vere-
+bilirliği zayıflatmakta ve yetersiz mülkiyetin değiştirilmesini güçleştirmektedir.
+Emek Rejimi
+1938 tarihli Saltsjöbaden Anlaşması, işçi-işveren pazarlığını devlet dışında ku-
+rumsallaştırmıştır. Bunu izleyen Rehn–Meidner modeli, sektör genelinde eşit
+ücret ilkesi yoluyla verimsiz firmanın piyasadan çıkmasına izin verirken çalışanı
+korumuştur. Bu düzenleme, firma koruyucu modellere kıyasla yeniden yapılanma
+direncini azaltmıştır.
+3
+
+-- 3 of 15 --
+
+1992 Krizi ve Kurumsal Düzeltme
+Mevcut yapı yalnızca sürekliliğin değil, kriz sonrası düzeltmenin de ürünüdür.
+1992 bankacılık ve döviz krizini izleyen dönemde mali kural, merkez bankası
+bağımsızlığı, emeklilik reformu ve telekomünikasyon serbestleşmesi gerçekleştirilmiştir.
+Sonraki dönemde ortaya çıkan yazılım girişimlerini mümkün kılan altyapı bu
+dönemin ürünüdür.
+Karşılaştırmalı C erçeve
+Sınıflandırma Denemesi
+Nüfus ölçeğine oranla yüksek teknolojik ağırlık taşıyan devletler şu şekilde gru-
+plandırılabilir: birinci halkada ˙Israil, ˙Isveç, ˙Isviçre ve Singapur; ikinci halkada
+Finlandiya, Danimarka, Hollanda, Tayvan ve Estonya; ayrı bir model olarak ise
+Güney Kore.
+Finlandiya Karşılaştırması
+Finlandiya örneği, nitelikli eğitim sisteminin tek başına küresel teknolojik güç
+üretmediğini göstermektedir. Eksik olan unsurlar sanayi ölçeği, sermaye birikimi,
+büyük şirket ağı ve stratejik önceliklendirmedir. Ülkenin güçlü olduğu alanlar
+görece dar nişlerdir: telekomünikasyon, oyun sektörü, orman ürünleri, buz kıran
+gemi inşası. Buradan çıkan sonuç, ˙Isveç–Finlandiya farkının eğitim sisteminde
+değil sanayi stratejisinde konumlandığıdır.
+Sınanmamış Karşı Vaka
+Danimarka, Belçika ve Avusturya benzer coğrafya, refah düzeyi ve eğitim niteliğine
+sahip olmalarına rağmen belirgin biçimde farklı sanayi profilleri geliştirmiştir.
+Bu farklılık inceleme boyunca açıklanamamıştır. Bir açıklamanın gücü kendi
+örneğini açıklamasında değil, benzer koşullardaki farklı sonuçları da kapsamasında
+ölçüldüğünden, ˙Isveç açıklaması bu haliyle sınanmamış sayılmalıdır.
+Mühendislik Refleksi Tezi
+Tezin ˙Ifadesi
+Ülkeler arasındaki farkın bilgi düzeyinde değil, problemi çerçeveleme refleksinde
+bulunduğu ileri sürülmüştür. Bu çerçevede ˙Isveç’in sistem ömrü, ˙Isviçre’nin
+ölçüm hassasiyeti, ˙Israil’in ise saldırıya dayanıklılık sorusundan hareket ettiği
+belirtilmiştir.
+Tezin Eleştirisi
+Birim hatası. Söz konusu refleks ulusal değil sektörel niteliktedir. Uzun
+ömürlü sermaye malı projelerinde çalışan bir mühendis, milliyetinden bağımsız
+olarak sistem ömrü refleksini geliştirir. Buna karşılık aynı refleks Stockholm
+4
+
+-- 4 of 15 --
+
+merkezli bir oyun stüdyosunda gözlenmez. Refleksin kaynağı ülke değil, tekrar-
+lanan proje tipidir. Bu düzeltmenin pratik sonucu önemlidir: refleks edinmek
+için belirli bir ulusa mensup olmak değil, belirli bir proje tipinde yeterince uzun
+kalmak gerekir.
+Sınanabilirlik sorunu. Ülke ile nitelik arasında kurulan eşleştirmeler sonuçtan
+geriye doğru üretilmiş etiketler niteliğindedir ve yanlışlanabilir değildir.
+Nedensellik yönü. ˙Isviçre hassasiyet kültürüne sahip olduğu için saat
+üretmemiş; dar toleranslı seri üretim yapmak durumunda kaldığı için hassaslaşmıştır.
+Refleks kültürden değil işten doğmaktadır.
+Refleksin çift yönlülüğü. Her refleks aynı anda bir kör noktadır. ˙Isviçre’nin
+mekanik hassasiyet refleksi quartz teknolojisine geçişi geciktirmiş; ˙Isveç’in uzun
+ömür refleksi hızlı döngülü tüketici donanımında dezavantaja dönüşmüştür.
+Devlet Aklı Kavramının C özümlenmesi
+Tanım
+Kavram, kısa vadeli maliyet ile uzun vadeli yetenek arasındaki çatışmada ikin-
+cisini tercih eden kararın kurumsal olarak tekrarlanabilir hale gelmesi biçiminde
+tanımlanabilir. ˙Iktisadi karşılığı opsiyon satın alınmasıdır: ödenen fark ürün
+bedeli değil, gelecekte seçenek sahibi olma primidir.
+Bileşenler
+• Tercih: Dışarıdan daha düşük maliyetle temin edilebilecek işin, kabiliyetin
+yitirilmemesi amacıyla içeride sürdürülmesi.
+• Yalıtım: Kararı seçim döngüsünden ve dönemsel finansal baskıdan ko-
+ruyan kurumsal mimari.
+• Süreklilik: ˙Işin fiilen ve kesintisiz olarak yapılmaya devam edilmesi.
+Kavramın Zayıflıkları
+Özne sorunu. Devlet tekil bir karar verici değildir. Kabiliyet tercihleri, be-
+lirli bir koalisyonun yeterince uzun süre etkin kalmasının sonucudur. Koalisyon
+dağıldığında söz konusu yönelim de sona ermektedir; Britanya havacılık sanayisi
+bu sürecin örneğidir.
+Sınanabilirlik sorunu. Kavram başarılı vakalarda varlığı, başarısız vakalarda
+yokluğu varsayılarak kullanıldığından döngüseldir.
+Normatif nötrlük varsayımının geçersizliği. Aynı uzun vadeli planlama
+kapasitesi, toplumsal alanda da uygulanabilmektedir. ˙Isveç’te 1922’de kurulan
+ırk biyolojisi enstitüsü ve 1935–1975 döneminde uygulanan kısırlaştırma pro-
+gramı, aynı planlama zihniyetinin insana yöneltilmiş biçimidir. Ayrıca tarafsızlık
+politikası döneminde Almanya’ya demir cevheri satışı ve askerı transit izni ver-
+ilmesi, kavramın ahlaki olarak nötr sayılamayacağını göstermektedir.
+5
+
+-- 5 of 15 --
+
+Önerilen Ölçüt
+Niyet beyanına değil davranışa dayalı tek ölçüt şudur: daha düşük maliyetli
+alternatif mevcutken üretimin kaç yıl kesintisiz olarak içeride sürdürüldüğü.
+Vaka Kümesi
+Olumlu vakalar arasında Tayvan’ın ITRI–TSMC güzergâhı, Singapur’un su bağımsızlığı
+programı, Fransa’nın nükleer programının ilk evresi, Kore’nin POSCO deney-
+imi, Norveç’in açık deniz mühendisliği ve Danimarka’nın rüzgâr enerjisi yönelimi
+sayılabilir.
+Olumsuz vakalar ise Concorde, Britanya havacılık sanayisi, Hindistan’ın Te-
+jas programı, Arjantin havacılığı ve Northvolt’tur.
+Olumlu vakaların ortak imzası üç unsurdan oluşmaktadır: varoluşsal nite-
+likte bir tehdit algısı, seçim döngüsünden yalıtılmış karar kurumu ve kesintisiz
+üretim akışı. Bu bulgu, kabiliyet tercihinin genellikle vizyondan değil zorunlu-
+luktan doğduğunu göstermektedir.
+Fransa Vakası: Kabiliyet Erozyonu
+Fransa’nın mühendislik kapasitesini yitirdiği yönündeki genel kanı düzeltilmelidir.
+Airbus, Safran, Dassault, Ariane, Alstom, Thales ve Schneider Electric halen
+dünya ölçeğinde konumdadır.
+Buna karşılık üç alanda belirgin kayıp mevcuttur:
+• Nükleer enerji. 1990’lardan sonra yeni santral siparişinin kesilmesiyle
+tedarikçi zinciri, nitelikli kaynakçı ve kalite denetim kadrosu dağılmıştır.
+Flamanville 3 projesi ciddi gecikme ve maliyet aşımı yaşamış, Areva mali
+başarısızlık sonrası yeniden yapılandırılmıştır.
+• Bilişim. Minitel’in kurulu üstünlüğü, internete geçişte yol bağımlılığı
+yaratarak gecikmeye yol açmıştır.
+• Otomotiv. Orta segmentte konumlanma güçlüğü ve üretimin yurt dışına
+kayması.
+Yapısal nedenler arasında devlet-şampiyon modelinin orta ölçekli ihracatçı
+taban yoksunluğu, ortak para birimine geçişle devalüasyon aracının kaybı ve
+grande ´ecole sisteminin en nitelikli mühendisleri teknik faaliyetten yönetsel kon-
+umlara yönlendirmesi sayılabilir. Son husus, ˙Isveç modelinin tersine bir örnek
+oluşturmakta ve elit yetiştirmenin tek başına kabiliyet güvencesi sağlamadığını
+göstermektedir.
+Vakadan çıkan temel önerme şudur: kabiliyet bir stok değil, akıştır.
+˙Isviçre Vakası: Hassasiyet ve Ölçüm
+Hassas üretim ile ölçüm cihazı üretimi ayrı yetenekler olmayıp aynı zorunluluğun
+iki yüzüdür. Ölçüm aracının, üretilen toleranstan bir mertebe daha hassas ol-
+6
+
+-- 6 of 15 --
+
+ması gerekliliği, hassas üretime giren her aktörü kendi ölçüm zincirini kurmaya
+mecbur bırakmakta ve kendini besleyen bir döngü oluşturmaktadır.
+Bu birikimin kurumsal çıktıları arasında Mettler-Toledo, Bruker, Tesa, Studer,
+Mikron ve Maxon ile federal metroloji enstitüsü METAS ve araştırma merkezi
+CSEM sayılabilir. Saatçilik bu birikimin ürünü değil, uygulama alanı ve antren-
+man sahasıdır.
+Modelin sınırları da kaydedilmelidir. 1970’lerdeki quartz krizi, derin ka-
+biliyetin aynı zamanda bir bağ oluşturduğunu göstermiştir; ilgili teknolojinin
+önemli bölümü ˙Isviçre’de geliştirilmiş olmasına rağmen mevcut mekanik birikim
+geçişi geciktirmiştir. Ayrıca hassasiyet kültürü, kütle ve hacim gerektiren alan-
+lara (havacılık, denizaltı, otomotiv) geçişe elverişli değildir.
+Kabiliyet Birikimi Tezi
+˙Ilk Formülasyon
+˙Ileri konumdaki devletlerin, güncel ürünler yerine gelecek onyılların problem-
+lerini çözebilecek insan, kurum ve kültürü inşa ettikleri ileri sürülmüştür.
+Düzeltilmiş Formülasyon
+• Kabiliyet birikimi bir öngörü stratejisi değil, öngörüsüzlüğe karşı sigor-
+tadır. ˙Ilgili aktörler geleceği tahmin edebildikleri için değil, edemeyecek-
+lerini kabul ettikleri için genel amaçlı kapasite tutmaktadır.
+• Kabiliyetin önemli bölümü planlı yatırımın değil, sürdürülen faaliyetin
+tortusudur. Stratejik görünüm büyük ölçüde geriye dönük yorumdan kay-
+naklanmaktadır.
+• Asıl mesele kabiliyet geliştirmek değil, erimesine izin vermemektir. Sat-
+urn V örneği bu hususu göstermektedir: teknik dokümantasyon mevcut
+olmasına rağmen üretim kabiliyeti yitirilmiştir, zira kaybolan çizim değil
+süreç, tedarikçi ve insan birikimidir.
+Nihai formülasyon şu şekilde ifade edilebilir: devletler otuz yıl sonrası için
+kabiliyet geliştirmemekte; otuz yıl boyunca aynı zorlu faaliyeti sürdürdükleri
+için kabiliyet sahibi olmaktadır.
+Bilgi ve Kabiliyet Aktarımı
+Üründen Elde Edilebilenler
+Geometri, malzeme kompozisyonu, tolerans değerleri, birleştirme yöntemi ve
+devre topolojisi.
+7
+
+-- 7 of 15 --
+
+Üründen Elde Edilemeyenler
+• Süreç bilgisi: ˙Işlem sırası, sıcaklık rejimi, kalıp tasarımı ve deneme
+birikimi. Ürün sonucu göstermekte, güzergâhı göstermemektedir.
+• Tasarım gerekçesi: Hangi alternatifin hangi nedenle elendiği bilgisi
+üründe kayıtlı değildir.
+• Fire oranı: Üretimin gerçek iktisadi yapısını belirleyen bu veri tekil
+örnekten çıkarılamaz.
+Tersine Mühendisliğin Sınırları
+Üç yapısal sınır mevcuttur: örtük bilginin gözlemle aktarılamaması, tedarik
+zincirinin taklit edilememesi ve kopyalayan tarafın yapısal olarak bir nesil geri-
+den gelmesi. Bunlara patent, ticari sır ve ihracat kontrolü gibi hukuki sınırlar
+eklenmektedir.
+Aktarım Yöntemleri
+Etki derecesine göre artan sırayla: inceleme ve söküm; davranışsal kopyalama
+(clean room yöntemi); patent ve literatür çözümlemesi; süreci gerçekleştiren
+üretim ekipmanının satın alınması; lisans ve ortak üretim; insan transferi; ya-
+parak öğrenme.
+Temel önerme şudur: Ürün tersine mühendislik edilebilir, süreç edile-
+mez. Süreç ancak insan aktarımı ve tekrarlanan üretim yoluyla geçmektedir.
+Bu nedenle ”organizasyonun tersine mühendisliği” ifadesi retorik olarak güçlü
+olmakla birlikte pratikte geçersizdir; Kore ve Tayvan örnekleri gözlem yoluyla
+değil lisans, ortak girişim, insan transferi ve uzun süreli desteklerle gerçekleşmiştir.
+Aktarılabilirlik C özümlemesi
+Yüksek Aktarılabilirlik
+Ölçüm ve test altyapısı ile problem tanımının fiil biçiminde formüle edilmesi.
+Nesne tanımları aktarılamazken eylem tanımları aktarılabilmektedir.
+Orta Aktarılabilirlik
+Yöntem ve refleksler ile soyutlama ve modeller. Modeller aktarılırken parame-
+trelerin aktarılmadığı hususu vurgulanmalıdır.
+Düşük veya Sıfır Aktarılabilirlik
+Örtük bilgi, bağlam bilgisi, alan kısıtları, düzenleyici çerçeve ve kullanıcı davranışı.
+8
+
+-- 8 of 15 --
+
+Ölçüt
+Bir bilginin aktarılabilirliği, o bilginin bağlam dışı bir okuyucuya yazılı biçimde
+eksiksiz aktarılabilmesiyle ölçülebilir.
+˙Ilgili Literatür
+˙Inceleme boyunca sezgisel olarak ulaşılan sonuçların önemli bölümü mevcut lit-
+eratürde tanımlanmıştır.
+• Herbert Simon, The Sciences of the Artificial : tasarımın bağımsız bir
+bilim alanı olarak kurulması.
+• Walter Vincenti, What Engineers Know and How They Know It: mühendislik
+bilgisinin bilimsel bilgiden ayrı bir tür olarak ele alınması.
+• Eugene Ferguson, Engineering and the Mind’s Eye: mühendislikte görsel
+ve sözel olmayan bilginin rolü.
+• Rittel ve Webber: kötü tanımlı problemler kavramı.
+• Michael Polanyi: örtük bilgi kuramı.
+• W. R. Ashby: gerekli çeşitlilik yasası.
+• Donella Meadows: sistem müdahalesinde kaldıraç noktaları.
+• Cohen ve Levinthal: emici kapasite kavramı.
+• David Teece: dinamik kabiliyetler.
+• Nelson ve Winter: evrimsel firma kuramı ve kurumsal rutinler.
+• Hausmann ve Hidalgo: iktisadi karmaşıklık ve ürün uzayı.
+• Peter Evans, Embedded Autonomy: devlet-sanayi ilişkisinin kurumsal çözümlemesi.
+Bunlar arasında ürün uzayı yaklaşımı özel önem taşımaktadır. Bu yaklaşıma
+göre bir ülke ancak mevcut kabiliyetlerinin komşuluğundaki ürünlere geçebilmektedir.
+˙Isveç örneğindeki görünür çeşitlilik, rastgele bir yayılma değil metalurji, rulman,
+hassas takım, ölçüm, sensör ve aviyonik şeklinde ilerleyen kısa adımlı bir zin-
+cirdir.
+Sistem C özümlemesi
+Matematik ve Fiziğin Konumu
+Denklemler tek başına yeterli olmamakla birlikte belirleyici sınırı çizmekte ve
+neyin mümkün olmadığını göstererek iddiaları elemektedir. Sistem düzeyindeki
+değişkenler, fiziğin izin verdiği alanın içinde işlemektedir. Dolayısıyla matematik
+ve fizik ikincil değil, önceliklidir; ancak yetersizdir.
+9
+
+-- 9 of 15 --
+
+Sistemin Katmanları
+• Fizik: Denklemler, malzeme ve enerji sınırları.
+• Yapı: Bileşenler, arayüzler ve bağlantılar. Sistem davranışı bileşenlerde
+değil bağlantılarda oluşmaktadır.
+• Akış: Enerji, malzeme, bilgi ve karar akışları; darboğazların konumu.
+• Kontrol: Geri besleme döngüleri, gecikmeler, eşikler ve kararlılık.
+• Durum ve tarih: Birikmiş stoklar, aşınma, borç ve teknik borç.
+• ˙Insan: Operatör niteliği, eğitim düzeyi, dikkat ve örtük bilgi.
+• Kurum: Karar ve onay zinciri ile olumsuz bilginin yukarı akış kabiliyeti.
+• Teşvik: Ödüllendirme ölçütleri. Sistemin fiili amacı, beyan edilen amacı
+değil teşviklerin işaret ettiği yöndür.
+• Hata: Hata modları, yedeklilik, bozulma biçimi ve ortak mod hataları.
+• Zaman: Tepki süresi, hizmet ömrü, bakım periyodu ve eskime.
+• Sınır: Sistemin nerede sona erdiği. Bu bir gözlemci kararıdır ve çözümleme
+hatalarının önemli bölümü buradan kaynaklanmaktadır.
+• Amaç: Sistemin fiilen neyi azamileştirdiği.
+• C evre ve rakip: Sistemi kasıtlı olarak bozmaya çalışan taraf.
+Ek katmanlar arasında bakım ve yaşam döngüsü, devreye alma, gözlemlenebilirlik,
+dokümantasyon sürekliliği, standart ve arayüz konumu, tedarik bağımlılığı, ölçek
+davranışı, güvenlik yüzeyi, meşruiyet, mevzuat, finansman modeli, politik ömür,
+yol bağımlılığı ve sistemin gayriresmı işleyişi sayılabilir.
+Katman listesinin kapalı olmadığı vurgulanmalıdır. Sistem tanımı gözlemcinin
+çizdiği sınıra bağlı olduğundan, liste tüketici nitelikte olamaz. Uygulamada en
+yüksek açıklayıcı güce sahip üç soru şunlardır: ne akmaktadır, gecikme nerededir
+ve kim hangi ölçüte göre ödüllendirilmektedir.
+Askerı Sistemlere Uygulama
+Bir hava savunma sisteminin çözümlenmesi üç katman gerektirmektedir:
+• Fizik katmanı: Menzil, sinyal-gürültü oranı ve tepki süresi. ˙Iddiaların
+elenmesini sağlar.
+• Sistem katmanı: Bakım, eğitim, komuta yapısı ve arıza halinde karar
+dağılımı. Sistemin fiilen işleyip işlemediğini belirler.
+• C atışma katmanı: Maliyet değişim oranı, üretim hızı, stok derinliği ve
+karşı tarafın adaptasyonu.
+10
+
+-- 10 of 15 --
+
+Sıralama işlevseldir: fizik eler, sistem belirler, iktisat sonucu tayin eder.
+Ayrıca askerı sistemlerin doğa sistemlerinden ayrıldığı husus vurgulanmalıdır:
+karşı tarafta sistemi çözümleyip kasıtlı olarak bozmaya çalışan bir irade bulun-
+maktadır. Bu nedenle uygun çerçeve sistem düşüncesi değil çatışan sistemler
+çözümlemesidir.
+Tarihsel Örneklere ˙Ilişkin Uyarı
+Napolyon, Moltke, Yamamoto ve Boyd örnekleri sistem düşüncesinin kanıtı
+olarak sunulmuştur. Ancak bu liste inceleme boyunca eleştirilen hayatta kalan-
+ların yanlılığı kusurunu taşımaktadır. Yamamoto sistem bütününü doğru okumuş
+olmakla birlikte yenilgiye uğramıştır; bu durum sistemi doğru çözümlemenin ka-
+pasite yokluğunda sonucu değiştirmediğini göstermektedir. Boyd’un asıl katkısı
+ise popülerleşen karar döngüsü modeli değil, sayısal nitelikteki enerji-manevrabilite
+kuramıdır.
+˙Iyi Mühendisliğin Tanımı
+˙Iyi mühendislik her ayrıntının azami özenle işlenmesi değildir. Sonlu kaynak
+koşullarında bu yaklaşım uygulanabilir olmadığı gibi, kaynakların dağıtımı bakımından
+da verimsizdir. Mühendislik faaliyetinin özü, sonucu belirleyen değişkenin tespit
+edilmesi ve geri kalanın bilinçli olarak daha düşük özenle bırakılmasıdır. Kavram-
+sal karşılıkları kritik yol, hassasiyet çözümlemesi ve hâkim hata terimidir. Aşırı
+mühendislik bir erdem değil kusurdur.
+Tolerans kavramı bu ilkenin somutlaşmış halidir: mühendislik hassasiyet
+üretmek değil, hassasiyetin nereye tahsis edileceğine karar vermektir.
+Belirleyici ölçütler şunlardır:
+• Doğru problemin seçilmiş olması. Yanlış problemin kusursuz çözümü en
+maliyetli hata türüdür; Concorde bu duruma örnektir.
+• Kısıtlara göre tasarım. Gripen, üstün performans yerine düşük maliyet,
+kısa pist ve hızlı bakım kısıtlarına göre tasarlanmıştır.
+• Hata payı bırakılması ve kademeli bozulma tasarımı.
+• Ölçüm ve geri besleme zincirinin kurulması.
+• Yeterli niteliğin zamanında teslim edilmesi.
+˙Istisna olarak, geri dönüşü bulunmayan ve hata maliyeti yüksek alanlarda
+(aviyonik, nükleer, tıbbi implant, uzay) ayrıntı titizliği zorunludur. Genel ilke,
+geri alınabilir kararlar ile geri alınamaz kararların ayrıştırılması ve özenin ikinci
+gruba tahsis edilmesidir.
+Yöntemsel Sonuç: Problem Ekseni
+Uzun ömürlü kurumların ve bireylerin ortak yapısal imzası, ürün etrafında değil
+kalıcı bir problem etrafında birikim oluşturmalarıdır.
+11
+
+-- 11 of 15 --
+
+Kurumsal Örnekler
+Alfa Laval (fazların ayrıştırılması), Sandvik (aşınma altında malzeme kaldırma),
+SKF (sürtünme kontrolü), ASML (optik yolla desen çözünürlüğü), Corning (cam
+teknolojisi), Trumpf (ışıkla kesme).
+Bireysel Örnekler
+Dijkstra (program doğruluğu), Lamport (dağıtık sistemlerde zaman ve muta-
+bakat), Liskov (soyutlamanın sınırları), Knuth (algoritmanın doğru sunumu),
+Alexander (mekân niteliği), Hamming (gürültülü kanalda bilgi bütünlüğü).
+Ortak Özellikler
+• Problem eylem biçiminde tanımlanmıştır; nesne biçiminde değil.
+• Problem fiziksel veya matematiksel bir temele dayandığından eskimemek-
+tedir.
+• Problem birden fazla sektörde geçerlidir; bu özellik sektörel çöküşe karşı
+koruma sağlar.
+• Doğru problem seçildiğinde mevcut araçlar belirli bir noktada yetersiz
+kalmakta ve aktör kendi ölçüm veya üretim aracını geliştirmek durumunda
+kalmaktadır. Bu durum, problem seçiminin isabetine ilişkin bir gösterge
+olarak değerlendirilebilir.
+Yöntemin Sınırları
+Problem seçimi çoğunlukla planlı bir karar değil biyografik bir sonuçtur; ilgili
+aktörler problemi seçmekten çok tekrar tekrar karşılaştıkları problemi tanımışlardır.
+Soyutlama düzeyi kritiktir. Fazla dar tanımlanan problem ortadan kalka-
+bilir; Kodak’ın gümüş halojenür kimyasındaki üstünlüğü bu nedenle değersizleşmiştir.
+Fazla geniş tanımlanan problem ise birikim üretmez. Uygun düzeyin göstergesi
+şudur: problem çözümün biçimini önceden belirlememeli, ancak yanlış çözümü
+elemelidir.
+Terk ölçütü olarak problemin kendisi değil var olma nedeni izlenmelidir. Ko-
+dak örneğinde belirleyici sinyal kurum içinden gelmiş ancak dikkate alınmamıştır.
+Son olarak, aynı disiplinle çalışıp sonuç alamayanlar görünür olmadığından,
+yöntem başarıyı güvence altına almamakta; yalnızca başarılı örneklerin ortak
+özelliğini tanımlamaktadır.
+12
+
+-- 12 of 15 --
+
+Devlet Aklı Kavramının Yeniden Değerlendirilmesi
+Kavramın Reddi ve Bu Reddin Sınırı
+Tartışmanın bu aşamasında, devlet aklı diye bir olgunun bulunmadığı; gerçekte
+belirli bir dönemde birilerinin karar aldığı, birilerinin bu karara maddi ve manevi
+destek verdiği ve sonucun başarıya ulaştığı ileri sürülmüştür. Bu formülasyonun
+ilk yarısı isabetli, ikinci yarısı ise hatalıdır.
+Başarı Varsayımının Reddi
+Aynı karar yapısı, aynı destek düzeyi ve aynı siyasi kararlılık, birbirinden tama-
+men farklı sonuçlar üretmiştir.
+• Concorde iki devletin ortak desteğine ve kesintisiz finansmana sahipti;
+ticari açıdan başarısız olmuştur.
+• Britanya havacılık sanayisinde benzer bir siyasi irade mevcuttu; sektör
+dağılmıştır.
+• Hindistan, Tejas programına kırk yıl boyunca kesintisiz siyasi destek sağlamıştır.
+• Northvolt, Avrupa’nın en yüksek sermaye toplayan girişimlerinden biriydi
+ve iflas etmiştir.
+Dolayısıyla “destek verildi, başarı geldi” önermesi yine sonuçtan geriye doğru
+kurulmuş bir açıklamadır. Bu, tartışma boyunca eleştirilen yöntemsel kusurun
+tekrarıdır; yalnızca özne değişmiş, devlet aklı yerine koalisyon konulmuş, ancak
+gözlem hâlâ yalnızca kazanan vakalarla sınırlı kalmıştır.
+Kavramı Tümüyle Reddetmenin Sakıncası
+Kavramın reddi de en az kabulü kadar kolaycıdır. Kavramın işaret ettiği olgu
+gerçektir; sorun açıklama gücünün sanıldığından dar olmasıdır.
+Gerçek olan kısım şudur: bazı ülkelerde belirli kararlar seçim döngüsüne
+rağmen kırk yıl varlığını sürdürebilmekte, bazılarında dört yıl bile ayakta kala-
+mamaktadır. Bu fark ölçülebilir niteliktedir ve rastlantısal değildir. Ancak
+kaynağı zekâ veya öngörü değil, kurumsal mimaridir: kararı kısa vadeli baskıdan
+yalıtan yapılar, yoğunlaşmış uzun vadeli mülkiyet, seçimden bağımsız satın alma
+kurumları ve meslek bürokrasisinin sürekliliği.
+Düzeltilmiş Formülasyon
+Kararı alan bir zihin bulunmamakta; kararı koruyan bir yapı bulunmaktadır.
+Yapı mevcutsa karar sürmekte, karar sürdükçe kabiliyet birikmektedir. Ancak
+biriken kabiliyetin işlevsel olup olmayacağını yapı belirlememektedir; bunu prob-
+lemin doğru seçilip seçilmediği, teknoloji dalgasının yönü ve rakiplerin davranışı
+tayin etmektedir.
+13
+
+-- 13 of 15 --
+
+Süreklilik gerekli koşuldur, yeterli koşul değildir. Fransa nükleer programında
+bir dönem her iki koşulu da sağlamış, sonrasında sürekliliği yitirmiştir. Concorde
+ise sürekliliğe sahip olmakla birlikte ikinci koşuldan yoksundu.
+Kavramın Kapsamı: Teknolojik Boyutun Ötesi
+Kullanılan Tanımın Darlığı
+˙Inceleme boyunca kullanılan tanım yalnızca sanayi-teknoloji boyutunu kap-
+samaktadır: dışarıdan ucuza temin edilebilecek işin, kabiliyet yitirilmemesi amacıyla
+içeride sürdürülmesi kararı. Bu, devlet aklı olarak adlandırılan olgunun sınırlı
+bir alt kümesidir. Tartışmanın ˙Isveç örneğinden başlaması, kapsamın bu şekilde
+daralmasına yol açmıştır.
+Kavramın Tarihsel Kökeni
+Terimin tarihsel karşılığı ragion di stato veya raison d’ ´Etat olup, on altıncı
+yüzyıl ˙Italyan ve Fransız siyasi düşüncesine dayanmaktadır (Machiavelli, Botero,
+Richelieu). Bu gelenekteki anlamı, burada kullanılandan tamamen farklıdır:
+devletin bekası, ahlaki ve dinı kısıtların üzerinde bir gerekçe sayılmaktadır.
+Dolayısıyla özgün anlamıyla devlet aklı bir kabiliyet planlaması değil, bir is-
+tisna doktrinidir. Richelieu’nün Katolik Fransa adına Protestan tarafta savaşa
+girmesi bu doktrinin klasik örneğidir.
+Devlet Aklının Boyutları
+Mali Akıl
+Kredibilite ve borçlanma kapasitesi. Britanya’nın on sekizinci yüzyılda Fransa
+karşısındaki üstünlüğü ordusundan çok ˙Ingiltere Bankası ve konsolide borç sis-
+teminden kaynaklanmıştır. Devletin en somut aklı çoğu zaman maliyesinde
+bulunmaktadır.
+Hukuki Akıl
+Mülkiyet güvencesi, sözleşmenin uygulanabilirliği ve öngörülebilirlik. ˙Iktisadi
+gelişme literatüründe (North, Acemoğlu–Robinson çizgisi) teknolojik kabiliyet-
+ten daha güçlü bir açıklayıcı değişken olarak ele alınmaktadır.
+Bürokratik Akıl
+Liyakate dayalı, sürekli ve kayıt tutan bir memur sınıfının varlığı. Weber’in
+temel tezini oluşturmaktadır. C in’in imparatorluk sınav sistemi en eski, Prusya
+bürokrasisi ise modern örneğidir.
+14
+
+-- 14 of 15 --
+
+Jeopolitik Akıl
+Coğrafyanın ve ittifak yapısının uzun vadeli okunması. Britanya’nın yüzyıllar
+boyunca sürdürdüğü Avrupa’da güç dengesi doktrini, hükümet değişikliklerinden
+bağımsız olarak devam etmesi bakımından en tutarlı örnektir.
+Demografik ve Tarımsal Akıl
+Nüfus yönetimi, gıda güvenliği ve su kaynakları. Osmanlı’nın çift-hane düzeni ve
+C in’in tahıl ambarı sistemi bu boyutun örnekleridir. Tarihsel olarak devletlerin
+çöküş noktası genellikle teknoloji değil, gıda ve maliye olmuştur.
+Toplumsal Mutabakat Aklı
+Vergi karşılığı hizmet ilişkisi, meşruiyet ve çatışmanın kurumsallaştırılması. ˙Iskandinav
+modelinin ayırt edici özelliği sanayi politikasından çok bu boyutta bulunmak-
+tadır.
+Negatif Akıl
+Ne yapılmayacağının bilinmesi: aşırı genişlemeye direnmek, savaşa girmemek,
+kaynağı dağıtmamak. ˙Isveç’in 1814 sonrasında savaşa taraf olmaması, kabiliyet
+inşasından çok daha belirleyici bir karardır.
+Boyutların Dağılımı
+Söz konusu boyutlar aynı devlette eşzamanlı olarak bulunmamaktadır. Bir de-
+vlet mali akılda güçlü, teknolojik akılda zayıf olabilmektedir.
+• Osmanlı bürokratik ve hukuki gelenekte güçlüyken mali ve teknolojik
+dönüşümde geri kalmıştır.
+• ABD teknolojik ve mali boyutta en güçlü konumdayken altyapı ve uzun
+vadeli planlamada zayıftır.
+• C in altyapı ve sanayi planlamasında güçlüyken hukuki öngörülebilirlik
+bakımından tartışmalıdır.
+Sonuç
+˙Inceleme boyunca kullanılan tanım, devlet aklının değil yalnızca teknolojik ka-
+biliyet boyutunun tanımıdır. Üstelik bu boyut, devletlerin tarihsel kaderini
+belirlemede muhtemelen en az etkili olanlardan biridir. Devletler genellikle
+teknoloji üretemedikleri için değil, maliyeleri bozulduğu veya meşruiyetlerini
+yitirdikleri için çökmektedir.
+15
+
+-- 15 of 15 --

@@ -1,0 +1,451 @@
+Ajanik Kurumsal Araştırma Sistemleri: Kanıt
+Temelli Bir Tasarım C erçevesi
+Ömer Faruk Yavuz
+August 2026
+Özet
+Bu çalışma, yazılım mühendisliği organizasyonlarında kurumsal bilginin soh-
+bet odaklı araçlarda erimesi problemini tanımlar ve buna karşı çok ajanlı bir
+araştırma sistemi önerir. Önerilen çerçevenin ayırt edici iddiası, çok ajanlı mi-
+marilerin temel kazanımının işlem hızı değil, kanıtların birbirinden bağımsız
+kaynaklardan toplanarak çapraz doğrulanması olduğudur. C alışma; bilgi kat-
+manlarının ayrıştırılması, kanıt güven sıralaması, paralelleştirme ölçütü, iddia
+(claim) şeması, çelişki çözüm kuralı, doğrulama mekanizmaları ve sistemin uzun
+vadeli sürdürülebilirlik koşullarını kapsar.
+Problem Tanımı
+Bilgi Modelinin Ontolojik Konumu
+Kurumsal bilgi sistemlerinin değerlendirilmesinde belirleyici ölçüt, bilginin bir
+akış olarak mı yoksa bir varlık olarak mı ele alındığıdır. Akış modelinde bilgi
+zaman içinde ilerleyen bir mesaj dizisidir ve geçmişe doğru erişim, dizinin geriye
+taranmasıyla mümkündür. Varlık modelinde ise bilgi, kendi kimliği, adresi ve
+ilişkileri olan kalıcı bir nesnedir.
+Varlık modelinin gerektirdiği nitelikler şu zincirde toplanır:
+Bilgi → Adreslenebilir → Aranabilir → V ersiyonlu → Bağlantılı → Kalıcı
+Bu zincirin işletilebilirlik ölçütü tek bir soruya indirgenebilir: Altı ay sonra
+bu bilgi tek bir aramayla bulunabilir mi? Olumsuz yanıt, ilgili sistemin bilgi
+tutma kapasitesinin zayıf olduğunu gösterir.
+Karşılaştırmalı Gözlem
+Tablo yapılı araçlarda her verinin bir adresi bulunur; satır, sütun, hücre, tablo
+ve sayfa hiyerarşisi sayesinde belirli bir hücre referansı tüm kullanıcılar için
+aynı nesneye işaret eder. Bilgi bu modelde konuşulmaz, modellenir. Elektronik
+posta sistemleri ise sohbet uygulaması değil iletişim veritabanıdır: gönderen,
+1
+
+-- 1 of 12 --
+
+alıcı, tarih, konu, thread, ek, arama ve etiket alanları sayesinde kayıtlar yıllar
+sonra dahi sorgulanabilir ve thread hiyerarşisi bağlamı korur.
+Buna karşılık conversation-first tasarımlarda bilgi ikinci plandadır. Aynı
+konuya ilişkin veri özel mesajlar, kanal mesajları, toplantı sohbetleri, emoji ile
+verilmiş onaylar ve harici dosya paylaşımları arasında parçalanır. Mesaj akışı
+merkezde olduğu için, birkaç hafta sonra zincirdeki ara halkanın içeriği geri
+getirilemez hale gelir.
+Devir Teslim Problemi
+Problemin en keskin biçimde görünür olduğu durum, ekibe yeni katılan bir
+mühendisin devam eden işi devralmasıdır. Yeni mühendisin görevi, bir yıllık
+mesaj geçmişini geriye kaydırarak okumak olamaz. Bunun üç gerekçesi vardır:
+içeriğin büyük bölümü ilgisizdir, ilgili mesajın bulunması güvenilir bir arama
+stratejisiyle desteklenmez ve kararların gerekçesi çoğunlukla hiçbir yerde yazılı
+değildir.
+Kötü işleyen senaryoda soru zinciri şu biçimde tıkanır: konunun geçmişte
+konuşulduğu hatırlanır, bağlantı bulunmaz, kimin yazdığı bilinmez. Bu, ku-
+rumsal hafızanın kaybıdır. ˙Iyi işleyen senaryoda ise her soru kalıcı bir artefakta
+çözülür: karar gerekçesi bir mimari karar kaydına, arayüz tasarımı bir tasarım
+dokümanına, dağıtım süreci bir runbook’a, hata geçmişi bir issue kaydına, kodun
+biçimi bir PR tartışmasına.
+Bilgi Katmanları
+Katman Barındığı ortam Kalıcılık
+Anlık koordinasyon Sohbet araçları Yok
+Kararlar ADR, Wiki Var
+Gereksinimler Issue tracker, dokümanlar Var
+Kodun gerekçesi Kod, yorum, tasarım dokümanı Var
+Değişiklik geçmişi Commit, PR Var
+˙Işletim yordamı Runbook, playbook Var
+Sohbet araçları koordinasyon işlevi görür; bilginin barınağı değildir. Havacılık,
+uzay, savunma ve finans sektörlerindeki büyük mühendislik organizasyonlarında
+sohbet araçları bulunmakla birlikte, değerli bilgi dokümantasyon, sürüm kon-
+trolü, karar kayıtları, test sonuçları ve izlenebilir kayıtlarda tutulur.
+Araştırma Protokolü
+Bir araştırma ajanının kaynaklara erişim sırası rastgele değil, kanıt güvenilirliği
+ölçütüne göre belirlenir.
+Adımlar
+1. Problemin tipini belirle: hata, özellik, mimari karar, iş kuralı veya op-
+erasyonel süreç.
+2
+
+-- 2 of 12 --
+
+2. Ontolojiyi çıkar: ilgili varlıklar ve aralarındaki ilişkiler.
+3. Kodu tara: metin araması, sözdizim ağacı analizi, sembol araması, arayüz
+ve tip tanımları.
+4. Sürüm geçmişini incele: git blame, git log, git show.
+5. Değişiklik taleplerini oku: tasarım gerekçeleri çoğunlukla yalnızca burada
+yazılıdır.
+6. Gereksinim kayıtlarına bak: ilk talep ve kabul kriterleri.
+7. Dokümantasyonu tara: README, Wiki, ADR, RFC, tasarım dokümanı,
+runbook.
+8. Testleri oku: sistemin beklenen davranışını bildiren en kesin kaynaktır.
+9. C alıştır: log, hata ayıklama, kesme noktası, iz sürme.
+10. ˙Insana danış: en son adım; insan en pahalı kaynaktır.
+11. Kanıt güven puanını hesapla.
+12. C elişki analizi yürüt.
+13. Bilgi grafiğini oluştur.
+Onuncu adımın en sona konulması bir maliyet tercihidir; ilk dokuz adımın
+tükenmesi, insana yöneltilecek sorunun dar ve cevaplanabilir olmasını sağlar.
+Bilgi Grafiği
+Her araştırma sonunda problem düğümüne bağlı bir graf oluşur: gereksinim
+kaydı, değişiklik talebi, commit, test, sınıf, fonksiyon, arayüz, yapılandırma,
+veritabanı şeması, doküman, log ve sorumlu kişi. Bu noktadan sonra yapılan iş
+arama değil keşiftir.
+Kanıt Güven Modeli
+Sayısal Ölçek
+Güven, kaynak tipinden gelen taban değer ile üç düzeltme çarpanının bileşimi
+olarak tanımlanır:
+C = B · ft · fv · fc, C ∈ [0, 1]
+Burada B kaynak tipi taban değeri, ft tazelik çarpanı, fv doğrulama çarpanı,
+fc tutarlılık çarpanıdır.
+3
+
+-- 3 of 12 --
+
+Kaynak tipi Taban değer B
+C alışan kod 0.95
+Test 0.95
+Üretim logu 0.90
+Değişiklik talebi tartışması 0.75
+Mimari karar kaydı 0.75
+Gereksinim kaydı 0.65
+Wiki 0.50
+Sohbet kaydı 0.30
+Beyana dayalı hatırlama 0.15
+Onaylanmamış ajan raporu 0.10
+Tazelik çarpanı, kaynağın geçersizleşme hızına bağlı yarı ömür üzerinden
+hesaplanır:
+ft = 2−∆t/h
+∆t kaynağın son değişikliğinden bu yana geçen süre, h ise kaynak tipine
+özgü yarı ömürdür. Üretim logu için saatler, sürüm geçmişi için depo başındaki
+değişiklik olayı, doküman için haftalar, gereksinim kaydı için aylar mertebesinde
+belirlenir.
+Doğrulama çarpanı fv , iddianın konum referansının programatik olarak doğrulanıp
+doğrulanmadığına göre 1.0 veya 0.0 değerini alır. Doğrulanamayan iddia sisteme
+girmez.
+Tutarlılık çarpanı fc, aynı varlığa ilişkin bağımsız kaynaklardan gelen destek
+sayısına göre artar, çelişki varlığında azalır:
+fc = min (1.0, 0.7 + 0.15 · ndestek) · (1 − 0.25 · nçelişki)
+Bu formülasyonun amacı sayısal kesinlik iddiası taşımak değil, kanıt değerlendirmesini
+ajanın serbest yargısından çıkarıp denetlenebilir bir hesaba bağlamaktır.
+Paralelleştirme Mimarisi
+Ayrıştırma Ölçütü
+Bir adım, ancak üç koşulu birlikte sağlıyorsa paralel yürütülebilir: girdisi başka
+bir ajanın çıktısına bağlı olmamalı, yan etkisi bulunmamalı ve çıktısı sentezden
+bağımsız olarak anlamlı olmalıdır.
+SIRALI
+Problem tipini belirle <- her seyin girdisi
+Ontolojiyi cikar <- arama terimlerini uretir
+...
+Celiski analizi <- tum bulgular gerekli
+Guven puanlama <- tum bulgular gerekli
+Sonuc raporu
+4
+
+-- 4 of 12 --
+
+PARALEL
+Kod | Surum | Talep | Gereksinim | Dokuman | Test | Log
+Ontoloji adımının paralelleştirilmesi sistemi bozar: ortak sözlük kurulmadan
+çalışan ajanlar aynı varlığı farklı terimlerle arar ve bulguları birleştirilemez.
+Bileşen Yapısı
+Orkestrator
+|
+[context-pack.json] <- tek kaynak
+|
++-------+-------+-------+-------+
+| | | | |
+kod surum talep dokuman test
+| | | | |
+findings/*.json (semali, salt yazim)
++-------+-------+-------+-------+
+|
+Sentezleyici
+|
+report.md | claims.json | run.json
+Ortak Bağlam Paketi
+Fan-out öncesinde üretilen ve her ajana değiştirilmeksizin verilen pakettir.
+{
+"question": "...",
+"kind": "architectural-decision",
+"entities": ["Download", "Cut", "Library", "S3"],
+"aliases": { "Download": ["downloadAudio", "download_count"] },
+"time_window": "2025-06-01..2026-08-01",
+"repos": ["repo-a", "repo-b"],
+"out_of_scope": ["..."]
+}
+aliases alanı ajanlar arası terim hizalamasını sağlar ve paketin en kritik
+bileşenidir.
+Uzmanlaşma
+Ajanlar tek uzmanlık ilkesiyle tanımlanır: kod ajanı ilgili dosya, fonksiyon ve
+çağrı zincirini çıkarır; sürüm ajanı commit geçmişi ve sorumluluk atamalarını
+inceler; talep ajanı tasarım gerekçelerini okur; gereksinim ajanı kabul kriterlerini
+toplar; doküman ajanı wiki, karar kaydı ve teknik önerileri tarar; test ajanı
+5
+
+-- 5 of 12 --
+
+testlerin garanti ettiği davranışı özetler; log ajanı gerçek çalışma davranışını
+gözler. Tümü tek bir sentez ajanına rapor verir.
+Rol kısıtının gevşetilmesi ajanları aynı kaynağa yöneltir; bağımsızlık kay-
+bolduğunda çapraz doğrulama anlamını yitirir. Paralelliğin değeri hızda değil
+kaynak bağımsızlığındadır.
+Başlangıç konfigürasyonu olarak üç ajan yeterlidir: sistemin ne yaptığını
+bildiren kod ajanı, neden böyle olduğunu bildiren geçmiş ajanı ve ne yapması
+beklendiğini bildiren bilgi ajanı. Aranan cevap çoğunlukla birinci ile üçüncünün
+ayrıştığı noktada bulunur.
+Soru Tipine Göre Ajan Seti
+Sabit bir yürütme grafiği bütün sorulara uymaz. Problem tipi alanı, koşacak
+ajan kümesini belirler.
+Problem tipi Baskın kaynaklar
+Hata Log, test, sürüm geçmişi
+Mimari karar Değişiklik talebi, karar kaydı, gereksinim
+˙Iş kuralı Gereksinim, doküman, test
+Operasyonel Runbook, yapılandırma, log
+Devir teslim Derinlik yerine kapsam genişliği
+Eşleme, komut metni içinde değil yapılandırma dosyasında tutulur.
+Paralelliğin Uygun Olmadığı Durumlar
+Soru dar kapsamlı olduğunda, ontoloji belirsiz kaldığında, kaynakların çoğu
+erişilemez durumdayken veya cevabın konumu zaten biliniyorken fan-out zarar
+üretir. N ajan N katı bağlam maliyeti anlamına gelir ve kazanç yalnızca kay-
+naklar gerçekten bağımsızsa doğar.
+˙Iddia Seması ve Doğrulama
+Biçimsel Tanım
+Ajanlar birbiriyle doğrudan haberleşmez; paylaşılan depolama üzerinden sabit
+şemayla iletişim kurar. Sema hem sentezin girdisi hem araştırma kaydının ken-
+disidir.
+{
+"$schema": "https://json-schema.org/draft/2020-12/schema",
+"type": "object",
+"required": ["agent", "run_id", "claims", "gaps", "sources_checked"],
+"properties": {
+"agent": { "enum": ["code","history","knowledge","people",
+"execution","evidence","contradiction"] },
+"run_id": { "type": "string" },
+6
+
+-- 6 of 12 --
+
+"claims": {
+"type": "array",
+"items": {
+"type": "object",
+"required": ["id","statement","evidence","as_of",
+"confidence","entities","sensitivity"],
+"properties": {
+"id": { "type": "string" },
+"statement": { "type": "string", "maxLength": 400 },
+"evidence": {
+"type": "object",
+"required": ["type","ref","locator"],
+"properties": {
+"type": { "enum": ["code","test","log","pr",
+"adr","issue","wiki"] },
+"ref": { "type": "string" },
+"locator": { "type": "string",
+"pattern": "^[^:]+:L[0-9]+(-L[0-9]+)?$" }
+}
+},
+"as_of": { "type": "string", "format": "date" },
+"confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+"entities": { "type": "array", "items": { "type": "string" } },
+"sensitivity": { "enum": ["public","internal","restricted"] }
+}
+}
+},
+"candidate_entities": { "type": "array", "items": { "type": "string" } },
+"gaps": { "type": "array", "items": { "type": "string" } },
+"dead_ends": { "type": "array", "items": { "type": "string" } },
+"rejected": { "type": "array", "items": { "type": "string" } },
+"sources_checked": { "type": "array", "items": { "type": "string" } },
+"sources_useless": { "type": "array", "items": { "type": "string" } }
+}
+}
+Konum Doğrulayıcı
+Konum referansı alanı zorunludur ve şema düzeyinde biçimsel olarak sınırlandırılmıştır.
+Doğrulayıcı, sentez öncesinde her iddia için şu işlemi yürütür: referans edilen
+dosya ve satır aralığı açılır, içerik okunur, iddia metniyle anlamsal örtüşme
+sınanır. Örtüşme sağlanamayan iddia rapora girmez ve gaps listesine gerekçesiyle
+taşınır.
+Doğrulayıcının çıktısı aynı zamanda sistemin temel kalite göstergesidir. Doğrulama
+oranı
+7
+
+-- 7 of 12 --
+
+Rloc = doğrulananiddiasayısı
+üretileniddiasayısı
+halüsinasyon oranının doğrudan ve programatik olarak ölçülebilen tersidir.
+Bu oranın eşik altına düşmesi, ilgili ajanın komut tanımının gözden geçirilmesini
+gerektirir.
+C elişki C özümü
+Tespit
+C elişki tespiti dil modeline bırakılmaz; deterministik eşleştirmeyle yürütülür.
+Aynı varlığa dokunan iddialar gruplanır, aynı zaman kesitine ait olanlar karşılaştırılır,
+uyuşmazlık halinde kayıt açılır.
+Zaman Ekseninin Ayrıştırılması
+Farklı kaynaklar farklı zaman kesitlerine aittir. Dokümanla kod arasındaki
+fark her durumda çelişki değildir; doküman yazıldığı anda doğru olup son-
+radan geçersizleşmiş olabilir. as of alanı bu ayrımı taşır. ˙Iki iddianın zaman
+damgaları belirgin biçimde ayrışıyorsa sonuç çelişki değil evrim olarak rapor-
+lanır. Araştırmanın aradığı cevap çoğunlukla bu evrim kaydının kendisidir.
+Karar Kuralı
+C elişki kaydı açıldığında şu sıra işletilir:
+1. Zaman kesitleri ayrışıyorsa kayıt evrim olarak sınıflandırılır ve kapatılır.
+2. Kesitler aynıysa iddialar güven puanına göre sıralanır.
+3. Puan farkı 0.30 eşiğini aşıyorsa yüksek puanlı iddia birincil, diğeri itiraz
+olarak etiketlenir; kayıt açık kalır.
+4. Puan farkı eşiğin altındaysa iddialar eşdeğer sayılır ve kayıt insan hakemliğine
+yönlendirilir.
+5. Hiçbir durumda kayıt otomatik kapatılmaz.
+Bu kuralın gerekçesi şudur: yüksek güvenli kaynak, doğru olan kaynak değil,
+doğrulanması kolay olan kaynaktır. Otomatik kapatmaya izin veren bir sistem,
+hatalı çalışan kodu doğru yazılmış gereksinime tercih eder ve hatayı kurumsal
+hafızaya gerçek olarak kaydeder.
+8
+
+-- 8 of 12 --
+
+Dayanıklılık Önlemleri
+Önbellek ve Geçersizleştirme
+Bulgular bağlam paketinin özet değerine bağlanır. Kaynakların geçersizleşme
+hızı türe göre farklılaştığından tek bir yaşam süresi yerine kaynak başına geçersizleştirme
+kuralı tanımlanır: sürüm bulguları depo başı değiştiğinde, doküman bulguları
+ilgili sayfa güncellendiğinde, log bulguları saat mertebesinde geçersizleşir.
+Bütçe ve Erken Durdurma
+Her ajana azami araç çağrısı, azami bağlam tüketimi, süre sınırı ve doygunluk
+koşulu tanımlanır. Bütçesini tüketip iddia üretemeyen ajan başarısız sayılmaz;
+ürettiği yokluk bildirimi rapora yazılır. Sessizce düşen ajan, var olmayan bilginin
+var sanılmasına yol açar.
+Kısmi Başarısızlık Politikası
+Üç politikadan biri önceden seçilir: tümünün başarısını şart koşan katı yaklaşım,
+eldeki bulguyla devam eden ve eksikleri işaretleyen varsayılan yaklaşım, kritik
+ajanları zorunlu tutup kalanı isteğe bağlı bırakan yeter sayı yaklaşımı. Raporun
+başında kapsam bildirimi yer alır: taranan kaynak sayısı ve eksiklerin gerekçesi.
+Bu bildirim olmadan okuyucu raporu tam sanar.
+Eşzamanlı Araştırmalar ve Hız Sınırı
+Birden fazla araştırma aynı anda yürüdüğünde kaynak rekabeti, önbellek çakışması
+ve çelişkili rapor sorunları doğar. Dış servis kotaları ajan başına değil sis-
+tem genelinde yönetilir. Uygulanan model, kaynak başına tek bir jeton ko-
+vasıdır: kova kapasitesi servis kotasının altında tutulur, doldurma hızı sabit-
+tir ve tüketim önceliği araştırmanın yaş sırasına göre belirlenir; böylece geç
+başlayan bir araştırma erken başlayanı aç bırakmaz. Kova boşaldığında ajan
+hata vermez, bekler; bekleme süresi bütçeyi aşarsa ilgili kaynak gaps kaydına
+kota gerekçesiyle yazılır.
+Varlık bazlı bir dizin tutulur; yeni bir raporun iddiası mevcut bir iddiayla
+çelişiyorsa her ikisi de işaretlenir. Aksi halde kurumsal hafızaya birbiriyle çelişen
+iki gerçek girer.
+Tekrar Üretilebilirlik
+Rapor tek başına yetersizdir. Koşu kaydı ayrıca saklanır: koşu kimliği, bağlam
+paketi özeti, depo başı, ajan durumları, model sürümü ve örnekleme parame-
+treleri. Bu kayıt olmadan ajanik araştırma, eleştirdiği sohbet aracının konumuna
+düşer: bir yerde üretilmiş, gerekçesi kaybolmuş bilgi.
+9
+
+-- 9 of 12 --
+
+Doğruluk ve Güvenlik
+Yetki Sınırı
+Ajanlar orkestratörün kimliğiyle değil, çağıran kullanıcının yetkisiyle koşar. Erişilemeyen
+kaynak sessizce atlanmaz, yetki gerekçesiyle kaydedilir. ˙Iddialar kaynak has-
+sasiyetine göre etiketlenir ve rapor görünümleri bu etikete göre süzülür. Kural
+özellikle müşteri verisinin bulunduğu ortamlarda kritiktir: güven sıralamasında
+en üstte yer alan üretim logu, aynı zamanda en hassas veri kümesidir.
+Enjeksiyon Yüzeyi
+Ajanın okuduğu her içerik — gereksinim açıklaması, değişiklik talebi yorumu,
+wiki sayfası, commit mesajı, kod yorumu — dışarıdan yazılabilir metindir ve tali-
+mat değil veri olarak işlenir. ˙Işçi ajanların araç erişimi salt okumayla sınırlandırılır.
+Sentez ajanı ham metni değil şemalı iddiaları görür; böylece şemalı ara katman
+güvenlik işlevi de üstlenir. Talimat niteliği taşıyan metin iddia olarak değil,
+şüphe kaydı olarak raporlanır.
+Varlık Kimliği
+Ajan yeni bir varlık keşfettiğinde bağlam paketini değiştiremez; aday varlık
+olarak raporlar. Sentez ajanı adayları mevcut ontolojiye bağlar veya reddeder;
+kabul edilenler bir sonraki koşunun eşanlamlı tablosuna girer. Ontoloji koşular
+arasında büyür, koşu içinde sabit kalır.
+Kendi C ıktısını Kaynak Sayma
+Uzun vadedeki en sinsi başarısızlık biçimi budur. ˙Ikinci koşu birinci koşunun
+raporunu kanıt sayarsa, birkaç yineleme sonunda dayanağı olmayan bir iddia
+bağımsız kaynaklarca doğrulanmış görünümü kazanır. Önlem iki katmanlıdır:
+onaylanmamış ajan raporunun taban güven değeri en alt seviyede tutulur ve işçi
+ajanların tarama alanından rapor dizini çıkarılır. Yalnızca sentez ajanı, yalnızca
+yineleme kontrolü amacıyla önceki raporlara erişir.
+Sorunun Öncülü
+Protokol, sorulan sorunun doğru soru olduğunu varsayar. Uygulamada en sık
+karşılaşılan kayıp, doğru cevaplanmış yanlış sorudur. Sentez ajanının son dene-
+timi, toplanan bulguların sorunun öncülünü doğrulayıp doğrulamadığıdır. Öncül
+bulgularla çelişiyorsa cevap üretilmeden önce soru yeniden formüle edilir. Öncülü
+sessizce kabul eden sistem kendini tutarlı biçimde yanıltır.
+Kurumsal Hafızaya Geri Besleme
+Negatif Bilginin Kaydı
+Eksiklik kaydı tek başına yetersizdir; kaydedilmesi gereken üç ayrı kategori
+vardır. Eksiklik, aranan fakat bulunamayan bilgiyi gösterir. C ıkmaz yol, de-
+10
+
+-- 10 of 12 --
+
+nenmiş ve çürütülmüş hipotezi kaydeder. Reddedilmiş çözüm ise geçmişte değerlendirilip
+terk edilmiş yaklaşımı belgeler. ˙Ikinci ve üçüncü kategoriler kaydedilmezse her
+yeni araştırma aynı çıkmaza yeniden girer. Bu, insan ekiplerinde de en sistem-
+atik biçimde kaybedilen bilgi türüdür.
+Öneri Üretimi
+Sentez adımı kalıcı kaynaklara doğrudan yazma yetkisine sahip değildir; öneri
+üretir. Eksiklikler karar kaydı taslağına, çelişkiler doküman düzeltme talebine,
+işlevsiz kaynaklar kullanımdan kaldırma önerisine dönüşür. Otomatik birleştirme
+yapılmaz; ajanın ürettiği bilgi kendi güven tablosunda en alt sıradadır ve insan
+onayı almadan yukarı taşınmaz.
+˙Insana Danışma Adımının Tasarımı
+Soru tek bir kişiye yöneltilir; sorumlu kişi, kod sahipliği kayıtlarından belirlenir.
+Soru cevaplanabilir biçimde daraltılır ve hangi kaynakların tarandığı, neyin bu-
+lunamadığı bağlamıyla birlikte sunulur. Alınan cevap doğrudan kalıcı kaynağa
+yazılır, sohbet ortamına değil. Aksi halde en pahalı kaynaktan elde edilen bilgi
+geçici bir ortamda ölür ve sistemin çözmeyi amaçladığı döngüye geri dönülür.
+Rapor Görünümleri
+C ıktının en az üç farklı tüketicisi vardır: anlık okuyan insan, aylar sonra okuyan
+insan ve sonraki koşudaki ajan. Birincisi kısa, kanıt bağlantılı ve çelişkileri öne
+alan bir metin ister; ikincisi bağlamı ve o günkü depo durumunu içeren bir
+kayıt; üçüncüsü yapılandırılmış ve güven puanlı iddia listesi. Üçü tek dosyada
+birleştirilirse her biri bozulur. Aynı veriden üç görünüm üretilir: insan raporu,
+iddia listesi ve koşu kaydı.
+Ölçüm
+Sistemin işlevselliği dört gösterge üzerinden izlenir: konum doğrulama oranı,
+insana danışma oranı, sonradan insan tarafından tespit edilen çelişki sayısı ve
+işaretlenen eksiğin kapanma süresi. Birincisi tümüyle otomatiktir ve doğrudan
+kalite göstergesidir. Sonuncusu ise sistemin kurumsal öğrenmeye dönüşüp dönüşmediğini
+gösterir; eksikler işaretlenip kapanmıyorsa sistem yalnızca borç biriktiriyordur.
+Sürdürülebilirlik ve Sahiplik
+Tasarımın en sessiz açığı teknik değildir. Ontoloji güncellenmediğinde, eşanlamlı
+tablosu bakımsız kaldığında ve problem tipi eşlemesi eskidiğinde sistem birkaç
+ay içinde gürültü üretmeye başlar; güvenilirliğini yitirdiği anda da terk edilir.
+Açıkça sahiplenilmesi gereken sorumluluklar şunlardır: ontolojinin onayı ve
+güncellenmesi, aday varlıkların kabul veya reddi, önerilen karar kayıtlarının
+kalıcı kaynağa birleştirilmesi, konum doğrulama oranı eşik altına düştüğünde
+müdahale, hız sınırı politikasının servis kotalarıyla uyumunun izlenmesi.
+11
+
+-- 11 of 12 --
+
+Sahipsiz bir bilgi sistemi, kaybolan bilginin daha pahalı bir versiyonudur.
+Sohbet odaklı araçların problemi de esasen teknik değil sahiplik problemidir;
+burada önerilen sistem, aynı nedenden ötürü aynı biçimde çürüyebilir.
+Sonuç
+Bu çalışma, kurumsal bilginin sohbet akışlarında değil kalıcı ve adreslenebilir
+artefaktlarda yaşaması gerektiği tezinden hareketle çok ajanlı bir araştırma sis-
+teminin tasarımını ortaya koymuştur. Tasarım dört katmanda yığılır: temel
+yapı sistemi kurar, dayanıklılık önlemleri işletim koşullarında çökmesini engeller,
+doğruluk önlemleri yanlış sonuç üretmesini sınırlar, sürdürülebilirlik önlemleri
+zaman içinde terk edilmesini geciktirir.
+C alışmanın merkezi savı şudur: ajanik sistemlerde asıl kazanım paralellik
+miktarının artırılması değil, kanıtların birbirinden bağımsız kaynaklardan topla-
+narak karşılıklı olarak doğrulanması veya çürütülmesidir. Konum doğrulaması,
+zaman ekseninin ayrıştırılması ve çelişkilerin otomatik kapatılmaması bu savın
+işletilebilir karşılıklarıdır. Sistemin nihai kırılganlığı ise algoritmik değil kurum-
+saldır: sahipliği tanımlanmadığı takdirde geri kalan bütün önlemler işlevsizleşir.
+12
+
+-- 12 of 12 --
