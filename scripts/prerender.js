@@ -368,22 +368,24 @@ const aiMissing = (ai.groups || []).flatMap((g) => g.slugs).filter((s) => !bySlu
 if (aiMissing.length) console.warn(`[prerender] ai.json'da karşılığı olmayan slug: ${aiMissing.join(', ')}`)
 const aiHead = buildHead({
   title: 'Yapay Zekâ',
-  description: ai.intro || 'Yapay zekâ ve otonom etmenler üzerine korpustaki metinler.',
+  description: ai.intro || 'Yapay Zekâ bölümü.',
   canonical: `${SITE_URL}${base}yapay-zeka`,
   type: 'website',
   image: '/profile.jpeg',
 })
 const aiBody =
   header('yapay-zeka') +
-  `<p class="rec-intro muted">${esc(ai.intro || '')}</p>` +
-  aiGroups
-    .map(
-      (g) =>
-        `<section class="ai-group"><h2 class="section-head">${esc(g.title)}</h2>` +
-        `<p class="muted ai-blurb">${esc(g.blurb || '')}</p>` +
-        `<ul class="post-list">${g.items.map(postListItem).join('')}</ul></section>`,
-    )
-    .join('') +
+  (ai.intro ? `<p class="rec-intro muted">${esc(ai.intro)}</p>` : '') +
+  (aiGroups.length
+    ? aiGroups
+        .map(
+          (g) =>
+            `<section class="ai-group"><h2 class="section-head">${esc(g.title)}</h2>` +
+            `<p class="muted ai-blurb">${esc(g.blurb || '')}</p>` +
+            `<ul class="post-list">${g.items.map(postListItem).join('')}</ul></section>`,
+        )
+        .join('')
+    : `<p class="muted rec-empty">Yakında.</p>`) +
   footer()
 write('yapay-zeka', renderPage({ head: aiHead, bodyHtml: aiBody }))
 

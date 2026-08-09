@@ -29,7 +29,7 @@ export default function YapayZeka() {
 
   return (
     <>
-      {data && (
+      {pick({ tr: data?.intro, en: data?.intro_en }) && (
         <p className="rec-intro muted">
           {pick({ tr: data.intro, en: data.intro_en })}
         </p>
@@ -37,6 +37,10 @@ export default function YapayZeka() {
 
       {loading && <p className="muted">{t('loading')}</p>}
       {error && <p className="error">{t('error')}: {error.message}</p>}
+
+      {!loading && !error && data && !data.groups?.length && (
+        <p className="muted rec-empty">{t('aiEmpty')}</p>
+      )}
 
       {!loading && !error && data?.groups?.map((g) => {
         const items = g.slugs.map((s) => bySlug.get(s)).filter(Boolean)
