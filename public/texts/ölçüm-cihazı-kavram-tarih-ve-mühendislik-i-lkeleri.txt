@@ -1,0 +1,1153 @@
+Ölçüm Cihazı: Kavram, Tarih ve Mühendislik
+˙Ilkeleri
+ÖFY
+August 2026
+Kavramsal C erçeve
+Tanım
+Ölçüm cihazı, doğrudan karşılaştırılamayan bir niceliği karşılaştırılabilir bir forma
+dönüştüren makinedir. C ekirdeğinde tek bir işlem bulunur: bilinmeyenin, üzerinde
+önceden anlaşılmış bir birimle kıyaslanması. Terazi bu işlemi en çıplak biçimiyle
+gerçekleştirir; bilinmeyen kütleyi bilinen kütleyle aynı fiziksel dilde yan yana
+koyar. Diğer bütün cihazlar, bu kıyaslamanın dolaylı ve zincirlenmiş versiyon-
+larıdır. Sıcaklık doğrudan kıyaslanamaz; ancak sıcaklık cıvanın hacmine, hacim
+bir ölçek üzerindeki uzunluğa çevrildiğinde kıyaslanabilir hâle gelir.
+Bu nedenle her ölçüm cihazı bir dönüştürücüdür (transducer ): ölçülemeyeni
+okunabilir olana taşır.
+Anatomi
+olgu duyarga dönüşüm ölçek okuma
+(sensor) (transfer) (scale) (readout)
+burada gizli bir TEOR_I vardır
+(cıva doğrusal genleşir, direnç
+sıcaklıkla şu şekilde değişir...)
+Zincirin kritik noktası, ölçeğin keyfi olamayacağıdır. Ölçek, üzerinde uzlaşılmış
+bir standarda bağlanmak zorundadır.
+˙Izlenebilirlik Zinciri
+Cihazı standarda bağlayan bağ, izlenebilirlik zinciridir:
+senin kumpasın
+fabrika mastarı
+ulusal metroloji enstitüsü (TÜB_ITAK UME)
+BIPM / SI tanımı
+doğa sabiti (c, h, Cs)
+1
+
+-- 1 of 31 --
+
+Zincir koptuğunda cihaz sayı üretmeye devam eder; ancak o sayı artık hiçbir
+şey ifade etmez. Kalibrasyonun anlamı buradan doğar: kalibrasyon cihazı
+düzeltmek değil, zinciri tazelemektir.
+Tarihsel Gelişim
+Nilometre: Ölçümün Kurumsal Doğuşu
+Bilinen en eski kurumsal ölçüm cihazlarından biri, Mısır’da Nil’in taşkın se-
+viyesini ölçen taş kuyulardır. Ölçülen nicelik aslında su seviyesi değildi; o yılın
+hasadı, dolayısıyla vergi oranıydı. Ölçüm cihazı, doğduğu andan itibaren bir
+devlet aygıtıydı: sayıyı üreten, vergiyi meşrulaştırır.
+Kralın Kolu: Nesneye Gömülü Standart
+Cubit, arşın, foot gibi erken standartlar bir hükümdarın bedenine ya da bir
+tapınakta saklanan taş çubuğa gömülüydü. Standart bir nesnede saklanıyordu.
+Bu model iki bin yıl sürdü ve tek bir yapısal zaafı vardı: nesne yanabilir,
+çalınabilir, aşınabilir.
+Boylam Problemi ve Zamanın Taşınabilir Kılınması
+On sekizinci yüzyılda gemiler enlemi güneş gözlemiyle bulabiliyor, boylamı bu-
+lamıyordu. Boylam, “limandaki saat” ile “buradaki öğle vakti” arasındaki farktı;
+dolayısıyla sorun coğrafi değil, zamanı taşınabilir kılma sorunuydu. ˙Ingiliz par-
+lamentosu 1714’te ödül koydu. Astronomlar gökyüzü tablolarında ısrar ederken,
+taşra marangozu John Harrison sıcaklıkla telafi eden, yağsız ve dengeli bir kro-
+nometre üretti (H4). Bu vaka, bir cihazın imparatorluk ölçeğinde bir problemi
+çözdüğü ilk büyük örnektir.
+Meridyen Seferi ve Hatanın ˙Icadı
+Fransız Devrimi, metreyi kralın bedeninden koparıp doğaya bağlamayı hede-
+fledi: Kuzey Kutbu–ekvator meridyen yayının on milyonda biri. Delambre ve
+M´echain, savaşın ortasında Dunkerque–Barselona hattını ölçmeye çıktı (1792–
+1798). M´echain Barselona’da tutarsız ölçümler buldu, hatayı gizledi, yıllarca
+bunun ağırlığıyla yaşadı ve düzeltme seferinde öldü. Bu utançtan modern
+metrolojinin kurucu kavramı doğdu: hata kaçınılmazdır; saklanacak değil, hesa-
+planacak bir niceliktir. Legendre ve Gauss’un en küçük kareler yöntemi tam bu
+iklimde olgunlaştı.
+Laboratuvarın Sanayileşmesi: Ohm Standardı
+On dokuzuncu yüzyılda telgraf kabloları okyanus altına döşenirken bir sorun
+ortaya çıktı: direnci kim, neye göre ölçecekti? British Association standart bir
+“ohm” tanımlamak üzere komisyon kurdu; Maxwell ve Kelvin bu çalışmanın
+içindeydi. Ölçüm cihazı burada bilimsel aletten piyasa altyapısına dönüştü;
+ticaret, ortak birim olmadan işlemiyordu.
+2
+
+-- 2 of 31 --
+
+Aletin Teorinin Taşıyıcısına Dönüşmesi
+Michelson–Morley interferometresi (1887) esiri ölçmek üzere yapıldı ve bula-
+madı. Bu “başarısızlık” görelilik kuramının önünü açtı. Aynı alet ailesi bir
+asır sonra LIGO’da yerçekimi dalgasını yakaladı; proton çapının binde biri mer-
+tebesinde uzunluk farkı ölçüldü. Cihazın hassasiyeti arttıkça ölçülen nicelik
+giderek daha teorik hâle geldi; artık hiç kimse “gördüğünü” ölçmemektedir.
+Le Grand K’nin Emekliliği
+Yirminci yüzyıl boyunca kilogram, S`evres’te bir kasada duran platin-iridyum
+silindirdi. Onlarca yıl içinde kopyalarıyla arasında mikrogramlık kaymalar ölçüldü;
+ancak hangisinin değiştiği bilinemezdi, çünkü tanım gereği asıl silindir her zaman
+tam olarak bir kilogramdı. 20 Mayıs 2019’da SI yeniden tanımlandı: kilogram
+artık Planck sabiti h’ye bağlı, Kibble terazisiyle gerçeklenen bir büyüklüktür.
+Standart nihayet nesneden çıkıp evrenin sabitlerine yerleşti. Nilometre’den bu
+noktaya uzanan beş bin yıllık eğri şudur: standardı kaybedilebilir bir şeyden,
+kaybedilemez bir şeye taşımak.
+C ekirdek Kavramlar
+• Cihaz, donmuş teoridir. Termometre okunurken cıvanın genleşme
+yasasına güvenilmektedir; hiçbir ölçüm teoriden bağımsız değildir.
+• Ölçmek müdahaledir. Voltmetre devreden akım çeker, termometre
+ölçtüğü sıvıdan ısı alır. Gözlem, gözlenen sistemi bozar; bu kuantum
+mekaniğinden önce klasik fizikte de böyleydi.
+• Her sayı bir hata bütçesidir. “23,4 °C” bir değer değil, bir aralıktır.
+Belirsizlik bildirilmemişse ölçüm tamamlanmamıştır.
+• Doğruluk kesinlikle özdeş değildir. Kalibrasyonsuz bir cihaz aynı
+yanlış cevabı büyük bir tutarlılıkla verebilir; sistematik hata tekrarla tem-
+izlenmez.
+• Ölçüm bir kurumdur. Cihaz tek başına hiçbir şey ifade etmez; arkasında
+zincir, enstitü, mutabakat ve denetim vardır. Ölçünün gücü metalden
+değil, o mutabakattan gelir.
+Mühendislik ˙Ilkeleri
+Birinci Küme: Ölçümün Temel Yapısı
+˙Ilke 1 — Ölçülen Sey, Ölçülmek ˙Istenen Sey Değildir
+Nilometre suyu ölçüyor, vergiyi kastediyordu. Cıvalı termometre sıcaklığı değil,
+cam borudaki uzunluğu ölçer. Aradaki köprüyü teori kurar ve bu köprü her
+zaman kısmi geçerliliğe sahiptir.
+3
+
+-- 3 of 31 --
+
+Yazılımdaki karşılığı: p99 gecikme ölçülür, kullanıcı memnuniyeti kastedilir.
+Test kapsamı ölçülür, doğruluk kastedilir. Story point ölçülür, ilerleme kaste-
+dilir. Proxy ile hedef arasındaki mesafe bilinmeden kullanılan her metrik, kali-
+brasyonsuz bir cihazdır. Goodhart yasası bu gözlemin devamıdır: proxy hedefe
+dönüştüğü anda köprü çöker.
+Örnek. Ekip “kod kapsamı %90’a çıksın” hedefi koyar. Altı ay sonra kapsam
+%92, üretimdeki hata sayısı ise artmıştır.
+// Kapsamı yükselten ama hiçbir şey doğrulamayan test
+func TestCalculateTotal(t *testing.T) {
+order := Order{Items: []Item{{Price: 10}, {Price: 20}}}
+_ = CalculateTotal(order) // assert yok | satırlar "kapsandı"
+}
+Ölçülen: çalıştırılan satır sayısı. Kastedilen: doğruluk. Köprü mevcut
+değildir.
+Uygulama. Kapsam bir eşik olarak değil, kör nokta detektörü olarak kul-
+lanılmalıdır; “hiç dokunulmamış dosya var mı” sorusuna cevap vermeli, kalite
+kanıtı sayılmamalıdır. Kaliteyi mutasyon testi ölçer: test bozulmadan kod bozu-
+labiliyorsa test yoktur.
+˙Ilke 2 — Belirsizlik Bildirmeyen Sayı, Ölçüm Değildir
+M´echain’in trajedisi hatayı gizleme girişimiydi; metroloji bu utançtan hata
+bütçesi kavramını çıkardı. Mühendislik raporlarında “gecikme 40 ms” ifadesi
+eksiktir. Hangi yük altında, kaç örnekte, hangi kuyrukta sorularının cevabı
+olmadan sayı bir iddiadır, ölçüm değildir.
+Kötü: "GET /clips → 40 ms"
+_Iyi: GET /clips
+n=5000, 60s süre, 50 eşzamanlı istek
+p50=38ms p95=210ms p99=940ms
+ortam: staging, 2 vCPU, soğuk cache
+p99’daki 940 ms değeri, ortalamanın içinde tamamen kaybolmuştu. Kul-
+lanıcıların yüzde biri bu gecikmeyi her gün deneyimlemektedir.
+Kural. Ortalama tek başına asla raporlanmaz. Her sayının yanında üç unsur
+bulunmalıdır: koşul, dağılım, belirsizlik.
+4
+
+-- 4 of 31 --
+
+˙Ilke 3 — Doğruluk ile Kesinlik Farklı Arızalardır
+Sistematik hata tekrarla temizlenmez. Bir profil aracı her seferinde aynı yanlış
+fonksiyonu suçlayabilir; izleme sisteminin kendi saat kayması nedeniyle tutarlı
+biçimde yanlış olabilir. Tutarlılık, doğruluğun kanıtı değildir.
+start := time.Now()
+handler(w, r)
+metrics.Observe(time.Since(start)) // sadece handler’ı ölçüyor
+Ölçüm handler’ın içinden başlamaktadır; TLS el sıkışması, istek gövdesinin
+okunması, ara katman zinciri ve yanıtın yazımı kapsam dışında kalmıştır. Cihaz
+her seferinde tutarlı biçimde eksik ölçmektedir.
+Doğrulama. ˙Ikinci bağımsız yöntem gereklidir. Sunucu tarafı metriği, istemci
+tarafı ölçümü veya yük dengeleyici kaydıyla karşılaştırılmalıdır. 100 ms’ye karşı
+340 ms farkı, kör noktanın büyüklüğüdür. Sonuç beklenenden temiz çıktığında
+ölçüm aracından şüphelenmek gerekir.
+˙Ilke 4 — Ölçmek Müdahaledir
+Voltmetre akım çeker; profil aracı işlemci tüketir, kayıt tutma G/C harcar,
+APM ajanı gecikme ekler. Gözlem sistemi bozar. Bu kaçınılmazdır; kaçınılmaz
+olmayan, bunu hesaba katmamaktır.
+func processFrame(f Frame) error {
+log.Printf("processFrame start: id=%s size=%d", f.ID, len(f.Data))
+// ... 2ms’lik iş
+log.Printf("processFrame end: id=%s", f.ID)
+}
+Saniyede on bin çağrıda bu yapı, senkron G/C nedeniyle ölçtüğünden fazla
+yük bindirir.
+Kural. Gözlemin maliyeti aranan etkiden küçük olmalıdır. ˙Iki milisaniye-
+lik bir fark, beş milisaniye yük bindiren bir araçla aranamaz. Sıcak yolda
+örnekleme, asenkron kayıt veya histogram sayacı tercih edilmelidir.
+˙Ilke 5 — ˙Izlenebilirlik Zinciri Koptuğunda Cihaz Susmaz
+Bu, arızaların en sinsisidir. Kalibrasyonu bozulmuş cihaz susmaz, yanlış bilgi
+verir. Yazılımda karşılığı: süresi dolmuş bir pano, artık var olmayan bir alanı
+sorgulayan bir sorgu, taşındıktan sonra güncellenmemiş bir alarm eşiği.
+# Panel bunu soruyor:
+sum(rate(upload_failed_total[5m])) → no data → 0 çizgisi
+# Olması gereken kontrol:
+absent(upload_failed_total) → alert: "metrik akmıyor"
+5
+
+-- 5 of 31 --
+
+Metrik adı bir yeniden düzenleme sırasında değiştiğinde sorgu boş küme
+döndürür ve boş küme grafikte sıfır olarak görünür.
+Kural. “Sinyal yok” ile “sinyal sıfır” ayırt edilemiyorsa gözlemlenebilirlik yok-
+tur. Her kritik metriğe bir bayatlama alarmı gereklidir.
+˙Ilke 6 — Referans, Kaybedilebilir Bir Nesnede Durmamalıdır
+Le Grand K’nin sorunu değişmesi değil, değişip değişmediğinin bilinemez ol-
+masıydı; çünkü tanım referansın kendisiydi. Yazılımda aynı hastalık şu biçimlerde
+görülür: elle kurulmuş ve kimsenin dokunmaya cesaret edemediği üretim sunucusu,
+testi olmayan altın çıktı dosyası, yalnızca bir kişinin bildiği dağıtım adımı, kilit
+dosyası bulunmayan bağımlılık listesi.
+Nesne olarak referans: Tanım olarak referans:
+prod-web-01 üzerindeki → infra/nginx.conf.tmpl (git’te)
+/etc/nginx/nginx.conf + Dockerfile
++ terraform apply
+→ sunucu her seferinde üretilebilir
+C are, 2019 reformunun aynısıdır: referansı nesneden çıkarıp yeniden üretilebilir
+bir tanıma taşımak.
+˙Ilke 7 — Cihaz Donmuş Teoridir; Metrik Seçimi Model Seçimidir
+Hangi metriğin toplanacağına karar verildiği anda, sistemin nasıl çalıştığına dair
+bir kuram gömülmüş olur. Kuyruk uzunluğunu ölçmeye karar veren, darboğazın
+kuyrukta olduğunu varsayar. Ölçülmeyen boyut, tartışmadan kaybolur.
+// Görünmeyen arıza:
+db.SetMaxOpenConns(10)
+// 50 eşzamanlı istek → 40 tanesi havuzda bekliyor
+// CPU %15, RAM rahat, disk boş | ve herkes yavaş
+˙Işlemci, bellek ve disk panelleri şu teoriyi gömer: darboğaz kaynak tükenmesidir.
+Bağlantı havuzu doygunluğu ölçülmediğinde arıza görünmez.
+Refleks. “Bu metrik hangi arıza türünü görünmez kılıyor?” sorusu sorul-
+malıdır. Ölçüm setinin kör noktası, mimarinin kör noktasıdır. USE ve RED
+yöntemlerinin varlık nedeni budur.
+˙Ilke 8 — Başarısız Ölçüm En Değerli Ölçümdür
+Michelson–Morley aradığını bulamadı ve fizik değişti. Beklentiyle uyuşmayan
+sonuç, ya cihaz ya teori hakkında bilgi taşır; her iki durumda da kazançtır.
+Beklentiyi doğrulayan sonuç ise çoğu zaman hiçbir şey öğretmez.
+6
+
+-- 6 of 31 --
+
+Hipotez: Yavaşlık JSON serialization’dan geliyor.
+Tahmin: Serialization toplam sürenin >%40’ı olmalı.
+Ölçüm: %3.
+Bu “başarısız” ölçüm, tek bir sayıyla zihinsel modelin yanlış olduğunu kanıtlamıştır.
+Kural. Ölçümden önce tahmin yazılmalıdır. Yazılmamış tahmin, sonuca bakıldığında
+“zaten öyle olacağını biliyordum” ifadesine dönüşür.
+˙Ilke 9 — Ölçünün Otoritesi Mutabakattan Gelir
+Ohm standardı bilimsel merak için değil, denizaltı kabloları için tanımlandı.
+Ölçüm bir kurumdur: cihaz, zincir, enstitü, denetim.
+Backend tanımı: ayda 1 API isteği atan token → 12.000
+Ürün tanımı: ayda 1 gün oturum açan insan → 4.000
+Fark: service account’lar, retry’lar, çoklu cihaz
+Tanımı paylaşılmayan metrik, metrik değildir. Sayı tartışmayı çözmez, tartışmanın
+kılığına girer.
+C are. Metrik sözlüğü; her metriğin tek bir yerde yazılı tanımı ve mümkünse
+tanımın tek kod kaynağı. Sözlük panodan önce gelir.
+˙Ilke 10 — Hassasiyet Arttıkça Ölçüm Teorikleşir
+LIGO proton çapının binde birini doğrudan görmez; modelin, filtrenin ve gürültü
+karakterizasyonunun katmanları üzerinden çıkarsar. Büyük sistemlerde de dağıtık
+izlemede görülen “istek yolu” doğrudan gözlem değil, örneklenmiş ve birleştirilmiş
+bir yeniden inşadır.
+Trace’in dayandığı varsayımlar:
+1. Tüm servislerin saatleri senkron (NTP kayması: ±10-50 ms)
+2. Span’ler doğru parent’a bağlanmış (context propagation kopabilir)
+3. Bu istek örnekleme setine girmiş (%1 sampling → nadir hata görünmez)
+4. Async iş span’i kapanana kadar yaşamış (fire-and-forget kaybolur)
+Ölçülülük. Cihazın hassasiyeti arttıkça ona duyulan güven değil, ona eşlik
+eden şüphe artmalıdır. ˙Ince ölçümün her katmanı yeni bir varsayım ekler.
+7
+
+-- 7 of 31 --
+
+Birinci Küme Özeti
+# ˙Ilke Mühendis refleksi
+1 Proxy hedef değildir Metriğin neyi temsil ettiğini yaz
+2 Belirsizlik zorunludur Koşul, dağılım, hata payı olmadan sayı
+yayımlama
+3 Sistematik hata sessizdir Bağımsız ikinci yöntemle doğrula
+4 Gözlem müdahaledir Aracın maliyetini etkiyle kıyasla
+5 Zincir kopabilir Ölçüm sistemini de izle
+6 Referans nesnede durmaz Yeniden üretilebilir tanıma taşı
+7 Cihaz teori taşır “Bu metrik neyi gizliyor?”
+8 Sürpriz kazançtır Hipotezle ölç
+9 Ölçü mutabakattır Tanımı paylaş
+10 Hassasiyet varsayım biriktirir Katman arttıkça şüpheyi artır
+˙Ikinci Küme: Metrik Tasarımının Teknik Kısıtları
+˙Ilke 11 — Birimi Olmayan Sayı Hesaplanabilir Değildir
+Mars Climate Orbiter 1999’da atmosfere fazla girerek kaybedildi; bir taraf pound-
+saniye, diğer taraf newton-saniye kullanıyordu. Sayılar geçerliydi, birim yoktu.
+// Birimsiz | çağıran ne yollayacağını bilmiyor
+func SetTimeout(t int) // saniye mi? ms mi?
+SetTimeout(30) // 30 saniye sanıp 30 ms yollamak
+// Birim tipe gömülü | yanlış kullanım derlenmiyor
+func SetTimeout(d time.Duration)
+SetTimeout(30 * time.Second)
+Aynı hastalık price float64 (para birimi ve ölçek belirsiz) ve size int
+(byte mı kilobayt mı) örneklerinde de görülür.
+Kural. Birim tip sistemine ya da en azından değişken adına gömülmelidir:
+timeoutMs, sizeBytes, priceCents.
+˙Ilke 12 — Sayaç ile Ölçer Farklı Türlerdir
+Kümülatif sayaç, anlık ölçer ve dağılım birbirinin yerine kullanılamaz.
+# Yanlış: counter’ı doğrudan çizmek → sürekli artan anlamsız çizgi
+http_requests_total
+# Doğru: türevini almak
+rate(http_requests_total[5m])
+Daha sinsi hata, ölçerin ortalanmasıdır. “Ortalama kuyruk uzunluğu 3”
+ifadesi, on dakika sıfır ve bir dakika otuz olan bir seride krizi tamamen silmek-
+tedir.
+8
+
+-- 8 of 31 --
+
+Kural. Metrik tanımlanırken hangi soru için toplandığı yazılmalıdır. “Ne
+kadar sık” sorusu sayaç, “şu an ne durumda” sorusu ölçer, “dağılım nasıl” sorusu
+histogram gerektirir. Ölçer için ortalama yerine max over time sorulmalıdır.
+˙Ilke 13 — Ölçüm Penceresi Gördüğün Gerçekliği Belirler
+Gerçek: 10:00:00{10:00:20 arası servis tamamen down
+1 dakikalık pencere: %67 başarı → "bir tuhaflık var"
+5 dakikalık pencere: %93 başarı → "önemsiz dalgalanma"
+1 saatlik pencere: %99.4 → SLO yeşil, kimse görmedi
+Kesinti kaybolmamıştır; çözünürlük tarafından yutulmuştur. Alarm penceresi
+olayın süresinden uzunsa, o olay için alarm yoktur.
+Kural. Yakalanmak istenen en kısa arıza süresi belirlenmeli, pencere ondan
+küçük seçilmelidir. Uzun pencereli SLO’nun yanına kısa pencereli tüketim hızı
+alarmı konulmalıdır.
+˙Ilke 14 — Toplulaştırma Bilgi Yok Eder ve Geri Alınamaz
+Yüzdelikler toplanamaz.
+Servis A p99 = 100 ms
+Servis B p99 = 100 ms
+A ve B’nin p99’larının ortalaması = 100 ms
+Birleşik sistemin gerçek p99’u = ???
+Bilinemez. Ham dağılım atıldıysa geri gelmez.
+Pod başına p99 hesaplayıp ardından podlar arası ortalama alan her pano,
+matematiksel olarak anlamsız bir sayı göstermektedir. Doğru yöntem histogram
+kovalarını toplayıp yüzdeliği en sonda hesaplamaktır.
+Kural. Toplulaştırma mümkün olan en son adıma ertelenmelidir. Erken özetlenmiş
+veri, sonradan sorulacak sorulara cevap veremez.
+˙Ilke 15 — Kardinalite, Ölçüm Sisteminin Kendi Arızasıdır
+Her etiket kombinasyonu ayrı bir zaman serisidir.
+// Bomba: 100k kullanıcı × 50 endpoint = 5M seri
+metrics.Inc("requests", "user_id", uid, "path", r.URL.Path)
+// Sağlıklı: sınırlı, bilinen değer kümesi
+metrics.Inc("requests", "route", "/clips/:id", "status", "200")
+Ham yol bilgisi de aynı tuzağa girer; rota şablonu kullanılmalıdır.
+9
+
+-- 9 of 31 --
+
+Genel ilke. Gözlem altyapısı da bir sistemdir, kapasitesi vardır ve izlenmesi
+gerekir. Kayıt tutma nedeniyle düşen üretim ortamı klasik bir arızadır.
+˙Ilke 16 — Alarm Eşiği, Arızanın Kendisi Değil Bir Hipotezidir
+CPU > %80 kuralı bir teori gömer: yüksek işlemci kullanımı kötüdür. Toplu iş
+işçisi için bu yanlıştır; gecikmeye duyarlı servis için de yanlış olabilir.
+Kötü: CPU > %80
+disk > %90
+pod restart oldu
+_Iyi: hata oranı > SLO burn rate 14x (1 saatte aylık bütçenin %2’si)
+kuyruk bekleme süresi p95 > 500 ms
+en eski işlenmemiş mesaj yaşı > 5 dk
+Ölçüt. Alarm çaldığında bir kullanıcı acı çekiyor mu? Cevap olumsuzsa o
+alarm gürültüdür ve gürültü zamanla gerçek alarmlara karşı sağırlık üretir.
+˙Ilke 17 — Ölçüm Noktası Sorumluluk Sınırında Olmalıdır
+_Istemci ölçümü: 1.400 ms (DNS + TLS + ağ + sunucu + render)
+Load balancer: 420 ms
+Uygulama handler: 340 ms
+Sadece DB sorgusu: 12 ms
+Dördü de doğrudur ve dördü farklı soruya cevap verir. “12 ms” diyerek
+kullanıcının 1400 milisaniyelik deneyimini savunmak, teknik olarak doğru bir
+yanıltmadır.
+Kural. Kullanıcı deneyimi savunuluyorsa kullanıcıya en yakın noktadan, iç
+optimizasyon yapılıyorsa içeriden ölçülmelidir. ˙Ikisi birbirinin yerine kullanılamaz.
+˙Ilke 18 — Temel C izgi Olmadan Ölçüm Anlamsızdır
+“Yeni sürüm 250 ms” ifadesi tek başına hiçbir şey söylemez.
+Değişiklik öncesi/sonrası kıyaslamanın minimum şartları:
+aynı donanım / instance tipi
+aynı veri hacmi ve dağılımı
+aynı ısınma süresi (JIT, cache, connection pool)
+aynı eşzamanlılık seviyesi
+biri sabah, diğeri gece → farklı yük → geçersiz
+En güvenilir yöntem A/B kıyaslamasıdır: iki sürüm aynı anda trafiğin yarısına
+verilir. Zamanı kontrol değişkeni olmaktan çıkarmanın tek yolu budur.
+10
+
+-- 10 of 31 --
+
+˙Ilke 19 — Ölçülmeyen Sey Optimizasyonda Feda Edilir
+Ölçüm seti bir değer sistemidir.
+Ölçülen: istek/saniye ↑
+Ölçülmeyen: tenant başına gecikme dağılımı
+Sonuç: toplam throughput %30 arttı,
+küçük müşterilerin p99’u 4 katına çıktı
+→ dashboard’da her şey yeşil
+Refleks. Her optimizasyon hedefinin yanına bir koruma metriği konulmalıdır:
+“gecikmeyi düşür, ancak bellek şu sınırı aşmasın ve kiracılar arası p99 farkı şu
+değeri geçmesin.”
+˙Ilke 20 — Ölçümün Maliyeti Kararın Değerini Aşmamalıdır
+Metroloji sürekli hassaslaşır, çünkü hassasiyet oradaki üründür. Mühendislikte
+ürün karardır.
+Karar: "Redis mi Memcached mi?"
+Ölçüm maliyeti: 3 gün kıyaslama altyapısı
+Kararın etkisi: ikisi de yeterli, geri dönüş 1 gün
+→ Ölçme. Birini seç, yanılırsan değiştir.
+Karar: "Veritabanını sharding’e geçirelim mi?"
+Ölçüm maliyeti: 1 hafta
+Kararın etkisi: geri dönüşü 6 ay, yanlışsa şirket batıyor
+→ Ölç. Hem de iki bağımsız yöntemle.
+Kural. Ölçüm çabası, merakla değil kararın geri dönülemezliğiyle orantılanmalıdır.
+˙Ikinci Küme Özeti
+# ˙Ilke Refleks
+11 Birimsiz sayı hesaplanamaz Birimi tipe veya isme göm
+12 Sayaç, ölçer ve histogram farklıdır Metriği tanımlarken sorusunu yaz
+13 Pencere gerçekliği belirler Pencereyi arızadan kısa seç
+14 Toplulaştırma geri alınamaz Özetlemeyi en sona ertele
+15 Kardinalite altyapıyı öldürür Etiket değerlerini sınırla
+16 Eşik bir hipotezdir Semptomu değil sözleşmeyi izle
+17 Ölçüm noktası politiktir Kullanıcıyı savunuyorsan kullanıcıdan ölç
+18 Temel çizgisiz sayı yoktur Aynı anda, aynı koşulda kıyasla
+19 Ölçülmeyen feda edilir Her hedefe bir koruma metriği
+20 Ölçümün de maliyeti vardır C abayı geri dönülemezlikle orantıla
+11
+
+-- 11 of 31 --
+
+Üçüncü Küme: Ölçümün Sosyal ve Zamansal Boyutu
+˙Ilke 21 — Ölçüm Bir Davranış Değiştiricidir
+Bir metriği panoya asmak, onu ölçmeyi bırakıp teşvik etmeye başlamaktır.
+Ölçülen: kişi başı kapatılan ticket / hafta
+Görülen: 8 → 19 (büyük başarı)
+Gerçekte: tek bir iş 5 ticket’a bölünüyor
+kimse zor ve uzun işe girmiyor
+refactor hiç yapılmıyor (ticket üretmiyor)
+Ayrım kuralı. Bir metrik ya teşhis ya değerlendirme içindir; ikisi aynı anda
+olamaz. Değerlendirmeye bağlanan metrik, o andan itibaren üretilmeye başlar
+ve teşhis aracı olmaktan çıkar. Ekip metrikleri sistemin teşhisi için kullanılmalı,
+kişilerin değerlendirmesi için asla kullanılmamalıdır.
+˙Ilke 22 — Metriğin Bir Yaşam Süresi Vardır
+Tipik dashboard yaşı:
+Panel 1-4: aktif kullanılıyor
+Panel 5-9: geçen yılki bir incident için eklendi, o sorun çözüldü
+Panel 10-14: kimsenin bakmadığı altyapı metrikleri
+Panel 15-18: ölü sorgular (bkz. _Ilke 5)
+On sekiz panelli bir ekran, on sekiz panelin de izlenmediği anlamına gelir.
+Kural. Her metriğin ve alarmın bir sahibi ve bir gözden geçirme tarihi ol-
+malıdır. “Bu alarm son altı ayda kaç kez çaldı ve çaldığında ne yapıldı” sorusu-
+nun cevabı “hiç” veya “susturuldu” ise silinmelidir. Silinmeyen ölçüm, gürültü
+bütçesini tüketir.
+˙Ilke 23 — C elişki Hâlinde Hakem Önceden Belirlenmelidir
+Önceden yazılmış hakem sırası:
+1. Müşteri tarafı sentetik prob (uçtan uca, dışarıdan)
+2. Load balancer erişim log’u
+3. Uygulama metrikleri
+4. Trace (örneklenmiş | sadece yön gösterir, sayı vermez)
+Celişki halinde: yukarıdaki kazanır.
+Bu, metrolojideki izlenebilirlik zincirinin doğrudan karşılığıdır: hangi ölçümün
+üstte olduğu, kriz anında değil önceden kararlaştırılır.
+12
+
+-- 12 of 31 --
+
+˙Ilke 24 — Ölçüm Gecikmesi, Ölçümün Kendisi Kadar Önemlidir
+Metrik pipeline gecikmesi:
+scrape aralığı 15 s
++ rate() penceresi 5 dk
++ alert "for" süresi 5 dk
++ bildirim kuyruğu 1 dk
+toplam ~11 dk
+Dağıtım başladıktan on bir dakika sonra öğrenilen bilgi, o sürede yayılım
+yüzde yüze ulaşmışsa canary uygulamasını anlamsız kılar.
+Kural. Kontrol döngüsünün gecikmesi, müdahale penceresinden kısa olmalıdır.
+Yayılım hızı ölçüm gecikmesine göre ayarlanır; tersi değil.
+˙Ilke 25 — Geçmiş Veri Olmadan “Normal” Bilinemez
+Katmanlı saklama stratejisi:
+ham (15 s çözünürlük) → 15 gün (incident debug)
+5 dk’ya indirgenmiş → 90 gün (trend, kapasite)
+1 saate indirgenmiş → 2 yıl (mevsimsellik, yıllık kıyas)
+Anomali tespiti temel çizgi, temel çizgi ise geçmiş gerektirir. Mevsimsellik
+tam olarak uzun geçmişte saklıdır. Ancak indirgeme sırasında ˙Ilke 14 hatırlanmalıdır:
+hazır yüzdelikler değil, histogram kovaları saklanmalıdır.
+˙Ilke 26 — Ölçülmeyen Seyin Yokluğu Kanıtlanmış Olmaz
+Abraham Wald, dönen uçaklardaki kurşun deliklerini haritalayan orduya zırhın
+deliklerin bulunmadığı yere konulmasını önerdi; oradan vurulanlar geri dönmemişti.
+Yazılımdaki tam karşılığı:
+latency histogramı sadece TAMAMLANAN istekleri içerir
+timeout’a düşen, bağlantısı kopan, istemcinin iptal ettiği istekler
+→ hiç kaydedilmez
+Sonuç: sistem yavaşladıkça p99 DÜSEB_IL_IR
+(çünkü yavaş istekler artık tamamlanmıyor)
+Kural. Başarı metriğinin yanına her zaman terk veya başarısızlık metriği
+konulmalıdır. “Kaç istek tamamlandı” ile “kaç istek başlatıldı” arasındaki fark
+ölçülmelidir.
+13
+
+-- 13 of 31 --
+
+˙Ilke 27 — Ölçüm C özünürlüğü Düzeltme C özünürlüğünden ˙Ince Ol-
+malıdır
+Autoscaler örneği:
+ölçüm: 60 s’de bir CPU örneği
+ölçek: 30 s’de bir scale kararı
+→ Karar, elindeki veriden daha hızlı veriliyor
+→ Aynı bayat veriyle iki kez ölçekleniyor
+→ Salınım: 3 pod → 12 pod → 3 pod → 12 pod
+Kontrol sistemi, sensöründen daha ince ayar yapamaz.
+Kural. Kontrol döngüsünün periyodu, ölçüm periyodunun en az birkaç katı
+olmalıdır; ayrıca histerezis ve bekleme süresi eklenmelidir. Bu, klasik kontrol
+teorisinin yazılımda sürekli yeniden keşfedilen sonucudur.
+˙Ilke 28 — “ Ölçemiyorum” C oğu Zaman “Enstrümante Etmedim” De-
+mektir
+"Ölçülemez" denen şeyler ve gerçek cihazları:
+kod kalitesi → değişim başına bug oranı, dosya başına
+değişiklik sıklığı × karmaşıklık (hotspot analizi)
+teknik borç → aynı dosyaya tekrar dönme oranı,
+bir özelliğin lead time’ının zaman içindeki eğrisi
+onboarding zorluğu → yeni kişinin ilk anlamlı PR’ına kadar geçen gün
+dokümantasyon → aynı sorunun Slack’te sorulma sıklığı
+Hiçbiri mükemmel değildir; ancak kaba ve doğru olan, ince ve yok olandan
+üstündür. Bu metrikler yalnızca teşhis içindir (bkz. ˙Ilke 21).
+˙Ilke 29 — Ölçüm Sisteminin Kendisi de Düzenli Olarak Sınanmalıdır
+Ölçüm sistemi tatbikatı:
+aylık: staging’de bilerek hata enjekte et
+→ doğru alarm, doğru kişiye, kaç dakikada ulaştı?
+aylık: bir metriği bilerek durdur
+→ "no data" alarmı çaldı mı? (bkz. _Ilke 5)
+çeyreklik: dashboard’ları gözden geçir
+→ hangi panel son 90 günde hiç bakılmadı?
+Kaos mühendisliğinin az konuşulan yarısı budur: amaç, sistemin dayanıklılığı
+kadar gözlem sisteminin dürüstlüğünü de sınamaktır.
+˙Ilke 30 — Ölçümün Son Sınırı Yargıdır
+Sayının yapabildiği: Sayının yapamadığı:
+seçenekleri daraltmak hangi değerin önemli olduğunu söylemek
+varsayımı yalanlamak ölçülmemiş riski hesaba katmak
+14
+
+-- 14 of 31 --
+
+tartışmayı somutlamak bağlamı bilmek
+sürprizi göstermek sorumluluğu üstlenmek
+Sayı sorumluluğu üstlenmez. “Metrikler öyle diyordu” bir savunma değildir;
+ölçümü seçen, penceresini belirleyen ve eşiğini koyan mühendisin kendisidir.
+Nilometre suyu ölçüyordu, vergiyi insanlar koyuyordu.
+Üçüncü Küme Özeti
+# ˙Ilke Refleks
+21 Ölçüm davranış değiştirir Teşhis metriğini değerlendirmeye bağlama
+22 Metriğin ömrü vardır Sahipsiz ve çalmayan alarmı sil
+23 C elişkide hakem önceden belli olmalı Kaynak hiyerarşisini kriz öncesi yaz
+24 Gecikme de bir hatadır Kontrol döngüsü ölçüm gecikmesinden yavaş
+olsun
+25 Temel çizgi geçmiş ister Katmanlı sakla, kovaları koru
+26 Görünmeyen yok değildir Başarı metriğinin yanına terk metriği
+27 Sensör aktüatörden ince olmalı Histerezis ve bekleme süresi
+28 “ Ölçülemez” çoğu zaman “yapılmadı” Kaba proxy’yi hiç yoktan üstün tut
+29 Ölçüm sistemi de sınanır Alarmı bilerek tetikle
+30 Sayı karar vermez “Metrik öyle diyordu” savunma değildir
+Dördüncü Küme: Ölçümün Epistemolojik Sınırları
+˙Ilke 31 — Gözlem Ölçülen Olguyu Ortadan Kaldırabilir
+˙Ilke 4 gözlemin maliyetinden söz ediyordu; buradaki daha derin sonuç, gözlemin
+sistemin davranışını değiştirmesidir.
+Heisenbug: debugger takınca hata kayboluyor
+Sebep: race condition | debugger zamanlamayı değiştirdi
+Log ekleyince düzelen "bug":
+log satırı senkronizasyon noktası oluşturdu,
+bellek bariyeri etkisi yarattı, yarışı gizledi
+Refleks. Gözlem altında kaybolan hata çözülmüş değil, maskelenmiştir. Za-
+manlamaya duyarlı arızalarda gözlem, koda yerleştirilen sonda yerine sisteme
+dokunmayan noktalardan alınmalıdır.
+˙Ilke 32 — Ölçüm Bir Katman Seçimidir
+Kullanıcı: "sayfa açılmıyor"
+Tarayıcı: LCP 8.2 s
+CDN: origin timeout
+LB: upstream 504
+Uygulama: context deadline exceeded
+15
+
+-- 15 of 31 --
+
+DB: lock wait timeout
+Disk: await 400 ms
+Donanım: SSD wear-leveling, GC pause
+Sekiz cihaz, sekiz doğru sayı ve tek bir kök neden. Yanlış olan tek şey, bir
+katmanın sayısını nihai açıklama saymaktır.
+Kural. Kök neden analizinde “bir katman daha in” refleksi, “sayı buldum”
+refleksinden önce gelmelidir. Durma noktası: bir katman daha inmek alınacak
+eylemi değiştirmiyorsa orada durulur.
+˙Ilke 33 — Nadir Olayı Ölçmek Örneklem Büyüklüğü Gerektirir
+Soru: "10.000 istekte hiç hata yok, güvenli mi?"
+Üçler kuralı (rule of three):
+n denemede 0 olay gözlendiyse, gerçek oranın
+%95 üst sınırı 3/n
+3/10.000 = %0.03
+→ günde 10M istekte 3.000 hataya kadar yer var
+Aynı mantık uç yüzdelikler için geçerlidir; bin örnekte p99.9 hesaplamak tek
+bir gözlemi mutlaklaştırmaktır.
+Kural. Yüzdelik ne kadar uçtaysa o kadar çok örnek gerekir.
+˙Ilke 34 — C oklu Karşılaştırma Yanlış Sinyal Üretir
+Yirmi metrikli bir panoya bakıp “hangisi anlamlı değişmiş” sorusu sorulduğunda,
+yüzde beş anlamlılık düzeyinde ortalama bir tanesi tesadüfen anlamlı çıkar.
+Deploy sonrası 40 panele bakmak:
+→ 2 tanesi "bozulmuş" görünecek (saf şans)
+→ ekip bunları açıklamaya çalışacak
+→ uydurulmuş bir nedensellik hik^ayesi doğacak
+Kural. Dağıtım öncesinde hangi üç metriğe bakılacağı yazılmalıdır. Diğerleri
+keşif içindir; keşifte bulunan, ayrı bir deneyle doğrulanmadan karara dönüştürülemez.
+˙Ilke 35 — Korelasyon Ölçülür, Nedensellik Ölçülmez
+Gözlem: cache hit oranı ↓, latency ↑ (birlikte hareket ediyor)
+Üç olasılık:
+A) cache miss → latency (varsayılan)
+B) yavaş yanıtlar → timeout → yeniden istek → cache karışıyor
+16
+
+-- 16 of 31 --
+
+C) trafik deseni değişti → ikisini birden etkiledi (ortak sebep)
+Ayırt etme yolu: müdahale.
+cache boyutunu artır → latency düzeliyor mu?
+düzelmiyorsa A yanlıştı.
+Kural. Nedensellik iddiası için gözlem yetmez; kontrollü müdahale gerekir.
+Üretimde denemek, çoğu zaman aylarca panoya bakmaktan daha bilimseldir.
+˙Ilke 36 — Ölçüm Sisteme Geri Besleme Yaparsa Sistem Kendini
+Kandırabilir
+Retry fırtınası:
+latency ↑ → istemci timeout → retry
+→ yük ↑ → latency ↑↑ → daha çok retry
+→ çöküş
+Bu sırada "istek/saniye" metriği yükseliyor.
+Dashboard "trafik arttı" diyor.
+Gerçek: trafik artmadı, sistem kendi kuyruğunu yiyor.
+Kural. Ölçümden otomatik eyleme giden her yol bir kontrol döngüsü olarak
+çizilmeli ve pozitif geri besleme aranmalıdır. Yeniden denemeye üstel geri çekilme,
+dağıtım ve bütçe konulmalı; “istek” ile “yeniden istek” ayrı metrikler olmalıdır.
+˙Ilke 37 — Ölçek Değiştikçe Metriğin Anlamı Değişir
+Alarm: "5 dakikada 50’den fazla hata"
+Kuruluş anı: 10k istek/5dk → %0.5 hata oranı → makul
+Bir yıl sonra: 2M istek/5dk → %0.0025 → sürekli çalıyor, susturuldu
+Kural. Eşikler mutlak sayı yerine oran veya bütçe tüketim hızı olarak tanımlanmalıdır.
+Ölçek büyüdüğünde kendini otomatik ayarlayan tanım, insanın güncellemesini
+beklemez.
+˙Ilke 38 — Ölçüm Verisi Kişisel Veri Olabilir
+Sızıntı yolları:
+?token=abc123 → erişim log’unda düz metin
+panic stack trace → içinde kullanıcı e-postası
+slow query log → WHERE ssn = ’...’
+metrik etiketi user_email → hem KVKK/GDPR hem kardinalite bombası
+17
+
+-- 17 of 31 --
+
+Kural. Kayıt ve metrik hattına çıkışta maskeleme konulmalı; üreten her nok-
+tada hatırlanması beklenmemelidir. Hassas alanlar tip düzeyinde işaretlenmelidir.
+Saklama süresi yasal gereklilikle belirlenir, “belki lazım olur” varsayımıyla değil.
+˙Ilke 39 — Tekrarlanamayan Ölçüm, Ölçüm Değildir
+Tekrarlanabilirlik paketi:
+benchmark komutu ve parametreleri (versiyonlanmış)
+girdi verisi (veya üreticisi + seed)
+ortam tanımı (image digest, instance tipi, kernel sürümü)
+ham sonuçlar (özet değil | bkz. _Ilke 14)
+"laptop’ta çalıştırdım, 240 ms çıktı"
+M´echain’in trajedisinin özü buydu: tekrarlanabilir olmayan ölçüm doğrulanamaz.
+Sınama. Başka biri, ölçümü yapanın oturumu olmadan, tek komutla aynı
+ölçümü alabiliyor mu? Alamıyorsa eldeki bir anıdır, veri değildir.
+˙Ilke 40 — Her Ölçüm Sisteminin Kör Noktası, Onu Kuranın Zihnin-
+deki Modeldir
+Kör noktayı görünür kılma teknikleri:
+1. Incident sonrası soru:
+"Bunu ne kadar erken görebilirdik?" değil,
+"Neden hiç göremedik? Hangi metrik yoktu?"
+2. Dışarıdan bakış:
+ekibe dahil olmayan biri panoya baksın |
+"bunda X’i göremiyorum" diyebilen tek kişi odur
+3. Ters soru:
+"Sistem şu anda sessizce bozuk olsaydı,
+hangi paneller yine de yeşil kalırdı?"
+Cevabın kesişimi = kör nokta
+4. Kullanıcı kanalı:
+destek biletleri, sosyal medya, doğrudan şik^ayet
+→ her zaman cihazlardan önce haber verir
+Cihaz donmuş teoriyse, gözlem sistemi donmuş bir dünya görüşüdür. Cihaz
+eksikliği, cihaz hatasından her zaman daha pahalıdır; çünkü hata fark edilir,
+eksiklik fark edilmez.
+18
+
+-- 18 of 31 --
+
+Dördüncü Küme Özeti
+# ˙Ilke Refleks
+31 Gözlem olguyu yok edebilir Debugger’da kaybolan hata çözülmemiştir
+32 Her katman farklı doğru söyler Eylem değişmiyorsa inmeyi bırak
+33 Nadir olay örneklem ister Sıfır gözlem sıfır oran değildir
+34 C ok metriğe bakmak yanlış sinyal üretir Hangi metriğe bakacağını önceden yaz
+35 Nedensellik müdahale ister A/B, bayrak, kademeli yayılım
+36 Ölçüm sisteme geri besleme yapar Yeniden denemeyi istekten ayrı say
+37 Ölçek eşiği bozar Mutlak sayı değil, oran veya tüketim hızı
+38 Telemetri kişisel veridir C ıkışta maskeleme, tipe gömme
+39 Tekrarlanamayan ölçüm anıdır Tek komutla yeniden üretilebilsin
+40 En büyük kör nokta kendi modelindir “Bozuk olsa hangi panel yeşil kalırdı?”
+Beşinci Küme: Performans Ölçümünün Kendi Fizik Yasaları
+˙Ilke 41 — Eşgüdümlü Atlama
+Yük üreteci “isteği gönder, cevabı bekle, sonra bir sonrakini gönder” mantığıyla
+çalışıyorsa, sistem takıldığında üreteç de takılır ve o sırada gönderilmesi gereken
+yavaş istekleri hiç göndermez.
+Plan: her 10 ms’de bir istek, 100 istek
+Sistem 1 saniye donuyor:
+gerçekte → 100 kullanıcı 1000, 990, 980 ... ms bekledi
+ölçülen → 1 istek 1000 ms, sonraki 99 istek ~1 ms
+p99 = 1000 ms sanılır, gerçekte neredeyse tüm istekler kötüydü
+Ölçüm, sistemin kötü olduğu anda susmuştur.
+Kural. Gecikme, isteğin gönderildiği andan değil gönderilmesinin planlandığı
+andan ölçülmelidir. Açık yük modeli kullanılmalı; yük, sistemin cevabına bağlı
+olmamalıdır.
+˙Ilke 42 — Little Yasası Bir Tutarlılık Denetleyicisidir
+L = λ × W bağıntısı gereğince sistemdeki iş sayısı, geliş hızı ile ortalama sürenin
+çarpımına eşittir. Üç nicelikten ikisi ölçülüyorsa üçüncüsü hesaplanabilir ve
+ölçülenle karşılaştırılabilir.
+Ölçülen: 500 istek/sn, ortalama süre 200 ms
+Little: L = 500 × 0.2 = 100 eşzamanlı istek olmalı
+Ama connection pool max 20.
+→ Celişki. Ya throughput yanlış, ya süre eksik ölçülüyor
+(muhtemelen havuzda bekleme süresi sayılmıyor | bkz. _Ilke 3)
+Bu, “iki bağımsız yöntem” ilkesinin maliyetsiz versiyonudur.
+19
+
+-- 19 of 31 --
+
+˙Ilke 43 — Ölçüm Aracının Kendisi Darboğaz Olabilir
+Belirtiler:
+yük artırıyorsun → throughput sabit kalıyor
+ama sunucu CPU %30, DB rahat
+→ şüphelen: üreteç CPU’su? ephemeral port tükenmesi?
+tek bir NIC? DNS çözümlemesi her istekte?
+Doğrulama: üreteci ikiye böl, iki makineden çalıştır.
+Toplam throughput arttıysa darboğaz ölçüm tarafındaydı.
+Kural. Her yük testinde üreteç tarafının kaynakları da izlenmelidir.
+˙Ilke 44 — Isınmamış Sistem Başka Bir Sistemdir
+Aynı endpoint, aynı kod:
+ilk 100 istek → 180 ms (JIT yorumluyor, havuz açılıyor)
+1.000. istek → 45 ms
+100.000. istek → 38 ms (kararlı hal)
+Tersi de tuzaktır: gerçek dünyada soğuk başlangıç mevcuttur (sunucusuz
+mimari, yeni pod, dağıtım sonrası). Kararlı hâl ölçümü, dağıtım anındaki acıyı
+gizler.
+Kural. ˙Iki durum ayrı ölçülmeli ve ayrı raporlanmalıdır: kararlı hâl p99 ve
+soğuk başlangıç p99.
+˙Ilke 45 — Derleyici Ölçüm Kodunu Fark Eder ve Siler
+// Yanlış: sonuç atılıyor, çağrı elenebilir
+for i := 0; i < N; i++ {
+Fib(30)
+}
+// Doğru: sonucu kaçır (escape), eleme engellensin
+var sink int
+func BenchmarkFib(b *testing.B) {
+var r int
+for i := 0; i < b.N; i++ {
+r = Fib(30)
+}
+sink = r // veya runtime.KeepAlive / b.ReportMetric
+}
+Aynı aileden hatalar: sabit girdinin derleme zamanında hesaplanması, döngünün
+vektörleştirilmesi, dalların mükemmel tahmin edilmesi.
+20
+
+-- 20 of 31 --
+
+Sağlama. Girdi büyüklüğü iki katına çıkarıldığında süre iki katına çıkmıyorsa
+iş yapılmıyordur.
+˙Ilke 46 — Mikro Ölçümlerin Toplamı Sistem Performansı Değildir
+JSON serialization: toplam sürenin %5’i
+%50 hızlandırıldı → sistem kazancı %2.5
+Cache hit oranını %70’ten %85’e çıkarmak
+→ sistem kazancı %20
+Amdahl yasası bu sonucun aritmetiğidir. Ayrıca mikro ölçümler bağlamı yok
+eder; gerçek sistemde önbellek satırları paylaşılır, çöp toplama baskısı vardır,
+komşu istekler bellek bant genişliğini tüketir.
+Kural. Optimizasyon hedefi uçtan uca profilden seçilmelidir. Mikro ölçüm bir
+hipotezi doğrulamak içindir, öncelik belirlemek için değil.
+˙Ilke 47 — Ölçeklenme Doğrusal Değildir
+Ölçüm: 4 worker → 400 rps
+8 worker → 760 rps
+Tahmin: 32 worker → 3.000 rps
+Gerçek: 32 worker → 900 rps
+(lock çekişmesi + connection pool + cache line ping-pong)
+throughput
+← tepe noktası
+eşzamanlılık
+Evrensel ölçeklenebilirlik yasası bunu iki terimle açıklar: çekişme (serileşen
+kısım) ve tutarlılık (senkronizasyon maliyeti, N 2 ile büyür).
+Kural. En az beş altı farklı yük seviyesinde ölçülmeli ve eğri çizilmelidir. Tepe
+noktası bulunmadan kapasite planlaması yapılamaz.
+˙Ilke 48 — Saat de Bir Ölçüm Cihazıdır ve Bozulur
+// Kırılgan: NTP düzeltmesi negatif süre üretebilir
+start := time.Now()
+// ... NTP saati 200 ms geri aldı
+elapsed := time.Now().Sub(start) // -150 ms
+Dağıtık tarafta iki makinenin saat farkı, izlemede cevabın istekten önce
+geldiği aralıklar üretir (bkz. ˙Ilke 10).
+21
+
+-- 21 of 31 --
+
+Kural. Süre için monotonik saat, damga için duvar saati kullanılmalıdır. Saat
+kayması ayrı bir metrik olarak izlenmelidir; bu, ölçüm cihazının kalibrasyonudur.
+˙Ilke 49 — Maliyet Bir Performans Metriğidir
+Optimizasyon A: p99 220ms → 140ms, maliyet $0.4 → $1.1 / 1M istek
+Optimizasyon B: p99 220ms → 175ms, maliyet $0.4 → $0.35 / 1M istek
+Hangisinin doğru olduğu ölçümde değil, bir milyon isteğin getirdiği gelirde
+saklıdır.
+Kural. Kaynak metrikleri mutlak değil birim başına raporlanmalıdır: istek
+başına maliyet, aktif kullanıcı başına gigabayt, işlenen video dakikası başına
+vCPU-saat. Ölçek büyüdüğünde mutlak sayılar anlamını yitirir; birim ekonomi
+yitirmez.
+˙Ilke 50 — Girdi Dağılımı Kayarsa Metrik Sabit Kalsa Bile Anlamı
+Değişir
+Örnek:
+6 ay önce: ortalama dosya 200 MB, işleme 40 s, başarı %99.8
+bugün: ortalama dosya 2 GB (müşteri 4K’ya geçti)
+işleme 40 s (!), başarı %99.8 (!)
+Nasıl? Büyük dosyalar upload aşamasında timeout’a düşüyor,
+pipeline’a hiç girmiyor → metriğe hiç yansımıyor (bkz. _Ilke 26)
+Makine öğrenmesi tarafında aynı olgunun adı veri kaymasıdır.
+Kural. C ıktı metriklerinin yanında girdi dağılımı da izlenmelidir: dosya boyutu,
+istek gövdesi, kullanıcı segmenti, sorgu karmaşıklığı histogramları. Girdi kaydığında
+çıktı metriği yeniden kalibre edilmelidir.
+Beşinci Küme Özeti
+# ˙Ilke Refleks
+41 Eşgüdümlü atlama Planlanan andan ölç, açık yük modeli
+42 Little yasası Bağıntı tutmuyorsa cihazlardan biri yanlıştır
+43 Üreteç darboğaz olabilir Test tarafını da izle, ikiye bölerek doğrula
+44 Isınma Soğuk ve kararlı hâli ayrı raporla
+45 Derleyici ölçümü siler Girdiyi iki katla, süre iki katlanıyor mu
+46 Mikro ölçüm sistem değildir Önceliği uçtan uca profilden seç
+47 Ölçeklenme doğrusal değildir Beş altı noktada ölç, tepeyi bul
+48 Saat bozulur Süre monotonik, damga duvar saati
+49 Maliyet performanstır Birim başına raporla
+50 Dünya kayar, metrik kalır Girdi dağılımını da izle
+22
+
+-- 22 of 31 --
+
+Altıncı Küme: Alana Özel Türevler
+˙Ilke 51 — Test Kümesi Sızıntısı
+Makine öğrenmesinde ölçüm cihazı bir veri kümesidir. Eğitim verisi test verisine
+sızarsa cihaz kıyaslamaz, hatırlar.
+Sızıntı yolları:
+1. Aynı kayıt hem train hem test’te (dedup yapılmadı)
+2. Zaman sızıntısı: gelecekteki bilgi feature’a girmiş
+("son 30 gün ortalaması" hesaplanırken test dönemi dahil edilmiş)
+3. Grup sızıntısı: aynı hastanın farklı çekimleri iki tarafa dağılmış
+4. Ön işleme sızıntısı: normalizasyon istatistikleri
+tüm veri üzerinden hesaplanmış, sonra bölünmüş
+En sinsisi dördüncüsüdür; ölçekleyici bölmeden önce eğitilirse test kümesinin
+ortalaması modele aktarılmış olur.
+Kural. Bölme her zaman ilk adımdır. Zaman serilerinde kronolojik bölme
+kullanılır. Nihai hakem üretimdir; çevrimdışı skor ile çevrimiçi skor farkı kalıcı
+bir metrik olarak izlenmelidir. Bu fark, cihazın kalibrasyon hatasıdır.
+˙Ilke 52 — Benchmark Doygunluğu
+Yaşam döngüsü:
+Yıl 1: yeni benchmark, en iyi skor %35 → iyi ayrıştırıyor
+Yıl 2: skorlar %60-70 → h^al^a bilgilendirici
+Yıl 3: skorlar %92-94 → aradaki 2 puan gürültü mü yetenek mi belirsiz
+Yıl 4: veri sızmış, herkes ona göre ayarlamış → ölçüm ölü
+Bu, Goodhart yasasının kurumsal ölçekteki görünümüdür. Aynı desen veri-
+tabanı ve servis kıyaslamalarında da mevcuttur.
+Kural. Kritik kararlar için kendi verisiyle kurulmuş, gizli tutulan ve dönemsel
+yenilenen bir ölçüm seti gereklidir. Kamuya açık kıyaslama bir ön eleme aracıdır,
+seçim kriteri değil.
+˙Ilke 53 — Hakem Ölçtüğüyle Aynı Malzemedense Sistematik Hata
+Paylaşılır
+Bilinen yanlılıklar:
+konum yanlılığı → ilk sunulan cevabı tercih etme
+uzunluk yanlılığı → uzun cevabı "daha iyi" sanma
+kendini tanıma → aynı aileden modelin çıktısını yeğleme
+kibarlık yanlılığı → biçimi içeriğin önüne koyma
+Düzeltmeler ölçüm biliminin standart yöntemleridir: sıranın rastgeleleştirilmesi,
+aynı çiftin iki yönde sorulması, uzunluğun kontrol değişkeni olarak kaydedilmesi
+ve insan etiketiyle düzenli çapraz kalibrasyon.
+23
+
+-- 23 of 31 --
+
+Kural. Otomatik hakem, insan yargısına karşı ölçülmüş bir korelasyon kat-
+sayısı olmadan kullanılmamalıdır. O katsayı yoksa elde cihaz değil tahmin
+vardır.
+˙Ilke 54 — Tazelik ile Eksiksizlik C elişir
+Günlük rapor 00:05’te üretiliyor.
+Mobil istemciler çevrimdışıyken biriktirip 6 saate kadar geç gönderiyor.
+Taze rapor → dünün verisi %94 tam, sayı düşük çıkıyor
+Eksiksiz rapor → 6 saat bekle, sabah toplantısına yetişmiyor
+Kural. Pencere kapatma politikası açıkça tanımlanmalı ve raporun üstünde
+belirtilmelidir. Geç gelen kayıt oranı ayrı bir metrik olmalıdır; sessizce arttığında
+bütün geçmiş raporların anlamı kayar (bkz. ˙Ilke 50).
+˙Ilke 55 — Taban Oran Yanılgısı
+Dedektör: %99 doğru (hem duyarlılık hem özgüllük)
+Gerçek saldırı oranı: 1.000.000 istekte 10
+Doğru yakalanan: 10 × 0.99 10
+Yanlış alarm: 999.990 × 0.01 10.000
+→ Alarm çaldığında saldırı olma olasılığı: 10 / 10.010 %0.1
+Yüzde doksan dokuz doğruluk, her gerçek olay başına bin yanlış alarm an-
+lamına gelir. Ekip alarmları susturur ve gerçek olay o susturulmuş kanaldan
+geçer.
+Kural. Nadir olay dedektörleri doğrulukla değil kesinlikle (precision) değerlendirilmelidir.
+Alarm hacmi bir kapasite kısıtıdır: günde bakılabilecek alarm sayısı eşiği belir-
+ler.
+˙Ilke 56 — Dağıtık Sistemde “Su An” Ölçülemez
+"Sistemde şu an kaç işlem var?"
+A’yı sorduğunda: 40
+B’yi sorduğunda (200 ms sonra): 35
+Toplam 75 mi? Hayır | A’nın 5 tanesi bu arada B’ye geçmiş,
+iki kez sayıldı. Ya da hiç sayılmadı.
+Doğru cevap ya Chandy–Lamport tarzı tutarlı kesit protokolüdür ya da soru-
+nun değiştirilmesidir: mutlak durum yerine korunumlu büyüklükler ölçülür.
+Kural. Dağıtık sistemde ölçer yerine sayaç tercih edilmelidir. Anlık durum
+soruları akış sorularına çevrilir.
+24
+
+-- 24 of 31 --
+
+˙Ilke 57 — Kuyrukta Derinlik Değil Yaş Ölçülür
+Kuyruk derinliği: 50.000 mesaj → panik
+ama tüketici 20.000 msg/sn işliyor → gecikme 2.5 sn, sorun yok
+Kuyruk derinliği: 12 mesaj → sakin
+ama en eski mesaj 40 dakikadır orada
+(zehirli mesaj tüketiciyi kilitlemiş, kuyruk ilerlemiyor)
+Derinlik, tüketim hızı bilinmeden anlamsızdır. Yaş, kullanıcının doğrudan
+hissettiği niceliktir.
+Kural. Her asenkron kuyruk için birincil metrik en eski işlenmemiş öğenin
+yaşıdır. Alarm yaşa kurulur; derinlik kapasite planlaması için ikincil metriktir.
+˙Ilke 58 — Deneye Erken Bakmak Sonucu Üretir
+p-değeri zaman içinde rastgele salınır:
+gün 1: 0.42
+gün 3: 0.08
+gün 5: 0.03 ← "kazandık" deyip durdurulursa yanlış karar
+gün 9: 0.31
+gün 14: 0.28 ← gerçek: etki yok
+Yanına iki tuzak eklenir: yenilik etkisi ve deneyler arası girişim.
+Kural. Örneklem büyüklüğü ve süre başlamadan önce hesaplanmalı, o tar-
+ihe kadar karar verilmemelidir. Erken bakış gerekiyorsa ardışık bakışa göre
+düzeltilmiş sıralı test yöntemleri kullanılır. En az bir tam haftalık döngü gerek-
+lidir; hafta içi ve hafta sonu farkı gerçek bir mevsimselliktir.
+˙Ilke 59 — Geri Kanalı Olmayan Cihaz Ölçüm Yapmaz
+Klasik kör nokta:
+Cihaz çöktüğünde telemetri de çöker.
+→ Panolarda "sağlıklı cihaz oranı %99"
+→ Cünkü sadece rapor gönderebilenler sayılıyor (_Ilke 26)
+Düzeltme: eksikliği ölç
+beklenen heartbeat sayısı vs gelen heartbeat sayısı
+→ "sessizlik" bir sinyaldir, veri yokluğu değil
+Uçta bant genişliği ve pil bir bütçedir; örnekleme zorunludur ve örnekleme
+yanlılık üretir: pili biten cihaz veri göndermez, dolayısıyla en kötü durumdakiler
+en az temsil edilir.
+25
+
+-- 25 of 31 --
+
+Kural. Uç telemetride “kaç cihazdan veri geldi” ile “kaç cihaz var” farkı bir-
+incil metrik olmalıdır. Örnekleme oranı veriyle birlikte gönderilmelidir ki geri
+ağırlıklandırma yapılabilsin.
+˙Ilke 60 — Ölçmeyi Bırakma Anını Bilmek de Ölçümün Parçasıdır
+Durma kriterleri:
+1. Karar değişmiyorsa dur
+"Bu ölçümün sonucu ne çıkarsa çıksın aynı şeyi mi yapacağım?"
+Evet ise ölçme.
+2. Belirsizlik, karar eşiğinin altına indiyse dur
+A=180ms, B=175ms, eşik "50ms’den fazla fark varsa değiştir"
+→ daha hassas ölçmenin değeri yok
+3. Bir sonraki ölçümün maliyeti, kalan belirsizliğin
+beklenen maliyetini aşıyorsa dur (bkz. _Ilke 20)
+4. Geri dönüş ucuzsa, ölçmek yerine dene
+feature flag + %1 trafik = en ucuz ölçüm aleti
+Metroloji sonsuza kadar hassaslaşır; mühendislikte ürün karardır. Cihaz,
+kararı besleyecek kadar iyi olduğunda görevini tamamlamıştır; daha iyisi artık
+maliyettir. Ölçüm eylemin hizmetindedir; eyleme dönüşmeyen sayı, ne kadar
+hassas olursa olsun süstür.
+Altıncı Küme Özeti
+# ˙Ilke Refleks
+51 Test kümesi sızıntısı Bölme ilk adım; çevrimdışı-çevrimiçi farkını
+izle
+52 Benchmark doygunluğu Kritik kararda kendi gizli setin
+53 Hakem aynı malzemeden ˙Insan yargısıyla korelasyon ölçülmeden kul-
+lanma
+54 Tazelik ve eksiksizlik çelişir Pencere politikasını raporun üstüne yaz
+55 Taban oran yanılgısı Nadir olayda doğruluk değil kesinlik
+56 Dağıtık “şu an” yoktur Ölçer yerine sayaç, durum yerine akış
+57 Derinlik değil yaş Alarm en eski öğenin yaşına kurulur
+58 Erken bakış sonuç üretir Süre ve örneklem önceden sabitlenir
+59 Geri kanalı olmayan cihaz Sessizliği sinyal say, eksiği ölç
+60 Durma kuralı Karar değişmiyorsa ölçme
+26
+
+-- 26 of 31 --
+
+Yedinci Küme: Sunum, Sözleşme ve Son Sınırlar
+˙Ilke 61 — Simpson Paradoksu
+Toplulaştırma bilgiyi yok etmekle kalmaz, işareti ters çevirebilir.
+Yeni sürüm hata oranı (toplam):
+v1: %2.0 v2: %3.5 → "v2 daha kötü, geri alalım"
+Platform kırılımı:
+v1 v2
+Mobil %5.0 (1.000) %4.0 (9.000) ← v2 daha iyi
+Masaüstü %1.0 (9.000) %0.5 (1.000) ← v2 daha iyi
+v2 her segmentte daha iyi, toplamda daha kötü.
+Sebep: v2 ağırlıklı olarak zaten hatalı olan mobile verilmiş.
+Bu bir hesap hatası değil, ağırlıkların değişmesidir. Kademeli yayılımlarda
+sürekli görülür; canary trafiği asla genel trafiğin bileşimiyle aynı değildir.
+Kural. Karşılaştırmadan önce segment dağılımlarının eşitliği doğrulanmalıdır.
+Eşit değilse dilimlenerek bakılmalı veya ortak bir dağılıma göre yeniden ağırlıklandırılmalıdır.
+˙Ilke 62 — Sansürlü Veri
+Naif hesap:
+Ayrılmış kullanıcıların ortalama ömrü = 4 ay
+→ "kullanıcılarımız ortalama 4 ay kalıyor"
+Hata: h^al^a aktif olan 50.000 kullanıcı hesaba hiç girmedi.
+Onlar da sayılsaydı ortalama çok daha yüksek olurdu.
+Ama ne kadar? Bilinmiyor | henüz ayrılmadılar.
+Bu sağdan sansürlemedir; olay ufkun ötesindedir. Doğru araç ortalama
+değil hayatta kalma eğrisidir (Kaplan–Meier). Aynı hata “ortalama bilet çözüm
+süresi”, “ortalama işlem süresi” ve “ortalama dağıtım süresi” hesaplarında da
+görülür.
+Kural. Süre ölçülürken henüz tamamlanmamışların oranı da raporlanmalıdır.
+Bu grup büyükse ortalama yayımlanmamalı, kohort veya hayatta kalma eğrisi
+kullanılmalıdır.
+˙Ilke 63 — Grafik Bir Cihaz Değil, Bir Argümandır
+Aynı veri, üç grafik:
+y ekseni 98-100 arası → %0.3’lük düşüş uçurum gibi görünür
+y ekseni 0-100 arası → aynı düşüş görünmez olur
+27
+
+-- 27 of 31 --
+
+log ölçek → üstel büyüme doğrusal görünür, panik geçer
+Hiçbiri "yanlış". Üçü üç farklı iddia.
+Ek tuzaklar: çift y ekseni, kırmızı-yeşil renk kodu (erkeklerin yaklaşık yüzde
+sekizi ayırt edemez), sıralı verinin pasta grafiğiyle sunulması, dolgu alanının
+olmayan bir hacim izlenimi yaratması.
+Kural. Kesilmiş eksen açıkça gösterilmelidir. Panolarda çift eksenden kaçınılmalıdır.
+Renk tek başına bilgi taşımamalı, şekil veya etiketle desteklenmelidir. Her
+grafiğe hangi soruyu cevapladığı yazılmalı; cevaplamıyorsa silinmelidir (bkz. ˙Ilke
+22).
+˙Ilke 64 — Tanım Değişince Tarihsel Seri Kırılır
+"Aktif kullanıcı" metriği:
+2024-01 → 2025-06: bot filtresi yok → 45.000
+2025-07: bot filtresi eklendi → 31.000
+Grafikte görünen: Temmuz’da %31 çöküş.
+Gerçek: hiçbir şey olmadı, cetvel değişti.
+Ulusal istatistik kurumları seri kesintisini açıkça işaretler; yazılım ekipleri
+işaretlemez.
+Kural. Tanım değiştiğinde ya yeni isim verilmeli, ya grafiğe kalıcı bir kesinti
+çizgisi eklenmeli, mümkünse eski veri yeni tanımla geriye dönük hesaplanmalı
+ve iki seri bir süre paralel yayımlanmalıdır. Tanım değişikliği kodla birlikte
+sürümlenmelidir.
+˙Ilke 65 — Ölçüm Bir Saldırı Yüzeyidir
+// Sızdırır: karşılaştırma ilk farklı byte’ta çıkar
+if userToken == storedToken { ... }
+// → 1000 deneme ile token byte byte çıkarılabilir
+// Sızdırmaz: sabit zamanlı
+if subtle.ConstantTimeCompare([]byte(userToken), []byte(storedToken)) == 1 { ... }
+Uygulama katmanında da aynı olgu geçerlidir: “kullanıcı bulunamadı” beş
+milisaniye, “şifre yanlış” iki yüz milisaniye sürüyorsa, hangi adreslerin kayıtlı
+olduğu ölçülerek çıkarılır. Hata mesajları aynı olsa bile süre farkı bilgi taşır.
+Ters yönde, halka açık durum sayfası saldırgana hangi girişiminin işe yaradığını
+canlı gösterir.
+Kural. Kimlik doğrulama yollarında sabit zaman hedeflenmeli, dışa açık du-
+rum sayfaları ham metrik yerine seviye bildirecek biçimde kabalaştırılmalıdır.
+28
+
+-- 28 of 31 --
+
+˙Ilke 66 — Denetim Kaydı ile Telemetri Farklı Cihazlardır
+Telemetri Denetim kaydı (audit)
+örneklenebilir asla örneklenemez
+kayıp tolere edilir kayıp = uyum ihlali
+15 gün saklanır 5-10 yıl saklanır
+geliştirici okur hukuk/denetçi okur
+performans için var kanıt için var
+değişebilir değiştirilemez olmalı (WORM, imza)
+Denetim kaydında ek gereksinim bütünlüktür; kayıt sonradan değiştirilebiliyorsa
+kanıt değeri sıfırdır.
+Kural. ˙Iki hat fiziksel olarak ayrılmalıdır. Karıştırılan hat hem pahalı hem
+yetersiz olur.
+˙Ilke 67 — Hata Bütçesi, Ölçümü Sözleşmeye C evirir
+SLI ham ölçüm, SLO iç hedef, SLA dışa verilen taahhüttür. Asıl mühendislik
+değeri aradaki bütçededir.
+SLO: %99.9 başarı / 30 gün
+Bütçe: %0.1 → ayda ~43 dakika
+Bütçe duruyorsa → risk al: hızlı deploy, deneysel özellik, kaos testi
+Bütçe yarıya indiyse → yavaşla, canary süresini uzat
+Bütçe bittiyse → özellik dondur, güvenilirlik işine dön
+Bu mekanizma, “ne zaman hızlı ne zaman dikkatli olunacağı” tartışmasını
+fikirden çıkarıp sayıya bağlar ve yüzde yüz hedeflemenin yanlış olduğunu açıkça
+kabul eder.
+Kural. SLO kullanıcının fark ettiği eşikten türetilmelidir. SLA her zaman
+SLO’dan gevşek tutulur; iç alarm, dış taahhüt ihlalinden önce çalmalıdır.
+˙Ilke 68 — Kriz Anında Okunamayan Pano, Olmayan Panodur
+_Incident sırasında işe yaramayan pano:
+40 panel, hepsi eşit boyutta
+eksen etiketleri yok
+"normal"in ne olduğu belirsiz
+→ operatör 6 dakika pano okuyor, sonra log’lara kaçıyor
+_Işe yarayan pano:
+üstte 4 kutu: kullanıcı acı çekiyor mu? (RED/USE)
+her grafikte baseline bandı çizili
+29
+
+-- 29 of 31 --
+
+alarm mesajında runbook linki
+→ 30 saniyede yön belli
+Ölçümün son alıcısı, gecenin üçünde uyandırılmış, bilişsel kapasitesi düşmüş
+bir insandır. Nöbet devri de bir ölçüm sorunudur; “şu ana kadar ne biliyoruz”
+yazılı değilse her devirde teşhis sıfırdan başlar.
+˙Ilke 69 — Tahmin Ölçüm Değildir
+Ölçüm: son 6 ay, ayda %8 büyüme
+Tahmin: 12 ay sonra 2.5× → sunucu siparişi buna göre
+Kırılan varsayımlar:
+büyüme doğrusal değil, adımlı (tek bir büyük müşteri gelir)
+altyapı doğrusal ölçeklenmez (_Ilke 47 | tepe noktası)
+kaynak temini gecikmelidir (GPU 4 ay, veri merkezi 12 ay)
+Geçmiş veriyi ileri uzatmak, veriye görünmez bir varsayım eklemektir: re-
+jimin aynı kalacağı varsayımı.
+Kural. Tahmin tek sayı olarak değil senaryo bandı olarak verilmeli ve her
+senaryonun tetikleyicisi yazılmalıdır. Böylece tahmin, sürekli yeniden kalibre
+edilen bir cihaza dönüşür.
+˙Ilke 70 — Ölçüm Okuryazarlığı Bireysel Değil, Ekip Yeteneğidir
+Ekip düzeyinde ölçüm olgunluğunun işaretleri:
+toplantıda "hangi pencerede?" sorusu refleks
+"ortalama" duyulduğunda dağılım isteniyor
+panoya bakmadan önce tahmin yazılıyor
+incident sonrası "hangi metrik yoktu" sorusu soruluyor
+metrik tanımı için tek bir kaynak var
+eski alarm silmek, yeni alarm eklemek kadar normal
+"sayı öyle diyor" bir tartışmayı bitirmiyor
+Nilometre beş bin yıl işledi; çünkü taş kuyu tek başına değil, rahip, kayıt,
+takvim ve vergi sistemi birlikte işledi. Cihaz zincirin yalnızca bir halkasıydı.
+Kapanış başa döner: ölçüm cihazı, bilinmeyeni üzerinde anlaşılmış bir bir-
+imle kıyaslayan makinedir. Yetmiş ilkenin tamamı bu cümledeki üç kavramın
+kırılganlığından türer. Bilinmeyen, düşünülen şey olmayabilir; üzerinde anlaşılmış
+sanılan birim üzerinde anlaşılmamış olabilir; kıyas ise her zaman bir teori taşır.
+Cihaza saygı, bu üç kırılganlığı unutmamaktır.
+30
+
+-- 30 of 31 --
+
+Yedinci Küme Özeti
+# ˙Ilke Refleks
+61 Simpson paradoksu Segment dağılımı aynı mı
+62 Sansürlü veri Henüz tamamlanmamışları raporla
+63 Grafik bir argümandır Kesik ekseni işaretle, rengi tek taşıyıcı yapma
+64 Tanım değişince seri kırılır Kesinti çizgisi ve paralel yayın
+65 Ölçüm saldırı yüzeyidir Kimlik doğrulama yolunda sabit zaman
+66 Denetim kaydı telemetri değildir Hatları ayır, denetimi örnekleme
+67 Hata bütçesi Hız kararını sayıya bağla
+68 Kriz anında okunabilirlik Yorgun tek kişiye göre tasarla
+69 Tahmin model taşır Senaryo bandı ve tetikleyici
+70 Okuryazarlık ekip yeteneğidir “Sayı öyle diyor” tartışmayı bitirmesin
+Ek Kavramlar
+Ölçümün Kendi Tarihi
+Bir metriğin bugünkü değeri kadar, o metriğin neden ölçülmeye başlandığı da
+bilgidir. C oğu pano, unutulmuş bir olayın fosilidir. Metrik tanımının yanına
+hangi olaydan sonra eklendiği notunun düşülmesi, ileride verilecek silme kararını
+mümkün kılar (bkz. ˙Ilke 22).
+Ölçülmeyeni Savunma
+Her ekipte ölçülemeyen ancak önemli olan nitelikler bulunur: mimari sadelik,
+ekip morali, kodun anlaşılabilirliği. Ölçülebilir olanların ölçülemeyenleri ezme
+eğilimi — ˙Ilke 19’un genel hâli — yapısal bir baskıdır. Buna karşı koymak bir
+yöntem değil, bilinçli bir duruştur. Sayının bulunmadığı yerde yargı devreye
+girer; bu bir eksiklik değil, ˙Ilke 30’un doğal sonucudur.
+31
+
+-- 31 of 31 --
