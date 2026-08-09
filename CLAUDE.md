@@ -28,6 +28,10 @@ Derleme her zaman `SITE_URL` ile:
 5. `priority` ver: kriz anında acele referans arayan biri için 1–10.
    10 = doğrudan uygulanabilir adım/denetim listesi. 1 = bağlam/tarih.
 
+**Yerel belge eklemek:** `yerel/pdfs/` içine kopyala → `yerel/posts.local.json`'a
+kayıt ekle → `npm run yerel-metin`. Korpusa girmez, aramada çıkmaz, yayına çıkmaz;
+ama düz metni `yerel/texts/` altında olduğu için sorulara cevap verirken kullanılır.
+
 ## Kimlikler
 
 Belgeler `BELGE-001`…, duvarlar `DUVAR-01`… Eklenme sırasına göre bir kez
@@ -41,7 +45,8 @@ eklenir. Sesle konuşurken slug yerine bunu kullan.
 | `public/posts.json` | manifest: belge, title, description (TR/EN), related, priority |
 | `public/duvarlar.json` + `docs/duvarlar.md` | kural kataloğu — **ikisi eşit tutulacak** |
 | `public/texts/*.txt` | düz metin (arama + llms.txt buradan) |
-| `yerel/` | gitignore'da, telifli üçüncü taraf belgeler, yalnızca localhost |
+| `yerel/` | gitignore'da, dışarı çıkmayan belgeler, yalnızca localhost |
+| `yerel/texts/*.txt` | yerel belgelerin düz metni — **soru sorulduğunda buraya da bak** |
 | `scripts/duvar.js` | `npm run duvar <konu>` / `--diff` — duvarları karar anında önüne getirir |
 
 ## Anlatım

@@ -11,6 +11,7 @@ import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createRequire } from 'node:module'
 import { fold } from '../src/search.js'
+import { clean } from './lib/clean.js'
 
 const require = createRequire(import.meta.url)
 const { PDFParse } = require('pdf-parse')
@@ -22,24 +23,8 @@ const indexPath = join(root, 'public', 'search-index.json')
 const fulltextPath = join(root, '.fulltext-cache.json')
 const textsDir = join(root, 'public', 'texts')
 
-// LaTeX/PDF çıkarımındaki Türkçe karakter bozulmalarını okunabilir hale getirir.
-// (Bazı 'ı/İ' harfleri çıkarımda tamamen düştüğü için en iyi çaba düzeyindedir.)
-function clean(s) {
-  return (s || '')
-    .replace(/¸\s?c/g, 'ç').replace(/¸\s?C/g, 'Ç')
-    .replace(/¸\s?s/g, 'ş').replace(/¸\s?S/g, 'Ş')
-    .replace(/¨\s?u/g, 'ü').replace(/¨\s?U/g, 'Ü')
-    .replace(/¨\s?o/g, 'ö').replace(/¨\s?O/g, 'Ö')
-    .replace(/¨\s?ı/g, 'i').replace(/¨\s?i/g, 'i')
-    .replace(/˘\s?g/g, 'ğ').replace(/˘\s?G/g, 'Ğ')
-    .replace(/ˆ\s?a/g, 'â').replace(/ˆ\s?ı/g, 'ı')
-    .replace(/³/g, 'ş')
-    .replace(/§/g, 'ğ')
-    .replace(/[¸¨˘ˆ]/g, '') // kalan birleştiriciler
-    .replace(/[ \t]+/g, ' ')
-    .replace(/\n{3,}/g, '\n\n')
-    .trim()
-}
+// Türkçe karakter düzeltmesi scripts/lib/clean.js'te — yerel kütüphane betiği de
+// aynı işlevi kullanıyor, iki kopya tutulmuyor.
 
 const posts = existsSync(manifestPath)
   ? JSON.parse(readFileSync(manifestPath, 'utf8'))
