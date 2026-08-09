@@ -1057,6 +1057,24 @@ code {
   padding: 16px 0;
 }
 
+/* Yapay Zekâ sekmesi: gruplanmış yazı listeleri */
+.ai-group + .ai-group {
+  margin-top: 40px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+
+.ai-group .section-head {
+  margin-bottom: 6px;
+}
+
+.ai-blurb {
+  margin: 0 0 16px;
+  max-width: 62ch;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
 .rec-list {
   list-style: none;
   margin: 0;

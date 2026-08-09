@@ -94,6 +94,9 @@ export const TRANSLATIONS = {
     priorityHint: 'Kriz anında öncelik puanı (10 üzerinden): yüksek olan doğrudan uygulanabilir bir yapı verir.',
     projectsIntro: 'Geliştirdiğim projeler.',
     projectsLive: 'Canlı ↗',
+    ai: 'Yapay Zekâ',
+    aiIntro:
+      'Yapay zekâ, otonom etmenler ve bunların yazılım mühendisliğine bindirdiği yük üzerine korpustaki metinler.',
     walls: 'Duvarlar',
     wallsIntro:
       'Arşivdeki makalelerden süzülmüş taşınabilir kurallar. Her kural bir duvar: nerede geçerli, nerede kırıldığı ve neyi engellediği yazılıdır. Bir sorunla karşılaştığında “bu duvara daha önce çarpılmış mı, nedeni neydi” diye sor.',
@@ -201,6 +204,9 @@ export const TRANSLATIONS = {
     priorityHint: 'Crisis-priority score out of 10: higher means it hands you a structure you can apply directly.',
     projectsIntro: 'Projects I have built.',
     projectsLive: 'Live ↗',
+    ai: 'AI',
+    aiIntro:
+      'Texts in the corpus on artificial intelligence, autonomous agents, and the load they place on software engineering.',
     walls: 'Walls',
     wallsIntro:
       'Transferable rules distilled from the essays. Each rule is a wall: where it holds, where it breaks, and what failure it prevents. When you hit a problem, ask “has this wall been hit before, and why?”',

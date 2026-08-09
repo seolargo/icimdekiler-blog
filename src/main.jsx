@@ -9,6 +9,7 @@ import Rehber from './pages/Rehber.jsx'
 import Oneriler from './pages/Oneriler.jsx'
 import Projeler from './pages/Projeler.jsx'
 import Duvarlar from './pages/Duvarlar.jsx'
+import YapayZeka from './pages/YapayZeka.jsx'
 import Sor from './pages/Sor.jsx'
 import { LanguageProvider } from './i18n.jsx'
 import './styles.css'
@@ -34,6 +35,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <Route path="oneriler" element={<Oneriler />} />
             <Route path="projeler" element={<Projeler />} />
             <Route path="duvarlar" element={<Duvarlar />} />
+            <Route path="yapay-zeka" element={<YapayZeka />} />
             <Route path="sor" element={<Sor />} />
             <Route path="post/:slug" element={<Post />} />
           </Route>

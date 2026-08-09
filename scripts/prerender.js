@@ -77,6 +77,7 @@ function header(active) {
     tab(base + 'oneriler', 'Öneriler', 'oneriler') +
     tab(base + 'projeler', 'Projeler', 'projeler') +
     tab(base + 'duvarlar', 'Duvarlar', 'duvarlar') +
+    tab(base + 'yapay-zeka', 'Yapay Zekâ', 'yapay-zeka') +
     `</nav>` +
     `<main class="site-main">`
 }
@@ -351,6 +352,41 @@ const dvBody =
   footer()
 write('duvarlar', renderPage({ head: dvHead, bodyHtml: dvBody }))
 
+// --- YAPAY ZEKÂ SEKMESİ ------------------------------------------------------
+// Seçki public/ai.json'dan gelir; bu sekme açık yazıları gruplayan bir görünüm,
+// `tab` alanı kullanılmaz (o alan "dışa kapalı" demek). Yazılar Yazılar
+// sekmesinde de durmaya devam eder.
+const aiPath = join(dist, 'ai.json')
+const ai = existsSync(aiPath)
+  ? JSON.parse(readFileSync(aiPath, 'utf8'))
+  : { intro: '', groups: [] }
+const bySlugAll = new Map(posts.map((p) => [p.slug, p]))
+const aiGroups = (ai.groups || [])
+  .map((g) => ({ ...g, items: g.slugs.map((s) => bySlugAll.get(s)).filter(Boolean) }))
+  .filter((g) => g.items.length)
+const aiMissing = (ai.groups || []).flatMap((g) => g.slugs).filter((s) => !bySlugAll.has(s))
+if (aiMissing.length) console.warn(`[prerender] ai.json'da karşılığı olmayan slug: ${aiMissing.join(', ')}`)
+const aiHead = buildHead({
+  title: 'Yapay Zekâ',
+  description: ai.intro || 'Yapay zekâ ve otonom etmenler üzerine korpustaki metinler.',
+  canonical: `${SITE_URL}${base}yapay-zeka`,
+  type: 'website',
+  image: '/profile.jpeg',
+})
+const aiBody =
+  header('yapay-zeka') +
+  `<p class="rec-intro muted">${esc(ai.intro || '')}</p>` +
+  aiGroups
+    .map(
+      (g) =>
+        `<section class="ai-group"><h2 class="section-head">${esc(g.title)}</h2>` +
+        `<p class="muted ai-blurb">${esc(g.blurb || '')}</p>` +
+        `<ul class="post-list">${g.items.map(postListItem).join('')}</ul></section>`,
+    )
+    .join('') +
+  footer()
+write('yapay-zeka', renderPage({ head: aiHead, bodyHtml: aiBody }))
+
 // --- YAZI SAYFALARI --------------------------------------------------------
 const postsBySlug = new Map(posts.map((p) => [p.slug, p]))
 for (const p of posts) {
@@ -447,6 +483,7 @@ const urls = [
   { loc: `${SITE_URL}${base}oneriler` },
   { loc: `${SITE_URL}${base}projeler` },
   { loc: `${SITE_URL}${base}duvarlar` },
+  { loc: `${SITE_URL}${base}yapay-zeka` },
   ...writings.map((p) => ({
     loc: `${SITE_URL}${base}post/${encodeURIComponent(p.slug)}`,
     lastmod: p.date,
