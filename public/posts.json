@@ -1,5 +1,27 @@
 [
   {
+    "slug": "otonominin-mühendisliği-etmen-tabanlı-sistemler-i-çin-bir-karar-sistemleri-çerçevesi",
+    "title": "Otonominin Mühendisliği: Etmen Tabanlı Sistemler İçin Bir Karar Sistemleri Çerçevesi",
+    "date": "2026-08-09",
+    "description": "Merkezî tez: etmen mimarisinin sağladığı esneklik ile ürettiği saldırı ve arıza yüzeyi aynı yapısal özelliğin iki adıdır — otonomi bir yetenek kazanımı değil, bir karar hakkı devri ve ona eşlik eden denetim yükümlülüğüdür. Dört iddia savunuluyor. (1) Etmen düşüncesi LLM’lere özgü yeni bir kavram değil; sınırlı rasyonalite, sibernetik geri besleme ve 1980–95 klasik etmen mimarilerinin (BDI, blackboard, KQML/FIPA) güncel bir bileşimi — o literatürlerin çözülmüş problemleri yeniden çözülmemeli. Taahhüt stratejileri bile hazır: kör (plan bitene kadar), tek fikirli (plan uygulanamaz olunca), açık fikirli (hedef geçersiz olunca). (2) Etmen mimarisi varsayılan değil **istisnai** bir seçimdir ve belirleyici ölçüt başarının dış kanıtla doğrulanabilir olmasıdır; iş akışı–etmen ayrımı yedi eksende tablolaştırılıyor (adım dizisi tasarım anında mı çalışma anında mı, maliyet öngörülebilir mi, test deterministik mi istatistiksel mi). Karşı örnekler açıkça sayılıyor: sabit şema dönüşümü, tek adımlı sınıflandırma, doğrulanamayan yaratıcı iş, geri alınamaz tekil işlem. (3) Etmen güvenilirliği model kalitesinden gelmez — *etmen ≈ model + döngü + bellek + araçlar + doğrulayıcı + kısıtlar*. Katmanlar risk sınıfına göre kademelendiriliyor (asgari / standart / yüksek / kurumsal) ve “neyi yapmayabilirsin” tablosu da veriliyor; bellek üçe ayrılıyor (episodik, semantik, prosedürel) ve her birinin bozulma riski ayrı yazılıyor: şişme, zehirlenme, çürüme. (4) Asıl tehlike gürültülü arıza değil **sessiz arıza**; tasarım hatanın oluşmamasından çok hatanın fark edilebilir olması üzerine kurulmalı. Doğrulama bölümü en keskin yeri: “etmen kendi ödevine not vermemeli”, üreten ile doğrulayan arasında temiz oda ayrımı, taze bağlamın epistemik bağımsızlık oluşu, ve doğrulayıcı gerilemesi — zincirin en altında model olmayan bir katman (derleyici, tip denetçisi, dış dünya gözlemi) bulunmak zorunda; model hakem yalnızca deterministik kontrolün ifade edemediği anlamsal boşlukta kullanılır. Ödül istismarı kipleri tek tek adlandırılıyor: testi geçirmek yerine testi düzenlemek, ölçüm kanalını ele geçirmek, görevi daraltıp tamamlandı demek. Ve döngü davranışının en can alıcı gözlemi: **öz-beyan ≠ dünyanın durumu** — etmen “testler geçti” diyorsa test loguna bakılır, döngü bir bayrak değil bir defterdir. Uygulama kodu (Node.js/TypeScript) kasten eke alınmış: sürüm bağımlı ve hızla bayatlayan malzeme, gövdedeki iddiaların hiçbiri ona bağlı değil.",
+    "pdf": "Otonominin_Mühendisliği__Etmen_Tabanlı_Sistemler_İçin_Bir_Karar_Sistemleri_Çerçevesi.pdf",
+    "thumb": "thumbs/otonominin-mühendisliği-etmen-tabanlı-sistemler-i-çin-bir-karar-sistemleri-çerçevesi.png",
+    "addedAt": "2026-08-09T17:46:12.118Z",
+    "pages": 54,
+    "belge": "BELGE-179",
+    "title_en": "Engineering Autonomy: A Decision-Systems Framework for Agent-Based Systems",
+    "description_en": "The central thesis: the flexibility an agent architecture provides and the attack-and-failure surface it produces are two names for the same structural property — autonomy is not a capability gain but a transfer of decision rights, and the oversight obligation that comes with it. Four claims are defended. (1) Agentic thinking is not a concept native to LLMs; it is a contemporary recombination of bounded rationality, cybernetic feedback and the classical agent architectures of 1980–95 (BDI, blackboard, KQML/FIPA) — the problems those literatures already solved should not be re-solved. Even the commitment strategies are ready-made: blind (until the plan completes), single-minded (until the plan becomes unworkable), open-minded (until the goal itself lapses). (2) An agent architecture is an exceptional rather than a default choice, and the deciding criterion is whether success is verifiable by external evidence; the workflow-versus-agent distinction is tabulated across seven axes (is the step sequence fixed at design time or determined at run time, is cost predictable, is testing deterministic or statistical). The counterexamples are named outright: fixed schema transformation, single-step classification, unverifiable creative work, irreversible one-shot operations. (3) Agent reliability does not come from model quality — *agent ≈ model + loop + memory + tools + verifier + constraints*. The layers are tiered by risk class (minimal / standard / high / institutional), with an explicit \"what you may omit\" table; memory splits into episodic, semantic and procedural, each with its own degradation mode written out: bloat, poisoning, decay. (4) The real danger is not noisy failure but **silent failure**; design should rest less on errors not occurring than on errors being noticeable. The verification chapter is the sharpest part: an agent must not grade its own homework, a clean-room separation between producer and verifier, fresh context as epistemic independence, and the verifier regress — the bottom of the chain must be a non-model layer (compiler, type checker, observation of the outside world); a model judge is used only in the semantic gap a deterministic check cannot express. The reward-hacking modes are named one by one: editing the test instead of passing it, capturing the measurement channel, narrowing the task and declaring completion. And the most cutting observation about loop behavior: **self-report ≠ the state of the world** — if the agent says \"the tests passed,\" you read the test log; the loop is a ledger, not a flag. The implementation code (Node.js/TypeScript) is deliberately confined to an appendix: version-dependent material that ages fast, and none of the claims in the body depend on it.",
+    "priority": 9,
+    "related": [
+      "agentic-thinking-belirsizlig-i-kontrollu-hamlelere-c-eviren-bir-karar-c-erc-evesi",
+      "otonomi-ve-bozulabilirlik-i-ki-eksenli-bir-değerlendirme-çerçevesi",
+      "ajanik-kurumsal-araştırma-sistemleri-kanıt-temelli-bir-tasarım-çerçevesi",
+      "ko-tu-projede-agent-tahmin-eder-yazılımda-niyet-ve-i-z",
+      "ölçüm-cihazı-kavram-tarih-ve-mühendislik-i-lkeleri",
+      "uzun-döngülü-karar-problemleri-doğrulama-mimarisi-üzerine-birleşik-bir-çerçeve"
+    ]
+  },
+  {
     "slug": "ölçüm-cihazı-kavram-tarih-ve-mühendislik-i-lkeleri",
     "title": "Ölçüm Cihazı: Kavram, Tarih ve Mühendislik İlkeleri",
     "date": "2026-08-09",
@@ -18,7 +40,8 @@
       "müdahale-ederek-anlama-karmaşık-yazılım-sistemlerini-anlamanın-yöntem-kataloğu",
       "s-irketlerde-performans-deg-erlendirmesi",
       "bilinen-yapıya-i-ndirgeme-bir-problem-teşhis-protokolü",
-      "bildiğini-sandığın-kelime-otomasyon-örneği-üzerinden-kavramın-sınırları"
+      "bildiğini-sandığın-kelime-otomasyon-örneği-üzerinden-kavramın-sınırları",
+      "otonominin-mühendisliği-etmen-tabanlı-sistemler-i-çin-bir-karar-sistemleri-çerçevesi"
     ]
   },
   {
@@ -119,7 +142,8 @@
       "onboarding-ürun-öğrenilebilirliği-ve-kurumsal-hafıza-bireysel-not-almadan-rag-tabanlı-bilgi-sistemlerine",
       "müdahale-ederek-anlama-karmaşık-yazılım-sistemlerini-anlamanın-yöntem-kataloğu",
       "teknolojik-bilginin-kaybı-aktarım-zincirleri-örtük-bilgi-ve-kurumsal-süreklilik-stratejileri-üzerine-bir-i-nceleme",
-      "otonomi-ve-bozulabilirlik-i-ki-eksenli-bir-değerlendirme-çerçevesi"
+      "otonomi-ve-bozulabilirlik-i-ki-eksenli-bir-değerlendirme-çerçevesi",
+      "otonominin-mühendisliği-etmen-tabanlı-sistemler-i-çin-bir-karar-sistemleri-çerçevesi"
     ],
     "title_en": "Agentic Enterprise Research Systems: An Evidence-Based Design Framework",
     "description_en": "Defines the problem of institutional knowledge dissolving inside chat tools and proposes a multi-agent research system against it. The distinctive claim: the real gain of multi-agent architectures is not throughput but cross-validation of evidence gathered from mutually independent sources — loosen the role constraint, point the agents at the same source, and independence, hence the value, disappears. It first separates the ontological status of the knowledge model: in the stream model knowledge is a sequence of messages; in the entity model it is a persistent object with identity, address, and relations. Operability reduces to one question: six months from now, can this be found with a single search? A 13-step research protocol follows — problem type, ontology, code, version history, pull requests, requirements, documentation, tests, execution, and only last the human (the most expensive source). Evidence confidence is taken out of the agent’s free judgment and bound to a calculation: C = B·ft·fv·fc, with per-source base values (running code and tests 0.95, production logs 0.90, ADRs 0.75, wiki 0.50, chat 0.30, recollection 0.15), an exponential freshness factor, and a verification factor that keeps unverifiable claims out of the system entirely. Parallelization is gated on three conditions; parallelizing the ontology step breaks the system, because without a shared vocabulary agents search for the same entity under different terms — which is why the aliases field of the shared context pack is its most critical component. Three agents suffice as a starting configuration: a code agent that knows what the system does, a history agent that knows why it is that way, and a knowledge agent that knows what it is supposed to do.",
@@ -142,7 +166,8 @@
       "agentic-thinking-belirsizlig-i-kontrollu-hamlelere-c-eviren-bir-karar-c-erc-evesi",
       "ajanik-kurumsal-araştırma-sistemleri-kanıt-temelli-bir-tasarım-çerçevesi",
       "uzun-döngülü-karar-problemleri-doğrulama-mimarisi-üzerine-birleşik-bir-çerçeve",
-      "gerekçenin-taşınması-kuralların-aşınma-mekanizması-ve-bilgi-kaybı"
+      "gerekçenin-taşınması-kuralların-aşınma-mekanizması-ve-bilgi-kaybı",
+      "otonominin-mühendisliği-etmen-tabanlı-sistemler-i-çin-bir-karar-sistemleri-çerçevesi"
     ]
   },
   {
@@ -511,7 +536,8 @@
       "öğrenme-hızının-örgütsel-ekonomisi-i-kinci-düzey-öğrenme-deneyim-eğrileri-ve-donanım-zengin-i-terasyonun-sınırları",
       "nereden-biliyoruz-bilginin-anatomisi-üzerine-bir-i-nceleme",
       "titiz-i-nceleme-i-çin-bir-yöntembilim",
-      "otonomi-ve-bozulabilirlik-i-ki-eksenli-bir-değerlendirme-çerçevesi"
+      "otonomi-ve-bozulabilirlik-i-ki-eksenli-bir-değerlendirme-çerçevesi",
+      "otonominin-mühendisliği-etmen-tabanlı-sistemler-i-çin-bir-karar-sistemleri-çerçevesi"
     ],
     "priority": 8,
     "belge": "BELGE-155"
@@ -1355,7 +1381,8 @@
     "series": "Sistem & Düşünme",
     "related": [
       "belirsiz-ve-hızla-siyasileşen-krizlerde-karar-mimarisi",
-      "otonomi-ve-bozulabilirlik-i-ki-eksenli-bir-değerlendirme-çerçevesi"
+      "otonomi-ve-bozulabilirlik-i-ki-eksenli-bir-değerlendirme-çerçevesi",
+      "otonominin-mühendisliği-etmen-tabanlı-sistemler-i-çin-bir-karar-sistemleri-çerçevesi"
     ],
     "title_en": "Agentic Thinking: A Decision Framework That Turns Uncertainty into Controlled Moves",
     "description_en": "Positions 'agentic thinking' not as a new concept that emerged in 2025–2026 but as a current combination of deep-rooted theoretical traditions such as Simon's bounded rationality, the OODA loop, and guided search. It breaks the intuitive definition — 'a mode of thinking that turns uncertainty into controlled moves' — into testable components, clarifying when this mode delivers a genuine advantage and when it produces needless complexity.",
@@ -1737,7 +1764,8 @@
     "related": [
       "i-zdüşüm-ve-yapı-görünmezliğin-disiplinlerarası-i-zi",
       "görünmeyeni-bilmenin-taksonomisi-yirmi-dört-i-lke-on-aile",
-      "bireysel-sınırlar-kurumsal-borc-ve-i-letis-im-yazılım-ekiplerinde-performans-ve-bu-yu-me-i-c-in-bir-c-erc-eve"
+      "bireysel-sınırlar-kurumsal-borc-ve-i-letis-im-yazılım-ekiplerinde-performans-ve-bu-yu-me-i-c-in-bir-c-erc-eve",
+      "otonominin-mühendisliği-etmen-tabanlı-sistemler-i-çin-bir-karar-sistemleri-çerçevesi"
     ],
     "title_en": "Tracing Instead of Guessing: A Unified Framework for Debt, Communication, and Meaning in Software Systems",
     "description_en": "Reduces the sustainability of software systems to a single principle: in a poorly structured system both a human and an AI agent guess; in a well-structured system both trace. It treats this principle in four views: a taxonomy of technical and organizational debt, the function of clarity in communication as an organizational lever, culture being built not by declared values but by tolerated behaviors, and the conceptual model (domain language, simple design) being the real layer that carries the code's meaning. It ties the four views to a common mechanism: the gap between the trace a system leaves and the knowledge needed.",
