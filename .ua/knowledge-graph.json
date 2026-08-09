@@ -1,0 +1,3372 @@
+{
+  "version": "1.0.0",
+  "project": {
+    "name": "pdf-blog",
+    "languages": [
+      "css",
+      "html",
+      "javascript",
+      "json",
+      "markdown"
+    ],
+    "frameworks": [
+      "React",
+      "React Router",
+      "Vite"
+    ],
+    "description": "React (Vite) tabanlı, backend'siz statik bir blog: PDF makaleleri yayınlar, her birine kalıcı ve paylaşılabilir bir link verir. Build sırasında manifest, tam metin arama indeksi, prerender edilmiş HTML, sitemap ve llms.txt üretilir; ayrıca korpustan türetilmiş 'duvarlar' kural kataloğunu sunar.",
+    "analyzedAt": "2026-08-09T14:04:41.230Z",
+    "gitCommitHash": "39b9a2dd94015bde1563661ac981482fe2232917"
+  },
+  "nodes": [
+    {
+      "id": "file:src/main.jsx",
+      "type": "file",
+      "name": "main.jsx",
+      "filePath": "src/main.jsx",
+      "summary": "Uygulamanın giriş noktası: React kökünü bağlar, BrowserRouter + LanguageProvider sarmalını kurar ve tüm sayfa rotalarını (ana sayfa, müzik, rehberler, öneriler, projeler, duvarlar, sor, post/:slug) App düzeni altında tanımlar.",
+      "tags": [
+        "entry-point",
+        "routing",
+        "bootstrap",
+        "react",
+        "provider"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Router basename'i `import.meta.env.BASE_URL` üzerinden türetilir; böylece alt dizinde barındırma da çalışır. Kaydırma geri yükleme 'manual' yapılarak konum yönetimi uygulamaya devredilir."
+    },
+    {
+      "id": "file:src/pages/Duvarlar.jsx",
+      "type": "file",
+      "name": "Duvarlar.jsx",
+      "filePath": "src/pages/Duvarlar.jsx",
+      "summary": "Korpustan türetilen taşınabilir kural kataloğunu (duvarlar) gösteren sayfa; public/duvarlar.json'u yükler, tema filtresi ve Türkçe-duyarlı serbest metin araması sunar, eşleşen parçaları vurgular.",
+      "tags": [
+        "component",
+        "page",
+        "search",
+        "filtering",
+        "data-fetching"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Arama ve vurgulamada `toLocaleLowerCase('tr')` kullanılır — Türkçe'deki I/İ kırılımı için gerekli. URL'deki `?q=` parametresi ana sayfadaki aramadan devralınır."
+    },
+    {
+      "id": "file:src/pages/Muzik.jsx",
+      "type": "file",
+      "name": "Muzik.jsx",
+      "filePath": "src/pages/Muzik.jsx",
+      "summary": "Müzik sekmesindeki kayıtları listeleyen sayfa; manifestten `tab === 'muzik'` olanları süzer ve yalnızca başlıklarını tıklanamaz biçimde gösterir (içerik dışa kapalı).",
+      "tags": [
+        "component",
+        "page",
+        "listing",
+        "filtering"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/pages/Oneriler.jsx",
+      "type": "file",
+      "name": "Oneriler.jsx",
+      "filePath": "src/pages/Oneriler.jsx",
+      "summary": "Önerilen dış kaynakları public/recommendations.json'dan yükleyip listeleyen sayfa; ayrıca yalnızca dev sunucusunda yerel-yalnız kütüphaneyi (yerel/posts.local.json) ayrı bir bölüm olarak gösterir.",
+      "tags": [
+        "component",
+        "page",
+        "data-fetching",
+        "listing",
+        "dev-only"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "`import.meta.env.DEV` koşuluyla yapılan ikinci istek üretim derlemesinde hiç yürütülmez; yerel klasör public/ dışında ve gitignore'da olduğu için yayına çıkmaz."
+    },
+    {
+      "id": "file:src/pages/Projeler.jsx",
+      "type": "file",
+      "name": "Projeler.jsx",
+      "filePath": "src/pages/Projeler.jsx",
+      "summary": "GitHub depolarından üretilen public/projects.json'u yükleyip proje listesini gösteren sayfa; dile göre `title` / `title_en` seçer ve deposu olmayan projeleri linksiz gösterir.",
+      "tags": [
+        "component",
+        "page",
+        "data-fetching",
+        "listing",
+        "i18n"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/pages/Rehber.jsx",
+      "type": "file",
+      "name": "Rehber.jsx",
+      "filePath": "src/pages/Rehber.jsx",
+      "summary": "Rehber sekmesindeki kayıtları listeleyen sayfa; manifestten `tab === 'rehber'` olanları süzer ve yalnızca başlıklarını tıklanamaz biçimde gösterir (içerik dışa kapalı).",
+      "tags": [
+        "component",
+        "page",
+        "listing",
+        "filtering"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/seo.js",
+      "type": "file",
+      "name": "seo.js",
+      "filePath": "src/seo.js",
+      "summary": "Rota değiştikçe belge <head>'ini güncelleyen SEO katmanı: title, description, canonical, Open Graph, Twitter Card ve opsiyonel Article JSON-LD etiketlerini yerinde oluşturur ya da tazeler.",
+      "tags": [
+        "utility",
+        "hook",
+        "seo",
+        "metadata",
+        "dom"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Etiketler her seferinde yeniden yaratılmak yerine 'upsert' edilir; böylece prerender edilmiş HTML ile istemci çıktısı aynı kalır ve çift etiket oluşmaz."
+    },
+    {
+      "id": "file:src/usePosts.js",
+      "type": "file",
+      "name": "usePosts.js",
+      "filePath": "src/usePosts.js",
+      "summary": "posts.json manifestini yükleyen paylaşılan veri hook'u; { posts, loading, error } durumunu döndürür ve bileşen sökülünce yazımı engelleyen bir iptal bayrağı kullanır.",
+      "tags": [
+        "hook",
+        "data-fetching",
+        "utility",
+        "state-management"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/pages/Duvarlar.jsx:highlight",
+      "type": "function",
+      "name": "highlight",
+      "filePath": "src/pages/Duvarlar.jsx",
+      "lineRange": [
+        10,
+        21
+      ],
+      "summary": "Bir metin içindeki arama terimini bulup <mark> ile sarmalayan yardımcı; eşleşme yoksa metni olduğu gibi döndürür.",
+      "tags": [
+        "utility",
+        "search",
+        "rendering",
+        "text-processing"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/pages/Duvarlar.jsx:Duvarlar",
+      "type": "function",
+      "name": "Duvarlar",
+      "filePath": "src/pages/Duvarlar.jsx",
+      "lineRange": [
+        23,
+        194
+      ],
+      "summary": "Duvarlar sayfası bileşeni: duvarlar.json'u çeker, tema sayaçlarını ve filtrelenmiş listeyi useMemo ile hesaplar, arama/tema durumunu yönetir ve her kuralı kaynak, neden ve sınama kayıtlarıyla birlikte basar.",
+      "tags": [
+        "component",
+        "page",
+        "search",
+        "filtering",
+        "state-management"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/pages/Muzik.jsx:Muzik",
+      "type": "function",
+      "name": "Muzik",
+      "filePath": "src/pages/Muzik.jsx",
+      "lineRange": [
+        5,
+        31
+      ],
+      "summary": "Müzik sekmesi bileşeni; usePosts ile manifesti alır, muzik sekmesindeki kayıtları süzer ve yükleme/hata durumlarıyla birlikte salt başlık listesi basar.",
+      "tags": [
+        "component",
+        "page",
+        "listing",
+        "filtering"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/pages/Oneriler.jsx:Oneriler",
+      "type": "function",
+      "name": "Oneriler",
+      "filePath": "src/pages/Oneriler.jsx",
+      "lineRange": [
+        20,
+        98
+      ],
+      "summary": "Öneriler sayfası bileşeni; önerilen kaynakları ve (yalnızca dev'de) yerel kütüphaneyi paralel olarak çeker, boş/yükleniyor durumlarını ayrı ayrı ele alır.",
+      "tags": [
+        "component",
+        "page",
+        "data-fetching",
+        "listing",
+        "dev-only"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/pages/Projeler.jsx:Projeler",
+      "type": "function",
+      "name": "Projeler",
+      "filePath": "src/pages/Projeler.jsx",
+      "lineRange": [
+        9,
+        73
+      ],
+      "summary": "Projeler sayfası bileşeni; projects.json'u çeker, dile göre başlık seçen bir yardımcı tanımlar ve her projeyi depo/anasayfa linkleriyle listeler.",
+      "tags": [
+        "component",
+        "page",
+        "data-fetching",
+        "listing",
+        "i18n"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/pages/Rehber.jsx:Rehber",
+      "type": "function",
+      "name": "Rehber",
+      "filePath": "src/pages/Rehber.jsx",
+      "lineRange": [
+        5,
+        31
+      ],
+      "summary": "Rehber sekmesi bileşeni; usePosts ile manifesti alır, rehber sekmesindeki kayıtları süzer ve yükleme/hata durumlarıyla birlikte salt başlık listesi basar.",
+      "tags": [
+        "component",
+        "page",
+        "listing",
+        "filtering"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/seo.js:upsertMeta",
+      "type": "function",
+      "name": "upsertMeta",
+      "filePath": "src/seo.js",
+      "lineRange": [
+        7,
+        16
+      ],
+      "summary": "Verilen nitelik/anahtar çiftine sahip <meta> etiketini bulur, yoksa oluşturur ve içeriğini günceller; boş içerikte hiçbir şey yapmaz.",
+      "tags": [
+        "utility",
+        "dom",
+        "seo",
+        "metadata"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/seo.js:useHead",
+      "type": "function",
+      "name": "useHead",
+      "filePath": "src/seo.js",
+      "lineRange": [
+        30,
+        68
+      ],
+      "summary": "Sayfa başlığı, açıklama, canonical, Open Graph, Twitter Card ve JSON-LD etiketlerini bir efekt içinde toplu güncelleyen React hook'u; tüm sayfa bileşenleri bunu kullanır.",
+      "tags": [
+        "hook",
+        "seo",
+        "metadata",
+        "side-effect"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/usePosts.js:usePosts",
+      "type": "function",
+      "name": "usePosts",
+      "filePath": "src/usePosts.js",
+      "lineRange": [
+        5,
+        23
+      ],
+      "summary": "posts.json'u bir kez çekip { posts, loading, error } durumu döndüren hook; temizleme fonksiyonundaki `alive` bayrağıyla sökülmüş bileşene durum yazmayı engeller.",
+      "tags": [
+        "hook",
+        "data-fetching",
+        "state-management",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scripts/prerender.js",
+      "type": "file",
+      "name": "prerender.js",
+      "filePath": "scripts/prerender.js",
+      "summary": "Vite derlemesinden sonra çalışan statik site üreticisi: her rota için gerçek HTML (head etiketleri, JSON-LD, JS'siz görünen içerik) yazar; ayrıca sitemap.xml, robots.txt, llms.txt, llms-full.txt, feed.xml, _redirects ve 404.html üretir. Gizli (müzik/rehber) paperların PDF, metin ve manifest kayıtlarını dist'ten temizleyerek yayına çıkmasını engeller.",
+      "tags": [
+        "build-system",
+        "prerender",
+        "seo",
+        "static-site",
+        "entry-point"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Modül gövdesi baştan sona yan etkili bir betik olarak akar (import edilmek için değil, `node scripts/prerender.js` ile çalıştırılmak için yazılmış); HTML şablon literalleriyle kurulur, kaçış işlemi elle `esc`/`escAttr` üzerinden yapılır."
+    },
+    {
+      "id": "file:src/ThemeIcon.jsx",
+      "type": "file",
+      "name": "ThemeIcon.jsx",
+      "filePath": "src/ThemeIcon.jsx",
+      "summary": "Tema kartlarında kullanılan sekiz adet ince çizgili SVG ikonunu tanımlar ve id'ye göre uygun olanı döndüren tek bir sunum bileşeni dışa aktarır. Bilinmeyen id'de varsayılan daire ikonuna düşer.",
+      "tags": [
+        "component",
+        "icon",
+        "svg",
+        "presentational",
+        "ui"
+      ],
+      "complexity": "simple",
+      "languageNotes": "İkonlar JSX fragment'ları olarak sabit bir nesnede tutulur; `currentColor` kullanıldığı için açık/koyu temaya kendiliğinden uyar."
+    },
+    {
+      "id": "file:src/excerpt.js",
+      "type": "file",
+      "name": "excerpt.js",
+      "filePath": "src/excerpt.js",
+      "summary": "Kart ve ilgili-yazı listelerinde kullanılan açıklama kırpma yardımcısı; metni kelime sayısına göre keser ve yarım kalan cümlenin sonundaki bağlayıcı noktalamayı temizler. Kırpma uzunlukları CARD_WORDS ve RELATED_WORDS sabitleriyle tek yerden yönetilir.",
+      "tags": [
+        "utility",
+        "text-formatting",
+        "shared",
+        "constants"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Hem tarayıcı tarafındaki React sayfaları hem de Node üzerinde çalışan prerender betiği tarafından paylaşılan tek ESM modülü — kırpma davranışının iki tarafta aynı çıkması bu paylaşıma dayanıyor."
+    },
+    {
+      "id": "file:src/pages/Home.jsx",
+      "type": "file",
+      "name": "Home.jsx",
+      "filePath": "src/pages/Home.jsx",
+      "summary": "Ana sayfa rotası: yazı listesini arama, seri filtresi, tema seçimi, sıralama ve sayfalama ile birlikte sunar; öne çıkanlar rafını ve tema ızgarasını render eder. Arama indeksini, tema ve duvar JSON'larını tembel yükler, kullanıcı durumunu URL parametrelerinde ve kaydırma konumunu sessionStorage'da tutar.",
+      "tags": [
+        "component",
+        "entry-point",
+        "search",
+        "pagination",
+        "state-management"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Tüm filtre durumu `useSearchParams` üzerinden URL'de saklanıyor; ağır filtreleme/sıralama adımları `useMemo` ile, arama indeksi ise ilk odaklanmada tembel `fetch` ile geliyor."
+    },
+    {
+      "id": "file:src/pages/Post.jsx",
+      "type": "file",
+      "name": "Post.jsx",
+      "filePath": "src/pages/Post.jsx",
+      "summary": "Tek yazı rotası: slug'a göre manifestten yazıyı bulur, PDF'i iframe içinde gösterir ve metni kopyala/indir, paylaş, atıf kopyala eylemlerini sunar. İlgili yazıları ve aynı serideki diğer yazıları listeler, sayfa meta etiketlerini useHead ile ayarlar.",
+      "tags": [
+        "component",
+        "detail-page",
+        "seo",
+        "clipboard",
+        "routing"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Atıf metni ve BibTeX anahtarı yazı verisinden çalışma anında türetiliyor; paylaşım `navigator.share` varsa onu, yoksa panoya kopyalamayı kullanan aşamalı bir geri düşüş uyguluyor."
+    },
+    {
+      "id": "function:scripts/prerender.js:fmtDate",
+      "type": "function",
+      "name": "fmtDate",
+      "filePath": "scripts/prerender.js",
+      "lineRange": [
+        36,
+        47
+      ],
+      "summary": "ISO tarih dizgesini Türkçe yerel biçimde okunur bir tarihe çevirir, geçersiz girdide sessizce boş/ham değere düşer.",
+      "tags": [
+        "utility",
+        "date",
+        "formatting"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/prerender.js:header",
+      "type": "function",
+      "name": "header",
+      "filePath": "scripts/prerender.js",
+      "lineRange": [
+        59,
+        82
+      ],
+      "summary": "Tüm statik sayfalarda ortak olan site başlığını ve sekme gezinme çubuğunu üretir; etkin sekmeyi işaretler.",
+      "tags": [
+        "html-generation",
+        "layout",
+        "navigation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/prerender.js:footer",
+      "type": "function",
+      "name": "footer",
+      "filePath": "scripts/prerender.js",
+      "lineRange": [
+        104,
+        117
+      ],
+      "summary": "İletişim bağlantılarını ve telif satırını içeren ortak sayfa altlığının HTML'ini üretir.",
+      "tags": [
+        "html-generation",
+        "layout",
+        "footer"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/prerender.js:postListItem",
+      "type": "function",
+      "name": "postListItem",
+      "filePath": "scripts/prerender.js",
+      "lineRange": [
+        126,
+        144
+      ],
+      "summary": "Bir yazı kaydını ana sayfa listesindeki kart HTML'ine dönüştürür: başlık, belge/seri/sayfa üstverisi, kırpılmış açıklama ve önizleme görseli.",
+      "tags": [
+        "html-generation",
+        "list-item",
+        "template"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/prerender.js:buildHead",
+      "type": "function",
+      "name": "buildHead",
+      "filePath": "scripts/prerender.js",
+      "lineRange": [
+        152,
+        174
+      ],
+      "summary": "Bir sayfanın <head> etiketlerini kurar: title, description, canonical, Open Graph, Twitter kartı ve isteğe bağlı JSON-LD yapılandırılmış verisi.",
+      "tags": [
+        "seo",
+        "metadata",
+        "html-generation",
+        "json-ld"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:scripts/prerender.js:renderPage",
+      "type": "function",
+      "name": "renderPage",
+      "filePath": "scripts/prerender.js",
+      "lineRange": [
+        177,
+        191
+      ],
+      "summary": "Vite'ın ürettiği index.html şablonuna hazırlanan head etiketlerini ve #root gövdesini yerleştirerek nihai statik sayfayı oluşturur.",
+      "tags": [
+        "html-generation",
+        "template",
+        "prerender"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/prerender.js:projItem",
+      "type": "function",
+      "name": "projItem",
+      "filePath": "scripts/prerender.js",
+      "lineRange": [
+        289,
+        302
+      ],
+      "summary": "Projeler sekmesindeki tek bir proje kaydını başlık, açıklama, etiket ve bağlantı içeren kart HTML'ine dönüştürür.",
+      "tags": [
+        "html-generation",
+        "list-item",
+        "template"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/prerender.js:dvCard",
+      "type": "function",
+      "name": "dvCard",
+      "filePath": "scripts/prerender.js",
+      "lineRange": [
+        328,
+        338
+      ],
+      "summary": "Bir duvar (taşınabilir kural) kaydını kart HTML'ine dönüştürür: kimlik, başlık, kural, kırılma koşulu, gerekçe ve kaynak etiketleri.",
+      "tags": [
+        "html-generation",
+        "list-item",
+        "duvarlar"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/ThemeIcon.jsx:ThemeIcon",
+      "type": "function",
+      "name": "ThemeIcon",
+      "filePath": "src/ThemeIcon.jsx",
+      "lineRange": [
+        73,
+        79
+      ],
+      "summary": "Verilen tema id'sine karşılık gelen SVG ikonunu 26x26 boyutunda render eder; eşleşme yoksa varsayılan daireye düşer.",
+      "tags": [
+        "component",
+        "icon",
+        "svg",
+        "presentational"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/excerpt.js:excerpt",
+      "type": "function",
+      "name": "excerpt",
+      "filePath": "src/excerpt.js",
+      "lineRange": [
+        8,
+        21
+      ],
+      "summary": "Metni belirtilen kelime sayısında kırpar; kelime sınırında keser, sondaki bağlayıcı noktalamayı atar ve kırpma olduysa üç nokta ekler.",
+      "tags": [
+        "utility",
+        "text-formatting",
+        "truncation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/pages/Home.jsx:Intro",
+      "type": "function",
+      "name": "Intro",
+      "filePath": "src/pages/Home.jsx",
+      "lineRange": [
+        12,
+        21
+      ],
+      "summary": "Ana sayfanın üstündeki dile duyarlı tanıtım bloğunu render eden küçük sunum bileşeni.",
+      "tags": [
+        "component",
+        "presentational",
+        "i18n"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/pages/Home.jsx:pageItems",
+      "type": "function",
+      "name": "pageItems",
+      "filePath": "src/pages/Home.jsx",
+      "lineRange": [
+        27,
+        49
+      ],
+      "summary": "Sayfalama çubuğunda gösterilecek öğe dizisini hesaplar: az sayfa varsa tümünü, çok sayfa varsa mevcut sayfanın çevresini ve uçları elips ile ayırarak döndürür.",
+      "tags": [
+        "utility",
+        "pagination",
+        "pure-function"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/pages/Home.jsx:Pagination",
+      "type": "function",
+      "name": "Pagination",
+      "filePath": "src/pages/Home.jsx",
+      "lineRange": [
+        51,
+        90
+      ],
+      "summary": "Önceki/sonraki düğmeleri ve sayfa numaralarıyla sayfalama gezintisini render eder; seçim değişikliğini onChange geri çağrısıyla üst bileşene bildirir.",
+      "tags": [
+        "component",
+        "pagination",
+        "navigation",
+        "i18n"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/pages/Home.jsx:FeaturedShelf",
+      "type": "function",
+      "name": "FeaturedShelf",
+      "filePath": "src/pages/Home.jsx",
+      "lineRange": [
+        92,
+        114
+      ],
+      "summary": "Öne çıkan yazıları yatay bir raf olarak render eder; liste boşsa hiçbir şey basmaz.",
+      "tags": [
+        "component",
+        "featured",
+        "list",
+        "ui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/pages/Home.jsx:ThemeGrid",
+      "type": "function",
+      "name": "ThemeGrid",
+      "filePath": "src/pages/Home.jsx",
+      "lineRange": [
+        116,
+        142
+      ],
+      "summary": "themes.json'dan gelen temaları ikon, başlık, kısa açıklama ve yazı sayısıyla ızgara olarak gösterir; tıklamayı onPick ile tema filtresine bağlar.",
+      "tags": [
+        "component",
+        "grid",
+        "filter",
+        "theme"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/pages/Home.jsx:Home",
+      "type": "function",
+      "name": "Home",
+      "filePath": "src/pages/Home.jsx",
+      "lineRange": [
+        144,
+        484
+      ],
+      "summary": "Ana sayfa bileşeni: URL parametrelerinden arama/seri/tema/sıralama durumunu okur, yazıları ve duvarları filtreleyip sıralar, sayfalar ve tüm ana sayfa bölümlerini bir araya getirir. Arama indeksini tembel yükler, kaydırma konumunu sessionStorage üzerinden geri yükler.",
+      "tags": [
+        "component",
+        "entry-point",
+        "search",
+        "state-management",
+        "pagination"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/pages/Post.jsx:Post",
+      "type": "function",
+      "name": "Post",
+      "filePath": "src/pages/Post.jsx",
+      "lineRange": [
+        8,
+        222
+      ],
+      "summary": "Tek yazı sayfası bileşeni: slug'a göre yazıyı bulur, meta etiketlerini kurar, PDF'i iframe'de gösterir ve kopyala/indir/paylaş/atıf eylemleriyle ilgili-yazı bağlantılarını render eder.",
+      "tags": [
+        "component",
+        "detail-page",
+        "seo",
+        "clipboard",
+        "routing"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:scripts/build-search-index.js",
+      "type": "file",
+      "name": "build-search-index.js",
+      "filePath": "scripts/build-search-index.js",
+      "summary": "Tüm PDF'lerin metnini pdf-parse ile çıkarıp üç çıktı üretir: istemci araması için katlanmış public/search-index.json, prerender'ın llms-full.txt üretiminde kullandığı .fulltext-cache.json ve yazı başına public/texts/<slug>.txt. generate-manifest.js'ten sonra çalışır ve önbellekte bulunan slug'ları yeniden parse etmez.",
+      "tags": [
+        "build-system",
+        "search-index",
+        "pdf-extraction",
+        "script",
+        "data-pipeline"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Top-level await ile ESM script; CommonJS olan pdf-parse paketine erişmek için createRequire köprüsü kullanılıyor. Artımlı derleme, önceki JSON çıktılarını Map'e çevirerek yapılıyor."
+    },
+    {
+      "id": "function:scripts/build-search-index.js:clean",
+      "type": "function",
+      "name": "clean",
+      "filePath": "scripts/build-search-index.js",
+      "lineRange": [
+        27,
+        42
+      ],
+      "summary": "LaTeX/PDF çıkarımında bozulan Türkçe karakterleri (¸c → ç, ³ → ş, § → ğ gibi) okunabilir hale getirir ve fazla boşluk/satır sonlarını sadeleştirir.",
+      "tags": [
+        "utility",
+        "normalization",
+        "text-cleanup",
+        "turkish"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/build-search-index.js:extract",
+      "type": "function",
+      "name": "extract",
+      "filePath": "scripts/build-search-index.js",
+      "lineRange": [
+        55,
+        64
+      ],
+      "summary": "Verilen PDF dosyasını okuyup PDFParse ile ham metnini döndürür; parser'ı finally bloğunda güvenle kapatır.",
+      "tags": [
+        "utility",
+        "pdf-extraction",
+        "async",
+        "io"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scripts/duvar.js",
+      "type": "file",
+      "name": "duvar.js",
+      "filePath": "scripts/duvar.js",
+      "summary": "`npm run duvar <konu>` ile çalışan CLI aracı: public/duvarlar.json kataloğundaki duvarları verilen terimlerle eşleştirip terminale basar. `--diff` kipinde git diff'teki dosya yollarını desen tablosuyla konu sözcüklerine çevirerek ilgili kısıtları karar anından önce görünür kılar.",
+      "tags": [
+        "cli",
+        "script",
+        "search",
+        "developer-tooling",
+        "entry-point"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Shebang'li Node ESM script; ANSI kaçış dizileriyle terminal biçimlendirmesi (B/D/V yardımcıları) ve execSync ile git diff okuması yapıyor."
+    },
+    {
+      "id": "file:src/pages/Sor.jsx",
+      "type": "file",
+      "name": "Sor.jsx",
+      "filePath": "src/pages/Sor.jsx",
+      "summary": "/sor rotasının sayfa bileşeni: kullanıcının sorusunu duvar kataloğuyla tamamen tarayıcıda eşleştirip en iyi 4 duvarı gösterir. Gezinmede gizlidir, dışarıya hiçbir istek atmaz ve daha önce saklanmış Anthropic API anahtarını localStorage'dan siler.",
+      "tags": [
+        "component",
+        "page",
+        "search",
+        "react-hooks",
+        "client-side"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Durak kelime (stop word) kümesi ve puanlı eşleştirme useMemo ile önbelleklenmiş; sorgu useSearchParams üzerinden URL'de tutuluyor."
+    },
+    {
+      "id": "function:src/pages/Sor.jsx:Sor",
+      "type": "function",
+      "name": "Sor",
+      "filePath": "src/pages/Sor.jsx",
+      "lineRange": [
+        16,
+        100
+      ],
+      "summary": "Soru formunu ve eşleşen duvar kartlarını render eden varsayılan dışa aktarılan React bileşeni; duvarlar.json'ı fetch ile yükler, sorguyu katlayıp durak kelimeleri ayıklar ve terim sayısına göre sıralanmış ilk 4 duvarı listeler.",
+      "tags": [
+        "component",
+        "react-hooks",
+        "search",
+        "event-handler"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/search.js",
+      "type": "file",
+      "name": "search.js",
+      "filePath": "src/search.js",
+      "summary": "Hem istemci hem derleme betikleri tarafından paylaşılan arama çekirdeği: Türkçe aksanları ve bozuk PDF karakterlerini sade ASCII'ye indirgeyen `fold` ile AND mantığıyla token eşleştiren `matchesTokens` fonksiyonlarını dışa aktarır.",
+      "tags": [
+        "utility",
+        "search",
+        "normalization",
+        "shared-module",
+        "turkish"
+      ],
+      "complexity": "simple",
+      "languageNotes": "NFD normalizasyonu + birleştirici işaretlerin silinmesi, Türkçe 'ı/i' özel durumuyla birlikte ele alınıyor; aynı modül Node betiklerinde ve tarayıcıda çalışacak biçimde saf ESM."
+    },
+    {
+      "id": "function:src/search.js:fold",
+      "type": "function",
+      "name": "fold",
+      "filePath": "src/search.js",
+      "lineRange": [
+        5,
+        17
+      ],
+      "summary": "Metni arama için katlar: Türkçe küçük harfe çevirir, bozuk PDF karakterlerini ve aksanları temizler, alfanümerik olmayanları boşluğa indirger.",
+      "tags": [
+        "utility",
+        "normalization",
+        "search",
+        "turkish"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/search.js:matchesTokens",
+      "type": "function",
+      "name": "matchesTokens",
+      "filePath": "src/search.js",
+      "lineRange": [
+        21,
+        25
+      ],
+      "summary": "Katlanmış sorgudaki her token samanlıkta geçiyorsa true döner (AND mantığı); haystack zaten katlanmışsa `folded=true` ile tekrar katlama atlanır.",
+      "tags": [
+        "utility",
+        "search",
+        "matching",
+        "validation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/App.jsx",
+      "type": "file",
+      "name": "App.jsx",
+      "filePath": "src/App.jsx",
+      "summary": "Sitenin kök layout bileşeni: marka başlığı, TR/EN dil anahtarı, altı sekmeli gezinme çubuğu, React Router `Outlet` alanı ve iletişim/son güncelleme bilgisini taşıyan altbilgi. Ayrıca site başlığı (`SITE`) ve iletişim bağlantıları (`CONTACTS`) sabitlerini dışa verir.",
+      "tags": [
+        "layout",
+        "entry-point",
+        "routing",
+        "component",
+        "navigation"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Altbilgideki `__LAST_CHANGE__` Vite `define` ile derleme anında gömülen global sabittir; `import.meta.env.BASE_URL` ile varlık yolları taban URL'ye göre çözülür."
+    },
+    {
+      "id": "function:src/App.jsx:App",
+      "type": "function",
+      "name": "App",
+      "filePath": "src/App.jsx",
+      "lineRange": [
+        46,
+        126
+      ],
+      "summary": "Varsayılan dışa verilen kök layout bileşeni; başlık, gezinme sekmeleri (yazılar, rehberler, müzik, öneriler, projeler, duvarlar), `Outlet` üzerinden sayfa içeriği ve altbilgiyi çizer.",
+      "tags": [
+        "component",
+        "layout",
+        "routing",
+        "entry-point"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/App.jsx:LangSwitch",
+      "type": "function",
+      "name": "LangSwitch",
+      "filePath": "src/App.jsx",
+      "lineRange": [
+        21,
+        44
+      ],
+      "summary": "TR/EN arasında geçiş yapan iki düğmeli erişilebilir dil anahtarı; aktif dili `aria-pressed` ile bildirir ve `useLang().setLang` çağırır.",
+      "tags": [
+        "component",
+        "i18n",
+        "accessibility",
+        "ui-control"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/AskAI.jsx",
+      "type": "file",
+      "name": "AskAI.jsx",
+      "filePath": "src/AskAI.jsx",
+      "summary": "Backend'siz \"yapay zekâya sor\" katmanı: açılan bir panelden korpus özetini (`llms.txt`) panoya kopyalar ve hazır bir istem ile harici sohbet aracını yeni sekmede açar.",
+      "tags": [
+        "component",
+        "modal",
+        "ai-integration",
+        "clipboard",
+        "ui-control"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Sunucu gerektirmeyen tasarım: model çağrısı yerine metin panoya kopyalanıp `window.open` ile harici sohbete devredilir."
+    },
+    {
+      "id": "function:src/AskAI.jsx:AskAI",
+      "type": "function",
+      "name": "AskAI",
+      "filePath": "src/AskAI.jsx",
+      "lineRange": [
+        8,
+        99
+      ],
+      "summary": "Açık/kapalı durumunu tutan panel bileşeni; Escape tuşuyla kapanır, `llms.txt` içeriğini fetch edip panoya yazar ve kodlanmış istemle harici sohbet bağlantısını açar.",
+      "tags": [
+        "component",
+        "modal",
+        "event-handler",
+        "clipboard",
+        "async"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/AuthorPortrait.jsx",
+      "type": "file",
+      "name": "AuthorPortrait.jsx",
+      "filePath": "src/AuthorPortrait.jsx",
+      "summary": "Yazarın korpustan türetilmiş \"portresini\" gösteren modal: `portrait.json` dosyasını ilk açılışta getirir; tekrar eden fikirler, hamleler, kapsam, dürüst not ve başlangıç yazısı bağlantılarını listeler.",
+      "tags": [
+        "component",
+        "modal",
+        "data-fetching",
+        "lazy-load",
+        "i18n"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Veri yalnızca modal ilk kez açıldığında çekilir (lazy load); İngilizce için `data.en` alanı temel nesnenin üzerine yayılarak kısmi çeviri desteklenir."
+    },
+    {
+      "id": "function:src/AuthorPortrait.jsx:AuthorPortrait",
+      "type": "function",
+      "name": "AuthorPortrait",
+      "filePath": "src/AuthorPortrait.jsx",
+      "lineRange": [
+        8,
+        148
+      ],
+      "summary": "Portre modalini yöneten bileşen; açılışta `portrait.json` yükler, Escape ile kapanır, metni paragraflara böler ve başlangıç yazılarına router `Link`'leri üretir.",
+      "tags": [
+        "component",
+        "modal",
+        "data-fetching",
+        "event-handler",
+        "rendering"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/i18n.jsx",
+      "type": "file",
+      "name": "i18n.jsx",
+      "filePath": "src/i18n.jsx",
+      "summary": "Uygulamanın çeviri altyapısı: TR/EN sözlükleri (`TRANSLATIONS`), seri adı karşılıkları (`SERIES_EN`) ve dil durumunu localStorage'da kalıcı kılan `LanguageProvider` context sağlayıcısı ile `useLang` hook'unu barındırır.",
+      "tags": [
+        "i18n",
+        "context-provider",
+        "hook",
+        "type-definition",
+        "utility"
+      ],
+      "complexity": "complex",
+      "languageNotes": "İlk dil sırasıyla localStorage, ardından `navigator.language` üzerinden seçilir; `t()` eksik anahtarda önce TR sözlüğüne, sonra anahtarın kendisine düşer."
+    },
+    {
+      "id": "function:src/i18n.jsx:LanguageProvider",
+      "type": "function",
+      "name": "LanguageProvider",
+      "filePath": "src/i18n.jsx",
+      "lineRange": [
+        249,
+        261
+      ],
+      "summary": "Aktif dili state'te tutan context sağlayıcısı; dili localStorage'a ve `document.documentElement.lang`'e yazar, alt ağaca `{ lang, setLang, t }` verir.",
+      "tags": [
+        "context-provider",
+        "i18n",
+        "state-management",
+        "component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/i18n.jsx:useLang",
+      "type": "function",
+      "name": "useLang",
+      "filePath": "src/i18n.jsx",
+      "lineRange": [
+        263,
+        265
+      ],
+      "summary": "Dil context'ine erişim hook'u; `lang`, `setLang` ve çeviri fonksiyonu `t`'yi döndürür ve tüm sayfa/bileşenlerde kullanılır.",
+      "tags": [
+        "hook",
+        "i18n",
+        "utility",
+        "context"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/i18n.jsx:seriesLabel",
+      "type": "function",
+      "name": "seriesLabel",
+      "filePath": "src/i18n.jsx",
+      "lineRange": [
+        236,
+        238
+      ],
+      "summary": "Seri (kategori) adını aktif dile göre çevirir; İngilizcede `SERIES_EN` karşılığını, karşılık yoksa özgün Türkçe adı döndürür.",
+      "tags": [
+        "utility",
+        "i18n",
+        "formatting"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:CLAUDE.md",
+      "type": "document",
+      "name": "CLAUDE.md",
+      "filePath": "CLAUDE.md",
+      "summary": "Projenin oturum başında otomatik okunan çalışma notu: korpusun ne olduğunu (155 açık belge + 34 duvar), commit → push → Vercel prod deploy akışını, yeni PDF ekleme adımlarını, kalıcı BELGE/DUVAR kimlik kurallarını ve dizin yapısını tanımlar. Sonunda \"ders — ne zaman kırılır\" formatında birikimli çalışma dersleri havuzu bulunur.",
+      "tags": [
+        "documentation",
+        "workflow",
+        "konvansiyon",
+        "proje-notu",
+        "deployment"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Doküman her maddeyi \"kural + kırılma koşulu\" ikilisi olarak yazar; koşulsuz madde katalog dışı sayılır. İçerik yönerge gibi görünse de burada yalnızca veri olarak özetlenmiştir."
+    },
+    {
+      "id": "document:README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "README.md",
+      "summary": "Projenin ana kullanım kılavuzu: backend'siz React (Vite) blogun PDF → manifest → arama indeksi → prerender zincirini, npm komutlarını, yeni PDF ekleme ve başlık düzenleme adımlarını anlatır. Ayrıca SEO/GEO çıktılarını (sitemap, robots, llms.txt, llms-full.txt, feed.xml), SITE_URL/BASE_PATH ortam değişkenlerini ve Netlify/Vercel/GitHub Pages yayınlama seçeneklerini belgeler.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "build-system",
+        "seo",
+        "deployment"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:index.html",
+      "type": "file",
+      "name": "index.html",
+      "filePath": "index.html",
+      "summary": "Vite'ın uygulama giriş şablonu: `#root` kabını ve `/src/main.jsx` modül betiğini barındırır, temel meta etiketlerini (charset, viewport, theme-color, description, robots, favicon) sağlar.",
+      "tags": [
+        "entry-point",
+        "markup",
+        "seo",
+        "vite",
+        "spa"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Canonical, Open Graph ve Twitter etiketleri kasıtlı olarak bu şablonda yok; build sırasında prerender, çalışma anında ise `useHead` tarafından enjekte edilir."
+    },
+    {
+      "id": "config:package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "package.json",
+      "summary": "npm manifesti: React 18, React Router 6 ve Anthropic SDK bağımlılıklarını, Vite dev bağımlılıklarını ve tüm build hattını tanımlar. `predev`/`prebuild` kancaları manifest ve arama indeksini otomatik üretir, `build` ise `vite build` sonrası prerender adımını çalıştırır.",
+      "tags": [
+        "configuration",
+        "build-system",
+        "npm-scripts",
+        "dependencies",
+        "entry-point"
+      ],
+      "complexity": "simple",
+      "languageNotes": "`type: module` ile tüm scripts/ dosyaları ESM olarak çalışır; pre-* kancaları manifest üretimini elle çalıştırma ihtiyacını ortadan kaldırır."
+    },
+    {
+      "id": "config:vercel.json",
+      "type": "config",
+      "name": "vercel.json",
+      "filePath": "vercel.json",
+      "summary": "Vercel dağıtım yapılandırması: `cleanUrls` ile uzantısız yolları, tüm istekleri `/index.html`'e yönlendiren SPA rewrite kuralını ve yeniden adlandırılan bir yazı için (hem yüzde-kodlu hem ham Unicode slug biçiminde) kalıcı 301 redirect'leri tanımlar.",
+      "tags": [
+        "configuration",
+        "deployment",
+        "routing",
+        "vercel",
+        "spa"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Türkçe slug'lar için redirect kaynağı iki kez yazılmış (percent-encoded ve ham) — Vercel eşleştirmesi normalize etmediği için ikisi de gerekli."
+    },
+    {
+      "id": "document:docs/duvarlar.md",
+      "type": "document",
+      "name": "duvarlar.md",
+      "filePath": "docs/duvarlar.md",
+      "summary": "Korpustan süzülmüş 34 taşınabilir kuralın (DUVAR-01…DUVAR-34) insan tarafından okunabilir kataloğu; her madde Kural / Kırılır / Neden / Kaynak alanlarını taşır, 13'ünde dışarıdan sınama kaydı vardır. `public/duvarlar.json` ile eşit tutulması gereken ikizidir.",
+      "tags": [
+        "documentation",
+        "knowledge-base",
+        "rules-catalog",
+        "korpus",
+        "second-order"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Katalog altı tematik bölüme (A–F) ayrılmış; geçerlilik ölçütü 'kırılma noktası olmayan madde duvar değil etikettir' kuralıyla dayatılıyor, bu da belgeyi salt not değil şemalı bir veri kaynağı hâline getiriyor."
+    },
+    {
+      "id": "document:docs/korpus-notlari.md",
+      "type": "document",
+      "name": "korpus-notlari.md",
+      "filePath": "docs/korpus-notlari.md",
+      "summary": "Arşivin 144 açık yazısının bütünsel durum raporu: düşünce parmak izi (kavram frekansları), yakınsadığı asıl soru, bağ dokusu ve kapsam boşlukları. Altı maddelik ikinci-mertebe yol haritası ile elle çalıştırılan araç komutlarını (`xray`, `portrait`, `translate`) listeler.",
+      "tags": [
+        "documentation",
+        "korpus",
+        "roadmap",
+        "analysis",
+        "overview"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:docs/korpus-rontgeni.html",
+      "type": "file",
+      "name": "korpus-rontgeni.html",
+      "filePath": "docs/korpus-rontgeni.html",
+      "summary": "`scripts/build-corpus-xray.js` tarafından üretilen tek dosyalık statik rapor sayfası: korpusun sayısal röntgenini altı bölümde (parmak izi, yakınsama, ironi, bağ dokusu, kapsam, ikinci-mertebe iş) çubuk grafikler ve sıralama kartlarıyla sunar.",
+      "tags": [
+        "markup",
+        "generated",
+        "report",
+        "korpus",
+        "visualization"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Bağımlılıksız tek dosya: tüm CSS satır içi, tema CSS değişkenleriyle hem `prefers-color-scheme` hem `data-theme` üzerinden çözülüyor; grafikler JS yerine genişliği hesaplanmış div'lerle çiziliyor."
+    },
+    {
+      "id": "document:docs/soyutlama-plani.md",
+      "type": "document",
+      "name": "soyutlama-plani.md",
+      "filePath": "docs/soyutlama-plani.md",
+      "summary": "Henüz başlanmamış 'Külliyat Soyutlama' katmanının planı: build sırasında Claude API ile makale başına yapılandırılmış özet üretip `public/abstracts.json`'a yazmak, bundan harita sayfası / kavram dizini / ilgili yazılar özelliklerini türetmek ve son katmanda bir sentez meta-makalesi çıkarmak.",
+      "tags": [
+        "documentation",
+        "design-doc",
+        "roadmap",
+        "llm-pipeline",
+        "planned"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:public/duvarlar.json",
+      "type": "config",
+      "name": "duvarlar.json",
+      "filePath": "public/duvarlar.json",
+      "summary": "Korpustan türetilmiş 34 \"duvar\" kuralının makine okunur kataloğu; her kayıt id, tema kodu, kural, kırılır, neden, kaynak ve (9 kayıtta) sinama alanlarını taşır. A–F tema sözlüğü TR/EN adlarıyla birlikte aynı dosyada tutulur.",
+      "tags": [
+        "configuration",
+        "data-model",
+        "knowledge-base",
+        "bilingual",
+        "hand-maintained"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Şema \"kırılma koşulu zorunlu\" ilkesini kodluyor: kirilir alanı olmayan madde kataloğa girmiyor, yani doğrulama veri sözleşmesinin kendisinde."
+    },
+    {
+      "id": "config:public/portrait.json",
+      "type": "config",
+      "name": "portrait.json",
+      "filePath": "public/portrait.json",
+      "summary": "Bir LLM'in 135 makalelik korpustan çıkardığı yazar portresi: giriş metni, yinelenen fikirler, tipik hamleler, kapsam özeti, dürüst not ve \"buradan başla\" seçkisi. TR gövdesinin yanında en anahtarı altında tam İngilizce karşılığı bulunur.",
+      "tags": [
+        "configuration",
+        "generated-data",
+        "bilingual",
+        "llm-output",
+        "author-profile"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "generatedAt ve postCount alanları içeriğin hangi korpus anlık görüntüsünden üretildiğini işaretliyor; dosya elle değil scripts/build-portrait.js ile yenileniyor."
+    },
+    {
+      "id": "config:public/posts.json",
+      "type": "config",
+      "name": "posts.json",
+      "filePath": "public/posts.json",
+      "summary": "Sitenin merkezi manifesti: 176 makale kaydı slug, title, date, description, pdf, thumb, addedAt, pages, belge (kalıcı BELGE-xxx kimliği), related, priority ve title_en/description_en alanlarıyla. Hem derleme adımlarının hem istemci arayüzünün tek doğruluk kaynağı.",
+      "tags": [
+        "configuration",
+        "manifest",
+        "data-model",
+        "bilingual",
+        "entry-point"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Karma üretim modeli: dosyayı generate-manifest.js üretir, translate-posts.js zenginleştirir, ama title/description/related/priority alanları elle yazılır — bu yüzden dosya kaynak denetimine girer, artefakt sayılmaz."
+    },
+    {
+      "id": "config:public/projects.json",
+      "type": "config",
+      "name": "projects.json",
+      "filePath": "public/projects.json",
+      "summary": "Projeler sayfasında listelenen 8 GitHub deposunun verisi; her kayıt name, title, desc, lang, url ve homepage alanlarını, ayrıca title_en/desc_en İngilizce karşılıklarını içerir.",
+      "tags": [
+        "configuration",
+        "static-data",
+        "bilingual",
+        "content-source"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:public/recommendations.json",
+      "type": "config",
+      "name": "recommendations.json",
+      "filePath": "public/recommendations.json",
+      "summary": "Öneriler sayfasını besleyen küçük elle yazılmış liste: her kayıt için name, url ve kısa bir not. Şu an 3 dış kaynak barındırıyor.",
+      "tags": [
+        "configuration",
+        "static-data",
+        "content-source",
+        "hand-maintained"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:public/search-index.json",
+      "type": "config",
+      "name": "search-index.json",
+      "filePath": "public/search-index.json",
+      "summary": "İstemci tarafı tam metin araması için üretilen ~4 MB'lik indeks: 176 kayıtlık düz dizi, her öğe yalnızca slug ve PDF'ten çıkarılıp aksanları katlanmış (folded) body metnini taşır.",
+      "tags": [
+        "configuration",
+        "generated-data",
+        "search-index",
+        "full-text",
+        "build-artifact"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Metin, src/search.js içindeki fold() ile aynı normalizasyondan geçmiş halde saklanıyor (Türkçe aksanlar ve bozuk LaTeX karakterleri ASCII'ye indirgeniyor); indeks ile sorgu aynı dönüşümü paylaşmazsa arama sessizce bozulur."
+    },
+    {
+      "id": "config:public/themes.json",
+      "type": "config",
+      "name": "themes.json",
+      "filePath": "public/themes.json",
+      "summary": "Ana sayfadaki tema haritası: 8 tema (izomorfizm, anlam, örtük bilgi, görünürlük, mühendislik zihni, okuma-öğrenme, strateji, yazılım mimarisi) her biri başlık, blurb ve ilgili makale slug listesiyle; ayrıca 6 slug'lık featured seçkisi.",
+      "tags": [
+        "configuration",
+        "taxonomy",
+        "bilingual",
+        "content-curation",
+        "navigation"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "slugs ve featured dizileri posts.json'daki slug'lara yumuşak referans; slug değişirse burada sessiz kırılma oluşur, çünkü bağ derleme zamanında doğrulanmıyor."
+    },
+    {
+      "id": "file:scripts/build-corpus-xray.js",
+      "type": "file",
+      "name": "build-corpus-xray.js",
+      "filePath": "scripts/build-corpus-xray.js",
+      "summary": "Korpusun tamamını hesaplamalı olarak çözümleyip tek dosyalık `docs/korpus-rontgeni.html` raporunu üretir: terim sıklığıyla ağırlık merkezleri, Jaccard benzerlik ağı, ilgili-yazı gelen-derecesiyle çekim merkezleri, en yalnız yazılar ve tema kapsamı. Build hattının parçası değildir, `npm run xray` ile elle çalıştırılır ve `.fulltext-cache.json` gerektirir.",
+      "tags": [
+        "build-script",
+        "analiz",
+        "rapor-üretimi",
+        "korpus",
+        "html-generator"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Node ESM betiği; tüm HTML raporu (stil dahil) tek bir template literal içinde inline üretilir, harici şablon motoru yoktur."
+    },
+    {
+      "id": "function:scripts/build-corpus-xray.js:words",
+      "type": "function",
+      "name": "words",
+      "filePath": "scripts/build-corpus-xray.js",
+      "lineRange": [
+        51,
+        55
+      ],
+      "summary": "Bir metni küçük harfe indirip Türkçe harfler dışındaki karakterleri temizler ve 6 karakterden uzun kelimelerden bir Set üretir; benzerlik hesabının girdisidir.",
+      "tags": [
+        "utility",
+        "metin-işleme",
+        "tokenizasyon",
+        "türkçe"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/build-corpus-xray.js:jac",
+      "type": "function",
+      "name": "jac",
+      "filePath": "scripts/build-corpus-xray.js",
+      "lineRange": [
+        57,
+        62
+      ],
+      "summary": "İki kelime kümesi arasındaki Jaccard benzerliğini hesaplar; küçük kümeyi gezerek kesişimi bulur, böylece belge-belge benzerlik matrisi ucuzlar.",
+      "tags": [
+        "utility",
+        "benzerlik",
+        "jaccard",
+        "algoritma"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Küçük/büyük küme seçimi (a.size < b.size) kesişim döngüsünü kısaltan basit bir optimizasyon."
+    },
+    {
+      "id": "function:scripts/build-corpus-xray.js:rankList",
+      "type": "function",
+      "name": "rankList",
+      "filePath": "scripts/build-corpus-xray.js",
+      "lineRange": [
+        121,
+        131
+      ],
+      "summary": "Sıralı listeleri (çekim merkezleri veya en yalnız yazılar) numaralı `<ol class=\"rank\">` HTML bloğuna çevirir; 'hub' türünde ayrıca gelen-derece sayısını da basar.",
+      "tags": [
+        "utility",
+        "html-rendering",
+        "rapor",
+        "template"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scripts/build-portrait.js",
+      "type": "file",
+      "name": "build-portrait.js",
+      "filePath": "scripts/build-portrait.js",
+      "summary": "Korpusun başlık + açıklama + tema haritasını Anthropic modeline okutup `public/portrait.json` dosyasını (\"bu yazar kim, nasıl düşünüyor\" portresi) üretir. Tam metin yerine elle yazılmış açıklamaları kullandığı için çağrı ucuzdur; API anahtarı gerektirdiğinden build hattının parçası değildir.",
+      "tags": [
+        "build-script",
+        "llm-integration",
+        "veri-üretimi",
+        "anthropic",
+        "json-output"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Anthropic SDK dinamik `await import()` ile yüklenir; model `MODEL` ortam değişkeniyle geçersiz kılınabilir, varsayılan `claude-sonnet-5`. Yanıt ``` ile sarmalanmış gelebildiği için ilk `{` ile son `}` arası kesilerek ayrıştırılır."
+    },
+    {
+      "id": "function:scripts/build-portrait.js:filterStarters",
+      "type": "function",
+      "name": "filterStarters",
+      "filePath": "scripts/build-portrait.js",
+      "lineRange": [
+        88,
+        94
+      ],
+      "summary": "Modelin ürettiği `starters` listesinden posts.json'da gerçekten bulunmayan slug'ları eleyip elenen sayısını uyarı olarak basar; hem TR hem EN bloğu için ayrı çağrılır.",
+      "tags": [
+        "validation",
+        "llm-output",
+        "guard",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scripts/generate-manifest.js",
+      "type": "file",
+      "name": "generate-manifest.js",
+      "filePath": "scripts/generate-manifest.js",
+      "summary": "`public/pdfs/` klasörünü tarayıp `public/posts.json` manifestini üretir: yeni PDF'ler için varsayılan giriş açar, mevcut başlık/açıklama/tarih alanlarını korur, önizleme (thumb) ve sayfa sayısını doldurur, kalıcı `BELGE-NNN` numarası atar. predev/prebuild kancasıyla otomatik çalışır.",
+      "tags": [
+        "build-script",
+        "manifest",
+        "entry-point",
+        "pdf-işleme",
+        "veri-üretimi"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "ESM içinde `createRequire` ile CommonJS `pdf-parse` paketi yüklenir. Belge numaraları eklenme sırasına göre bir kez atanır ve bir daha değişmez; sıralama `addedAt` damgasına göre yapılır."
+    },
+    {
+      "id": "function:scripts/generate-manifest.js:makeThumb",
+      "type": "function",
+      "name": "makeThumb",
+      "filePath": "scripts/generate-manifest.js",
+      "lineRange": [
+        22,
+        41
+      ],
+      "summary": "PDF'in ilk sayfasından macOS `qlmanage` (Quick Look) ile 800px PNG önizleme üretir ve slug adına taşır; araç yoksa veya hata olursa sessizce null döner.",
+      "tags": [
+        "utility",
+        "görsel-üretimi",
+        "platform-bağımlı",
+        "pdf-işleme"
+      ],
+      "complexity": "simple",
+      "languageNotes": "macOS'a özgü bir dış araca (qlmanage) bağlıdır; başka platformlarda önizlemesiz devam eder — hata bilinçli olarak yutulur."
+    },
+    {
+      "id": "function:scripts/generate-manifest.js:pageCount",
+      "type": "function",
+      "name": "pageCount",
+      "filePath": "scripts/generate-manifest.js",
+      "lineRange": [
+        45,
+        55
+      ],
+      "summary": "PDFParse ile belgenin toplam sayfa sayısını okur; hata durumunda null döner ve parser her koşulda `finally` içinde serbest bırakılır.",
+      "tags": [
+        "utility",
+        "pdf-işleme",
+        "async",
+        "metadata"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/generate-manifest.js:slugify",
+      "type": "function",
+      "name": "slugify",
+      "filePath": "scripts/generate-manifest.js",
+      "lineRange": [
+        57,
+        63
+      ],
+      "summary": "PDF dosya adından URL slug'ı üretir: uzantıyı atar, Türkçe harfleri koruyarak diğer karakterleri tireye çevirir, baş/son tireleri kırpar.",
+      "tags": [
+        "utility",
+        "slug",
+        "url",
+        "türkçe"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/generate-manifest.js:titleize",
+      "type": "function",
+      "name": "titleize",
+      "filePath": "scripts/generate-manifest.js",
+      "lineRange": [
+        66,
+        73
+      ],
+      "summary": "Dosya adından okunabilir bir varsayılan başlık türetir (tire/alt çizgi boşluğa, kelime başları büyük harfe). Yalnızca yer tutucudur; başlıklar sonradan elle yazılır.",
+      "tags": [
+        "utility",
+        "metin-işleme",
+        "başlık",
+        "varsayılan-değer"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scripts/translate-posts.js",
+      "type": "file",
+      "name": "translate-posts.js",
+      "filePath": "scripts/translate-posts.js",
+      "summary": "posts.json'daki Türkçe başlık ve açıklamaları Anthropic modeliyle İngilizceye çevirip `title_en` / `description_en` alanlarına yazar. Artımlıdır — yalnızca eksik olanları çevirir (FORCE=1 ile hepsini) ve slug'lara dokunmaz.",
+      "tags": [
+        "build-script",
+        "llm-integration",
+        "çeviri",
+        "i18n",
+        "anthropic"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "İstekler 20'lik gruplara bölünür (BATCH) ve model yanıtı ilk `[` ile son `]` arası kesilerek ayrıştırılır; ayrıştırma başarısızsa süreç dosyayı yazmadan sonlanır."
+    },
+    {
+      "id": "file:src/styles.css",
+      "type": "file",
+      "name": "styles.css",
+      "filePath": "src/styles.css",
+      "summary": "Sitenin tek küresel stil dosyası: `:root` üzerinde tasarım belirteçleri (renk, tipografi, ölçü) ve `prefers-color-scheme: dark` ile karanlık tema, ardından bölüm bölüm düzen — dil değiştirici, sekme gezinmesi, arama/filtre, yazı listesi ve sayfalama, yazı detayı ve atıf kutusu, tema haritası, portre ve 'yapay zekâna ver' modalları, Duvarlar kataloğu (kriz önceliği rozetleri, sınama kayıtları), yerel kütüphane rafı ve Sor cevap sayfası.",
+      "tags": [
+        "stylesheet",
+        "design-tokens",
+        "dark-mode",
+        "responsive",
+        "global-styles"
+      ],
+      "complexity": "complex",
+      "languageNotes": "CSS custom property'leri iki ayrı `:root` bloğunda tanımlanır (genel + Duvarlar bölümü); karanlık tema yalnızca `prefers-color-scheme` medya sorgusuyla, ayrıca `prefers-reduced-motion` ile animasyonlar koşullu verilir."
+    },
+    {
+      "id": "file:vite.config.js",
+      "type": "file",
+      "name": "vite.config.js",
+      "filePath": "vite.config.js",
+      "summary": "Vite derleme yapılandırması: React eklentisi, `BASE_PATH` ile ayarlanabilen mutlak `base` yolu, son git commit tarihinden türetilen `__LAST_CHANGE__` derleme sabiti ve yalnızca dev sunucusunda çalışan `yerel-kutuphane` eklentisi.",
+      "tags": [
+        "configuration",
+        "build-system",
+        "vite",
+        "entry-point",
+        "plugin"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "`define` ile derleme anında değer gömülür; git yoksa (Vercel CLI deploy ortamı) derleme anı zaman damgası kullanılır."
+    },
+    {
+      "id": "function:vite.config.js:yerelKutuphane",
+      "type": "function",
+      "name": "yerelKutuphane",
+      "filePath": "vite.config.js",
+      "lineRange": [
+        26,
+        52
+      ],
+      "summary": "`apply: 'serve'` ile yalnızca dev sunucusunda etkin olan Vite eklentisi; gitignore'daki `yerel/` klasörünü /yerel/... altından servis eder ve yolun gerçekten o klasörün altında kaldığını ayırıcıyla doğrulayarak path traversal'ı engeller.",
+      "tags": [
+        "plugin",
+        "middleware",
+        "dev-server",
+        "security",
+        "static-serving"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "`resolve` + `normalize` sonrası `file.startsWith(yerelDir + sep)` denetimi, hem `../` hem kodlanmış `..%2F` biçimlerini kapatır; üretim derlemesinde bu yol hiç var olmaz."
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:src/main.jsx",
+      "target": "file:src/App.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main.jsx",
+      "target": "file:src/i18n.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main.jsx",
+      "target": "file:src/pages/Duvarlar.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main.jsx",
+      "target": "file:src/pages/Home.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main.jsx",
+      "target": "file:src/pages/Muzik.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main.jsx",
+      "target": "file:src/pages/Oneriler.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main.jsx",
+      "target": "file:src/pages/Post.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main.jsx",
+      "target": "file:src/pages/Projeler.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main.jsx",
+      "target": "file:src/pages/Rehber.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main.jsx",
+      "target": "file:src/pages/Sor.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main.jsx",
+      "target": "file:src/styles.css",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/pages/Duvarlar.jsx",
+      "target": "file:src/i18n.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/pages/Duvarlar.jsx",
+      "target": "file:src/seo.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/pages/Muzik.jsx",
+      "target": "file:src/i18n.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/pages/Muzik.jsx",
+      "target": "file:src/seo.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/pages/Muzik.jsx",
+      "target": "file:src/usePosts.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/pages/Oneriler.jsx",
+      "target": "file:src/i18n.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/pages/Oneriler.jsx",
+      "target": "file:src/seo.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/pages/Projeler.jsx",
+      "target": "file:src/i18n.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/pages/Projeler.jsx",
+      "target": "file:src/seo.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/pages/Rehber.jsx",
+      "target": "file:src/i18n.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/pages/Rehber.jsx",
+      "target": "file:src/seo.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/pages/Rehber.jsx",
+      "target": "file:src/usePosts.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/pages/Duvarlar.jsx",
+      "target": "function:src/pages/Duvarlar.jsx:highlight",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/pages/Duvarlar.jsx",
+      "target": "function:src/pages/Duvarlar.jsx:Duvarlar",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/pages/Muzik.jsx",
+      "target": "function:src/pages/Muzik.jsx:Muzik",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/pages/Oneriler.jsx",
+      "target": "function:src/pages/Oneriler.jsx:Oneriler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/pages/Projeler.jsx",
+      "target": "function:src/pages/Projeler.jsx:Projeler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/pages/Rehber.jsx",
+      "target": "function:src/pages/Rehber.jsx:Rehber",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/seo.js",
+      "target": "function:src/seo.js:upsertMeta",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/seo.js",
+      "target": "function:src/seo.js:useHead",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/usePosts.js",
+      "target": "function:src/usePosts.js:usePosts",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/pages/Duvarlar.jsx",
+      "target": "function:src/pages/Duvarlar.jsx:Duvarlar",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/pages/Muzik.jsx",
+      "target": "function:src/pages/Muzik.jsx:Muzik",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/pages/Oneriler.jsx",
+      "target": "function:src/pages/Oneriler.jsx:Oneriler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/pages/Projeler.jsx",
+      "target": "function:src/pages/Projeler.jsx:Projeler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/pages/Rehber.jsx",
+      "target": "function:src/pages/Rehber.jsx:Rehber",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/seo.js",
+      "target": "function:src/seo.js:useHead",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/usePosts.js",
+      "target": "function:src/usePosts.js:usePosts",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/seo.js:useHead",
+      "target": "function:src/seo.js:upsertMeta",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/pages/Duvarlar.jsx:Duvarlar",
+      "target": "function:src/seo.js:useHead",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/pages/Muzik.jsx:Muzik",
+      "target": "function:src/seo.js:useHead",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/pages/Oneriler.jsx:Oneriler",
+      "target": "function:src/seo.js:useHead",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/pages/Projeler.jsx:Projeler",
+      "target": "function:src/seo.js:useHead",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/pages/Rehber.jsx:Rehber",
+      "target": "function:src/seo.js:useHead",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/pages/Muzik.jsx:Muzik",
+      "target": "function:src/usePosts.js:usePosts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/pages/Rehber.jsx:Rehber",
+      "target": "function:src/usePosts.js:usePosts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/pages/Duvarlar.jsx:Duvarlar",
+      "target": "function:src/i18n.jsx:useLang",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/pages/Muzik.jsx:Muzik",
+      "target": "function:src/i18n.jsx:useLang",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/pages/Oneriler.jsx:Oneriler",
+      "target": "function:src/i18n.jsx:useLang",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/pages/Projeler.jsx:Projeler",
+      "target": "function:src/i18n.jsx:useLang",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/pages/Rehber.jsx:Rehber",
+      "target": "function:src/i18n.jsx:useLang",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:scripts/prerender.js",
+      "target": "file:src/excerpt.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/pages/Home.jsx",
+      "target": "file:src/ThemeIcon.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/pages/Home.jsx",
+      "target": "file:src/excerpt.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/pages/Home.jsx",
+      "target": "file:src/i18n.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/pages/Home.jsx",
+      "target": "file:src/search.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/pages/Home.jsx",
+      "target": "file:src/seo.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/pages/Home.jsx",
+      "target": "file:src/usePosts.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/pages/Post.jsx",
+      "target": "file:src/excerpt.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/pages/Post.jsx",
+      "target": "file:src/i18n.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/pages/Post.jsx",
+      "target": "file:src/seo.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/pages/Post.jsx",
+      "target": "file:src/usePosts.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/prerender.js",
+      "target": "function:scripts/prerender.js:fmtDate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:scripts/prerender.js",
+      "target": "function:scripts/prerender.js:header",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:scripts/prerender.js",
+      "target": "function:scripts/prerender.js:footer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:scripts/prerender.js",
+      "target": "function:scripts/prerender.js:postListItem",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:scripts/prerender.js",
+      "target": "function:scripts/prerender.js:buildHead",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:scripts/prerender.js",
+      "target": "function:scripts/prerender.js:renderPage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:scripts/prerender.js",
+      "target": "function:scripts/prerender.js:projItem",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:scripts/prerender.js",
+      "target": "function:scripts/prerender.js:dvCard",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/ThemeIcon.jsx",
+      "target": "function:src/ThemeIcon.jsx:ThemeIcon",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/excerpt.js",
+      "target": "function:src/excerpt.js:excerpt",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/pages/Home.jsx",
+      "target": "function:src/pages/Home.jsx:Intro",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/pages/Home.jsx",
+      "target": "function:src/pages/Home.jsx:pageItems",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/pages/Home.jsx",
+      "target": "function:src/pages/Home.jsx:Pagination",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/pages/Home.jsx",
+      "target": "function:src/pages/Home.jsx:FeaturedShelf",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/pages/Home.jsx",
+      "target": "function:src/pages/Home.jsx:ThemeGrid",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/pages/Home.jsx",
+      "target": "function:src/pages/Home.jsx:Home",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/pages/Post.jsx",
+      "target": "function:src/pages/Post.jsx:Post",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/ThemeIcon.jsx",
+      "target": "function:src/ThemeIcon.jsx:ThemeIcon",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/excerpt.js",
+      "target": "function:src/excerpt.js:excerpt",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/pages/Home.jsx",
+      "target": "function:src/pages/Home.jsx:Home",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/pages/Post.jsx",
+      "target": "function:src/pages/Post.jsx:Post",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:scripts/prerender.js:postListItem",
+      "target": "function:src/excerpt.js:excerpt",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:scripts/prerender.js:postListItem",
+      "target": "function:scripts/prerender.js:fmtDate",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:scripts/prerender.js:renderPage",
+      "target": "function:scripts/prerender.js:buildHead",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/pages/Home.jsx:Home",
+      "target": "function:src/excerpt.js:excerpt",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/pages/Home.jsx:Home",
+      "target": "function:src/usePosts.js:usePosts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/pages/Home.jsx:Home",
+      "target": "function:src/seo.js:useHead",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/pages/Home.jsx:Home",
+      "target": "function:src/i18n.jsx:useLang",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/pages/Home.jsx:Home",
+      "target": "function:src/i18n.jsx:seriesLabel",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/pages/Home.jsx:Home",
+      "target": "function:src/search.js:fold",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/pages/Home.jsx:Home",
+      "target": "function:src/search.js:matchesTokens",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/pages/Home.jsx:Home",
+      "target": "function:src/pages/Home.jsx:pageItems",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/pages/Home.jsx:Pagination",
+      "target": "function:src/pages/Home.jsx:pageItems",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/pages/Home.jsx:Intro",
+      "target": "function:src/i18n.jsx:useLang",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/pages/Home.jsx:Pagination",
+      "target": "function:src/i18n.jsx:useLang",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/pages/Home.jsx:ThemeGrid",
+      "target": "function:src/ThemeIcon.jsx:ThemeIcon",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/pages/Post.jsx:Post",
+      "target": "function:src/excerpt.js:excerpt",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/pages/Post.jsx:Post",
+      "target": "function:src/usePosts.js:usePosts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/pages/Post.jsx:Post",
+      "target": "function:src/seo.js:useHead",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/pages/Post.jsx:Post",
+      "target": "function:src/i18n.jsx:useLang",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/pages/Post.jsx:Post",
+      "target": "function:src/i18n.jsx:seriesLabel",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/pages/Home.jsx",
+      "target": "file:src/pages/Post.jsx",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:scripts/prerender.js",
+      "target": "file:src/pages/Home.jsx",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:scripts/prerender.js",
+      "target": "file:src/pages/Post.jsx",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:scripts/build-search-index.js",
+      "target": "file:src/search.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/duvar.js",
+      "target": "file:src/search.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/pages/Sor.jsx",
+      "target": "file:src/i18n.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/pages/Sor.jsx",
+      "target": "file:src/search.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/pages/Sor.jsx",
+      "target": "file:src/seo.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/build-search-index.js",
+      "target": "function:scripts/build-search-index.js:clean",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:scripts/build-search-index.js",
+      "target": "function:scripts/build-search-index.js:extract",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/pages/Sor.jsx",
+      "target": "function:src/pages/Sor.jsx:Sor",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/search.js",
+      "target": "function:src/search.js:fold",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/search.js",
+      "target": "function:src/search.js:matchesTokens",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/pages/Sor.jsx",
+      "target": "function:src/pages/Sor.jsx:Sor",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/search.js",
+      "target": "function:src/search.js:fold",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/search.js",
+      "target": "function:src/search.js:matchesTokens",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:scripts/build-search-index.js",
+      "target": "function:src/search.js:fold",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:scripts/duvar.js",
+      "target": "function:src/search.js:fold",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:scripts/duvar.js",
+      "target": "function:src/search.js:matchesTokens",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/pages/Sor.jsx:Sor",
+      "target": "function:src/search.js:fold",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/pages/Sor.jsx:Sor",
+      "target": "function:src/search.js:matchesTokens",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/pages/Sor.jsx:Sor",
+      "target": "function:src/i18n.jsx:useLang",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/pages/Sor.jsx:Sor",
+      "target": "function:src/seo.js:useHead",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/search.js:matchesTokens",
+      "target": "function:src/search.js:fold",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/App.jsx",
+      "target": "file:src/AskAI.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/App.jsx",
+      "target": "file:src/AuthorPortrait.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/App.jsx",
+      "target": "file:src/i18n.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/AskAI.jsx",
+      "target": "file:src/i18n.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/AuthorPortrait.jsx",
+      "target": "file:src/i18n.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/App.jsx",
+      "target": "function:src/App.jsx:App",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/App.jsx",
+      "target": "function:src/App.jsx:LangSwitch",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/AskAI.jsx",
+      "target": "function:src/AskAI.jsx:AskAI",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/AuthorPortrait.jsx",
+      "target": "function:src/AuthorPortrait.jsx:AuthorPortrait",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/i18n.jsx",
+      "target": "function:src/i18n.jsx:LanguageProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/i18n.jsx",
+      "target": "function:src/i18n.jsx:useLang",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/i18n.jsx",
+      "target": "function:src/i18n.jsx:seriesLabel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/App.jsx",
+      "target": "function:src/App.jsx:App",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/AskAI.jsx",
+      "target": "function:src/AskAI.jsx:AskAI",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/AuthorPortrait.jsx",
+      "target": "function:src/AuthorPortrait.jsx:AuthorPortrait",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/i18n.jsx",
+      "target": "function:src/i18n.jsx:LanguageProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/i18n.jsx",
+      "target": "function:src/i18n.jsx:useLang",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/i18n.jsx",
+      "target": "function:src/i18n.jsx:seriesLabel",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/App.jsx:App",
+      "target": "function:src/i18n.jsx:useLang",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/App.jsx:LangSwitch",
+      "target": "function:src/i18n.jsx:useLang",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/AskAI.jsx:AskAI",
+      "target": "function:src/i18n.jsx:useLang",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/AuthorPortrait.jsx:AuthorPortrait",
+      "target": "function:src/i18n.jsx:useLang",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/App.jsx:App",
+      "target": "function:src/App.jsx:LangSwitch",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "function:src/App.jsx:App",
+      "target": "function:src/AuthorPortrait.jsx:AuthorPortrait",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "function:src/App.jsx:App",
+      "target": "function:src/AskAI.jsx:AskAI",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "document:README.md",
+      "target": "file:src/main.jsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:README.md",
+      "target": "file:scripts/generate-manifest.js",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:README.md",
+      "target": "file:scripts/build-search-index.js",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:README.md",
+      "target": "file:scripts/prerender.js",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:README.md",
+      "target": "file:src/seo.js",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:README.md",
+      "target": "config:vercel.json",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:README.md",
+      "target": "config:package.json",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:CLAUDE.md",
+      "target": "file:scripts/duvar.js",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:CLAUDE.md",
+      "target": "document:docs/duvarlar.md",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:CLAUDE.md",
+      "target": "file:scripts/generate-manifest.js",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:CLAUDE.md",
+      "target": "file:scripts/build-search-index.js",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:CLAUDE.md",
+      "target": "document:README.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:index.html",
+      "target": "file:src/main.jsx",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:package.json",
+      "target": "file:index.html",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:package.json",
+      "target": "file:src/main.jsx",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:package.json",
+      "target": "file:scripts/prerender.js",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:package.json",
+      "target": "file:scripts/generate-manifest.js",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:package.json",
+      "target": "file:scripts/build-search-index.js",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:package.json",
+      "target": "file:scripts/duvar.js",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:package.json",
+      "target": "file:scripts/build-corpus-xray.js",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:package.json",
+      "target": "file:scripts/build-portrait.js",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:package.json",
+      "target": "file:scripts/translate-posts.js",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:vercel.json",
+      "target": "file:index.html",
+      "type": "routes",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:vercel.json",
+      "target": "file:src/App.jsx",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "document:docs/duvarlar.md",
+      "target": "config:public/duvarlar.json",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/duvarlar.md",
+      "target": "file:scripts/duvar.js",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/korpus-notlari.md",
+      "target": "file:docs/korpus-rontgeni.html",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/korpus-notlari.md",
+      "target": "file:scripts/build-corpus-xray.js",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/korpus-notlari.md",
+      "target": "file:scripts/build-portrait.js",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/korpus-notlari.md",
+      "target": "file:scripts/translate-posts.js",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/korpus-notlari.md",
+      "target": "document:docs/duvarlar.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/soyutlama-plani.md",
+      "target": "document:docs/korpus-notlari.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/soyutlama-plani.md",
+      "target": "file:scripts/build-search-index.js",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:scripts/generate-manifest.js",
+      "target": "config:public/posts.json",
+      "type": "writes_to",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:scripts/translate-posts.js",
+      "target": "config:public/posts.json",
+      "type": "writes_to",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:scripts/build-search-index.js",
+      "target": "config:public/search-index.json",
+      "type": "writes_to",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:scripts/build-search-index.js",
+      "target": "config:public/posts.json",
+      "type": "reads_from",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/build-portrait.js",
+      "target": "config:public/portrait.json",
+      "type": "writes_to",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:scripts/build-portrait.js",
+      "target": "config:public/posts.json",
+      "type": "reads_from",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/build-portrait.js",
+      "target": "config:public/themes.json",
+      "type": "reads_from",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/build-corpus-xray.js",
+      "target": "config:public/posts.json",
+      "type": "reads_from",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/build-corpus-xray.js",
+      "target": "config:public/themes.json",
+      "type": "reads_from",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/duvar.js",
+      "target": "config:public/duvarlar.json",
+      "type": "reads_from",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/prerender.js",
+      "target": "config:public/posts.json",
+      "type": "reads_from",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/prerender.js",
+      "target": "config:public/search-index.json",
+      "type": "reads_from",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/prerender.js",
+      "target": "config:public/recommendations.json",
+      "type": "reads_from",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/prerender.js",
+      "target": "config:public/projects.json",
+      "type": "reads_from",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/prerender.js",
+      "target": "config:public/duvarlar.json",
+      "type": "reads_from",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/usePosts.js",
+      "target": "config:public/posts.json",
+      "type": "reads_from",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/AuthorPortrait.jsx",
+      "target": "config:public/portrait.json",
+      "type": "reads_from",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/pages/Duvarlar.jsx",
+      "target": "config:public/duvarlar.json",
+      "type": "reads_from",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/pages/Sor.jsx",
+      "target": "config:public/duvarlar.json",
+      "type": "reads_from",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/pages/Home.jsx",
+      "target": "config:public/themes.json",
+      "type": "reads_from",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/pages/Home.jsx",
+      "target": "config:public/search-index.json",
+      "type": "reads_from",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/pages/Home.jsx",
+      "target": "config:public/duvarlar.json",
+      "type": "reads_from",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/pages/Projeler.jsx",
+      "target": "config:public/projects.json",
+      "type": "reads_from",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/pages/Oneriler.jsx",
+      "target": "config:public/recommendations.json",
+      "type": "reads_from",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "config:public/themes.json",
+      "target": "config:public/posts.json",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "config:public/search-index.json",
+      "target": "config:public/posts.json",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "config:public/portrait.json",
+      "target": "config:public/posts.json",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:scripts/build-corpus-xray.js",
+      "target": "function:scripts/build-corpus-xray.js:words",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:scripts/build-corpus-xray.js",
+      "target": "function:scripts/build-corpus-xray.js:jac",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:scripts/build-corpus-xray.js",
+      "target": "function:scripts/build-corpus-xray.js:rankList",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:scripts/build-portrait.js",
+      "target": "function:scripts/build-portrait.js:filterStarters",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:scripts/generate-manifest.js",
+      "target": "function:scripts/generate-manifest.js:makeThumb",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:scripts/generate-manifest.js",
+      "target": "function:scripts/generate-manifest.js:pageCount",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:scripts/generate-manifest.js",
+      "target": "function:scripts/generate-manifest.js:slugify",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:scripts/generate-manifest.js",
+      "target": "function:scripts/generate-manifest.js:titleize",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:vite.config.js",
+      "target": "function:vite.config.js:yerelKutuphane",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:scripts/generate-manifest.js",
+      "target": "config:public/posts.json",
+      "type": "reads_from",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/translate-posts.js",
+      "target": "config:public/posts.json",
+      "type": "reads_from",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/build-corpus-xray.js",
+      "target": "file:docs/korpus-rontgeni.html",
+      "type": "writes_to",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:vite.config.js",
+      "target": "file:src/main.jsx",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:src/styles.css",
+      "target": "file:src/main.jsx",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ],
+  "layers": [
+    {
+      "id": "layer:ui",
+      "name": "Arayüz Katmanı",
+      "description": "React SPA'nın kullanıcıya görünen yüzü: BrowserRouter kökü, kök layout ve sekme gezinmesi, sekiz rota sayfası (Home, Post, Duvarlar, Sor, Projeler, Öneriler, Rehber, Müzik), modal bileşenler (portre, yapay zekâya ver) ve tek küresel stil dosyası.",
+      "nodeIds": [
+        "file:src/main.jsx",
+        "file:src/App.jsx",
+        "file:src/pages/Home.jsx",
+        "file:src/pages/Post.jsx",
+        "file:src/pages/Duvarlar.jsx",
+        "file:src/pages/Sor.jsx",
+        "file:src/pages/Projeler.jsx",
+        "file:src/pages/Oneriler.jsx",
+        "file:src/pages/Rehber.jsx",
+        "file:src/pages/Muzik.jsx",
+        "file:src/AskAI.jsx",
+        "file:src/AuthorPortrait.jsx",
+        "file:src/ThemeIcon.jsx",
+        "file:src/styles.css"
+      ]
+    },
+    {
+      "id": "layer:shared-core",
+      "name": "Paylaşılan Çekirdek",
+      "description": "Sayfaların ortak kullandığı, dışa doğru bağımlılığı olmayan taban modüller: TR/EN i18n context sağlayıcısı (12 dosya tarafından çekiliyor), rota başına <head> güncelleyen SEO katmanı, posts.json manifest hook'u ve derleme betikleriyle de paylaşılan Türkçe-duyarlı arama/kırpma yardımcıları.",
+      "nodeIds": [
+        "file:src/i18n.jsx",
+        "file:src/seo.js",
+        "file:src/usePosts.js",
+        "file:src/search.js",
+        "file:src/excerpt.js"
+      ]
+    },
+    {
+      "id": "layer:build-pipeline",
+      "name": "Derleme Hattı",
+      "description": "Backend yerine geçen build-time Node betikleri: PDF klasöründen manifest üretimi, pdf-parse ile arama indeksi ve düz metin çıkarımı, Vite sonrası prerender/sitemap/llms.txt üretimi, LLM tabanlı çeviri ve portre üretimi ile duvar kataloğunu sorgulayan CLI aracı.",
+      "nodeIds": [
+        "file:scripts/generate-manifest.js",
+        "file:scripts/build-search-index.js",
+        "file:scripts/prerender.js",
+        "file:scripts/translate-posts.js",
+        "file:scripts/build-portrait.js",
+        "file:scripts/build-corpus-xray.js",
+        "file:scripts/duvar.js"
+      ]
+    },
+    {
+      "id": "layer:data",
+      "name": "Veri Katmanı",
+      "description": "Derleme hattının yazdığı ve hem prerender'ın hem tarayıcıdaki SPA'nın okuduğu public/ JSON dosyaları: merkezî posts.json manifesti, ~4 MB'lik arama indeksi, duvar kataloğu, tema haritası, yazar portresi ile proje ve öneri listeleri.",
+      "nodeIds": [
+        "config:public/posts.json",
+        "config:public/search-index.json",
+        "config:public/duvarlar.json",
+        "config:public/themes.json",
+        "config:public/portrait.json",
+        "config:public/projects.json",
+        "config:public/recommendations.json"
+      ]
+    },
+    {
+      "id": "layer:documentation",
+      "name": "Belgeler ve Korpus Notları",
+      "description": "Projenin çalışma kılavuzları ve korpustan türetilmiş ikinci-mertebe metinler: README derleme zincirini, CLAUDE.md oturum konvansiyonlarını anlatır; docs/ altında 34 duvarın insan-okur kataloğu, korpus durum raporu, soyutlama planı ve xray betiğinin ürettiği statik rapor sayfası bulunur.",
+      "nodeIds": [
+        "document:README.md",
+        "document:CLAUDE.md",
+        "document:docs/duvarlar.md",
+        "document:docs/korpus-notlari.md",
+        "document:docs/soyutlama-plani.md",
+        "file:docs/korpus-rontgeni.html"
+      ]
+    },
+    {
+      "id": "layer:config-deploy",
+      "name": "Yapılandırma ve Dağıtım",
+      "description": "Derleme ve yayın iskeleti: npm script kancalarıyla tüm hattı zincirleyen package.json, base yolu ve dev-only yerel kütüphane eklentisini kuran vite.config.js, Vite'ın giriş şablonu index.html ve SPA rewrite + 301 yönlendirmelerini tanımlayan vercel.json.",
+      "nodeIds": [
+        "config:package.json",
+        "file:vite.config.js",
+        "file:index.html",
+        "config:vercel.json"
+      ]
+    }
+  ],
+  "tour": [
+    {
+      "order": 1,
+      "title": "Proje Ne, Neyi Çözüyor",
+      "description": "Tura projenin kendi anlattığı yerden başlıyoruz: README, backend'i olmayan bir React (Vite) blogun PDF makaleleri nasıl yayına çevirdiğini — PDF → manifest → arama indeksi → prerender zincirini — ve npm komutlarını anlatır. CLAUDE.md ise bunun bir arşiv değil korpus olduğunu ekler: 176 belge kaydı ve bunlardan süzülmüş 34 'duvar' kuralı. İkisini birlikte okuduğunuzda projenin tanımlayıcı fikrini görürsünüz: burada sunucu yoktur, derleme hattının kendisi backend'dir.",
+      "nodeIds": [
+        "document:README.md",
+        "document:CLAUDE.md"
+      ]
+    },
+    {
+      "order": 2,
+      "title": "Derleme Hattı Backend'in Yerine",
+      "description": "package.json bu projenin omurgasıdır: bağımlılıkları değil, hattın sırasını tanımlar. `predev` ve `prebuild` kancaları her dev/build öncesi manifest ve arama indeksini otomatik üretir, `build` ise `vite build` bittikten sonra prerender adımını çalıştırır. Sonraki üç adımda bu zinciri sırayla, ürettiği veriyle birlikte takip edeceğiz.",
+      "nodeIds": [
+        "config:package.json"
+      ],
+      "languageLesson": "npm, `foo` script'inden önce `prefoo`'yu, sonra `postfoo`'yu kendiliğinden çalıştırır. Bu proje sunucusuz kalabilmek için tam olarak bunu sömürüyor: `npm run dev` yazan biri farkında olmadan manifest ve indeks üretimini de tetikliyor, yani 'veri tabanı' her çalıştırmada tazeleniyor."
+    },
+    {
+      "order": 3,
+      "title": "PDF'ten Manifeste",
+      "description": "Hattın ilk halkası: generate-manifest.js `public/pdfs/` klasörünü tarar ve `public/posts.json` manifestini üretir. Kritik davranışı üretmek değil korumaktır — yeni PDF'ler için varsayılan bir kayıt açar, ama elle yazılmış başlık/açıklama/tarih alanlarına dokunmaz, önizleme ve sayfa sayısını doldurur, bir kez atadığı kalıcı `BELGE-NNN` numarasını bir daha değiştirmez. Ortaya çıkan posts.json bu tur boyunca sürekli karşınıza çıkacak: hem derleme betiklerinin hem tarayıcıdaki arayüzün tek doğruluk kaynağı (fan-in sıralamasında ikinci en çok bağımlı olunan düğüm).",
+      "nodeIds": [
+        "file:scripts/generate-manifest.js",
+        "config:public/posts.json"
+      ]
+    },
+    {
+      "order": 4,
+      "title": "Tam Metin ve Arama İndeksi",
+      "description": "Hattın ikinci halkası, manifestten hemen sonra çalışır: build-search-index.js her PDF'in metnini pdf-parse ile çıkarır ve üç çıktı yazar — istemci araması için ~4 MB'lik search-index.json, prerender'ın llms-full.txt üretiminde kullandığı `.fulltext-cache.json` ve yazı başına düz metin dosyaları. Önbellekte bulduğu slug'ları yeniden ayrıştırmaz, yani artımlıdır. Buradaki asıl ders src/search.js: aksan katlama (`fold`) ve token eşleştirme mantığı tek bir modülde durur ve hem Node betiği hem tarayıcı tarafından aynen kullanılır.",
+      "nodeIds": [
+        "file:scripts/build-search-index.js",
+        "config:public/search-index.json",
+        "file:src/search.js"
+      ],
+      "languageLesson": "ESM modülleri Node ve tarayıcıda aynı biçimde import edilebildiği için, arama normalizasyonu gibi 'iki tarafta da tıpatıp aynı olmalı' kurallar tek dosyada tutulabilir. İndeksi üreten kodla indekste arayan kodun farklı `fold` uygulamaları olsaydı, Türkçe aksanlı veya PDF çıkarımında bozulmuş kelimeler sessizce eşleşmez olurdu."
+    },
+    {
+      "order": 5,
+      "title": "Uygulamanın Giriş Noktası",
+      "description": "Veri hazır; şimdi onu tüketen SPA'ya geçiyoruz. index.html Vite'ın şablonudur — `#root` kabı ve `/src/main.jsx` modül betiği. main.jsx React kökünü bağlar, BrowserRouter + LanguageProvider sarmalını kurar ve sekiz rotanın tamamını App düzeni altında tanımlar; bu yüzden grafikte en yüksek fan-out'a sahip dosyadır (11). App.jsx ise kök layout'tur: marka başlığı, TR/EN dil anahtarı, sekme çubuğu, `Outlet` alanı ve altbilgi. styles.css sitenin tek küresel stil dosyasıdır — `:root` tasarım belirteçleri ve `prefers-color-scheme` ile karanlık tema.",
+      "nodeIds": [
+        "file:index.html",
+        "file:src/main.jsx",
+        "file:src/App.jsx",
+        "file:src/styles.css"
+      ],
+      "languageLesson": "React Router'da iç içe rotalar: ana rota bir layout bileşeni (App) render eder, alt rotalar ise o layout'un içindeki `<Outlet />` deliğine yerleşir. Böylece başlık, gezinme ve altbilgi sayfa değişince yeniden kurulmaz — yalnızca Outlet'in içeriği değişir."
+    },
+    {
+      "order": 6,
+      "title": "Paylaşılan Çekirdek Modüller",
+      "description": "Sayfalara geçmeden önce hepsinin çektiği taban katmanı görün. i18n.jsx grafiğin en çok bağımlı olunan dosyasıdır (12 gelen kenar): TR/EN sözlükleri, seri adı karşılıkları ve dili localStorage'da kalıcı kılan `LanguageProvider` context'i ile `useLang` hook'u. usePosts.js posts.json manifestini yükleyen paylaşılan veri hook'udur — Adım 3'te üretilen dosyayı arayüze bu taşır. excerpt.js ise kart ve ilgili-yazı listelerindeki açıklama kırpmasını tek yerden yönetir.",
+      "nodeIds": [
+        "file:src/i18n.jsx",
+        "file:src/usePosts.js",
+        "file:src/excerpt.js"
+      ],
+      "languageLesson": "Context + custom hook ikilisi React'in klasik kalıbıdır: sağlayıcı durumu ağacın tepesinde tutar, `useLang` gibi bir hook onu tüketmeyi tek satıra indirir. usePosts'taki iptal bayrağı da ayrı bir kalıptır — `useEffect` temizleme fonksiyonunda bayrağı düşürerek, bileşen söküldükten sonra gelen fetch cevabının state yazmasını (ve uyarı üretmesini) engeller."
+    },
+    {
+      "order": 7,
+      "title": "Ana Sayfa: Arama ve Tema Haritası",
+      "description": "Home.jsx uygulamanın en yoğun sayfasıdır (fan-out 10): yazı listesini arama, seri filtresi, tema seçimi, sıralama ve sayfalama ile sunar, üstüne öne çıkanlar rafını ve tema ızgarasını ekler. Adım 4'ün ürettiği ~4 MB'lik arama indeksini ve themes.json'u tembel yükler — açılışta değil, gerçekten arandığında. Kullanıcı durumu URL parametrelerinde, kaydırma konumu sessionStorage'da tutulur; yani geri düğmesi listeyi bulduğunuz yerde bırakır. ThemeIcon.jsx tema kartlarının sekiz ince çizgili SVG ikonunu sağlar.",
+      "nodeIds": [
+        "file:src/pages/Home.jsx",
+        "config:public/themes.json",
+        "file:src/ThemeIcon.jsx"
+      ]
+    },
+    {
+      "order": 8,
+      "title": "Tek Yazı Sayfası ve SEO",
+      "description": "Post.jsx `/post/:slug` rotasıdır: slug'a göre manifestten yazıyı bulur, PDF'i iframe içinde gösterir, metni kopyala/indir, paylaş ve atıf kopyala eylemlerini sunar; altında ilgili yazıları ve aynı serideki diğerlerini listeler. Sayfa meta etiketlerini seo.js'in `useHead` hook'u üstlenir — rota değiştikçe title, description, canonical, Open Graph, Twitter Card ve Article JSON-LD etiketlerini yerinde oluşturur ya da tazeler. seo.js, i18n ve posts.json'dan sonra en çok bağımlı olunan modüldür (9 gelen kenar).",
+      "nodeIds": [
+        "file:src/pages/Post.jsx",
+        "file:src/seo.js"
+      ],
+      "languageLesson": "Tek sayfalık uygulamada gezinme belgeyi yeniden yüklemediği için `<head>` kendiliğinden değişmez; useHead gibi bir hook `useEffect` içinde DOM'a elle dokunup etiketleri günceller. Ama bu yalnızca JavaScript çalıştıran ziyaretçiler için geçerlidir — paylaşım botları ve tarayıcıların çoğu HTML'i ham haliyle okur. Bu boşluğu Adım 11'deki prerender kapatır."
+    },
+    {
+      "order": 9,
+      "title": "Backend'siz Yapay Zekâ Katmanı",
+      "description": "Bu proje LLM'i çalışma zamanında değil, derleme zamanında kullanır. build-portrait.js korpusun başlık + açıklama + tema haritasını Anthropic modeline okutup `portrait.json` üretir; translate-posts.js ise eksik `title_en`/`description_en` alanlarını artımlı olarak doldurur. İkisi de API anahtarı gerektirdiği için build hattının parçası değil, elle çalıştırılır. Tarayıcı tarafında AuthorPortrait.jsx bu hazır JSON'u bir modalda gösterir, AskAI.jsx ise hiçbir istek atmadan korpus özetini (`llms.txt`) panoya kopyalayıp harici sohbet aracını yeni sekmede açar.",
+      "nodeIds": [
+        "file:scripts/build-portrait.js",
+        "file:scripts/translate-posts.js",
+        "config:public/portrait.json",
+        "file:src/AuthorPortrait.jsx",
+        "file:src/AskAI.jsx"
+      ],
+      "languageLesson": "Pahalı veya anahtar gerektiren işi derleme zamanına kaydırmak (build-time inference), yayına çıkan siteyi tamamen statik bırakır: kullanıcı gecikme, sır saklama ya da maliyet ödemez, çünkü çağrı çoktan yapılmış ve sonucu bir JSON dosyasına donmuştur. Bedeli tazelik — yeniden derlenene kadar çıktı eskir."
+    },
+    {
+      "order": 10,
+      "title": "Veri Güdümlü Küçük Sekmeler",
+      "description": "Adım 7 ve 8'in kalıbının en yalın hâli: sayfa bileşeni bir JSON dosyası çeker ve listeler, başka mantık yoktur. Projeler.jsx projects.json'daki 8 GitHub deposunu, Oneriler.jsx ise recommendations.json'daki dış kaynakları gösterir; ikisi de dile göre `title` / `title_en` arasında seçim yapar. Öneriler sayfası ayrıca yalnızca dev sunucusunda görünen yerel-yalnız kütüphane bölümünü barındırır — telifli belgeler yayına asla çıkmaz.",
+      "nodeIds": [
+        "file:src/pages/Projeler.jsx",
+        "config:public/projects.json",
+        "file:src/pages/Oneriler.jsx",
+        "config:public/recommendations.json"
+      ]
+    },
+    {
+      "order": 11,
+      "title": "Prerender: SPA'yı Statik HTML'e Çevirmek",
+      "description": "Turun dönüm noktası. prerender.js `vite build` bittikten sonra çalışır ve her rota için gerçek HTML yazar: head etiketleri, JSON-LD ve JavaScript kapalıyken bile görünen içerik. Yanında sitemap.xml, robots.txt, llms.txt, llms-full.txt (tüm makalelerin tam metni), feed.xml ve 404.html üretir — yani Adım 8'deki çalışma zamanı SEO'sunu makinelerin okuyabildiği statik karşılığına çevirir. İkinci görevi bir güvenlik işidir: Muzik.jsx ve Rehber.jsx sekmelerinde yalnızca başlıkları gösterilen gizli kayıtların PDF, metin ve manifest izlerini dist'ten siler; arayüzde gizlemek dosyayı gizlemediği için bu temizlik hattın sonunda yapılır.",
+      "nodeIds": [
+        "file:scripts/prerender.js",
+        "file:src/pages/Muzik.jsx",
+        "file:src/pages/Rehber.jsx"
+      ],
+      "languageLesson": "Prerender (SSG), SPA'nın rotalarını derleme sırasında dolaşıp her biri için hazır HTML dosyası yazma tekniğidir. Sunucu gerekmez — çıktı düz dosyalardır — ama içerik derleme anında donar. `dist/post/<slug>/index.html` gibi klasör-başına-index düzeni, sunucu yapılandırması olmadan temiz URL'lerin çalışmasını sağlar."
+    },
+    {
+      "order": 12,
+      "title": "Duvarlar: İkinci Mertebe Katman",
+      "description": "Bu projeyi bir PDF arşivinden ayıran şey burada: korpustan süzülmüş 34 taşınabilir kural, her biri 'X'te geçerli / Y'de kırılır' formunda. docs/duvarlar.md insan okuru için katalog, public/duvarlar.json makine okunur ikizidir ve ikisi elle eşit tutulur. Duvarlar.jsx JSON'u tema filtresi ve Türkçe-duyarlı aramayla gezdirir; gezinmede gizli olan Sor.jsx bir soruyu tamamen tarayıcıda duvarlarla eşleştirip en iyi 4'ünü döndürür; duvar.js ise aynı kataloğu terminale taşır ve `--diff` kipinde git diff'teki dosya yollarını konu sözcüklerine çevirerek ilgili kısıtları karar anından önce önünüze koyar.",
+      "nodeIds": [
+        "document:docs/duvarlar.md",
+        "config:public/duvarlar.json",
+        "file:src/pages/Duvarlar.jsx",
+        "file:src/pages/Sor.jsx",
+        "file:scripts/duvar.js"
+      ],
+      "languageLesson": "Aynı bilgiyi hem Markdown hem JSON olarak tutmak bilinçli bir ödünleşmedir: Markdown insanın okuyup düzenlediği kanoniktir, JSON ise arayüzün ve CLI'ın sorgulayabildiği biçimdir. Bedeli senkron kalma yükümlülüğüdür — tek kaynaktan üretim yapılmadığı sürece bu bir konvansiyonla, kodla değil, korunur."
+    },
+    {
+      "order": 13,
+      "title": "Korpus Röntgeni ve Yol Haritası",
+      "description": "Duvarların nereden geldiğini gösteren çözümleme katmanı. build-corpus-xray.js korpusun tamamını hesaplamalı olarak tarar — terim sıklığıyla ağırlık merkezleri, Jaccard benzerlik ağı, ilgili-yazı gelen derecesiyle çekim merkezleri, en yalnız yazılar, tema kapsamı — ve tek dosyalık statik rapor sayfası korpus-rontgeni.html'i üretir. Build hattının parçası değildir, `npm run xray` ile elle çalıştırılır ve Adım 4'ün bıraktığı `.fulltext-cache.json`'a dayanır. korpus-notlari.md bu sayıların yorumunu ve altı maddelik ikinci-mertebe yol haritasını, soyutlama-plani.md ise henüz başlanmamış bir sonraki katmanın (makale başına yapılandırılmış özet → kavram dizini → sentez metni) planını taşır.",
+      "nodeIds": [
+        "file:scripts/build-corpus-xray.js",
+        "file:docs/korpus-rontgeni.html",
+        "document:docs/korpus-notlari.md",
+        "document:docs/soyutlama-plani.md"
+      ]
+    },
+    {
+      "order": 14,
+      "title": "Derleme Yapılandırması ve Dağıtım",
+      "description": "Turu hattın çıkışında bitiriyoruz. vite.config.js React eklentisini, `BASE_PATH` ile ayarlanabilen mutlak `base` yolunu, son git commit tarihinden türetilen `__LAST_CHANGE__` derleme sabitini ve Adım 10'da gördüğünüz yerel kütüphaneyi yalnızca dev sunucusunda sunan eklentiyi kurar. vercel.json ise yayın tarafını tamamlar: `cleanUrls`, tüm istekleri `/index.html`'e yollayan SPA rewrite kuralı ve yeniden adlandırılmış bir yazı için kalıcı 301 yönlendirmeler. Derleme her zaman `SITE_URL` verilerek yapılır, çünkü Adım 11'in ürettiği canonical, sitemap ve OG adresleri bu değişkene bağlıdır.",
+      "nodeIds": [
+        "file:vite.config.js",
+        "config:vercel.json"
+      ],
+      "languageLesson": "BrowserRouter kullanan bir SPA'da `/post/slug` adresine doğrudan girildiğinde sunucu o yolda dosya arar; rewrite kuralı olmazsa 404 döner. Bu projede iki savunma birden var: prerender gerçek `index.html` dosyalarını yazar, vercel.json'daki rewrite ise prerender'ın kapsamadığı yolları uygulamaya devreder."
+    }
+  ]
+}

@@ -1,0 +1,383 @@
+{
+  "name": "pdf-blog",
+  "description": "React (Vite) tabanlı, backend'siz statik bir blog: PDF makaleleri yayınlar, her birine kalıcı ve paylaşılabilir bir link verir. Build sırasında manifest, tam metin arama indeksi, prerender edilmiş HTML, sitemap ve llms.txt üretilir; ayrıca korpustan türetilmiş 'duvarlar' kural kataloğunu sunar.",
+  "languages": [
+    "css",
+    "html",
+    "javascript",
+    "json",
+    "markdown"
+  ],
+  "frameworks": [
+    "React",
+    "React Router",
+    "Vite"
+  ],
+  "files": [
+    {
+      "path": "CLAUDE.md",
+      "language": "markdown",
+      "sizeLines": 81,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "README.md",
+      "language": "markdown",
+      "sizeLines": 94,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/duvarlar.md",
+      "language": "markdown",
+      "sizeLines": 285,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/korpus-notlari.md",
+      "language": "markdown",
+      "sizeLines": 93,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/korpus-rontgeni.html",
+      "language": "html",
+      "sizeLines": 160,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "docs/soyutlama-plani.md",
+      "language": "markdown",
+      "sizeLines": 82,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "index.html",
+      "language": "html",
+      "sizeLines": 19,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "package.json",
+      "language": "json",
+      "sizeLines": 30,
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/duvarlar.json",
+      "language": "json",
+      "sizeLines": 511,
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/portrait.json",
+      "language": "json",
+      "sizeLines": 112,
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/posts.json",
+      "language": "json",
+      "sizeLines": 3465,
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/projects.json",
+      "language": "json",
+      "sizeLines": 79,
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/recommendations.json",
+      "language": "json",
+      "sizeLines": 17,
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/search-index.json",
+      "language": "json",
+      "sizeLines": 0,
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/themes.json",
+      "language": "json",
+      "sizeLines": 143,
+      "fileCategory": "config"
+    },
+    {
+      "path": "scripts/build-corpus-xray.js",
+      "language": "javascript",
+      "sizeLines": 283,
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/build-portrait.js",
+      "language": "javascript",
+      "sizeLines": 102,
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/build-search-index.js",
+      "language": "javascript",
+      "sizeLines": 106,
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/duvar.js",
+      "language": "javascript",
+      "sizeLines": 112,
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/generate-manifest.js",
+      "language": "javascript",
+      "sizeLines": 120,
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/prerender.js",
+      "language": "javascript",
+      "sizeLines": 633,
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/translate-posts.js",
+      "language": "javascript",
+      "sizeLines": 81,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/App.jsx",
+      "language": "javascript",
+      "sizeLines": 126,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/AskAI.jsx",
+      "language": "javascript",
+      "sizeLines": 99,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/AuthorPortrait.jsx",
+      "language": "javascript",
+      "sizeLines": 148,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/ThemeIcon.jsx",
+      "language": "javascript",
+      "sizeLines": 79,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/excerpt.js",
+      "language": "javascript",
+      "sizeLines": 21,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/i18n.jsx",
+      "language": "javascript",
+      "sizeLines": 265,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main.jsx",
+      "language": "javascript",
+      "sizeLines": 44,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/pages/Duvarlar.jsx",
+      "language": "javascript",
+      "sizeLines": 194,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/pages/Home.jsx",
+      "language": "javascript",
+      "sizeLines": 484,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/pages/Muzik.jsx",
+      "language": "javascript",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/pages/Oneriler.jsx",
+      "language": "javascript",
+      "sizeLines": 98,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/pages/Post.jsx",
+      "language": "javascript",
+      "sizeLines": 222,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/pages/Projeler.jsx",
+      "language": "javascript",
+      "sizeLines": 73,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/pages/Rehber.jsx",
+      "language": "javascript",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/pages/Sor.jsx",
+      "language": "javascript",
+      "sizeLines": 100,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/search.js",
+      "language": "javascript",
+      "sizeLines": 25,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/seo.js",
+      "language": "javascript",
+      "sizeLines": 68,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/styles.css",
+      "language": "css",
+      "sizeLines": 1691,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "src/usePosts.js",
+      "language": "javascript",
+      "sizeLines": 23,
+      "fileCategory": "code"
+    },
+    {
+      "path": "vercel.json",
+      "language": "json",
+      "sizeLines": 17,
+      "fileCategory": "config"
+    },
+    {
+      "path": "vite.config.js",
+      "language": "javascript",
+      "sizeLines": 58,
+      "fileCategory": "code"
+    }
+  ],
+  "totalFiles": 45,
+  "filteredByIgnore": 177,
+  "estimatedComplexity": "moderate",
+  "importMap": {
+    "CLAUDE.md": [],
+    "README.md": [],
+    "docs/duvarlar.md": [],
+    "docs/korpus-notlari.md": [],
+    "docs/korpus-rontgeni.html": [],
+    "docs/soyutlama-plani.md": [],
+    "index.html": [],
+    "package.json": [],
+    "public/duvarlar.json": [],
+    "public/portrait.json": [],
+    "public/posts.json": [],
+    "public/projects.json": [],
+    "public/recommendations.json": [],
+    "public/search-index.json": [],
+    "public/themes.json": [],
+    "scripts/build-corpus-xray.js": [],
+    "scripts/build-portrait.js": [],
+    "scripts/build-search-index.js": [
+      "src/search.js"
+    ],
+    "scripts/duvar.js": [
+      "src/search.js"
+    ],
+    "scripts/generate-manifest.js": [],
+    "scripts/prerender.js": [
+      "src/excerpt.js"
+    ],
+    "scripts/translate-posts.js": [],
+    "src/App.jsx": [
+      "src/AskAI.jsx",
+      "src/AuthorPortrait.jsx",
+      "src/i18n.jsx"
+    ],
+    "src/AskAI.jsx": [
+      "src/i18n.jsx"
+    ],
+    "src/AuthorPortrait.jsx": [
+      "src/i18n.jsx"
+    ],
+    "src/ThemeIcon.jsx": [],
+    "src/excerpt.js": [],
+    "src/i18n.jsx": [],
+    "src/main.jsx": [
+      "src/App.jsx",
+      "src/i18n.jsx",
+      "src/pages/Duvarlar.jsx",
+      "src/pages/Home.jsx",
+      "src/pages/Muzik.jsx",
+      "src/pages/Oneriler.jsx",
+      "src/pages/Post.jsx",
+      "src/pages/Projeler.jsx",
+      "src/pages/Rehber.jsx",
+      "src/pages/Sor.jsx",
+      "src/styles.css"
+    ],
+    "src/pages/Duvarlar.jsx": [
+      "src/i18n.jsx",
+      "src/seo.js"
+    ],
+    "src/pages/Home.jsx": [
+      "src/ThemeIcon.jsx",
+      "src/excerpt.js",
+      "src/i18n.jsx",
+      "src/search.js",
+      "src/seo.js",
+      "src/usePosts.js"
+    ],
+    "src/pages/Muzik.jsx": [
+      "src/i18n.jsx",
+      "src/seo.js",
+      "src/usePosts.js"
+    ],
+    "src/pages/Oneriler.jsx": [
+      "src/i18n.jsx",
+      "src/seo.js"
+    ],
+    "src/pages/Post.jsx": [
+      "src/excerpt.js",
+      "src/i18n.jsx",
+      "src/seo.js",
+      "src/usePosts.js"
+    ],
+    "src/pages/Projeler.jsx": [
+      "src/i18n.jsx",
+      "src/seo.js"
+    ],
+    "src/pages/Rehber.jsx": [
+      "src/i18n.jsx",
+      "src/seo.js",
+      "src/usePosts.js"
+    ],
+    "src/pages/Sor.jsx": [
+      "src/i18n.jsx",
+      "src/search.js",
+      "src/seo.js"
+    ],
+    "src/search.js": [],
+    "src/seo.js": [],
+    "src/styles.css": [],
+    "src/usePosts.js": [],
+    "vercel.json": [],
+    "vite.config.js": []
+  }
+}
