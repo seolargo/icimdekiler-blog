@@ -50,15 +50,23 @@ export default function Oneriler() {
         <ul className="rec-list">
           {items.map((it, i) => (
             <li key={i} className="rec-item">
-              <a
-                className="rec-link"
-                href={it.url}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span className="rec-name">{it.name}</span>
-                {it.url && <span className="rec-host">{host(it.url)} ↗</span>}
-              </a>
+              {it.url ? (
+                <a
+                  className="rec-link"
+                  href={it.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span className="rec-name">{it.name}</span>
+                  <span className="rec-host">{host(it.url)} ↗</span>
+                </a>
+              ) : (
+                // Linksiz kayıt: yalnızca ad. Bağlantısı olmayan başvuru
+                // yayınları için — adı dursun yeter.
+                <span className="rec-link rec-link-plain">
+                  <span className="rec-name">{it.name}</span>
+                </span>
+              )}
               {it.note && <p className="rec-note">{it.note}</p>}
             </li>
           ))}

@@ -261,11 +261,16 @@ const recHost = (url) => {
     return url
   }
 }
+// url yoksa bağlantı üretilmez; yalnızca ad basılır (adı dursun yeten kayıtlar).
 const recItem = (it) =>
-  `<li class="rec-item"><a class="rec-link" href="${escAttr(it.url)}" target="_blank" rel="noopener noreferrer">` +
-  `<span class="rec-name">${esc(it.name)}</span>` +
-  (it.url ? `<span class="rec-host">${esc(recHost(it.url))} ↗</span>` : '') +
-  `</a>${it.note ? `<p class="rec-note">${esc(it.note)}</p>` : ''}</li>`
+  `<li class="rec-item">` +
+  (it.url
+    ? `<a class="rec-link" href="${escAttr(it.url)}" target="_blank" rel="noopener noreferrer">` +
+      `<span class="rec-name">${esc(it.name)}</span>` +
+      `<span class="rec-host">${esc(recHost(it.url))} ↗</span>` +
+      `</a>`
+    : `<span class="rec-link rec-link-plain"><span class="rec-name">${esc(it.name)}</span></span>`) +
+  `${it.note ? `<p class="rec-note">${esc(it.note)}</p>` : ''}</li>`
 const recHead = buildHead({
   title: 'Öneriler',
   description: 'Okuduğum ve işime yarayan kaynaklar — isimler, siteler, belgeler.',

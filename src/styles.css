@@ -1110,6 +1110,15 @@ code {
   text-underline-offset: 3px;
 }
 
+/* Linksiz kayıt: tıklanabilir görünmesin, altı çizilmesin. */
+.rec-link-plain {
+  cursor: default;
+}
+
+.rec-link-plain:hover .rec-name {
+  text-decoration: none;
+}
+
 .rec-host {
   font-size: 0.85rem;
   color: var(--muted);
