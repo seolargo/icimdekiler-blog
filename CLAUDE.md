@@ -23,7 +23,14 @@ Derleme her zaman `SITE_URL` ile:
 **Yeni PDF eklemek:**
 1. `public/pdfs/` içine kopyala (taşıma — kaynağı yerinde bırak)
 2. `npm run manifest && npm run search-index`
-3. Başlığı ve açıklamayı **elle** yaz (TR + EN) — otomatik başlık bozuk çıkıyor
+3. Başlığı ve açıklamayı **elle** yaz (TR + EN) — otomatik başlık bozuk çıkıyor.
+   Açıklama kuralları:
+   - **Formal dil.** Belgenin kendi üslubunda: düz, bildirimsel, üçüncü şahıs.
+     "Metin şunu savunur", "tanım iki soruyu ayırır". Değerlendirme yapma
+     ("en keskin bölüm", "can alıcı"), okura seslenme ("işine yarar").
+   - **Markdown yok.** `**kalın**` düz metin olarak basılıyor, sitede yıldız
+     görünüyor. Vurgu gerekiyorsa cümleyi yeniden kur.
+   - **~1500 karakter.** Son belgelerin aralığı 900–1850; bunun dışına çıkma.
 4. `related` ver ve **çift yönlü** bağla
 5. `priority` ver: kriz anında acele referans arayan biri için 1–10.
    10 = doğrudan uygulanabilir adım/denetim listesi. 1 = bağlam/tarih.
