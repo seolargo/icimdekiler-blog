@@ -1,0 +1,1091 @@
+˙Ileri Mühendislik: Kavramsal Bir C erçeve
+Ömer Faruk Yavuz
+August 2026
+Tanımın Konumlandırılması
+“˙Ileri mühendislik” terimi, kurumsallaşmış bir mühendislik disiplinine karşılık
+gelmez. Terim, yüksek teknik karmaşıklık, ileri bilimsel bilgi, hassas üretim
+ve güçlü sistem entegrasyonu gerektiren mühendislik faaliyetlerini betimlemek
+üzere kullanılan bir üst kavramdır. Bu çalışmada terim, belirli bir teknik zorluk
+düzeyine değil, belirli bir örgütsel yeteneğe işaret edecek biçimde tanımlanmaktadır.
+Önerilen tanım şudur: ileri mühendislik, bir yapıntının üretilebilmesi değil, o
+yapıntının belirlenmiş tolerans, verim ve arıza oranı sınırları içinde tekrar tekrar
+üretilebilmesi ve makul bir maliyetle değiştirilebilmesi kapasitesidir.
+Bu tanım, temel mühendislik ile ileri mühendislik arasında şu ayrımı üretir:
+• Temel mühendislik sorusu: “Bu yapıntı çalıştırılabilir mi?”
+• ˙Ileri mühendislik sorusu: “Bu yapıntı daha küçük, daha hafif, daha hızlı,
+daha ucuz ve daha güvenilir hâle getirilerek milyonlarca kez aynı nitelikte
+üretilebilir mi?”
+Gösteri ile Kapasite Ayrımı
+Yukarıdaki tanımın doğrudan bir sonucu, tekil bir başarının kapasiteye kanıt
+oluşturmamasıdır. Bu ayrım aşağıdaki tabloda özetlenmektedir.
+Gösteri Kapasite
+C ıktı C alışan tekil örnek Ürün ailesi ve üretim hattı
+Ölçüt Yapılabildi mi Hangi hızda ve nitelikte türetilebiliyor
+Bilginin yeri Proje ekibi Kurum, süreç ve model
+Ekip dağılırsa Bilgi kaybolur Bilgi korunur
+Yeterli sermaye ve kararlılıkla hemen her ülke belirli bir yapıntıyı bir kez
+üretebilir. Ayırt edici olan, aynı ürünün onuncu neslinin beşinci nesilden hem
+daha ucuza hem daha nitelikli üretilebilmesidir.
+1
+
+-- 1 of 30 --
+
+Tekrarlanabilirliğin Ölçütleri
+Üç Temel Büyüklük
+Tekrarlanabilirlik üç ayrı büyüklükle ölçülür ve bu büyüklükler birbirine in-
+dirgenemez.
+• Tolerans: Tasarımın izin verdiği sapma aralığı. Tasarımcı tarafından
+belirlenir.
+• Verim (yield): Üretilen birimlerin satılabilir olan oranı.
+• Arıza oranı: Sahaya çıkan birimlerin belirli bir süre içinde bozulan oranı.
+Tolerans sınırı ile proses yeteneği arasındaki ilişki, proses yeterlilik endek-
+sleriyle nicelleştirilir. Gözlenen dağılımın ortalaması μ, standart sapması σ, alt
+ve üst spesifikasyon sınırları LSL ve U SL olmak üzere
+Cp = U SL − LSL
+6σ , Cpk = min
+ U SL − μ
+3σ , μ − LSL
+3σ
+
+.
+Endüstriyel taban değer Cpk = 1,33; altı sigma düzeyi Cpk = 2,0 olarak
+kabul edilir.
+Burada vurgulanması gereken kavramsal ayrım, kontrol sınırı ile tolerans
+sınırının farklı büyüklükler olduğudur. Tolerans tasarımın talebini, kontrol sınırı
+prosesin fiilı davranışını temsil eder. Olgun bir proses, ürün spesifikasyon dışına
+çıkmadan çok önce kaymayı tespit eder.
+Altyapısal Önkoşullar
+Yukarıdaki ölçütlerin tutturulabilmesi, ürünün kendisinden bağımsız üç altyapı
+katmanının olgunluğunu gerektirir.
+Metroloji. Ölçüm biliminin kendisi. ˙Iki bileşeni vardır: kalibrasyon zincirinin
+uluslararası standarda kesintisiz bağlanması (izlenebilirlik) ve ölçüm sisteminin
+kendi değişkenliğinin nicelleştirilmesi. Gözlenen varyans ayrıştırması
+σ2
+gözlenen = σ2
+ür ün + σ2
+ölçüm
+biçimindedir. Yerleşik kabul, ölçüm değişkenliğinin tolerans bandının yüzde
+onunu aşmamasıdır. Aşıldığında uygun parçalar reddedilir, uygunsuz parçalar
+kabul edilir ve hangi hatanın yapıldığı belirlenemez.
+Proses kontrolü. Sürecin çıktı dağılımının izlenmesi ve sapmanın ürün bozul-
+madan önce tespit edilmesi. Temel araç istatistiksel proses kontrolüdür.
+Tedarik zinciri derinliği. Her katmanda birden fazla yetkin tedarikçinin bu-
+lunması ve bu tedarikçilere coğrafi ile siyasi erişimin sürdürülebilmesi. Yapısal
+kısıt şudur: bir üreticinin proses yeteneği, tedarikçisinin proses yeteneğini aşamaz.
+2
+
+-- 2 of 30 --
+
+Verim Mühendisliği
+Yarı iletken üretiminde verim, maliyet yapısının belirleyici değişkenidir. Bir pul
+üzerindeki yonga sayısı sabit, pul işleme maliyeti de sabit olduğundan, birim
+maliyet verimle ters orantılıdır.
+Verim kayıpları iki sınıfa ayrılır. Sistematik kayıplar desenli ve kök nedeni
+belirlenebilir niteliktedir; rastgele kayıplar ise parçacık kirliliğinden kaynaklanır
+ve ancak oran olarak yönetilebilir. Rastgele kayıp için klasik Murphy modeli,
+yonga alanı A ve birim alandaki kusur yoğunluğu D0 olmak üzere
+Y =
+ 1 − e−AD0
+AD0
+2
+biçimindedir. Modelin doğrudan sonucu, yonga alanı büyüdükçe verimin
+üstel olarak düşmesidir. Yonga mimarisinde büyük tek parça tasarımların daha
+küçük birimlere ayrıştırılması (chiplet yaklaşımı), bu üretim fiziğinin dayattığı
+bir tasarım kararıdır.
+Tasarım Uzayı ve Ürün Ailesi
+Tasarım Uzayı ve Sistematik Taranması
+Bir yapıntının tasarımında değiştirilebilir parametrelerin oluşturduğu çok boyutlu
+küme tasarım uzayı olarak adlandırılır. Uzayın her noktasına performans, maliyet
+ve kütle gibi çıktılar karşılık gelir.
+Tasarım uzayının sistematik taranması, sezgisel olarak seçilmiş az sayıda
+tasarımın karşılaştırılması yerine, geniş bir kombinasyon kümesinin benzetim
+yoluyla değerlendirilmesini ifade eder. Yöntemin çıktısı tekil bir tasarım değil,
+aşağıdakileri gösteren bir haritadır:
+• Hangi bölgeden sonra iyileştirmenin olanaksız hâle geldiği, yani Pareto
+sınırının konumu
+• Hangi parametrelerin çıktı üzerinde belirleyici, hangilerinin ihmal edilebilir
+olduğu
+• Küçük bir ödünün orantısız bir kazanç ürettiği bölgeler
+Biçimsel olarak problem, çok amaçlı optimizasyon olarak ifade edilir:
+min
+x∈X (f1(x), f2(x), . . . , fk(x)) kısıt gj (x) ≤ 0.
+C özüm bir nokta değil, bir kümedir. Bu ayrımın doğurduğu kavramsal
+sonuç şudur: Pareto sınırının altındaki tasarımların elenmesi bir mühendislik
+problemidir ve çözülebilir; sınır üzerindeki noktalar arasında seçim yapmak ise
+mühendislik problemi değil, stratejik bir karardır.
+3
+
+-- 3 of 30 --
+
+Ürün Ailesi ve Platform Mimarisi
+Ürün ailesi, ortak bir çekirdekten türetilen ürünler kümesini tasarlama strate-
+jisidir. Otomotiv sektöründe ortak platform mimarileri, yarı iletkende yeniden
+kullanılabilir tasarım blokları, yazılımda ortak çekirdek ile türev dağıtımlar bu
+stratejinin örnekleridir.
+Uygulamadan çıkarılabilecek üç düzenlilik şunlardır:
+• Sabit tutulan öğe kümesi tipik olarak dardır; platform, her şeyin or-
+taklaştırılması değil, doğru öğenin dondurulmasıdır.
+• Dondurulan şey arayüzdür, gerçekleştirim değildir. Arayüz sabit kaldığı
+sürece arkasındaki teknoloji değişebilir.
+• Her platformun bir geçerlilik aralığı vardır. Belirli bir dönemde doğru olan
+sabitler, teknolojik koşullar değiştiğinde kısıt hâline gelebilir.
+Bu üç düzenliliğin ihlali iki tipik başarısızlık üretir: değişkenlik noktalarının
+sınırlandırılmaması yapılandırma karmaşasına, arayüz yerine gerçekleştirimin
+dondurulması ise teknolojik kilitlenmeye yol açar.
+Değişim Maliyetinin Birincil Ölçüt Olarak Alınması
+Yukarıdaki katmanların üzerinde yer alan ölçüt, ürünün yaptığı iş değil, üründe
+bir değişiklik yapmanın maliyetidir. Bir parametre değişikliğinin çevrim süresi
+ve maliyeti, kurumun elinde tekil bir ürün mü yoksa bir tasarım ailesi mi bu-
+lunduğunu belirler. ˙Ikinci durumdaki kurum, birim zamanda daha fazla nesil
+deneyebildiği için uzun vadede birincisini geçer.
+Bu noktada sık yapılan bir kavram karışıklığının giderilmesi gerekir. Ucu-
+zlayan şey öğrenme değil, denemedir. Uzmanlık edinme süresi kısalmaz; kısalan,
+bir hipotezin sınanma maliyetidir. Parametrelerle serbestçe oynanabilmesi, işin
+basitleşmesinin değil, belirsizliğin daha önce bedeli ödenerek azaltılmış olmasının
+sonucudur.
+Sistem Mühendisliğinde Roller ve Bilgi Türleri
+Baş Mühendis ile Uzman Ayrımı
+Sistem mühendisliği pratiğinde iki rol biçimsel olarak ayrıştırılmıştır. Baş mühendis
+(Japon otomotiv geleneğinde shusa) bütünün teknik tutarlılığından sorumludur;
+alan uzmanı ise tek bir eksende derinlik sağlar.
+Baş mühendis Alan uzmanı
+Hangi sorular belirleyicidir O sorunun yanıtı nedir
+Neyin feda edileceği Fedanın fiziksel sınırı
+Bağlantıları görür Tekil düğümü doğrular
+Genişlik Derinlik
+4
+
+-- 4 of 30 --
+
+Baş mühendisin işlevi doğrulama yapmak değil, hangi doğrulamanın gerekli
+olduğunu belirlemektir. Rolün ayırt edici özellikleri şunlardır: örgüt şemasında
+kalabalık bir birimi yönetmemesi, teknik bütçelerin dağıtımına karar vermesi
+ve tasarım gerekçelerinin kurumsal hafızasını taşıması. Program yöneticisinden
+farkı, ikincisinin takvim ve bütçenin, birincisinin ise teknik bütünlüğün sahibi
+olmasıdır; bu iki rolün ayrı kişilerde tutulması bilinçli bir gerilim tasarımıdır.
+Bilginin Kurumsal Niteliği
+˙Ileri mühendislik kapasitesini üreten bilginin önemli bir bölümü kodlanmamış
+niteliktedir. Lisans düzeyi eğitim standarttır; farklılaşma lisansüstü düzeyde
+dar bir alanda derinleşmeyle başlar, ancak belirleyici birikim uzun süreli ku-
+rumsal deneyimden doğar. Bu nedenle kapasite bireyde değil kurumda, süreçte
+ve modelde birikir.
+Bunun doğrudan bir sınama ölçütü vardır: ekip dağıldığında bilgi kayboluy-
+orsa elde gösteri, korunuyorsa kapasite vardır.
+Sistem Seviyesinde Muhakemenin Bileşenleri
+Baş mühendisin taşıması gereken bilgi türleri, alt sistemlerin iç fiziği değil, alt
+sistemler arasındaki ilişkilerdir. Bu bileşenler aşağıda sıralanmaktadır.
+1. Bağlantı topolojisi. Hangi alt sistemin hangisini, hangi yönde etk-
+ilediği; geri besleme döngülerinin varlığı. Biçimsel araçları N 2 diyagramı
+ve tasarım yapısı matrisidir.
+2. Duyarlılık büyüklükleri. Bir parametrenin değişiminin diğer büyüklükler
+üzerindeki etkisinin mertebesi. Kesin değer alan uzmanının sorumluluğundadır;
+mertebe bilgisi ise hangi sorunun sorulacağını belirler.
+3. Teknik bütçelerin durumu. Kütle, güç, ısı, gecikme ve maliyet bütçelerinde
+kalan pay. Rezervin tükenme hızı proje sağlığının göstergesidir.
+4. Varsayımların epistemik durumu. Her sayının ölçülmüş, benzetilmiş
+veya tahmin edilmiş olması arasındaki ayrımın izlenmesi.
+5. Kararların geri alınabilirliği. Geri alınabilir kararlarda hız, geri alınamaz
+kararlarda kanıt önceliklidir.
+6. Disiplinlerin sistematik sapmaları. Her uzmanlığın yapısal bir eğilimi
+vardır; bu sapmaların düzeltilmesi değil hesaba katılması beklenir.
+7. Soruların doğru muhataba yöneltilmesi. Görünüşte tek bir sorunun
+birden çok disipline ait alt sorulara ayrıştırılabilmesi.
+8. Ödünleşim ile hatanın ayrıştırılması. Pareto sınırının altındaki konum
+bir hatadır ve düzeltilir; sınır üzerindeki konum bir tercihtir ve karar merci-
+ine iletilir.
+5
+
+-- 5 of 30 --
+
+9. Kırılganlık haritası. Tekil arıza noktaları, en dar toleranslı arayüzler,
+en az doğrulanmış alt sistemler ve tek kaynağa bağlı bileşenler.
+10. Tasarım gerekçesi ve kurumsal hafıza. Kararların nedenlerinin kayıt
+altında tutulması; aksi hâlde aynı hatanın tekrarlanması.
+Örnek Vaka Üzerinden Gösterim
+Yukarıdaki bileşenlerin birlikte işleyişi, tek bir talep üzerinden gösterilebilir.
+Bir insansız hava aracında kamera çözünürlüğünün iki katına çıkarılması talep
+edilmiş olsun. Alan uzmanının yanıtı, yeni algılayıcının 400 gram ek kütle ve 60
+watt ek güç gerektirdiği yönündedir. Bu yanıt doğrudur ancak eksiktir.
+Bağlantı Zincirinin C özümlenmesi
+Ek kütle yalnızca algılayıcıya ait değildir. Artan yük dengeleme düzeneğinin
+güçlendirilmesini, bu da gövde bağlantısının takviyesini gerektirir. Artan güç
+tüketimi batarya kapasitesinin ve soğutma sisteminin büyütülmesini zorunlu
+kılar. Artan veri hızı işlemci ve telemetri bant genişliğini etkiler. Toplam kütle
+artışı yaklaşık 1550 gram düzeyine ulaşır.
+Ayrıca sistemde bir geri besleme döngüsü bulunur: kütle artışı gerekli itkiyi,
+itki artışı güç tüketimini, güç tüketimi batarya kütlesini yükseltir. Naif hesap
+tek yönlü akış varsayar; doğru hesap sabit nokta arar.
+Bütçe ve Duyarlılık Değerlendirmesi
+Duyarlılık mertebeleri kilogram başına yaklaşık altı dakika ve on watt başına
+yaklaşık dört dakika uçuş süresi kaybı biçimindedir. Toplam etki, uçuş süresinin
+doksan dakikadan elli beş dakikaya inmesidir.
+Kütle bütçesinde kalan rezerv 1100 gramdır ve talep karşılanamamaktadır.
+Güç bütçesinde kalan rezerv altmış watttır; talep bu rezervi tam olarak tüketmektedir.
+˙Ikinci durum, spesifikasyonun sağlandığı ancak hiçbir pay bırakılmadığı bir sınır
+durumudur ve Taguchi kayıp işlevinin uyardığı türden bir konumdur.
+Epistemik Denetim
+Toplam kütle tahmininin bileşenleri farklı güvenilirlik düzeylerine sahiptir. Algılayıcı
+kütlesi üretici belgelerinden doğrulanmıştır. Güç tüketimi değeri yirmi beş santi-
+grat derece koşulunda geçerlidir; oysa çalışma sıcaklığı elli beş santigrat dereceye
+çıkmaktadır. Yük dengeleme düzeneği ve soğutma kütleleri tahmine dayanmak-
+tadır. ˙Işlemci yeterliliği doğrulanmamıştır.
+Bu değerlendirme, bir modelin geçerlilik aralığı dışında kullanılmasının tipik
+örneğini içermektedir. Üretici belgesindeki değer yanlış değildir; farklı bir bağlamda
+kullanılmaktadır. Bu tür hataların tehlikesi, sistemin hata üretmemesi, makul
+görünen yanlış bir değer üretmesidir.
+6
+
+-- 6 of 30 --
+
+Karar Sıralaması ve Sonuç
+Yük dengeleme arayüzü gövde kalıbına bağlıdır ve kalıp donduktan sonra değiştirilemez.
+Mevcut planlamada, en geri alınamaz karar en az doğrulanmış tahmine dayanılarak
+verilecektir. Bu sıralama hatalıdır.
+Doğru sıra, kalıp kararından önce yüksek sıcaklık altında algılayıcı sınaması
+yapılmasıdır. Kurumsal kayıtlarda benzer bir bileşenin elli santigrat derece
+üzerinde görüntü bozulması ürettiğine dair bir kayıt bulunmaktadır; bu kayıt
+olmaksızın aynı hata ikinci kez yapılacaktır.
+Nihai olarak iki seçenek karar merciine sunulur: iki kat çözünürlük ve elli beş
+dakika uçuş süresi, ya da bir buçuk kat çözünürlük ve yetmiş beş dakika uçuş
+süresi. Bu iki seçenek arasındaki tercih Pareto sınırı üzerindedir ve mühendislik
+kararı değildir.
+Muhakeme Bileşenlerinin Etkisi
+Yukarıdaki bileşenlerin işletilmesi beş sonuç üretir: hatanın en ucuz katmanda
+yakalanması, geri alınamaz kararların doğrulanmış bilgiyle verilmesi, ödünleşimlerin
+karar merciine iletilmesi, aynı hatanın tekrarlanmaması ve iterasyon maliyetinin
+kalıcı olarak düşmesi.
+Bileşenlerin işletilmemesi hâlinde proje tipik olarak başarısız olmaz; ürün
+çalışır ancak öngörülemeyen bir maliyetle çalışır. Bu durumun kurumsal sonucu,
+ekip dağıldığında geriye bir yapıntının kalması, bir yeteneğin kalmamasıdır.
+Kapsam Genişletmesi
+Yukarıdaki bileşen listesi tek bir karar anını modellemektedir ve kapsayıcı değildir.
+Sistem mühendisliği pratiğinin tamamı aşağıdaki eksenleri de içerir.
+• Zaman ekseni: Kritik yol analizi, uzun tedarik süreli kalemlerin erken
+bağlanması, teknoloji hazırlık düzeyi ölçeği, karar sıralaması.
+• Doğrulama stratejisi: Benzetim ile fiziksel sınama arasındaki maliyet ve
+güven dengesi, kabul ölçütlerinin sınamadan önce yazılması, nitelendirme
+süreçleri, hızlandırılmış ömür sınamaları, zayıf birimlerin üretim aşamasında
+ayıklanması. Hangi doğrulamanın yapılmayacağına karar vermek de bu
+kapsamdadır.
+• Değişiklik yönetimi: Yapılandırma yönetimi, değişiklik talebi ve emri
+süreçleri, sürtünmenin kararın geri alınabilirliğine göre ayarlanması, sa-
+hadaki birimlere yönelik geriye dönük etkinin yönetimi.
+• Ekonomi: Sabit ve değişken maliyet ayrımı, yaşam döngüsü maliyeti,
+yatırım geri dönüş eşiği, fırsat maliyeti, hacim ile birim maliyet arasındaki
+öğrenme eğrisi ilişkisi.
+• Örgütsel gerçeklik: Ürün mimarisinin örgüt yapısını yansıtması, teknik
+yetkinin hiyerarşiden ayrıştırılması, bilginin bireyde mi sistemde mi durduğu.
+7
+
+-- 7 of 30 --
+
+• Dış kısıtlar: Düzenleyici gereklilikler ve belgelendirme, standart seçimi,
+fikrı mülkiyet sınırları, ihracat denetimleri, hukuki sorumluluk.
+• ˙Insan etkeni: Kullanım hatasının bir tasarım sorunu olarak ele alınması,
+bakım koşullarının tasarıma yansıtılması.
+Bu başlıkların tümü tek bir soruya indirgenebilir: her kararın bedelinin
+nerede ve ne zaman ortaya çıkacağı. Liste, bu sorunun uygulandığı alanların
+envanterinden ibarettir.
+Kapasite Hiyerarşisi ve Metaforun Sınırları
+Problem C erçevelemesi
+Sistem seviyesinde muhakeme, verilen problem tanımı içinde en iyi konumu
+bulmayı hedefler. Bir üst katman, problem tanımının kendisini müzakereye
+açar. Gereksinim listesi bu bakış açısında bir veri değil, sahibi belirlenebilir bir
+varsayımlar kümesidir.
+Bu yaklaşımın biçimsel adımı, her gereksinim için kaynağın ve gerekçenin
+sorgulanmasıdır. Havacılık tarihinde bunun bilinen örnekleri, gereksinim düzeyinde
+yapılan yeniden tanımlamaların, tasarım düzeyindeki en iyilemelerden daha
+büyük kazanç üretmesidir.
+Sınırın Kaydırılması
+Pareto sınırı sabit değildir. Sistem seviyesinde muhakeme sınır üzerinde konum
+seçer; teknolojik sıçrama sınırın kendisini kaydırır. Bu kaydırmayı üreten etken
+tipik olarak sistem mühendisliğinden değil, malzeme veya proses teknolojisinden
+gelir. Bu nedenle sınır üzerinde çalışan mühendisin, kendi alanının dışındaki
+gelişmeleri izlemesi yapısal bir gerekliliktir.
+Kısıtın Temel ˙Ilkelere ˙Indirgenmesi
+Bir başka yön, kabul edilmiş büyüklüklerin teorik alt sınırla karşılaştırılmasıdır.
+Kimya mühendisliğinde bir ayırma işleminin termodinamik olarak gerektirdiği
+asgari iş hesaplanabilir ve gerçek prosesle karşılaştırılabilir; aradaki fark iy-
+ileştirme payını verir. Aynı akıl yürütme, bir ürünün malzeme maliyetinin
+bileşenlerine ayrıştırılıp piyasa fiyatıyla karşılaştırılmasında da kullanılır.
+Bu katman, sistem mühendisliğinin üzerinde değil altında konumlanır: kabul
+edilmiş sayıların fiziksel zorunluluk ile tarihsel alışkanlık bileşenlerine ayrıştırılmasıdır.
+Ekosistem Düzeyi
+Daha geniş bir katman, tekil problemin seçilmesi değil, başkalarının çözeceği
+problemlerin uzayının tanımlanmasıdır. Standart koymak, protokol tasarla-
+mak, mimari lisanslamak ve kurum kurmak bu kategoridedir. Ölçütü, doğrudan
+üretilen değer değil, üzerine inşa edilen değerdir.
+8
+
+-- 8 of 30 --
+
+Hiyerarşi Metaforunun Sınırları
+Yukarıdaki katmanların bir merdiven olarak kavranması üç nedenle yanıltıcıdır.
+Doğrulanabilirliğin Azalması
+Yükselen katmanlarda geri besleme zayıflar. Malzeme davranışına ilişkin bir
+önerme sınanabilir ve kesin yanıt üretir; iş modeline ilişkin bir önerme yıllar
+sonra kısmen doğrulanır; değer yargısına ilişkin bir önerme doğrulanamaz. Geri
+beslemenin bulunmadığı alanda uzmanlık birikmez; yalnızca kanaat birikir.
+Ölçekler Arası Hareketin Önceliği
+Uygulamada üst katmanda konumlanan kişilerin alt katmanlara inmesi bir ger-
+ileme değil, işin doğal bir bileşenidir. Ayırt edici yetenek, belirli bir katmanda
+durmak değil, katmanlar arasında hareket edebilmektir.
+Asimetrik Erişim
+Üst katmanlara söylem düzeyinde erişim serbesttir; alt katmanlara erişim ise
+ölçüm, sınama ve deneyim gerektirir. Bu asimetri, örgütsel yapıların zamanla
+üst katmana kaymasına ve üst katmanların alt katman deneyimi taşımayan
+aktörlerle dolmasına yol açar. Disiplinlerin niteliksel çöküş mekanizması tipik
+olarak budur.
+Bu nedenle çerçeveyi sorgulama yetkisi, çerçeve içinde çalışmış olmaktan
+doğar. Alt katmanda çalışmamış bir aktörün üst katman söylemi, mühendislik
+değil retoriktir.
+Disiplinlerarası Aktarım
+Üretim Mühendisliğinden Yazılıma Aktarılabilir Pratikler
+Üretim disiplininin yazılım mühendisliğine aktarılabilir çekirdeği üç refleksten
+oluşur.
+1. Bir büyüklüğe ilişkin iddiada bulunmadan önce ölçüm sisteminin güvenilirliğinin
+doğrulanması.
+2. Tekil olay yerine dağılımın incelenmesi; sapmanın eşik aşılmadan önce
+tespit edilmesi.
+3. Arızanın tekil bir olay değil, bir oran ve sistem özelliği olarak kavranması.
+Bu reflekslerden türeyen uygulama düzeyindeki karşılıklar aşağıdaki tabloda
+verilmektedir.
+9
+
+-- 9 of 30 --
+
+Üretim Yazılım
+Tolerans Hizmet düzeyi hedefi
+Proses yeteneği Gecikme dağılımı
+Verim Başarılı dağıtım oranı
+Kütle ve güç bütçesi Hata bütçesi
+Metroloji Gözlemlenebilirlik altyapısı
+˙Istatistiksel proses kontrolü Anomali tespiti
+Hata maliyeti eğrisi Sınamanın erkene çekilmesi
+Hata önleyici tasarım Tip sistemi ve arayüz tasarımı
+Arıza modu ve etkileri analizi Tasarım öncesi arıza modeli çıkarımı
+Hat durdurma yetkisi Dağıtım durdurma yetkisi
+Tedarikçi nitelendirme Bağımlılık yönetimi
+Tasarım standardı belgeleri Mimari karar kayıtları
+Aktarılamayan Kısım
+Aktarımın sınırı, iki alanın kısıt yapısındaki farktan doğar. Donanımda kısıt
+fiziksel ve zaman içinde sabittir; yazılımda gereksinimler ürün ömrü boyunca
+değişir. Bu nedenle donanımın erken kilitlenme ve tam önden tasarım disiplini
+yazılıma doğrudan aktarıldığında, geçerliliği sınanmış olmayan bir süreç modeli
+üretir.
+Doğru sentez, ölçüm ve kök neden disiplininin aktarılması, erken kilitlenme
+pratiğinin aktarılmamasıdır. Nitekim üretim tarafında da bu sorun tanınmış ve
+karar anını mümkün olduğunca geciktirirken karar için gereken bilgiyi mümkün
+olduğunca erken üretmeyi hedefleyen küme temelli eşzamanlı mühendislik yaklaşımı
+geliştirilmiştir.
+Kavramların Tarihsel Önceliği
+Bu çalışmada ele alınan kavramların tümü yazılım mühendisliğinden önce tanımlanmıştır.
+• Değiştirilebilir parça ilkesi ve önkoşulu olan mastar sistemi: on sekizinci
+yüzyıl sonu ve on dokuzuncu yüzyıl başı.
+• ˙Istatistiksel proses kontrolü: 1924.
+• Ortak platformdan türeyen ürün ailesi stratejisi: 1920’ler.
+• Karmaşık sistemlerde modülerliğin biçimsel gerekçesi: 1962.
+• Modül sınırlarının değişme olasılığına göre çizilmesi ilkesi ve program
+aileleri kavramı: 1970 ve 1972.
+Yazılım mühendisliği bu birikimi devralmak yerine büyük ölçüde yeniden
+keşfetmiştir. Bu gözlemin yöntemsel sonucu şudur: yeni bir mühendislik prob-
+lemiyle karşılaşıldığında, problemin üretim veya sistem mühendisliği alanındaki
+karşılığının ve o alanda ne zaman çözüldüğünün araştırılması, sıfırdan çözüm
+üretmekten düşük maliyetlidir.
+10
+
+-- 10 of 30 --
+
+Vaka ˙Incelemeleri
+Yöntemsel Not
+Aşağıdaki değerlendirmeler kamuya açık kaynaklara dayanmaktadır. Modülerlik
+ve proses olgunluğu içsel niteliklerdir ve doğrudan gözlenemez. Kullanılan göstergeler
+dolaylıdır: adlandırma düzeni, proje takvimi, fiyat kademelenmesi, kurumun
+kilometre taşı olarak kaydettiği olaylar ve bileşenlerin ayrı satılabilirliği. Bu
+göstergeler bir yön işaret eder; ölçüm sağlamaz.
+Vaka: Bir Robotik Üreticisi
+˙Incelenen kurum yedi ayrı robot kategorisinde ürün geliştirmektedir. Kamuya
+açık kayıtlardan üç yapısal sorun okunabilmektedir.
+Gösteri ile Kapasitenin Ayrıştırılmaması
+Kurumun kendi kilometre taşı listesi sosyal ve tanıtım nitelikli olayları ağırlıklı
+olarak içermekte; birim maliyet, arıza oranı, kümülatif sevkiyat, tedarikçi nite-
+lendirme ve hat çevrim süresi gibi kapasite göstergelerini içermemektedir. Bir
+kurumun kilometre taşı olarak kaydettiği olgular, neyi en iyilediğinin göstergesidir.
+Genişlik ile Derinliğin Ayrıştırılmaması
+Yedi ayrı kategori farklı fizik, farklı sınama altyapısı ve farklı tedarik zinciri
+gerektirir. Ortak çekirdeğin belirsiz olduğu bir yelpazede her ürün ayrı bir
+birim hâline gelir ve öğrenme hiçbir eksende birikmez.
+Prototip Zinciri ile Ürün Ailesinin Ayrıştırılmaması
+Kurumun proje kayıtlarında bir projenin tamamlanması ile ardılının başlatılmasının
+aynı tarihe düştüğü çok sayıda örnek bulunmaktadır. Bu düzen, proje sınırının
+bir üretim olgunluğu eşiği değil, idari bir işaretleme olduğuna işaret eder. Olgun
+bir üretim çevriminde iki sürüm arasında kararlılık dönemi, üretim rampası ve
+saha geri beslemesi yer alır.
+Buna karşılık platform yönünde iki olumlu gösterge bulunmaktadır: ürünler
+arası ortak bir yazılım katmanının tanımlanmış olması ve aktüatör ile geliştirme
+kartlarının ayrı ürün olarak satılması. ˙Ikincisi özellikle anlamlıdır; bir bileşenin
+bağımsız satılabilmesi, arayüzünün tanımlanmış olduğunu gösterir.
+Vaka: Yeniden Kullanılabilir Fırlatma Sistemi
+Aynı kurum bünyesinde iki farklı olgunluk katmanı gözlenebilmektedir.
+Olgunlaşmış sistem tarafında ölçütler şunlardır: tek bir alt kademenin otuz
+altı uçuş gerçekleştirmesi, ortalama çevrim süresinin kırk gün düzeyine inmesi ve
+kurumun finansal beyanlarında alt kademelerin belirli bir uçuş sayısı üzerinden
+amortize edilmesi. Son gösterge kavramsal olarak belirleyicidir: donanım ömrü
+11
+
+-- 11 of 30 --
+
+artık bir mühendislik iddiası değil, muhasebe kalemi hâline gelmiştir. Bu, belir-
+sizliğin bedelinin ödenmiş olduğunun tanımıdır.
+Bakım tasarımı da hizmet verilebilirlik ilkesinin uygulamasını göstermektedir:
+mekanik düzeneklerin bakım süresini kısaltacak biçimde yeniden tasarlanması
+ve kaplama seçimlerinin uçuşlar arası işlem gereksinimini ortadan kaldıracak
+biçimde yapılması.
+Geliştirme aşamasındaki sistem tarafında ise üç yıllık dönemde on üç düzeyinde
+uçuş gerçekleştirilmiştir. Bu, prototip iterasyon fazına karşılık gelir. Aynı ku-
+rumun iki farklı olgunluk katmanını eşzamanlı taşıması olağandır; hatalı olan,
+ikisinin aynı ölçütlerle değerlendirilmesidir.
+Kurumun bir diğer yapısal tercihi, üretim hacminin dışsal talebe bağımlılıktan
+çıkarılmasıdır. Uçuşların büyük çoğunluğunun kurumun kendi altyapı proje-
+sine ayrılması, öğrenme eğrisinin dışsal sipariş akışından bağımsızlaştırılması
+anlamına gelir.
+Vaka: Elektrikli Araç Üreticisi
+˙Incelenen kurumun ayırt edici stratejisi parça sayısının azaltılmasıdır. Yüksek
+tonajlı döküm preslerinin kullanımıyla, geleneksel olarak birkaç yüz parçadan
+oluşan alt gövde yapılarının tek parça olarak üretilmesi hedeflenmiştir. Bunun
+ürettiği zincir, montaj adımı, istasyon sayısı, tolerans yığılması, fabrika alanı ve
+sermaye yatırımının eşzamanlı azalmasıdır. Tolerans yığılması bileşeni özellikle
+önemlidir: her montaj arayüzü kendi sapmasını toplam sapmaya ekler.
+˙Ikinci bileşen, aracın sıralı bir hat üzerinde değil, bağımsız üretilen modüllerin
+sonda birleştirilmesiyle üretilmesidir. Bu, eşzamanlı mühendislik ilkesinin mon-
+taj düzeyindeki uygulamasıdır.
+Buna karşılık kurum, montaj tutarlılığı ve yüzey kalitesi göstergelerinde
+bağımsız değerlendirmelerde sektör ortalamasının altında konumlanmaktadır.
+Bu bulgu, kurumun parça sayısını azaltma ekseninde öncü, dağılımı daraltma
+ekseninde ise geride olduğunu göstermektedir. ˙Iki eksen birbirinden bağımsızdır.
+Ayrıca büyük tek parça dökümlerin onarılabilirlik üzerindeki olumsuz etk-
+isi, Pareto sınırı üzerinde bilinçli bir konum tercihi olarak değerlendirilmelidir;
+teknik bir hata değildir.
+Karşılaştırmalı Değerlendirme
+Gösterge Robotik üretici Araç üreticisi Fırlatma sistemi
+Ortak çekirdek Belirsiz Tanımlı Tanımlı
+Hacim Düşük Yüksek Yüksek
+Kilometre taşı türü Tanıtım ağırlıklı Üretim ve maliyet Yeniden kullanım
+Yayımlanan kalite verisi Yok Var Var
+Değişim maliyeti Bilinmiyor Azalıyor Muhasebeleşmiş
+˙Iki farklı fakat kendi içinde tutarlı strateji ayırt edilebilmektedir. Birincisi
+süreci önce kararlı kılıp sonra hızlanmayı, ikincisi hızlı iterasyonla sürecin yol
+12
+
+-- 12 of 30 --
+
+boyunca kararlanmasını öngörür. ˙Iki strateji de aynı noktada sonlanır: çıktı
+dağılımının bilinir hâle gelmesi.
+Hacim Koşulu
+Koşulun Doğru Formülasyonu
+Önceki bölümlerde tanımlanan kapasitenin istatistiksel bir temeli vardır. Dağılım,
+proses yeteneği, verim ve arıza oranı kavramlarının tümü çok sayıda tekrar
+gerektirir. Bu nedenle üretim hacmi, mühendisliğin değil, belirli bir mühendislik
+türünün önkoşuludur.
+Formülasyonun genişletilmesi hatalıdır. Düşük hacimli üretim de mühendisliktir
+ve kimi durumlarda daha zorlayıcıdır.
+Tek Nüsha Sistemlerin Doğrulama Stratejisi
+Köprüler, barajlar, uzay sondaları, büyük ölçekli bilimsel aygıtlar ve özel makine
+imalatı istatistiksel doğrulama stratejisini kullanamaz. Bu sistemler farklı bir
+stratejiye başvurur.
+Seri üretim Tek nüsha
+Fiziksel tekrar Benzetim ve analiz
+Ölçülen dağılım Hesaplanan emniyet payı
+Verim eğrisi Güvenlik faktörü
+˙Istatistiksel çıkarım Kapsamlı yer sınaması
+Tekil arıza noktası sayısı yüksek ve yeniden deneme olanağı bulunmayan sis-
+temlerde doğrulama yükünün tamamı modelleme ve yer sınamalarına aktarılır.
+Bu, daha az mühendislik değil, farklı bir doğrulama mimarisidir.
+Hacmin ˙Ikameleri
+Düşük hacimli üretimde öğrenme başka kaynaklardan satın alınır.
+• Benzetim. Fiziksel tekrarın yerini sanal tekrar alır. Ancak modelin
+gerçek verilerle kalibre edilmesi gerekir ve bu kalibrasyon geçmiş deneylerin
+birikimine dayanır. Birikim gereksinimi ortadan kalkmaz, yeri değişir.
+• Standart bileşen kullanımı. Yerleşik tedarikçilerden bileşen tedarik
+edilmesi, o tedarikçinin hacim üzerinden edindiği öğrenmenin ürüne ak-
+tarılması anlamına gelir. Buna karşılık her bileşenin kurum içinde üretilmesi,
+her bileşenin öğrenme eğrisi maliyetinin kurum tarafından üstlenilmesi de-
+mektir; düşük hacimde bu maliyet karşılanamaz.
+• Genişletilmiş emniyet payı. Dağılımın bilinmediği koşulda dar tol-
+erans yerine geniş güvenlik faktörü kullanılır. Bedeli ağırlık, maliyet ve
+verimlilik kaybıdır.
+13
+
+-- 13 of 30 --
+
+Tutarsız Konum
+Buradan çıkan değerlendirme ölçütü şudur: bir kurum ya dar odak ve yüksek
+hacim stratejisini, ya da düşük hacim ve derin analiz stratejisini tutarlı biçimde
+uygulamalıdır. Geniş ürün yelpazesi ile düşük hacmin, derin analiz altyapısı
+olmaksızın bir arada bulunması, iki stratejinin de dışında kalan tutarsız bir
+konumdur.
+Aynı tutarsızlık yazılım tarafında da gözlenir. Yüksek hacimli sistemlerde
+istatistiksel yaklaşım geçerlidir; düşük kullanıcı sayılı sistemlerde ise tip sis-
+temi, değişmezlik denetimleri ve inceleme yoğunluğu gibi analitik yaklaşımlar
+geçerlidir. Hatalı olan, hacim koşulu sağlanmadan hacim temelli stratejinin
+taklit edilmesidir.
+Vaka: Yeniden C erçevelemenin Geçerlilik Aralığı
+Yetenek Aktarımının Sınırı
+Belirli bir sistemde ayırt edici bir özelliği çözmüş mühendisin, aynı özelliği bir
+sonraki nesilde de kolaylıkla üreteceği beklentisi sezgisel olarak makul görünür.
+Bu beklenti tarihsel olarak sınanabilir bir iddiadır.
+Dördüncü nesil hafif avcı uçağının yüksek uçuş çıkış oranı ve düşük bakım
+yükü, beşinci nesil çok rollü avcı uçağına aktarılmamıştır. Aktarımın gerçekleşmemesi,
+kurumsal sürekliliğin bulunmamasından kaynaklanmaz; iki program aynı üretim
+tesisinde ve kesintisiz bir mühendislik geleneği içinde yürütülmüştür. Aktarım
+üç yapısal nedenle mümkün olmamıştır.
+Özelliğin Gereksinim Kararından Türemesi
+Dördüncü nesil uçağın bakılabilirliği bir tasarım tekniğinin değil, bir gereksinim
+reddinin sonucudur. Gereksinim kümesinin daraltılması uçak boyutunu, boyut
+sistem sayısını, sistem sayısı bakım yükünü belirlemiştir. Özellik zincirin çıktısıdır,
+girdisi değildir.
+Bu tespitin sonucu şudur: aktarılabilir olan bir yöntem değil, gereksinimi
+reddedebilme yetkisidir. Söz konusu yetki, tasarım ekibinin tedarik sistemi
+içindeki konumuna bağlıdır ve tasarımla birlikte devredilmez.
+Yeni Kısıt Ekseninin Mekanizmayı Geçersiz Kılması
+Düşük gözlenebilirlik gereksinimi, erişim panellerinin toleransını mekanik uyum
+ölçütünden radyo frekansı kesit ölçütüne bağlamıştır. Bakım kolaylığı ile gizlilik
+aynı Pareto sınırının karşıt uçlarında konumlanır. Bir uçtaki çözümün diğer
+uca taşınması, beceri düzeyiyle ilgili bir sorun değil, sınırın yapısıyla ilgili bir
+olanaksızlıktır.
+14
+
+-- 14 of 30 --
+
+Baskın Etkenin Yer Değiştirmesi
+Ölçek ve karmaşıklık arttıkça sürdürülebilirlik probleminin ağırlık merkezi mekanik
+alandan yazılım ve lojistik altyapısına kaymıştır. Mekanik bakılabilirlik alanındaki
+birikim, yeni baskın etken üzerinde kaldıraç sağlamaz.
+Platform Vaadinin C özülmesi
+Beşinci nesil program, ürün ailesi stratejisinin en iddialı uygulamalarından biri
+olarak tasarlanmıştır. Başlangıç hedefi, üç varyantın parçalarının yüzde yetmişten
+fazlasını paylaşmasıydı. Program yönetiminin sonraki beyanlarına göre gerçekleşen
+ortaklık oranı yüzde yirmi ile yirmi beş aralığında kalmış ve ortaklık esas olarak
+kokpit bölümünde yoğunlaşmıştır. Sonuç, tek bir platform yerine büyük ölçüde
+birbirinden bağımsız üç üretim hattına yaklaşan bir yapıdır.
+C özülmenin nedeni, üç kuvvetin çelişen gereksinimlerinin tasarıma başlangıçtan
+itibaren dahil edilmesidir. Dikey iniş varyantının kaldırma düzeneği gövde kesi-
+tini yalnızca kendi varyantı için değil, üç varyantın tümü için belirlemiştir.
+Bu sonuç, platform disiplininin üç kuralının da ihlaline karşılık gelir:
+Kural Gerçekleşen
+Sabit tutulan küme dar olmalı Ortaklık hedefi tüm sisteme yayıldı
+Değişkenlik noktaları önceden ilan edilmeli Gereksinimler süreç içinde dayatıldı
+Dondurulan şey arayüz olmalı Gövde kesiti donduruldu
+Aktarılan ve Aktarılmayan Bileşenler
+Aktarılmaz Aktarılır
+Belirli konfigürasyon Duyarlılık haritası
+Belirli bakım şeması Ölçüm disiplini
+Belirli tolerans değerleri Gereksinimi sorgulama refleksi
+C özüm Soru
+Mühendis bir çözüm değil, bir soru kümesi taşır. Söz konusu soruların değerli
+bir yanıt üretmesi, örgütsel koşulların bu soruların sonuçlarını kabul etmesine
+bağlıdır.
+Yüksek ˙Irtifa Keşif Uçağı Örneği
+Yeniden C erçevelemenin ˙Içeriği
+Yüksek irtifa keşif uçağı programı, problem çerçevelemesinin klasik örneği olarak
+anılır. Ancak çerçevelemenin içeriği sıklıkla yanlış aktarılır. Uçak radar tespitin-
+den kaçınmamıştır; ilk görevlerden itibaren radar tarafından izlenmiş ve tespit
+diplomatik düzeyde teyit edilmiştir.
+Gerçek yeniden çerçeveleme tespit ekseninde değil, erişim ekseninde yapılmıştır:
+15
+
+-- 15 of 30 --
+
+Reddedilen gereksinim Yerine konan gereksinim
+Radar tarafından görülmemek Avcı uçağı ve füzenin erişemeyeceği irtifada olmak
+Görülmek kabul edilmiş, vurulmak engellenmiştir. Yaklaşık yirmi bir bin me-
+trelik seyir irtifası, dönemin karşı taraf avcı uçaklarının tavanının üzerindeydi.
+Varsayımın Geçerlilik Aralığı
+Yeniden çerçevelemenin dayandığı sabit, karşı tarafın önleme tavanıydı ve bu
+sabit karşı tarafın denetimindeydi. Aralık dört yıl sonra kapanmıştır:
+1956 ˙Ilk görev; radar tespit ediyor, önleme olanaksız
+1957 Radar kesitini düşürme çalışması; başarısız
+1960 Uçak, yüzey-hava füzesiyle düşürülüyor
+Bu durum, modelin geçerlilik aralığı ilkesinin doğrudan bir örneğidir. C erçeveleme
+yanlış değildi; dayandığı varsayım dışsal bir aktörün hamlesiyle geçersizleşti.
+Eksen Değişimlerinin Zinciri
+Radar kesitinin mevcut gövde üzerinde düşürülememesi, doğrudan bir sonraki
+nesil tasarımını tetiklemiştir. Ortaya çıkan zincir, her aşamada rakibin güçlü
+olduğu ekseni terk edip zayıf olduğu bir eksene geçme örüntüsünü gösterir:
+Eksen Başlangıç Yaklaşık ömür
+˙Irtifa (erişim) 1956 4 yıl
+Hız ve irtifa 1964 25 yıl
+Radar kesiti (tespit) 1983 40 yıl
+Her yeni eksen bir öncekinden uzun ömürlü olmuş, ancak hiçbiri kalıcı üstünlük
+sağlamamıştır. Bu nedenle yeniden çerçeveleme, kalıcı bir avantaj değil, kazanılmış
+bir zaman aralığı olarak değerlendirilmelidir. Aralık kapanmadan bir sonraki
+hamlenin hazırlanması, çerçevelemenin ayrılmaz ikinci yarısıdır. Nitekim mev-
+cut uçak henüz görevdeyken ardıl tasarımın geliştirilmesine başlanmıştır.
+Geçerlilik Aralığı Kapandıktan Sonraki Kullanım
+Önleme tavanı üstünlüğü 1960 yılında ortadan kalkmış olmasına rağmen uçak
+görevde kalmıştır. 1962 yılındaki füze krizinde, karşı kıyıda konuşlandırılan orta
+menzilli balistik füze sahalarının tespiti bu uçakla gerçekleştirilmiş; aynı kriz
+sırasında bir uçak yüzey-hava füzesiyle düşürülerek pilotu hayatını kaybetmiştir.
+1960 Karşı taraf hava sahasında düşürülme
+1962 Füze sahalarının tespiti
+1962 ˙Ikinci düşürülme olayı
+Buradan çıkan gözlem şudur: bir platformun geçerlilik aralığının kapanması,
+platformun kullanımdan çıkarılması anlamına gelmez. Kabul edilen risk düzeyi
+yükselir, kullanım koşulları daralır, ancak ardıl sistem olgunlaşana kadar kul-
+lanım sürer.
+16
+
+-- 16 of 30 --
+
+Dondurulmuş Sabitlerin Uzun Ömürlülüğü
+Aynı uçak, yetmiş yılı aşan bir hizmet süresiyle karşıt bir örnek de oluşturur.
+Emeklilik tarihi defalarca ertelenmiştir. Sürekliliğin nedeni, dondurulan sabit
+kümesinin dar ve doğru seçilmiş olmasıdır: yüksek irtifa performansı, geniş
+kanat, yüksek hacimli faydalı yük bölmesi. Bu sabitler, sensör teknolojisi değiştikçe
+yeni yüklerin taşınmasına olanak tanımıştır.
+Böylece tek bir sistem iki farklı ilkenin örneği hâline gelir. Belirli bir yeteneğin
+geçerlilik aralığı kapanabilir; buna karşılık doğru seçilmiş arayüz sabitleri, o
+yeteneğin ötesinde bir hizmet ömrü sağlayabilir.
+17
+
+-- 17 of 30 --
+
+Vaka: Bilgi Üretimi ile Ürüne C evirme Kapasitesi
+Arasındaki Ayrışma
+Sorunun Konumlandırılması
+Önceki bölümlerde ileri mühendislik, bilginin kendisiyle değil, bilgiyi tekrarlan-
+abilir bir ürüne çeviren katman yığınıyla tanımlanmıştı. Sovyetler Birliği örneği
+bu ayrımın en belirgin tarihsel gösterimini sunar: temel bilim ve matematik
+alanlarında dünya çapında üretim yapan bir sistemin, bu üretimi ürüne çevirme
+kapasitesinde yapısal biçimde sınırlı kalması.
+Radar Kesiti Teorisi ve Uygulanabilirlik Değerlendirmesi
+Teorinin Niteliği
+1962 yılında yayımlanan kenar dalgaları yöntemi, belirli bir geometrinin radar
+yansımasının hesaplanmasına ilişkin yaklaşık bir yöntem sunmaktaydı. Ancak
+tasarım probleminin yönü bu hesaplamanın tersiydi:
+Yöntemin çözdüğü Tasarımcının gereksinimi
+Geometri → radar kesiti Hedef kesit → geometri
+˙Ikinci yön bir ters problemdir ve çözümü tekil bir hesaplama değil, çok
+sayıda geometrinin sistematik taranmasıdır. Bu yönüyle problem, daha önce
+tanımlanan tasarım uzayı tarama probleminin doğrudan bir örneğidir.
+Ayrıca yöntem dönemin koşullarında yalnızca basit yüzeyler için işletilebiliyordu.
+Karmaşık gövde geometrilerinin düz yüzeylere ayrıştırılması zorunluluğu, ilk
+uygulama örneğinin karakteristik köşeli biçimini doğurmuştur. Söz konusu biçim
+estetik bir tercih değil, hesaplama kısıtının doğrudan sonucudur.
+Tamamlayıcı Kapasitelerin Durumu
+Teorinin uygulanabilirliği, teorinin kendisinden bağımsız bir dizi tamamlayıcı
+kapasiteye bağlıydı.
+Bileşen Sovyet tarafındaki durum
+Teori Mevcut, yerli kaynaklı
+Hesaplama gücü Yetersiz
+Sayısal tasarım ve imalat Yetersiz
+Kompozit malzeme Zayıf
+Soğurucu kaplama Zayıf
+Sayısal uçuş kontrolü Yetersiz
+Son bileşen belirleyicidir. Aerodinamik olarak kararsız bir gövdenin uçurulabilmesi
+sürekli sayısal müdahale gerektirir. Bu kapasitenin bulunmadığı bir ortamda,
+teorinin bilinmesi uygulama için yeterli değildir.
+Buradan çıkan sonuç, değerlendirmenin hatalı bilgiye dayanmadığıdır. Mev-
+cut koşullar altında teori gerçekten uygulanabilir değildi.
+18
+
+-- 18 of 30 --
+
+Doktrin Farkının Rolü
+Bir teorinin değeri, sorulan probleme bağlıdır. Sovyet hava savunma doktrini
+savunma odaklıydı ve merkezı sorusu gelen hava aracının tespit ve imhasıydı.
+Düşük gözlenebilirlik ise saldırgan tarafın, yani karşı hava savunma ağının içine
+sızmayı hedefleyen tarafın problemine yanıt üretir.
+Sorulan problem Üretilen çözüm
+Gelen aracı nasıl tespit ederim Radar ağı, füze savunması
+Karşı ağın içine nasıl girerim Düşük gözlenebilirlik
+Aynı fizik, iki farklı problem tanımı altında iki farklı teknoloji yolu üretmiştir.
+Doktrin, hangi teorinin değerli sayılacağını belirleyen bir filtre işlevi görmüştür.
+Kurumsal Değerlendirme Hatası
+Yayın izni veren merci, çalışmanın askeri uygulanabilirliğini kendi doktrini ve
+kendi sanayi kapasitesi üzerinden değerlendirmiş ve olumsuz sonuca varmıştır.
+Yazarın sonraki beyanlarına göre bu bir gözden kaçırma değil, bilinçli bir değerlendirmedir.
+Hatanın yapısı şudur: bir teorinin değeri, değerlendirmeyi yapan tarafın
+mevcut kapasitesi üzerinden ölçülmüş, gelecekteki kapasite üzerinden ölçülmemiştir.
+Değerlendirme 1962 koşulları için doğru, 1975 koşulları için yanlıştır. Aradaki
+farkı üreten etken hesaplama gücündeki artıştır.
+Bu, modelin geçerlilik aralığı ilkesinin doğrudan bir örneğidir. “Uygulana-
+maz” hükmünün arkasında yazılmamış bir koşul bulunmaktaydı: mevcut hesaplama
+gücüyle. Koşul kayda geçmediği için, koşul değiştiğinde değerlendirme yeniden
+açılmamıştır.
+Örüntünün Genelliği
+Aynı yapı teknoloji tarihinde tekrarlayan bir biçimdir.
+• Yapay sinir ağları iki ayrı dönemde uygulanabilir bulunmamıştır; eksik
+olan kuram değil, hesaplama kapasitesi ve veriydi.
+• Standart konteyner taşımacılığı fikri uzun süre mevcuttu; eksik olan liman
+altyapısı ve standardizasyondu.
+• Radar kesiti hesaplama yöntemi mevcuttu; eksik olan hesaplama ve imalat
+kapasitesiydi.
+Ortak yapı şudur: kuram tipik olarak erken üretilir, uygulanabilirlik ise
+bir tamamlayıcı teknolojinin olgunlaşmasını bekler. Kuramı üreten taraf ile
+tamamlayıcı kapasiteye sahip taraf çoğunlukla aynı değildir.
+Bunun yöntemsel sonucu, olumsuz uygulanabilirlik kararlarının hangi kapa-
+site varsayımına dayandığının kayda geçirilmesidir. Varsayım kaydedilmediğinde,
+koşul değiştiğinde karar yeniden değerlendirilmez; yalnızca gerekçesi unutulmuş
+bir ret kalır.
+19
+
+-- 19 of 30 --
+
+Teori Üretiminin Kapsamı
+Ayrışmanın büyüklüğünü göstermek için, aynı sistemin ürettiği ve büyük ölçüde
+başka yerlerde uygulamaya dönüşen kuramsal katkılardan bir kesit aşağıda ver-
+ilmektedir.
+Matematik ve Optimizasyon
+• Doğrusal programlama (1939). Üretim planlaması için geliştirilmiş,
+ancak ima ettiği fiyat mekanizması nedeniyle planlama sisteminde yaygın
+kullanım bulmamıştır. Batı’da bağımsız olarak yeniden geliştirilmiş ve
+yöneylem araştırmasının temelini oluşturmuştur.
+• Olasılık kuramının aksiyomatik temeli ve karmaşıklık kuramı.
+C ağdaş istatistiksel öğrenme altyapısının önemli bir bölümü bu çizgiden
+türemektedir.
+• ˙Istatistiksel öğrenme kuramı (1960–70’ler). Kuramın geliştiricisi
+1990 sonrasında göç etmiş, uygulama karşılıkları başka bir kurumsal or-
+tamda üretilmiştir.
+• Optimal kontrol kuramının maksimum ilkesi (1956). Yörünge opti-
+mizasyonundan robotiğe uzanan uygulama alanı; kendi uzay programında
+fiilen kullanılan ender örneklerdendir.
+• Alt-kuadratik çarpma algoritması (1960). Büyük sayı aritmetiğinin
+temelini oluşturmuştur.
+Fizik ve Malzeme
+• Uyarılmış yayınım ve lazer temelleri. Nobel düzeyinde kuramsal
+katkı; lazer sanayisi ise başka bir coğrafyada kurulmuştur.
+• Yarı iletken heteroyapılar. Oda sıcaklığında çalışan lazer diyodunun
+geliştirilmesi; optik depolama, fiber optik iletim ve aydınlatma teknoloji-
+lerinin temeli. Kuramın sahibi, sanayinin bu bilgiyi ürüne çeviremediğini
+açıkça ifade etmiştir.
+• Tokamak konfigürasyonu (1950’ler). Füzyon araştırmasının bugüne
+kadarki baskın mimarisi; uluslararası büyük ölçekli projeler bu konfigürasyona
+dayanmaktadır.
+• Yoğun madde ve süperiletkenlik kuramları. Halen kullanımdadır.
+• Kimyasal salınım reaksiyonu (1951). ˙Ilk yayın girişimi termodi-
+namiğe aykırılık gerekçesiyle reddedilmiş, sonradan kendiliğinden örgütlenme
+literatürünün merkezı örneği hâline gelmiştir.
+20
+
+-- 20 of 30 --
+
+Uygulanabilen Alanlar
+Değerlendirmenin tek yönlü olmaması için, kuramın ürüne dönüştüğü alanların
+da belirtilmesi gerekir.
+• Erken uzay programı, sistem entegrasyonu düzeyinde önceliklidir.
+• 1966’dan itibaren hizmette olan fırlatma aracı ailesi, tarihin en yoğun kul-
+lanılan sistemidir ve dar bir sabit küme üzerine kurulu platform tanımına
+uymaktadır.
+• Kademeli yanma çevrimli roket motoru ailesi, karşı tarafça uzun süre
+uygulanamaz sayılmış, sonraki dönemde satın alınarak kullanılmıştır.
+• Piyade tüfeği tasarımı, geniş toleransla yüksek güvenilirlik hedefleyen bilinçli
+bir tasarım felsefesinin ürünüdür ve mevcut üretim gerçekliğiyle uyum-
+ludur.
+• Metalurji, kaynak teknolojileri ve titanyum işleme alanlarında hem ku-
+ramsal hem üretimsel yetkinlik mevcuttur.
+Ayrışmanın Yapısı
+Uygulanabilen ve uygulanamayan alanlar karşılaştırıldığında ayrımın ürün türüne
+göre keskinleştiği görülmektedir.
+Uygulanabilen Uygulanamayan
+Roket itki sistemleri Yarı iletken
+Nükleer teknoloji Lazer sanayisi
+Metalurji ve kaynak Hesaplama donanımı
+Titanyum işleme Tüketici elektroniği
+Askeri sistem entegrasyonu Yazılım
+Sol sütundaki ürünler büyük ölçekli, tekil, devlet önceliği taşıyan ve düşük
+adetli sistemlerdir. Sağ sütundakiler küçük ölçekli, yüksek adetli, hassasiyet ve
+verim gerektiren, sivil talebe bağlı ürünlerdir.
+Buradan çıkan tespit şudur: sorun kuramın uygulanamaması değildir. Sis-
+tem, bir kuramı tekil ve büyük bir yapıntıya çevirebilmekte, ancak çok sayıda
+küçük yapıntıya çevirememektedir. Bu, çalışmanın başında yapılan ileri mühendislik
+tanımının doğrudan karşılığıdır: belirleyici olan üretebilmek değil, tekrarlan-
+abilir biçimde üretebilmektir.
+Yapısal Nedenler
+Ayrışmanın üç nedeni, önceki bölümlerde tanımlanan çerçeveyle örtüşmektedir.
+1. Talep sinyalinin yokluğu. Ürünler piyasa tarafından çekilmemiştir.
+Hacim oluşmadığında öğrenme eğrisi başlamaz; öğrenme eğrisi başlamadığında
+verim iyileşmesi gerçekleşmez.
+21
+
+-- 21 of 30 --
+
+2. Geri besleme döngüsünün kapalılığı. Kullanıcı memnuniyetsizliği
+üreticiye ulaşmamıştır. Bu, ölçüm sisteminin bulunmaması durumuna
+karşılık gelir ve ölçümsüz iyileştirme olanaksızdır.
+3. Değerlendirmenin mevcut kapasiteye sabitlenmesi. “Su an uygu-
+lanamaz” ile “hiçbir zaman uygulanamaz” ayrımının yapılmaması, tekil
+bir hata değil kurumsal bir alışkanlık niteliğindedir.
+Sonuç
+Vaka tek bir önermeyle özetlenebilir: söz konusu sistem bilgi üretiminde dünya
+çapındaydı; bilgiyi ürüne çeviren katman yığınında değildi. Bu yığın, çalışmanın
+başında ileri mühendislik olarak tanımlanan kapasitenin kendisidir.
+Vakanın genel geçer sonucu, bilgi erişilebilirliğinin bir üstünlük kaynağı ol-
+madığıdır. Söz konusu kuramların büyük bölümü kamuya açık biçimde yayımlanmıştır.
+Ayrımı üreten, bilgiye erişim değil, bilgiyi tekrarlanabilir bir yapıntıya dönüştürecek
+metroloji, proses kontrolü, tedarik derinliği ve talep geri beslemesi katmanlarının
+eşzamanlı olgunluğudur.
+22
+
+-- 22 of 30 --
+
+Vakadan Türeyen Uygulama ˙Ilkeleri
+Sovyet örneğinin taşıdığı dersler ulusal ölçekle sınırlı değildir; aynı mekanizmalar
+takım ve proje ölçeğinde de işler. Aşağıda üç ilke bu ölçeğe indirgenmiş biçimde
+formüle edilmektedir.
+Olumsuz Kararların Kapasite Koşuluyla Birlikte Kaydedilmesi
+Bir teknik olanaksızlık hükmü, hükmü veren tarafın o andaki kapasitesine bağlıdır.
+Bu bağımlılık kayda geçirilmediğinde, hüküm koşulsuz bir olanaksızlık iddiası
+olarak kurumsal hafızaya yerleşir.
+Eksik formülasyon Tam formülasyon
+“Bu yapılamaz” “Mevcut altyapı ve ekip bileşimiyle yapılamaz”
+˙Ikinci formülasyon kendi geçerlilik koşulunu taşır. Koşul değiştiğinde kararın
+yeniden değerlendirilmesi bir hatırlama işi olmaktan çıkar ve sistematik hâle
+gelir. Birinci formülasyonda ise koşul görünmez olduğu için, koşul ortadan
+kalktığında dahi karar açılmaz; geriye gerekçesi unutulmuş bir ret kalır.
+Mimari karar kayıtlarının varlık gerekçesi tam olarak budur. Kayıt, kararın
+kendisini değil, kararın dayandığı bağlamı korumak için tutulur.
+Geri Beslemenin ˙Ikame Edilemezliği
+Tasarım niteliği, geri besleme bulunmadığında öğrenmeye dönüşmez. Kullanılmayan
+ve ölçülmeyen bir sistem, tasarım kalitesi ne olursa olsun, ölçülen düşük nitelikli
+bir sistemden daha az bilgi üretir.
+Bu ilke, önceki bölümlerde tanımlanan ölçüm önceliği ilkesinin bir sonu-
+cudur: değerlendirme yapılabilmesi için önce gözlem kanalının kurulmuş olması
+gerekir. Kaynak, kuramsal derinlik ve insan sermayesi bakımından güçlü bir
+sistemin dahi, geri besleme kanalı kapalı olduğunda ürün kapasitesi üretemediği
+vakada gözlenmiştir. Söz konusu gözlem, geri beslemenin diğer girdilerle ikame
+edilebilir bir kaynak olmadığını göstermektedir.
+Kuramın Aktarılabilirliği ile Katman Yığınının Aktarılamazlığı
+Kuramsal bilgi düşük maliyetle aktarılır; büyük bölümü zaten kamuya açıktır.
+Buna karşılık kuramı ürüne dönüştüren katman yığını aktarılamaz, çünkü bu
+yığın bir belge değil, eşzamanlı olgunlaşmış kapasiteler kümesidir.
+Aktarılabilir Aktarılamaz
+Yayımlanmış kuram Hesaplama altyapısı
+Yöntem tarifi Hassas imalat kapasitesi
+Ölçüm formülü Metroloji zinciri
+Tasarım ilkesi Proses kontrolü olgunluğu
+Tedarik zinciri derinliği
+23
+
+-- 23 of 30 --
+
+Radar kesiti vakasında kuramsal belge her iki tarafça da erişilebilir du-
+rumdaydı. Ayrımı üreten etken bilgiye erişim değil, o bilgiyi bir yapıntıya
+dönüştürecek katmanların aynı anda mevcut olmasıydı. Bu nedenle teknolo-
+jik üstünlük, bilgi tekelinin değil, dönüştürme kapasitesinin bir işlevidir.
+Yöntemsel Uyarı
+Yukarıdaki ilkeler geriye dönük değerlendirmenin taşıdığı yanlılıkla birlikte okun-
+malıdır. Bir kararın hatalı olduğu hükmü, karar anında mevcut olmayan bilgiye
+dayanılarak verilmektedir. Söz konusu vakada 1962 yılındaki değerlendirme, o
+günün göstergeleri açısından tutarlıydı.
+Buradan çıkarılabilecek ders, doğru karar verme yükümlülüğü değildir; bu
+yükümlülük belirsizlik altında yerine getirilemez. C ıkarılabilecek tek tutarlı
+ders, kararın gerekçesinin koşullarıyla birlikte kaydedilmesi ve böylece yanlışlığın
+sonradan fark edilebilir kılınmasıdır.
+24
+
+-- 24 of 30 --
+
+Mühendislik Tarihinden C ıkarılabilir Dersler
+Yöntemsel C erçeve
+Tarihsel vakalar, mühendislik pratiğine ilişkin ilkelerin doğal deney niteliğinde
+gözlenmesine olanak tanır. Her vaka, diğer değişkenler görece sabitken tek bir
+mekanizmanın etkisini görünür kılar. Bu nedenle vakalar anekdot olarak değil,
+izole ettikleri değişken üzerinden okunmalıdır.
+Değerlendirme üç kısıtla yapılmalıdır. Birincisi, karar anında mevcut olan
+bilgiyle değerlendirme yapılmalı, sonradan edinilen bilgi geriye yansıtılmamalıdır.
+˙Ikincisi, aynı davranışı sergileyip farklı sonuç üreten karşı örnekler aranmalıdır;
+karşı örnek varsa öne sürülen değişken belirleyici değildir. Üçüncüsü, aktarılabilir
+olan olayın kendisi değil, altındaki mekanizmadır.
+Vakaların Genel Görünümü
+Dönem Vaka ˙Izole edilen değişken
+M. Ö. 300.000 Levallois tekniği Süreç tasarımına geçiş
+M. Ö. 70.000 Kompozit alet Arayüz ve planlı kırılma noktası
+M. Ö. 3000 Bronz alaşımı Proses parametresi ve tedarik zinciri
+M. Ö. 2600 Piramitler Kalibrasyon zinciri, koordinasyon
+M. Ö. 1200 Demire geçiş Erişilebilirliğin performansı yenmesi
+M. Ö. 300 Yunan bilimi Teori–uygulama kopukluğu
+1–400 Roma Tekrarlanabilirlik ve standart
+1100–1500 Gotik katedraller Teorisiz iterasyon
+1200–1600 Venedik Arsenali Akış üretimi, hacim bağımlılığı
+1400–1900 C in Kurumsal sürekliliğin yokluğu
+1760–1840 Sanayi Devrimi Metroloji ve standardizasyon
+1850–1880 Viktorya mühendisliği Ölçek sıçraması
+1920–1990 Sovyetler Birliği Geri besleme yokluğu
+1942–1945 Manhattan / V-2 Planlı paralellik
+1945–1975 Britanya Ölçek ve yatırım sürekliliği
+1945–1980 Japonya Kısıt altında tasarım
+1961–1972 Apollo Koordinasyon ve mimari seçim
+1986 Challenger Bilginin karara ulaşma kanalı
+1960–2020 Yarı iletken göçü Belirleyici katmanın yer değiştirmesi
+2018–2019 737 MAX Ticari kısıtın teknik kararı ezmesi
+Tekrarlayan Mekanizmalar
+Süreci Tasarlama Önceliği
+Levallois tekniği, yontma taş üretiminde doğrudan ürün üretmek yerine ürünü
+belirleyen çekirdeğin hazırlanmasına geçişi temsil eder. Hazırlık aşamasında
+somut bir çıktı üretilmez; nihai biçim son darbede değil, hazırlıkta belirlenir.
+25
+
+-- 25 of 30 --
+
+Bu geçiş, çalışmanın merkezı önermesinin en eski örneğidir: incelemenin ve
+emeğin odağı yapıntıdan, yapıntıyı üreten sürece kayar. Kalıp, tezgâh, jig, der-
+leme sistemi ve üretim hattı aynı kategorinin farklı dönemlerdeki karşılıklarıdır.
+Metrolojinin Önceliği
+Büyük ölçekli tekrarlanabilirlik her dönemde ölçüm altyapısını önkoşul olarak
+gerektirmiştir. Mısır’da referans arşın çubuğunun kopyalarla periyodik karşılaştırılması,
+on dokuzuncu yüzyılda atölye referans standartları ve vida dişi standardizasy-
+onu aynı işlevi görür.
+Sanayi Devrimi’nin yaygın anlatısı bu nedenle eksiktir. Buhar makinesi
+tasarımı, gerektirdiği silindir toleransını üretebilen tezgâh geliştirilene kadar
+ticari ürün hâline gelememiştir. Belirleyici olan tasarım fikri değil, üretim ve
+ölçüm kapasitesidir.
+ölçüm → proseskontrolü → standart → değiştirilebilirlik → ölçek
+Geri Beslemenin ˙Ikame Edilemezliği
+Sovyet vakası, kuramsal üretim, kaynak ve insan sermayesi yüksekken talep geri
+beslemesinin bulunmadığı bir yapıyı gösterir. Sonuç, ürün kapasitesinin düşük
+kalmasıdır. Bu, geri beslemenin diğer girdilerle ikame edilemeyeceğinin en izole
+gözlemidir.
+Aynı mekanizma tersten de doğrulanır. Tarımın doğuşunda kuramsal bilgi
+yokken yalnızca seçim ve tekrar döngüsüyle ürün nitelikleri kökten değiştirilmiştir.
+Kapalı bir geri besleme döngüsü, kuram olmadan da iyileştirme üretir.
+Standardın ˙Iterasyonsuz Donması
+Acheulean el baltası biçiminin yaklaşık bir milyon yıl boyunca değişmemesi,
+standardizasyonun tek başına yeterli olmadığını gösterir. Standart, sapmayı
+görünür kılmak için vardır; iterasyon mekanizması bulunmadığında yalnızca
+dondurucu bir kısıta dönüşür.
+Buradan çıkan ölçüt, bir sistemin niteliğinin mevcut kalitesiyle değil iyileşme
+hızıyla değerlendirilmesidir.
+Erişilebilirliğin Performansı Yenmesi
+Demirin bronzun yerini alması, malzeme niteliğinin üstünlüğüyle değil, cevher
+erişilebilirliğinin yaygınlığıyla açıklanır. Bronz üretimi coğrafi olarak ayrık iki
+hammaddeye ve dolayısıyla uzun mesafeli bir tedarik zincirine bağlıydı; zincir
+koptuğunda üretim de durmuştur.
+Genel ilke şudur: teknik olarak üstün fakat tedarik açısından kırılgan çözüm,
+teknik olarak zayıf fakat erişilebilir çözüme karşı sürdürülebilir üstünlük kura-
+maz.
+26
+
+-- 26 of 30 --
+
+Teori ile Uygulama Arasındaki Kopukluk
+Yunan biliminde buhar gücünün prensibi bilinmesine ve çalışan bir düzenek
+üretilmesine rağmen güç kaynağı olarak geliştirilmemiştir. Yaygın açıklama,
+işgücü tasarrufunun ekonomik bir hedef olmamasıdır; ayrıca üretimle uğraşan
+sınıf ile kuram üreten sınıf arasında kurumsal bağ bulunmamaktadır.
+Aynı yapı yirminci yüzyılda radar kesiti kuramında yinelenmiştir. Kuram ka-
+muya açık biçimde yayımlanmış, uygulamaya dönüşmesi için gereken hesaplama,
+imalat ve kontrol katmanları başka bir coğrafyada bulunmuştur.
+Bu vakalarda ortak hata, bir kuramın değerinin değerlendirmeyi yapan tarafın
+mevcut kapasitesi üzerinden ölçülmesi ve bu koşulun kayda geçirilmemesidir.
+Belirsizlik Altında Paralel Yol
+Manhattan Projesi’nde ayrıştırma yöntemleri ve bomba tasarımları için birden
+çok yol eşzamanlı finanse edilmiştir. Görünürdeki kaynak israfı, doğru yolun
+önceden bilinemediği koşulda başarısızlık riskine karşı alınan bir sigortadır.
+Bu, kararın olabildiğince geç verilmesi ancak karar için gereken bilginin
+olabildiğince erken üretilmesi ilkesinin uygulamasıdır. Aynı dönemin karşıt
+örneğinde ise çabaların çokluğu planlı yedeklemeden değil, koordinasyonsuz ku-
+rumsal rekabetten kaynaklanmış ve sonuç üretmemiştir.
+Ayrım şudur: planlı paralellik tek karar merciinin bilinçli yedeklemesidir;
+koordinasyonsuz tekrar yalnızca israftır.
+Bilginin Karara Ulaşma Kanalı
+Challenger vakasında teknik bilgi mevcuttu, uzman itirazı yapılmıştı ve veri
+kayıt altındaydı. Eksik olan, bilginin karara dönüşme yoludur. Kanıt yükünün
+tersine çevrilmesi, yani güvenli olduğunun değil güvensiz olduğunun kanıtlanmasının
+istenmesi, sürecin yapısal hatasıdır.
+Aynı vakada tanımlanan sapmanın normalleşmesi olgusu, sistematik bir sap-
+manın tekrarlanan başarı nedeniyle kabul edilebilir sayılmasını ifade eder. Tekil
+bir hatalı karar değil, birikimli çok sayıda küçük karar söz konusudur.
+Ölçek Değişiminde Baskın Etkenin Yer Değiştirmesi
+Ölçek büyüdüğünde farklı büyüklükler farklı üslerle artar; kütle ve ısı üretimi
+hacimle, mukavemet ve ısı atımı yüzeyle ölçeklenir. Bu nedenle küçük ölçekte
+ihmal edilebilir olan etken büyük ölçekte belirleyici hâle gelir.
+Sonuç olarak bir bulgunun geçerliliği elde edildiği ölçekle sınırlıdır. Küçük
+ölçekli denemenin epistemik değeri asimetriktir:
+Kesin sonuç verir Kesin sonuç vermez
+Olumsuz sonuç: çalışmıyor Olumlu sonuç: büyük ölçekte çalışır
+Bu nedenle küçük ölçek eleme aracıdır, onaylama aracı değildir. Doğru
+yöntem, her kademesi bir öncekinin cevaplayamadığı soruyu üstlenen bir ölçek
+27
+
+-- 27 of 30 --
+
+merdiveninin atlanmadan tırmanılmasıdır. Atlanan kademenin sorusu ortadan
+kalkmaz; fark edilmeden bir üst kademeye taşınır.
+Belirleyici Katmanın Zaman ˙Içinde Değişmesi
+Yarı iletken sanayisinde üstünlük altmış yıl içinde birden çok kez el değiştirmiş
+ve her devir farklı bir nedenle kapanmıştır: önce verim disiplini, sonra sermaye
+döngüsündeki risk iştahı, sonra tasarım ile üretimi ayıran iş modeli yeniliği
+belirleyici olmuştur.
+Buradan çıkan ilke, tek bir eksende yetkinliğin üstünlüğü korumaya yetmediğidir.
+Katman yığınının hangi katmanının belirleyici olduğu zamanla değişir.
+Kurumsal Süreklilik
+C in örneği, teknolojik önceliğin kurumsal koruma olmadan kalıcı olmadığını
+gösterir. Deniz seferi programının merkezı bir kararla sonlandırılması ve kayıtların
+imha edilmesi, uzun süreli birikimi geçersiz kılmıştır.
+Roma örneği aynı ilkeyi malzeme düzeyinde tekrarlar: kurumsal yapı çözüldüğünde
+beton üretim bilgisi yüzyıllarca kullanılamaz hâle gelmiştir. Bilgi bireyde veya
+dağınık pratikte tutulduğunda kurumla birlikte kaybolur.
+Ödünleşimin Doğru Formülasyonu
+Vakaların toplu okunuşundan çıkan yaygın bir yanlış çıkarım, düşük nitelikli
+veya eksik çözümlerin genel olarak tercih edilebilir olduğudur. Doğru formülasyon
+şudur: ödünün verildiği eksenin, o bağlamda darboğaz oluşturmayan eksen ol-
+ması gerekir.
+Ödün verilebilir eksenler Ödün verilemez eksenler
+Performans Emniyet
+Kapsam Geri dönülemez kararlar
+Optimizasyon düzeyi Veri bütünlüğü
+Yüzey niteliği Düzenleyici eşikler
+Piyade tüfeği tasarımında geniş tolerans kabul edilmiş, ancak basınç hesabında
+ödün verilmemiştir. 737 MAX vakasında ise ödün belgelendirme ve eğitim ek-
+senlerinde verilmiş, sonuç ölümcül olmuştur. Aynı hız tercihi, farklı eksende
+uygulandığında farklı sonuç üretir.
+Ödünün niteliğini belirleyen üç ölçüt şunlardır: ödünün darboğaz olmayan
+eksende bulunması, geri alınabilir olması ve bilinçli biçimde verilmiş olması.
+Fark edilmemiş ödün mühendislik kararı değil, borçtur.
+Sonuç
+Yaklaşık üç yüz bin yıllık kesitte, mühendisliğin temel bileşenlerinin hiçbiri yeni
+değildir. Süreç tasarımı, arayüz yönetimi, planlı arıza noktası, proses parame-
+tresi kontrolü, kalibrasyon zinciri, emniyet payı ve belirsizlik altında kaynak
+28
+
+-- 28 of 30 --
+
+taahhüdü farklı dönemlerde bağımsız olarak ortaya çıkmıştır. Değişen tek şey
+ölçek ve hızdır.
+Vakaların ortak örüntüsü, belirleyici etkenin icadın kendisi olmamasıdır.
+Roma betonu icat etmemiş, standartlaştırmıştır. Venedik gemiyi icat etmemiş,
+akışa sokmuştur. ˙Ingiltere buharı icat etmemiş, ölçülebilir kılmıştır. C in çok
+sayıda tekniği ilk üretmiş, hiçbirini sürdürememiştir.
+Bu örüntü, çalışmanın başında yapılan tanımın tarihsel doğrulamasıdır: ayrım
+üretebilmekte değil, tekrar tekrar, aynı nitelikte ve kurumsal olarak üretebilmektedir.
+Bilgi çoğu dönemde erişilebilir olmuştur; ayrımı üreten, bilgiyi yapıntıya dönüştüren
+katmanların eşzamanlı olgunluğudur.
+29
+
+-- 29 of 30 --
+
+Sonuç
+Bu çalışmada ileri mühendislik, bir teknik zorluk düzeyi olarak değil, bir örgütsel
+kapasite olarak tanımlanmıştır. Kapasitenin ölçütü tekil bir yapıntının üretilebilmesi
+değil, o yapıntının belirlenmiş sınırlar içinde tekrar üretilebilmesi ve makul
+maliyetle değiştirilebilmesidir.
+Ele alınan bileşenler beş başlık altında toplanabilir. Birincisi, ölçüm altyapısının
+kendisinin doğrulanması gereken bir sistem olarak kavranmasıdır. ˙Ikincisi, arızanın
+tekil olay değil dağılımsal bir özellik olarak ele alınmasıdır. Üçüncüsü, alt sis-
+temler arasındaki bağlantı ve ödünleşim yapısının, alt sistemlerin iç fiziğinden
+önce gelen bir bilgi türü oluşturmasıdır. Dördüncüsü, kararların geri alınabilirlik
+derecesine göre farklı doğrulama yüküyle ele alınmasıdır. Beşincisi, bilginin
+bireyde değil kurumsal yapıda tutulmasıdır.
+Bu bileşenlerin tümü tek bir kavramsal harekete indirgenebilir: incelemenin
+odağının yapıntıdan, yapıntıyı üreten sürece kaydırılması. Ürün yerine üretim
+sistemi, arıza yerine arızayı üreten mekanizma, sonuç yerine sonucu belirleyen
+dağılım incelenir.
+Söz konusu kavramların hiçbiri yeni değildir; büyük bölümü yirminci yüzyılın
+ilk yarısında biçimsel tanımını almıştır. Bu gözlem, kavramsal yeniliğin değil,
+kavramların örgütsel refleks hâline getirilmesinin ayırt edici olduğunu göstermektedir.
+Bilgi kamuya açıktır; ayrım, o bilgiyi taşıyan kurumsal davranışın varlığında or-
+taya çıkmaktadır.
+30
+
+-- 30 of 30 --
