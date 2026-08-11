@@ -1,0 +1,603 @@
+Kapasite ve Kullanım: Ölçülemeyeni Ölçmek
+ÖFY
+August 2026
+Özet
+Kapasite doğrudan gözlemlenemez; gözlemlenen her zaman performanstır. Bu
+nedenle kapasite ölçümü bir okuma değil, bir ters problem çözümüdür ve tek
+gözlemle tek çözüme ulaşmaz: düşük performans hem kapasite yokluğundan
+hem de kullanılmayan kapasiteden kaynaklanabilir. Kapasitenin ölçülebilir tanımı
+“belirli kısıtlar altında sürdürülebilir maksimum”dur ve bu tanımın ayırt edici
+sınavı, gözlenen performansın arkasında biriken bir borç bulunup bulunmadığıdır.
+Kullanım oranı ise yüksek olduğunda iyi değildir; kuyruk teorisi doyuma yaklaşan
+sistemlerde bekleme süresinin 1/(1 − ρ) ile büyüdüğünü gösterir, dolayısıyla
+yüksek kullanım verimlilik değil kırılganlık işaretidir. Ölçüm teorisi, bir niteliğe
+sayı atamanın ancak ampirik yapı ile sayısal yapı arasında bir karşılıklılık ku-
+rulduğunda meşru olduğunu söyler; bu koşul sağlanmadığında üretilen şey ölçüm
+değil, ölçüm görünümlü sayıdır. Ölçülemeyen nitelikler vekil değişkenlerle tem-
+sil edildiğinde, vekile teşvik bağlanması vekil ile hedef arasındaki bağı sistematik
+olarak koparır. Ülke düzeyinde teknolojik kapasite ölçümü bu hataların tümünü
+aynı anda barındırır: çok boyutlu bir nitelik tek sayıya indirgenir, sıralama
+ölçeğinde aritmetik yapılır ve vekiller (patent, yayın, yüksek teknoloji ihracatı)
+doğrudan hedef hâline getirilir.
+1
+
+-- 1 of 18 --
+
+Giriş
+Bir sistemin “ne kadar yapabildiği” ile “ne kadar yaptığı” birbirinden ayrı iki
+niceliktir ve aralarındaki fark, ölçüm pratiğinin en sık atlanan ayrımıdır. Birin-
+cisi kapasite (capacity), ikincisi performans (performance), ikisinin oranı kul-
+lanım oranı (utilization) olarak adlandırılır. Bu üç terim gündelik kullanımda
+birbirinin yerine geçer; teknik kullanımda geçemez, çünkü aynı gözlemden üçü
+de aynı güvenle çıkarılamaz.
+Ayrımın pratik önemi, yanlış teşhisin yanlış müdahaleye yol açmasındadır.
+C ıktısı düşük bir sistemde sorun kapasite eksikliğiyse yatırım gerekir; kullanım
+eksikliğiyse yatırım kaynağı boşa harcar ve kullanılmayan kapasiteyi büyütmekten
+başka bir şey yapmaz. ˙Iki durum dışarıdan aynı görünür.
+Kapasitenin ölçümü, ölçüm teorisinin (measurement theory) genel problem-
+ine bağlanır. Burada kastedilen, Lebesgue integralinin temelini oluşturan matem-
+atiksel ölçü teorisi (measure theory) değil, gerçek dünyadaki bir ilişki yapısının
+sayı sistemine eşlenmesini inceleyen temsili ölçüm teorisidir (representational
+measurement theory). Bu alan, hangi durumda bir niteliğe sayı atanabileceğini
+ve atanan sayıyla hangi işlemlerin yapılabileceğini belirler.
+Yaygın ve yanlış olan kabul şudur: bir şeye sayı atanabiliyorsa ölçülmüş
+sayılır. Temsili ölçüm teorisinin gösterdiği, sayı atamanın kolay, atamanın
+meşru olmasının zor olduğudur. Ekranda görünen sayılar birbirine benzer;
+arkalarındaki yapı benzemez.
+Not, kapasite ve kullanım ölçümünü genel bir çerçeve olarak kurar, ölçüm
+teorisinin ilgili sonuçlarını bu çerçeveye bağlar ve çerçeveyi ülke düzeyinde teknolo-
+jik kapasite örneği üzerinden sınar. Kapsam dışında bırakılanlar: istatistik-
+sel kestirim yöntemlerinin ayrıntısı, belirli sektörlere özgü kapasite planlama
+teknikleri ve ölçme araçlarının kalibrasyon prosedürleri.
+2
+
+-- 2 of 18 --
+
+Ölçüm teorisinin temelleri
+Ölçüm bir eşlemedir
+Temsili ölçüm teorisine göre ölçüm, ampirik bir yapının sayısal bir yapıya eşlenmesidir
+(Krantz, Luce, Suppes ve Tversky, 1971). Ampirik yapı, nesneler kümesi ile bu
+nesneler arasındaki gözlemlenebilir ilişkilerden oluşur; sayısal yapı ise sayılar
+kümesi ile bunlar arasındaki matematiksel ilişkilerden.
+Ampirik yapı Sayısal yapı
+(nesneler + ilişkiler) → (sayılar + ilişkiler)
+"A, B’den ağır" → "3.2 > 1.8"
+"A ile B birlikte, → "3.2 + 1.8 = 5.0"
+C kadar ağır"
+Eşleme, ancak ampirik ilişkiler sayısal ilişkilere karşılık geliyorsa meşrudur.
+Karşılık gelmiyorsa sayı üretilmiştir ama ölçüm yapılmamıştır. Bir ölçüm önerisinin
+ispatlaması gereken üç şey vardır: böyle bir eşlemenin var olduğu (temsil teo-
+remi), kaç farklı eşlemenin mümkün olduğu (tekillik teoremi) ve ampirik yapının
+hangi koşulları sağlaması gerektiği (yeterlilik aksiyomları).
+Yeterlilik aksiyomlarının en temel olanı geçişliliktir. Bir nitelik tek boyutlu
+bir sayıya eşlenecekse, “A, B’den daha çok X’e sahiptir” ilişkisi geçişli ol-
+mak zorundadır. Geçişlilik kırılıyorsa, ölçülmeye çalışılan şey tek bir boyut
+değil, birbiriyle çarpışan birkaç boyuttur ve tek sayıya indirgenmesi bir kategori
+hatasıdır. Ölçüm başarısızlıklarının büyük kısmı ölçüm hatasından değil, bu
+kategori hatasından kaynaklanır.
+Ölçek türleri
+Alanın en bilinen sonucu, ölçeklerin sınıflandırılmasıdır (Stevens, 1946). Her
+ölçek türü, korunan yapıya göre tanımlanır ve korunan yapı, sayı üzerinde hangi
+işlemlerin anlamlı olduğunu belirler.
+Ölçek Koruduğu ˙Izin verilen Örnek
+Sınıflama Eşitlik Sayım, mod Meslek kodu
+Sıralama Sıra Medyan, yüzdelik Mohs sertliği
+Aralık Farklar Ortalama, fark Celsius
+Oran Oranlar Tüm işlemler Kütle, süre
+Sınıflama ölçeği (nominal ) yalnızca ayırt eder; sıralama ölçeği (ordinal )
+sıralar ama mesafe tanımlamaz; aralık ölçeği (interval ) farkları anlamlı kılar
+ama sıfır noktası keyfıdir; oran ölçeği (ratio) mutlak sıfıra sahiptir ve oranları
+anlamlı kılar.
+Kritik nokta, ölçek türünü verinin değil ölçülen niteliğin yapısının belirleme-
+sidir. Mohs sertlik ölçeğinde 10 numaralı elmas, 5 numaralı apatitten iki kat
+3
+
+-- 3 of 18 --
+
+sert değildir; ölçek yalnızca hangi malzemenin hangisini çizdiğini kodlar. Cel-
+sius ölçeğinde 20 derece, 10 derecenin iki katı sıcak değildir; sıfır noktası suyun
+donma noktası olarak keyfı seçilmiştir ve oran bu keyfıliğe bağımlıdır.
+Yaygın hatalar bu ayrımın ihlalinden doğar. Likert tipi anket maddelerinin
+ortalamasının alınması bunların en sık görülenidir: yanıt seçenekleri arasındaki
+mesafenin eşit olduğu varsayılır, oysa bu varsayım ölçüm tarafından değil pratik
+kolaylık tarafından dayatılmıştır. Aynı hata, yazılım geliştirmede kullanılan iş
+büyüklüğü puanlarının (story point) ortalamasının alınmasında da tekrarlanır;
+bu puanlar tanımı gereği sıralama ölçeğindedir.
+Anlamlılık
+Ölçek türlerinden daha temel olan kavram anlamlılıktır (meaningfulness). Bir
+ifade, ölçeğin izin verdiği tüm dönüşümler altında doğruluk değerini koruyorsa
+anlamlıdır.
+Sınav basittir: birim değiştirilir, ifadenin hâlâ aynı şeyi söyleyip söylemediğine
+bakılır.
+• “A, B’nin iki katı uzun” — metreden feet’e geçildiğinde oran korunur.
+Anlamlıdır.
+• “Bugün dünden iki kat sıcak” — Celsius’tan Fahrenheit’a geçildiğinde
+oran değişir. Anlamsızdır.
+Bu ölçüt, birleştirilerek üretilen bileşik göstergelerin büyük kısmını geçersiz
+kılar. Birkaç değişkenin ağırlıklandırılıp toplanmasıyla elde edilen bir endeks
+düşünüldüğünde: ağırlıklar değiştirildiğinde sıralama değişiyorsa, üretilen sıralama
+ölçülen niteliğin değil ağırlık seçiminin bir sonucudur. Anlamlılık sınavını geçmek
+için endeksin, savunulabilir ağırlık aralığının tamamında aynı sıralamayı vermesi
+gerekir; bu koşul pratikte nadiren denetlenir.
+Doğrudan ölçülemeyen nitelikler
+Kapasite gibi doğrudan gözlemlenemeyen niteliklere gizil değişken (latent vari-
+able) denir. Bunlar yalnızca etkileri üzerinden çıkarsanır. ˙Iki yaklaşım geliştirilmiştir.
+Birleştirilmiş ölçüm (conjoint measurement), iki bağımsız değişkenin or-
+tak etkisi üzerindeki düzenin, altta yatan aralık ölçeğini kurtarmaya yettiğini
+gösterir (Luce ve Tukey, 1964). Doğrudan bir birim tanımlanamadığında bile,
+karşılaştırma örüntüsünden ölçek çıkarılabilir.
+Gizil değişken modelleri, gözlenen tepkilerden gözlenmeyen niteliği ke-
+stirir. Rasch modeli bunun en yalın örneğidir (Rasch, 1960): bir sınavda doğru
+cevap sayısı yalnızca bir sayımdır, fakat model bu sayımı hem soru güçlüğü hem
+de kişi yeteneği boyutlarına ayrıştırarak ölçek üretir.
+Her iki yaklaşım da aynı disipline dayanır: gizil niteliğin ölçülebilmesi için,
+gözlenen verilerin belirli bir yapıyı sağlaması gerekir. Yapı sağlanmıyorsa, üretilen
+sayı gizil niteliği değil, ölçüm aracının kendisini yansıtır.
+4
+
+-- 4 of 18 --
+
+Kapasitenin ölçülmesi
+Tanım
+Kapasite, belirli kısıtlar altında sürdürülebilir maksimum çıktı olarak
+tanımlanır. Tanımın üç niteleyicisi de zorunludur; biri düşerse ölçüm anlamını
+kaybeder.
+• Maksimum: anlık tepe değeri değil, üst sınır.
+• Sürdürülebilir : sistemi bozmadan, tekrarlanabilir biçimde.
+• Kısıtlar altında: hangi koşullar geçerliyken ölçüldüğü.
+Bir motorun sekiz bin devire çıkabilmesi ile sekiz bin devirde beş yüz saat
+çalışabilmesi farklı iki niceliktir. Birincisi tepe, ikincisi kapasitedir. Aradaki fark
+şuradan gelir: tepe değerine ulaşırken sistemden borç alınır — bakım ertelenir,
+aşınma birikir, yedek tüketilir — ve bu borç ölçüm anında görünmez.
+Buradan doğrudan uygulanabilir bir sınav çıkar: bir performans seviyesi,
+ancak arkasında biriken bir borç yoksa kapasitedir. Yazılım geliştirmede
+bir ekibin bir dönemde çıkardığı iş ile her dönem çıkarabildiği iş arasındaki fark
+aynı mekanizmaya dayanır; birinci durumda teknik borç, gözden geçirme titizliği
+ve dinlenme süresi kaynak olarak tüketilmiştir.
+Ters problem yapısı
+Gözlemlenen her zaman performanstır; kapasite bir çıkarımdır. Bu asimetri,
+ölçüm stratejisinin tamamını belirler.
+Kapasite (gizli) kullanım oranı Performans (gözlenir)
+çıkarım (ters problem)
+Ters problemler tek çözümlü değildir. Düşük performans iki farklı nedenden
+kaynaklanabilir — kapasite yoktur, ya da kapasite vardır fakat kullanılmamaktadır
+— ve bu iki durum tek bir gözlemden ayrıştırılamaz. Sonuç şudur: kapasite
+ölçümü zorlamalı bir işlemdir. Sistem doyuma sürülmeden kapasitesi bi-
+linemez.
+Dört ölçüm yolu
+Doyum testi
+Yük kademeli olarak artırılır ve çıktının artmayı bıraktığı nokta belirlenir. Yöntemsel
+olarak en doğrudan olanıdır. ˙Iki sınırlılığı vardır: yıkıcı olabilir ve çoğu gerçek
+sistemde kasıtlı olarak uygulanamaz.
+Bununla birlikte, uygulanamayan yerlerde doğal olarak gerçekleşir. Savaşlar,
+salgınlar ve yaptırım rejimleri istemsiz stres testleridir ve gerçek kapasitenin,
+5
+
+-- 5 of 18 --
+
+barış dönemi göstergelerini yalanladığı yerlerdir. Rusya’nın 2022 sonrasında
+sivil havacılık ve otomotiv üretiminde yaşadığı daralma, ithal girdi kesildiğinde
+“üretebiliyor olmak” ile “bağımsız üretebiliyor olmak” arasındaki farkın istemsiz
+bir ölçümüdür.
+Darboğaz tespiti
+Sistem kapasitesi, bileşen kapasitelerinin toplamı değil minimumudur. Kısıtlar
+teorisi bu ilkeye dayanır (Goldratt, 1984): sistemin çıktısı en dar halka tarafından
+belirlenir.
+Bunun sezgiye aykırı sonucu şudur: darboğaz olmayan bir bileşende yapılan
+iyileştirme, sistem kapasitesini sıfır oranında artırır. Fakat yerel ölçümlerde
+iyileşme olarak görünür. On istasyonlu bir üretim hattında dokuz istasyonun
+verimliliğini artırmak, ölçüm panelinde dokuz iyileşme üretir ve hattın çıktısında
+hiçbir değişiklik yaratmaz. Yerel verimlilik metriklerinin sistem verimliliğiyle
+karıştırılması, kapasite yönetiminde en pahalı hatadır.
+Zarf yöntemi
+Aynı türden çok sayıda birim karşılaştırılır, en iyi performans gösterenlerin
+oluşturduğu sınır (frontier ) çizilir ve her birimin bu sınıra uzaklığı ölçülür. Veri
+zarflama analizi bu mantıkla çalışır (Charnes, Cooper ve Rhodes, 1978).
+Üstünlüğü, kapasitenin önceden tanımlanmasını gerektirmemesidir; sınır gözlemden
+türetilir. Zayıflığı ise şudur: gözlenen en iyi, mümkün olan en iyi değildir.
+Bütün birimler ortak bir kısıt altındaysa — örneğin aynı düzenleyici çerçeve ya
+da aynı teknolojik nesle bağlıysa — zarf, gerçek tavanı değil ortak tavanı ölçer
+ve sektörün tamamının ne kadar geride olduğu görünmez kalır.
+Toparlanma hızı
+Sisteme bir şok verilir ve önceki seviyeye dönüş süresi ölçülür. Bu, artık kapa-
+sitenin (rezervin) doğrudan ölçümüdür: doyumda çalışan bir sistem toparlana-
+maz, boşluğu olan sistem hızla toparlanır.
+Diğer üç yöntem üzerindeki üstünlüğü yıkıcı olmamasıdır. Küçük ve kon-
+trollü şoklarla uygulanabilir; bilişim altyapısında planlı arıza denemeleri, üretimde
+kasıtlı kısa duruşlar bu mantığı kullanır.
+6
+
+-- 6 of 18 --
+
+Kullanım oranının ölçülmesi
+Formül basit, yorum değil
+Kullanım oranı ρ, performansın kapasiteye bölümüdür:
+ρ = gerçekleşençıktı
+kapasite
+Formülün sadeliği yanıltıcıdır; yorumunda üç ayrı tuzak bulunur.
+Yüksek kullanım iyi değildir
+Kuyruk teorisinin temel sonucu, doyuma yaklaşan sistemlerde bekleme süresinin
+doğrusal değil hiperbolik biçimde büyümesidir. Değişkenliğin bulunduğu her
+sistemde bekleme, yaklaşık olarak 1/(1 − ρ) çarpanıyla artar (Kingman, 1961).
+Kullanım oranı Bekleme çarpanı
+%50 2
+%80 5
+%90 10
+%95 20
+%99 100
+Bu, doğrudan bir tasarım ilkesine dönüşür: %95 kullanımda çalışan bir sis-
+tem verimli değil kırılgandır. Boşluk israf değil, değişkenliğin soğurucusudur.
+Hastane yoğun bakım yataklarının, itfaiye teşkilatlarının ve elektrik şebekelerinin
+taşıdığı atıl kapasite bilinçli bir tasarım kararıdır, ihmalin sonucu değil.
+Aynı ilke bilişim ve organizasyon düzeyinde de geçerlidir. Sürekli %95 işlemci
+kullanımında çalışan bir sunucu, tamamı projelere tahsis edilmiş bir ekip ve sıfır
+boşluk bırakan bir takvim, üç ayrı alanda aynı hatanın örnekleridir.
+Meşguliyet kullanım değildir
+Ölçülen genellikle sistemin çalışıp çalışmadığıdır; sorulması gereken ise sistemin
+değer üreten bir iş yapıp yapmadığıdır. Meşgul fakat boşa çalışan bir sistem,
+meşguliyet metriğinde tam puan alır.
+Bu ayrım, kullanım oranının tanımını değiştirir: pay, aktivite değil değer
+üreten çıktı olmalıdır. Aktivite üzerinden tanımlanan kullanım oranı, sistemin
+kendini oyalama kapasitesini ölçer.
+Düşük kullanımın nedeni belirsizdir
+Kapasite kullanılmıyorsa nedeni en az beş farklı şey olabilir ve bunlar tamamen
+farklı müdahaleler gerektirir. Nedeni belirlemeden yapılan müdahale, en iyi
+ihtimalle etkisizdir.
+7
+
+-- 7 of 18 --
+
+Neden Belirti Müdahale
+Talep yokluğu Kuyruk boş Talep tarafı
+Eşleşme yokluğu Kuyruk var, tür yanlış Yönlendirme, ara katman
+Başka darboğaz Girdi gelmiyor Yukarı akış
+Koordinasyon
+yokluğu
+Parçalar var, birleşmiyor Entegrasyon
+Erişim kısıtı Kapasite var, izin yok Kurumsal düzenleme
+Zamansal boyut
+Tek anlık ölçüm kapasiteyi tanımlamaz, çünkü kapasitenin kendisi kullanımın
+fonksiyonudur.
+Kullanılmayan kapasite körelir. Kapasite bir stok değil bir akıştır; kul-
+lanılmadığında amortize olur. Kapatılan bir üretim hattının, dağılan bir ekibin
+ya da uygulanmayan bir becerinin yeniden kurulması, ilk kurulmasından ucuz
+değildir ve çoğu zaman daha pahalıdır. Bunun nedeni, kapasitenin önemli bir
+kısmının yazıya dökülmemiş bilgi (tacit knowledge) biçiminde, üretim pratiğinin
+içinde taşınmasıdır (Polanyi, 1966; Nelson ve Winter, 1982). Belgeler korunsa
+bile pratik kaybolur.
+Aşırı kullanılan kapasite ise tükenir. Bakımsız makine, tükenmiş ekip ve
+aşırı otlatılan mera aynı mekanizmanın örnekleridir.
+Bu iki eğilimin birlikte sonucu, optimum kullanım oranının ne %100 ne de
+düşük olmasıdır: bakım eşiğinin üstünde, doyum eşiğinin altında bir
+bant aranır. Ayrıca bu, ölçümün ne zaman yapıldığını kritik hâle getirir; kap-
+asitenin bir kez ölçülüp sabit kabul edilmesi, kısa süre içinde geçersizleşen bir
+varsayımdır.
+8
+
+-- 8 of 18 --
+
+Sayısallaştırma ve vekil değişken problemi
+Kodlama ile ölçme farklıdır
+Bir nesneyi hesaplanabilir kılmak için yapılan iki işlem birbirine karıştırılır.
+Kodlama, nesneyi bilgisayarın işleyebileceği bir forma sokmaktır: met-
+nin bayt dizisine, görüntünün piksel dizisine çevrilmesi. Kayıp sınırlıdır, işlem
+çoğunlukla geri döndürülebilirdir ve meşruiyet sorunu doğurmaz.
+Ölçme, nesneye bir büyüklük atamaktır; “ne kadar” sorusuna cevap verir.
+Burada bir yapı iddiası bulunur ve iddia yanlış olabilir.
+Bir şeyin bilgisayarda temsil edilmesi için kodlama yeterlidir. Ölçme, yalnızca
+karar verilecekse ve nitelik gerçekten bir boyut oluşturuyorsa gerekir.
+Sayısallaştırmanın yolları
+• Doğrudan sayım. Nesne ayrık birimlerden oluşuyorsa uygulanır. Sorun-
+suzdur, fakat az sayıda nitelik bu yapıdadır.
+• Fiziksel ölçüm. Nitelik bir birim sistemine bağlanabiliyorsa uygulanır:
+süre, kütle, uzunluk.
+• Sıralama. Nesneler karşılaştırılabiliyor fakat mesafe tanımlı değilse. Sayı
+üretir, ancak toplama ve ortalama işlemlerine izin vermez.
+• Gömme (embedding). Nesne bir vektör uzayına yerleştirilir. Modern
+makine öğrenmesinin temel işlemidir. Burada üretilen tek bir değer değil
+bir konumdur; yakınlık anlamlıdır, büyüklük anlamlı değildir.
+• Vekil değişken (proxy). Ölçülmek istenen nitelik ölçülemiyorsa, onunla
+ilişkili ölçülebilir bir nitelik kullanılır.
+• Yapısal temsil. Sayı yerine ilişkisel yapı üretilir: çizge, tip sistemi, durum
+makinesi. Hesaplanabilir olması bakımından sayıdan aşağı değildir ve çoğu
+durumda zorlama bir metrikten daha bilgilendiricidir.
+Vekil değişkenin çöküşü
+Vekil kullanıldığı anda üç ayrı şey birbirinden ayrılır.
+Gerçekten önemsenen nitelik (ölçülemez)
+varsayılan bağ
+Vekil değişken (ölçülür)
+teşvik bağlanır
+Davranış (optimize edilir)
+Aktörler vekili optimize eder, hedefi değil. Vekil ile hedef arasındaki bağ
+ise tam da optimizasyon başladığında kopar. Bu, iktisatta Goodhart yasası
+olarak bilinir: bir ölçüt hedef hâline geldiğinde ölçüt olma niteliğini kaybeder
+9
+
+-- 9 of 18 --
+
+(Goodhart, 1975; yaygınlaşan formülasyon için Strathern, 1997). Sosyal politika
+alanındaki eşdeğeri Campbell tarafından formüle edilmiştir (Campbell, 1979).
+Mekanizma açıktır ve ölçüm teorisi diliyle ifade edilebilir. Vekil ile hedef
+arasındaki ilişki, doğal davranış dağılımı altında gözlenmiştir. Optimizasyon,
+sistemi o dağılımın dışına, ilişkinin geçerliliğinin sınanmadığı bölgeye taşır. Yani
+ölçüm, kendi geçerlilik koşulunu ortadan kaldırır.
+OKR örneği
+Hedefler ve anahtar sonuçlar yöntemi (Objectives and Key Results), Intel’de
+geliştirilip yaygınlaşmış bir hedef belirleme çerçevesidir (Grove, 1983; Doerr,
+2018). Yapısı iki katmanlıdır ve tasarımı vekil problemini bildiğini gösterir.
+• Objective: nitel, kasıtlı olarak ölçülemez. Gerçekten önemsenen nitelik
+katmanı.
+• Key Result: nicel, ölçülebilir. Vekil katmanı.
+Amaçlanan kullanımda anahtar sonuç bir kanıttır, hedef değil: hedefe ulaşıldıysa
+belirli sayıların belirli biçimde görünmesi beklenir. Bozulmuş kullanımda anahtar
+sonucun kendisi hedefe dönüşür ve nitel katman dekoratif bir başlık hâline gelir.
+Ayrımı sınayan soru şudur: anahtar sonuçlara ulaşıp hedefe ulaşamamak
+mümkün müdür? Cevap neredeyse her zaman evettir; bu da anahtar sonuçların
+hedef değil gösterge olarak kullanılması gerektiğini söyler. Pratikte ödüllendirme
+anahtar sonuca bağlandığında bu ayrım anında çöker, çünkü teşvik vekile bağlanmış
+olur.
+C erçevenin ikinci zayıflığı ölçek türünü hiç sorgulamamasıdır. “Memnuniyet
+puanını 7,2’den 8,1’e çıkarmak” biçimindeki bir hedefte 7,2 sayısı, sıralama
+ölçeğindeki yanıtlar üzerinde yapılmış bir aritmetiğin ürünüdür. Sayı hassas
+görünür; arkasında ölçüm yapısı bulunmaz.
+Ne zaman sayısallaştırılmaz
+Uygulanabilir eşik şudur: sayısallaştırma, kararı iyileştiriyorsa meşrudur. Kararı
+iyileştirmeden yalnızca raporlamayı kolaylaştırıyorsa, kayıp kazançtan büyüktür.
+Sayısallaştırmanın uygunsuz olduğunu gösteren belirtiler:
+• Vekil ile hedef arasındaki bağ savunulamıyorsa.
+• Ölçüt teşvike bağlanacaksa ve oyunlanması, ölçütü gerçekten iyileştirmenin
+en kolay yoluysa.
+• Nitelik çok boyutluysa ve tek sayıya indirgeme boyutları çarpıştırıyorsa.
+• Ölçüm maliyeti, ölçümden gelen bilgiden yüksekse.
+• Ölçülemeyen boyut, ölçülebilen boyuttan önemliyse.
+10
+
+-- 10 of 18 --
+
+Son madde en sinsi olanıdır ve ölçmenin nötr bir işlem olmadığını gösterir:
+ölçme, sistemdeki dikkati yeniden dağıtır. Kod satırı sayısı ölçüldüğünde yalnızca
+yanlış bir metrik elde edilmez; aynı zamanda ölçülmeyen her şey — okunabilirlik,
+silinen kod, önlenen karmaşıklık — sistemden çekilir ve bakımsız kalır (Muller,
+2018).
+Daha dayanıklı yaklaşımlar
+• Gerilimli metrik seti. Birbirini dengeleyen metrikler seçilir: hız ile hata
+oranı, kapsam ile derinlik. Tek metrik oyunlanır; birbirine gerilimli bir set
+oyunlanmaya direnir, çünkü birini şişirmek diğerini düşürür.
+• Hedef yerine eşik. “Su değerin altında kalsın” biçimindeki formülasyon,
+“şunu maksimize et” biçimindekinden farklı davranır: optimizasyon baskısı
+ortadan kalkar ve Goodhart etkisi zayıflar. Hizmet düzeyi hedefleri (Ser-
+vice Level Objective, SLO) bu mantıkla çalışır.
+• Nitel çekirdek, nicel gösterge. Karar nitel yargı ile verilir; sayı yargıyı
+besler ve tutarsızlıkları yakalar. OKR’nin özgün tasarımı budur.
+• Sayı yerine yapı. Tek boyutlu bir puan yerine ilişkisel bir temsil üretilir.
+Böyle bir temsil hesaplanabilirliğini korur, sıkıştırma kaybına uğramaz ve
+tek boyuta indirgenmediği için oyunlanması zorlaşır.
+11
+
+-- 11 of 18 --
+
+Uygulama: ülke düzeyinde teknolojik kapasite
+Yaygın göstergelerin durumu
+Ülke teknolojik kapasitesi için kullanılan standart göstergelerin çoğu, ölçülmesi
+kolay olduğu için seçilmiştir. Her biri yukarıda kurulan çerçevenin farklı bir
+kuralını ihlal eder.
+• Araştırma-geliştirme harcamasının millı gelire oranı. Girdi ölçer, kapasite
+değil. Harcamanın kurumsal araştırmaya mı yayın teşvikine mi gittiği,
+aynı oranla tamamen farklı çıktılar üretir.
+• Patent sayısı. Teşvik sistemi patentin kendisini ödüllendiriyorsa doğrudan
+Goodhart etkisine açıktır; sayı, korunan bilginin değil başvuru davranışının
+ölçüsü hâline gelir.
+• Yüksek teknoloji ihracatı payı. Ürünün gümrük sınıflandırması ile o ürüne
+ülkede eklenen katma değer farklı şeylerdir. Montaj ağırlıklı üretim yapan
+ekonomilerde bu gösterge yüksek çıkar; katma değer temelli ticaret istatis-
+tikleri farkı görünür kılar (OECD, Ticarette Katma Değer veri tabanı).
+• Yayın ve üniversite sayısı. Bilgi üretimi ile bilginin üretime dönüşmesi
+arasında kurumsal bir aktarım mekanizması gerekir; mekanizma yoksa
+yayın bir dışa aktarım kanalıdır. Türkiye’de üniversite sayısının iki yüzü
+aşması ve yayın sayısının hızla artması, bu artışın ne kadarının akademik
+teşvik düzenlemelerinin doğrudan ürünü olduğu sorusunu doğurur; salt
+sayıya bakarak ayrıştırılamaz.
+Ortak sorun şudur: bu göstergeler bileşik bir endekse dönüştürüldüğünde
+anlamlılık sınavını geçmezler, çünkü ağırlıklandırma keyfıdir ve sıralama ağırlık
+seçimiyle birlikte değişir.
+Maddi katman
+Maddi üretim kapasitesi için ölçülmesi anlamlı olan nicelikler doğrudan kapasite
+tanımından türer.
+Verim ve tolerans
+Bir prototip üretmek ile yüz bin adedi yüksek verimle üretmek arasında birkaç
+büyüklük mertebesi fark vardır. Iskarta oranı ve süreç yetenek indeksleri, “sürdürülebilir
+maksimum” tanımının doğrudan karşılığıdır. Bu veriler ülke düzeyinde derlen-
+mez, fakat sektörel olarak erişilebilir ve en dürüst göstergedir.
+Metroloji kapasitesi
+Ölçülemeyen üretilemez. Bir ülkenin ulusal metroloji enstitüsünün kalibrasyon
+ve ölçüm yetenekleri, akredite test laboratuvarlarının kapsamı ve ölçüm ciha-
+zlarının yerli olup olmaması, üretim kapasitesinin üst sınırını belirler. Ölçüm
+12
+
+-- 12 of 18 --
+
+ekipmanında dışa bağımlılık, gizli bir tavandır. Kalibrasyon yetenek tabloları
+Uluslararası Ağırlıklar ve Ölçüler Bürosu tarafından açık biçimde yayımlanır.
+Tedarik zinciri derinliği
+Katman 0 Nihai ürün montajı ← çok sayıda ülke
+Katman 1 Ana alt sistemler ← orta gelir grubu
+Katman 2 Bileşen ve malzeme ← ayrışma burada başlar
+Katman 3 Takım tezg^ahı, kalıp ← az sayıda ülke
+Katman 4 Süreç ekipmanı, metroloji ← çok az ülke
+Katman 5 Ekipmanı üreten ekipman ← birkaç ülke
+Uygulanabilir sınav, ürünün sökülüp her parçanın menşeinin çıkarılmasıdır.
+Hangi katmana kadar yerli üretim mevcuttur sorusu, toplam ihracat rakam-
+larından çok daha bilgilendiricidir.
+Girdi bağımlılığı
+Yaptırım senaryosu, doyum testinin ülke ölçeğindeki karşılığıdır. Sınanan girdiler:
+takım tezgâhı yedek parçası, özel kimyasallar, tasarım ve simülasyon yazılımı,
+uluslararası sertifikasyon onayı. Ölçülen büyüklük, kesinti hâlinde ikame süresidir.
+Süreklilik ve yazıya dökülmemiş bilgi
+Üretim hattı durduğunda kaybolan bilgi, belgelerde saklanmayan bilgidir. Sovyet
+sanayisinin 1991 sonrasında yaşadığı çöküş bu mekanizmanın büyük ölçekli
+örneğidir. Sıkça anılan bir başka örnek, Amerika Birleşik Devletleri’nin Saturn V
+roketinin motorlarını yıllar sonra doğrudan yeniden üretememesidir; çizimler ko-
+runmuş olmasına rağmen üretim pratiğini taşıyan işgücü dağılmıştı. Bu örneğin
+yaygın anlatımı basitleştirilmiş olabilir ve ayrıntısı doğrulanmalıdır; mekaniz-
+manın kendisi ise örgütsel rutin literatüründe yerleşiktir (Nelson ve Winter,
+1982).
+Sistem entegrasyonu
+Yüz binlerce parçadan oluşan bir sistemi zamanında ve bütçe içinde birleştirebilmek,
+parçaları tek tek üretebilmekten ayrı ve daha nadir bir yetenektir. Teknik ol-
+maktan çok yönetim ve arayüz standardizasyonu kapasitesidir.
+Sübvansiyonsuz ticari sınav
+Ürünün, devlet desteği olmadan, gönüllü yabancı alıcıya piyasa fiyatından satılabilmesi
+en zor ve en dürüst sınavdır; çünkü değerlendirmeyi yapan taraf, ölçen tarafla
+aynı değildir ve dolayısıyla oyunlanamaz.
+13
+
+-- 13 of 18 --
+
+Bilgi ve doktrin katmanı
+Maddi kapasite “yapabiliyor mu” sorusunu ölçer. Bilgi katmanı farklı bir şeyi
+ölçer: bir ülke kendi problemini kendi kavramlarıyla tanımlayabiliyor mu, yoksa
+başkasının kavram setiyle mi düşünüyor.
+Bu katmanda da sayım yanıltıcıdır; sorulacak sorular yapısaldır.
+• Atıf yönü. Yayınlar ağırlıklı olarak kendi ülkesinden atıf alıyorsa, kapalı
+bir döngü söz konusudur. Dışarıdan gelen atıf oranı, üretilen bilginin
+dolaşıma girip girmediğini gösterir.
+• Terminoloji ihracı. En sert sınav budur: ülke, dünya literatürüne kavram
+sokabiliyor mu. Japonya yalnızca ürün değil, üretim düşüncesinin sözlüğünü
+de ihraç etmiştir — kaizen (Imai, 1986), poka-yoke (Shingo). Sovyet
+mühendislik geleneği TRIZ metodolojisini bırakmıştır (Altshuller). Kavram
+ihracı, üniversite sayısıyla ölçülemeyen bir kapasitedir.
+• C eviri yönü asimetrisi. Bir alanın literatürü hangi yönde akıyor. Japonya
+yirminci yüzyılın ilk yarısında çeviri ithalatçısı, sonraki dönemde ihracatçı
+konumundaydı; bu dönüş noktası kapasite değişiminin göstergesidir.
+• Dergilerin çekim gücü. Ülkenin dergileri, o ülkeden olmayan araştırmacıların
+yayın yapmak istediği yerler mi. Cevap olumsuzsa dergi sayısı gösterge
+değildir.
+• Doktrinin revizyon kaydı. Doktrin üretip sonra gerçeklik karşısında revize
+etme geleneğinin varlığı, geri besleme döngüsünün işlediğini gösterir. Dok-
+trin yazıp hiç değiştirmemek, doktrin yokluğundan daha kötüdür, çünkü
+sınanmadığı hâlde sınanmış görünür.
+˙Iki katmanın ilişkisi
+Doktrin / kavram katmanı
+neyin üretileceğini
+neyin mümkün ve nasıl kullanılacağını
+olduğunu belirler belirler
+Maddi üretim katmanı
+Maddi kapasite olmadan doktrin uygulanamaz bir metindir. Doktrin ol-
+madan maddi kapasite, başkasının tanımladığı problemleri çözen kiralık bir
+işgücüdür. ˙Ikisinin birbirini beslediği ülke sayısı azdır.
+Katmanlı sınav
+Tek bir bileşik puan üretmek yerine, iki katmanın her biri için aynı dört basamaklı
+sınav ayrı çalıştırılır.
+14
+
+-- 14 of 18 --
+
+Basamak Maddi katman Bilgi katmanı
+Bilgi Bir kez yapabiliyor mu Alanı anlıyor, aktarabiliyor
+mu
+Kapasite Seri ve yüksek verimle
+üretiyor mu
+Özgün araştırma üretiyor
+mu
+Bağımsızlık Girdi kesildiğinde ne oluyor Kendi problemini
+tanımlayabiliyor mu
+Yeterlilik Daha iyisini tasarlaya-
+biliyor mu
+Literatüre kavram soka-
+biliyor mu
+Sağ sütun sol sütundan tipik olarak bir ya da iki kuşak geriden gelir; bu
+gecikme olağandır. Ters sıradaki durum — güçlü doktrin, zayıf üretim — genel-
+likle çökmüş bir imparatorluk mirasına işaret eder.
+15
+
+-- 15 of 18 --
+
+Sonuç
+Kapasite ölçümünde yapılan hataların çoğu ölçme tekniğinden değil, ölçülen
+şeyin yapısının sorgulanmamasından kaynaklanır. Bir niteliğe sayı atanmadan
+önce, o niteliğin bir boyut oluşturup oluşturmadığı — karşılaştırmaların geçişli
+olup olmadığı — sınanmalıdır. Bu sınav yapılmadığında üretilen sayı, niteliği
+değil ölçüm aracının kendi yapısını yansıtır.
+Kapasite ile performansın ayrılması, tek gözlemle yapılamaz. Ayrım an-
+cak sistem zorlandığında, bir şok verildiğinde ya da bileşen düzeyinde darboğaz
+aranarak kurulabilir. Bunun kurumsal karşılığı şudur: kriz dönemleri kapa-
+sitenin en pahalı fakat en güvenilir ölçüm anlarıdır ve barış dönemi göstergelerini
+düzenli olarak yalanlarlar.
+Kullanım oranı yüksekliği bir başarı göstergesi değildir. Değişkenliğin bu-
+lunduğu her sistemde doyuma yaklaşmak bekleme süresini hiperbolik biçimde
+büyütür; dolayısıyla atıl kapasite bir israf kalemi değil, dayanıklılığın bedelidir.
+Bu, verimlilik odaklı yönetim pratiğiyle doğrudan çelişir ve çelişkinin farkında
+olunmadığında sistemler ölçüm panelinde iyileşirken gerçekte kırılganlaşır.
+Vekil değişkene teşvik bağlandığında vekil ile hedef arasındaki bağ kopar.
+Bu, dikkatsizlikten değil optimizasyonun kendi mekanizmasından kaynaklanır:
+optimizasyon, ilişkinin ölçüldüğü dağılımın dışına çıkar. Buradan çıkan tasarım
+kuralı, tek metrik yerine birbirine gerilimli metrik setleri, maksimizasyon hedefi
+yerine eşikler ve tek boyutlu puan yerine yapısal temsiller kullanmaktır.
+Sınırlılıklar
+Kurulan çerçevenin en zayıf noktası, “sürdürülebilir” niteleyicisinin işlemselleştirilmesidir.
+Borç birikiminin ne zaman başladığı çoğu sistemde gecikmeli olarak görünür;
+dolayısıyla bir performans seviyesinin kapasite mi tepe mi olduğu, ancak yeter-
+ince uzun bir gözlem penceresinden sonra söylenebilir. Kısa dönemli ölçümler
+bu ayrımı sistematik olarak tepe lehine yanıltır.
+˙Ikinci sınırlılık, darboğaz mantığının yalnızca seri bağlı sistemlerde temiz
+çalışmasıdır. Bileşenlerin birbirini kısmen ikame edebildiği ya da darboğazın
+yük altında yer değiştirdiği sistemlerde tek bir kısıttan söz edilemez ve minimum
+işlemi geçerliliğini yitirir.
+Üçüncüsü, ülke uygulamasında iki katman arasındaki nedensel bağın yönü
+belirsizdir. Doktrin üretiminin maddi kapasiteyi mi öncelediği, yoksa maddi
+kapasitenin doktrin üretimini mi mümkün kıldığı, tarihsel örneklerde her iki
+yönde de gözlenir; not bu soruyu çözmez, yalnızca iki katmanın ayrı ölçülmesi
+gerektiğini savunur.
+Açık sorular
+Kapasitenin körelme hızı, kullanım oranının bir fonksiyonu olarak modellenebilir
+mi; başka bir deyişle, bir yeteneğin bakım eşiği ampirik olarak belirlenebilir
+mi. Gerilimli metrik setlerinin oyunlanmaya direncinin, set büyüklüğüyle nasıl
+16
+
+-- 16 of 18 --
+
+değiştiği açık bir sorudur. Son olarak, çok boyutlu bir niteliğin tek sayıya in-
+dirgenmeden nasıl karşılaştırılabilir kılınacağı — kısmi sıralama ile yetinmenin
+karar verme açısından yeterli olup olmadığı — pratikte çözülmemiş bir prob-
+lemdir.
+Kaynaklar
+• Altshuller, G. S. TRIZ metodolojisi üzerine çalışmaları. Yayın tarihleri
+ve baskılar doğrulanmalıdır.
+• Campbell, D. T. (1979). Assessing the Impact of Planned Social Change.
+Evaluation and Program Planning.
+• Charnes, A., Cooper, W. W. ve Rhodes, E. (1978). Measuring the Ef-
+ficiency of Decision Making Units. European Journal of Operational Re-
+search.
+• Doerr, J. (2018). Measure What Matters. Portfolio.
+• Goldratt, E. M. ve Cox, J. (1984). The Goal. North River Press.
+• Goodhart, C. A. E. (1975). Problems of Monetary Management: The
+U.K. Experience.
+• Grove, A. S. (1983). High Output Management. Random House.
+• Imai, M. (1986). Kaizen: The Key to Japan’s Competitive Success. McGraw-
+Hill.
+• Kingman, J. F. C. (1961). The Single Server Queue in Heavy Traffic.
+Proceedings of the Cambridge Philosophical Society.
+• Krantz, D. H., Luce, R. D., Suppes, P. ve Tversky, A. (1971). Foundations
+of Measurement, Vol. I. Academic Press.
+• Luce, R. D. ve Tukey, J. W. (1964). Simultaneous Conjoint Measurement.
+Journal of Mathematical Psychology.
+• Muller, J. Z. (2018). The Tyranny of Metrics. Princeton University Press.
+• Nelson, R. R. ve Winter, S. G. (1982). An Evolutionary Theory of Eco-
+nomic Change. Harvard University Press.
+• Polanyi, M. (1966). The Tacit Dimension. Routledge.
+• Rasch, G. (1960). Probabilistic Models for Some Intelligence and Attain-
+ment Tests. Danmarks Paedagogiske Institut.
+• Shingo, S. Poka-yoke ve sıfır kalite kontrol üzerine çalışmaları. Baskı
+bilgileri doğrulanmalıdır.
+17
+
+-- 17 of 18 --
+
+• Stevens, S. S. (1946). On the Theory of Scales of Measurement. Science,
+103(2684).
+• Strathern, M. (1997). “Improving Ratings”: Audit in the British Univer-
+sity System. European Review.
+• OECD. Trade in Value Added (TiVA) veri tabanı. Güncel sürüm doğrulanmalıdır.
+18
+
+-- 18 of 18 --
