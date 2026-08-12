@@ -1,0 +1,678 @@
+Rekabetçilikten Sistem Ontolojisine: Ölçüm,
+Kapasite ve Analitik Mercek
+Ömer Faruk Yavuz
+August 2026
+Özet
+Ülke rekabetçiliği sıralamaları, bileşik endeksler oldukları için tek bir gerçeği
+değil, endeksi kuran soruyu ölçerler. IMD Dünya Rekabetçilik Sıralaması iş
+yapma ortamının kalitesini, Ekonomik Karmaşıklık Endeksi ise üretken bilgi
+birikimini ölçtüğü için ikisinin üst sıraları yalnızca kısmen örtüşür; bu örtüşmeme
+bir tutarsızlık değil, iki farklı sorunun farklı cevap vermesidir. 2026 verisinde
+üst sıradaki ekonomilerin ortak özelliği ne rejim tipi ne devletin büyüklüğü ne
+de doğal kaynaktır; ortak olan, taahhüdün zaman içinde bağlayıcı kalmasıdır.
+Türkiye’nin bu sıralamalardaki konumu bir seviye sorunundan çok bir oynaklık
+sorunudur: yapısal alanlarda istikrarlı, makroekonomik ve kurumsal alanlarda
+dalgalı bir performans, dokuz yıllık grafikte yirmi basamaklık salınım üretmektedir.
+Kavramsal düzeyde, literatürdeki “devlet kapasitesi” terimi mühendislikteki
+kapasiteye değil, gözlemlenebilirlik ve kontrol edilebilirlik bileşimine karşılık
+gelir; kayıt dışılık bir performans düşüklüğü değil, belirli eksenlerde sensör
+yokluğudur. Bu tespit, sistem çözümlemesinde sıklıkla tek başlık altında toplanan
+kabiliyet, performans, kalite, dayanıklılık, ölçek davranışı ve esnekliğin birbirine
+indirgenemeyen soru aileleri olduğunu görünür kılar. Sistem, olguların bir sınıfı
+değil olgulara uygulanan bir mercektir; ve mercek kütüphanesinin asıl işlevi, her
+merceğin aşırı uygulandığında ürettiği karakteristik hatayı önceden bilmektir.
+1
+
+-- 1 of 20 --
+
+Giriş
+Rekabetçilik (competitiveness), bir ülkenin ekonomik refah yaratma ve bu or-
+tamı sürdürülebilir kılma kapasitesini ölçmeyi amaçlayan bileşik bir göstergedir.
+Terimin kendisi tartışmalıdır. Paul Krugman, ülkelerin firmalar gibi rekabet
+etmediğini, bir ülkenin refahının esas olarak kendi verimlilik artışıyla belir-
+lendiğini ve rakiplerinin performansının bunda ikincil rol oynadığını savunarak
+kavramı “tehlikeli bir saplantı” olarak nitelemiştir (Krugman, 1994). Bu itiraz,
+sıralamaların işe yaramaz olduğu anlamına gelmez; ancak sıralamayı yükseltmek
+ile üretkenliği yükseltmenin ayrı hedefler olduğunu ve ilkinin ikincisinin yerine
+geçtiğinde bileşenlerin manipüle edilebilir hâle geldiğini hatırlatır.
+Bu notta iki ayrı düzey ele alınmaktadır ve aralarındaki bağ kurulmadan
+ikisi de eksik kalır. Birinci düzey olgusaldır: hangi ülkeler hangi ölçüte göre
+üst sıradadır, ortak özellikleri nelerdir, Türkiye bu tabloda nerede durmaktadır.
+˙Ikinci düzey kavramsaldır: “kapasite”, “verimlilik”, “kabiliyet” gibi terimler
+gündelik kullanımda birbirinin yerine geçtiği için, birinci düzeydeki bulgular
+çoğu zaman yanlış kategoriye yerleştirilmektedir. Devlet kapasitesi kavramı bu
+karışıklığın tipik örneğidir ve tam da bu nedenle iki düzey arasındaki geçiş nok-
+tasını oluşturur.
+Merkezı terimler burada tanımlanır. Bileşik endeks, farklı birimlerdeki çok
+sayıda göstergenin ağırlıklandırılarak tek bir sayıya indirgenmesiyle elde edilen
+ölçüttür. Kabiliyet (capability), bir sistemin hangi tür sonuçları hangi koşullar
+altında gerçekleştirebildiğidir. Kapasite (capacity), yapabildiği işin nicel üst
+sınırıdır. Verimlilik (efficiency), çıktının girdiye oranıdır. Analitik mercek
+(analytical lens), bir olguya bakarken hangi değişkenlerin görüleceğini ve hangi
+soruların sorulacağını belirleyen çerçevedir.
+Yaygın ama yanıltıcı iki kabul notun ayrıldığı noktaları oluşturur. Birin-
+cisi, rekabetçilik sıralamalarının tek bir nesnel gerçeği ölçtüğü kabulüdür; oysa
+farklı endeksler farklı sorular sorar ve cevapları örtüşmediğinde bu bir hata değil
+bilgidir. ˙Ikincisi, sistem çözümlemesinde kapasite ve verimliliğin aynı başlık
+altında toplanabileceği kabulüdür; oysa ikisi arasında bir önkoşul ilişkisi vardır
+ve düzleştirildiklerinde ölçek tipi bozulur.
+Notun sınırı şudur: rekabetçilik verileri 2026 yılı yayınlarına dayanır ve
+sıralamalar yıllık olarak değiştiği için olgusal kısım tarihlidir; kavramsal kısım
+ise tarihsiz olmayı hedefler. Politika önerisi verilmez, mevcut sıralamaların nasıl
+okunacağı ve arkasındaki kavram yapısının nasıl düzenleneceği ele alınır.
+2
+
+-- 2 of 20 --
+
+Rekabetçiliğin Ölçülmesi
+˙Iki farklı endeks, iki farklı soru
+Rekabetçilik ölçümünde en yaygın iki araç birbirinden farklı şeyler ölçer ve bu
+fark sonuçlara doğrudan yansır.
+IMD Dünya Rekabetçilik Sıralaması (IMD World Competitiveness Ranking)
+1989’dan beri yayımlanmakta olup 2026 baskısında 70 ekonomiyi 341 kriter
+üzerinden değerlendirmektedir. Dört ana faktör kullanılır: Ekonomik Perfor-
+mans, Devlet Verimliliği, ˙Iş Dünyası Verimliliği ve Altyapı. Her faktör beş alt
+faktöre ayrılır ve yirmi alt faktörün her biri toplam skorda eşit ağırlık taşır
+(IMD, 2026). Veri kaynağı ikilidir: yaklaşık üçte ikisi IMF, Dünya Bankası,
+OECD ve ulusal istatistik kurumlarından alınan sert veri, üçte biri ise yaklaşık
+6.900 üst düzey yöneticiyle yapılan algı anketidir.
+Ekonomik Karmaşıklık Endeksi (Economic Complexity Index, ECI) tama-
+men farklı bir soru sorar: bir ülkenin ihracat sepeti ne kadar çeşitli ve ne kadar
+zor üretilen ürünlerden oluşmaktadır. Endeks, ihracat verisindeki çeşitlilik ve
+yaygınlık bilgilerinden özyinelemeli olarak türetilir ve bir ülkenin sahip olduğu
+üretken bilgi birikiminin (knowhow ) dolaylı ölçüsü olarak yorumlanır (Hidalgo
+ve Hausmann, 2009). Ölçüm tamamen sert ihracat verisine dayandığı için algı
+bileşeni taşımaz ve yıldan yıla yavaş değişir.
+2026 tablosu
+IMD 2026 sıralamasının ilk yirmisi şöyledir:
+3
+
+-- 3 of 20 --
+
+Sıra Ekonomi Skor 2025’e göre
+1 Singapur 100,00 +1
+2 Hong Kong 95,55 +1
+3 ˙Isviçre 95,31 –2
+4 Tayvan 94,33 +2
+5 Birleşik Arap Emirlikleri 94,09 –
+6 Danimarka 94,08 –2
+7 ˙Irlanda 94,06 –
+8 Hollanda 90,13 +2
+9 ˙Isveç 88,52 –1
+10 Amerika Birleşik Devletleri 86,82 +3
+11 Katar 85,93 –2
+12 C in 84,43 +4
+13 Suudi Arabistan 84,02 +4
+14 Lüksemburg 82,08 +6
+15 Malezya 81,91 +8
+16 Kanada 80,99 –5
+17 Avustralya 79,21 +1
+18 Norveç 78,12 –6
+19 Finlandiya 76,81 –5
+20 Bahreyn 76,28 +2
+ECI sıralamasının tepesinde ise Japonya, Güney Kore, ˙Isviçre, Singapur,
+Tayvan ve Almanya yer almakta; Birleşik Krallık onuncu, Amerika Birleşik De-
+vletleri on dördüncü, C in on sekizinci sırada bulunmaktadır (Harvard Growth
+Lab, 2024).
+Örtüşmeyen kümelerin anlamı
+˙Iki listenin karşılaştırılması, tek başına hiçbir listenin vermediği bir bilgi üretir.
+Birleşik Arap Emirlikleri, Katar ve ˙Irlanda IMD listesinde üst sıradadır an-
+cak ECI’de aynı konumda değildir. Bu, iyi bir iş yapma ortamının sığ bir üretken
+kapasiteyle birlikte var olabileceğini gösterir; finans merkezi, kaynak geliri ya
+da vergi rejimi avantajı, ihracat sepetinin karmaşıklığını artırmadan sıralamayı
+yükseltebilir.
+Japonya ve Almanya ise ECI’de en üst sıradayken IMD listesinde ilk beşte
+değildir. Bunun tersi durum söz konusudur: derin üretken kapasite, ağırlaşmış
+bir düzenleyici ve demografik ortamla birlikte var olmaktadır. 2026 verisinde
+Almanya’nın 73,64 puana gerilemesi bu gerilimin somut göstergesidir.
+Her iki testi birden geçen ülkeler Singapur, ˙Isviçre ve Tayvan’dır. Bu kesişimin
+ortak özelliği, coğrafi ve demografik imkânlarıyla açıklanamayacak bir üretken
+kapasiteyi, onlarca yıl boyunca bozulmamış bir kural rejimi altında biriktirmiş
+olmalarıdır.
+4
+
+-- 4 of 20 --
+
+Üst Sıradaki Ekonomilerin Ortak Özellikleri
+Kural öngörülebilirliği
+2026 IMD raporunun ana bulgusu, rekabetçiliğin artık öncelikle maliyet, ölçek
+veya inovasyon yarışı olmadığı, kurumsal güvenilirlik yarışı hâline geldiğidir. Ra-
+por, dünya düzeni parçalandıkça öngörülebilir kuralların, uygulanabilir taahhütlerin
+ve meşru devlet kapasitesinin değer kazandığını tespit etmektedir (IMD, 2026).
+Bu bulgunun ayırt edici tarafı, üst sıradaki ekonomilerin ne bakımından
+ortak olmadığını da göstermesidir. Singapur, Hong Kong, Birleşik Arap Emir-
+likleri, ˙Isviçre ve Danimarka birbirinden çok farklı siyasi rejimlere, çok farklı
+vergi oranlarına ve çok farklı kamu harcama oranlarına sahiptir. Ortak olan ku-
+ralın içeriği değil, kuralın zaman içinde sabit kalmasıdır. Bir yatırımcı açısından
+kötü ama sabit bir kural, iyi ama sık değişen bir kuraldan daha az maliyetlidir;
+çünkü ilkinde maliyet hesaplanabilir, ikincisinde hesaplanamaz.
+Küçük iç pazar ve zorunlu dışa açıklık
+Üst sıradaki ekonomilerin çoğu, kendi iç pazarına sığamayacak kadar küçüktür.
+Bu ilk bakışta bir dezavantaj gibi görünse de disiplin kaynağıdır: iç pazarda
+korunma imkânı bulunmayan firma, ilk günden dünya standardına göre üretmek
+zorunda kalır.
+Michael Porter’ın ulusların rekabet üstünlüğü üzerine çalışmasındaki en aykırı
+bulgusu bu mekanizmayla örtüşür. Porter, uluslararası pazarda başarılı olan
+sektörlerin korunmuş sektörler değil, iç pazarda sert rekabete maruz kalmış
+sektörler olduğunu göstermiştir (Porter, 1990). ˙Içe kapanma seçeneğinin bu-
+lunmaması, listenin en görünmez ortak özelliğidir.
+Bir düğüm noktasında ikame edilemezlik
+Üst sıradaki her ekonomi, küresel değer zincirinde belirli bir düğümü tutmak-
+tadır: Singapur ve Hong Kong’da finans ve lojistik, Tayvan’da yarı iletken
+üretimi, ˙Isviçre’de ilaç ve hassas üretim, ˙Irlanda’da uluslararası şirket merkez-
+leri, Hollanda’da liman altyapısı ve tarım teknolojisi.
+Ortak özellik her alanda iyi olmak değil, bir alanda ikame edilemez ol-
+maktır. Bu, ECI’nin ölçtüğü karmaşıklıkla doğrudan bağlantılıdır: kaç ürün
+ihraç edildiği değil, kaç zor ürün ihraç edildiği belirleyicidir.
+Devlet kapasitesi, devlet büyüklüğü değil
+2026 verisinde ˙Isviçre’nin Altyapı ve Devlet Verimliliği faktörlerinde dünya bir-
+incisi, Hong Kong’un ise Devlet Verimliliği’nde ikinci sırada olması bu ayrımın
+somut göstergesidir. Danimarka ve ˙Isveç yüksek kamu payıyla, Singapur ise
+düşük vergiyle üst sıradadır. Ortak değişken kamunun ekonomideki payı değil,
+kamunun kendi işini yapabilme yetkinliğidir.
+5
+
+-- 5 of 20 --
+
+Yeniden ayarlanabilirlik
+Zirvedeki konum miras alınmaz. Singapur’un 2026’da birinciliğe dönüşü, ˙Iş
+Dünyası Verimliliği faktöründe yedi basamak birden yükselerek dünya birincisi
+olmasından kaynaklanmıştır. Buna karşılık ˙Isviçre, doğrudan yatırım akımlarındaki
+sert bozulma nedeniyle Ekonomik Performans’ta gerilemiş; yaşam maliyeti en-
+deksinde 65., benzin fiyatında 64. sıraya düşmüştür (IMD, 2026).
+Ortak olmayan değişkenler
+Karşılaştırma yapılırken elenmesi gereken faktörler, ortak olanlar kadar bilgi
+taşır.
+Değişken Durum
+Doğal kaynak zenginliği Belirleyici değil; sıklıkla negatif
+Nüfus ve yüzölçümü Belirleyici değil
+Rejim tipi Demokrasi zorunlu değil, öngörülebilirlik
+zorunlu
+Düşük ücret Kısa vadeli avantaj, sürdürülebilir kaynak
+değil
+Devletin küçüklüğü Belirleyici değil
+6
+
+-- 6 of 20 --
+
+Türkiye’nin Konumu
+Seviye değil oynaklık
+Türkiye 2026 IMD sıralamasında 70 ülke içinde 57. sıradadır; bir önceki yıl 69
+ülke içinde 66. sırada bulunuyordu ve dokuz basamak yükselmiştir (IMD, 2026;
+Bakır, 2026).
+Dokuz yıllık seyir şöyledir: 2017’de 63 ülke içinde 47., 2018’de 46., 2019’da
+51., 2020’de 46., 2021’de 64 ülke içinde 51., 2022’de 63 ülke içinde 52., 2023’te
+64 ülke içinde 47., 2024’te 67 ülke içinde 53., 2025’te 69 ülke içinde 66., 2026’da
+70 ülke içinde 57.
+Bu bir düşük seviye grafiği değil, testere grafiğidir. 46 ile 66 arasındaki
+salınım dokuz yıla sığmaktadır ve asıl bilgi ortalamada değil genlikte bulun-
+maktadır.
+Faktör kırılımı
+Türkiye 2026’da en güçlü performansını 46. sırayla Ekonomik Performans faktöründe
+göstermiş, en zorlandığı alan 64. sırayla Devlet Verimliliği olmuştur (Bakır,
+2026).
+Bu kırılım, notun önceki bölümündeki tespitle doğrudan kesişir: Türkiye’nin
+en zayıf olduğu eksen, 2026 raporunun en belirleyici ilan ettiği eksendir. Ekonomik
+Performans’taki görece iyi konum, Devlet Verimliliği’ndeki 64’lük sıralama tarafından
+dengelenmektedir.
+2025’teki sert düşüşün kaynakları da aynı yere işaret etmiştir. IMD raporu
+düşüşteki en büyük etken olarak ulusal para birimindeki istikrarsızlığı ve finansal
+sistem üzerindeki kur baskısını göstermiş; fiyatlar alt faktöründe Türkiye’nin
+dünyadaki en kötü performanslardan birini sergilediğini, teknolojik altyapı ve
+kurumsal çerçevede akran ekonomilerin gerisinde kalındığını, mühendislik ve
+teknoloji alanlarındaki nitelikli insan göçünün inovasyon kapasitesini sınırladığını
+tespit etmiştir. 2026’daki toparlanma ise parasal sıkılaştırmanın kurumsal güven
+endeksine yansıması, enflasyonun düşüş eğilimine girmesiyle fiyat istikrarı puanının
+düzelmesi, ihracat partner havuzunun çeşitlenmesi ve turizm gelirleriyle açıklanmaktadır
+(Bakır, 2026).
+Sabit ve akışkan alanların ayrışması
+Türkiye altyapı, üretim kapasitesi ve pazar büyüklüğü gibi yapısal alanlarda
+istikrarlı; enflasyon, kur istikrarı ve kurumsal güven gibi akışkan alanlarda çok
+dalgalı performans göstermektedir (Bakır, 2026).
+7
+
+-- 7 of 20 --
+
+Alan Durum
+Fiziki altyapı, lojistik Görece güçlü
+Pazar büyüklüğü, üretim tabanı Güçlü
+Dışa açıklık, ihracat çeşitliliği Orta, iyileşme yönünde
+Makroekonomik öngörülebilirlik Zayıf, yüksek oynaklık
+Kurumsal öngörülebilirlik En zayıf halka
+˙Insan sermayesini tutma Negatif
+˙Iki metodolojik uyarı
+Birincisi, IMD metodolojisinin üçte birini oluşturan yönetici algı anketleri, gündemi
+hareketli ülkelerde sonuçları belirgin biçimde dalgalandırmaktadır. On üç basamaklık
+düşüş ve dokuz basamaklık yükselişin bir bölümü yapısal değişim değil, algı
+bileşeninin oynaklığıdır. Tek yılın hareketi üzerinden yapısal çıkarım yapmak
+bu nedenle yanıltıcıdır.
+˙Ikincisi, sıralama görecelidir ve ülke seti sabit değildir: 2017’de 63, 2025’te
+69, 2026’da 70 ekonomi kapsanmıştır. Performansı sabit kalan bir ülke, sete daha
+iyi ekonomiler girdikçe geriler. Sıralama sıralı (ordinal ) bir ölçektir; basamak
+farkları eşit aralıklı değildir ve üzerinde aritmetik işlem yapılamaz (Stevens,
+1946).
+8
+
+-- 8 of 20 --
+
+Devlet Kapasitesi ve Devlet Verimliliği
+Devlet verimliliğinin ölçtüğü
+IMD çerçevesinde Devlet Verimliliği (government efficiency), devlet politikalarının
+rekabetçiliği ve iş dünyasını ne ölçüde desteklediğini ölçen faktördür. Beş alt
+faktörden oluşur: kamu maliyesi, vergi politikası, kurumsal çerçeve, iş dünyası
+mevzuatı ve toplumsal çerçeve.
+Bir işletme açısından bu faktörün somut karşılığı şu sorulardır: şirket kur-
+mak kaç gün sürmektedir, vergi beyanının uyum maliyeti nedir, bir uyuşmazlık
+mahkemede ne kadar sürede çözülmektedir, bu yıl geçerli olan düzenleme gelecek
+yıl da geçerli midir, izin süreçlerinde gayriresmı ödeme gerekmekte midir.
+Terimin ölçmediği şey kamu harcamasının düşüklüğüdür. ˙Iskandinav ülkeleri
+yüksek kamu payına rağmen bu faktörde üst sıralardadır. Ölçülen, bürokrasinin
+birim maliyetidir: aynı hizmetin kaç günde, kaç işlemle ve ne kadar öngörülebilirlikle
+verildiği.
+Devlet kapasitesinin ölçtüğü
+Devlet kapasitesi (state capacity), bir devletin aldığı kararı fiilen uygulaya-
+bilme gücüdür. Michael Mann bu gücü “altyapısal iktidar” (infrastructural
+power ) olarak kavramsallaştırmış ve devletin toplumun içine nüfuz edip karar-
+larını lojistik olarak hayata geçirebilme yeteneği olarak tanımlamıştır (Mann,
+1984). Kavramın modern iktisat literatüründeki gelişimi Besley ve Persson’un
+çalışmalarında izlenebilir (Besley ve Persson, 2011).
+Üç temel bileşeni vardır:
+• Bilgi kapasitesi: Ülkede ne olduğunu bilmek. Kim nerede yaşamaktadır,
+hangi sektör ne üretmektedir, veri düzgün toplanmakta mıdır.
+• Toplama kapasitesi: Vergiyi kimden ne kadar alacağını bilmek ve ala-
+bilmek. Kayıt dışı ekonominin büyüklüğü bu kapasitenin ters göstergesidir.
+• Uygulama kapasitesi: Kararın kâğıttan sahaya geçmesi. Bir yönetmelik
+mevcut olup denetimi yoksa uygulama kapasitesi yoktur.
+˙Ikisi arasındaki fark
+Kavram Sorduğu soru
+Kapasite Devlet yapabiliyor mu?
+Verimlilik Yapıyorsa ne kadar az kaynakla?
+Kapasite mantıksal olarak önce gelir. Yapamayan bir devletin verimliliği
+tartışılmaz; sıfır çıktının kaynak oranı sıralama üretmez.
+Bunun rekabetçilik açısından sonucu şudur: devlet kapasitesi düşükse ku-
+ralın iyi olması sonuç değiştirmez, çünkü kural yalnızca kurala uyanı bağlar,
+uymayanı bağlamaz. Bu asimetri dürüst oyuncuyu cezalandırır ve uzun vadede
+seçilim baskısını tersine çevirir.
+9
+
+-- 9 of 20 --
+
+Somut örnek bu ayrımı görünür kılar. ˙Iki ülkede de ruhsatsız yapı yasaktır.
+Kapasitesi yüksek olanda temel atıldığı gün tespit edilip mühürlenir; kapasitesi
+düşük olanda bina tamamlanır, iskân edilir ve yıllar sonra af düzenlemesiyle
+meşrulaştırılır. Yazılı kural aynıdır, fark kapasitededir.
+Kavramın mühendislik karşılığı
+Devlet kapasitesi teriminin bileşenleri, mühendislikteki kapasiteye değil kabiliyet
+katmanına karşılık gelir. Bu, terimin adının yanıltıcı olduğu anlamına gelir.
+Devlet kapasitesi bileşeni Mühendislik karşılığı
+Bilgi kapasitesi Gözlemlenebilirlik, enstrümantasyon
+Uygulama kapasitesi Kontrol edilebilirlik, aktüatör varlığı
+Toplama kapasitesi Kapasite
+Kontrol teorisindeki temel sonuç burada birebir işler: gözlemlenemeyen du-
+rum kontrol edilemez. Gözlemlenebilirlik ve kontrol edilebilirlik kavramları
+Kalman tarafından formüle edilmiştir (Kalman, 1960). Devletin kayıt dışı ekonomiyi
+görememesi, sensörü bulunmayan bir sistemin o eksende hiçbir müdahale yapa-
+maması demektir. Bu bir verimlilik sorunu değil, kabiliyet yokluğudur.
+Buradan çıkan sonuç şudur: “devlet kapasitesi düşük” ifadesi mühendislik
+diline çevrildiğinde “tavan düşük” değil, “bazı eksenlerde sensör ve aktüatör hiç
+yok” anlamına gelmektedir. ˙Iki teşhis farklı müdahale gerektirir; birincisi ölçek
+yatırımı, ikincisi enstrümantasyon.
+10
+
+-- 10 of 20 --
+
+Sistem Ontolojisi
+Katman ayrımının gerekçesi
+Mühendislik çözümlemesinde kapasite, verimlilik, gecikme, kalite, güvenilirlik ve
+ölçeklenebilirlik sıklıkla “sistem performansı” başlığı altında tek listede toplanır.
+Bu düzleştirme, birbirine indirgenmeyen büyüklükleri aynı düzeye koyduğu için
+karşılaştırmayı bozar.
+Temel önkoşul zinciri şudur:
+Kabiliyet → Kapasite → Verimlilik
+(yapabilir (ne (hangi kaynak
+mi?) kadar?) oranıyla?)
+Kabiliyet olmadan kapasite tanımsızdır. Kapasite sıfırken verimlilik matem-
+atiksel olarak tanımsız değildir; girdi sıfırdan büyük ve çıktı sıfır olduğunda oran
+sıfır çıkar. Ancak bu değer ayırt edici bilgi taşımaz: yapamayan bütün sistemler
+aynı noktada toplandığı için sıralama üretmez. Önkoşul ilişkisi bu zayıflatılmış
+hâliyle geçerlidir.
+Kabiliyet zarfı
+Kabiliyeti tümüyle ikili (binary) bir nitelik saymak fazla kabadır. Gerçek sis-
+temlerde kabiliyet koşulludur. Bir radar için “hedef tespit edebilir” ifadesi
+yetersizdir; asıl ifade hangi radar kesitine sahip hedefin, hangi mesafede, hangi
+hava koşulunda, hangi tespit olasılığıyla ve hangi reaksiyon süresiyle tespit
+edilebildiğidir.
+Bu, kabiliyet zarfı (capability envelope) kavramına götürür. ˙Ikililik noktasal
+olarak korunur: belirli bir koşul vektörü zarfın içinde midir, evet ya da hayır.
+Zarfın genişliği ise niceldir. Biçimsel olarak kabiliyet, koşul uzayında tanımlı bir
+gösterge fonksiyonudur; sınırın kendisi sürekli, üyelik ikilidir.
+Bu düzeltmeyle iki katmanın tanımları şöyle netleşir:
+Kabiliyet, sistemin hangi tür sonuçları hangi koşullar altında gerçekleştirebildiğidir.
+Performans, o kabiliyetin icrası sırasında ulaşılan nicel seviyedir.
+Kapasite, throughput ve darboğaz
+Yaygın bir hata, kapasite ile fiili akış arasındaki farkın darboğazın büyüklüğü
+sayılmasıdır. Bu yanlıştır.
+Bir hattın kapasitesi saatte 100 birim, fiili akışı saatte 60 birim ise aradaki
+40 birim darboğaz değil, kullanılmayan pay (headroom, slack ) demektir. Talep
+zaten 60 olabilir ve sistemde hiçbir darboğaz bulunmayabilir.
+˙Ifade Karşılığı
+Kapasite – throughput Kullanılmayan pay
+Darboğaz Toplam akışı sınırlayan kısıt
+11
+
+-- 11 of 20 --
+
+Darboğazın (bottleneck ) ayırt edici özelliği skaler bir büyüklük olmamasıdır.
+Ölçülen şey “ne kadar” değil “nerede”dir; darboğaz bir sayı değil topolojik bir
+konumdur. Kısıtlar teorisi bütün çıktı iyileştirmesini bu konumun tespitine
+bağlar (Goldratt, 1984).
+˙Içsel ve bileşik büyüklükler
+Akış ailesindeki büyüklükler aynı türden değildir ve bu ayrım yapılmadığında
+karşılaştırmalar yanıltıcı olur.
+Büyüklük Türü
+Kapasite ˙Içsel; talepten bağımsız
+Throughput Bileşik; sistem × talep
+Kullanım oranı Bileşik
+Kullanılmayan pay Bileşik
+Talep 60 iken throughput’un 60 çıkması sistem hakkında bilgi vermez. Bu
+nedenle throughput, hangi talep rejiminde ölçüldüğü belirtilmeden bir sistem
+özelliği olarak raporlanamaz. Aynı sorun gecikme için de geçerlidir: yüksüz
+gecikme ile doygunluk altındaki gecikme farklı büyüklüklerdir.
+Ontolojide her büyüklüğe bu etiketin düşülmesi gerekir. Aksi hâlde iki sistem
+karşılaştırılırken farkın sistemden mi ortamdan mı geldiği ayrıştırılamaz.
+Soru aileleri
+Aşağıdaki yapı, birbirine indirgenmeyen altı soru ailesini ve bunların nedenini
+barındıran yedinci katmanı ayırır.
+KES_ITSEL MERCEKLER (her aileye yatay uygulanır)
+ekonomi · risk · güvenlik · emniyet
+sürdürülebilirlik · ölçüm
+1 KAB_IL_IYET ne yapabilir?
+işlev · görev · kapsam · erişim
+kabiliyet zarfı
+gözlemlenebilirlik · kontrol edilebilirlik
+2 PERFORMANS ne kadar?
+akış kapasite* · throughput · kullanım oranı
+kullanılmayan pay · darboğaz (konum)
+zaman gecikme · yanıt süresi · çevrim süresi
+takt süresi
+kaynak verimlilik · üretkenlik · kaynak yoğunluğu
+3 KAL_ITE çıktının niteliği ne?
+12
+
+-- 12 of 20 --
+
+doğruluk · kesinlik · tolerans
+hata oranı · randıman · tutarlılık
+türev aileleri: bozucuya göre 1-3’teki değişim
+4 DAYANIKLILIK zaman ve arıza altında?
+güvenilirlik · kullanılabilirlik
+bakım yapılabilirlik · hata toleransı
+zarafetli bozulma · esneklik
+5 ÖLCEK DAVRANISI büyüklük değişince?
+ölçeklenebilirlik · elastiklik
+ölçek ekonomileri ve dısekonomileri
+doygunluk · çekişme · eşgüdüm yükü
+6 ESNEKL_IK görev karması değişince?
+karma esnekliği · geçiş süresi
+yeniden yapılandırılabilirlik
+genellik-uzmanlık takası
+7 YAPI yukarıdakiler neden böyle?
+mimari · modülerlik · bağlaşım · uyum
+yedeklilik · topoloji · arayüzler
+bağımlılık yapısı · hiyerarşi · durum dağılımı
+* içsel büyüklük; diğerleri sistem × ortam bileşiği
+Türev ailelerinin gerekçesi
+Dördüncü, beşinci ve altıncı aileler ilk üçün türevidir: bir bozucuya göre değişimi
+sorarlar. Aralarındaki fark bozucunun eksenindedir.
+Aile Bozucu ekseni
+Dayanıklılık Zaman, arıza, yıpranma
+Ölçek davranışı Büyüklük, yük hacmi
+Esneklik Görev karması, çeşitlilik
+Ölçeklenebilirliğin dayanıklılık altına konmaması gerekir; ikisi bağımsız değişkenlerdir.
+Bir yazılım sistemi yüzde 99,999 kullanılabilirlik gösterirken kötü ölçeklenebilir
+olabilir. Aynı şekilde esneklik, hacim değil çeşitlilik değiştiğinde ne olduğunu
+sorar: üretimde ürün karması esnekliği ve geçiş maliyeti, yazılımda heterojen iş
+yükü altındaki davranış bu aileye girer.
+13
+
+-- 13 of 20 --
+
+Gözlemlenebilirliğin özyinelemeli konumu
+Gözlemlenebilirlik ve kontrol edilebilirlik kabiliyet listesinde yer alır, ancak diğer
+öğelerden farklı bir role sahiptir: diğer bütün katmanların ölçülebilmesini sağlayan
+kabiliyettir. Yokluğunda geri kalan beş aile hakkındaki hiçbir iddia doğrulanamaz.
+Bu nedenle ya ayrı bir üst katman olarak işaretlenmeli, ya da her aileye “bu
+ailedeki büyüklükler bu sistemde ölçülebiliyor mu” alt sorusu eklenmelidir. De-
+vlet kapasitesi örneği bunun uç hâlidir: kayıt dışı ekonomi, sistemin kendi akışını
+ölçemediği bölgedir; orada performans rakamı üretilebilir ancak doğrulanamaz.
+Ekonominin kesitsel konumu
+Verimliliğin “kaynak kullanımı” ya da “ekonomi” başlığı altına alınması bir kat-
+egori hatası üretir. Verimlilik teknik bir orandır; maliyet ise fiyat bilgisi gerek-
+tirir. Aynı verimlilikteki bir süreç, girdi fiyatı değiştiğinde farklı ekonomik sonuç
+verir. ˙Ikisi aynı başlığa konduğunda fiziksel oran piyasa değişkenine bağımlı hâle
+gelir.
+Verimlilik performans ailesinde kalmalı, ekonomi ise kesitsel mercek olmalıdır.
+Bu konumda bakım maliyeti, hurda maliyeti ve ölçek ekonomisi aynı merceğin
+farklı ailelere düşen izdüşümleri olarak ele alınabilir.
+14
+
+-- 14 of 20 --
+
+Analitik Mercek Kütüphanesi
+Sistemin akran konumuna indirilmesi
+Sistem, olguların bir sınıfı değil olgulara uygulanan bir bakış açısıdır. “Her
+şey sistemdir” önermesi doğru olabilir ancak boştur: bir yüklem her nesneye
+uyduğunda hiçbir şeyi ayırt etmez ve değili gösterilemediği için yanlışlanamaz.
+˙Işlevsel olan okuma şudur: soru “bu bir sistem midir” değil, “bunu sistem
+olarak modellemek işe yaramakta mıdır”. Bu okumada önceki bölümdeki altı
+soru ailesi bir test bataryasına dönüşür: bir olguya uygulandığında kaç aile
+anlamlı cevap vermektedir. Bir şiire throughput sorusu sorulabilir ancak cevap
+üretmez; çerçevenin değeri nereye uymadığını da söyleyebilmesindedir.
+Sistem modelinin önkoşulları
+Mercek üç koşul sağlandığında karşılık bulur:
+• Sınır çizilebilirlik: ˙Içeride ne var, dışarıda ne var. Sınır keyfı çizilebiliyorsa
+model de keyfıdir.
+• Kalıcı yapı: Aynı girdiye benzer tepki. Yapı yoksa yedinci katman boş
+kalır ve diğer altısının nedeni açıklanamaz.
+• Tekrarlanan akış: Bir kereye mahsus olay sistem değil olaydır. Perfor-
+mans ailesi ancak tekrar varsa anlamlıdır.
+Asıl risk, açıkça sistem olmayan şeylere sistem dilinin uygulanmasında değildir;
+orada zorlama hemen fark edilir. Risk, sistem gibi görünen ancak önkoşulları
+sağlamayan olgulardadır: sınırı belirsiz olanlar, yapısı ölçüm sırasında değişenler
+ve tekrarı taklit edip nedeni her seferinde farklı olanlar. Bu üçünde sistem dili
+sorunsuz çalışır görünür, sayılar üretilir; ancak üretilen sayılar sistemin özelliği
+değil ölçüm anının artığıdır.
+Düzey ayrımı
+Mercek listeleri kurulurken sık yapılan hata, merceklerle merceğin ürettiği alt
+soruların aynı düzeye konmasıdır. Yapı, akış, kontrol, dayanıklılık ve ölçek,
+sistem merceğinin çıktısıdır ; mekanizma, teşvik, evrim, epistemik ve tarihsel
+bakış ise gerçekten alternatif merceklerdir. ˙Iki düzey ayrılmazsa aynı terim hem
+mercek hem alt soru olarak geçer.
+Düzey ˙Içeriği
+Mercek Olguya hangi soru ailesiyle bakılacağı
+Aile O merceğin ürettiği değişken kümesi
+15
+
+-- 15 of 20 --
+
+C ekirdek mercekler
+Mercek Temel soru
+Sistem Parçalar nasıl etkileşiyor, bütün nasıl davranıyor?
+Mekanizma Bu sonuç hangi nedensel zincirle meydana
+geliyor?
+Süreç ve akış Zaman içinde hangi aşamalar; ne nereden nereye
+gidiyor?
+Ağ Kim kime bağlı; merkezler ve köprüler nerede?
+Kontrol Geri besleme, sensör, aktüatör nasıl kurulmuş?
+Epistemik Kim ne biliyor, bilgi nasıl üretilip doğrulanıyor?
+Ölçüm Bu büyüklük hangi ölçek tipinde, gösterge mi
+doğrudan mı?
+Teşvik ve karar Aktörleri hangi ödül ve maliyetler yönlendiriyor?
+Evrimsel Hangi varyasyonlar seçiliyor, biçim neden bu?
+Kurumsal Kurallar, roller ve yetkiler davranışı nasıl
+biçimlendiriyor?
+Tarihsel Bugünkü durum hangi yol bağımlılığıyla oluştu?
+Ölçek Boyut on kat değişirse hangi yasalar değişir?
+Ölçüm merceğinin epistemik mercekten ayrı tutulması gerekir. Epistemik
+mercek kimin ne bildiğini sorar; ölçüm merceği ise daha dar ve daha keskindir:
+büyüklük hangi ölçek tipindedir, doğrudan mı yoksa gösterge üzerinden mi
+ölçülmektedir, ölçüldüğünü bildiğinde davranışı değişmekte midir. Bu mercek
+olmadan diğer bütün merceklerin ürettiği sayılar denetimsiz kalır. Sıralı ölçekte
+aritmetik yapılması, göstergenin hedefe dönüştüğünde bozulması ve ölçüm aracının
+ölçtüğü şeyi değiştirmesi, epistemik merceğin standart soru setinde bulunmaz.
+Mercekler arası ilişkiler
+Mercekler birbirinin alternatifi olmadığı gibi, birbirinden bağımsız da değildir.
+Aralarındaki ilişkiler üç tiptedir.
+Örtüşme. Yapı, ağ ve topoloji büyük ölçüde aynı değişkenleri üretir; süreç
+ile akış da öyle. Bunlar üst üste binmez, tekrar eder.
+Önkoşul. Kontrol merceği epistemik merceği varsayar, çünkü geri besleme
+ölçüm gerektirir. Oyun teorik mercek ajan merceğini varsayar. Sıra yanlış
+kurulduğunda alttaki mercek boşa döner.
+C elişki. En önemli ilişki tipi budur ve listelerde çoğunlukla görünmez.
+Teşvik merceği amaçlı aktör varsayar; evrimsel mercek amacı açıkça reddeder,
+çünkü seçilim niyet gerektirmez. Aynı olguya ikisini birden uygulamak “iki
+doğru açıklama” vermez; hangisinin geçerli olduğuna dair bir çatal açar. Bir
+kurumdaki tuhaf pratik ya birinin çıkarına hizmet ettiği için ya da yalnızca
+hayatta kaldığı için mevcuttur. Bunlar farklı iddialardır ve farklı kanıt gerek-
+tirirler.
+16
+
+-- 16 of 20 --
+
+Karakteristik patolojiler
+Her merceğin aşırı uygulandığında ürettiği tipik hata vardır. Bu sütun olmadan
+kütüphane bir kontrol listesine dönüşür ve her mercekten bir sonuç çıkarılır.
+Mercek Aşırı uygulandığında
+Sistem Her şeyi geri besleme döngüsüne indirger,
+failliği kaybeder
+Teşvik Her davranışı gizli çıkara bağlar, beceriksi-
+zliği göremez
+Evrimsel Var olan her özelliği işlevsel sayar
+Ağ Açıklamayı merkezıliğe indirger, içeriği
+kaybeder
+Mekanizma Sonsuz gerileme; hangi düzeyde duracağını
+bilemez
+Ekonomik Fiyatlanamayanı yok sayar
+Tarihsel Her şeyi yol bağımlılığına bağlar, değişimi
+açıklayamaz
+Kontrol Ölçülemeyen değişkeni sistemden atar
+Oyun teorik Rasyonellik varsayımını sahaya taşır
+Ölçüm Olguyu ölçüm artefaktına indirger
+Evrimsel merceğin patolojisi literatürde açıkça eleştirilmiştir. Gould ve
+Lewontin, mimari yan ürünlerin uyarlanma sanılmasını San Marco Bazilikası’nın
+kemer aralarındaki üçgen boşluklara (spandrel ) benzeterek eleştirmiş; bu boşlukların
+süsleme için tasarlanmadığını, kubbeyi kemerlere oturtmanın zorunlu sonucu
+olduğunu göstermiştir (Gould ve Lewontin, 1979).
+Mercek seçim kuralı
+Bütün mercekleri sırayla uygulamak hem pahalıdır hem patolojiye açıktır. Kul-
+lanışlı ölçüt, açıklanamayan artığın konumudur.
+Gözlenen durum ˙Işaret ettiği mercek
+Parçalar doğru çalışıyor, sonuç beklenenden farklı Sistem, etkileşim
+Herkes kuralı biliyor, uymuyor Teşvik
+Kural iyi, uygulanmıyor Kapasite, kontrol
+Kimse istemediği hâlde ortaya çıkıyor Evrimsel, oyun teorik
+Kötü bir yapı ısrarla sürüyor Tarihsel
+Karar doğru, bilgi yanlış Epistemik
+Ölçek değişince bozuluyor Ölçek
+Sayı değişiyor, olgu değişmiyor Ölçüm
+Mercek, olgunun türüne göre değil açıklanamayan artığın konumuna göre
+seçilir.
+17
+
+-- 17 of 20 --
+
+Geri besleme halkası
+Mercek uygulama zinciri tek yönlü kurulduğunda eksik kalır:
+Olgumercekdeğişkenler → sorular → model → açıklama
+Asıl bilgi geri dönüşte üretilir:
+· · · → model → tahmin → sapma → mercekrevizyonu
+Modelin tuttuğu yer değil tutmadığı yer, hangi merceğin eksik olduğunu
+gösterir. Sistem merceğiyle kurulan bir model sürekli belirli bir yönde sapıyorsa,
+sapmanın yönü genellikle teşvik ya da epistemik merceğe işaret eder; çünkü
+sistem merceği failliği ve bilgi asimetrisini görmez. Bu halka olmadan mercek
+seçimi bir tercih meselesi olarak kalır, halkayla birlikte yanlışlanabilir hâle gelir.
+Üst model
+Yapı tek başına davranışı belirlemez. Aynı mimariye sahip iki sistem, farklı
+kaynak ve farklı çevre altında bambaşka davranabilir. Bu nedenle üst model şu
+biçimi alır:
+Y apı + Kaynak + C evre + ˙I şletimRejimi → Davranış → Sonuç
+Kabiliyet, performans, kalite, dayanıklılık, ölçek davranışı ve esneklik, bu
+zincirin ortasındaki davranışa yöneltilen farklı sorulardır. Zincirin sağına doğru
+gidildikçe büyüklükler bileşikleşir: yapı içseldir, sonuç tamamen bağlamsaldır.
+Bu, önceki bölümde kurulan içsel-bileşik ayrımının genel biçimidir.
+18
+
+-- 18 of 20 --
+
+Sonuç
+Rekabetçilik sıralamaları okunurken üç ayrım işlevseldir. Birincisi, farklı endek-
+slerin farklı sorular sorduğu ve örtüşmeyen sonuçlarının bilgi taşıdığıdır: iyi bir iş
+yapma ortamı sığ bir üretken kapasiteyle, derin bir kapasite ise ağırlaşmış bir or-
+tamla birlikte var olabilir. ˙Ikincisi, sıralamanın sıralı ölçekte olduğu ve basamak
+farklarının eşit aralıklı olmadığıdır; üzerinde aritmetik yapılamaz ve ülke seti
+değiştiğinde sabit performans gerileme olarak görünür. Üçüncüsü, algı bileşeni
+taşıyan endekslerde tek yılın hareketinin yapısal değişim sayılamayacağıdır.
+Türkiye örneğinde bu üç ayrım şu teşhise götürür: sorun ortalama seviye-
+den çok genliktir. Yapısal alanlarda istikrarlı, kurumsal ve makroekonomik
+alanlarda dalgalı bir performans, on yıllık grafikte yirmi basamaklık salınım
+üretmektedir. Kuralın içeriği değil kuralın sabitliği belirleyici olduğu için, se-
+viye artışı ancak oynaklık düştüğünde kalıcı olur.
+Kavramsal düzeyde notun ürettiği asıl ayrım şudur: devlet kapasitesi terimi
+mühendislikteki kapasiteye değil kabiliyet katmanına, özellikle gözlemlenebilirlik
+ve kontrol edilebilirliğe karşılık gelir. Bu, teşhisi değiştirir; sensörü olmayan
+bir eksende yapılacak şey ölçek yatırımı değil enstrümantasyondur. Aynı ayrım
+genel sistem çözümlemesine taşındığında, tek başlık altında toplanan büyüklüklerin
+altı ayrı soru ailesi olduğu ve bunların üçünün diğer üçünün bir bozucuya göre
+türevi olduğu görünür hâle gelir.
+C erçevenin sınırlılıkları açıktır. Soru aileleri ayrımı, sınırı çizilebilen ve kalıcı
+yapıya sahip sistemlerde işler; sınırı belirsiz, ölçüldüğünü bilerek davranan ya
+da tekrarı taklit eden olgularda sayı üretmeye devam eder ancak ürettiği sayı
+sistemin değil ölçüm anının özelliğidir. Devlet kapasitesi tam bu sınırda durur:
+kavramsal karşılığı birebir oturur, ancak sınırı belirsizdir ve ölçüldüğünü bilir.
+Mercek kütüphanesi de bir yöntem değil bir dizindir; hangi merceğin ne zaman
+kullanılacağına dair kural, artığın konumundan türetildiği için ölçüm kalitesine
+bağımlıdır ve ölçüm bozuksa kural da bozulur.
+Açık kalan sorular şunlardır. Birincisi, mercekler arası çelişki tipinin nasıl
+karara bağlanacağı: teşvik ile evrimsel açıklama arasındaki çatal, hangi kanıt
+türüyle kapatılabilir. ˙Ikincisi, esneklik ailesinin dayanıklılık ve ölçek aileleriyle
+bağımsız olup olmadığı; üç bozucu ekseninin gerçekten dik olup olmadığı am-
+pirik bir sorudur. Üçüncüsü, içsel-bileşik ayrımının sistematik olarak nasıl
+işaretleneceği; her büyüklük için ortam bağımlılığının derecesini veren bir ölçüt
+henüz yoktur.
+Bu çerçevenin başka bir alana taşınabildiği nokta ölçüm teorisidir. Stevens’ın
+ölçek tipleri ayrımı ile buradaki kabiliyet-performans ayrımı aynı hatayı farklı
+düzeylerde önler: nominal bir büyüklüğe oransal işlem uygulamak ile ikili bir
+niteliğe nicel karşılaştırma uygulamak, aynı kategori hatasının iki görünümüdür.
+Kaynaklar
+• Bakır, N. (2026, 25 Haziran). Türkiye rekabetçilikte kayıplarını geri alıyor.
+Dünya Gazetesi.
+19
+
+-- 19 of 20 --
+
+• Besley, T. ve Persson, T. (2011). Pillars of Prosperity: The Political
+Economics of Development Clusters. Princeton University Press.
+• Goldratt, E. M. ve Cox, J. (1984). The Goal: A Process of Ongoing
+Improvement. North River Press.
+• Gould, S. J. ve Lewontin, R. C. (1979). The Spandrels of San Marco and
+the Panglossian Paradigm: A Critique of the Adaptationist Programme.
+Proceedings of the Royal Society of London B, 205(1161), 581–598.
+• Harvard Growth Lab (2024). The Atlas of Economic Complexity 10.0.
+Harvard Kennedy School.
+• Hidalgo, C. A. ve Hausmann, R. (2009). The Building Blocks of Economic
+Complexity. Proceedings of the National Academy of Sciences, 106(26),
+10570–10575.
+• IMD World Competitiveness Center (2026). IMD World Competitiveness
+Yearbook 2026. Institute for Management Development, Lozan.
+• Kalman, R. E. (1960). On the General Theory of Control Systems. Pro-
+ceedings of the First IFAC Congress, Moskova.
+• Krugman, P. (1994). Competitiveness: A Dangerous Obsession. Foreign
+Affairs, 73(2), 28–44.
+• Mann, M. (1984). The Autonomous Power of the State: Its Origins,
+Mechanisms and Results. European Journal of Sociology, 25(2), 185–213.
+• Porter, M. E. (1990). The Competitive Advantage of Nations. Free Press.
+• Stevens, S. S. (1946). On the Theory of Scales of Measurement. Science,
+103(2684), 677–680.
+20
+
+-- 20 of 20 --
