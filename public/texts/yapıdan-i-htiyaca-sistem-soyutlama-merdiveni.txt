@@ -1,0 +1,461 @@
+Yapıdan ˙Ihtiyaca: Sistem Soyutlama Merdiveni
+ÖFY
+August 2026
+Özet
+Bir sistemin en hızlı eskiyen katmanı, kullandığı teknolojilerdir; davranışını be-
+lirleyen değişkenler ise teknoloji kuşak değiştirdiğinde büyük ölçüde yerinde
+kalır. Teknolojiler bir sistemin en değişken katmanıdır; sistemin davranışını
+belirleyen değişkenler ise teknoloji değiştiğinde büyük ölçüde yerinde kalır. Bu
+nedenle mühendislik muhakemesinin doğru sırası teknolojiden probleme değil,
+ihtiyaçtan aşağı doğrudur: ihtiyaç, amaç, kabiliyet, fonksiyon, davranış ve en
+sonda yapı. Derin teknik uzmanlık bu sıralamada bir hedef değil bir araçtır
+ve nereye derinleşileceğini sistem seviyesindeki muhakeme belirler. Bir sis-
+temi teknoloji-bağımsız biçimde çözümlemek için sistemin adına değil, taşıdığı
+işlevlere ve kısıtlara soru sorulur; “sinyal-gürültü oranı nedir” yerine “bu sis-
+temde bilginin güvenilirliğini ne belirler” sorulduğunda sinyal-gürültü oranı cevabın
+kendisi olarak ortaya çıkar. Aynı sorgulama şablonu radar, hava savunma sis-
+temi, dağıtık yazılım sistemi ve kurum için büyük ölçüde değişmeden uygulan-
+abilir. Parçaların tek tek en iyi hâle getirilmesi bütünün en iyi hâle gelmesini
+garanti etmez; sistem çıktısı en zayıf halka, darboğaz ve bileşenler arası eşleşme
+tarafından belirlendiği için kaynaklar tek tek değil portföy olarak dağıtılmalıdır.
+Hava savunması örneğinde teknolojiden arta kalan çekirdek beş değişkene in-
+dirgenebilir: bilgi, zaman, erişim, kaynak ve dayanıklılık.
+1
+
+-- 1 of 15 --
+
+Giriş
+Mühendislik pratiğinde sık karşılaşılan bir yönelim, bir teknolojiyi mümkün olan
+en derin düzeyde öğrenmeyi başlı başına bir yetkinlik hedefi hâline getirmektir.
+Bu yönelim kendi içinde tutarlıdır: derin uzmanlık ölçülebilir, tanınabilir ve
+kariyer olarak karşılığı olan bir şeydir. Ancak bu yönelim bir varsayım taşır —
+sistemin başarısının, kullanılan teknolojinin kalitesiyle orantılı olduğu varsayımı.
+Bu varsayım genel olarak yanlıştır ve yanlışlığı özellikle çok bileşenli sistemlerde
+belirgin hâle gelir.
+Burada ele alınan problem şudur: bir sistemin davranışını gerçekten neyin
+belirlediği ve bu belirleyicilerin hangi soyutlama düzeyinde bulunduğu. Buna
+bağlı ikinci problem, sınırlı kaynağın hangi bileşene ve hangi derinliğe yatırılacağına
+nasıl karar verileceğidir.
+Notta kullanılan merkezı terimler şunlardır.
+Sistem, birbirine bağlı bileşenlerin, tek tek bileşenlerde bulunmayan bir
+davranış üretecek biçimde düzenlenmiş hâlidir. Bir sistemin tanımlayıcı özelliği
+parçaların listesi değil, parçalar arasındaki ilişkilerdir; aynı parçalar farklı ilişkilerle
+bağlandığında farklı bir sistem ortaya çıkar (Meadows, 2008).
+Kabiliyet (capability), belirli koşullar altında belirli bir sonucu üretebilme
+gücüdür. Kabiliyet bir nesne değil bir yeterliliktir: “on adet avcı uçağına
+sahip olmak” bir envanterdir, “hava sahasının belirli bir hacmini belirli bir süre
+boyunca kontrol edebilmek” bir kabiliyettir.
+Fonksiyon (function), sistemin ürettiği dönüşümün, bu dönüşümü kimin
+gerçekleştirdiğinden bağımsız ifadesidir. “Radar” bir yapı adıdır; “uzak mesafedeki
+nesneleri tespit etme ve konumlandırma” bir fonksiyon adıdır. Fonksiyon düzeyinde
+düşünmek, aynı fonksiyonu yerine getirebilecek başka yapıları görünür kılar.
+Teknoloji-bağımsız soyutlama (technology-independent abstraction), bir
+sistemin belirli bir uygulama teknolojisine bağlı ayrıntıları çıkarıldığında geriye
+kalan fonksiyon, kısıt ve değişkenler kümesidir.
+Notun sınırı şudur: burada bir teknoloji seçme yöntemi ya da bir tasarım
+metodolojisi verilmemektedir. Verilen şey, teknoloji seçiminden önce gelen
+çözümleme katmanıdır. Bu katmanın kendi sınırlılıkları da mevcuttur ve sonuç
+bölümünde ele alınmaktadır.
+2
+
+-- 2 of 15 --
+
+Soyutlama Merdiveni
+Katmanlar
+Bir sistem, birbirinin üstünde duran altı düzeyde tarif edilebilir. Aşağıdan
+yukarı doğru:
+• Yapı: Sistemin fiziksel ya da mantıksal bileşenleri. Radarlar, uçaklar,
+komuta merkezleri, sunucular, veritabanları.
+• Davranış: Bileşenlerin zaman içinde ne yaptığı. Tespit etme, sınıflandırma,
+karar verme, müdahale etme.
+• Fonksiyon: Davranışın ürettiği dönüşüm. Hava tehdidini etkisiz kılma.
+• Kabiliyet: Fonksiyonun belirli koşullarda sürdürülebilir biçimde üretilmesi.
+Hava sahasını kontrol altında tutabilme.
+• Amaç: Kabiliyetin hangi daha büyük hedefe hizmet ettiği. Askerı hareket
+serbestisinin korunması.
+• ˙Ihtiyaç / değer: Amacın dayandığı temel gerekçe. Güvenlik, egemenlik.
+Bu türden bir katmanlaşma bilişsel iş çözümlemesi literatüründe soyutlama
+hiyerarşisi (abstraction hierarchy) adıyla formüle edilmiştir; Rasmussen’in kurduğu
+biçimde hiyerarşinin alt düzeyleri “nasıl” sorusunu, üst düzeyleri “neden” sorusunu
+yanıtlar (Rasmussen, 1985; Vicente, 1999). Bir düzeyden yukarı çıkmak o
+düzeydeki nesnenin varlık gerekçesini, aşağı inmek ise gerçekleştirilme biçimini
+verir.
+Katmanların değişim hızları farklıdır ve bu fark pratikte belirleyicidir. Yapı
+en hızlı değişen katmandır: bir radar modeli on yılda eskir, bir yazılım kütüphanesi
+üç yılda terk edilir. Kabiliyet ve amaç ise onlarca yıl boyunca sabit kalabilir.
+Bir hava savunma sisteminin 1960’taki amacı ile bugünkü amacı arasındaki fark,
+kullanılan donanım arasındaki farkın yanında önemsizdir. Yatırılan öğrenme
+emeğinin ömrü, öğrenilen şeyin hangi katmanda durduğuna bağlıdır.
+C ift yönlü hareket
+Soyutlama merdiveni yalnızca yukarı çıkmak için kullanıldığında işe yaramaz;
+yukarı çıkış çözüm uzayını açmak, aşağı iniş ise bir çözüm seçmek içindir. Tam
+hareket şöyledir:
+F-35
+→ savaş uçağı
+→ havadan müdahale aracı
+→ etkileme fonksiyonu
+→ hava sahasını kontrol etme kabiliyeti
+→ algılama + karar + etkileme + koordinasyon + dayanıklılık
+→ bu alt fonksiyonları üretebilecek teknoloji kümeleri
+→ seçilen somut konfigürasyon
+3
+
+-- 3 of 15 --
+
+Yukarı çıkış sırasında sorulan soru “bu neyin bir örneği” değil, “bu neyi
+başarmak için var”dır. Aşağı iniş sırasında sorulan soru ise “bu fonksiyonu
+eldeki kısıtlar altında hangi düzenlemeler üretebilir”dir. Yalnızca yukarı çıkılıp
+durulursa sonuç, uygulanabilirliği olmayan bir soyutlama olur; yalnızca aşağıda
+kalınırsa mevcut teknoloji seçeneğinin dışına çıkılamaz.
+4
+
+-- 4 of 15 --
+
+Sistem Sorgulama S ablonu
+Sorular
+Bir sistemin temel ilkelerini çıkarmak için sistemin kendi terminolojisiyle soru
+sorulmaz. Sistemin terminolojisiyle sorulan soru — “sinyal-gürültü oranı kaçtır”
+— yalnızca o terminolojiyi bilenlerin sorabileceği bir sorudur ve zaten bilinen bir
+çerçeveyi doğrular. Bunun yerine, herhangi bir sisteme sorulabilecek üst düzey
+sorular kullanılır; teknik kavramlar bu soruların cevabı olarak ortaya çıkar.
+1. Bu sistem hangi sonucu üretmeye çalışıyor? C ıktısı nedir?
+2. Neyi algılıyor, neyi dönüştürüyor, neyi taşıyor?
+3. Hangi fiziksel ya da mantıksal yasalar altında çalışıyor?
+4. Performansını ne belirliyor? Hız, menzil, doğruluk, kapasite, enerji, maliyet.
+5. Bilgi nereden geliyor ve ne kadar güvenilir?
+6. Zaman sistemde nasıl davranıyor?
+7. Durum nerede tutuluyor ve kim tarafından güncelleniyor?
+8. Neye bağımlı? Hangi girdi kesilirse sistem durur?
+9. Nasıl bozuluyor? Hata nasıl yayılıyor?
+10. Bozulduğu nasıl anlaşılıyor?
+11. Bozulduğunda ne oluyor? Kısmi çalışma mümkün mü?
+12. Hangi ödünleşimler var? Bir boyut iyileştiğinde hangisi kötüleşiyor?
+13. Ölçek büyüdüğünde ne değişiyor?
+14. C evre değiştiğinde ne değişiyor?
+15. ˙Insan sistemin neresinde?
+16. Sistemin çalıştığı nasıl kanıtlanır?
+Bu sorular alan bilgisinin yerini tutmaz; alan bilgisinin hangi bölümünün
+gerekli olduğunu belirler. On altı sorunun cevaplanması, bir sistem hakkında
+hangi teknik konuların öğrenilmesi gerektiğinin listesini üretir.
+5
+
+-- 5 of 15 --
+
+Radar örneği
+Sablon bir sensör sistemine uygulandığında ortaya çıkan cevaplar şunlardır.
+Performansını ne belirliyor sorusu verici gücü, anten kazancı, çalışma frekansı,
+hedefin radar kesit alanı (radar cross section, bir hedefin radar dalgalarını geri
+yansıtma ölçüsü) ve atmosferik zayıflamayı verir. Bu değişkenler radar denklemi
+olarak bilinen bağıntıda toplanır; tespit menzilinin verici gücünün dördüncü
+kökü ile ölçeklenmesi buradan gelir. Bu ölçekleme pratikte belirleyicidir: men-
+zili iki katına çıkarmak için gücün on altı katına çıkarılması gerekir, dolayısıyla
+menzil artışı tek bir radarın gücünü artırarak değil, radar sayısını artırarak ya
+da platformu yükselterek elde edilir.
+Bilgi ne kadar güvenilir sorusu sinyal-gürültü oranını, yer yankısını (clut-
+ter ), yanlış alarm oranını ve tespit olasılığını verir. Buradaki temel ödünleşim,
+eşik değerinin düşürülmesinin tespit olasılığını artırırken yanlış alarm oranını da
+artırmasıdır; iki hata türü aynı anda azaltılamaz.
+Zaman nasıl etkiliyor sorusu tarama süresini, güncelleme sıklığını ve işleme
+gecikmesini verir. C evre nasıl sınırlıyor sorusu görüş hattını, ufuk sınırını,
+araziyi ve hava koşullarını verir; bir yer radarının alçak irtifadaki hedefi belirli
+bir mesafeden sonra görememesi teknolojiden değil Dünya’nın eğriliğinden kay-
+naklanır ve hiçbir donanım iyileştirmesiyle giderilemez. Nasıl bozuluyor sorusu
+karıştırmayı (jamming), donanım arızasını, kör bölgeleri ve yanlış sınıflandırmayı
+verir.
+Yazılım örneği
+Aynı sorular bir dağıtık yazılım sistemine uygulandığında farklı isimler taşıyan
+aynı yapıdaki cevapları verir.
+Soru Ortaya çıkan kavramlar
+Zaman nasıl davranıyor? Gecikme, zaman aşımı, yarış koşulu, saat kay-
+ması
+Durum nerede tutuluyor? Veritabanı, önbellek, oturum, çoğaltma
+Bileşenler aynı gerçeği nasıl paylaşıyor? Tutarlılık, işlem, uzlaşı
+Nasıl bozuluyor? Ağ bölünmesi, süreç çökmesi, bayat önbellek
+Doğru çalıştığı nasıl bilinir? Test, değişmez koşul, izleme
+Yük büyüyünce ne olur? Verimlilik, kuyruklanma, kaynak çekişmesi
+Radar örneğindeki tespit olasılığı ile yanlış alarm oranı arasındaki ödünleşim,
+yazılımda bir uyarı sisteminin eşik ayarında birebir aynı biçimde ortaya çıkar:
+eşik düşürüldüğünde gerçek arızalar yakalanır ama gürültü artar. ˙Iki sistem
+arasındaki bu benzerlik tesadüf değildir; her ikisi de gürültülü bir kanaldan
+karar üretmektedir ve karar kuramının kısıtları teknolojiden bağımsızdır.
+6
+
+-- 6 of 15 --
+
+C özüm Uzayı
+Bir ihtiyacın karşılanma biçimi belirlenmeden önce, o ihtiyacı karşılayabilecek
+düzenlemelerin kümesine çözüm uzayı (solution space) denir. Problemin çözümden
+bağımsız tanımlanması — yani “bir X’e ihtiyacım var” yerine “şu sonucu üretmem
+gerekiyor” denmesi — bu kümenin görünmesini sağlar.
+“Hava sahamı korumam gerekiyor” ifadesi bir ihtiyaç tanımıdır. “Avcı uçağı
+almam gerekiyor” ise bir çözüm tanımıdır ve çözüm uzayını daha soru sorul-
+madan tek bir noktaya indirger. Aynı ihtiyacın çözüm uzayında avcı uçağı,
+yer-hava füze sistemi, yer radar ağı, havadan erken uyarı uçağı, elektronik harp,
+insansız hava aracı, üs dağıtımı ve konuşlandırma coğrafyası, müttefik desteği
+ve bunların kombinasyonları bulunur.
+C özüm uzayının erken daraltılması iki mekanizmayla olur. Birincisi, ihtiyacın
+mevcut ürün kategorileriyle ifade edilmesidir; kategoriler tedarikçi tarafından
+tanımlandığı için problem de tedarikçinin çerçevesinde kurulmuş olur. ˙Ikincisi,
+kurum içindeki mevcut uzmanlığın çözümü belirlemesidir. Elinde derin bir uz-
+manlık bulunan kurum, o uzmanlığın uygulanabileceği çözümü tercih eder; bu,
+kaynağın verimli kullanımı gibi görünür ancak seçim gerekçesi problemden değil
+envanterden gelmiştir.
+Yazılımda karşılığı doğrudandır. “Siparişleri güvenilir biçimde müşteriye
+ulaştırmak” ihtiyacı olan bir kurumda, konteyner düzenleme altyapısının daha
+iyi kullanılması bir çözüm adayıdır; ancak aynı çözüm uzayında altyapının tama-
+men kaldırılıp daha basit bir konuşlandırma modeline geçilmesi de bulunur ve
+bazı ölçeklerde ikincisi daha yüksek güvenilirlik üretir. Bir teknolojinin kurum-
+sal kimliğin parçası hâline gelmesi, bu ikinci seçeneğin düşünülmesini kurumsal
+olarak maliyetli kılar.
+7
+
+-- 7 of 15 --
+
+Kaynakların Portföy Olarak Yönetimi
+Yerel optimizasyon tuzağı
+Bir sistemin bileşenleri tek tek en iyi hâle getirildiğinde sistemin bütününün en
+iyi hâle geleceği varsayımı, bileşenler arasında etkileşim bulunmayan sistemler
+dışında geçerli değildir. Etkileşim bulunan sistemlerde çıktı, bileşenlerin perfor-
+manslarının toplamı değil, en kısıtlayıcı bileşenin izin verdiği kadarıdır. Kısıtlar
+kuramının merkezı iddiası budur: bir üretim zincirinde darboğaz olmayan bir
+istasyonun hızlandırılması toplam çıktıyı artırmaz, yalnızca darboğaz önünde
+biriken stoğu artırır (Goldratt, 1984).
+Aynı yapı Amdahl yasasında niceliksel biçimde ifade edilmiştir: bir işin par-
+alelleştirilebilen kısmı ne kadar hızlandırılırsa hızlandırılsın, toplam hızlanma
+seri kalan kısım tarafından sınırlanır (Amdahl, 1967). Her iki formülasyon da
+aynı şeyi söyler — iyileştirme çabasının getirisi, çabanın büyüklüğüne değil,
+uygulandığı yerin sistem içindeki konumuna bağlıdır.
+Portföy olarak dağıtım
+Kaynakların toplu oynanması, eldeki insan, para, zaman, mevcut teknoloji,
+altyapı, veri, kurumsal yapı ve tedarik zincirinin ayrı bütçeler olarak değil tek
+bir portföy olarak ele alınması demektir. Ölçüt, her kalemin kendi içinde en iyi
+olması değil, kombinasyonun hedeflenen sistem çıktısını en yükseğe taşımasıdır.
+Sabit bir bütçeyle hava savunma kabiliyeti üretmek isteyen bir aktör, bütçenin
+tamamını en yetenekli platformlara ayırdığında yüksek nitelikli bir envantere
+sahip olur; ancak sensör ağı zayıf, pilot uçuş saati düşük, mühimmat stoğu
+sınırlı, bakım personeli yetersiz ve üsleri korumasız ise sistemin ürettiği kabiliyet
+düşüktür. Aynı bütçeyle daha mütevazı platformlar, güçlü bir radar ağı, kat-
+manlı füze savunması, elektronik harp, yüksek mühimmat stoğu, uzun eğitim
+süresi ve dayanıklı bakım altyapısı birlikte satın alındığında toplam kabiliyet
+daha yüksek olabilir. Buradaki iddia mütevazı platformun iyi platformdan üstün
+olduğu değil, sabit bütçe altında bileşenler arası dağılımın bileşen kalitesinden
+daha belirleyici olabileceğidir.
+Yazılımda aynı mantık şöyle görünür. “Kullanıcı talebine iki saniye içinde
+güvenilir cevap vermek” hedefi olan yirmi kişilik bir ekipte, herkesin özellik
+geliştirmeye ayrılması bir dağıtımdır. Alternatif dağıtımda bir kısım kaynak veri
+modelinin sadeleştirilmesine, bir kısmı önbelleklemeye, bir kısmı gözlemlenebilirliğe,
+bir kısmı doğrulamaya ayrılır ve bazı özellikler tamamen iptal edilir. ˙Ikinci
+dağıtım daha az kod üretir; hedefe ulaşma olasılığı daha yüksektir çünkü hedef
+kod miktarına değil uçtan uca gecikme ve hata oranına bağlıdır.
+Bu yaklaşımın sınırı, portföy dağıtımının ancak sistem çıktısının ölçülebildiği
+durumda anlamlı olmasıdır. C ıktı ölçülemiyorsa “bütünü optimize etme” id-
+diası, ölçülebilir yerel hedeflerin terk edilmesi için gerekçeye dönüşebilir ve hesap
+verebilirliği azaltır.
+8
+
+-- 8 of 15 --
+
+Teknoloji Optimizasyonundan Kabiliyet Optimiza-
+syonuna
+˙Iki soru biçimi arasındaki fark, bu notun pratik çekirdeğidir.
+Teknoloji optimizasyonu Kabiliyet optimizasyonu
+Radarın menzili nasıl artırılır? Tehdit yeterince erken tespit edilip doğru
+karşılık verilmesi nasıl sağlanır?
+Arayüz gecikmesi 100 ms’den 50 ms’ye
+nasıl indirilir?
+Kullanıcının işini güvenilir biçimde iki
+saniyede tamamlaması nasıl sağlanır?
+Model doğruluğu nasıl yükseltilir? Kararın isabetli ve zamanında verilmesi nasıl
+sağlanır?
+Sol sütundaki sorular bir parçanın performansını, sağ sütundakiler sistemin
+ürettiği sonucu sorar. Fark, cevabın nerede aranacağını değiştirir. Erken tespit
+kabiliyeti sorulduğunda cevap radar menzilini artırmak olabileceği gibi ikinci bir
+radar konuşlandırmak, havadan erken uyarı platformu kullanmak, farklı fiziksel
+ilkeye dayanan bir sensör eklemek, sensör verilerini birleştirmek ya da karar
+zincirindeki onay basamaklarını azaltmak da olabilir. ˙Ikinci sütundaki sorunun
+cevabı çoğu zaman ilk sütundaki bileşenin dışındadır: uçtan uca gecikmenin
+baskın bileşeni sunucu tarafı değil, arayüz oluşturma, veritabanı kilidi, üçüncü
+taraf servis ya da insan onayı olabilir; bu durumda sunucu gecikmesinin yarıya
+indirilmesi kullanıcı deneyiminde ölçülebilir bir değişiklik üretmez.
+Bu ayrım savunma planlamasında kabiliyet temelli planlama (capability-
+based planning) adıyla kurumsallaşmıştır. Yaklaşımın temel önerisi, planla-
+manın belirli bir tehdit senaryosuna ve o senaryoya karşılık gelen belirli plat-
+formlara göre değil, geniş bir belirsizlik yelpazesinde gerekli olacak kabiliyetlere
+göre yapılmasıdır (Davis, 2002). Yaklaşımın bilinen zayıflığı da kaydedilmelidir:
+kabiliyet dili yeterince somutlaştırılmadığında bütçe kararlarının izlenebilirliğini
+azaltabilir, çünkü “kabiliyet” bir platform kadar net biçimde sayılamaz ve maliyetlendirile-
+mez.
+9
+
+-- 9 of 15 --
+
+Hava Savunma Sisteminin Teknoloji-Bağımsız Değişkenleri
+Değişkenler
+Kullanılan platformlardan bağımsız olarak, bir hava savunma sisteminin davranışını
+belirleyen değişkenler şunlardır.
+• Algılama: Tehdidin ne kadar erken, ne kadar uzaktan ve hangi güvenilirlikle
+görüldüğü.
+• Belirsizlik: Görülen nesnenin ne olduğuna dair kesinlik derecesi; dost,
+düşman ve sahte hedef ayrımı.
+• Zaman: Tespit ile karar, karar ile müdahale arasındaki süre.
+• Erişim: Fiilen kontrol edilebilen coğrafi hacim.
+• Karar zinciri: Bilginin kimden kime aktığı, kararın hangi düzeyde ver-
+ildiği ve zincirin ürettiği gecikme.
+• Etkileme kapasitesi: Tehdide karşı fiilen yapılabilenler — önleme, en-
+gelleme, bozma, caydırma.
+• Doygunluk: Aynı anda kaç tehditle başa çıkılabildiği.
+• Kaynak kıtlığı: Mühimmat, yakıt, personel, bakım kapasitesi ve sensör
+zamanının sınırlılığı.
+• Dayanıklılık: Bir radarın, üssün, haberleşme hattının ya da komuta
+merkezinin kaybı hâlinde sistemin çalışmaya devam etme derecesi.
+• Bağımlılıklar: Elektrik, haberleşme, konum belirleme, veri bağlantısı ve
+dış tedarik gibi, yokluğunda sistemin çöktüğü girdiler.
+• Koordinasyon: Sensörlerin, karar vericilerin ve müdahale araçlarının
+birlikte çalışma derecesi.
+• Bilgi kalitesi: Verinin güncelliği, eksiksizliği, tutarlılığı.
+• Coğrafya: Arazi, ufuk, mesafeler ve konuşlanma noktalarının dayattığı
+sınırlar.
+• Karşı tarafın davranışı: Tehdidin gizlenmesi, aldatması, doygunluk
+zorlaması ve rota değiştirmesi.
+• Sürdürülebilirlik: Sistemin bir gün değil, aylar ve yıllar boyunca çalıştırılabilmesi.
+• Öğrenme hızı: Yeni bir tehdit biçimi ortaya çıktığında uyum sağlama
+süresi.
+10
+
+-- 10 of 15 --
+
+Bu listedeki hiçbir madde “hangi platform” sorusunun cevabı değildir. Her
+biri, platform değiştiğinde yerinde kalan ve yalnızca sayısal değeri değişen bir
+boyuttur.
+Son madde — karşı tarafın davranışı — diğerlerinden ayrı bir niteliğe sahip-
+tir ve bu ayrım kaydedilmelidir. Hava savunması, çevresi sabit olmayan bir
+sistemdir; karşı taraf sistemin zayıf noktalarını gözleyip davranışını buna göre
+değiştirir. Doğa yasalarına karşı çalışan bir sistemde optimizasyon kalıcıdır,
+uyarlanan bir rakibe karşı çalışan sistemde her optimizasyon yeni bir karşı hamle
+davet eder. Bu nedenle son iki madde — sürdürülebilirlik ve öğrenme hızı —
+uzun vadede diğerlerinin çoğundan daha belirleyici olabilir.
+C ekirdek döngü
+Teknoloji tamamen soyutlandığında geriye şu döngü kalır:
+tehdit belirir
+→ algılanır
+→ ne olduğu tahmin edilir
+→ önceliklendirilir
+→ karar verilir
+→ kaynak tahsis edilir
+→ müdahale edilir
+→ sonuç ölçülür
+→ yeniden karar verilir
+Bu döngünün askerı düşüncedeki en bilinen formülasyonu Boyd’un gözlem–
+yönelim–karar–eylem çevrimidir; Boyd’un merkezı iddiası, çevrimin mutlak hızının
+değil, karşı tarafınkine göre göreli hızının belirleyici olduğudur (Boyd, 1987).
+Buradan çıkan sonuç doğrudan kaynak dağıtımını ilgilendirir: döngünün her-
+hangi bir halkasındaki gecikme — örneğin onay bekleme süresi — diğer hal-
+kalardaki teknik üstünlüğü etkisiz kılabilir.
+Aynı döngü, teknoloji adları değiştirilerek bir olay müdahale sistemine, bir
+dolandırıcılık tespit sistemine ya da bir üretim hattı kalite kontrolüne uygu-
+lanabilir. Yapının korunması, bu döngünün belirli bir alana değil, gürültülü
+ortamda sınırlı kaynakla karar üretme problemine ait olmasından kaynaklanır.
+Beş değişkene indirgeme
+Yukarıdaki liste daha da sıkıştırıldığında beş boyut kalır:
+Boyut Kapsadığı değişkenler
+Bilgi Algılama, belirsizlik, bilgi kalitesi, koordinasyon
+Zaman Karar zinciri gecikmesi, tepki süresi, öğrenme hızı
+Erişim Menzil, coğrafi hacim, konuşlanma
+Kaynak Mühimmat, yakıt, personel, doygunluk sınırı
+Dayanıklılık Yedeklilik, bağımlılıklar, sürdürülebilirlik
+11
+
+-- 11 of 15 --
+
+Bu beş boyut, radarın, füzenin ve uçağın kuşak değiştirmesinden bağımsız
+olarak sistemin başarısını belirlemeye devam eder. Beşe indirgeme bir kayıp
+içerir — karşı tarafın uyarlanan davranışı bu tabloda doğrudan yer almaz —
+dolayısıyla sıkıştırılmış hâl, planlama için değil karşılaştırma için uygundur.
+12
+
+-- 12 of 15 --
+
+Derinliğin Yeri
+Buraya kadar kurulan çerçeve, derin teknik uzmanlığın gereksizliğini savunmaz.
+Savunduğu şey, derinleşme kararının teknolojiden değil problemden türetilmesidir.
+Bir jet motoru, sistemin kritik darboğazı ise motor teknolojisinin çok derin
+bilinmesi gerekir ve bu bilgi başka hiçbir şeyle ikame edilemez. Burada belir-
+leyici olan motorun ilginçliği değil, sistemin çıktısını sınırlayan bileşen olmasıdır.
+Darboğaz yer değiştirdiğinde derinleşme yeri de yer değiştirir; kısıtlar kuramının
+uygulama döngüsünde bu, bir darboğaz çözüldüğünde yeni darboğazın aranması
+olarak formüle edilir (Goldratt, 1984).
+Buradan çıkan ilke iki cümlede toplanabilir:
+Derinliği teknoloji seçmez, problem seçer. Önce kabiliyet, sonra sis-
+tem, sonra teknoloji.
+Bu ilke “her şeyi biraz bilen” bir profil önermez. Tersine, nerede genelci
+nerede uzman olunacağının problemden türetilmesini sağlar — ki bu, sabit bir
+uzmanlık alanına yerleşmekten daha talepkâr bir konumdur, çünkü derinleşme
+yerinin zaman içinde değişmesini kabul etmeyi gerektirir.
+13
+
+-- 13 of 15 --
+
+Sonuç
+Bir sistemi teknoloji-bağımsız biçimde çözümlemenin pratik karşılığı, öğrenme
+ve kaynak yatırımının ömrünü uzatmasıdır. Yapı katmanında öğrenilen şey o
+katmanla birlikte eskir; fonksiyon ve kabiliyet katmanında öğrenilen şey, uygu-
+lama teknolojisi tamamen değiştiğinde bile taşınır. Radar denklemindeki ödünleşimi
+anlayan biri, aynı ödünleşimi bir uyarı sisteminin eşik ayarında tanır.
+˙Ikinci karşılık, kaynak dağıtımının bileşen kalitesinden çok bileşenler arası
+dağılım tarafından belirlendiğinin görülmesidir. Bu, envanter diliyle konuşmaktan
+kabiliyet diliyle konuşmaya geçmeyi gerektirir; sahip olunan şeylerin listesi ile
+üretilebilen sonuçların listesi farklı şeylerdir ve bütçe kararları ikincisine göre
+verildiğinde farklı sonuçlanır.
+C erçevenin sınırlılıkları vardır ve bunlar kaydedilmeden çerçeve yanıltıcıdır.
+Birincisi, teknolojinin çözüm uzayını belirlediği durumlar mevcuttur. Radar
+soğurucu malzeme, jet motoru ya da transistör gibi gelişmeler, var olan fonksiy-
+onları daha iyi yerine getirmekle kalmayıp daha önce tanımlanamayan kabiliyet-
+leri mümkün kılmıştır. Bu durumlarda soyutlamadan aşağı inen akıl yürütme
+yetersiz kalır; çünkü soyut fonksiyon listesi, henüz düşünülmemiş bir fonksiy-
+onu içermez. Teknoloji-bağımsız çözümleme mevcut çözüm uzayını haritalar, o
+uzayı genişleten sıçramaları öngörmez.
+˙Ikincisi, erken soyutlama bir başarısızlık biçimidir. Fonksiyon düzeyinde
+eşdeğer görünen iki çözüm, uygulama ayrıntılarında eşdeğer olmayabilir; “tespit
+fonksiyonu” başlığı altında toplanan iki sensör, bakım yükü, tedarik bağımlılığı
+ve arıza davranışı bakımından karşılaştırılamaz olabilir. Soyutlama, ayrıntıların
+önemsiz olduğu anlamına gelmez; hangi ayrıntıların önemli olduğunun sonradan
+belirleneceği anlamına gelir.
+Üçüncüsü, kabiliyet dili hesap verebilirliği zayıflatabilir. Ölçülebilir yerel
+hedefler — gecikme, menzil, hata oranı — terk edildiğinde ve yerine ölçülmeyen
+bütünsel hedefler konduğunda, ilerlemenin doğrulanması güçleşir. Kabiliyet
+düzeyine çıkmak, ölçmeyi bırakmak değil ölçüm noktasını sistem çıktısına taşımak
+olmalıdır.
+Açık kalan sorular şunlardır. Bir sistemde darboğazın nerede olduğu, ölçüm
+altyapısı kurulmadan nasıl kestirilir? Karşı tarafın uyarlandığı sistemlerde “en
+iyi dağıtım” kavramı ne ölçüde anlamlıdır, zira her dağıtım karşı hamleyi de
+belirler? Ve teknoloji-bağımsız değişkenler listesi, o alanda derin deneyim sahibi
+olmayan biri tarafından güvenilir biçimde çıkarılabilir mi, yoksa listenin kendisi
+de bir uzmanlık ürünü müdür?
+Son soru, çerçevenin kendisiyle ilgili bir gerilime işaret eder: teknoloji-bağımsız
+soyutlama, teknolojiyi bilmeden yapılabilecek bir işlem değildir. Neyin çıkarılabileceğini
+bilmek, çıkarılanı bilmeyi gerektirir.
+Kaynaklar
+• Amdahl, G. M. (1967). Validity of the Single Processor Approach to
+Achieving Large Scale Computing Capabilities. AFIPS Conference Pro-
+ceedings.
+14
+
+-- 14 of 15 --
+
+• Ashby, W. R. (1956). An Introduction to Cybernetics. Chapman & Hall.
+• Boyd, J. R. (1987). A Discourse on Winning and Losing. Yayımlanmamış
+brifing derlemesi.
+• Checkland, P. (1981). Systems Thinking, Systems Practice. Wiley.
+• Davis, P. K. (2002). Analytic Architecture for Capabilities-Based Plan-
+ning, Mission-System Analysis, and Transformation. RAND Corporation.
+• Goldratt, E. M. & Cox, J. (1984). The Goal. North River Press.
+• Maier, M. W. & Rechtin, E. (2000). The Art of Systems Architecting.
+CRC Press.
+• Meadows, D. H. (2008). Thinking in Systems: A Primer. Chelsea Green.
+• Rasmussen, J. (1985). The Role of Hierarchical Knowledge Representa-
+tion in Decisionmaking and System Management. IEEE Transactions on
+Systems, Man, and Cybernetics, 15(2).
+• Vicente, K. J. (1999). Cognitive Work Analysis. Lawrence Erlbaum.
+15
+
+-- 15 of 15 --

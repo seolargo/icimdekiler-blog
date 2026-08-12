@@ -1,0 +1,569 @@
+Model Fabrika Yetmediğinde: Türk Ar-Ge’nin
+Ortaklaştırılabilir Katmanı ve Sanayi Politikası
+Araçları
+ÖFY
+August 2025
+Özet
+Ar-Ge faaliyetinin tamamı merkezîleştirilemez, çünkü bir firmanın araştırma harcamasın-
+dan beklediği getiri, ürettiği bilgiye bir süre tek başına sahip olmaktan doğar; bilgi ortak
+havuza konduğunda bu getiri ortadan kalkar ve havuzu finanse etme teşviki de onunla
+birlikte yok olur. Ortaklaştırılabilen kısım rekabet öncesi katmandır: temel bilim, ölçüm
+yöntemleri, arayüz ve standartlar. Ortaklaştırılamayan kısım ürün mimarisi, süreç reçetesi
+ve verim optimizasyonudur; bu bilgi büyük ölçüde belgelenemeyen türdendir ve yalnızca
+uygulayan ekipte birikir. Sektörel ortak yazılım gibi girişimler bu ayrımın doğru tarafında
+durdukları ölçüde işler; rakip firmaların veri paylaşmama itirazının çözümü veriyi değil
+veri formatını ortaklaştırmaktır. Kamunun bu alandaki en güçlü aracı araştırma sübvan-
+siyonu değil, alıcı sıfatıyla yazılan zorlu şartnamedir: riski firmaya taşır, hangi projenin
+iyi olduğunu bilme yükümlülüğünü ortadan kaldırır ve ölçek doğurur. Verimlilik artışı
+ile katma değer artışı farklı olgulardır; verimlilik kazancı fason üretim ilişkilerinde büyük
+ölçüde alıcıya aktarılır. Katma değer merdiveninde yukarı çıkış, mevcut kabiliyete komşu
+ama kıtlığı yüksek bir alana geçmeyi, hızlı öğrenme döngüsünü, destekte seçilim baskısını
+ve on yıl ölçeğinde süreklilik kapasitesini birlikte gerektirir. Sanayi politikasının başarısını
+belirleyen şey doğru firmayı seçmek değil, başarısız olanı kesebilmek ve o firmada birikmiş
+kabiliyeti sektörde tutabilmektir.
+1
+
+-- 1 of 16 --
+
+Giriş
+Araştırma ve geliştirme (research and development, Ar-Ge), bir firmanın mevcut ürün ve
+süreçlerini iyileştirmek ya da yenilerini oluşturmak için yürüttüğü sistematik bilgi üretim
+faaliyetidir. Bu faaliyet aynı sektördeki firmalar tarafından birbirinden bağımsız olarak,
+büyük ölçüde aynı problemler üzerinde ve birbirinden habersiz biçimde yürütülür. Dışarı-
+dan bakıldığında bu düzenleme savurgan görünür: on firma aynı problemi çözmek için on
+ayrı ekip finanse etmekte, çözümlerin dokuzu kullanılmadan atılmaktadır. Buradan doğal
+olarak şu soru çıkar: bu faaliyet tek bir merkezde toplanıp çıktısı sektöre dağıtılsa, toplam
+maliyet düşmez mi?
+Sorunun ciddiye alınmayı hak eden bir tarafı vardır, çünkü kısmen uygulanmaktadır.
+Yarıiletken sektöründe imec, uygulamalı araştırmada Fraunhofer-Gesellschaft, mobil ile-
+tişimde 3GPP standart kuruluşu, yazılımda Linux çekirdeği ve LLVM derleyici altyapısı
+gibi yapılar, rakip firmaların ortak finanse ettiği ve çıktısını paylaştığı örneklerdir. Ame-
+rika Birleşik Devletleri’nde 1987’de kurulan SEMATECH konsorsiyumu da aynı mantıkla,
+yarıiletken üretim teknolojisinde ortak bir araştırma tabanı oluşturmak üzere kurulmuş-
+tur. Dolayısıyla asıl soru ortaklaştırmanın mümkün olup olmadığı değil, neden yalnızca
+belirli bir katmanda mümkün olduğudur.
+Bu notta kullanılan merkezî kavramlar şunlardır. Rekabet öncesi katman (pre-competitive
+layer ), bir sektördeki tüm oyuncuların ihtiyaç duyduğu ancak paylaşılması hiçbirinin gö-
+reli konumunu değiştirmeyen bilgi alanıdır. Rekabetçi katman, firmanın piyasadaki ko-
+numunu doğrudan belirleyen ve paylaşıldığında o konumu ortadan kaldıran bilgi alanıdır.
+Örtük bilgi (tacit knowledge), uygulayıcının sahip olduğu ancak açık kurallar hâlinde
+ifade edilemeyen, dolayısıyla belge yoluyla aktarılamayan bilgidir (Polanyi, 1966). Yu-
+muşak bütçe kısıtı (soft budget constraint), zarar eden bir kuruluşun dışarıdan sürekli
+kaynak aktarımıyla ayakta tutulduğu ve dolayısıyla iflas riskiyle disipline edilmediği du-
+rumu adlandırır (Kornai, 1980).
+Yaygın bir kabul, Ar-Ge’nin bir maliyet kalemi olduğu ve dolayısıyla ölçek ekonomisiyle
+ucuzlatılabileceği yönündedir. Bu notta savunulan konum farklıdır: Ar-Ge büyük ölçüde
+rekabetin kendisidir; maliyet gibi davranan yalnızca bir alt katmanı vardır ve ortaklaştırma
+yalnızca o katmanda anlamlıdır.
+Notun kapsamı, ortaklaştırmanın sınırlarından başlayarak sektörel ortak altyapı tasarı-
+mına, oradan kamunun kullanabileceği araçlara ve nihayet katma değer artışının koşulla-
+rına uzanır. Kapsam dışında bırakılan konular şunlardır: fikrî mülkiyet hukukunun ayrın-
+tıları, patent sisteminin tasarımı, rekabet hukukunun konsorsiyumlara bakışı ve makro-
+ekonomik istikrar politikalarının teknik araçları.
+2
+
+-- 2 of 16 --
+
+Ar-Ge’nin Ortaklaştırılabilir ve Ortaklaştırılamaz Kat-
+manları
+Katman ayrımı
+Sektörler kendiliğinden şu çizgiyi çizer. Rekabet öncesi katmanda temel fizik ve kimya, öl-
+çüm ve test yöntemleri, güvenlik protokolleri, arayüz standartları ve ortak altyapı bulunur.
+Bu alanda bilginin paylaşılması hiçbir firmanın pazar payını değiştirmez, buna karşılık her
+firmanın bireysel maliyetini düşürür. Rekabetçi katmanda ise ürün mimarisi, üretim sü-
+reci parametreleri, verim (yield ) optimizasyonu ve tasarım tercihleri yer alır. Burada bilgi
+doğrudan kâr marjına dönüştüğü için paylaşılmaz.
+Ayrımın somut hâli yarıiletken sektöründe görülebilir. Aşırı morötesi litografi (extreme
+ultraviolet lithography, EUV) teknolojisinin fiziksel çalışma ilkeleri konsorsiyum üyeleri
+arasında ortak geliştirilir ve yayımlanır; buna karşılık belirli bir üretim hattında o ma-
+kineden yüksek verim elde etmeyi sağlayan parametre kümesi paylaşılmaz. Aynı makine,
+aynı yayımlanmış bilgi, farklı sonuçlar.
+Ortaklaştırmayı sınırlayan mekanizmalar
+Getiri kaynağının ortadan kalkması
+Bir firmanın araştırmaya kaynak ayırmasının iktisadi gerekçesi, ürettiği bilgiye bir süre tek
+başına sahip olmaktan doğan geçici üstünlüktür. Tüm firmalar aynı teknolojiye aynı anda
+sahip olduğunda rekabet fiyat boyutuna iner ve marj sıfıra doğru baskılanır. Bu durumda
+ortak havuzu finanse etme teşviki de ortadan kalkar; sistem kendi finansman kaynağını
+tüketir. Bu nedenle ortaklaştırma yalnızca getirinin zaten yakalanamadığı alanlarda, yani
+rekabet öncesi katmanda istikrarlıdır.
+Bilginin belgelenememesi
+Ar-Ge çıktısı bir rapordan ibaret değildir. Çıktının önemli bir kısmı, o raporu üreten
+ekipteki sezgi, başarısız denemelerin hafızası ve hangi koşulda hangi parametrenin nasıl
+davrandığına dair birikimdir. Bu bilgi açık kurallar hâlinde yazılamadığı için belge yoluyla
+aktarılamaz (Polanyi, 1966). Merkezî bir kurum raporu dağıtabilir, ancak raporu üretebilir
+kılan yetkinliği dağıtamaz.
+Bunun tarihsel deneyi Sovyet araştırma-üretim ayrımıdır. Araştırma bilimsel araştırma
+enstitülerinde (nauçno-issledovatelskiy institut, NII), üretim ise ayrı fabrikalarda merkezî-
+leştirilmişti. Sonuç, uluslararası düzeyde güçlü bir teorik üretim ile buna karşılık gelmeyen
+bir ürün performansı oldu; kurumsal ayrım, tasarım ile üretim arasındaki geri besleme
+döngüsünü kesti.
+Doğru yolun önceden bilinememesi
+Teknolojik gelişmede hangi çözüm yolunun tutacağı önceden bilinmez. Tek merkez tek
+bir bahis oynar; çok sayıda firmanın farklı yollar denemesi ise dışarıdan israf gibi görünen
+bir paralel arama sürecidir. Batarya kimyalarında lityum demir fosfat (LFP) ile nikel-
+manganez-kobalt (NMC) hatlarının uzun süre birlikte ilerlemesi ve aşı teknolojisinde me-
+sajcı RNA (messenger RNA, mRNA) yaklaşımının yıllarca marjinal kalıp sonradan öne
+3
+
+-- 3 of 16 --
+
+çıkması bu yapının örnekleridir. Merkezîleştirmenin asıl maliyeti harcama tasarrufu değil,
+varyans kaybıdır: denenmeyen yolun tutup tutmayacağı hiçbir zaman öğrenilemez. Ev-
+rimsel iktisat yazını teknolojik değişimi tam olarak böyle bir arama ve eleme süreci olarak
+modeller (Nelson ve Winter, 1982).
+Tercihlerin birleştirilememesi
+“Sektörün isteğini harmanlamak” ifadesi pratikte bir tercih birleştirme problemidir. Bü-
+yük ölçekli oyuncu ile küçük ölçekli oyuncunun öncelikleri çatışır; herkesi memnun etmeyi
+hedefleyen çıktı en küçük ortak paydaya iner. Standart kuruluşlarında bir özelliğin şartna-
+meye girmesinin yıllar sürmesi bu mekanizmanın gözlemlenebilir sonucudur. Ayrıca fay-
+danın firmalar arasında asimetrik dağılması, katkı payının belirlenmesini çözümsüz kılar
+ve ya bedavacılığa ya da büyük oyuncuların yapıdan çekilmesine yol açar.
+Tasarımın üretimden ayrılamaması
+Tasarım tercihleri, hat kabiliyeti ve tedarik zinciri birbirine bağlıdır. Dışarıdan gelen “en
+iyi tasarım”, mevcut üretim hattında gerçekleştirilemiyorsa değersizdir. Bir buluşun geti-
+risini yakalayanın çoğu zaman buluşu yapan değil, onu üretip dağıtabilecek tamamlayıcı
+varlıklara (complementary assets) sahip olan taraf olduğu gözlemi bu bağın iktisadi ifa-
+desidir (Teece, 1986).
+Ortaklaştırmanın kazandığı koşullar
+Ortaklaştırma üç koşul birlikte sağlandığında üstünlük taşır: sabit maliyet tek bir firmanın
+karşılayamayacağı büyüklüktedir; çıktı standartlaştırılabilir niteliktedir; ve uyumsuzluğun
+maliyeti farklılaşmanın getirisinden yüksektir. Evrensel seri veri yolu (universal serial bus,
+USB) arayüzü, mobil iletişim standartları ve işletim sistemi çekirdekleri bu üç koşulun bir-
+likte sağlandığı örneklerdir. Koşullar sağlanmadığında dağınık Ar-Ge, savurgan göründüğü
+hâlde daha verimlidir.
+4
+
+-- 4 of 16 --
+
+Sektörel Ortak Yazılım: Dikey Ürün Modeli
+Modelin mantığı
+Belirli bir sektördeki çok sayıda firmaya aynı yazılım ürününü sunan iş modeli dikey
+hizmet olarak yazılım (vertical software as a service, dikey SaaS) olarak adlandırılır.
+Modelin işlerlik kazanmasının koşulu, hedef sektörün yazılım üzerinden rekabet etmiyor
+olmasıdır. Tekstil üreticileri kumaş kalitesi, fiyat, teslimat hızı ve müşteri ilişkisi üzerinden
+rekabet eder; üretim planlama yazılımı bu firmalar açısından rekabet öncesi katmanda yer
+alır. Dolayısıyla ortaklaştırılması, yukarıda tanımlanan sınırlamalarla çelişmez.
+Modelin iktisadi mantığı iki yönlüdür. Birincisi maliyet paylaşımıdır: aynı geliştirme har-
+caması çok sayıda müşteriye bölünür. İkincisi ve daha önemlisi öğrenme birikimidir. Kendi
+yazılım ekibini istihdam eden bir firma yalnızca kendi hatalarından öğrenirken, çok müş-
+terili tedarikçi tüm müşterilerinin hatalarından öğrenir. Bu birikim zamanla tedarikçinin
+asıl varlığı hâline gelir; ürünün kaynak kodu değil, sektöre dair operasyonel bilgi taklit
+edilmesi zor olan kısımdır.
+Özelleştirme batağı
+Modelin en sık gözlemlenen başarısızlık biçimi, ortak sanılan kısmın uygulamada dar
+çıkmasıdır. Aynı sektördeki iki firmanın süreçleri yüzeyde benzer görünür ancak ayrıntıda
+ayrışır: biri fason üretim yaparken diğeri kendi markasıyla üretir, biri ihracat ağırlıklı
+çalışırken diğeri iç piyasaya yöneliktir.
+Bu ayrışma karşısında her müşteriye özel geliştirme yapılması, birkaç yıl içinde tek bir
+ürün yerine birbirinden bağımsız çok sayıda sistemin bakımını gerektiren bir yapıya yol
+açar. Bu duruma özelleştirme batağı adı verilebilir: firma yazılım ürünü sattığını varsa-
+yarken fiilen paralel danışmanlık projeleri yürütmektedir ve ölçek ekonomisi hiçbir zaman
+oluşmaz. Yapısal çözüm, çekirdeğin tüm müşterilerde aynı kalması ve farklılığın yalnızca
+yapılandırma parametreleriyle karşılanmasıdır; kod tabanı dallanmaz.
+Veri paylaşımı itirazı
+Rakip firmalara aynı tedarikçi üzerinden hizmet verilmesine yöneltilen standart itiraz,
+verilerin üçüncü bir tarafta toplanmasıdır. İtiraz yerindedir ancak yanlış nesneye yönelik-
+tir: firmaların korumak istediği şey veri değil, rekabet bilgisidir. Tedarikçi kimliği, alış
+fiyatı, müşteri listesi ve marj bilgisinin dışarı çıkması sakıncalıdır; sipariş kaydının hangi
+alanlardan oluştuğu bilgisinin paylaşılmasında ise sakınca yoktur.
+Buradan çözümün yapısı çıkar: veri değil, format ortaklaştırılır. Kurulacak şey mer-
+kezî bir veri havuzu değil, ortak bir tanımlar kümesidir. Sipariş, fason emri, numune,
+ürün kodu ve sevkiyat kayıtlarının alan yapısı standartlaştırılır; her firmanın verisi kendi
+denetiminde kalır. İki firma birbirine veri gönderdiğinde aynı yapıyı kullanmış olurlar.
+Bu yaklaşımın uygulama açısından önemli bir üstünlüğü vardır: standardın oluşturulması
+için hiçbir firmadan veri talep edilmez. Türkiye’de elektronik fatura uygulamasının yerleş-
+mesi bu mantığın örneğidir; kamu otoritesi muhasebe yazılımı üretmemiş, faturanın veri
+yapısını standartlaştırmış, ürün geliştirmeyi piyasaya bırakmıştır.
+5
+
+-- 5 of 16 --
+
+Ortak havuz gerektiğinde
+Kıyaslama (benchmarking) ve sektör ortalaması üretimi gibi bazı çıktılar ancak toplulaş-
+tırılmış veriyle mümkündür. Bu durumda kurulan yapı üç ilkeye dayandırılır. Birincisi
+kimliksizleştirmedir: dışarıya yalnızca toplulaştırılmış değerler verilir ve tersine mühen-
+dislikle tek bir firmanın ayrıştırılmasını önlemek için asgari katılımcı sayısı şartı konur.
+İkincisi mülkiyettir: havuzu işleten yapı kâr amacı gütmez ve mülkiyeti katılımcılardadır.
+Üçüncüsü karşılıklılıktır: veri veren rapor alır, vermeyen almaz.
+Verinin hiçbir koşulda firma dışına çıkmaması istendiğinde, modelin her katılımcının kendi
+sunucusunda eğitildiği ve yalnızca öğrenilen parametrelerin merkeze aktarıldığı federatif
+öğrenme (federated learning) yaklaşımı teknik bir seçenek oluşturur. Bu yaklaşımın ol-
+gunluk gereksinimi yüksektir ve genellikle ilk aşamanın değil sonraki aşamaların aracıdır.
+Avrupa’da otomotiv tedarik zinciri için kurulan Catena-X girişimi bu mimarinin büyük
+ölçekli bir örneğidir: merkezî havuz yerine ortak kimlik ve standart altyapısı kurulmuş,
+veri her katılımcıda kalmış ve yalnızca taraflar arası izinle akmıştır. Estonya’nın X-Road
+altyapısı da kamu kurumları arasında aynı ilkeyi uygular; her kurum kendi verisini tutar,
+altyapı yalnızca güvenli sorgu ve iz kaydı sağlar.
+6
+
+-- 6 of 16 --
+
+Kamunun Rolü: Arıza Teşhisi ve Araç Seçimi
+Doğrudan üretimin sınırı
+Kamu otoritesinin sektörel yazılım ürününü doğrudan yaptırması, tekrarlayan bir başarı-
+sızlık kalıbıdır. Nedeni yapısaldır: kamu otoritesi bu ürünün kullanıcısı değildir. Kullanıcı
+olmayan bir kurumun şartnamesini yazdığı ürün, hiçbir firmanın somut sıkıntısına denk
+gelmez ve tamamlandığında kullanılmaz.
+Kamunun işlevi ürün üretmek değil, firmaların bu ürünü kendi kaynaklarıyla satın almasını
+engelleyen arızayı teşhis etmektir. Bir faaliyet kârlıysa ve yapılmıyorsa, arıza dört tipten
+biridir.
+Dört arıza tipi
+• Bilgi arızası: Firma neyin mümkün olduğunu bilmediği için yatırımın getirisini
+hesaplayamaz ve riske girmez.
+• Koordinasyon arızası: Tek başına dönüşen firmanın kazancı sınırlıdır; kazanç an-
+cak tedarik zinciri birlikte dönüştüğünde ortaya çıkar ve kimse ilk hamleyi yapmak
+istemez.
+• Beceri arızası: Sektörü bilen yazılımcı ya da yazılımı bilen sektör uzmanı bulun-
+maz; iki alan arasında aktarım yapacak kişi yoktur.
+• Finansman arızası: Firma faydayı görür ve talep eder, ancak nakit akışı uzun geri
+dönüş süresini kaldırmaz.
+Bu dört arıza farklı araçlar gerektirir. Yanlış teşhis konduğunda, doğru araç bile sonuç
+üretmez.
+Araçlar
+Gösteri etkisi
+Sınırlı sayıda firmada, maliyetin önemli kısmı kamu tarafından karşılanarak pilot uygu-
+lama yapılır. Belirleyici koşul, sonuçların sayısallaştırılması ve kamuya açık biçimde ya-
+yımlanmasıdır. Programın asıl çıktısı yazılım değil, bu rapordur; diğer firmalar getiriyi
+somut rakamlarla gördüğünde kendi kaynaklarıyla yatırım yapar. Bu araç bilgi arızasına
+yöneliktir.
+Talep tarafının finansmanı
+Kamu otoritesi ürünü seçmek yerine firmaya belirli tutarda kullanım hakkı (voucher ) ve-
+rir; firma tedarikçisini piyasadan kendisi seçer. Kritik ayrıntı eşleştirme oranıdır: firmanın
+da kendi kaynağından katkı koyması gerekir. Kendi kaynağı bulunmayan firma projeye
+sahip çıkmaz; kaynak koyan firma ise tedarikçiyi denetler ve bu, kamunun kendi başına
+sağlayamayacağı bir kalite denetimini maliyetsiz üretir. Bu araç finansman arızasına yö-
+neliktir.
+7
+
+-- 7 of 16 --
+
+Ortak veri standardı
+Kamunun elindeki en düşük maliyetli ve en az kullanılan araçtır. Ürün geliştirilmez, ortak
+dil kurulur. Standart yürürlüğe girdiğinde üzerine kurulacak ürünleri piyasa üretir. Bu
+araç koordinasyon arızasına yöneliktir.
+Personel dolaşımı
+Sektör bilgisi taşıyan mühendis ile yazılım geliştiricisini aynı proje içinde çalıştıran prog-
+ramlar, iki alan arasındaki aktarımı sağlar. Sektör bilen yazılımcı yetiştirmek yıllar alırken
+mevcut iki profili eşleştirmek aylar alır. Uygulamalı araştırma enstitüsü modelinin temel
+işlevlerinden biri budur. Bu araç beceri arızasına yöneliktir.
+Program tasarım kuralları
+Kaybedeni kesebilme
+Sanayi politikasının başarısı doğru seçimi yapmakta değil, yanlış seçimi hızla sonlandır-
+makta belirir. Her programa başlangıçta çıkış koşulu ve süre sınırı yazılır. Sonlandırılama-
+yan destek, desteklenen firmayı desteğe bağımlı kılar ve dönüşümü hızlandırmak yerine
+yavaşlatır.
+Yakınlık ile bağımsızlığın dengesi
+Kamu otoritesi sektörden kopuk olduğunda ihtiyacın ne olduğunu tespit edemez; fazla iç
+içe geçtiğinde ise büyük oyuncuların çıkarına çalışan bir kaynak dağıtım mekanizmasına
+dönüşür. Bu dengenin kurumsal adı embedded autonomy, yani yerleşik özerkliktir (Evans,
+1995). Dengeyi sağlayan şey kişisel ilişki değil kurallardır: ölçütlerin açık olması, sonuçların
+yayımlanması ve aynı firmaya süresiz destek verilmemesi.
+Doğru başarı ölçütü
+Programın başarı göstergesi dağıtılan bütçe ya da desteklenen proje sayısı değil, yayı-
+lımdır: destek almadan aynı çözümü satın alan firma sayısı. Bu sayı artmıyorsa program
+amacına ulaşmıyordur ve harcama büyüklüğü bunu değiştirmez.
+8
+
+-- 8 of 16 --
+
+Kamu Alımı Yoluyla Talep Yaratma
+Sübvansiyon ile alım taahhüdü arasındaki fark
+Kamu otoritesinin teknoloji geliştirmeye yönelik iki farklı müdahale biçimi vardır ve etki-
+leri belirgin biçimde ayrışır.
+Araştırma sübvansiyonunda kamu, belirli bir teknolojinin geliştirilmesi için kaynak aktarır.
+Firma kaynağı alır, bir prototip üretir ve rapor sunar. Alıcısı bulunmadığı için çıktının
+ürüne dönüşme zorunluluğu yoktur.
+Alım taahhüdünde ise kamu, sağlanması gereken performans şartını ilan eder ve şartı
+sağlayan üründen belirli miktarda satın alacağını taahhüt eder. Firma kendi kaynağını
+yatırır, çünkü sonunda gerçek bir satış vardır; başaramadığında ise kaynağı geri alamaz.
+İkinci biçimin üstünlükleri şunlardır. Riski doğru tarafa yerleştirir: kaynağını koyan fir-
+manın dikkati niteliksel olarak değişir. Değerlendirme problemini ortadan kaldırır: kamu
+otoritesinin hangi projenin daha umut verici olduğunu bilmesi gerekmez, ölçüt teknik
+yargı değil sonuçtur. Ürünün gerçek olmasını zorunlu kılar: satın alınan ürün kullanılır,
+arızalanır ve geri besleme üretir; öğrenme döngüsü ancak bu koşulda kurulur. Nihayet öl-
+çek doğurur: garantili hacim bulunduğunda firma üretim hattı kurar, birim maliyet düşer
+ve ürün sivil pazara açılabilir hâle gelir.
+Bu mekanizmanın tarihsel örnekleri, entegre devre teknolojisinin havacılık ve savunma
+alımlarıyla olgunlaşması, internet öncüsü ağ mimarisinin ve küresel konumlandırma sis-
+teminin (global positioning system, GPS) kamu talebiyle geliştirilmesidir. Bu örneklerde
+kamu, araştırmayı fonlamaktan çok ürünün ilk ve garantili alıcısı olmuştur (Mazzucato,
+2013).
+Zorlu şartnamenin koşulları
+Mekanizmanın çalışması dört koşula bağlıdır.
+• Talep sürekli ve öngörülebilir olmalıdır. Tek seferlik alım yatırım kararı do-
+ğurmaz; firma üretim hattı kuracaksa çok yıllı hacim görmelidir.
+• Şart sonuca yazılmalı, yönteme yazılmamalıdır. Belirli bir bileşen ya da marka
+şart koşulduğunda firma geliştirme yapmaz, ithal eder. Sağlanması gereken perfor-
+mans tanımlandığında ise çözüm arayışı başlar.
+• Zorluk düzeyi doğru ayarlanmalıdır. Mevcut ürünlerle karşılanabilen bir şart
+hiçbir gelişme doğurmaz; ulaşılamayacak bir şart ise ihalenin boş kalmasına ya da
+tek firmaya kilitlenmesine yol açar. Uygun aralık, bugün hazır ürünü bulunmayan
+ancak öngörülebilir bir sürede geliştirilebilecek düzeydir.
+• Ölçüm altyapısı bulunmalıdır. Şartın sağlanıp sağlanmadığı bağımsız ve akre-
+dite biçimde ölçülemiyorsa şartname kâğıt üzerinde kalır. Bu nedenle mekanizmanın
+gerçek ön koşulu araştırma desteği değil, test ve belgelendirme kapasitesidir. Bu
+kapasite bir kez kurulduğunda yalnızca ilgili programa değil, aynı alandaki tüm
+ürünlerin ihracat belgelendirmesine hizmet eder.
+Mekanizmanın kötüye kullanım biçimi, şartnamenin belirli bir firmanın mevcut ürününe
+göre yazılmasıdır; bu durumda araç rekabeti kapatan bir kaynak aktarım düzeneğine dö-
+9
+
+-- 9 of 16 --
+
+nüşür. Ayırt edici ölçüt, şartın sonuca yazılmış olması ve birden fazla firmanın yarışabil-
+mesidir.
+Devletin müşteri olmadığı alanlar
+Kamu alımı mekanizması yalnızca kamunun zaten alıcı olduğu alanlarda kullanılabilir:
+savunma, sağlık, ulaşım, enerji ve kamu altyapısı. Tüketici ürünlerinde – oyun, moda,
+kişisel elektronik – kamu müşteri değildir ve talebi şekillendiremez.
+Bu alanlarda seçici sanayi politikası, yani belirli firma ya da ürünlerin desteklenmesi,
+tüketici tercihinin önceden bilinememesi nedeniyle sistematik olarak başarısız olur. İşleyen
+araçlar yataydır; yani kazananı piyasanın seçtiği, herkese açık araçlardır:
+• İnsan havuzu. Bu ürünlerde tek belirleyici girdi nitelikli insandır. Etkili müda-
+hale eğitim ve göç politikasıdır: nitelikli kişinin yetişmesi, ülkeye gelenin kalması ve
+gidenin dönmesi kolaylaştırılır.
+• Risk sermayesi. Tüketici ürünü geliştirme sürecinde denemelerin küçük bir kısmı
+tutar ve tutanlar yatırımı katlayarak karşılar. Bu dağılıma teminat esaslı banka kre-
+disi uymaz. Kamunun buradaki işlevi doğrudan yatırım yapmak değil, özel fonlara
+kaynak koyup seçimi onlara bırakmaktır. İsrail’in 1993’te başlattığı Yozma programı
+bu modelin en çok incelenen örneğidir; kamu, kâr payından feragat ederek özel ya-
+tırımcıya çıkış hakkı tanımış ve hedefi getiri elde etmek değil sektörü oluşturmak
+olarak tanımlamıştır (Avnimelech ve Teubal, 2006).
+• Başarısızlığın ucuz olması. Şirket kapatmanın kolaylığı, iflasın girişimciyi kalıcı
+olarak dışlamaması ve çalışanın iş değiştirmesinin geçim riski yaratmaması. Deneme-
+lerin çoğunun tutmadığı bir alanda, başarısızlığın maliyeti yüksekse deneme sayısı
+düşer. Silikon Vadisi’nin ayırt edici özelliği olarak sıklıkla eğitim kurumları gösterilse
+de, karşılaştırmalı çalışmalar iş gücünün firmalar arasında serbestçe dolaşabilmesini
+ve rekabet yasağı sözleşmelerinin uygulanamaz olmasını daha belirleyici bulmuştur
+(Saxenian, 1994; Gilson, 1999).
+• Dağıtıma müdahale edilmemesi. Bu ürünlerde dağıtım kanalları küresel ve açık-
+tır. Kamunun yapabileceği sınırlıdır; buna karşılık ödeme altyapısını zorlaştırmamak
+ve sermaye hareketlerini kısıtlamamak doğrudan etkilidir.
+• Kümelenme. Bilgi bu alanlarda resmî kanallardan değil, aynı coğrafyada bulunan
+kişiler arasındaki geçişlerle yayılır. Politikanın hedefi tek firma değil yoğunluktur.
+• Talebin seçici kalması. Kamu alımının bu alandaki karşılığı, iç pazarın talep-
+kâr olmasıdır. Korumacı düzenlemeyle rekabetten yalıtılmış pazar, kalite sinyalini
+kesintiye uğratır (Porter, 1990).
+Bu iki durumun ayrımı şu biçimde formüle edilebilir: kamu müşteriyse talebi şekillendirir
+ve seçici davranabilir; müşteri değilse arz koşullarını şekillendirir ve seçici davranamaz.
+İki durumu birbirine karıştırmak yaygın bir hatadır.
+10
+
+-- 10 of 16 --
+
+Verimlilikten Katma Değere Geçiş
+Verimlilik ile yenilik arasındaki ayrım
+Süreç iyileştirme, ortak yazılım altyapısı ve veri standardizasyonu gibi müdahaleler mevcut
+işin daha düşük maliyetle yapılmasını sağlar. Yenilik ise yapılan işin kendisinin değişme-
+sidir. İkisi akrabadır ancak biri diğerini kendiliğinden doğurmaz. Verimlilik programları,
+üzerine yenilik kurulabilecek bir zemin oluşturur; zeminin kendisi yenilik üretmez.
+Temel denklem
+Bir üretim faaliyetinin sağladığı getiri iki bileşenin bileşkesidir: ne üretildiği ve o ürünü
+kaç aktörün üretebildiği. İkinci bileşen çoğu zaman belirleyicidir. Yüksek katma değerli
+üretim, teknolojik karmaşıklığın yüksekliği değil, yapabilenin az olması anlamına gelir.
+Bazı hassas imalat ve makine sektörleri teknolojik olarak çığır açıcı olmadıkları hâlde
+yüksek marj taşırlar; çünkü gerektirdikleri birikim uzun sürede oluşur ve kısa yoldan
+kopyalanamaz.
+Buradan pratik bir sonuç çıkar: hedef “yüksek teknoloji üretmek” olarak değil, taklit edil-
+mesi zor bir konum edinmek olarak tanımlanmalıdır. İki tanım çoğu zaman örtüşür
+ancak her zaman değil.
+Geçişin dört şartı
+Yakınlık
+Ülkeler ve firmalar rastgele sektöre geçmezler; hâlihazırda ürettikleri ürünlerin gerektir-
+diği yeteneklere komşu olan alanlara kayarlar. Bu düzenlilik ürün uzayı (product space)
+çalışmalarında ampirik olarak gösterilmiştir: bir ekonominin gelecekte üreteceği ürünler,
+hâlihazırda ürettiklerine yetenek bakımından yakın olanlar arasından çıkar (Hidalgo ve
+diğerleri, 2007; Hausmann ve Hidalgo, 2009).
+Bunun uygulamadaki karşılığı, “hangi sektöre girmeliyiz” sorusunun cevabının en kârlı
+sektör değil, mevcut kabiliyete komşu olan en kârlı sektör olmasıdır. Her adımda mevcut
+yetenek kümesinin büyük kısmı korunur ve üzerine sınırlı bir ekleme yapılır. Uzak alan-
+lara sıçramayı hedefleyen programların başarısızlık oranının yüksek olması, altta taşıyıcı
+yeteneğin bulunmamasıyla açıklanır.
+Öğrenme hızı
+Karmaşık ürünlerde belirleyici olan, sahip olunan bilgi miktarı değil birim zamanda ya-
+pılabilen deneme sayısıdır. Bu ürünlerin ortak özelliği ilk denemede istenen performansı
+vermemeleridir; öne geçen taraf, hatayı daha hızlı tespit edip düzeltebilendir. Üretim
+deneyimi arttıkça birim maliyetin düzenli biçimde düşmesi olgusu, öğrenmenin üretim
+faaliyetinin kendisinden doğduğunu gösterir (Arrow, 1962).
+Yüksek öğrenme hızı üç koşulu gerektirir: denenecek somut bir problemi tanımlayan gerçek
+talep, ölçüm ve test altyapısıyla sağlanan hızlı geri besleme, ve başarısızlığın kurumu
+ortadan kaldırmaması. Üçü sağlanmadığında araştırma bütçesinin büyüklüğü öğrenme
+hızını yükseltmez.
+11
+
+-- 11 of 16 --
+
+Seçilim baskısı
+Destek mekanizmasının süreli ve performansa bağlı olması, kaynağın başaramayan aktör-
+lerden başarabilenlere geçmesini sağlar. Doğu Asya ve Latin Amerika sanayileşme dene-
+yimlerinin karşılaştırması bu noktada yoğunlaşır: benzer destek araçları kullanılmış, ancak
+performans ölçütünü tutturamayan firmanın desteğinin kesilip kesilmediği sonuçları ayrış-
+tırmıştır (Amsden, 1989). Politika araçlarının kendisi değil, uygulanan disiplin belirleyici
+olmuştur.
+Vade
+Yüksek katma değerli üretime geçişin getirisi on yıl ölçeğindedir. Yüksek enflasyon ve
+yüksek reel faiz koşullarında hiçbir rasyonel yatırımcı bu vadeye kaynak bağlamaz; kay-
+nak daha kısa vadeli ve daha likit alanlara yönelir. Bu nedenle makroekonomik istikrar
+teknoloji politikasının yan konusu değil ön koşuludur.
+Vade koşulunun ikinci bileşeni politik sürekliliktir. Yönetim değişiminde sonlandırılan
+programlar, hiç başlatılmamış programlardan daha maliyetlidir; çünkü hem kaynağı tü-
+ketir hem de sektörde gelecek programlara karşı güvensizlik oluştururlar.
+Başlangıç sektörü kavramı
+Emek yoğun tüketim malı üretimi – tekstil bunun en yaygın örneğidir – düşük giriş engelli
+ve çok sayıda ülkenin yapabildiği bir faaliyettir. Bu yapıda verimlilik artışının önemli
+bir kısmı üreticide kalmaz. Fason üretim ilişkisinde alıcı, tedarikçinin maliyet yapısını
+görebilmekte ve alternatif tedarikçilere erişebilmektedir; dolayısıyla maliyet düşüşü fiyat
+pazarlığında alıcıya aktarılır. Verimlilik programı bu ilişkide üreticiyi daha iyi bir tedarikçi
+hâline getirir, tedarikçi konumundan çıkarmaz.
+Katma değer merdiveninde yukarı çıkış, fiyatın üretici tarafından belirlenebilmesini ge-
+rektirir; bu da marka, özgün tasarım ya da başkalarının sağlayamadığı teknik kabiliyetten
+birine dayanır. Tarihsel örüntü bu noktada nettir: sanayileşme sürecini tamamlamış ülke-
+lerin hemen tamamı tekstille başlamış ancak yükselişlerini tekstilden çıkarak gerçekleştir-
+mişlerdir. Tekstil bir başlangıç sektörüdür; sermaye biriktirir, iş gücünü sanayi disiplinine
+alıştırır ve ihracat rekabetini öğretir, ardından devredilir.
+Bu nedenle sorulması gereken soru, mevcut sektörde nasıl yukarı çıkılacağı değil, o sek-
+törde biriken kabiliyetin hangi komşu alana taşınabileceğidir. Tekstil örneğinde bu alan-
+lar teknik tekstil, kompozit malzeme ve malzeme mühendisliğidir; oradan da otomotiv,
+savunma ve sağlık tedarik zincirlerine bağlanır. Bu çerçevede verimlilik programının ka-
+lıcı değeri, kaynak sektörü ayakta tutmak değil, geçişi mümkün kılacak altyapıyı – veri
+standartları, test ve belgelendirme kapasitesi, sektör bilgisine sahip yazılım firmaları –
+bırakmasıdır. Bu varlıklar, kaynak sektör küçülse dahi kullanılabilir kalır.
+12
+
+-- 12 of 16 --
+
+Başarısızlık Yönetimi: Firma Ölür, Kabiliyet Ölmez
+Yumuşak bütçe kısıtı
+Kamu programlarında hedeflenen performansı tekrar tekrar tutturamayan bir firmanın
+kaynak aktarımıyla ayakta tutulması iki ayrı zarar üretir. Birincisi doğrudan kaynak kay-
+bıdır. İkincisi ve daha büyüğü, o firmanın elinde tuttuğu mühendis, tesis ve pazar payının
+başarabilecek aktörlere geçmemesidir; yani ölçülemeyen kayıp, doğmayan firmadır.
+Yumuşak bütçe kısıtının en tahrip edici sonucu davranışsaldır. Bir kez kurtarılan firma
+için amaç fonksiyonu değişir: ürün geliştirmek yerine destek almak optimize edilir, araş-
+tırma kapasitesi yerine ilişki yönetimi kapasitesi büyür (Kornai, 1980). Bu değişim tek bir
+firmayla sınırlı kalmaz; desteklenmeyen rakip haksız rekabetle karşılaştığı için sektörün
+genel teşvik yapısı bozulur.
+Kabiliyetin yakalanması
+Firmanın tasfiyesine izin vermek gerekli olsa da yeterli değildir. Tasfiye sırasında kaybolan
+şey yalnızca sermaye değil, yıllar içinde birikmiş ve belgelenemeyen bilgidir; ekip dağıldı-
+ğında bu bilgi yeniden oluşturulamaz. Bu nedenle uygulanabilir hedef, firmayı kurtarmak
+değil kabiliyeti sektörde tutmaktır. Kullanılan araçlar şunlardır:
+• Ekip henüz dağılmadan devir, birleşme ve satın alma işlemlerinin kolaylaştırılması
+• Anahtar personelin aynı sektörde istihdam edilmesini kolaylaştıran düzenlemeler
+• Program sonlandırılırken üretilen tasarım belgeleri, test verileri ve teknik doküman-
+tasyonun kamuya ya da devralan tarafa geçmesi; bu koşulun sözleşmeye başlangıçta
+yazılması
+• İflas hukukunun, başarısız olan girişimciyi kalıcı olarak faaliyet dışına itmemesi
+Bu araçların ortak amacı, başarısızlığı önlemek değil ucuzlatmaktır. Başarısızlığın ma-
+liyeti yüksek olduğunda hiçbir aktör riskli işi üstlenmez; bu durumda yalnızca sonucu
+önceden belli olan işler yapılır ve öğrenme durur.
+Kesme kriteri
+Bir programın sürdürülüp sürdürülmeyeceği, başarısızlığın büyüklüğüne değil niteliğine
+bakılarak belirlenir.
+Sürdürme yönünde değerlendirilen durumlar: teknik hedefe ulaşılamamış ancak ölçülebilir
+ilerleme kaydedilmiş olması, sorunun teşhis edilmiş olması, ekibin bir arada durması ve
+öğrenilenin aktarılabilir hâlde bulunması. Zorlu hedefli programlarda ilk denemede ba-
+şarısızlık beklenen sonuçtur; her denemenin tutturulduğu bir programda hedef yeterince
+zorlu değildir.
+Sonlandırma yönünde değerlendirilen durumlar: aynı hatanın tekrarlanması, ilerleme ra-
+poru üretilirken ürün üretilmemesi, ekibin dağılmış olması ve sorunun kabiliyet değil niyet
+düzeyinde bulunması.
+Bu kararı yönetilebilir kılan yapı, programın küçük dilimlere bölünmesi ve her dilim so-
+nunda önceden yazılmış ölçütlerle değerlendirilmesidir. Bu düzenlemede sonlandırma ka-
+13
+
+-- 13 of 16 --
+
+rarı istisnai bir müdahale değil, sözleşmenin olağan işleyişidir. Sonlandırılması siyasi ma-
+liyet doğuran programlar, sonlandırma anını başlangıçta tanımlamamış olanlardır.
+Başarılı firmanın çıkışı
+Hedefe ulaşan firmanın süresiz desteklenmesi, daha az görünür ancak benzer sonuçlar
+doğuran bir hatadır. Başarı, desteğin sonlandırılma gerekçesi olarak tanımlanmalıdır; aksi
+hâlde en yetkin firma tek alıcıya bağımlı hâle gelir ve sivil pazara açılmaz.
+Sağlıklı yörünge, ilk sözleşmenin kamu alımıyla gelmesi, ardından ihracat ve sivil satış
+payının artarak kamu payının düşmesidir. Cirosunun büyük kısmı yıllarca tek bir kamu
+alıcısından gelen bir yapı, işletme olmaktan çok idari bir uzantıdır ve rekabetçi pazara
+girdiğinde ayakta kalamaz.
+Bu nedenle sözleşmelere çoğu zaman geri ödenebilirlik koşulu ya da sivil satıştan pay alma
+hükmü konur. Riski üstlenen tarafın getirinin bir kısmını da alması hem dağıtımsal olarak
+tutarlıdır hem de programın kendi kaynağını kısmen üretmesini sağlar.
+14
+
+-- 14 of 16 --
+
+Sonuç
+Notta kurulan ayrımların pratik karşılığı, ortaklaştırma kararının ürün düzeyinde değil
+katman düzeyinde verilmesi gerektiğidir. Bir faaliyetin ortaklaştırılıp ortaklaştırılamaya-
+cağını belirleyen ölçüt, o faaliyetin teknik niteliği değil, katılımcıların göreli konumunu
+değiştirip değiştirmediğidir. Bu ölçüt uygulandığında, aynı sektörde bazı faaliyetlerin or-
+tak yürütülüp bazılarının yürütülememesi tutarsızlık değil, doğru ayrımın sonucudur.
+İkinci pratik sonuç, kamu müdahalesinin araç seçiminin önce arıza teşhisine bağlanmasıdır.
+Bilgi arızasına kaynak aktarımıyla, finansman arızasına eğitimle, koordinasyon arızasına
+tek tek firma desteğiyle karşılık verilmesi, doğru araçların yanlış problemlere uygulanma-
+sıdır ve sonuç üretmez. Teşhis atlandığında müdahalenin başarısızlığı araca atfedilir; oysa
+sorun eşleştirmededir.
+Üçüncü sonuç, kamunun alıcı sıfatıyla sahip olduğu kaldıracın araştırma sübvansiyonun-
+dan yapısal olarak güçlü olmasıdır. Bu güç, kamunun teknik yargı yürütme zorunluluğunu
+ortadan kaldırmasından ve riski kaynağı koyan tarafa taşımasından doğar. Aynı nedenle
+bu kaldıraç, kamunun alıcı olmadığı alanlarda kullanılamaz; oralarda seçici müdahale sis-
+tematik olarak yanlış aktörleri seçer.
+Sınırlılıklar
+Notta kurulan çerçevenin bulanıklaştığı üç durum vardır.
+Birincisi, rekabet öncesi ile rekabetçi katman arasındaki sınır sabit değildir. Bugün rekabet
+konusu olan bir kabiliyet, teknoloji olgunlaştıkça standart bileşene dönüşebilir; tersi de
+mümkündür. Sınırın nerede çizileceği ampirik bir sorudur ve sektörden sektöre, dönemden
+döneme değişir.
+İkincisi, kesme disiplini ile kabiliyetin korunması arasındaki denge kural hâline getirilemez.
+Her iki uçta da tanımlı bir hata vardır – erken kesme öğrenmeyi keser, geç kesme kaynağı
+kilitler – ancak doğru zamanlamayı belirleyen genel bir ölçüt bulunmamaktadır. Aşamalı
+sözleşme yapısı bu belirsizliği ortadan kaldırmaz, yalnızca kararı yönetilebilir aralıklara
+böler.
+Üçüncüsü ve en önemlisi, notta kullanılan örneklerin tamamı işleyen yapılardan seçilmiş-
+tir. Aynı mantıkla kurulup sonuç üretmeden kapanmış konsorsiyum, standart girişimi ve
+destek programlarının sayısı bilinmemektedir; bu nedenle örneklerin gösterdiği tutarlı-
+lık kısmen hayatta kalan örnekler üzerinden bakmanın (survivorship bias, hayatta kalan
+yanlılığı) sonucudur. Çerçevenin açıklayıcı gücü, öngörü gücüyle karıştırılmamalıdır.
+Açık kalan sorular
+Ortak veri standardının hangi asgari katılımcı sayısında kendi kendini sürdürür hâle gel-
+diği ve bu eşiğin altında kalan girişimlerin nasıl davrandığı belirlenmiş değildir. Benzer
+biçimde, kamu alımı yoluyla kazanılan kabiliyetin sivil pazara aktarım oranını neyin be-
+lirlediği – sözleşme yapısı mı, sektörün teknik niteliği mi, firmanın ölçeği mi – bu notta
+cevaplanmamıştır. Nihayet, seçilim baskısının uygulanabilmesi için gereken kurumsal ko-
+şulların hangileri olduğu ve bu koşulların bulunmadığı ortamlarda alternatif disiplin me-
+kanizmalarının kurulup kurulamayacağı açık bir sorudur.
+15
+
+-- 15 of 16 --
+
+Kaynaklar
+• Amsden, A. H. (1989). Asia’s Next Giant: South Korea and Late Industrialization.
+Oxford University Press.
+• Arrow, K. J. (1962). The Economic Implications of Learning by Doing. The Review
+of Economic Studies, 29(3).
+• Avnimelech, G. ve Teubal, M. (2006). Creating Venture Capital Industries That
+Co-Evolve with High Tech Clusters. Research Policy, 35(10).
+• Evans, P. (1995). Embedded Autonomy: States and Industrial Transformation. Prin-
+ceton University Press.
+• Gilson, R. J. (1999). The Legal Infrastructure of High Technology Industrial Dist-
+ricts. New York University Law Review, 74.
+• Hausmann, R. ve Hidalgo, C. A. (2009). The Building Blocks of Economic Comp-
+lexity. PNAS, 106(26).
+• Hidalgo, C. A., Klinger, B., Barabási, A.-L. ve Hausmann, R. (2007). The Product
+Space Conditions the Development of Nations. Science, 317.
+• Kornai, J. (1980). Economics of Shortage. North-Holland.
+• Mazzucato, M. (2013). The Entrepreneurial State. Anthem Press.
+• Nelson, R. R. ve Winter, S. G. (1982). An Evolutionary Theory of Economic Change.
+Harvard University Press.
+• Polanyi, M. (1966). The Tacit Dimension. Routledge.
+• Porter, M. E. (1990). The Competitive Advantage of Nations. Free Press.
+• Rodrik, D. (2004). Industrial Policy for the Twenty-First Century. CEPR Discussion
+Paper.
+• Saxenian, A. (1994). Regional Advantage: Culture and Competition in Silicon Valley
+and Route 128. Harvard University Press.
+• Teece, D. J. (1986). Profiting from Technological Innovation. Research Policy, 15(6).
+Catena-X, X-Road ve imec gibi kurumsal girişimlere yapılan atıflar kuruluşların kendi ka-
+muya açık tanıtım belgelerine dayanmaktadır; bu girişimlerin sonuçlarına ilişkin bağımsız
+değerlendirme kaynakları doğrulanmalıdır.
+16
+
+-- 16 of 16 --

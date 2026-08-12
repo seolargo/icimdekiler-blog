@@ -1,0 +1,527 @@
+Mühendislikte Nedensellik ve Kavramsal
+Ayrımlar
+Ömer Faruk Yavuz
+August 2026
+Özet
+Nedensellik, iki olay arasında birinin diğerini meydana getirdiği ilişkidir ve bir-
+likte görülmeden farklıdır: ayrımı kuran ölçüt, birincisi olmasaydı ikincisinin
+de olmayacağıdır. Bu karşı-olgusal tanım doğrudan gözlenemez, çünkü aynı
+sistemde hem müdahale edilmiş hem edilmemiş durum bir arada bulunmaz;
+dolayısıyla nedensel iddialar görülmez, çıkarsanır. Mühendislikte nedensellik
+üç ayrı işlevde kullanılır ve bunların karıştırılması yaygın bir hata kaynağıdır:
+tasarımda istenen nedensel bağın kurulması, teşhiste gözlenen sonuçtan geriye
+doğru nedenin çıkarılması, arıza incelemesinde ise sorumluluğun atfedileceği
+halkanın seçilmesi. Üçüncüsü fiziksel değil pratik bir seçimdir; gerçekte sonucu
+bir koşullar kümesi üretir ve bunlardan müdahale edilebilir olan “neden” diye
+adlandırılır. Nedenselliğin doğrusal biçimi geri besleme içeren sistemlerde çöker:
+döngüde neden sorusunun cevabı bulunmaz, tetikleyicinin ortadan kaldırılması
+sistemi düzeltmez. Nedensellik etrafında kümelenen ve mühendislik kararlarında
+fiilen kullanılan bir ayrımlar kümesi bulunmaktadır; bunlar altı başlıkta toplan-
+abilir ve her biri belirli bir hata sınıfını önler. Bu ayrımların bilinmemesinin
+maliyeti günlük iş üzerinde değil öğrenme üzerindedir: ayrımı adlandıramayan
+kişi doğru davranabilir ancak neden doğru davrandığını bilmediği için aynı hata
+sınıfını farklı kılıkta tekrar eder. Kayıp anlık değil bileşiktir.
+1
+
+-- 1 of 17 --
+
+Giriş
+Nedensellik (causality), iki olay arasında birinin diğerini meydana getirdiği
+ilişkiyi adlandırır. Bu ilişki, iki olayın birlikte görülmesinden — yani kore-
+lasyondan — farklıdır: korelasyon iki büyüklüğün birlikte değiştiğini bildirir,
+nedensellik birinin diğerini ürettiğini iddia eder.
+En yaygın tanım karşı-olgusaldır: A, B’nin nedeniyse, A gerçekleşmeseydi B
+de gerçekleşmeyecekti. Bu tanımın gücü test edilebilir bir soru üretmesindedir;
+zayıflığı ise sorunun doğrudan gözlenememesidir. Aynı hastaya ilacın hem ver-
+ildiği hem verilmediği bir durum yoktur. Dolayısıyla nedensel iddialar gözlemle
+değil çıkarımla kurulur ve bu çıkarımın dayandığı asıl araç müdahaledir: sisteme
+dokunup sonucun değişip değişmediğine bakmak.
+Hume (1748), nedenselliğin hiçbir zaman doğrudan algılanmadığını, algılananın
+yalnızca düzenli ardışıklık olduğunu ve “üretme” ilişkisinin duyularda değil zih-
+nin alışkanlığında bulunduğunu ileri sürmüştür. Bu itiraz çürütülmemiş, ancak
+pratikte aşılmıştır: nedensellik gözlemle değil müdahaleyle tanımlanarak. Pearl
+(2000), gözlem ile müdahale arasındaki bu farkı biçimsel olarak ayırmış ve ne-
+densel çıkarımı istatistiksel bağımlılıktan ayrı bir düzeye yerleştirmiştir.
+Türkçedeki terim, soru sözcüğünün kavramlaştırılmasıyla oluşmuştur: “ne-
+den” hem soruyu hem cevabı taşır. Batı dillerindeki karşılığı (causa) bu bağı
+taşımaz. Öztürkçeleştirme öncesinde Arapça kökenli “illiyet” kullanılmakta
+olup terim hukuk dilinde “illiyet bağı” biçiminde yaşamaktadır.
+Felsefı sınıflandırmada nedensellik metafiziğin, dar anlamda ontolojinin konusudur;
+çünkü olayların bağlı olduğu iddiası gerçekliğin ne olduğuna dair bir iddiadır.
+Buna karşılık tek bir dalda kalmaz: epistemolojide “nasıl bilinebilir”, bilim felse-
+fesinde “açıklama nedir”, ahlak felsefesinde “sorumluluk neyi gerektirir”, hukuk
+felsefesinde “zincirin neresinde kesilir” biçiminde yeniden ortaya çıkar. Aristote-
+les’in sisteminde ise bir alt başlık değil, bilginin ölçütüdür: bir şeyi bilmek onun
+nedenini bilmektir.
+Burada ele alınan kapsam, nedenselliğin mühendislik pratiğindeki kullanımı
+ve bu kullanımın etrafında kümelenen kavramsal ayrımlardır. Nedenselliğin
+metafizik statüsü, determinizm tartışması ve nedensel çıkarımın biçimsel araçları
+kapsam dışıdır.
+2
+
+-- 2 of 17 --
+
+Mühendislikte Nedenselliğin Üç Kullanımı
+Nedensellik mühendislikte tek bir işlev görmez. Birbirinden ayrı üç kullanım
+vardır ve bunların karıştırılması, çözülemeyen tartışmaların ve yanlış arıza teşhislerinin
+ortak kaynağıdır.
+Tasarım: nedensel bağın kurulması
+Bilim, var olan nedensel ilişkileri bulur; mühendislik, olmayanları kurar. Bir
+devre ya da bir modül tasarlandığında yapılan iş, belirli bir girdinin belirli bir
+çıktıyı üretmesini fiziksel ya da mantıksal olarak zorunlu kılmaktır.
+Bu kullanımda başarı ölçütü, istenen bağın kurulmuş olması değil, isten-
+meyen bağların kapatılmış olmasıdır. Bir fonksiyonun çıktısı yalnızca tanımlı
+girdilerine bağlıysa nedensel yapısı açıktır. C ıktı ayrıca genel bir duruma, sistem
+saatine ya da başka bir yerde açılmış bir kaynağa bağlıysa, orada belgelenmemiş
+bir nedensel yol vardır. Bir sistemin “temiz” olması tam olarak budur: ne-
+densel bağların belgelenenlerle sınırlı olması. Sızan her ek bağ, sonradan teşhis
+edilemeyen arızanın kaynağıdır.
+Teşhis: nedenin geri çıkarılması
+Arıza analizi, gözlenen sonuçtan geriye doğru nedeni bulma işidir ve doğası
+gereği belirsizdir, çünkü aynı belirtiyi birden fazla neden üretebilir.
+Kullanılan asıl araç müdahaledir: bileşen devre dışı bırakılır, sinyal zorlanır,
+sürüm geri alınır. Değişiklik sonucu değiştiriyorsa nedensel bağ vardır. Bunun
+tamamlayıcısı, hatanın isteyerek yeniden üretilebilmesidir; yeniden üretilemeyen
+bir açıklama açıklama değil tahmindir.
+Aramanın sistematik biçimi ikili bölmedir: olası nedenler kümesi ikiye bölünüp
+hangi yarıda kaldığı sınanır. Sürüm geçmişi üzerinde çalışan git bisect aracı
+bu yöntemin otomatikleştirilmiş hâlidir.
+Buradaki asıl tuzak, ilk yeterli açıklamada durmaktır. Bir açıklamanın be-
+lirtiyi üretebiliyor olması, onun gerçek neden olduğunu göstermez. Kaç farklı
+hipotez aynı belirtiyi üretiyorsa, o kadar ayırt edici sınama gerekir.
+Atıf: nedenin seçilmesi
+Bir arızanın “nedeni” söylendiğinde aslında bir seçim yapılmaktadır. Gerçekte
+sonucu üreten, birlikte yeterli hâle gelen bir koşullar kümesidir; bunlardan biri
+neden olarak adlandırılır.
+Seçim ölçütü fiziksel değil pratiktir: müdahale edilebilir olan, alışılmadık
+olan ya da sorumlu tutulabilen halka seçilir. Yangının nedeni olarak kısa devre
+söylenir, oksijen söylenmez; oysa ikisi de gereklidir.
+Kaza incelemelerinde bu ayrım kurumsallaşmıştır. Reason (1990), kazaların
+tek bir arızadan değil, birden çok savunma katmanının aynı anda delinmesin-
+den doğduğunu göstermiş ve tekil kök neden arayışının yanıltıcılığını ortaya
+koymuştur. Bunun pratik sonucu, olgun arıza incelemelerinde sorunun “ne
+3
+
+-- 3 of 17 --
+
+bozuldu” değil “hangi savunma katmanları neden devreye girmedi” biçiminde
+kurulmasıdır.
+Nedensel dilin çöktüğü yer
+Doğrusal neden-sonuç zinciri, döngü içeren sistemlerde işlemez. A, B’yi etkiliyor
+ve B de A’yı etkiliyorsa “hangisi neden” sorusunun cevabı yoktur.
+Yavaşlayan bir servisin isteklerin birikmesine, biriken isteklerin daha fazla
+yavaşlamaya yol açtığı durum böyledir. Sistem kendini besler ve tetikleyici olay
+çoktan geçmiş olabilir. Bu durumda nedensel dilin yerini yapısal dil alır: neden
+aranmaz, döngü tanımlanır ve döngünün kazancı ile gecikmesi incelenir. Kontrol
+teorisi bu ihtiyaçtan doğmuştur.
+Pratik sonucu belirleyicidir: tetikleyiciyi bulup ortadan kaldırmak sistemi
+düzeltmez, çünkü sistem artık tetikleyiciden bağımsız olarak dönmektedir. Müdahale
+döngünün kendisine yapılır — örneğin istek kabulünün kesilip birikimin boşaltılmasıyla.
+4
+
+-- 4 of 17 --
+
+Nedensellik ve Bilgi Ayrımları
+Korelasyon ve nedensellik
+˙Iki büyüklüğün birlikte değişmesi, aralarında üretici bir bağ bulunduğunu göstermez.
+Dondurma satışı ile boğulma vakaları birlikte artar; ikisini de sıcaklık üretir. Bu
+tür üçüncü değişkene ortak neden (confounder ) denir.
+Ayrımı kuran şey müdahaledir. Kayıtlarda iki eğrinin birlikte yükselmesi
+hiçbir şey kanıtlamaz; değişikliği geri alıp sorunun kaybolması nedenselliğe çok
+daha yakındır.
+Zamansal ardışıklık ve nedensellik
+Sonra gerçekleşmesi, ondan dolayı gerçekleşmesi değildir. Bu çıkarım hatası post
+hoc ergo propter hoc olarak adlandırılır.
+Mühendislikteki karşılığı doğrudandır: bir konuşlandırmadan sonra çıkan
+arıza o konuşlandırmadan kaynaklanmayabilir. Sistemde tampon, kuyruk ya da
+önbellek varsa neden ile sonuç arasındaki gecikme günlere çıkabilir; yavaş dolan
+bir kuyruk söz konusuysa üç gün önceki değişiklik de sorumlu olabilir. Zamansal
+yakınlık ipucudur, kanıt değildir.
+Gerekli koşul ve yeterli koşul
+Bir koşul, o olmadan sonuç gerçekleşmiyorsa gereklidir; tek başına sonucu üretiyorsa
+yeterlidir. Gerçek sistemlerde arızalar tipik olarak birden çok gerekli koşulun
+birleşmesiyle ortaya çıkar.
+“Bende çalışıyor” ifadesinin tam anlamı budur: gerekli koşullardan bir kısmı
+iki ortamda da bulunmakta, yeterlilik yalnızca birinde sağlanmaktadır. Bu ne-
+denle ifade bir çürütme değil, eksik koşulun aranması gerektiğini bildiren bir
+veridir.
+Yakın neden ve uzak neden
+Nedensel zincirin son halkası ile başlangıcı farklı şeylerdir. Bir arızada bellek
+taşması yakın neden, o taşmayı mümkün kılan sınırsız birikim uzak nedendir.
+Hangisine “sebep” denileceği, önceki bölümde belirtildiği gibi pratik bir
+seçimdir. Bu seçimin bilinçli yapılması gerekir; aksi hâlde ekip yakın nedeni
+düzeltip uzak nedeni yerinde bırakır ve aynı arıza başka bir belirtiyle döner.
+Doğrulama ve yanlışlama
+Bir hipotezi destekleyen örnek toplamak ile onu çürütecek örneği aramak farklı
+işlemlerdir. Popper (1934), bilimsel bir önermenin değerinin doğrulanabilirliğinde
+değil yanlışlanabilirliğinde bulunduğunu ileri sürmüştür; doğrulayıcı örnek çoğu
+zaman ayırt edici bilgi taşımaz, çünkü rakip hipotezlerle de uyumludur.
+5
+
+-- 5 of 17 --
+
+Test yazımındaki karşılığı doğrudandır: kodun çalıştığı durumu değil, kırılacağı
+durumu aramak gerekir. Yalnızca beklenen girdilerle çalıştırılan bir test, kodun
+doğruluğu hakkında az bilgi verir.
+Kanıt yokluğu ve yokluk kanıtı
+Bir olayın kayıtlarda görünmemesi, gerçekleşmediği anlamına gelmez; kaydın
+oraya bakıp bakmadığı ayrıca doğrulanmalıdır. Ölçüm aracının kapsamadığı
+bir bölgede yapılan “hiçbir şey yok” çıkarımı geçersizdir.
+Bilmek ve doğru tahmin etmek
+Doğru cevabın verilmesi, cevabın bilindiğini göstermez. Gerekçesi olmayan
+doğru cevap tekrarlanabilir değildir; bir sonraki benzer durumda aynı isabeti
+vermez.
+Bu ayrım, arıza incelemelerinde uygulanabilir bir ölçüt üretir: bir açıklamanın
+kabul edilmesi için belirtiyi üretmesi yetmez, aynı zamanda neden diğer olası
+açıklamaların elendiğinin gösterilmesi gerekir.
+6
+
+-- 6 of 17 --
+
+Tanım ve Kavram Ayrımları
+Tanımsal ve olgusal anlaşmazlık
+Bir tartışma ya dünyanın nasıl olduğu üzerinedir ya da bir kelimenin sınırı
+üzerine. “Bu bir hata mı yoksa tasarlanmış davranış mı” tartışması ikinci
+türdendir ve veriyle çözülemez, çünkü taraflar aynı olguları paylaşmaktadır.
+Ayrımın fark edilmesi tartışmayı kısaltır: iki durum ayrı adlandırılır ve konu
+kapanır. Fark edilmediğinde tartışma uzar, kimse ikna olmaz ve karar genellikle
+kıdeme göre verilir.
+Tanımlayıcı ve normatif
+“Sistem böyle çalışıyor” ile “sistem böyle çalışmalı” farklı önermelerdir. Ekiplerde
+en sık karışan ayrım budur: mevcut davranışın tarifi otomatik olarak spesi-
+fikasyon sayılır.
+Karışmanın pratik sonucu, hatalı bir davranışın uzun süre korunmasıdır;
+kimse onu savunmamış olsa bile, betimlemesi zamanla kural olarak okunur.
+Tür ve örnek
+Bir arızanın “üç kez çıktığı” söylendiğinde, aynı türden üç olaydan mı yoksa
+üç ayrı arızadan mı söz edildiği belirsizdir. Bu ayrım (type/token) netleşmeden
+yapılan sayım, ürettiği metriği anlamsızlaştırır.
+Sınır vakası ve karşı örnek
+Sınır vakası, tanımın belirli bir bölgede bulanık olduğunu gösterir; karşı örnek,
+tanımın yanlış olduğunu gösterir. ˙Ikisinin karıştırılması, yalnızca kenarında be-
+lirsizlik bulunan işlevsel bir tanımın gereksiz yere terk edilmesine yol açar.
+7
+
+-- 7 of 17 --
+
+Ölçme Ayrımları
+Gösterge ve ölçülen şey
+Bir metrik, ölçmeyi amaçladığı büyüklük değil onun vekilidir. Test kapsamı
+kalite değildir; kalitenin, ölçülmesi kolay olduğu için seçilmiş bir göstergesidir.
+Vekilin asıl büyüklükle bağı her zaman kısmidir ve koşullar değiştiğinde
+zayıflar. Bu nedenle bir metriğin yorumu, hangi büyüklüğün vekili olarak
+seçildiği hatırlanmadan yapılamaz.
+Ölçme ve müdahale
+Ölçme eyleminin kendisi ölçüleni değiştirebilir. Goodhart (1975), bir ölçütün
+hedefe dönüştürüldüğü anda iyi bir ölçüt olmaktan çıktığını formüle etmiştir;
+sebep, aktörlerin doğrudan ölçütü optimize etmeye başlaması ve ölçütün asıl
+büyüklükle bağının kopmasıdır.
+Sonuç, görünürlük ile bozulmama arasında bir gerilimdir: ölçülmeyen şey
+yönetilemez, ölçülen şey ise ölçüldüğü için değişir.
+Geçerlilik ve güvenilirlik
+Bir ölçümün tutarlı sonuç vermesi (reliability), doğru büyüklüğü ölçtüğü (va-
+lidity) anlamına gelmez. Her seferinde aynı yanlış değeri üreten bir ölçüm
+güvenilirdir ve geçersizdir.
+Uygulamada güvenilirlik kolay fark edilir, geçersizlik fark edilmez; bu ne-
+denle tutarlılık sıklıkla doğruluk kanıtı sayılır.
+Nicel ve niceliksel görünen
+Sayıya dönüştürülmüş bir öznel yargı öznel kalır; sayısal biçim nesnellik kazandırmaz.
+Efor tahmininde kullanılan puanlama sistemleri bu sınıftadır. Sayının varlığı,
+üzerinde aritmetik işlem yapılabileceği yanılsamasını üretir ve toplamların an-
+lamlı olduğu varsayılır.
+8
+
+-- 8 of 17 --
+
+Model ve Gerçeklik Ayrımları
+Harita ve arazi
+Model, modellediği şey değildir. Korzybski (1933), haritanın araziyle karıştırılmasını
+temel bir kavram hatası olarak formüle etmiştir. Mühendislikteki karşılıkları
+doğrudandır: şema veritabanı değildir, mimari diyagram sistem değildir, tip
+tanımı üretimde akan veri değildir.
+Ayrımın pratik sonucu, modelde bulunmayan bir davranışın gerçekte bulun-
+madığı çıkarımının geçersiz olmasıdır.
+Yararlı yanlış ve zararlı yanlış
+Newton mekaniği yanlıştır ve köprü hesabında görelilikten daha iyidir, çünkü
+doğru olan burada kullanılamayacak kadar ağırdır. Box (1976), bütün model-
+lerin yanlış, bir kısmının yararlı olduğunu belirtmiştir.
+Bu nedenle bir model hakkında sorulacak doğru soru “doğru mu” değil
+“nerede çöker”. C ökme sınırı bilinen bir yanlış model güvenlidir; sınırı bilin-
+meyen doğru bir model değildir.
+Bilerek eksiltme ve eksik bilgi
+Soyutlama, sınırı bilinerek seçilmiş kontrollü bir yanlışlıktır. Cehalet ise sınırı
+bilinmeyen bir eksikliktir. ˙Ikisi dışarıdan aynı görünür — her ikisinde de bilgi ek-
+siktir — ancak davranışları zıttır: birincisi sınırına yaklaşıldığında uyarı üretebilir,
+ikincisi üretemez.
+Basitlik ve basitleştirme
+Bir modelin ne kadar basitleştirilebileceğinin bir alt sınırı vardır; bu sınırın
+altına inen model, modellediği olguyu üretmeyi bırakır. Basitlik bir erdemdir,
+basitleştirme ise ancak sınırın üstünde kaldığı sürece erdemdir.
+9
+
+-- 9 of 17 --
+
+Sistem ve Parça Ayrımları
+˙Indirgeme ve bütünsel davranış
+Parçaların tek tek anlaşılması sistemin anlaşılmasına yetmiyorsa, davranış parçaların
+kendisinden değil etkileşimlerinden doğuyor demektir. Bu tür davranışlara or-
+taya çıkan davranış (emergent behavior ) denir.
+Tek tek doğru çalışan servislerin birlikte kilitlenmesi bu sınıftandır. Sonucu
+şudur: her bileşenin doğrulanmış olması, bileşimin doğrulandığı anlamına gelmez.
+Doğrusal zincir ve geri besleme döngüsü
+Nedensel zincir tek yönlüdür; döngüde yön yoktur. Döngü tespit edildiğinde
+“neden” sorusu terk edilir ve yerine döngünün yapısı incelenir.
+Bu ayrımın atlanması, tetikleyicinin düzeltilmesiyle sorunun çözüldüğü varsayımını
+üretir. Kendini besleyen bir sistemde bu varsayım yanlıştır.
+Yapı ve davranış
+Sistemin neyden yapıldığı ile ne yaptığı ayrı şeylerdir. Aynı yapı farklı yük, veri
+ve zamanlama koşullarında farklı davranır.
+Bu ayrım, kod okuyarak davranış çıkarmanın sınırını belirler ve üretim veri-
+sine bakmanın neden vazgeçilmez olduğunu açıklar: yapı kodda, davranış yalnızca
+çalışan sistemde görünür.
+10
+
+-- 10 of 17 --
+
+Sorumluluk ve Karar Ayrımları
+Karar ve sonuç
+˙Iyi bir karar kötü bir sonuç verebilir, kötü bir karar iyi bir sonuç verebilir; çünkü
+sonuç karara ek olarak şansa da bağlıdır. Sonuca bakarak kararın kalitesini
+yargılama eğilimi sonuç yanlılığı (outcome bias) olarak adlandırılır ve deneysel
+olarak gösterilmiştir (Baron & Hershey, 1988).
+Etkisi arıza incelemelerinde en yıkıcıdır: kötü sonuç veren makul karar-
+lar cezalandırılır, iyi sonuç veren dikkatsiz kararlar pekiştirilir. Bu, öğrenme
+sinyalinin işaretini bozar.
+Sonuçsalcı ve kural temelli çerçeve
+Bir değişikliğin değerlendirilmesi ya sonuçlarına ya da uyulması gereken bir ku-
+rala uygunluğuna bakılarak yapılır. ˙Iki çerçeve genellikle aynı cevabı verir;
+çatıştıklarında ise taraflar farkında olmadan farklı çerçeveler kullandığı için
+tartışma çözülmez.
+Fark edildiğinde tartışma yeniden kurulabilir: kuralın hangi sonucu korumak
+için konduğu sorulur ve tartışma tek çerçeveye taşınır.
+Eylem ve eylemsizlik
+Bir şeyi yapmak ile yapmamayı seçmenin sorumluluk bakımından eşit olup ol-
+madığı sorusu, ahlak felsefesinde uzun süredir tartışılmaktadır. Mühendislikteki
+karşılığı ölçme asimetrisidir: kabul edilen kötü bir kararın maliyeti üretimde
+görünür ve faturalandırılır, reddedilen iyi bir kararın maliyeti hiçbir yerde ölçülmez.
+Bu asimetri, karar vericinin niyetinden bağımsız olarak eylemsizliği ödüllendirir.
+Bilerek alınan ve fark edilmeyen borç
+Bilinçli olarak alınmış teknik borç ile fark edilmemiş kırılganlık kodda aynı
+görünebilir. Aradaki fark geri ödenebilirliktedir: birincisinde nerede, neden ve
+hangi koşulda ödeneceği bilinir; ikincisinde borcun varlığı bile bilinmez.
+Bu nedenle borcun kaydedilmesi, borcun kendisinden daha belirleyicidir.
+11
+
+-- 11 of 17 --
+
+Bu Ayrımların Bilinmemesinin Maliyeti
+Ayrımların adını bilmemek ile ayrımı hiç yapmamak farklı şeylerdir. Mühendislerin
+bazıları bu adları bilmez ve yine de doğru davranır, çünkü ayrımlar deneyimle
+sezgi hâline gelmiştir. Maliyet, adların yokluğundan değil ayrımın yokluğundan
+doğar.
+Hata sınıfının tekrarı
+Sezgiyle çalışan kişi doğru davranır ancak neden doğru davrandığını bilmez.
+Bunun sonucu, aynı hatanın yeni bir kılıkta tekrar edilmesidir. Korelasyonu
+nedensellik sanmanın bir örneğinden ders çıkaran kişi, başka bir alanda aynı
+yapıyla karşılaştığında onu tanımaz.
+Mekanizma şudur: adı olan ayrım aktarılabilir ve genellenebilir; adı olmayan
+ayrım tek vakaya yapışık kalır. Bu, adlandırmanın tek başına bilgi eklemediği
+hâlde neden işe yaradığını açıklar.
+Tartışma türünün ayırt edilememesi
+Bir anlaşmazlığın olgusal mı tanımsal mı olduğunu göremeyen kişi, tanımsal
+bir tartışmayı veriyle çözmeye çalışır ve çözemez. Faturası kişiye değil ekibe
+kesilir ve görünmez, çünkü kaybedilen şey zamandır ve zamanın nereye gittiği
+ölçülmez.
+Teşhiste erken durma
+Bir açıklamanın belirtiyi üretebiliyor olması onu doğru kılmaz. Kanıt eşiği
+kavramı bulunmayan kişi ilk yeterli açıklamada durur, düzeltmeyi yapar ve arıza
+bir süre sonra döner. Bu maliyet ölçülebilirdir ve sayılan kayıplar arasında en
+somut olanıdır.
+Kendi kararını değerlendirememe
+Karar ile sonucu ayırmayan kişi, iyi sonuç verdiği için kötü kararı tekrarlar ve
+kötü sonuç verdiği için iyi kararı terk eder. Öğrenme sinyali gürültüyle karışır.
+Uzun vadede en pahalı olan bu olabilir, çünkü doğrudan deneyimin kendisini
+bozar: yirmi yıllık deneyim, bir yıllık deneyimin yirmi kez tekrarına dönüşür.
+Kaybedilmeyenler
+Kod yazma becerisi, sistem bilgisi ve hata ayıklama refleksi bu ayrımlara bağlı
+değildir ve mühendislik pratiğinin ağırlığı buralardadır. Alan bilgisi olmayan
+ancak kavramsal olarak keskin bir kişi, tersinden belirgin biçimde daha kötü
+durumdadır.
+Simetrik olarak, ayrımların adını bilip kendi işine hiç uygulamayan kişi bir
+kazanım elde etmemiştir. Kayıp adları bilmemekte değilse, kazanç da adları
+bilmekte değildir.
+12
+
+-- 12 of 17 --
+
+Ödünleşme ˙Ikilikleri
+Önceki bölümlerde ele alınan ayrımlar kavramsaldır: aynı adla konuşulan iki
+farklı şeyi birbirinden ayırırlar ve bir tarafı seçmek doğru, diğerini seçmek
+yanlıştır. Korelasyonu nedensellikten ayıran kişi bir tercih yapmaz, bir hatadan
+kaçınır.
+Burada ele alınan yapı farklıdır. Ödünleşme (trade-off ), iki niteliğin aynı
+kaynaktan beslenmesi ve birinden fazla alındığında diğerinin zorunlu olarak azal-
+masıdır. Burada yanlış bir taraf yoktur; bağlama göre değişen bir ayar noktası
+vardır. Ayrımın kendisi de nedenseldir: birinden fazla alınması diğerinin azal-
+masına sebep olur, yalnızca onunla birlikte görülmez.
+Bir karşıtlığın bu bölüme girmesi için ölçüt şudur: iki tarafın birbirini üretmesi.
+Yalnızca zıt görünen kavram çiftleri — hızlı ve yavaş, iyi ve kötü — ödünleşme
+değildir; ödünleşme, bir tarafın artışının diğerini mekanik olarak azalttığı du-
+rumdur.
+Gevşeklik ve verim
+Bir sistemdeki kullanılmayan kapasite — yedek sunucu, ara stok, boş zaman dil-
+imi — verimsizlik olarak görünür. Bu kapasite sıfırlandığında sistem en verimli
+hâline gelir ve aynı anda en kırılgan hâline.
+Mekanizma kuyruk teorisiyle açıklanır: bir kaynağın kullanım oranı yüzde
+yüze yaklaştıkça bekleme süresi doğrusal değil üstel biçimde artar. Yani tam
+doluluğa yaklaşan bir sistemde küçük bir dalgalanma büyük bir gecikmeye
+dönüşür. Trafik akışı, üretim hattı, tam dolu bir disk ve yüzde yüz tahsis
+edilmiş bir ekip aynı davranışı gösterir.
+Ödünleşmenin ifadesi şudur: verim, dayanıklılığın satılmış hâlidir. Bu, ver-
+imin kötü olduğu anlamına gelmez; satışın bilinçli yapılması gerektiği anlamına
+gelir.
+Esneklik ve garanti
+Bir sistemin yapabileceği şeylerin kümesi genişledikçe, o sistem hakkında ver-
+ilebilecek garantilerin kümesi daralır. Her şeyi yapabilen bir bileşen hakkında
+hiçbir şey garanti edilemez.
+Tip sistemi bu ödünleşmenin en açık örneğidir: esneklik satılıp garanti satın
+alınır. Bir değişkenin alabileceği değerler kısıtlandığında, o değişkenle yapılabilecek
+işlemler hakkında derleme zamanında bilgi üretilir.
+Pratik sonucu, “her şeyi yapabilen” nitelemesinin bir övgü değil bir uyarı ol-
+masıdır: garanti verilemeyen bir bileşen, davranışı yalnızca çalıştırılarak öğrenilebilen
+bir bileşendir.
+Soyutlama ve teşhis edilebilirlik
+Ayrıntının gizlenmesi, sistemle çalışmayı kolaylaştırır ve sistem bozulduğunda
+anlamayı zorlaştırır. ˙Iki nitelik aynı kaynaktan beslenir: gizlenen ayrıntı hem
+13
+
+-- 13 of 17 --
+
+kolaylığı hem teşhis körlüğünü üretir.
+Bu ödünleşmenin özelliği, iyi tasarlanmış katmanlarda daha keskin olmasıdır.
+Bir soyutlama ne kadar başarılıysa, altındaki mekanizma hakkında o kadar az
+şey bilinir; dolayısıyla çöktüğünde hazırlık o kadar azdır. Spolsky (2002), her
+soyutlamanın belirli koşullarda altındaki ayrıntıyı sızdırdığını ve bu sızıntının
+tam olarak hazırlıksız olunan yerde gerçekleştiğini belirtmiştir.
+Üretim hızı ve doğrulama kapasitesi
+Üretimi hızlandıran her araç, doğrulanması gereken çıktının miktarını artırır.
+Doğrulama kapasitesi aynı kalırsa, birim zamanda denetlenmeden geçen değişiklik
+oranı yükselir.
+Bu, araç kalitesinden bağımsız yapısal bir sonuçtur ve bir sistemin darboğazının
+yer değiştirmesi olarak okunmalıdır. Üretim tarafı hızlandığında darboğaz doğrulamaya
+kayar; darboğazın taşınmadığı her hızlanma, kazancı hata oranı olarak geri öder.
+Tekrarın giderilmesi ve bağlanım
+Aynı kodun iki yerde bulunması bir bakım maliyeti üretir: değişiklik iki yerde
+yapılmalıdır. Tekrar giderilip kod tek yere indirildiğinde bu maliyet ortadan
+kalkar ve yerine bir bağ oluşur: iki çağıran artık aynı değişikliğe birlikte maruz
+kalır.
+Ödünleşme şudur: tekrar bağımsızlık üretir, tekrarın giderilmesi bağ üretir.
+˙Iki kullanım gerçekten aynı kuralı paylaşıyorsa birleştirme doğrudur; yalnızca
+şu anda benzer görünüyorlarsa birleştirme, gelecekte ayrışacak iki kuralı yapay
+olarak birbirine bağlar.
+Görünürlük ve bozulmama
+Bir büyüklüğün ölçülmesi onun yönetilebilmesini sağlar ve aynı anda değişmesine
+yol açar. Ölçüt hedefe dönüştüğünde aktörler doğrudan ölçütü optimize eder ve
+ölçüt asıl büyüklükle bağını kaybeder.
+Bu ödünleşme kaçınılamaz olduğu için yönetim biçimi belirleyicidir: bir-
+den çok ölçütün birlikte kullanılması, tek bir ölçütün optimize edilmesini pa-
+halılaştırır ve bozulmayı yavaşlatır.
+Keşif ve sömürü
+Bilinen en iyi seçeneğin kullanılması ile daha iyisinin aranması arasındaki bölüşüm
+(exploration/exploitation), pekiştirmeli öğrenme literatüründe biçimsel olarak
+incelenen bir problemdir. Tümüyle bilinene sadık kalan bir aktör daha iyisini
+hiç bulamaz; tümüyle arayan aktör bulduklarından hiç yararlanamaz.
+Optimal bölüşümün kalan süreye bağlı olması bu ikiliğin en az sezilen yanıdır:
+ufuk uzunsa keşfe ayrılan pay artmalı, kısaysa azalmalıdır. Teknoloji seçimi,
+kariyer kararları ve mimari denemeler aynı yapıyı taşır.
+14
+
+-- 14 of 17 --
+
+Bağlanma ve seçenek tutma
+Bir seçeneğe bağlanmak diğerlerini kapatır; buna karşılık derinleşme yalnızca
+bağlanmayla mümkündür. Derinlik, kapatılan kapıların bedeliyle satın alınır.
+Mühendislikteki karşılığı, soyutlama katmanı ekleyerek sağlayıcı bağımsızlığı
+korumaktır. Bu katman geçiş imkânını saklar ve aynı anda seçilen sağlayıcının
+kendine özgü yeteneklerinden yararlanmayı engeller. Seçenek bedava tutulmaz;
+tutulan her seçeneğin bir taşıma maliyeti vardır.
+Güven ve doğrulama
+Bir ekipte her çıktının denetlenmesi, delegasyonun fiilen gerçekleşmediği an-
+lamına gelir; hiçbirinin denetlenmemesi ise sorumluluğun tanımsız kaldığı an-
+lamına gelir.
+Bu ikiliğin çözümü yoktur, ayarı vardır ve ayar sabit değildir: ekibin ve
+sistemin olgunluğuyla birlikte değişir. Sabit bir denetim oranı, olgunlaşan bir
+ekipte gereksiz maliyet, değişen bir sistemde yetersiz koruma üretir.
+Kısa vade ve uzun vade
+Bugün hızlı ilerlemek yarını yavaşlatır. Teknik borç kavramının tamamı bu
+ödünleşmenin adlandırılmasıdır (Cunningham, 1992).
+Bu ikilikte sık yapılan hata, borcun tümüyle reddedilmesini erdem say-
+maktır. Hiç borç almayan bir proje çoğu zaman yarına ulaşamaz; borcun varlığı
+değil, kaydedilmemesi ve ödeme koşulunun belirsiz kalması sorun üretir.
+Ödünleşmelerin ortak yapısı
+Sayılan ikiliklerin hiçbirinin doğru cevabı yoktur; ayar noktası vardır ve ayar
+bağlama göre değişir. Bundan daha önemli olan ikinci özellik şudur: ayar nok-
+tası zaman içinde kayar. Küçük bir sistemde doğru olan gevşeklik oranı, sistem
+büyüdüğünde yanlış olur; başlangıçta doğru olan borç düzeyi, ürün oturduğunda
+yanlış olur.
+Bu nedenle asıl beceri doğru tarafı seçmek değil, hangi tarafta durulduğunu
+bilmek ve kayma sinyallerini fark etmektir. “Su anda verimi dayanıklılığa tercih
+ediyoruz” cümlesini kurabilen bir ekip, farkında olmadan aynı tercihi yapan
+bir ekipten belirgin biçimde daha iyi durumdadır; çünkü birincisi tercihi geri
+alabilir, ikincisi neyin değiştiğini fark edemez.
+Bu, önceki bölümlerdeki kavramsal ayrımlarla ödünleşmeler arasındaki bağı
+da kurar. Kavramsal ayrımlar hatayı önler; ödünleşmelerin adlandırılması ise
+tercihi geri alınabilir kılar. ˙Ikisi de bilgiyi sezgiden çıkarıp aktarılabilir hâle
+getirir.
+15
+
+-- 15 of 17 --
+
+Sonuç
+Nedensellik, mühendislikte tek bir kavram olarak değil üç ayrı işlev olarak çalışır.
+Tasarımda kurulur, teşhiste geri çıkarılır, atıfta seçilir. Bu üçünün ayrı tutul-
+ması pratik bir gerekliliktir: tasarımda titiz olan bir ekip, teşhiste ilk açıklamada
+durabilir ve atıfta tekil kök neden arayarak sistemin çok nedenli yapısını gizleye-
+bilir.
+Sayılan ayrımların ortak işlevi, aynı kelimeyle konuşulan iki farklı şeyi ayırmaktır.
+Bu nedenle listenin kendisi ezberlenecek bir içerik değildir; işlevsel olan, bir
+tartışma ya da teşhis tıkandığında sorulacak tek sorudur: burada ayrı olan iki
+şey aynı adla mı konuşulmaktadır. Ayrımların çoğu zaten bu soruya verilmiş
+cevaplardır.
+Bu ayrımların bilinmemesinin maliyeti günlük işte değil öğrenmede ortaya
+çıkar. Bilmeyen mühendis bir görevi tamamlayamaz hâle gelmez; hata yaptığında
+ondan çıkardığı dersin genelliğini kaybeder. Kayıp anlık değil bileşiktir — her
+seferinde küçük, yıllar içinde büyük.
+C erçevenin sınırları belirtilmelidir. Ayrımların listesi kapalı değildir ve bu-
+radaki gruplandırma analitiktir; gerçek bir vakada birden fazla ayrım aynı anda
+devrededir. Ayrıca ayrımların büyük kısmı, uygulama alanına dair yeterli bilgi
+bulunmadığında işe yaramaz: hangi hipotezlerin ayırt edilmesi gerektiğini bilmek,
+alan bilgisi gerektirir. Kavramsal keskinlik alan bilgisinin yerine geçmez, onun
+verimini artırır.
+Açık kalan soru, bu ayrımların nasıl edinildiğiyle ilgilidir. Deneyimle sezgi
+hâline gelmeleri mümkündür, ancak bu yol yavaştır ve edinileni aktarılamaz
+bırakır. Adlandırma yoluyla öğretilmeleri de mümkündür, ancak kendi işine
+uygulanmayan adlandırmanın kazanç üretmediği görülmektedir. ˙Ikisi arasındaki
+doğru bileşimin ne olduğu ve bunun bir ekip düzeyinde nasıl kurulacağı burada
+cevaplanmamıştır.
+Kaynaklar
+• Aristoteles. Fizik, II. Kitap.
+• Baron, J. & Hershey, J. C. (1988). Outcome Bias in Decision Evaluation.
+Journal of Personality and Social Psychology, 54(4).
+• Box, G. E. P. (1976). Science and Statistics. Journal of the American
+Statistical Association, 71(356).
+• Goodhart, C. (1975). Problems of Monetary Management: The UK Ex-
+perience. Papers in Monetary Economics, Reserve Bank of Australia.
+• Hume, D. (1748). An Enquiry Concerning Human Understanding.
+• Korzybski, A. (1933). Science and Sanity. Institute of General Semantics.
+• Pearl, J. (2000). Causality: Models, Reasoning, and Inference. Cambridge
+University Press.
+16
+
+-- 16 of 17 --
+
+• Popper, K. (1934). Logik der Forschung. Julius Springer.
+• Reason, J. (1990). Human Error. Cambridge University Press.
+17
+
+-- 17 of 17 --
