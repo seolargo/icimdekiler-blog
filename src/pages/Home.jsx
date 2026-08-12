@@ -300,7 +300,12 @@ export default function Home() {
   }, [filtered, sort])
 
   // "Buradan başla" + tema ızgarası yalnızca temiz açılış görünümünde
-  const showLanding = !query && !series && !tema && page === 1
+  // "Buradan başla" seçkisi + tema haritası geçici olarak kapalı: ana sayfa
+  // doğrudan yazı listesiyle başlıyor. Geri açmak için public/themes.json
+  // içindeki "display" alanını true yap — başka değişiklik gerekmiyor.
+  // (Tema filtresi ?tema=... adresiyle çalışmaya devam ediyor.)
+  const showLanding =
+    themes?.display !== false && !query && !series && !tema && page === 1
 
   const pageCount = Math.ceil(ordered.length / PER_PAGE)
   const current = Math.min(page, pageCount || 1)
