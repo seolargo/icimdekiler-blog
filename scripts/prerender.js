@@ -380,15 +380,27 @@ const kvHead = buildHead({
   type: 'website',
   image: '/profile.jpeg',
 })
+const kvGroup = (title, rows) =>
+  rows && rows.length
+    ? `<p class="kv-stats" style="margin-top:22px"><b>${esc(title)}:</b> ` +
+      rows
+        .map(
+          (c) =>
+            `<a href="${base}kavramlar?k=${encodeURIComponent(c.k)}">${esc(c.label)}</a> (${c.tf})`,
+        )
+        .join(' · ') +
+      `</p>`
+    : ''
 const kvBody =
   header('kavramlar') +
   `<div class="kv">` +
   `<p class="kv-stats"><b>${kavramlar.docs}</b> yazı · <b>${kavramlar.tokens.toLocaleString('tr-TR')}</b> kelime · ` +
   `<b>${kavramlar.vocab.toLocaleString('tr-TR')}</b> farklı biçim</p>` +
   `<div class="kv-cloud">${kavramlar.concepts.map(kvWord).join('')}</div>` +
-  `<p class="kv-stats" style="margin-top:22px">Tamlamalar: ` +
-  kavramlar.phrases.map((c) => `${esc(c.label)} (${c.tf})`).join(' · ') +
-  `</p></div>` +
+  kvGroup('Tamlamalar', kavramlar.phrases) +
+  kvGroup('Belirgin kavramlar', kavramlar.distinct) +
+  kvGroup('Adlar', kavramlar.names) +
+  `</div>` +
   footer()
 write('kavramlar', renderPage({ head: kvHead, bodyHtml: kvBody }))
 

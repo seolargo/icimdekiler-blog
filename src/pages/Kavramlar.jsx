@@ -18,7 +18,7 @@ export default function Kavramlar() {
   const [data, setData] = useState(null)
   const [params, setParams] = useSearchParams()
   const { posts } = usePosts()
-  const [mode, setMode] = useState('tek') // tek | ikili
+  const [mode, setMode] = useState('tek') // tek | ikili | belirgin | adlar
   const [q, setQ] = useState('')
 
   const selected = params.get('k') || null
@@ -35,21 +35,41 @@ export default function Kavramlar() {
     fetch(`${import.meta.env.BASE_URL}kavramlar.json`)
       .then((r) => r.json())
       .then(setData)
-      .catch(() => setData({ concepts: [], phrases: [], docs: 0, tokens: 0, vocab: 0 }))
+      .catch(() =>
+        setData({ concepts: [], phrases: [], distinct: [], names: [], docs: 0, tokens: 0, vocab: 0 }),
+      )
   }, [])
 
-  const list = (mode === 'tek' ? data?.concepts : data?.phrases) || []
-  const byKey = useMemo(() => {
+  const MODES = [
+    { id: 'tek', field: 'concepts', label: 'conceptsSingle' },
+    { id: 'ikili', field: 'phrases', label: 'conceptsPairs' },
+    { id: 'belirgin', field: 'distinct', label: 'conceptsDistinct' },
+    { id: 'adlar', field: 'names', label: 'conceptsNames' },
+  ]
+  const listOf = (id) => data?.[MODES.find((m) => m.id === id).field] || []
+  const list = listOf(mode)
+  // anahtar -> kayıt ve anahtar -> hangi kipte olduğu (komşu kavram bağlantıları için)
+  const [byKey, modeOf] = useMemo(() => {
     const m = new Map()
-    for (const c of data?.concepts || []) m.set(c.k, c)
-    for (const c of data?.phrases || []) m.set(c.k, c)
-    return m
+    const w = new Map()
+    for (const { id, field } of MODES)
+      for (const c of data?.[field] || []) {
+        if (!m.has(c.k)) w.set(c.k, id)
+        m.set(c.k, m.get(c.k) || c)
+      }
+    return [m, w]
   }, [data])
   const titleOf = useMemo(() => {
     const m = new Map()
     for (const p of posts) m.set(p.slug, lang === 'en' && p.title_en ? p.title_en : p.title)
     return m
   }, [posts, lang])
+
+  // ?k=… ile gelindiğinde kavramın bulunduğu kipe geç (ad ise "Adlar", vb.)
+  useEffect(() => {
+    if (selected && modeOf.has(selected)) setMode(modeOf.get(selected))
+    // yalnızca veri yüklendiğinde / bağlantıdan gelindiğinde
+  }, [data, selected]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const needle = fold(q.trim())
   const shown = useMemo(
@@ -58,11 +78,12 @@ export default function Kavramlar() {
   )
 
   const active = selected ? byKey.get(selected) : null
-  // bulutta yazı boyutu: frekansın karekökü (baskın kavram her şeyi ezmesin)
-  const max = shown.length ? Math.max(...shown.map((c) => c.tf)) : 1
-  const min = shown.length ? Math.min(...shown.map((c) => c.tf)) : 1
-  const size = (tf) => {
-    const r = (Math.sqrt(tf) - Math.sqrt(min)) / (Math.sqrt(max) - Math.sqrt(min) || 1)
+  // bulutta yazı boyutu: kipin kendi skorunun karekökü (tf, tf-idf…)
+  const val = (c) => c.s ?? c.tf
+  const max = shown.length ? Math.max(...shown.map(val)) : 1
+  const min = shown.length ? Math.min(...shown.map(val)) : 1
+  const size = (c) => {
+    const r = (Math.sqrt(val(c)) - Math.sqrt(min)) / (Math.sqrt(max) - Math.sqrt(min) || 1)
     return (0.82 + r * 1.5).toFixed(2)
   }
 
@@ -77,22 +98,17 @@ export default function Kavramlar() {
 
       <div className="kv-controls">
         <div className="kv-modes" role="group" aria-label={t('conceptsMode')}>
-          <button
-            type="button"
-            className={`kv-mode${mode === 'tek' ? ' is-active' : ''}`}
-            aria-pressed={mode === 'tek'}
-            onClick={() => setMode('tek')}
-          >
-            {t('conceptsSingle')} <span className="kv-n">{data.concepts.length}</span>
-          </button>
-          <button
-            type="button"
-            className={`kv-mode${mode === 'ikili' ? ' is-active' : ''}`}
-            aria-pressed={mode === 'ikili'}
-            onClick={() => setMode('ikili')}
-          >
-            {t('conceptsPairs')} <span className="kv-n">{data.phrases.length}</span>
-          </button>
+          {MODES.map((m) => (
+            <button
+              key={m.id}
+              type="button"
+              className={`kv-mode${mode === m.id ? ' is-active' : ''}`}
+              aria-pressed={mode === m.id}
+              onClick={() => setMode(m.id)}
+            >
+              {t(m.label)} <span className="kv-n">{listOf(m.id).length}</span>
+            </button>
+          ))}
         </div>
         <div className="kv-search">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -118,7 +134,10 @@ export default function Kavramlar() {
               key={c.k}
               type="button"
               className={`kv-word${selected === c.k ? ' is-active' : ''}`}
-              style={{ fontSize: `${size(c.tf)}rem`, opacity: 0.55 + 0.45 * (c.df / data.docs) }}
+              style={{
+                fontSize: `${size(c)}rem`,
+                opacity: 0.55 + 0.45 * Math.min(1, c.df / (data.docs * 0.5)),
+              }}
               onClick={() => select(selected === c.k ? null : c.k)}
               title={`${c.tf} ${t('conceptsTimes')} · ${c.df} ${t('conceptsInDocs')}`}
             >
@@ -161,7 +180,7 @@ export default function Kavramlar() {
                   type="button"
                   className="kv-nearw"
                   onClick={() => {
-                    setMode('tek')
+                    setMode(modeOf.get(n) || 'tek')
                     select(n)
                   }}
                 >
