@@ -104,8 +104,8 @@ export const TRANSLATIONS = {
     wallsUnit: 'duvar',
     concepts: 'Kavramlar',
     conceptsTitle: 'Kavramlar',
-    conceptsIntro:
-      'Korpusta en sık geçen kelimeler ve tamlamalar. Metinler ekleri atılarak sayıldı: “sistemler”, “sistemin”, “sisteme” tek bir kavram altında toplanır. Bir kavrama tıkla; kaç yazıda geçtiğini, en yoğun geçtiği metinleri ve yanında hangi kavramlarla birlikte durduğunu gösterir.',
+    conceptsMeta:
+      'Korpusun kelime haritası: en sık geçen kavramlar ve tamlamalar, hangi yazıda ne yoğunlukta geçtikleri.',
     conceptsDocs: 'yazı',
     conceptsWords: 'kelime',
     conceptsForms: 'farklı biçim',
@@ -119,8 +119,6 @@ export const TRANSLATIONS = {
     conceptsNear: 'Yanında geçenler',
     conceptsTop: 'En yoğun geçtiği yazılar',
     conceptsSearchAll: 'Bu kelimeyi yazıların tam metninde ara',
-    conceptsNote:
-      'Sayım otomatik: PDF’lerin düz metni üzerinde, bağlaç ve yardımcı fiiller elenerek yapılır. Ek atma kuralı sezgiseldir; kimi kelimeler beklenenden farklı gruplanabilir.',
     lblRule: 'Kural',
     lblBreaks: 'Kırılır',
     lblReason: 'Neden',
@@ -233,8 +231,8 @@ export const TRANSLATIONS = {
     wallsUnit: 'walls',
     concepts: 'Concepts',
     conceptsTitle: 'Concepts',
-    conceptsIntro:
-      'The words and phrases that recur most often across the corpus. Counts are taken after Turkish suffixes are stripped, so “sistemler”, “sistemin” and “sisteme” collapse into one concept. Click a concept to see how many essays use it, where it is densest, and which concepts stand next to it.',
+    conceptsMeta:
+      'A word map of the corpus: the most frequent concepts and phrases, and where each one is densest.',
     conceptsDocs: 'essays',
     conceptsWords: 'words',
     conceptsForms: 'distinct forms',
@@ -248,8 +246,6 @@ export const TRANSLATIONS = {
     conceptsNear: 'Occurs beside',
     conceptsTop: 'Densest in',
     conceptsSearchAll: 'Search this word in full texts',
-    conceptsNote:
-      'Counting is automatic: it runs on the plain text of the PDFs with function words and auxiliaries removed. Suffix stripping is heuristic, so some words may group differently than expected. Concepts are listed in Turkish, the language of the essays.',
     lblRule: 'Rule',
     lblBreaks: 'Breaks when',
     lblReason: 'Why',

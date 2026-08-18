@@ -362,11 +362,6 @@ write('duvarlar', renderPage({ head: dvHead, bodyHtml: dvBody }))
 const kavramlar = existsSync(join(dist, 'kavramlar.json'))
   ? JSON.parse(readFileSync(join(dist, 'kavramlar.json'), 'utf8'))
   : { docs: 0, tokens: 0, vocab: 0, concepts: [], phrases: [] }
-const kvIntro =
-  'Korpusta en sık geçen kelimeler ve tamlamalar. Metinler ekleri atılarak sayıldı: ' +
-  '“sistemler”, “sistemin”, “sisteme” tek bir kavram altında toplanır. Bir kavrama tıkla; ' +
-  'kaç yazıda geçtiğini, en yoğun geçtiği metinleri ve yanında hangi kavramlarla birlikte ' +
-  'durduğunu gösterir.'
 const kvMax = Math.max(1, ...kavramlar.concepts.map((c) => c.tf))
 const kvMin = Math.min(kvMax, ...kavramlar.concepts.map((c) => c.tf))
 const kvWord = (c) => {
@@ -387,7 +382,7 @@ const kvHead = buildHead({
 })
 const kvBody =
   header('kavramlar') +
-  `<div class="kv"><p class="kv-intro">${esc(kvIntro)}</p>` +
+  `<div class="kv">` +
   `<p class="kv-stats"><b>${kavramlar.docs}</b> yazı · <b>${kavramlar.tokens.toLocaleString('tr-TR')}</b> kelime · ` +
   `<b>${kavramlar.vocab.toLocaleString('tr-TR')}</b> farklı biçim</p>` +
   `<div class="kv-cloud">${kavramlar.concepts.map(kvWord).join('')}</div>` +

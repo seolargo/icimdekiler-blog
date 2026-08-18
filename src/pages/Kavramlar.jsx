@@ -29,7 +29,7 @@ export default function Kavramlar() {
     setParams(next, { replace: true })
   }
 
-  useHead({ title: t('conceptsTitle'), description: t('conceptsIntro'), image: '/profile.jpeg' })
+  useHead({ title: t('conceptsTitle'), description: t('conceptsMeta'), image: '/profile.jpeg' })
 
   useEffect(() => {
     fetch(`${import.meta.env.BASE_URL}kavramlar.json`)
@@ -70,7 +70,6 @@ export default function Kavramlar() {
 
   return (
     <div className="kv">
-      <p className="kv-intro">{t('conceptsIntro')}</p>
       <p className="kv-stats">
         <b>{nf(data.docs, t('locale'))}</b> {t('conceptsDocs')} · <b>{nf(data.tokens, t('locale'))}</b>{' '}
         {t('conceptsWords')} · <b>{nf(data.vocab, t('locale'))}</b> {t('conceptsForms')}
@@ -187,8 +186,6 @@ export default function Kavramlar() {
           </Link>
         </div>
       )}
-
-      <p className="kv-note">{t('conceptsNote')}</p>
     </div>
   )
 }
