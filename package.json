@@ -10,12 +10,13 @@
     "xray": "node scripts/build-corpus-xray.js",
     "search-index": "node scripts/build-search-index.js",
     "yerel-metin": "node scripts/build-yerel-texts.js",
-    "predev": "node scripts/generate-manifest.js && node scripts/build-search-index.js",
+    "predev": "node scripts/generate-manifest.js && node scripts/build-search-index.js && node scripts/build-kavramlar.js",
     "dev": "vite",
-    "prebuild": "node scripts/generate-manifest.js && node scripts/build-search-index.js",
+    "prebuild": "node scripts/generate-manifest.js && node scripts/build-search-index.js && node scripts/build-kavramlar.js",
     "build": "vite build && node scripts/prerender.js",
     "preview": "vite preview",
-    "duvar": "node scripts/duvar.js"
+    "duvar": "node scripts/duvar.js",
+    "kavramlar": "node scripts/build-kavramlar.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.110.0",

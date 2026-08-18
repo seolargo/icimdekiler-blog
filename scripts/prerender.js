@@ -77,6 +77,7 @@ function header(active) {
     tab(base + 'oneriler', 'Öneriler', 'oneriler') +
     tab(base + 'projeler', 'Projeler', 'projeler') +
     tab(base + 'duvarlar', 'Duvarlar', 'duvarlar') +
+    tab(base + 'kavramlar', 'Kavramlar', 'kavramlar') +
     tab(base + 'yapay-zeka', 'Yapay Zekâ', 'yapay-zeka') +
     `</nav>` +
     `<main class="site-main">`
@@ -357,6 +358,45 @@ const dvBody =
   footer()
 write('duvarlar', renderPage({ head: dvHead, bodyHtml: dvBody }))
 
+// --- KAVRAMLAR (korpusun kelime haritası) ----------------------------------
+const kavramlar = existsSync(join(dist, 'kavramlar.json'))
+  ? JSON.parse(readFileSync(join(dist, 'kavramlar.json'), 'utf8'))
+  : { docs: 0, tokens: 0, vocab: 0, concepts: [], phrases: [] }
+const kvIntro =
+  'Korpusta en sık geçen kelimeler ve tamlamalar. Metinler ekleri atılarak sayıldı: ' +
+  '“sistemler”, “sistemin”, “sisteme” tek bir kavram altında toplanır. Bir kavrama tıkla; ' +
+  'kaç yazıda geçtiğini, en yoğun geçtiği metinleri ve yanında hangi kavramlarla birlikte ' +
+  'durduğunu gösterir.'
+const kvMax = Math.max(1, ...kavramlar.concepts.map((c) => c.tf))
+const kvMin = Math.min(kvMax, ...kavramlar.concepts.map((c) => c.tf))
+const kvWord = (c) => {
+  const r = (Math.sqrt(c.tf) - Math.sqrt(kvMin)) / (Math.sqrt(kvMax) - Math.sqrt(kvMin) || 1)
+  const size = (0.82 + r * 1.5).toFixed(2)
+  return (
+    `<a class="kv-word" style="font-size:${size}rem" href="${base}kavramlar?k=${encodeURIComponent(c.k)}" ` +
+    `title="${escAttr(`${c.tf} kez · ${c.df} yazıda`)}">${esc(c.label)}</a>`
+  )
+}
+const kvHead = buildHead({
+  title: 'Kavramlar',
+  description:
+    'Korpusun kelime haritası: en sık geçen kavramlar ve tamlamalar, hangi yazıda ne yoğunlukta geçtikleri.',
+  canonical: `${SITE_URL}${base}kavramlar`,
+  type: 'website',
+  image: '/profile.jpeg',
+})
+const kvBody =
+  header('kavramlar') +
+  `<div class="kv"><p class="kv-intro">${esc(kvIntro)}</p>` +
+  `<p class="kv-stats"><b>${kavramlar.docs}</b> yazı · <b>${kavramlar.tokens.toLocaleString('tr-TR')}</b> kelime · ` +
+  `<b>${kavramlar.vocab.toLocaleString('tr-TR')}</b> farklı biçim</p>` +
+  `<div class="kv-cloud">${kavramlar.concepts.map(kvWord).join('')}</div>` +
+  `<p class="kv-stats" style="margin-top:22px">Tamlamalar: ` +
+  kavramlar.phrases.map((c) => `${esc(c.label)} (${c.tf})`).join(' · ') +
+  `</p></div>` +
+  footer()
+write('kavramlar', renderPage({ head: kvHead, bodyHtml: kvBody }))
+
 // --- YAPAY ZEKÂ SEKMESİ ------------------------------------------------------
 // Seçki public/ai.json'dan gelir; bu sekme açık yazıları gruplayan bir görünüm,
 // `tab` alanı kullanılmaz (o alan "dışa kapalı" demek). Yazılar Yazılar
@@ -490,6 +530,7 @@ const urls = [
   { loc: `${SITE_URL}${base}oneriler` },
   { loc: `${SITE_URL}${base}projeler` },
   { loc: `${SITE_URL}${base}duvarlar` },
+  { loc: `${SITE_URL}${base}kavramlar` },
   { loc: `${SITE_URL}${base}yapay-zeka` },
   ...writings.map((p) => ({
     loc: `${SITE_URL}${base}post/${encodeURIComponent(p.slug)}`,

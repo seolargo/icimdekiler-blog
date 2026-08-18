@@ -51,6 +51,7 @@ eklenir. Sesle konuşurken slug yerine bunu kullan.
 |---|---|
 | `public/posts.json` | manifest: belge, title, description (TR/EN), related, priority |
 | `public/duvarlar.json` + `docs/duvarlar.md` | kural kataloğu — **ikisi eşit tutulacak** |
+| `public/kavramlar.json` | korpusun kelime haritası (`npm run kavramlar`, prebuild'de otomatik) |
 | `public/texts/*.txt` | düz metin (arama + llms.txt buradan) |
 | `yerel/` | gitignore'da, dışarı çıkmayan belgeler, yalnızca localhost |
 | `yerel/texts/*.txt` | yerel belgelerin düz metni — **soru sorulduğunda buraya da bak** |
