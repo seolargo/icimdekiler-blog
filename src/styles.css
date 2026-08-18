@@ -1790,25 +1790,7 @@ code {
   align-items: baseline;
   gap: 6px 14px;
   line-height: 1.35;
-  /* bulut sayfayı aşağı itmesin: kendi içinde kaydırılır */
-  max-height: min(52vh, 460px);
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  padding: 6px 14px 18px 2px;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  scrollbar-width: thin;
-  scrollbar-color: var(--line) transparent;
-}
-.kv-cloud::-webkit-scrollbar {
-  width: 8px;
-}
-.kv-cloud::-webkit-scrollbar-thumb {
-  background: var(--line);
-  border-radius: 999px;
-}
-.kv-cloud::-webkit-scrollbar-thumb:hover {
-  background: var(--muted);
+  padding: 4px 0 6px;
 }
 .kv-word {
   border: 0;
