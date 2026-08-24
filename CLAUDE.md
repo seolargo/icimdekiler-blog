@@ -92,3 +92,15 @@ Aynı format: **ders — ne zaman kırılır.** Kırılma koşulu yoksa yazma.
 - **Yeni araç önermeden önce kurulu olanı kontrol et.** Claude Code'da dikte
   zaten varmış; macOS diktesi ise hiç açılmamış.
   *Kırılır:* kullanıcı o aracı zaten kullandığını söylüyorsa.
+
+- **Korpusta belge ararken önce başlık listesini oku, sonra grep at.** 189
+  başlık tek isteme sığıyor. "Kelime kelime inceleme" araması Türkçe terimlerle
+  (satır satır, yakın okuma, şerh) iki kez yanlış belgeye gitti; aranan belge
+  kavramı İngilizce adlandırıyordu — BELGE-174 Scrutiny. Başlık listesi anında
+  buldu.
+  *Kırılır:* korpus tek isteme sığmayacak kadar büyürse — o zaman grep/retrieval.
+
+- **Cevaba emin olma yüzdesini yaz.** Birden çok aday varsa her birine ayrı
+  yüzde. Kesin tonda verilen yanlış cevap, belirsizliği gizlediği için ayrıca
+  maliyetli.
+  *Kırılır:* —
