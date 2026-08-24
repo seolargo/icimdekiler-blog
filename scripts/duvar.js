@@ -43,13 +43,15 @@ let baglam = ''
 if (diffKipi) {
   let dosyalar = []
   try {
-    const cikti = execSync('git diff --name-only HEAD', { encoding: 'utf8' })
-    dosyalar = cikti.split('\n').filter(Boolean)
-    if (!dosyalar.length) {
-      dosyalar = execSync('git diff --name-only HEAD~1 HEAD', { encoding: 'utf8' })
-        .split('\n')
-        .filter(Boolean)
-    }
+    const calistir = (c) => execSync(c, { encoding: 'utf8' }).split('\n').filter(Boolean)
+    // git diff izlenmeyen dosyaları göstermez; yeni eklenen dosya en riskli
+    // olandır, ayrıca sorulur.
+    dosyalar = [
+      ...calistir('git diff --name-only HEAD'),
+      ...calistir('git ls-files --others --exclude-standard'),
+    ]
+    if (!dosyalar.length) dosyalar = calistir('git diff --name-only HEAD~1 HEAD')
+    dosyalar = [...new Set(dosyalar)]
   } catch {
     console.error('git diff okunamadı — bir git deposunun içinde misin?')
     process.exit(1)

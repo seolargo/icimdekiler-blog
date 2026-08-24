@@ -56,6 +56,8 @@ eklenir. Sesle konuşurken slug yerine bunu kullan.
 | `yerel/` | gitignore'da, dışarı çıkmayan belgeler, yalnızca localhost |
 | `yerel/texts/*.txt` | yerel belgelerin düz metni — **soru sorulduğunda buraya da bak** |
 | `scripts/duvar.js` | `npm run duvar <konu>` / `--diff` — duvarları karar anında önüne getirir |
+| `public/kod-duvarlari.json` + `docs/kod-duvarlari.md` | kod yazarken uygulanan 47 kural — **ikisi eşit tutulacak**, `.md` üretilir |
+| `scripts/kod-duvar.js` | `npm run kod-duvar -- --an B --diff` — ana göre kod kuralları; `--md` ile docs'u üretir |
 
 ## Anlatım
 
@@ -104,3 +106,18 @@ Aynı format: **ders — ne zaman kırılır.** Kırılma koşulu yoksa yazma.
   yüzde. Kesin tonda verilen yanlış cevap, belirsizliği gizlediği için ayrıca
   maliyetli.
   *Kırılır:* —
+
+## Kod duvarları
+
+Duvarlar (34) karar/örgüt düzeyinde; **kod duvarları** (47) klavye düzeyinde ve
+ayrı bir katalog. Kaynağı korpustaki mühendislik paperları: BELGE-174, 169, 176,
+166, 184, 148, 153, 061, 046, 040, 038, 105, 043.
+
+Beş an: **T** başlarken · **Y** yazarken · **D** dokunurken · **B** bitirmeden ·
+**A** arıza. Her maddenin `kırılır`ı var — nerede geçerli değil.
+
+Hepsini birden uygulama: **KOD-06** derinliği tehlikeye göre seçer
+(geri alınabilirlik, etki yarıçapı, maruziyet).
+
+Her projeden çalışır: `~/.claude/skills/kod-duvari/` global skill'i
+`scripts/kod-duvar.js`'i çağırır. Yeni madde eklenince `npm run kod-duvar -- --md`.

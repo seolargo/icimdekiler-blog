@@ -1,0 +1,961 @@
+{
+  "anlar": {
+    "T": {
+      "name": "Başlarken",
+      "aciklama": "Kod yazmadan önce: problem sınıfı, ölçüt, kapsam, tehlike"
+    },
+    "Y": {
+      "name": "Yazarken",
+      "aciklama": "Klavye başında verilen kararlar"
+    },
+    "D": {
+      "name": "Dokunurken",
+      "aciklama": "Yabancı ya da mevcut koda müdahale"
+    },
+    "B": {
+      "name": "Bitirmeden",
+      "aciklama": "Bitti demeden önce irdeleme ve doğrulama"
+    },
+    "A": {
+      "name": "Arıza",
+      "aciklama": "Bir şey bozulduğunda: hata ayıklama, olay incelemesi"
+    }
+  },
+  "kurallar": [
+    {
+      "id": "KOD-01",
+      "an": "T",
+      "title": "Önce problem sınıfını teşhis et, sonra çözüm ara",
+      "kural": "\"Bunu nasıl çözerim?\" sorusunu bir kez erteleyip \"bu hangi problem sınıfına ait?\" diye sor. 100M kullanıcıya mesaj bir kuyruk ürünü seçimi değil kuyruk kuramı problemidir; iki servisin aynı veriyi yazması bir veritabanı seçimi değil dağıtık tutarlılık problemidir; aynı olayın tekrar gelince bozması idempotentlik problemidir. Fark çözümün niteliğinde değil, tek hamlede erişilen bilgi hacmindedir.",
+      "kirilir": "Problem gerçekten yerel ve tekilse — bir yazım hatası, bir eksik alan, bir kopyala-yapıştır kusuru. Orada sınıf araması saf gecikmedir.",
+      "neden": "Bir problemi uygun biçimselleştirmeye taşımak, o alanın teoremlerini, algoritmalarını ve en önemlisi imkânsızlık sonuçlarını tek hamlede probleme bağlar.",
+      "kaynak": [
+        "BELGE-176"
+      ],
+      "tetik": [
+        "mimari",
+        "tasarım",
+        "yeni özellik",
+        "ölçek",
+        "dağıtık"
+      ]
+    },
+    {
+      "id": "KOD-02",
+      "an": "T",
+      "title": "Birleştirme yapan her işlemde yasaları kontrol et",
+      "kural": "Bir şeyi parça parça hesaplayıp birleştirecekseniz beş yasayı tek tek yoklayın: birleşme (assoc → paralelleştirilebilir), değişme (comm → sıra önemsiz), birim (identity → boş durum tanımlı), ters (inverse → geri alınabilir), etkisizlik (idempotent → tekrar zararsız). Yasa sağlanmıyorsa hesabı değil TAŞINAN TEMSİLİ değiştirin: ortalama yerine (sum, count), p95 yerine t-digest özeti, son yazan kazansın yerine (timestamp, value), distinct count yerine HyperLogLog.",
+      "kirilir": "Cebirsel yapı hiç yoksa — iş gelip bekliyorsa, çıktı girdiyi etkiliyorsa, geçmiş önemliyse. Yasa kontrolünün boş çıkması da bilgidir: cebirsel çerçeveyi zorlama, dinamik çerçeveye geç (kuyruk kuramı, kontrol kuramı, Markov).",
+      "neden": "Temsil değişimi paralel çalışmayı, artımlı güncellemeyi ve yeniden deneme güvenliğini bir arada kazandırır. İki makinenin ortalamalarını eşit ağırlıkla toplamak (30+50)/2=40 verir; gerçek cevap 50'dir.",
+      "kaynak": [
+        "BELGE-176"
+      ],
+      "tetik": [
+        "agregasyon",
+        "birleştirme",
+        "merge",
+        "reduce",
+        "metrik",
+        "paralel",
+        "dağıtık",
+        "senkron"
+      ]
+    },
+    {
+      "id": "KOD-03",
+      "an": "T",
+      "title": "Seçtiğin çerçevenin neyi YASAKLADIĞINI yaz",
+      "kural": "Bir yapıyı teşhis ettikten sonra en yüksek getirili soru şudur: bu dil bana neyi yasaklıyor? Medyan monoid değildir, o sorgu paralelleşmez. Doluluk 1'e giderken bekleme sınırsız büyür, o gecikme kod eniyilemesiyle çözülmez. CAP gereği bölünme anında tutarlılık ve erişilebilirlik aynı anda sağlanamaz.",
+      "kirilir": "Problem küçük ve tek makinede kalıyorsa — imkânsızlık sonuçlarının çoğu ölçek veya dağıtıklık varsayar.",
+      "neden": "Bir biçimselleştirmenin asıl kazancı pozitif bir çözüm değil, arama uzayının kapatılmasıdır. Yanlış yola hiç girmemek, doğru yolu bulmaktan daha çok zaman kazandırır.",
+      "kaynak": [
+        "BELGE-176"
+      ],
+      "tetik": [
+        "ölçek",
+        "dağıtık",
+        "performans",
+        "tutarlılık",
+        "gecikme"
+      ]
+    },
+    {
+      "id": "KOD-04",
+      "an": "T",
+      "title": "Başarı ölçütünü üretimden önce ve dışarıdan yaz",
+      "kural": "Hedefi, ulaşılıp ulaşılmadığı makinece denetlenebilecek biçimde önceden yaz; şu an ulaşılmadığını doğrula; en küçük adımla ulaş; hedef bozulmadan içeriyi düzenle. Kritik nitelik \"dışarıdan\"dır — ölçüt üretim başladıktan sonra yazılırsa üretilen şeye göre biçimlenir ve kendini onaylar.",
+      "kirilir": "Keşif fazında. Alan bilinmezken ölçüt erken donar. Orada doğru yol spike-and-stabilize'dir: keşif kodunu yaz, çalıştır, öğren ve AT; sonra öğrenilen şekille ölçüt koy.",
+      "neden": "Ölçütlü sistemde çıktı kalitesi prosedürün kalitesine bağlanır ve ölçeklenir; ölçütsüzde kişinin kalitesine bağlıdır ve ölçeklenmez. Bedeli de vardır: ölçüte sığmayan her şey kaybolur (Goodhart).",
+      "kaynak": [
+        "BELGE-153"
+      ],
+      "tetik": [
+        "test",
+        "tdd",
+        "kabul kriteri",
+        "spec",
+        "yeni özellik"
+      ]
+    },
+    {
+      "id": "KOD-05",
+      "an": "T",
+      "title": "Spec'e sistemin YAPMAMASI gerekeni de yaz",
+      "kural": "Nitelikli bir tanım şunları kapsar: amaç, kullanıcı senaryoları, kabul kriterleri, girdi/çıktı yapıları, arayüz sözleşmesi, yükleme durumu, hata durumu, boş durum, yetki kuralları, sınır durumları ve sistemin yapmaması gereken davranışlar. Zincir nettir: spec maddesi → kabul kriteri → test senaryosu → gerçekleştirim doğrulaması.",
+      "kirilir": "Spec üretim sürecinin dışında duran bir rapora dönüştüğünde. Ayırt edici ölçüt budur: içeride işleyen kontrat mı, dışarıda duran doküman mı? Birincisi kaldıraç, ikincisi yüktür.",
+      "neden": "Yapay zekâ kodu hızlı yazabilir; sistemin davranış geometrisini insan tarif etmelidir. Geometri net değilse kod yazmak yalnızca belirsizliği hızlandırır.",
+      "kaynak": [
+        "BELGE-046"
+      ],
+      "tetik": [
+        "spec",
+        "yeni özellik",
+        "kabul kriteri",
+        "llm",
+        "ajan",
+        "prompt"
+      ]
+    },
+    {
+      "id": "KOD-06",
+      "an": "T",
+      "title": "İnceleme derinliğini tehlikeye göre seç — bu kataloğu her değişiklikte açma",
+      "kural": "Tehlike = f(geri alınabilirlik, etki yarıçapı, maruziyet). Düşük tehlikede yalnızca çekirdek üç-dört madde. Orta tehlikede tam liste artı yazılı varsayım listesi. Yüksek tehlikede tam liste artı bağımsız ikinci geçiş artı çalıştırılabilir doğrulama. Geri alınamaz işlemleri ayrıştır — veri silme, para transferi, dışarıya bildirim, fiziksel etki — ve ağır süreci yalnızca o kümeye uygula.",
+      "kirilir": "Bir eksen bağlama göre katman değiştirebilir: kütüphane API'sinde \"insan faktörü\" (yanlış kullanımı kolaylık) kritik katmana çıkar.",
+      "neden": "Elli maddelik listeyi her değişiklikte uygulamak sürdürülemez; sonuçta ya inceleme yapılmaz ya mekanik yapılıp değersizleşir. Havacılık ve tıptaki süreç ağırlığı hatanın geri alınamazlığından türer; yazılığın büyük bölümünde hata geri alınabilir.",
+      "kaynak": [
+        "BELGE-169",
+        "BELGE-148"
+      ],
+      "tetik": [
+        "migration",
+        "şema",
+        "silme",
+        "ödeme",
+        "dağıtım",
+        "geri alma",
+        "üretim"
+      ]
+    },
+    {
+      "id": "KOD-07",
+      "an": "T",
+      "title": "Bir soruşturmada ilk yazılan şey hipotez değil kapsamdır",
+      "kural": "Neyi sisteme dahil ettiğin alacağın cevabı önceden belirler. \"Servis yavaş\" teşhisi: sınırı sürece çizersen kod optimizasyonuna, veritabanını dahil edersen indeks eksikliğine, ağı dahil edersen DNS çözümleme gecikmesine, istemciyi dahil edersen agresif retry davranışına çıkar. Aynı gözlem, farklı sınırlarla farklı sistemlerin gözlemi hâline gelir.",
+      "kirilir": "Sistem yakın ayrıştırılabilirliğini yitirmişse — global değişebilir durum, gizli zamansal bağlantı, paylaşılan veritabanı tabloları varsa sınır çizmek işe yaramaz; anlamanın zorluğu tam olarak bu bozulmanın ölçüsüdür.",
+      "neden": "Sınırın dışında bıraktığın her şey ölçümlerinde açıklanamayan varyans olarak geri döner. Sınır kararı hangi varyansın açıklanacağını belirler.",
+      "kaynak": [
+        "BELGE-166"
+      ],
+      "tetik": [
+        "performans",
+        "arıza",
+        "olay",
+        "yavaş",
+        "teşhis"
+      ]
+    },
+    {
+      "id": "KOD-08",
+      "an": "Y",
+      "title": "Oku ile yaz arasında durum değişebilir",
+      "kural": "Bir değeri okuyup koşul kontrolünden geçirip sonra ona dayanarak yazan her kod yolunda, okuma ile yazma arasında o değerin değişebileceğini varsay. Bakiye 100 iken eşzamanlı iki istek 80'er birim talep ederse ikisi de bakiyeyi 100 okur ve ikisi de koşuldan geçer.",
+      "kirilir": "İşlem tek atomik ifadeyle yapılıyorsa — veritabanının kendi koşullu güncellemesi, karşılaştır-ve-değiştir, ya da tek bir kilit altındaki blok. Orada okuma ile yazma arasında aralık yoktur.",
+      "neden": "Kontrollü test ortamında sorunsuz çalışan sistem, gerçek eşzamanlılık altında farklı davranır. Bu kusur okumakla görünmez; varsayımı yazıya dökmekle görünür.",
+      "kaynak": [
+        "BELGE-174"
+      ],
+      "tetik": [
+        "eşzamanlılık",
+        "transaction",
+        "kilit",
+        "kuyruk",
+        "worker",
+        "bakiye",
+        "sayaç"
+      ]
+    },
+    {
+      "id": "KOD-09",
+      "an": "Y",
+      "title": "Ardışık iki yan etkili çağrı yarım kalabilir",
+      "kural": "Birbiri ardına yapılan iki yan etkili çağrıda, birincisi başarılı ikincisi başarısız olduğunda sistemin hangi durumda kalacağını yaz. Tutar gönderenden düşer, alıcıya ulaşmaz. Kullanıcıya \"başarılı\" yanıtı döndüğünde tam olarak hangi garanti verilmiş oluyor: düşüldü mü, ulaştı mı, ikisi tek transaction içinde mi?",
+      "kirilir": "İkinci adımın telafi edilebilir bir geri alma yolu varsa ya da yeniden denemesi zararsızsa. O zaman yarım kalma geçici bir durumdur, kalıcı bir tutarsızlık değil.",
+      "neden": "\"Transfer\" teriminin operasyonel tanımı yazılmadığında, kodun verdiği garanti ile kullanıcının anladığı garanti ayrışır ve fark ancak arıza anında görünür.",
+      "kaynak": [
+        "BELGE-174"
+      ],
+      "tetik": [
+        "transaction",
+        "ödeme",
+        "transfer",
+        "iki adım",
+        "saga",
+        "outbox"
+      ]
+    },
+    {
+      "id": "KOD-10",
+      "an": "Y",
+      "title": "Dış servise yazan çağrıda yanıt gelmemesi başarısızlık demek değildir",
+      "kural": "Dışarıya yazan bir çağrı yanıt alınmadan koparsa, karşı sistem işlemi tamamlamış olabilir ama çağıran bunu bilmez. Yeniden gönderim çift kayıt üretir. Çözüm bir idempotency anahtarıdır.",
+      "kirilir": "İşlem doğası gereği idempotentse — aynı değeri set etmek, aynı satırı aynı içerikle üzerine yazmak. Ama dikkat: kuruluşta idempotent olan olay tipi altı ay sonra yeni bir alan eklendiğinde idempotent olmaktan çıkar ve varsayım hâlâ koddadır.",
+      "neden": "En sık ve en sessiz veri bozulması sınıfı budur; hata değil fazladan doğru görünen kayıt üretir.",
+      "kaynak": [
+        "BELGE-174",
+        "BELGE-176"
+      ],
+      "tetik": [
+        "retry",
+        "yeniden deneme",
+        "webhook",
+        "kuyruk",
+        "http",
+        "dış servis",
+        "idempotency"
+      ]
+    },
+    {
+      "id": "KOD-11",
+      "an": "Y",
+      "title": "Gösterge niyeti değil gerçekleşen durumu bildirmeli",
+      "kural": "Bir kuyruğa yazmanın başarılı dönmesi mesajın işlendiğini, dağıtım aracının başarı bildirmesi yeni sürümün çalıştığını, yapılandırma değişikliğinin uygulanması hedef davranışın oluştuğunu göstermez. Arzulanan durum ile gözlemlenen durumu ayrı büyüklükler olarak taşı ve ikisi arasındaki farkı birinci sınıf bir gösterge say.",
+      "kirilir": "Komut ile durum arasında fiilen aralık yoksa — senkron, tek süreç içi, dönüş değeri sonucun kendisi olan çağrılarda ayrı gösterge gereksiz karmaşıklıktır.",
+      "neden": "Three Mile Island'da kontrol odasındaki gösterge vananın durumunu değil kendisine gönderilen komutu yansıtıyordu; operatörler saatlerce kapalı sandıkları bir vanadan soğutucu kaybetti. Fark normal işleyişte görünmez, arıza anında belirleyicidir — çünkü arıza tam olarak komutun gerçekleşmediği durumdur.",
+      "kaynak": [
+        "BELGE-148"
+      ],
+      "tetik": [
+        "dağıtım",
+        "deploy",
+        "durum",
+        "health",
+        "gösterge",
+        "metrik",
+        "kuyruk",
+        "config"
+      ]
+    },
+    {
+      "id": "KOD-12",
+      "an": "Y",
+      "title": "Birimi, para birimini, zaman dilimini sayının içinde taşı",
+      "kural": "Çıplak bir sayı taşıdığı varsayımı taşımaz. Birim, para birimi, zaman dilimi ve koordinat sistemi değerin yanında değil içinde bulunmalıdır. Aynı ilke servis arayüzleri için de geçerlidir: sözleşmenin belgelenmiş olması yetmez, çalışma zamanında doğrulanabilir olması gerekir.",
+      "kirilir": "Değer tek bir dar bağlamdan hiç çıkmıyorsa ve o bağlamın birimi tipte zaten sabitse. Sınırı geçen her değer için geçerlidir.",
+      "neden": "Mars Climate Orbiter'da her iki bileşen de kendi içinde doğru çalışıyordu; hata hiçbir bileşenin içinde değil, aralarındaki sözleşmenin belirsizliğindeydi.",
+      "kaynak": [
+        "BELGE-148"
+      ],
+      "tetik": [
+        "api",
+        "sözleşme",
+        "arayüz",
+        "serialize",
+        "tarih",
+        "saat",
+        "para",
+        "birim"
+      ]
+    },
+    {
+      "id": "KOD-13",
+      "an": "Y",
+      "title": "Her dış çağrı için üç soruyu birden sor",
+      "kural": "Zaman aşımına uğrarsa ne olur? Yanlış cevap dönerse ne olur? YAVAŞ AMA BAŞARILI olursa ne olur? Üçüncüsü en çok atlanan ve en pahalı olandır: yavaşlama retry üretir, retry yükü artırır, yük yavaşlamayı artırır.",
+      "kirilir": "Çağrı gerçekten dışsal değilse — aynı süreç içinde, ağ geçmeyen, kendi kodun. Orada üçlü soru gürültüdür.",
+      "neden": "Yazılım sistemleri düz nedensel zincirler değil döngüler içerir; pozitif geri besleme küçük bir gecikmeyi tam kesintiye çevirir.",
+      "kaynak": [
+        "BELGE-166"
+      ],
+      "tetik": [
+        "http",
+        "api",
+        "dış servis",
+        "timeout",
+        "retry",
+        "grpc",
+        "fetch",
+        "client"
+      ]
+    },
+    {
+      "id": "KOD-14",
+      "an": "Y",
+      "title": "Yasaklama yerine olanaksızlaştırma",
+      "kural": "Yanlış davranış belgede yasaklanmışsa kural zayıftır; sistemde ifade edilemiyorsa güçlüdür. Tehlikeli durumu temsil edemeyen tipler, geri alınamaz komutu engelleyen ara katmanlar, elle atlanamayan dağıtım kapıları, ayrıcalıklı işlem için ikinci onay.",
+      "kirilir": "Kısıt tipe ya da kapıya indirilemiyorsa. \"Müşteri bu ekranı 2019'daki bir şikâyet üzerine istedi\" bilgisi bir teste dönüştürülemez, yalnızca bir karar kaydında saklanabilir.",
+      "neden": "Yapılamayan bir şeyin neden yapılmaması gerektiğinin hatırlanması gerekmez. Gerekçe taşıma sorununu ortadan kaldırmaz ama etkisiz kılar.",
+      "kaynak": [
+        "BELGE-148"
+      ],
+      "tetik": [
+        "tip",
+        "type",
+        "validation",
+        "yetki",
+        "auth",
+        "dağıtım",
+        "kapı",
+        "guard"
+      ]
+    },
+    {
+      "id": "KOD-15",
+      "an": "Y",
+      "title": "Kapasite aşıldığında ne olacağı da tasarım konusudur",
+      "kural": "Yük atma, öncelikli kuyruklama ve kademeli işlev kaybını önceden tanımla. Bu tasarımın yokluğunda sistem aşırı yük altında rastgele bir bileşenden — genellikle en kritik olanından — kopar.",
+      "kirilir": "Yükün üst sınırı yapısal olarak sabitse ve kapasitenin altındaysa. Kullanıcıya açık her yüzeyde bu varsayım kırılgandır.",
+      "neden": "Apollo 11'in bilgisayarı aşırı yüklendiğinde çökmedi, öncelik sırasına göre düşük öncelikli görevleri düşürdü. Aşırı yük altındaki davranış bir arıza değil bir tasarım kararıydı.",
+      "kaynak": [
+        "BELGE-148"
+      ],
+      "tetik": [
+        "kuyruk",
+        "yük",
+        "rate limit",
+        "throttle",
+        "backpressure",
+        "ölçek",
+        "worker"
+      ]
+    },
+    {
+      "id": "KOD-16",
+      "an": "Y",
+      "title": "Yorum gerekçe taşır; gerekçeyi engellediği somut başarısızlık olarak yaz",
+      "kural": "Kodun ne yaptığını kodun kendisi söyler. Yorumun tek meşru işlevi koddan okunamayan gerekçeyi taşımaktır ve gerekçe kuralla AYNI YERDE durmalıdır. Genel ilke zayıftır, somut başarısızlık güçlüdür: \"Domain katmanı kalıcılıktan habersiz olmalıdır\" bir buyruktur; \"şema değiştiğinde domain katmanının değişmemesi için\" ise kuralın koruduğu şeyi adlandırdığı için hangi koşulda gevşetilebileceğini de söyler.",
+      "kirilir": "Kod zaten gerekçeyi taşıyorsa — iyi adlandırılmış bir fonksiyon çağrısı, kısıtı ifade eden bir tip. Orada yorum tekrardır ve tekrar eden yorum kod değişince yanlış bilgiye dönüşür.",
+      "neden": "Gerekçesi aktarılmamış kural, uygulayıcı için maliyeti görünür / faydası görünmez bir yüktür; terk edilmesi disiplinsizlik değil rasyonel karardır.",
+      "kaynak": [
+        "BELGE-184",
+        "BELGE-148"
+      ],
+      "tetik": [
+        "yorum",
+        "comment",
+        "adr",
+        "karar",
+        "workaround",
+        "hack"
+      ]
+    },
+    {
+      "id": "KOD-17",
+      "an": "Y",
+      "title": "Yedeklilik sayıyla değil paylaşılan bağımlılıkla ölçülür",
+      "kural": "Farklı bölgelerde çalışan iki kopya aynı yapılandırma kaynağına bağlıysa yedekli değildir. İkinci kural: kurtarma yolu kurtarılacak sistemden bağımsız olmalıdır — erişim, kimlik doğrulama ve iletişim kanallarının arızalı sistemin üzerinden geçmesi en sık ve en pahalı yapısal kusurdur.",
+      "kirilir": "Ortak arıza kipinin maliyeti kabul edilmişse ve bu kabul tarihiyle kaydedilmişse. Sessizce kabul edilmişse kırılmaz.",
+      "neden": "Fukushima'da yedek jeneratörlerin tümü aynı fiziksel tehdide — su basmasına — açıktı. Yedeklilik sayısal olarak vardı, işlevsel olarak yoktu.",
+      "kaynak": [
+        "BELGE-148"
+      ],
+      "tetik": [
+        "yedek",
+        "replica",
+        "failover",
+        "ha",
+        "kurtarma",
+        "backup",
+        "status",
+        "config"
+      ]
+    },
+    {
+      "id": "KOD-18",
+      "an": "Y",
+      "title": "Aynı veriyi ikinci bir yerde tutma",
+      "kural": "Aynı bilginin state.summary, state.current.summary ve recordDetail.summary olarak üç yerde durması tek bir soru üretir: gerçek kaynak hangisi? Bu soru cevapsızsa hem insan hem model yanlış alanı günceller — hatayı çözdüğünü sanırken kullanılmayan bir alanı düzeltir.",
+      "kirilir": "İkinci kopya kasıtlı bir önbellekse ve geçersizleştirme yolu yazılıysa. Kasıtsız her kopya doğruluk kaynağı belirsizliğidir.",
+      "neden": "Model olasılık tabanlı örüntü tamamlama ile üretir; sistemdeki varyasyon arttıkça olası doğru yolların sayısı artar ve isabet oranı düşer. Tekil doğruluk kaynağı yapay zekâ destekli geliştirmede daha da kritiktir.",
+      "kaynak": [
+        "BELGE-040",
+        "BELGE-038"
+      ],
+      "tetik": [
+        "state",
+        "store",
+        "durum",
+        "cache",
+        "önbellek",
+        "redux",
+        "model"
+      ]
+    },
+    {
+      "id": "KOD-19",
+      "an": "Y",
+      "title": "Hata ürettiğinde nedeni sonradan bulunabilsin",
+      "kural": "Bir işlem başarısız olduğunda geriye şunlar kalmalı: işlem kimliği, hangi hesap/kaynak, hangi servis, kaçıncı deneme, hangi sürüm. Aksi hâlde sistem hata üretmiş ama o hatanın tanısal değerini yitirmiştir. Üç kanal ayrı soruya cevap verir: metrik \"bozuldu mu\", iz \"nerede\", günlük \"neden\".",
+      "kirilir": "Hata zaten çağıranın elinde tam bağlamla dönüyorsa ve kaybolmuyorsa. Sınırı geçen ve asenkron olan her hata için geçerlidir.",
+      "neden": "Gözlenebilirlik sonradan eklenen bir özellik değil tasarım kararıdır; iç durumunu dışarı yansıtmayan bileşen kontrol teorisi anlamında gözlenemezdir ve gözlenemeyen sistem güvenilir biçimde kontrol edilemez.",
+      "kaynak": [
+        "BELGE-174",
+        "BELGE-166"
+      ],
+      "tetik": [
+        "log",
+        "hata",
+        "error",
+        "catch",
+        "observability",
+        "trace",
+        "metrik"
+      ]
+    },
+    {
+      "id": "KOD-20",
+      "an": "Y",
+      "title": "Yaslandığın yasayı özellik testine kodla",
+      "kural": "Bir tasarım bir cebirsel varsayıma yaslanıyorsa o varsayımı üç satırla canlı tut: merge(merge(a,b),c) == merge(a,merge(b,c)); merge(a, birim) == a; merge(a,a) == a. Yeni bir tür eklendiğinde test kırılır ve sessiz bozulma önlenir.",
+      "kirilir": "Varsayım tipte zaten ifade edilmişse ve tip sistemi onu ihlal edilemez kılıyorsa.",
+      "neden": "Kuruluş anında geçerli olan eşleme sistem evrildikçe geçerliliğini yitirir ve bu yitim gözlemlenmez: \"olaylar idempotent\" varsayımı altı ay sonra yeni olay tipiyle geçersizleşir, varsayım hâlâ kodda durur, sistem sessizce hatalı sonuç üretir.",
+      "kaynak": [
+        "BELGE-176"
+      ],
+      "tetik": [
+        "merge",
+        "birleştirme",
+        "crdt",
+        "senkron",
+        "property test",
+        "invariant",
+        "değişmez"
+      ]
+    },
+    {
+      "id": "KOD-21",
+      "an": "D",
+      "title": "Gerekçesi bulunamayan kontrolü silme",
+      "kural": "Gerekçesi bulunamayan bir kontrol, gereksiz olduğu kanıtlanmış bir kontrol değildir; yalnızca gerekçesi bulunamamış bir kontroldür. Silmek yerine ilgili noktaya bir kayıt satırı koy ve iki gün bekle: hiç tetiklenmiyorsa silme kararı için dayanak oluşur, tetikleniyorsa kaybolmuş gerekçe bulunmuş olur.",
+      "kirilir": "Kontrolün koruduğu koşulun artık var olamayacağı yapısal olarak gösterilebiliyorsa — ilgili alan tipten kaldırılmış, ilgili dış sistem kapanmışsa.",
+      "neden": "Therac-25'te önceki modeldeki donanımsal kilitler \"yazılım kendini kanıtladı\" gerekçesiyle kaldırıldı. Kilidin var olma nedeni yazılım hatasının fiziksel düzeyde durdurulabilmesiydi; bu neden aktarılmadığı için kilit işlevsiz bir maliyet kalemi sayıldı. İşlevi tanımı gereği görünmez olan koruma, gerekçesi kayıtlı değilse ilk sadeleştirmede kaldırılır.",
+      "kaynak": [
+        "BELGE-184",
+        "BELGE-148"
+      ],
+      "tetik": [
+        "refactor",
+        "temizlik",
+        "cleanup",
+        "sadeleştirme",
+        "silme",
+        "ölü kod",
+        "legacy"
+      ]
+    },
+    {
+      "id": "KOD-22",
+      "an": "D",
+      "title": "Anlamadığın kodu değiştirmeden önce davranışını dondur",
+      "kural": "Doğru olduğunu düşündüğün davranışı değil, FİİLEN GERÇEKLEŞEN davranışı test et; çıktı hatalı görünse bile test o çıktıyı beklesin. Kaba olabilir: fonksiyonun gerçek girdilerle ürettiği çıktıyı bir dosyaya kaydet ve testi o dosyayla karşılaştır. Birkaç saatte kurulur, en sık kırılan bölgeyi kapatır.",
+      "kirilir": "Mevcut davranış hatalıysa bu yöntem hatayı da korur — değişmezliği garanti eder, doğruluğu değil. Bilinen bir hatayı düzeltiyorsan önce hatayı teste çevir, sonra davranışı değiştir.",
+      "neden": "Kaybolan gerekçe bir noktada bir davranışa dönüşmüştür. O davranış test altına alındığında gerekçe bilinmese de ihlal sinyal üretir. Bilgi geri kazanılmaz; ihlal tespit edilebilir hâle getirilir ve pratik koruma açısından ikisi denktir.",
+      "kaynak": [
+        "BELGE-184"
+      ],
+      "tetik": [
+        "legacy",
+        "refactor",
+        "migration",
+        "yeniden yazma",
+        "devralma",
+        "eski kod"
+      ]
+    },
+    {
+      "id": "KOD-23",
+      "an": "D",
+      "title": "Derleyicinin göremediği beş bağı düz metin araması ile çıkar",
+      "kural": "Bir birimi değiştirmeden önce çağrı noktalarını bul. Derleyicinin yakaladıkları kolay kısımdır; asıl risk şurada: yansıma ve dinamik çağrı; yapılandırma dosyasından okunan sınıf veya alan adları; metin olarak yazılmış veritabanı sorguları, kolon ve tablo adları; olay ve mesaj adları, kuyruk anahtarları; dış sistemlerin beklediği alan adları ve biçimler. İlgili adları kod tabanında düz metin olarak aramak zorunlu adımdır.",
+      "kirilir": "Değiştirilen isim gerçekten dosya-yerel ve dışa açılmıyorsa (private, modül dışına çıkmayan). Dışa çıkan her ad için geçerlidir.",
+      "neden": "Bu beş kategorinin ortak özelliği hiçbirinde aracın uyarı vermemesidir; bağlamı olmayan kişinin en sık arıza ürettiği yerlerdir.",
+      "kaynak": [
+        "BELGE-184"
+      ],
+      "tetik": [
+        "rename",
+        "yeniden adlandırma",
+        "refactor",
+        "şema",
+        "migration",
+        "api",
+        "event",
+        "kuyruk"
+      ]
+    },
+    {
+      "id": "KOD-24",
+      "an": "D",
+      "title": "Değiştirmek yerine ekle, bir süre paralel çalıştır",
+      "kural": "Anlaşılmayan bir yolun yerine yenisini koymak yerine yeni yolu mevcut olanın yanına ekle ve eski yolu yerinde bırak. İki yolu bir süre birlikte çalıştır, çıktıları karşılaştır, uyum doğrulandıktan sonra eskiyi kaldır. Tek seferde değiştirmeye göre belirgin biçimde yavaştır; buna karşılık her aşamasında geri dönülebilirdir.",
+      "kirilir": "Yan etkili işlemlerde doğrudan uygulanamaz — iki yolun ikisi de yazıyorsa çift kayıt üretir; orada ek düzenek (gölge yazma, kuru çalıştırma) gerekir.",
+      "neden": "Gerekçesi bilinmeyen bir sistemde geri dönebilme, hızlı ilerlemeden değerlidir.",
+      "kaynak": [
+        "BELGE-184",
+        "BELGE-040"
+      ],
+      "tetik": [
+        "migration",
+        "geçiş",
+        "yeniden yazma",
+        "refactor",
+        "parity",
+        "shadow",
+        "feature flag"
+      ]
+    },
+    {
+      "id": "KOD-25",
+      "an": "D",
+      "title": "Testleri spesifikasyon olarak oku; tuhaf olanlar en çok bilgi taşır",
+      "kural": "Var olan testler, kaybolmuş gerekçenin yazıya geçmiş tek parçasıdır. Genel testler az bilgi taşır; asıl bilgi tuhaf, spesifik ve sabit sayı içeren testlerdedir. \"Şu alan boşken şu hata kodu dönmeli\" biçiminde bir test, bir zamanlar bu durumun yaşandığının kanıtıdır. Yeni bir modüle girerken önce testleri okumak, kodu okumaktan daha hızlı bağlam sağlar.",
+      "kirilir": "Test süiti kodun yapısından türetilmişse (yoğun taklit, çağrı sırası doğrulaması) spesifikasyon değil kodun tekrarıdır ve hiçbir bilgi taşımaz.",
+      "neden": "Aynı mantık depodaki tarihsel ize de uzanır: tuhaf görünen tek satırlık düzeltmeler — bir koşul, bir bekleme çağrısı, bir özel durum kontrolü — neredeyse her zaman yaşanmış bir üretim arızasının izidir. git log -S ve git blame o izi verir.",
+      "kaynak": [
+        "BELGE-184"
+      ],
+      "tetik": [
+        "legacy",
+        "devralma",
+        "onboarding",
+        "test",
+        "anlama",
+        "eski kod"
+      ]
+    },
+    {
+      "id": "KOD-26",
+      "an": "D",
+      "title": "Yeniden kullandığın bileşen doğrulama zarfını kendisiyle taşımaz",
+      "kural": "Bir bileşenin doğruluğu mutlak değil, üretildiği varsayımlar kümesine görelidir. Bir kütüphane belirli bir yük profili, belirli bir veri dağılımı ve belirli bir hata modeli varsayarak yazılmıştır; bu varsayımların hiçbiri sürüm numarasında görünmez. Bağımlılığın hangi zarfta doğrulandığını sor ve kendi kullanım profilinle karşılaştır.",
+      "kirilir": "Kendi kullanım profilin zarfın içinde kalıyorsa ve bu yazılıysa. Sözlü olarak \"bizde sorun çıkarmadı\" zarf kanıtı değildir.",
+      "neden": "Ariane 5'te önceki nesilden devralınan atalet referans yazılımı yeni aracın farklı uçuş profilinde taşma üretti. Bileşen kendi doğrulama zarfı içinde kusursuzdu; kusurlu olan o zarfın dışında yeniden kullanılmasıydı. Ek ders: kalkıştan sonra hiçbir işlevi olmayan kodun sistemde bırakılması nötr bir karar değildir.",
+      "kaynak": [
+        "BELGE-148"
+      ],
+      "tetik": [
+        "bağımlılık",
+        "kütüphane",
+        "paket",
+        "upgrade",
+        "sürüm",
+        "kopyala",
+        "yeniden kullanım"
+      ]
+    },
+    {
+      "id": "KOD-27",
+      "an": "D",
+      "title": "Kullanımdan kalkmış bayrağı ya da alan adını yeniden kullanma",
+      "kural": "Emekliye ayrılmış bir bayrak, alan adı, kolon ya da mesaj tipi yeni bir anlamla yeniden kullanılamaz. Eski kod bir yerde hâlâ ayakta olabilir ve aynı adı eski anlamıyla okur.",
+      "kirilir": "Eski anlamı okuyan hiçbir çalışan örneğin kalmadığı KANITLANABİLİYORSA — tüm istemciler zorunlu güncellemeden geçmiş, tüm kuyruklar boşalmışsa.",
+      "neden": "Knight Capital'de dağıtım sekiz sunucunun yedisinde tamamlandı; yeni kod yıllar önce kullanımdan kalkmış bir işlevin bayrağını yeniden kullanıyordu ve güncellenmeyen sunucuda aynı bayrak eski davranışı tetikledi. Kısmi dağıtım ile bayrak yeniden kullanımının birleşimi kırk beş dakikada şirketi iflasa götürdü.",
+      "kaynak": [
+        "BELGE-148"
+      ],
+      "tetik": [
+        "feature flag",
+        "bayrak",
+        "şema",
+        "migration",
+        "kolon",
+        "enum",
+        "dağıtım",
+        "deploy"
+      ]
+    },
+    {
+      "id": "KOD-28",
+      "an": "D",
+      "title": "Bağlam yokken hedef güvenli olmak değil, yanlışı saatler içinde fark etmektir",
+      "kural": "Bağlam yokken her değişikliği güvenli hâle getirmek mümkün değildir. Hedefi değiştir: küçük ve tek amaçlı değişiklikler, sık ve geri alınabilir konuşlandırma, değişen yola konmuş kayıt satırları, değişimden sonraki ilk gün ölçütlerin izlenmesi. Kaybolan bilginin telafisi doğru tahmin etmek değil, yanlış tahminin ucuz olmasıdır.",
+      "kirilir": "İşlem geri alınamazsa — veri silme, para transferi, dışarıya bildirim, fiziksel etki. Orada ucuz yanılma diye bir şey yoktur; KOD-06'nın ağır süreci uygulanır.",
+      "neden": "Devir teslimin yapılmadığı bir ortamda kaybolan bilgiyi geri kazanmak çoğu durumda mümkün değildir; ihtiyaç duyulan şey bilinmeyen kısıtı öğrenmek değil, çiğnendiğinde bunu üretim ortamından önce ya da hemen sonra duymaktır.",
+      "kaynak": [
+        "BELGE-184"
+      ],
+      "tetik": [
+        "legacy",
+        "devralma",
+        "yeni proje",
+        "bağlam yok",
+        "deploy",
+        "dağıtım"
+      ]
+    },
+    {
+      "id": "KOD-29",
+      "an": "D",
+      "title": "Modelin \"ne yapıyor\" açıklaması iddiadır, \"neden var\" açıklaması tahmindir",
+      "kural": "Dil modeli tam olarak kodu okuyup gerekçeyi göremeyen okuyucudur; tuhaf duran bir yapıyı gereksiz karmaşıklık sayması bir hata değil beklenen davranıştır. Modelin bir bloğun NE yaptığına dair açıklaması doğrulanabilir bir iddiadır; NEDEN orada olduğuna dair açıklaması ise bir tahmindir ve kanıt sayılamaz.",
+      "kirilir": "Gerekçe bağlama açıkça verilmişse — depoda otomatik okunan bir kısıt dosyası, kodun yanındaki bir karar kaydı. O zaman model tahmin etmez, okur.",
+      "neden": "Model üretim tarafını hızlandırır, doğrulama tarafını aynı oranda hızlandırmaz; darboğaz doğrulamaya kayar ve birim zamanda üretime sızan hatalı değişiklik sayısı artar. Bu, model kalitesinden bağımsız yapısal bir sonuçtur.",
+      "kaynak": [
+        "BELGE-184",
+        "BELGE-038"
+      ],
+      "tetik": [
+        "llm",
+        "ajan",
+        "model",
+        "temizlik",
+        "sadeleştirme",
+        "modernleştirme",
+        "üretilen kod"
+      ]
+    },
+    {
+      "id": "KOD-30",
+      "an": "B",
+      "title": "Savunmak için değil çürütmek için oku; her turda merceği değiştir",
+      "kural": "İyi bir inceleme, işi savunmak için değil onu çürütebildiği ölçüde çürütmeye çalışmak için yürütülür; çürütme girişimi başarısız olduğunda güven artar. Ve aynı mercekle daha çok bakmak aynı şeyi bulur — bulgular çabadan değil AÇI DEĞİŞİMİNDEN gelir. Katmanları döndür: amaç, gereksinim, varsayım, arayüz, veri ve durum, zaman, hata, sınır koşulları, güvenlik, insan, gözlemlenebilirlik, geri alınabilirlik, karar gerekçesi, bilinmeyenler.",
+      "kirilir": "Nesnenin şekli henüz belirsizse — keşif fazında ortada çürütülecek bir iddia yoktur. Önce şekil, sonra irdeleme.",
+      "neden": "Onaylayıcı kanıt toplamak ucuz ve yanıltıcıdır. Ekiplerin çoğunun atladığı bir katman daha vardır: incelemenin kendisinin incelenmesi — doğru kişiye mi soruldu, uygulanan test aranan hatayı yakalayabilir miydi, ekibin tamamı aynı kör noktayı mı paylaşıyor.",
+      "kaynak": [
+        "BELGE-174"
+      ],
+      "tetik": [
+        "inceleme",
+        "review",
+        "bitti",
+        "hazır",
+        "pr",
+        "merge"
+      ]
+    },
+    {
+      "id": "KOD-31",
+      "an": "B",
+      "title": "Doyum kriteri tek başına yeterli değildir; kapsam koşulunu da ara",
+      "kural": "\"Üç tur üst üste yeni kritik bulgu yok\" ölçütü tek başına kırılgandır. Yanına iki koşul daha koy: her katman en az iki kez tarandı mı (kapsam doyumu), ve bir bütçe tavanı. İlk ikisi sağlanmadan döngü durmamalı, üçüncüsü aşıldığında zorunlu olarak durmalıdır.",
+      "kirilir": "Nesne tek turda bitecek kadar küçükse döngü kurmanın maliyeti getirisini aşar.",
+      "neden": "Doyum doğruluk anlamına gelmez: dar bir çerçeveye sıkışmış bir inceleme hızla doyar ve süreci tamamlanmış olarak raporlar. Karşı sınama basittir — nesneye bilinen bir kusur kasten yerleştir; döngü bunu bulamıyorsa hatalı olan döngüdür.",
+      "kaynak": [
+        "BELGE-174"
+      ],
+      "tetik": [
+        "inceleme",
+        "review",
+        "irdeleme",
+        "scrutiny",
+        "doyum"
+      ]
+    },
+    {
+      "id": "KOD-32",
+      "an": "B",
+      "title": "Örtük varsayımı yazıya dök; her tespiti alıntıyla bağla",
+      "kural": "Zihinde sessizce kabul edilen varsayımları açık metne dönüştür — yazılmayan varsayım görünmez olduğu için denetlenemez. Her tespit ilgili satırı birebir alıntılasın ya da çalıştırılabilir bir karşı örnek üretsin. Okuma kandırılabilir; geçmeyen bir test geçmez.",
+      "kirilir": "Çalıştırma üretim verisi veya üretim ortamı gerektiriyorsa çalıştırılabilir kanıt elde edilemez; orada alıntı ve bağımsız ikinci geçiş kalır.",
+      "neden": "En pahalı hatalar incelemecinin \"gördü\" sandığı ama beklentisine dayanarak tahmin ettiği yerlerde saklanır. Hem insan hem model metni bütünsel okur; tanıdık bir kalıp görüldüğünde ayrıntı okunmaz, kalıba göre tahmin edilir. Alıntı zorunluluğu tam olarak bu kestirmeyi kapatır.",
+      "kaynak": [
+        "BELGE-169"
+      ],
+      "tetik": [
+        "inceleme",
+        "review",
+        "varsayım",
+        "kanıt",
+        "test"
+      ]
+    },
+    {
+      "id": "KOD-33",
+      "an": "B",
+      "title": "Yüksek tehlikede bağımsız ikinci geçiş yap",
+      "kural": "Sonuca hiç bakmadan işi sıfırdan yeniden üret ve iki sonucu karşılaştır. Ayrışan her nokta, paylaşılan gizli bir varsayıma işaret eder.",
+      "kirilir": "Düşük tehlikede maliyeti getirisini aşar — KOD-06'daki eşiğe bak.",
+      "neden": "Kıdemli üç mühendisin onayından geçen seksen sayfalık bir termal analizde en tepedeki kişi 34. sayfadaki tek bir hatalı varsayımı yakalar. Bu bir kahramanlık hikâyesi değil, sistem başarısızlığıdır: üç bağımsız inceleme belgede yazılı olmayan bir varsayımı görememiştir, çünkü hiçbiri işi bağımsız olarak yeniden yapmamıştır.",
+      "kaynak": [
+        "BELGE-169"
+      ],
+      "tetik": [
+        "inceleme",
+        "review",
+        "kritik",
+        "migration",
+        "ödeme",
+        "güvenlik"
+      ]
+    },
+    {
+      "id": "KOD-34",
+      "an": "B",
+      "title": "Bulgunun şeklini kod tabanında ara; tekil olaydan ilkeye geç",
+      "kural": "Her gerçek kusurun bir ŞEKLİ vardır. O şekli kod tabanının tamamında ara — bir hata orada beşe dönüşür. Sonra bir basamak yukarı çık: çıkarılacak sonuç \"teknisyen yanlış taktı\" değil \"kritik bağlantı yanlış montaja fiziksel olarak izin vermemeli\"dir.",
+      "kirilir": "Olay gerçekten tekilse ve tekrarlamayan bir dış koşuldan doğuyorsa — tek seferlik bir veri bozulması, kapanmış bir dış sisteme özgü davranış.",
+      "neden": "Variant analizi insanların atladığı adımdır; düzeltilip variant'ı aranmamış bir hata yarım düzeltilmiştir.",
+      "kaynak": [
+        "BELGE-174"
+      ],
+      "tetik": [
+        "bug",
+        "hata",
+        "kök neden",
+        "düzeltme",
+        "fix",
+        "variant"
+      ]
+    },
+    {
+      "id": "KOD-35",
+      "an": "B",
+      "title": "Test bağımsız bir ikinci türetme mi, kodun tekrarı mı?",
+      "kural": "Test ve kod aynı niyetin iki bağımsız türetmesidir; uyuşmaları kanıt değeri taşır çünkü bağımsızdırlar. Test implementasyonun yapısından türetildiğinde (her iş birliği nesnesinin taklit edilmesi, çağrı sıralarının doğrulanması) bağımsızlık çöker ve geriye totoloji kalır: kodun kod olduğunu doğrulayan bir test. Ayrıca kırmızı fazını gördün mü — ilk yazımında geçen bir test, hiçbir şey ölçmediği fark edilmemiş bir alettir.",
+      "kirilir": "Karakterizasyon testinde ilişki terstir: orada kod sabit dünya, test ise yanlışlanabilir bir sanıdır ve kodun şeklinden türetilmiş olması kusur değil amaçtır.",
+      "neden": "Yoğun taklit içeren süitlerin yemyeşil yanarken sistemin çalışmamasının sebebi budur. Ayrıca testler modelin temel geri bildirim mekanizmasıdır; testler kırılgan veya yüzeyselse model işlevsel olarak körleşir — kod üretmeye devam eder ama gerçek etkisini değerlendiremez.",
+      "kaynak": [
+        "BELGE-153",
+        "BELGE-038"
+      ],
+      "tetik": [
+        "test",
+        "mock",
+        "taklit",
+        "spec",
+        "tdd",
+        "coverage"
+      ]
+    },
+    {
+      "id": "KOD-36",
+      "an": "B",
+      "title": "Tek değişiklikte çok test kırmızıysa bu bir tanıdır",
+      "kural": "Dışa dönük davranış değişmediyse kusur testlerdedir: süit yapıya kenetlenmiştir. Davranış gerçekten değiştiyse kırmızılar doğru ve bilgilendiricidir. İkinci sinyal: testi kurmak için çok sayıda bağımlılığı ayağa kaldırmak gerekiyorsa bu tasarım hakkında ampirik bir veridir — hipotez testi yapılmıyor, termometre okunuyor.",
+      "kirilir": "Kaskadın kaynağı paylaşılan kurulum bloğuysa tanı yanıltıcıdır; ortak kurulum süitin gizli tekil noktasıdır ve oradaki bir varsayım değiştiğinde bağımsız görünen testler topluca düşer.",
+      "neden": "Kırk test aynı iç ayrıntıya dokunuyorsa o ayrıntı kırk kenarlı bir düğüme dönüşmüştür. Test süiti API'nin ikinci tüketicisidir; her test bir bağımlılık kenarıdır. Süit kutsal değildir, bir maliyet-fayda kalemidir ve test silinebilir.",
+      "kaynak": [
+        "BELGE-153"
+      ],
+      "tetik": [
+        "test",
+        "kırılgan",
+        "refactor",
+        "mock",
+        "kaskad"
+      ]
+    },
+    {
+      "id": "KOD-37",
+      "an": "B",
+      "title": "Geçici olarak devre dışı bıraktığın korumaları geri aç",
+      "kural": "Aktarılması ve kapatılması gereken bilgi, tamamlanmış işler değil TAMAMLANMAMIŞ olanlar ve geçici olarak devre dışı bırakılmış korumalardır: susturulmuş bir uyarı kuralı, atlanmış bir test, gevşetilmiş bir eşik, açık bırakılmış bir hata ayıklama bayrağı.",
+      "kirilir": "Kapatma kalıcı ve kasıtlıysa ve bu karar tarihiyle, gerekçesiyle kaydedilmişse. Kaydedilmemişse geçicidir ve unutulur.",
+      "neden": "Piper Alpha'da bakım için sökülmüş bir emniyet valfinin durumu vardiya devrinde eksik aktarıldı ve sonraki vardiya pompayı çalıştırılabilir varsaydı. Bilgi en çok sorumluluk el değiştirirken kaybolur; kazaların orantısız bölümü bu ana denk gelir.",
+      "kaynak": [
+        "BELGE-148"
+      ],
+      "tetik": [
+        "skip",
+        "todo",
+        "fixme",
+        "disable",
+        "susturma",
+        "eşik",
+        "alarm",
+        "bitti"
+      ]
+    },
+    {
+      "id": "KOD-38",
+      "an": "B",
+      "title": "Bu incelemenin neyi KAPSAMADIĞINI yaz",
+      "kural": "Bitirirken üç satır ekle: bu inceleme neyi kapsamadı (performans, güvenlik, dağıtım, göç), hangi tespit doğrulandı ve hangisi varsayım olarak kaldı, hangi ölçüt ilk gün izlenecek. Kesin doğrulanan / güçlü desteklenen / varsayılan ama test edilmemiş ayrı işaretlenmeli.",
+      "kirilir": "Değişiklik gerçekten tek dosyalık ve geri alınabilirse üç satır fazladır; bir satır yeter.",
+      "neden": "Bu ayrım yapılmadığında bir varsayım birkaç aktarım sonra olgu olarak dolaşıma girer.",
+      "kaynak": [
+        "BELGE-169",
+        "BELGE-166"
+      ],
+      "tetik": [
+        "bitti",
+        "hazır",
+        "pr",
+        "rapor",
+        "inceleme",
+        "postmortem"
+      ]
+    },
+    {
+      "id": "KOD-39",
+      "an": "A",
+      "title": "Mekanizma zinciri kurulmadan yapılan düzeltme semptom bastırmaktır",
+      "kural": "\"Ne ile birlikte oluyor?\" sorusundan \"hangi süreç üzerinden oluyor?\" sorusuna geç. Teşhis ancak adım adım zincir kurulduğunda tamamlanır: bağlantı havuzu doldu → istekler kuyrukta bekledi → istemci zaman aşımına uğradı → retry gönderdi → yük ikiye katlandı → havuz daha da doldu.",
+      "kirilir": "Zincirin bir halkası hesaplamalı olarak indirgenemezse — bazı sistemlerin davranışını öğrenmenin tek yolu onları çalıştırmaktır, kısayol yoktur. Orada zincir kurmak yerine deney yapılır.",
+      "neden": "Zincir kurulmadan yapılan düzeltme aynı arızanın bir sonraki biçimini engellemez.",
+      "kaynak": [
+        "BELGE-166"
+      ],
+      "tetik": [
+        "arıza",
+        "olay",
+        "bug",
+        "kök neden",
+        "debug",
+        "incident"
+      ]
+    },
+    {
+      "id": "KOD-40",
+      "an": "A",
+      "title": "Kırmızı bir test kodun yanlış olduğunu kanıtlamaz",
+      "kural": "Hiçbir hipotez tek başına test edilmez; her test arka plan varsayımları demetiyle birlikte sınanır. Test başarısız olduğunda hangi varsayımın yanlış olduğu mantıksal olarak belirsizdir: kod mu hatalı, test mi hatalı, ortam mı farklı, bağımlılık sürümü mü değişti? Ve ters yönde: test hatanın varlığını gösterir, yokluğunu değil.",
+      "kirilir": "Test bir dakika önce yeşildi ve aradaki tek fark senin değişikliğinse belirsizlik pratikte yok denecek kadar azdır.",
+      "neden": "Duhem-Quine problemi hata ayıklamada en sık atlanan adımdır; ekip kodu düzeltmeye çalışırken sorun ortamdadır.",
+      "kaynak": [
+        "BELGE-166"
+      ],
+      "tetik": [
+        "test",
+        "kırmızı",
+        "ci",
+        "flaky",
+        "debug",
+        "arıza"
+      ]
+    },
+    {
+      "id": "KOD-41",
+      "an": "A",
+      "title": "Ölçüm, ölçtüğü olaydan hızlı örneklemiyorsa kanıt değildir",
+      "kural": "Toplama aralığı on beş saniye olan bir metrik, üç saniyelik bir doygunluk olayını hiç göstermez. Yüzde birlik örnekleme oranıyla çalışan bir iz toplayıcı nadir yolu asla yakalamaz. Toplulaştırma sırasında yüzdelik dilimlerin ortalamasını almak matematiksel olarak anlamsızdır ve kuyruk gecikmesini sistematik olarak küçük gösterir. Ayrıca ölçmek sistemi değiştirir (prob etkisi).",
+      "kirilir": "Aradığın olay ölçüm penceresinden uzun sürüyorsa — saatlerce süren bir bellek sızıntısı on beş saniyelik metrikte net görünür.",
+      "neden": "Ölçüm zincirinin kendisi bir sistemdir ve o da hata üretir. Aracı doğrulamadan yapılan ölçüm, sapmasızlığı gösterilmemiş bir aygıtla yapılan ölçümdür.",
+      "kaynak": [
+        "BELGE-166"
+      ],
+      "tetik": [
+        "metrik",
+        "p99",
+        "gecikme",
+        "profil",
+        "ölçüm",
+        "monitoring",
+        "performans"
+      ]
+    },
+    {
+      "id": "KOD-42",
+      "an": "A",
+      "title": "Göremediğin veri sistematik olarak filtrelenmiş olabilir",
+      "kural": "Çökme raporu altyapısında biriken kayıtlar, yalnızca raporlamanın ayakta kalabildiği çökmelerdir; süreci anında öldüren hatalar hiç görünmez. Zaman aşımına uğrayan istekler tamamlananların gecikme histogramında yer almaz — yani en yavaş istekler ölçümden sistematik olarak dışlanır. Kullanıcı anketleri yalnızca terk etmemiş kullanıcılara ulaşır.",
+      "kirilir": "Ölçüm noktası olayın kendisinden önce ve dışında duruyorsa (ağ geçidi tarafında sayılan istek, istemcinin gönderdiği başlangıç işareti) sansür kalkar.",
+      "neden": "Sansürlü veri üzerinde yapılan kalıntı analizi yanlış yöne işaret eder.",
+      "kaynak": [
+        "BELGE-166"
+      ],
+      "tetik": [
+        "metrik",
+        "crash",
+        "timeout",
+        "log",
+        "analitik",
+        "ölçüm",
+        "arıza"
+      ]
+    },
+    {
+      "id": "KOD-43",
+      "an": "A",
+      "title": "Korelasyon değil müdahale; ama patlama yarıçapını önce sınırla",
+      "kural": "\"Yavaş sorgu ile yüksek hata oranı birlikte görülüyor\" bir korelasyondur; ikisini de tetikleyen üçüncü bir neden olabilir. Sorguya yapay gecikme enjekte edip hata oranının yükseldiğini görmek karşıolgusal bilgi üretir. Müdahale kendiliğinden bilgi vermez, KARŞILAŞTIRMA verir: kontrol grubu olmadan yapılan üretim değişikliği aynı anda olan her şeyle karışır.",
+      "kirilir": "Patlama yarıçapı önceden sınırlandırılamıyorsa müdahale edilmez. Sınırlanabiliyorsa da önce gözlemle ucuz olan elenir.",
+      "neden": "Pasif gözlem birliktelik ilişkisi üretir ve bu ilişki ortak bir üçüncü nedenle de açıklanabilir. Kontrollü müdahale, müdahale edilmeseydi sonucun ortaya çıkmayacağını deneysel olarak gösterir. Chaos engineering'in epistemolojik değeri buradadır.",
+      "kaynak": [
+        "BELGE-166"
+      ],
+      "tetik": [
+        "arıza",
+        "olay",
+        "korelasyon",
+        "chaos",
+        "kanarya",
+        "canary",
+        "a/b",
+        "deney"
+      ]
+    },
+    {
+      "id": "KOD-44",
+      "an": "A",
+      "title": "Asıl bilgi modelin açıklayamadığı yüzdededir",
+      "kural": "Kapasite modelin trafiğin yüzde doksanını açıklıyorsa asıl bilgi kalan yüzde ondadır. \"Ortalama gecikme modelle uyumlu ama 99. yüzdelik üç kat yüksek\" gözlemi, ortalamayı değil kuyruğu üreten bir mekanizmaya işaret eder: çöp toplama duraklaması, kilit çekişmesi, bağlantı havuzu tükenmesi. Ve bir uyarı: sekiz özel durumla donatılmış bir teşhis hipotezi geçmiş olayların tümünü açıklar ve bir sonrakini öngöremez.",
+      "kirilir": "Kalıntı ölçüm gürültüsü mertebesindeyse — orada açıklanacak bir şey yoktur, KOD-41'e bak.",
+      "neden": "Sadelik burada estetik tercih değil öngörü gücü kriteridir: iyi model, henüz görülmemiş olayı doğru tahmin edendir.",
+      "kaynak": [
+        "BELGE-166"
+      ],
+      "tetik": [
+        "performans",
+        "p99",
+        "gecikme",
+        "kapasite",
+        "model",
+        "kuyruk"
+      ]
+    },
+    {
+      "id": "KOD-45",
+      "an": "A",
+      "title": "Her parça doğru çalışırken bütün bozulabilir",
+      "kural": "Retry fırtınası, thundering herd, önbellek çığı, metastabil arıza. Bunların ortak özelliği her bileşenin kendi başına doğru çalışmasıdır; bileşen düzeyinde inceleme bu sınıfı hiçbir zaman bulamaz. Metastabil arıza özellikle öğreticidir: \"nedeni bul ve kaldır\" sezgisini kırar — neden zaten kalkmıştır, sistem yine de düzelmez. Ek sinyal: 30 saniye ile 31 saniye arasında davranış NİTELİKSEL olarak değişiyorsa orada gizli bir eşik vardır ve bulunmalıdır.",
+      "kirilir": "Sistem gerçekten yakın ayrıştırılabilirse ve etkileşim yüzeyi darsa bu sınıf oluşmaz — ama global değişebilir durum, gizli zamansal bağlantı ya da paylaşılan tablo varsa ayrıştırılabilirlik zaten yoktur.",
+      "neden": "\"Yüzde 50 yükte iyi çalışıyordu\" gözlemi yüzde 80 hakkında neredeyse hiçbir şey söylemez; doluluk kritik eşiğe yaklaştıkça kuyruk gecikmesi patlar. Bu bir kusur değil matematiksel bir zorunluluktur ve çözümü kod eniyilemesi değil kapasite planlaması ya da geri basınç tasarımıdır.",
+      "kaynak": [
+        "BELGE-166",
+        "BELGE-043"
+      ],
+      "tetik": [
+        "retry",
+        "cache",
+        "önbellek",
+        "yük",
+        "ölçek",
+        "kuyruk",
+        "metastabil",
+        "arıza"
+      ]
+    },
+    {
+      "id": "KOD-46",
+      "an": "A",
+      "title": "Kök neden tekil bir kutu değil, hizalanmış deliklerdir",
+      "kural": "Ciddi arızalar tek bir hatadan değil, birden çok savunma katmanındaki deliklerin hizalanmasından doğar: kod incelemesi kaçırdı, test kapsamadı, kanarya çok kısa sürdü, alarm eşiği yanlıştı, runbook eskiydi. Düzeltme birden çok katmana yapılmalıdır — yalnızca kodu düzeltip alarmı düzeltmemek aynı deliği açık bırakır. Ölçüt: runbook çeşitliliği arıza modu çeşitliliğinden az olamaz.",
+      "kirilir": "Sistem gerçekten tek katmanlıysa — küçük bir araç, tek kullanıcılı bir betik. Orada katman aramak tören olur.",
+      "neden": "Sıkı bağlı ve etkileşimsel olarak karmaşık sistemlerde bazı arızalar öngörülemez ve kaçınılmazdır; kusur değil yapının doğal sonucudurlar. Buradan iki tasarım yönü çıkar: bağı gevşetmek ve etkileşim karmaşıklığını azaltmak.",
+      "kaynak": [
+        "BELGE-166"
+      ],
+      "tetik": [
+        "postmortem",
+        "olay",
+        "incident",
+        "kök neden",
+        "arıza",
+        "runbook",
+        "alarm"
+      ]
+    },
+    {
+      "id": "KOD-47",
+      "an": "A",
+      "title": "Sapmanın kendisini değil sapma eğilimini izle",
+      "kural": "Aralıklı olarak başarısız olan sınamalar, düzenli biçimde susturulan uyarılar, tekrarlayan ancak kendiliğinden düzelen hata kayıtları, her yayında bir kez daha esnetilen bir eşik — bunların tümü sapma sinyalidir. İzlenmesi gereken büyüklük anomalinin son sonucu değil SIKLIĞINDAKİ DEĞİŞİMDİR. Bir sapma kabul edilecekse kararın tarihini ve gerekçesini kaydet.",
+      "kirilir": "Sapmanın sıklığı ölçülemiyorsa — kayıt tutulmuyorsa. O zaman önce ölçüm kurulur, eğilim sonra izlenir.",
+      "neden": "Kural krizde tartışılarak kaldırılmaz; sessizce, tekil bir istisna olarak delinir ve ikinci istisna birincisine dayanarak meşrulaşır. Referans noktası artık kural değil son gözlenen sapmadır. Kaydetmek, sonraki kararın referansının önceki sapma değil özgün kural olmasını sağlar — aşınmaya karşı en doğrudan yapısal önlem budur. Ve geriye dönük göstergeler (çalışma süresi, olay sayısı) riski gizler; anlamlı göstergeler ileriye dönüktür: yedekten geri dönüş en son ne zaman sınandı?",
+      "kaynak": [
+        "BELGE-148"
+      ],
+      "tetik": [
+        "flaky",
+        "alarm",
+        "susturma",
+        "eşik",
+        "uyarı",
+        "sapma",
+        "postmortem",
+        "slo"
+      ]
+    }
+  ]
+}
