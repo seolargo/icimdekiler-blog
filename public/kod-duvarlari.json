@@ -38,7 +38,8 @@
         "yeni özellik",
         "ölçek",
         "dağıtık"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-02",
@@ -59,7 +60,8 @@
         "paralel",
         "dağıtık",
         "senkron"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-03",
@@ -77,17 +79,19 @@
         "performans",
         "tutarlılık",
         "gecikme"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-04",
       "an": "T",
       "title": "Başarı ölçütünü üretimden önce ve dışarıdan yaz",
-      "kural": "Hedefi, ulaşılıp ulaşılmadığı makinece denetlenebilecek biçimde önceden yaz; şu an ulaşılmadığını doğrula; en küçük adımla ulaş; hedef bozulmadan içeriyi düzenle. Kritik nitelik \"dışarıdan\"dır — ölçüt üretim başladıktan sonra yazılırsa üretilen şeye göre biçimlenir ve kendini onaylar.",
+      "kural": "Hedefi, ulaşılıp ulaşılmadığı makinece denetlenebilecek biçimde önceden yaz; şu an ulaşılmadığını doğrula; en küçük adımla ulaş; hedef bozulmadan içeriyi düzenle. Kritik nitelik \"dışarıdan\"dır — ölçüt üretim başladıktan sonra yazılırsa üretilen şeye göre biçimlenir ve kendini onaylar. Sınaması KOD-48'dedir: ölçüt sistem henüz yokken de ölçülebiliyor mu?",
       "kirilir": "Keşif fazında. Alan bilinmezken ölçüt erken donar. Orada doğru yol spike-and-stabilize'dir: keşif kodunu yaz, çalıştır, öğren ve AT; sonra öğrenilen şekille ölçüt koy.",
       "neden": "Ölçütlü sistemde çıktı kalitesi prosedürün kalitesine bağlanır ve ölçeklenir; ölçütsüzde kişinin kalitesine bağlıdır ve ölçeklenmez. Bedeli de vardır: ölçüte sığmayan her şey kaybolur (Goodhart).",
       "kaynak": [
-        "BELGE-153"
+        "BELGE-153",
+        "BELGE-165"
       ],
       "tetik": [
         "test",
@@ -95,7 +99,8 @@
         "kabul kriteri",
         "spec",
         "yeni özellik"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-05",
@@ -114,7 +119,8 @@
         "llm",
         "ajan",
         "prompt"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-06",
@@ -135,7 +141,8 @@
         "dağıtım",
         "geri alma",
         "üretim"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-07",
@@ -153,7 +160,8 @@
         "olay",
         "yavaş",
         "teşhis"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-08",
@@ -173,7 +181,8 @@
         "worker",
         "bakiye",
         "sayaç"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-09",
@@ -192,7 +201,8 @@
         "iki adım",
         "saga",
         "outbox"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-10",
@@ -213,7 +223,8 @@
         "http",
         "dış servis",
         "idempotency"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-11",
@@ -234,7 +245,8 @@
         "metrik",
         "kuyruk",
         "config"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-12",
@@ -255,7 +267,8 @@
         "saat",
         "para",
         "birim"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-13",
@@ -276,7 +289,8 @@
         "grpc",
         "fetch",
         "client"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-14",
@@ -297,7 +311,8 @@
         "dağıtım",
         "kapı",
         "guard"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-15",
@@ -317,7 +332,8 @@
         "backpressure",
         "ölçek",
         "worker"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-16",
@@ -337,7 +353,8 @@
         "karar",
         "workaround",
         "hack"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-17",
@@ -358,7 +375,8 @@
         "backup",
         "status",
         "config"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-18",
@@ -379,7 +397,8 @@
         "önbellek",
         "redux",
         "model"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-19",
@@ -400,7 +419,8 @@
         "observability",
         "trace",
         "metrik"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-20",
@@ -420,7 +440,8 @@
         "property test",
         "invariant",
         "değişmez"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-21",
@@ -441,7 +462,8 @@
         "silme",
         "ölü kod",
         "legacy"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-22",
@@ -460,7 +482,8 @@
         "yeniden yazma",
         "devralma",
         "eski kod"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-23",
@@ -481,7 +504,8 @@
         "api",
         "event",
         "kuyruk"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-24",
@@ -502,7 +526,8 @@
         "parity",
         "shadow",
         "feature flag"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-25",
@@ -521,7 +546,8 @@
         "test",
         "anlama",
         "eski kod"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-26",
@@ -541,7 +567,8 @@
         "sürüm",
         "kopyala",
         "yeniden kullanım"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-27",
@@ -562,7 +589,8 @@
         "enum",
         "dağıtım",
         "deploy"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-28",
@@ -581,7 +609,8 @@
         "bağlam yok",
         "deploy",
         "dağıtım"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-29",
@@ -602,7 +631,8 @@
         "sadeleştirme",
         "modernleştirme",
         "üretilen kod"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-30",
@@ -621,7 +651,8 @@
         "hazır",
         "pr",
         "merge"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-31",
@@ -639,7 +670,8 @@
         "irdeleme",
         "scrutiny",
         "doyum"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-32",
@@ -657,7 +689,8 @@
         "varsayım",
         "kanıt",
         "test"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-33",
@@ -676,7 +709,8 @@
         "migration",
         "ödeme",
         "güvenlik"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-34",
@@ -695,7 +729,8 @@
         "düzeltme",
         "fix",
         "variant"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-35",
@@ -715,7 +750,8 @@
         "spec",
         "tdd",
         "coverage"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-36",
@@ -733,7 +769,8 @@
         "refactor",
         "mock",
         "kaskad"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-37",
@@ -754,7 +791,8 @@
         "eşik",
         "alarm",
         "bitti"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-38",
@@ -774,7 +812,8 @@
         "rapor",
         "inceleme",
         "postmortem"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-39",
@@ -793,7 +832,8 @@
         "kök neden",
         "debug",
         "incident"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-40",
@@ -812,7 +852,8 @@
         "flaky",
         "debug",
         "arıza"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-41",
@@ -832,7 +873,8 @@
         "ölçüm",
         "monitoring",
         "performans"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-42",
@@ -852,7 +894,8 @@
         "analitik",
         "ölçüm",
         "arıza"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-43",
@@ -873,7 +916,8 @@
         "canary",
         "a/b",
         "deney"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-44",
@@ -892,7 +936,8 @@
         "kapasite",
         "model",
         "kuyruk"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-45",
@@ -914,7 +959,8 @@
         "kuyruk",
         "metastabil",
         "arıza"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-46",
@@ -934,7 +980,8 @@
         "arıza",
         "runbook",
         "alarm"
-      ]
+      ],
+      "sinama": []
     },
     {
       "id": "KOD-47",
@@ -955,7 +1002,301 @@
         "sapma",
         "postmortem",
         "slo"
-      ]
+      ],
+      "sinama": []
+    },
+    {
+      "id": "KOD-48",
+      "an": "T",
+      "title": "Ölçütün belirleyici sınaması: sistem henüz yokken ölçülebiliyor mu?",
+      "kural": "Tanımlanan ölçüt sistemi değil PROBLEMİ ölçmelidir. Sınama tek sorudur: bu ölçüt, sistem henüz mevcut değilken de ölçülebiliyor mu? Ölçülemiyorsa ölçüt sistemin kendisini ölçüyordur. Ölçülebiliyorsa aynı işlem başlangıç değerini de üretir — hedefin anlamlı olması bu değerin varlığına bağlıdır. Geçerli biçim mevcut değeri, hedef değeri ve zaman ufkunu birlikte içerir.",
+      "kirilir": "Nicel ölçüt tanımlanamıyorsa iki alternatif kalır: tanımlı bir başarı koşuluna bağlanmış gözlenebilir olay, ya da vekil ölçüt (güvenlikte açık sayısı, yama süresi). Vekil ölçüt kullanıldığı açıkça yazılmalıdır.",
+      "neden": "KOD-04'ün \"dışarıdan\" niteliğinin işletilebilir sınaması budur. \"Sistem daha hızlı olacak\" ölçülemez; \"birim zamandaki destek çağrısı hacminin şu değerden şu değere şu sürede inmesi\" ölçülebilir ve sistem yokken de ölçülebilir.",
+      "kaynak": [
+        "BELGE-165"
+      ],
+      "tetik": [
+        "ölçüt",
+        "kabul kriteri",
+        "hedef",
+        "kpi",
+        "slo",
+        "spec"
+      ],
+      "sinama": []
+    },
+    {
+      "id": "KOD-49",
+      "an": "T",
+      "title": "Gereksinimden doğrudan dosya yapısına atlama",
+      "kural": "Zincir şudur: amaç → gereksinim → işlev → mantıksal mimari (alan modeli) → işlev tahsisi → fiziksel mimari → bileşen. Önce ne yapılacağı, ardından neyin yapacağı. Ekiplerin önemli bir kısmı gereksinimden doğrudan fiziksel mimariye geçer ve alan modeli hiç üretilmez.",
+      "kirilir": "Alan modeli zaten kurulu ve değişmiyorsa — mevcut bir bounded context içine bir işlev eklemek zinciri baştan işletmeyi gerektirmez.",
+      "neden": "Alan modeli atlandığında sistemin yapısı problemin yapısını değil organizasyonun iletişim yapısını yansıtır (Conway). Sonuç, beklenen akışta çalışan ama kenar durumlarda sessiz veri kaybı üreten bir sistemdir.",
+      "kaynak": [
+        "BELGE-165"
+      ],
+      "tetik": [
+        "mimari",
+        "yeni özellik",
+        "domain",
+        "modül",
+        "klasör",
+        "tasarım"
+      ],
+      "sinama": []
+    },
+    {
+      "id": "KOD-50",
+      "an": "T",
+      "title": "Değişikliği büyüklüğe göre değil geri alınabilirliğe göre sınıflandır",
+      "kural": "Dört seviye. R1 düşük: nullable kolon ekleme, eşzamanlı indeks, geriye uyumlu ekleme — tek değişiklik kümesi yeter. R2 orta: non-nullable kolon, kısıt, benzersiz indeks, tetikleyici — tek küme mümkün, ek önlem gerekir. R3 yüksek: yeniden adlandırma, kolon silme, tip değişikliği, birincil anahtar değişimi — aşamalı geçiş ZORUNLU. R4 kritik: ödeme, muhasebe kaydı, kimlik/oturum, parçalanmış sistem — aşamalı geçiş artı ek onay ve izleme. Karar ağacı altı soru: geriye uyumlu mu, geri alma kolay mı, sorgu davranışı değişiyor mu, kesinti riski var mı, veri bütünlüğü etkileniyor mu, özellik bayrağı uygulanabiliyor mu — birine bile hayır ise R3'tesin.",
+      "kirilir": "Sınır durumlar kategoriler arası yargı gerektirir: küçük ölçekli ama yüksek trafikli bir tabloda nullable kolon eklemek R1 görünüp R2 gibi davranabilir. Sınıflandırma bir karar destek aracıdır, otomatik kural kümesi değil.",
+      "neden": "Birincil anahtar değişimi satır sayısı bakımından küçüktür ama geri alınması pahalıdır. Risk büyüklükle değil geri alınabilirlikle ölçülür.",
+      "kaynak": [
+        "BELGE-114"
+      ],
+      "tetik": [
+        "migration",
+        "şema",
+        "kolon",
+        "index",
+        "veritabanı",
+        "alter",
+        "rename"
+      ],
+      "sinama": []
+    },
+    {
+      "id": "KOD-51",
+      "an": "D",
+      "title": "R3/R4 geçişini beş bağımsız geri alınabilir aşamaya böl",
+      "kural": "1) Çift şema hazırlığı: yeni yapı eklenir, uygulama ikisini de okuyabilir — henüz kullanılmadığı için geri alma risksiz. 2) Çift yazma: her yazma ikisine birden gider; geri alma çift yazmayı kapatmakla. 3) Veri göçü: mevcut veri toplu veya akış biçiminde taşınır; geri alma göçü durdurmakla. 4) Okuma geçişi: yalnızca yeni yapıdan okunur, eski hâlâ güncel tutulur; geri alma okuma yolunu döndürmekle. 5) Yazma geçişi ve temizlik: eskiye yazma durur, kod temizlenir, eski yapı kaldırılır — bu aşamanın geri alınması diğerlerinden pahalıdır, yalnızca sistem yeni yapı altında yeterince stabil gözlendikten sonra.",
+      "kirilir": "R1-R2 değişikliklerinde bu aşamalandırma orantısız bir yüktür. Ayrıca çift yazma aşaması karmaşıklığı geçici olarak artırır ve süresi uzadıkça senkronizasyon hatası riski birikir — mümkün olduğunca kısa tutulmalıdır.",
+      "neden": "Risk tek bir büyük kararda değil, beş küçük ve bağımsız olarak geri alınabilir kararda dağıtılır. Büyük patlama yaklaşımında tüm referanslar aynı anda kırılır, kısıt tutarsızlıkları ve replikasyon gecikmesi birleşir, dağıtım geri döndürülemez hâle gelir.",
+      "kaynak": [
+        "BELGE-114"
+      ],
+      "tetik": [
+        "migration",
+        "şema",
+        "geçiş",
+        "rename",
+        "veritabanı",
+        "kolon",
+        "dual write"
+      ],
+      "sinama": []
+    },
+    {
+      "id": "KOD-52",
+      "an": "Y",
+      "title": "Sıfır kesintili dağıtımın beş ilkesi",
+      "kural": "Geriye uyumluluk: yeni şema eski istemcilerle çalışabilmeli. İleriye uyumluluk: eski şema yeni istemcilerle çalışabilmeli. Şema öncelikli dağıtım: şema değişikliği kod değişikliğinden ÖNCE uygulanmalı. İdempotent migrasyon: göç işleminin tekrar çalıştırılması güvenli olmalı. Gözlemlenebilirlik: her aşamada anormallik erken görülebilmeli.",
+      "kirilir": "Planlı kesinti penceresi kabul edilmişse ve tüm istemciler o pencerede durdurulabiliyorsa ilkelerin bir kısmı gevşetilebilir. Kullanıcıya açık sistemlerde bu varsayım nadiren tutar.",
+      "neden": "İleriye uyumluluk en sık atlanandır: dağıtım sırasında eski ve yeni kod bir süre birlikte çalışır ve eski kod yeni şemayı görür.",
+      "kaynak": [
+        "BELGE-114"
+      ],
+      "tetik": [
+        "deploy",
+        "dağıtım",
+        "migration",
+        "şema",
+        "rolling",
+        "sürüm"
+      ],
+      "sinama": []
+    },
+    {
+      "id": "KOD-53",
+      "an": "T",
+      "title": "Mutlu yolu önce ve ayrı teslim et",
+      "kural": "Temel akışı önce ve tek başına bitir; kalan riski kenar durumlara izole et. Böylece akış erken doğrulanır, test erken başlar ve artık risk yönetilebilir bir kümeye sıkışır. Büyük tekil değişiklik yerine artımlı teslim: bir incelemecinin aynı anda tutması gereken bağlam arttıkça incelemenin gerçek hata yakalama kapasitesi düşer ve derin değerlendirme yerine yüzeysel onaya döner.",
+      "kirilir": "Kenar durum akışın kendisini belirliyorsa — mutlu yol kenar durum çözülmeden tasarlanamıyorsa ayrıştırma sahte olur ve iki kez yazarsın.",
+      "neden": "Değişiklik boyutu arttıkça hata olasılığı ve inceleme kalitesi ORANTISIZ biçimde kötüleşir. Aynı ilke iki düzlemde birden geçerlidir: insan (inceleme kalitesi) ve sistem (geri alınabilirlik).",
+      "kaynak": [
+        "BELGE-114"
+      ],
+      "tetik": [
+        "pr",
+        "teslim",
+        "kapsam",
+        "yeni özellik",
+        "planlama",
+        "edge case"
+      ],
+      "sinama": []
+    },
+    {
+      "id": "KOD-54",
+      "an": "D",
+      "title": "Kod tabanını dosya boyutuna göre değil karar değerine göre oku",
+      "kural": "Küçük dosya en az önemli dosya değildir: routing konfigürasyonu, bağımlılık enjeksiyonu, auth guard, env ayarı ya da kök reducer tüm sistemin davranışını belirleyen kritik düğümlerdir. Dört katmanlı oku: 1) harita — sistem nasıl ayağa kalkıyor, hangi parçalardan oluşuyor, veri ve kontrol akışı. 2) mayın tarlası — küçük değişiklikte zincirleme etki yaratan alanlar, sessizce yutulan hatalar, test kör noktaları. 3) hangi yolu açacaksın — öncelik, ROI, dokunulmayacak alanlar. 4) neden o yol kapandı — mimari karar geçmişi, geçmiş arızalar, churn, iş kritikliği.",
+      "kirilir": "İş gerçekten tek dosyalıksa ve sistem düzeyinde etkisi yoksa dört katman tören olur; birinci katmanın özeti yeter.",
+      "neden": "Bu yapı olmadan dosya okunur ama sistem düşünülmez. Dördüncü katman olmadan teknik olarak doğru ama iş açısından yanlış öncelikler üretilir — ve \"kötü kod mu, zorunlu kod mu\" ayrımı yapılamaz.",
+      "kaynak": [
+        "BELGE-094",
+        "BELGE-105"
+      ],
+      "tetik": [
+        "onboarding",
+        "yeni proje",
+        "legacy",
+        "analiz",
+        "devralma",
+        "anlama",
+        "harita"
+      ],
+      "sinama": []
+    },
+    {
+      "id": "KOD-55",
+      "an": "D",
+      "title": "Repoda tekrar eden her örüntü kural değildir",
+      "kural": "Kural dosyası (CLAUDE.md, kısıt dosyası, stil rehberi) üretirken önce üçe ayır: KESİN — repo genelinde tutarlı, araç/config/test ile desteklenen. MUHTEMEL — birden fazla yerde var ama evrensel değil, takım standardı mı lokal tercih mi belirsiz. ÇELİŞKİLİ — birbiriyle çelişen örüntüler, legacy izleri, yarım kalmış geçiş kalıntıları. Yalnızca birinci gruptan kural yaz; ikinci ve üçüncüyü \"insan kararı gereken açık sorular\" başlığı altında ayrı listele.",
+      "kirilir": "Repo tek kişilik ve tek dönemlik ise gruplar ayrışmaz; orada gözlenen her örüntü zaten tek bir tercihin izidir.",
+      "neden": "Güvenilir kurallar, belirsiz adaylar ve çelişkili alanlar birbirinden ayrıştırılmadan yazılan bir kural dosyası yardımdan çok zarar üretir — model yarım kalmış bir geçişi proje standardı sanır ve çoğaltır.",
+      "kaynak": [
+        "BELGE-094",
+        "BELGE-038"
+      ],
+      "tetik": [
+        "claude.md",
+        "kural",
+        "convention",
+        "stil",
+        "kısıt dosyası",
+        "llm",
+        "ajan"
+      ],
+      "sinama": []
+    },
+    {
+      "id": "KOD-56",
+      "an": "D",
+      "title": "Mimari sağlık kenar sayısıyla değil kenar yönelimiyle ölçülür",
+      "kural": "Yüksek bağlantı sayısı tek başına tanı değildir; belirleyici olan bağlantıların hangi düğümler arasında ilerlediğidir. Üç görsel olarak ayırt edilebilir bozulma: KARDEŞ BAĞI — aynı düzeydeki iki modülün birbirini içe aktarması (ortak ihtiyaç alt katmana indirilmeli). AŞIRI MERKEZİLEŞMİŞ TİP DOSYASI — adı bir özelliğe ait görünen ama kırk yerden içe aktarılan dosya (davranışı paylaşılan çekirdek, adı yalan). SINIRDA ÇİFT YÖNLÜ BASKI — köprü düğümün tek dosyada yoğunlaşması (köprü doğru yerde, iç düzeni parçalanmamış).",
+      "kirilir": "Yapısal geometri tek başına iş değeri, alan modeli doğruluğu, kullanıcı deneyimi, çalışma zamanı darboğazı ve güvenlik hakkında karar veremez. Mimari karar bunların sentezidir; geometri yalnızca birinci bileşeni ölçer.",
+      "neden": "On dört ile on yedi düğümlü orta ölçekli bir sistemde yirmi beş-otuz kenar bulunması sağlıklı mimaride bile olağandır. Sağlığı belirleyen tek topolojik ilke akışın tek yönlü ve katmanlı olması, kardeşlerin birbirinden bağımsız kalmasıdır.",
+      "kaynak": [
+        "BELGE-059"
+      ],
+      "tetik": [
+        "mimari",
+        "bağımlılık",
+        "import",
+        "modül",
+        "refactor",
+        "coupling",
+        "döngü"
+      ],
+      "sinama": []
+    },
+    {
+      "id": "KOD-57",
+      "an": "D",
+      "title": "Yeniden yapılandırma sırası satır sayısına göre değil kaldıraca göre",
+      "kural": "Üç değişkeni birlikte tart: kaç modülü etkiliyor (etki alanı), ne kadar otomatik yürütülebiliyor (mekaniklik), topolojiyi ne kadar iyileştiriyor (mimari kaldıraç). Yüksek etki ile düşük tasarım yükünü birleştiren adımlar önce. Sıra: 1) merkezileşmiş tip dosyasını doğru ad alanına taşı (tek karar, kırk nokta). 2) sınırdaki yoğun dosyayı alan bazında böl. 3) kardeş bağını kaldır (yeni paylaşımlı arayüz tasarımı gerekir). 4) içsel orkestrasyonu parçala. Sıra keyfi değildir: içsel parçalama omurga oturmadan yapılırsa sonuçsuz kalır, çünkü parçaların yeni omurgada nereye oturacağı ancak omurga yerine geçtikten sonra belli olur.",
+      "kirilir": "Bir alanda acil bir arıza varsa sıra bozulur — orada kaldıraç değil kanama durdurulur.",
+      "neden": "Kardeş bağının kaldırılması ancak omurga doğru konumlandığında paylaşımlı modülün nereye yerleştirileceğini belirlemeye izin verir.",
+      "kaynak": [
+        "BELGE-059",
+        "BELGE-060"
+      ],
+      "tetik": [
+        "refactor",
+        "yeniden yapılandırma",
+        "mimari",
+        "öncelik",
+        "borç",
+        "plan"
+      ],
+      "sinama": []
+    },
+    {
+      "id": "KOD-58",
+      "an": "B",
+      "title": "Mimari kuralı yazılı sözleşmede bırakma, mandallı ölçüte çevir",
+      "kural": "Birim testi kod davranışı için ne yapıyorsa fitness function mimari nitelik için onu yapar: ihlal anında geri bildirim. Eşiği ikincil kaynaktan alma (\"700 satır\", \"20 içe aktarma\") — hedef kod tabanının kendi dağılımını ölç, P90'ın biraz üstünü eşik yap, sistem sağlıklaştıkça aşamalı indir. MANDAL (ratchet): ilk çalıştırmada mevcut ihlal sayısı taban değer kaydedilir; sonraki her değişiklik bu sayıyı yalnızca azaltabilir ya da aynı tutabilir, artarsa derleme başarısız sayılır; azaldığında yeni taban kalıcılaşır.",
+      "kirilir": "Ölçülemeyen boyutlarda (iş değeri, ürün önceliği, alan modeli doğruluğu, kullanıcı deneyimi, güvenlik açığı, takım kapasitesi) fitness function yetersizdir — geometri denklemin yalnızca birinci bileşenini ölçer.",
+      "neden": "Mandalsız bir fitness function pratikte iki sondan birine ulaşır: ya sürekli başarısızlık nedeniyle devre dışı bırakılır, ya istisnalarla aşındırılarak işlevsizleşir. Mandalla sistemin yapısal sağlığı yalnızca iyileşebilir.",
+      "kaynak": [
+        "BELGE-061"
+      ],
+      "tetik": [
+        "lint",
+        "ci",
+        "mimari",
+        "bağımlılık",
+        "eşik",
+        "kural",
+        "import",
+        "borç"
+      ],
+      "sinama": []
+    },
+    {
+      "id": "KOD-59",
+      "an": "B",
+      "title": "Karar filtresi: bu gerçek risk mi azaltıyor, kodu temiz mi gösteriyor?",
+      "kural": "Her öneri için beş soru: gerçekten kullanıcıya, takıma ya da güvenilirliğe değer katıyor mu? Yalnızca kodu daha temiz mi gösteriyor yoksa gerçek risk mi azaltıyor? Bu değişiklik yapılmazsa ne olur? Yapılırsa ne kazanılır? Şimdi mi yoksa sonraki büyük iş ile birlikte mi? Ve açıkça yaz: hangi alanlara ŞİMDİLİK dokunulmayacak.",
+      "kirilir": "Değişiklik zaten yapılmış ve bedeli ödenmişse filtre geriye dönük gerekçelendirmeye dönüşür; filtre karardan önce işletilir.",
+      "neden": "Bazen iyi mühendislik doğru refactor'u yapmak değil, yanlış zamanda refactor yapmamaktır.",
+      "kaynak": [
+        "BELGE-094"
+      ],
+      "tetik": [
+        "refactor",
+        "temizlik",
+        "öneri",
+        "inceleme",
+        "review",
+        "öncelik",
+        "borç"
+      ],
+      "sinama": []
+    },
+    {
+      "id": "KOD-60",
+      "an": "A",
+      "title": "Semptomu sınıflandır, büyüklüğünü ölç, sonra çözüm seç",
+      "kural": "Semptomun büyüklüğü belirlenmeden çözümün büyüklüğü seçilemez. Önce sınıfı ayır — aynı görünen şikâyet farklı sınıflardan gelebilir ve her sınıf farklı çözüm gerektirir; bir arayüz geliştirmek yalnızca birine karşılık gelir. Sonra büyüklüğü ölç. Sonra kök nedene in: \"Talepler izlenemiyor → neden? → kayıt sistemine işlenmiyor → neden? → ...\". Ve mümkünse yerinde gör: sistemin kendi ürettiği sayıya değil, olayın gerçekleştiği yere bak (genchi genbutsu).",
+      "kirilir": "Semptom tek ve tekrarlanabilir bir hata ise sınıflandırma gecikmedir; doğrudan mekanizma zincirine geç (KOD-39).",
+      "neden": "Sınıflandırma yapılmadan seçilen çözüm, olguyu değil olgunun bir yüzünü hedefler ve sistem ölçülen şeyi düzeltip problemi yerinde bırakır.",
+      "kaynak": [
+        "BELGE-165"
+      ],
+      "tetik": [
+        "arıza",
+        "şikâyet",
+        "semptom",
+        "olay",
+        "teşhis",
+        "kök neden",
+        "destek"
+      ],
+      "sinama": []
+    },
+    {
+      "id": "KOD-61",
+      "an": "Y",
+      "title": "İyi yapılandırılmış sistemde iz sürülür, kötüde tahmin edilir",
+      "kural": "Bir değişiklik yapılırken üç şeyin bilinmesi gerekir: değişikliğin nereden geldiği, neyi etkilediği ve nasıl doğrulanacağı. Bu bilgi sistemde açıkça mevcutsa değişikliği yapan — insan ya da ajan — iz sürer; mevcut değilse tahmin eder. Bir kod yazarken sorulacak soru budur: bu değişikliğe altı ay sonra bakan, bu üçünü koddan izleyebilecek mi?",
+      "kirilir": "İzin taşınamayacağı kısımlar vardır: müşteri tarafındaki tarihsel sebepler koda değil yalnızca karar kaydına yazılabilir (KOD-16).",
+      "neden": "Teknik borç, örgütsel iletişim ve kavramsal model zayıflığı görünüşte farklı problemlerdir; hepsi sistemin bıraktığı iz ile ihtiyaç duyulan bilgi arasındaki aynı boşluğun yüzleridir.",
+      "kaynak": [
+        "BELGE-093"
+      ],
+      "tetik": [
+        "adlandırma",
+        "naming",
+        "domain",
+        "yorum",
+        "izlenebilirlik",
+        "trace",
+        "borç"
+      ],
+      "sinama": []
     }
   ]
 }

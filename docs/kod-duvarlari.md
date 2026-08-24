@@ -53,13 +53,13 @@ Bir yapıyı teşhis ettikten sonra en yüksek getirili soru şudur: bu dil bana
 
 ### KOD-04 — Başarı ölçütünü üretimden önce ve dışarıdan yaz
 
-Hedefi, ulaşılıp ulaşılmadığı makinece denetlenebilecek biçimde önceden yaz; şu an ulaşılmadığını doğrula; en küçük adımla ulaş; hedef bozulmadan içeriyi düzenle. Kritik nitelik "dışarıdan"dır — ölçüt üretim başladıktan sonra yazılırsa üretilen şeye göre biçimlenir ve kendini onaylar.
+Hedefi, ulaşılıp ulaşılmadığı makinece denetlenebilecek biçimde önceden yaz; şu an ulaşılmadığını doğrula; en küçük adımla ulaş; hedef bozulmadan içeriyi düzenle. Kritik nitelik "dışarıdan"dır — ölçüt üretim başladıktan sonra yazılırsa üretilen şeye göre biçimlenir ve kendini onaylar. Sınaması KOD-48'dedir: ölçüt sistem henüz yokken de ölçülebiliyor mu?
 
 **Kırılır:** Keşif fazında. Alan bilinmezken ölçüt erken donar. Orada doğru yol spike-and-stabilize'dir: keşif kodunu yaz, çalıştır, öğren ve AT; sonra öğrenilen şekille ölçüt koy.
 
 **Neden:** Ölçütlü sistemde çıktı kalitesi prosedürün kalitesine bağlanır ve ölçeklenir; ölçütsüzde kişinin kalitesine bağlıdır ve ölçeklenmez. Bedeli de vardır: ölçüte sığmayan her şey kaybolur (Goodhart).
 
-*Kaynak: BELGE-153*
+*Kaynak: BELGE-153, BELGE-165*
 
 ### KOD-05 — Spec'e sistemin YAPMAMASI gerekeni de yaz
 
@@ -90,6 +90,46 @@ Neyi sisteme dahil ettiğin alacağın cevabı önceden belirler. "Servis yavaş
 **Neden:** Sınırın dışında bıraktığın her şey ölçümlerinde açıklanamayan varyans olarak geri döner. Sınır kararı hangi varyansın açıklanacağını belirler.
 
 *Kaynak: BELGE-166*
+
+### KOD-48 — Ölçütün belirleyici sınaması: sistem henüz yokken ölçülebiliyor mu?
+
+Tanımlanan ölçüt sistemi değil PROBLEMİ ölçmelidir. Sınama tek sorudur: bu ölçüt, sistem henüz mevcut değilken de ölçülebiliyor mu? Ölçülemiyorsa ölçüt sistemin kendisini ölçüyordur. Ölçülebiliyorsa aynı işlem başlangıç değerini de üretir — hedefin anlamlı olması bu değerin varlığına bağlıdır. Geçerli biçim mevcut değeri, hedef değeri ve zaman ufkunu birlikte içerir.
+
+**Kırılır:** Nicel ölçüt tanımlanamıyorsa iki alternatif kalır: tanımlı bir başarı koşuluna bağlanmış gözlenebilir olay, ya da vekil ölçüt (güvenlikte açık sayısı, yama süresi). Vekil ölçüt kullanıldığı açıkça yazılmalıdır.
+
+**Neden:** KOD-04'ün "dışarıdan" niteliğinin işletilebilir sınaması budur. "Sistem daha hızlı olacak" ölçülemez; "birim zamandaki destek çağrısı hacminin şu değerden şu değere şu sürede inmesi" ölçülebilir ve sistem yokken de ölçülebilir.
+
+*Kaynak: BELGE-165*
+
+### KOD-49 — Gereksinimden doğrudan dosya yapısına atlama
+
+Zincir şudur: amaç → gereksinim → işlev → mantıksal mimari (alan modeli) → işlev tahsisi → fiziksel mimari → bileşen. Önce ne yapılacağı, ardından neyin yapacağı. Ekiplerin önemli bir kısmı gereksinimden doğrudan fiziksel mimariye geçer ve alan modeli hiç üretilmez.
+
+**Kırılır:** Alan modeli zaten kurulu ve değişmiyorsa — mevcut bir bounded context içine bir işlev eklemek zinciri baştan işletmeyi gerektirmez.
+
+**Neden:** Alan modeli atlandığında sistemin yapısı problemin yapısını değil organizasyonun iletişim yapısını yansıtır (Conway). Sonuç, beklenen akışta çalışan ama kenar durumlarda sessiz veri kaybı üreten bir sistemdir.
+
+*Kaynak: BELGE-165*
+
+### KOD-50 — Değişikliği büyüklüğe göre değil geri alınabilirliğe göre sınıflandır
+
+Dört seviye. R1 düşük: nullable kolon ekleme, eşzamanlı indeks, geriye uyumlu ekleme — tek değişiklik kümesi yeter. R2 orta: non-nullable kolon, kısıt, benzersiz indeks, tetikleyici — tek küme mümkün, ek önlem gerekir. R3 yüksek: yeniden adlandırma, kolon silme, tip değişikliği, birincil anahtar değişimi — aşamalı geçiş ZORUNLU. R4 kritik: ödeme, muhasebe kaydı, kimlik/oturum, parçalanmış sistem — aşamalı geçiş artı ek onay ve izleme. Karar ağacı altı soru: geriye uyumlu mu, geri alma kolay mı, sorgu davranışı değişiyor mu, kesinti riski var mı, veri bütünlüğü etkileniyor mu, özellik bayrağı uygulanabiliyor mu — birine bile hayır ise R3'tesin.
+
+**Kırılır:** Sınır durumlar kategoriler arası yargı gerektirir: küçük ölçekli ama yüksek trafikli bir tabloda nullable kolon eklemek R1 görünüp R2 gibi davranabilir. Sınıflandırma bir karar destek aracıdır, otomatik kural kümesi değil.
+
+**Neden:** Birincil anahtar değişimi satır sayısı bakımından küçüktür ama geri alınması pahalıdır. Risk büyüklükle değil geri alınabilirlikle ölçülür.
+
+*Kaynak: BELGE-114*
+
+### KOD-53 — Mutlu yolu önce ve ayrı teslim et
+
+Temel akışı önce ve tek başına bitir; kalan riski kenar durumlara izole et. Böylece akış erken doğrulanır, test erken başlar ve artık risk yönetilebilir bir kümeye sıkışır. Büyük tekil değişiklik yerine artımlı teslim: bir incelemecinin aynı anda tutması gereken bağlam arttıkça incelemenin gerçek hata yakalama kapasitesi düşer ve derin değerlendirme yerine yüzeysel onaya döner.
+
+**Kırılır:** Kenar durum akışın kendisini belirliyorsa — mutlu yol kenar durum çözülmeden tasarlanamıyorsa ayrıştırma sahte olur ve iki kez yazarsın.
+
+**Neden:** Değişiklik boyutu arttıkça hata olasılığı ve inceleme kalitesi ORANTISIZ biçimde kötüleşir. Aynı ilke iki düzlemde birden geçerlidir: insan (inceleme kalitesi) ve sistem (geri alınabilirlik).
+
+*Kaynak: BELGE-114*
 
 ## Yazarken
 
@@ -225,6 +265,26 @@ Bir tasarım bir cebirsel varsayıma yaslanıyorsa o varsayımı üç satırla c
 
 *Kaynak: BELGE-176*
 
+### KOD-52 — Sıfır kesintili dağıtımın beş ilkesi
+
+Geriye uyumluluk: yeni şema eski istemcilerle çalışabilmeli. İleriye uyumluluk: eski şema yeni istemcilerle çalışabilmeli. Şema öncelikli dağıtım: şema değişikliği kod değişikliğinden ÖNCE uygulanmalı. İdempotent migrasyon: göç işleminin tekrar çalıştırılması güvenli olmalı. Gözlemlenebilirlik: her aşamada anormallik erken görülebilmeli.
+
+**Kırılır:** Planlı kesinti penceresi kabul edilmişse ve tüm istemciler o pencerede durdurulabiliyorsa ilkelerin bir kısmı gevşetilebilir. Kullanıcıya açık sistemlerde bu varsayım nadiren tutar.
+
+**Neden:** İleriye uyumluluk en sık atlanandır: dağıtım sırasında eski ve yeni kod bir süre birlikte çalışır ve eski kod yeni şemayı görür.
+
+*Kaynak: BELGE-114*
+
+### KOD-61 — İyi yapılandırılmış sistemde iz sürülür, kötüde tahmin edilir
+
+Bir değişiklik yapılırken üç şeyin bilinmesi gerekir: değişikliğin nereden geldiği, neyi etkilediği ve nasıl doğrulanacağı. Bu bilgi sistemde açıkça mevcutsa değişikliği yapan — insan ya da ajan — iz sürer; mevcut değilse tahmin eder. Bir kod yazarken sorulacak soru budur: bu değişikliğe altı ay sonra bakan, bu üçünü koddan izleyebilecek mi?
+
+**Kırılır:** İzin taşınamayacağı kısımlar vardır: müşteri tarafındaki tarihsel sebepler koda değil yalnızca karar kaydına yazılabilir (KOD-16).
+
+**Neden:** Teknik borç, örgütsel iletişim ve kavramsal model zayıflığı görünüşte farklı problemlerdir; hepsi sistemin bıraktığı iz ile ihtiyaç duyulan bilgi arasındaki aynı boşluğun yüzleridir.
+
+*Kaynak: BELGE-093*
+
 ## Dokunurken
 
 *Yabancı ya da mevcut koda müdahale*
@@ -318,6 +378,56 @@ Dil modeli tam olarak kodu okuyup gerekçeyi göremeyen okuyucudur; tuhaf duran 
 **Neden:** Model üretim tarafını hızlandırır, doğrulama tarafını aynı oranda hızlandırmaz; darboğaz doğrulamaya kayar ve birim zamanda üretime sızan hatalı değişiklik sayısı artar. Bu, model kalitesinden bağımsız yapısal bir sonuçtur.
 
 *Kaynak: BELGE-184, BELGE-038*
+
+### KOD-51 — R3/R4 geçişini beş bağımsız geri alınabilir aşamaya böl
+
+1) Çift şema hazırlığı: yeni yapı eklenir, uygulama ikisini de okuyabilir — henüz kullanılmadığı için geri alma risksiz. 2) Çift yazma: her yazma ikisine birden gider; geri alma çift yazmayı kapatmakla. 3) Veri göçü: mevcut veri toplu veya akış biçiminde taşınır; geri alma göçü durdurmakla. 4) Okuma geçişi: yalnızca yeni yapıdan okunur, eski hâlâ güncel tutulur; geri alma okuma yolunu döndürmekle. 5) Yazma geçişi ve temizlik: eskiye yazma durur, kod temizlenir, eski yapı kaldırılır — bu aşamanın geri alınması diğerlerinden pahalıdır, yalnızca sistem yeni yapı altında yeterince stabil gözlendikten sonra.
+
+**Kırılır:** R1-R2 değişikliklerinde bu aşamalandırma orantısız bir yüktür. Ayrıca çift yazma aşaması karmaşıklığı geçici olarak artırır ve süresi uzadıkça senkronizasyon hatası riski birikir — mümkün olduğunca kısa tutulmalıdır.
+
+**Neden:** Risk tek bir büyük kararda değil, beş küçük ve bağımsız olarak geri alınabilir kararda dağıtılır. Büyük patlama yaklaşımında tüm referanslar aynı anda kırılır, kısıt tutarsızlıkları ve replikasyon gecikmesi birleşir, dağıtım geri döndürülemez hâle gelir.
+
+*Kaynak: BELGE-114*
+
+### KOD-54 — Kod tabanını dosya boyutuna göre değil karar değerine göre oku
+
+Küçük dosya en az önemli dosya değildir: routing konfigürasyonu, bağımlılık enjeksiyonu, auth guard, env ayarı ya da kök reducer tüm sistemin davranışını belirleyen kritik düğümlerdir. Dört katmanlı oku: 1) harita — sistem nasıl ayağa kalkıyor, hangi parçalardan oluşuyor, veri ve kontrol akışı. 2) mayın tarlası — küçük değişiklikte zincirleme etki yaratan alanlar, sessizce yutulan hatalar, test kör noktaları. 3) hangi yolu açacaksın — öncelik, ROI, dokunulmayacak alanlar. 4) neden o yol kapandı — mimari karar geçmişi, geçmiş arızalar, churn, iş kritikliği.
+
+**Kırılır:** İş gerçekten tek dosyalıksa ve sistem düzeyinde etkisi yoksa dört katman tören olur; birinci katmanın özeti yeter.
+
+**Neden:** Bu yapı olmadan dosya okunur ama sistem düşünülmez. Dördüncü katman olmadan teknik olarak doğru ama iş açısından yanlış öncelikler üretilir — ve "kötü kod mu, zorunlu kod mu" ayrımı yapılamaz.
+
+*Kaynak: BELGE-094, BELGE-105*
+
+### KOD-55 — Repoda tekrar eden her örüntü kural değildir
+
+Kural dosyası (CLAUDE.md, kısıt dosyası, stil rehberi) üretirken önce üçe ayır: KESİN — repo genelinde tutarlı, araç/config/test ile desteklenen. MUHTEMEL — birden fazla yerde var ama evrensel değil, takım standardı mı lokal tercih mi belirsiz. ÇELİŞKİLİ — birbiriyle çelişen örüntüler, legacy izleri, yarım kalmış geçiş kalıntıları. Yalnızca birinci gruptan kural yaz; ikinci ve üçüncüyü "insan kararı gereken açık sorular" başlığı altında ayrı listele.
+
+**Kırılır:** Repo tek kişilik ve tek dönemlik ise gruplar ayrışmaz; orada gözlenen her örüntü zaten tek bir tercihin izidir.
+
+**Neden:** Güvenilir kurallar, belirsiz adaylar ve çelişkili alanlar birbirinden ayrıştırılmadan yazılan bir kural dosyası yardımdan çok zarar üretir — model yarım kalmış bir geçişi proje standardı sanır ve çoğaltır.
+
+*Kaynak: BELGE-094, BELGE-038*
+
+### KOD-56 — Mimari sağlık kenar sayısıyla değil kenar yönelimiyle ölçülür
+
+Yüksek bağlantı sayısı tek başına tanı değildir; belirleyici olan bağlantıların hangi düğümler arasında ilerlediğidir. Üç görsel olarak ayırt edilebilir bozulma: KARDEŞ BAĞI — aynı düzeydeki iki modülün birbirini içe aktarması (ortak ihtiyaç alt katmana indirilmeli). AŞIRI MERKEZİLEŞMİŞ TİP DOSYASI — adı bir özelliğe ait görünen ama kırk yerden içe aktarılan dosya (davranışı paylaşılan çekirdek, adı yalan). SINIRDA ÇİFT YÖNLÜ BASKI — köprü düğümün tek dosyada yoğunlaşması (köprü doğru yerde, iç düzeni parçalanmamış).
+
+**Kırılır:** Yapısal geometri tek başına iş değeri, alan modeli doğruluğu, kullanıcı deneyimi, çalışma zamanı darboğazı ve güvenlik hakkında karar veremez. Mimari karar bunların sentezidir; geometri yalnızca birinci bileşeni ölçer.
+
+**Neden:** On dört ile on yedi düğümlü orta ölçekli bir sistemde yirmi beş-otuz kenar bulunması sağlıklı mimaride bile olağandır. Sağlığı belirleyen tek topolojik ilke akışın tek yönlü ve katmanlı olması, kardeşlerin birbirinden bağımsız kalmasıdır.
+
+*Kaynak: BELGE-059*
+
+### KOD-57 — Yeniden yapılandırma sırası satır sayısına göre değil kaldıraca göre
+
+Üç değişkeni birlikte tart: kaç modülü etkiliyor (etki alanı), ne kadar otomatik yürütülebiliyor (mekaniklik), topolojiyi ne kadar iyileştiriyor (mimari kaldıraç). Yüksek etki ile düşük tasarım yükünü birleştiren adımlar önce. Sıra: 1) merkezileşmiş tip dosyasını doğru ad alanına taşı (tek karar, kırk nokta). 2) sınırdaki yoğun dosyayı alan bazında böl. 3) kardeş bağını kaldır (yeni paylaşımlı arayüz tasarımı gerekir). 4) içsel orkestrasyonu parçala. Sıra keyfi değildir: içsel parçalama omurga oturmadan yapılırsa sonuçsuz kalır, çünkü parçaların yeni omurgada nereye oturacağı ancak omurga yerine geçtikten sonra belli olur.
+
+**Kırılır:** Bir alanda acil bir arıza varsa sıra bozulur — orada kaldıraç değil kanama durdurulur.
+
+**Neden:** Kardeş bağının kaldırılması ancak omurga doğru konumlandığında paylaşımlı modülün nereye yerleştirileceğini belirlemeye izin verir.
+
+*Kaynak: BELGE-059, BELGE-060*
 
 ## Bitirmeden
 
@@ -413,6 +523,26 @@ Bitirirken üç satır ekle: bu inceleme neyi kapsamadı (performans, güvenlik,
 
 *Kaynak: BELGE-169, BELGE-166*
 
+### KOD-58 — Mimari kuralı yazılı sözleşmede bırakma, mandallı ölçüte çevir
+
+Birim testi kod davranışı için ne yapıyorsa fitness function mimari nitelik için onu yapar: ihlal anında geri bildirim. Eşiği ikincil kaynaktan alma ("700 satır", "20 içe aktarma") — hedef kod tabanının kendi dağılımını ölç, P90'ın biraz üstünü eşik yap, sistem sağlıklaştıkça aşamalı indir. MANDAL (ratchet): ilk çalıştırmada mevcut ihlal sayısı taban değer kaydedilir; sonraki her değişiklik bu sayıyı yalnızca azaltabilir ya da aynı tutabilir, artarsa derleme başarısız sayılır; azaldığında yeni taban kalıcılaşır.
+
+**Kırılır:** Ölçülemeyen boyutlarda (iş değeri, ürün önceliği, alan modeli doğruluğu, kullanıcı deneyimi, güvenlik açığı, takım kapasitesi) fitness function yetersizdir — geometri denklemin yalnızca birinci bileşenini ölçer.
+
+**Neden:** Mandalsız bir fitness function pratikte iki sondan birine ulaşır: ya sürekli başarısızlık nedeniyle devre dışı bırakılır, ya istisnalarla aşındırılarak işlevsizleşir. Mandalla sistemin yapısal sağlığı yalnızca iyileşebilir.
+
+*Kaynak: BELGE-061*
+
+### KOD-59 — Karar filtresi: bu gerçek risk mi azaltıyor, kodu temiz mi gösteriyor?
+
+Her öneri için beş soru: gerçekten kullanıcıya, takıma ya da güvenilirliğe değer katıyor mu? Yalnızca kodu daha temiz mi gösteriyor yoksa gerçek risk mi azaltıyor? Bu değişiklik yapılmazsa ne olur? Yapılırsa ne kazanılır? Şimdi mi yoksa sonraki büyük iş ile birlikte mi? Ve açıkça yaz: hangi alanlara ŞİMDİLİK dokunulmayacak.
+
+**Kırılır:** Değişiklik zaten yapılmış ve bedeli ödenmişse filtre geriye dönük gerekçelendirmeye dönüşür; filtre karardan önce işletilir.
+
+**Neden:** Bazen iyi mühendislik doğru refactor'u yapmak değil, yanlış zamanda refactor yapmamaktır.
+
+*Kaynak: BELGE-094*
+
 ## Arıza
 
 *Bir şey bozulduğunda: hata ayıklama, olay incelemesi*
@@ -506,4 +636,14 @@ Aralıklı olarak başarısız olan sınamalar, düzenli biçimde susturulan uya
 **Neden:** Kural krizde tartışılarak kaldırılmaz; sessizce, tekil bir istisna olarak delinir ve ikinci istisna birincisine dayanarak meşrulaşır. Referans noktası artık kural değil son gözlenen sapmadır. Kaydetmek, sonraki kararın referansının önceki sapma değil özgün kural olmasını sağlar — aşınmaya karşı en doğrudan yapısal önlem budur. Ve geriye dönük göstergeler (çalışma süresi, olay sayısı) riski gizler; anlamlı göstergeler ileriye dönüktür: yedekten geri dönüş en son ne zaman sınandı?
 
 *Kaynak: BELGE-148*
+
+### KOD-60 — Semptomu sınıflandır, büyüklüğünü ölç, sonra çözüm seç
+
+Semptomun büyüklüğü belirlenmeden çözümün büyüklüğü seçilemez. Önce sınıfı ayır — aynı görünen şikâyet farklı sınıflardan gelebilir ve her sınıf farklı çözüm gerektirir; bir arayüz geliştirmek yalnızca birine karşılık gelir. Sonra büyüklüğü ölç. Sonra kök nedene in: "Talepler izlenemiyor → neden? → kayıt sistemine işlenmiyor → neden? → ...". Ve mümkünse yerinde gör: sistemin kendi ürettiği sayıya değil, olayın gerçekleştiği yere bak (genchi genbutsu).
+
+**Kırılır:** Semptom tek ve tekrarlanabilir bir hata ise sınıflandırma gecikmedir; doğrudan mekanizma zincirine geç (KOD-39).
+
+**Neden:** Sınıflandırma yapılmadan seçilen çözüm, olguyu değil olgunun bir yüzünü hedefler ve sistem ölçülen şeyi düzeltip problemi yerinde bırakır.
+
+*Kaynak: BELGE-165*
 

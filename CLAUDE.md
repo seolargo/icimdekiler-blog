@@ -109,9 +109,9 @@ Aynı format: **ders — ne zaman kırılır.** Kırılma koşulu yoksa yazma.
 
 ## Kod duvarları
 
-Duvarlar (34) karar/örgüt düzeyinde; **kod duvarları** (47) klavye düzeyinde ve
-ayrı bir katalog. Kaynağı korpustaki mühendislik paperları: BELGE-174, 169, 176,
-166, 184, 148, 153, 061, 046, 040, 038, 105, 043.
+Duvarlar (34) karar/örgüt düzeyinde; **kod duvarları** (61) klavye düzeyinde ve
+ayrı bir katalog. Kaynağı 19 mühendislik paperı: BELGE-038, 040, 043, 046, 059,
+060, 061, 093, 094, 105, 114, 148, 153, 165, 166, 169, 174, 176, 184.
 
 Beş an: **T** başlarken · **Y** yazarken · **D** dokunurken · **B** bitirmeden ·
 **A** arıza. Her maddenin `kırılır`ı var — nerede geçerli değil.
@@ -121,3 +121,10 @@ Hepsini birden uygulama: **KOD-06** derinliği tehlikeye göre seçer
 
 Her projeden çalışır: `~/.claude/skills/kod-duvari/` global skill'i
 `scripts/kod-duvar.js`'i çağırır. Yeni madde eklenince `npm run kod-duvar -- --md`.
+
+`sinama` alanı duvarlardaki gibi: bir madde dışarıdan bir şeye çarptığında tarih +
+sonuç (desteklendi / daraltıldı / kırıldı) + kaynak yazılır. Şu an 61/61 boş.
+
+`scripts/kod-duvar-hook.sh` — Stop hook adayı: oturum biterken çalışma ağacında
+kod dosyası değişmişse tek satır hatırlatır, değilse susar. `~/.claude/settings.json`
+içine **elle** eklenecek; Claude o dosyaya yazamıyor (sınıflandırıcı engelliyor).
