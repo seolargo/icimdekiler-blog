@@ -77,6 +77,7 @@ function header(active) {
     tab(base + 'oneriler', 'Öneriler', 'oneriler') +
     tab(base + 'projeler', 'Projeler', 'projeler') +
     tab(base + 'duvarlar', 'Duvarlar', 'duvarlar') +
+    tab(base + 'kod-duvarlari', 'Kod Duvarları', 'kod-duvarlari') +
     tab(base + 'kavramlar', 'Kavramlar', 'kavramlar') +
     tab(base + 'yapay-zeka', 'Yapay Zekâ', 'yapay-zeka') +
     `</nav>` +
@@ -358,6 +359,43 @@ const dvBody =
   footer()
 write('duvarlar', renderPage({ head: dvHead, bodyHtml: dvBody }))
 
+// Kod duvarları — paperlardan türetilmiş, kod yazarken uygulanan kurallar.
+// Duvarlar'la aynı kart yapısı; gruplama temaya göre değil ANA göre (T/Y/D/B/A).
+const kodDuvarlari = existsSync(join(dist, 'kod-duvarlari.json'))
+  ? JSON.parse(readFileSync(join(dist, 'kod-duvarlari.json'), 'utf8'))
+  : { anlar: {}, kurallar: [] }
+const kdIntro =
+  'Mühendislik makalelerinden süzülmüş, kod yazarken uygulanan kurallar. Duvarlar karar ' +
+  'düzeyinde kalır; bunlar klavye düzeyindedir. Beş ana bölünür: işe başlarken, kod yazarken, ' +
+  'eski koda dokunurken, “bitti” demeden ve bir şey bozulunca. Her kural nerede geçerli olduğu ' +
+  'kadar nerede geçerli olmadığını da söyler.'
+const kdAnName = (k) => kodDuvarlari.anlar?.[k]?.name || k
+const kdCard = (w) =>
+  `<li class="dv-card" data-theme="${escAttr(w.an)}">` +
+  `<div class="dv-head"><span class="dv-id" data-theme="${escAttr(w.an)}">${esc(w.id)}</span>` +
+  `<span class="dv-tag"><span class="dv-dot" data-theme="${escAttr(w.an)}"></span>${esc(kdAnName(w.an))}</span></div>` +
+  `<h2 class="dv-title">${esc(w.title)}</h2>` +
+  `<div class="dv-fields">` +
+  `<div class="dv-field"><span class="dv-lbl">Kural</span><p>${esc(w.kural)}</p></div>` +
+  `<div class="dv-field dv-breaks"><span class="dv-lbl">Kırılır</span><p>${esc(w.kirilir)}</p></div>` +
+  `<div class="dv-field dv-reason"><span class="dv-lbl">Neden</span><p>${esc(w.neden)}</p></div>` +
+  `<div class="dv-sources">${(w.kaynak || []).map((k) => `<span class="dv-src">${esc(k)}</span>`).join('')}</div>` +
+  `</div></li>`
+const kdHead = buildHead({
+  title: 'Kod Duvarları',
+  description:
+    'Mühendislik makalelerinden türetilmiş, kod yazarken uygulanan kurallar: her biri nerede geçerli, nerede geçerli değil ve neyi engeller.',
+  canonical: `${SITE_URL}${base}kod-duvarlari`,
+  type: 'website',
+  image: '/profile.jpeg',
+})
+const kdBody =
+  header('kod-duvarlari') +
+  `<div class="dv"><p class="dv-intro">${esc(kdIntro)}</p>` +
+  `<ul class="dv-list">${(kodDuvarlari.kurallar || []).map(kdCard).join('')}</ul></div>` +
+  footer()
+write('kod-duvarlari', renderPage({ head: kdHead, bodyHtml: kdBody }))
+
 // --- KAVRAMLAR (korpusun kelime haritası) ----------------------------------
 const kavramlar = existsSync(join(dist, 'kavramlar.json'))
   ? JSON.parse(readFileSync(join(dist, 'kavramlar.json'), 'utf8'))
@@ -537,6 +575,7 @@ const urls = [
   { loc: `${SITE_URL}${base}oneriler` },
   { loc: `${SITE_URL}${base}projeler` },
   { loc: `${SITE_URL}${base}duvarlar` },
+  { loc: `${SITE_URL}${base}kod-duvarlari` },
   { loc: `${SITE_URL}${base}kavramlar` },
   { loc: `${SITE_URL}${base}yapay-zeka` },
   ...writings.map((p) => ({

@@ -1312,6 +1312,9 @@ code {
 .dv-dot[data-theme='D'] { background: var(--dv-d); }
 .dv-dot[data-theme='E'] { background: var(--dv-e); }
 .dv-dot[data-theme='F'] { background: var(--dv-f); }
+/* Kod duvarları anları: A/B/D üstteki renkleri paylaşır, T ve Y eksik kalanlar */
+.dv-dot[data-theme='T'] { background: var(--dv-e); }
+.dv-dot[data-theme='Y'] { background: var(--dv-f); }
 
 .dv-count {
   font-size: 0.8rem;
@@ -1354,6 +1357,8 @@ code {
 .dv-card[data-theme='D']::before { background: var(--dv-d); }
 .dv-card[data-theme='E']::before { background: var(--dv-e); }
 .dv-card[data-theme='F']::before { background: var(--dv-f); }
+.dv-card[data-theme='T']::before { background: var(--dv-e); }
+.dv-card[data-theme='Y']::before { background: var(--dv-f); }
 
 .dv-head {
   display: flex;
@@ -1378,6 +1383,8 @@ code {
 .dv-id[data-theme='D'] { background: var(--dv-d); }
 .dv-id[data-theme='E'] { background: var(--dv-e); }
 .dv-id[data-theme='F'] { background: var(--dv-f); }
+.dv-id[data-theme='T'] { background: var(--dv-e); }
+.dv-id[data-theme='Y'] { background: var(--dv-f); }
 .dv-tag {
   display: inline-flex;
   align-items: center;
