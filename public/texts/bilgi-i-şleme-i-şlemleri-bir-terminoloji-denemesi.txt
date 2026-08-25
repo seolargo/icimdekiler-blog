@@ -1,0 +1,510 @@
+Bilgi ˙Işleme ˙Işlemleri: Bir Terminoloji Denemesi
+ÖFY
+August 2026
+Özet
+Sınıflandırma, soyutlama, ayrıştırma, sıkıştırma ve geri getirme gibi fiiller tek
+bir disipline ait değildir; enformasyon üzerinde iş gören genel operatörlerdir ve
+toplu adları bilgi işleme işlemleridir (information processing operations). Bu
+işlemlerin ortak yapısı, girdi ve çıktısının aynı türden olmasıdır: enformasyonu
+enformasyona dönüştürürler, ona dışarıdan içerik eklemezler. Bu kümenin en
+yakın atası enformasyon işleme, bir alt dalı ise enformasyon düzenlemedir (infor-
+mation organization); ikisi arasındaki fark, düzenlemenin enformasyonun tem-
+silini değil yalnızca yerleşimini ve erişilebilirliğini değiştirmesidir. Buradaki “or-
+ganization” sözcüğü örgüt kuramındaki anlamıyla değil, tertip etme anlamıyla
+kullanılır; iki alan yalnızca en soyut düzeyde — parçaları, ilişkileri ve sınırları
+düzene sokma fikrinde — kesişir. Açığa çıkarma, saklama süresi ve imha gibi
+işlemler bu aileye ait değildir; bunlar enformasyonun anlamıyla değil yaşam
+döngüsü ve denetimiyle ilgilenen enformasyon yönetişimi alanına aittir. ˙Işlemler
+tek bir düz liste hâlinde sıralandığında yanıltıcı olur, çünkü aynı listede seçme
+gibi erişim işlemleriyle çıkarım yapma gibi epistemik işlemler yan yana gelir;
+doğru düzey, tek tek fiiller değil işlem aileleridir. Yedi aileli bir şema — seçme,
+düzenleme, dönüştürme, temsil, çıkarım, doğrulama, saklama ve geri getirme —
+bu fiillerin tamamını kapsar ve disiplinler arası karşılaştırmayı mümkün kılar.
+1
+
+-- 1 of 18 --
+
+Giriş
+Enformasyon üzerinde iş gören fiiller, birbirinden habersiz alanlarda tekrar tekrar
+ortaya çıkar. Bir kütüphaneci kitapları konuya göre sınıflandırır; bir makine
+öğrenmesi mühendisi örnekleri etiketlere göre sınıflandırır; bir çocuk hayvan-
+ları kuş ve balık diye ayırırken sınıflandırır. Üçünde de yapılan iş aynıdır: bir
+nesneler kümesi, önceden belirlenmiş ya da veriden türetilmiş ayrımlara göre
+alt kümelere bölünür. Aynı durum sıkıştırma, soyutlama, ayrıştırma ve geri
+getirme için de geçerlidir.
+Bu tekrar, adlandırma sorunu doğurur. Her alan aynı işleme kendi termi-
+nolojisiyle bakar — bilgi kuramında sıkıştırma bir kanal kapasitesi meselesi,
+yazılımda bir depolama meselesi, bilişsel psikolojide bir bellek kapasitesi mese-
+lesidir — ve bu yüzden işlemlerin ortak bir adı olduğu gözden kaçar.
+Burada merkezı olan üç terim şöyle tanımlanır. Enformasyon (informa-
+tion), belirsizliği azaltan ayrım taşıyıcısıdır; ham işaretler olan veriden farkı,
+bir yorumlama çerçevesi içinde anlam kazanmış olmasıdır. ˙Işlem (operation),
+bir girdiyi alıp belirli bir kurala göre çıktı üreten fonksiyondur. Bilgi işleme
+işlemi, girdisi de çıktısı da enformasyon olan işlemdir; yani enformasyonun for-
+munu, yapısını ya da erişilebilirliğini değiştirir, ama ona dışarıdan yeni gözlem
+eklemez.
+Bu son nokta ayırt edicidir. Ölçüm yapmak, deney kurmak ya da anket uygu-
+lamak enformasyon üretir; bunlar dünyadan enformasyona giden işlemlerdir ve
+bu ailenin dışındadır. Sınıflandırma ise eldeki enformasyonla çalışır.
+Yaygın bir kabul, bu fiillerin “bilgi yönetimi” başlığı altında toplanabileceğidir.
+Bu kabul iki farklı problemi birbirine karıştırır: enformasyonun anlamının nasıl
+düzenlendiği ile enformasyonun kurumsal olarak nasıl yönetildiği. Not bu ikisini
+ayırır ve yalnızca birincisiyle ilgilenir.
+Notun kapsamı, enformasyon üzerindeki işlemlerin adlandırılması, sınıflandırılması
+ve disiplinler arası karşılıklarının kurulmasıdır. Belirli bir alandaki bir işlemin
+teknik ayrıntısı — örneğin sıkıştırma algoritmalarının çalışma biçimi — kapsam
+dışıdır.
+2
+
+-- 2 of 18 --
+
+Ata Kavram Sorunu
+Enformasyon işleme
+En geniş şemsiye, enformasyon işlemedir (information processing). Terim bugünkü
+anlamını iki koldan kazanmıştır. Birinci kol mühendisliktir: Shannon’ın iletişimin
+matematiksel kuramı, mesajı kaynaktan alıcıya taşıyan zincirin kodlama, iletim
+ve kod çözme adımlarına ayrılabileceğini göstermiştir (Shannon, 1948). ˙Ikinci
+kol bilişsel psikolojidir: zihni girdi alan, dönüştüren, depolayan ve geri çağıran
+bir sistem olarak modelleyen yaklaşım, alanın kurucu metinlerinden birinde
+açıkça formüle edilmiştir (Neisser, 1967).
+Bu iki kol aynı soyutlamayı paylaşır: enformasyon bir yerden bir yere giderken
+üzerinde bir dizi işlem uygulanır ve her işlem onun formunu değiştirir.
+Enformasyon düzenleme
+Bir alt düzeyde enformasyon düzenleme (information organization) durur. Bu
+alanın kapsamı, enformasyonun sonradan bulunabilir hâle getirilmesidir; sınıflandırma,
+kategorileme, gruplama, hiyerarşi kurma, ilişkilendirme, indeksleme ve etiketleme
+bu başlığa girer (Taylor, 2004). Alanın kuramsal temeli üzerine yazılmış çalışmalar,
+düzenlemenin nihai gerekçesinin her zaman erişim olduğunu vurgular: bir nesne,
+sonradan aranıp bulunabilsin diye düzenlenir (Svenonius, 2000).
+Buna komşu bir alan olan bilgi organizasyonu (knowledge organization), tak-
+sonomi, ontoloji, kavram haritaları ve denetimli sözlükler gibi araçlarla kavram-
+lar arası ilişkileri inceler; enformasyon düzenlemeden farkı, belgelerle değil kavram-
+larla çalışmasıdır (Hjørland, 2008).
+Düzenleme ile temsilin ayrımı
+Soyutlama, özetleme, temsil etme ve dönüştürme, düzenleme başlığının altına
+tam oturmaz. Bir kütüphanede kitapları konuya göre raflamak kitapların ken-
+disini değiştirmez; yalnızca yerlerini değiştirir. Oysa bir metni özetlemek metnin
+kendisini değiştirir — ortaya farklı bir nesne çıkar.
+Ayrım şöyle konabilir: düzenleme işlemleri nesneler arasındaki yerleşimi
+değiştirir, temsil işlemleri nesnenin kendisini değiştirir. Bu yüzden bu iki küme
+aynı şemsiye altında ancak bir üst düzeyde — enformasyon işleme düzeyinde —
+birleşir.
+Örgüt kuramıyla karıştırılma
+“Organization” sözcüğü Türkçeye hem “örgüt” hem “düzenleme” olarak çevrilebildiği
+için bu terim örgüt kuramıyla (organization theory) karıştırılabilir. ˙Iki alanın
+konusu farklıdır. Örgüt kuramı insanları, yetkiyi, koordinasyonu, bürokrasiyi
+ve teşvik yapılarını inceler. Enformasyon düzenleme belgeleri, kavramları ve
+bunların erişim yapılarını inceler.
+3
+
+-- 3 of 18 --
+
+Bir kütüphanede kitapların konu, alt konu ve yazar sırasına göre yerleştirilmesi
+enformasyon düzenlemedir. Bir şirkette genel müdürden ekip liderine uzanan
+raporlama zinciri örgüt tasarımıdır.
+Yine de en soyut düzeyde ortak bir çekirdek vardır: her iki durumda da
+parçalar, aralarındaki ilişkiler ve sınırlar belirli bir düzene sokulur. Bu ortaklık
+bir özdeşlik değil bir benzeşimdir; kuramsal sonuçların bir alandan diğerine
+doğrudan taşınmasını meşrulaştırmaz.
+4
+
+-- 4 of 18 --
+
+Kapsam Dışı Kalan ˙Işlemler
+Enformasyonla ilgili her fiil bu aileye ait değildir. Açığa çıkarma (disclosure),
+saklama süresi (retention) ve imha (disposal ) enformasyon üzerinde iş görür,
+ancak farklı bir soruya cevap verirler.
+Sınıflandırma “bu enformasyon neye benziyor” sorusuna cevap verir. ˙Imha
+ise “bu enformasyon ne kadar süre tutulmalı ve kim erişebilmeli” sorusuna cevap
+verir. Birincisi anlamla, ikincisi denetimle ilgilidir.
+Bu ikinci küme, kayıt yönetimi (records management) ve enformasyon yönetişimi
+(information governance) alanlarına aittir. Kayıtların oluşturulmasından imhasına
+kadar geçen süreçlerin nasıl yönetileceği uluslararası bir standartla tanımlanmıştır
+(ISO 15489). Buradaki temel kavramlar — saklama takvimi, erişim yetkisi,
+güvenli imha, izlenebilirlik — enformasyonun içeriğine değil, hukuki ve kurum-
+sal statüsüne bağlıdır.
+Bir şirketin eski müşteri kayıtlarını beş yıl sonra güvenli biçimde imha etmesi,
+o kayıtların ne anlama geldiğiyle ilgili bir karar değildir; yasal yükümlülük ve
+risk yönetimiyle ilgili bir karardır.
+5
+
+-- 5 of 18 --
+
+˙Işlem Aileleri
+Fiilleri düz bir liste hâlinde sıralamak yanıltıcıdır, çünkü aynı listede farklı soyut-
+lama düzeyleri yan yana gelir. “Sırala” ile “çıkarım yap” aynı kümede duramaz:
+birincisi mekanik bir yeniden düzenlemedir, ikincisi yeni bir önerme üretir.
+Aşağıdaki yedi aile, listedeki bütün fiilleri düzeyleri karışmadan kapsar.
+Seçme işlemleri
+Enformasyonun bir kısmının işleme alınıp geri kalanının dışarıda bırakılması.
+Süzme (filtering), sıralama, önceliklendirme ve dikkat bu başlığa girer. Bilişsel
+psikolojide dikkatin bir süzgeç olarak modellenmesi bu ailenin erken örneğidir
+(Broadbent, 1958).
+Düzenleme işlemleri
+Nesneler arasındaki yerleşimin ve ilişkilerin kurulması: sınıflandırma, gruplama,
+hiyerarşi kurma, indeksleme, etiketleme, ilişkilendirme. C ıktısı bir erişim yapısıdır.
+Dönüştürme işlemleri
+Enformasyonun formunun değiştirilmesi: kodlama, kod çözme, sıkıştırma, nor-
+malleştirme, birim dönüşümü. Bu ailenin ayırt edici özelliği, çoğu üyesinin
+tersinir olmasıdır — kayıpsız sıkıştırılmış bir dosya açıldığında aslına döner.
+Kayıplı sıkıştırma bu kuralın istisnasıdır ve tam da bu yüzden temsil ailesine
+yaklaşır.
+Temsil işlemleri
+Enformasyonun yerine, onun bazı özelliklerini koruyup bazılarını atan başka
+bir nesnenin konması: soyutlama, özetleme, modelleme, sembolleştirme. Bu
+işlemler tersinir değildir; atılan ayrıntı geri getirilemez. Bir haritanın araziye
+göre eksik olması bir kusur değil, temsil olmasının koşuludur.
+C ıkarım işlemleri
+Mevcut enformasyondan yeni önermeler türetilmesi: tümdengelim, tümevarım,
+genelleme, benzeşim kurma. Bu ailenin bir üyesi olan abdüksiyon — gözlemi en
+iyi açıklayan hipotezin seçilmesi — Peirce tarafından ayrı bir çıkarım biçimi
+olarak tanımlanmıştır. Ailenin diğerlerinden farkı, çıktısının girdide bulun-
+mayan bir iddia içermesidir.
+Doğrulama işlemleri
+Enformasyonun ya da ondan türetilen iddianın sınanması: karşılaştırma, tu-
+tarlılık denetimi, yanlışlama, çapraz doğrulama. Diğer ailelerin ürettiği çıktının
+kalite denetimini yapar.
+6
+
+-- 6 of 18 --
+
+Saklama ve geri getirme işlemleri
+Enformasyonun zaman içinde korunması ve sonradan erişilmesi: depolama, arşivleme,
+indeks üzerinden sorgulama, hatırlama. Bellek araştırmasında kodlama, depo-
+lama ve geri getirme üçlüsü ayrı aşamalar olarak modellenmiştir (Atkinson ve
+Shiffrin, 1968).
+Bu ailelerden yalnızca sonuncusunun ikinci yarısı — geri getirme — bir
+tüketici işlemdir. Diğerlerinin tamamı, doğrudan ya da dolaylı olarak, enfor-
+masyonun sonradan geri getirilebilmesi için yapılır. Liste bu yönüyle bir enfor-
+masyon yaşam döngüsünün fiil envanteridir.
+7
+
+-- 7 of 18 --
+
+Disiplinler Arası Karşılıklar
+Aynı işlem ailesi farklı alanlarda farklı terminolojiyle görünür. Aşağıdaki tablo,
+ailelerin başlıca alanlardaki karşılıklarını verir.
+Alan Tipik terimler
+Bilgi bilimi sınıflandırma, indeksleme, etiketleme, üstveri atama,
+kümeleme, geri getirme
+Enformasyon kuramı kodlama, kod çözme, sıkıştırma, örnekleme, niceleme, hata
+düzeltme
+Veri işleme ayrıştırma, doğrulama, eşleme, indirgeme, birleştirme, nor-
+malleştirme, seri hâle getirme
+Sistem tasarımı ayrıştırma, modülerleştirme, soyutlama, kapsülleme,
+bölümleme, çoğaltma
+Bilişsel psikoloji algı, dikkat, kategorileme, öbekleme, çağrışım, ayırt etme,
+hatırlama
+Epistemoloji gözlem, tümevarım, tümdengelim, abdüksiyon, kavram-
+sallaştırma, gerekçelendirme
+Bilgi mimarisi düzenleme, etiketleme, gezinme, arama, taksonomi, çapraz
+bağlama
+˙Istatistik ve makine
+öğrenmesi
+örnekleme, öznitelik çıkarma, boyut indirgeme, kümeleme,
+sınıflandırma
+Doğal dil işleme belirteçleme, bölütleme, ayrıştırma, gömme, özetleme, be-
+lirsizlik giderme
+Tablodaki tekrar dikkat çekicidir. Sınıflandırma dokuz alanın altısında,
+ayrıştırma ve soyutlama dördünde, sıkıştırma ve kodlama üçünde görünür. Bu,
+alanların birbirinden ödünç aldığı terimlerden çok, aynı yapısal problemin bağımsız
+olarak birden fazla yerde ortaya çıkmasından kaynaklanır.
+Öbekleme (chunking) bu noktanın iyi bir örneğidir. Kısa süreli belleğin kap-
+asitesinin ayrı öğe sayısıyla sınırlı olduğu, dolayısıyla öğeleri anlamlı birimlerde
+toplamanın kapasiteyi etkin biçimde artırdığı gösterilmiştir (Miller, 1956). Aynı
+yapı veri işlemede toplulaştırma (aggregation), yazılım tasarımında kapsülleme,
+dilde ise sözcük öbeği olarak karşımıza çıkar.
+8
+
+-- 8 of 18 --
+
+Terminolojik Notlar
+Türkçe karşılıklar bazı yerlerde ayrım kaybına yol açar.
+Aggregation için “birleştirme” kullanıldığında, merging ile karışır. Aggre-
+gation birden fazla kaydın tek bir özet değere indirgenmesidir — bin satışın
+toplam ciroya dönüşmesi gibi. Merging ise kayıtların sayısını korur, yalnızca
+farklı kaynakları tek kümede toplar. “Toplulaştırma” ilkini daha doğru karşılar.
+Decomposition için “ayrıştırma” kullanıldığında, kimyadaki ve veri işlemedeki
+parsing ile karışabilir. Ayrıştırma burada bir bütünün parçalarına bölünmesidir;
+parsing ise yapısız bir dizinin yapılı bir temsile çevrilmesidir ve aslında dönüştürme
+ailesine aittir.
+Retrieval için “geri getirme” doğru bir karşılıktır ancak “erişim” (access) ile
+eşitlenmemelidir. Erişim bir yetki meselesidir ve yönetişim ailesine aittir; geri
+getirme ise bir arama ve eşleştirme işlemidir.
+9
+
+-- 9 of 18 --
+
+Sonuç
+Bu fiillerin ortak bir adı olduğunu görmek, tek başına bir adlandırma kazancı
+değildir. Asıl kazanç, bir alanda çözülmüş bir problemin başka bir alanda
+aynı problem olarak tanınabilmesidir. Kayıplı sıkıştırmada “neyin atılabileceği”
+sorusu ile yazılım soyutlamasında “hangi ayrıntının gizleneceği” sorusu yapısal
+olarak aynı sorudur: her ikisinde de amaç, hangi bilginin kaybının kullanıcı
+açısından fark edilmeyeceğini kestirmektir.
+Yedi aileli şemanın pratik karşılığı, bir işin hangi düzeyde tıkandığını teşhis
+etmeyi kolaylaştırmasıdır. Bir belgeye ulaşılamıyorsa sorun düzenleme ailesindedir
+— indeks ya da sınıflandırma yetersizdir. Belge bulunuyor ama anlaşılmıyorsa
+sorun temsil ailesindedir — özet ya da soyutlama düzeyi yanlıştır. Belge anlaşılıyor
+ama güvenilmiyorsa sorun doğrulama ailesindedir. Bu üç durum aynı şikâyetle
+— “bilgiye ulaşamıyorum” — dile getirilebilir, ancak çözümleri farklıdır.
+C erçevenin sınırı, ailelerin keskin biçimde ayrılmamasıdır. Kayıplı sıkıştırma
+hem dönüştürme hem temsildir. Kümeleme hem düzenleme hem çıkarımdır —
+veriden kategoriler türetildiği ölçüde yeni bilgi üretir. Bu bulanıklık şemanın
+kusuru değil, işlemlerin doğasının bir sonucudur; aileler kesin kutular değil,
+ağırlık merkezleridir.
+Notun kurduğu ama cevaplamadığı iki soru vardır. Birincisi, bu ailelerin
+sıralamasında zorunlu bir bağımlılık olup olmadığıdır: temsil her zaman düzenlemeyi
+önceler mi, yoksa sıra bağlama göre değişir mi. ˙Ikincisi, aynı şemanın enfor-
+masyon dışındaki alanlara — örneğin üretim süreçlerine ya da örgütsel koordi-
+nasyona — ne ölçüde taşınabileceğidir. ˙Ikinci sorunun cevabı olumluysa, “orga-
+nization” sözcüğünün iki anlamı arasındaki benzeşim tesadüfı olmaktan çıkar.
+10
+
+-- 10 of 18 --
+
+˙Işlem Sözlüğü
+Aynı işlem ailesi farklı alanlarda farklı terminolojiyle görünür. Aşağıdaki tablo
+ailelerin başlıca alanlardaki karşılıklarını özetler; ardından her alanın terim en-
+vanteri tam hâliyle verilir.
+Alan Baskın işlem ailesi
+Bilgi bilimi düzenleme, saklama ve geri getirme
+Enformasyon kuramı dönüştürme
+Veri işleme dönüştürme, düzenleme
+Sistem tasarımı temsil, düzenleme
+Bilişsel psikoloji seçme, çıkarım, saklama ve geri getirme
+Epistemoloji çıkarım, doğrulama
+Bilgi mimarisi düzenleme
+˙Istatistik ve makine
+öğrenmesi
+seçme, temsil, düzenleme
+Doğal dil işleme dönüştürme, temsil
+Bilgi bilimi
+Belgelerin ve kayıtların bulunabilir hâle getirilmesiyle ilgilenen alan. Terimlerin
+çoğu kütüphanecilik pratiğinden gelir ve nesne düzeyinde çalışır.
+• sınıflandırma (classification) — önceden tanımlı bir şemaya yerleştirme
+• kategorileme (categorization) — benzerlik temelinde küme oluşturma
+• indeksleme (indexing) — erişim anahtarları üretme
+• etiketleme (tagging) — serbest anahtar sözcük atama
+• üstveri atama (metadata assignment) — nesne hakkında yapılı tanımlayıcı
+üretme
+• kümeleme (clustering) — veriden türetilen gruplama
+• boyutlandırma (faceting) — birden çok bağımsız eksende sınıflandırma
+• sıralama (ranking) — ilgililik derecesine göre düzenleme
+• süzme (filtering) — ölçüt dışı kayıtları eleme
+• toplulaştırma (aggregation) — kayıtları özet değere indirgeme
+• özetleme (summarization) — içeriği kısaltarak temsil etme
+• bağlama (linking) — kayıtlar arası ilişki kurma
+• geri getirme (retrieval ) — sorguya karşılık gelen kayıtları bulma
+11
+
+-- 11 of 18 --
+
+Enformasyon kuramı
+Mesajın kaynaktan alıcıya taşınmasıyla ilgilenen alan. Terimler anlamla değil,
+sinyalin taşıdığı ayrım miktarıyla çalışır.
+• kodlama (encoding) — mesajı iletim biçimine çevirme
+• kod çözme (decoding) — iletim biçiminden mesajı geri kurma
+• sıkıştırma (compression) — artıklığı azaltarak temsili küçültme
+• iletim (transmission) — kanaldan geçirme
+• dönüştürme (transformation) — gösterim uzayını değiştirme
+• niceleme (quantization) — sürekli değerleri ayrık düzeylere indirgeme
+• örnekleme (sampling) — sürekli sinyalden ayrık noktalar alma
+• süzme (filtering) — belirli bileşenleri zayıflatma
+• kanal kodlama (channel coding) — gürültüye dayanıklılık için denetimli
+artıklık ekleme
+• hata düzeltme (error correction) — bozulmuş biti geri kurma
+• artıklık azaltma (redundancy reduction) — tekrar eden yapıyı eleme
+• entropi kestirimi (entropy estimation) — kaynağın belirsizlik miktarını
+ölçme
+Veri işleme
+Yazılımda veri üzerinde uygulanan atomik işlemler. Bu küme, bir sistemin veriye
+uygulayabileceği temel yapı taşları olduğu için veri işleme primitifleri olarak da
+adlandırılır.
+• ayrıştırma (parsing) — yapısız diziden yapılı temsil üretme
+• doğrulama (validation) — kuralara uygunluk denetimi
+• süzme (filtering), eşleme (mapping), indirgeme (reduction)
+• sıralama (sorting), gruplama (grouping), birleştirme (joining)
+• bölme (splitting), kaynaştırma (merging), toplulaştırma (aggregation)
+• normalleştirme (normalization) — tekrarı ortadan kaldıran yapıya çevirme
+• seri hâle getirme (serialization) ve tersi (deserialization)
+• yineleme ayıklama (deduplication), indeksleme, önbellekleme (caching)
+Eşleme ve indirgeme, büyük veri kümelerinin dağıtık işlenmesinde iki temel
+adım olarak formüle edilmiştir (Dean ve Ghemawat, 2004). Normalleştirme ise
+ilişkisel veri modelinin kurucu metninde tanımlanmıştır (Codd, 1970).
+12
+
+-- 12 of 18 --
+
+Sistem tasarımı
+Bir sistemin parçalara bölünmesi ve parçalar arası akışın düzenlenmesiyle ilgili
+işlemler.
+• ayrıştırma (decomposition) — bütünü parçalara bölme
+• modülerleştirme (modularization) — parçaları bağımsız değiştirilebilir bir-
+imlere ayırma
+• soyutlama (abstraction) — ayrıntıyı gizleyip yerine arayüz koyma
+• kapsülleme (encapsulation) — iç durumu dışarıdan erişime kapatma
+• bölümleme (partitioning) — yükü ya da veriyi bölgelere dağıtma
+• yönlendirme (routing), tamponlama (buffering)
+• çoğaltma (replication), eşzamanlama (synchronization)
+• aracılık (mediation), düzenleme ve yönetim (orchestration)
+Modülerleştirmenin ölçütünün akış değil, gizlenen tasarım kararı olduğu Par-
+nas tarafından gösterilmiştir (Parnas, 1972).
+Bilişsel psikoloji
+Zihnin enformasyon üzerinde yaptığı işlemler. Bu kümenin ayırt edici yanı,
+işlemlerin çoğunun iradesiz ve farkındalık dışı olmasıdır.
+• algı (perception), dikkat (attention), seçme (selection)
+• kategorileme (categorization), ayırt etme (discrimination)
+• soyutlama (abstraction), genelleme (generalization)
+• öbekleme (chunking) — öğeleri anlamlı birimlerde toplayarak bellek kap-
+asitesini etkin biçimde artırma
+• çağrışım (association), karşılaştırma (comparison)
+• ayrıştırma (decomposition), bütünleştirme (integration)
+• çıkarım (inference), hatırlama (recall ), tanıma (recognition)
+13
+
+-- 13 of 18 --
+
+Epistemoloji
+Bilginin nasıl üretildiğine ve gerekçelendirildiğine dair işlemler. Diğer alanlardan
+farkı, işlemlerin doğruluk ölçütüne bağlanmış olmasıdır.
+• gözlem (observation)
+• tümdengelim (deduction) — öncüllerden zorunlu sonuç çıkarma
+• tümevarım (induction) — tekil gözlemlerden genel önerme türetme
+• abdüksiyon (abduction) — gözlemi en iyi açıklayan hipotezi seçme
+• genelleme (generalization), soyutlama (abstraction)
+• kavramsallaştırma (conceptualization) — olguya karşılık gelen kavram kurma
+• yorumlama (interpretation), gerekçelendirme (justification)
+• doğrulama (verification), yanlışlama (falsification)
+• çözümleme (analysis), bireşim (synthesis)
+Kuramların doğrulanarak değil yanlışlanabilirlikleriyle sınanması gerektiği
+Popper tarafından savunulmuştur (Popper, 1959).
+Bilgi mimarisi
+Bir enformasyon uzayının — site, uygulama, arşiv — gezilebilir hâle getirilmesi.
+Alanın çekirdek üçlüsü düzenleme, temsil ve geri getirmedir.
+• düzenleme (organization), etiketleme (labeling)
+• gezinme (navigation), arama (search)
+• sınıflandırma, hiyerarşi kurma, taksonomi oluşturma
+• boyutlandırma (faceting), gruplama, yapılandırma (structuring)
+• indeksleme, üstveri, çapraz bağlama (cross-linking)
+Bu dört bileşenin — düzenleme, etiketleme, gezinme, arama — alanın temel
+sistemleri olduğu Rosenfeld ve Morville tarafından formüle edilmiştir (Rosenfeld
+ve Morville, 1998).
+14
+
+-- 14 of 18 --
+
+Bilgi organizasyonu ve bilgi temsili
+˙Ilki kavramlar arası ilişkilerin düzenlenmesiyle, ikincisi kavramların biçimsel
+olarak kodlanmasıyla ilgilenir.
+• taksonomi, ontoloji, denetimli sözlük (controlled vocabulary)
+• eşanlamlılar dizini kurma (thesaurus construction)
+• kavram haritalama (concept mapping), anlamsal bağlama (semantic link-
+ing)
+• yetke denetimi (authority control ) — aynı varlığın tek bir adla temsil
+edilmesi
+• biçimselleştirme (formalization), modelleme (modeling)
+• sembolleştirme (symbolization), ilişki tanımlama (relation definition)
+• çizge temsili (graph representation), kural temsili (rule representation)
+Veri yönetimi
+Verinin toplanmasından imhasına kadar geçen zincir. Bu kümenin son üyeleri
+— arşivleme, silme, köken izleme — enformasyon yönetişimi alanına geçiş nok-
+tasıdır.
+• toplama (collection), alım (ingestion)
+• temizleme (cleaning), normalleştirme, dönüştürme
+• bütünleştirme (integration), toplulaştırma
+• depolama (storage), indeksleme, geri getirme
+• arşivleme (archiving), silme (deletion)
+• soy izi (lineage) ve köken (provenance) — verinin hangi işlemlerden geçtiğinin
+kaydı
+˙Istatistik ve makine öğrenmesi
+Veriden düzenlilik çıkarmaya yönelik işlemler.
+• örnekleme (sampling)
+• öznitelik çıkarma (feature extraction) — ham veriden modelin kullanacağı
+değişken üretme
+• öznitelik seçme (feature selection) — mevcut değişkenlerden bilgilendirici
+olanları ayırma
+15
+
+-- 15 of 18 --
+
+• normalleştirme, boyut indirgeme (dimensionality reduction)
+• kümeleme (clustering), sınıflandırma (classification)
+• bağlanım (regression), bölütleme (segmentation), kestirim (estimation)
+Doğal dil işleme
+Dil verisi üzerindeki işlemler. Diğer alanlardaki işlemlerin dile özgülenmiş hâlleridir.
+• belirteçleme (tokenization) — metni işlem birimlerine bölme
+• bölütleme (segmentation), ayrıştırma (parsing)
+• etiketleme (tagging), sınıflandırma, çıkarım (extraction)
+• özetleme (summarization), gömme (embedding) — sözcüğü vektör uzayında
+konumlandırma
+• çeviri (translation), normalleştirme
+• belirsizlik giderme (disambiguation), üretim (generation)
+Yinelenen çekirdek
+Yukarıdaki on bir envanterde birden fazla alanda tekrar eden fiiller ayıklandığında
+yirmi maddelik bir çekirdek kalır:
+seç → böl → grupla → sınıflandır → sırala → ilişkilendir →
+karşılaştır → soyutla → genelle → ayrıştır → birleştir →
+dönüştür → temsil et → kodla → sıkıştır → süz →
+çıkarım yap → doğrula → sakla → geri getir
+Bu dizi bir süreç modeli değildir. Maddeler ne zorunlu bir sıra izler ne de
+aynı soyutlama düzeyinde durur: sıralama mekanik bir yeniden düzenlemeyken
+çıkarım yeni bir önerme üretir. Dizinin değeri, işlem ailelerinin hangi somut
+fiillerden türetildiğini göstermesindedir; kendi başına bir taksonomi olarak kul-
+lanılamaz.
+Yirmi maddenin aileler üzerindeki dağılımı şöyledir:
+Aile Fiiller
+Seçme seç, süz, sırala
+Düzenleme böl, grupla, sınıflandır, ilişkilendir, ayrıştır, birleştir
+Dönüştürme dönüştür, kodla, sıkıştır
+Temsil soyutla, temsil et
+C ıkarım genelle, karşılaştır, çıkarım yap
+Doğrulama doğrula
+Saklama ve geri getirme sakla, geri getir
+16
+
+-- 16 of 18 --
+
+Dağılımın dengesizliği bilgi vericidir. Düzenleme ailesi altı fiille en kalabalık
+gruptur; doğrulama tek fiille temsil edilir. Bu, enformasyon üzerindeki pratik
+çabanın büyük kısmının düzenlemeye, doğrulamanın ise görece az sayıda işleme
+dayandığını gösterir — oysa arşivde yıllar sonra en çok eksikliği hissedilen işlem
+doğrulamadır.
+17
+
+-- 17 of 18 --
+
+Kaynaklar
+• Atkinson, R. C. ve Shiffrin, R. M. (1968). Human Memory: A Proposed
+System and its Control Processes. The Psychology of Learning and Moti-
+vation, Cilt 2. Academic Press.
+• Broadbent, D. E. (1958). Perception and Communication. Pergamon
+Press.
+• Hjørland, B. (2008). What is Knowledge Organization (KO)? Knowledge
+Organization, 35(2–3).
+• ISO 15489-1:2016. Information and documentation — Records manage-
+ment — Part 1: Concepts and principles. International Organization for
+Standardization.
+• Miller, G. A. (1956). The Magical Number Seven, Plus or Minus Two.
+Psychological Review, 63(2).
+• Neisser, U. (1967). Cognitive Psychology. Appleton-Century-Crofts.
+• Shannon, C. E. (1948). A Mathematical Theory of Communication. Bell
+System Technical Journal, 27.
+• Svenonius, E. (2000). The Intellectual Foundation of Information Orga-
+nization. MIT Press.
+• Taylor, A. G. (2004). The Organization of Information. Libraries Unlim-
+ited.
+• Codd, E. F. (1970). A Relational Model of Data for Large Shared Data
+Banks. Communications of the ACM, 13(6).
+• Dean, J. ve Ghemawat, S. (2004). MapReduce: Simplified Data Process-
+ing on Large Clusters. OSDI ’04.
+• Parnas, D. L. (1972). On the Criteria To Be Used in Decomposing Systems
+into Modules. Communications of the ACM, 15(12).
+• Popper, K. (1959). The Logic of Scientific Discovery. Hutchinson.
+• Rosenfeld, L. ve Morville, P. (1998). Information Architecture for the
+World Wide Web. O’Reilly.
+Abdüksiyonun ayrı bir çıkarım biçimi olarak tanımlanması Peirce’ün çeşitli
+yazılarına dayanır; tek bir kaynak metne atıf yapılabilmesi için künye doğrulanmalıdır.
+18
+
+-- 18 of 18 --

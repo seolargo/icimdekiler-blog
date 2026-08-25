@@ -1,0 +1,547 @@
+Eleme: Teşhiste Hipotez Uzayının Yönetimi
+ÖFY
+August 2026
+Özet
+Uzmanlık, doğru cevabı bilmekten çok doğru cevabı daha az adımda bulmaktır:
+aynı problemi çözen iki kişiden biri üç ölçümle, diğeri on iki ölçümle sonuca
+varır ve fark, bilginin miktarında değil aramanın biçimindedir. Bir teşhis prob-
+leminde asıl kaynak tüketen şey hipotezleri doğrulamak değil, hangi hipotezin
+doğrulanacağına karar vermektir; bu nedenle iyi bir ölçüm en çok bilgi veren
+değil, hipotez uzayını en dengeli bölen ölçümdür. Arama uzayının daraltılması
+tek bir işlem değil, birbirinden ayrı altı mekanizmanın bileşimidir: kesme, önsel
+olasılıkla ağırlıklandırma, kısıt yayılımı, mekanizma bilgisiyle dal kesme, aykırılık
+odaklı ilerleme ve yeniden çerçeveleme. Bu mekanizmaların her birinin formel
+bir karşılığı bulunmaktadır ve bu karşılıklar bilgi kuramı, Bayesçi karar kuramı,
+kısıt sağlama ve teşhis edilebilirlik analizi gibi birbirinden bağımsız gelişmiş
+alanlarda yer alır; dolayısıyla uzman sezgisi mistik değil, kısmen hesaplanabilir
+bir işlemdir. Daraltmanın kendisi bir erdem değildir: yanlış bir önsel dağılımla
+birleştiğinde erken kapanmaya yol açar ve doğru hipotez uzaydan çıkarıldığında
+arama hiç sonuçlanmaz. Ayrıca aramanın uzayı ancak kurulmuş hipotezlerden
+oluştuğu için, hipotez üretimindeki bir eksiklik hiçbir daraltma tekniğiyle telafi
+edilemez. Öğretim açısından çıkan sonuç, öğrenciye doğru cevabın değil kesme
+kararının gösterilmesi gerektiğidir; performans ölçütü de sonucun doğruluğu
+değil teşhise kadar yapılan ölçüm sayısıdır. Son olarak, bu becerinin oluşabilmesi
+ortamın sinyal ile neden arasında kararlı bir ilişki sunmasına bağlıdır; bu koşul
+sağlanmadığında biriken şey uzmanlık değil kendinden emin bir yanlılıktır.
+1
+
+-- 1 of 17 --
+
+Giriş
+˙Iki mühendis aynı arızaya bakar ve ikisi de doğru teşhise ulaşır. Birincisi üç
+ölçüm yapmıştır, ikincisi on iki. Aradaki fark bilginin varlığı veya yokluğu
+değildir; ikisi de aynı kavramları bilmektedir. Fark, hangi ölçümün hangi sırayla
+yapılacağına ilişkin karardadır.
+Bu ayrım, uzmanlığın yaygın tanımını sorgulanır hâle getirir. Uzmanın
+acemiden “daha çok bildiği” varsayımı, gözlenen davranışı açıklamakta yeter-
+sizdir; çünkü acemi de çoğu zaman doğru cevaba ulaşır, yalnızca daha pahalı
+bir yoldan ulaşır. Açıklanması gereken şey sonucun doğruluğu değil, yolun
+uzunluğudur.
+Merkezı terimler şöyle tanımlanır. Hipotez uzayı (hypothesis space), bir
+problem karşısında olası neden veya çözüm olarak değerlendirilen adayların
+kümesidir. Arama (search), bu küme içinde doğru adayı bulmak için yapılan
+işlemler dizisidir; kavramın problem çözme kuramındaki formel kullanımı Newell
+ve Simon tarafından kurulmuştur (Newell ve Simon, 1972). Ayırt edici ölçüm
+(discriminating test), sonucu hangi çıksa uzaydan en az bir hipotezi eleyen
+ölçümdür. Önsel olasılık (prior probability), bir hipotezin herhangi bir ölçüm
+yapılmadan önceki inanılırlık derecesidir. Bilgi kazancı (information gain),
+bir ölçümün beklenen belirsizlik azalmasıdır. Erken kapanma (premature clo-
+sure), teşhisin yeterli ayırt edici kanıt toplanmadan sonlandırılmasıdır.
+Notun sınırladığı problem, teşhis türü problemlerdir: sistemde bir belirti
+gözlenmiştir, nedeni bilinmemektedir ve nedeni bulmak için maliyetli ölçümler
+yapılması gerekmektedir. Tasarım problemleri, optimizasyon problemleri ve
+tanımı gereği tek adımda çözülen problemler kapsam dışıdır. Ayrıca not, dar-
+altmanın nasıl gerçekleştiğini ele alır; belirli bir alanın teşhis içeriğini değil.
+2
+
+-- 2 of 17 --
+
+Hipotez Uzayı ve Arama Maliyeti
+Uzayın kurulması
+Aramadan önce aranacak kümenin var olması gerekir. Bu, işlemin en çok gözden
+kaçan basamağıdır: bir hipotez listelenmemişse hiçbir daraltma tekniği onu bu-
+lamaz.
+Tıbbi problem çözme üzerine yapılan erken çalışmalar, deneyimli hekimlerin
+hipotezleri sürecin sonunda değil ilk dakikalarda ürettiğini ve genellikle aynı
+anda az sayıda hipotez taşıdığını göstermiştir (Elstein, Shulman ve Sprafka,
+1978). Yani uzman, bütün olasılıkları toplayıp sonra elemez; erken ve küçük bir
+aday kümesi kurar ve onu günceller.
+Bu gözlem iki yönlüdür. Olumlu yönü, küçük kümenin aramayı ucuzlat-
+masıdır. Olumsuz yönü, doğru cevabın kümeye hiç girmemesi durumunda son-
+raki bütün işlemlerin boşa gitmesidir. Dolayısıyla uzay kurma ile uzay daraltma
+birbirinin karşıtı olan iki işlemdir ve iyi bir teşhis süreci ikisi arasında salınır.
+Somut bir örnek üzerinden ilerlemek yararlıdır. Bir ağ servisi yavaşlamaktadır.
+Olası neden sınıfları şöyle listelenebilir: işlemci doygunluğu, bellek baskısı, disk
+giriş-çıkışı, ağ gecikmesi, veritabanı kilidi, bağlantı havuzunun tükenmesi, çöp
+toplama duraklamaları, bağımlı bir servisin yavaşlaması, yük dengeleyici hatası,
+ad çözümleme sorunu, kod gerilemesi, trafik artışı, aynı donanımı paylaşan başka
+bir iş yükünün etkisi ve sertifika doğrulama gecikmesi.
+Bu on dört hipotezlik uzay, notun geri kalanında örnek olarak kullanılacaktır.
+Arama maliyetinin bileşenleri
+Arama maliyeti tek bir sayı değildir. En az üç bileşeni vardır.
+Birincisi ölçüm sayısıdır. On dört hipotezi tek tek doğrulamak on dört
+ölçüm gerektirir.
+˙Ikincisi ölçüm başına maliyettir ve hipotezden hipoteze değişir. Bir
+metriğe bakmak saniyeler alır; üretim ortamında bir bileşeni izole etmek saatler
+alabilir; bir parçayı sökmek makineyi durdurmayı gerektirebilir.
+Üçüncüsü gecikmedir. Bazı ölçümler sonuç vermek için olayın tekrarlan-
+masını bekler. Nadir olaylarda bu bekleme, ölçümün pratikte yapılamaz olması
+anlamına gelir.
+Bu üç bileşen, “en kesin ölçümü yap” kuralının neden yanlış olduğunu açıklar.
+Kesinlik maliyet ve gecikmeyle birlikte değerlendirilmediğinde, teorik olarak en
+bilgilendirici ölçüm pratikte en kötü ilk hamle olabilir.
+Tek tek doğrulamanın neden kötü olduğu
+Sıralı doğrulama, hipotezleri bağımsız ve eşit olası kabul eder. Bu iki varsayım
+da genellikle yanlıştır.
+Hipotezler bağımsız değildir; çoğu ortak bir mekanizmaya bağlıdır ve biri
+elendiğinde diğerleri de düşer. Eşit olası da değildirler; belirli bir sistemde
+belirli arızalar diğerlerinden çok daha sık görülür.
+3
+
+-- 3 of 17 --
+
+Ayrıca sıralı doğrulama, doğrulayıcı kanıt aramaya yatkındır. ˙Insanların bir
+kuralı sınarken kuralı yanlışlayacak değil doğrulayacak örnekleri seçme eğiliminde
+olduğu deneysel olarak gösterilmiştir (Wason, 1960). Teşhiste bunun karşılığı,
+aklına gelen ilk hipotezi destekleyen ölçümü yapmak ve onu eleyecek ölçümü
+yapmamaktır. Bilimsel yöntemin güçlü çıkarım olarak adlandırılan biçimi tam
+olarak bunun karşıtını önerir: her adımda rakip hipotezleri dışlayacak deney
+tasarlanmalıdır (Platt, 1964).
+4
+
+-- 4 of 17 --
+
+Arama Uzayı Daraltmanın Mekanizmaları
+Aşağıdaki altı mekanizma birbirinden ayrıdır. Karıştırılmamaları önemlidir;
+çünkü bir problemde hangisinin uygulanabilir olduğu, elde edilebilecek daraltma
+miktarını belirler.
+Kesme
+Uzayı iki parçaya bölen bir ölçüm bulunur. Sonuç hangi çıkarsa çıksın bir parça
+tümüyle elenir.
+Örnek servis probleminde “istek süresinin ne kadarı beklemede, ne kadarı
+işlem yaparken geçiyor” sorusu bu işlevi görür. Süre ağırlıklı olarak beklemede
+geçiyorsa işlemci doygunluğu ve çöp toplama duraklamaları düşer; işlem ya-
+parken geçiyorsa kilit, bağlantı havuzu ve bağımlı servis düşer.
+Daha basit bir örnek şudur: bir bilgisayar açılmadığında “herhangi bir gösterge
+ışığı yanıyor mu” sorusu, olumsuz cevapta yazılım tarafındaki hipotezlerin tamamını
+tek adımda eler.
+Bu, ikili aramanın teşhis alanındaki karşılığıdır. Her ölçüm uzayı yarıya
+indirdiğinde n hipotezlik bir uzay yaklaşık log2 n ölçümde çözülür. On dört
+hipotez için bu dört ölçüm demektir; on dört ölçüm yerine.
+Buradan kritik bir kural çıkar: iyi bir ölçüm en çok kesinlik sağlayan değil,
+uzayı en dengeli bölen ölçümdür. On üç hipotezi bırakıp yalnızca birini eleyen
+bir ölçüm, sonucu ne kadar güvenilir olursa olsun kötü bir ilk hamledir. Ölçümün
+değeri, verdiği kesinlikle değil, sonrasında kalan belirsizlikle ölçülür.
+Önsel olasılıkla ağırlıklandırma
+Hipotezler eşit olası değildir. Belirli bir sistemde son bir yılda görülen yavaşlamaların
+büyük bölümü veritabanı kilidinden, çok küçük bir bölümü ad çözümlemesinden
+kaynaklanmışsa, arama sırası bu dağılıma göre değişir.
+Uzman ile acemi arasındaki en somut fark burada görünür. Acemi hipotez-
+leri listeler ve eşit muamele eder; uzman listeyi bir ağırlık dağılımı olarak taşır.
+Bu ağırlık ayrıca bağlama duyarlıdır: aynı belirti, farklı bir sistemde farklı
+bir dağılım üretir. Bu nedenle önsel bilgi kitaptan değil, o sistemle geçirilmiş
+süreden gelir.
+Uygulamada kullanılan ölçüt, beklenen faydanın maliyete oranıdır. Bir ölçümün
+değeri, elemesi beklenen olasılık kütlesinin ölçüm maliyetine bölümüdür. Bu
+ölçüte göre ucuz ve orta düzeyde bilgilendirici bir ölçüm, pahalı ve kesin bir
+ölçümden önce gelir.
+Kısıt yayılımı
+Bazı hipotezler ölçümle değil, elde bulunan bilgiden mantıksal olarak elenir.
+Örnek servis probleminde yavaşlık yalnızca tek bir müşteride görülüyorsa,
+bütün altyapı düzeyindeki hipotezler düşer: ad çözümleme, yük dengeleyici ve
+5
+
+-- 5 of 17 --
+
+donanım paylaşımı sorunları bütün müşterileri etkilerdi. Hiçbir ölçüm yapılmamış,
+yalnızca mevcut bilgi bir kısıt olarak kullanılmıştır.
+˙Ikinci bir örnek zamanlamadır. Sorun gece yarısından sonra, trafiğin en
+düşük olduğu saatte başlamışsa trafik artışı hipotezi elenir.
+Bu mekanizma uzmanın en az görünen hamlesidir. Acemi ölçüm yapmaya
+yönelir; uzman önce elindeki bilgiden çıkarılabilecek her sonucu tüketir. Ya-
+pay zekâda karşılığı kısıt yayılımıdır: bir değişkenin alabileceği değerler dar-
+aldığında, ona bağlı değişkenlerin değer kümeleri de kendiliğinden daralır.
+Mekanizma bilgisiyle dal kesme
+Hipotezler düz bir liste değildir; nedensel bir yapıya bağlıdırlar. Bu yapı bilindiğinde
+tek bir ölçüm bir yaprağı değil bir dalı keser.
+Bir motor örneği bunu somutlaştırır. Türbin giriş sıcaklığı yükselmiş, an-
+cak yakıt debisi ve basınç normal ölçülmüştür. Yanma tarafındaki hipotezlerin
+büyük bölümü topluca düşer; çünkü hepsi debi veya basınçta bir anormallik
+üretirdi. Ölçüm bir hipotezi değil, aynı mekanizmaya bağlı bir hipotez ailesini
+elemiştir.
+Bu, alan bilgisinin neden doğrudan arama verimliliğine dönüştüğünü açıklayan
+mekanizmadır. Sistemin nasıl çalıştığını bilen kişi hipotezleri bir ağaç olarak
+görür ve dal keser; sistemin yalnızca bileşen adlarını bilen kişi yaprak eler.
+Yapay zekâda bu yaklaşımın formel hâli, sistemin doğru davranış modelinden
+yola çıkarak gözlenen davranışla tutarsızlığı üreten bileşen kümelerini hesapla-
+maktır (Reiter, 1987; de Kleer ve Williams, 1987).
+Aykırılık odaklı ilerleme
+Uzay çok büyükse, ne olduğunu sormak yerine ne olmadığını sormak daha ucuz-
+dur. Normalin nasıl göründüğünü bilen kişi sapmanın nerede olduğunu görür
+ve aramayı o bölgeye sabitler.
+Bu mekanizmanın zımni ifadesi “bu grafik bana normal gelmedi” cümlesidir.
+Formel hâli anomali tespitidir: önce normal davranışın bir modeli kurulur,
+ardından arama yalnızca sapmanın gözlendiği bölgeye indirgenir.
+Mekanizma, uzmanlığın algısal bileşenine dayanır. Kişi tek tek kuralları
+hatırlamaz; çok sayıda normal örnek görmüş olduğu için sapmayı fark eder.
+Satranç uzmanları üzerine yapılan çalışmalar, uzmanların anlamlı örüntüler
+biriktirdiğini ve bu örüntülerin aramayı yönlendirdiğini göstermiştir (Chase ve
+Simon, 1973).
+Mekanizmanın sınırı da buradadır: normal repertuarı yoksa sapma görülmez.
+Yeni kurulmuş bir sistemde aykırılık odaklı ilerleme kullanılamaz, çünkü henüz
+normal tanımlanmamıştır.
+Yeniden çerçeveleme
+Bazı durumlarda uzay daraltılmaz, değiştirilir. Yanlış soru sorulduğunda arama
+sonuçsuz biçimde sürebilir.
+6
+
+-- 6 of 17 --
+
+Örnek servis probleminde “hangi bileşen yavaş” sorusu sonuç vermiyorsa,
+doğru soru “yavaşlık bütün isteklerde mi yoksa yalnızca dağılımın üst dilim-
+lerinde mi görülüyor” olabilir. ˙Ikinci soru farklı bir uzay açar ve aynı za-
+manda birinci sorunun neden cevapsız kaldığını da açıklar: ortalama üzerinden
+bakıldığında yalnızca küçük bir istek kesimini etkileyen bir neden görünmez.
+Bu, altı mekanizma içinde en zor olanıdır ve en deneyimlilerde görülür.
+Ayrıca diğerlerinden farklı olarak tersine çevrilebilir değildir: yeniden çerçeveleme
+yanlışsa, yeni uzayda doğru cevap hiç bulunmayabilir.
+Mekanizmaların birlikte kullanımı
+Gerçek bir teşhiste bu mekanizmalar sırayla değil iç içe kullanılır. Tipik bir
+akış şöyledir: elde bulunan bilgiden kısıt yayılımıyla bir grup hipotez elenir,
+kalanlar önsel dağılıma göre ağırlıklandırılır, en dengeli bölen ölçüm seçilir,
+sonuç mekanizma bilgisiyle bir dalın tamamına yayılır ve kalan uzay yeterince
+küçüldüğünde tek tek doğrulamaya geçilir.
+Sıralamayı belirleyen ilke şudur: ücretsiz olan mekanizmalar önce tüketilir.
+Kısıt yayılımı ve önsel ağırlıklandırma ölçüm gerektirmez; kesme ve dal kesme
+gerektirir. Ölçüm yapmadan yapılabilecek daraltma tükenmeden ölçüme geçmek,
+aramanın en yaygın verimsizliğidir.
+7
+
+-- 7 of 17 --
+
+Mekanizmaların Formel Karşılıkları
+Yukarıdaki mekanizmaların her biri, birbirinden bağımsız gelişmiş formel alan-
+larda karşılığı bulunan işlemlerdir. Bu, uzman sezgisinin kısmen hesaplanabilir
+olduğunu gösterir.
+Bilgi kuramı
+Bir ölçümün değeri, ölçüm sonrası beklenen belirsizlik azalmasıyla ifade edilebilir.
+Belirsizliğin ölçüsü olarak entropi kullanılır (Shannon, 1948). Hipotezlerin olasılık
+dağılımı p1, . . . , pn ise belirsizlik
+H = −
+n X
+i=1
+pi log2 pi
+biçiminde yazılır. Bir ölçümün bilgi kazancı, ölçüm öncesi entropi ile ölçüm
+sonrası beklenen entropi arasındaki farktır.
+Bu formülasyon, kesme mekanizmasının neden dengeli bölmeyi gerektirdiğini
+açıklar. Entropi, olasılık kütlesi eşit dağıldığında en yüksektir; dolayısıyla bek-
+lenen entropiyi en çok düşüren ölçüm, uzayı olasılık kütlesi açısından ortadan
+bölen ölçümdür.
+Aynı ölçüt, çoklu arıza teşhisinde bir sonraki ölçümün seçilmesi için doğrudan
+kullanılmıştır (de Kleer ve Williams, 1987).
+Bayesçi güncelleme
+Önsel ağırlıklandırmanın formel karşılığı Bayes kuralıdır. Bir H hipotezi ve bir
+E gözlemi için
+P (H | E) = P (E | H) P (H)
+P (E)
+yazılır. Burada iki nicelik ayrılır: hipotezin ölçüm öncesi inanılırlığı olan
+önsel olasılık ve gözlemin o hipotez altındaki olabilirliği. Uzmanın taşıdığı
+bağlama duyarlı ağırlık dağılımı, birinci niceliğe karşılık gelir.
+Bu ayrım pratikte önemlidir; çünkü çok bilgilendirici bir gözlem, önseli çok
+düşük bir hipotezi yine de olası hâle getirmeyebilir. Nadir bir arıza için güçlü
+bir kanıt, sık bir arıza için orta düzey bir kanıttan daha az ağırlık taşıyabilir.
+Deney değeri ve optimal deney tasarımı
+“Hangi ölçüm önce yapılmalı” sorusunun karar kuramındaki karşılığı, bir deneyin
+sağladığı bilginin ölçülmesidir (Lindley, 1956). Karar analizinde aynı soru, bil-
+ginin değeri kavramıyla ele alınır: bir ölçümün değeri, o ölçüm yapıldığında
+verilecek kararın beklenen faydası ile ölçüm yapılmadan verilecek kararın bek-
+lenen faydası arasındaki farktır (Raiffa ve Schlaifer, 1961).
+8
+
+-- 8 of 17 --
+
+Bu çerçeve, maliyet bileşenini doğrudan içerir. Bilginin değeri ölçüm maliyetinden
+küçükse, ölçüm yapılmaması doğru karardır. Uzmanın “buna bakmaya gerek
+yok” yargısı bu hesabın zımni hâlidir.
+Kısıt sağlama
+Kısıt yayılımının formel karşılığı, kısıt sağlama problemlerinde değer kümelerinin
+daraltılmasıdır. Bir değişkenin alabileceği değerler kümesi daraldığında, kısıtlarla
+ona bağlı değişkenlerin kümeleri de daralır ve bu daralma ağ boyunca yayılır.
+˙Işlem, arama başlamadan önce uzayın önemli bir bölümünün elenmesini sağlar.
+Teşhiste bunun karşılığı, gözlemlerin mantıksal sonuçlarının tüketilmesidir:
+belirtinin kapsamı, zamanlaması, tekrarlanabilirliği ve etkilediği kullanıcı kümesi
+birer kısıttır.
+Teşhis edilebilirlik analizi
+Bazı hipotezler, mevcut ölçüm noktalarıyla ilkesel olarak birbirinden ayrılamaz.
+Bunlara ayırt edilemeyen arıza kümeleri denir ve teşhis edilebilirlik analizi bu
+kümeleri sistem tasarlanırken hesaplar.
+Bu, notun geri kalanına önemli bir sınır koyar: hiçbir arama stratejisi,
+ölçüm noktalarının ayıramadığı iki hipotezi ayıramaz. Daraltma probleminin bir
+bölümü çalışma zamanında değil, tasarım zamanında çözülür. Sensör yerleşimi
+bir teşhis kararıdır.
+Sinyal tespit kuramı
+Bir ölçümün sonucu ikili olarak yorumlanıyorsa, yorumun kalitesi tek bir doğruluk
+oranıyla ifade edilemez. Sinyal tespit kuramı iki niceliği ayırır: kişinin veya ci-
+hazın iki durumu ayırt etme gücü ve karar eşiği.
+Ayrım, uzman değerlendirmesinde kritiktir. C ok sayıda anormallik bildiren
+bir teknisyen, gerçekten daha iyi ayırt ettiği için de, karar eşiği düşük olduğu
+için de bu sonucu üretmiş olabilir. ˙Iki durum farklı müdahaleler gerektirir ve
+ayrılmadan yapılan uzman-acemi karşılaştırmaları yorumlanamaz.
+9
+
+-- 9 of 17 --
+
+Uzman ile Acemi Arasındaki Fark
+Farkın nerede olduğu
+Yukarıdaki mekanizmalar, uzmanlık farkının hangi basamaklarda ortaya çıktığını
+belirler.
+• Uzay kurma. Uzman erken ve küçük bir aday kümesi kurar; acemi ya
+çok geniş ya da tek hipotezli bir kümeyle başlar.
+• Önsel dağılım. Uzman hipotezleri ağırlıklı taşır; acemi eşit sayar.
+• Kısıt tüketimi. Uzman ölçüme geçmeden önce eldeki bilgiden çıkarılabilecekleri
+tüketir; acemi ölçüme erken geçer.
+• Ölçüm seçimi. Uzman dengeli bölen ölçümü seçer; acemi en kolay
+yapılan veya en kesin görünen ölçümü seçer.
+• Sonucun yayılması. Uzman bir ölçüm sonucunu nedensel yapı üzerinden
+bir hipotez ailesine yayar; acemi tek hipoteze uygular.
+• Durma kararı. Uzman kalan belirsizlik yeterince düştüğünde durur;
+acemi ya erken durur ya da gereksiz doğrulama yapar.
+Mekanizmanın bilişsel açıklaması
+Bu farkların altında yatan bilişsel yapı, deneyimin örüntü olarak sıkıştırılmasıdır.
+Uzman geçmişte gördüğü binlerce vakayı tek tek hatırlamaz; bunları anlamlı bir-
+imler hâlinde sıkıştırır ve yeni bir durum bu birimlerle eşleştiğinde ilgili aday
+kümesi doğrudan etkinleşir (Chase ve Simon, 1973).
+Zaman baskısı altındaki kararlarda gözlenen davranış da bununla tutarlıdır:
+deneyimli kişiler seçenekleri tek tek karşılaştırmak yerine durumu geçmiş örüntülerle
+eşleştirip makul bir hareket tarzına hızla ulaşır (Klein, 1998). Bu model, uzayın
+daraltılmasının bilinçli bir hesap değil, çoğu zaman tanımaya dayalı bir işlem
+olduğunu gösterir.
+Davranışın hangi bilişsel düzlemde gerçekleştiği de ayrılabilir. Beceri düzeyindeki
+davranış otomatiktir, kural düzeyindeki davranış tanınmış bir duruma bilinen
+bir prosedürün uygulanmasıdır, bilgi düzeyindeki davranış ise tanınmayan du-
+rumda modelden akıl yürütmeyi gerektirir (Rasmussen, 1983). Arama uzayı
+daraltması esas olarak ikinci düzlemde ucuzdur ve üçüncü düzlemde pahalıdır;
+uzmanlık, aynı problemi üçüncü düzlemden ikinciye taşımaktır.
+Ölçüt
+Bu çerçevenin doğrudan bir ölçme sonucu vardır. Teşhis performansı yalnızca
+doğruluk ile ölçülmemelidir; teşhise kadar yapılan ölçüm sayısı bağımsız ve
+daha ayırt edici bir ölçüttür.
+Ölçüt üç nedenle yararlıdır. Birincisi, doğru cevaba ulaşan iki kişiyi ayırır.
+˙Ikincisi, süreci gözlemlenebilir kılar; sonuç değil yol kaydedilir. Üçüncüsü,
+10
+
+-- 10 of 17 --
+
+öğretim için doğrudan geri bildirim üretir: hangi ölçümün gereksiz olduğu ve
+hangi ölçümün atlanabileceği gösterilebilir.
+Ölçütün sınırı, tek başına kullanıldığında bozulmaya açık olmasıdır; bu nokta
+ilerideki bölümde ele alınmaktadır.
+11
+
+-- 11 of 17 --
+
+Öğretim
+Neyin gösterileceği
+Öğretimdeki kritik karar, öğrenciye ne gösterileceğidir. Doğru cevabı göstermek
+arama stratejisi öğretmez.
+Zayıf öğretim, sonucu bildirir: “sorun bağlantı havuzunun tükenmesinden
+kaynaklanıyordu.” Öğrenci bu bilgiyi alır ancak bir sonraki vakada aynı belir-
+tiyle karşılaştığında yalnızca bu tek hipotezi hatırlar.
+Güçlü öğretim, kesme kararını sorar: “ilk hangi ölçümü istersin ve bu ölçüm
+on dört hipotezden kaçını eler?” Ardından öğrencinin seçimi uzmanın seçimiyle
+karşılaştırılır ve fark, elenen hipotez kütlesi üzerinden konuşulur. Öğrencinin
+hatası “yanlış cevap verdin” olarak değil, “arama uzayını şu noktada gereksiz
+geniş bıraktın; şu ölçüm üç hipotezi birden eleyebilirdi” olarak ifade edilir.
+Uzman yolunun çıkarılması
+Öğretimin girdisi, uzmanın izlediği yolun kaydıdır. Bu kaydı çıkarmak için
+geliştirilmiş yapılandırılmış görüşme protokolleri mevcuttur; kritik karar yöntemi,
+bir uzmanı geçmiş bir vaka üzerinde geriye doğru yürütür ve şu noktaları ayrı
+ayrı sorar: ilk ne fark edildi, hangi hipotezler oluştu, hangileri hangi gerekçeyle
+elendi, sonra hangi bilgi istendi, o bilgi hangi ihtimalleri ortadan kaldırdı ve
+hangi noktada teşhisten emin olundu (Klein, Calderwood ve MacGregor, 1989).
+C ok sayıda uzmandan toplandığında ortaya bir arama haritası çıkabilir:
+problem sınıfları, ayırt edici sinyaller, buluşsal kurallar, karar eşikleri, arıza
+örüntüleri ve tanı testleri.
+Bu yöntemin bilinen sınırı, iç gözleme dayanmasıdır. Kişilerin kendi karar
+süreçlerine ilişkin raporları, gerçekte etkili olan etkeni değil makul görünen
+bir gerekçeyi yansıtabilir. Dolayısıyla protokolün çıktısı, davranışsal kayıtla ve
+sonuç verisiyle çapraz kontrol edilmeden tek başına kullanılmamalıdır.
+Vaka tasarımı ve sıralama
+Vakaların seçimi kadar sırası da belirleyicidir. Rastgele toplanmış vaka yığını,
+aynı ayrımı defalarca tekrarlayıp bazı ayrımları hiç göstermeyebilir.
+˙Iyi bir vaka kümesinin taşıması gereken özellikler şunlardır: her vaka en
+az bir ayırt edici karar noktası içermelidir; benzer belirtiyle farklı nedene gi-
+den çiftler bulunmalıdır, çünkü ayırt etme ancak karşıtlıkla öğrenilir; ve nadir
+fakat yüksek sonuçlu vakalar orantısız biçimde temsil edilmelidir, çünkü sahada
+bunlarla karşılaşma sıklığı öğrenmeye yetmez.
+Öğretimin biçimi öğrencinin düzeyine göre değişmelidir. Acemi için tam
+çözümlü örnek keşifsel çalışmadan etkilidir; ancak öğrenci ilerledikçe aynı destek
+performansı düşürmeye başlar (Kalyuga, Ayres, Chandler ve Sweller, 2003).
+Dolayısıyla aynı vaka arşivi, farklı düzeylerde farklı miktarda destekle sunul-
+malıdır.
+12
+
+-- 12 of 17 --
+
+Algısal bileşenin ayrı öğretimi
+Aykırılık odaklı ilerleme, kural öğretimiyle kazandırılamaz; normal repertuarının
+kurulmasını gerektirir. Bu bileşen için ayrı bir yöntem vardır: yoğun ve hızlı
+sınıflandırma tekrarıyla algısal ayırt etme becerisinin geliştirilmesi. Bu yaklaşımın,
+normalde uzun sürede oluşan örüntü tanıma kabiliyetini belirgin biçimde hızlandırdığı
+gösterilmiştir (Kellman ve Garrigan, 2009).
+Pratik karşılığı, öğrenciye açıklama yapmadan çok sayıda normal ve anormal
+örnek gösterip hızlı yargı istemek ve anında geri bildirim vermektir.
+13
+
+-- 13 of 17 --
+
+Başarısızlık Modları ve Sınırlar
+Erken kapanma
+Daraltma kendi başına bir erdem değildir. Yanlış bir önsel dağılımla birleştiğinde
+uzay yanlış yöne daraltılır ve doğru hipotez erken elenirse arama sonuçlanmaz.
+Bu, uzmanların karakteristik hatasıdır ve acemininkinden farklıdır. Acemi
+çok fazla yer arar; uzman hızla daraltır, yanlış bir dala girer ve o daldan
+çıkmakta zorlanır. Tıbbi teşhis hatası çalışmalarında bu örüntü erken kapanma
+olarak adlandırılmış ve en sık görülen bilişsel hata türlerinden biri olarak tanımlanmıştır
+(Croskerry, 2003). Bununla birlikte çalışan yanlılıklar demirleme, doğrulama
+arayışı ve akla gelme kolaylığına göre ağırlıklandırmadır.
+Karşı önlemler tekniğin zorunlu tamamlayıcısıdır:
+• Her hipotez için “hangi kanıt beni bu hipotezden vazgeçirir” sorusunun
+önceden yazılması.
+• Doğrulayıcı değil eleyici ölçüm seçme kuralı (Platt, 1964).
+• Başarısızlığın olmuş varsayılıp nedenlerinin önceden listelendiği ön-mortem
+uygulaması (Klein).
+• Belirli bir ölçüm sayısından sonra teşhis kesinleşmediğinde uzayın yeniden
+kurulması.
+Uzayın eksik kurulması
+Hiçbir daraltma tekniği, listelenmemiş bir hipotezi bulamaz. Bu, tekniğin en
+temel sınırıdır ve tekniğin kendisi tarafından tespit edilemez: doğru cevap uza-
+yda yoksa, bütün ölçümler tutarlı biçimde kalan hipotezleri eler ve süreç sonunda
+ya yanlış bir teşhise ya da hiçbir teşhise varır.
+Uygulanabilir tek karşı önlem, uzayın dışarıdan sınanmasıdır: farklı arka
+plana sahip ikinci bir kişinin bağımsız olarak hipotez üretmesi, veya benzer
+belirtilerin geçmiş kayıtlarından mekanik olarak taranması.
+C oklu neden
+Yukarıdaki mekanizmaların çoğu tek nedenli arıza varsayar. Birden fazla neden
+aynı anda etkin olduğunda eleme mantığı bozulur: bir hipotezi eleyen kanıt,
+aslında iki nedenin birleşik etkisiyle üretilmiş olabilir.
+C oklu arıza durumu ayrı bir formel ele alma gerektirir ve teşhis kuramında
+bağımsız bir problem olarak incelenmiştir (Reiter, 1987; de Kleer ve Williams,
+1987). Pratikte tanınma işareti şudur: her hipotez tek tek elenmiş görünmesine
+rağmen belirti sürüyorsa, tek neden varsayımı sınanmalıdır.
+14
+
+-- 14 of 17 --
+
+Ölçümün kendisinin güvenilmezliği
+Arama, ölçüm sonuçlarının doğru olduğu varsayımına dayanır. Bu varsayım her
+zaman geçerli değildir: sensör kalibrasyonu bozuk olabilir, ölçüm sistemi kendi
+varyansını üretiyor olabilir veya günlük kayıtları eksik olabilir.
+Ölçüm sistemi analizi bu sorunu ayrı bir disiplin olarak ele alır ve gözlenen
+varyansın ne kadarının gerçek sistemden, ne kadarının ölçüm düzeneğinden
+geldiğini ayırır. Teşhis bağlamındaki sonucu şudur: bir ölçüm hipotez elemeden
+önce, ölçümün kendisinin güvenilirliği bilinmelidir.
+Ortam geçerliliği
+En kapsayıcı sınır ortamla ilgilidir. Sinyal ile neden arasındaki ilişki kararlı
+değilse ve geri bildirim gecikmeli veya gürültülüyse, daraltma stratejisi öğrenilemez.
+Uzman sezgisinin ne zaman güvenilir olduğu sorusu doğrudan bu koşula
+bağlanmıştır: sezgi ancak yüksek geçerlilikli ve hızlı geri bildirimli ortamlarda
+oluşur; bu koşulun sağlanmadığı ortamlarda deneyim, kendinden emin fakat
+isabetsiz yargı üretir (Kahneman ve Klein, 2009).
+Bunun pratik sonucu, herhangi bir uzmanlık aktarımı projesinden önce or-
+tamın sınanması gerektiğidir. Ortam elverişli değilse toplanan vaka sayısının
+artırılması sorunu çözmez; yalnızca yanlılığı pekiştirir.
+Ölçütün bozulması
+Teşhise kadar yapılan ölçüm sayısı iyi bir ölçüttür, ancak hedef hâline getir-
+ildiğinde ölçüt olmaktan çıkar. Ölçüm sayısı bir performans hedefi olarak ilan
+edildiğinde optimize edilen şey teşhis kalitesi değil ölçüm sayısı olur; kişiler
+ölçüm yapmadan tahmin etmeye ve emin olmadan durmaya yönelir.
+Bu nedenle ölçüt tek başına değil, teşhis doğruluğu ve tekrar açılan vaka
+oranıyla birlikte kullanılmalıdır.
+15
+
+-- 15 of 17 --
+
+Sonuç
+Uzmanlığın gözlenebilir farkı bilgi miktarında değil arama yolunun uzunluğunda
+ortaya çıkar; dolayısıyla uzmanlığı ölçmek isteyen her düzenleme, sonucu değil
+süreci kaydetmek zorundadır. Bu, teşhis performansı ölçümünde doğrudan bir
+değişiklik gerektirir: doğru teşhis oranının yanına teşhise kadar yapılan ölçüm
+sayısı eklenmelidir.
+Arama uzayı daraltması tek bir yetenek değil, altı ayrı mekanizmanın bileşimidir
+ve bu mekanizmalar farklı öğrenme yolları gerektirir. Kesme ve mekanizma bil-
+gisiyle dal kesme, sistemin nasıl çalıştığına dair açık bilgiye dayanır ve doğrudan
+öğretilebilir. Önsel ağırlıklandırma bağlama özgüdür ve yalnızca o sistemle
+geçirilen süreyle kazanılır. Aykırılık odaklı ilerleme algısaldır ve tekrar yoluyla
+kazanılır. Kısıt yayılımı bir alışkanlıktır ve ölçüme geçmeden önce durmayı
+gerektirir. Yeniden çerçeveleme en zor olanıdır ve doğrudan öğretilebilirliği be-
+lirsizdir. Bu ayrım eğitim tasarımı için pratik bir sonuç doğurur: tek bir vaka
+arşivi bu beş farklı yolu birden besleyemez, her mekanizma için farklı vaka türü
+ve farklı geri bildirim biçimi gerekir.
+Mekanizmaların formel karşılıklarının bulunması, uzman sezgisinin kısmen
+hesaplanabilir olduğunu gösterir; ancak bu, sezginin tümüyle formalize edilebileceği
+anlamına gelmez. Formel yöntemler ölçüm seçimini ve güncellemeyi kapsar;
+hipotez uzayının kurulmasını ve yeniden çerçevelemeyi kapsamaz. Uzayın ku-
+rulması hâlâ büyük ölçüde tanımaya ve alan deneyimine bağlıdır ve bu, otomatik
+teşhis sistemlerinin en kırılgan noktasını oluşturur.
+C erçevenin sınırlılıkları belirgindir. Tek neden varsayımı çok sayıda gerçek
+vakada geçerli değildir. Ayırt edilemeyen hipotez kümeleri, çalışma zamanında
+hiçbir stratejiyle çözülemez ve sensör yerleşimi kararına geri gönderir. Daralt-
+manın kendisi, yanlış önselle birleştiğinde performansı düşürür ve bu hata biçimi
+acemide değil uzmanda görülür. Nihayet, sinyal ile neden arasında kararlı ilişki
+bulunmayan ortamlarda bu becerinin oluşması beklenemez.
+Açık kalan sorular üç başlıkta toplanabilir. Birincisi, bir ortamın uzmanlık
+oluşturmaya elverişli olup olmadığı hangi ölçütle ve hangi veriyle önceden sınanır.
+˙Ikincisi, uzman yolunun çıkarılmasında iç gözlem raporlarının güvenilmezliği
+hangi çapraz kontrol yöntemiyle telafi edilir. Üçüncüsü, yeniden çerçeveleme
+yeteneği öğretilebilir mi, yoksa yalnızca çok sayıda başarısız arama deneyiminin
+yan ürünü müdür.
+C erçevenin dar bir konuya ait görünen bu içeriği, daha geniş bir mühendislik
+ilkesiyle örtüşür. Bir sistemin arızalandığında ayırt edilebilir olması, çalıştığında
+verimli olması kadar bir tasarım özelliğidir. Ölçüm noktalarının yerleşimi, günlük
+kayıtlarının içeriği ve normal davranışın belgelenmiş olması, teşhis anında yapılabilecek
+daraltmanın üst sınırını belirler. Bu nedenle arama uzayı daraltması yalnızca
+bir uzmanlık meselesi değil, aynı zamanda bir tasarım kararıdır.
+Kaynaklar
+• Chase, W. G. ve Simon, H. A. (1973). Perception in Chess. Cognitive
+Psychology, 4(1).
+16
+
+-- 16 of 17 --
+
+• Croskerry, P. (2003). The Importance of Cognitive Errors in Diagnosis
+and Strategies to Minimize Them. Academic Medicine, 78(8).
+• de Kleer, J. ve Williams, B. C. (1987). Diagnosing Multiple Faults. Arti-
+ficial Intelligence, 32(1).
+• Elstein, A. S., Shulman, L. S. ve Sprafka, S. A. (1978). Medical Problem
+Solving: An Analysis of Clinical Reasoning. Harvard University Press.
+• Kahneman, D. ve Klein, G. (2009). Conditions for Intuitive Expertise: A
+Failure to Disagree. American Psychologist, 64(6).
+• Kalyuga, S., Ayres, P., Chandler, P. ve Sweller, J. (2003). The Expertise
+Reversal Effect. Educational Psychologist, 38(1).
+• Kellman, P. J. ve Garrigan, P. (2009). Perceptual Learning and Human
+Expertise. Physics of Life Reviews, 6(2).
+• Klein, G. (1998). Sources of Power: How People Make Decisions. MIT
+Press.
+• Klein, G., Calderwood, R. ve MacGregor, D. (1989). Critical Decision
+Method for Eliciting Knowledge. IEEE Transactions on Systems, Man,
+and Cybernetics, 19(3).
+• Lindley, D. V. (1956). On a Measure of the Information Provided by an
+Experiment. Annals of Mathematical Statistics, 27(4).
+• Newell, A. ve Simon, H. A. (1972). Human Problem Solving. Prentice
+Hall.
+• Platt, J. R. (1964). Strong Inference. Science, 146(3642).
+• Polanyi, M. (1966). The Tacit Dimension. University of Chicago Press.
+• Raiffa, H. ve Schlaifer, R. (1961). Applied Statistical Decision Theory.
+Harvard Business School.
+• Rasmussen, J. (1983). Skills, Rules, and Knowledge. IEEE Transactions
+on Systems, Man, and Cybernetics, 13(3).
+• Reiter, R. (1987). A Theory of Diagnosis from First Principles. Artificial
+Intelligence, 32(1).
+• Shannon, C. E. (1948). A Mathematical Theory of Communication. Bell
+System Technical Journal, 27.
+• Wason, P. C. (1960). On the Failure to Eliminate Hypotheses in a Con-
+ceptual Task. Quarterly Journal of Experimental Psychology, 12(3).
+17
+
+-- 17 of 17 --

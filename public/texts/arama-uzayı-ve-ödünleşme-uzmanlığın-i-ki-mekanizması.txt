@@ -1,0 +1,1826 @@
+Arama Uzayı ve Ödünleşme: Uzmanlığın ˙Iki
+Mekanizması
+ÖFY
+August 2026
+Özet
+Sovyet mühendislik sisteminin tasarım bürosu ile fabrikayı ayrı kurumsal yetenek-
+ler sayan modelidir; Ukrayna bu modelin en büyük mirasçılarından biridir.
+Ancak model tek yönlü bir başarı hikâyesi değildir: tasarım ile üretimin ku-
+rumsal olarak ayrılması, üretilebilirlik geri bildiriminin zayıflamasına ve seri
+üretim varyansının yüksek kalmasına da yol açmıştır. Mühendislik disiplin-
+lerinin ayrıntılı bir kataloğu çıkarıldığında, yüzlerce ayrı alanın az sayıda ortak
+problem çözme hamlesinin türevi olduğu görülmektedir: sınırı önce hesapla-
+mak, bilgiyi öne çekip kararı geciktirmek, yerel optimumu sistem optimumuna
+bağlamak, kaçınılmaz bozulmayı yasaklamak yerine yönlendirmek, arama uzayını
+daraltacak sinyali seçmek, bilgiyi taşıyıcısından ayırmak ya da taşıyıcıyı belgele-
+mek, ve bilginin akmasını sağlayacak teşviği tasarlamak. Uzmanlık, bu ham-
+lelerden ikincisinin ve beşincisinin insandaki karşılığıdır: zımni bilgi, problem
+çözme uzayında arama maliyetini düşüren, deneyimden sıkıştırılmış ve bağlama
+duyarlı bilgidir. Zımni bilginin davranışsal izlerden geri çıkarılması ilkesel olarak
+mümkündür, ancak bu proje uzman sistemlerin bilgi edinimi darboğazı, iç gözlemin
+güvenilmezliği ve düşük geçerlilikli ortamlarda sezginin oluşmaması gibi bilinen
+engellerle sınırlıdır. Son olarak, bilginin sisteme aktarılması kendi kaynağını
+kurutma riski taşır: otomasyon, insana yalnızca en zor ve en nadir durumları
+bırakırken o durumlar için gereken pratiği de elinden alır.
+1
+
+-- 1 of 48 --
+
+Giriş
+Mühendislik disiplinlerinin sayısı ve çeşitliliği, bu disiplinlerin birbirinden bağımsız
+bilgi kümeleri olduğu izlenimini yaratır. Bir yapı mühendisi ile bir derleyici
+tasarımcısının, bir kaynak metalurjisti ile bir uçuş kontrol mühendisinin ortak
+bir dile sahip olmadığı düşünülür. Bu izlenim yanlıştır. Alanların teknik içeriği
+farklıdır, ancak çözdükleri problem yapıları büyük ölçüde tekrar eder ve bu
+tekrar eden yapılar sayılabilir.
+Bu notun konusu iki iç içe sorudur. Birincisi kurumsaldır: karmaşık bir
+teknik ürünü fikirden seri üretime götürme kabiliyeti hangi kurumsal biçimlerde
+örgütlenir ve bu biçimler birbirinden nasıl ayrılır. ˙Ikincisi epistemiktir: bu
+kabiliyetin taşıyıcısı olan bilginin ne kadarı yazılabilir, ne kadarı yalnızca insanda
+yaşar ve yazılamayan kısım hangi mekanizmalarla aktarılır.
+Merkezı terimler şöyle tanımlanır. Açık bilgi (explicit knowledge), ke-
+limelere, kurallara, formüle veya prosedüre dökülebilen bilgidir. Zımni bilgi
+(tacit knowledge), kişinin bildiği ancak tam olarak dile getiremediği bilgidir;
+kavram Michael Polanyi tarafından formüle edilmiştir (Polanyi, 1966). Tasarım
+bürosu (design bureau, Rusça OKB, Opytno-Konstruktorskoye Byuro), ürünü
+tasarlayan ve prototipe götüren, ancak seri üretimi genellikle kendisi yapmayan
+mühendislik kurumudur. Sistem mühendisliği (systems engineering), bir sis-
+temin gereksinimlerini, mimarisini, ödünleşmelerini ve alt sistemler arası bütünleşmesini
+yöneten disiplindir. Dijital ikiz (digital twin), fiziksel bir sistemin gerçek za-
+manlı veriyle beslenen dijital temsilidir.
+Yaygın fakat yanlış bir kabul, tasarım ile üretim arasındaki farkın yalnızca bir
+aşama farkı olduğudur. Bir şeyi bir kez yapabilmek ile onu bin kez aynı kalitede
+üretebilmek farklı problem sınıflarıdır; bu notun kurumsal tartışması büyük
+ölçüde bu ayrım üzerine kurulur. ˙Ikinci bir yanlış kabul, zımni bilginin yeterli
+veri toplandığında açık bilgiye dönüştürülebileceğidir; bu kabulün 1980’lerdeki
+uzman sistemler deneyiminde sınandığı ve kısmen çürütüldüğü gösterilecektir.
+Notun kapsamı, mühendislik kurumlarının örgütlenme biçimleri, mühendislik
+disiplinlerinin bir kataloğu ve zımni bilginin üretimi ile dışsallaştırılmasıdır. Be-
+lirli bir motorun, belirli bir yazılım sisteminin ya da belirli bir ülkenin savunma
+sanayii politikasının teknik ayrıntıları kapsam dışıdır.
+2
+
+-- 2 of 48 --
+
+Ukrayna Örneği: Sovyet Mühendislik Mirası
+˙Ikili Kurumsal Yapı
+Ukrayna’nın havacılık motoru kabiliyeti iki kurum etrafında örgütlenmiştir. Ivchenko-
+Progress ağırlıklı olarak motor tasarım ve geliştirme bürosudur; Motor Sich ise
+üretim, montaj, test ve bakım tarafını üstlenir. Motor Sich’in ürün ailesi turbo-
+fan, turboprop ve turboshaft motorları kapsar; AI-322, D-436, D-18T, AI-450
+ve D-136 bu ailenin örnekleridir.
+Bu yapı, Türkiye’deki yeni ayrıma yüzeysel olarak benzemekle birlikte önemli
+bir noktada ayrılır. Ivchenko-Progress devlet kuruluşudur; Motor Sich uzun
+süre özel sektörde kalmış, C inli Skyrizon’un hisse alma girişimi ve bunu izleyen
+süreçten sonra 2023’te mahkeme kararıyla kamulaştırılmıştır. Yani Ukrayna’daki
+tasarım-üretim ayrımı iki farklı mülkiyet rejimi anlamına geliyordu; Türkiye’deki
+ayrım ise aynı ekosistem içinde gerçekleşmektedir.
+Mirasın Kapsamı
+Sovyetler Birliği dağıldığında, Rusya dışındaki en büyük yüksek teknoloji sanayi
+mirasının önemli bölümü Ukrayna sınırları içinde kalmıştır. Miras tek bir teknoloji
+değil, bütün bir ağır mühendislik ekosistemidir.
+• Havacılık. Antonov tasarım bürosu ile Kyiv ve Harkiv üretim altyapısı.
+Antonov ekibi Sovyet döneminde çok sayıda uçak tipi ve modifikasyonu
+geliştirmiş, AN-2’den ağır nakliye uçaklarına uzanan bir tasarım geleneği
+oluşturmuştur.
+• Gaz türbinleri ve uçak motorları. Zaporijya’daki Motor Sich pistonlu
+motorlardan jet ve gaz türbinli motorlara geçmiş, 1950’lerden itibaren jet
+motoru üretimine başlamış ve geniş bir motor ailesine ulaşmıştır.
+• Roket ve uzay. Dnipro’daki Yuzhmash ve Yuzhnoye ekosistemi 1950’lerde
+sıvı yakıtlı roket motorlarıyla başlamış, Zenit gibi fırlatma sistemlerine
+kadar genişlemiştir.
+• Malzeme ve üretim mühendisliği. Hassas talaşlı imalat, yüksek sıcaklık
+alaşımları, kaynak teknolojileri, büyük ölçekli montaj, ölçüm ve test altyapısı.
+Paton Elektrik Kaynak Enstitüsü bu alanın örneğidir: kaynak teknolo-
+jisini geliştirmek için yapı mekaniği, metalurji, malzeme bilimi, ark fiziği,
+ekipman ve sarf malzemesi birlikte çalışılmıştır.
+• Büyük sistem entegrasyonu. AN-225’in gövde ve kuyruk bölümleri
+Kyiv’de, kanat bölümleri Taşkent’te üretilip birleştirilmiştir. AN-24 ise
+Kyiv, Ulan-Ude ve Irkutsk’ta üretilmiştir. Coğrafi olarak dağıtık üretim,
+tolerans, arayüz, lojistik, dokümantasyon ve konfigürasyon disiplinini zorunlu
+kılar.
+3
+
+-- 3 of 48 --
+
+Bu mirasın asıl içeriği çizimler değildir. Kalan şey insanlar, fabrikalar, test
+altyapısı, süreçler, tedarikçi ağı ve onlarca yıllık zımni bilgidir. Daha kesin bir
+ifadeyle: Ukrayna’ya kalan teknoloji bir motor tasarımı değil, karmaşık fiziksel
+sistemleri fikirden seri üretime götürme kabiliyetidir.
+Mirasın Bugünkü Durumu
+Kabiliyetin “unutulduğu” iddiası doğru değildir; ancak bozulmadan kaldığı id-
+diası da doğru değildir. Sovyet sistemi tek ülke içinde işleyen dev bir ağdı; bir
+motor bir cumhuriyette tasarlanıp parçaları başka bir cumhuriyette üretilebiliyordu.
+Birliğin dağılması bu ağı parçaladı. Bunu yatırım eksikliği, pazar kaybı, tesis-
+lerin eskimesi, 2014 sonrası Rusya ile kopuş ve 2022 sonrası savaş izledi. Zapor-
+ijya cephe hattına yakındır ve tesisler defalarca hedef alınmıştır.
+Buna karşılık mühendislik kabiliyetinin sürdüğüne dair göstergeler vardır.
+Antonov 2025’te bir An-124 modernizasyonunu tamamlamıştır; bu, eski bir
+platform üzerinde sistem entegrasyonu, değişiklik yönetimi, test ve sertifikasyon
+bilgisinin korunduğuna işaret eder. Ivchenko-Progress 2026’da küçük turbojet
+motorların geliştirilmesi ve üretimi için Polonya tarafıyla iş birliği anlaşması
+imzalamıştır.
+Daha ilginç olan, savaş sırasında ortaya çıkan ikinci bir mühendislik mode-
+lidir. Birkaç dev devlet kuruluşunun yanında çok sayıda küçük şirket ve hızlı
+geliştirme ekibi oluşmuştur. Eski model “dev tasarım bürosu, uzun geliştirme,
+büyük fabrika, seri üretim” iken, yeni model “küçük ekip, hızlı prototip, gerçek
+kullanım geri bildirimi, değiştir, tekrar üret” biçimindedir. Bu ikinci model
+özellikle insansız sistemlerde belirgindir.
+Buradan çıkan ayrım genel olarak geçerlidir: motor yapabilmek ile ihtiyaç
+duyulan her motoru yeterli miktarda üretebilmek farklı şeylerdir. Tasarım bil-
+gisi ile seri üretim kapasitesi bağımsız olarak kaybedilebilir ve bağımsız olarak
+yeniden kazanılabilir.
+Mirasın Zayıf Tarafları
+Sovyet modelinin yalnızca güçlü yanlarını aktarmak arşivde yanıltıcı bir kayıt
+bırakır. Modelin bilinen zayıflıkları şunlardır.
+• Tasarım-üretim kopukluğu. Tasarım bürosu ile fabrikanın kurumsal
+olarak ayrılması, üretilebilirlik geri bildiriminin zayıflamasına yol açmıştır.
+Fabrikalar tasarım değişikliğine direnmiş, üretilebilirlik erken tasarım karar-
+larına yeterince girmemiştir. Üretim için tasarım disiplininin formelleşmesi
+büyük ölçüde Batı ve Japon geleneğinde gerçekleşmiştir.
+• Seri üretim varyansı. Sovyet motorlarının overhaul arası süreleri Batı
+muadillerinin belirgin biçimde altında kalmıştır. Tasarım kalitesi ile imalat
+tutarlılığı arasındaki fark bu modelin kalıcı sorunudur.
+• Tersine mühendislik payı. ˙Ilk jet motorlarının bir kısmı Batı tasarımlarının
+kopyalarıdır; bağımsız keşif anlatısı eksiktir.
+4
+
+-- 4 of 48 --
+
+• Baş tasarımcı modelinin kırılganlığı. Teknik otoritenin tek kişide
+toplanması halefiyet sorunu doğurur. Korolev’in ölümünün ardından Sovyet
+ay programının çözülmesi bunun en bilinen örneğidir.
+• Zorlama unsuru. Tupolev ve Korolev dâhil çok sayıda mühendis, sha-
+rashka adı verilen hapishane tasarım bürolarında çalışmıştır. Kurumsal
+modelin bir bölümü gönüllü bir örgütlenme değildir.
+• Maliyet disiplininin yokluğu. Sistem mimarisine ayrılan kaynak yoğunluğunun
+bir nedeni, maliyet kısıtının yumuşak olmasıdır. Model, sert bütçe kısıtı
+altında aynı biçimde çalışmayabilir.
+5
+
+-- 5 of 48 --
+
+Tasarım Bürosu: Bir Karmaşıklık Yönetme Maki-
+nesi
+Tanım ve Konum
+Tasarım bürosu, ürünü hesaplayan, tasarlayan ve prototipe götüren mühendislik
+organizasyonudur. Adındaki “büro” sözcüğü yanıltıcıdır; bu kurumlarda bin-
+lerce mühendis çalışabilir. Bir uçak söz konusu olduğunda tasarım bürosunun
+izlediği akış, gereksinimlerin belirlenmesinden aerodinamik, yapı, motor ente-
+grasyonu ve kontrol sistemlerine, oradan çizimlere, prototipe, teste ve düzeltmeye
+uzanır. Seri üretim genellikle bürodan çıkar ve fabrikalara devredilir.
+Sovyet sisteminde bilinen örnekler Antonov (nakliye uçakları), Mikoyan-
+Gurevich ve Sukhoi (savaş uçakları), Tupolev (bombardıman ve yolcu uçakları),
+Yuzhnoye (füze ve roket) ve Ivchenko-Progress (uçak motoru) bürolarıdır. Bürolar
+arasında belirli ölçüde paralel rekabet bulunuyordu; tek merkezli bir tasarım
+örgütlenmesi söz konusu değildi.
+Kurumsal ayrımı netleştiren üçlü şudur. Araştırma laboratuvarı “yeni bir
+türbin malzemesi mümkün müdür” sorusunu sorar. Tasarım bürosu “bu malze-
+meyle, verilen ağırlık ve yakıt tüketimi sınırları içinde belirli bir güçte motor
+nasıl yapılır” sorusunu sorar. Fabrika “bu tasarım aynı kalitede yılda kaç adet
+üretilebilir” sorusunu sorar. Bunlar üç farklı kurumsal yetenektir.
+Baş Tasarımcının ˙Işlevi
+Baş tasarımcı (chief designer ) her alanı en iyi bilen kişi değildir; sistemde hangi
+ödünleşmenin kabul edileceğine karar veren kişidir. Bir savaş uçağı geliştirilirken
+aerodinamik ekibi sürüklemeyi düşüren bir kanat geometrisi önerir, yapı ekibi bu
+geometrinin ağırlığı artırdığını söyler, motor ekibi hava girişinin yeterli akış ver-
+mediğini bildirir, aviyonik ekip radar için hacim ister, bakım ekibi bir parçanın
+gömülü yerleşiminin saha değişim süresini uzattığını belirtir. Her ekip kendi
+ölçütü açısından haklı olabilir; hepsinin önerisi aynı anda uygulanamaz.
+Baş tasarımcının elindeki iki temel araç şunlardır.
+Gereksinim bütçeleri. Ağırlık, güç, maliyet, hacim, soğutma ve menzil
+gibi toplam kaynaklar alt sistemlere pay edilir. Örneğin on ton boş ağırlık hedefi
+gövde, motor, aviyonik, iniş takımı ve yakıt sistemi arasında bölüştürülür. Bir
+alt sistem ek pay talep ettiğinde bu artık o alt sistemin sorunu değildir; talebin
+karşılanacağı kaynağın nereden alınacağı bir sistem kararıdır.
+Arayüz denetimi. Motor ile hava girişi, radar ile güç sistemi, yazılım ile
+sensör, kanat ile gövde arasındaki sınırlar kritik risk noktalarıdır. Baş tasarımcı
+bu sınırların ilgili iki ekip tarafından kendi aralarında çözülmesine bırakılmasını
+değil, sistem gereksinimlerine uygunluğunun izlenmesini sağlar.
+˙Işlevin özü, yerel optimumların sistem optimumunu bozmasını engellemektir.
+Uzmanlar parçayı optimize eder; baş tasarımcı ödünleşmeleri optimize eder;
+sistem mühendisliği bu kararların ölçülebilir altyapısını kurar.
+Bu rolün Sovyet sistemine özgü olmadığını belirtmek gerekir. Toyota’nın
+shusa olarak adlandırılan baş mühendis sistemi aynı işlevi görür, ancak otoritesi
+6
+
+-- 6 of 48 --
+
+kaynak tahsisinden değil ürün konseptinin sahipliğinden ve ikna gücünden gelir.
+Tasarım Bürosundan C ıkan ˙Ilkeler
+Testin tasarımın içinde olması
+“ Önce tasarımı bitir, sonra test et” yaklaşımı reddedilir. Döngü şu biçimdedir:
+tasarla, test et, ölç, nedeni bul, tasarımı değiştir, tekrar test et.
+Bir motorun ilk kompresör tasarımı yapıldıktan sonra rig testine sokulur.
+Belirli devirde aşırı titreşim gözlenirse sonuç “test başarısız” olarak kaydedilip
+sona bırakılmaz; kanat geometrisi, yataklama, malzeme veya kontrol mantığı
+değiştirilir. Benzer biçimde kanat prototipi yük testinde beklenenden fazla es-
+erse yapı yeniden tasarlanır; hava girişinde akış ayrılması gözlenirse geometri
+değişir; elektronik kutu aşırı ısınırsa soğutma mimarisi değişir; bakım testinde
+parçaya erişim zorsa yerleşim değişir.
+Buradaki kritik ayrım testin iki farklı işlevidir. Sondaki test bir doğrulamadır:
+ürün şartnameyi karşılıyor mu. Tasarım içindeki test bir öğrenme aracıdır:
+tasarlanan şey gerçekte nasıl davranıyor ve ne değiştirilmelidir. En değerli test
+genellikle ürünün sonunda yapılan değil, tasarım kararının hâlâ ucuz biçimde
+değiştirilebildiği erken testtir.
+Bu ilkenin genelleştirilmiş hâli, ürün geliştirme literatüründe “tasarımın içine
+gömme” ailesi olarak adlandırılabilecek bir prensipler kümesi üretir: güvenlik,
+emniyet, güvenilirlik, bakılabilirlik, üretilebilirlik, test edilebilirlik ve gözlemlenebilirlik.
+Bunların ortak formülasyonu, işlevsel olmayan gereksinimlerin birinci sınıf tasarım
+kısıtı sayılmasıdır. Değerlendirme ölçütü yalnızca “çalışıyor mu” değil, aynı za-
+manda güvenli mi, test edilebilir mi, üretilebilir mi, bakılabilir mi, gözlemlenebilir
+mi ve hata verdiğinde kontrollü mü sorularıdır.
+Üretilebilirliğin erken düşünülmesi
+Laboratuvarda çalışan bir tasarım fabrikada bir dizi farklı problemle karşılaşır:
+tolerans aşırı dar olduğu için hurda oranı yüksektir; malzeme zor işlendiği için
+parça başına süre uzundur; geometri karmaşık olduğu için özel ve pahalı tezgâh
+gerekir; montaj ustanın elle ince ayarına bağlı olduğu için kalite kişiden kişiye
+değişir; ölçüm ve test hattı darboğaz oluşturur; kritik bir malzemeyi yalnızca tek
+tedarikçi sağlar; yirmi parçadan oluşan tasarım altı parçayla yapılabilecekken
+bölünmüştür; bir parçanın takılabilmesi için önce çok sayıda başka parçanın
+takılması gerekir.
+Prototip “bu fiziksel olarak çalışıyor mu” sorusunu cevaplar. Üretim mühendisliği
+“bu sürekli, ekonomik, tekrarlanabilir, hızlı ve kabul edilebilir hata oranıyla
+üretilebilir mi” sorusunu sorar. Aynı performansı veren iki tasarımdan verimi
+yüzde yetmiş olan ile yüzde doksan dokuz olan, teknik olarak eşdeğer fakat
+sanayi açısından karşılaştırılamaz niteliktedir.
+Bu nedenle iyi bir tasarım bürosu çizim aşamasındayken üretim tarafına şu
+soruları sorar: hangi yöntemle üretilecek, bu tolerans gerçekten tutturulabiliyor
+mu, parça başına süre nedir, hurda oranı ne olur, nasıl ölçülecek, robot monte
+7
+
+-- 7 of 48 --
+
+edebilir mi, teknisyen yanlış takabilir mi, parça sayısı azaltılabilir mi. Disi-
+plinin adı üretim için tasarım (Design for Manufacturing, DFM); montaj da
+dâhil edildiğinde üretim ve montaj için tasarım (Design for Manufacturing and
+Assembly, DFMA) olur.
+Genel ilke şudur: bir ürünün tasarımı yalnızca nasıl çalışacağını değil, nasıl
+üretileceğini, test edileceğini, kullanılacağını ve bakım göreceğini de belirler.
+C alışan prototip ile sanayileşmiş ürün arasındaki mesafenin kaynağı budur.
+Arayüz mühendisliği
+Büyük sistemlerde arızalar çoğunlukla parçaların içinde değil, iki parçanın birleştiği
+yerde ortaya çıkar. Motor kendi başına kusursuz, gövde kendi başına kusursuz
+olabilir; motor gövdeye bağlandığında titreşim aktarımı, bağlantı noktası yükü,
+hava girişi akışı ve egzoz ısısı sorunları çıkabilir. Yazılımda karşılığı, iki servisin
+ayrı ayrı testlerden geçmesine rağmen uygulama programlama arayüzü sözleşmesinin
+uyuşmaması, zamanlama varsayımlarının farklı olması veya veri biçimlerinin
+ayrışmasıdır.
+Bir arayüzde tanımlanması gerekenler şunlardır: ne gönderiliyor, ne alınıyor,
+hangi voltaj, basınç veya veri biçimi kullanılıyor, fiziksel bağlantı nasıl, tol-
+eranslar ne, zamanlama ne ve hata durumunda davranış ne olacak. Elektrik
+ile aviyonik arasındaki arayüzde “yirmi sekiz volt veriliyor” ifadesi yetersizdir;
+voltaj aralığı, maksimum akım, geçici aşırı gerilim, elektromanyetik gürültü,
+konnektör tipi, pin dizilimi, topraklama ve hata hâlindeki davranış da tanımlanmalıdır.
+Bu nedenle sistem mühendisliğinde arayüz kontrol dokümanı (Interface Con-
+trol Document, ICD) ayrı ve resmı bir belge türüdür. Temel ilke, parçaları
+tasarlamanın yetmediği, parçaların birbirleriyle yaptığı anlaşmaların da tasar-
+lanması gerektiğidir. Karmaşıklık arttıkça entegrasyon riski artar: yüz iyi alt
+sistem varsa soru artık bu alt sistemlerin iyi olup olmadığı değil, birbirleriyle
+doğru iletişim kurup kurmadığıdır.
+Konfigürasyon yönetimi
+Konfigürasyon yönetimi (configuration management), hangi ürünün tam olarak
+hangi bileşen sürümlerinden oluştuğunun kaydedilmesidir. Karmaşık bir ürün
+geliştirilirken sürekli değişiklik yapılır: bir kapak çatladığı için ikinci sürümü
+çıkar, yazılımda hata bulunduğu için sürüm yükselir, bir sensör başka bir sensörle
+değiştirilir, bir çizim testten sonra revize edilir.
+“Yedi numaralı prototip titreşim testini geçti” ifadesi, bu prototipin hangi
+motoru, hangi yazılım sürümünü, hangi çizim revizyonunu, hangi malzeme par-
+tisini ve hangi sensörü içerdiği ve testin hangi ayarlarla yapıldığı bilinmediğinde
+değersizdir; çünkü aynı ürünün yeniden üretilip aynı sonucun alınıp alınamayacağı
+bilinmez.
+Kurulan bağ şudur: ürün kimliği, parça sürümleri, çizimler, yazılım, değişiklikler
+ve test sonuçları birbirine bağlanır. Örnek bir kayıt, belirli bir prototip uçak
+için motor seri numarasını, motor kontrol yazılımı sürümünü, kanat çizim re-
+vizyonunu, radar yazılım derlemesini ve test konfigürasyonunu birlikte tutar.
+8
+
+-- 8 of 48 --
+
+Yazılım tarafındaki benzetme aydınlatıcıdır: sürüm kontrol sistemi hangi
+kaydın hangi koda karşılık geldiğini söyler; konfigürasyon yönetimi hangi uçağın
+hangi parçalardan, çizimlerden, yazılımdan ve testlerden oluştuğunu söyler. Kri-
+tik nokta, sürümlemenin tek başına yetmemesidir; değişikliğin neden yapıldığı
+ve hangi sonuçlara yol açtığı da bağlanmalıdır. Sürüm kontrolü, izlenebilirlik,
+değişiklik denetimi ve ürün kimliği birleştiğinde konfigürasyon yönetimi ortaya
+çıkar.
+9
+
+-- 9 of 48 --
+
+Mühendislik Modellerinin Karşılaştırması
+Aşağıdaki ayrımlar ulusal karakter iddiaları değildir; tarih içinde oluşmuş ku-
+rumsal örgütlenme modelleridir ve aynı ülkede birden fazla model bulunabilir.
+Ayrım noktası “hangi teknolojiyi biliyorlar” değil, “mühendisliği nasıl örgütlüyorlar
+ve hangi aşamayı kurumsal üstünlüğe dönüştürüyorlar” sorusudur.
+Model Ana soru Güçlü taraf
+Sovyet Bu büyük teknik görev nasıl
+gerçekleştirilir?
+Sistem mimarisi, uzman bürolar,
+baş tasarımcı
+ABD En iyi teknoloji nasıl bulunup en-
+tegre edilir?
+Araştırma ekosistemi, rekabet,
+formel sistem mühendisliği
+Almanya Bu nasıl kusursuza yakın ve
+sürekli üretilir?
+Proses, kalite, üretim mühendisliği
+Fransa Kritik sistemde ulusal
+bağımsızlık nasıl kurulur?
+Devlet koordinasyonu, elit teknik
+kurumlar, uzun programlar
+Japonya Aynı işi her seferinde nasıl daha
+iyi yaparız?
+Baş mühendis, kümeye dayalı
+tasarım, sürekli iyileştirme
+˙Israil Kullanıcının problemi ne kadar
+hızlı çözülür?
+Kısa gerçeklik geri besleme döngüsü
+C in Bu nasıl öğrenilir, yerlileştirilir
+ve ölçeklenir?
+Öğrenme, tedarik zinciri, ölçek, it-
+erasyon
+Sovyet modeli
+Modelin çekirdeği deneysel tasarım bürosudur. ˙Ileri sistemlerin tasarımı ve pro-
+totiplenmesi uzman bürolarda yoğunlaşırken fabrikalar üretime odaklanabilir.
+Baş tasarımcı teknik bütünlüğü taşıyan güçlü bir figürdür; Korolev’in resmı
+görev unvanının doğrudan bu olması modelin karakteristik örneğidir. Akış
+araştırma enstitüsünden tasarım bürosuna, oradan prototip ve teste, ardından
+fabrikaya ve seri üretime uzanır.
+Modelin ayırt edici yeteneği, çok büyük ve karmaşık bir fiziksel mühendislik
+problemini uzman kurumlara bölüp yeniden tek sistem hâlinde birleştirmektir.
+ABD modeli
+Baş mühendis, test disiplini ve konfigürasyon yönetimi bu modelde de mevcut-
+tur; bunlar Sovyet sistemine özgü değildir. Fark örgütlenmenin dağıtıklığındadır:
+üniversite, ulusal laboratuvar, devlet kurumu, ana yüklenici, çok sayıda tedarikçi
+ve girişim aynı teknoloji programında buluşur. Bütünü birleştiren disiplin formel
+sistem mühendisliğidir; alt sistem ekiplerine gereksinimler ve mimari dağıtılır,
+arayüzlerin ve bütünleşmiş ürünün gereksinimleri karşılaması izlenir.
+Kısaca, Sovyet modelinin “güçlü tasarım bürosu ve güçlü baş tasarımcı” vur-
+gusuna karşılık Amerikan modeli “güçlü ekosistem, formel sistem mühendisliği
+ve yüklenici ağı” vurgusu taşır.
+10
+
+-- 10 of 48 --
+
+Alman modeli
+Sorulan soru “çalışıyor mu” noktasında bırakılmaz; “bu on beş yıl boyunca,
+toleranslar bozulmadan, yüksek kalitede ve ekonomik biçimde nasıl üretilir”
+biçimini alır. Modelin taşıyıcıları uzmanlaşmış orta ölçekli üretici şirketler
+ve uygulamalı araştırmayı sanayiye bağlayan araştırma altyapısıdır. Kaba bir
+soyutlamayla Sovyet modeli ürünün sistem mimarisine, Alman modeli ürünün
+prosesine ve tekrar üretilebilirliğine yoğunlaşır.
+Fransız modeli
+Fransa’nın modeli devlet-mühendislik programı odaklıdır ve Sovyet modeline
+diğerlerinden daha yakındır. Elit teknik kadro geleneği ve devletin havacılık,
+füze ve nükleer gibi stratejik alanlarda doğrudan kapasite inşa etmesi belirleyi-
+cidir. Sovyet modelinden ayrıldığı nokta, bu yapının piyasa ekonomisi, ihracat
+ve uluslararası ortaklıklarla birlikte sürdürülebilmesidir.
+Japon modeli
+Toyota’nın baş mühendis sistemi, kümeye dayalı eşzamanlı mühendislik ve sürekli
+iyileştirme pratikleri bu modelin çekirdeğidir. Ayırt edici tarafı, öğrenmenin
+bireysel değil süreçsel olarak kurumsallaştırılmasıdır: standart iş, A3 raporlama,
+yerinde gözlem ve yapılandırılmış özeleştiri toplantıları zımni bilginin aktarımını
+takvimlenmiş bir ritüele dönüştürür.
+˙Israil modeli
+Sovyet modelinin neredeyse karşıt ucundadır. Sovyet akışı gereksinimden tasarım
+bürosuna, uzun bir mühendislik programına, teste ve üretime uzanırken, ˙Israil’de
+görülen akış operasyonel problemden mühendise, prototipe, kullanıcı geri bildirim-
+ine ve değişikliğe uzanır. Gücü kısa geri besleme döngüsündedir. Sınırı ise
+şudur: hızlı iterasyon, jet motoru çekirdeği gibi uzun olgunlaşma süresi ve de-
+rin malzeme birikimi gerektiren alanlarda tek başına yeterli değildir; ˙Israil bu
+alanda kendi motor çekirdeğini geliştirmemiştir.
+C in modeli
+C in birden fazla modelden bileşen almıştır: devlet koordinasyonu Sovyet ve
+Fransız tarafına, üretim ekosistemi Alman ve Japon mantığına, piyasa rekabeti
+Amerikan tarafına yakındır. Ayırt edici özelliği, dev ölçekli sanayi ekosistemini
+bizzat bir öğrenme aracı olarak kullanmasıdır. Döngü şu biçimdedir: al, incele,
+öğren, üret, ölçekle, hata bul, iyileştir, yerlileştir, yeniden ölçekle.
+Bu modelin sınırını gösteren en net vaka havacılık motorudur. C in ölçek ve
+tedarik zinciri açısından dünya lideri konumundayken kendi turbofan program-
+ları onlarca yıl almış, özellikle türbin sıcak kısmındaki tek kristal döküm ve süper
+alaşım metalurjisinde uzun süre tıkanmıştır. Ölçeğin her tür bilgiyi üretmediği,
+11
+
+-- 11 of 48 --
+
+bazı bilgi türlerinin ölçekten bağımsız olarak zaman ve zımni birikim gerektirdiği
+buradan görülür.
+Ortak çekirdek
+Modellerin altında ortak bir akış vardır: gereksinim, modelleme, mimari, ödünleşme,
+prototip, test, üretim, kalite ve geri besleme. Fark, hangi aşamanın kurumsal
+üstünlüğe dönüştürüldüğündedir.
+12
+
+-- 12 of 48 --
+
+Mühendislik Disiplinlerinin Kataloğu
+Aşağıdaki katalog, her disiplini ayırt eden çekirdek hamleye göre düzenlenmiştir.
+C ekirdek hamle, o disiplinin “şimdiye kadar şu yapılıyordu, bunun yerine şu
+yapılmalı” biçiminde ifade edilebilecek kurucu iddiasıdır.
+Tasarım kararının mimarisi
+• Eşzamanlı mühendislik (concurrent engineering). Ürünü sırayla de-
+partmandan departmana geçirmek yerine mekanik, elektronik, yazılım,
+üretim, test, bakım, maliyet ve sistem mühendisliğinin aynı anda bir-
+likte tasarlaması. Bir insansız hava aracının gövdesi çizilirken üretim
+mühendisi kalıp maliyetini, elektronikçi anten gölgelenmesini, bakımcı mo-
+tora erişimi, testçi sensör yerleşimini aynı masada bildirir. Terim 1986
+tarihli bir savunma tedarik raporunda formüle edilmiştir (IDA Report R-
+338, 1986). “Eşzamanlı” rastgele paralellik değil, ortak gereksinimler ve
+arayüzler üzerinden senkronize paralellik anlamına gelir.
+• Kümeye dayalı eşzamanlı mühendislik (set-based concurrent engi-
+neering). Tek bir tasarıma erken yakınsamak yerine birden fazla tasarım
+kümesini paralel taşımak ve geç daraltmak. Toyota’nın ürün geliştirme
+pratiğinden çıkarılmış ve Batı’daki nokta tabanlı eşzamanlı mühendislikle
+karşıtlık içinde formüle edilmiştir (Ward, Liker, Cristiano ve Sobek, 1995).
+Kararı geciktirmenin maliyet değil opsiyon değeri olduğu iddiası taşır.
+• Aksiyomatik tasarım (axiomatic design). ˙Iyi tasarımın matematiksel
+bir ölçütü olduğu iddiası. ˙Işlevsel gereksinimler ile tasarım parametreleri
+arasındaki matris köşegen olmalı, yani bir parametrenin değiştirilmesi tek
+bir işlevi etkilemelidir; kuplaj kötü tasarımın göstergesidir (Suh, 1990).
+• TRIZ (Rusça kısaltmayla buluşsal problem çözme kuramı). Ödünleşmeyi
+optimize etmek yerine çelişkiyi ortadan kaldırmak. Kırk buluş prensibi ve
+çelişki matrisi çok sayıda patentin sistematik taranmasından çıkarılmıştır
+(Altshuller). Yöntem, buluş yapmanın kendisini sistematikleştirme den-
+emesidir ve bu yönüyle zımni yaratıcılığın arşivden çıkarılması projesinin
+erken bir örneğidir.
+• Tasarım yapı matrisi (Design Structure Matrix, DSM). Sistemi kutu-ok
+şeması yerine kare bağımlılık matrisi olarak modellemek. Matris kümelendiğinde
+modüller, üçgenleştirildiğinde doğru iş sırası, köşegen üstü elemanlarda
+kaçınılmaz iterasyon döngüleri görünür hâle gelir (Steward, 1981; Eppinger
+ve Browning, 2012).
+• C ok disiplinli tasarım optimizasyonu (Multidisciplinary Design Op-
+timization, MDO). Aerodinamik, yapı ve kontrolü ayrı ayrı optimize edip
+sonra uzlaştırmak yerine kuplajlı sistemi tek seferde optimize etmek. Baş
+tasarımcının ödünleşme işinin kısmen matematikleştirilmesidir.
+13
+
+-- 13 of 48 --
+
+• Modülerlik kuramı (modularity). Modülerliğin bir düzen tercihi değil
+opsiyon üretme mekanizması olduğu iddiası; görünür tasarım kuralları
+donduğunda gizli parametreler bağımsız evrilebilir ve her modül bir gerçek
+opsiyona dönüşür (Baldwin ve Clark, 2000).
+• Tasarım esnekliği ve gerçek opsiyonlar (flexibility in engineering de-
+sign). Belirsizliği tahminle yenmeye çalışmak yerine tasarıma anahtar koy-
+mak: genişletilebilir temel, ayrılabilir modül, yedek kanal. Bugün maliyet,
+yarın opsiyon (de Neufville ve Scholtes, 2011).
+• Sistem mimarlığı (systems architecting). Sistem mühendisliğinin ölçülemeyen
+tarafını inkâr etmek yerine buluşsal kural olarak kodlamak. Rechtin çok
+sayıda mimari sezgiyi derlemiştir; bu yönüyle çalışma, zımni bilgiyi doğrudan
+yakalama girişiminin klasik bir örneğidir (Rechtin, 1991).
+Belirsizlik, varyans ve modele güven
+• Gürbüz tasarım (robust design, Taguchi yöntemleri). Toleransı daralt-
+mak pahalı olduğundan tasarımı gürültüye duyarsız kılmak. Parametre
+tasarımı ile tolerans tasarımını ayırır ve kalite kaybı fonksiyonu kavramını
+getirir.
+• Deney tasarımı (Design of Experiments, DOE). Teste ne zaman gir-
+ileceğini değil hangi deneyin yapılacağını tasarlamak: faktöriyel tasarım,
+kesirli faktöriyel, tepki yüzeyi yöntemi. Yöntemin istatistiksel temeli tarla
+denemelerinin gürültülü ve tekrarlanamaz ortamında geliştirilmiştir (Fisher,
+1935).
+• ˙Istatistiksel proses kontrolü (statistical process control ). Ortak neden
+ile özel neden ayrımı. Her sapmaya müdahale etmek varyansı azaltmaz,
+artırır; Deming’in huni deneyi bunu gösterir (Shewhart, 1931; Deming,
+1986).
+• Ölçüm sistemi analizi (Measurement Systems Analysis, Gage R&R).
+Parçayı ölçmeden önce ölçüm sistemini ölçmek. Gözlenen varyansın ne
+kadarının gerçek parça varyansı, ne kadarının cihaz ve operatör kaynaklı
+olduğu ayrılır; birçok “proses kararsız” vakası aslında ölçüm kararsızlığıdır.
+• Metroloji ve izlenebilirlik zinciri. Hiçbir ölçüm mutlak değildir; her
+cihaz ulusal standarda uzanan bir kalibrasyon zincirine bağlanır ve her
+halkada belirsizlik birikir. Bir sayının anlamı, onu üreten zincirin belge-
+lenmişliği kadardır.
+• Doğrulama, geçerleme ve belirsizlik niceleme (Verification, Vali-
+dation and Uncertainty Quantification, VVUQ). Simülasyonun sonucunu
+değil sonuca ne kadar güvenilebileceğini hesaplamak. Doğrulama denklem-
+lerin doğru çözülüp çözülmediğini, geçerleme doğru denklemlerin seçilip
+seçilmediğini, belirsizlik niceleme girdi belirsizliğinin çıktıya nasıl yayıldığını
+sorar.
+14
+
+-- 14 of 48 --
+
+• Duyarlılık analizi (sensitivity analysis). Yüzlerce parametreden hangi-
+lerinin gerçekten belirleyici olduğunu sistematik olarak ayırmak. Baş
+tasarımcının “neye dikkat etmeli” sezgisinin hesaplanabilir karşılığıdır.
+• Vekil ve indirgenmiş mertebeli modelleme (surrogate modeling, reduced-
+order modeling). Pahalı simülasyonu çalıştırmak yerine onun ucuz bir
+yaklaşımını öğrenip optimizasyonu bunun üzerinde yapmak. C ok disiplinli
+optimizasyonu pratikte mümkün kılan tekniktir.
+• Uç değer kuramı (extreme value theory). Tasarım yükünü ortalamaya
+değil aşırı değer istatistiğine dayandırmak. Yüz yıllık taşkın kavramı bir
+olasılık ifadesidir; ağır kuyruklu dağılımlarda ortalama ve varyansla plan-
+lama yapmak yanıltıcıdır.
+• Bayesçi güncelleme ve hiyerarşik modelleme. Az veriyle karar ver-
+mek gerektiğinde önsel bilgi ile veriyi formel olarak birleştirmek ve benzer
+birimlerden bilgi ödünç almak. Nadir olayların analizinde tek pratik yol
+budur.
+• Nedensel çıkarım (causal inference). Gözlemsel veriden nedenselliğe
+geçmek için nedensel bir yapı varsayımının gerekli olduğu; korelasyondan
+nedenselliğin veri miktarıyla değil ancak yapı varsayımıyla çıkarılabildiği
+(Pearl, 2009).
+Arıza, emniyet ve yapısal bütünlük
+• Sistem kuramına dayalı tehlike analizi (System-Theoretic Process
+Analysis, STPA). Kazayı arıza zinciri değil kontrol problemi olarak mod-
+ellemek. Hiçbir bileşen bozulmadan da sistem kaza yapabilir; çünkü kon-
+trol yapısı yanlış kısıt uygulamış olabilir. Yazılım ve organizasyon kaynaklı
+kazaları klasik arıza ağacı analizinin yakalayamadığı yerde yakalar (Leve-
+son, 2011).
+• Güvenilirlik merkezli bakım (Reliability-Centered Maintenance, RCM).
+Uçak bileşenlerinin yalnızca küçük bir bölümünün yaşa bağlı arıza gösterdiği,
+kalanında planlı overhaul’un arıza oranını artırdığı bulgusu üzerine kurulu
+bakım mantığı (Nowlan ve Heap, 1978).
+• Olasılıksal risk değerlendirmesi (Probabilistic Risk Assessment, PRA).
+“Güvenli mi” sorusunu ikili olmaktan çıkarıp olasılık dağılımına çevirmek.
+Nükleer sektörde geliştirilmiş, oradan diğer alanlara yayılmıştır.
+• Arıza fiziği (physics of failure). Arızayı istatistikle değil mekanizmayla
+modellemek: elektromigrasyon, termal yorulma, dendritik büyüme. ˙Ilgili
+test yaklaşımı yüksek hızlandırılmış ömür testidir; şartname sınırında test
+etmek yerine kırılana kadar zorlayıp sınırı öğrenmek esastır.
+• Ortak nedenli arıza analizi (common-cause failure analysis). Yedekliliğin
+ancak bağımsızlık varsa işe yaradığı. Üç kanal aynı yazılımı koşuyorsa,
+15
+
+-- 15 of 48 --
+
+aynı fabrikadan geliyorsa veya aynı kablo demetinden geçiyorsa yedeklilik
+görünüştedir.
+• Hataya dayanıklı hesaplama (fault-tolerant computing). Bileşenin bozul-
+masını değil yanlış davranmasını varsaymak. Sessizce duran bileşen kolay,
+yanlış ama makul veri üreten bileşen yıkıcıdır. Buradan çıkan mimariler
+çok sürümlü programlama, oylayıcılar ve Bizans hatasına dayanıklı pro-
+tokollerdir (Avizienis).
+• Hasar toleransı (damage tolerance). C atlağın olmayacağı varsayımını
+bırakıp çatlağın zaten var olduğunu kabul etmek ve kritik boyuta büyüme
+süresine göre muayene aralığı belirlemek. Emniyetli ömür ve emniyetli
+arıza yaklaşımlarından sonra gelen üçüncü yapısal felsefedir ve arızayı
+tasarımın içine alır.
+• Kırılma mekaniği (fracture mechanics). Dayanımı yalnızca gerilmeyle
+değil kusur boyutuyla ifade etmek; malzemenin ne kadar büyük bir kusuru
+taşıyabildiğini sormak.
+• Tahribatsız muayene ve tespit olasılığı (Probability of Detection,
+POD). Muayenenin ikili değil olasılıksal olduğu; her yöntemin bir tespit
+olasılığı eğrisi bulunduğu. Hasar toleransı ancak tespit olasılığı bilindiğinde
+çalışır ve buradan doğrudan bir tasarım kısıtı çıkar: muayene edilebilirlik.
+• Kapasite tasarımı (capacity design). Yapının nerede kırılacağını tasarımcının
+seçmesi; sünek elemanları kasıtlı olarak zayıf, gevrek elemanları güçlü ya-
+parak çöküşü kontrollü ve haber verir hâle getirmek.
+• Korozyon mühendisliği ve katodik koruma. Bozulmayı önlenecek
+bir kaza değil hızı hesaplanabilir bir süreç olarak ele almak; kurban anot
+yerleştirerek bozulmayı istenen yere yönlendirmek.
+• Triboloji. Sürtünme ve aşınmayı malzeme özelliği değil bir sistem olarak
+ele almak: yüzey, karşı yüzey, yağlayıcı, yük, sıcaklık ve kirlilik birlikte.
+Yatak, dişli ve conta arızalarının büyük bölümü bu alandadır.
+• ˙Insan güvenilirliği analizi (Human Reliability Analysis). ˙Insan hatasını
+arıza ağacına sayısal olarak dâhil etmek.
+• Dayanıklılık mühendisliği (resilience engineering). Sistemin hasar veya
+beklenmedik durum karşısında işlevini sürdürebilmesi ya da toparlanabilmesi;
+yalnızca arızayı önlemekten farklı olarak arıza sonrası davranışı tasarla-
+mak.
+• Yazılım yenileme (software rejuvenation). Yazılımın da yaşlandığını
+kabul edip bellek sızıntısı ve biriken durum nedeniyle arızayı beklemeden
+proaktif olarak yenilemek.
+16
+
+-- 16 of 48 --
+
+Kanıt, sertifikasyon ve bağımsız otorite
+• Uçuşa elverişlilik ve sertifikasyon mühendisliği. Sistemin yalnızca
+çalışması değil, çalıştığının bir düzenleyiciye kanıtlanabilir olması. Tasarım
+güvence seviyeleri, izlenebilirlik zorunlulukları ve emniyet argümanı yapıları
+bu çerçeveden gelir. Kanıt üretimi tasarımın bir çıktısı hâline gelir.
+• Formel yöntemler (formal methods). Test etmek yerine ispatlamak:
+model denetimi, teorem ispatlayıcılar, biçimsel belirtim dilleri. Bazı özelliklerin
+test edilerek değil ancak ispatlanarak garanti edilebileceğini gösterir ve
+“test tasarımın içindedir” ilkesinin sınırını çizer.
+• Performansa dayalı tasarım (performance-based design). Yönetmeliğe
+uymak yerine hedefin sağlandığını ispatlamak. Yangın güvenliği mühendisliğinde
+tahliye süresinin yangının gelişme süresiyle karşılaştırılarak gösterilmesi
+tipik örnektir.
+• Bağımsız doğrulama ve geçerleme (Independent Verification and Val-
+idation, IV&V). Kritik yazılımın, geliştiriciden bütçe ve raporlama hattı
+olarak ayrık bir kurum tarafından doğrulanması.
+• Bağımsız test ve değerlendirme. Geliştirme testi ile kullanıcının
+gerçek koşullarda yaptığı operasyonel testin ayrı kurumlara verilmesi. Sis-
+temi geliştiren ekibin kendi sistemini nihai olarak sınamaması ilkesi, Sovyet
+modeliyle karşılaştırıldığında en belirgin kurumsal farklardan biridir.
+• Personel kalifikasyonu. Bazı proseslerde parametre değil operatörün
+eli kalite değişkenidir; bu nedenle ürün değil kişi kalifiye edilir. Kay-
+nak mühendisliğinde prosedür kalifikasyonu ile kaynakçı kalifikasyonu ayrı
+ayrı yapılır ve süresi geçtiğinde düşer. Bu, zımni bilginin resmı olarak
+muhasebeleştirildiği ender kurumsal çözümlerden biridir: bilgi çıkarılmaz,
+taşıyıcısı belgelenir.
+Sanayileşme, üretim ve proses
+• Yeni ürün devreye alma (New Product Introduction). Prototipten seri
+üretime geçişi kapılara bölünmüş ayrı bir mühendislik programı olarak ele
+almak: mühendislik doğrulama, tasarım doğrulama ve üretim doğrulama
+aşamaları.
+• Verim mühendisliği (yield engineering). Verimi bir sonuç değil tasarım
+değişkeni saymak. Proses penceresi, kritik alan analizi ve yedeklilik yarı
+iletken üretiminde tasarım kararlarıdır.
+• Poka-yoke ve jidoka. Operatörü eğitmek yerine yanlış yapmayı fiziksel
+olarak imkânsız kılmak; ve hata görüldüğünde hattı durdurma yetkisini en
+alt seviyeye vermek. Bu, zımni bilgi aktarımı probleminin en zarif biçimde
+atlanmasıdır: bilgi aktarılmaz, parçanın geometrisine gömülür.
+17
+
+-- 17 of 48 --
+
+• Değişkenlik riski yönetimi ve anahtar özellikler (key characteris-
+tics). Her boyutu sıkı tutmaya çalışmak yerine işlevi gerçekten belirleyen
+az sayıda boyutu tanımlayıp varyans bütçesini oraya harcamak.
+• Geometrik boyutlandırma ve toleranslandırma (Geometric Dimen-
+sioning and Tolerancing, GD&T) ve model tabanlı tanım. Parçayı ölçüyle
+değil işlevsel niyetle boyutlandırmak; referans yüzey yapısı montajın nasıl
+oturacağını tanımlar. Model tabanlı tanım teknik resmi kaldırıp üç boyutlu
+modeli tek yetkili tanım hâline getirir.
+• ˙Ileri ürün kalite planlaması ve üretim parçası onay süreci (APQP,
+PPAP ). Tedarikçiden gelen parçayı muayene etmek yerine parçayı üreten
+prosesi onaylamak; numune değil proses yeterliliği, kontrol planı ve ölçüm
+sistemi denetlenir.
+• Eskime yönetimi (Diminishing Manufacturing Sources and Material
+Shortages). Otuz yıl hizmet verecek bir platformu, üç yıl üretilecek bileşenlerle
+inşa etme probleminin ayrı bir mühendislik konusu hâline gelmesi.
+• ˙Inşa edilebilirlik ve modülerleştirme (constructability). Tasarımı sa-
+hada kurulabilirliğe göre optimize etmek; büyük tesisleri sahada değil fab-
+rikada modül hâlinde imal edip sahaya taşımak.
+• Devreye alma mühendisliği (commissioning). Tesisin “bitmiş” olması
+ile “çalışıyor” olması arasındaki ayrı mühendislik aşaması: sistem sistem
+devreye alma, performans testi, garanti testi.
+• Ölçek büyütme ve pilot tesis. Laboratuvar reaktörü ile ticari reaktörün
+aynı denklemi çözmediği; karışma, ısı transferi ve kalış süresi dağılımının
+ölçekle değiştiği. Kimya mühendisliği prototip-üretim boşluğunu zorunlu
+bir pilot ölçek basamağı olarak kurumsallaştırmıştır.
+• Proses sistem mühendisliği (process systems engineering). Tesisin
+tasarımını, kontrolünü ve işletmesini ayrı problemler olarak değil birlikte
+optimize etmek; tasarımın kontrol edilebilirliği belirlediği fikri buradan
+gelir.
+• Katmanlı imalat kalifikasyonu. Parçayı değil makine, toz partisi,
+parametre seti ve konum kombinasyonunu kalifiye etmek; aynı dosyanın
+farklı makinede farklı parça verdiği gerçeği.
+• Bütünleşik hesaplamalı malzeme mühendisliği (Integrated Compu-
+tational Materials Engineering, ICME). Malzemeyi deneme yanılmayla
+keşfetmek yerine ölçekler arası hesaplamak: atomistik yapıdan mikroyapıya,
+oradan makro özelliğe ve prosese.
+• Yönlü katılaştırma ve tek kristal döküm. Alaşımı değiştirmeden
+tane sınırlarını ortadan kaldırarak sürünme dayanımını artırmak. Türbin
+sıcak kısmındaki kabiliyet farkının büyük bölümü buradadır ve bilginin
+18
+
+-- 18 of 48 --
+
+çoğu zımnidir: fırın sıcaklık profilleri, mum model, seramik kabuk kimyası,
+döküm sonrası ısıl işlem.
+• Kaplama mühendisliği (termal bariyer kaplamalar). Malzemeyi dayanıklı
+yapmak yerine sıcaklıktan izole etmek. Türbin giriş sıcaklığındaki artışın
+önemli bölümü alaşımdan değil kaplama ve soğutma deliği mimarisinden
+gelir.
+• Gemi inşasında ağırlık ve denge mühendisliği ile blok montaj.
+Ağırlık merkezinin inşaat boyunca sürekli izlenen bir bütçe kalemi olması;
+ve blok içinde boru, kablo ve iskelenin önceden kurulup blokların sonradan
+kaynaklanması. Üretim için tasarımın en büyük ölçekli uygulamasıdır.
+Akış, kısıt ve program yönetimi
+• Ürün geliştirme akışı (product development flow ). Ürün geliştirmeyi
+proje planı değil kuyruk sistemi olarak modellemek; görünmeyen maliyetin
+verimsizlik değil kuyrukta bekleyen iş olduğu ve yüksek kaynak kullanımı
+hedeflemenin çevrim süresini artırdığı. Öncelik için kullanılan ölçüt gecikme
+maliyetidir (Reinertsen, 2009).
+• Kısıtlar kuramı (Theory of Constraints). Sistemin çıktısını tek bir
+kısıtın belirlediği; kısıt olmayan yerde yapılan iyileştirmenin değer üretmediği,
+hatta stok yarattığı (Goldratt, 1984).
+• Kuyruk kuramı ve Little yasası. Kapasiteyi ortalamayla değil varyans
+ve kullanım oranıyla düşünmek; kullanım oranı yüzde yüze yaklaşırken
+bekleme süresinin doğrusal değil patlayarak arttığı.
+• Güvenilirlik büyümesi (reliability growth, test-analiz-düzelt döngüsü).
+Güvenilirliğin tasarlanmadığı, büyütüldüğü ve büyüme eğrisinin öngörülebilir
+olduğu; dolayısıyla belirli bir hedefe ulaşmak için gereken test saatinin
+önceden kestirilebildiği. Motor geliştirme takvimlerinin altındaki matem-
+atiktir.
+• Teknoloji hazırlık seviyeleri (Technology Readiness Level ) ve üretim
+hazırlık seviyeleri. Olgunluğu ikili bir yargıdan çıkarıp ölçeklenmiş bir dile
+çevirmek ve programa kapı kuralları koymak. Olgunlaşmamış teknolojiyi
+ana geliştirme programına erken sokan projelerin sistematik olarak maliyet
+ve takvim aştığı bulgusu bu çerçeveyi doğurmuştur.
+• Maliyetin bağımsız değişken sayılması (Cost as an Independent Vari-
+able) ve hedef maliyete göre tasarım. Maliyeti tasarımın sonucu değil
+gereksinimi yapmak; hedef maliyeti sabitleyip kabiliyeti değişken bırakmak.
+• Aşamalı yetenek tedariki (incremental acquisition, blok yapısı). Tek
+seferde eksiksiz sistem teslim etmek yerine yetenek bloklarına bölmek ve
+her bloğu gerçek kullanıcıya vermek.
+19
+
+-- 19 of 48 --
+
+• Referans sınıf tahmini (reference class forecasting). Proje süresini
+içeriden tahmin etmek yerine benzer projelerin dağılımına bakmak; plan-
+lama yanlılığının sistematik ve yaygın olduğu bulgusuna dayanır (Flyvb-
+jerg).
+• Karar analizi (decision analysis). Kararın kalitesini sonuçtan değil sürecinden
+ölçmek: doğru çerçeve, doğru alternatifler, doğru bilgi, doğru tercihler ve
+doğru mantık. ˙Iyi kararın kötü sonuç verebileceği ayrımı, post-mortem
+çalışmalarının en çok ihtiyaç duyduğu ayrımdır.
+• Yedek parça ve envanter kuramı. Yedek parça sayısını arıza oranına
+göre değil sistem hazırlık oranını en yükseğe çıkaracak biçimde dağıtmak;
+aynı bütçeyle hangi parçadan kaç adet, hangi depoda tutulacağını hesapla-
+mak (Sherbrooke, METRIC modeli).
+• Onarım seviyesi analizi ve bütünleşik lojistik destek. Bir bileşen
+arızalandığında kimin, nerede ve hangi seviyede onaracağı sorusunun tasarım
+aşamasında cevaplanması; bu kararın modülerliği, konnektör tipini ve
+teşhis mimarisini belirlemesi.
+Ölçek, fizik ve kaynak
+• Boyut analizi ve benzerlik kuramı. Sistemi çözmeden önce kaç bağımsız
+boyutsuz sayıya indirgenebileceğini bulmak. Sonucu Reynolds, Mach veya
+Nusselt gibi boyutsuz sayılar cinsinden yazmak, ölçeği farklı çok sayıda
+deneyi tek eğriye toplar (Buckingham, 1914). Rüzgâr tünelinde küçük
+modelin gerçek uçağı temsil edebilmesinin dayanağı budur ve “simülasyon
+gerçeği ne kadar taşır” sorusunun en eski cevabıdır.
+• Ölçek yasaları. Bir sistem büyüdüğünde hangi büyüklüklerin doğrusal,
+hangilerinin kareyle, hangilerinin küple değiştiğini ayırmak. Prototipten
+seri ürüne ve laboratuvardan fabrikaya geçişte bozulan şeylerin fiziksel
+açıklaması buradadır.
+• Mikro ölçek etkileri. Ölçek küçüldükçe baskın kuvvetin değişmesi;
+yerçekimi ve eylemsizliğin önemsizleşip yüzey gerilimi ile moleküller arası
+kuvvetlerin belirleyici hâle gelmesi. Makro sezgiyle tasarlanan mekanizma
+mikro ölçekte çalışmaz.
+• Kriyojenik mühendislik. Düşük sıcaklıkta malzeme özelliklerinin ve
+yalıtım probleminin tümüyle değişmesi; kaçınılmaz ısı sızıntısının bir tasarım
+bütçesi hâline gelmesi ve gevrekleşmenin kritik bir arıza modu olması.
+• Vakum teknolojisi. Boşluğun pasif olmadığı; yüzeyden gaz çıkışı, sızıntı
+ve pompalama hızının ayrı bir denge oluşturduğu ve malzeme seçiminin
+buna göre yapıldığı.
+20
+
+-- 20 of 48 --
+
+• Ekserji analizi ve pinch teknolojisi. Enerjiyi miktarıyla değil kalite-
+siyle muhasebeleştirmek; ve bir tesisteki ısı entegrasyonunu tek tek ekip-
+man iyileştirerek değil sistemin termodinamik minimum ihtiyacını hesapla-
+yarak tasarlamak (Linnhoff). Bu, iyileştirmeye başlamadan önce üst sınırı
+bilmenin kanonik örneğidir.
+• Güç sistemlerinde N-1 kriteri. Sistemi normal koşulda değil herhangi
+bir tek elemanı kaybetmiş hâlinde çalışacak biçimde işletmek; ve çığ etk-
+isiyle yayılan arızayı ayrı bir analiz konusu yapmak.
+• Trafik akış kuramı. Kapasite eklemenin akışı iyileştirmeyebileceği; be-
+lirli koşullarda yol eklemenin toplam seyahat süresini artırabileceği (Braess
+paradoksu). Yerel iyileştirmenin sistemi bozması ilkesinin en temiz matem-
+atiksel örneğidir.
+Teşhis ve sinyal seçimi
+• Teşhis edilebilirlik analizi (diagnosability). Sistemi tasarlarken yalnızca
+çalışıp çalışmayacağını değil arızalandığında ayırt edilebilir olup olmay-
+acağını sormak. Sensör yerleşimi, ayırt edilemeyen arıza kümeleri ve min-
+imum sensör seti formel olarak hesaplanır. Bu, teşhis kabiliyetini uzmanın
+belleğinden çıkarıp mimariye gömme girişimidir.
+• Kestirim ve sağlık yönetimi (Prognostics and Health Management).
+Arızayı tespit etmekten kalan faydalı ömrü belirsizlik aralığıyla birlikte
+tahmin etmeye geçmek. Anomali, teşhis, kestirim ve karar zinciri bu alanın
+çekirdeğidir.
+• Optimal deney tasarımı ve bilginin değeri (value of information).
+“Hangi test önce yapılmalı” sorusunu sezgiye bırakmayıp beklenen bilgi
+kazancını hesaplamak ve maliyete bölmek. Bayesçi deney tasarımı, aktif
+öğrenme ve sıralı olasılık oranı testi bu ailedendir. Arama uzayını daraltma
+fikrinin formel karşılığıdır.
+• Kök neden analizi. Basit neden zinciri sormak yerine nedensel bir grafik
+kurmak ve her düğüm için kanıt talep etmek; teşhisin tek nedene değil
+birden çok gerekli koşulun kesişimine ulaşması.
+• Riske dayalı muayene (risk-based inspection). Her ekipmanı eşit sıklıkta
+muayene etmek yerine arıza olasılığı ile sonucunun çarpımına göre önceliklendirmek.
+Arama uzayını daraltmanın bakım planlamasındaki karşılığıdır.
+• Yağ analizi ve tribo-teşhis. Makineyi açmadan, içindeki yağın taşıdığı
+parçacıkların morfolojisinden hangi bileşenin ve hangi mekanizmayla aşındığını
+çıkarmak. Doğru sinyalin, düşük maliyetle çok sayıda hipotezi eleyen
+sinyal olduğunun en somut örneğidir.
+21
+
+-- 21 of 48 --
+
+• Titreşim analizi ve modal test. Yapının doğal frekanslarını ölçüp
+modelle karşılaştırmak; ve belirli devirlerde çalışmayı yasaklayan kritik
+hız kavramını tasarıma dâhil etmek.
+• Akustik ve gürültü-titreşim-sertlik mühendisliği. Gürültüyü tek
+bir ölçüm olarak değil kaynak, yol ve alıcı olarak ayrıştırmak ve her yolun
+katkısını nicelemek. “Sorun burada görünüyor ama kaynağı başka yerde”
+probleminin formel çözümüdür.
+• Elektromanyetik uyumluluk (Electromagnetic Compatibility, EMC).
+Her devrenin hem verici hem alıcı olduğu; kablo yönlendirmesi, topraklama
+mimarisi ve kalkanlamanın erken tasarım kararları olduğu. Arayüz riskinin
+en sinsi hâlidir, çünkü bu arayüzler hiçbir şemada çizilmez.
+• Adli mühendislik ve kırık yüzey analizi (fractography). Elde yalnızca
+kalıntı varken ne olduğunu ispat standardında yeniden kurmak; kırık yüzeyinden
+çatlağın başlangıç noktasını ve büyüme yönünü okumak. Zımni teşhis be-
+cerisinin en yapılandırılmış ve referans atlaslarla desteklenmiş hâlidir.
+Zaman, hesap ve yazılım
+• Zaman tetiklemeli mimari (time-triggered architecture). Gerçek za-
+manlı sistemde olayları beklemek yerine zamanı mimarinin temeli yap-
+mak; her işlemin küresel saatte önceden belirlenmiş anda gerçekleşmesi.
+Esneklikten vazgeçilerek doğrulanabilirlik satın alınır (Kopetz).
+• Gerçek zamanlı çizelgeleme analizi. “Yeterince hızlı görünüyor” ölçütünü
+reddedip son tarihe uyulacağını matematiksel olarak ispatlamak; en kötü
+durum yürütme süresi analizi ve öncelik ataması (Liu ve Layland, 1973).
+• Saat dağıtımı ve zamanlama kapanışı. Dijital tasarımda asıl prob-
+lemin mantık değil sinyalin zamanında varması olduğu; kurulum ve tutma
+süreleri, saat kayması ve saat alanı geçişleri. Arayüz riskinin en katı fiziksel
+örneğidir.
+• Sayısal analiz ve koşullanma. Doğru algoritmanın kötü koşullanmış
+problemde yanlış cevap verebileceği; yuvarlama hatası birikimi ve geriye
+doğru hata analizi. Model doğru olsa bile hesabın yanlış olabileceğini
+gösterir.
+• Ağ üretimi (mesh generation). Sonlu elemanlar analizinin kalitesinin
+çözücüde değil ağda belirlendiği; ve ağ üretiminin büyük ölçüde otomatikleştirilememiş
+olduğu.
+• Performans mühendisliği ve çatı modeli (roofline model ). Kodun
+yavaşlığını yalnızca profil çıkararak değil teorik üst sınırla karşılaştırarak
+anlamak: bellek bant genişliğine mi yoksa hesap gücüne mi çarpıldığı.
+Pinch analizinin yazılımdaki karşılığıdır.
+22
+
+-- 22 of 48 --
+
+• Tip sistemleri ve dil tasarımı. Hatayı test ederek bulmak yerine temsil
+edilemez kılmak. Sistem tasarımına çevirisi şudur: kötü durumu yasak-
+layan bir yapı, kötü durumu denetleyen bir yapıdan daha güçlüdür.
+• Site güvenilirlik mühendisliği (Site Reliability Engineering). Güvenilirliği
+ikili hedef olmaktan çıkarıp hata bütçesine çevirmek; yüzde yüz çalışma
+süresi hedefinin yanlış hedef olduğu ve inovasyon ile güvenilirlik arasında
+açık bir değişim birimi kurulması gerektiği.
+• Kaos mühendisliği (chaos engineering). Arızayı beklemek yerine kon-
+trollü biçimde üretmek ve hipotezi gerçek çalışma ortamında sınamak.
+• Test edilebilirlik için tasarım (Design for Testability). Donanımda
+test edilebilirliği bir erdem değil, silikon alanı harcayan bir tasarım kararı
+yapmak: tarama zincirleri, standart test arayüzleri, dâhili kendi kendini
+test yapıları.
+• Mahremiyet mühendisliği. Mahremiyeti politika metni olmaktan çıkarıp
+matematiksel garanti hâline getirmek: diferansiyel mahremiyet, k-anonimlik.
+• Yeniden üretilebilir hesaplama. Sonucun bit düzeyinde tekrarlan-
+abilirliğini garanti etmek veya aralık aritmetiğiyle sonucun sınırlarını hesapla-
+mak.
+Düşman varsayan mühendislik
+• Tehdit modelleme (threat modeling). Sistemi ortalama koşula değil onu
+bozmaya çalışan zeki bir aktöre karşı tasarlamak. Güvenilirlikten ayrıldığı
+nokta şudur: doğa rastgeledir, düşman ise en zayıf noktayı arar; dolayısıyla
+ortalama değil en kötü durum, olasılık değil saldırı maliyeti düşünülür.
+• Kerckhoffs ilkesi ve ispatlanabilir güvenlik. Gizliliği tasarımın gi-
+zliliğine değil yalnızca anahtara dayandırmak ve güvenliği bir varsayıma
+indirgeyerek ispatlamak.
+• Hayatta kalabilirlik mühendisliği (survivability). Vurulmayı önlemekle
+yetinmeyip vurulduğunda ne olacağını tasarlamak. Vurulma olasılığı ile
+vurulunca kaybetme olasılığı ayrı ayrı düşürülür: yedekli hidrolik hat,
+ayrık yakıt tankı, kritik bileşenlerin birbirinden uzağa yerleştirilmesi. Alanın
+kurucu hikâyesi, dönen uçaklardaki hasar dağılımının seçim yanlılığı ne-
+deniyle tersine yorumlanması gerektiğinin fark edilmesidir (Wald’a atfedilen
+analiz; yayımlanmış anlatım için Mangel ve Samaniego, 1984).
+• Kurcalamaya karşı koruma (anti-tamper ). Ürün ele geçtiğinde bile
+tersine mühendisliği maliyetli kılmak; ihracat yapan bir savunma sanayii
+için giderek merkezıleşen bir tasarım konusu.
+23
+
+-- 23 of 48 --
+
+Sistemin ötesindeki sistem
+• Kurumsal mimari çerçeveleri (enterprise architecture). Bir organiza-
+syonun süreçlerini, verisini, uygulamalarını ve teknolojisini birbirine bağlı
+görünümler olarak modellemek; farklı paydaşlar için farklı görünümler
+üretip aralarındaki tutarlılığı zorlamak.
+• Sistemler sistemi mühendisliği (system of systems engineering). Alt
+sistemlerin operasyonel ve yönetimsel olarak bağımsız olduğu durumu ayrı
+bir problem sınıfı saymak. Klasik sistem mühendisliğinin varsayımları
+burada çöker: tek sahip yoktur, tek bütçe yoktur ve alt sistemler izin
+alınmadan değişir.
+• Birlikte çalışabilirlik mühendisliği (interoperability engineering). Bir-
+likte çalışabilirliği niyet değil ölçülebilir seviye yapmak; aynı veriyi taşıyabilmek,
+aynı anlamı taşıyabilmek ve aynı işlemi paylaşabilmek farklı basamak-
+lardır.
+• Teknoloji transferi ve denkleştirme mühendisliği (offset). Teknoloji
+alımını satın alma değil kabiliyet inşa programı olarak tasarlamak; neyin
+lisansla, neyin ortak üretimle, neyin ortak geliştirmeyle alınacağı ve hangi
+aşamada zımni bilginin gerçekten aktığı.
+• Standart rekabeti ve platform stratejisi. Teknik üstünlüğün değil
+kurulu taban ve tamamlayıcıların belirleyici olduğu. Motor alanına çevirisi
+şudur: bir motor mimarisi ancak etrafında yeterli platform ve tedarik
+zinciri oluşursa yaşar.
+• Terminoloji ve ontoloji mühendisliği. Farklı ekiplerin aynı sözcüğe
+farklı anlam yüklemesinin bir iletişim sorunu değil entegrasyon riski olduğu;
+bu nedenle terminolojinin formel olarak tasarlandığı.
+• Standardizasyon. Standardın bir kısıt değil kolektif zımni bilginin sıkıştırılmış
+hâli olduğu; bir bağlantı elemanının diş standardının arkasında çok sayıda
+arızanın öğrenilmiş dersini taşıdığı. Standartların nasıl yazıldığı ve revize
+edildiği başlı başına bir disiplindir ve kurumsal hafızanın en eski biçimidir.
+˙Insan, arayüz ve otomasyon
+• ˙Insan sistem entegrasyonu ve insan faktörleri. ˙Insanı sonradan
+eklenen bir kullanıcı olarak değil, kapasitesi ve sınırları tasarıma giren bir
+bileşen olarak ele almak.
+• Ergonomi ve biyomekanik. ˙Insan bedenini bir kısıt olarak niceleştirip
+iş istasyonunu buna göre tasarlamak; montaj için tasarımın söylemediği
+tamamlayıcı yarı.
+• Ekolojik arayüz tasarımı (ecological interface design). Operatöre veri
+göstermek yerine sistemin kısıtlarını göstermek. Doğru tasarlanmış arayüz
+24
+
+-- 24 of 48 --
+
+uzmanın zihnindeki modeli ekrana taşır; bu yönüyle zımni bilgiyi çıkarmanın
+alternatifidir: bilgiyi gereksiz kılan bir görselleştirme kurmak (Rasmussen
+ve Vicente).
+• Beceri, kural ve bilgi temelli davranış çerçevesi (skill-rule-knowledge).
+Operatör davranışının üç farklı bilişsel düzlemde gerçekleştiği ve hata
+türlerinin bu düzlemlere göre ayrıştığı (Rasmussen, 1983).
+• Otomasyon sürprizi ve mod karışıklığı. Otomasyonun hata oranını
+düşürürken yeni bir hata sınıfı ürettiği: operatörün sistemin hangi modda
+olduğunu yanlış bilmesi (Sarter ve Woods).
+• Otomasyonun ironileri. Otomasyonun kolay işleri alıp insana yalnızca
+en zor ve en seyrek durumları bıraktığı, ancak o durumlar için gereken
+pratiği de elinden aldığı (Bainbridge, 1983).
+• Ekip kaynak yönetimi (Crew Resource Management). Kaza verisinden
+çıkan bulgu üzerine kurulmuştur: kazaların önemli bölümü bireysel be-
+ceri eksikliğinden değil hiyerarşi ve iletişimden kaynaklanır. C özüm bireyi
+daha çok eğitmek değil ekibin karar mimarisini değiştirmektir.
+• Sinyal tespit kuramı (signal detection theory). Tespit performansını
+tek bir doğruluk sayısına indirmemek; duyarlılık ile karar eşiğini ayırmak.
+Bir teknisyenin çok sayıda arıza yakalaması, daha iyi ayırt ettiği için mi
+yoksa eşiği düşük olduğu için mi olduğu ayrılmadan yorumlanamaz.
+• Psikofizik. Algının fiziksel uyaranla doğrusal değil logaritmik ilişkili
+olduğu ve fark edilebilir en küçük değişimin ölçülebilir bir eşik olduğu.
+Anomali sezgisinin nicel tabanıdır.
+• Duyusal analiz mühendisliği. ˙Insan algısını öznel bırakmayıp eğitilmiş
+panel ve istatistiksel protokolle ölçülebilir hâle getirmek. Otomotivde kapı
+sesi ve titreşim hissi bu yolla şartnameye dönüştürülür. Bu, zımni algıyı
+metne çevirmek yerine kalibre edilmiş insanı ölçüm zincirinin resmı parçası
+yapmaktır.
+Bilgi, hafıza ve kurumsal öğrenme
+• Tasarım gerekçesi kaydı (design rationale capture). Kararın kendisini
+değil gerekçesini kaydetmek: hangi seçenekler vardı, hangi ölçütle elendi,
+hangi varsayım altında. Yöntemin kökeni sorun temelli bilgi sistemleri ge-
+leneğine uzanır ve mühendislikte kararların yapılandırılmış kaydı biçiminde
+uygulanmıştır.
+• Bilgi tabanlı mühendislik (knowledge-based engineering). Mühendislik
+kurallarını dokümana değil çalıştırılabilir parametrik modele gömmek; böylece
+kural, tasarım aracının içinde otomatik olarak uygulanır.
+25
+
+-- 25 of 48 --
+
+• Kaza inceleme kurumu modeli. Kaza soruşturmasını cezalandırmadan
+tümüyle ayırmak, bulguları kamuya açmak ve tek amacı öğrenme yapmak.
+Havacılığın güvenlik kaydının kaynağı büyük ölçüde bu kurumsal ayrımdır.
+• Gönüllü olay raporlama sistemleri. Kazaya dönüşmemiş olayları
+toplamak ve raporlayana bağışıklık vermek. Nadir olay probleminin çözümüdür:
+nadir kaza beklenemiyorsa sık yaşanan ramak kala olayları toplanır.
+• Adil kültür (just culture). Cezasızlık ile sorumsuzluk arasında açık bir
+çizgi çizmek; insan hatası, riskli davranış ve pervasızlığın farklı muamele
+görmesi. Ayrım yapılmadığında ya raporlama durur ya disiplin çöker.
+• Eylem sonrası değerlendirme (after action review ). Öğrenmeyi gönüllülüğe
+bırakmayıp takvimlenmiş, yapılandırılmış ve rütbeden arındırılmış bir ritüele
+dönüştürmek: ne olması gerekiyordu, ne oldu, neden fark var, bir dahakine
+ne değişecek.
+• Endüstri mühendisliği ve hareket-zaman etüdü. Zanaatkârın bildiğini
+gözlemleyerek dışarı çıkarmak ve standartlaştırmak. Gilbreth’lerin film
+kaydı ve hareket birimleriyle yaptığı çalışma, davranış kaydından bilgi
+çıkarma fikrinin bir asır önceki versiyonudur. Öğretici tarafı sınırlarıdır:
+standardizasyon uyum ve motivasyonu bozmuş, zanaatın en değerli kısmı
+ölçülememiştir.
+• Arşiv bilimi. Her şeyi saklamanın arşiv olmadığı; neyin saklanacağına
+karar vermenin ve kaydın kökenini korumanın arşivin asıl işi olduğu. Kaydın
+düzeninin de bilgi taşıdığı ilkesi buna eklenir.
+• Kayıt yönetimi ve saklama süreleri. Kaydın ne kadar süre tutulacağı
+ve ne zaman yok edileceğinin bir tasarım kararı olduğu; veri toplamanın
+aynı zamanda bir yükümlülük yarattığı.
+• C ok yönlü sınıflandırma (faceted classification). Tek hiyerarşinin her
+şeyi sınıflandıramayacağı ve çok eksenli sınıflandırmanın gerektiği (Ran-
+ganathan). Arıza taksonomisi probleminin çözüm geleneği buradadır.
+• Arıza kodlama ve taksonomi standartları. Arıza verisini toplamadan
+önce arızanın nasıl adlandırılacağını standartlaştırmak; aksi hâlde kayıtlar
+karşılaştırılamaz.
+• Dijital koruma. Dijital kaydın kâğıttan kırılgan olduğu ve biçimin uzun
+vadeli okunabilirliğinin aktif olarak planlanması gerektiği. Uzun ömürlü
+bir platformun dijital izinin, o izi tutan yazılımdan uzun ömürlü olması
+zorunludur.
+• Süreç madenciliği (process mining). Olay günlüklerinden gerçek süreç
+davranışını çıkarmak; tasarlanan süreç ile fiilen yürütülen süreç arasındaki
+farkı ölçmek (van der Aalst).
+26
+
+-- 26 of 48 --
+
+• Özümseme kapasitesi (absorptive capacity). Dışarıdan bilgi almanın
+alıcının kendi araştırma-geliştirme kapasitesine bağlı olduğu; teknoloji trans-
+ferinin ancak zaten benzer işi yapan bir kuruma aktığı (Cohen ve Levinthal,
+1990).
+• Yapışkan bilgi (sticky information). Bazı bilginin bulunduğu yerden
+taşınırken maliyetli olduğu ve bu nedenle inovasyonun yerinin bilginin
+yapışkan olduğu yer tarafından belirlendiği (von Hippel, 1994).
+• Kurum içi bilgi transferi engelleri. Aynı şirketin iki biriminde bile
+en iyi uygulamanın kendiliğinden akmadığı; engellerin nedensel belirsi-
+zlik, alıcının motivasyonu ve ilişkinin zayıflığı gibi ölçülebilir bileşenlere
+ayrıldığı (Szulanski, 1996).
+Yaşam döngüsü, çevre ve düzenleme
+• Yaşam döngüsü mühendisliği. Yalnızca geliştirmeyi değil üretim, op-
+erasyon, bakım, yükseltme ve kullanım sonunu birlikte optimize etmek.
+• Değer mühendisliği (value engineering). Gereken işlevi daha düşük
+yaşam döngüsü maliyetiyle sağlamanın yollarını sistematik olarak aramak.
+• Maliyet mühendisliği ve yaşam döngüsü maliyetlemesi. Satın alma
+fiyatı yerine bütün ömür maliyetini bir mühendislik değişkeni yapmak.
+• Yaşam döngüsü değerlendirmesi (Life Cycle Assessment). Ürünün
+etkisini kullanım aşamasıyla sınırlamayıp hammaddeden bertarafa kadar
+nicelemek.
+• Sökülebilirlik için tasarım (design for disassembly). Montaj kolaylığından
+farklı olarak sökülebilirliği tasarlamak: malzeme ayrılabilirliği, tersine
+çevrilebilir bağlantı, işaretleme.
+• Düzenleme odaklı tasarım. Düzenlemeyi dışsal bir engel değil tasarım
+girdisi olarak ele almak ve mümkünse standardı biçimlendiren taraf olmak;
+standart yazan tarafın yıllar sonra pazar erişimini belirlediği.
+Biyolojik ve değişken ortam
+• Biyoproses mühendisliği. Ürünün kendisini değil onu üreten canlıyı ve
+ortamını tasarlamak ve kontrol etmek. C ıktı varyansı doğal olarak yüksek
+olduğundan istatistiksel proses kontrolü ve partiler arası tutarlılık burada
+zorunluluktur.
+• Tasarımla kalite ve proses analitik teknolojisi (Quality by Design).
+Kaliteyi son üründe test ederek değil tasarım uzayını tanımlayarak ve pros-
+esi gerçek zamanlı ölçerek garanti etmek. Kritik kalite özellikleri ile kritik
+proses parametreleri eşlenir ve düzenleyiciye “bu uzay içinde kalındığında
+kalite sağlanır” argümanı sunulur. Bu, “tasarımın içine gömme” ailesinin
+düzenleyici tarafından zorunlu kılındığı ender örnektir.
+27
+
+-- 27 of 48 --
+
+• Sentetik biyolojide standardizasyon girişimi. Biyolojiyi keşif değil
+mühendislik disiplini yapma denemesi: parça kütüphanesi, standart arayüz,
+ölçülebilir karakterizasyon. Girişimin beklenen ölçüde başarılı olmaması
+öğreticidir; biyolojik parçalar bağlama duyarlı olduğu için kompozisyon
+çalışmamıştır. Modülerlik kuramının sınırını gösteren vakadır.
+• Tarla denemeleri ve deneysel tasarım. Kontrollü laboratuvarın mümkün
+olmadığı durumda uzamsal blok ve rastgeleleştirme yoluyla nedensel çıkarım
+yapmak.
+Zanaat, beden ve öğrenme
+• Enstrüman yapımı ve akustik zanaat. Bir ürünün en kritik özelliğinin
+ölçülebilir olmasına rağmen ölçümle üretilememesi. Modal analiz ve titreşim
+deseni yöntemleri mevcuttur, ancak pratik büyük ölçüde ahşabın elle sınanmasına
+dayanır. Her zanaatın bilime indirgenebileceği varsayımının karşı vakasıdır.
+• Cerrahi öğrenme eğrileri ve yapılandırılmış teknik değerlendirme.
+Prosedürel beceriyi yalnızca sonuçla değil gözlenen tekniğin yapılandırılmış
+puanlamasıyla ölçmek ve öğrenme eğrisinin plato noktasını vaka sayısıyla
+belirlemek. “Yeterlilik için kaç vaka gerekir” sorusunun ampirik cevabına
+sahip ender alandır.
+• Ustalık temelli öğrenme (mastery learning). Eğitimi süre cinsinden
+değil yeterlilik cinsinden tanımlamak; öğrenci ölçütü geçene kadar tekrar
+eder, süre değişkendir.
+• Bilişsel çıraklık (cognitive apprenticeship). Zanaat çıraklığında ustanın
+eylemini gösterdiği, zihinsel işlerde ise gösterilmesi gerekenin düşünce olduğu.
+Yöntem sırası şudur: uzmanın düşüncesini sesli anlatması, rehberlik, kademeli
+destek çekme, dile getirme, yansıtma ve keşif (Collins, Brown ve Newman,
+1989).
+• Algısal öğrenme modülleri. Uzmanın algısal ayırt etme becerisinin an-
+latılarak değil yoğun ve hızlı sınıflandırma tekrarıyla öğretilmesi. Normalde
+yıllar süren örüntü tanıma kabiliyetinin ölçülebilir biçimde hızlandığı gösterilmiştir
+(Kellman).
+• Bilişsel yük kuramı (cognitive load theory). Öğretimi konu mantığına
+göre değil çalışma belleği sınırına göre tasarlamak. Karşı sezgisel bulgusu,
+acemi için tam çözümlü örneğin keşifsel öğrenmeden etkili olduğu, ancak
+uzmanlaştıkça aynı desteğin zarar verdiğidir (Sweller).
+• Öğretim tasarımı (instructional systems design, dört bileşenli model).
+Eğitimi içerik yazarak değil görev analizinden geriye doğru tasarlamak;
+bütün görev sınıfları, destekleyici bilgi, prosedürel bilgi ve parça görev
+pratiği ayrı ayrı planlanır (van Merrienboer).
+28
+
+-- 28 of 48 --
+
+• Müfredat sıralaması (curriculum learning). Örneklerin hangi sırayla
+gösterildiğinin, hangi örneklerin gösterildiği kadar belirleyici olduğu.
+• Eğitim transferi ve simülatör geçerliliği. Simülatörün değerinin
+gerçekçiliğiyle değil transfer etkinlik oranıyla ölçüldüğü; ve yüksek görsel
+gerçekçiliğin değil görev doğruluğunun transferi artırdığı.
+• Kalibrasyon eğitimi ve tahmin turnuvaları. Yargıyı bir beceri olarak
+ölçüp puanlamak ve geri bildirimle kalibre etmek; kısa ve yapılandırılmış
+eğitimin tahmin doğruluğunu ölçülebilir biçimde artırdığı bulgusu (Tet-
+lock).
+• Ön-mortem ve kırmızı takım (pre-mortem, red teaming). Hatayı son-
+radan aramak yerine başarısızlığı olmuş varsayıp nedenlerini önceden yaz-
+mak. Yöntem, örüntü tabanlı hızlı karar modelinin kendi zayıflığına karşı
+geliştirilmiştir (Klein).
+Gözlemsel ve uyarlamalı tasarım
+• Gözlemsel yöntem (observational method ). Kazı ve zemin mühendisliğinde
+tasarımı önden dondurmayıp kazarken ölçmek ve tasarımı ölçüme göre
+uyarlamak (Peck, 1969). Malzeme özelliklerinin verilmiş ve heterojen
+olduğu durumda “test tasarımın içindedir” ilkesinin en radikal hâlidir:
+tasarım inşaat sırasında belirlenir.
+• Derin belirsizlik altında gürbüz karar verme (robust decision mak-
+ing). Geleceği tahmin edip ona göre optimize etmek yerine çok sayıda
+senaryoda kabul edilebilir kalan kararı seçmek.
+• Mekanizma tasarımı ve teşvik uyumu. ˙Insanların doğru davran-
+masını ummak yerine doğru davranmanın çıkarlarına uygun olduğu bir
+yapı kurmak. Mühendislik projelerinde doğrudan karşılığı sözleşme yapısıdır:
+sabit fiyatlı ile maliyet-artı sözleşmeler farklı davranış üretir.
+• Ölçüt tasarımı ve Goodhart yasası. Bir ölçütün hedef hâline geldiği
+anda ölçüt olmaktan çıktığı. Teşhis süresini ölçmeye başlamak, teşhis
+süresinin değil teşhis kalitesinin optimize edilmemesine yol açabilir.
+29
+
+-- 29 of 48 --
+
+Bilgi Mühendisliği Katmanı
+Model tabanlı sistem mühendisliği
+Model tabanlı sistem mühendisliği (Model-Based Systems Engineering, MBSE),
+sistemi anlatan bilgiyi dağınık belgelerde değil birbirine bağlı tek bir mühendislik
+modelinde tutmaktır.
+Belge tabanlı yaklaşımda gereksinimler bir metin dosyasında, arayüzler bir
+hesap tablosunda, mimari bir sunumda, test planı ayrı bir belgede durur. Bun-
+lardan biri değiştiğinde diğerleri kendiliğinden güncellenmez; bir süre sonra
+hangi belgenin güncel olduğu bilinmez hâle gelir.
+Model tabanlı yaklaşımda sistemin parçaları, gereksinimleri, bağlantıları ve
+davranışları aynı modelin elemanlarıdır. Bir insansız hava aracında “sekiz saat
+havada kalma” gereksinimi, bunu karşılayan sistem işlevine, o işlevi gerçekleştiren
+tahrik alt sistemine ve alt sistemin bileşenlerine bağlanır. Motor gücü ihtiyacı
+arttığında model, batarya gereksiniminin artık karşılanmadığını bildirebilir ve
+etki zinciri izlenebilir: motor değişti, güç sistemi etkilendi, batarya boyutu etk-
+ilendi, ağırlık etkilendi, havada kalma süresi etkilendi, bazı gereksinimler risk
+altına girdi, ilgili testler yeniden yapılmalıdır.
+Yaklaşımın gücü izlenebilirliktedir: gereksinim, işlev, mimari, bileşen, arayüz
+ve test birbirine bağlıdır. Buradaki “model” üç boyutlu geometri modeli değil,
+sistemin mantıksal modelidir: neyden oluştuğu, ne yaptığı, parçaların nasıl
+bağlandığı, hangi gereksinimi hangi parçanın karşıladığı, madde, enerji ve verinin
+nereden nereye aktığı ve bir şey değiştiğinde neyin etkilendiği.
+Belge tabanlı yaklaşımda sistemi anlatan belgeler vardır; model tabanlı yaklaşımda
+sistemin kendisini temsil eden bağlantılı bir model vardır ve belgeler gerektiğinde
+bu modelden üretilir. ˙Ilkenin özü, mühendislik bilgisinin metin olarak değil
+ilişkileriyle birlikte saklanmasıdır.
+Yaklaşımın maliyeti de kaydedilmelidir. ˙Izlenebilirlik zorunlu kılınmadığında
+zamanla çürür, araç bağımlılığı ciddidir ve pek çok kurumda uygulama biçimsel
+kalır. Küçük ve orta ölçekli ekiplerde iyi bir depo yapısı, adlandırma düzeni,
+iş takip sistemi, belge bağlama alışkanlığı ve test kimlikleri çoğu zaman daha
+yüksek getiri sağlar.
+Dijital iz ve dijital mühendislik
+Dijital iz (digital thread ), gereksinimden modele, simülasyona, geometriye, üretime,
+teste ve operasyon verisine uzanan zincirin izlenebilir olmasıdır.
+Bir uçak kanadı örneğinde zincir şu halkalardan oluşur: gereksinim (kanat
+belirli bir yükü taşımalıdır), sistem modeli (bu gereksinim hangi alt sisteme ait-
+tir), simülasyon (hangi yük senaryolarında analiz edilmiştir), geometri (hangi
+tasarım bu gereksinimi karşılar), üretim (hangi tezgâh, hangi proses, hangi
+malzeme partisi), test (hangi fiziksel parça hangi testten geçmiştir) ve operasyon
+(parça gerçek uçuşta nasıl davranmıştır).
+Zincir iki yönde kullanılır. Geriye doğru: sahada çatlak bulunan parçanın
+seri numarası, üretim partisi, tasarım revizyonu, simülasyon varsayımları ve
+30
+
+-- 30 of 48 --
+
+bağlı olduğu gereksinim bulunur; aynı konfigürasyonun hangi diğer uçaklarda
+bulunduğu tespit edilir. ˙Ileriye doğru: bir tasarım değişikliğinin hangi test-
+lerin tekrarını, hangi üretim talimatı değişikliğini ve hangi uçaklarda güncelleme
+gerektirdiği belirlenir.
+Dijital mühendislik (digital engineering) bunun geniş şemsiyesidir: mühendisliğin
+ana çalışma nesnesini belgeden dijital modele ve bağlı veriye taşımak. Ayrım
+önemlidir; bilgisayar kullanmak dijital mühendislik değildir. Asıl mesele karar-
+ların, modellerin, gereksinimlerin, testlerin ve fiziksel ürünün izlenebilir biçimde
+birbirine bağlanmasıdır. Yazılım dünyasındaki karşılığı, kaynak kontrolü, sürekli
+tümleştirme, bağımlılık grafiği ve telemetri mantığının fiziksel mühendisliğin
+tamamına yayılmasıdır.
+Bilgi olgunluk merdiveni
+Dosyaların ayrı yerlerde bulunması başlı başına bir sorun değildir. Asıl sorun
+bağlantıların yalnızca insanların belleğinde durmasıdır. “Bu gereksinim şu belgede,
+ilgili test sonucu şu tabloda, nihai karar şu yazışmada, uygulaması şu kod
+dalında” bilgisi, o kişi ayrıldığında veya aradan zaman geçtiğinde kaybolur.
+Merdiven şu basamaklardan oluşur:
+1. Dağınık bilgi. Kayıt vardır ama yeri bilinmez.
+2. ˙Insan haritası. Belirli kişiler neyin nerede olduğunu bilir.
+3. Düzenli dokümantasyon. Kayıtlar tanımlı bir yerde ve düzende tutulur.
+4. ˙Izlenebilirlik. Bilgi parçaları arasındaki bağ açıkça kaydedilir; bir gereksinim,
+onu karşılayan tasarıma ve doğrulayan teste bağlanır.
+5. Dijital iz. Bağlantılar ürünün bütün yaşam döngüsü boyunca makine
+tarafından izlenebilir bir ağ hâline gelir.
+˙Ikinci basamaktan üçüncüye geçmek bile ekip hızını belirgin biçimde artırır.
+Asıl sıçrama dördüncü ile beşinci arasında değil, “neyin nerede olduğunu biliyo-
+rum” ile “bir şey değiştiğinde veya bozulduğunda neyle ilişkili olduğunu sistem-
+den çıkarabiliyorum” arasındadır.
+31
+
+-- 31 of 48 --
+
+Zımni Bilgi
+Tanım ve bileşenler
+Zımni bilgi, kişinin bildiği ancak tam olarak kelimelere, kurallara veya prosedüre
+dökemediği bilgidir. Kavramı makul kılan gözlem şudur: bazı bilgiler kural
+listesi biçiminde yaşamaz; deneyimle oluşan örüntü tanıma ve bağlam duyarlılığı
+biçiminde yaşar.
+Bileşenlerine ayrıldığında şu türler görülür:
+• Algısal bilgi. Bir motor sesinin normal olmadığının fark edilmesi. Kişi
+farkı duyar ancak hangi frekans bileşeninin neden yanlış olduğunu hemen
+açıklayamaz.
+• Örüntü tanıma. Bir yazılım hatasının eşzamanlılık kaynaklı olduğu
+izlenimi. Henüz kanıt yoktur; benzer çok sayıda vakadan gelen bir eşleşme
+vardır.
+• Bağlamsal bilgi. Aynı kuralın farklı durumlarda farklı uygulanması. Be-
+lirli bir toleransın genel olarak yeterli olmasına rağmen belirli bir tedarikçide
+riskli sayılması.
+• Prosedürel beceri. Nasıl yapılacağı bilinen ancak tarif edilmesi zor olan
+işler: kaynak yapmak, hassas montaj, enstrüman çalmak.
+• Ödünleşme sezgisi. Küçük bir performans kazancı için belirli bir karmaşıklığa
+değmeyeceği yargısı. Formülden değil geçmiş deneyimden gelir.
+• ˙Istisna bilgisi. Resmı prosedürün söylemediği ancak deneyimli kişinin
+bildiği koşullu kontrol noktaları.
+• Sosyal ve örgütsel bilgi. Bir değişiklik için hangi birimlerle erken
+konuşulması gerektiği. Organizasyon şemasında yazmaz.
+• Nedensel sezgi. Sorunun göründüğü yer ile kök nedenin bulunduğu yerin
+farklı olabileceği ve doğru yere bakma becerisi.
+Ayrımı örnekleyen bir karşılaştırma şudur. Açık bilgi: “bir bağlantı ele-
+manı belirli bir tork değerinde sıkılmalıdır.” Zımni bilgi: “bu bağlantı montaj
+sırasında hafif yamuk oturuyorsa, hedef tork değerine ulaşılmış olması bağlantının
+güvenli olduğu anlamına gelmez.” Birincisini belgeye koymak kolaydır; ikincisini
+yakalamak zordur.
+Oluşma mekanizması
+Zımni bilgi şu döngüyle oluşur: çok sayıda vaka görme, geri bildirim alma,
+hata yapma, düzeltme, örüntüleri sıkıştırma ve sezgi. Bir uzman yıllar boyunca
+binlerce örnek görür; bellek bunların hepsini tek tek saklamaz, sıkıştırıp bir
+benzerlik modeli oluşturur.
+32
+
+-- 32 of 48 --
+
+Bu nedenle çekirdek tanım şöyle verilebilir: deneyimden sıkıştırılmış, bağlama
+duyarlı, kısmen dile dökülemeyen karar bilgisi.
+Aktarım yöntemleri, doğrudan yazıya dökmenin mümkün olmadığı ölçüde
+dolaylıdır: mentorluk, çıraklık, olay sonrası değerlendirme, vaka arşivi, simülasyon,
+görev rotasyonu ve gerçek problem üzerinde birlikte çalışma.
+Uzmanlık içindeki yeri
+Zımni bilgi uzmanlığın tamamı değil bir bileşenidir. Uzmanlık, açık bilgi, zımni
+bilgi, problem çözme becerisi, yargı, deneyim, alan modelleri ve uygulama be-
+cerisinin bileşimidir. Zımni bilgi bunların içindeki deneyimden sıkışmış, bağlama
+duyarlı ve tam olarak dile dökülmeyen kısımdır; ancak deneyim ve yargıyla iç
+içe olduğu için tek bir kategoriye temiz biçimde yerleştirilemez.
+˙Işlevi açısından en verimli tanım şudur: zımni bilgi, problem çözme uzayında
+arama maliyetini düşüren sıkıştırılmış deneyimdir. Nereye bakılacağı, neyin
+önemsenmeyeceği, hangi testin önce yapılacağı ve hangi hipotezin daha olası
+olduğu daha iyi seçilir.
+Bu, problem çözmenin alternatifi değildir. Acemi ile uzman aynı süreçten
+geçer: sinyali gör, veri topla, hipotez kur, test et, nedeni bul, çöz, etkiyi denetle.
+Fark, uzmanın bu zincirin bazı adımlarını deneyim sayesinde sıkıştırmasıdır.
+Aynı hataya bakan iki mühendisten deneyimli olan, bekleme örüntüsünü tanıyıp
+yirmi olası yolu üçe indirebilir.
+Ancak “zımni bilgi arama uzayı daraltmasıdır” formülü fazla dardır. Zımni
+bilgi motor beceriyi, algılamayı, bağlam değerlendirmesini, zamanlamayı ve
+sosyal yargıyı da kapsar. Doğru ifade şudur: arama uzayı daraltması, zımni
+bilginin uzman problem çözmedeki önemli işlevlerinden biridir.
+Literatürdeki karşılıklar
+• Polanyi zımni bilgi kavramının temelini kurmuş, insanların bildiklerinin
+tamamını açık kurallara dökemediğini savunmuştur (Polanyi, 1966).
+• Collins bu iddiayı ampirik olarak sınamıştır. Belirli bir lazer türünün
+yalnızca yayımlanmış makaleye dayanarak yapılamadığını, yapmış birinin
+yanında bulunanların başarabildiğini göstermiştir. Collins zımni bilgiyi
+üçe ayırır: ilişkisel (ilkesel olarak aktarılabilir), bedensel ve kolektif (yalnızca
+bir toplulukta yaşayan) zımni bilgi (Collins, 2010).
+• Simon ve Gobet satranç uzmanlığı üzerine çalışmalarda uzmanların
+çok sayıda anlamlı örüntü biriktirdiğini ve örüntü tanımanın problem
+uzayındaki aramayı yönlendirdiğini göstermiştir.
+• Klein tanımaya dayalı karar modelini geliştirmiştir: deneyimli kişiler za-
+man baskısı altında her seçeneği tek tek karşılaştırmak yerine durumu
+geçmiş örüntülerle eşleştirip hızla makul bir hareket tarzına ulaşır (Klein,
+1998).
+33
+
+-- 33 of 48 --
+
+• Dreyfus ve Dreyfus beş aşamalı beceri edinimi modelini kurmuştur:
+acemi, ileri acemi, yetkin, yetkin ötesi ve uzman (Dreyfus ve Dreyfus,
+1986).
+• Nonaka ve Takeuchi zımni ile açık bilgi arasındaki dönüşüm döngüsünü
+modellemiştir: toplumsallaşma, dışsallaştırma, birleştirme ve içselleştirme
+(Nonaka ve Takeuchi, 1995). Bu model, “zımni bilgi açık bilgiye, açık bilgi
+başkasının deneyimine, o deneyim yeni zımni bilgiye dönüşür” döngüsünün
+yerleşik formülasyonudur.
+• Kritik karar yöntemi (Critical Decision Method ), uzmanın karar yolunu
+geriye dönük ve yapılandırılmış biçimde çıkaran görüşme protokolüdür: ilk
+ne fark edildi, hangi hipotezler oluştu, hangileri neden elendi, sonra hangi
+bilgi istendi (Klein, Calderwood ve MacGregor, 1989). Daha geniş şemsiye
+bilişsel görev analizidir.
+• Rasmussen beceri, kural ve bilgi temelli davranış çerçevesini kurmuş; Vi-
+cente bunu bilişsel iş analizi olarak sosyo-teknik sistemlere uygulamıştır.
+• Hollnagel tasarlanan iş ile fiilen yapılan iş arasındaki farkı kavramsallaştırmıştır;
+prosedürde yazmayan ama uygulanan pratiklerin adı budur.
+• Lave ve Wenger öğrenmenin bireysel değil topluluk içinde çevresel katılımla
+gerçekleştiğini savunmuştur (Lave ve Wenger, 1991).
+• Kahneman ve Klein uzman sezgisinin ne zaman güvenilir olduğu sorusunu
+ortaklaşa ele almıştır. Vardıkları sonuç, sezginin ancak yüksek geçerlilikli
+ve hızlı geri bildirimli ortamlarda oluştuğudur; düşük geçerlilikli ortam-
+larda deneyim, kendinden emin fakat yanlış sezgi üretir (Kahneman ve
+Klein, 2009).
+• Vincenti mühendislik bilgisinin uygulamalı bilim olmadığını, kendi epis-
+temolojisi bulunan ayrı bir bilgi türü olduğunu savunmuş ve kategori-
+lerini saymıştır: temel tasarım konsepti, ölçütler ve şartnameler, teorik
+araçlar, nicel veri, pratik değerlendirmeler ve tasarım araçları. Ayrıca
+normal tasarım ile radikal tasarım ayrımını kurmuştur (Vincenti, 1990).
+Sezmenin ötesindeki katmanlar
+Durumu sezmek uzmanlığın son basamağı değildir. Üzerinde şu katmanlar bu-
+lunur:
+1. Doğru teşhis koymak: bir şeyin ters olduğunu değil, neyin neden ters
+olduğunu ayırmak.
+2. Önceliklendirmek: çok sayıda sinyal içinden gerçekten kritik olanı seçmek.
+3. Doğru müdahaleyi seçmek: en az yan etkiyle işe yarayacak eylemi belir-
+lemek.
+34
+
+-- 34 of 48 --
+
+4. Sonucu öngörmek: bir değişikliğin sistemin başka hangi yerini etkileyeceğini
+kestirmek.
+5. Yeni durumlara aktarmak: daha önce birebir görülmemiş bir problemi
+benzer mekanizmalardan çözmek.
+6. Yeni kural çıkarmak: deneyimden genel prensip üretmek.
+7. Başkalarının yargısını kalibre etmek: ekibin neyi kaçırdığını görmek ve
+doğru soruları sordurmak.
+8. Sistemi yeniden tasarlamak: aynı problemi tekrar tekrar çözmek yerine o
+problem sınıfını doğurmayacak mimariyi kurmak.
+Bir yazılım sistemi örneği bu basamakları somutlaştırır. Sistem ara sıra
+yavaşlamaktadır. Kavramları bilmek gecikme, kilit ve kuyruk terimlerini tanımaktır.
+Uygulamak günlük kayıtlarına, metriklere ve izlere bakmaktır. Sezmek “bu bir
+işlemci sorunu değil, bir bekleme örüntüsü” demektir. Teşhis etmek verita-
+banı bağlantı havuzunun dolduğunu ve bazı sorguların kilit nedeniyle sırada
+beklediğini tespit etmektir. Karar vermek, bağlantı sayısını artırmanın belir-
+tiyi gizleyeceğini, asıl sorunun gereksiz uzun işlem sınırı olduğunu görmektir.
+Öngörmek, işlem kısaltıldığında gecikmenin düşeceğini ama yazma çekişmesinin
+başka bir tabloda görünebileceğini bilmektir. Genellemek, uzun işlem ile paylaşılan
+sıcak kaydın birlikte bir problem sınıfı oluşturduğunu formüle etmektir. Aktar-
+mak, başka bir serviste benzer belirti görüldüğünde birebir aynı hata olmasa
+da kaynak çekişmesini düşünmektir. Yeniden tasarlamak, sıcak kaydı ortadan
+kaldıran, işlem sınırlarını küçülten ve kuyruk ile geri basınç kullanan bir mimari
+kurmaktır.
+En üst basamak örüntü tanıma değil örüntü üretimidir: mevcut örüntüyü
+görmek değil, hangi yapının hangi örüntüyü üreteceğini önceden tasarlamak.
+Bir motor örneğinde karşılığı, titreşimi sezmekten kaynağı teşhis etmeye, doğru
+parçayı değiştirmeye, başka etkileri öngörmeye, benzer motorlara genellemeye
+ve nihayet tasarımı değiştirip o titreşim modunu baştan engellemeye uzanan
+zincirdir.
+35
+
+-- 35 of 48 --
+
+Zımni Bilginin Üretilmesi ve Dışsallaştırılması
+Açık bilgiden zımni bilgiye
+Uzmanlığın oluşum zinciri dört halkalıdır.
+Açık bilgi, kitapta, prosedürde ve formülde bulunan, okunabilir ve ak-
+tarılabilir bilgidir. Bir rulmanın belirli bir sıcaklık aralığının üstünde risk taşıdığı
+bilgisi bu türdendir. Tek başına uzmanlık üretmez.
+Simüle edilmiş deneyim, gerçek dünyaya çıkmadan mümkün olduğunca
+çok karar durumu yaşamaktır: vaka analizi, senaryo, arıza örneği, geçmiş olay
+incelemesi, test verisi ve korumalı deneme ortamı. Amaç bilgiyi kullanmaya
+zorlanmaktır. Yüz farklı motor arıza vakasının gösterilip her seferinde “ilk hangi
+ölçüme bakarsınız” sorusunun sorulması bu türdendir.
+Gerçek deneyim, gerçekliğin kişiyi düzeltmesidir. Veri eksiktir, sensör
+yanlış okuyabilir, zaman baskısı vardır, sistem beklenmedik davranır ve üretim
+toleransları devreye girer. En önemli farkı, kararın gerçek bir sonucunun ol-
+masıdır.
+Zımni bilgi, bunların zamanla sıkışmış hâlidir. Her durumda uzun bir
+kontrol listesi işletilmez; belirli bir örüntü tanındığında doğru yere bakılır.
+Zincirin tek yönlü olmadığı vurgulanmalıdır. Deneyimli bir mühendis belirli
+bir titreşim deseninin tehlikeli olduğunu yıllarca sezgisel olarak bilir; sonra bu
+desen ölçülüp sınıflandırıldığında bir kural çıkarılır ve zımni bilgi yeniden açık
+bilgiye dönüşür. Döngü şu biçimde kapanır: açık bilgi, deneyim, zımni bilgi,
+dışa vurum, yeni açık bilgi.
+Buradan çıkan pratik sonuç önemlidir: yirmi yıllık süre simüle edilemez,
+ancak yirmi yılda karşılaşılacak vaka çeşitliliğinin bir bölümü yoğunlaştırılabilir.
+Hedef deneyimin süresini taklit etmek değil, bilgi yoğunluğunu artırmaktır.
+Arama uzayı daraltmayı öğretmek
+Uzmanın arama uzayını daraltma mekanizması kısmen doğrudan öğretilebilir.
+Öğretilecek şablon şudur: belirti verildiğinde hangi problem sınıfları olasıdır,
+hangi sinyal bunları birbirinden ayırır, en yüksek bilgi kazancı hangi ölçümdedir,
+sonuç görüldükten sonra hipotezler nasıl güncellenir.
+Bir yazılım örneğinde sistem yavaşladığında acemi çok sayıda yere bakar;
+uzman önce olası sınıfları ayırır (işlemci sınırlı, giriş-çıkış sınırlı, çekişme, ağ,
+bağımlı servis) ve bunları en hızlı ayıran ölçümü seçer. Öğrenciye yalnızca doğru
+cevabı göstermek yerine uzmanın hangi olasılıkları hangi gerekçeyle elediğini
+göstermek, arama stratejisi öğretmek anlamına gelir.
+Bir başka örnek daha basittir. Bir bilgisayar açılmadığında acemi rastgele
+bakar: güç kaynağı, ekran, işletim sistemi, bellek. Deneyimli kişi önce “herhangi
+bir gösterge ışığı yanıyor mu” sorusunu sorar; ışık yoksa işletim sistemi ve ekran
+ihtimalleri önemli ölçüde elenir. Öğretilmesi gereken şey arızanın nerede olduğu
+değil, ilk sorunun hangi ihtimalleri elediğidir.
+Eğitim döngüsü şu biçimde kurulabilir: vaka verilir, tahmin istenir, olası ne-
+denler sıralanır, ayırt edici test seçilir, yeni bilgi verilir, tahmin güncellenir,
+36
+
+-- 36 of 48 --
+
+gerçek neden gösterilir, uzman çözümüyle karşılaştırılır ve aramanın nerede
+gereksiz genişlediği incelenir.
+Uzmanların arama yolunun kaydedilmesi bunun girdisini sağlar: ilk ne fark
+edildi, hangi hipotezler geldi, hangisi neden elendi, sonra hangi bilgi istendi,
+o bilgi hangi ihtimalleri ortadan kaldırdı, hangi noktada teşhisten emin ol-
+undu. C ok sayıda uzmandan toplandığında ortaya problem sınıfları, ayırt edici
+sinyaller, buluşsal kurallar, karar eşikleri, arıza örüntüleri ve tanı testlerinden
+oluşan bir arama haritası çıkabilir.
+Davranışsal izlerden çıkarım
+Daha ileri bir öneri, uzmanlığın izlerini doğrudan çalışma ortamından topla-
+maktır. Kamera, konuşma kaydı, bilgisayar etkileşimi ve makine telemetrisi
+birlikte kullanıldığında şunlar gözlenebilir: hangi durumda nereye bakıldığı,
+hangi ölçümün önemsenip hangisinin önemsenmediği, kontrollerin hangi sırayla
+yapıldığı, prosedürden ne zaman sapıldığı, hangi problemde kime danışıldığı,
+hangi işaretten sonra kararın değiştiği ve hatadan sonra nelerin farklı yapıldığı.
+Yüzlerce vaka üzerinde bu izler karşılaştırıldığında hiçbir prosedürde yaz-
+mayan buluşsal kurallar görünür hâle gelebilir; örneğin deneyimli bir teknisyenin
+sıcaklık artışında doğrudan parça değiştirmeyip önce titreşim, ses ve yük değişimini
+birlikte kontrol etmesi.
+Ancak kayıt tek başına dönüşüm sağlamaz. Kayıttan elde edilen şey büyük
+bir davranış veri kümesidir; bundan durum, gözlenen sinyaller, kişinin dikkat
+ettiği unsur, karar, eylem ve sonuç ilişkisinin çıkarılması gerekir. Kavramsal
+boru hattı şu adımlardan oluşur: farklı kaynakların ortak zaman çizelgesinde
+eşlenmesi, olayların ve vakaların ayrılması, karar noktalarının bulunması, uzman
+davranışlarının karşılaştırılması, tekrar eden karar örüntülerinin çıkarılması, bun-
+ların uzmanlara doğrulatılması ve nihayet vaka kütüphanesi, prosedür veya
+eğitim simülasyonuna dönüştürülmesi.
+Etik boyut ihmal edilemez. Sürekli görüntü ve ses kaydı mahremiyet, çalışan
+gözetimi, rıza ve güç asimetrisi sorunları doğurur; ayrıca izlendiğini bilen çalışan
+davranışını değiştirir. Daha savunulabilir bir model, belirli istasyonlarda ve be-
+lirli problem çözme oturumlarında amaçla sınırlı ve gönüllü kayıt ile makine
+verisinin birleştirilmesi ve ardından kısa bir değerlendirme görüşmesi yapılmasıdır.
+Yaklaşımın kavramsal katkısı şudur: zımni bilgi doğrudan okunamayabilir,
+ancak bıraktığı davranışsal izler gözlemlenerek tersine mühendislik yapılabilir.
+Bu, “uzman problem uzayını nasıl daraltıyor” sorusunu ölçülebilir hâle getirir.
+Metodolojik itirazlar
+Öneri, aşağıdaki bilinen engellerle sınanmadan savunulamaz.
+• Bilgi edinimi darboğazı. 1980’lerde uzman sistemler alanında tam
+olarak bu proje denenmiştir: uzmandan kural çıkarıp sisteme yerleştirmek.
+˙Işlem beklenenden çok daha zor çıkmış ve kural tabanlı yapay zekânın ger-
+37
+
+-- 37 of 48 --
+
+ilemesinin ana nedenlerinden biri olmuştur. Bu, önerinin en ciddi tarihsel
+karşı kanıtıdır.
+• ˙Iç gözlemin güvenilmezliği. ˙Insanların kendi karar süreçlerine ilişkin
+raporları sistematik biçimde yeniden kurgulanmıştır; kişiler gerçekte etkili
+olan etkeni değil makul görünen bir gerekçeyi bildirir (Nisbett ve Wilson,
+1977). Bu bulgu, boru hattındaki “uzmana doğrulat” adımının güvenilirliğini
+doğrudan zayıflatır.
+• Ortam geçerliliği ön koşulu. Uzman sezgisi ancak yüksek geçerlilikli
+ve hızlı geri bildirimli ortamlarda oluşur (Kahneman ve Klein, 2009).
+Dolayısıyla veri toplamaya başlamadan önce ilgili ortamın bu koşulu sağlayıp
+sağlamadığı sınanmalıdır; sağlamıyorsa çıkarılacak “uzmanlık” sistematik
+yanlılıktan ibaret olabilir.
+• Seçim yanlılığı. Uzmanlara sistematik olarak daha zor vakalar atanır.
+Ham veride uzmanın sonuç ölçütleri aceminin ölçütlerinden kötü görünebilir.
+Vaka zorluğuna göre düzeltilmeyen uzman-acemi karşılaştırması yanıltıcıdır.
+Aynı yanlılığın klasik örneği, dönen uçaklardaki hasar dağılımına bakarak
+zırh yerleşimi kararı verilmesidir.
+• Gözlenebilirlik sınırı. Tıklama ve uygulama geçişi verisi dikkati ölçmez.
+Göz izleme gerekir ve o bile bakış ile dikkatin özdeş olmadığı sınırını taşır.
+• Nadir olay paradoksu. En değerli zımni bilgi nadir arızalarla ilgilidir;
+nadir arızada ise en az veri bulunur. Kısmi çözüm, kazaya dönüşmemiş
+olayların toplanması ve hiyerarşik modellerle benzer birimlerden bilgi ödünç
+alınmasıdır.
+• Uzmanlar arası uyum. ˙Iki uzmanın aynı vakada aynı yargıya varıp var-
+madığı ölçülmelidir. Uzmanlar birbirleriyle anlaşmıyorsa tek bir “uzman
+davranışı” hedefi yoktur. Bu ölçüm çoğu projede hiç yapılmaz.
+• Nedensellik. “Uzmanlar önce belirli bir kontrolü yapıyor ve teşhis hızlanıyor”
+ifadesi nedensel bir iddiadır ve karıştırıcı değişkenler denetlenmeden ku-
+rulamaz.
+• Ölçütün bozulması. Teşhis süresi ölçülmeye başlandığında optimize
+edilen şey teşhis süresi olur, teşhis kalitesi değil.
+• Taksonomi ön koşulu. Arıza verisi toplanmadan önce arızanın nasıl ad-
+landırılacağı standartlaştırılmazsa kayıtlar karşılaştırılamaz ve vaka arşivi
+işlevsiz kalır.
+Dışsallaştırmanın alternatifi
+“Bilgiyi taşıyıcısından ayır” tek yönlü bir strateji değildir. Collins’in bedensel ve
+kolektif zımni bilgi kategorileri, bir bölümün ilkesel olarak dışsallaştırılamayacağını
+38
+
+-- 38 of 48 --
+
+gösterir. Bu durumda ikinci bir strateji devreye girer: bilgiyi çıkarmak yerine
+taşıyıcısını kurumsallaştırmak.
+Üç yerleşik örnek vardır. Kaynakçı kalifikasyonunda bilgi metne çevrilmez;
+kişi belgelenir ve belge süreli kılınır. Duyusal analiz panellerinde algı yazıya
+dökülmez; kalibre edilmiş insan ölçüm zincirinin resmı bir parçası hâline getirilir.
+Poka-yoke uygulamalarında bilgi ne çıkarılır ne belgelenir; parçanın geometrisine
+gömülerek gereksizleştirilir.
+39
+
+-- 39 of 48 --
+
+Dijital ˙Ikiz ve Bilişsel Dijital ˙Ikiz
+Kavramların ayrımı
+Dijital ikiz, fiziksel bir sistemin gerçek zamanlı veriyle beslenen dijital temsilidir
+ve “sistem şu anda hangi durumda” sorusunu cevaplar.
+Bilişsel dijital ikiz (cognitive digital twin, CDT), bu temsile öğrenme, akıl
+yürütme, tahmin ve karar desteği yeteneklerinin eklenmiş hâlidir ve “sistem
+hangi durumda, sonra ne olacak, ne yapılmalı” sorusunu cevaplar.
+Endüstriyel bir uygulama örneği durumu somutlaştırır. Spiral kaynaklı çelik
+boru üretiminde makine bileşenlerine yeni sensörler eklenerek toplam sensör
+sayısı yüzlü seviyelere çıkarılmış, endüstriyel nesnelerin interneti platformu üzerinden
+veri toplanıp işlenmiş, makine öğrenmesi modelleriyle gerçek zamanlı anomali
+tespiti ve kestirimci bakım uygulanmıştır. Bildirilen sonuçlar arasında enerji
+tüketiminde azalma, arızaların önceden tespiti, bakım maliyetlerinin düşmesi
+ve plansız duruşların azalması yer almaktadır.
+Alan yazınının durumu
+Kavramın sistematik bir taraması, 59 makale üzerinden şu bulgulara ulaşmıştır
+(Bacnak, Arayici, Doukari, Rogage ve Laing, 2026).
+Tanımlar üç kalıpta toplanmaktadır: dijital ikizin çeşitli yeteneklerle genişletilmiş
+hâli olarak CDT; birden çok dijital ikizden oluşan sistemler sistemi olarak CDT;
+ve karmaşık, öngörülemeyen ortamlar için bir çözüm alanı olarak CDT.
+En çok çalışılan uygulama alanı imalattır; incelenen makalelerin yaklaşık
+üçte biri bu alandadır. CDT’ler siber-fiziksel entegrasyonun olgun, çift yönlü
+veri akışının mevcut ve otonom karar vermenin uygulanabilir olduğu bağlamlarda
+ortaya çıkmaktadır.
+Bilişsel yetenekler frekans sırasıyla şöyledir: öğrenme (tüm çalışmalarda),
+karar verme, akıl yürütme, tahmin, optimizasyon, algılama, adaptasyon, plan-
+lama, problem çözme, bellek, bağlamsal anlama, dikkat, kendi kendine öğrenme
+ve hedef tanıma.
+Mimari açıdan üç eksen ayrılmaktadır: dijital ikizin içine yapay zekâ mod-
+elleri gömülü mimariler; dijital ikize semantik bir bilişsel katman eklenmiş mi-
+mariler; ve yaşam döngüsü boyunca çoklu alt modelden oluşan, ontolojilerle
+bağlanmış sistemler sistemi mimarileri.
+Etkinleştirici teknolojilerde 2021-2022 döneminde klasik makine öğrenmesi
+ve optimizasyon baskınken, 2025-2026 döneminde derin pekiştirmeli öğrenme ve
+büyük dil modeli tabanlı mimarilere kayış gözlenmektedir. Bilgi temsili teknolo-
+jileri (ontoloji, bilgi grafiği, semantik akıl yürütme) çalışmaların yaklaşık kırkta
+birinde bulunmakta ve sinirsel yaklaşımlarla birlikte kullanıldığında nörosembolik
+bir eğilim oluşturmaktadır.
+C alışmanın önerdiği birleşik tanım şudur: semantik yetenekleri güçlendirilmiş,
+sanal alt sistemleri arasında paylaşılan durumsal farkındalık kuran, çevresiyle
+otonom biçimde adapte olup evrilen, yüksek düzey akıl yürütmeyle bilgi ve
+deneyim temelli çıktılar üreten bir dijital ikiz sistemi.
+40
+
+-- 40 of 48 --
+
+Bilişsel-operasyonel ikiz önerisi
+Bu alan yazınında dikkat çekici bir sınır bulunmaktadır. Tarama metodolo-
+jisinde bir çalışma, dijital ikiz sisteminin değil insan kullanıcının bilişsel perfor-
+mansını tartıştığı gerekçesiyle kapsam dışı bırakılmıştır. Kapsam, dijital ikizin
+bilişi olarak çizilmiş, insanın bilişi dışarıda tutulmuştur.
+Önerilebilecek genişleme, insanın problem çözme sürecinin temsilin bir parçası
+hâline getirilmesidir. Kaydedilecek zincir şudur: dünya durumu, algı (ne görüldü),
+dikkat (ne önemli bulundu), yorum, hipotez, eleme (hangi ihtimaller neden
+atıldı), karar, eylem, sonuç ve öğrenme (bir sonraki kararın nasıl değiştiği).
+Ayrım şöyle özetlenebilir. Dijital iz “ürüne ne oldu” sorusunu, dijital ikiz
+“ürün şu anda nasıl davranıyor” sorusunu, önerilen bilişsel-operasyonel ikiz ise
+“bu organizasyon bu ürün üzerinde nasıl düşünüyor, karar veriyor, müdahale
+ediyor ve öğreniyor” sorusunu temsil eder.
+Böyle bir sistem zamanla uzman ile acemi arasındaki karar örüntüsü farkını
+ölçülebilir hâle getirebilir ve kurumsal hafızadan kurumsal öğrenme modeline
+geçişi mümkün kılabilir.
+Konumlandırma ve komşu alan yazını
+Özgünlük iddiası dikkatli kurulmalıdır. ˙Insan davranışı bazı bilişsel ikiz yaklaşımlarında
+zaten mevcuttur; özellikle karar laboratuvarı olarak konumlandırılan yaklaşımlar
+davranışsal sinyalleri ve insan-makine takımlaşmasını açıkça kapsamaktadır.
+Dolayısıyla “insan hiç düşünülmemiş” iddiası savunulamaz.
+Daha savunulabilir iddia şudur: insanın problem çözme yörüngesinin, zımni
+bilgi çıkarımı amacıyla ve sistematik biçimde ikizin çekirdeğine yerleştirilmesi,
+daha dar ve potansiyel olarak özgün bir yöndür.
+Bu iddianın sınanması için taranması gereken komşu alan yazını şunlardır:
+insan dijital ikizi ve operatör dijital ikizi çalışmaları, insan-siber-fiziksel sistem-
+ler, organizasyonun dijital ikizi kavramı, süreç madenciliği, bilişsel görev analizi,
+zımni bilgi çıkarımı, ekip bilişi ve paylaşılan zihinsel modeller.
+41
+
+-- 41 of 48 --
+
+Ortak Problem C özme Operatörleri
+Katalogdaki disiplinler tek tek incelendiğinde, teknik içerikleri farklı olsa da
+az sayıda hamlenin türevi oldukları görülür. Aşağıdaki liste bu hamleleri iki
+kümede toplar.
+Karar hamleleri
+Sınırı önce hesapla
+Optimizasyona başlamadan önce ulaşılabilir üst sınırı belirlemek. Pinch analizi
+bir tesisin termodinamik minimum ısı ihtiyacını hesaplayıp tasarımı ona göre ku-
+rar. C atı modeli kodun teorik performans tavanını çizip profil çıkarmayı ona göre
+yorumlar. Boyut analizi problemi çözmeden bağımsız parametre sayısını verir.
+Carnot verimi, Shannon sınırı, Amdahl yasası, gözlenebilirlik koşulu ve kuyruk
+kuramındaki kullanım-bekleme ilişkisi aynı hamlenin farklı örnekleridir. Ortak
+iddia şudur: iyileştirmenin mümkün olup olmadığı, iyileştirmeye başlamadan
+bilinebilir.
+Zımni bilgi tarafındaki karşılığı ortam geçerliliği koşuludur: sezginin oluşabileceği
+bir ortam yoksa, ne kadar veri toplanırsa toplansın uzmanlık çıkarılamaz.
+Bilgiyi öne çek, kararı geciktir
+Bu iki yönlü bir hamledir ve iki bileşeni birbirine karşıt görünür.
+Birinci bileşen, yaşam döngüsünün ileride ortaya çıkacak kısıtlarını tasarımın
+başına çekmektir. Eşzamanlı mühendislik, üretilebilirlik, test edilebilirlik, bakılabilirlik,
+emniyet, güvenlik, elektromanyetik uyumluluk, insan faktörleri ve inşa edilebilir-
+lik bu bileşene aittir.
+˙Ikinci bileşen, kararın kendisini mümkün olduğunca geç dondurmaktır. Kümeye
+dayalı eşzamanlı mühendislik, gerçek opsiyonlar yaklaşımı, modülerlikte görünür
+kuralların dondurulup gizli parametrelerin serbest bırakılması, gözlemsel yöntem
+ve aşamalı yetenek tedariki bu bileşene aittir.
+Görünen çelişki, ayrımın doğru yapılmasıyla çözülür: öne çekilen bilgi, gecik-
+tirilen karardır. Kısıtın erken bilinmesi, kararın erken alınmasını gerektirmez;
+tersine, kısıtı erken bilmek kararı daha uzun süre açık tutmayı mümkün kılar.
+Yerel optimumu sistem optimumuna bağla
+Sistem mühendisliği, baş tasarımcı rolü, gereksinim bütçeleri, arayüz mühendisliği,
+ödünleşme uzayı analizi, mimari tasarım, yaşam döngüsü mühendisliği, kısıtlar
+kuramı ve Braess paradoksu bu hamlenin örnekleridir. Ortak iddia, her bileşenin
+kendi ölçütünü en iyilemesinin sistemin ölçütünü bozabileceğidir.
+Kaçınılmaz bozulmayı yönlendir
+Bu hamle, kaliteyi tasarımın içine gömme hamlesinden ayrılır ve ona kısmen
+karşıttır. Birincisi kötü sonucu engellemeye çalışır; bu ise kötü sonucun kaçınılmaz
+42
+
+-- 42 of 48 --
+
+olduğunu kabul edip yönünü ve biçimini belirler.
+Hasar toleransı çatlağın var olduğunu varsayar. Kapasite tasarımı yapının
+nerede kırılacağını seçer. Katodik koruma korozyonu kurban anoda yönlendirir.
+Kontrollü bozulma, güvenli mod ve emniyetli arıza mimarileri arıza sonrası
+davranışı tasarlar. Hata bütçesi yüzde yüz çalışma süresinin yanlış hedef olduğunu
+ilan eder. Güvenilirlik büyümesi güvenilirliğin tasarlanmadığını, büyütüldüğünü
+kabul eder.
+Bilgi hamleleri
+Arama uzayını daraltacak sinyali seç
+Optimal deney tasarımı, bilginin değeri hesabı, teşhis edilebilirlik analizi, riske
+dayalı muayene, yağ analizi, transfer yolu analizi, adli mühendislik ve zımni uz-
+manlığın kendisi bu hamlenin örnekleridir. Ortak iddia şudur: doğru sinyal, en
+çok bilgi taşıyan sinyal değil, en düşük maliyetle en çok hipotezi eleyen sinyaldir.
+Bilgiyi taşıyıcısından ayır ya da taşıyıcıyı belgele
+Bu hamlenin iki kolu vardır ve ikisi de meşrudur.
+Ayırma kolu: konfigürasyon yönetimi, izlenebilirlik, dijital iz, model tabanlı
+sistem mühendisliği, tasarım gerekçesi kaydı, bilgi tabanlı mühendislik, stan-
+dartlar, taksonomiler, olay sonrası değerlendirme, arşivleme ve süreç maden-
+ciliği.
+Belgeleme kolu: kaynakçı kalifikasyonu, duyusal analiz panelleri, çıraklık ve
+uygulama toplulukları, mentorluk. Bu kol, bilginin bir bölümünün ilkesel olarak
+dışsallaştırılamayacağı kabulüne dayanır.
+Üçüncü bir seçenek, bilgiyi gereksizleştirmektir: poka-yoke ve ekolojik arayüz
+tasarımı bu yolu izler.
+Bilginin akmasını sağlayacak teşviği tasarla
+Mekanizma tasarımı, sözleşme yapısı seçimi, adil kültür, gönüllü raporlamada
+bağışıklık, bağımsız test otoritesinin raporlama hattı, kaza inceleme kurumunun
+cezalandırmadan ayrılması ve ölçüt tasarımı bu hamlenin örnekleridir. Ortak id-
+dia, doğru davranışın umulmak yerine çıkar uyumlu hâle getirilmesi gerektiğidir.
+Havacılığın güvenlik kaydının ana kaynağı teknoloji değil bu kurumsal düzenlemedir.
+Bilgiyi aktarırken yeniden üretilebilirliğini koru
+Bir bilgi sisteme gömüldüğünde, o bilgiyi öğrenme gerekçesi de ortadan kalkar.
+Otomasyon kolay durumları üstlenir ve insana yalnızca en zor, en nadir durum-
+lar kalır; ancak insanın o durumlar için gereken pratiği edinme fırsatı da ortadan
+kalkmıştır (Bainbridge, 1983).
+Zımni bilgi çıkarımı projesine çevirisi doğrudandır. Bir teşhis kuralı sisteme
+konduğunda, acemi teknisyen o kuralı uygular ancak arkasındaki mekanizmayı
+43
+
+-- 43 of 48 --
+
+öğrenmez; kendi örüntü repertuarını oluşturmaz. Sistem veri kümesinde bulun-
+mayan bir arıza bileşimiyle karşılaştığında, odada bağımsız teşhis yapabilecek
+kimse kalmamış olur. Uzun vadede sistem, kendisini besleyen bilgi kaynağını
+kurutur.
+Bilinen karşı önlemler şunlardır:
+• Cevabı değil gerekçeyi vermek. Sistem yalnızca eylemi değil, o eyleme
+götüren mekanizmayı bildirir.
+• Kararı insanda bırakıp sistemi hipotez daraltmayla sınırlamak. Otomatik
+teşhis ile karar desteği arasındaki fark, birincisinin beceriyi aşındırması,
+ikincisinin hızlandırmasıdır.
+• Elle uygulama pratiğini takvime bağlamak. Havacılıkta uygulanan çözüm
+budur: belirli aralıklarla otomasyon kapalı çalışma zorunludur.
+• Sistemin yanılabileceği durumları göstermek. Sisteme ne zaman güvenilmeyeceğini
+bilmek ayrı bir beceridir ve öğretilebilir.
+• Yeni vakada önce insana sormak, sistemin tahminini sonra göstermek.
+Böylece insan pratiğe devam ederken sistem yeni veri toplar.
+• Belirsizliği açıkça göstermek. Yüksek güvenli tek bir tahmin düşünmeyi
+durdurur; dağıtılmış olasılıklar düşünmeyi sürdürür.
+Aynı veri ve aynı model, otomatik teşhis motoru olarak tasarlandığında
+kendi kaynağını kurutur; eğitim ve karar destek altyapısı olarak tasarlandığında
+besleyerek büyür.
+44
+
+-- 44 of 48 --
+
+Sonuç
+Kurumsal düzeyde çıkan ilk sonuç, tasarım ile üretimin ayrı yetenekler olduğu,
+ancak bu ayrımın kurumsal olarak sertleştirilmesinin bedelsiz olmadığıdır. Sovyet
+modeli ayrımı en keskin biçimde kuran örnektir ve sistem mimarisi kabiliyetini
+gerçekten geliştirmiştir; buna karşılık üretilebilirlik geri bildiriminin zayıflaması
+ve seri üretim varyansının yüksek kalması aynı ayrımın maliyetidir. Dolayısıyla
+Türkiye’deki yeniden yapılanma değerlendirilirken sorulması gereken soru, ayrımın
+yapılıp yapılmadığı değil, ayrılan iki kurum arasındaki geri bildirim kanallarının
+nasıl kurulduğudur. Programın devri kolaydır; üretim gerçekliğinin geliştirme
+kararlarına geri akması kolay değildir.
+˙Ikinci sonuç, mühendislik disiplinlerinin çokluğunun aldatıcı olduğudur. Kat-
+alogdaki yüz civarı alan, yedi hamlenin farklı alanlardaki uygulamalarıdır: sınırı
+önce hesapla, bilgiyi öne çek ve kararı geciktir, yerel optimumu sistem op-
+timumuna bağla, kaçınılmaz bozulmayı yönlendir, arama uzayını daraltacak
+sinyali seç, bilgiyi taşıyıcısından ayır ya da taşıyıcıyı belgele, ve bilginin ak-
+masını sağlayacak teşviği tasarla. Bu indirgeme pratik bir sonuç doğurur: yeni
+bir alanla karşılaşıldığında öğrenilmesi gereken şey o alanın terminolojisi değil,
+hangi hamlenin hangi biçimde uygulandığıdır.
+Üçüncü sonuç, hamlelerin birbiriyle gerilim hâlinde olabildiğidir. Kısıtı öne
+çekmek ile kararı geciktirmek yüzeyde çelişir; çelişki bilgi ile karar ayrımı yapıldığında
+çözülür. Kaliteyi tasarımın içine gömmek ile bozulmayı yönlendirmek de yüzeyde
+çelişir; birincisi kötü sonucu engellemeye, ikincisi kaçınılmazlığını kabul edip
+biçimlendirmeye çalışır. Bu gerilimler çerçevenin kusuru değil, içeriğinin bir
+parçasıdır; hangi hamlenin hangi koşulda uygulanacağı ayrı bir yargı mesele-
+sidir.
+Dördüncü sonuç zımni bilgi tarafındadır. Uzmanlık, doğru sinyali seçme,
+doğru hipotezleri eleme, doğru müdahaleyi seçme ve bunu zamanla kurumsal bil-
+giye dönüştürme bileşenlerinden oluşur; ancak bu listeye en üst basamak olarak
+problem sınıfını ortadan kaldırma eklenmelidir. Bir teşhis becerisi geliştirmek
+ile teşhis ihtiyacını doğuran tasarımı değiştirmek farklı düzeylerdir ve ikincisi
+birincisini gereksizleştirir.
+C erçevenin sınırlılıkları şunlardır. Hamle indirgemesi, bir alanın teknik de-
+rinliğinin yerini tutmaz; tek kristal döküm veya zamanlama kapanışı “hangi
+hamlenin uygulandığı” bilinerek yapılamaz. Zımni bilginin davranışsal izler-
+den çıkarılması ilkesel olarak mümkündür, ancak uzman sistemler döneminde
+aynı projenin büyük ölçüde başarısız olduğu, iç gözlem raporlarının güvenilmez
+olduğu, düşük geçerlilikli ortamlarda sezginin oluşmadığı ve seçim yanlılığının
+uzman-acemi karşılaştırmalarını bozduğu bilinmektedir. Bu engeller aşılamaz
+değildir, fakat aşılmadan proje kurulamaz. Ayrıca bilginin bir bölümünün ilke-
+sel olarak dışsallaştırılamayacağı, alan yazınında bedensel ve kolektif zımni bilgi
+ayrımıyla savunulmaktadır.
+Açık kalan sorular şunlardır. Ortam geçerliliği koşulunun sağlanıp sağlanmadığı
+hangi ölçütle ve hangi veriyle sınanır; yani bir alanda uzmanlığın gerçekten
+oluşup oluşmadığı önceden nasıl bilinir. ˙Ikinci olarak, uzmanlar arası uyum
+düşük çıktığında “uzman davranışı” neye göre tanımlanır. Üçüncü olarak,
+45
+
+-- 45 of 48 --
+
+bilgiyi sisteme aktarmakla insanın onu yeniden üretme yolunu açık tutmak
+arasındaki dengeye hangi ölçüt karar verir; bu, otomasyonun her uygulamasında
+yeniden verilmesi gereken bir karardır ve genel bir çözümü bulunmamaktadır.
+Son olarak, kurumsal ve epistemik hatlar tek noktada birleşir. Bir ülkenin
+ya da şirketin karmaşık ürün geliştirme kabiliyeti, sahip olduğu çizimlerde değil,
+insanlarında, süreçlerinde, test altyapısında ve tedarikçi ağında yaşar. Bu ka-
+biliyetin kurumlar arasında aktarılması, alıcının kendi geliştirme kapasitesine
+bağlıdır (Cohen ve Levinthal, 1990) ve bilginin bir bölümü bulunduğu yer-
+den taşınırken maliyetlidir (von Hippel, 1994). Dolayısıyla yeniden yapılanma,
+teknoloji transferi ve zımni bilgi çıkarımı aynı problemin üç farklı ölçekteki
+görünümleridir: bilgi kimde durur, nasıl taşınır ve taşınırken ne kaybeder.
+Kaynaklar
+• Bacnak, T., Arayici, Y., Doukari, O., Rogage, K. ve Laing, R. (2026).
+Cognitive Digital Twins: A Systematic Review of Definitions, Applica-
+tions, and a Unified Definition. Information, 17(6), 556.
+• Bainbridge, L. (1983). Ironies of Automation. Automatica, 19(6).
+• Baldwin, C. Y. ve Clark, K. B. (2000). Design Rules: The Power of
+Modularity. MIT Press.
+• Buckingham, E. (1914). On Physically Similar Systems. Physical Review.
+• Cohen, W. M. ve Levinthal, D. A. (1990). Absorptive Capacity: A New
+Perspective on Learning and Innovation. Administrative Science Quar-
+terly.
+• Collins, H. (2010). Tacit and Explicit Knowledge. University of Chicago
+Press.
+• Collins, A., Brown, J. S. ve Newman, S. E. (1989). Cognitive Apprentice-
+ship. Knowing, Learning, and Instruction.
+• Constant, E. W. (1980). The Origins of the Turbojet Revolution. Johns
+Hopkins University Press.
+• Deming, W. E. (1986). Out of the Crisis. MIT Press.
+• Dreyfus, H. L. ve Dreyfus, S. E. (1986). Mind over Machine. Free Press.
+• Eppinger, S. D. ve Browning, T. R. (2012). Design Structure Matrix
+Methods and Applications. MIT Press.
+• Fisher, R. A. (1935). The Design of Experiments. Oliver and Boyd.
+• Goldratt, E. M. (1984). The Goal. North River Press.
+• Hughes, T. P. (1983). Networks of Power: Electrification in Western
+Society. Johns Hopkins University Press.
+46
+
+-- 46 of 48 --
+
+• Institute for Defense Analyses (1986). The Role of Concurrent Engineer-
+ing in Weapons System Acquisition. IDA Report R-338.
+• Kahneman, D. ve Klein, G. (2009). Conditions for Intuitive Expertise: A
+Failure to Disagree. American Psychologist, 64(6).
+• Klein, G. (1998). Sources of Power: How People Make Decisions. MIT
+Press.
+• Klein, G., Calderwood, R. ve MacGregor, D. (1989). Critical Decision
+Method for Eliciting Knowledge. IEEE Transactions on Systems, Man,
+and Cybernetics.
+• Lave, J. ve Wenger, E. (1991). Situated Learning: Legitimate Peripheral
+Participation. Cambridge University Press.
+• Leveson, N. G. (2011). Engineering a Safer World. MIT Press.
+• Liu, C. L. ve Layland, J. W. (1973). Scheduling Algorithms for Multipro-
+gramming in a Hard-Real-Time Environment. Journal of the ACM.
+• MacKenzie, D. (1990). Inventing Accuracy. MIT Press.
+• Mangel, M. ve Samaniego, F. J. (1984). Abraham Wald’s Work on Aircraft
+Survivability. Journal of the American Statistical Association.
+• Nisbett, R. E. ve Wilson, T. D. (1977). Telling More Than We Can Know.
+Psychological Review, 84(3).
+• Nonaka, I. ve Takeuchi, H. (1995). The Knowledge-Creating Company.
+Oxford University Press.
+• Nowlan, F. S. ve Heap, H. F. (1978). Reliability-Centered Maintenance.
+United Airlines / U.S. Department of Defense.
+• Pearl, J. (2009). Causality: Models, Reasoning, and Inference. Cambridge
+University Press.
+• Peck, R. B. (1969). Advantages and Limitations of the Observational
+Method in Applied Soil Mechanics. G´eotechnique.
+• Perrow, C. (1984). Normal Accidents. Basic Books.
+• Polanyi, M. (1966). The Tacit Dimension. University of Chicago Press.
+• Rasmussen, J. (1983). Skills, Rules, and Knowledge. IEEE Transactions
+on Systems, Man, and Cybernetics.
+• Rechtin, E. (1991). Systems Architecting. Prentice Hall.
+• Reinertsen, D. G. (2009). The Principles of Product Development Flow.
+Celeritas.
+47
+
+-- 47 of 48 --
+
+• Shewhart, W. A. (1931). Economic Control of Quality of Manufactured
+Product. Van Nostrand.
+• Steward, D. V. (1981). The Design Structure System. IEEE Transactions
+on Engineering Management.
+• Suh, N. P. (1990). The Principles of Design. Oxford University Press.
+• Szulanski, G. (1996). Exploring Internal Stickiness. Strategic Manage-
+ment Journal.
+• Vicente, K. J. (1999). Cognitive Work Analysis. Lawrence Erlbaum.
+• Vincenti, W. G. (1990). What Engineers Know and How They Know It.
+Johns Hopkins University Press.
+• von Hippel, E. (1994). Sticky Information and the Locus of Problem
+Solving. Management Science.
+• Ward, A., Liker, J. K., Cristiano, J. J. ve Sobek, D. K. (1995). The Second
+Toyota Paradox. Sloan Management Review.
+48
+
+-- 48 of 48 --

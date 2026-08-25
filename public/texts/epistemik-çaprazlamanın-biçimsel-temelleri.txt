@@ -1,0 +1,1031 @@
+Epistemik C aprazlamanın Biçimsel Temelleri
+ÖFY
+August 2026
+Özet
+Disiplinler arası çarpışma bir üretim değil seçilim problemidir: iki alanın kavram-
+larını birbirine uygulayarak soru üretmek neredeyse maliyetsizken, üretilen soru-
+nun gerçekten bilgi taşıyıp taşımadığını sınamak pahalıdır ve bağlayıcı kısıt
+uzman erişimidir. Bir çarpışmanın değeri, ürettiği önermenin sınanmasından
+beklenen belirsizlik indirimidir; bu ölçüt altında “iki alandan biri tek başına bi-
+linerek cevaplanabiliyorsa çarpışma boştur” kuralı, ikinci alanın bilgisinin birin-
+cisi verildiğinde hâlâ bir şey eklemesi koşuluna dönüşür ve en verimli önermenin
+doğruluğundan emin olunmayan önerme olduğu sonucu çıkar. Konuşmada on
+iki ayrı operatör sayılmıştır; bunların çoğu bağımsız değildir ve yapısal eşleme,
+ortak soy, maliyet oranı ve nedensel etki olmak üzere dört aileye iner. Yokluk op-
+eratörü en verimli sayılan operatördür, ancak olduğu hâliyle en çok yanlış alarm
+üretir: bir mekanizmanın ikinci alanda bulunmaması çoğu durumda eksiklik
+değil, mekanizmayı mümkün kılan koşulun orada sağlanmamasıdır. Tekstildeki
+kabul edilebilir kusur oranının yazılıma taşınamaması bunun açık örneğidir;
+taşınamama nedeni yazılımın geri kalmışlığı değil, örneklemenin dayandığı birim
+bağımsızlığının orada bulunmamasıdır. C özümler onları mümkün kılan koşullara
+sıkı biçimde bağlı olduğu, arıza modları ise çok daha az koşula bağlı olduğu için
+disiplinler arası transferde çözüm değil arıza modu taşımak sistematik olarak
+daha yüksek getirilidir. Motorun sağlığı ürettiği soru sayısıyla değil, uzmana
+götürülen önermelerin çürütülme oranıyla ölçülür.
+1
+
+-- 1 of 32 --
+
+Giriş
+˙Iki farklı bilgi alanının kavramlarını, mekanizmalarını ve yöntemlerini birbirine
+uygulayarak yeni soru üretme pratiği, bu notta çarpışma (collision) olarak ad-
+landırılır. Pratiğin yaygın adı disiplinlerarasılıktır; burada ele alınan biçim daha
+dardır. Amaç bir alandan diğerine metafor taşımak değil, bir alanın geliştirdiği
+problem çözme mekanizmasını başka bir alanın problemine kontrollü biçimde
+uygulamaktır. Aradaki fark önemsiz değildir: metafor benzerlik iddia eder ve
+sınanamaz; mekanizma transferi ise çalışıp çalışmadığı gösterilebilecek bir iddia
+üretir.
+Pratiğin yapısal zaafı üretkenliğinin kolaylığıdır. Herhangi iki alan adı yan
+yana getirildiğinde kulağa ilginç gelen bir birleşim elde edilir ve bu birleşimlerin
+sayısı elde tutulan kavram sayısının karesiyle büyür. Buna karşılık bir çarpışmanın
+gerçekten bilgi üretip üretmediğini sınamak literatür taraması, uzman görüşmesi
+ve çoğu zaman saha erişimi gerektirir. Üretim maliyeti ile doğrulama maliyeti
+arasındaki bu asimetri, pratiğin kendi ürettiği yığın altında işlevsizleşmesine yol
+açar. Yüzlerce ilginç birleşim biriktirilir, hiçbiri sınanmaz ve geriye sınanmamış
+iddialardan oluşan bir arşiv kalır.
+Notta kullanılan merkezı kavramlar şunlardır. Nesne, çarpıştırılan bir-
+imdir; disiplin adı, alt alan, mekanizma, artefakt ya da tek bir parametre ola-
+bilir ve hangi düzeyde seçildiği çıktının niteliğini belirler. Operatör, iki nesne
+arasında hangi tür ilişkinin arandığını belirleyen işlemdir; benzerlik aramak ile
+yokluk aramak farklı operatörlerdir. Kısıt, çarpışmanın hangi koşul altında
+değerlendirildiğini belirten üçüncü terimdir; ölçek, zaman baskısı, personel devir
+hızı gibi. Lonca (guild ), çarpıştırılan alanlardan birinin uygulayıcı topluluğudur
+ve önermenin sınandığı mercidir. Yanlışlanabilir önerme, çarpışmanın çıktısı
+olan ve uzman tarafından yanlış olduğu gösterilebilecek biçimde yazılmış id-
+diadır.
+Yaygın ancak yanıltıcı iki kabul vardır. Birincisi, operatör sayısını artırmanın
+sistemi zenginleştirdiğidir; oysa aralarında bağımlılık bulunan operatörler sis-
+temi zenginleştirmez, yalnızca sistem görüntüsü verir. ˙Ikincisi, bir mekaniz-
+manın başka bir alanda bulunmamasının orada bir eksiklik olduğudur; oysa yok-
+lukların büyük kısmı doğrudur ve mekanizmayı mümkün kılan koşulun sağlanmamasından
+kaynaklanır.
+Notun kapsamı çarpışma pratiğinin tanımı, çarpışma değerinin ölçülmesi,
+operatör kümesinin indirgenmesi ve kaynak kısıtı altında seçim kuralıdır. Belirli
+çarpışmaların içerik düzeyinde çözümlenmesi kapsam dışıdır; verilen örnekler
+yalnızca yapıyı somutlaştırmak içindir.
+2
+
+-- 2 of 32 --
+
+C arpışma Uzayı ve C özünürlük
+Nesnelerin düzeyleri
+C arpıştırılabilecek nesneler tek bir soyutlama düzeyinde bulunmaz. Dört düzey
+ayırt edilebilir. En üstte disiplin adları vardır: tekstil, yazılım, havacılık. Bir alt
+düzeyde alt alanlar ve işlevler bulunur: kalite kontrol, test mühendisliği, uçuş
+emniyeti. Onun altında mekanizmalar ve artefaktlar yer alır: kabul örneklemesi
+planı, test kapsamı ölçütü, kalkış öncesi kontrol listesi. En altta ise tek tek
+parametreler ve eşikler bulunur: kabul sayısı, dal kapsamı oranı, azami bekleme
+süresi.
+Bir disiplinin barındırdığı mekanizma sayısı yüzler mertebesindedir. Yani
+disiplin adı düzeyinden mekanizma düzeyine inildiğinde nesne sayısı iki büyüklük
+mertebesi artar; buna karşılık her bir nesne çok daha belirgin hâle gelir.
+C arpışmanın çözünürlüğü, seçilen nesnelerin bu düzeylerden hangisinde bu-
+lunduğudur. Disiplin adı düzeyinde kurulan bir çarpışma iki kategori adının
+yan yana konmasıdır ve tanımı gereği yapısal bilgi taşımaz, çünkü kategori
+adı bir mekanizma belirtmez ve eşleme kurulacak nesne yoktur. “Tekstil ile
+yazılımı çarpıştıralım” cümlesi bir çarpışma değil, bir niyet beyanıdır. Buna
+karşılık kabul örneklemesi planı ile test kapsamı ölçütünü karşılaştırmak gerçek
+bir temas noktasıdır; iki tarafın da ne yaptığı bellidir, dolayısıyla uyup uy-
+madıkları gösterilebilir.
+Bu ayrım bilişsel psikolojide bilinmektedir. Gentner’in yapı eşleme kuramı,
+verimli analojinin nesnelerin özniteliklerinin değil, nesneler arasındaki ilişkilerin
+eşlenmesinden doğduğunu ortaya koymuştur (Gentner, 1983). Disiplin adı bir
+özniteliktir; mekanizma ise ilişkiler taşır.
+Sayının değil seçimin problem olması
+Elde birkaç bin mekanizma, birkaç operatör ve on kadar kısıt bulunduğunda
+üretilebilecek çarpışma sayısı yüz milyonlar mertebesine çıkar. Bu büyüklük
+uzayın taranarak değerlendirilmesini olanaksız kılar. Dolayısıyla “daha fazla
+çaprazlama yapalım” önerisi anlamsızdır: üretim zaten sınırsızdır ve nesne başına
+maliyeti neredeyse sıfırdır.
+Gerçek problem, bu uzay üzerinde bir değer ölçütü tanımlayıp sınırlı bütçe
+altında en değerli alt kümeyi seçmektir. Kıt olan kaynak fikir değil, fikri sınama
+kapasitesidir.
+Maliyet asimetrisi
+Bir çarpışmanın yaşam döngüsü üç adımdan oluşur ve adımların maliyetleri
+arasında büyüklük mertebesi farkı vardır. C arpışmayı üretmek dakikalar sürer.
+Literatürde karşılığı olup olmadığını araştırmak saatler sürer. Ciddi bir uygu-
+layıcının yapılandırılmış eleştirisini almak günler sürer ve çoğu zaman geri kazanılamayan
+bir erişim hakkını harcar; aynı kişiye aynı ciddiyetle ikinci kez gidilemez.
+3
+
+-- 3 of 32 --
+
+Bu asimetri, sonraki bölümlerde kurulan seçim kuralının neden fikir sayısı
+üzerinden değil uzman zamanı üzerinden yazıldığını açıklar.
+4
+
+-- 4 of 32 --
+
+C arpışmanın Değeri
+Belirsizlik indirimi ölçütü
+Bir çarpışma, doğruluğu bilinmeyen bir önerme üretir. Bu önerme bir sınava
+götürülür ve bir yanıt alınır. C arpışmanın değeri, sınavdan önce önerme hakkında
+duyulan belirsizliğin sınavdan sonra ne kadar azalacağıdır.
+Bu ölçütün doğrudan bir sonucu vardır: doğruluğundan zaten emin olu-
+nan bir önerme sınandığında hiçbir şey öğrenilmez, çünkü indirilebilecek be-
+lirsizlik yoktur. Bir önermenin doğru çıkma ihtimalini yüzde doksan olarak
+görüyorsanız, sınav sonucunun bilgi değeri düşüktür; yüzde doksan dokuz olarak
+görüyorsanız neredeyse sıfırdır. Belirsizlik, doğru ve yanlış ihtimalleri birbirine
+eşit olduğunda en yüksek değerini alır.
+Buradan tek cümlelik bir seçim kuralı çıkar: en değerli çarpışma, ürettiği
+önermenin doğru mu yanlış mı olduğunu kestiremediğiniz çarpışmadır. Uz-
+manın onaylayacağından emin olduğunuz bir iddiayı götürmek, pahalı bir erişim
+hakkını sıfıra yakın bilgi karşılığında harcamaktır.
+Aynı sonuç sınav kuramında bağımsız olarak elde edilmiştir. Bir sınav
+maddesinin ölçme gücü, doğru cevaplanma olasılığı yarıya yakın olduğunda
+en yüksektir; herkesin bildiği ya da hiç kimsenin bilemeyeceği sorular aday
+hakkında bilgi taşımaz (Lord, 1980). ˙Iki farklı çerçeve aynı eşiği vermektedir.
+Boşluk ölçütü
+“˙Iki alandan biri tek başına bilinerek cevaplanabiliyorsa çarpışma boştur” fil-
+tresi bu çerçevede kesinleşir. Bir çarpışmanın boş olmaması için önermenin ne
+yalnızca birinci alanın bilgisiyle, ne de yalnızca ikinci alanın bilgisiyle çözülebilmesi
+gerekir. Yani ikinci alanın bilgisi, birinci alan zaten bilinirken hâlâ bir şey ek-
+lemelidir; ve bunun tersi de doğru olmalıdır.
+“Tekstilde de kalite önemlidir, yazılımda da” biçimindeki bir çıktı bu ölçütü
+sağlamaz. Her iki alan tek başına bilindiğinde önermenin doğruluğu belirlenir;
+ikinci alan hiçbir şey eklemez. Buna karşılık “tekstilde ekonomik olarak kabul
+edilen kusur oranının yazılımdaki karşılığı neden tanımsızdır” önermesi tekstil
+tarafında örnekleme kuramının, yazılım tarafında ise kusurun kopyalar arasında
+nasıl yayıldığının birlikte bilinmesini gerektirir. Hiçbiri tek başına yetmez.
+Literatür kontrolü zorunlu adımdır
+Belirsizlik hesabı, başlangıçtaki inancın nasıl kurulduğuna duyarlıdır. Bir önermenin
+cevabı literatürde zaten varsa, gerçek belirsizlik sıfıra yakındır ve çarpışmanın
+değeri de sıfırdır. Bu nedenle değer, literatür taramasından sonra kalan belirsi-
+zlik üzerinden hesaplanmalıdır. Literatür kontrolü bir akademik nezaket adımı
+değil, değerin doğru hesaplanması için zorunlu bir adımdır.
+Kontrolün atlanmasının maliyeti somuttur. Konuşmada üretilen örneklerin
+bir kısmının cevabı mevcuttur. Hata ayıklamanın kısıtlanmış ve hızlandırılmış
+5
+
+-- 5 of 32 --
+
+deneysel bilim olarak modellenmesi Zeller tarafından açık bir tez olarak ku-
+rulmuş, delta hata ayıklama algoritmasıyla işletimsel hâle getirilmiştir (Zeller
+ve Hildebrandt, 2002; Zeller, 2009). Yazılım ölçümünün ölçüm kuramı temelleri
+Fenton ve Pfleeger tarafından yazılmıştır (Fenton ve Pfleeger, 1997). Bağışıklık
+sistemi ile bilgisayar güvenliği çarpışması 1990’larda denenmiş ve yapay bağışıklık
+sistemleri adıyla ayrı bir alt alana dönüşmüştür (Forrest ve diğerleri, 1994). Bu
+üçü literatür taraması yapılmadan uzmana götürülseydi, tek seferlik erişim bi-
+linen bir şeyi doğrulatmak için harcanmış olacaktı.
+Kalibrasyon denetimi
+“Doğruluğundan emin olmadığın önermeyi seç” kuralı, kişinin kendi güven düzeyine
+güvenilebildiği ölçüde işler. Bu denetlenebilir. Her önerme uzmana götürülmeden
+önce, doğru çıkma ihtimali hakkında bir tahmin yazılır ve tarihiyle kaydedilir.
+Yeterince önerme biriktikten sonra, yüzde seksen güvenle yazılan önermelerin
+gerçekten yaklaşık beşte dördünün doğru çıkıp çıkmadığına bakılır.
+Sonuç iki türlü olabilir. Tahminler kabaca tutuyorsa güven düzeyleri kul-
+lanılabilir ve seçim kuralı işler. Kendinden emin olunan yerlerde sistematik
+olarak yanılınıyorsa, kusur çarpışma yönteminde değil alan bilgisindedir; bu
+durumda önce alan bilgisi güçlendirilmelidir, çünkü yanlış kalibre edilmiş bir
+öznede bütün öncelik sıralaması bozulur.
+6
+
+-- 6 of 32 --
+
+Operatörlerin ˙Indirgenmesi
+Liste bir cebir değildir
+Konuşmada on iki operatör sıralanmış ve bunlar için “operatör cebiri” terimi
+kullanılmıştır. Terim yerinde değildir. Cebirden söz edebilmek için en azından
+işlemin kapalı olması, yani iki nesneye uygulandığında yine aynı türden bir nesne
+üretmesi gerekir. Burada operatörler nesne çiftlerini alıp soru üretir; soru ise
+çarpıştırılabilir bir nesne değildir. Dolayısıyla bir operatörün çıktısına ikinci bir
+operatör uygulanamaz, işlemler birleştirilemez ve yapı en zayıf cebirsel tanımı
+bile karşılamaz.
+Kapalılık ancak sorular yeniden nesneleştirilirse sağlanır: üretilen soru, son-
+raki turda çarpıştırılabilecek bir nesne olarak kaydedilirse döngü kurulur. Bu,
+kayıt biçiminin neden yöntemin süsü değil zorunlu parçası olduğunu gösterir.
+Kayıt yoksa yineleme de yoktur; her tur sıfırdan başlar.
+Altı operatör tek bir aramanın altı çıktısıdır
+Operatörlerin çoğu tek bir işlemin farklı sonuçlarıdır. Her alan üç şeyle tarif
+edilebilir: barındırdığı mekanizmalar, bu mekanizmalar arasındaki bağıntılar ve
+alanda geçerli olan koşullar. ˙Iki alan arasında aranan şey, birinci alanın mekaniz-
+malarını ikinci alanın mekanizmalarına götüren kısmi bir eşlemedir. Eşleme
+kısmidir çünkü her mekanizmanın karşılığı bulunmayabilir; yapı korumasından
+söz edilmesi ise, birinci alanda birbirine bağlı iki mekanizmanın karşılıklarının
+ikinci alanda da birbirine bağlı olmasını gerektirir.
+Bu tek arama, sonucuna göre farklı operatör adları alır. Eşleme bir yerde ku-
+rulabiliyorsa ortak yapı operatörüdür. Eşleme birinci alanın bütününde kurula-
+biliyor ve ikinci alanın bir parçasına oturuyorsa özel vaka operatörüdür. Eşleme
+kurulabiliyor ama bağıntılar korunmuyorsa ayrışma operatörüdür ve analojinin
+nerede kırıldığını gösterir. Eşlemenin hiç kurulamadığı mekanizmalar yokluk
+operatörünü verir. Aynı aramanın ters yönde yapılması çeviri operatörüdür
+ve çevrilemeyen kalıntı yapısal farkı işaret eder. Ters yönün ayrı bir operatör
+sayılması ise yalnızca argümanların yer değiştirmesidir; yeni bir işlem değildir.
+Böylece altı ayrı isim, tek bir aramanın altı ayrı sonucudur. Bunları ayrı
+operatörler olarak saymak sistemi zenginleştirmez; yalnızca sistem görüntüsü
+verir ki bu, tam olarak eleştirilen patolojinin kendisidir.
+Geriye kalan üç aile
+Eşleme ailesine indirgenemeyen operatörler farklı türden nesneler gerektirir.
+• Ortak soy operatörü. ˙Iki alanın ortak bir üçüncü problemden türeyip
+türemediğini sorar. Aranan şey iki alan arasında bir eşleme değil, her
+ikisinden de üçüncü bir yapıya giden iki ayrı eşlemedir. Terzi kalıbı ile
+yazılım tasarım örüntüsü örneğinde bu ortak yapı, tekil başarılı üretimin
+çoğaltılabilir üretime dönüştürülmesi problemidir. ˙Iki alan birbirine ben-
+zemez; ikisi de aynı probleme bağımsız olarak cevap üretmiştir.
+7
+
+-- 7 of 32 --
+
+• Maliyet operatörü. Bir mekanizmanın başka bir büyüklük cinsinden
+bedelini sorar. Yapısal değil ölçüseldir; eşleme kurulmuş olsa bile oran
+ayrı bir bilgi taşır. Güvenilirlik artışının karmaşıklık cinsinden bedeli ya
+da esneklik artışının doğrulanabilirlik cinsinden bedeli bu aileye girer.
+• Nedensel operatörler. Bir mekanizmanın diğer alanda performansı ne
+kadar iyileştirdiğini, hangi koşulda zarara dönüştüğünü ve iki alanın per-
+formansını birlikte belirleyen gizli bir etken bulunup bulunmadığını sorar.
+Bunlar bir müdahale kavramı gerektirdiği için ayrı bölümde ele alınır.
+On iki etiket böylece dört aileye iner: yapısal, soy, ölçüsel, nedensel. ˙Indirgeme
+bir sadeleştirme egzersizi değildir. Her ailenin sınama yöntemi farklıdır: yapısal
+iddia örnek eşlemeyle, soy iddiası tarihsel kayıtla, ölçüsel iddia ölçümle, nedensel
+iddia karşılaştırmalı tasarımla sınanır. Bir önermenin hangi aileye ait olduğu
+bilinmeden hangi kanıtın toplanacağı da bilinemez.
+8
+
+-- 8 of 32 --
+
+Yokluk Operatörünün Yanlış Alarm Problemi
+Yokluğun iki türü
+Yokluk operatörü “birinci alanda var, ikincisinde yok, neden” sorusunu sorar ve
+konuşmada en verimli operatör olarak nitelenmiştir. Verimliliği gerçektir; ben-
+zerlik bulmak kolayken kurumsallaşmış bir yokluğu fark etmek zordur. Ancak
+operatör, olduğu hâliyle yokluğun bir eksiklik olduğunu peşinen varsayar ve bu
+varsayım çoğu zaman yanlıştır.
+Yokluk iki türlüdür. Birincisinde mekanizmayı mümkün kılan koşullar ik-
+inci alanda sağlanmaktadır, ancak mekanizma kurulmamıştır; burada gerçek bir
+eksiklik vardır ve önerme uzmana götürülmeye değer. ˙Ikincisinde mekanizmayı
+mümkün kılan koşullar sağlanmamaktadır; mekanizma eksik değil, uygulana-
+mazdır ve eksiklik iddiası hatalıdır.
+Ayrımı yapabilmek için her mekanizmaya bir etkinleştirici koşul kümesi atan-
+malıdır: mekanizmanın çalışabilmesi için ortamda sağlanması gereken şeyler.
+Yokluğun eksiklik sayılabilmesinin ölçütü, karşılığın bulunmaması ile bu koşulların
+ikinci alanda sağlanıyor olmasının aynı anda gerçekleşmesidir.
+Operatörün ham hâlinin sorunu, ürettiği yoklukların çoğunun ikinci türden
+olmasıdır. Bir mekanizmanın taşınmamış olmasının en yaygın nedeni, tam
+olarak onu mümkün kılan koşulun öbür tarafta bulunmamasıdır. Dolayısıyla
+ikinci adım zorunlu kılınmadığı sürece operatör bir sahte problem fabrikasına
+dönüşür ve ürettiği liste ikna edici göründüğü için düzeltilmesi de zor olur.
+Doğru soru “neden yok” değil, “bu mekanizmayı mümkün kılan koşul nedir ve
+ikinci alanda geçerli midir” sorusudur.
+Örnek: kabul edilebilir kusur oranı
+Tekstilde ve genel olarak parçalı üretimde kabul örneklemesi kullanılır. Bir
+partiden belirli sayıda birim çekilir, içindeki kusurlu sayısı önceden belirlenmiş
+kabul sayısını aşmazsa parti kabul edilir (ISO 2859-1; kökeni MIL-STD-105 seri-
+sidir). Yöntemin dayandığı koşul, birimlerin kusurlu olma durumlarının bir-
+birinden yaklaşık bağımsız olmasıdır.
+Bu koşulun neden zorunlu olduğu düşünülerek görülebilir. Birimler bağımsızsa,
+incelenen birim sayısı arttıkça partinin gerçek kusur oranı hakkındaki kestirim
+keskinleşir; yüz birim incelemek on birim incelemekten daha bilgilendiricidir ve
+örnekleme anlamlıdır. Yazılımda ise dağıtılan kopyalar aynı ikili dosyadır. Bir
+kusur ya bütün kopyalarda vardır ya hiçbirinde yoktur; birimler bağımsız değil,
+tamamen özdeştir. Bu durumda ikinci kopyayı incelemek birinciye hiçbir şey
+eklemez; bin kopya incelemek bir kopya incelemekle aynı bilgiyi verir.
+Sonuç şudur: kabul edilebilir kalite düzeyi kavramının yazılımda bulunma-
+ması bir olgunlaşmamışlık göstergesi değildir. Mekanizma eksik değil, dayandığı
+koşul sağlanmadığı için kategorik olarak uygulanamazdır. Yokluk operatörünün
+ham hâliyle ürettiği “yazılımda neden kabul edilebilir kusur oranı yok” sorusu,
+bu haliyle yanlış bir soru olarak kalır.
+9
+
+-- 9 of 32 --
+
+Karşılığın farklı birimde kurulmuş olması
+˙Ikinci adımın bir yan ürünü daha vardır ve belki asıl kazanç budur: aranan
+mekanizma çoğu zaman vardır, ancak başka bir birim üzerinde tanımlanmıştır.
+Yazılımda kabul edilebilir kusur oranının karşılığı hata bütçesidir. Hizmet
+düzeyi hedefi, kopya başına değil istek ya da olay başına bir başarısızlık oranı
+tanımlar (Beyer ve diğerleri, 2016). Örnekleme birimi artefakttan olaya kaydırıldığında
+bağımsızlık yaklaşık olarak geri gelir, çünkü ayrı istekler farklı zamanlarda, farklı
+verilerle ve farklı yük altında gerçekleşir; ortak mod arızaları dışında birbir-
+leriyle zayıf ilişkilidir. Mekanizma taşınmıştır, yalnızca üründe değil süreçte
+tanımlanmıştır.
+Genel kural şu biçimde yazılabilir: bir mekanizma taşınamıyorsa, önce taşınmasını
+engelleyen koşul saptanmalı, sonra o koşulun sağlandığı bir birim aranmalıdır.
+Karşılık bulunursa çarpışma bir eksiklik değil bir eşleme üretir; bulunmazsa
+yokluk gerçekten kurumsallaşmamıştır ve o zaman uzmana götürülmeye değer.
+10
+
+-- 10 of 32 --
+
+Nedensel Operatörler
+Performans iddiası
+Bir alanın mekanizmasının diğer alandaki performansı ne kadar iyileştirdiğini so-
+ran operatör, artık bir benzerlik değil bir nedensellik iddiası üretir. Muharebe
+sonrası değerlendirme uygulamasının yazılım ekiplerine taşınması örneğinde id-
+dia, bu uygulamayı yapan ekiplerde aynı hata sınıfının yinelenme oranının daha
+düşük olacağıdır.
+Buradaki asıl güçlük, gözlemsel karşılaştırmanın nedensel etkiyi vermeme-
+sidir. Yapılandırılmış değerlendirme yapan ekipler, bunu yapmayı seçtikleri için
+zaten daha disiplinli ekipler olabilir. Bu durumda ekip olgunluğu hem uygu-
+lamanın benimsenmesinin hem de düşük yinelenme oranının ortak nedenidir
+ve iki grup arasındaki fark etkiyi olduğundan büyük gösterir. Karşılaştırma
+yapılırken bu ortak nedenin denetlenmesi ya da uygulamanın ekiplerin seçimine
+bırakılmadan dışarıdan atanması gerekir.
+Operatörün doğru çıktısı bu nedenle yalın bir “bu uygulama ekipleri iy-
+ileştirir” cümlesi değil, hangi karşılaştırmanın hangi denetimle yapılacağını da
+içeren bir önermedir. Aksi hâlde ortaya sınanabilir görünen ama sınandığında
+yanıltıcı sonuç veren bir iddia çıkar.
+Bozulma koşulu
+Transferin hangi koşulda zarara dönüştüğünü soran operatör, konuşmada en az
+yer verilenlerden biri olmasına rağmen en yüksek getirili olanlardandır. Sorduğu
+şey basittir: bu mekanizmanın etkisi hangi noktadan sonra işaret değiştirir.
+Kalite mühendisliğinin erken aşama araştırmaya uygulanması örneğinde be-
+lirleyici değişken belirsizlik düzeyidir. Süreç disiplini varyansı azaltır ve ol-
+gunlaşmış üretimde bu tam olarak istenen şeydir. Keşif aşamasında ise varyans
+bilgi kaynağıdır; varyansı bastırmak öğrenmeyi bastırmak anlamına gelir. Dolayısıyla
+belirli bir belirsizlik düzeyinin üzerinde aynı mekanizma yarardan zarara döner
+ve ilgilenilen şey bu dönüm noktasının nerede olduğudur.
+Operatörün değeri, soruyu “bu mekanizmadan ne öğrenebiliriz” biçiminden
+“bu mekanizmayı hangi koşulda kesinlikle kullanmamalıyız” biçimine çevirmesidir.
+˙Ikinci soru daha az sayıda ve daha keskin cevap kabul eder, dolayısıyla sınanması
+da kolaydır.
+Gizli ortak etken ve sahte kesişim
+Görünürde bağımsız iki alanın performansını birlikte belirleyen gizli etkeni arayan
+operatör, listedeki en tehlikeli olanıdır. Tehlikesi şudur: yeterince yüksek bir
+soyutlama düzeyinde herhangi iki alan arasında böyle bir etken daima bulun-
+abilir. “˙Ikisinde de belirsizlik vardır”, “ikisinde de insan vardır”, “ikisinde de
+zaman baskısı vardır” türü ifadeler her zaman doğrudur ve hiçbir zaman bilgi
+taşımaz.
+11
+
+-- 11 of 32 --
+
+Ayırt edici sınav şudur: aday etken, iki alan arasındaki benzerliği değil, her
+alanın kendi içindeki başarı farklarını açıklamalıdır. “Geri besleme çevriminin
+sıklığı ve kalitesi” adayı bu sınava sokulduğunda, bazı pilot eğitim program-
+larının neden diğerlerinden daha etkili olduğunu ve ayrıca bazı sürekli tümleştirme
+kurulumlarının neden diğerlerinden daha etkili olduğunu ayrı ayrı öngörebilmelidir.
+˙Iki alanı birden betimliyor ama hiçbirinin içindeki farkı açıklamıyorsa, elde bir
+değişken değil bir etiket vardır ve atılmalıdır.
+Askerı birlik ile ameliyathane çarpışması bu sınavla değerlendirilebilir. Aday
+etken olarak “karar yetkisinin bilgiye en yakın kişiye ne kadar yakın olduğu”
+önerilmişti. Bu aday sınavı geçmeye adaydır, çünkü hem birlikler arasındaki
+hem de ameliyat ekipleri arasındaki performans farklarını açıklama iddiası taşır
+ve bu iddia her iki alanda ayrı ayrı sınanabilir.
+12
+
+-- 12 of 32 --
+
+Kısıt Altında Seçim
+Sıralamanın tersine çevrilmesi
+Konuşmada önerilen motor şu sıradadır: nesne seç, operatör seç, kısıt ekle, soru
+üret, önerme çıkar, loncaya çarptır, hayatta kalan bilgiyi kaydet. Bu sıralama kıt
+kaynağın soru olduğunu varsayar. Oysa maliyet asimetrisi bunun tersini söyler:
+kıt kaynak loncadır. Elli soru üretmek maliyetsizdir; deneyimli bir uygulayıcının
+yapılandırılmış kırk dakikası büyük ölçüde geri kazanılamaz.
+Doğru sıralama erişimden başlar. Önce hangi loncaya gerçekten girilebildiği
+belirlenir; tanıdık bir fabrika müdürü, ulaşılabilir bir kalite mühendisi, görüşme
+kabul eden bir subay. Sonra o loncanın hangi mekanizmalarının eldeki probleme
+değdiği saptanır. En son o mekanizmalara hangi operatörün uygulanabileceğine
+karar verilir. Konuşmada erişim avantajı bir dipnot olarak geçmektedir; gerçekte
+birinci kısıttır ve erişilemeyen loncaya bağlı çarpışma, bilgi kazancı ne olursa
+olsun seçilemez.
+Seçim kuralı da buradan çıkar. Adaylar, sağlayacakları belirsizlik indirim-
+inin tüketecekleri uzman zamanına oranına göre sıralanır ve bütçe dolana kadar
+yukarıdan aşağı doyurulur. Yüksek değerli ama üç ayrı görüşme gerektiren bir
+çarpışma, orta değerli ama tek görüşmede sınanabilen üç çarpışmanın gerisinde
+kalabilir.
+Muhatabın seçimi
+Uzmanın kimliği sonucun bilgi değerini doğrudan etkiler. Bir alanın merkezinde
+duran uygulayıcı, alanının öz imgesini savunma eğilimindedir ve yanıtı büyük
+olasılıkla “biz aslında bunu yapıyoruz” olur. Cevabı önceden kestirilebilen muhatap
+az bilgi taşır; sınav yapılmış gibi görünür ama belirsizlik indirilmemiştir.
+En bilgilendirici muhatap sınırda duran kişidir: üretime bakan kalite mühendisi,
+sanayiye geçmiş subay, klinikten yönetime geçmiş hekim, alanından ayrılmış ama
+bilgisini korumuş kişi. Bunlarda iki sözlük birden bulunur, dolayısıyla önerme
+anlaşılır; ve savunulacak kurumsal konum daha az olduğu için yanıt önceden
+kestirilemez.
+Önermenin biçimi
+Uzmana götürülen nesnenin biçimi kazancı belirler. “Teori ile pratik arasında
+boşluk olduğunu düşünüyorum” ifadesi bir önerme değil bir konudur; karşısında
+doğru ya da yanlış denebilecek bir şey olmadığı için sınav da yoktur ve karşılığında
+yarım saatlik nazik bir sohbet alınır.
+Buna karşılık “bu sektörde prototipten seri üretime geçişte ana darboğaz
+teknik bilgi değil, ölçüm ve süreç bilgisinin kurumsallaşamamasıdır” ifadesi
+yanlışlanabilir bir önermedir. Uzman ya doğrular, ya çürütür, ya da darboğazı
+yeniden tanımlar. Üç durumda da bilgi üretilir; en değerlisi genellikle üçüncüsüdür,
+çünkü orada hem eski iddia çürütülmüş hem de yerine yenisi konmuş olur.
+13
+
+-- 13 of 32 --
+
+Tek bir görüşmeden elde edilebilecek bilginin küçüklüğü de kabul edilmelidir.
+Üç değerli bir yanıt uzayı, önerme başına en fazla birkaç ikili bilgi taşır. Bu
+nedenle önermeler tek tek değil, kalibre edilmiş güven düzeyleriyle birlikte toplu
+hâlde götürülmelidir.
+14
+
+-- 14 of 32 --
+
+Arıza Modu Transferi
+Taşınabilirlik neden çözümlerde düşüktür
+Disiplinler arası transferde varsayılan davranış, bir alanın en iyi uygulamalarını
+diğerine taşımaktır. Bu, taşınabilirliği en düşük olan nesneyi seçmektir.
+Bir mekanizmanın başka bir alana taşınabilmesi, onu mümkün kılan bütün
+koşulların orada sağlanmasına bağlıdır. Koşul sayısı arttıkça hepsinin birden
+sağlanma ihtimali hızla düşer. En iyi uygulamalar ise tanımı gereği çok sayıda
+koşula bağlıdır. Havacılıkta kontrol listesi tek başına durmaz; düzenleyici zorun-
+luluk, standartlaşmış eğitim, büyük ölçüde sabit görev profili, iki kişilik kokpit
+ekibi ve ağır bir olay soruşturma kurumu üzerine oturur. Bu koşulların tamamı
+bir yazılım ekibinde sağlanmadığı için kontrol listesi taşındığında çoğu zaman
+biçimsel bir kağıt işine dönüşür.
+Arıza modları için durum tersidir. Bir patoloji genellikle dar bir koşul
+kümesinden doğar ve bu koşullar disiplinler arasında ortaktır. Sapmanın nor-
+malleşmesi, Vaughan’ın Challenger kazası çözümlemesinde adlandırdığı biçimiyle,
+belirsizlik altında yinelenen işletim, yerel başarı geri bildirimi ve maliyet baskısının
+bir arada bulunmasından doğar (Vaughan, 1996). Bir sapma gözlenir, kötü bir
+sonuç doğurmaz, kabul edilebilir sayılır ve yeni normal hâline gelir. Bu üç koşul
+yazılım operasyonunda, inşaatta ve hastanede uyarlama gerektirmeden sağlanır.
+Buradan genel bir kural çıkar:
+Bir disiplinin çözümleri yereldir, arızaları yapısaldır.
+Dolayısıyla transfer için arıza modlarına bakmak, çözümlere bakmaktan sis-
+tematik olarak daha yüksek getirilidir. Kuralın bir sınırı da vardır: arıza modu
+transferi kolay olduğu için ucuz görünür, ancak yalnızca patolojinin tanınmasını
+sağlar. Tanınan patolojinin giderilmesi yine yerel bir çözüm gerektirir ve o
+çözüm taşınamaz.
+Tarihsel temas
+Konuşmadaki listede bulunmayan ve ortak soy operatöründen farklı bir işlem, iki
+alanın daha önce çarpışıp çarpışmadığını sorar. Değeri doğrudandır: geçmişte
+bir transfer girişimi olmuşsa, o girişimin sonucu yeni önerme için elde bulunan
+en güçlü kanıttır ve literatür taramasının en verimli biçimidir.
+Örnekler mevcuttur. Dokuma tezgâhı ile hesaplama arasındaki temas ku-
+rucu düzeydedir; Babbage’ın analitik makinesinin kart mekanizması Jacquard
+tezgâhına açık atıfla anlatılmıştır (Menabrea ve Lovelace, 1843). Yalın üretimden
+yazılıma transfer 2000’lerde açıkça yapılmış, hangi bileşenlerin tuttuğu ve hangi-
+lerinin tutmadığı belgelenmiştir (Poppendieck ve Poppendieck, 2003). Bağışıklık
+sisteminden siber güvenliğe transfer denenmiş ve büyük ölçüde konuşmada öngörülen
+nedenle, yani saldırganın savunmanın davranışına tepki veren uyarlanabilir bir
+rakip olması nedeniyle beklenen sonucu vermemiştir (Forrest ve diğerleri, 1994).
+15
+
+-- 15 of 32 --
+
+Başarısız transferi incelemek yeni transfer önermekten hem ucuz hem bil-
+gilendiricidir; çünkü başarısızlığın nedeni doğrudan hangi etkinleştirici koşulun
+sağlanmadığını söyler.
+16
+
+-- 16 of 32 --
+
+Motorun Ölçülmesi
+C ürütülme oranı
+Bir çarpışma motorunun sağlığı ürettiği soru sayısıyla ölçülemez. Üretim maliyet-
+siz olduğu için bu sayı yalnızca harcanan zamanı ölçer. Anlamlı gösterge, lon-
+caya götürülen önermelerin ne kadarının çürütüldüğüdür.
+Beklenen değer seçim kuralından çıkar. Önermeler doğruluğundan emin ol-
+unmayan bölgeden seçiliyorsa ve güven düzeyleri kalibreyse, çürütülme oranı
+yarıya yakın olmalıdır. Sapmalar tanı koydurur. Oran sıfıra yakınsa önermeler
+ya aşikâr biçimde doğrudur ya da yanlışlanamayacak kadar bulanık yazılmıştır;
+her iki durumda da bilgi üretilmemektedir. Oran bire yakınsa güven düzeyleri
+aşırı iyimserdir ve alan bilgisi henüz önerme üretmeye yetmemektedir; bu du-
+rumda önce alan bilgisi güçlendirilmelidir. Oran kabaca üçte bir ile üçte iki
+arasındaysa seçim doğru bölgeden yapılıyor demektir.
+Mutlak sayılar da bilgi taşır ve buradaki sonuç sezgiye aykırıdır. Bir yılda
+sınanan önerme sayısı tek haneliyse bu, erişim kısıtının gerçekten bağlayıcı
+olduğunu ve motorun doğru tasarlandığını gösterir. Üç haneliyse sınamanın
+gerçek anlamda yapılmadığı, “sınama” adı altında sohbet kaydedildiği anlaşılır;
+çünkü ciddi uzman zamanı bütçesi bu sayıyı taşımaz.
+Kayıt biçimi
+“Hayatta kalan bilgiyi kaydet” talimatı, kayıt şablonu tanımlanmadığı sürece
+uygulanamaz ve tam olarak eleştirilen patolojinin kendisini üretir: yüksek hızda
+üretilen, hiçbiri sınanmayan, hiçbiri geri çağrılamayan teori. Asgari şablon şu
+alanları içermelidir.
+• C arpıştırılan iki nesne, mekanizma düzeyinde yazılmış olarak; disiplin adı
+kabul edilmez.
+• Kullanılan operatör ve ait olduğu aile.
+• Üçüncü terim olarak eklenen kısıt: ölçek, zaman ufku, hata toleransı,
+personel devir hızı, kaynak kıtlığı gibi.
+• Önerme, tek cümlelik ve yanlışlanabilir biçimde.
+• Önermenin doğru çıkma ihtimaline dair başlangıç tahmini ve bu tahminin
+yazıldığı tarih.
+• Literatür taramasının sonucu ve bulunan en yakın mevcut çalışma.
+• Mekanizmanın etkinleştirici koşulları ve bunların ikinci alanda sağlanıp
+sağlanmadığı.
+• Sınavın götürüldüğü lonca ve muhatabın alandaki konumu.
+• Sonuç: doğrulandı, çürütüldü ya da yeniden tanımlandı.
+17
+
+-- 17 of 32 --
+
+• Sınav sonrası güncellenmiş inanç ve güncellemenin gerekçesi.
+Başlangıç tahmininin tarihiyle birlikte tutulması, sonradan kalibrasyon dene-
+timini mümkün kılan alandır; bu alan yoksa güven düzeylerinin tutup tutmadığı
+hiçbir zaman anlaşılamaz ve seçim kuralı denetlenemez hâle gelir.
+Uçtan uca örnek
+Bir çarpışmanın işlenmesi somut olarak şöyle görünür.
+C arpıştırılan nesneler, tekstildeki parti izlenebilirliği ile yazılım tedarik zin-
+cirindeki bağımlılık envanteridir; ikisi de mekanizma düzeyinde tanımlıdır. Op-
+eratör yapısal ailedendir: iki mekanizma arasında eşleme aranmaktadır. Kısıt
+olarak bilinen bir güvenlik açığının yayınlanması durumu seçilmiştir.
+Üretilen önerme şudur: kusurlu bir iplik partisinden etkilenen bitmiş ürünleri
+geriye doğru tam olarak listeleyebilen bir üretici ile, açık verilen bir bileşenden
+etkilenen bütün dağıtılmış ikili dosyaları listeleyebilen bir yazılım kuruluşu arasındaki
+fark araç eksikliğinden değil, envanter kaydının üretim anında değil sonradan
+oluşturulmasından kaynaklanmaktadır.
+Başlangıç tahmini olarak önermenin doğru çıkma ihtimali yarıya yakın görülmüştür;
+bu, çarpışmayı öncelikli aday yapar. Literatür taraması yazılım malzeme listesi
+uygulamalarının bu ayrımı kısmen ele aldığını gösterirse tahmin yukarı çekilir,
+kalan belirsizlik azalır ve çarpışmanın önceliği düşer. Muhatap olarak hem
+üretim hem yazılım tarafını gören bir tedarik zinciri sorumlusu seçilmiştir; bir
+saatlik görüşme öngörülmektedir. Kalan belirsizliğin görüşme süresine oranı
+hesaplanır ve diğer adaylarla karşılaştırılarak sıraya konur.
+18
+
+-- 18 of 32 --
+
+Mantıksal Operatörler
+Önerme mantığı operatörleri
+Önerme mantığı, doğruluk değeri taşıyan cümleleri temel birim olarak alır ve
+bunları birbirine bağlayan işlemleri inceler. Bir önerme, doğru ya da yanlış
+olabilen bildirim cümlesidir; soru ve emir cümleleri önerme değildir. Önermeler
+P , Q, R gibi harflerle gösterilir.
+˙Işaret Adı Doğru olduğu durum
+¬ değilleme ¬P doğrudur ancak P yanlışsa
+∧ tümel evetleme ˙Iki bileşen de doğruysa
+∨ tikel evetleme En az biri doğruysa
+⊕ dışlayıcı evetleme Tam olarak biri doğruysa
+→ koşullu Öncül doğru, ardıl yanlış olduğunda
+yanlış; diğer üç durumda doğru
+↔ çift koşullu Doğruluk değerleri eşitse
+↑ Sheffer çizgisi ˙Ikisi birden doğru değilse
+↓ Peirce oku ˙Ikisi de yanlışsa
+⊤ doğru sabiti Her zaman
+⊥ yanlış sabiti Hiçbir zaman
+˙Işlem önceliği yüksekten alçağa şu sıradadır: ¬, ∧, ∨, →, ↔. Buna göre
+¬P ∧ Q → R ifadesi ((¬P ) ∧ Q) → R okunur.
+Değilleme
+Değilleme tek bir önerme üzerinde işler ve doğruluk değerini tersine çevirir. P
+“sistem güvenlidir” ise ¬P “sistem güvenli değildir” anlamına gelir.
+P ¬P
+D Y
+Y D
+Tümel ve tikel evetleme
+Tümel evetleme, iki bileşenin de doğru olmasını gerektirir. Tikel evetleme kap-
+sayıcıdır; en az birinin doğru olması yeterlidir ve ikisinin birden doğru olması
+ifadeyi yanlış yapmaz. Doğal dildeki “veya” bu iki anlam arasında gidip geldiği
+için, dışlayıcı anlam kastedildiğinde ayrı bir işaret kullanılır.
+P Q P ∧ Q P ∨ Q P ⊕ Q
+D D D D Y
+D Y Y D D
+Y D Y D D
+Y Y Y Y Y
+19
+
+-- 19 of 32 --
+
+Bir kütüphaneye giriş için “öğrenci kimliği veya personel kartı” istendiğinde
+kastedilen kapsayıcı anlamdır; ikisi birden bulunan kişi de girer. Buna karşılık
+bir işlem yalnızca yerel önbellekten ya da yalnızca uzak kaynaktan karşılanacaksa,
+aradaki bağ dışlayıcıdır.
+Koşullu
+Koşullu ifade P → Q, “P ise Q” biçiminde okunur. P öncül, Q ardıldır. ˙Ifadenin
+yanlış olduğu tek durum, öncülün doğru ve ardılın yanlış olmasıdır; öncül yanlış
+olduğunda ifade doğru kabul edilir.
+P Q P → Q
+D D D
+D Y Y
+Y D D
+Y Y D
+Öncülün yanlış olduğu satırların doğru sayılması ilk bakışta aykırı görünür;
+bu, koşullunun bir söz olarak anlaşılmasıyla açıklanır. “Sınavı geçersen sana
+kitap alacağım” sözü, sınav geçilmediğinde ihlal edilmiş sayılmaz.
+Koşullu, → ile birlikte üç türetilmiş ifade doğurur ve bunların ayırt edilmesi
+mantığın en sık kullanılan araçlarındandır:
+• Karşıt ters (contrapositive): ¬Q → ¬P . Özgün ifadeye denktir; biri
+doğruysa diğeri de doğrudur.
+• Evrik (converse): Q → P . Denk değildir. “Yağmur yağarsa yol ıslanır”
+doğru olabilir, “yol ıslanırsa yağmur yağmıştır” doğru olmayabilir.
+• Karşıt (inverse): ¬P → ¬Q. Denk değildir; evriğin karşıt tersidir ve
+onunla denktir.
+C ift koşullu
+P ↔ Q ifadesi “P ancak ve ancak Q” biçiminde okunur ve iki yönlü koşuldur.
+Tanım kurarken kullanılan işaret budur: yalnızca gerekli değil, aynı zamanda
+yeterli koşul bildirir. Bir sistemin arızaya dayanıklı sayılması tanımlanırken ↔
+kullanılırsa, tanımı sağlayan her sistem arızaya dayanıklı, arızaya dayanıklı her
+sistem de tanımı sağlıyor demektir.
+Sheffer çizgisi ve Peirce oku
+Bu iki işlem, tek başlarına bütün önerme mantığını ifade edebilme özellikleri
+nedeniyle ayrı yer tutar. P ↑ Q, ¬(P ∧ Q)’ya; P ↓ Q ise ¬(P ∨ Q)’ya denktir.
+Her ikisi de işlevsel olarak tamdır: yalnızca ↑ kullanılarak ¬, ∧, ∨ ve → yeniden
+kurulabilir. Sayısal devre tasarımında NAND ve NOR kapılarının temel yapıtaşı
+sayılması bu özelliğe dayanır.
+20
+
+-- 20 of 32 --
+
+Yüklem mantığı ve niceleyiciler
+Önerme mantığı, cümlenin iç yapısını görmez; “her insan ölümlüdür” ifadesini
+tek bir P olarak alır ve buradan “Sokrates ölümlüdür” sonucunu çıkaramaz.
+Yüklem mantığı, cümleyi nesne ve yükleme ayırarak bu sınırı aşar. ˙Insan(x)
+biçimindeki yazım, x nesnesinin bir özelliği taşıdığını bildirir.
+˙Işaret Adı Okunuşu
+∀ tümel niceleyici Her x için
+∃ varlıksal niceleyici Öyle bir x vardır ki
+∃! tekil varlık Tam olarak bir x vardır ki
+yokluk Hiçbir x yoktur ki
+Niceleyicilerin hangi bağlaçla eşleştiği önemlidir. Tümel niceleyici koşulluyla,
+varlıksal niceleyici tümel evetlemeyle kullanılır:
+∀x˙Insan(x) → Ölümlü(x)
+∃x˙Insan(x) ∧ Ölümlü(x)
+Birinci ifade “bütün insanlar ölümlüdür”, ikincisi “ölümlü olan en az bir in-
+san vardır” demektir. Eşleştirmenin değiştirilmesi anlamı bozar: ∀x[˙Insan(x) ∧
+Ölümlü(x) ifadesi “evrendeki her şey hem insandır hem ölümlüdür” anlamına
+gelir ve neredeyse her zaman yanlıştır.
+Niceleyicilerin sırası da anlam taşır. ∀x∃y R(x, y) ile ∃y∀x R(x, y) farklı
+ifadelerdir; birincisi her x için ayrı bir y bulunabileceğini, ikincisi bütün x’ler
+için ortak tek bir y bulunduğunu söyler. Birinciden ikinciye geçmek niceleyici
+kaydırması adı verilen hatadır.
+Üstdil işaretleri
+Aşağıdaki işaretler önermelerin kendisi hakkında konuşmak için kullanılır; nesne
+dilinin değil, üstdilin parçasıdır.
+˙Işaret Anlamı
+⊢ Türetilebilirlik. Γ ⊢ P , P önermesinin Γ öncül kümesinden
+biçimsel kurallarla ispatlanabildiğini bildirir.
+Anlamsal gerektirme. ΓP , Γ’nın doğru olduğu her yorumda
+P ’nin de doğru olduğunu bildirir.
+≡ Mantıksal denklik. ˙Iki ifadenin bütün doğruluk ata-
+malarında aynı değeri aldığını bildirir.
+“Dolayısıyla”. Sonuç satırının başına konur.
+“C ünkü”. Gerekçe bildirir.
+Zorunluluk (kipsel mantık).
+Olanaklılık (kipsel mantık).
+21
+
+-- 21 of 32 --
+
+⊢ ile arasındaki ayrım ispat ile doğruluk arasındaki ayrımdır. Birincisi bir
+kural sisteminde adım adım türetilebilmeyi, ikincisi anlamsal olarak zorunlu
+kılınmayı ifade eder. Bir mantık sisteminin sağlam (sound ) olması, türetilebilen
+her şeyin gerektirilmesi; tam (complete) olması, gerektirilen her şeyin türetilebilmesi
+demektir.
+Temel denklikler
+• De Morgan kuralları: ¬(P ∧ Q) ≡ ¬P ∨ ¬Q ve ¬(P ∨ Q) ≡ ¬P ∧ ¬Q
+• Koşullunun açılımı: P → Q ≡ ¬P ∨ Q
+• Karşıt ters denkliği: P → Q ≡ ¬Q → ¬P
+• C ift koşullunun açılımı: P ↔ Q ≡ (P → Q) ∧ (Q → P )
+• Niceleyici değillemesi: ¬∀x P (x) ≡ ∃x ¬P (x) ve ¬∃x P (x) ≡ ∀x ¬P (x)
+• C ift değilleme: ¬¬P ≡ P
+• Dağılma: P ∧ (Q ∨ R) ≡ (P ∧ Q) ∨ (P ∧ R)
+De Morgan kuralları ile niceleyici değillemesi aynı yapının sonlu ve sonsuz
+hâlleridir: tümel niceleyici bir tümel evetleme zinciri, varlıksal niceleyici bir tikel
+evetleme zinciri gibi davranır.
+Geçerli çıkarım biçimleri
+Ad Biçim Geçerlilik
+Modus ponens P → Q, P Q Geçerli
+Modus tollens P → Q, ¬Q ¬P Geçerli
+Zincirleme tasım P → Q, Q → R P → R Geçerli
+Ayrık tasım P ∨ Q, ¬P Q Geçerli
+Ardılı doğrulama P → Q, Q P Geçersiz
+Öncülü değilleme P → Q, ¬P ¬Q Geçersiz
+Son iki satır en sık yapılan biçimsel hatalardır ve ikisi de evrik ile karşıt
+ifadelerin denk sanılmasından doğar. “Kod hatalıysa test başarısız olur” öncülünden,
+testin başarısız olduğu gözlemine dayanarak kodun hatalı olduğu sonucuna var-
+mak ardılı doğrulamadır; test altyapısının kendisi de bozuk olabilir.
+Küme kuramındaki karşılıklar
+Önerme mantığı işlemleri, küme işlemleriyle birebir eşleşir. Bir P önermesine,
+onu sağlayan nesnelerin kümesi karşılık getirildiğinde:
+22
+
+-- 22 of 32 --
+
+Mantık Küme Ad
+∧ ∩ Kesişim
+∨ ∪ Birleşim
+¬ tümleyen Tümleyen
+→ ⊆ Altküme
+↔ = Eşitlik
+⊥ ∅ Boş küme
+⊤ evrensel küme Evrensel küme
+Bu eşleşme, De Morgan kurallarının hem mantıkta hem küme kuramında
+aynı biçimde görünmesini açıklar. Koşullunun altküme bağıntısına karşılık gelmesi
+de sezgiseldir: “her P olan Q’dur” demek, P kümesinin Q kümesinin içinde
+kaldığını söylemektir.
+23
+
+-- 23 of 32 --
+
+Matematiksel Mantık ile Doğal Dilin C özümlenmesi
+Matematiksel mantığın doğal dil üzerindeki işlevi, sembolik yazım üretmek değil,
+bir iddianın taşıdığı yapıyı görünür kılmaktır. Bir cümle mantıksal biçimine
+ayrıldığında hangi koşulun gerekli hangisinin yeterli olduğu, iddianın bütün nes-
+neler hakkında mı yoksa bazıları hakkında mı konuştuğu ve sonucun öncüllerden
+gerçekten çıkıp çıkmadığı ayrı ayrı sorulabilir hâle gelir. Aynı Türkçe cümle
+birden çok mantıksal biçime karşılık gelebilir ve bu biçimler farklı sınavlar
+gerektirir. “Mikroservisler karmaşıktır” cümlesi bütün mikroservis sistemlerinin
+karmaşık olduğu anlamına da gelebilir, karmaşık olan mikroservis sistemleri bu-
+lunduğu anlamına da; birinci okuma tek bir sade kurulum gösterilerek çürütülür,
+ikincisi tek bir karmaşık kurulum gösterilerek doğrulanır.
+Önerme mantığının operatörleri
+Bir önerme, doğru ya da yanlış olabilen bildirim cümlesidir. “Sistem çalışıyor”
+bir önermedir; soru ve emir cümleleri doğruluk değeri taşımadıkları için önerme
+değildir. Önermeler P , Q, R harfleriyle gösterilir ve aşağıdaki operatörlerle
+birleştirilir.
+Sembol Adı Doğru olduğu durum
+¬P Değilleme P yanlışsa
+P ∧ Q Tümel evetleme ˙Ikisi de doğruysa
+P ∨ Q Tikel evetleme En az biri doğruysa
+P ⊕ Q Dışlayıcı evetleme Tam olarak biri doğruysa
+P → Q Koşullu P doğru ve Q yanlış olmadıkça
+P ↔ Q C ift koşullu Doğruluk değerleri eşitse
+P ↑ Q Sheffer çizgisi ˙Ikisi birden doğru değilse
+P ↓ Q Peirce oku ˙Ikisi de yanlışsa
+⊤ Doğru sabiti Her zaman
+⊥ Yanlış sabiti Hiçbir zaman
+˙Işlem önceliği yüksekten alçağa ¬, ∧, ∨, →, ↔ sırasındadır; buna göre ¬P ∧
+Q → R ifadesi ((¬P ) ∧ Q) → R okunur. ˙Ikili operatörlerin davranışı doğruluk
+tablosuyla verilir.
+P Q P ∧ Q P ∨ Q P ⊕ Q P → Q
+D D D D Y D
+D Y Y D D Y
+Y D Y D D D
+Y Y Y Y Y D
+Tikel evetleme kapsayıcıdır: iki bileşenin birden doğru olması ifadeyi yanlış
+yapmaz. Türkçedeki “veya” hem kapsayıcı hem dışlayıcı anlamda kullanıldığı
+için dışlayıcı anlam kastedildiğinde ⊕ ayrıca yazılır. Bir kütüphaneye girişte
+24
+
+-- 24 of 32 --
+
+öğrenci kimliği veya personel kartı istendiğinde kastedilen kapsayıcı anlamdır; ik-
+isi birden bulunan kişi de girer. Buna karşılık bir isteğin yalnızca yerel önbellekten
+ya da yalnızca uzak kaynaktan karşılanması dışlayıcıdır.
+Sheffer çizgisi ve Peirce oku, tek başlarına bütün önerme mantığını ifade
+edebildikleri için ayrıca anılır. P ↑ Q ifadesi ¬(P ∧Q) ile, P ↓ Q ifadesi ¬(P ∨Q)
+ile denktir; yalnızca ↑ kullanılarak diğer bütün operatörler yeniden kurulabilir
+(Sheffer, 1913). Sayısal devre tasarımında NAND ve NOR kapılarının temel
+yapıtaşı sayılması aynı özelliğe dayanır.
+Koşullu ifade ve türevleri
+Koşullu ifade P → Q biçiminde yazılır ve “P ise Q” okunur; P öncül, Q
+ardıldır. ˙Ifadenin yanlış olduğu tek durum öncülün doğru, ardılın yanlış ol-
+masıdır. Öncülün yanlış olduğu satırların doğru sayılması, koşullunun verilmiş
+bir söz olarak düşünülmesiyle açıklanır: “Sınavı geçersen sana kitap alacağım”
+sözü sınav geçilmediğinde ihlal edilmiş sayılmaz.
+Bir erişim denetimi gereksinimi bu biçimde yazılabilir. P kimlik doğrulamanın
+başarısız olmasını, Q erişimin reddedilmesini göstersin; gereksinim P → Q
+olarak ifade edilir. Sistem, kimlik doğrulaması başarısız olduğu hâlde erişim
+veriyorsa gereksinim ihlal edilmiştir. Kimlik doğrulaması başarılıyken erişimin
+ne olacağı bu ifadenin kapsamı dışındadır.
+Koşullunun tikel evetlemeye açılımı şudur:
+P → Q ≡ ¬P ∨ Q
+Koşullu ifadeden üç türetilmiş ifade elde edilir ve bunların ayırt edilmesi
+çözümlemenin en kritik adımıdır.
+• Karşıt ters (contrapositive): ¬Q → ¬P . Özgün ifadeye denktir.
+• Evrik (converse): Q → P . Denk değildir. “Yağmur yağarsa yol ıslanır”
+doğru olabilir; “yol ıslaksa yağmur yağmıştır” doğru olmayabilir, çünkü
+yol başka nedenle de ıslanabilir.
+• Karşıt (inverse): ¬P → ¬Q. Denk değildir; evriğin karşıt tersi olduğu
+için onunla denktir.
+Gerekli ve yeterli koşullar
+P → Q geçerliyse P , Q için yeterli koşuldur: gerçekleşmesi Q’yu güvence altına
+alır. Aynı ifadede Q, P için gerekli koşuldur: Q olmadan P olamaz. Bu ikinci
+okuma karşıt terstan çıkar. ˙Iki yön de geçerliyse çift koşullu yazılır:
+P ↔ Q ≡ (P → Q) ∧ (Q → P )
+Tanım kurarken kullanılan işaret budur; hem gerekli hem yeterli koşul bildirir.
+Bir sistemin arızaya dayanıklı sayılması çift koşulluyla tanımlandığında, tanımı
+25
+
+-- 25 of 32 --
+
+sağlayan her sistem arızaya dayanıklıdır ve arızaya dayanıklı her sistem tanımı
+sağlar.
+Türkçedeki “gerektirir”, “sayesinde”, “olmadan olmaz”, “ancak”, “garanti
+eder” ifadeleri bu ayrımı yapmaz. C özümlemede hangisinin kastedildiği açıkça
+belirlenmelidir; “ancak” ve “yalnızca” çoğunlukla gerekli koşul, “ise” ve “garanti
+eder” çoğunlukla yeterli koşul bildirir.
+Birleşik koşullar ve alternatifler
+Bir sonucun birden çok koşulun birlikte sağlanmasını gerektirdiği durumlar
+tümel evetlemeyle yazılır. Bir ürünün başarısı için teknik yeterlilik T , kul-
+lanıcı talebi U ve ekonomik sürdürülebilirlik E gerekiyorsa başarı koşulu S ≡
+T ∧ U ∧ E biçimini alır. Yapının taşıdığı bilgi, bileşenlerden birinin yanlış ol-
+masının bütünü yanlış yapmasıdır; çözümlemede sorulacak soru hangi gerekli
+koşulun sağlanmadığıdır.
+Bir sonuca birden çok yoldan ulaşılabildiği durumlar tikel evetlemeyle yazılır.
+Bir sistemin başarımı önbellekleme, paralelleştirme ya da algoritma iyileştirmesiyle
+artırılabiliyorsa üç seçenek ∨ ile bağlanır ve birden fazlası aynı anda uygulan-
+abilir.
+Yüklem mantığı ve niceleyiciler
+Önerme mantığı cümlenin iç yapısını görmez; “her insan ölümlüdür” ifadesini
+tek bir P olarak alır ve buradan “Sokrates ölümlüdür” sonucunu türetemez.
+Yüklem mantığı cümleyi nesne ve yükleme ayırarak bu sınırı aşar; Insan(x)
+yazımı, x nesnesinin bir özelliği taşıdığını bildirir. Bu genişletme Frege tarafından
+kurulmuştur (Frege, 1879).
+Sembol Adı Okunuşu
+∀x Tümel niceleyici Her x için
+∃x Varlıksal niceleyici Öyle bir x vardır ki
+∃!x Tekil varlık Tam olarak bir x vardır ki
+x Yokluk Hiçbir x yoktur ki
+Niceleyicilerin hangi bağlaçla eşleştiği anlam taşır. Tümel niceleyici koşulluyla,
+varlıksal niceleyici tümel evetlemeyle kullanılır:
+∀x [Insan(x) → Olumlu(x)]
+∃x [Insan(x) ∧ Bilimci(x)]
+Eşleştirmenin değiştirilmesi anlamı bozar: ∀x [Insan(x) ∧ Olumlu(x)] ifadesi
+evrendeki her nesnenin hem insan hem ölümlü olduğunu söyler ve neredeyse
+her zaman yanlıştır. Varlıksal iddiadan tümel iddia da çıkarılamaz; “bazı”
+örneklerden “bütün” hakkında sonuç üretmek geçersiz bir sıçramadır.
+26
+
+-- 26 of 32 --
+
+Birden çok niceleyici içeren ifadelerde sıra belirleyicidir. ∀x ∃y R(x, y) her x
+için ayrı bir y bulunabileceğini, ∃y ∀x R(x, y) ise bütün x’ler için ortak tek bir
+y bulunduğunu söyler. Her insanın bir annesi olması birinci biçimdedir; bütün
+insanların ortak tek bir annesi olması ikinci biçimdedir. Birinciden ikinciye
+geçmek niceleyici kaydırması adı verilen hatadır.
+Değilleme ve karşı örnek
+Tümel bir iddianın değillemesi varlıksal, varlıksal bir iddianın değillemesi tümeldir:
+¬∀x P (x) ≡ ∃x ¬P (x)
+¬∃x P (x) ≡ ∀x ¬P (x)
+Buradan çürütmenin biçimi doğrudan okunur. ∀x [A(x) → B(x)] biçimindeki
+bir iddiayı çürütmek için A özelliğini taşıyan ama B taşımayan tek bir örnek
+yeterlidir:
+∃x [A(x) ∧ ¬B(x)]
+Niceleyici seçimi bu nedenle iddianın çürütülme maliyetini belirler. Tümel
+niceleyiciyle kurulmuş iddia tek karşı örnekle düşer; varlıksal niceleyiciyle ku-
+rulmuş iddianın çürütülmesi ise bütün alanın taranmasını gerektirir. C özümlemede
+sorulacak soru şudur: bu iddiayı yanlış yapmak için nasıl bir örnek yeterlidir.
+C ıkarım biçimleri
+Bir sonucun belirli öncüllerden biçimsel olarak türetilebilmesi Γ ⊢ P ile gösterilir;
+burada Γ öncüller kümesidir.
+Ad Biçim Geçerlilik
+Modus ponens P → Q, P Q Geçerli
+Modus tollens P → Q, ¬Q ¬P Geçerli
+Zincirleme tasım P → Q, Q → R P → R Geçerli
+Ayrık tasım P ∨ Q, ¬P Q Geçerli
+Ardılı doğrulama P → Q, Q P Geçersiz
+Öncülü değilleme P → Q, ¬P ¬Q Geçersiz
+Son iki satır en sık yapılan biçimsel hatalardır ve ikisi de evrik ile karşıt
+ifadelerin özgün koşulluya denk sanılmasından doğar. “Kod hatalıysa test başarısız
+olur” öncülünden, testin başarısız olduğu gözlemine dayanarak kodun hatalı
+olduğu sonucuna varmak ardılı doğrulamadır; test altyapısının kendisi de bozuk
+olabilir.
+27
+
+-- 27 of 32 --
+
+Sözdizimsel ve anlamsal gerektirme
+˙Iki ayrı gerektirme kavramı vardır. Γ ⊢ P ifadesi, P ’nin belirli bir biçimsel ispat
+sisteminde Γ’dan türetilebildiğini bildirir ve ispatla ilgilidir. ΓP ifadesi, Γ’daki
+bütün önermelerin doğru olduğu her modelde P ’nin de doğru olduğunu bildirir
+ve anlamla ilgilidir. Bir mantık sisteminin sağlam (sound ) olması türetilebilen
+her şeyin gerektirilmesi, tam (complete) olması ise gerektirilen her şeyin türetilebilmesi
+demektir.
+Temel denklikler
+• De Morgan kuralları: ¬(P ∧ Q) ≡ ¬P ∨ ¬Q ve ¬(P ∨ Q) ≡ ¬P ∧ ¬Q
+• Koşullunun açılımı: P → Q ≡ ¬P ∨ Q
+• Karşıt ters denkliği: P → Q ≡ ¬Q → ¬P
+• C ift koşullunun açılımı: P ↔ Q ≡ (P → Q) ∧ (Q → P )
+• Niceleyici değillemesi: ¬∀x P (x) ≡ ∃x ¬P (x) ve ¬∃x P (x) ≡ ∀x ¬P (x)
+• C ift değilleme: ¬¬P ≡ P
+• Dağılma: P ∧ (Q ∨ R) ≡ (P ∧ Q) ∨ (P ∧ R)
+De Morgan kuralları ile niceleyici değillemesi aynı yapının sonlu ve sonsuz
+hâlleridir; tümel niceleyici bir tümel evetleme zinciri, varlıksal niceleyici bir tikel
+evetleme zinciri gibi davranır.
+Küme kuramındaki karşılıklar
+Bir önermeye onu sağlayan nesnelerin kümesi karşılık getirildiğinde mantık işlemleri
+küme işlemleriyle birebir eşleşir.
+Mantık Küme Ad
+∧ ∩ Kesişim
+∨ ∪ Birleşim
+¬ tümleyen Tümleyen
+→ ⊆ Altküme
+↔ = Eşitlik
+⊥ ∅ Boş küme
+⊤ evrensel küme Evrensel küme
+Eşleşme, De Morgan kurallarının hem mantıkta hem küme kuramında aynı
+biçimde görünmesini açıklar. Koşullunun altküme bağıntısına karşılık gelmesi
+sezgiseldir: “her P olan Q’dur” demek P kümesinin Q kümesinin içinde kaldığını
+söylemektir.
+28
+
+-- 28 of 32 --
+
+Mantıksal biçimden sınama üretmek
+Biçimselleştirme doğrudan sınama üretir. Bir erişim denetimi gereksinimi
+GecerliBelirtec ∧ Yetkili → ErisimVerilir
+biçiminde tanımlandığında, doğruluk tablosunun satırları test durumlarına
+karşılık gelir.
+GeçerliBelirteç Yetkili ErişimVerilir
+D D D
+D Y Y
+Y D Y
+Y Y Y
+Böylece doğal dilde yazılmış bir gereksinim, mantıksal biçim aracılığıyla
+dört durumlu bir sınama matrisine dönüşür. Aynı yöntem daha çok değişkenli
+gereksinimlere genişletildiğinde durum sayısı ikinin kuvveti olarak büyür; bu,
+gereksinimin kaç bağımsız koşula bağlandığının doğrudan bir ölçüsüdür.
+C özümleme sırası
+Herhangi bir doğal dil metni şu sırayla çözümlenebilir.
+1. Metindeki atomik önermeleri belirle ve sembol ata.
+2. Doğal dilde yazılmamış niceleyicileri açığa çıkar; iddianın tümel mi varlıksal
+mı olduğunu saptayarak belirsizse iki okumayı da göster.
+3. Önermeler arasındaki bağlaçları saptayarak metnin mantıksal biçimini
+yaz.
+4. Gerekli ile yeterli koşulları ayır.
+5. Sonuca ulaşmak için gereken ama açıkça söylenmemiş öncülleri çıkar.
+6. Sonucun öncüllerden gerçekten türetilip türetilmediğini denetle ve geçersizse
+hatanın hangi adımda oluştuğunu göster.
+7. Ana iddianın değillemesini yaz.
+8. Değillemeden hareketle iddiayı çürütecek karşı örneğin biçimini belirle.
+9. Önermelerin aynı anda doğru olup olamayacağını, yani metnin iç tutarlılığını
+denetle.
+10. ˙Iddiayı daha kesin ve sınanabilir biçimde yeniden yaz.
+29
+
+-- 29 of 32 --
+
+Mantığın epistemik sınırı
+Biçimsel geçerlilik ile gerçek dünyadaki doğruluk ayrı sorulardır. P → Q ve
+P öncüllerinden Q sonucuna varmak geçerli bir çıkarımdır, ancak bu, P ’nin ya
+da P → Q ilişkisinin gerçekte doğru olduğunu göstermez. Birinci soru mantığın
+alanına girer; ikincisi gözlem, ölçüm ve deney gerektirir. Ayrımın korunmaması,
+biçimsel olarak kusursuz ama içeriği yanlış argümanların ikna edici görünmesine
+yol açar.
+Klasik mantığın kapsam sınırı
+Her doğal dil ifadesi klasik önerme ya da yüklem mantığına eksiksiz indirgene-
+mez. “˙Insanların çoğu bencildir” iddiası ne ∀ ne ∃ ile doğru biçimde yazılabilir;
+tümel yazım iddiayı çürütülmeye fazla açık, varlıksal yazım fazla zayıf hâle
+getirir. Zorunluluk ve olanak içeren iddialar için kipsel mantık (P , P ), za-
+man ilişkileri için zamansal mantık, belirsizlik için olasılıksal mantık, dereceli
+doğruluk için bulanık mantık, yükümlülük ve izin için deontik mantık, neden–
+sonuç ilişkileri için nedensel mantık kullanılır. Temel ilke, doğal dili zorla klasik
+sembollere dönüştürmek değil, önce anlamı korumak ve ardından uygun biçimsel
+sistemi seçmektir.
+30
+
+-- 30 of 32 --
+
+Sonuç
+C arpışma pratiğinin sıkılaştırılması üç somut kural üretir. Birincisi, çarpışmanın
+birimi disiplin değil mekanizmadır; disiplin adları düzeyindeki birleşimler tanımı
+gereği bilgi taşımaz, çünkü kategori adı yapı belirtmez ve eşleme kurulacak
+nesne yoktur. ˙Ikincisi, bir çarpışmanın değeri ürettiği önermenin ne kadar
+belirsiz olduğuyla ölçülür ve en değerli önerme, cevabından emin olunmayan
+önermedir. Üçüncüsü, seçim probleminin bağlayıcı kısıtı soru üretimi değil uz-
+man erişimidir; dolayısıyla zincir erişimden geriye doğru kurulmalıdır.
+Operatör kümesinin dörde indirgenmesi sistemin yoksullaşması değil sınanabilir
+hâle gelmesidir. On iki etiket hangi kanıtın toplanacağını söylemez; yapısal, soy,
+ölçüsel ve nedensel ayrımı söyler. Bir önermenin hangi aileye ait olduğu bilin-
+meden hangi veriyle sınanacağı da bilinemez ve önerme sınanamaz kalır.
+Yokluk operatörünün etkinleştirici koşul kontrolüyle tamamlanması, muhteme-
+len bütün yöntemin en yüksek getirili tek değişikliğidir. Bu kontrol olmadan
+operatör, çoğunluğu koşullu yokluk olan bir kümeyi eksiklik listesi olarak sunar
+ve liste ikna edici göründüğü için düzeltilmesi zor olur. Kabul örneklemesi
+örneğinde görüldüğü gibi kontrol yalnızca yanlış önermeyi elemekle kalmaz,
+karşılığın hangi birimde aranması gerektiğini de söyler.
+C erçevenin sınırları belirgindir. Değer ölçütü öznel güven düzeylerine dayanır;
+bunlar kalibre değilse bütün öncelik sıralaması bozulur ve kalibrasyon dene-
+timi ancak yeterince sınama biriktikten sonra sonuç verir. Taşınabilirliğin koşul
+sayısıyla düşmesi kaba bir kuraldır; koşullar birbirinden bağımsız değil kümelenerek
+bulunduğu için bu kural yalnızca adayları sıralamak için kullanılabilir, mutlak
+bir olasılık kestirimi olarak kullanılamaz. Nedensel operatörlerin çıktıları, ku-
+rumlar üzerinde rastgele atama yapılamadığı için çoğunlukla gözlemsel kalır ve
+ortak nedenlerden arındırılması güçtür.
+Açık kalan iki soru vardır. Birincisi, çarpışmanın çıktısı olan sorunun ken-
+disi bir nesne olarak kaydedildiğinde uzayın kapanıp kapanmadığı, kapanıyorsa
+yinelenen çarpışmaların bir yere yakınsayıp yakınsamadığıdır. ˙Ikincisi, yöntemin
+kendisine uygulanmasıdır: burada kurulan çerçeve de bir teoridir ve kendi ölçütüne
+göre, bir loncaya götürülüp çürütülmediği sürece teori vadisinin içindedir. C erçevenin
+ilk sınavı, kendi çürütülme oranını kaydetmesidir.
+Kaynaklar
+• Beyer, B., Jones, C., Petoff, J. ve Murphy, N. R. (2016). Site Reliability
+Engineering. O’Reilly.
+• DiMaggio, P. J. ve Powell, W. W. (1983). The Iron Cage Revisited: Insti-
+tutional Isomorphism and Collective Rationality in Organizational Fields.
+American Sociological Review, 48(2).
+• Fenton, N. E. ve Pfleeger, S. L. (1997). Software Metrics: A Rigorous and
+Practical Approach. PWS Publishing.
+31
+
+-- 31 of 32 --
+
+• Forrest, S., Perelson, A. S., Allen, L. ve Cherukuri, R. (1994). Self-Nonself
+Discrimination in a Computer. IEEE Symposium on Security and Privacy.
+• Gentner, D. (1983). Structure-Mapping: A Theoretical Framework for
+Analogy. Cognitive Science, 7(2).
+• Howard, R. A. (1966). Information Value Theory. IEEE Transactions on
+Systems Science and Cybernetics, 2(1).
+• ISO 2859-1. Sampling Procedures for Inspection by Attributes. (Kökeni
+MIL-STD-105 serisidir; sürüm yılı doğrulanmalıdır.)
+• Lindley, D. V. (1956). On a Measure of the Information Provided by an
+Experiment. Annals of Mathematical Statistics, 27(4).
+• Lord, F. M. (1980). Applications of Item Response Theory to Practical
+Testing Problems. Erlbaum.
+• Menabrea, L. F. ve Lovelace, A. A. (1843). Sketch of the Analytical Engine
+Invented by Charles Babbage, with Notes by the Translator. Scientific
+Memoirs, 3.
+• Pearl, J. (2009). Causality: Models, Reasoning, and Inference. 2. baskı.
+Cambridge University Press.
+• Poppendieck, M. ve Poppendieck, T. (2003). Lean Software Development:
+An Agile Toolkit. Addison-Wesley.
+• Pressman, J. L. ve Wildavsky, A. (1973). Implementation. University of
+California Press.
+• Shannon, C. E. (1948). A Mathematical Theory of Communication. Bell
+System Technical Journal, 27.
+• Vaughan, D. (1996). The Challenger Launch Decision. University of
+Chicago Press.
+• Zeller, A. ve Hildebrandt, R. (2002). Simplifying and Isolating Failure-
+Inducing Input. IEEE Transactions on Software Engineering, 28(2).
+• Zeller, A. (2009). Why Programs Fail: A Guide to Systematic Debugging.
+2. baskı. Morgan Kaufmann.
+32
+
+-- 32 of 32 --

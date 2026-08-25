@@ -1,0 +1,1067 @@
+Vekil Değişkenler ve Örtük Yargı
+Ömer Faruk Yavuz
+Ağustos 2026
+1
+
+-- 1 of 35 --
+
+Kural ve Örnek: Mühendislik Bilgisinin
+Aktarım Kanalı
+Özet
+Mühendislik bilgisinin aktarımında kural, örnekten daha zayıf bir taşıyıcıdır. Kural, çok sayıda
+somut vakadan damıtılmış kayıplı bir sıkıştırmadır; damıtma sırasında hangi durumda hangi
+tercihin yapıldığına dair yargı düşer ve geriye yalnızca sonucun özeti kalır. Bu nedenle “fonksiy-
+onlar kısa olsun” biçiminde bir kurala harfiyen uyan, ancak niteliksiz kod üretmek mümkündür.
+Bilginin aktarımı için asgari üç bileşen gerekir: hedefi gösteren kanonik örnek, kabul edilebilirliğin
+alt sınırını gösteren karşıt örnek ve kişinin ürettiği işi bu iki referansa bağlayan geri bildirim.
+Bu üçlü yapı yazılıma özgü değildir; imalat, kaynakçılık, metalurji, yapı mühendisliği, havacılık,
+tıp ve hukuk eğitiminde kurumsallaşmış karşılıkları vardır. İmalattaki limit sample uygulaması,
+karşıt örneğin en saf hâlidir: rafta duran fiziksel parça, ideal ürünü değil kabul edilebilir olanın en
+kötüsünü işaretler. Yazılımın bu geleneklerden farkı, örneğinin taşınabilir ve sabit bir nesne olma-
+ması, canlı bir kod tabanının içinde yaşayıp değişmesidir; bu nedenle diğer alanlarda arşivleme işi
+olan örnek yönetimi, yazılımda sürekli bakım işine dönüşür. Kurumsal düzeyde iki farklı çözüm
+gözlenir: yargıyı araca gömen platform yaklaşımı ve yargıyı süreç olarak aktaran mentorluk
+yaklaşımı.
+2
+
+-- 2 of 35 --
+
+Giriş
+Deneyimli bir mühendisin yeni bir kişiye bilgi aktarırken kullandığı iki temel biçim vardır.
+Birincisi kuraldır: genellenmiş, bağlamdan koparılmış, buyurucu bir önerme. İkincisi örnektir:
+belirli bir problemin belirli bir çözümünü taşıyan somut artefakt. Bu notta savunulan konum,
+ikincisinin birincisinden yalnızca pedagojik olarak daha etkili değil, epistemolojik olarak daha
+eksiksiz olduğudur.
+Kuralın yetersizliğinin kaynağı iletişim becerisi değil, bilginin yapısıdır. Michael Polanyi’nin
+örtük bilgi (tacit knowledge) kavramı bu yapıyı adlandırır: bir kişi söyleyebildiğinden fazlasını
+bilir (Polanyi, 1966). Bir ustanın “iyi” saydığı şeyi tanıma kapasitesi, o kapasiteyi tarif etme
+kapasitesinden büyüktür. Aktarım kanalı olarak dil seçildiğinde bu fark kaybolur; artefakt
+seçildiğinde kısmen korunur.
+Thomas Kuhn’un bilim tarihine yönelik çözümlemesinde aynı olgu exemplar terimiyle
+karşılanır. Kuhn’a göre bir bilimsel paradigmanın öğrencilere aktarılmasında asıl taşıyıcı, kitapta
+yazılı yasa ifadeleri değil, bölüm sonlarındaki çözülmüş problemlerdir; öğrenci yasayı yeni bir
+duruma nasıl uygulayacağını ancak benzerlik ilişkisi kurarak, yani örnekler üzerinden öğrenir
+(Kuhn, 1962/1970). Paradigmanın taşıyıcı birimi kural değil, çözülmüş örnektir.
+Bu notta ele alınan üç bileşen — kanonik örnek, sınır örneği, referanslı geri bildirim — ve
+bunların farklı mühendislik disiplinlerindeki kurumsal karşılıklarıdır. Not, kod inceleme (code
+review) süreçlerinin verimliliği ya da ekip yönetimi teknikleri hakkında bir iddia taşımaz; ilgilendiği
+şey aktarım kanalının kendisidir.
+Merkezî terimler şöyle tanımlanır. Kanonik örnek, bir ekibin “şuna bak” diyebildiği, hedef
+niteliği temsil eden somut artefakttır. Sınır örneği, kabul edilebilir ile edilemez arasındaki eşiği
+işaretleyen, genellikle kabul edilebilirin en kötü hâlini gösteren artefakttır. Referanslı geri
+bildirim, bir kişinin ürettiği işi bu iki artefakta açıkça bağlayan değerlendirmedir; kural ifadesi
+biçimindeki değerlendirmeden ayrılır.
+3
+
+-- 3 of 35 --
+
+Kuralın Kayıplı Sıkıştırma Olması
+Bir kural, tek tek vakalardan yapılan bir genellemedir. “Fonksiyonlar kısa olsun” önermesi, uzun
+fonksiyonların bakımında karşılaşılmış yüzlerce sorunun ortak özetidir. Ancak özet, kendisini
+üreten vakaların yerini tutmaz. Özette bulunmayan bilgi, hangi durumda kısaltmanın fayda
+getirdiği, hangi durumda parçalamanın izlenebilirliği bozduğudur.
+Bunun pratik sonucu şudur: kurala biçimsel olarak uyan ancak amacını ıskalayan üretim
+mümkündür. Fonksiyon uzunluğu kuralını uygulayan bir kişi, üç satırlık ancak isimlendirmesi
+hiçbir bilgi taşımayan, çağrı zinciri altı düzey derinleşen bir yapı üretebilir. Kural sağlanmıştır;
+kuralın damıtıldığı yargı aktarılmamıştır.
+Ölçüt olarak şu formülasyon kullanılabilir: bir kural, onu üreten örneklerden ayrıldığında
+karşı taraf ters mühendislik yapmak zorunda kalır. Deneyimli kişi bunu yapabilir, çünkü kendi
+vaka birikimi vardır ve kuralı o birikimin üzerine oturtur. Deneyimsiz kişide oturtulacak zemin
+yoktur; kural, boşlukta duran bir buyruk hâline gelir.
+Tek Örneğin Yetersizliği
+Kanonik örnek tek başına da eksiktir, çünkü sınır çizmez. Kendisine tek bir olumlu örnek
+gösterilen kişi, o örnekteki hangi özelliğin taklit edilmesi gereken öz, hangisinin tesadüfi ayrıntı
+olduğunu ayırt edemez. Gözlenen tipik davranış, ayrım yapılamadığı için örneğin tümünün
+kopyalanmasıdır.
+Ayrım yapabilmek karşıt örnek gerektirir. Makine öğrenmesindeki karşıtlıklı öğrenme (con-
+trastive learning) yaklaşımının dayandığı ilke aynıdır: bir temsil, yalnızca olumlu örneklerden
+değil, olumlu ile olumsuzun karşılaştırılmasından öğrenilir. Sınırı belirleyen bilgi, ikisi arasındaki
+farktadır.
+4
+
+-- 4 of 35 --
+
+Üçlü Yapının Somut Bir Uygulaması
+Aşağıda tek bir tema — HTTP isteği işleyicisinde hata yönetimi — üzerinden üç bileşen
+gösterilmektedir. Örnekler Node.js ve Express çatısı kullanılarak verilmiştir; aynı yapı başka
+dillerde de kurulabilir.
+Kanonik Örnek
+const { ErrNotFound } = require(’../services/errors’);
+const { toCutDTO } = require(’./dto’);
+async function getCut(req, res) {
+const id = Number(req.params.id);
+if (!Number.isInteger(id) || id <= 0) {
+return res.status(400).json({
+code: ’invalid_id’,
+message: ’cut id must be a positive integer’
+});
+}
+try {
+const cut = await cutService.getCut(id);
+return res.status(200).json(toCutDTO(cut));
+} catch (err) {
+if (err instanceof ErrNotFound) {
+return res.status(404).json({ code: ’cut_not_found’ });
+}
+req.log.error({ err, cutId: id }, ’get cut failed’);
+return res.status(500).json({ code: ’internal’ });
+}
+}
+Sınır Örneği
+async function getCut(req, res) {
+const id = parseInt(req.params.id);
+try {
+const cut = await cutService.getCut(id);
+res.json(cut);
+} catch (err) {
+res.status(500).json({ error: err.message });
+}
+}
+İki parça yüzeysel olarak benzerdir: aynı çatı, aynı eşzamansız yapı, aynı uzunluk mertebesi.
+Aktarılan bilgi benzerlikte değil, farklar listesindedir:
+• parseInt sonucu doğrulanmamaktadır. "12abc" girdisi 12 değerine, "abc" girdisi NaN
+değerine dönüşür ve sorguya bu hâliyle geçer. Number ile Number.isInteger birlikte
+kullanıldığında girdi sınırda durdurulur.
+5
+
+-- 5 of 35 --
+
+• Tek bir yakalama bloğu, “kayıt bulunamadı” ile “veritabanı erişilemez” durumlarını aynı
+sınıfa indirger. Silinmiş bir kaydı isteyen istemci 404 yerine 500 alır ve hatayı kendi
+tarafında yorumlayamaz.
+• err.message yanıt gövdesine yazılmaktadır. Bu alan sorgu metni, tablo adı ya da bağlantı
+ayrıntısı içerebileceğinden iç yapı dışarı sızar.
+• Kayıt (log) yazılmamaktadır. Sunucu 500 döndürür, ancak nedeni hiçbir yerde saklanmaz.
+• Etki alanı nesnesi doğrudan serileştirilmektedir. Veri aktarım nesnesi (data transfer object,
+DTO) katmanı olmadığı için modele sonradan eklenen bir alan — örneğin dâhili not ya da
+e-posta — kimse fark etmeden dış arayüze düşer.
+• Yanıt çağrıları return ile sonlandırılmamaktadır. Tek dallı hâlde sorun çıkarmaz; koşul
+eklendiği anda “headers already sent” hatası üretir.
+Referanslı Geri Bildirim
+Kural biçimindeki geri bildirim aktarım taşımaz:
+Hata yönetimi eksik.
+Referanslı biçim, değerlendirmeyi iki artefakta bağlar:
+routes/cuts.js içindeki getCut işlevine bakılabilir; orada kimlik doğrulaması 400,
+ErrNotFound 404, kalan durumlar kayda yazılıp 500 olarak ayrılmıştır. Buradaki
+tek yakalama bloğu bu ayrımı ortadan kaldırdığı için silinmiş bir kayıtta istemci
+500 almaktadır. Ayrıca err.message yanıta yazıldığından sorgu ayrıntısı dışarı
+çıkmaktadır. Serileştirmede toCutDTO kullanılırsa modele eklenen alanlar arayüze
+istem dışı yansımaz.
+İkinci biçim, birinci biçimin taşıdığı bilgiye ek olarak kişinin sonraki kararlarında başvura-
+bileceği bir konum bilgisi taşır.
+6
+
+-- 6 of 35 --
+
+Diğer Mühendislik Dallarında Örnek Yoluyla Aktarım
+Üçlü yapının yazılıma özgü olmadığı, fiziksel artefaktla çalışan disiplinlerdeki yerleşik uygula-
+malardan görülebilir. Bu disiplinlerde yapı çoğu zaman yazılımdakinden daha kurumsaldır, çünkü
+örnek elle tutulabilir bir nesnedir.
+İmalat: Standart Numune ve Limit Numunesi
+Görsel muayenede kullanılan iki ayrı numune türü vardır ve aralarındaki ayrım bu notun konusu
+açısından belirleyicidir. Golden sample (standart ya da ana numune) onaylanmış ideal durumu
+gösterir. Limit sample ya da boundary sample (Japonca gendo mihon) ise bu idealden kabul
+edilebilir azami sapmayı gösterir; yani iyi ürün ile kusurlu ürün arasındaki sınırı işaretler. Sektör
+yazınında iki terim zaman zaman birbirinin yerine kullanılsa da ayrım korunduğunda anlamlıdır:
+biri hedefi, diğeri eşiği temsil eder.
+Uygulamada limit numunesi gerçek parçalardan üretilir, numaralandırılır, taraflarca imzalanır
+ve genellikle satıcı, alıcı ve üretim yüklenicisinde ayrı nüshalar bulunur. Numuneler zamanla
+aşındığı, ışık ve nem etkisiyle değiştiği için kalibrasyon sisteminin parçası sayılır ve düzenli
+olarak yeniden gözden geçirilir. Bu yönüyle limit numunesi yönetimi belge yönetimine benzer bir
+denetim gerektirir.
+Uygulamanın işlevi çift yönlüdür. Birincisi, deneyimli muayene personelinin azalması
+karşısında yargıyı kişiden bağımsız hâle getirmektir. İkincisi, üretici ile müşteri arasında or-
+tak bir kabul ölçütü kurmaktır; yalnızca üreticide bulunan bir numune, karşı tarafın teslimatı
+değerlendirmesine imkân vermez.
+Kaynakçılık ve Talaşlı İmalat
+Kaynak muayenesinde kabul ve ret örneklerinin makro fotoğrafları ile eğitim atölyelerinde elle
+incelenebilen kaynak numuneleri kullanılır: gözeneklilik, yetersiz nüfuziyet, kenar yanığı gibi
+kusurlar tarif yerine numune üzerinden öğretilir. Talaşlı imalatta yüzey pürüzlülüğü karşılaştırma
+bloğu aynı işlevi görür; üzerinde farklı Ra değerleri işlenmiş plakalar bulunan bu araç, sayısal bir
+hedefi dokunulabilir bir referansa çevirir. “Ra 1,6 olsun” bir kuraldır; karşılaştırma bloğu bir
+örnektir.
+Metalurji ve Tahribatsız Muayene
+Metalurjide tane boyutu değerlendirmesi, mikroyapı görüntüsünün standart karşılaştırma çizel-
+geleriyle eşleştirilmesi yoluyla yapılır. Tahribatsız muayenede kalibrasyon blokları kullanılır: içine
+bilinen konum ve boyutta yapay kusurlar açılmış numuneler. Cihaz, kusurun tarifine göre değil
+gerçek bir kusurun ürettiği sinyale göre ayarlanır.
+Yapı ve Havacılık: Negatif Örneğin Ağırlığı
+Bazı disiplinlerde ağırlık merkezi karşıt örnektedir. Yapı mühendisliği eğitiminin omurgasında
+çökme vakaları bulunur: Hyatt Regency yürüyüş yolu çökmesi, Tacoma Narrows köprüsü,
+Citicorp Center’ın sonradan fark edilen rüzgâr yükü açığı. Henry Petroski’nin savı, tasarım
+bilgisinin başarıdan çok başarısızlıktan biriktiğidir; başarı hangi emniyet payının gereksiz olduğunu
+göstermez, başarısızlık ise hangi payın eksik olduğunu tam olarak gösterir (Petroski, 1985).
+Havacılıkta bu işlevi kaza inceleme raporları ve kurumsal ders veritabanları üstlenir. Bunlar
+sektörün ortak karşıt örnek arşividir ve tek bir kuruma ait değildir.
+7
+
+-- 7 of 35 --
+
+Tıp ve Hukuk
+Tıpta morbidite ve mortalite toplantıları, gerçekleşmiş olumsuz sonucun yapısal incelemesidir.
+Radyoloji eğitiminde öğretim dosyaları kullanılır: radyolog normal ile patolojik görüntüyü tanım
+ezberleyerek değil, çok sayıda görüntü çiftini karşılaştırarak ayırt eder.
+Hukuk eğitiminde case method, 1870’te Christopher Columbus Langdell tarafından Harvard
+Hukuk Fakültesi’nde ders kitabının yerine mahkeme kararlarının konulmasıyla kurumsallaşmıştır
+(Langdell, 1871). Kuralın soyut ifadesi yerine kuralın uygulandığı somut vaka okutulur.
+8
+
+-- 8 of 35 --
+
+İki Kurumsal Model: Araca Gömme ve Süreçle Aktarma
+Yazılım kuruluşlarında aynı problemin iki farklı çözümü gözlenir. Ayrım, aktarımın taşıyıcısının
+araç mı yoksa insan mı olduğuna dayanır.
+Netflix: Yargının Araca Gömülmesi
+Netflix’in bilinen yaklaşımı paved road kavramıdır: merkezî ekiplerce resmen desteklenen araç ve
+pratik kümesi. Uygulanması zorunlu tutulmaz; benimsenmesi, o yolu kullanmanın kullanma-
+maktan belirgin biçimde daha iyi bir deneyim olmasıyla teşvik edilir (Netflix Technology Blog,
+2018). Proje başlatma, geliştirme ortamı kurulumu, sürekli tümleştirme bağlantısı gibi adımlar
+uygulama tipine göre araç tarafından üretilir.
+Buradaki mantık örnek göstermek değil, yargıyı üretim aracına gömmektir. Yeni gelen kişiye
+doğru işleyicinin neye benzediği anlatılmaz; şablondan çıkan iskelet zaten doğru hata ayrımıyla
+gelir. Kuhn’un çözülmüş problemi yerine önceden doldurulmuş bir form konur.
+Bu tercihin arka planında kadro yapısı vardır. Netflix’in kültür belgesi “bağlam, denetim
+değil” ilkesine dayanır: yöneticinin işi kararı vermek değil, iyi kararın verilebileceği bağlamı
+sağlamaktır (Netflix Culture Memo). Yüksek yetkinlik yoğunluğu hedefleyen bu yapı, yetiştirme
+mekanizmasına duyulan ihtiyacı azaltır.
+Yaklaşımın bilinen maliyeti, yolun sürdürülmesindeki güçlüktür. Platform ekiplerinin en çok
+zorlandığı nokta, geliştiricileri güncel kütüphane ve araçlara taşımaktır; geçişler geliştiricilerin
+asıl işinden zaman çaldığı için bütçe bulmak güçtür (The New Stack, 2023). Yargı araca
+gömüldüğünde, araç eskidiğinde yargının kişilerde bir karşılığı kalmaz.
+Google: Yargının Süreç Olarak Aktarılması
+Google’da readability adı verilen iç sertifikasyon süreci, bu notun tarif ettiği üçlü yapının
+kurumsallaşmış hâlidir. Değişikliğin kod tabanına girebilmesi için, ilgili dilde readability sahibi
+bir mühendisin onayı gerekir; bu onay, kodun dilin stil kılavuzuna ve yerleşik pratiklerine
+uygunluğunu denetler (Software Engineering at Google, 9. bölüm). Sertifikayı almak isteyen
+mühendis, değişikliklerini bu iş için ayrılmış bir inceleyici grubuna gönderir ve ayrıntılı geri
+bildirim alır.
+Sürecin kurum içinde tanımı, “programlama dili en iyi pratiklerinin yayılması için şirket
+çapında bir mentorluk süreci” biçimindedir. Ölçek olarak mühendislerin yaklaşık beşte biri sürece
+katılmakta, yüzde bir ilâ ikisi inceleyici konumunda bulunmaktadır (Engineer’s Codex, 2024).
+Uygulamanın kökeni erken döneme uzanır: Google’ın ilk çalışanı Craig Silverstein’ın her yeni işe
+alınan kişinin ilk değişikliğini stil ve pratik açısından ayrıntılı incelemesi, sonradan kurumsallaşan
+sürecin çekirdeğidir (Modern Descartes, 2023).
+İki modelin karşılaştırması şu biçimde özetlenebilir:
+Araca gömme Süreçle aktarma
+Taşıyıcı Şablon, araç, platform İnsan, inceleme, stil
+kılavuzu
+Ön koşul Merkezî platform ekibi Sertifikalı inceleyici havuzu
+Ölçeklenme Araç kullanımıyla otomatik İnceleyici sayısıyla sınırlı
+Zayıf noktası Araç eskidiğinde yargı
+kalmaz
+İnceleme darboğaz oluştu-
+rur
+Küçük ekipler için ikinci model daha erişilebilirdir; platform ekibi kurmak sermaye gerek-
+tirirken kanonik dosya belirlemek ve inceleme disiplinini değiştirmek gerektirmez.
+9
+
+-- 9 of 35 --
+
+Yazılıma Özgü Güçlük: Örneğin Bozulması
+Diğer mühendislik dallarıyla karşılaştırıldığında yazılımın yapısal bir dezavantajı görülür. Limit
+numunesi rafta durur, karşılaştırma bloğu aşınmaz, kaza raporu geriye dönük olarak değiştirilmez.
+Bu alanlarda örnek, taşınabilir ve büyük ölçüde sabit bir nesnedir; yönetimi arşivleme işidir.
+Yazılımda kanonik örnek canlı bir kod tabanının içinde bulunur. Aynı dosya birkaç ay
+içinde yeniden yapılandırılabilir, bağımlılığı değişebilir, örnek olma niteliğini yitirebilir. Ekip
+“şu dosyaya bak” dediğinde gönderdiği yer artık gösterilmek istenen şeyi göstermiyor olabilir.
+Buradan çıkan sonuç, yazılımda örnek yönetiminin arşivleme değil süreklilik gerektiren bakım işi
+olduğudur.
+İkinci bir güçlük, örneğin bağlama bağımlılığıdır. Kitaplardaki örnek kod, bir ekibin bağımlılık
+enjeksiyonu tarzını, hata modelini, isimlendirme sözlüğünü ve kayıt tutma alışkanlığını taşımaz.
+Bu nedenle kanonik örneğin dış kaynaktan değil ekibin kendi kod tabanından seçilmesi gerekir.
+Limit Numunesi Mantığının Aktarımı
+İmalat pratiğinden yazılıma taşınabilecek en somut fikir, gösterilen örneğin niteliğine ilişkindir.
+Yazılımda paylaşılan örnekler tipik olarak vitrin niteliğindedir: özenle yazılmış, temsil gücü
+yüksek, ancak günlük üretim koşullarından uzak parçalar. Limit numunesi mantığı bunun tersini
+önerir; asıl işlevsel olan, kabul edilebilirliğin alt eşiğini gösteren örnektir.
+Bu ayrımın gerekçesi şudur. Deneyimsiz kişinin günlük olarak verdiği karar “bu kod mükemmel
+mi” değil, “bu kod gönderilebilir mi” kararıdır. Vitrin örneği bu karara girdi sağlamaz; ulaşılamaz
+bir hedef olarak durur ve çoğu zaman kişinin kendi işini gereğinden olumsuz değerlendirmesine
+yol açar. Eşik örneği ise doğrudan karar verilebilir bir referanstır.
+10
+
+-- 10 of 35 --
+
+Sonuç
+Kural ile örnek arasındaki tercih, bir üslup meselesi değil aktarılan bilginin miktarına ilişkin
+bir meseledir. Kural, üretildiği vakalardan ayrıldığında yargı bileşenini kaybeder ve alıcının
+kendi vaka birikimiyle yeniden doldurmasını gerektirir; bu birikimin bulunmadığı durumda kural
+biçimsel olarak uygulanır, işlevsel olarak uygulanmaz. Bu nedenle aktarımın asgari birimi tek bir
+kural değil, kanonik örnek ile sınır örneğinden oluşan bir çifttir.
+Çiftin ikinci ögesi çoğu zaman ihmal edilir ve ihmal maliyetlidir. Tek bir olumlu örnek, hangi
+özelliğin öz hangisinin tesadüf olduğunu belirlemeye yetmez. Sınırı belirleyen bilgi iki örnek
+arasındaki farktadır; farkın açıkça listelenmesi, aktarımın gerçekleştiği andır.
+Farklı mühendislik disiplinlerinin bu yapıyı bağımsız olarak geliştirmiş olması, yapının belirli
+bir alana değil bilginin kendisine ait olduğuna işaret eder. İmalatta limit numunesi, metalurjide
+karşılaştırma çizelgesi, tahribatsız muayenede kalibrasyon bloğu, yapı mühendisliğinde çökme
+vakası, hukukta emsal karar — hepsi aynı işlevin farklı maddi biçimleridir.
+Yazılımın bu geleneklere göre konumu özel bir dikkat gerektirir. Örnek burada sabit bir
+nesne olmadığı için, örneği güncel tutma yükü ekibin üzerindedir ve bu yük görünmezdir: kimse
+bir dosyanın artık örnek olmaktan çıktığını raporlamaz. Kurumsal düzeyde iki farklı çözüm
+gözlenmiştir; bunlar birbirinin alternatifi değil, farklı kaynak yapılarına verilmiş cevaplardır.
+Yüksek yetkinlik yoğunluğu ve büyük platform yatırımı olan kuruluş yargıyı araca gömebilir; bu
+kaynaklara sahip olmayan kuruluşun elinde kanonik dosya, karşıt örnek ve referanslı inceleme
+kalır.
+Çerçevenin sınırları da belirtilmelidir. Örnek yoluyla aktarım, mevcut pratiği yeniden üretme
+eğilimi taşır; bir kod tabanındaki yerleşik ancak isabetsiz bir yaklaşım, kanonik örnek olarak
+işaretlendiğinde daha da yerleşir. Kural, kendisini üreten vakalardan koptuğu için zayıftır, ancak
+aynı kopukluk onu gözden geçirilebilir kılar: bir kural tartışılıp değiştirilebilirken, örneğin taşıdığı
+örtük yargıya itiraz etmek güçtür. Bu nedenle örnek temelli aktarımın çalıştığı yapılarda kanonik
+örneklerin düzenli olarak yeniden değerlendirilmesi gerekir — imalatta limit numunelerinin
+kalibrasyon sistemine dâhil edilmesiyle aynı gerekçeyle.
+Açık kalan bir soru, sınır örneğinin nasıl seçileceğine ilişkindir. İmalatta eşik, ölçülebilir bir
+nitelik üzerinde tanımlanır ve taraflarca imzalanır. Yazılımda “kabul edilebilirin en kötüsü” için
+karşılaştırılabilir bir ölçüt bulunmadığından, eşiğin belirlenmesi kolektif yargıya kalır; bu yargının
+nasıl kurumsallaştırılabileceği bu notun kapsamı dışındadır.
+Kaynaklar
+• Kuhn, T. S. (1962/1970). The Structure of Scientific Revolutions (2. baskı, 1969 Postscript
+ile). University of Chicago Press.
+• Polanyi, M. (1966). The Tacit Dimension. Routledge & Kegan Paul.
+• Petroski, H. (1985). To Engineer is Human: The Role of Failure in Successful Design. St.
+Martin’s Press.
+• Langdell, C. C. (1871). A Selection of Cases on the Law of Contracts. Little, Brown.
+• Winters, T., Manshreck, T., Wright, H. (2020). Software Engineering at Google. O’Reilly.
+(Bölüm 9, Code Review; readability süreci.)
+• Netflix Technology Blog (2018). Full Cycle Developers at Netflix — Operate What You
+Build.
+• Netflix Culture Memo. jobs.netflix.com/culture.
+• The New Stack (2023). Developer Productivity Engineering at Netflix.
+11
+
+-- 11 of 35 --
+
+• Engineer’s Codex (2024). How Google Writes Clean, Maintainable Code.
+• Modern Descartes (2023). Readability: Google’s Temple to Engineering Excellence.
+• Agilian. Should I Use a Golden Sample or Limit Samples? (Standart numune ile limit
+numunesi ayrımı ve saklama koşulları.)
+• IPQCCO. What is a Limit Sample? (Limit numunesinin tanımı ve işletme pratiği.)
+12
+
+-- 12 of 35 --
+
+Tasarımın Merkezi: İnsan, Sistem ve
+Sorumluluk
+Özet
+İnsan merkezli tasarımın (human-centered design) yerini sistem merkezli bir yaklaşımın aldığı
+yönündeki yaygın tespit, doğru bir gözlemi yanlış adlandırmaktadır. Tasarımın merkezi taşın-
+mamakta, üçe bölünmekte ve parçalar farklı yönlere gitmektedir: amacın kaynağı olarak insan
+merkezde kalır, kontrolün faili olarak merkezden çıkar, sorumluluğun taşıyıcısı olarak merkezde
+tutulur. Üçüncüsü ile ikincisi arasındaki uyumsuzluk, bugünkü otonom sistem tartışmasının
+çözülmemiş çekirdeğidir. İnsan ile makinenin ortak bir bilişsel birim oluşturduğu fikri yeni değildir;
+Licklider (1960) tarafından adlandırılmış, Hollnagel ve Woods (1983) tarafından formelleştir-
+ilmiştir. Yeni olan, bu düzenlemenin istisna olmaktan çıkıp varsayılan hâline gelmesidir. Otomasy-
+onun insanı üst kademeye taşıdığı varsayımı ampirik olarak yanlıştır: otomasyon işin kolay kısmını
+devralır, zor kısmını insana bırakır ve bunu yaparken insanın zor kısmı çözecek beceriyi koruma
+imkânını ortadan kaldırır (Bainbridge, 1983). Sertifikasyon ve sorumluluk rejimleri hâlâ insanı
+nihai otorite varsayarak yazıldığı için, yetkinin göç ettiği ancak sorumluluğun göç etmediği bir
+boşluk oluşmuştur.
+13
+
+-- 13 of 35 --
+
+Giriş
+Mühendislik tasarımında “merkez” terimi tek bir şeyi adlandırmaz. En az üç ayrı anlamı vardır
+ve bu anlamlar birbirinden bağımsız hareket edebilir.
+Normatif merkez, sistemin ne için var olduğunu belirleyen konumdur. Amaçların kaynağıdır.
+Analitik merkez, tasarım faaliyetinin nesnesidir; mühendisin optimize etmeye çalıştığı
+birimdir.
+Operasyonel merkez, işletim sırasında kararı fiilen veren ve sonucunun hesabını veren
+konumdur.
+Klasik ergonomi ve insan faktörleri disiplininde bu üçü çakışıktı. Otomobil sürücü için
+tasarlanır, tasarımın nesnesi sürücü-arayüz ilişkisidir, kazada sorumluluk sürücüdedir. Üçünün
+çakışıklığı o kadar doğal görünüyordu ki ayrı terimlere ihtiyaç duyulmadı. Otonom ve yarı otonom
+sistemlerin yaygınlaşmasıyla çakışıklık bozulmuştur ve tek bir “merkez” terimiyle konuşmak artık
+analizi bozmaktadır.
+Bu notta ele alınan iddia, paradigma değişiminin bu ayrışma olduğu; “insan merkezliden
+sistem merkezliye geçiş” formülasyonunun ise ayrışmayı tek yönlü bir yer değiştirme gibi göstererek
+asıl problemi gizlediğidir. Not, otonomi seviyelerinin teknik gerçekleştirimini, makine öğrenmesi
+yöntemlerini ve belirli bir platformun mühendislik ayrıntılarını kapsam dışında bırakır; ilgilendiği
+düzey tasarım felsefesi ve sorumluluk mimarisidir.
+14
+
+-- 14 of 35 --
+
+İnsan Merkezli Tasarımın Kuruluşu ve Sınırı
+Paradigmanın çekirdek sorusu
+Sanayi devriminden yirminci yüzyılın sonuna kadar makine tasarımının örgütleyici sorusu şuydu:
+insan bu makineyi nasıl kullanacak? Otomobili sürücü kullanır, uçağı pilot uçurur, bilgisayara
+kullanıcı komut verir, fabrikada operatör makineyi yönetir. Her durumda makine bir araçtır ve
+aracın niteliği, insan tarafından ne kadar iyi kullanılabildiğiyle ölçülür.
+Bu soru bir optimizasyon programı doğurur. Optimize edilen büyüklükler ergonomi, kullanıcı
+deneyimi, hata oranının düşürülmesi ve insan performansının artırılmasıdır. İkinci Dünya Savaşı
+sırasında kokpit tasarımındaki kaza incelemeleri disiplini kurumsallaştırmıştır: aynı tipte uçakta
+tekrar eden “pilot hatası” vakalarının, benzer görünümlü kolların yan yana yerleştirilmesinden kay-
+naklandığı anlaşılınca, hata failden tasarıma taşınmıştır. Modern insan faktörleri mühendisliğinin
+doğuşu bu tersine çevirmedir.
+Paradigmanın kör noktası
+İnsan merkezli tasarımın örtük varsayımı, insanın döngüdeki tek karar noktası olduğu ve maki-
+nenin durumunun insan tarafından doğrudan gözlemlenebildiğidir. Bir uçağın kumanda yüzeyi
+nerede duruyorsa pilot onu görür; bir tezgâhın kesici ucu ne yapıyorsa operatör onu izler. Tasarım
+problemi, bu gözlemin kolaylaştırılmasıdır.
+Makine kendi başına durum değerlendirmesi yapmaya, veri birleştirmeye ve seçenek üretmeye
+başladığında varsayım çöker. İnsanın gözlemlediği şey artık dünya değil, makinenin dünya
+modelidir. Bu noktada “kullanıcı arayüzünü iyileştirmek” problemi tanımlamaz; çünkü problem
+arayüzün okunabilirliği değil, arkasındaki modelin doğruluğu ve insanın o modele ne kadar
+güvenmesi gerektiğidir.
+15
+
+-- 15 of 35 --
+
+Bileşik Sistem Yaklaşımı
+Kavramın kökeni
+İnsan ile makinenin ayrı ayrı değil ortak bir birim olarak ele alınması gerektiği fikri, J. C. R.
+Licklider’ın Man-Computer Symbiosis makalesinde adlandırılmıştır (Licklider, 1960). Licklider’ın
+önerisi, bilgisayarın insanın yerini almasının da insanın uzantısı olmasının da yanlış çerçeve
+olduğu; asıl hedefin iki tarafın farklı yeteneklerini birleştiren bir ortaklık kurmak olduğuydu.
+İnsan hedef belirlemede, hipotez kurmada ve ölçüt seçmede; makine ise tekrarlı hesaplama,
+saklama ve arama işlerinde üstündür.
+Fikir, Erik Hollnagel ve David Woods tarafından mühendislik disiplinine dönüştürülmüştür
+(Hollnagel ve Woods, 1983). Bileşik bilişsel sistem (joint cognitive system) kavramının çekirdek
+hamlesi analiz biriminin değiştirilmesidir: incelenen şey ne insandır ne makine, ikisinin birlikte
+oluşturduğu bilişsel bileşiktir. Bu kavrayışta “insan hatası” çoğu zaman açıklayıcı bir kategori
+değildir; bileşiğin koordinasyon kusurunun, faili en görünür olan bileşene yazılmış hâlidir.
+Denetimli kontrol ve otonomi kademeleri
+Thomas Sheridan’ın denetimli kontrol (supervisory control) çerçevesi, insanın sistemle ilişkisini
+ikili bir kontrol–kontrolsüzlük ayrımından çıkarıp kademeli bir ölçeğe yaymıştır (Sheridan ve
+Verplank, 1978; Sheridan, 1992). Uygulamada üç ana konum yaygınlaşmıştır:
+• Döngü içinde insan (human-in-the-loop): Sistem eylemi ancak insan onayıyla gerçek-
+leştirir. İnsan her kararın parçasıdır.
+• Döngü üstünde insan (human-on-the-loop): Sistem kendi kararını verir ve uygular; insan
+izler ve gerektiğinde müdahale ederek durdurur.
+• Döngü dışında insan (human-out-of-the-loop): Sistem, insanın işletim anında müdahalesi
+olmaksızın çalışır.
+Bu üç kademeye zaman zaman eklenen ara kavramlar, aslında farklı bir eksene işaret eder.
+Kademe ölçeği insanın nerede durduğunu söyler; oysa kritik soru insanın kararın hangi kısmına
+fiilen hükmettiğidir. Bu ikinci soru, silahlı otonom sistemler literatüründe anlamlı insan
+kontrolü (meaningful human control) başlığı altında ele alınır ve ABD Savunma Bakanlığı’nın
+3000.09 sayılı direktifi ile NATO belgelerinde politika düzeyine taşınmıştır (US DoD Directive
+3000.09, 2012; güncellenmiş hâli 2023). Angaje kuralı belirlemek ile bir angajmanı denetlemek
+farklı eylemlerdir; ikisi aynı merdivenin basamakları değildir.
+Yeni olan ne
+Bileşik sistem kavramı 1960’ta adlandırılmış, 1983’te formelleşmiştir. Dolayısıyla “yeni paradig-
+maya geçiyoruz” ifadesi kavramsal bir yenilik iddiası olarak yanlıştır. Değişen şey kavramın
+kendisi değil, kapsamıdır: denetimli kontrol düzenlemesi nükleer santral, uzay aracı ve süreç
+endüstrisi gibi dar bir alanın istisnası olmaktan çıkıp otomobil, üretim hattı ve yazılım geliştirme
+dâhil olmak üzere varsayılan düzenleme hâline gelmiştir. Bir kavram altmış yıldır ortadaysa ve
+pratik hâlâ geride kalıyorsa, engelin teknik olmadığı sonucu çıkar.
+16
+
+-- 16 of 35 --
+
+Otomasyonun İronileri
+Bainbridge argümanı
+İnsanın otomasyon kademesinde yukarı çıkmasını bir terfi olarak sunan anlatının en güçlü karşı
+savı, Lisanne Bainbridge’in Ironies of Automation makalesidir (Bainbridge, 1983). Argüman şu
+adımlardan oluşur:
+1. Tasarımcı, güvenilir biçimde otomatikleştirebildiği işleri otomatikleştirir. Bunlar rutin,
+tanımlı, sık tekrarlanan işlerdir.
+2. Otomatikleştirilemeyen işler insana kalır. Bunlar tanım gereği ender, belirsiz ve önceden
+tam belirtilememiş durumlardır.
+3. Beceri, tekrarla korunur. Rutin işi yapmayan operatör, o işin dayandığı beceriyi ve durum
+farkındalığını zamanla yitirir.
+4. Sonuç: operatörden, en zor işi, en az güncel beceriyle, genellikle en az zamanla ve en yüksek
+stres altında yapması beklenir.
+Otomasyon insanın işini kolaylaştırmaz; kolay kısmını alır, zor kısmını bırakır. Bu ironi kırk
+yıldır çürütülememiştir ve otonom sistem tartışmasının en tekrarlı ampirik bulgusudur.
+İki vaka
+Air France 447
+1 Haziran 2009’da Rio de Janeiro–Paris seferini yapan Airbus A330, Atlantik üzerinde düşmüştür.
+Pitot tüplerinin buzlanması hız verisini bozunca otopilot devreden çıkmış ve uçuş kontrol yasası
+daha az korumalı bir moda geçmiştir. Ekip, uçağın perdövites (stall) durumunda olduğunu
+yaklaşık üç buçuk dakika boyunca teşhis edememiş, burun yukarı girdi vermeyi sürdürmüştür
+(BEA, 2012). Ekibin toplam uçuş saati yüksekti; elle uçuş saati değil. Bainbridge’in üçüncü
+adımının doğrudan tezahürüdür.
+Boeing 737 MAX
+2018 ve 2019’daki iki kazada, MCAS adlı otomatik denge sistemi tek bir hücum açısı sensöründen
+gelen hatalı veriye dayanarak burnu tekrarlı biçimde aşağı itmiştir. Buradaki kusur AF447’nin
+tersidir: sistem yetkiyi almış, ancak pilotlar sistemin varlığından ve devreye girme koşullarından
+haberdar edilmemiştir (NTSB, 2019). Yetkinin sisteme geçmesi tek başına sorun değildir; geçişin
+insana bildirilmemesi sorundur.
+İkame yanılgısı ve güven kalibrasyonu
+Woods ve çalışma arkadaşlarının ikame yanılgısı (substitution myth) dediği hata, otomasyonun
+insanın yaptığı işi birebir devraldığı, geri kalanın değişmeden kaldığı varsayımıdır (Sarter, Woods
+ve Billings, 1997). Gözlem tersidir: otomasyon işi devralmaz, dönüştürür ve genellikle yeni bir
+koordinasyon yükü üretir. Operatör artık süreci değil, süreci yöneten sistemi izlemek zorundadır;
+bu ikinci düzey izleme çoğu zaman birincisinden zordur.
+Buna bağlı ikinci bulgu güvenle ilgilidir. Otomasyona duyulan güvenin hedefi yüksek güven
+değil, kalibre edilmiş güventir: sistemin gerçek yeterliliğiyle örtüşen güven düzeyi (Lee ve See,
+2004). Aşırı güven izlemenin gevşemesine, yetersiz güven ise sistemin gereksiz yere devre dışı
+bırakılmasına yol açar. Tasarım problemi, kullanıcının sisteme güvenmesini sağlamak değil, ne
+zaman güvenmemesi gerektiğini fark edebilmesini sağlamaktır.
+17
+
+-- 17 of 35 --
+
+Temsilin Kayması
+Sensör füzyonu ve dolayımlanmış algı
+Çok sensörlü modern platformlarda değişen asıl şey karar yetkisi değil, temsildir. Radar, elektro-
+optik sistemler, kızılötesi arama-izleme ve elektronik harp alıcılarından gelen veriler birleştirilir,
+hedefler sınıflandırılır ve operatöre ham ölçüm değil yorumlanmış bir dünya modeli sunulur. F-35
+gibi platformlarda pilot, ekranda bir sensör çıktısı görmez; füzyon hattının ürettiği tekilleştirilmiş
+iz listesini görür.
+Bu, epistemik bir kaymadır. Operatör artık dünyayı algılamamakta, makinenin dünya
+modelini algılamaktadır. Sonucu şudur: operatörün yanılması için yanlış muhakeme yapması
+gerekmez. Model hatalıysa, doğru muhakeme yanlış sonuca varır ve operatörün bunu fark
+edebileceği bağımsız bir algı kanalı çoğu zaman yoktur.
+Durum farkındalığının değişen anlamı
+Mica Endsley’in durum farkındalığı (situation awareness) modeli üç düzey ayırır: çevredeki
+öğelerin algılanması, bunların anlamının kavranması ve yakın geleceğin öngörülmesi (Endsley,
+1995). Dolayımlanmış algı koşulunda birinci düzey insandan makineye geçer. İnsanın farkındalığı
+artık çevreye değil, makinenin çevre temsiline dair olur.
+Bu, ölçülmesi gereken büyüklüğü de değiştirir. Klasik insan faktörleri insan hatasını ölçer.
+Bileşik sistemde ölçülmesi gereken şey, modelin kalibrasyonu ile insanın modele duyduğu güven
+arasındaki uyumdur. Bir sistemin “kullanılabilir” olması, modelinin ne zaman yanıldığını
+kullanıcısına bildirebilmesi anlamına gelir; sadece okunaklı bir ekran sunması değil.
+Aynı kaymanın diğer alanlardaki karşılıkları
+• Karayolu taşıtları. Sürücü destek sistemlerinde eski düzenlemede insan sürer, araç yardım
+eder. Yeni düzenlemede sistem çevreyi algılar ve insan denetleyici konuma geçer. Denetleyici
+konumun tehlikesi Bainbridge’in tarif ettiğidir: uzun süre müdahale gerektirmeyen bir
+sistem, müdahale gerektiğinde hazır olmayan bir denetleyici üretir.
+• Yazılım geliştirme. Eski düzenlemede kodun tamamını programcı yazar. Yeni düzen-
+lemede insan mimariyi ve kısıtları kurar, üretim ve öneri katmanı otomatikleşir. İnsanın işi
+yazmaktan değerlendirmeye kayar; değerlendirme, yazmaya kıyasla daha zor öğrenilen ve
+tekrar olmadan daha hızlı körelen bir beceridir.
+• Üretim. Otonom üretim sisteminin kendini optimize ettiği düzenlemede insanın işi
+makineyi çalıştırmak değil, optimizasyonun hedef fonksiyonunu ve sınırlarını belirlemektir.
+Kaza analizinde sorulacak soru “operatör ne yaptı” değil “hedef fonksiyonu kim yazdı” olur.
+18
+
+-- 18 of 35 --
+
+Yetki ile Sorumluluğun Ayrışması
+Ahlaki tampon bölge
+Madeleine Clare Elish’in ahlaki tampon bölge (moral crumple zone) kavramı, otomotivdeki
+tampon bölge benzetmesinden türetilmiştir: nasıl ki aracın ön kısmı çarpma enerjisini soğurmak
+üzere ezilir, karmaşık otonom sistemlerde de döngüde bırakılan insan, sorumluluk darbesini
+soğuran bileşen hâline gelir (Elish, 2019). Kararın büyük kısmını sistem vermiş olsa bile, hukuki
+ve toplumsal muhasebe en görünür ve en anlaşılır fail olan insana yönelir.
+2018’de Tempe’de bir test aracının yayaya çarparak ölümüne yol açtığı olayda soruşturma ve
+kamuoyu tartışması büyük ölçüde araçtaki güvenlik operatörü üzerinde yoğunlaşmıştır. Oysa
+Ulusal Ulaştırma Güvenliği Kurulu incelemesi, algılama hattının yayayı sınıflandırmakta tekrarlı
+biçimde başarısız olduğunu ve acil frenleme işlevinin sistem tasarımı gereği devre dışı bırakılmış
+olduğunu ortaya koymuştur (NTSB, 2019). Yetki sistemdeydi; sorumluluk operatörde kaldı.
+Rejim gecikmesi
+Bu, salt bir tasarım sorunu değil bir kurumsal tasarım sorunudur. Havacılık sertifikasyon rejiminin
+tamamı — sistem geliştirme süreçlerini tanımlayan ARP4754A, emniyet değerlendirmesini
+tanımlayan ARP4761, yazılım için DO-178C ve donanım için DO-254 — pilotu nihai otorite
+kabul eden bir çerçevede kurulmuştur. Sorumluluk hukuku ve sigorta yapıları da aynı kabule
+dayanır.
+Buradan şu sonuç çıkar: paradigma teknik olarak kaymış, hukuki ve sertifikasyon düzeyinde
+kaymamıştır. Aradaki boşluk boş kalmamakta; o boşlukta insan oturmaktadır. Otonomi seviyesi
+yükseldikçe insanın fiili kontrolü azalır, ancak hesap verme yükümlülüğü sabit kalır. Ayrışmanın
+yönü tek yönlüdür ve kendiliğinden kapanmaz.
+19
+
+-- 19 of 35 --
+
+Merkezin Üçe Bölünmesi
+Üç merkezin son durumu
+Merkez türü Klasik düzenleme Bileşik sistem düzenlemesi
+Normatif (amaç) İnsan İnsan — değişmez
+Analitik (tasarım
+nesnesi)
+İnsan-arayüz ilişkisi İnsan-makine bileşiği
+Operasyonel (fiilî
+karar)
+İnsan Sistem
+Sorumluluk İnsan İnsan — taşınmadı
+Normatif merkezin insanda kalması bir tercih değil mantıksal bir zorunluluktur. Bir sistem
+verilen hedefi optimize eder; hedefin doğru hedef olup olmadığını soramaz, çünkü bu soru
+optimizasyon probleminin dışındadır. Olgusal önermelerden değer önermelerinin türetilemeyeceği
+yönündeki klasik ayrım (Hume, 1739), mühendislikte bu biçimi alır: amaç sistemin içinden
+çıkarılamaz, dışarıdan verilir.
+Analitik merkez ise gerçekten kaymıştır. Ergonomi tekil operatörün performansını optimize
+ediyordu; bileşik sistem yaklaşımında optimize edilen şey iki tarafın koordinasyonudur: hangi
+tarafın neyi ne zaman bildiği, yetkinin nerede durduğu, devirlerin nasıl gerçekleştiği ve bir tarafın
+diğerinin modelini nasıl denetleyebildiği.
+Adlandırma sorunu
+“Sistem merkezli tasarım” ifadesi, tasarımın merkezinin insandan çıktığını ima ettiği için yanıltıcıdır.
+Değişen şey merkez değil, tasarımın nesnesidir: artefakttan bileşiğe geçilmiştir. Literatürdeki
+yerleşik adlandırmaların hepsi bu ayrımı korur. Hollnagel ve Woods’un “bileşik” (joint) sıfatı,
+insanın çıkarıldığını değil bileşiğe dâhil edildiğini söyler. Donald Norman, insan merkezli tasarımın
+pratikte tekil kullanıcının tekil görevini optimize etmeye daraldığını belirterek insanlık merkezli
+tasarım (humanity-centered design) terimini önerdiğinde de merkezi taşımaz, kapsamı genişletir:
+bütün sistemi ele almak, tekil ürün yerine toplumsal problemi hedeflemek, uzun vadeye bakmak
+ve çözümü topluluğa devretmek (Norman, 2023).
+Aynı hamle başka çerçevelerde de görülür. Batya Friedman’ın değer duyarlı tasarımı (value-
+sensitive design), tasarıma gömülü değerleri sürecin başında açığa çıkarmayı önerir. Terry Irwin’in
+geçiş tasarımı (transition design), tasarımın nesnesini üründen toplumsal geçişe taşır. Hiçbiri
+normatif merkezi insandan almaz; hepsi analitik merkezi genişletir.
+20
+
+-- 20 of 35 --
+
+Sonuç
+Otonom sistemlere geçiş, insanı tasarımın merkezinden çıkaran bir hareket değildir. Tek bir
+merkez varsayımının artık geçersiz olduğunun anlaşılmasıdır. Amaç belirleme, kontrol uygulama
+ve hesap verme, klasik mühendislik nesnelerinde aynı fail üzerinde çakıştığı için tek bir kavramla
+adlandırılabiliyordu; bileşik sistemlerde çakışıklık bozulmuştur ve üç ayrı soru olarak sorulmaları
+gerekir.
+Bunun üç pratik karşılığı vardır. Birincisi, otonomi kademesini yükseltme kararı bir perfor-
+mans kararı değil bir sorumluluk mimarisi kararıdır; kademeyi yükselten tasarımcı, aynı anda
+kimin neyin hesabını vereceğini de yeniden tanımlamak zorundadır. İkincisi, insanın denetleyici
+konuma taşınması otomatik bir iyileştirme değildir; Bainbridge ironisi gereği, denetleyicinin
+müdahale becerisini koruyacak bir tasarım tedbiri alınmadıkça kademe yükseltmek sistemi ender
+durumlarda daha kırılgan yapar. Üçüncüsü, dolayımlanmış algı koşulunda arayüz tasarımının
+ölçütü okunabilirlik değil, modelin kendi belirsizliğini bildirebilme kapasitesidir.
+Çerçevenin sınırları vardır. Üç merkez ayrımı, kararın tek bir insanda toplandığı durumlarda
+nettir; kararın bir kurum içinde dağıldığı durumlarda — örneğin hedef fonksiyonunu bir ekip,
+işletim kısıtlarını başka bir birim, anlık müdahaleyi bir operatör belirlediğinde — normatif merkez
+de bulanıklaşır ve “insan” tekil bir fail olmaktan çıkar. Not, bu dağıtık durumu ele almamaktadır.
+Açık kalan soru şudur: sorumluluğun yetkiyi takip etmesi hangi mekanizmayla sağlan-
+abilir? Sertifikasyon rejimlerini otonomi kademesine duyarlı hâle getirmek, üretici sorumluluğunu
+genişletmek ve anlamlı insan kontrolünü ölçülebilir bir kısıt olarak tanımlamak önerilen yollardır;
+hiçbiri henüz yerleşmiş değildir. Ayrışma kapanmadığı sürece, otonomi artışının fiilî etkisi insanın
+kontrolünü azaltıp maruziyetini sabit tutmak olacaktır.
+Kaynaklar
+• Bainbridge, L. (1983). Ironies of Automation. Automatica, 19(6).
+• BEA (2012). Final Report on the Accident on 1st June 2009 to the Airbus A330-203, Flight
+AF 447. Bureau d’Enquêtes et d’Analyses, Fransa.
+• Elish, M. C. (2019). Moral Crumple Zones: Cautionary Tales in Human-Robot Interaction.
+Engaging Science, Technology, and Society, 5.
+• Endsley, M. R. (1995). Toward a Theory of Situation Awareness in Dynamic Systems.
+Human Factors, 37(1).
+• Friedman, B. ve Hendry, D. G. (2019). Value Sensitive Design: Shaping Technology with
+Moral Imagination. MIT Press.
+• Hollnagel, E. ve Woods, D. D. (1983). Cognitive Systems Engineering: New Wine in New
+Bottles. International Journal of Man-Machine Studies, 18(6).
+• Hume, D. (1739). A Treatise of Human Nature.
+• Irwin, T. (2015). Transition Design: A Proposal for a New Area of Design Practice, Study,
+and Research. Design and Culture, 7(2).
+• Lee, J. D. ve See, K. A. (2004). Trust in Automation: Designing for Appropriate Reliance.
+Human Factors, 46(1).
+• Licklider, J. C. R. (1960). Man-Computer Symbiosis. IRE Transactions on Human Factors
+in Electronics, HFE-1.
+• Norman, D. A. (2023). Design for a Better World: Meaningful, Sustainable, Humanity
+Centered. MIT Press.
+21
+
+-- 21 of 35 --
+
+• NTSB (2019). Collision Between Vehicle Controlled by Developmental Automated Driving
+System and Pedestrian, Tempe, Arizona, March 18, 2018. Highway Accident Report
+NTSB/HAR-19/03.
+• NTSB (2019). Safety Recommendation Report: Assumptions Used in the Safety Assessment
+Process and the Effects of Multiple Alerts and Indications on Pilot Performance (Boeing
+737 MAX). ASR-19-01.
+• Sarter, N. B., Woods, D. D. ve Billings, C. E. (1997). Automation Surprises. G. Salvendy
+(Ed.), Handbook of Human Factors and Ergonomics içinde. Wiley.
+• Sheridan, T. B. (1992). Telerobotics, Automation, and Human Supervisory Control. MIT
+Press.
+• Sheridan, T. B. ve Verplank, W. L. (1978). Human and Computer Control of Undersea
+Teleoperators. MIT Man-Machine Systems Laboratory.
+• US Department of Defense (2012, güncelleme 2023). Directive 3000.09: Autonomy in
+Weapon Systems.
+22
+
+-- 22 of 35 --
+
+Mühendislik Organizasyonlarında Takım
+Oyunu
+Özet
+Mühendislik organizasyonlarında “takım oyunu” çoğunlukla uyumluluk ve yardımseverlik olarak
+anlaşılır; oysa işlevsel tanımı farklıdır: bireysel çıktının değil, sistemin toplam çıktısının maksimize
+edilmesi. Bu tanım, bloke etmemekten kredi dağıtmaya kadar uzanan davranış kümesinin
+tamamını tek bir ilkeden türetir. Davranışsal katman tek başına yetersizdir, çünkü bireysel iyi
+niyete dayanan çözümler taşıyıcısı çekildiğinde çöker; kalıcı olan, doğru davranışı varsayılan
+hâline getiren mekanizmalardır. Takım oyununu mümkün kılan sosyal zemin ise küçük sosyal
+risklerin ucuz olmasıdır: soru sormanın, hata itiraf etmenin ve fikir ortaya atmanın bedeli
+yükseldiğinde ekip sessizce yanlış yapmaya devam eder. Mühendis ortamlarında bu zemini en
+çok aşındıran davranış, bilginin statü aracı olarak kullanılmasıdır; bu davranış kötü karakterden
+değil, yetkinliğin doğrudan gözlemlenememesinden doğan bir ölçüm probleminden kaynaklanır.
+Aynı ölçüm problemi uzaktan çalışmada vekil değişken seçimini belirler ve kötü seçilmiş bir vekil,
+ölçüm yokluğundan daha tehlikelidir; çünkü bozulduğu hâlde güven vermeye devam eder. Bir
+müdahalenin sonucunu belirleyen şey doğrudan etkisi değil, hangi davranışı normalleştirdiğidir.
+Bu ikinci dereceden etki mantığı askeri doktrinde iki yüzyıldır kurumsallaşmış durumdadır, ancak
+doktrinin şirketlere transferi kişi üzerinden değil kavram üzerinden gerçekleşir; dayandığı yapısal
+koşullar taşınmadığında geriye yalnızca doktrinin biçimi kalır.
+23
+
+-- 23 of 35 --
+
+Giriş
+Takım oyunu (teamwork), bir organizasyonda bireyin kendi lokal çıktısı ile sistemin toplam çıktısı
+ayrıştığında ikincisini tercih etmesi biçiminde tanımlanabilir. Bu tanım, gündelik kullanımdaki iki
+yaygın kabulden ayrılır. Birincisi, takım oyununun uyumluluk ve çatışmasızlıkla eş tutulması: bu
+kabul, karar öncesi sert itirazı takım karşıtı sayarak organizasyonun hata düzeltme kapasitesini
+düşürür. İkincisi, takım oyununun kişisel fedakârlıkla ölçülmesi: bu kabul, yapısal bir açığı
+bireysel emekle kapatmayı erdem sayar ve böylece açığın görünür olmasını engeller.
+Konu üç ayrı katmanda ele alınmayı gerektirir; bu katmanların birbirine karıştırılması
+çözümlerin yanlış yere uygulanmasına yol açar. Davranışsal katman, bireyin gündelik iş
+akışında verdiği kararlardır: neyi önce yapacağı, neyi kime söyleyeceği, hangi bilgiyi ne zaman
+paylaşacağı. Yapısal katman, bu kararların bireyin niyetinden bağımsız olarak doğru çıkmasını
+sağlayan mekanizmalardır: sahiplik matrisi, nöbet rotasyonu, prosedür belgeleri. Sosyal katman,
+ekip üyelerinin birbirine karşı tutumudur ve diğer iki katmanı taşıyan zemindir; sosyal zemin
+bozuksa ne davranış normları ne de mekanizmalar tutar.
+Bu katmanların altında ortak bir problem yatar: ölçüm problemi. Yetkinlik, katkı,
+çaba ve iyi niyet doğrudan gözlemlenemeyen büyüklüklerdir. Organizasyonlar bunların yerine
+gözlemlenebilir vekil değişkenlere (proxy) bakmak zorundadır ve vekil değişkenler bir kez ölçüt
+hâline geldiğinde optimize edilmeye başlanır. Bu notta ele alınan davranış kalıplarının önemli bir
+bölümü, ahlaki bir zaaftan değil bu yapısal zorunluluktan doğar.
+Not, mühendislik organizasyonlarını ve özellikle dağıtık (remote) çalışan yazılım ekiplerini
+kapsar. Ekip kurma teknikleri, işe alım, performans değerlendirme sistemlerinin tasarımı ve
+liderlik psikolojisi kapsam dışıdır. Askeri doktrine yapılan başvurular, benzer bir problemin
+daha uzun süre ve daha yüksek bedelle çalışılmış olması nedeniyledir; doktrinin doğrudan
+uygulanabilirliği iddiası taşımaz.
+24
+
+-- 24 of 35 --
+
+Davranışsal Katman: Takım Oyununun İçeriği
+Bloke etmeme önceliği
+Bir organizasyonda en pahalı olay, bir kişinin başka bir kişiyi beklemesidir. Bekleme süresi
+boyunca bekleyen tarafın kapasitesi tamamen atıl kalır, ancak bu maliyet bekleten tarafın görüş
+alanına girmez. Asimetri şuradadır: bir kod incelemesi (code review), bir erişim izni ya da bir
+karar, veren taraf için yirmi dakikalık iş iken bekleyen taraf için yarım günlük durma anlamına
+gelebilir.
+Bu asimetriden çıkan pratik kural, mesai başlangıcında önce başkalarını açan işlerin yapılması,
+derin ve kesintisiz odak gerektiren işlerin sonraya bırakılmasıdır. Kural, zaman dilimi farkı
+bulunan dağıtık ekiplerde iki katına çıkar: gün sonunda bırakılan bir yorum, karşı tarafın ertesi
+günkü tüm çalışma planını belirler.
+Devir teslim yüzeyinin maliyeti
+Yazılan kodun maliyeti, yazma süresi değil, sonraki okuyucuların onu anlamak için harcayacağı
+toplam süredir. Bir modülü on kişi okuyacaksa, yazarın anlaşılırlık için harcadığı her dakika
+on kat geri döner. Bu nedenle değişiklik açıklaması (pull request description), commit mesajı,
+veri tabanı göç (migration) notu ve “bu neden böyle yapıldı” yorumu birer nezaket unsuru değil,
+doğrudan verimlilik bileşenidir.
+Brooks (1975), bir projeye adam eklendiğinde iletişim kanallarının sayısının kişi sayısının
+karesiyle orantılı arttığını göstermiştir; bu, devir teslim yüzeyini temiz bırakmanın neden ekip
+büyüdükçe daha kritik hâle geldiğini açıklar.
+Bilgi asimetrisinin çift yönlü maliyeti
+Yalnızca bir kişinin bildiği bilgi, o kişi için kısa vadede pazarlık gücü üretir. Aynı bilgi uzun
+vadede iki tarafa da zarar verir. Organizasyon açısından tekil hata noktası (single point of failure)
+oluşur; kişi açısından ise hareket kabiliyeti kaybolur, çünkü yerine geçebilecek kimse bulunmayan
+bir modülün sahibi ne izne çıkabilir ne başka bir işe geçebilir. Bilgiyi paylaşmak bu nedenle
+özgeci bir davranış değil, kişinin kendi seçenek kümesini genişletmesidir.
+Karar sonrası uyum
+Karar alma sürecinde sert itiraz sağlıklıdır ve sürecin kalitesini yükselten asıl unsurdur. Karar
+alındıktan sonraki pasif direniş ise en yıkıcı davranıştır, çünkü kararı iptal etmez, yalnızca
+uygulanmasını yavaşlatır ve nedeni görünmez kılar.
+Amazon’un liderlik ilkeleri arasında yer alan “katılmama ve bağlanma” (disagree and commit)
+formülasyonu tam olarak bu ayrımı kurumsallaştırır: itiraz kayda geçirilir, ardından karara tam
+destek verilir (Bezos, 2016). Bu davranışın kişisel getirisi de vardır: sürekli itiraz eden ve karar
+sonrası da direnen kişi bir süre sonra tartışmaya çağrılmaz; itirazını karara bağlayabilen kişi ise
+tekrar davet edilir.
+Kötü haberin erkenliği
+Bir gecikmenin organizasyona verdiği zarar, gecikmenin süresiyle değil, haber verilme zamanıyla
+ölçülür. Son gün bildirilen iki günlük gecikme, üç hafta önce bildirilen iki haftalık gecikmeden
+daha pahalıdır; çünkü ilkinde başkalarının yeniden planlama hakkı elinden alınmıştır.
+Bundan çıkan sonuç, itibarın hızla değil kalibrasyonla kurulduğudur. Kalibrasyon, kişinin
+verdiği tahminlerin gerçekleşenle tutarlılığı ve sapma durumunda bunu önceden bildirme davranışıdır.
+Öngörülebilir bir mühendis, ortalama olarak daha hızlı ama tahminleri tutmayan bir mühendisten
+daha değerlidir, çünkü üzerine plan yapılabilir.
+25
+
+-- 25 of 35 --
+
+Görünürlüğün mekanik zorunluluğu
+Sessizce iyi iş yapan mühendis, dağıtık bir ekipte çoğunlukla “yükü çekmiyor” varsayılır. Bu
+varsayım kötü niyetten değil veri yokluğundan doğar: kimse kimsenin ekranını görmemektedir ve
+yokluğunda zihin boşluğu olumsuz yönde doldurur.
+Günlük durum toplantısı (standup), kısa yazılı ilerleme notu ve karar özetleri bu nedenle
+övünme aracı değil, başkalarının planlama yapabilmesi için gereken sinyaldir. Sinyalin işlevsel
+olması, üretilen işle orantılı kalmasına bağlıdır; sinyalin kendisi hedefe dönüştüğünde ortaya çıkan
+bozulma ilerideki bölümde ele alınmaktadır.
+Kredinin isimle dağıtılması
+Kredi, bir başarının kime yazıldığıdır. “İsimle dağıtmak”, katkının sahibini açıkça adlandırmaktır.
+“Bunu birlikte çözdük” cümlesi ile “bu yarış koşulunu (race condition) ekipteki bir kişi yakaladı,
+benim çözümüm yanlış katmandaydı” cümlesi arasındaki fark, ilkinin kredinin buharlaşmasına,
+ikincisinin bir isme yapışmasına yol açmasıdır.
+Mekanizma iki yönlüdür. Kişinin kendi katkısını övmesi ucuz bir sinyaldir, çünkü çıkar taşır;
+başkasının övmesi ise bilgi taşır. Aynı zamanda krediyi doğru dağıtan kişi, kendi yargısının iyi
+çalıştığını göstermiş olur, dolayısıyla işlem kendisi için de kredi üretir. Bunun sınırı enflasyondur:
+her katkıya isim yazıldığında sinyalin ayırt edici değeri sıfırlanır. Bu nedenle adlandırma belirleyici
+katkılarla sınırlı tutulur ve spesifik yapılır — “yardımcı oldu” değil, “şu varsayımın yanlış olduğunu
+o gördü”.
+Sınır koymanın takım işlevi
+Her talebe olumlu yanıt vermek yardımseverlik gibi görünür, ancak öngörülemez bir kaynak
+yaratır ve planlamayı bozar. İşlevsel form reddetme değil, kapasite ve öncelik dilidir: “Bunu
+alabilirim, ancak X gecikir; hangisi öncelikli?” Bu formülasyon, önceliklendirme yükünü onu
+taşıması gereken yere, yani karar merciine geri gönderir.
+26
+
+-- 26 of 35 --
+
+Yapısal Katman: Kültür ve Mekanizma Ayrımı
+Ayrımın tanımı
+Bir davranışın kaynağı iki yerde olabilir: kişilerin iyi niyeti ya da sistemin yapısı. Kültürel
+çözüm, doğru davranışın kişilerin tutumundan gelmesini bekler. Yapısal çözüm (mekanizma),
+doğru davranışı sistemin varsayılanı hâline getirir ve kişilerin tutumundan bağımsızlaştırır.
+Ayırt edici test şu soruyla kurulabilir: Ekipteki en umursamaz kişi hiçbir şeyi değiştirmediğinde
+bu çözüm çalışmaya devam eder mi? Yanıt olumsuzsa çözüm kültüreldir ve kırılgandır.
+Örnek üzerinden karşılaştırma
+Bir ekipte kod incelemelerinin günlerce beklediği varsayılsın. Kültürel çözümde bir kişi erken
+saatlerde inceleme yapmaya başlar ve toplantıda hızlı davranılması yönünde çağrıda bulunur.
+İyileşme iki hafta sürer; ardından çağrıyı yapan kişi yoğunlaştığında, bir başkası izne çıktığında
+ya da ekibe normu bilmeyen biri katıldığında sorun geri döner. Çözümün taşıyıcısı bir kişiydi ve
+o kişi çekildiğinde çözüm de çekilmiştir.
+Yapısal çözümde ise inceleme için bir hizmet düzeyi taahhüdü (service level agreement)
+tanımlanır — örneğin belirli bir süre içinde incelenmeyen değişikliğin otomatik olarak bir sonraki
+kişiye atanması — ve her modülün tanımlı bir sahibi bulunduğu için isteğin kime gideceği belirsiz
+kalmaz. Bu durumda kimsenin fedakârlık yapmasına gerek yoktur.
+Kültürel temenni Yapısal karşılık
+“Birbirimize yardım edelim” İnceleme süresi taahhüdü, otomatik
+atama
+“Gece bir sorun çıkarsa haber verin” Nöbet rotasyonu (on-call); nö-
+betçinin takvimde tanımlı olması
+“Bilgiyi paylaşalım” Prosedür belgeleri (runbook); yazılı
+ve aranabilir olması
+“Herkes her yere baksın” Sahiplik matrisi; modül–kişi
+eşleşmesinin açık olması
+Bireysel fedakârlığın gizleyici etkisi
+Yapısal bir açığın bireysel emekle kapatılması yalnızca geçici bir çözüm değil, aynı zamanda
+teşhisi engelleyen bir müdahaledir. Açık kapatıldığı sürece semptom görünmez; sistem bozuk
+çalışmaya devam eder, ancak bozukluğun maliyeti tek bir kişinin fazladan mesaisi olarak gizlenir.
+Kişi ayrıldığında sorun tüm şiddetiyle ve hazırlıksız bir ekiple geri döner.
+Meadows (2008), sistemlerde müdahale noktalarının etki gücünü sıralarken, sistemin yapısını
+ve kurallarını değiştiren müdahalelerin, parametreleri ya da akışları değiştiren müdahalelerden
+belirgin biçimde daha güçlü olduğunu belirtir. Bireysel fedakârlık akış düzeyinde bir müdahaledir;
+mekanizma tasarımı kural düzeyinde bir müdahaledir.
+27
+
+-- 27 of 35 --
+
+Sosyal Katman: Etkileşim Normları
+İyi niyet varsayımı
+Bir davranışın nedeni belirsiz olduğunda varsayılan yorumun olumlu tarafta tutulması — geç
+yanıt verenin meşgul olduğu, sert yorum yazanın kötü bir gün geçirdiği — naiflik değil, kaynak
+tasarrufudur. Kötü niyet varsayımı bir kez yerleştiğinde her etkileşim savunma pozisyonunda
+geçer ve bu, ekip düzeyinde büyük bir bilişsel maliyet üretir. Varsayım kanıt biriktikçe elbette
+güncellenir; ancak başlangıç noktasının konumu, ekibin genel enerji bütçesini belirler.
+Kişi ile işin ayrılması
+“Bu tasarım şu senaryoda kırılıyor” ile “düşünmeden yazmışsın” cümleleri aynı olguya işaret
+edebilir, ancak yalnızca ilki cevaplanabilir. Eleştiri kişiye yöneldiğinde karşı taraf teknik konuyu
+tartışamaz hâle gelir; artık kendini savunmaktadır ve tartışmanın konusu değişmiştir.
+Simetrik olarak, kendi işine yönelen eleştiriyi kişisel almamak öğrenilebilir bir beceridir ve
+mühendislikte getirisi en yüksek becerilerden biridir; çünkü kişinin hata bulma hızını doğrudan
+belirler.
+Bilmemenin maliyetinin düşürülmesi
+Ekiplerdeki en pahalı sessizlik, üyelerin yetersiz görünmemek için soru sormamasıdır. Edmondson
+(1999), ekiplerde psikolojik güvenlik olarak adlandırdığı — kişilerarası risk almanın cezalandırıl-
+mayacağına dair ortak inanç — değişkenin öğrenme davranışıyla ilişkili olduğunu göstermiştir.
+Bu değişkeni yükselten şey duyuru değil örnektir. “Soru sormak serbesttir” açıklaması
+davranışı değiştirmez; kıdemli bir kişinin “bunu bilmiyorum” demesi değiştirir, çünkü aynı
+davranışın maliyetinin düşük olduğunu kanıtlar.
+Statü oyunları ve bilginin üstünlük aracı olarak kullanımı
+Mühendislik ortamlarında statü büyük ölçüde teknik yetkinlikle belirlenir, ancak yetkinlik
+doğrudan gözlemlenemez. Gözlemlenebilir tek vekil, kişinin ne bildiğini sergilemesidir. Bu
+nedenle ortamda sürekli bir yetkinlik sinyali verme baskısı oluşur ve bu sinyalin en ucuz biçimi,
+başkasının bilmediği bir şeyin bilindiğini göstermektir. Statü oyunu bu çerçevede karakter
+zaafından değil ölçüm probleminden doğar; iyi niyetli kişiler de üretir.
+Davranışın asıl zararı doğrudan muhatabında değil, tanıklarındadır. Bir kişi topluluk önünde
+düzeltildiğinde odadaki diğer herkes “burada yanlış bir şey söylemenin maliyeti yüksektir” bilgisini
+edinir ve emin olmadığı hiçbir şeyi dile getirmez. Ekip, yalnızca kesin bilinenin konuşulduğu bir
+yapıya dönüşür; yeni fikir üretimi durur.
+Gereksiz jargon kullanımı aynı mekanizmanın başka bir biçimidir. Bir konuya gerçekten
+hâkim olan kişi genellikle sade konuşur, çünkü sinyal verme ihtiyacı düşüktür ve kavramı basite
+indirebilmek zaten hâkimiyetin göstergesidir. Jargon enflasyonunu durduran şey de yukarıdan
+gelen sadelik örneğidir.
+Özelde düzeltme, açıkta övme
+Övgü ile eleştirinin tanık sayısına duyarlılığı terstir. Övgü topluluk önünde söylendiğinde değeri
+artar, çünkü statü sosyal olarak dağıtılan bir büyüklüktür. Eleştiri ise tanık sayısıyla ters orantılı
+biçimde işe yarar: özelde söylendiğinde bilgi, toplulukta söylendiğinde ceza olarak alınır. Ceza
+olarak alınan eleştiri davranışı düzeltmez, yalnızca hatayı gizlemeyi öğretir.
+Kuralın istisnası, yanlış bilginin orada bir karar üretecek olmasıdır; bu durumda düzeltme
+anında ve açık yapılmak zorundadır. Farkı yaratan unsur, düzeltmenin faile değil konuya
+yöneltilmesidir: “burada bir yanlış anlaşılma var, X şöyle çalışıyor” ile “yanlış biliyorsun” aynı
+bilgi içeriğini taşıyan ancak farklı sosyal olaylar üreten iki cümledir.
+28
+
+-- 28 of 35 --
+
+Dağıtık çalışmaya özgü etkiler
+Yazılı iletişim tonu sistematik olarak aşağı çeker: nötr yazılmış bir cümle karşı tarafta soğuk,
+kısa bir yanıt ilgisiz okunur. Bu sapmanın telafisi, tonun bilinçli olarak yukarı alınması ve iş dışı
+asgari bir temas alanının korunmasıdır; birbirini bir ölçüde tanıyan kişiler arasında yazılı yanlış
+anlamaların çoğu kendiliğinden yumuşar.
+Yardım isteme eşiği de açıkça normlandırılmadığında iki uçta bozulur: hiç sormamak saatlerce
+tıkanmaya, her şeyi sormak düşünme işinin dışa aktarılmasına yol açar. Ekiplerde işleyen çözüm
+genellikle bir zaman kutusudur — belirli bir süre tıkanıklık sonrası sormanın norm sayılması —
+ve bu norm açıkça konuşulduğunda hiçbir taraf rahatsızlık hissetmez.
+Mesai dışı erişilebilirlik beklentisi kısa vadede takım bağlılığı görünümü üretir, uzun vadede
+uzaklaşma üretir. Kişinin çevrimdışı olma hakkına saygı, en az fark edilen ancak en çok hatırlanan
+davranışlardan biridir.
+29
+
+-- 29 of 35 --
+
+Ölçüm Problemi ve Vekil Değişkenler
+Vekil değişkenin kaçınılmazlığı
+Yönetim ve değerlendirme faaliyetleri, doğrudan gözlemlenemeyen büyüklükler üzerine kuruludur:
+yetkinlik, çaba, katkı, potansiyel. Bunların yerine gözlemlenebilir büyüklükler — vekil değişkenler
+— konur. Vekilsiz yönetim mümkün değildir; sorun vekilin varlığı değil, seçimidir.
+İki ayrı hata
+Kötü bir vekil iki farklı hata üretir ve bunların ayrılması pratik açıdan önemlidir.
+Ölçüm hatası, vekil ile asıl büyüklük arasındaki ilişkinin zayıf olmasıdır. Örneğin bir
+mesajlaşma platformundaki mesaj sıklığı ile üretilen değer arasındaki korelasyon düşüktür: derin
+odak gerektiren işe dalmış bir mühendis az yazar, hiçbir şey üretmeyen ancak sosyal olarak etkin
+bir kişi çok yazar. Vekil daha başlangıçta gürültülüdür.
+Hedefe dönüşme hatası daha ciddidir. Neye bakıldığı gizli tutulsa dahi çalışanlar bunu kısa
+sürede çıkarsar; çıkarsadıkları anda vekil, işin yansıması olmaktan çıkıp doğrudan üretilen bir
+performansa dönüşür. Strathern (1997), Goodhart’ın (1975) para politikası bağlamında formüle
+ettiği gözlemi genel biçime taşıyarak bir ölçütün hedef hâline geldiğinde iyi bir ölçüt olmaktan
+çıktığını belirtmiştir. Bu noktadan sonra elde hâlâ bir sayı bulunduğu için bağın koptuğu fark
+edilmez; bozulmuş ama güven veren bir ölçüm, ölçüm yokluğundan daha tehlikelidir.
+Yan hasarlar
+Sinyal üretmek zaman gerektirir. Vekilin görünürlük olduğu ortamlarda çalışanlar, çalışmak
+yerine çalıştıklarını göstermeye kaynak ayırmaya başlar. Ayrıca en sessiz çalışanlar çoğunlukla
+en derin işi yapanlardır; görünürlük temelli bir vekil bu grubu sistematik olarak cezalandırır ve
+zamanla organizasyondan uzaklaştırır.
+İyi vekilin ölçütü
+İyi bir vekil, manipüle edilmesi imkânsız olan değil, manipüle edilmesi işi gerçekten iyi
+yapmakla örtüşen vekildir. Bu ölçüte yaklaşan seçenekler çıktıya yakın olanlardır:
+• Tamamlanmış iş: birleştirilen değişiklikler, kapanan kayıtlar, çalışır durumdaki özellikler
+• Kalibrasyon: verilen tahminlerin tutması ve sapmanın önceden bildirilmesi
+• Blokaj davranışı: tıkanıklığın ne kadar sürede bildirildiği, başkalarının bekletilip bek-
+letilmediği
+• Çevresel değerlendirme: birlikte çalışan kişilerin o kişiyi bekleyip beklemediği
+Bunlar da manipüle edilebilir, ancak manipülasyonun maliyeti yüksektir ve daha önemlisi, bu
+ölçütleri optimize etmek işi iyi yapmakla büyük ölçüde çakışır.
+Ölçütün açıklanması
+Neye bakıldığının ekibe açıkça bildirilmesi, gizli tutulmasından daha iyi sonuç verir. Gizli ölçüt,
+çalışanları neyin ölçüldüğünü tahmin etmeye zorlar; belirsizlik altında en güvenli tahmin “görünür
+ol” olduğu için, gizlilik istenmeden görünürlük vekiline kayışı teşvik eder.
+30
+
+-- 30 of 35 --
+
+Yüksek Dereceden Etkiler ve Askeri Doktrin
+İkinci dereceden etkinin önceliği
+Bir müdahalenin sonucunu belirleyen şey çoğunlukla doğrudan hedefi değil, diğer gözlemcilere ne
+öğrettiğidir. Topluluk önünde düzeltme örneğinde birinci dereceden etki bir kişinin bilgisinin
+düzelmesidir; ikinci dereceden etki, odadaki diğer kişilerin susmasıdır. İkincisinin büyüklüğü
+neredeyse her zaman daha fazladır.
+Durma noktası problemi
+Bu düşünce biçiminin kendine ait bir patolojisi vardır: doğal bir durma noktası bulunmaması. Her
+hamlenin etkisinin etkisinin hesaplanmaya çalışılması karar felcine yol açar ve pratikte üçüncü
+dereceden sonrası zaten öngörülemez, çünkü sistem yüksek gürültülüdür. İşlevsel biçim ikinci
+derecede durur ve tek bir soruya indirgenir: bu davranışla hangi davranış normalleştirilmektedir?
+Askeri doktrindeki karşılıklar
+Aynı problem askeri kurumlarda uzun süredir çalışılmış ve doktrin hâline getirilmiştir.
+Planlama derinliğinin sınırlanması
+Ordularda yaygın uygulama, planlama detayının belirli bir kademe ötesine götürülmemesidir;
+alt kademelere niyet bildirilir, yöntem bırakılır. Gerekçe doğrudan öngörülemezliktir: belirli bir
+derinliğin ötesinde üretilen detay, uygulama anında geçersizleşeceği için harcanan çaba israftır.1
+Auftragstaktik
+Prusya ve ardından Alman ordusunda gelişen görev taktiği (Auftragstaktik), komutanın ulaşılacak
+sonucu ve gerekçesini bildirmesi, yöntemi ise astın kararına bırakması ilkesine dayanır. Doktrin,
+yüksek dereceden etkilerin merkezden hesaplanamayacağı kabulüyle başlar ve buna hesaplama
+değil mimari bir yanıt verir: kararı, bilginin en taze olduğu yerel noktaya taşır.
+Komutanın niyeti
+Amerikan Kara Kuvvetleri doktrininde commander’s intent olarak tanımlanan unsur, “hangi
+davranışı normalleştiriyorum” sorusunun kurumsal karşılığı sayılabilir. Ayrıntılı emir birinci
+dereceden bir müdahaledir ve temas anında geçerliliğini yitirir; niyet ise ikinci derecedendir ve
+emir çöktüğünde bile astın hangi yönde davranacağını belirler. Niyeti doğru ileten komutan,
+hesaplayamadığı bütün alt dalları dolaylı olarak yönlendirmiş olur (ADP 5-0, 2019).
+OODA ve döngü hızı
+John Boyd’un gözlem–yönelim–karar–eylem (observe, orient, decide, act) döngüsü üzerine
+kurduğu argüman, daha derin analiz yapılması yönünde değil, tam tersi yöndedir. Belirsizlik
+altında derin öngörünün getirisi hızla azalırken geri besleme almanın getirisi azalmaz; dolayısıyla
+uzun türev zinciri yerine kısa döngü tercih edilir (Coram, 2002).
+1Bu uygulamanın kademe sayısı bakımından kesin doktrinel formülasyonu kaynaklarda değişkenlik göstermekte-
+dir; ilkenin kendisi yerleşiktir, kademe sayısının doğrulanması gerekir.
+31
+
+-- 31 of 35 --
+
+Plan ile temas ilişkisi
+Moltke’ye atfedilen, hiçbir harekât planının düşman ana kuvvetiyle ilk temasın ötesine güvenle
+uzanamayacağı yönündeki formülasyon, planlamanın gereksizliğini değil, ilk temas sonrası için
+üretilen detayın değersizliğini ifade eder. Planlama süreci değerlidir; planın kendisinin belirli bir
+noktadan sonraki içeriği değildir.
+32
+
+-- 32 of 35 --
+
+Doktrin Transferinin Sınırları
+Ampirik bulgular
+Askeri geçmişin yöneticilik performansına etkisi ampirik olarak incelenmiştir. Benmelech ve
+Frydman (2015), askerlik hizmeti geçmişi bulunan genel müdürlerin daha muhafazakâr kurumsal
+politikalar izlediğini, kurumsal dolandırıcılık vakalarına daha az karıştığını ve sektörel daralma
+dönemlerinde daha iyi performans gösterdiğini; buna karşılık daha düşük düzeyde kurumsal
+yatırım yaptığını bulmuştur. Bulgular tek yönlü bir üstünlük değil, bir uzmanlaşma profili
+gösterir: hasar kontrolü ve etik davranış tarafında güçlü, keşif ve büyüme tarafında zayıf.
+Bulguların bağlama duyarlı olduğu da görülmüştür; Lin ve diğerleri (2021), Çin bağlamında
+askeri geçmişli yöneticiler için kısmen ters yönde sonuçlar rapor etmiştir. Bu, etkinin askerlik
+deneyiminin kendisinden değil, o deneyimi üreten kurumun kültürel ve etik yapısından geldiğine
+işaret eder.
+Transfer edilenin kişi değil kavram olması
+Asıl mesele bireylerin transferi değildir. Auftragstaktik’in bir organizasyonda işlemesi, ordunun
+belirli yapısal koşullarına bağlıdır: görece net bir amaç fonksiyonu, zorunlu rotasyon, ortak
+eğitimden geçmiş kadro ve hatanın bedelinin herkesçe görülebilir olması. Şirketlerde bu koşulların
+hiçbiri tam olarak bulunmaz; amaç fonksiyonu bulanıktır, kadro heterojendir ve kötü kararın
+bedeli çoğunlukla başka bir birime aktarılabilir.
+Koşullar taşınmadan biçim ithal edildiğinde ortaya çıkan sonuç öngörülebilirdir. “Mikro
+yönetme, niyeti ver” ifadesi kalır, ancak altındaki güven ve ortak eğitim bulunmadığı için inisiyatif
+fiilen yalnız bırakılma anlamına gelir. Emir–komuta dili gelir, gerçek hesap verebilirlik gelmez.
+Sonuçta doktrinin en değersiz bileşeni — hiyerarşi ve sertlik — transfer olur.
+Fiilen gerçekleşen transfer biçimi
+Askeri fikirlerin şirketlere geçişi tarihsel olarak kişi üzerinden değil kavram üzerinden gerçek-
+leşmiştir. Toyota Üretim Sistemi’nin standart iş ile yerel karar arasında kurduğu denge, Ama-
+zon’un karar sonrası bağlanma ilkesi (Bezos, 2016), Netflix’in denetim yerine bağlam sağlama
+yaklaşımı (Hastings ve Meyer, 2020) ve çevik yazılım geliştirme yöntemlerinin özerk ekip vurgusu
+aynı problemin farklı çözümleridir. Hiçbiri askeri personel istihdamı yoluyla üretilmemiştir.
+33
+
+-- 33 of 35 --
+
+Sonuç
+Takım oyununun davranışsal içeriği tek bir ilkeden türetilebilir olsa da, bu davranışların
+sürdürülebilirliği bireysel tutuma bırakıldığında kırılgan kalır. Kalıcılık, doğru davranışın
+varsayılan hâline getirilmesiyle sağlanır; dolayısıyla takım oyununun en gelişmiş biçimi fedakârlık
+yapmak değil, fedakârlığı gereksiz kılan yapıyı önermektir. Bu, bireysel davranış normlarını
+geçersiz kılmaz — mekanizmalar kurulana kadar aradaki boşluğu davranış doldurur — ancak
+boşluğun kalıcı çözümü olarak görülmesini engeller.
+Notta ele alınan davranış kalıplarının önemli bir bölümü ahlaki bir çerçeveye değil, ölçüm
+çerçevesine oturur. Statü sinyali verme, görünürlük arayışı ve bilginin saklanması, gözlem-
+lenemeyen büyüklüklerin vekil değişkenlerle temsil edilmesinden doğar. Bu tespitin pratik
+sonucu, bu davranışların kişilere yönelik uyarılarla değil, vekil değişkenlerin yeniden seçilmesiyle
+azaltılabileceğidir.
+Çerçevenin sınırları da belirgindir. Her organizasyonel sorun ölçüm problemi değildir. Bazıları
+çıkar çatışmasıdır — taraflar birbirini tam olarak görür, ölçüm sorunsuzdur, ancak hedefler
+ayrışır; bu durumda şeffaflık sorunu çözmez, yalnızca netleştirir. Bazıları kapasite problemidir:
+bilgi saklanmamaktadır, kişi gerçekten bilmemektedir ya da zamanı yoktur. Bazıları da doğrudan
+duygusal olgulardır ve sistem diline çevrildiğinde model korunur ancak olgu kaybolur. Ölçüm
+çerçevesinin genelleştirilmesi bu üç kategoriyi görünmez kılma riski taşır.
+Benzer bir sınır yüksek dereceden etki analizi için de geçerlidir. Zincir uzatıldıkça öngörü
+değeri hızla düşer ve karar felcine dönüşür; pratik faydanın büyük bölümü ikinci derecede, tek
+bir normalleştirme sorusunda toplanır. Askeri doktrin bu sınırı hesaplama yoluyla değil mimari
+yoluyla — kararı yerelleştirerek ve niyeti ileterek — aşmıştır; bu çözümün taklit edilebilmesi,
+dayandığı yapısal koşulların da kurulmasına bağlıdır. Koşulsuz kopyalanan doktrin biçimsel bir
+kabuk üretir.
+Açık kalan bir soru, dağıtık çalışan ekiplerde çıktıya yakın vekillerin ne ölçüde ölçeklenebilir
+olduğudur. Tamamlanmış iş, kalibrasyon ve blokaj davranışı gibi ölçütler küçük ekiplerde
+gözlemlenebilir, ancak yüzlerce kişilik organizasyonlarda toplulaştırma gerektirir ve toplulaştırma
+işleminin kendisi yeni bir vekilleştirme adımıdır. Bu adımda oluşan bozulmanın büyüklüğü ayrı
+bir inceleme konusudur.
+Son olarak, çözümleyici çerçevenin kendisine ilişkin bir uyarı yerinde olur: her sosyal olayı
+sistem diline çevirebilme kabiliyeti, kişiyi olayın içinden çıkarıp dışına yerleştirme eğilimi taşır.
+Bu mesafe analiz için gerekli, ilişki kurmak için maliyetlidir.
+Kaynaklar
+• Benmelech, E. ve Frydman, C. (2015). Military CEOs. Journal of Financial Economics,
+117(1), 43–59.
+• Bezos, J. (2016). Letter to Shareholders. Amazon.com, Inc.
+• Brooks, F. P. (1975). The Mythical Man-Month: Essays on Software Engineering. Addison-
+Wesley.
+• Coram, R. (2002). Boyd: The Fighter Pilot Who Changed the Art of War. Little, Brown
+and Company.
+• Edmondson, A. (1999). Psychological Safety and Learning Behavior in Work Teams.
+Administrative Science Quarterly, 44(2), 350–383.
+• Goodhart, C. A. E. (1975). Problems of Monetary Management: The U.K. Experience.
+Papers in Monetary Economics, Reserve Bank of Australia.
+• Hastings, R. ve Meyer, E. (2020). No Rules Rules: Netflix and the Culture of Reinvention.
+Penguin Press.
+34
+
+-- 34 of 35 --
+
+• Lin, L., Nguyen, N. H., Young, M. ve Zou, L. (2021). Military executives and corporate
+outcomes: Evidence from China. Emerging Markets Review, 49.
+• Meadows, D. H. (2008). Thinking in Systems: A Primer. Chelsea Green Publishing.
+• Strathern, M. (1997). “Improving ratings”: audit in the British University system. European
+Review, 5(3), 305–321.
+• U.S. Army (2019). ADP 5-0: The Operations Process. Headquarters, Department of the
+Army.
+35
+
+-- 35 of 35 --

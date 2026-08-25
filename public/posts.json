@@ -1,5 +1,253 @@
 [
   {
+    "slug": "belirsizliğin-korunumu-kodun-determinizminden-ajan-kısıtlarına",
+    "title": "Belirsizliğin Korunumu: Kodun Determinizminden Ajan Kısıtlarına",
+    "date": "2026-08-25",
+    "description": "Sıradan yazılım kodunun deterministik olduğunu, pratikte gözlenen belirsizliğin kodun kendisinden değil sabitlenmemiş gizli girdilerinden geldiğini savunur. Bu girdiler sözde-rastgelelik, eşzamanlılık, dış durum ile donanım ve derleyici katmanı başlıkları altında sayılır; sabitlendiklerinde belirsizlik tümüyle kaybolur, dolayısıyla olasılık burada sistemin bir özelliği değil gözlemcinin bilgi eksiğinin ölçüsüdür. Mühendislik pratiğindeki sonuç, belirsizliğin ortadan kaldırılmasının değil yerinin değiştirilmesinin hedeflenmesidir: yeniden deneme mekanizması ağ belirsizliğini başarısızlıktan gecikmeye çevirir, belirsizliği yok etmez. Robert C. Martin'in 2026'da savunduğu ajan kodunu okumama pozisyonu bu ilkenin bir uygulaması olarak çözümlenir; güvenilir artefakt kodun kendisinden, kodu çevreleyen deterministik kısıt katmanına taşınmıştır. Metin bu pozisyona iki itiraz getirir. Birincisi, büyük dil modellerinin ürettiği belirsizliğin de ontik değil epistemik olduğudur — sıcaklık ve tohum sabitlendiğinde örnekleme deterministikleşir — ve bu, kod yalnızca bir örneklemdir dolayısıyla okumak anlamsızdır argümanının dayanağını zayıflatır. İkincisi Grady Booch'un itirazıdır ve mekanizmanın kapsama haritasındaki asıl boşluğa işaret eder: test paketi yalnızca düşünülmüş başarısızlıkları yakalar, kod okuma ise düşünülmemiş olanları yakalayabilen tek mekanizmadır. Kapsama haritasının kendi içindeki çelişki de buradadır: gereksinim hatası sınıfı için tek güvence mekanizması insan gözü olarak tanımlanırken, aynı çerçeve insanı devreden çıkarmayı önermektedir. Yan kanal saldırıları, kaotik hassasiyet ve algoritmik ayırt edilemezlik ara vakalar olarak ele alınır.",
+    "pdf": "Belirsizliğin_Korunumu__Kodun_Determinizminden_Ajan_Kısıtlarına.pdf",
+    "thumb": "thumbs/belirsizliğin-korunumu-kodun-determinizminden-ajan-kısıtlarına.png",
+    "addedAt": "2026-08-25T21:34:27.098Z",
+    "pages": 21,
+    "belge": "BELGE-202",
+    "title_en": "Conservation of Uncertainty: From the Determinism of Code to Agent Constraints",
+    "description_en": "Argues that ordinary software code is deterministic and that the nondeterminism observed in practice comes not from the code but from hidden inputs left unfixed. These inputs are enumerated under pseudo-randomness, concurrency, external state, and the hardware and compiler layer; once fixed, the uncertainty disappears entirely, so probability here is a measure of the observer's information deficit rather than a property of the system. The engineering consequence is that the aim is not to eliminate uncertainty but to relocate it: a retry mechanism turns network uncertainty from failure into latency, it does not remove it. Robert C. Martin's 2026 position of not reading agent-written code is analyzed as an application of this principle; the trusted artifact has moved from the code itself to the deterministic constraint layer surrounding it. The text raises two objections. First, the uncertainty produced by large language models is likewise epistemic rather than ontic — fix the temperature and the seed and sampling becomes deterministic — which weakens the ground of the argument that code is merely a sample and therefore not worth reading. Second is Grady Booch's objection, which points to the real gap in the mechanism's coverage map: a test suite catches only the failures that were thought of, while reading code is the one mechanism that can catch those that were not. The internal contradiction of the coverage map lies here: for the class of requirement errors the only assurance mechanism is defined as the human eye, while the same framework proposes removing the human. Side-channel attacks, chaotic sensitivity and algorithmic indistinguishability are treated as intermediate cases.",
+    "priority": 7,
+    "related": [
+      "epistemik-ve-ontik-belirsizlik-mühendislikte-olasılığın-i-ki-yüzü",
+      "kaybolan-gerekçe-devir-teslimsiz-kod-tabanlarında-çalışma",
+      "01-yapay-zeka-destekli-gelistirmede-teknik-borc",
+      "09-spec-driven-development"
+    ]
+  },
+  {
+    "slug": "arama-uzayı-ve-ödünleşme-uzmanlığın-i-ki-mekanizması",
+    "title": "Arama Uzayı ve Ödünleşme: Uzmanlığın İki Mekanizması",
+    "date": "2026-08-25",
+    "description": "Sovyet mühendislik sisteminin tasarım bürosu ile fabrikayı ayrı kurumsal yetenekler sayan modelini inceler ve Ukrayna'yı bu modelin en büyük mirasçılarından biri olarak ele alır. Model tek yönlü bir başarı hikâyesi olarak sunulmaz: tasarım ile üretimin kurumsal olarak ayrılması, üretilebilirlik geri bildiriminin zayıflamasına ve seri üretim varyansının yüksek kalmasına da yol açmıştır. Tasarım bürosunun bir karmaşıklık yönetme makinesi olarak işleyişi, baş tasarımcının işlevi ve büroların ürettiği ilkeler ayrıntılandırılır: testin tasarımın içinde olması, üretilebilirliğin erken düşünülmesi, arayüz mühendisliği ve konfigürasyon yönetimi. Mühendislik disiplinlerinin ayrıntılı bir kataloğu çıkarıldığında yüzlerce ayrı alanın az sayıda ortak problem çözme hamlesinin türevi olduğu gösterilir: sınırı önce hesaplamak, bilgiyi öne çekip kararı geciktirmek, yerel optimumu sistem optimumuna bağlamak, kaçınılmaz bozulmayı yasaklamak yerine yönlendirmek, arama uzayını daraltacak sinyali seçmek, bilgiyi taşıyıcısından ayırmak ya da taşıyıcıyı belgelemek ve bilginin akmasını sağlayacak teşviği tasarlamak. Uzmanlık bu hamlelerden ikincisinin ve beşincisinin insandaki karşılığı olarak konumlandırılır: zımni bilgi, problem çözme uzayında arama maliyetini düşüren, deneyimden sıkıştırılmış ve bağlama duyarlı bilgidir. Zımni bilginin davranışsal izlerden geri çıkarılmasının ilkesel olarak mümkün ama bilgi edinimi darboğazı, iç gözlemin güvenilmezliği ve düşük geçerlilikli ortamlarda sezginin oluşmaması gibi engellerle sınırlı olduğu belirtilir. Kapanış bir riski adlandırır: bilginin sisteme aktarılması kendi kaynağını kurutabilir, çünkü otomasyon insana yalnızca en zor ve en nadir durumları bırakırken o durumlar için gereken pratiği de elinden alır.",
+    "pdf": "Arama_Uzayı_ve_Ödünleşme__Uzmanlığın_İki_Mekanizması.pdf",
+    "thumb": "thumbs/arama-uzayı-ve-ödünleşme-uzmanlığın-i-ki-mekanizması.png",
+    "addedAt": "2026-08-25T21:34:27.097Z",
+    "pages": 48,
+    "belge": "BELGE-201",
+    "title_en": "Search Space and Trade-off: Two Mechanisms of Expertise",
+    "description_en": "Examines the Soviet engineering model that counted the design bureau and the factory as separate institutional capabilities, and treats Ukraine as one of its largest inheritors. The model is not presented as a one-sided success: separating design from production institutionally also weakened manufacturability feedback and kept variance in serial production high. The design bureau is detailed as a machine for managing complexity, along with the function of the chief designer and the principles the bureaus produced: testing residing inside design, manufacturability considered early, interface engineering, and configuration management. A detailed catalogue of engineering disciplines shows that hundreds of separate fields are derivatives of a small number of shared problem-solving moves: computing the limit first; pulling information forward and deferring the decision; binding the local optimum to the system optimum; steering inevitable degradation rather than forbidding it; choosing the signal that narrows the search space; separating knowledge from its carrier or documenting the carrier; and designing the incentive that lets knowledge flow. Expertise is positioned as the human counterpart of the second and fifth of these: tacit knowledge is context-sensitive knowledge, compressed from experience, that lowers the cost of search in the problem space. Recovering tacit knowledge from behavioral traces is held to be possible in principle but bounded by the knowledge acquisition bottleneck, the unreliability of introspection, and the failure of intuition to form in low-validity environments. The closing names a risk: transferring knowledge into the system can dry up its own source, since automation leaves the human only the hardest and rarest cases while removing the practice those cases require.",
+    "priority": 6,
+    "related": [
+      "eleme-teşhiste-hipotez-uzayının-yönetimi",
+      "o-rtu-k-bilgi-ve-u-ru-n-gelis-tirici-deneyiminden-bilme-bic-imlerine",
+      "teknolojik-bilginin-kaybı-aktarım-zincirleri-örtük-bilgi-ve-kurumsal-süreklilik-stratejileri-üzerine-bir-i-nceleme"
+    ]
+  },
+  {
+    "slug": "eleme-teşhiste-hipotez-uzayının-yönetimi",
+    "title": "Eleme: Teşhiste Hipotez Uzayının Yönetimi",
+    "date": "2026-08-25",
+    "description": "Uzmanlığın doğru cevabı bilmekten çok doğru cevabı daha az adımda bulmak olduğunu savunur: aynı problemi çözen iki kişiden biri üç ölçümle, diğeri on iki ölçümle sonuca varır ve fark bilginin miktarında değil aramanın biçimindedir. Bir teşhis probleminde asıl kaynak tüketen şey hipotezleri doğrulamak değil hangi hipotezin doğrulanacağına karar vermektir; bu nedenle iyi bir ölçüm en çok bilgi veren değil, hipotez uzayını en dengeli bölen ölçümdür. Arama uzayının daraltılması tek bir işlem değil, birbirinden ayrı altı mekanizmanın bileşimi olarak çözümlenir: kesme, önsel olasılıkla ağırlıklandırma, kısıt yayılımı, mekanizma bilgisiyle dal kesme, aykırılık odaklı ilerleme ve yeniden çerçeveleme. Her mekanizmanın formel bir karşılığı bulunduğu ve bu karşılıkların bilgi kuramı, Bayesçi karar kuramı, kısıt sağlama ve teşhis edilebilirlik analizi gibi bağımsız gelişmiş alanlarda yer aldığı gösterilir; dolayısıyla uzman sezgisi mistik değil kısmen hesaplanabilir bir işlemdir. Daraltmanın kendisinin bir erdem olmadığı ayrıca kaydedilir: yanlış bir önsel dağılımla birleştiğinde erken kapanmaya yol açar ve doğru hipotez uzaydan çıkarıldığında arama hiç sonuçlanmaz. Aramanın uzayı ancak kurulmuş hipotezlerden oluştuğu için hipotez üretimindeki bir eksiklik hiçbir daraltma tekniğiyle telafi edilemez. Öğretim açısından sonuç, öğrenciye doğru cevabın değil kesme kararının gösterilmesi gerektiğidir; performans ölçütü de sonucun doğruluğu değil teşhise kadar yapılan ölçüm sayısıdır. Son olarak bu becerinin oluşabilmesi ortamın sinyal ile neden arasında kararlı bir ilişki sunmasına bağlıdır; koşul sağlanmadığında biriken şey uzmanlık değil kendinden emin bir yanlılıktır.",
+    "pdf": "Eleme__Teşhiste_Hipotez_Uzayının_Yönetimi.pdf",
+    "thumb": "thumbs/eleme-teşhiste-hipotez-uzayının-yönetimi.png",
+    "addedAt": "2026-08-25T21:34:27.096Z",
+    "pages": 17,
+    "belge": "BELGE-199",
+    "title_en": "Elimination: Managing the Hypothesis Space in Diagnosis",
+    "description_en": "Argues that expertise is less about knowing the right answer than about reaching it in fewer steps: of two people solving the same problem one arrives after three measurements and the other after twelve, and the difference lies not in the amount of knowledge but in the form of the search. In a diagnostic problem what consumes resources is not confirming hypotheses but deciding which hypothesis to confirm; a good measurement is therefore not the most informative one but the one that splits the hypothesis space most evenly. Narrowing the search space is analyzed not as a single operation but as the composition of six distinct mechanisms: cutting, weighting by prior probability, constraint propagation, pruning branches with mechanism knowledge, anomaly-driven progress, and reframing. Each is shown to have a formal counterpart residing in independently developed fields — information theory, Bayesian decision theory, constraint satisfaction and diagnosability analysis — so expert intuition is not mystical but partly computable. Narrowing is recorded as no virtue in itself: combined with a wrong prior it leads to premature closure, and once the correct hypothesis has been removed the search never terminates. Because the space consists only of hypotheses that have been formed, a shortfall in hypothesis generation cannot be compensated by any narrowing technique. For teaching, the consequence is that the student should be shown the cutting decision rather than the right answer, and that the performance measure is the number of measurements taken before diagnosis rather than the correctness of the result. Finally, the skill can form only where the environment offers a stable relation between signal and cause; where it does not, what accumulates is not expertise but confident bias.",
+    "priority": 9,
+    "related": [
+      "bilinen-yapıya-i-ndirgeme-bir-problem-teşhis-protokolü",
+      "müdahale-ederek-anlama-karmaşık-yazılım-sistemlerini-anlamanın-yöntem-kataloğu",
+      "arama-uzayı-ve-ödünleşme-uzmanlığın-i-ki-mekanizması"
+    ]
+  },
+  {
+    "slug": "mükemmellik-adaları-yoğunlaşma-modelinin-ekonomisi",
+    "title": "Mükemmellik Adaları: Yoğunlaşma Modelinin Ekonomisi",
+    "date": "2026-08-25",
+    "description": "Bir ülkenin belirli bir teknolojik ürünü üretememesinin çoğunlukla bir bilgi eksikliği değil, kurumsal birikim eksikliğinin ölçüm çıktısı olduğunu savunur. Yüksek performanslı jet motoru gibi artefaktların ardındaki asıl kısıt literatürde bulunmayan proses parametreleri, kuşaklar arası aktarılan örtük bilgi, derin tedarik katmanı, metroloji altyapısı ve arızayı bilgiye çeviren kayıt mekanizmalarıdır. Bu birikim yokken bile kaynak ve yetenek dar bir alana yığılarak dünya sınıfı çıktı üretilebilir; buna mükemmellik adası denir. Modelin çalışma mekanizması beş başlıkta çözümlenir: girdi önceliği, ölçünün değişmesi, dışarıdan takılan kalite denetimi, kaba kuvvetin öngörüyü ikame etmesi ve tasarımın üretim zayıflığını soğurması. Sovyetler Birliği modelin en saf örneği olarak ele alınır ve hem işlediğini hem sınırını gösterir: ada gerçek çıktı üretmiştir, ancak çevresinden bağımsız değildir ve genel disiplin eksikliğine rağmen değil, kısmen onu üreterek çalışır. Modelin üç sınırı adlandırılır: yayılmama, ölçek gerektiren teknolojilerde çalışmama ve yoğunlaşma kesildiğinde çöküş. Fransız grands projets geleneği aynı yoğunlaşma mantığını sağlam bir sanayi tabanı üzerinde uyguladığı için farklı bir sonuç vermiştir; bedeli hesap verebilirlik ve hata düzeltme kapasitesidir. Modelin en yanıltıcı yanı maliyetinin ölçülememesidir: hem uygulayan sistem hem dışarıdan gözleyen taraf, sistemin en çok yatırım yaptığı çıktıyı sistemin genel yeteneğinin temsilcisi saymaya eğilimlidir. Soğuk Savaş boyunca Batı'nın Sovyet kapasitesini değerlendirme biçimi bu ölçüm hatasının kurumsal ölçekteki örneğidir.",
+    "pdf": "Mükemmellik_Adaları__Yoğunlaşma_Modelinin_Ekonomisi.pdf",
+    "thumb": "thumbs/mükemmellik-adaları-yoğunlaşma-modelinin-ekonomisi.png",
+    "addedAt": "2026-08-25T21:34:27.096Z",
+    "pages": 16,
+    "belge": "BELGE-200",
+    "title_en": "Islands of Excellence: The Economics of the Concentration Model",
+    "description_en": "Argues that a country's inability to produce a given technological artifact is usually not a knowledge gap but the measured output of a shortfall in institutional accumulation. Behind artifacts such as a high-performance jet engine the binding constraints are process parameters absent from the literature, tacit knowledge passed between generations, a deep supplier tier, metrology infrastructure, and the recording mechanisms that turn failure into knowledge. Even without this accumulation, world-class output can be produced by piling resources and talent onto a narrow area; this is called an island of excellence. The model's working mechanism is analyzed under five headings: priority in inputs, a shifted standard, quality control fitted from outside, brute force substituting for foresight, and design absorbing weakness in production. The Soviet Union is treated as the purest instance, showing both that the model works and where it stops: the island produced real output, yet it is not independent of its surroundings and works not despite the general lack of discipline but partly by producing it. Three limits are named: failure to spread, failure in technologies that require scale, and collapse once concentration ceases. The French grands projets tradition applied the same logic on a sound industrial base and so gave a different result; its price was accountability and error-correction capacity. The model's most misleading property is that its cost cannot be measured: both the system applying it and the outside observer tend to take the output receiving the most investment as representative of the system's general capability. The West's assessment of Soviet capacity through the Cold War is that measurement error at institutional scale.",
+    "priority": 4,
+    "related": [
+      "sıçrama-mesafesi-komşuluk-ölçüm-ve-süreklilik",
+      "rekabetçilikten-sistem-ontolojisine-ölçüm-kapasite-ve-analitik-mercek",
+      "i-sveç-özelinde-teknolojik-uzmanlaşma-kabiliyet-birikimi-ve-sistem-çözümlemesi-üzerine-bir-i-nceleme",
+      "model-fabrika-yetmediğinde-türk-ar-ge-nin-ortaklaştırılabilir-katmanı-ve-sanayi-politikası-araçları"
+    ]
+  },
+  {
+    "slug": "bilgi-i-şleme-i-şlemleri-bir-terminoloji-denemesi",
+    "title": "Bilgi İşleme İşlemleri: Bir Terminoloji Denemesi",
+    "date": "2026-08-25",
+    "description": "Sınıflandırma, soyutlama, ayrıştırma, sıkıştırma ve geri getirme gibi fiillerin tek bir disipline ait olmadığını, enformasyon üzerinde iş gören genel operatörler olduğunu ve toplu adlarının bilgi işleme işlemleri olduğunu öne sürer. Bu işlemlerin ortak yapısı girdi ve çıktısının aynı türden olmasıdır: enformasyonu enformasyona dönüştürürler, ona dışarıdan içerik eklemezler. Kümenin en yakın atası enformasyon işleme, bir alt dalı ise enformasyon düzenlemedir; ikisi arasındaki fark, düzenlemenin enformasyonun temsilini değil yalnızca yerleşimini ve erişilebilirliğini değiştirmesidir. Buradaki organization sözcüğünün örgüt kuramındaki anlamıyla değil tertip etme anlamıyla kullanıldığı ayrıca belirtilir; iki alan yalnızca en soyut düzeyde, parçaları ve sınırları düzene sokma fikrinde kesişir. Açığa çıkarma, saklama süresi ve imha gibi işlemler bu aileye ait değildir; bunlar enformasyonun anlamıyla değil yaşam döngüsü ve denetimiyle ilgilenen enformasyon yönetişimi alanına aittir. İşlemlerin tek bir düz liste hâlinde sıralanmasının yanıltıcı olduğu, çünkü aynı listede seçme gibi erişim işlemleriyle çıkarım yapma gibi epistemik işlemlerin yan yana geldiği savunulur; doğru düzey tek tek fiiller değil işlem aileleridir. Yedi aileli bir şema önerilir: seçme, düzenleme, dönüştürme, temsil, çıkarım, doğrulama, saklama ve geri getirme. Kapanışta bu adlandırmanın asıl kazancının bir alanda çözülmüş bir problemin başka bir alanda aynı problem olarak tanınabilmesi olduğu belirtilir — kayıplı sıkıştırmada neyin atılabileceği sorusu ile yazılım soyutlamasında hangi ayrıntının gizleneceği sorusu yapısal olarak aynı sorudur.",
+    "pdf": "Bilgi_İşleme_İşlemleri__Bir_Terminoloji_Denemesi.pdf",
+    "thumb": "thumbs/bilgi-i-şleme-i-şlemleri-bir-terminoloji-denemesi.png",
+    "addedAt": "2026-08-25T21:34:27.095Z",
+    "pages": 18,
+    "belge": "BELGE-198",
+    "title_en": "Information Processing Operations: An Essay in Terminology",
+    "description_en": "Proposes that verbs such as classifying, abstracting, parsing, compressing and retrieving do not belong to a single discipline but are general operators acting on information, collectively named information processing operations. Their shared structure is that input and output are of the same kind: they turn information into information without adding content from outside. The nearest ancestor of the set is information processing and one of its branches is information organization; the difference is that organization changes not the representation of information but only its placement and accessibility. It is noted separately that organization is used here in the sense of arranging rather than in the sense it carries in organizational theory; the two fields meet only at the most abstract level, in the idea of putting parts and boundaries in order. Operations such as disclosure, retention period and disposal do not belong to this family; they belong to information governance, which concerns the lifecycle and control of information rather than its meaning. Listing the operations as a single flat list is argued to mislead, since access operations such as selecting then sit beside epistemic operations such as inferring; the right level is families of operations rather than individual verbs. A seven-family scheme is proposed: selecting, organizing, transforming, representing, inferring, verifying, and storing and retrieving. The closing notes that the real gain of the naming is that a problem solved in one field becomes recognizable as the same problem in another — what may be discarded in lossy compression and which detail to hide in software abstraction are structurally the same question.",
+    "priority": 3,
+    "related": [
+      "04-bilgi-geometrisi-ve-kodun-topolojisi",
+      "haritalama-koddan-kavrama-bir-zihinsel-hamlenin-anatomisi"
+    ]
+  },
+  {
+    "slug": "vekil-değişkenler-ve-örtük-yargı",
+    "title": "Vekil Değişkenler ve Örtük Yargı",
+    "date": "2026-08-25",
+    "description": "Üç metinden oluşan bir derlemedir; ortak ekseni, ölçülemeyen bir niteliğin yerine geçen vekil değişkenlerin ve aktarılamayan örtük yargının mühendislik pratiğindeki sonuçlarıdır. Birinci metin, Kural ve Örnek, kuralın örnekten daha zayıf bir taşıyıcı olduğunu savunur: kural çok sayıda somut vakadan damıtılmış kayıplı bir sıkıştırmadır ve damıtma sırasında hangi durumda hangi tercihin yapıldığına dair yargı düşer, bu nedenle fonksiyonlar kısa olsun biçiminde bir kurala harfiyen uyup niteliksiz kod üretmek mümkündür. Aktarım için asgari üç bileşen gerekir: hedefi gösteren kanonik örnek, kabul edilebilirliğin alt sınırını gösteren karşıt örnek ve üretilen işi bu ikisine bağlayan geri bildirim. İmalattaki limit numunesi karşıt örneğin en saf hâlidir; metalurjide karşılaştırma çizelgesi, hukukta emsal karar aynı işlevin farklı maddi biçimleridir. İkinci metin, Tasarımın Merkezi, insan merkezli tasarımın yerini sistem merkezli bir yaklaşımın aldığı tespitini düzeltir: merkez taşınmaz, üçe bölünür — insan amacın kaynağı olarak merkezde kalır, kontrolün faili olarak çıkar, sorumluluğun taşıyıcısı olarak tutulur. Bainbridge'in gözlemi hatırlatılır: otomasyon işin kolay kısmını devralır, zor kısmını insana bırakır ve zor kısmı çözecek beceriyi koruma imkânını ortadan kaldırır. Üçüncü metin, Takım Oyunu, takım oyununu uyumluluk değil sistemin toplam çıktısının maksimize edilmesi olarak tanımlar, sosyal zeminin küçük sosyal risklerin ucuz olmasına dayandığını gösterir ve kötü seçilmiş bir vekil değişkenin ölçüm yokluğundan daha tehlikeli olduğunu belirtir — bozulduğu hâlde güven vermeye devam eder.",
+    "pdf": "Vekil_Değişkenler_ve_Örtük_Yargı.pdf",
+    "thumb": "thumbs/vekil-değişkenler-ve-örtük-yargı.png",
+    "addedAt": "2026-08-25T21:34:27.094Z",
+    "pages": 35,
+    "belge": "BELGE-197",
+    "title_en": "Proxy Variables and Tacit Judgment",
+    "description_en": "A compilation of three texts whose common axis is the consequences, in engineering practice, of proxy variables standing in for an unmeasurable quality and of tacit judgment that cannot be transferred. The first, Rule and Example, argues that a rule is a weaker carrier than an example: a rule is a lossy compression distilled from many concrete cases, and the judgment about which choice was made in which situation is lost in the distillation, which is why one can follow a rule such as keep functions short to the letter and still produce poor code. Transfer requires three components at minimum: a canonical example showing the target, a counter-example marking the lower bound of acceptability, and feedback binding the work produced to both. The limit sample in manufacturing is the purest form of the counter-example; the comparison chart in metallurgy and the precedent in law are the same function in different material forms. The second, The Center of Design, corrects the claim that a system-centered approach has replaced human-centered design: the center does not move, it splits in three — the human remains central as the source of purpose, leaves as the agent of control, and is retained as the bearer of responsibility. Bainbridge's observation is recalled: automation takes over the easy part, leaves the hard part to the human, and removes the practice needed to keep the skill for it. The third, Team Play, defines team play not as agreeableness but as maximizing the system's total output, shows the social ground rests on small social risks being cheap, and notes that a badly chosen proxy is more dangerous than no measurement — it keeps inspiring confidence after it has broken.",
+    "priority": 7,
+    "related": [
+      "o-rtu-k-bilgi-ve-u-ru-n-gelis-tirici-deneyiminden-bilme-bic-imlerine",
+      "teknolojik-bilginin-kaybı-aktarım-zincirleri-örtük-bilgi-ve-kurumsal-süreklilik-stratejileri-üzerine-bir-i-nceleme",
+      "bireysel-sınırlar-kurumsal-borc-ve-i-letis-im-yazılım-ekiplerinde-performans-ve-bu-yu-me-i-c-in-bir-c-erc-eve",
+      "otonominin-mühendisliği-etmen-tabanlı-sistemler-i-çin-bir-karar-sistemleri-çerçevesi"
+    ]
+  },
+  {
+    "slug": "epistemik-çaprazlamanın-biçimsel-temelleri",
+    "title": "Epistemik Çaprazlamanın Biçimsel Temelleri",
+    "date": "2026-08-25",
+    "description": "Disiplinler arası çarpışmanın bir üretim değil seçilim problemi olduğunu savunur: iki alanın kavramlarını birbirine uygulayarak soru üretmek neredeyse maliyetsizken, üretilen sorunun gerçekten bilgi taşıyıp taşımadığını sınamak pahalıdır ve bağlayıcı kısıt uzman erişimidir. Bir çarpışmanın değeri, ürettiği önermenin sınanmasından beklenen belirsizlik indirimi olarak tanımlanır; bu ölçüt altında iki alandan biri tek başına bilinerek cevaplanabiliyorsa çarpışma boştur kuralı, ikinci alanın bilgisinin birincisi verildiğinde hâlâ bir şey eklemesi koşuluna dönüşür ve en verimli önermenin doğruluğundan emin olunmayan önerme olduğu sonucu çıkar. Sayılan on iki operatörün çoğunun bağımsız olmadığı gösterilir ve küme dört aileye indirgenir: yapısal eşleme, ortak soy, maliyet oranı ve nedensel etki. Yokluk operatörü en verimli sayılan operatördür ancak olduğu hâliyle en çok yanlış alarm üretir — bir mekanizmanın ikinci alanda bulunmaması çoğu durumda eksiklik değil, mekanizmayı mümkün kılan koşulun orada sağlanmamasıdır. Tekstildeki kabul edilebilir kusur oranının yazılıma taşınamaması bunun açık örneğidir; taşınamama nedeni yazılımın geri kalmışlığı değil örneklemenin dayandığı birim bağımsızlığının orada bulunmamasıdır. Çözümler onları mümkün kılan koşullara sıkı biçimde bağlı, arıza modları ise çok daha az koşula bağlı olduğu için disiplinler arası transferde çözüm değil arıza modu taşımak sistematik olarak daha yüksek getirilidir. Yöntemin sağlığı ürettiği soru sayısıyla değil, uzmana götürülen önermelerin çürütülme oranıyla ölçülür.",
+    "pdf": "Epistemik_Çaprazlamanın_Biçimsel_Temelleri.pdf",
+    "thumb": "thumbs/epistemik-çaprazlamanın-biçimsel-temelleri.png",
+    "addedAt": "2026-08-25T21:34:27.093Z",
+    "pages": 32,
+    "belge": "BELGE-196",
+    "title_en": "Formal Foundations of Epistemic Crossing",
+    "description_en": "Argues that interdisciplinary collision is a selection problem rather than a production problem: generating questions by applying the concepts of one field to another is nearly costless, while testing whether the resulting proposition carries information is expensive, and the binding constraint is access to experts. The value of a collision is defined as the expected reduction in uncertainty from testing the proposition it produces; under this criterion the rule that a collision is empty if either field alone can answer it becomes the condition that the second field's knowledge still adds something once the first is given, and it follows that the most productive proposition is the one whose truth is not already assumed. Most of the twelve operators enumerated are shown not to be independent, and the set reduces to four families: structural mapping, common ancestry, cost ratio and causal effect. The absence operator is held to be the most productive, yet as stated produces the most false alarms — a mechanism missing in the second field usually indicates not a deficiency but that the condition enabling the mechanism is not met there. The failure to carry an acceptable defect rate from textiles into software is the clear case; the reason is not that software lags but that the unit independence sampling rests on is absent. Because solutions are tightly bound to the conditions enabling them while failure modes depend on far fewer conditions, transferring a failure mode rather than a solution is systematically higher yield. The method's health is measured not by questions produced but by the refutation rate of propositions taken to experts.",
+    "priority": 5,
+    "related": [
+      "kavramsal-çarpıştırma-yöntemi-ve-negatif-bilginin-kısıt-geometrisi",
+      "yapısal-i-zomorfizm-kaynaklar-gelenekler-sentez",
+      "yazılım-mühendisliği-ne-öğrenebilir-sekiz-disiplinden-dersler"
+    ]
+  },
+  {
+    "slug": "girdi-i-şlemede-temsil-boşluğu",
+    "title": "Girdi İşlemede Temsil Boşluğu",
+    "date": "2026-08-25",
+    "description": "Bir girdi üzerinde yapılan doğrulama ile o girdinin sonradan kullanılan hâli aynı değer olmadığında aradaki farkın bir güvenlik açığı ürettiğini gösterir. Durum literatürde adlandırılmış bir zafiyet sınıfıdır: CWE-180, Validate Before Canonicalize; kardeş kaydı CWE-179 aynı ailenin daha genel hâlidir. Doğru sıra üç adımlıdır ve bozulduğu anda boşluk açılır: kanonikleştir, doğrula, kullan. MITRE'nin kendi örneği sorunun bir dikkat meselesi olmadığını gösterir: bir yolun beklenen önekle başlayıp başlamadığı denetlenir, denetim başarıyla geçilir, ardından kanonikleştirme çift noktayı üst dizine geçiş olarak yorumlar ve doğrulanan yol ile açılan yol artık aynı yol değildir. Sondaki boşlukların kırpılması bu sınıfın en zararsız örneğidir — aynı şekil dizin geçişi, Unicode normalizasyonu ve imza doğrulaması gibi çok daha ağır sonuçlu bağlamlarda tekrarlanır. NFKC ve NFKD kiplerinin zararsız görünen bir dizgeyi zararlı hâle getirebilmesi ayrı bir kayıt olarak CWE-182 altında sınıflandırılmıştır. Sorunun kaynağı programcının dikkatsizliği değil işlem sırasının kendisidir: doğrulama verinin nihai temsili üzerinde yapılmadığı sürece hangi değeri onayladığını bilemez. Çözümün kontrol disiplini ile aranması yetersiz kalır, çünkü boolean döndüren bir doğrulama fonksiyonu öğrendiği bilgiyi çağırana taşımaz; kalıcı çözüm doğrulamayı bir tip dönüşümüne çevirmektir. Kırpma ve hoşgörülü ayrıştırma alışkanlığının gerekçesi gösterilen sağlamlık ilkesi ise bugün İnternet Mimari Kurulu tarafından bizzat sorunun kaynaklarından biri sayılmaktadır.",
+    "pdf": "Girdi_İşlemede_Temsil_Boşluğu.pdf",
+    "thumb": "thumbs/girdi-i-şlemede-temsil-boşluğu.png",
+    "addedAt": "2026-08-25T21:34:27.092Z",
+    "pages": 12,
+    "belge": "BELGE-194",
+    "title_en": "The Representation Gap in Input Handling",
+    "description_en": "Shows that when the validation performed on an input and the form of that input used later are not the same value, the difference itself produces a security hole. The situation is a named weakness class: CWE-180, Validate Before Canonicalize, with the sibling record CWE-179 as its more general form. The correct order has three steps and the gap opens the moment it is broken: canonicalize, validate, use. MITRE's own example shows this is not a matter of attention: a path is checked for the expected prefix, the check passes, canonicalization then reads the double dot as a move to the parent directory, and the path validated is no longer the path opened. Trimming trailing whitespace is the most harmless instance of the class — the same shape recurs in path traversal, Unicode normalization and signature verification, with far heavier consequences. That NFKC and NFKD can turn an apparently harmless string into a harmful one is filed separately as CWE-182. The source of the problem is not carelessness but the order of operations: unless validation runs on the final representation of the data, it cannot know which value it approved. Seeking the remedy in discipline of checking falls short, because a validator returning a boolean does not carry what it learned back to its caller; the durable fix is to turn validation into a type conversion. The robustness principle, long cited to justify trimming and lenient parsing, is today counted by the Internet Architecture Board itself among the sources of the problem.",
+    "priority": 9,
+    "related": [
+      "sınıfı-kapatmak-güvenlik-bulgularının-tip-tasarımındaki-karşılığı",
+      "güvenlik-kavramları-envanteri-duruş-i-lke-alan-ve-anti-örüntü-haritası"
+    ]
+  },
+  {
+    "slug": "sınıfı-kapatmak-güvenlik-bulgularının-tip-tasarımındaki-karşılığı",
+    "title": "Sınıfı Kapatmak: Güvenlik Bulgularının Tip Tasarımındaki Karşılığı",
+    "date": "2026-08-25",
+    "description": "OWASP Top 10'un en tehlikeli on açığın listesi değil, ölçülebilirlik ile saha sezgisi arasında bilinçli kurulmuş bir uzlaşma olduğunu ortaya koyar: kategorilerin sekizi katkı verisinden, ikisi topluluk anketinden seçilir. Bu yapı listenin kendi belgesinde açıkça kabul edilir ve doğrudan bir sonucu vardır — Top 10 tek başına doğrulanabilir bir denetim listesi olarak kullanılamaz. Sıralama bir zafiyet türünün kaç kez bulunduğuna değil, uygulamaların yüzde kaçında en az bir kez bulunduğuna dayanır; bu tercih otomatik araçların ürettiği yüksek bulgu hacminin insan testçi verisini bastırmasını engeller ve saldırganın bir kategoriyi sömürmek için tek örneğe ihtiyaç duyması olgusuyla gerekçelendirilir. 2021 sürümünde kategori adları semptomdan kök nedene kaydırılmış, analiz edilen zayıflık sayısı yaklaşık otuzdan dört yüze çıkarılmıştır. Metin OWASP'ın asıl katkısının tek bir liste değil yaşam döngüsünün her aşamasına karşılık gelen bir belge kümesi olduğunu belirtir ve işlevsel ayrımı verir: Top 10 nereye bakılacağını, ASVS neyin doğrulanacağını, Cheat Sheet Series nasıl yapılacağını söyler. Sunucu tarafı karşılıkları nesne düzeyinde yetkilendirme, toplu atama, ön imzalı URL'ler ve uzun ömürlü bağlantıda yetki tazeleme üzerinden örneklenir. Merkezî sonuç şudur: güvenlik alanının ürettiği bulguların önemli bir bölümü tip ve arayüz tasarımının bağımsız olarak vardığı sonuçlarla örtüşür — bir hata sınıfı örnekleri denetlenerek değil, sınıfın kendisi imkânsızlaştırılarak kapatılır; denetim eklemek denetimi unutma olasılığını da ekler.",
+    "pdf": "Sınıfı_Kapatmak__Güvenlik_Bulgularının_Tip_Tasarımındaki_Karşılığı.pdf",
+    "thumb": "thumbs/sınıfı-kapatmak-güvenlik-bulgularının-tip-tasarımındaki-karşılığı.png",
+    "addedAt": "2026-08-25T21:34:27.092Z",
+    "pages": 14,
+    "belge": "BELGE-195",
+    "title_en": "Closing the Class: Security Findings and Their Counterpart in Type Design",
+    "description_en": "Sets out that the OWASP Top 10 is not a list of the ten most dangerous flaws but a deliberate compromise between measurability and field intuition: eight categories are selected from contributed data and two from a community survey. The structure is acknowledged in the document itself and has a direct consequence — the Top 10 cannot be used on its own as a verifiable audit checklist. Ranking rests not on how often a weakness type was found but on the percentage of applications in which it was found at least once; this choice prevents the high finding volume of automated tools from swamping human tester data and is justified by the fact that an attacker needs a single instance to exploit a category. In the 2021 edition category names moved from symptom to root cause and the number of weaknesses analyzed rose from around thirty to four hundred. The text notes that OWASP's real contribution is not one list but a body of documents covering every stage of the lifecycle, and gives the functional split: the Top 10 says where to look, ASVS what to verify, the Cheat Sheet Series how to do it. Server-side counterparts are illustrated through object-level authorization, mass assignment, pre-signed URLs and re-establishing authority on long-lived connections. The central conclusion is that a substantial part of what security work produces coincides with what type and interface design reach independently — a class of error is closed not by auditing its instances but by making the class itself inexpressible; adding a check also adds the possibility of forgetting it.",
+    "priority": 8,
+    "related": [
+      "girdi-i-şlemede-temsil-boşluğu",
+      "güvenlik-kavramları-envanteri-duruş-i-lke-alan-ve-anti-örüntü-haritası"
+    ]
+  },
+  {
+    "slug": "yazılım-mimarisi-seçim-zamanlama-ve-kademeli-değişim",
+    "title": "Yazılım Mimarisi: Seçim, Zamanlama ve Kademeli Değişim",
+    "date": "2026-08-25",
+    "description": "Mimari tartışmalarının verimsiz kalmasının başlıca nedenini, tartışmanın hangi katmanda yürüdüğünün belirlenmemiş olmasına bağlar; araç seçimi kısıt kararı verilmeden konuşulduğunda aracın özellikleri kararı geriye doğru belirler. Mimari, bir sistemde değiştirilmesi pahalı olan kararların bütünü olarak tanımlanır ve bu tanım mimariyi diyagramla ya da klasör yapısıyla tanımlayan yaygın kullanımdan bilinçli olarak ayrılır. Kararlar değişim maliyetine göre altı katmana ayrılır — alan, kısıt, sınır, topoloji, uygulama, işletim — ve bu sıralamada yukarıdaki katman aşağıdakini kısıtlar; ters yönde bir belirlenim gözlendiğinde mimari bozulmuş demektir. Veri yapısı ile mimari kalıp seçiminin ayrımı bu çerçeveden çıkar: bir veri yapısını değiştirmek tek bir dosyayı, bağımlılık yönünü değiştirmek her dosyayı etkiler; dolayısıyla ilkinde erken karar zarar, ikincisinde geç karar zarardır. On altı veri yapısı çözdüğü sorun ve bedeliyle tablolanır. Kalıp adlarının uygulanacak şeyin kendisi değil bir fikrin belirli bir uygulanış biçimi olduğu savunulur: Hexagonal'in altındaki tek fikir iş mantığının dış bağımlılıklar olmadan sınanabilmesidir ve bu fikir kalıbın klasör yapısı benimsenmeden de uygulanabilir. Mimari sağlık kalıba benzerlikle değil üç semptomla ölçülür: iş kuralını test etmek için dış sistem gerekip gerekmediği, küçük bir değişikliğin kaç dosya açtırdığı ve değişiklik sonrası neyin bozulacağına dair belirsizlik. Çalışan bir sistemde iyileştirme topluca geçişle değil dokunulan yerlerin kademeli sıyrılmasıyla yapılır, çünkü uzun süredir çalışan kod dokümante edilmemiş alan bilgisinin fiilî deposudur.",
+    "pdf": "Yazılım_Mimarisi__Seçim__Zamanlama_ve_Kademeli_Değişim.pdf",
+    "thumb": "thumbs/yazılım-mimarisi-seçim-zamanlama-ve-kademeli-değişim.png",
+    "addedAt": "2026-08-25T21:34:27.091Z",
+    "pages": 13,
+    "belge": "BELGE-193",
+    "title_en": "Software Architecture: Choice, Timing and Incremental Change",
+    "description_en": "Attributes the unproductiveness of architecture discussions chiefly to leaving unstated which layer the discussion runs at; when tool choice is debated before the constraint decision is made, the tool's properties determine that decision in reverse. Architecture is defined as the set of decisions that are expensive to change, a definition deliberately parted from the common usage that identifies architecture with a diagram or a folder layout. Decisions are separated into six layers by cost of change — domain, constraint, boundary, topology, implementation, operation — where each layer constrains the one below it; determination observed in the opposite direction means the architecture has broken down. The distinction between choosing a data structure and choosing an architectural pattern follows: changing a data structure touches one file, changing a dependency direction touches every file, so an early decision harms in the first case and a late one in the second. Sixteen data structures are tabulated with the problem each solves and its cost. Pattern names are argued to be a particular rendering of an idea rather than the thing to be applied: the single idea beneath Hexagonal is that business logic can be tested without external dependencies, and that idea holds without adopting the pattern's folder structure. Architectural health is measured not by resemblance to a pattern but by three symptoms: whether testing a business rule requires an external system, how many files a small change opens, and the uncertainty about what will break after a change. In a running system, improvement proceeds by incrementally peeling the places being touched rather than by wholesale migration, since long-running code is the de facto store of undocumented domain knowledge.",
+    "priority": 9,
+    "related": [
+      "yapıdan-i-htiyaca-sistem-soyutlama-merdiveni",
+      "çekirdek-katmandan-sınırlı-bağlamlara-domain-odaklı-mimariye-evrimsel-geçiş",
+      "kod-tabani-geometrisi",
+      "artımlı-teslimat-ve-sıfır-kesintili-s-ema-gec-is-i-risk-sınıflandırmasından-bes-as-amalı-migrasyon-modeline"
+    ]
+  },
+  {
+    "slug": "şemaya-gömülen-felsefe",
+    "title": "Şemaya Gömülen Felsefe",
+    "date": "2026-08-25",
+    "description": "Mühendislik pratiğinde felsefi kavramların işlevinin bilgi eklemek değil, zaten verilmiş bir kararı görünür kılmak olduğunu savunur. Şemaya birincil anahtar konulduğunda özdeşlik kararı, servis sınırı çizildiğinde parça-bütün kararı, sistem hızlı olmalı biçiminde bir gereksinim kabul edildiğinde eşik kararı çoktan verilmiştir; kavramın sağladığı tek şey o anın bir karar anı olarak fark edilmesidir. Bu kararlar verildikleri anda karar olarak görülmez, varsayılan tercihler olarak geçilir ve sonuçları ancak değiştirilmeleri pahalı hâle geldikten sonra ortaya çıkar. Metin iki kısıta dayanır: her kavram soru biçiminde tanımlanır ve her kavram bir tetikleyici duruma bağlanır; hangi işi yaparken hangi sorunun devreye gireceği belirtilmezse kavram kullanılamaz hâlde kalır. Otuz sekiz kavram altı kümede toplanır — kimlik, parça ve seviye; kip, zaman ve kural; dil ve anlam; kanıt ve çıkarım ve devamı — ve on bir mühendislik durumuna eşlenir. Kavramların bir kısmının yalnızca tartışma nesnesi kalmayıp prosedürel torunlar ürettiği gösterilir: yanlışlanabilirlik ilkesi istihbarat analizinde doldurulan bir tabloya, biçimsel ontoloji veri entegrasyonunda içe aktarılan bir dosyaya, sınırlı rasyonellik hizmet düzeyi hedeflerine dönüşmüştür. Getirisi üç başlıkta toplanır: kararı deneyimin öğrettiği andan erkene çekmek, sezgiyi denetlenebilir bir iddiaya çevirmek ve kişiyi kendi açıklamasının karşısına koymak. Sınırı da yazılır: kavram alan bilgisinin yerine geçmez ve etiket yapıştırmak tartışmayı durdurabilir.",
+    "pdf": "Şemaya_Gömülen_Felsefe.pdf",
+    "thumb": "thumbs/şemaya-gömülen-felsefe.png",
+    "addedAt": "2026-08-25T21:34:27.090Z",
+    "pages": 18,
+    "belge": "BELGE-192",
+    "title_en": "Philosophy Embedded in the Schema",
+    "description_en": "Argues that the function of philosophical concepts in engineering practice is not to add knowledge but to make an already-taken decision visible. When a primary key is placed in a schema the identity decision is made; when a service boundary is drawn the part-whole decision is made; when a requirement of the form the system must be fast is accepted the threshold decision is made. The only thing the concept supplies is the recognition that this was a decision point. Such decisions are rarely seen as decisions when taken, pass as default preferences, and surface only once changing them has become expensive. The text rests on two constraints: every concept is defined as a question, and every concept is bound to a triggering situation; unless it is stated which question enters during which task, the concept remains unusable. Thirty-eight concepts are grouped into six clusters — identity, part and level; modality, time and rule; language and meaning; evidence and inference, and so on — and mapped onto eleven engineering situations. Several concepts are shown to have produced procedural descendants rather than remaining objects of debate: falsifiability became a table filled in during intelligence analysis, formal ontology a file imported during data integration, bounded rationality a set of service level objectives. The return is threefold: pulling a decision earlier than experience would teach it, turning intuition into an auditable claim, and placing a person opposite their own explanation. The limit is stated: a concept does not replace domain knowledge, and attaching a label can end the discussion.",
+    "priority": 7,
+    "related": [
+      "anlamın-sınırları-wittgenstein-dan-ontolojiye-ve-domain-driven-design-a",
+      "mühendislikte-nedensellik-ve-kavramsal-ayrımlar",
+      "bildiğini-sandığın-kelime-otomasyon-örneği-üzerinden-kavramın-sınırları"
+    ]
+  },
+  {
+    "slug": "epistemik-ve-ontik-belirsizlik-mühendislikte-olasılığın-i-ki-yüzü",
+    "title": "Epistemik ve Ontik Belirsizlik: Mühendislikte Olasılığın İki Yüzü",
+    "date": "2026-08-25",
+    "description": "Olasılık kavramının iki farklı şeyi aynı adla andığını ortaya koyar. Birincisi bilenin eksikliğidir: zarın sonucu fizik yasalarınca belirlidir, atıcı başlangıç koşullarını bilmediği için olasılığa başvurur. İkincisi bilinenin değil bilinebilenin sınırıdır: radyoaktif bozunmanın zamanı ne kadar bilgi toplanırsa toplansın belirlenemez. Ayrımın pratik sonucu şudur: birinci türden olasılık bilgi arttıkça daralması gereken geçici bir duraktır, ikinci türden olasılık varış noktasının kendisidir. Epistemik yorum Laplace'tan De Finetti'ye ve Jaynes'e izlenir; olasılığın bilgisizliği yalnızca adlandırmadığı, ona yapı verdiği belirtilir — sayıyı üreten şey bilgisizliğin içinde kalan yapısal bilgidir. Ontik yorumun üç biçimi (frekansçı, eğilim, kuantum) ele alınır ve Bell eşitsizliğinin ihlali, kuantum belirsizliğinin daha fazla araştırmayla kapatılabilecek bir bilgi boşluğu olmadığını gösteren deneysel dayanak olarak sunulur. Belirsizliğin kapatılabilirliği üç durumda geçersizleşir: ilkesel olarak kapatılamayan, Lorenz'in kaos çalışmasında olduğu gibi pratik olarak kapatılamayan ve Knight ile Ellsberg'in ayırdığı ölçülemeyen belirsizlik. Yazılım mühendisliği tartışmanın en saf örneğini sunar, çünkü sayısal bilgisayar tanımı gereği determinist bir aygıttır ve gözlenen her nondeterminizm ölçülmemiş bir değişkene işaret eder; buna karşın önemli veri yapıları ve dağıtık sistem teknikleri ölçek karşılığında kesinlikten bilinçli olarak feragat eder.",
+    "pdf": "Epistemik_ve_Ontik_Belirsizlik__Mühendislikte_Olasılığın_İki_Yüzü.pdf",
+    "thumb": "thumbs/epistemik-ve-ontik-belirsizlik-mühendislikte-olasılığın-i-ki-yüzü.png",
+    "addedAt": "2026-08-25T21:34:27.089Z",
+    "pages": 12,
+    "belge": "BELGE-191",
+    "title_en": "Epistemic and Ontic Uncertainty: The Two Faces of Probability in Engineering",
+    "description_en": "Shows that the term probability names two different things. The first is the knower's deficit: the outcome of a die is fixed by physical law, and the thrower resorts to probability only because the initial conditions are unknown. The second is a limit not on what is known but on what is knowable: the moment of a radioactive decay cannot be determined however much information is gathered. The practical consequence is that a probability of the first kind is a temporary stop that should narrow as information grows, while one of the second kind is the destination itself. The epistemic reading is traced from Laplace through De Finetti to Jaynes, noting that probability does not merely name ignorance but gives it structure — the number is produced by the structural knowledge that remains inside the ignorance. Three forms of the ontic reading are covered (frequentist, propensity, quantum), and the violation of Bell's inequality is presented as the experimental ground showing that quantum uncertainty is not a gap closable by further research. Closability fails in three cases: uncertainty closed in principle, uncertainty closed in practice as in Lorenz's work on chaos, and the unmeasurable uncertainty Knight and Ellsberg separated from risk. Software engineering supplies the purest example, since a digital computer is by definition deterministic and every observed nondeterminism points to an unmeasured variable; yet major data structures and distributed techniques deliberately trade exactness for scale.",
+    "priority": 5,
+    "related": [
+      "belirsizliğin-korunumu-kodun-determinizminden-ajan-kısıtlarına",
+      "müdahale-ederek-anlama-karmaşık-yazılım-sistemlerini-anlamanın-yöntem-kataloğu",
+      "nereden-biliyoruz-bilginin-anatomisi-üzerine-bir-i-nceleme"
+    ]
+  },
+  {
+    "slug": "yanlışlanabilirlik-ölçütünün-kurumlara-uygulanması",
+    "title": "Yanlışlanabilirlik Ölçütünün Kurumlara Uygulanması",
+    "date": "2026-08-25",
+    "description": "Bir kurumun yön tutup tutmadığının çıktı hacmine bakılarak anlaşılamayacağını, çünkü yanlış yönde ilerleyen kurumun da çıktı ürettiğini savunur. Yönü belirleyen şey kurumun kendisi hakkında sorabildiği sorulardır ve bu sorular üç katmanda toplanır: amacın korunup korunmadığı, hatanın görülebilir olup olmadığı ve maliyetin kime hangi döneme yıkıldığı. Amaç katmanında Michels'in oligarşikleşme tezi ile Merton'un amaç kayması kavramı üzerinden kurumların amaçlarının yerine amaçlarının göstergelerini koyduğu gösterilir; ikame kasıtlı değildir, ölçülebilir olanın ölçülemeyeni dışlaması yoluyla kendiliğinden gerçekleşir. Bilgi katmanında Popper'ın ölçütü kurumsal karara taşınır: yanlış yolda olunduğunu ne kanıtlar sorusunun kararla aynı anda yazılmış, tarihli ve ölçülebilir bir cevabı yoksa sonradan gelen her olumsuz sinyal mevcut çerçeveye yerleştirilerek etkisizleştirilir. Hirschman'ın çıkış-ses ayrımı, Janis'in grup düşüncesi ve Vaughan'ın sapmanın normalleşmesi kavramları itiraz maliyetinin bilgiyi yukarı çıkarken nasıl yumuşattığını açıklar. Bedel katmanında dışsallık ve devir sorunu ele alınır. Kapanışta yedi soru denetlenebilir karşılıklarına eşlenir; ortak nitelikleri geçmişe dönük olarak sayılabilir olmalarıdır, niyet beyanı içeren hiçbir madde listeye giremez. Çerçevenin sınırı açıkça kaydedilir: sorular kurumun iç tutarlılığını sınar, amacın kendisinin değerli olup olmadığını sınamaz.",
+    "pdf": "Yanlışlanabilirlik_Ölçütünün_Kurumlara_Uygulanması.pdf",
+    "thumb": "thumbs/yanlışlanabilirlik-ölçütünün-kurumlara-uygulanması.png",
+    "addedAt": "2026-08-25T21:34:27.087Z",
+    "pages": 10,
+    "belge": "BELGE-190",
+    "title_en": "Applying the Falsifiability Criterion to Institutions",
+    "description_en": "Argues that whether an institution holds its direction cannot be read from the volume of its output, since an institution moving in the wrong direction also produces output. What determines direction is the set of questions the institution can ask about itself, and these fall into three layers: whether the purpose is preserved, whether error is visible, and onto whom and which period the cost is shifted. At the purpose layer, Michels's thesis of oligarchization and Merton's goal displacement show how institutions substitute indicators of their purpose for the purpose itself; the substitution is not deliberate but occurs on its own as the measurable crowds out the unmeasurable. At the knowledge layer Popper's criterion is carried into institutional decision-making: unless the question of what would prove the direction wrong has a dated, measurable answer written at the same moment as the decision, every later negative signal is neutralized by being fitted into the existing frame. Hirschman's exit-voice distinction, Janis's groupthink and Vaughan's normalization of deviance explain how the cost of dissent softens information on its way up. The cost layer treats externality and succession. The closing maps seven questions onto auditable counterparts whose shared property is that all are countable in retrospect; no item containing a statement of intent may enter the list. The limit is recorded explicitly: the questions test internal consistency, not whether the purpose itself is worth holding.",
+    "priority": 6,
+    "related": [
+      "kurumsal-mükemmellik-rejimleri-ve-öz-denetimin-yapısal-sınırları",
+      "duvarlarla-i-lerlemek-test-güdümlü-geliştirmeden-ölçüt-önceliği-i-lkesine",
+      "gerekçenin-taşınması-kuralların-aşınma-mekanizması-ve-bilgi-kaybı"
+    ]
+  },
+  {
     "slug": "sıçrama-mesafesi-komşuluk-ölçüm-ve-süreklilik",
     "title": "Sıçrama Mesafesi: Komşuluk, Ölçüm ve Süreklilik",
     "date": "2026-08-12",
@@ -18,7 +266,8 @@
       "i-leri-mühendislik-kavramsal-bir-çerçeve",
       "kapasite-ve-kullanım-ölçülemeyeni-ölçmek",
       "model-fabrika-yetmediğinde-türk-ar-ge-nin-ortaklaştırılabilir-katmanı-ve-sanayi-politikası-araçları",
-      "o-rtu-k-bilgi-ve-u-ru-n-gelis-tirici-deneyiminden-bilme-bic-imlerine"
+      "o-rtu-k-bilgi-ve-u-ru-n-gelis-tirici-deneyiminden-bilme-bic-imlerine",
+      "mükemmellik-adaları-yoğunlaşma-modelinin-ekonomisi"
     ]
   },
   {
@@ -38,7 +287,8 @@
       "sıçrama-mesafesi-komşuluk-ölçüm-ve-süreklilik",
       "i-sveç-özelinde-teknolojik-uzmanlaşma-kabiliyet-birikimi-ve-sistem-çözümlemesi-üzerine-bir-i-nceleme",
       "kapasite-ve-kullanım-ölçülemeyeni-ölçmek",
-      "model-fabrika-yetmediğinde-türk-ar-ge-nin-ortaklaştırılabilir-katmanı-ve-sanayi-politikası-araçları"
+      "model-fabrika-yetmediğinde-türk-ar-ge-nin-ortaklaştırılabilir-katmanı-ve-sanayi-politikası-araçları",
+      "mükemmellik-adaları-yoğunlaşma-modelinin-ekonomisi"
     ]
   },
   {
@@ -61,7 +311,8 @@
       "regülasyon-netliği-ve-sermaye-çekimi-küçük-aktörün-kaldıraç-stratejisi",
       "öğrenme-hızının-örgütsel-ekonomisi-i-kinci-düzey-öğrenme-deneyim-eğrileri-ve-donanım-zengin-i-terasyonun-sınırları",
       "rekabetçilikten-sistem-ontolojisine-ölçüm-kapasite-ve-analitik-mercek",
-      "sıçrama-mesafesi-komşuluk-ölçüm-ve-süreklilik"
+      "sıçrama-mesafesi-komşuluk-ölçüm-ve-süreklilik",
+      "mükemmellik-adaları-yoğunlaşma-modelinin-ekonomisi"
     ]
   },
   {
@@ -82,7 +333,8 @@
       "ölçüm-cihazı-kavram-tarih-ve-mühendislik-i-lkeleri",
       "nereden-biliyoruz-bilginin-anatomisi-üzerine-bir-i-nceleme",
       "i-ndirgeme-ve-belirim-arasında",
-      "müdahale-ederek-anlama-karmaşık-yazılım-sistemlerini-anlamanın-yöntem-kataloğu"
+      "müdahale-ederek-anlama-karmaşık-yazılım-sistemlerini-anlamanın-yöntem-kataloğu",
+      "şemaya-gömülen-felsefe"
     ]
   },
   {
@@ -124,7 +376,8 @@
       "gerekçenin-taşınması-kuralların-aşınma-mekanizması-ve-bilgi-kaybı",
       "teknolojik-bilginin-kaybı-aktarım-zincirleri-örtük-bilgi-ve-kurumsal-süreklilik-stratejileri-üzerine-bir-i-nceleme",
       "müdahale-ederek-anlama-karmaşık-yazılım-sistemlerini-anlamanın-yöntem-kataloğu",
-      "o-rtu-k-bilgi-ve-u-ru-n-gelis-tirici-deneyiminden-bilme-bic-imlerine"
+      "o-rtu-k-bilgi-ve-u-ru-n-gelis-tirici-deneyiminden-bilme-bic-imlerine",
+      "belirsizliğin-korunumu-kodun-determinizminden-ajan-kısıtlarına"
     ]
   },
   {
@@ -145,7 +398,8 @@
       "i-leri-mühendislik-kavramsal-bir-çerçeve",
       "zamanlama-problemi-olarak-teknoloji-takibi",
       "kapasite-ve-kullanım-ölçülemeyeni-ölçmek",
-      "lotus-termit-ve-wright-kardeşler-katman-seçiminin-üç-vakası"
+      "lotus-termit-ve-wright-kardeşler-katman-seçiminin-üç-vakası",
+      "yazılım-mimarisi-seçim-zamanlama-ve-kademeli-değişim"
     ]
   },
   {
@@ -242,7 +496,8 @@
       "ajanik-kurumsal-araştırma-sistemleri-kanıt-temelli-bir-tasarım-çerçevesi",
       "ko-tu-projede-agent-tahmin-eder-yazılımda-niyet-ve-i-z",
       "ölçüm-cihazı-kavram-tarih-ve-mühendislik-i-lkeleri",
-      "uzun-döngülü-karar-problemleri-doğrulama-mimarisi-üzerine-birleşik-bir-çerçeve"
+      "uzun-döngülü-karar-problemleri-doğrulama-mimarisi-üzerine-birleşik-bir-çerçeve",
+      "vekil-değişkenler-ve-örtük-yargı"
     ]
   },
   {
@@ -293,7 +548,8 @@
       "ölçüm-cihazı-kavram-tarih-ve-mühendislik-i-lkeleri",
       "i-leri-mühendislik-kavramsal-bir-çerçeve",
       "zamanlama-problemi-olarak-teknoloji-takibi",
-      "refleks-reddin-mekanizmaları"
+      "refleks-reddin-mekanizmaları",
+      "şemaya-gömülen-felsefe"
     ]
   },
   {
@@ -313,7 +569,8 @@
       "haritalama-koddan-kavrama-bir-zihinsel-hamlenin-anatomisi",
       "bildiğini-sandığın-kelime-otomasyon-örneği-üzerinden-kavramın-sınırları",
       "ölçüm-cihazı-kavram-tarih-ve-mühendislik-i-lkeleri",
-      "mühendislikte-nedensellik-ve-kavramsal-ayrımlar"
+      "mühendislikte-nedensellik-ve-kavramsal-ayrımlar",
+      "eleme-teşhiste-hipotez-uzayının-yönetimi"
     ],
     "title_en": "Reduction to Known Structure: A Problem Diagnosis Protocol",
     "description_en": "The core claim: the efficiency of problem solving depends, in most cases, far less on the capacity to invent new solutions than on the capacity to diagnose the structure a problem belongs to. The question transforms in stages: “how do I solve this” → “which problem class is this” → “am I putting it in the wrong class” → “into which mathematical language can I move it so that the existing knowledge there starts working.” The difference is concrete: “message 100M users” is a queue-product choice on the surface and queueing theory under structural diagnosis; “the metric improved, the product got worse” is Goodhart; “it breaks when the same event arrives twice” is idempotency. The second column invokes a technology, the third invokes a literature. The framework has three layers — lens (which question am I asking), structure (what is the skeleton), formalism (in which language am I writing it) — with the most leverage in the third: moving a problem into a suitable formalism connects it in one move to that field’s theorems, algorithms, and, no less importantly, its impossibility results. A common error is treating every reduction as a homomorphism; the document places the mapping Φ on a spectrum (isomorphism, homomorphism, embedding, abstraction, simulation, encoding, approximation, Karp reduction) and separates what each preserves from what it loses. The relatives pointing the other way — CAP, FLP, Arrow, Rice, the halting problem, lower bounds, no free lunch — prove that certain mappings cannot be built at all, and are treated as the method’s real payoff. Its operable form is a twelve-question diagnostic protocol, accompanied by an inventory of lenses grouped into fifteen families.",
@@ -418,7 +675,9 @@
       "titiz-i-nceleme-i-çin-bir-yöntembilim",
       "authentication-authorization-giriş-seviyesi-rehberi",
       "kurumsal-mükemmellik-rejimleri-ve-öz-denetimin-yapısal-sınırları",
-      "sistem-mühendisliği-zinciri-ve-uygulanmama-koşulları-yazılım-geliştirme-pratiği-i-çin-bir-çerçeve-ve-eleştiri"
+      "sistem-mühendisliği-zinciri-ve-uygulanmama-koşulları-yazılım-geliştirme-pratiği-i-çin-bir-çerçeve-ve-eleştiri",
+      "girdi-i-şlemede-temsil-boşluğu",
+      "sınıfı-kapatmak-güvenlik-bulgularının-tip-tasarımındaki-karşılığı"
     ]
   },
   {
@@ -443,7 +702,8 @@
       "kapasite-ve-kullanım-ölçülemeyeni-ölçmek",
       "model-fabrika-yetmediğinde-türk-ar-ge-nin-ortaklaştırılabilir-katmanı-ve-sanayi-politikası-araçları",
       "rekabetçilikten-sistem-ontolojisine-ölçüm-kapasite-ve-analitik-mercek",
-      "sıçrama-mesafesi-komşuluk-ölçüm-ve-süreklilik"
+      "sıçrama-mesafesi-komşuluk-ölçüm-ve-süreklilik",
+      "mükemmellik-adaları-yoğunlaşma-modelinin-ekonomisi"
     ]
   },
   {
@@ -529,7 +789,9 @@
       "scrutiny-mühendislikte-derinlemesine-i-rdeleme-pratiği",
       "ölçüm-cihazı-kavram-tarih-ve-mühendislik-i-lkeleri",
       "kaybolan-gerekçe-devir-teslimsiz-kod-tabanlarında-çalışma",
-      "mühendislikte-nedensellik-ve-kavramsal-ayrımlar"
+      "mühendislikte-nedensellik-ve-kavramsal-ayrımlar",
+      "epistemik-ve-ontik-belirsizlik-mühendislikte-olasılığın-i-ki-yüzü",
+      "eleme-teşhiste-hipotez-uzayının-yönetimi"
     ],
     "priority": 10,
     "belge": "BELGE-166"
@@ -601,7 +863,8 @@
       "lotus-termit-ve-wright-kardeşler-katman-seçiminin-üç-vakası",
       "i-ndirgeme-ve-belirim-arasında",
       "bildiğini-sandığın-kelime-otomasyon-örneği-üzerinden-kavramın-sınırları",
-      "refleks-reddin-mekanizmaları"
+      "refleks-reddin-mekanizmaları",
+      "epistemik-çaprazlamanın-biçimsel-temelleri"
     ],
     "priority": 9,
     "belge": "BELGE-163"
@@ -648,7 +911,8 @@
       "kurumsal-mükemmellik-rejimleri-ve-öz-denetimin-yapısal-sınırları",
       "tersine-mühendislik-ve-mühendislik-refleksi-sistem-modellemesinden-örgütsel-öğrenmeye",
       "bildiğini-sandığın-kelime-otomasyon-örneği-üzerinden-kavramın-sınırları",
-      "mühendislikte-nedensellik-ve-kavramsal-ayrımlar"
+      "mühendislikte-nedensellik-ve-kavramsal-ayrımlar",
+      "epistemik-ve-ontik-belirsizlik-mühendislikte-olasılığın-i-ki-yüzü"
     ],
     "title_en": "How Do We Know? An Examination of the Anatomy of Knowledge",
     "description_en": "When we say we “know” something, what are we really claiming? This piece builds up the philosophy of knowledge (epistemology) from scratch — what knowledge is, what makes a belief count as knowledge, whether certainty is possible — but doesn't stop there. Its real interest: what if someone is deliberately trying to mislead you? If whoever hands you the “evidence” is trying to deceive you, how do the classic methods fall short? It works this through with concrete examples: when a software test passes, “did it pass because the system is correct, or because the test never probed the fault?”; how intelligence analysis is an institutionalized practice of “how do we know?”; and, most strikingly, why Israel was caught by surprise in the 1973 Yom Kippur War despite holding plenty of warning signs — because an entrenched assumption had become a filter that bent every new piece of evidence to fit it. It examines World War II's famous deception operations (a fake army, forged documents carried on a corpse) by the mental weakness each one targeted. It ends with everyday forms of “fake knowing” (“I cited a source,” “an expert said so,” “the AI said the same thing”) and ties it all to one question: what evidence, if it appeared, would make you change your mind?",
@@ -833,7 +1097,8 @@
       "kavramsal-çarpıştırma-yöntemi-ve-negatif-bilginin-kısıt-geometrisi",
       "titiz-i-nceleme-i-çin-bir-yöntembilim",
       "ölçüm-cihazı-kavram-tarih-ve-mühendislik-i-lkeleri",
-      "kapasite-ve-kullanım-ölçülemeyeni-ölçmek"
+      "kapasite-ve-kullanım-ölçülemeyeni-ölçmek",
+      "yanlışlanabilirlik-ölçütünün-kurumlara-uygulanması"
     ],
     "priority": 9,
     "belge": "BELGE-153"
@@ -856,7 +1121,8 @@
       "gerekçenin-taşınması-kuralların-aşınma-mekanizması-ve-bilgi-kaybı",
       "tersine-mühendislik-ve-mühendislik-refleksi-sistem-modellemesinden-örgütsel-öğrenmeye",
       "keşif-organizasyonlarının-tasarımı-öğrenme-hızı-varsayım-denetimi-ve-bağlam-bağımlılığı-üzerine-genişletilmiş-bir-i-nceleme",
-      "güvenlik-kavramları-envanteri-duruş-i-lke-alan-ve-anti-örüntü-haritası"
+      "güvenlik-kavramları-envanteri-duruş-i-lke-alan-ve-anti-örüntü-haritası",
+      "yanlışlanabilirlik-ölçütünün-kurumlara-uygulanması"
     ],
     "priority": 6,
     "belge": "BELGE-152"
@@ -943,7 +1209,8 @@
       "otonomi-ve-bozulabilirlik-i-ki-eksenli-bir-değerlendirme-çerçevesi",
       "bildiğini-sandığın-kelime-otomasyon-örneği-üzerinden-kavramın-sınırları",
       "kaybolan-gerekçe-devir-teslimsiz-kod-tabanlarında-çalışma",
-      "refleks-reddin-mekanizmaları"
+      "refleks-reddin-mekanizmaları",
+      "yanlışlanabilirlik-ölçütünün-kurumlara-uygulanması"
     ],
     "title_en": "Carrying the Rationale: How Rules Erode and Knowledge Is Lost",
     "description_en": "Reads the accident-investigation literature of high-stakes fields — aviation, medicine, nuclear power, spaceflight — around a single thesis: a rule's capacity to survive is determined not by its correctness but by whether its rationale is carried along with it. The mechanism rests on an asymmetry — the cost of a rule whose rationale wasn't transmitted is visible at every application, while the failure it prevents is by definition never observed; so abandoning the rule becomes not indiscipline but a rational decision given the information at hand. It frames the problem not as a matter of character or negligence but of knowledge transfer, works through neighboring forms — whether a signal reports intent or state, how an authority gradient cuts off information flow, when redundancy is only apparent — and carries the findings into software engineering, marking the limits of the transfer as well.",
@@ -965,7 +1232,8 @@
       "adın-biçimi-bir-kavramın-kendini-i-cra-etmesi-ve-dillerin-gramatik-kaldıraçları-üzerine",
       "kavramsal-sanat-ve-anlam-mimarlıg-ı",
       "haritalama-koddan-kavrama-bir-zihinsel-hamlenin-anatomisi",
-      "bildiğini-sandığın-kelime-otomasyon-örneği-üzerinden-kavramın-sınırları"
+      "bildiğini-sandığın-kelime-otomasyon-örneği-üzerinden-kavramın-sınırları",
+      "şemaya-gömülen-felsefe"
     ],
     "title_en": "The Limits of Meaning: From Wittgenstein to Ontology and Domain-Driven Design",
     "description_en": "Carries the question 'when the same word means different things to different communities, how is that difference represented in a single information system?' from philosophy into software engineering. Starting from early/late Wittgenstein (rule-following and the limit of formalization) and the finding that concepts are community-relative and can't be compressed into one canonical schema, it compares two opposing institutional answers — Palantir Ontology and Domain-Driven Design — on their shared philosophical ground. The thesis: DDD preserves the difference and places an explicit translation layer between boundaries, while Ontology dissolves the difference into a shared object layer; the real distinction is not performance or expressive power but the visibility of power — DDD turns 'whose language prevails' into an explicit design decision, while Ontology buries the same decision in infrastructure configuration and makes it invisible. It openly records the source asymmetry and the absence of empirical grounding, and closes by addressing counter-arguments.",
@@ -1008,7 +1276,8 @@
       "geometrinin-otesi",
       "kod-tabani-geometrisi",
       "sistem-mühendisliği-zinciri-ve-uygulanmama-koşulları-yazılım-geliştirme-pratiği-i-çin-bir-çerçeve-ve-eleştiri",
-      "zamanlama-problemi-olarak-teknoloji-takibi"
+      "zamanlama-problemi-olarak-teknoloji-takibi",
+      "yazılım-mimarisi-seçim-zamanlama-ve-kademeli-değişim"
     ],
     "title_en": "From a Core Layer to Bounded Contexts: An Evolutionary Path to Domain-Driven Architecture",
     "description_en": "Addresses two intertwined problems — the duplication and behavioral drift caused by writing the same business rules separately on mobile and web clients, and business logic staying buried in interface code — along a single evolutionary path: starting from a three-part structure of a central core layer holding the business logic and the mobile/web clients that consume it, it builds step by step the transition to an architecture where that core is restructured along Domain-Driven Design (DDD) principles. It ranges from defining the layers (core, domain, application, client) and the direction of dependency to discovering bounded contexts, the context map and the anti-corruption layer, the model building blocks (entity, value object, aggregate, repository), the tension between persistence and the domain model, and a context-by-context, incremental migration strategy. It stays at the level of concepts and decision criteria without code examples, using a restaurant chain and a shipping company as analogies.",
@@ -1066,7 +1335,8 @@
       "sistem-teorisi",
       "düzen-nereden-çıkar-sistemler-ağlar-evrim-ve-zihin-üzerine",
       "yenilikçi-düşünme-yöntemlerinin-yazılım-tasarımına-uygulanması-bir-i-ndirme-i-zleme-download-tracking-vaka-çalışması",
-      "bilinen-yapıya-i-ndirgeme-bir-problem-teşhis-protokolü"
+      "bilinen-yapıya-i-ndirgeme-bir-problem-teşhis-protokolü",
+      "epistemik-çaprazlamanın-biçimsel-temelleri"
     ],
     "pdf": "Yapısal_İzomorfizm__Kaynaklar__Gelenekler__Sentez.pdf",
     "thumb": "thumbs/yapısal-i-zomorfizm-kaynaklar-gelenekler-sentez.png",
@@ -1190,7 +1460,9 @@
       "çadırın-altındaki-hafıza-sirk-beden-ve-modern-uygarlık",
       "ajanik-kurumsal-araştırma-sistemleri-kanıt-temelli-bir-tasarım-çerçevesi",
       "i-leri-mühendislik-kavramsal-bir-çerçeve",
-      "kaybolan-gerekçe-devir-teslimsiz-kod-tabanlarında-çalışma"
+      "kaybolan-gerekçe-devir-teslimsiz-kod-tabanlarında-çalışma",
+      "vekil-değişkenler-ve-örtük-yargı",
+      "arama-uzayı-ve-ödünleşme-uzmanlığın-i-ki-mekanizması"
     ],
     "pages": 13,
     "title_en": "The Loss of Technological Knowledge: A Study of Transmission Chains, Tacit Knowledge, and Institutional Continuity Strategies",
@@ -1208,7 +1480,8 @@
       "otomotiv-mühendisliğinden-yazılıma-aktarılabilecek-dersler",
       "uzay-bilimlerinden-yazılım-mühendisliğine-dersler",
       "uzun-döngülü-karar-problemleri-doğrulama-mimarisi-üzerine-birleşik-bir-çerçeve",
-      "kurumsal-mükemmellik-rejimleri-ve-öz-denetimin-yapısal-sınırları"
+      "kurumsal-mükemmellik-rejimleri-ve-öz-denetimin-yapısal-sınırları",
+      "epistemik-çaprazlamanın-biçimsel-temelleri"
     ],
     "pdf": "Yazılım_Mühendisliği_Ne_Öğrenebilir__Sekiz_Disiplinden_Dersler.pdf",
     "thumb": "thumbs/yazılım-mühendisliği-ne-öğrenebilir-sekiz-disiplinden-dersler.png",
@@ -1506,7 +1779,9 @@
       "lotus-termit-ve-wright-kardeşler-katman-seçiminin-üç-vakası",
       "çadırın-altındaki-hafıza-sirk-beden-ve-modern-uygarlık",
       "kaybolan-gerekçe-devir-teslimsiz-kod-tabanlarında-çalışma",
-      "sıçrama-mesafesi-komşuluk-ölçüm-ve-süreklilik"
+      "sıçrama-mesafesi-komşuluk-ölçüm-ve-süreklilik",
+      "vekil-değişkenler-ve-örtük-yargı",
+      "arama-uzayı-ve-ödünleşme-uzmanlığın-i-ki-mekanizması"
     ],
     "belge": "BELGE-120"
   },
@@ -1602,7 +1877,8 @@
     "priority": 8,
     "related": [
       "yazılım-gelis-tirici-hızı-sistem-tasarımı-kıdem-bazlı-stratejiler-ve-kurumsal-uygulama",
-      "mu-hendislikte-go-ru-nu-rlu-k-gu-c-ve-stratejik-konumlanma"
+      "mu-hendislikte-go-ru-nu-rlu-k-gu-c-ve-stratejik-konumlanma",
+      "yazılım-mimarisi-seçim-zamanlama-ve-kademeli-değişim"
     ],
     "belge": "BELGE-114"
   },
@@ -1785,7 +2061,8 @@
       "anlamın-sınırları-wittgenstein-dan-ontolojiye-ve-domain-driven-design-a",
       "kod-tabani-geometrisi",
       "müdahale-ederek-anlama-karmaşık-yazılım-sistemlerini-anlamanın-yöntem-kataloğu",
-      "bilinen-yapıya-i-ndirgeme-bir-problem-teşhis-protokolü"
+      "bilinen-yapıya-i-ndirgeme-bir-problem-teşhis-protokolü",
+      "bilgi-i-şleme-i-şlemleri-bir-terminoloji-denemesi"
     ],
     "belge": "BELGE-105"
   },
@@ -1987,7 +2264,8 @@
     "related": [
       "mu-hendislikte-go-ru-nu-rlu-k-gu-c-ve-stratejik-konumlanma",
       "ko-tu-projede-agent-tahmin-eder-yazılımda-niyet-ve-i-z",
-      "sessiz-etki-yazılım-ekiplerinde-yapısal-ve-davranışsal-denge"
+      "sessiz-etki-yazılım-ekiplerinde-yapısal-ve-davranışsal-denge",
+      "vekil-değişkenler-ve-örtük-yargı"
     ],
     "belge": "BELGE-095"
   },
@@ -2657,7 +2935,8 @@
       "04-bilgi-geometrisi-ve-kodun-topolojisi",
       "çekirdek-katmandan-sınırlı-bağlamlara-domain-odaklı-mimariye-evrimsel-geçiş",
       "architectural-fitness-function-ratchet",
-      "haritalama-koddan-kavrama-bir-zihinsel-hamlenin-anatomisi"
+      "haritalama-koddan-kavrama-bir-zihinsel-hamlenin-anatomisi",
+      "yazılım-mimarisi-seçim-zamanlama-ve-kademeli-değişim"
     ],
     "title_en": "Codebase Geometry: A Topological Diagnosis of Software Architecture",
     "description_en": "This piece treats a software codebase not as a technical entity made up only of file and line counts but as a geometric structure of directed relations, mass densities, central nodes, and layered flows. Modules are read as nodes, import relations as edges, file volume as mass, and import density as central gravity. The aim is to move architectural health beyond intuitive assessment and evaluate it through measurable and visualizable indicators.",
@@ -2915,7 +3194,8 @@
     "description_en": "Spec-driven development is an approach based on explicitly defining how a system should behave before writing code; it reverses the classic 'code first, documentation later' order: first what the system will do is defined, then code fitting that definition is produced. The piece examines the approach in four dimensions: comparison with the classic method, the content of the 'spec' concept, its special role in AI-assisted development, and correct/incorrect ways of applying it. The core claim: in the age of AI, the real issue is not who writes the code but how correctly what it should do is described.",
     "priority": 7,
     "related": [
-      "duvarlarla-i-lerlemek-test-güdümlü-geliştirmeden-ölçüt-önceliği-i-lkesine"
+      "duvarlarla-i-lerlemek-test-güdümlü-geliştirmeden-ölçüt-önceliği-i-lkesine",
+      "belirsizliğin-korunumu-kodun-determinizminden-ajan-kısıtlarına"
     ],
     "belge": "BELGE-046"
   },
@@ -3012,7 +3292,8 @@
       "kod-geometrisi-uygulamali-analiz",
       "geometrinin-otesi",
       "08-geometri-uzay-zaman-ve-iliskisel-yapi",
-      "07-yapay-zekaya-mimari-tanimlama-geometri-once-yaklasim"
+      "07-yapay-zekaya-mimari-tanimlama-geometri-once-yaklasim",
+      "bilgi-i-şleme-i-şlemleri-bir-terminoloji-denemesi"
     ],
     "title_en": "Information Geometry and the Topology of Code: Understanding Software Systems Through Structural Form",
     "description_en": "In the modern world, complexity arises not only in physical systems but also in information systems; the critical question is no longer 'does the system work' but 'is it understandable, sustainable, and manageable.' Because failure often stems not from the inadequacy of a single algorithm but from the scattering of information and the blurring of flows. This piece offers the concepts of 'information geometry' and 'the topology of code' as a conceptual framework for understanding how information is organized within a system.",
@@ -3076,7 +3357,8 @@
       "02-ai-readable-architecture",
       "10-developer-experience-ve-agent-experience",
       "05-soyut-yapilarin-tasarimi-ve-modern-muhendislik-alanlari",
-      "03-refactor-teknikleri-ve-entropi-azaltma"
+      "03-refactor-teknikleri-ve-entropi-azaltma",
+      "belirsizliğin-korunumu-kodun-determinizminden-ajan-kısıtlarına"
     ],
     "belge": "BELGE-038"
   },

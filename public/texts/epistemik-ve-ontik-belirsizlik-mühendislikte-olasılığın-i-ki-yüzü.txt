@@ -1,0 +1,396 @@
+Epistemik ve Ontik Belirsizlik: Mühendislikte
+Olasılığın ˙Iki Yüzü
+ÖFY
+August 2026
+Özet
+Olasılık kavramı iki farklı şeyi aynı adla anar. Birincisi bilenin eksikliğidir:
+zarın sonucu fizik yasalarınca belirlidir, atıcı başlangıç koşullarını bilmediği
+için olasılığa başvurur. ˙Ikincisi bilinenin değil bilinebilenin sınırıdır: radyoak-
+tif bozunmanın zamanı, ne kadar bilgi toplanırsa toplansın belirlenemez. Bu
+ayrım pratik bir sonuç doğurur: birinci türden bir olasılık, bilgi arttıkça daral-
+ması gereken geçici bir duraktır; ikinci türden olasılık ise varış noktasının ken-
+disidir. Ancak epistemik belirsizliğin kapatılabilir olması, kapatılmasının her
+zaman doğru olduğu anlamına gelmez; kaotik ve çok bileşenli sistemlerde kap-
+atma maliyeti sağladığı faydayı aşar. Yazılım mühendisliği bu tartışmanın en
+saf örneğini sunar, çünkü sayısal bilgisayar tanımı gereği determinist bir aygıttır
+ve gözlenen her nondeterminizm ölçülmemiş bir değişkene işaret eder. Buna
+karşın son otuz yılın önemli veri yapıları ve dağıtık sistem teknikleri, ölçek ve
+performans karşılığında kesinlikten bilinçli olarak feragat eder. Mühendislikte
+olgunlaşmanın işareti belirsizliğin yok edilmesi değil, sınırının sayısallaştırılması
+ve bedelinin bilinmesidir.
+1
+
+-- 1 of 12 --
+
+Giriş
+Bir olayın sonucu önceden söylenemediğinde iki farklı durum söz konusu olabilir.
+Ya sonuç belirlidir ancak onu belirleyen etkenler bilinmemektedir, ya da sonuç
+hiçbir bilgi düzeyinde belirli değildir. Her iki durumda da aynı matematiksel
+araca, olasılık kuramına başvurulur; fakat aracın ölçtüğü şey aynı değildir.
+˙Ilk duruma epistemik olasılık (epistemic probability) adı verilir. Terim
+bilgiyle ilgili anlamına gelen Yunanca episteme kökünden gelir. Burada olasılık,
+gözlemcinin bilgi eksikliğinin ölçüsüdür ve sistemin kendisine ait bir nitelik
+değildir. ˙Ikinci duruma ontik olasılık (ontic ya da aleatoric probability) denir;
+varlıkla ilgili anlamına gelen ontos kökünden türer. Burada belirsizlik sistemin
+fiziksel yapısına aittir ve gözlemcinin durumundan bağımsızdır.
+Yaygın kabul, olasılığın her durumda birinci türden olduğu yönündedir.
+Bu kabul günlük deneyimle uyumludur: zar, kâğıt oyunu, hava tahmini gibi
+karşılaşılan olasılıksal durumların büyük çoğunluğu gerçekten de bilgi eksikliğinden
+kaynaklanır. Ancak yirminci yüzyıl fiziği bu kabulün evrensel olmadığını göstermiştir.
+Bu not, iki olasılık türü arasındaki ayrımı kurmakta, ayrımın hangi durumlarda
+pratik sonuç doğurduğunu göstermekte ve mühendislik disiplinlerinde belirsi-
+zliğin nasıl ele alındığını incelemektedir. Olasılık kuramının matematiksel yapısı,
+ölçü kuramı temelleri ve istatistiksel çıkarım yöntemleri kapsam dışıdır.
+2
+
+-- 2 of 12 --
+
+Olasılığın ˙Iki Yorumu
+Epistemik yorum
+Epistemik yorumun klasik ifadesi Laplace’a aittir. Laplace, evrenin tüm parçacıklarının
+konum ve hızlarını bilen ve bunları çözümleyebilecek yeterlilikte bir zekâ için
+hiçbir şeyin belirsiz kalmayacağını, geleceğin de geçmiş gibi gözler önünde olacağını
+yazmıştır (Laplace, 1814). Bu çerçevede olasılık, insan zihninin bu ideal zekâdan
+olan uzaklığının ölçüsüdür.
+Yaklaşımın en uç ifadesi De Finetti’de bulunur. De Finetti, olasılık ku-
+ramı üzerine yazdığı eserin önsözüne “olasılık yoktur” cümlesiyle başlar (De
+Finetti, 1974). ˙Iddia, olasılığın nesnelerin içinde bulunan bir nitelik olmadığı,
+yalnızca bir öznenin inanç derecesi olduğudur. Bu inanç derecesinin keyfı ol-
+madığını gösteren argüman Dutch book argümanıdır: inanç dereceleri olasılık
+aksiyomlarına uymayan bir kişiye, hangi sonuç gerçekleşirse gerçekleşsin kay-
+bettiği bir bahis kümesi sunulabilir. Tutarlılık, dışarıdan dayatılan bir kural
+değil, kayıptan kaçınmanın sonucudur.
+Jaynes bu çizgiyi genişleterek olasılık kuramını eksik bilgi altında akıl yürütmenin
+mantığı olarak kurar; klasik mantığın kesinlik durumundaki hâli, olasılık ku-
+ramının özel bir durumudur (Jaynes, 2003).
+Burada gözden kaçırılmaması gereken bir nokta vardır. Olasılık, bilgisizliği
+yalnızca adlandırmaz; ona yapı verir. “Bilmiyorum” ifadesi ile “0,3 olasılıkla”
+ifadesi arasındaki fark, ikincisinin bilgisizliğin biçimi hakkında bir iddia taşımasıdır.
+Cehalet tek başına sayı üretmez. Sayıyı üreten şey, bilgisizliğin içinde kalan
+yapısal bilgidir: zarın altı yüzünün bulunması, yüzler arasında ayırt edici bir
+fiziksel farkın olmaması, atışın tekrarlanabilir olması. Bu bilgiler olmadan 1/6
+değeri türetilemez.
+Ontik yorum
+Karşı görüşe göre olasılık, gözlemciden bağımsız olarak dünyaya aittir. Bu
+görüşün üç ana biçimi vardır.
+Frekansçı yorum, olasılığı uzun vadeli göreli frekans olarak tanımlar. Madeni
+paranın tura gelme olasılığı, atış sayısı sonsuza giderken tura oranının yakınsadığı
+değerdir. Bu tanım tek seferlik olaylara uygulanamaz; “yarın yağmur yağma
+olasılığı” frekansçı çerçevede doğrudan anlam taşımaz, çünkü yarın bir kez
+yaşanacaktır.
+Eğilim yorumu (propensity) Popper tarafından bu güçlüğü aşmak için
+önerilmiştir (Popper, 1959). Olasılık, tekil bir deney düzeneğinin belirli bir
+sonucu üretme yönündeki fiziksel eğilimidir. Tek bir atomun bozunma olasılığı,
+o atomun bir özelliğidir.
+Kuantum mekaniği, ontik olasılığın en güçlü örneğini sunar. Standart
+yorumda bir ölçümün sonucu, ölçüm öncesinde belirli değildir; Born kuralı
+yalnızca sonuç dağılımını verir. Bu belirsizliğin epistemik olup olmadığı uzun
+süre tartışılmıştır. Einstein, Podolsky ve Rosen, kuantum mekaniğinin eksik
+3
+
+-- 3 of 12 --
+
+bir kuram olduğunu, altta yatan “gizli değişkenlerin” bulunması hâlinde deter-
+minizme dönüleceğini savunmuştur (Einstein, Podolsky ve Rosen, 1935).
+Bell, bu tartışmayı felsefı olmaktan çıkarıp deneysel olarak sınanabilir hâle
+getirmiştir. Bell eşitsizliği, yerel gizli değişken kuramlarının sağlaması gereken
+bir sınır koyar; kuantum mekaniği ise bu sınırın ihlal edileceğini öngörür (Bell,
+1964). Sonraki deneyler eşitsizliğin ihlal edildiğini göstermiş, bu çalışmalar 2022
+Nobel Fizik Ödülü’ne konu olmuştur.
+Bunun bu not açısından sonucu şudur: kuantum ölçüm sonuçlarındaki belir-
+sizlik, daha fazla araştırmayla kapatılabilecek bir bilgi boşluğu değildir. “Yeter-
+ince çalışırsak determinizme döneriz” stratejisinin geçerli olmadığı bir alan mev-
+cuttur.
+˙Iki yorumun bağlantısı
+˙Iki yorum birbirini dışlamaz. ˙Istatistiksel mekanik ikisinin kesiştiği yerdir: en-
+tropi hem gözlemcinin mikro durum hakkındaki bilgisizliğinin ölçüsü hem de
+termodinamik bir büyüklüktür.
+Bağlantıyı en açık biçimde Lewis’in Temel ˙Ilke’si (Principal Principle) kurar:
+bir olayın nesnel şansının x olduğu biliniyorsa, o olaya duyulan öznel inanç
+derecesi de x olmalıdır (Lewis, 1980). Bu ilkenin bilgi verici olması, epistemik
+ve ontik olasılığın aynı şey olmadığını gösterir. Aynı şey olsalardı ilke boş bir
+özdeşlik olurdu.
+4
+
+-- 4 of 12 --
+
+Belirsizliğin Kapatılabilirliği
+Epistemik olasılık bilgi eksikliğinden kaynaklanıyorsa, bilgi arttıkça daralması
+beklenir. Bu beklenti çoğu alanda karşılanır ve bilimsel ilerlemenin ölçütlerinden
+biridir. Hava tahmininde belirsizlik, ölçüm ağı ve sayısal model çözünürlüğü
+arttıkça sistematik olarak azalmıştır. Tıpta popülasyon düzeyindeki oranların
+yerini, hasta alt gruplarına özgü daha dar tahminler almaktadır.
+Bu gözlem bir ilke önerir: olasılıksal bir açıklama bir durak olarak görülmeli,
+nihai cevap olarak kabul edilmemelidir. Ancak ilke üç durumda geçersizleşir.
+Kapatılamaz belirsizlik
+Kuantum ölçüm sonuçları örneğinde belirsizlik ilkesel olarak kapatılamaz. Bu-
+rada determinizme ilerleme yönünde çaba harcamak, var olmayan bir yolu ara-
+mak anlamına gelir.
+Pratik olarak kapatılamaz belirsizlik
+Bazı sistemler determinist yasalara uyar ancak öngörülemez davranır. Lorenz,
+basit bir atmosfer modelinde başlangıç koşullarındaki çok küçük farkların za-
+man içinde üstel olarak büyüdüğünü göstermiştir (Lorenz, 1963). Bu olguya
+kaos adı verilir. Sistemin determinist olması, uzun vadeli tahmin için hiçbir
+güvence sağlamaz; çünkü gereken başlangıç koşulu hassasiyeti fiziksel olarak
+elde edilemez.
+Benzer biçimde bir bardak sudaki molekül sayısı 1025 mertebesindedir. Her
+molekülün konum ve hızını takip etmek ilkesel olarak mümkün olsa da hiçbir
+hesaplama kaynağıyla gerçekleştirilemez. Termodinamiğin olasılıksal olması bir
+eksiklik değil, ölçeğe uygun araç seçimidir.
+Ölçülemeyen belirsizlik
+Knight, olasılık dağılımının bilindiği durum ile dağılımın kendisinin bilinmediği
+durumu ayırmış, birincisine risk, ikincisine belirsizlik demiştir (Knight, 1921).
+Ellsberg, insanların bu iki durumu davranışsal olarak da ayırt ettiğini gösteren
+bir deney kurmuştur: karar vericiler, olasılıkları bilinen bir kumarı, olasılıkları
+bilinmeyen ama beklenen değeri aynı olan bir kumara sistematik biçimde tercih
+etmektedir (Ellsberg, 1961).
+Bu ayrımın pratik sonucu, olasılık hesabının kendi geçerlilik alanının dışına
+taşındığında sahte kesinlik üretmesidir. Taleb, nadir ve yüksek etkili olayların
+standart olasılık modellerinde sistematik olarak eksik temsil edildiğini savunur
+(Taleb, 2007). Modelin ürettiği sayı ne kadar küçükse, o sayıya duyulan güvenin
+yarattığı risk o kadar büyük olabilir.
+5
+
+-- 5 of 12 --
+
+Yazılım Mühendisliğinde Belirsizlik
+Sayısal bilgisayar tanımı gereği determinist bir aygıttır: aynı durumda aynı
+girdi aynı çıktıyı üretir. Dolayısıyla yazılımda karşılaşılan belirsizliğin neredeyse
+tamamı epistemiktir ve ilkesel olarak kapatılabilir. Bu, yazılım mühendisliğini
+önceki bölümdeki ayrımın gözlemlenmesi için elverişli bir alan hâline getirir.
+Nondeterminizmin kaynakları
+Determinist bir aygıtta gözlenen nondeterminizm, programın metninde görünmeyen
+bir girdiden kaynaklanır. Başlıca kaynaklar şunlardır:
+• ˙Iş parçacığı (thread ) zamanlaması ve paylaşılan duruma erişim sırası
+• Ağ gecikmesi, paket kaybı ve mesaj sırasının değişmesi
+• Gerçek zaman, rastgele sayı üreteci, süreç kimliği gibi ortam değerleri
+• Sıralaması tanımsız veri yapıları üzerinde yineleme
+• Bellek adresleri ve önbellek durumu gibi donanım düzeyi ayrıntılar
+Bu kaynakların hiçbiri gerçek anlamda rastgele değildir; hepsi ölçülmemiş
+değişkenlerdir.
+Belirsizliği kapatma yöntemleri
+Gözlemlenebilirlik
+“Sistem bazen yavaşlıyor” ifadesi olasılıksal görünür, ancak sistemin rastgele
+davrandığını değil, ilgili değişkenin ölçülmediğini bildirir. Günlükleme (log-
+ging), izleme (tracing) ve metrik toplama bu değişkeni görünür kılar. Gecikme
+dağılımının üst yüzdelik dilimlerindeki sıçramaların çöp toplama (garbage collec-
+tion, kullanılmayan belleğin otomatik geri kazanımı) duraklamalarıyla örtüştüğü
+gözlendiğinde, olasılıksal bir gözlem nedensel bir açıklamaya indirgenmiş olur.
+Kaynağın ortadan kaldırılması
+˙Ikinci strateji, nondeterminizm kaynağını saymak yerine yok etmektir. Değişmez
+(immutable) veri yapıları ve yan etkisiz fonksiyonlar kullanıldığında paylaşılan
+durum bulunmadığı için yarış koşulu (race condition) oluşamaz. Aynı isteğin
+birden çok kez işlenmesinin sonucu değiştirmemesi anlamına gelen eş güçlülük
+(idempotency) sağlandığında, ağın mesajı tekrar iletmesi sonuç açısından önemsizleşir.
+Yeniden üretilebilir derleme (reproducible build ), aynı kaynak koddan bayt
+düzeyinde aynı ikili dosyanın üretilmesidir; bağımlılık sürümlerinin kilit dosyalarıyla
+sabitlenmesi bunun ön koşuludur. Testlerde saatin, rastgele sayı üretecinin ve
+kimlik üretiminin dışarıdan enjekte edilmesi, aynı testin her koşuşta aynı sonucu
+vermesini sağlar.
+6
+
+-- 6 of 12 --
+
+Sonucu belirsizliğe duyarsızlaştırma
+Üçüncü strateji belirsizliği ortadan kaldırmaz, sistemin gözlenebilir davranışını
+ona bağımsız kılar. Zaman aşımı, yeniden deneme, geri çekilme (backoff ) ve
+devre kesici (circuit breaker ) kalıpları bu sınıftandır. Alt katmanda stokastik
+olan bir ortamın üzerine, davranışı tahmin edilebilir bir yüzey konur.
+Formal yöntemler
+Eşzamanlı sistemlerde olası çalışma sıralarının sayısı kombinatorik olarak büyür
+ve insan sezgisiyle taranamaz. Bu durumda çözüm olasılıkları saymak değil,
+durum uzayını mekanik olarak taramak ya da sınıfı yapısal olarak kapatmaktır.
+TLA+ gibi belirtim dilleri birinci yolu, tek yazarlı tasarım ve aktör modeli ikinci
+yolu izler.
+Bilinçli olarak olasılığa geçiş
+Belirsizliğin kapatılması her zaman doğru hamle değildir. Son otuz yılın önemli
+veri yapıları ve dağıtık sistem tekniklerinin bir bölümü, kesinlikten feragat ed-
+erek karşılığında hafıza, hız ya da esneklik satın alır. Bunların ortak niteliği, fer-
+agat edilen kesinliğin sınırının bilinmesidir ; kontrolsüz değil, fiyatı hesaplanmış
+bir belirsizlik söz konusudur.
+Bloom filtresi
+Bir elemanın kümede bulunup bulunmadığını sınayan olasılıksal veri yapısıdır
+(Bloom, 1970). Elemanların kendisini saklamaz; yalnızca bir bit dizisi tutar.
+Eleman eklenirken birkaç karma (hash) fonksiyonundan geçirilir ve karşılık gelen
+bitler bire çevrilir. Sorguda aynı bitlere bakılır.
+Yapının davranışı asimetriktir. “Yok” cevabı kesindir; ilgili bitlerden biri
+sıfırsa eleman hiç eklenmemiştir. “Var” cevabı ise yanlış olabilir, çünkü bitler
+başka elemanlarca doldurulmuş olabilir. Bu yanlış olumlu (false positive) oranı
+bit dizisinin uzunluğu ve karma fonksiyonu sayısıyla önceden ayarlanır. Karşılığında,
+elemanların doğrudan saklanmasına göre bir ila iki mertebe hafıza tasarrufu
+sağlanır.
+Tipik kullanım, veritabanının diske erişmeden önce kaydın varlığını sınamasıdır.
+Filtre “yok” derse disk erişimi tümüyle atlanır; “var” der ve yanılırsa maliyet
+yalnızca gereksiz bir okumadır.
+HyperLogLog
+Bir veri akışındaki farklı eleman sayısını (cardinality) tahmin eder (Flajolet ve
+ark., 2007). Kesin sayım tüm kimliklerin saklanmasını gerektirir; yüz milyon
+tekil kullanıcı için bu gigabayt mertebesinde hafıza demektir.
+HyperLogLog kimlikleri saklamaz. Her elemanın karma değerindeki baştaki
+sıfır dizisinin uzunluğunu izler; uzun sıfır dizilerinin gözlenmesi çok sayıda farklı
+7
+
+-- 7 of 12 --
+
+eleman bulunduğuna işaret eder. Birkaç kilobayt hafızayla, yüzde iki mer-
+tebesinde bir hata payıyla sayım yapılabilir. Web analitiği araçlarındaki tekil
+ziyaretçi sayıları bu yöntemle hesaplanır; bu bağlamda yüzde iki hata pratik bir
+sorun oluşturmazken hafıza tasarrufu belirleyicidir.
+Tutarlı karma
+Verinin sunucular arasında dağıtımında en basit yöntem, anahtarın karma değerinin
+sunucu sayısına bölümünden kalanını kullanmaktır. Bu yöntemin kusuru, sunucu
+sayısı değiştiğinde neredeyse tüm anahtarların yer değiştirmesidir.
+Tutarlı karma (consistent hashing), sunucuları ve anahtarları dairesel bir
+değer uzayına yerleştirir; her anahtar saat yönünde karşılaştığı ilk sunucuya
+atanır (Karger ve ark., 1997). Sunucu eklendiğinde yalnızca yeni sunucunun
+sorumluluk aralığına düşen anahtarlar taşınır. Bedeli, rastgele yerleşimden kay-
+naklanan yük dengesizliğidir; her sunucunun daire üzerinde birden çok sanal
+noktayla temsil edilmesiyle bu dengesizlik azaltılır.
+˙Iki seçenek gücü
+Yük dağıtımında en az yüklü sunucuyu seçmek, tüm sunucuların yükünün sorgu-
+lanmasını gerektirir. Bunun yerine rastgele iki sunucu seçilip aralarında daha
+az yüklü olanın kullanılması, en yüksek yükü tam sorgulamaya çok yakın bir
+düzeyde tutar (Mitzenmacher, 2001). Tek bir ek sorgu, tam bilgiye yakın bir
+sonuç sağlar.
+Büyük dil modelleri
+Büyük dil modeli, her adımda sonraki simge (token) üzerinde bir olasılık dağılımı
+üretir ve bu dağılımdan örnekleme yaparak metin oluşturur. Aynı girdinin farklı
+çıktılar üretmesinin nedeni budur. Klasik yazılımın “girdi X ise çıktı Y ” garan-
+tisi burada bulunmaz; sistemin doğruluğu tekil çıktı üzerinden değil, dağılımın
+niteliği üzerinden değerlendirilir.
+8
+
+-- 8 of 12 --
+
+Diğer Mühendislik Alanlarında Aynı Ayrım
+Epistemik belirsizliğin ölçülmesi ve fiyatlandırılması yalnızca yazılıma özgü değildir.
+Farklı disiplinlerde aynı yapı farklı adlarla karşımıza çıkar.
+Yapı mühendisliği
+Klasik yaklaşım determinist bir hesap ile güvenlik katsayısını birleştirir: malzeme
+dayanımı bir katsayıya bölünür, yük hesaplanır, taşıma kapasitesinin yeterliliği
+sınanır. Güvenlik katsayısı, belirsizliği ölçmeden kaba bir marjla örtme yöntemidir.
+Sınır durum tasarımı bunun yerine olasılıksal bir çerçeve kurar. Malzeme
+dayanımı da gelecek yük de birer dağılımdır; hedef, yapı ömrü boyunca göçme
+olasılığını kabul edilebilir bir eşiğin altında tutmaktır. Deprem yönetmeliklerindeki
+“50 yılda %10 aşılma olasılığı” türü ifadeler bu çerçevenin doğrudan sonucudur.
+Burada dikkat çeken nokta, hedefin “yapı yıkılmaz” değil “yıkılma olasılığı şu
+eşiğin altındadır” biçiminde kurulmasıdır.
+Güvenilirlik mühendisliği
+Bir bileşenin ne zaman arızalanacağı determinist olarak söylenemez. Bunun
+yerine arızalar arası ortalama süre ve arıza oranı eğrileri kullanılır. Uçak bakımı
+bu temelde planlanır: parça arızalandığında değil, arıza olasılığı eşiği aşmadan
+önce değiştirilir.
+Yedeklilik (redundancy) aynı mantığın tasarıma yansımasıdır. Tek bileşenin
+arıza olasılığı 10−5 ise, birbirinden bağımsız iki bileşenin aynı anda arızalanma
+olasılığı 10−10 mertebesine iner. Bu hesabın kritik varsayımı bağımsızlıktır;
+ortak bir nedene bağlı arızalarda hesap geçersizleşir.
+Kontrol mühendisliği
+Klasik kontrol kuramı sistemin tam olarak bilindiğini varsayar. Gerçekte sensörler
+gürültülüdür ve model yaklaşıktır. Kalman filtresi, gürültülü ölçümü belirsiz
+modelle olasılıksal olarak birleştirerek durum tahmini üretir (Kalman, 1960).
+Konum belirleme sistemleri, uçak otopilotları ve robot navigasyonu bu yönteme
+dayanır. Burada olasılık giderilmesi gereken bir kusur değil, çözümün aracıdır.
+Haberleşme
+Shannon, gürültülü bir kanal üzerinden hatasız iletişimin mümkün olduğu azami
+hızı belirlemiştir (Shannon, 1948). Kanal gürültüsü fiziksel bir olgudur ve or-
+tadan kaldırılamaz; ancak hata düzeltme kodlarıyla hata olasılığı istenen düzeye
+indirilebilir. Bedeli bant genişliğidir: aynı bilgiyi taşımak için daha fazla simge
+gönderilir. Optik ortamdaki çiziklere karşın verinin okunabilmesi ve derin uzay
+iletişiminin işlemesi bu değiş tokuşun sonucudur.
+9
+
+-- 9 of 12 --
+
+Malzeme bilimi ve üretim
+Kırılgan malzemelerin dayanımı Weibull dağılımıyla modellenir (Weibull, 1951).
+Bunun nedeni kırılmanın malzemedeki en büyük mikro çatlağa bağlı olması ve
+bu çatlağın konum ve boyutunun rastgele dağılmasıdır. Aynı üretim partisinden
+çıkan iki numune farklı yük altında kırılır.
+Yarı iletken üretiminde verim (yield ), bir dilimdeki tümdevrelerden çalışır
+durumda olanların oranıdır. Kirlilik parçacıkları ve litografi hataları rastgele
+dağıldığı için tam verim hedeflenmez; fiyatlandırma beklenen verim üzerinden
+yapılır. Üretilen tümdevrelerin sınanıp hız sınıflarına ayrılarak farklı ürün olarak
+satılması, belirsizliğin yok edilmek yerine ürünleştirilmesidir.
+Ortak örüntü
+Alanlar arasında yinelenen bir olgunlaşma sırası görülür. Önce determinist
+model ve güvenlik katsayısı gelir; belirsizlik ölçülmez, kaba bir marjla örtülür.
+Ardından belirsizliğin ölçülmesi ve dağılım olarak modellenmesi gelir. Son
+aşamada hedef “hata olmasın”dan “hata olasılığı şu eşiğin altında olsun”a dönüşür.
+Aynı sırayla yinelenen bir tehlike de vardır. Olasılık hesabı, hesaba katılmayan
+bir bağımlılık ya da model hatası bulunduğunda sahte güven üretir. Fukushima
+kazasında deprem ve tsunami bağımsız olaylar olarak modellenmişti; oysa or-
+tak bir nedene bağlıydılar ve bu nedenle hesaplanan kaza olasılığı gerçekte
+olduğundan küçük çıkmıştı.
+10
+
+-- 10 of 12 --
+
+Sonuç
+Olasılık kavramının iki farklı şeyi adlandırması, pratik bir soruyu zorunlu kılar:
+eldeki belirsizlik hangi türdendir. Soru, belirsizlikle ne yapılacağını belirler.
+Belirsizlik epistemikse ve kapatma maliyeti makulse, kapatılmalıdır. Yazılım
+mühendisliğindeki belirsizliklerin büyük çoğunluğu bu sınıftandır ve “bazen oluyor”
+türü ifadeler bir açıklama değil, ölçüm eksikliğinin itirafıdır. Belirsizlik on-
+tikse, kapatma çabası var olmayan bir yolu aramaktır. Belirsizlik ilkesel olarak
+kapatılabilir ama pratik olarak kapatılamıyorsa, doğru hamle onu ölçmek ve
+sınırını bilmektir.
+Buradan çıkan asıl ayrım, belirsizliğin varlığı ile ölçülmüşlüğü arasındadır.
+Bloom filtresinin yanlış olumlu oranı ile bir sistemin “bazen bozulması” arasındaki
+fark, belirsizliğin miktarı değil, sınırının bilinip bilinmemesidir. Birinci durumda
+belirsizlik bir tasarım parametresidir; ikincisinde teşhis edilmemiş bir kusurdur.
+Mühendislik olgunluğunun ölçütü belirsizliğin sıfırlanması değil, bu iki durumun
+ayırt edilebilmesidir.
+C erçevenin sınırları vardır. Epistemik ve ontik ayrımı, kuantum mekaniğinin
+farklı yorumları altında farklı biçimler alır; determinist yorumlar mevcuttur ve
+tartışma kapanmış değildir. Ayrıca pratikte iki belirsizlik türü çoğu zaman iç
+içedir: bir modelin tahmin hatası hem parametre belirsizliğinden hem de sis-
+temin doğal değişkenliğinden kaynaklanır ve bu iki bileşen kolayca ayrıştırılamaz.
+Açık kalan sorulardan biri, ölçülemeyen belirsizliğin nasıl ele alınacağıdır.
+Knight’ın belirsizlik kategorisi ve model hatası, olasılık diliyle tam olarak ifade
+edilemez; bu alan için sağlamlık (robustness) ve kırılganlığın azaltılması gibi
+olasılık dışı ölçütler önerilmiştir, ancak bunların sistematik bir kuramı henüz
+yoktur.
+Kaynaklar
+• Bell, J. S. (1964). On the Einstein Podolsky Rosen Paradox. Physics,
+1(3).
+• Bloom, B. H. (1970). Space/Time Trade-offs in Hash Coding with Allow-
+able Errors. Communications of the ACM, 13(7).
+• De Finetti, B. (1974). Theory of Probability. Wiley.
+• Einstein, A., Podolsky, B. ve Rosen, N. (1935). Can Quantum-Mechanical
+Description of Physical Reality Be Considered Complete? Physical Re-
+view, 47.
+• Ellsberg, D. (1961). Risk, Ambiguity, and the Savage Axioms. Quarterly
+Journal of Economics, 75(4).
+• Flajolet, P., Fusy, ´E., Gandouet, O. ve Meunier, F. (2007). HyperLogLog:
+The Analysis of a Near-Optimal Cardinality Estimation Algorithm. Pro-
+ceedings of AofA.
+11
+
+-- 11 of 12 --
+
+• Jaynes, E. T. (2003). Probability Theory: The Logic of Science. Cam-
+bridge University Press.
+• Kalman, R. E. (1960). A New Approach to Linear Filtering and Prediction
+Problems. Journal of Basic Engineering, 82(1).
+• Karger, D., Lehman, E., Leighton, T., Panigrahy, R., Levine, M. ve Lewin,
+D. (1997). Consistent Hashing and Random Trees. Proceedings of STOC.
+• Knight, F. H. (1921). Risk, Uncertainty and Profit. Houghton Mifflin.
+• Laplace, P. S. (1814). Essai philosophique sur les probabilit´es.
+• Lewis, D. (1980). A Subjectivist’s Guide to Objective Chance. R. C.
+Jeffrey (Ed.), Studies in Inductive Logic and Probability, Cilt II. University
+of California Press.
+• Lorenz, E. N. (1963). Deterministic Nonperiodic Flow. Journal of the
+Atmospheric Sciences, 20(2).
+• Mitzenmacher, M. (2001). The Power of Two Choices in Randomized
+Load Balancing. IEEE Transactions on Parallel and Distributed Systems,
+12(10).
+• Popper, K. R. (1959). The Propensity Interpretation of Probability. British
+Journal for the Philosophy of Science, 10(37).
+• Shannon, C. E. (1948). A Mathematical Theory of Communication. Bell
+System Technical Journal, 27.
+• Taleb, N. N. (2007). The Black Swan. Random House.
+• Weibull, W. (1951). A Statistical Distribution Function of Wide Applica-
+bility. Journal of Applied Mechanics, 18.
+12
+
+-- 12 of 12 --
