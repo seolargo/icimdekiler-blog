@@ -4,10 +4,10 @@ Bu dosya her oturumda otomatik okunur. Kısa tutulacak; şişerse okunmaz olur.
 
 ## Bu proje ne
 
-Ömer Faruk Yavuz'un yazdığı makalelerin arşivi değil, **korpusu**. 167 kayıt
-(155'i açık, 12'si gizli müzik/rehber). Üstünde ikinci mertebeden bir katman
-var: korpustan türetilmiş **34 duvar** — taşınabilir kurallar, her biri
-"X'te geçerli / Y'de kırılır" formunda. 12'sinin dışarıdan sınama kaydı var.
+Ömer Faruk Yavuz'un yazdığı makalelerin arşivi değil, **korpusu**. 203 kayıt
+(191'i açık, 12'si gizli müzik/rehber). Üstünde ikinci mertebeden iki katman
+var: korpustan türetilmiş **34 duvar** (karar düzeyi) ve **62 kod duvarı**
+(klavye düzeyi) — hepsi "X'te geçerli / Y'de kırılır" formunda.
 
 Canlı: https://icimdekiler-blog.vercel.app · Vercel projesi `icimdekiler-blog`
 (GitHub entegrasyonu yok, deploy CLI ile).
@@ -56,7 +56,7 @@ eklenir. Sesle konuşurken slug yerine bunu kullan.
 | `yerel/` | gitignore'da, dışarı çıkmayan belgeler, yalnızca localhost |
 | `yerel/texts/*.txt` | yerel belgelerin düz metni — **soru sorulduğunda buraya da bak** |
 | `scripts/duvar.js` | `npm run duvar <konu>` / `--diff` — duvarları karar anında önüne getirir |
-| `public/kod-duvarlari.json` + `docs/kod-duvarlari.md` | kod yazarken uygulanan 47 kural — **ikisi eşit tutulacak**, `.md` üretilir |
+| `public/kod-duvarlari.json` + `docs/kod-duvarlari.md` | kod yazarken uygulanan 62 kural — **ikisi eşit tutulacak**, `.md` üretilir |
 | `scripts/kod-duvar.js` | `npm run kod-duvar -- --an B --diff` — ana göre kod kuralları; `--md` ile docs'u üretir |
 
 ## Anlatım
@@ -87,15 +87,15 @@ Aynı format: **ders — ne zaman kırılır.** Kırılma koşulu yoksa yazma.
   çıkmıyor.
 
 - **"Bu ölçekte gerekmez" derken hangi ölçek olduğunu söyle.** 34 duvar tek
-  isteme sığıyor, retrieval gereksiz. 155 yazının tam metni 1,14 milyon token,
-  sığmıyor — orada retrieval zorunlu. Aynı soru, iki farklı cevap.
+  isteme sığıyor, retrieval gereksiz. 191 yazının tam metni bir milyon tokenı
+  aşıyor, sığmıyor — orada retrieval zorunlu. Aynı soru, iki farklı cevap.
   *Kırılır:* —
 
 - **Yeni araç önermeden önce kurulu olanı kontrol et.** Claude Code'da dikte
   zaten varmış; macOS diktesi ise hiç açılmamış.
   *Kırılır:* kullanıcı o aracı zaten kullandığını söylüyorsa.
 
-- **Korpusta belge ararken önce başlık listesini oku, sonra grep at.** 189
+- **Korpusta belge ararken önce başlık listesini oku, sonra grep at.** 203
   başlık tek isteme sığıyor. "Kelime kelime inceleme" araması Türkçe terimlerle
   (satır satır, yakın okuma, şerh) iki kez yanlış belgeye gitti; aranan belge
   kavramı İngilizce adlandırıyordu — BELGE-174 Scrutiny. Başlık listesi anında
@@ -109,9 +109,9 @@ Aynı format: **ders — ne zaman kırılır.** Kırılma koşulu yoksa yazma.
 
 ## Kod duvarları
 
-Duvarlar (34) karar/örgüt düzeyinde; **kod duvarları** (61) klavye düzeyinde ve
-ayrı bir katalog. Kaynağı 19 mühendislik paperı: BELGE-038, 040, 043, 046, 059,
-060, 061, 093, 094, 105, 114, 148, 153, 165, 166, 169, 174, 176, 184.
+Duvarlar (34) karar/örgüt düzeyinde; **kod duvarları** (62) klavye düzeyinde ve
+ayrı bir katalog. Kaynağı 20 mühendislik paperı: BELGE-038, 040, 043, 046, 059,
+060, 061, 093, 094, 105, 114, 148, 153, 165, 166, 169, 174, 176, 184, 203.
 
 Beş an: **T** başlarken · **Y** yazarken · **D** dokunurken · **B** bitirmeden ·
 **A** arıza. Her maddenin `kırılır`ı var — nerede geçerli değil.
@@ -123,8 +123,9 @@ Her projeden çalışır: `~/.claude/skills/kod-duvari/` global skill'i
 `scripts/kod-duvar.js`'i çağırır. Yeni madde eklenince `npm run kod-duvar -- --md`.
 
 `sinama` alanı duvarlardaki gibi: bir madde dışarıdan bir şeye çarptığında tarih +
-sonuç (desteklendi / daraltıldı / kırıldı) + kaynak yazılır. Şu an 61/61 boş.
+sonuç (desteklendi / daraltıldı / kırıldı) + kaynak yazılır. Şu an 62/62 boş.
 
-`scripts/kod-duvar-hook.sh` — Stop hook adayı: oturum biterken çalışma ağacında
-kod dosyası değişmişse tek satır hatırlatır, değilse susar. `~/.claude/settings.json`
-içine **elle** eklenecek; Claude o dosyaya yazamıyor (sınıflandırıcı engelliyor).
+`scripts/kod-duvar-hook.sh` — Stop hook, `~/.claude/settings.json`'a **kurulu**:
+oturum biterken çalışma ağacında kod dosyası değişmişse tek satır hatırlatır,
+değilse susar. O dosyayı Claude düzenleyemez (sınıflandırıcı engelliyor), elle
+değiştirilecek.

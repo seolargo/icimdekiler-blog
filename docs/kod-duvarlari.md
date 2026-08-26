@@ -131,6 +131,16 @@ Temel akışı önce ve tek başına bitir; kalan riski kenar durumlara izole et
 
 *Kaynak: BELGE-114*
 
+### KOD-62 — Denetim yükü kurma, sınıfı düşür
+
+Değişikliği önem derecesine göre değil iki ölçülebilir eksene göre sınıflandır — geri alınabilirlik ve etki alanı. SINIF 1 (geri alınabilir, dar): güvence gerekmez, gözlem yeterli. SINIF 2 (geri alınabilir, geniş): özellik bayrağı, kapalı gelir. SINIF 3 (geri alınamaz, dar): otomatik test zorunlu. SINIF 4 (geri alınamaz, geniş): test de yetmez, çünkü test yalnızca önceden düşünülmüş senaryoyu yakalar. Sınıf 4'te doğru müdahale hatayı yakalamak değil, kalıcı olmasını yapısal olarak imkânsız kılmaktır: kolonu ekleme ile aynı sürümde düşürme, ödemeye eşsizlik anahtarı koy, fiziksel silme yerine işaretle. Bu müdahaleler BİR DEFALIKTIR — alan güvenceye alındığında Sınıf 4'ten Sınıf 1'e düşer ve sonrasında normal hızda geliştirilir. Sınıflandırmanın amacı sürekli bir denetim yükü kurmak değil, sınıfı değiştirmektir.
+
+**Kırılır:** Düzenlemeye tabi alanlarda bağımsız onay hukuki bir yükümlülüktür ve teknik gerekçeyle kaldırılamaz — orada sınıf düşse de denetim kalır. İkinci kırılma: sınıfı düşüren müdahalenin kendisi çoğu zaman Sınıf 4'tür, kendi ağırlığında ele alınır.
+
+**Neden:** Önem ile geri alınabilirlik farklı eksenlerdir ve karıştırılması yanlış yere yük bindirir: kimlik doğrulama önemli bir alandır ama geri alınabilir — hatalı yetki değişikliği sürüm geri alınıp oturum belirteçleri iptal edilerek düzeltilir. Buna karşılık önemsiz görünen bir veritabanı göçü geri alınamaz. Sınıfı belirleyen önem değil, dönüşün mümkün olup olmadığıdır. KOD-06 derinliği tehlikeye göre seçer; bu madde bir adım öteye geçer — tehlikeyi bir kere ödeyip kalıcı olarak düşürmeyi önerir.
+
+*Kaynak: BELGE-203*
+
 ## Yazarken
 
 *Klavye başında verilen kararlar*
