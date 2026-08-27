@@ -4,8 +4,8 @@ Bu dosya her oturumda otomatik okunur. Kısa tutulacak; şişerse okunmaz olur.
 
 ## Bu proje ne
 
-Ömer Faruk Yavuz'un yazdığı makalelerin arşivi değil, **korpusu**. 203 kayıt
-(191'i açık, 12'si gizli müzik/rehber). Üstünde ikinci mertebeden iki katman
+Ömer Faruk Yavuz'un yazdığı makalelerin arşivi değil, **korpusu**. 206 kayıt
+(194'ü açık, 12'si gizli müzik/rehber). Üstünde ikinci mertebeden iki katman
 var: korpustan türetilmiş **34 duvar** (karar düzeyi) ve **62 kod duvarı**
 (klavye düzeyi) — hepsi "X'te geçerli / Y'de kırılır" formunda.
 
@@ -87,7 +87,7 @@ Aynı format: **ders — ne zaman kırılır.** Kırılma koşulu yoksa yazma.
   çıkmıyor.
 
 - **"Bu ölçekte gerekmez" derken hangi ölçek olduğunu söyle.** 34 duvar tek
-  isteme sığıyor, retrieval gereksiz. 191 yazının tam metni bir milyon tokenı
+  isteme sığıyor, retrieval gereksiz. 194 yazının tam metni bir milyon tokenı
   aşıyor, sığmıyor — orada retrieval zorunlu. Aynı soru, iki farklı cevap.
   *Kırılır:* —
 
@@ -95,7 +95,7 @@ Aynı format: **ders — ne zaman kırılır.** Kırılma koşulu yoksa yazma.
   zaten varmış; macOS diktesi ise hiç açılmamış.
   *Kırılır:* kullanıcı o aracı zaten kullandığını söylüyorsa.
 
-- **Korpusta belge ararken önce başlık listesini oku, sonra grep at.** 203
+- **Korpusta belge ararken önce başlık listesini oku, sonra grep at.** 206
   başlık tek isteme sığıyor. "Kelime kelime inceleme" araması Türkçe terimlerle
   (satır satır, yakın okuma, şerh) iki kez yanlış belgeye gitti; aranan belge
   kavramı İngilizce adlandırıyordu — BELGE-174 Scrutiny. Başlık listesi anında
