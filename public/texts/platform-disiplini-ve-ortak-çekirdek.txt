@@ -1,0 +1,251 @@
+Platform Disiplini ve Ortak C ekirdek
+Ömer Faruk Yavuz
+August 2026
+Özet
+Bir donanım üreticisinin olgunluğu, çıkardığı ürün sayısıyla değil ürünleri arasındaki
+ortak parça oranıyla ölçülür. Ortak bir çekirdek bulunmadığında geniş ürün yel-
+pazesi bir kabiliyet göstergesi değil, bir dağılma göstergesidir: her ürün kendi
+test altyapısını, kendi tedarikçisini ve kendi öğrenme sürecini gerektirir, hiçbirinde
+yeterli tekrar birikmez ve öğrenme eğrisi başlamaz.
+Bu ölçütün dışarıdan sınanmasını sağlayan somut sorular vardır. Bunların
+en belirleyicisi ürünler arası ortak parça oranıdır; tek başına platform iddiasının
+kanıtı sayılır. ˙Ikinci güçlü gösterge, bir bileşenin tek başına satılabilmesidir: bir
+parça ayrı satılabiliyorsa arayüzü tanımlanmış demektir, çünkü tanımlanmamış
+arayüze sahip bir parçanın alıcısı olamaz.
+Ürün yelpazesinin biçimi de bilgi taşır. Yan yana duran ve eşzamanlı olarak
+desteklenen ürünler bir aile oluşturur; birbirini sırayla ikame eden ürünler ise bir
+prototip kuyruğudur. ˙Ikisi dışarıdan benzer görünür ancak biri birikim üretir,
+diğeri üretmez.
+C erçevenin kendi sınırı belirgindir. Modülerlik iç bir özelliktir ve doğrudan
+gözlemlenemez; dışarıdan yalnızca dolaylı kanıtlara erişilir. Kesin sonuç ancak
+iki ürünün fiziksel olarak karşılaştırılmasıyla elde edilir.
+Aynı ölçüt yazılım üretimine doğrudan aktarılabilir. Derleme sistemi, test
+altyapısı ve dağıtım hattı, ürünü üreten fabrikanın karşılığıdır ve destek işi
+olarak değil birinci sınıf ürün olarak ele alınmalıdır.
+1
+
+-- 1 of 8 --
+
+Giriş
+Bir üretim kurumunun teknik olgunluğunun dışarıdan değerlendirilmesi, doğrudan
+ölçüm imkânı bulunmadığı için dolaylı göstergelere dayanmak zorundadır. Bu
+değerlendirmede en sık kullanılan gösterge ürün çeşitliliğidir: farklı kategoril-
+erde çok sayıda ürün çıkarabilen bir kurumun yüksek kabiliyete sahip olduğu
+varsayılır.
+Bu varsayım, kabiliyet ile kapasiteyi birbirine karıştırır. Kabiliyet, bir şeyin
+yapılabildiğinin gösterilmesidir. Kapasite ise aynı şeyin çok sayıda kez, aynı
+kalitede ve düşen maliyetle yapılabilmesidir. Bir ürünün ortaya çıkarılması bir-
+inciyi kanıtlar, ikincisi hakkında bilgi vermez.
+Bu ayrımın altında istatistiksel bir zorunluluk bulunur. Dağılım, proses
+yeteneği, verim ve arıza oranı gibi kavramların tümü çok sayıda tekrar gerektirir.
+Tekrar olmadan bu büyüklükler hesaplanamaz; hesaplanamayan bir büyüklük
+iyileştirilemez. Dolayısıyla tekrarın nereden geleceği sorusu, kapasite tartışmasının
+merkezindedir.
+Tekrarı üreten iki kaynak vardır. Birincisi hacimdir: aynı ürünün çok sayıda
+üretilmesi. ˙Ikincisi ise platform disiplinidir: farklı ürünlerin aynı bileşenleri
+paylaşması yoluyla, tek bir bileşenin toplam üretim adedinin ürün sayısı kadar
+katlanması. ˙Ikinci kaynak, hacmin düşük olduğu durumlarda birincinin kısmi
+ikamesidir.
+Notta tanımlanan merkezı terim platform disiplinidir: farklı ürünlerin ortak
+bir bileşen kümesi üzerine kurulması ve bu kümenin arayüzlerinin ürünlerden
+bağımsız olarak tanımlanmasıdır. Ortak çekirdek ise bu paylaşılan bileşen kümesinin
+kendisidir.
+Notun kapsamı, platform disiplininin dışarıdan nasıl sınanacağı ve bu sınamanın
+sınırlarıyla ilgilidir. Belirli kurumların değerlendirilmesi örnek düzeyinde kalmakta,
+kapsamlı bir vaka incelemesi yapılmamaktadır.
+2
+
+-- 2 of 8 --
+
+Ortak C ekirdeğin ˙Işlevi
+Ortak çekirdeğin sağladığı şey parça maliyetindeki tasarruftan ibaret değildir.
+Asıl kazanım, öğrenmenin tek bir noktada birikmesidir.
+Bir bileşen beş farklı üründe kullanıldığında, o bileşen hakkında elde edilen
+her gözlem beş üründen birden gelir. Arıza verisi beş kaynaktan toplanır, üretim
+adedi beşe katlanır, tedarikçiyle kurulan ilişki beş ürünün hacmiyle pazarlık
+gücü kazanır ve bileşen için yapılan test altyapısı yatırımı beş ürüne bölünür.
+Ortak çekirdek bulunmadığında bu mekanizmanın her adımı kırılır:
+Gereken Ortak çekirdek yoksa
+Ölçüm birikimi Her ürün için ayrı test altyapısı kurulur,
+hiçbiri derinleşmez
+Verim öğrenmesi Ürün başına hacim düşük kalır, öğrenme eğrisi
+başlamaz
+Tedarikçi geliştirme Her kategori farklı tedarikçiye gider,
+hiçbirinde kaldıraç oluşmaz
+Doğrulanmış model Benzetim modellerinin kalibrasyonu için
+yeterli tekrar bulunmaz
+Yineleme maliyeti Her yeni ürün baştan başlar, önceki ürünün
+birikimini devralmaz
+Bu tablo, geniş ürün yelpazesinin neden bir güç göstergesi olmadığını açıklar.
+Yelpaze genişliği ile derinlik arasında, sabit bir mühendislik kaynağı altında
+doğrudan bir değiş tokuş bulunur. Yedi ayrı kategoride ürün çıkaran bir kurum,
+her kategoride ayrı fizik, ayrı kontrol problemi ve ayrı tedarik zinciriyle uğraşır;
+kaynak dağıldığı için hiçbirinde eşiği aşamaz.
+Karşıt strateji, bileşen seçiminin maliyet yapısına göre yapılmasıdır. Ba-
+caklı robotlarda aktüatör malzeme maliyetinin en büyük kalemidir; bu bileşen
+üzerinde derinleşen bir kurum, dört ayaklı ve insansı gibi görünüşte farklı iki
+ürün hattını aynı çekirdek üzerinde yürütebilir. Bu durumda iki ürün, tek bir
+bileşenin öğrenme eğrisini birlikte besler.
+3
+
+-- 3 of 8 --
+
+Dışarıdan Uygulanabilir Modülerlik Testi
+Platform disiplininin varlığı, kurumun kendi iddiasından bağımsız olarak beş
+soruyla sınanabilir.
+1. Aynı temel bileşen kaç farklı üründe kullanılmaktadır.
+2. Bir modül arızalandığında tek başına değiştirilebilmekte midir, yoksa üst
+yapının sökülmesi mi gerekmektedir.
+3. Yeni bir ürün kaç yeni parça numarası doğurmaktadır.
+4. Üçüncü bir taraf, yalnızca yayımlanmış belgeye bakarak sisteme kendi
+modülünü ekleyebilmekte midir.
+5. Ürünler arası ortak parça oranı yüzde kaçtır.
+Beşinci soru diğerlerini kapsar ve tek başına platform iddiasının kanıtıdır.
+Otomotivde bu oran yayımlanmaktadır; aynı üreticinin iki ayrı modeli arasında
+yüzde yetmiş beş civarında ortak parça oranı bildirilmiştir ve ortak platform
+mimarilerinde bu oran daha da yükselmektedir. Robotik alanında bu oranın ka-
+muya açıklanması yaygın değildir; açıklanmaması tek başına bir eksiklik göstergesi
+sayılamaz, ancak iddianın doğrulanamaz kalmasına yol açar.
+Üçüncü soru bir tuzağı açığa çıkarır. Yeni ürün başına doğan parça nu-
+marası sayısı, kurumun ürün çıkarma hızından bağımsız olarak platform disiplin-
+ini ölçer. Hızlı ürün çıkaran ancak her üründe parça numarası sayısını katlayan
+bir kurum, hızını birikime dönüştürmemektedir.
+Bileşenin ayrı satılabilmesi
+Yukarıdaki sorulardan bağımsız ve dışarıdan en kolay gözlemlenebilir gösterge
+şudur: bir bileşen, ürünün dışında tek başına satışa sunulabiliyor mu.
+Bu göstergenin gücü, bir parçanın ayrı satılabilmesinin arayüzünün tanımlanmış
+olmasını zorunlu kılmasından gelir. Alıcının bileşeni kendi sistemine bağlayabilmesi
+için mekanik, elektriksel ve yazılımsal arayüzlerin belgelenmiş olması gerekir.
+Belgelenmemiş bir arayüze sahip bileşenin alıcısı olamaz. Dolayısıyla ayrı satış,
+iç modülerliğin dışarıdan görülebilen bir izidir.
+Bu göstergenin sınırı da vardır. Bir bileşenin ayrı satılması, o bileşenin
+kurumun kendi ürünlerinde de gerçekten paylaşıldığını göstermez; ayrı satılan
+ürün, ana ürün hattından bağımsız geliştirilmiş bir kalem olabilir. Gösterge
+arayüz tanımının varlığını kanıtlar, paylaşımın yaygınlığını kanıtlamaz.
+4
+
+-- 4 of 8 --
+
+Ürün Ailesi ile Prototip Kuyruğunun Ayrılması
+Bir kurumun ürün listesi dışarıdan bakıldığında tek bir biçimde görünür; oysa
+iki farklı yapı bu biçimin altına gizlenir.
+Ürün ailesi, eşzamanlı olarak var olan ve birbirini ikame etmeyen ürünlerden
+oluşur. Farklı ihtiyaçlara hitap ederler, aynı anda desteklenirler, ortak bileşen
+ve ortak üretim altyapısı paylaşırlar. Bir otomobil üreticisinin farklı gövde tip-
+lerindeki modelleri bu yapıdadır.
+Prototip kuyruğu ise ardışık olarak var olan ürünlerden oluşur. Her yeni
+ürün bir öncekinin yerini alır, öncekinin desteği fiilen sona erer ve genellikle
+önceki üründen devralınan bileşen sınırlı kalır. Dışarıdan bu yapı da bir ürün
+listesi olarak görünür.
+Ayrımın pratik önemi birikimdedir. Ailede her ürün diğerlerinin hacmini
+besler; kuyrukta her ürün kendi hacmiyle sınırlıdır ve o hacim de kısa ömürlüdür.
+Dışarıdan bu ayrımı yapmayı sağlayan işaretler bulunur:
+• Ürünlerin eşzamanlı olarak satışta ve destekte olup olmaması.
+• Adlandırma yapısı: sıralı numaralandırma kuyruğa, kategori adları aileye
+işaret eder.
+• Proje takvimi: bir projenin tamamlandığı gün bir sonrakinin başlaması,
+ayrık projeler olarak etiketlenmiş kesintisiz bir prototip akışına işaret eder.
+• Fiyat kademelerinin bittiği adet: iskonto tablosunun üst basamağı, bekle-
+nen sipariş büyüklüğünü açık eder. Seri üretim yapan bir kurumun kademe
+tablosu tek haneli adetlerde sona ermez.
+Kilometre taşı seçiminin bir veri olması
+Yukarıdaki işaretlerin en genel biçimi şu ilkedir: bir kurum neyi kilometre taşı
+sayıyorsa onu optimize ediyordur.
+Bu ilke, kurumun kendi yayımladığı tarihçe üzerinden uygulanır. Listede
+yer alan maddeler ile yer almayan kategoriler karşılaştırılır. Kapasite geliştiren
+bir kurumun kilometre taşları arasında birim maliyet düşüşü, arıza oranı iy-
+ileşmesi, kümülatif sevkiyat adedi, tedarikçi nitelendirme ve hat çevrim süresi
+gibi maddeler bulunur. Kabiliyet gösteren bir kurumun listesinde ise unvanlar,
+sergileme, medya görünürlüğü ve etkinlik katılımları ağırlık kazanır.
+˙Ikinci tür maddeler kendi başlarına olumsuz değildir; kaynak yaratma ve
+görünürlük işlevleri vardır. Bulgu, bu maddelerin varlığından değil, birinci tür
+maddelerin yokluğundan çıkar.
+5
+
+-- 5 of 8 --
+
+C erçevenin Geçerlilik Sınırı
+Yukarıdaki testlerin tümü dolaylıdır ve bu, çerçevenin kendi sınırını oluşturur.
+Modülerlik iç bir özelliktir. Dışarıdan gözlemlenemeyen şeyler şunlardır:
+aynı modülün kaç üründe fiilen kullanıldığı, kontrol elektroniğinin ortak olup
+olmadığı, taşıyıcı yapının paylaşılıp paylaşılmadığı, ve ortak yazılım katmanının
+gerçek bir donanım soyutlaması sağlayıp sağlamadığı ya da her ürün için ayrıca
+uyarlanıp uyarlanmadığı.
+Elde bulunan kanıtlar bu nedenle ikinci derecedendir: adlandırma yapısı,
+proje takvimi, fiyat kademesi, kilometre taşı seçimi, ayrı satılan bileşenler. Bun-
+lar bir yön gösterir ancak ölçüm değildir.
+Kesin sonuç yalnızca doğrudan karşılaştırmayla elde edilir: iki ürünün parçalarına
+ayrılıp bileşen listelerinin karşılaştırılması. Bu yapılmadan ulaşılan her sonuç,
+olasılık ifadesi olarak kalmalıdır.
+Ayrıca ortak yazılım katmanının varlığı tek başına platform kanıtı sayılmaz.
+Ürünler arası ortak bir işletim katmanı doğru yönde bir hamledir, ancak bu kat-
+manın her ürün için ayrı ayrı uyarlanması durumunda soyutlama iddiası boşalır.
+Yazılım katmanının gerçekliği, donanım tarafındaki paylaşımdan bağımsız olarak
+doğrulanamaz.
+6
+
+-- 6 of 8 --
+
+Yazılım Üretimindeki Karşılığı
+Buraya kadar tanımlanan çerçeve fiziksel ürün üretimi üzerinden kurulmuştur;
+ancak dayandığı mekanizma ürünün fiziksel olmasına bağlı değildir. Mekanizma
+şudur: tekrar eden bir sürecin kendisi de bir üründür ve ölçülmediği sürece
+iyileşmez.
+Yazılımda bu sürecin karşılığı derleme sistemi, test altyapısı ve dağıtım
+hattıdır. Bunlar geliştirmenin yardımcı unsurları olarak değil, geliştirilen ürünü
+üreten fabrika olarak ele alınmalıdır. Buradan çıkan sonuçlar doğrudandır:
+• Fabrikanın çıktı dağılımı ölçülür. Derleme süresi, test kümesinin koşma
+süresi, dağıtımın başarısızlık oranı ve geri alma süresi, üretimdeki çevrim
+süresi ve verim rakamlarının karşılığıdır.
+• Fabrikaya yapılan yatırım ürün başına değil, tüm ürünlere bölünür. Bir
+kez kurulan bir doğrulama katmanı sonraki her değişiklikte tekrar iş görür;
+bu, ortak çekirdeğin yazılımdaki halidir.
+• Ortak parça oranının karşılığı, projeler arası paylaşılan altyapı oranıdır.
+Her yeni servisin kendi derleme, dağıtım ve izleme kurgusunu baştan
+üretmesi, her ürünün kendi adası olmasının yazılımdaki biçimidir.
+• Bileşenin ayrı satılabilmesi testinin karşılığı, bir modülün başka bir pro-
+jede yeniden kullanılabilmesidir. Ancak belgelenmiş bir arayüze sahip bir
+modül başka bir bağlama taşınabilir.
+Bu aktarımın sınırı da belirtilmelidir. Fiziksel üretimde parça paylaşımının
+maliyeti düşüktür ve faydası doğrudandır; yazılımda paylaşılan bir bileşen, bağımlı
+olan tüm projeleri birbirine bağlar ve birinde yapılan değişikliğin diğerlerine
+yayılmasına yol açar. Dolayısıyla yazılımda paylaşım oranının artırılması, tek
+başına bir hedef değildir; paylaşılan bileşenin arayüzünün kararlı olması koşuluna
+bağlıdır.
+7
+
+-- 7 of 8 --
+
+Sonuç
+Bir donanım kurumunun teknik olgunluğunun değerlendirilmesinde ürün sayısı
+yanıltıcı bir göstergedir. Doğru gösterge, ürünler arasındaki ortak parça oranıdır;
+çünkü öğrenmeyi üreten şey ürün çeşitliliği değil bileşen düzeyindeki tekrardır.
+Bu ölçüt uygulandığında, ortak çekirdeği bulunmayan geniş bir ürün yelpazesi
+bir kabiliyet göstergesi olmaktan çıkıp kaynak dağılmasının göstergesine dönüşür.
+Ölçütün dışarıdan sınanmasında en güvenilir iki gösterge, ortak parça oranının
+kendisi ve bileşenlerin ayrı satılabilmesidir. ˙Ikincisi özellikle değerlidir, çünkü
+kurumun beyanına değil piyasadaki fiili duruma dayanır: bir parçanın alıcısının
+bulunması, arayüzünün tanımlanmış olmasını zorunlu kılar.
+C erçevenin sınırı, dayandığı kanıtların tümünün dolaylı olmasıdır. Modülerlik
+iç bir özellik olduğu için dışarıdan yalnızca izleri görülür. Bu, çerçevenin geçersiz
+olduğu anlamına gelmez; ulaşılan sonuçların olasılık ifadesi olarak kalması gerektiği
+anlamına gelir. Bu ayrımın korunmaması, dolaylı kanıtla ulaşılan bir sonucun
+ölçüm gibi sunulmasına yol açar ve değerlendirmenin kendisini geçersiz kılar.
+Açık kalan soru, düşük hacimli üretimde platform disiplininin hacmi ne
+ölçüde ikame edebileceğidir. Ortak çekirdek, bir bileşenin toplam üretim adedini
+ürün sayısı kadar katlar; ancak bu katlama, hacmin sağladığı istatistiksel temeli
+sağlayacak düzeye ulaşmayabilir. Bu eşiğin nerede olduğu, incelenen kurumun
+ürün sayısına ve bileşen paylaşım oranına bağlı olarak değişir ve genel bir değer
+verilemez.
+Kaynaklar
+• Baldwin, C. Y., & Clark, K. B. (2000). Design Rules, Volume 1: The
+Power of Modularity. MIT Press.
+• Parnas, D. L. (1972). On the Criteria To Be Used in Decomposing Systems
+into Modules. Communications of the ACM, 15(12).
+• Ulrich, K. (1995). The Role of Product Architecture in the Manufacturing
+Firm. Research Policy, 24(3).
+• Wright, T. P. (1936). Factors Affecting the Cost of Airplanes. Journal of
+the Aeronautical Sciences, 3(4).
+8
+
+-- 8 of 8 --

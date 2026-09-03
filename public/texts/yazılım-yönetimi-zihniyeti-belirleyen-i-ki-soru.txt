@@ -1,0 +1,401 @@
+Yazılım Yönetimi: Zihniyeti Belirleyen ˙Iki Soru
+ÖFY
+September 2026
+Özet
+Bir yazılım projesini yürütme biçimleri, ekibin belirsizliği nerede gördüğüne ve
+neye güvendiğine göre ayrışır; görev odaklı, hedef odaklı, deney odaklı, pazar
+odaklı, süreç odaklı, kalite odaklı, ölçek odaklı ve yetkinlik odaklı olmak üzere
+sekiz zihniyet ayırt edilebilir. Bu zihniyetleri ülkelere bağlayan popüler tablolar
+üç nedenle yanıltıcıdır: hücreler sütun başlığının tekrarından ibarettir, “klasik”
+sütunu karikatür diğerleri ideal olarak yazılmıştır ve Kore sütunu gerçekte yalın
+girişim (lean startup) ilkeleridir. Bir zihniyeti belirleyen asıl etken iki sorudur:
+parayı veren ne sorar ve yanılmanın bedeli nedir. Bu iki soru, yönün belli olup
+olmadığı ile hatanın ucuz ya da pahalı olduğu eksenlerinden oluşan bir ma-
+tris kurar; bu matris Stacey’nin belirsizlik ekseni ile Bezos’un geri dönülmezlik
+ayrımının bileşimidir ve burada Yavuz Matrisi olarak adlandırılmıştır. Yapay
+zekâ ile kod üretiminin ucuzladığı tek kişilik ekiplerde darboğaz kod yazmaktan
+ürün yargısına kayar; bu durumda “önce araştır sonra yap” öğüdü geçersizleşir,
+çünkü yapmak araştırmaktan ucuzdur. Böyle bir ekibin haftası matrisin üç ku-
+tusu arasında geçer: müşteri listesi geldiğinde koşma, canlı sisteme giren parçada
+doğrulama, kullanıcı davranışı bilinmediğinde deneme. Bu döngüde biriken bilgi
+Current kavramıyla kaydedilir: kanıtla güncellenen ve kaynağa göre sıralanan,
+tarihli mevcut karar.
+1
+
+-- 1 of 13 --
+
+Giriş
+Bir yazılım ekibinin çalışma biçimini tanımlamanın yaygın yolu, süreç adlarıyla
+konuşmaktır: şelale, çevik, sprint, kanban. Bu adlar işin nasıl sıralandığını
+söyler ama ekibin bir hata çıktığında ne yaptığını, iki iş arasında hangisini önce
+seçtiğini ve neyi kanıt saydığını söylemez. Oysa ekipleri birbirinden ayıran asıl
+şey bu üç karardır. Aynı sprint düzenini kullanan iki ekipten biri hatayı “bug”
+diye kapatır, diğeri “öğrenme” diye kaydeder; biri listenin başındakini yapar,
+diğeri en büyük belirsizliği seçer.
+Bu ayrımı anlatmak için son yıllarda ülke adlarıyla kurulan karşılaştırmalar
+yaygınlaşmıştır: “Kore hedef koyar, Japonya süreci iyileştirir, Almanya kaliteyi
+doğrular, ˙Israil dener.” Bu karşılaştırmalar akılda kalıcıdır ama iki sorun taşır.
+Birincisi, aynı ülke içinde sektörler ve şirketler birbirinden ülkeler arası fark-
+tan daha çok ayrışır; Amerikan savunma sanayii Alman otomotivine Amerikan
+girişimlerinden daha yakındır. ˙Ikincisi, ülke etiketi zihniyeti bir kimlik gibi
+sunar ve seçilebilir olmaktan çıkarır. Zihniyet bir kimlik değil, belirli koşullara
+verilmiş bir cevaptır; koşullar bilinirse cevap seçilebilir.
+Bu notta zihniyet (mindset) terimi, bir ekibin şu üç soruya verdiği kararlı
+cevaplar kümesi anlamında kullanılmaktadır: neyi önce yapar, hataya ne der,
+neyi kanıt sayar. Yön (direction) terimi, ne yapılacağının bilinip bilinmediğini;
+yöntem (method ) ise nasıl yapılacağının bilinip bilinmediğini ifade eder. Yanılmanın
+bedeli (cost of error ), bir kararın yanlış çıkması hâlinde geri alınmasının maliye-
+tidir.
+Notun kapsamı ekip düzeyindeki karar zihniyetleridir. Bireysel programlama
+pratikleri, kod kalitesi standartları ve proje yönetimi araçları kapsam dışıdır.
+Notun son bölümü, yapay zekâ ile kod üretiminin yaygınlaştığı koşulda tek
+kişilik ekipler için özel bir durum incelemesi içerir.
+2
+
+-- 2 of 13 --
+
+Görev Odaklı ve Hedef Odaklı Yürütme
+˙Iki yaklaşımın karşılaştırılması
+Görev odaklı (task-driven) yürütmede proje bir iş listesiyle başlar: “Ne yap-
+mamız gerekiyor?” Liste görevlere bölünür, görevler sprintlere dağıtılır, her
+görev tamamlandığında ilerleme kaydedilmiş sayılır. Hedef odaklı (target-driven)
+yürütmede ise proje ölçülebilir bir sonuçla başlar: “Neyi kazanmak istiyoruz?”
+Sonuca ulaşmayı engelleyen şeyler belirlenir, kaynak en büyük engele yığılır.
+Fark somut bir örnekle görülebilir. Aynı ürünü, bir yapay zekâ destekli video
+kırpma platformunu iki ekip planlasın.
+Aşama Görev odaklı Hedef odaklı
+Başlangıç “Yapay zekâ ile video platformu ya-
+pacağız.”
+“˙Içerik üreticisi bir saatlik videodan
+beş kullanılabilir klibi on dakikada
+alacak.”
+Planlama Elli görev çıkarılır. Sonucu engelleyen üç şey belirlenir:
+transkripsiyon, bölüm seçimi, render.
+˙Ilk iş Giriş ve yükleme ekranları. En belirsiz olan: yapay zekâ iyi klip
+seçebiliyor mu? Yirmi videoyla de-
+nenir.
+Test “Yükleme çalışıyor mu?” “Seçilen kliplerin yüzde kaçı kul-
+lanıldı?”
+Hata “Yapay zekâ kötü çalışıyor, bug
+açılır.”
+“Yüzde kırk doğru seçiyor. Neden?
+Ne eksik?”
+Sonraki adım Dördüncü sprint: editör. Yüzde kırkı seksene çıkarmak için
+kaynak oraya kaydırılır.
+Birinci ekip “sıradaki iş ne?” diye sorar; ikinci ekip “hedefe ulaşmamızı şu
+anda ne engelliyor?” diye sorar. Fark bu iki soruda toplanır; tablonun diğer
+satırları bu sorudan türer.
+Görev odaklı yaklaşımın savunması
+Bu karşılaştırma çoğunlukla hedef odaklı yaklaşımın lehine kurulur; bu tek
+yanlıdır. Hedef belliyse ve belirsizlik azsa, görev odaklı çalışmak daha hızlıdır.
+Bilinen bir veri girişi ekranı, standart bir raporlama modülü ya da kapsamı
+sözleşmeyle sabitlenmiş bir teslimat için darboğaz analizi yapmak zaman kaybıdır.
+Görev odaklı yaklaşımın zayıflığı yanlış yönde hızlı ilerlemesidir; ama yön doğruysa
+bu zayıflık ortaya çıkmaz. Hedef odaklı yaklaşımın zayıflığı ise hedefin kendisinin
+yanlış olmasıdır; hedef yanlışsa darboğaz analizi yanlış darboğazı bulur.
+Dolayısıyla ikisi arasındaki seçim bir üstünlük seçimi değil, koşul seçimidir.
+Bu koşulun ne olduğu notun dördüncü bölümünde ele alınmaktadır.
+3
+
+-- 3 of 13 --
+
+Ülke Modelleri ve Sınırları
+Yaygın ülke tablosu
+Görev–hedef ayrımı sıklıkla ülkelere genişletilir: Türkiye görev odaklı, Kore
+hedef odaklı, Japonya süreç odaklı, Amerika Birleşik Devletleri pazar odaklı, C in
+ölçek odaklı, Tayvan yetkinlik odaklı, Almanya kalite odaklı, ˙Israil deney odaklı,
+Fransa program odaklı. Bu eşleştirmelerin her birinin tarihsel bir dayanağı
+vardır ve baskın kurum kültürü düzeyinde okunduğunda büsbütün yanlış değildir.
+Kore’nin 1960’lardan itibaren devlet planlaması ve chaebol adı verilen hold-
+ingler aracılığıyla belirli sektörlerde tarihli hedefler koyması (Amsden, 1989),
+Toyota’nın üretim sistemini sürekli iyileştirme üzerine kurması (Womack, Jones
+ve Roos, 1990) ve Amerikan girişim sermayesinin “kullanıcı bunu ister mi?”
+sorusunu finanse etmesi (Ries, 2011) belgelenmiş örüntülerdir.
+Tablonun üç zayıflığı
+Bu tabloların ayrıntılı hâlleri, örneğin on üç aşama ve dokuz ülkeyle kurulanlar,
+göründüğünden daha az bilgi taşır.
+Sütunlar kendini tekrar eder
+C in sütunu okunduğunda “stratejik kapasite, stratejik darboğaz, stratejik teknoloji,
+stratejik hedef” sırası görülür; tek kelime on üç satırda çekilmiştir. Tayvan
+sütununda aynı şey “teknik” kelimesiyle, Almanya sütununda “gereksinim ve
+kalite” ile olur. On üç satır çarpı dokuz sütun değil, dokuz kelime ve o ke-
+limelerin çekimi vardır. Bilgi taşıyan yalnızca iki satırdır: neyin önce yapıldığı
+ve hataya ne dendiği. Diğer satırlar bu ikisinden türetilebilir.
+Klasik sütunu karikatür, diğerleri idealdir
+Türkiye sütununda “API 200 döndü mü?” yazarken Kore sütununda “hedefe
+ulaştık mı?” yazar. Birinci sütun kötü uygulamayı, diğerleri iyi teoriyi anlatır.
+Alman ekibin de kötü günü, Türk ekibin de iyi günü vardır. Kötü uygulama
+iyi teoriyle kıyaslandığında her tablo aynı sonucu verir; bu bir bulgu değil,
+kurgunun sonucudur.
+Kore sütunu Kore değildir
+Ayrıntılı tablolarda Kore sütununa “deney, öğrenme, ölçekleme”, “kanıt gelince
+plan değişir” ve “şimdilik böyle yapıyoruz” gibi cümleler yazılır. Bunlar yalın
+girişim ilkeleridir ve ˙Israil–Amerika kümesine aittir. Gerçek Kore modeli hedef
+koyar, kapasiteyi çıkarır, planı yazar ve planı tutturana kadar yürütür; deney
+ve pivot bu modelin parçası değildir. Samsung’un 1980’lerde bellek yongası
+üretimine girip yıllarca zarar etmesine rağmen yön değiştirmemesi bu inadın
+4
+
+-- 4 of 13 --
+
+örneğidir.1 Tabloya bakan kişi Kore bayrağı altında yalın girişim ilkelerini görür
+ve iki modeli birbirine karıştırır. “Kore gibi planlamak” dendiğinde akla deney,
+“˙Israil gibi denemek” dendiğinde akla plan gelir; kafa karışıklığının kaynağı
+tablonun kendisidir.
+Ülke yerine zihniyet
+Ülke etiketi atıldığında geriye tek soru kalır: bu ekip belirsizliği nerede görüyor
+ve neye güveniyor? Bu soruya verilen cevaplar sekiz zihniyet oluşturur.
+Zihniyet Temel soru Neyi önce yapar Hataya ne der
+Görev odaklı Sıradaki iş ne? Listenin başındakini Bug
+Hedef odaklı Hedefe ulaşmayı ne en-
+gelliyor?
+En büyük darboğazı “Ne engelledi?”
+Deney odaklı Neyi bilmiyoruz? En büyük bilinmeyeni Yeni bilgi
+Pazar odaklı Kullanıcı bunu ister
+mi?
+En riskli kullanıcı
+varsayımını
+Hipotez reddedildi
+Süreç odaklı Neden her seferinde
+farklı çıkıyor?
+En büyük israfı Kaizen girdisi
+Kalite odaklı Yanılırsak ne olur? En yüksek riskli
+gereksinimi
+Kök neden
+Ölçek odaklı Yüz katında ne kırılır? Ölçeği kilitleyen şeyi Optimizasyon konusu
+Yetkinlik
+odaklı
+Hangi tek şeyde en iyi
+olmalıyız?
+Kritik teknik boşluğu Teknik öğrenme
+Her zihniyetin çalıştığı ve zarar verdiği koşul vardır. Görev odaklı yaklaşım
+yön yanlışken hızla bitirir. Hedef odaklı yaklaşım hedef yanlışsa her şeyi boşa
+harcar. Deney odaklı yaklaşım bilinen şeyleri de dener ve zaman yakar. Pazar
+odaklı yaklaşımda teknik borç birikir ve hiçbir şey tamamlanmaz. Süreç odaklı
+yaklaşım belirsizliği çözmez ve yeniyi üretmez; Japon yazılım sektörünün üretimdeki
+başarısını tekrarlayamaması bu sınırın örneğidir. Kalite odaklı yaklaşım erken
+aşamada hızı öldürür. Ölçek odaklı yaklaşım doğrulanmamış ürünü büyütür.
+Yetkinlik odaklı yaklaşım geniş ürün çıkaramaz. Bu zihniyetler birbirinin rakibi
+değildir; projenin aşamasına göre sırayla uygulanır. Belirsizlik yüksekken deney,
+hedef netleşince hedef, ürün tutunca pazar, hata pahalılaşınca kalite, büyüme
+başlayınca ölçek. Süreç odaklı yaklaşım ise diğerlerinin altında sürekli çalışan
+bir katmandır.
+1Samsung’un DRAM üretimine 1983’te girdiği ve ilk yıllarda zarar ettiği yaygın olarak
+aktarılır; zarar süresi ve tutarına ilişkin kesin rakamlar doğrulanmalıdır.
+5
+
+-- 5 of 13 --
+
+Zihniyeti Belirleyen ˙Iki Soru
+Para soruyu sorar
+Bir ekibin zihniyetini büyük ölçüde parayı veren tarafın sorduğu soru belirler.
+Girişim sermayesi “büyüdü mü?” diye sorar, ihale “listeyi bitirdin mi?” diye
+sorar, devlet “hedefe vardın mı?” diye sorar. Ekip doğal olarak o soruya ce-
+vap verecek biçimde çalışır; kendi kaynağının sormadığı soruya kimse uzun süre
+emek harcamaz. Bu bakışla ülke eşleştirmeleri yeniden okunabilir: Amerikan
+girişimlerinin pazar odaklı olması girişim sermayesinin sorusudur, Kore’nin hedef
+odaklı olması devlet planlamasının sorusudur, Türk yazılım sektörünün görev
+odaklı olması ihale mantığının sorusudur. Bu sonuncusu kültürel değil ekonomik
+bir sonuçtur: sermaye pahalı ve müşteri liste getiriyorsa ekip listeyi bitirir; be-
+lirsizliği çözmenin parasını kimse ödememektedir. Aynı ülkede devletin hedef
+koyup finanse ettiği savunma sanayii örneklerinin hedef odaklı çalışması bu
+açıklamayı destekler.
+Hatanın bedeli cevabın hızını belirler
+Para tek başına yeterli değildir. Aynı soruya verilen cevabın ne kadar dikkatli
+olması gerektiğini yanılmanın bedeli belirler. Alman otomotiv sektörünün kalite
+odaklı olması parayı verenden değil, hatanın insan hayatına mal olmasından
+gelir; aynı Alman sermayesi yazılımda daha gevşek çalışır. Yanılmak ucuzsa
+cevap hızlı ve kaba verilir, ekip deney odaklı olur. Yanılmak pahalıysa cevap
+yavaş ve doğrulanmış verilir, ekip kalite odaklı olur. Soru aynı olsa bile.
+˙Iki soru birlikte şöyle özetlenebilir:
+Para soruyu sorar; hatanın bedeli cevabın hızını belirler.
+Diğer etkenler
+˙Iki soru baskın etkendir ama tek etken değildir. Üç şey daha rol oynar. Bir-
+incisi yeteneğin nereden geldiğidir: ˙Israil’in deney odaklılığı askerlik deney-
+imiyle ilişkilendirilir; genç yaşta belirsiz problemlerle karşılaşan mühendislerin
+alışkanlığıdır, sermayenin sorusu değildir. ˙Ikincisi zihniyetin ne kadar süredir
+uygulandığıdır: Japonya’nın süreç odaklılığı 1950’lerde kaynak yokluğundan
+doğmuştur; bugün kaynak boldur ama zihniyet kalmıştır. Kültür bir kez oturduğunda
+para değişse de hemen değişmez. Üçüncüsü hata maliyetinin ölçeğe göre farklılaşmasıdır.
+Kore örneği
+Kore modeli iki soruya çelişkili görünen bir cevap verir ve bu çelişki modelin
+özünü açıklar. Parayı devlet vermiş ve sorusu tarihli sonuç olmuştur: “Beş yıl
+içinde şu sektörde dünya ölçeğinde oyuncu olacak mısın?” Hatanın bedeli ise
+ölçeğe göre farklıdır. Ülke ölçeğinde çok pahalıdır: kaynak azdır, tek şans vardır,
+hedef kaçırılırsa sektör kaçırılır. Proje ölçeğinde ise ucuzdur: holding arkadadır,
+6
+
+-- 6 of 13 --
+
+para akmaya devam eder, yeniden denenir. Bu ikisinin toplamı şu cevabı üretir:
+hedeften sapma yoktur ama hedefe giden yolda deneme çoktur. Yön kilitli,
+yöntem serbesttir. Almanya gibi doğrulaya doğrulaya gidilmemiş, Amerika gibi
+“kullanıcı ister mi?” diye de sorulmamıştır. Bedeli insan üzerindedir: hata
+ucuz ama başarısızlık pahalıysa baskı ekibe biner; Kore’deki çalışma saatleri ve
+tükenmişlik oradan gelir.
+7
+
+-- 7 of 13 --
+
+Yavuz Matrisi
+Eksenler
+˙Iki soru bir matris kurar. Birinci eksen yönün belli olup olmadığıdır: ne yapılacağı
+biliniyor mu? ˙Ikinci eksen yanılmanın bedelidir: karar yanlış çıkarsa geri almak
+ucuz mu, pahalı mı? Dört kutu oluşur ve sekiz zihniyet bu kutulara yerleşir.
+Yanılmak ucuz Yanılmak pahalı
+Yön belirsiz Deney, pazar Yetkinlik
+Yön belli Görev, hedef, ölçek Kalite, süreç
+Matrisin kullanım kuralı tek cümledir: biliyorsan planla, bilmiyorsan dene.
+Asıl hata bilinen ile bilinmeyeni karıştırmaktır. Bilinmeyeni planlamak görev
+odaklı projelerin klasik hatasıdır; bilineni denemek girişimlerin klasik hatasıdır.
+Literatürle ilişkisi
+Matrisin iki ekseni ayrı ayrı bilinen çerçevelere karşılık gelir. Yön ekseni Stacey’nin
+belirsizlik matrisine dayanır; Stacey, ne yapılacağı konusunda anlaşma ile nasıl
+yapılacağı konusunda kesinlik eksenlerini kullanarak plan ile deney arasındaki
+seçimi konumlandırmıştır (Stacey, 1996). Snowden ve Boone’un Cynefin çerçevesi
+aynı ayrımı basit, karmaşık, kompleks ve kaotik alanlar olarak adlandırır (Snow-
+den ve Boone, 2007). Hata bedeli ekseni Bezos’un tek yönlü ve çift yönlü kapı
+ayrımına karşılık gelir: geri alınabilir kararlar hızlı, geri alınamaz kararlar yavaş
+verilir (Bezos, 2016). ˙Iki eksenin bileşimi en yakın March’ın keşif ile işletme
+(exploration–exploitation) ayrımına düşer (March, 1991); ancak March hata be-
+delini ayrı bir eksen olarak ele almaz. Zihniyetleri ve ülke modellerini bu iki
+eksene yerleştiren bir çalışma literatürde bilinmemektedir; bu katman bu notun
+kendi eklemesidir. Matris, bu bileşime ad vermek üzere Yavuz Matrisi olarak
+adlandırılmıştır.
+8
+
+-- 8 of 13 --
+
+Tek Kişilik Ekip ve Yapay Zekâ ile Kod Üretimi
+Darboğazın kayması
+Büyük dil modellerinin kod üretebildiği koşulda, tek kişilik bir ekibin darboğazı
+kod yazma kapasitesi olmaktan çıkar. Kod üretmek ucuzlamış, doğru şeyi
+seçmek ve sadeleştirmek pahalı kalmıştır. Bu kayma, önceki bölümlerdeki öğütlerin
+bir kısmını geçersizleştirir. “ Önce kapasiteyi çıkar, önce test et” cümlelerinin
+altında yapmanın pahalı olduğu varsayımı yatar. Yapmak ucuzsa en iyi test
+yapmanın kendisidir. Bir özelliğin gerekli olup olmadığını araştırmak bir gün
+sürüyorsa ve yapmak bir saat sürüyorsa, araştırma zaman kaybıdır. Ekip zaten
+deney yapmaktadır; deneyin adı “özellik yapmak”tır.
+Aynı nedenle kaynak dağıtımı, darboğaz analizi ve hipotez listesi gibi araçlar
+tek kişilik ölçekte fazla ağırdır; bunlar ekip varsayar. Sekiz zihniyetin tablosun-
+dan tek kişiye kalan dört satırdır: neyi önce yapacağı, neyi test sayacağı, hataya
+ne diyeceği ve neyi kesin bilgi saymayacağı.
+Kırk istek vakası
+Bir serbest geliştirici müşteri görüşmesinde kırka yakın özellik isteği alır, hepsini
+yapar, sonra isteklerin birbiriyle tam uyumlu olmadığını ve dile getirilmemiş
+kısıtlar bulunduğunu fark eder. Bu durum bir hata değil, beklenen bir sonuçtur.
+Müşteri çözüm diliyle konuşur (“Excel dışa aktarma ekleyin”), problem diliyle
+değil (“muhasebe sistemine veri aktaramıyorum”). Kırk istek genellikle on civarı
+gerçek probleme iner; o problemlerin de iki üç tanesi işin çoğunu belirler.
+Yaygın öğüt, kırk isteği yapmadan önce her birinin arkasındaki problemi
+sormaktır. Zaman baskısı altında bu uygulanamaz; gelecek hafta demo varsa
+kırk keşif görüşmesi yapılamaz. C özüm yavaşlamak değil, belirsizliği ucuzlat-
+maktır. Otuz dakikalık bir sınıflama yeterlidir: net olanlar düşünmeden yapılır;
+belirsiz olanlar en basit yorumuyla yapılır ve varsayım bir satırla kaydedilir;
+riskli olanlar (entegrasyon, veri, güvenlik) için müşteriye tek soru sorulur ve
+cevap beklenir. Varsayım listesi demoda müşteriye gösterilir; “şu altı şeyi böyle
+varsaydım” demek beş dakika sürer ve kısıtların çoğu o anda ortaya çıkar. Son-
+radan çıkmasından çok daha ucuzdur.
+Sadeleştirme ve özellik sayısı
+“Kırk özelliğin hepsini yapma” öğüdü bu ölçekte geçersizdir; müşteriye “bunu
+yapmayalım” demek çoğu zaman mümkün değildir ve yapılmış bir özelliği kaldırmak
+hiç yapmamaktan zordur. Doğru çerçeve özellik sayısını azaltmak değil, bağımlılığı
+azaltmaktır. Karmaşıklık özellik sayısından değil, özelliklerin birbirine bağlanmasından
+gelir. Üç ayrı yükleme yolu, her biri tek bir şey yapıyorsa basittir; birbirine
+bağımlı iki özellik karmaşıktır. Tek kişilik ekipte karmaşıklığı taşıyacak ikinci
+kişi olmadığından, bugün basit olan yol altı ay sonra da anlaşılabilen yoldur.
+9
+
+-- 9 of 13 --
+
+Üç ilke
+Tek kişilik ekip için çalışma biçimi üç ilkeye indirgenebilir.
+1. Hızlı çalışmak. Tek kişinin avantajı hızdır; büyük ekibin yapamadığı
+şey bir haftada kırk özellik çıkarmaktır. Ancak hız ile saat sayısı farklıdır.
+Kod üretimi ucuzladığında iş azalmaz, yer değiştirir: yazmaktan bakmaya,
+test etmeye, müşteriyle konuşmaya. O işleri hızlandıran araç yoktur ve
+yorucudur. Hız evet, uzun mesai hayır.
+2. En basit yolu seçmek. Yukarıda açıklandığı gibi, basitlik özellik sayısıyla
+değil bağımlılıkla ölçülür.
+3. Dışarıdan hizmet almak. Transkripsiyon, render, depolama, kimlik
+doğrulama, ödeme, e-posta gibi bileşenler tek kişinin işi değildir. Kendi
+yazmak bir hafta kazandırır, iki yıl bakım yükler. Ölçüt para değil bakımdır:
+aylık ücret ödenen servis bozulduğunda sorun ekibin değildir; kendi yazılan
+bozulduğunda demo sabahı ekibin sorunudur. Tek istisna, ürünü farklılaştıran
+mantıktır; o dışarı verilmez, gerisi satın alınır.
+Bu üçünün toplamı bir stratejidir: hız ve basitlik ekibe, güvenilirlik dışarıya
+kalır.
+Haftanın matristeki yeri
+Tek kişilik ekibin haftası Yavuz Matrisi’nin üç kutusu arasında geçer. Müşteri
+listesi geldiğinde yön bellidir ve kod ucuz olduğundan yanılmak ucuzdur: sol
+alt kutu, koşma. Canlı sisteme giren parçada yanılmak pahalıdır: sağ alt kutu,
+doğrulama. “Kullanıcı böyle mi kullanacak?” sorusunda yön belirsizdir: sol
+üst kutu, deneme. Üç kutu aynı gün içinde sırayla kullanılır; çelişki yoktur,
+yalnızca hangi soru için hangisinin kullanıldığının bilinmesi gerekir. Sağ üst
+kutu, yetkinlik alanı, bu ölçekte boştur.
+10
+
+-- 10 of 13 --
+
+Current
+Tanım
+Current, bir ekibin şu anda, elindeki kanıta göre uyguladığı mevcut karardır.
+Bir karar, bir süreç, bir varsayım, bir yöntem; hepsi Current’tır. Hiçbiri kalıcı
+doğru değildir; hepsi tarihli ve koşulludur. Kavramın gücü, “böyle yapıyoruz”
+cümlesinin içine tarih ve kanıt koşulu gömmesindedir.
+“Böyle yapılıyor” bir gözlemdir. “Böyle yapılmalı” bir iddiadır. Current
+ikisinin arasında durur: “Simdilik böyle, çünkü elimizdeki kanıt bu.” Kırk istek
+vakasında “dışa aktarmanın CSV olması yeterlidir” cümlesi bir kuraldı değil,
+bir Current’tı; müşteriden yeni bilgi geldiğinde değişti.
+Current’ı değiştiren iki kuvvet
+Current tek başına duran bir kavram değildir; onu hareket ettiren iki kuvvet
+vardır.
+1. Kanıt. Yeni veri geldiğinde Current güncellenir; varsayımla değil, ölçümle.
+Bu kuvvet kanıta dayalı mühendislik (evidence-based engineering) olarak
+adlandırılır. Özü bilimsel yöntemdir; yeni bir ilke değil, mühendislik karar-
+larına uygulanmış hâlidir.
+2. Kaynak. Her Current aynı anda güncellenemez; zaman ve para sınırlıdır.
+En çok öğreten ya da en çok değer üreten Current’a yoğunlaşılır, gerisi
+olduğu gibi bırakılır. Bu kuvvet girişim ekonomisi (startup economics)
+olarak adlandırılır. Özü fırsat maliyetidir.
+Bu iki kuvvet Current ile eşit ağırlıkta üç kavram değildir; Current merkezdedir,
+diğer ikisi onu besleyen mekanizmalardır. Üçünü eşit sütunlar olarak sunmak
+Current’ı küçültür, çünkü yeni olan yalnızca Current’tır.
+kanıt → günceller
+Current
+kaynak → hangisini önce
+Üç soru
+Kavram üç soruyla uygulanır:
+• Simdi ne yapıyoruz? (Current)
+• Ne öğrendim? (kanıt)
+• Nereye odaklanayım? (kaynak)
+11
+
+-- 11 of 13 --
+
+Kapsam sınırı
+Current döngüsü bir öğrenme çerçevesidir; her durum için bir karar çerçevesi
+değildir. Yavuz Matrisi’nde sol üst kutuya, yön belirsiz ve yanılmak ucuz olan
+alana aittir. Yön belliyse Current sorgulanmaz, koşulur; “ne öğrendim?” sorusu
+müşteri listesini bitirirken işe yaramaz. Yanılmak pahalıysa Current deneyle
+değil doğrulamayla değiştirilir. Matris hangi kutuda bulunulduğunu söyler; Cur-
+rent o kutuda ne yapıldığını kaydeder. ˙Ikisi birlikte tamdır; Current tek başına
+yarımdır.
+Tek cümlede: Current, kanıtla güncellenen ve kaynağa göre sıralanan, tarihli
+mevcut karardır.
+12
+
+-- 12 of 13 --
+
+Sonuç
+Ülke tablolarının yerine iki soru konduğunda, zihniyet seçimi bir kimlik mese-
+lesi olmaktan çıkıp bir koşul meselesine dönüşür. Parayı veren ne soruyor ve
+yanılmak ne kadar pahalı; bu iki cevap bilindiğinde hangi zihniyetin uygun
+olduğu türetilebilir. Bunun pratik karşılığı şudur: ülke ya da şirket değiştirmeden
+zihniyet değiştirmek zordur, çünkü soruyu soran değişmemiştir; ama aynı proje
+içinde farklı işler farklı kutulara düştüğünden, tek bir ekip aynı hafta içinde üç
+zihniyeti sırayla kullanabilir ve kullanmalıdır.
+Yapay zekâ ile kod üretiminin ucuzlaması,
+13
+
+-- 13 of 13 --

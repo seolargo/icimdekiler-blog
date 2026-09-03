@@ -1,0 +1,1191 @@
+Bilişsel Psikoloji: Yazılım Mühendisliğine
+Aktarım
+ÖFY
+September 2026
+Özet
+Psikoloji lisans müfredatının mühendislik açısından değerli olan kısmı klinik
+dersler değil, ölçme ve deney tasarımı disiplinidir. C alışma belleğinin dört
+birim civarındaki kapasitesi, kod okunabilirliğinin fizyolojik sınırını belirler; iyi
+isimlendirme, sığ koşul yapısı ve az parametre bu sınırı esnetmenin değil, ona
+uyum sağlamanın araçlarıdır. Bilişsel yükün içsel, dışsal ve verimli biçimleri
+tek bir kapasiteden beslendiği için, düzensizlikten doğan yük yüksek olduğunda
+öğrenmeye kaynak kalmaz: kötü yazılmış kod yavaş okunmaz, anlaşılmaz. Görme
+bir ölçüm değil bir yeniden inşa olduğundan, arayüz tasarımı ve görüntü sıkıştırması
+aynı olguya dayanır — gözün zaten atmadığı bilgiyi üretmemek. Hata ayıklamada
+asıl engel bilgi eksikliği değil onay yanlılığıdır; hipotezi destekleyen kanıt topla-
+mak, onu çürütmeye çalışmanın yerini tutmaz. Öğrenmenin belirleyici değişkeni
+hız değil, sonucun geldiği anda o sonucu üreten düşüncenin hâlâ erişilebilir ol-
+masıdır; hızlandırılamayan geri bildirimlerde bağlamın yazılı olarak saklanması
+tek savunmadır. ˙Ihtiyaç anında öğrenme etkili bir stratejidir ancak yapısal bir
+kör noktası vardır: varlığından habersiz olunan bir çözüme ihtiyaç duyulduğu
+fark edilemez. Bu kör noktanın maliyeti sistemin ölçeğiyle birlikte büyüdüğü
+için, öngörüye değil öngörüsüzlüğe dayanıklı yapılara yatırım yapmak daha
+güvenilir bir savunmadır.
+1
+
+-- 1 of 31 --
+
+Giriş
+Psikoloji, davranışın ve zihinsel süreçlerin incelenmesidir. Bu tanım geniştir ve
+alanın kendi içinde birbirinden hayli farklı dallar barındırmasının sebebi budur:
+ruhsal bozuklukları inceleyen klinik psikoloji ile belleğin çalışma mekanizmasını
+inceleyen bilişsel psikoloji, ortak bir yöntem dilini paylaşsalar da farklı sorular
+sorarlar.
+Yazılım mühendisliği ile psikoloji arasındaki bağ rastlantısal değildir. Her iki
+alan da 1950’lerde, aynı benzetmenin etrafında biçimlenmiştir. O tarihe kadar
+psikolojiye hâkim olan davranışçılık (behaviorism), zihnin içinin ölçülemeyeceğini
+ve dolayısıyla bilim konusu olamayacağını savunuyordu; yalnızca uyaran ve tepki
+gözlemlenebilirdi. Bu görüş 1950–60 arasında terk edildi ve yerini bilgi işleme
+yaklaşımı aldı. Bu geçişe bilişsel devrim (cognitive revolution) denir. Üç etken
+belirleyici oldu: bilgisayarın icadı zihin için girdi-işleme-çıktı biçiminde bir ben-
+zetme sundu; Chomsky’nin dilbilim eleştirisi, çocuğun hiç duymadığı cümleleri
+kurabilmesinin ödül-ceza mekanizmasıyla açıklanamayacağını gösterdi; Shan-
+non’ın bilgi kuramı ise “bilgi” kavramını ölçülebilir hâle getirdi (Chomsky, 1959;
+Shannon, 1948).
+Bu ortak köken, iki alanın kavram dağarcığını da paylaşmasına yol açmıştır.
+Bellek, depolama, geri çağırma, kapasite, yük gibi terimler her iki alanda da
+kullanılır. Ancak asıl bağ terminolojik değil işlevseldir: yazılım geliştirme, insan
+bilişinin sınırlarına sürekli çarpan bir etkinliktir. Kod insan tarafından okunur,
+arayüz insan tarafından kullanılır, hata insan tarafından aranır, sistem insan
+ekipleri tarafından işletilir. Bu dört noktanın her birinde psikolojinin ölçülmüş
+bulguları geçerlidir.
+Bu notta ele alınan çerçeve, psikoloji eğitiminin kademeli yapısından başlayarak
+bu bulguların mühendislik karşılıklarını kurar. Kapsam dışında bırakılan alan
+klinik psikolojidir: psikoterapi kuramları, tanı sistemleri, projektif testler ve
+psikofarmakoloji meslek bilgisidir ve mühendislik pratiğine aktarılmaz. Notun
+sınırı bir başka yönden de çizilmelidir: burada aktarılan bulgular istatistiksel
+eğilimlerdir, bireysel öngörüler değildir. C alışma belleğinin dört birim kapa-
+sitesi bir ortalamadır; belirli bir kişinin belirli bir kodu okuyabilme kapasitesini
+kestirmez.
+2
+
+-- 2 of 31 --
+
+Mühendislik Açısından Ayıklama
+Aktarılabilen dersler
+Mühendislik pratiğine doğrudan aktarılan blok yöntem dersleridir. Araştırma
+Yöntemleri, Deneysel Psikoloji ve istatistik dersleri birlikte tek bir beceri kazandırır:
+gürültülü insan verisinden nedensel çıkarım yapmak. Kontrol grubu kurmak,
+karıştırıcı değişkeni (confound ) fark etmek, etki büyüklüğü ile istatistiksel an-
+lamlılığı birbirinden ayırmak, gerekli örneklem büyüklüğünü önceden hesapla-
+mak ve çoklu karşılaştırma tuzağını tanımak bu bloğun içeriğidir. Mühendislikteki
+karşılığı A/B testi, kademeli yayılım (canary deployment) ve performans ölçümüdür.
+Psikolojik Testler ve Ölçme dersi, doğrudan ölçülemeyen bir niteliğin nasıl
+sayıya çevrileceğini konu alır. Güvenirlik (reliability), aynı ölçümün tekrar-
+landığında aynı sonucu verip vermediğidir. Geçerlik (validity), ölçülmek is-
+tenen niteliğin mi yoksa onunla ilişkili başka bir şeyin mi ölçüldüğüdür. Yapı
+geçerliği, soyut bir kavramın gözlenebilir göstergelere indirgenmesini inceler. Bu
+üç kavram metrik tasarımının doğrudan karşılığıdır: “geliştirici verimliliği” ya
+da “sistem sağlığı” gibi nitelikler ancak vekil ölçütlerle izlenebilir ve vekilin
+gerçek hedeften ne kadar saptığı bilinmelidir.
+Bilişsel Psikoloji ile Duyum ve Algı dersleri, sırasıyla kod okunabilirliğinin
+ve arayüz tasarımının kuramsal temelidir. Bu iki alanın içeriği notun izleyen
+bölümlerinde ayrıntılı olarak ele alınmaktadır.
+Kısmen aktarılabilen dersler
+Kişilik Kuramları dersinin kuramsal kısmı aktarılmaz, ancak Beş Faktör mod-
+eli (Five Factor Model ) yöntemsel olarak öğreticidir. Model, bir kuramdan
+türetilmemiş, veriden çıkarılmıştır: sözlükteki kişilik sıfatları toplanmış, geniş
+örneklemlere uygulanmış ve faktör analiziyle beş kümeye indirgenmiştir (Costa
+& McCrae, 1992). Yöntem, çok sayıda değişkenin altında kaç gerçek boyut bu-
+lunduğunu bulma problemidir ve temel bileşen analizi ile aynı ailedendir. Ders
+ayrıca doğrudan aktarılabilir bir kural verir: sürekli bir değişkeni kategoriye
+çevirmek bilgi kaybettirir. Kullanıcıları “aktif” ve “pasif” diye ikiye bölmek,
+aktiflik puanını sürekli değer olarak tutmaktan daha az bilgi taşır.
+Psikopatoloji dersinin içeriği aktarılmaz, ancak arka planındaki tartışma
+tanıdıktır. Tanı sistemleri kategoriktir; belirtiler ise sürekli bir dağılım gösterir.
+Eşiğin nereye konduğu kimin tanı alacağını belirler ve eşiği düşürmek yanlış
+pozitifi, yükseltmek yanlış negatifi artırır. Bu, sınıflandırma eşiği problemidir.
+Kategorilerin sürekli üst üste binmesi (eş tanı) ise taksonominin sınırlarını yanlış
+yerden çizdiğinin göstergesidir.
+Klinik Görüşme dersinin beceri kısmı gereksinim toplamaya aktarılabilir.
+Görüşmenin temel becerisi, kişinin söylediği ile kastettiği arasındaki farkı bul-
+maktır. Kullanıcının “dışa aktarma düğmesi istiyorum” talebinin altında “ra-
+poru yöneticiye ulaştırmak” ihtiyacı bulunabilir; talep karşılandığında ihtiyaç
+karşılanmamış olur. Dersin somut teknikleri şunlardır: soruyu açık uçlu kur-
+mak, soruya cevabı yerleştirmemek, belirsiz ifadeyi somutlaştırmak ve sessizliğe
+3
+
+-- 3 of 31 --
+
+dayanmak.
+Gelişim Psikolojisinin çocuk gelişimi kısmı aktarılmaz, iki kavramı aktarılır.
+Piaget’nin şema, özümseme ve uyumsama üçlüsü, yeni bilginin mevcut zihin-
+sel yapıya uyduğunda kolayca yerleştiğini, uymadığında ise yapının kendisinin
+değişmek zorunda kaldığını söyler. Bir paradigmadan diğerine geçmenin zorluğu
+bilgi eksikliğinden değil, mevcut şemanın direncinden kaynaklanır. Vygotsky’nin
+yakınsal gelişim alanı (zone of proximal development) kavramı ise tek başına
+yapılamayan ancak yardımla yapılabilen aralığı tanımlar; öğrenme bu aralıkta
+gerçekleşir (Vygotsky, 1978). Görev dağıtımının ve mentorluğun kuramsal dayanağı
+budur.
+Aktarılmayan dersler
+Psikoterapi Kuramları, projektif testler, adli psikoloji ve psikofarmakoloji meslek
+bilgisidir; mühendislik pratiğine transfer edilmez.
+Lisansüstü metodoloji dersleri
+Yalnızca mühendislik getirisi gözetildiğinde lisansüstü metodoloji dersleri lisanstak-
+ilerden daha değerlidir, ancak hepsi eşit değildir.
+˙Ileri Deneysel Tasarım en yüksek getirilidir. Güç analizi testin süresini ve
+örneklem büyüklüğünü önceden belirler; erken durdurma problemi, teste her
+gün bakıp anlamlı sonuç görüldüğünde durdurmanın yanlış pozitif oranını ciddi
+biçimde şişirdiğini gösterir; faktöriyel tasarım birden çok değişkenin aynı anda
+ve etkileşimleriyle birlikte sınanmasını sağlar.
+Ölçek geliştirme ikinci sıradadır ve gerekçesi yukarıda psikometri başlığında
+verilmiştir.
+Buna karşılık Yapısal Eşitlik Modellemesinin nedensellik iddiası veriden değil
+modelin varsayımından gelir; nedensel çıkarım için Pearl’ün nedensel grafikleri
+ya da ekonometrik yöntemler daha uygundur (Pearl, 2009). Meta-analiz iyi
+bir yöntemdir ancak günlük mühendislik pratiğinde karşılığı sınırlıdır; verdiği
+asıl kavram yayın yanlılığıdır (publication bias) — yalnızca olumlu sonuçların
+yayımlanması alanın toplam bilgisini çarpıtır. C ok Değişkenli ˙Istatistik ile
+makine öğrenmesi arasındaki örtüşme dar tutulmalıdır: psikoloji tarafı açıklama
+peşindedir ve yorumlanabilirliği önceler, makine öğrenmesi tahmin peşindedir
+ve yorumlanabilirliği ikincil sayar.
+Bu derslerin hiçbiri için psikoloji programına kayıt zorunlu değildir. Aynı
+içerik istatistik, ekonometri ve insan-bilgisayar etkileşimi (human-computer in-
+teraction) programlarında da yer alır ve orada örnekler doğrudan arayüz ve ürün
+üzerinden verilir.
+4
+
+-- 4 of 31 --
+
+Bilişsel Kapasite ve Kod Okuma
+C alışma belleği
+C alışma belleği (working memory), üzerinde aktif olarak işlem yapılan bilginin
+tutulduğu geçici sistemdir. Uzun süreli bellek kalıcı depolama ise çalışma belleği
+o an açık olan tampondur.
+Kapasitesi küçüktür. Miller’ın 1956 tarihli çalışması yedi artı eksi iki birim
+vermiştir, ancak bu rakam ezberleme görevlerine aittir (Miller, 1956). Üzerinde
+işlem yapılması gereken birimler söz konusu olduğunda ölçülen kapasite dört
+civarındadır (Cowan, 2001).
+Üç özelliği belirleyicidir. Sınırlıdır: dörtten fazla bağımsız birim aynı anda
+tutulamaz. Kırılgandır: kesinti geldiğinde içerik kaybolur ve kaldığı yerden
+devam edilemez, baştan kurulur. Paylaşımlıdır: kod okumak, değişken adını
+hatırlamak ve dizin yapısını akılda tutmak aynı kapasiteden beslenir.
+Bir fonksiyonu anlamak için aynı anda tutulması gerekenler tipik olarak
+şunlardır: fonksiyonun aldığı parametreler, değişkenlerin o anki değerleri, içinde
+bulunulan koşul dalı, çağrı zincirinde nereden gelindiği ve aranan şeyin ne
+olduğu. Bu liste beş birimdir ve sınırı aşar. Karmaşık kod okunurken not
+alma davranışının sebebi budur: çalışma belleği kâğıda dışsallaştırılır.
+Parçalama
+Kapasite artırılamaz, ancak her birime daha fazla bilgi sığdırılabilir. Bu işleme
+parçalama (chunking) denir.
+Chase ve Simon’ın satranç çalışması mekanizmayı açıkça gösterir. Usta
+oyunculara gerçek bir maçtan alınmış pozisyon birkaç saniye gösterildiğinde
+taşları ezberden yeniden dizebilmektedirler; acemiler dizememektedir. Taşlar
+tahtaya rastgele yerleştirildiğinde ise ustanın üstünlüğü kaybolmaktadır (Chase
+& Simon, 1973). Usta yirmi taşı ayrı ayrı hatırlamamakta, dört beş örüntüyü
+hatırlamaktadır: “şah kanadında rok yapılmış”, “merkezde piyon zinciri var”.
+Her örüntü tek birimdir.
+Kodda aynı mekanizma işler. Deneyimli bir geliştirici için Go dilindeki hata
+kontrolü kalıbı tek bir birimdir:
+if err != nil {
+return nil, err
+}
+Aynı blok, kalıbı tanımayan biri için üç ayrı satırdır. Bunun iki pratik sonucu
+vardır. Tanıdık örüntüler bilişsel olarak bedava, özgün çözümler pahalıdır;
+okuyucunun hazır bir birimi bulunmayan yapı satır satır çözülmek zorundadır.
+˙Ikinci sonuç isimlendirmeyle ilgilidir: calculateDiscountedPrice() tek bir-
+imdir, aynı işi yapan on beş satırlık açık kod on beş birimdir. ˙Iyi isimlendirme,
+okuyucu için birim üretmektir.
+5
+
+-- 5 of 31 --
+
+Bilişsel yük kuramı
+Bilişsel yük kuramı (cognitive load theory) Sweller tarafından eğitim psikolo-
+jisi için geliştirilmiştir; sorusu, karmaşık bilginin sınırlı bir belleğe nasıl ak-
+tarılacağıdır (Sweller, 1988). Kuramın temel varsayımı çalışma belleğinin tek
+ve sabit bir havuz olduğu, üç ayrı tüketicinin bu havuzdan beslendiğidir (Sweller,
+van Merrienboer & Paas, 1998).
+˙Içsel yük
+˙Içsel yük (intrinsic load ) problemin kendi zorluğudur. Ölçüsü eleman etk-
+ileşimidir: kaç unsurun aynı anda birbirine bağlı olduğu. Yüz sabiti bir dosyaya
+yazmak uzun ama kolaydır, çünkü unsurlar birbirinden bağımsızdır. Üç servisin
+paylaştığı bir durumun tutarlılığını sağlamak kısa ama zordur, çünkü unsurlar
+karşılıklı bağımlıdır.
+Yazılımdaki tipik kaynakları eşzamanlılık, dağıtık sistemlerde kısmi başarısızlık,
+zaman ve saat dilimi işlemleri, metin kodlaması ve kayan nokta aritmetiğidir.
+Brooks bu tür zorluğu temel karmaşıklık (essential complexity) olarak adlandırmış
+ve onu ortadan kaldıracak tek bir yöntemin bulunmadığını savunmuştur (Brooks,
+1987).
+˙Içsel yük yok edilemez ancak taşınabilir. Üç yol vardır. Sınıra itmek:
+karmaşıklığı sistemin tamamına yaymak yerine tek bir modülde toplamak. Tipe
+yüklemek: ayrı tipler tanımlayarak doğrulama yükünün bir kısmını derleyi-
+ciye devretmek. Kütüphaneye devretmek: sınanmış bir uygulamayı kullanmak.
+Üçünde de karmaşıklık ortadan kalkmaz, okuyucunun çalışma belleğinden başka
+bir yere aktarılır.
+˙Içsel yükü azaltma girişimlerinin sık rastlanan başarısızlık biçimi, onu gizle-
+mektir. Zor bir işlemin basit görünen bir arayüzün ardına saklanması, kenar
+durumlarda beklenmedik davranışa yol açar. Bu olgu sızdıran soyutlama (leaky
+abstraction) olarak adlandırılmıştır (Spolsky, 2002). Gizlenmiş içsel yük dışsal
+yüke dönüşür.
+Dışsal yük
+Dışsal yük (extraneous load ) problemden değil sunumdan kaynaklanan ek maliyet-
+tir. Tanımı gereği sıfırlanabilir: aynı işi yapan daha okunur bir kod her zaman
+mümkündür.
+Sweller’ın eğitim tarafındaki klasik örneği bölünmüş dikkat etkisidir (split-
+attention effect): geometri şeklinin sayfanın üstünde, açıklamasının altta yer al-
+ması öğrenmeyi yavaşlatır, çünkü öğrenci gözünü iki nokta arasında gezdirirken
+bağlamı sürekli yeniden kurar. Sekil ile metin birleştirildiğinde öğrenme hızlanır.
+Konu ve zorluk aynıdır; yalnızca sunum değişmiştir.
+Koddaki karşılıkları şunlardır. Bölünmüş dikkat: tek bir isteğin akışını
+izlemek için dört ayrı dosya açmak zorunda kalmak. Fazlalık etkisi (redun-
+dancy effect): aynı bilginin iki yerde verilmesi yükü azaltmaz, artırır; okuyucu
+ikisini karşılaştırmak zorunda kalır, yorum ile kod çeliştiğinde ise hangisine
+güveneceğine karar vermek zorundadır. Arama maliyeti: bir değişkenin nerede
+6
+
+-- 6 of 31 --
+
+değiştiğini bulmak için çok sayıda dosya taramak. Tutarsızlık: aynı projede bir-
+den çok hata yönetimi biçiminin bulunması — tutarlılık parçalamayı mümkün
+kılan koşuldur, tutarsızlık onu ortadan kaldırır. Gereksiz dolaylılık: tek uygu-
+laması bulunan arayüz ya da tek çağıranı olan sarmalayıcı; soyutlama ancak
+birden çok şeyi gizlediğinde kazanç sağlar. Belirsiz isimlendirme: anlamın
+bağlamdan çıkarılmasını gerektiren her ad ek birim tüketir.
+Verimli yük
+Verimli yük (germane load ) zihinsel model kurmaya harcanan çabadır ve istenen
+yüktür. ˙Işlevi, uzun süreli bellekte şema inşa etmektir; şema, kalıcı hâle gelmiş
+parçalamadır. Bir kez oluştuğunda ilgili örüntünün tanınması bedava hâle gelir.
+Yeni bir kod tabanına girilen ilk hafta yaşanan yorgunluğun büyük kısmı ver-
+imli yüktür. Üçüncü ayda aynı kodun hafif gelmesinin sebebi kodun değişmesi
+değil şemanın oturmasıdır.
+˙Iki yük türü belirtileriyle ayırt edilebilir. “Bu neden böyle yapılmış” ve “bu
+örüntüyü daha önce görmüştüm” türü sorular verimli yükün belirtisidir. “Bu
+değişken ne anlama geliyor”, “bu fonksiyon nerede tanımlı” türü sorular dışsal
+yükün belirtisidir. Birincisi yatırım, ikincisi kayıptır.
+Ortak havuz
+Üç yük tek kapasiteden beslenir. Kuramın formülü şudur: içsel, dışsal ve verimli
+yükün toplamı kapasiteyi aşamaz. ˙Içsel yük ve kapasite sabit olduğuna göre
+dışsal yükteki her artış, verimli yüke kalan payı azaltır.
+Dört birimlik bir kapasite varsayımıyla:
+Durum ˙Içsel Dışsal Verimliye kalan
+Temiz kod, basit problem 2 1 1
+Temiz kod, zor problem 3 1 0
+Kötü kod, basit problem 2 2 0
+Kötü kod, zor problem 3 2 taşma
+Son satır belirleyicidir. Kapasite aşıldığında sonuç yavaş anlama değil, an-
+lamamadır. Sistem yükü boşaltmak için birim atmaya başlar: bir kenar durum
+gözden kaçar, bir koşul atlanır, bir hata yolu hiç düşünülmez.
+Bundan üç sonuç çıkar. Birincisi, kötü kodun maliyeti zor problemlerde kat-
+lanarak artar; içsel yükün yüksek olduğu yerde tampon kalmadığı için, karmaşıklığın
+en yoğun olduğu bölge temizliğin en kritik olduğu bölgedir. “Burası zaten
+karmaşık, dağınık olması normal” değerlendirmesi bu ilişkiyi tersine çevirir.
+˙Ikincisi, aynı kod farklı okuyucularda farklı yük üretir; deneyimli okuyucunun
+şemaları hazır olduğu için içsel yükü daha düşüktür. Buradan uzmanlık tersine
+dönmesi etkisi (expertise reversal effect) doğar: acemiye yardım eden ayrıntılı
+açıklamalar uzman için fazlalık, yani dışsal yüktür. Üçüncüsü, işe alım sonrası
+uyum süresi doğrudan dışsal yükün fonksiyonudur; şema kurmak için verimli
+yüke yer gerekir ve dışsal yük havuzu doldurmuşsa şema kurulamaz.
+7
+
+-- 7 of 31 --
+
+Ayırma testleri
+Bir zorluğun hangi kategoriye ait olduğu üç soruyla belirlenebilir. Kod ideal
+biçimde yazılmış olsaydı yine zor olur muydu: evet ise içsel, hayır ise dışsaldır.
+Bu çabadan geriye kalıcı bir kazanım kalıyor mu: kalıyorsa verimli, kalmıyorsa
+dışsaldır. Zorluk alana mı yoksa bu projeye mi özgü: alana özgüyse içsel, projeye
+özgüyse dışsaldır. Üçüncü test ekip içi tartışmayı çözdüğü için en kullanışlısıdır.
+Somut karşılıklar
+Parametre sayısı
+Sekiz parametreli bir fonksiyon çağrı yerinde sekiz birim tüketir ve parametre
+sırasının da hatırlanmasını gerektirir:
+func CreateAsset(name string, path string, duration int,
+format string, bitrate int, channels int,
+loop bool, fadeIn int) error
+Parametreler bir yapıya alındığında yük tek birime iner, alan adları çağrı
+yerinde görünür hâle gelir ve sıra sorunu ortadan kalkar:
+func CreateAsset(cfg AssetConfig) error
+Bu, biçimsel bir tercih değil, bellek yükünün sekizde bire indirilmesidir.
+Üçten fazla parametre gruplanmalıdır.
+˙Iç içe geçmiş koşullar
+Her koşul bloğu bir birim işgal eder, çünkü blok içindeyken hangi koşulların
+sağlandığı hatırlanmak zorundadır. Dört kademe iç içe geçmiş bir yapıda en
+içteki satıra ulaşıldığında dört koşul birden tutulmaktadır. Erken dönüş kalıbı
+(guard clause) aynı mantığı kurar ancak her kontrolü kapatarak belleği boşaltır:
+if user == nil { return ErrNoUser }
+if !user.Active { return ErrInactive }
+if !user.HasPermission("write") { return ErrForbidden }
+if asset.Locked { return ErrLocked }
+Bu noktadan sonra hiçbir koşul bellekte tutulmaz.
+Değişken kapsamı ve hata mesajları
+Bir değişkenin tanımı ile kullanımı arasındaki mesafe, o değişkenin bellekte tu-
+tulması gereken süredir. Tanımı kullanıma yaklaştırmak bu süreyi kısaltır.
+Hata mesajları okuyucunun bellekten tamamlaması gereken bilgi miktarına
+göre değerlendirilir. Error: operation failed biçimindeki bir mesaj hangi
+işlemin, hangi kaynak üzerinde başarısız olduğunu ve ne yapılması gerektiğini
+okuyucuya bırakır. Dosya adını, sınırı ve gerçekleşen değeri içeren bir mesaj bu
+üç soruyu da kapatır.
+8
+
+-- 8 of 31 --
+
+Yapılandırma dosyaları
+˙Iki yüz satırlık düz bir yapılandırma dosyası arama gerektirir; aynı içerik alan
+gruplarına ayrıldığında birimlere bölünür ve yalnızca ilgili blok taranır. Ayrıca
+anlamı birbirine bağlı ayarlar (biri etkinken diğerinin yok sayıldığı durumlar)
+birbirinden uzağa konmamalıdır; aksi hâlde okuyucu ikisini aynı anda bellekte
+tutmak zorunda kalır.
+Kod okuma pratiği
+Not almanın gerekliliği kodun tanıdıklığına bağlıdır. Tanıdık kodda parçalama
+hazırdır ve not gerekmez. Yabancı ya da derin kodda kapasite ilk dakikalarda
+dolar; aynı fonksiyona üçüncü kez dönülüp içeriği yeniden çözülüyorsa bellek
+taşmış demektir.
+Dışsallaştırma için dört yöntem işlevseldir. C ağrı zincirinin düz metin olarak
+yazılması, katmanlar arasında gezinirken nereden gelindiğinin hatırlanma yükünü
+kaldırır. Soruların cevaplanmadan listeye yazılması, ana akışın kaybedilmesini
+önler. Kutu ve ok biçiminde basit bir şema, metnin doğrusal yapısıyla sistemin
+doğrusal olmayan yapısı arasındaki uyumsuzluğu giderir. Anlaşılan her fonksiy-
+onun üzerine tek satırlık özet bırakmak, sonraki okuma için birim hazırlar. Hata
+ayıklayıcı (debugger ) da bu ailedendir: değişken değerlerinin zihinde simüle
+edilmesi yerine ekranda görülmesini sağlar.
+9
+
+-- 9 of 31 --
+
+Görsel Algı ve Arayüz Tasarımı
+Gözün yapısı
+Göz bir kamera değildir. Kamera görüntünün her noktasını eşit çözünürlükte
+kaydeder; göz kaydetmez.
+Retinanın merkezinde fovea adı verilen, görme alanının yalnızca bir ilâ iki
+derecesini kapsayan bir bölge bulunur. Keskin görme yalnızca bu bölgede gerçekleşir;
+kol boyu mesafede yaklaşık bir başparmak tırnağı büyüklüğünde bir alana karşılık
+gelir. Görme alanının geri kalanı bulanıktır ve renk ayrımı zayıftır.
+Buna rağmen algılanan görüntü bulanık değildir. Göz saniyede üç ilâ dört
+kez sıçrayarak farklı noktalara odaklanır ve beyin bu parçalardan kesintisiz bir
+sahne kurar. Dolayısıyla algılanan şey retinadan gelen ham veri değil, beynin
+ürettiği bir yeniden inşadır.
+Kör nokta bu iddianın en açık kanıtıdır. Optik sinirin retinadan ayrıldığı
+noktada algılayıcı hücre bulunmaz; görme alanında gerçek bir boşluk vardır.
+Bu boşluk algılanmaz, çünkü beyin çevre dokudan yola çıkarak onu doldurur.
+Sakkad ve değişim körlüğü
+Gözün sıçramalarına sakkad (saccade) denir. Sıçrama süresince görsel işleme
+baskılanır; bu olguya sakkadik baskılama adı verilir. Aynaya bakan bir kişi
+kendi gözünün hareketini göremez, başkasınınkini görebilir.
+Bunun bir sonucu değişim körlüğüdür (change blindness): sıçrama sırasında
+sahnede gerçekleşen değişiklikler algılanmaz. Simons ve Levin’in çalışmasında
+yoldan geçen birine yol soran kişi, araya taşınan bir kapının arkasında başka
+biriyle değiştirilmiş ve katılımcıların yaklaşık yarısı değişimi fark etmemiştir
+(Simons & Levin, 1998).
+Arayüz karşılığı doğrudandır: sessizce değişen bir değer algılanmaz. Kritik
+güncellemelerin hareketle ya da kısa süreli bir vurguyla işaretlenmesi gerekir;
+hareket, çevresel görmede de yakalanan bir özelliktir.
+C ubuk ve koni
+Retinada iki tür algılayıcı bulunur. Koniler renk ayrımı yapar, aydınlık or-
+tam gerektirir ve foveada yoğunlaşmıştır. C ubuklar renk ayrımı yapmaz, düşük
+ışıkta çalışır ve çevrede yoğunlaşmıştır. Karanlıkta rengin kaybolmasının ve
+soluk bir ışık kaynağına doğrudan bakıldığında kaybolup hafif yana bakıldığında
+görünmesinin sebebi budur.
+Üç tür koni bulunur ve renk körlüğü bunlardan birinin eksik ya da kaymış ol-
+masından kaynaklanır. En yaygın biçimi kırmızı-yeşil ayrımını etkiler ve erkek-
+lerde yaklaşık yüzde sekiz oranında görülür. Mavi konilerin sayısı diğerlerine
+göre belirgin biçimde azdır; bu nedenle mavi tonlarda ince ayrıntı algılanmaz ve
+ince çizgi ya da küçük yazı için mavi uygun bir seçim değildir.
+10
+
+-- 10 of 31 --
+
+Parlaklık algısı ve gama
+Işık şiddeti iki katına çıkarıldığında algılanan parlaklık iki katına çıkmaz; ilişki
+doğrusal değildir.
+Gama düzeltmesi (gamma correction) bu olguya dayanır. sRGB renk uzayında
+128 değeri, 255’in yaydığı ışığın yarısını değil yaklaşık yüzde yirmi ikisini yayar.
+Sınırlı bit derinliği, gözün daha duyarlı olduğu karanlık bölgeye daha fazla pay
+ayrılacak biçimde dağıtılmıştır.
+Bunun pratik sonucu görüntü işlemede kritiktir: görüntü küçültme, karıştırma
+ve bulanıklaştırma işlemleri doğrusal uzayda yapılmalıdır. Gama uzayında or-
+talama almak matematiksel olarak hatalıdır ve küçültülmüş görüntülerin olması
+gerekenden koyu çıkmasına yol açar.
+Kenar işleme
+Retina ham veriyi doğrudan iletmez, önce işler. Temel işlem merkez-çevre
+karşıtlığıdır: bir hücre, merkezindeki ışık ile çevresindeki ışığın farkına tepki
+verir. Bu, işlevsel olarak bir kenar bulma süzgecidir ve görüntü işlemedeki
+Laplace süzgeci ile aynı matematiği kullanır.
+Yan etkisi gözlenebilir. ˙Iki düz gri alanın sınırında, veride bulunmayan açık
+ve koyu şeritler algılanır; bu olgu Mach bantları olarak adlandırılır (Mach, 1865).
+Aynı mekanizmanın bir başka sonucu, gözün mutlak parlaklığı değil yalnızca
+farkı ölçebilmesidir. Aynı gri ton, koyu zeminde açık, açık zeminde koyu algılanır.
+Dolayısıyla bir rengin okunurluğu tek başına değerlendirilemez; her zaman yazı
+ve zemin çifti olarak ele alınır.
+Gestalt ilkeleri
+Gestalt psikolojisi, algının dağınık unsurları kendiliğinden gruplandırdığını gösteren
+ilkeler dizisi geliştirmiştir. Arayüz açısından dördü belirleyicidir.
+Yakınlık: birbirine yakın konumlanan unsurlar bir grup olarak algılanır. Bir
+formda alanları gruplamak için boşluk, çizgiden daha güçlü bir araçtır.
+Benzerlik: aynı renk ya da biçime sahip unsurlar bir grup olarak algılanır.
+Bir tablodaki hata satırlarının aynı renkte olması, okuma gerektirmeden bir
+küme oluşturur.
+Kapalılık: eksik bir şeklin tamamlandığı varsayılır; bir kutunun dört kenarı
+yerine iki köşesi yeterlidir.
+Ortak bölge: aynı çerçeve ya da aynı zemin içindeki unsurlar bir grup olarak
+algılanır. Gösterge panellerindeki kart yapısı bu ilkeye dayanır.
+Bu ilkelerden çıkan pratik kural, grup oluşturmak için çizgi yerine boşluk
+kullanmaktır. Her çizgi ekranda ek unsurdur; boşluk ek unsur üretmeden aynı
+işi görür.
+Ön dikkatsel özellikler ve görsel arama
+Bazı farklar bilinçli arama gerektirmeden algılanır; bunlara ön dikkatsel özellikler
+(preattentive features) denir ve işlenmeleri iki yüz milisaniyeden kısa sürer.
+11
+
+-- 11 of 31 --
+
+Başlıcaları renk, boyut, kalınlık, yönelim ve harekettir. Yüz sayının içindeki
+tek kırmızı sayı anında bulunur; en büyük sayının bulunması ise hepsinin okun-
+masını gerektirir.
+Belirleyici kısıt şudur: aynı anda yalnızca bir ön dikkatsel özellik işlevseldir.
+Ekrandaki her unsur renklendirildiğinde hiçbiri öne çıkmaz. Sekiz farklı rengin
+kullanıldığı bir panelde kırmızı artık uyarı işlevi görmez.
+Görsel arama iki biçimde gerçekleşir. Aranan unsur tek bir ayırt edici özelliğe
+sahipse arama süresi ekrandaki unsur sayısından bağımsızdır. Aranan unsur iki
+özelliğin birleşimiyle tanımlanıyorsa (hem kırmızı hem yuvarlak) tek tek tarama
+gerekir ve süre unsur sayısıyla orantılı olarak artar. Bu nedenle kritik satırlar
+tek bir işaretle ayırt edilebilir olmalıdır.
+Renk ve erişilebilirlik
+Üç kural izlenir.
+Renk tek başına bilgi taşımamalıdır. Renk görme eksikliğinin yaygınlığı göz
+önüne alındığında, her renk kodlamasına ikinci bir işaret — biçim, simge, desen
+ya da metin — eşlik etmelidir. Yalnızca renkle başarı ve başarısızlık ayrımı
+yapan sürekli tümleştirme çıktıları bu kuralı ihlal eder.
+Kontrast oranı ölçülebilir bir büyüklüktür. WCAG 2.1 normal metin için
+en az 4,5:1, büyük metin için en az 3:1 oranı öngörür (W3C, 2018). Bu oran
+tahmin edilmez, hesaplanır.
+Sıcak renkler öne, soğuk renkler geri algılanır. Uyarıların sıcak, arka plan
+bilgisinin soğuk tonlarda verilmesinin sebebi budur.
+Okuma
+Okuma sırasında göz metin üzerinde düzgün kaymaz, sıçrar. Her duraklamada
+yedi ilâ dokuz karakter alınır ve duraklama iki yüz milisaniye civarında sürer.
+Bunun üç tasarım sonucu vardır. Satır uzunluğu kırk beş ilâ yetmiş beş
+karakter aralığında tutulmalıdır; daha uzun satırlarda göz sonraki satırın başlangıcını
+bulmakta zorlanır ve satır atlar (Bringhurst, 1992). Tümü büyük harfle yazılmış
+metin daha yavaş okunur, çünkü kelime tanıma kısmen kelimenin dış hattına
+dayanır ve büyük harfte bütün kelimeler dikdörtgen biçimindedir. Satır aralığı
+yazı boyutunun 1,4 ilâ 1,6 katı olduğunda komşu satırlardan kaynaklanan karışma
+azalır.
+Gösterge paneli
+Yukarıdaki ilkelerin bileşkesi, gösterge paneli tasarımında tek bir kurala in-
+dirgenebilir: her unsur öne çıkıyorsa hiçbiri öne çıkmaz.
+Bunun uygulaması şu biçimdedir. Tek bir ana ölçüt büyük punto ile verilir
+ve göz oraya iner. Geri kalan ölçütler küçük ve düşük doygunlukta tutulur.
+Renk yalnızca anormal durumda ortaya çıkar; sistem normal çalışırken panel
+sakindir. Kartlar boşlukla gruplanır. Önem sırası okuma yönüne uygun biçimde
+düzenlenir.
+12
+
+-- 12 of 31 --
+
+Grafik seçiminde üç kural işler. Pasta grafik zayıftır, çünkü açı karşılaştırması
+uzunluk karşılaştırmasından belirgin biçimde kötüdür; aynı veri çubuk grafikte
+daha doğru okunur. Sıfırdan başlamayan çubuk grafik yanıltıcıdır, çünkü çubuğun
+uzunluğu değeri temsil eder; çizgi grafikte eğim taşıyıcı olduğundan aynı kısıt
+geçerli değildir. Üç boyutlu grafik derinlik yanılsaması yoluyla uzunluk algısını
+bozar ve hiçbir bilgi eklemez.
+Alarm yorgunluğu (alarm fatigue) bu bölümün en maliyetli olgusudur: sürekli
+tekrarlanan uyarı zamanla süzülür ve gerçek uyarı da algılanmaz hâle gelir.
+Nöbet sistemlerinde uyarı sayısını azaltmak, uyarıyı daha belirgin hâle getirmek-
+ten etkilidir.
+13
+
+-- 13 of 31 --
+
+Yargı Yanlılıkları ve Hata Ayıklama
+Onay yanlılığı
+Onay yanlılığı (confirmation bias), bir hipoteze sahip olan kişinin onu doğrulayacak
+kanıt araması, çürütecek kanıtı aramaması ve karşısına çıktığında ona daha
+az ağırlık vermesidir. Bilinçli bir tercih değil, muhakemenin varsayılan işleyiş
+biçimidir.
+Wason’ın 2-4-6 görevi mekanizmayı açıkça gösterir. Katılımcıya aklından
+bir kural tuttuğu, “2-4-6” üçlüsünün bu kurala uyduğu söylenir ve kuralı bul-
+ması istenir; istediği kadar üçlü önerebilir, yalnızca uyup uymadığı bilgisini alır.
+Katılımcıların çoğu “ikişer artan sayılar” hipotezini kurar ve bunu sınamak için
+8-10-12, 20-22-24 gibi hipoteziyle uyumlu üçlüler önerir. Üçü de olumlu yanıt
+alır ve katılımcı kuralı bulduğuna kanaat getirir. Oysa kural yalnızca “artan üç
+sayı”dır. Hata, hipotezi çürütebilecek hiçbir sınamanın yapılmamasıdır (Wason,
+1960).
+Hata ayıklamadaki karşılığı
+Bir yükleme hizmetinin ara sıra başarısız olduğu durumda ilk akla gelen hipotez
+depolama servisinin zaman aşımına uğradığı olabilir. Bu hipotezle çalışan bir in-
+celeme, depolama günlüklerinde yavaş istekler bulur, zaman aşımı süresi artırıldığında
+hata oranında bir azalma gözler ve ağ gecikmesinde dalgalanma tespit eder. Üç
+bulgu da hipotezle uyumludur.
+Gerçek sebep ise büyük dosyalarda bellek yetersizliği olabilir. Büyük dosyalar
+zaten yavaş yüklendiği için günlükler yavaş görünür; zaman aşımı artırıldığında
+bazı yüklemeler tamamlanabildiği için hata azalır. Toplanan her bulgu hipotezle
+uyumludur ancak hiçbiri onu kanıtlamaz, çünkü aynı bulgular rakip hipotezle
+de uyumludur.
+Mekanizmanın dört bileşeni vardır. Bakılan yeri hipotez belirler: depolama
+sorunu aranıyorsa depolama günlüğü açılır ve her serviste bir düzensizlik bulun-
+abilir. Test edilmeyen alanlar hiç incelenmez; hipotezde bellek geçmediği için
+bellek ölçütlerine bakılmaz. Kısmi düzelme yanıltır; bir yan etkinin bastırılması
+sebebin bulunduğu izlenimi verir. Zaman baskısı süreci hızlandırır ve alternatif
+üretmeyi gereksiz gösterir.
+C ürütme yöntemi
+Popper’ın bilim felsefesindeki konumu buraya doğrudan uygulanır: bir hipotezi
+güçlendiren şey onu destekleyen örneklerin sayısı değil, ciddi çürütme girişimlerine
+dayanmış olmasıdır (Popper, 1959).
+Dört yöntem işlevseldir.
+Hipotez yanlışsa hangi gözlemin beklenmesi gerektiği sorulur. Bu soru sınamanın
+tasarımını değiştirir ve destekleyici kanıt yerine ayırt edici kanıt aranmasını
+sağlar.
+14
+
+-- 14 of 31 --
+
+Tahmin sınamadan önce yazılır. Yazılmamış tahmin sonuca göre biçim
+değiştirir; sonuç görüldükten sonra “zaten böyle olacağı düşünülüyordu” değerlendirmesi
+yapılır. Bu olguya geriye dönük yanlılık (hindsight bias) denir ve onay yanlılığını
+görünmez kılar.
+En az iki hipotezle çalışılır ve ikisini ayıran sınama aranır. Yukarıdaki
+örnekte başarısız yüklemelerin dosya boyutu dağılımına bakmak, iki hipotez-
+den birini eler; depolama günlüklerini incelemek elemez.
+Hipotezden bağımsız yöntemler tercih edilir. ˙Ikiye bölme yöntemi (git
+bisect) arama alanını her adımda yarıya indirir ve incelemecinin ne düşündüğünden
+etkilenmez. Onay yanlılığına karşı en sağlam savunma, hipotez üretmeyen bir
+yöntem kullanmaktır.
+˙Ilgili diğer yanlılıklar
+Planlama yanılgısı (planning fallacy), görev sürelerinin sistematik olarak olduğundan
+kısa tahmin edilmesidir; süre tahminlerinin düzenli biçimde aşılmasının adıdır.
+C apa etkisi (anchoring), ilk duyulan sayının sonraki tahminleri kısıtlamasıdır.
+Batık maliyet yanılgısı, çalışmadığı anlaşılan bir yaklaşımdan yapılan yatırım ne-
+deniyle dönülememesidir. Temel atıf hatası ise izleyen bölümde ele alınmaktadır.
+Bu yanlılıkların arayüzü olan alanlar da vardır. Hata raporunda teşhisin
+belirtiden önce yazılması, incelemeye bakan herkesi aynı yöne yönlendirir; belirti
+yazılır, teşhis yazılmaz. Kod incelemesinde “onaylamak için bakmak” ile “ne
+bozulabileceğini görmek için bakmak” farklı sonuç üretir. Kendi yazdığı kodun
+testini yazan kişi çalıştığını gösteren senaryoları yazma eğilimindedir; kırabilecek
+senaryoları başka biri daha kolay üretir.
+Değişiklik yaşına göre renklendirme
+Hata ayıklamada olasılık dağılımı düzgün değildir: yıllardır değişmemiş bir
+satırın bugün bozulma olasılığı, dün değişmiş bir satırınkinden belirgin biçimde
+düşüktür. Bu dağılımın görsel olarak kodlanması ön dikkatsel özelliklerin yerinde
+bir kullanımıdır.
+Geliştirme ortamlarının çoğunda kenar çubuğunda değişiklik işaretleri bu-
+lunur; ancak bu işaretler ikili bilgi taşır ve genellikle son işleme göre hesaplanır.
+Hata ayıklamada sorulan soru ise farklıdır: en son çalışan sürümden bu yana
+neyin değiştiği. Bunun için üç koşul gerekir.
+Karşılaştırma noktası ayarlanabilir olmalıdır. Anlamlı referans son işleme
+değil, son dağıtım ya da dalın ayrılma noktasıdır.
+Renk tek kanal üzerinden ve doygunluk farkıyla verilmelidir. Kod düzenleyicide
+sözdizimi vurgusu paletin tamamını kullandığından, ikinci bir renk sistemi çakışma
+üretir. Yazı rengi yerine zemin rengi kullanılması ve tek tonun doygunluğunun
+değiştirilmesi bu çakışmayı önler.
+Görünüm varsayılan olarak kapalı olmalıdır; sürekli açık kalan bir vurgu
+alarm yorgunluğuyla aynı mekanizmayla işlevini kaybeder.
+Yöntemin sınırı da belirtilmelidir: hatanın bulunduğu satır ile değişen satır
+aynı olmayabilir. Bir fonksiyonun dönüş biçimi değiştirildiğinde, hata onu kul-
+15
+
+-- 15 of 31 --
+
+lanan ve aylardır değişmemiş bir noktada ortaya çıkabilir. Renklendirme incele-
+meye nereden başlanacağını gösterir, hatanın nerede olduğunu göstermez; çağrı
+hiyerarşisi araçlarıyla birlikte kullanılmalıdır.
+16
+
+-- 16 of 31 --
+
+Öğrenme, Geri Bildirim ve Belgeleme
+Geri bildirim gecikmesi
+Bir eylemin sonucu ne kadar geç ulaşırsa, sonucun sebebe bağlanması o kadar
+güçleşir. Mekanizma bilişseldir: geri bildirim ulaştığında o eylemin bağlamının
+hâlâ erişilebilir olması gerekir.
+Yazılım geliştirmede gecikme eşikleri şöyledir:
+Gecikme Sonuç
+Anlık (düzenleyicide tip hatası) Hata yazılırken düzeltilir
+1–2 saniye (birim testi) Bağlam korunur, akış bozulmaz
+30 saniye (derleme) Dikkat kayar, zihinsel model silinir
+20 dakika (sürekli tümleştirme) Başka işe geçilir, dönüş maliyetli
+2 gün (kod incelemesi) Ne yapıldığı hatırlanmaz
+3 ay (üretim hatası) Bağlantı hiç kurulmaz
+Buradan çıkan sonuç, derleme süresini kısaltmanın bir konfor değil öğrenme
+meselesi olduğudur. Yirmi dakikalık bir tümleştirme döngüsüyle çalışan geliştirici,
+aynı kişi olsa bile iki dakikalık döngüyle çalışandan daha az öğrenir.
+Değişkenin hız olmadığı
+Belirleyici değişken hız değil, bağlamın hâlâ açık olmasıdır. Aradaki fark üç
+noktada görünür hâle gelir.
+Hızlı ancak güvenilmez geri bildirim yavaş olandan kötüdür. Rastgele başarısız
+olan test iki saniyede yanıt verir ancak yanıtı güvenilmezdir; bir süre sonra okun-
+maz hâle gelir ve gerçek hataların da göz ardı edilmesine yol açar.
+Öğrenmenin bir kısmı gecikme gerektirir. Aralıklı tekrar ilkesi, hemen tekrar-
+lamanın aralık vererek tekrarlamaktan daha kötü öğrettiğini söyler.
+Eşik ötesinde hız kazanç getirmez. ˙Iki saniyelik test ile iki yüz milisaniyelik
+test arasında öğrenme farkı yoktur; iki saniye ile iki dakika arasında ise belirgin
+fark vardır. ˙Ilişki doğrusal değildir, eşiklidir.
+Öğrenilen şey satır değil varsayımdır. Bağlam korunduğunda geri bildirim
+“değerin her zaman dolu geleceği varsayımı yanlışmış” biçiminde bir güncelleme
+üretir; bağlam kaybolduğunda yalnızca “buraya bir kontrol eklenmeli” biçiminde
+bir düzeltme üretir. ˙Ikincisi aynı hatanın başka bir yerde tekrarlanmasını önlemez.
+Bağlam ömrünü uzatmak
+Bazı geri bildirimler doğası gereği gecikmelidir ve hızlandırılamaz: üretim hatasının
+aylar sonra ortaya çıkması, mimari kararın yıllar sonra sonuç vermesi, kullanıcı
+davranışının haftalar sonra belirginleşmesi. Bu durumlarda kaybedilen şey hız
+değil bağlamdır ve bağlam kaydedilebilir.
+Karar kaydı (architecture decision record ), seçilen yaklaşımın gerekçesini
+ve kabul edilen riskleri yazılı hâle getirir; risk gerçekleştiğinde kararın mantığı
+17
+
+-- 17 of 31 --
+
+erişilebilir kalır. ˙Işleme mesajının “ne yapıldığı” yerine “neden yapıldığı” bil-
+gisini taşıması, sürüm geçmişini bir yıl sonra öğretici kılar. Değişiklikten önce
+beklenen sonucun yazılması, sonuç geldiğinde karşılaştırılacak bir referans bırakır;
+yazılmadığında geriye dönük yanlılık bütün öğretici değeri siler. Olay sonrası
+inceleme (postmortem) ise doğal olarak kopmuş bir bağlantıyı yapay biçimde
+yeniden kurar.
+˙Iki müdahalenin maliyeti farklıdır. Gecikmeyi kısaltmak bir kez yapılır
+ve sonrasında herkese otomatik olarak uygulanır. Bağlam kaydetmek her se-
+ferinde yinelenen ve aşınmaya açık bir disiplindir. Bu nedenle sıralama şudur:
+kısaltılabilen her gecikme kısaltılır, kalan yerlerde bağlam kaydedilir ve kayıt
+yalnızca sonucu aylar sonra belirginleşecek kararlar için tutulur. Her şeyin
+kaydedilmeye çalışılması kayıtların okunmamasına, ardından yazılmamasına yol
+açar.
+Ayrım şu soruyla yapılır: gecikme teknik bir sınırdan mı yoksa olgunun
+doğasından mı kaynaklanıyor. Derleme süresi, test süresi, tümleştirme kuyruğu
+ve inceleme bekleme süresi teknik sınırlardır ve çözülebilir. Üretim hatasının
+ortaya çıkma süresi olgunun doğasıdır.
+Aralıklı tekrar
+Ebbinghaus’un kendi üzerinde yürüttüğü çalışma, unutmanın hızlı başlayıp sonra
+yavaşladığını göstermiştir (Ebbinghaus, 1885). Belirleyici bulgu, her tekrarın
+unutma eğrisini yeniden yükseltmesi ve eğimini azaltmasıdır: ikinci öğrenmeden
+sonra unutma daha yavaş gerçekleşir.
+Aralıklı tekrarın (spaced repetition) yoğun çalışmadan üstün olmasının üç
+açıklaması vardır. Birincisi kolaylık yanılgısıdır: art arda çalışılırken malzeme
+akıcı gelir ve bu akıcılık öğrenme sanılır, oysa ölçülen şey geçici erişilebilirliktir.
+Aralık verildiğinde kısmi unutma gerçekleşir ve hatırlama güçleşir; bu güçlük
+öğrenmenin kendisidir. ˙Ikincisi kodlama çeşitliliğidir: farklı zaman ve bağlamlarda
+çalışılan bilgi birden çok ipucuna bağlanır. Üçüncüsü, her hatırlamanın bellek
+izini geçici olarak esnek hâle getirip yeniden sağlamlaştırmasıdır; belirleyici olan
+tekrar sayısı değil yeniden birleştirme sayısıdır.
+Aralık, bilginin ne kadar sonra gerekeceğine göre ayarlanır ve genişleyen
+aralıklar iyi sonuç verir. Yazılım pratiğinde yapay aralık kurmaya genellikle
+gerek yoktur; iş akışı aynı modüle düzensiz aralıklarla dönmeyi zaten sağlar.
+Önemli olan farkındalıktır: bir modülü bir kez derinlemesine incelemek, ona
+birkaç kez dönmekten daha az kalıcı sonuç verir.
+Geri çağırma etkisi
+Roediger ve Karpicke’nin çalışmasında öğrenciler bir metni okuduktan sonra iki
+gruba ayrılmıştır. Bir grup metni yeniden okumuş, diğer grup metni kapatıp
+hatırlayabildiğini yazmıştır. Beş dakika sonra yapılan sınamada yeniden okuyan
+grup daha başarılıdır; bir hafta sonra yapılan sınamada sonuç tersine dönmüştür
+(Roediger & Karpicke, 2006).
+18
+
+-- 18 of 31 --
+
+˙Iki sonuç çıkar. Kısa vadeli başarım uzun vadeli öğrenmenin güvenilir bir
+göstergesi değildir; kendini iyi hissettiren yöntem genellikle daha zayıf öğretir.
+˙Ikincisi, hatırlama girişimi bilgiyi yalnızca ölçmez, değiştirir; her başarılı geri
+çağırma izi güçlendirir.
+Daha az sezgisel bir bulgu, başarısız hatırlama girişiminin de öğretici ol-
+masıdır. Cevap bilinmeden tahmin yürütmek ve ardından doğru cevabı görmek,
+doğrudan doğru cevabı okumaktan daha etkilidir. Takılmak öğrenmenin maliyeti
+değil mekanizmasıdır.
+Aynı çalışmanın en dikkate değer ayrıntısı, öğrencilerin hangi grubun daha
+iyi öğreneceğine dair tahminlerinin gerçek sonuçla ters yönde olmasıdır. Sezgi
+bu konuda sistematik olarak yanılır.
+Kod tabanına uygulama
+Yeni bir kod tabanına girildiğinde en yaygın davranış dosyaları açıp okumaktır.
+Bu, metni yeniden okumanın karşılığıdır ve zayıf sonuç verir: okuma sırasında
+her şey anlaşılır görünür çünkü kod ekrandadır, kapatıldığında geriye az şey
+kalır. Hiçbir geri çağırma gerçekleşmemiştir.
+Altı yöntem daha etkilidir.
+Fonksiyon açılmadan önce, adına ve çağrıldığı yere bakarak ne yaptığı tahmin
+edilir, sonra açılır. Tahmin doğruysa zihinsel model doğrulanmış olur; yanlışsa
+öğrenilmesi gereken nokta tam olarak bulunmuştur.
+Anlaşılmayan blok kasten bozulur: bir koşul tersine çevrilir, bir satır silinir,
+testler çalıştırılır. Neyin kırıldığını görmek, kodun ne yaptığını okumaktan daha
+kesin bilgi verir. Hiçbir şeyin kırılmaması da bilgidir: kod ölüdür ya da test
+yoktur.
+Kısa bir fonksiyon okunduktan sonra kapatılır ve boş bir dosyada yeniden
+yazılmaya çalışılır. Takılınan her nokta anlaşılmamış noktadır.
+Küçük bir hata düzeltmesiyle başlanır. Bu tek iş, yerel ortamın kurulumunu,
+testin çalıştırılmasını, kodun gönderilmesini, inceleme sürecini ve dağıtımı bir-
+likte öğretir; hiçbir belge bunu veremez çünkü bunlar okuyarak değil yaparak
+öğrenilen şeylerdir.
+Hata ayıklayıcıda durak noktasına ulaşılmadan önce değişkenlerin alacağı
+değerler tahmin edilir, sonra bakılır. Bu, değer yazdırmaktan farklıdır: birin-
+cisinde yalnızca okuma, ikincisinde üretim vardır.
+Anlaşıldığı düşünülen bir modül, kaynağa bakılmadan başkasına anlatılır.
+Takılınan yer anlaşılmamış yerdir. Kod incelemesi yazmak da aynı işlevi görür,
+çünkü modelin zihinden dışarı çıkarılmasını gerektirir.
+Takılmanın sınırı
+Takılmanın öğretici olduğu iddiası sınırsız değildir. ˙Iki tür takılma ayırt edilir.
+Üretken takılma problemin kendisinden kaynaklanır ve uğraştıkça çözüme yaklaşılır.
+Verimsiz takılma bilgi eksikliğinden kaynaklanır ve düşünmekle çözülmez; bir
+ad, bir kural ya da bir konum bilinmemektedir.
+19
+
+-- 19 of 31 --
+
+Ayırt edici ölçüt son on beş dakikada ilerleme kaydedilip kaydedilmediğidir.
+Yirmi ilâ otuz dakika makul bir sınırdır; öncesinde sormak öğrenme fırsatını,
+sonrasında ısrar etmek zamanı harcar. Cevap alındıktan sonra bir adım daha
+vardır: cevabın neden bulunamadığının değerlendirilmesi. Yanlış yerde mi arandığı,
+yanlış terimle mi arandığı ya da eksik bir kavram mı bulunduğu, asıl öğrenmenin
+yeridir.
+˙Istenen zorluk
+Bjork’un istenen zorluk (desirable difficulty) kavramı, öğrenmeyi anlık olarak
+güçleştiren bazı koşulların uzun vadede öğrenmeyi güçlendirdiğini ifade eder
+(Bjork, 1994). Kolay edinilen çabuk unutulur; zorlanarak edinilen kalır.
+˙Işe alım sonrası uyum belgelerine doğrudan uygulanır: her adımı hazır veren
+belge öğretmez. “Su komutu çalıştır” yerine “şu sonucu elde et” biçiminde
+kurulan talimat daha yavaş ilerletir ancak daha kalıcı sonuç verir.
+Bunun iki koşulu vardır. Birincisi, hedef doğrulanabilir olmalıdır; kişi iler-
+leyip ilerlemediğini kendisi ölçebilmelidir. “Ortamı kur” belirsizdir; “sağlık uç
+noktası çağrıldığında şu yanıt dönmeli” hedefi açık bırakırken yolu açık bırakır.
+Ölçülemeyen zorluk istenen zorluk değil, yalnızca belirsizliktir.
+˙Ikincisi, açıklık hedefte tutulur, altyapıda tutulmaz. Mantığı bulmak, veri
+akışını izlemek ve hangi katmana dokunulacağına karar vermek zorlanılması
+gereken kısımdır. Depoyu klonlamak, bağımlılıkları kurmak ve testi çalıştırmak
+zorlanılmaması gereken kısımdır; buradaki zorluk tamamen dışsal yüktür ve sıfır
+öğrenme üretir. ˙Iyi bir uyum belgesi kurulumu tek komuta indirir ve problemi
+açık bırakır; yaygın uygulama bunun tersidir.
+Buna ilişkin bir başka bulgu üretken başarısızlıktır (productive failure): bir
+problemi önce çözmeye çalışıp başarısız olmak ve ardından açıklamayı almak,
+açıklamayı önce almaktan daha iyi öğretir (Kapur, 2008). Uygulaması, mimari
+sunumunun ilk gün yapılmamasıdır. Küçük bir görevle kendi zihinsel modelini
+kurmuş bir kişi için üçüncü gün yapılan sunum tutunacak noktalar bulur; ilk
+gün yapılan sunum ise anlamsız bir şema olarak kalır.
+Kademeli açılan yardım
+Aynı belge farklı düzeydeki okuyucular tarafından okunur. Cevabın açıkça
+yazılması deneyimli okuyucunun düşünme fırsatını ortadan kaldırır; yazılmaması
+ise acemi okuyucunun uzun süre tıkanmasına yol açar.
+Kapalı açılır bölümler bu ikilemi çözer. Cevap belgede bulunur ancak görünmez;
+açmak bilinçli bir karardır. Zorluk düzeyini belge değil okuyucu belirler.
+HTML’in details etiketi bu yapıyı ek araç gerektirmeden sağlar ve GitHub
+gibi platformlarda Markdown içinde çalışır:
+<details>
+<summary>_Ipucu</summary>
+Doğrulama kodu internal/media altında.
+20
+
+-- 20 of 31 --
+
+</details>
+Kapalı hâlde yalnızca başlık, tıklandığında içerik görünür. </summary>
+etiketi ile içerik arasına boş satır konmadığında Markdown biçimlendirmesi
+çalışmaz.
+Talimat üç katmanda kurulur: hedef açık yazılır, ipucu kapalı bölümde
+verilir, tam çözüm ayrı bir kapalı bölümde bulunur. ˙Ipuçları kendi içinde de
+kademelendirilebilir: nereye bakılacağı, sorunun neden oluştuğu ve tam cevap.
+Hangi katmana kadar açıldığı bilgisi ayrıca belgenin kalitesi hakkında veri üretir;
+okuyucuların çoğu doğrudan cevaba iniyorsa görev fazla zor ya da ipuçları yeter-
+sizdir.
+Belge türleri
+Öğrenme kuramından türeyen bir ayrım, teknik belgelerin dört ayrı türe ayrılmasıdır.
+Bu çerçeve Di´ataxis olarak adlandırılmıştır (Procida, 2017).
+Öğretici (tutorial ) yeni gelen okuyucu içindir. Tek bir yol izler, seçenek
+sunmaz, hangi çıktının görüleceğini önceden bildirir ve neden öyle yapıldığını
+açıklamaz. Amacı kapsamlı olmak değil, çalışan bir sonuca ulaştırarak güven
+vermektir.
+Nasıl yapılır belgesi (how-to) belirli bir görevi yerine getirmek isteyen ve
+alanı zaten bilen okuyucu içindir. Kurulumu anlatmaz, kısadır ve yalnızca tuzak
+noktalarını uyarır. Öğreticiden farkı okuyucu varsayımıdır: öğretici “yükleme
+yapmayı öğret” der, nasıl yapılır belgesi “yükleme yapmayı bilen kişi ayarı nasıl
+değiştirir” der.
+Açıklama belgesi tasarımın gerekçesini verir. Komut içermez, okunurken bir
+işlem yapılmaz. ˙Içeriği ödünleşimlerdir: hangi alternatiflerin değerlendirildiği,
+neden seçilmedikleri, seçilen yaklaşımın getirisi ve bedeli. Amacı zihinsel model
+kurmaktır; bu belgeyi okuyan kişi belgede geçmeyen bir durumda da doğru
+tahmin yürütebilir.
+Başvuru belgesi (reference) eksiksiz listedir. Parametreler, dönüş kodları
+ve sınırlar tablo hâlinde verilir. Yorum içermez, baştan sona okunmaz, arama
+yapılır. Öğretmez, hatırlatır.
+Türlerin karışması dört tipik hata üretir. Öğreticiye başvuru bilgisi eklemek
+acemi okuyucuyu boğar. Nasıl yapılır belgesine öğretici girişi eklemek aranan
+bilgiyi gereksiz metin arasında kaybeder. Başvuru tablosunun arasına tasarım
+gerekçesi sıkıştırmak aramayı bozar. En yaygın eksiklik ise açıklama belgesinin
+hiç yazılmamasıdır; bu durumda kullanıcılar sistemi kullanabilir ancak neden
+öyle olduğunu bilmedikleri için yeni durumlarda tahmin yürütemez ve her se-
+ferinde sormak zorunda kalır.
+Kural tektir: bir belge bir tür. Karıştırma ihtiyacı duyulduğunda iki ayrı
+belge yazılır ve birbirine bağlanır.
+21
+
+-- 21 of 31 --
+
+Hızlı yineleme
+Geri bildirim gecikmesinin donanım tarafındaki karşılığı hızlı yineleme (rapid
+iteration) yaklaşımıdır. Klasik havacılık ve uzay mühendisliğinde araç uçmadan
+önce kapsamlı biçimde çözümlenir ve ilk uçuşunda çalışması beklenir. Alternatif
+yaklaşım, hızlı üretilen prototipleri uçurmak, başarısızlıktan veri toplamak ve
+yeniden denemektir. SpaceX’in iniş ve prototip denemeleri bu ikinci yaklaşımın
+örnekleridir.
+Kuramsal bağ şudur: benzetim dolaylı bir geri bildirimdir ve yalnızca mod-
+elin doğru olduğu ölçüde bilgi verir; modelde bulunmayan bir etken hiç görünmez.
+Gerçek deneme ise modelin yanıldığı noktayı gösterir. Bu, tahmin üretip gerçekle
+karşılaştırma döngüsünün donanım ölçeğindeki hâlidir.
+Yaklaşımın sınırı açıktır ve uygulayan kurumlarca da gözetilir: insansız
+denemelerde ve prototiplerde başarısızlığın maliyeti para ve zamandır, insanlı
+uçuşlarda ve müşteri yüklerinde ise geri alınamaz. Ayrım ölçütü, başarısızlığın
+ucuz ve geri alınabilir olup olmadığıdır.
+Yazılımdaki karşılığı doğrudandır. Özellik bayrağı (feature flag), kademeli
+yayılım ve geri alma mekanizmaları başarısızlığı ucuzlaştıran araçlardır; ucu-
+zladığı ölçüde hızlı yineleme mümkün hâle gelir.
+˙Iki düzeltme gereklidir. Yaklaşım yeni değildir: Toyota üretim sistemi,
+Boyd’un karar döngüsü ve çevik yazılım hareketi aynı fikrin farklı biçimleridir;
+yeni olan, roket üretiminde uygulanmasıdır. Ayrıca hızlı yineleme çözümlemenin
+yerine geçmez; çözümlemenin doğrulanma sıklığını artırır.
+22
+
+-- 22 of 31 --
+
+Toplumsal ve Örgütsel Boyut
+Temel atıf hatası ve suçlamasız inceleme
+Temel atıf hatası (fundamental attribution error ), başkalarının davranışının
+kişilik özelliklerine, kendi davranışımızın ise içinde bulunulan duruma bağlanma
+eğilimidir. Aynı hata başkası yaptığında dikkatsizlikle, kendimiz yaptığımızda
+eksik belgeyle ve zaman baskısıyla açıklanır.
+Ross, Amabile ve Steinmetz’in çalışması eğilimin gücünü göstermektedir.
+Katılımcılara kurayla “soru soran” ve “cevaplayan” rolleri verilmiş; soru so-
+ran kendi bildiği alandan sorular sorduğu için cevaplayan doğal olarak zor-
+lanmıştır. ˙Izleyiciler soru soranı daha bilgili değerlendirmişlerdir — rollerin
+rastgele dağıtıldığını bilmelerine rağmen (Ross, Amabile & Steinmetz, 1977).
+Olay sonrası incelemelerin suçlamasız (blameless) yürütülmesinin gerekçesi
+budur. “Kim yaptı” sorusu kolay ve yanıltıcı bir cevap üretir; işlevsel soru,
+bu hatanın neden mümkün olduğudur: hangi onay adımı yoktu, neden uyarı
+üretilmedi, geri alma neden zordu. Suçlamanın ikinci ve daha ağır sonucu, hata
+bildiriminin azalmasıdır; bildirilmeyen hata düzeltilemez.
+Sorumluluğun dağılması
+Darley ve Latan´e, ortamda bulunan kişi sayısı arttıkça yardıma müdahale olasılığının
+düştüğünü göstermişlerdir; sorumluluk bölündükçe her bireyin üzerine düşen
+pay azalır (Darley & Latan´e, 1968).
+Yazılımdaki karşılıkları doğrudandır. Sekiz kişiye giden bir uyarı çoğu zaman
+ele alınmaz, tek kişiye giden uyarı alınır. Herkesin sahip olduğu kod, uygula-
+mada kimsenin sahip olmadığı koddur. C ok sayıda incelemeciye atanan bir
+değişiklik önerisinde her incelemeci diğerinin dikkatli baktığını varsayar. Ad
+verilmeden yapılan “bunu biri alsın” çağrısı karşılık bulmaz.
+Kural şudur: sorumluluk adlandırılmamışsa yoktur.
+Uyum baskısı ve grup düşüncesi
+Asch’in çalışmasında katılımcı, doğru cevabın açıkça belli olduğu bir görevde,
+önceden yönlendirilmiş kişilerin sırayla yanlış cevap verdiği bir ortama yerleştirilmiştir.
+Katılımcıların kayda değer bir bölümü açıkça yanlış olan çoğunluk cevabına
+katılmıştır. C alışmanın en işlevsel bulgusu şudur: tek bir kişinin bile farklı ce-
+vap vermesi uyum baskısını büyük ölçüde ortadan kaldırmaktadır (Asch, 1951).
+Tasarım toplantılarında itiraz gelmemesinin sebebi genellikle görüş birliği
+değildir; ilk konuşan bir yön belirlemiş ve kimse tek başına karşı çıkmayı üstlenmemiştir.
+Üç karşı önlem işler. Görüşlerin toplantı öncesinde yazılı olarak alınması, sözlü
+tartışmada ilk konuşanın kurduğu çapayı ortadan kaldırır. En kıdemli kişinin
+en son konuşması, tartışmanın erken kapanmasını önler. Bir kişiye açıkça karşı
+çıkma görevi verilmesi, muhalefeti kişisel olmaktan çıkarır ve Asch’in tek muhalif
+bulgusunu uygulamaya geçirir.
+23
+
+-- 23 of 31 --
+
+Grup düşüncesi (groupthink ) bu eğilimin kurumsal biçimidir: uyumlu bir
+grup, görüş birliğini korumak uğruna gerçekçi değerlendirmeyi feda eder (Janis,
+1972). Belirtileri alternatiflerin hiç tartışılmaması, risklerin küçümsenmesi ve
+karşı çıkan kişinin uyumsuz sayılmasıdır. Yazılımdaki tipik görünümü, mevcut
+bir tercihin gerekçe yerine geçmesidir; karar tartışılmaz, çünkü tartışmak grubun
+geçmiş kararını sorgulamak anlamına gelir.
+Sosyal kaytarma
+Ringelmann’ın halat çekme ölçümleri, grup büyüdükçe kişi başına düşen çabanın
+azaldığını göstermiştir; sekiz kişilik bir grup tek kişinin gücünün sekiz katını
+üretmez. Bulgu sonraki çalışmalarda sosyal kaytarma (social loafing) olarak
+kavramsallaştırılmıştır (Latan´e, Williams & Harkins, 1979). Mekanizma bireysel
+katkının görünmez hâle gelmesidir.
+Karşılığı, katkısı görünmeyen işlerin yapılmamasıdır: test yazımı, belgeleme
+ve teknik borç temizliği kimseye atanmadığında yapılmaz.
+˙Içsel motivasyon
+Deci ve Ryan’ın öz belirleme kuramı (self-determination theory) üç temel ihtiyaç
+tanımlar: özerklik, yetkinlik ve ilişkisellik. Üçü karşılandığında motivasyon
+içeriden gelir; biri eksik olduğunda dışsal ödülle telafi edilmez (Deci & Ryan,
+1985).
+Aşırı gerekçelendirme etkisi (overjustification effect) bu kuramın en dikkate
+değer bulgusudur: zaten severek yapılan bir etkinliğe dışsal ödül eklendiğinde
+içsel motivasyon düşer ve ödül kaldırıldığında etkinlik terk edilir. Yazılımdaki
+karşılığı, kapatılan iş kaydı sayısına ya da yazılan satır sayısına bağlanan ölçütlerdir;
+iş, ölçülmeye başlandığı anda işin kendisi olmaktan çıkıp ölçüte dönüşür.
+˙Iş özellikleri
+Hackman ve Oldham’ın modeline göre bir işin motive edici olması beş özelliğe
+bağlıdır (Hackman & Oldham, 1976):
+Özellik Yazılımdaki karşılığı
+Beceri çeşitliliği Aynı kalıbın sürekli tekrarlanmaması
+Görev bütünlüğü Bir işin baştan sona götürülmesi
+Görev önemi ˙Işin kime yaradığının görülmesi
+Özerklik Yöntem üzerinde karar yetkisi
+Geri bildirim Sonucun görülebilmesi
+Görev bütünlüğü en sık ihlal edilenidir: bir işin çok sayıda küçük parçaya
+bölünüp dağıtılması ölçülebilir verimliliği artırır ancak kimsenin yaptığı işin
+bütününü görmemesine yol açar. Görev önemi ise uzaktan çalışmada kolayca
+kaybolur; son kullanıcıyla temas ortadan kalktığında iş, iş kaydı kapatmaya in-
+dirgenir.
+24
+
+-- 24 of 31 --
+
+Tükenmişlik
+Maslach’ın tanımında tükenmişlik (burnout) üç bileşenlidir: duygusal tükenme,
+işten uzaklaşma ve kendini yetersiz hissetme (Maslach & Jackson, 1981). Riski
+artıran etkenler aşırı yük, düşük kontrol, yetersiz ödül, adaletsizlik, topluluk
+çözülmesi ve değer çatışmasıdır.
+Belirleyici nokta, tükenmişliğin temel sebebinin çalışma süresi değil kontrol
+eksikliği olmasıdır. Aynı süre kendi kararıyla çalışıldığında aynı sonucu üretmez.
+Nöbet düzeninin yorucu olmasının sebebi de iş yükü değil öngörülemezliktir;
+olay gelmeyen bir nöbet de dinlendirmez, çünkü hazır bekleme durumu sürer.
+Performans değerlendirmesi
+Değerlendirme sistemlerinde sistematik hatalar vardır. Yenilik etkisi son dönemi
+öne çıkarır ve daha eski katkıları gölgeler. Hale etkisi bir alandaki güçlü izlen-
+imin diğer alanlara yayılmasıdır. Merkeze kayma, zor konuşmalardan kaçınmak
+için herkese ortalama değerlendirme verilmesidir. Zorunlu dağılım kuralı, iyi
+işleyen bir ekipte de birinin düşük gösterilmesini gerektirdiği için ekip içi işbirliğini
+doğrudan bozar.
+Bunların üzerine Goodhart yasası eklenir: bir ölçüt hedef hâline geldiğinde
+iyi bir ölçüt olmaktan çıkar (Goodhart, 1975; Strathern, 1997). Kod satırı
+ölçüldüğünde uzun kod, iş kaydı sayısı ölçüldüğünde parçalanmış iş kaydı üretilir.
+Uzaktan çalışma
+Üç mekanizma belirleyicidir.
+Zayıf bağlar zayıflar. Yakın ekiple iletişim uzaktan da sürer; kaybolan şey
+başka ekiplerden kişilerle kurulan rastlantısal temastır. Ekipler arası bilgi akışı
+büyük ölçüde bu kanaldan geçtiği için, sonuç ekiplerin birbirinden yalıtılması ve
+ortak sorunların birden çok kez çözülmesidir.
+Görünürlük eşitsizliği doğar. Yakınlık yanlılığı (proximity bias) nedeniyle
+fiziksel olarak bulunan kişi, aynı katkıyı üreten uzak çalışana göre daha görünür
+olur. Bu, karma düzenlerde belirgin bir sorundur; tümüyle uzaktan çalışan
+düzenlerde ortadan kalkar.
+Geçiş ritüelleri ortadan kalkar. Yol, ofise giriş ve çıkış zihinsel mod değiştirici
+işlevi görürdü. Yoklukları işin gün boyuna yayılmasına yol açar ve tükenmişliğin
+daha az görünen sebeplerinden birini oluşturur.
+Karşı önlemler mekaniktir: sabit başlangıç ve bitiş saatleri, ayrılmış çalışma
+alanı, eşzamansız yürütme (yazılı karar kaydı ve açık kanal) ve yazılı iletişimde
+bilinçli olarak fazladan bağlam vermek — ton ve niyet metinde büyük ölçüde
+kaybolur.
+25
+
+-- 25 of 31 --
+
+Üstbiliş ve Bilinmeyen Bilinmeyenler
+Üstbiliş
+Üstbiliş (metacognition), kişinin kendi bilişsel süreçleri hakkındaki bilgisi ve
+bu süreçleri izleme becerisidir. Biliş bir şeyi öğrenmekse, üstbiliş öğrenilip
+öğrenilmediğinin bilinmesidir.
+Ayrı bir beceri olarak ele alınmasının sebebi, birinci katman iyi işlerken ik-
+inci katmanın bozuk olabilmesidir. Ölçümler kişilerin kendi anlama düzeylerini
+sistematik olarak yüksek tahmin ettiğini göstermektedir: bir metin okunduktan
+sonra alınacağı tahmin edilen sınav notu, gerçek nottan düzenli olarak yüksek
+çıkar.
+Sebep akıcılık yanılgısıdır. Metin önündeyken anlaşılırlık yüksektir ve bu
+anlaşılırlık bilgi sanılır; oysa ölçülen şey metnin okunaklılığıdır. Kodda birebir
+karşılığı vardır: ekranda açık duran kod anlaşılır görünür, kapatıldığında geriye
+az şey kalır.
+Dunning ve Kruger’in bulgusu bu mekanizmanın bir sonucudur: bir alanda
+düşük yetkinliğe sahip kişiler kendi yetkinliklerini olduğundan yüksek değerlendirirler
+(Kruger & Dunning, 1999). Açıklaması yapısaldır — bir alandaki zorluğu
+değerlendirebilmek o alanda yetkinlik gerektirir; ölçüm için gereken araç, ölçülen
+şeyin kendisidir.
+Üç bilgi durumu
+Bilginin üç durumu ayırt edilir. Bilindiği bilinen bilgi sorun üretmez. Bilin-
+mediği bilinen eksiklik yönetilebilir bir durumdur: ne zaman öğrenilmesi ve ne
+zaman sorulması gerektiği bilinir. Bilinmediği bilinmeyen eksiklik ise yönetilemez,
+çünkü varlığından haberdar olunmayan bir çözüm hiç aranmaz ve yapılan işin
+yetersiz olduğu fark edilmez. Bu ayrım kamuoyunda Rumsfeld’in 2002 tarihli
+ifadesiyle yaygınlaşmıştır ancak risk çözümlemesinde daha eskidir.
+˙Ihtiyaç anında öğrenmenin sınırı
+˙Ihtiyaç anında öğrenme (just-in-time learning) etkili bir stratejidir. Üç gerekçesi
+vardır: ihtiyaç anında zihinde zaten bir soru bulunur ve soru cevabın tutunacağı
+noktadır; öğrenilen şey hemen kullanılır ve kullanım geri çağırmanın kendisidir;
+bir alanın tamamını önceden öğrenmek pratik olarak imkânsızdır, çünkü hangi
+kısmın gerekeceği önceden bilinemez.
+Ancak stratejinin yapısal bir kör noktası vardır: ihtiyaç duyulduğunun fark
+edilmesi, o şeyin var olduğunun bilinmesine bağlıdır. Bir veritabanı özelliğinin
+varlığından haberdar olmayan kişi onu aramaz; problemi bildiği yöntemlerle
+çözer ve çözdüğünü varsayar. Bu eksiklik zamanla birikir ve uzun deneyime
+sahip ancak bilgisi dar bir profil üretir.
+Aynı sınır piyasa deneyimi için de geçerlidir. Piyasa hangi konunun öğrenileceğini
+kendisi seçmez; karşılaşılan işler seçer ve bu işler kurumun, ürünün ve ekibin
+26
+
+-- 26 of 31 --
+
+özelliklerine bağlıdır. Bir ürün belirli bir alana hiç ihtiyaç duymuyorsa, o alan
+yıllar boyunca hiç öğrenilmez.
+C özüm iki farklı okuma biçimini ayırmaktır. Derinlemesine okuma ihtiyaç
+anında, belirli bir soruyu cevaplamak için yapılır. Tarama okuması ihtiyaç
+yokken yapılır ve amacı öğrenmek değil, neyin var olduğunu bilmektir; bir alanın
+içindekiler listesini kısa süre incelemek bu türdendir ve ayrıntı hatırlanmasa bile
+ileride “bu konuda bir şey vardı” değerlendirmesini mümkün kılar. Bu ikinci tür,
+bilinmediği bilinmeyen bilgiyi bilinmediği bilinen bilgiye çeviren tek yöntemdir.
+Bir başka ayrım da yapılmalıdır. Hızla değişen bilgi — kütüphane arayüzleri,
+araç komutları, sürüm ayrıntıları — ihtiyaç anında öğrenilir ve zaten aranabilir
+durumdadır. Yavaş değişen temel bilgi — veri yapıları, ağ, işletim sistemi,
+eşzamanlılık, veritabanı iç işleyişi — ihtiyaç beklenmeden öğrenilir, çünkü karar
+anında gerekir ve karar anında öğrenilemez: ne aranacağı bilinmez.
+Felaket üretme mekanizması
+Bilinmediği bilinmeyen riskler risk hesabına hiç girmez. Bilinen riskler için
+yedek, izleme ve plan üretilir; bilindiği bilinen belirsizlikler için pay bırakılır.
+Varlığından haberdar olunmayan risk için hiçbir şey yapılmaz. Sonuç yalnızca
+savunmasızlık değil, savunmasız olunduğunun bilinmemesidir — ikincisi yanlış
+bir güven duygusu ürettiği için daha ağırdır.
+Üç örnek mekanizmayı göstermektedir. Challenger kazasında soğuk havada
+sızdırmazlık halkalarının davranışı mühendislerce biliniyordu; sorun bu bilginin
+karar sürecine risk olarak girmemesiydi. Feynman’ın komisyon raporuna ek-
+lediği değerlendirme, yönetimin arıza olasılığı tahminleri ile mühendislerin tah-
+minleri arasında çok büyük bir fark bulunduğunu ortaya koymuştur (Feynman,
+1986). Ariane 5’in ilk uçuşunda, önceki modelden devralınan ve orada sorunsuz
+çalışmış olan yazılım, yeni aracın daha yüksek yatay hız değerini beklenen sayı
+aralığına sığdıramamış; taşma hem ana hem yedek sistemi aynı anda devre dışı
+bırakmıştır, çünkü ikisi aynı kodu çalıştırmaktaydı (Lions, 1996). Üç durumun
+ortak yanı, hatanın teknik değil kavrayışa ilişkin olmasıdır.
+Olgunun hafife alınmasının dört sebebi vardır. Görünmezdir: eksik olan bir
+düşüncenin yokluğu fark edilmez. Ödüllendirilmez: önlenen felaket gözlemlenmediği
+için önleyen çaba da görünmez. Geriye dönük olarak apaçık görünür: kaza
+sonrasında ilgili ayrıntı bariz görünür, oysa olay öncesinde binlerce ayrıntıdan
+biriydi. Kolay bir çözümü varmış gibi durur: “daha dikkatli olmak” bir çözüm
+değildir, çünkü dikkat varlığı bilinmeyen bir şeye yönelemez.
+Ölçek etkisi de vardır: aynı bilgisizlik, küçük sistemde küçük, büyük sistemde
+büyük hasar üretir. Nükleer enerji, havacılık ve ilaç gibi alanlarda süreçlerin ağır
+olmasının gerekçesi budur; yavaşlık verimsizlik değil, bilinmeyen risklere karşı
+ödenen bedeldir.
+Perrow’un normal kaza kuramı (normal accident theory) durumu daha da
+sınırlayıcı biçimde ortaya koyar: yeterince karmaşık ve sıkı bağlı bir sistemde
+kazalar arızi değil, sistemin olağan davranışıdır; öngörülemeyen etkileşim sayısı
+bileşen sayısıyla birlikte hızla arttığı için hepsinin önceden düşünülmesi mümkün
+değildir (Perrow, 1984).
+27
+
+-- 27 of 31 --
+
+Karşı önlemler
+Kör nokta sıfırlanamaz; küçültülebilir ve zararı sınırlanabilir.
+Küçültme tarafında dört yöntem işler. C eşitlilik: benzer geçmişe sahip
+kişilerin kör noktaları örtüşür, farklı geçmişten gelen kişi başkasının göremediğini
+görür; ekip kurmanın en pratik gerekçesi budur. Dış bakış: bağımsız denetim
+ya da başka ekipten inceleme, hata bulmaktan çok sorulmamış soruyu üretmeye
+yarar. Yakın atlatmaların toplanması: havacılığın bu alandaki en büyük katkısı,
+kaza gerçekleşmeden “az kalsın” durumlarının cezasız biçimde bildirilmesidir;
+yakın atlatma, bilinmeyen riskin ucuz habercisidir ve yazılımdaki karşılığı bek-
+lenmedik davranışların patlamadan kayda geçirilmesidir. Ön ölüm çözümlemesi
+(premortem): projeye başlamadan önce ekipten, projenin bir yıl sonra başarısız
+olduğunu varsayıp sebebini anlatması istenir; geriye dönük anlatı kurmak, ileriye
+dönük risk listesi yapmaktan daha fazla senaryo üretir, çünkü insan öykü kur-
+mada olasılık tahmininden daha başarılıdır (Klein, 2007).
+Zarar sınırlama tarafı ise asıl savunmadır, çünkü öngörü gerektirmez. Bölmeli
+tasarım bir bileşenin arızasının diğerlerine yayılmasını engeller. Geri alınabilirlik,
+hatanın anlaşıldığı noktada dönüşe izin verir. Kademeli yayılım hasarı sınırlar.
+Yedeklilik yararlıdır ancak çeşitli olmak zorundadır; Ariane 5 örneğinin dersi,
+aynı kodun iki kez çalıştırılmasının yedeklilik sağlamadığıdır. Tek bir işlemin
+verebileceği azami hasarın önceden sınırlanması da aynı ailedendir. Bu önlemlerin
+ortak özelliği, neyin yanlış gideceğinin bilinmesini gerektirmemeleridir. Taleb’in
+kırılgan olmayan yapı kavramı da aynı yönelimi ifade eder: öngörüye değil,
+öngörüsüzlüğe dayanıklılığa yatırım yapmak (Taleb, 2012).
+28
+
+-- 28 of 31 --
+
+Sonuç
+Psikolojinin mühendisliğe aktarılabilen kısmı, alanın içeriği değil yöntemidir.
+Deney tasarımı, ölçme kuramı ve bilişsel sınırların ölçülmüş değerleri; A/B tes-
+tinin doğru kurulması, metriklerin geçerliliğinin sorgulanması ve okunabilirlik
+tartışmasının sezgiden çıkarılması için doğrudan kullanılabilir. Klinik dersler bu
+aktarımın dışındadır ve bu, alanın değil sorunun kapsamıyla ilgilidir.
+Notta kurulan ayrımlar birkaç pratik kurala indirgenebilir. Zorluğun kaynağı
+sorulur: problemden geliyorsa taşınır, düzensizlikten geliyorsa silinir. Geri
+bildirimin gecikmesi sorgulanır: teknik bir sınırdan kaynaklanıyorsa kısaltılır,
+olgunun doğasından kaynaklanıyorsa bağlam yazılı olarak saklanır. Hipotez ku-
+rulduğunda destekleyici değil ayırt edici kanıt aranır. Öğrenme, okumakla değil
+hatırlamaya çalışmakla ölçülür. Belgelerde açıklık hedefte tutulur, altyapıda
+tutulmaz.
+C erçevenin sınırları da belirtilmelidir. Bilişsel yük kuramının üç bileşeni
+deneysel olarak birbirinden net biçimde ayrıştırılamamaktadır; bazı araştırmacılar
+verimli yükün ayrı bir kategori olmadığını savunmakta ve Sweller’ın kendisi de
+sonraki çalışmalarında ayrımı gevşetmiştir. Ayrımın mühendislik değeri ölçüm
+hassasiyetinden bağımsızdır: “bu zorluk problemden mi sunumdan mı geliyor”
+sorusu, kuram tam doğrulanmasa da işlevsel bir sorudur. Benzer biçimde çalışma
+belleği kapasitesine ilişkin sayılar ortalamalardır ve bireysel öngörü için kul-
+lanılamaz.
+Açık kalan sorular da vardır. Kod yaşına göre sürekli renklendirme fikrinin
+yaygın bir aracı bulunmamaktadır ve etkisi ölçülmemiştir. Değişiklik verisi
+ile test kapsamı verisinin kesiştirilmesi — yani son dönemde değişmiş ancak
+sınanmamış satırların işaretlenmesi — hata olasılığının en yoğun olduğu bölgeyi
+verecektir ancak hazır araç desteği sınırlıdır. Uzun vadeli geri bildirimlerde
+bağlamın hangi biçimde saklandığında gerçekten okunduğu da ölçülmemiş bir
+sorudur; karar kayıtlarının yazılıp okunmaması yaygın bir başarısızlık biçimidir.
+Son olarak, notun kendisi ele aldığı ilkelerden birinin örneğidir. Bir yazılım
+geliştiricinin psikoloji müfredatını incelemesi, o alanı öğrenmek değil, alanın
+nerede işe yarayabileceğini görmektir; yani bilinmediği bilinmeyen bilgiyi bilin-
+mediği bilinen bilgiye çevirmektir. Kazanç, öğrenilen bulgularda değil, haritanın
+genişlemesindedir.
+Kaynaklar
+• Asch, S. E. (1951). Effects of Group Pressure Upon the Modification and
+Distortion of Judgments. Groups, Leadership and Men.
+• Bjork, R. A. (1994). Memory and Metamemory Considerations in the
+Training of Human Beings. Metacognition: Knowing About Knowing.
+MIT Press.
+• Bringhurst, R. (1992). The Elements of Typographic Style. Hartley &
+Marks.
+29
+
+-- 29 of 31 --
+
+• Brooks, F. P. (1987). No Silver Bullet: Essence and Accidents of Software
+Engineering. IEEE Computer, 20(4).
+• Chase, W. G. & Simon, H. A. (1973). Perception in Chess. Cognitive
+Psychology, 4(1).
+• Chomsky, N. (1959). Review of B. F. Skinner’s Verbal Behavior. Lan-
+guage, 35(1).
+• Costa, P. T. & McCrae, R. R. (1992). Revised NEO Personality Inventory
+Manual. Psychological Assessment Resources.
+• Cowan, N. (2001). The Magical Number 4 in Short-Term Memory. Be-
+havioral and Brain Sciences, 24(1).
+• Darley, J. M. & Latan´e, B. (1968). Bystander Intervention in Emergencies.
+Journal of Personality and Social Psychology, 8(4).
+• Deci, E. L. & Ryan, R. M. (1985). Intrinsic Motivation and Self-Determination
+in Human Behavior. Plenum.
+• Ebbinghaus, H. (1885). Über das Gedachtnis. Duncker & Humblot.
+• Feynman, R. P. (1986). Personal Observations on the Reliability of the
+Shuttle. Rogers Commission Report, Appendix F.
+• Goodhart, C. (1975). Problems of Monetary Management: The UK Expe-
+rience. Yasanın bugünkü formülasyonu Strathern (1997) tarafından ver-
+ilmiştir.
+• Hackman, J. R. & Oldham, G. R. (1976). Motivation Through the Design
+of Work. Organizational Behavior and Human Performance, 16(2).
+• Janis, I. L. (1972). Victims of Groupthink. Houghton Mifflin.
+• Kapur, M. (2008). Productive Failure. Cognition and Instruction, 26(3).
+• Klein, G. (2007). Performing a Project Premortem. Harvard Business
+Review, 85(9).
+• Kruger, J. & Dunning, D. (1999). Unskilled and Unaware of It. Journal
+of Personality and Social Psychology, 77(6).
+• Latan´e, B., Williams, K. & Harkins, S. (1979). Many Hands Make Light
+the Work. Journal of Personality and Social Psychology, 37(6).
+• Lions, J. L. (1996). Ariane 5 Flight 501 Failure: Report by the Inquiry
+Board. ESA.
+• Mach, E. (1865). Mach bantlarına ilişkin ilk gözlemler bu tarihli çalışmalarında
+yer alır; tam künye doğrulanmalıdır.
+30
+
+-- 30 of 31 --
+
+• Maslach, C. & Jackson, S. E. (1981). The Measurement of Experienced
+Burnout. Journal of Occupational Behaviour, 2(2).
+• Miller, G. A. (1956). The Magical Number Seven, Plus or Minus Two.
+Psychological Review, 63(2).
+• Pearl, J. (2009). Causality: Models, Reasoning and Inference. Cambridge
+University Press.
+• Perrow, C. (1984). Normal Accidents: Living with High-Risk Technologies.
+Basic Books.
+• Popper, K. (1959). The Logic of Scientific Discovery. Hutchinson. (Al-
+manca özgün baskı 1934.)
+• Procida, D. (2017). Di´ataxis: A Systematic Framework for Technical Doc-
+umentation. C erçevenin ilk yayımlanma tarihi doğrulanmalıdır.
+• Roediger, H. L. & Karpicke, J. D. (2006). Test-Enhanced Learning. Psy-
+chological Science, 17(3).
+• Ross, L., Amabile, T. M. & Steinmetz, J. L. (1977). Social Roles, Social
+Control, and Biases in Social-Perception Processes. Journal of Personality
+and Social Psychology, 35(7).
+• Shannon, C. E. (1948). A Mathematical Theory of Communication. Bell
+System Technical Journal, 27.
+• Simons, D. J. & Levin, D. T. (1998). Failure to Detect Changes to People
+During a Real-World Interaction. Psychonomic Bulletin & Review, 5(4).
+• Spolsky, J. (2002). The Law of Leaky Abstractions. Joel on Software.
+• Sweller, J. (1988). Cognitive Load During Problem Solving. Cognitive
+Science, 12(2).
+• Sweller, J., van Merrienboer, J. & Paas, F. (1998). Cognitive Architecture
+and Instructional Design. Educational Psychology Review, 10(3).
+• Taleb, N. N. (2012). Antifragile: Things That Gain from Disorder. Ran-
+dom House.
+• Vygotsky, L. S. (1978). Mind in Society. Harvard University Press.
+• W3C (2018). Web Content Accessibility Guidelines (WCAG) 2.1.
+• Wason, P. C. (1960). On the Failure to Eliminate Hypotheses in a Con-
+ceptual Task. Quarterly Journal of Experimental Psychology, 12(3).
+31
+
+-- 31 of 31 --
