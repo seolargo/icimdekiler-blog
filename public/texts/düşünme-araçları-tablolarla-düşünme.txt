@@ -1,0 +1,566 @@
+Düşünme Araçları: Tablolarla Düşünme
+ÖFY
+September 2026
+Özet
+Tablo, bilgiyi düzenlemek için kullanılan pasif bir kayıt aracı değil, iki değişkeni
+dik eksenlere yerleştirerek tek başına hiçbirinin taşımadığı bilgiyi üreten bir
+düşünme aracıdır. Tablonun ürettiği asıl bilgi dolu hücrelerde değil, diğerlerine
+benzemeyen hücrede bulunur: boş kalan, beklenmedik biçimde sıfır olan ya da
+fazla düzgün görünen hücre, bir olgunun ya da bir ölçüm hatasının izidir. Bu
+nedenle tablo kurmanın kritik adımı hücreleri doldurmak değil, hangi satır ve
+sütunların açılacağına karar vermektir; yanlış çizilmiş bir sınır, doğru doldu-
+rulmuş her hücreyi geçersiz kılar. ˙Insan zihni iki boyutu eşzamanlı tutabilir,
+üç ve daha fazlasını tutamaz; bu yüzden yüksek boyutlu problemlerde izlenen
+yol boyutları göstermek değil, her adımda hangi ikisine bakılacağını seçmektir.
+Boyut sayısı arttıkça sorun görselleştirme olmaktan çıkıp kombinasyon sayısının
+patlaması hâline gelir ve yöntemler ikiye ayrılır: kombinasyonları sistematik
+üretmek ya da boyutları azaltmak. Matematikte tablo hücreleri ölçümle değil
+kuralla dolduğu için okunan şey veri değil örüntüdür; buradaki tuhaf hücre bir
+teorem ipucu ya da hesap hatasıdır ve hangisi olduğunu yalnızca ispat söyler.
+Tablonun boyutu ile fiziksel uzayın boyutu birbirine karıştırılmamalıdır: üç
+boyutlu bir vektör zihinde rahatça tutulurken üç sütunlu bir tablo tutulamaz,
+çünkü ilkinde eksenler ortak bir uzayda birleşip tek bir nesne oluşturur, ikin-
+cisinde eksenler birbirine yabancıdır.
+1
+
+-- 1 of 18 --
+
+Giriş
+Tablo (table), iki ayrı değişkenin değerlerinin dik eksenlere yerleştirildiği ve her
+hücrenin bu iki değerin kesişimine karşılık geldiği bir bilgi yapısıdır. Matris (ma-
+trix ) terimi aynı yapının matematiksel ve karar analitiği bağlamındaki adıdır.
+Bu notta her iki terim, aynı bilişsel işlevi gören yapıyı adlandırmak için kul-
+lanılmaktadır.
+Yaygın kabul, tablonun bir depolama ve sunum biçimi olduğu yönündedir:
+eldeki veri satırlara yazılır, biçimlendirilir, bir toplantıda gösterilir ve arşivlenir.
+Bu kabul tablonun üretken işlevini görünmez kılar. Tablo, doğru kurulduğunda
+yalnızca bilineni düzenlemez; bilinmeyeni de tahmin eder. Mendeleyev’in 1869’da
+yayımladığı periyodik tablo bu işlevin klasik örneğidir: elementler atom ağırlığı
+ve kimyasal özellik eksenlerine dizildiğinde boş kalan hücreler, henüz keşfedilmemiş
+elementlerin varlığını ve özelliklerini öngörmüştür (Mendeleev, 1869).
+Notun kapsamı, tablonun bir düşünme aracı olarak nasıl kurulduğu, boyut
+sayısı arttığında hangi yöntemlere başvurulduğu ve bu yapının matematikteki ile
+mühendislikteki kullanımları arasındaki farktır. Tablonun grafik tasarımı, veri
+görselleştirme estetiği ve tablo yazılımlarının teknik özellikleri kapsam dışıdır.
+2
+
+-- 2 of 18 --
+
+˙Iki Boyutun Bilişsel Ayrıcalığı
+Tek boyutlu bir yapı, yani liste, yalnızca sıralama bilgisi taşır. Bir öğenin
+diğerinden büyük ya da küçük olduğu görülür; bunun nedenine dair hiçbir
+şey görülmez. Üç ve daha fazla boyut ise iki nedenle doğrudan kullanılamaz:
+düzleme tam olarak indirgenemez ve çalışma belleğinde eşzamanlı tutulamaz.
+˙Iki boyut, bu iki kısıtın arasında kalan aralıktır.
+˙Iki boyutlu bir yapının ürettiği üç etki ayrı ayrı tanımlanabilir.
+Boşluğun görünür hâle gelmesi
+Bir liste her zaman tam görünür; eksik olan öğe listede bir iz bırakmaz. Izgarada
+ise her satır-sütun kesişimi bir hücre gerektirir ve doldurulmamış hücre göze
+çarpar. Periyodik tablodaki boşluklar bu mekanizmanın doğrudan sonucudur:
+eksiklik, ancak bir yapının içine yerleştirildiğinde görünür olur.
+Kombinasyonun zorunlu hâle gelmesi
+Serbest düşünme, tanıdık eşleşmelere yönelir. Satır ve sütunların çarpımı ise
+tanıdık olmayan eşleşmeleri de zorunlu olarak üretir. Bu, tablonun yaratıcılık
+aracı olarak kullanılmasının temelidir ve morfolojik analizde sistematik bir yönteme
+dönüştürülmüştür (Zwicky, 1969).
+Karşılaştırmanın standartlaşması
+Aynı sütunda yer alan iki öğe, aynı ölçüyle değerlendirilmek zorundadır. Düz
+metinde “şu daha hızlı ancak bu daha güvenilir” biçiminde farklı ölçütler arasında
+geçiş yapılabilir; tabloda bu kaçış kapalıdır. Karar matrislerinin sağladığı asıl
+fayda hesaplanan puan değil, her seçeneğin her ölçütte değerlendirilmesini zorunlu
+kılmasıdır (Pugh, 1991).
+3
+
+-- 3 of 18 --
+
+Eksen Seçimi ve Tablo Kurma Sırası
+Tablonun bilgi üretme kapasitesi, tamamen eksen seçimine bağlıdır. Yanlış
+seçilmiş eksenler, hücreleri ne kadar doğru doldurulursa doldurulsun yanlış sonuç
+verir.
+Eksen seçim ölçütleri
+• Bağımsızlık. ˙Iki eksen birbirinden bağımsız olmalıdır. Biri diğerinin
+sonucuysa elde edilen şey tablo değil, bir fonksiyonun grafiğidir. Örneğin
+“fiyat × kalite” çoğu pazarda sahte bir eksen çiftidir; ikisi birbirine bağlı
+olduğu için hücrelerin bir kısmı boş kalır ve bu boşluk bir bulgu değil,
+eksen seçiminin artığıdır.
+• Karardan türeme. Eksenler eldeki veriden değil, verilecek karardan
+türetilir. “Hangi bilgim var” sorusuyla başlandığında rastgele sütunlar
+açılır ve tablo, kararı beslemeyen bir kayda dönüşür.
+• Ayırt edicilik. ˙Iyi seçilmiş bir eksen çifti, hücrelerden en az birini bek-
+lenmedik yapar. Tüm hücreler beklendik çıkıyorsa eksenler bir ayrım
+üretmiyor demektir.
+• Tamlık ve ayrıklık. Satır ve sütunlar, birbiriyle çakışmayan ve bir
+arada tüm durumları kapsayan kategoriler olmalıdır. Bu ilke danışmanlık
+literatüründe MECE (mutually exclusive, collectively exhaustive) adıyla
+formüle edilmiştir (Minto, 1987). Sınama sorusu şudur: tabloya girmesi
+gereken ancak hiçbir hücreye düşmeyen bir durum var mıdır?
+Kurma sırası
+Mühendislik yaklaşımında sıra şudur: amacın yazılması, sınırın çizilmesi, veri
+kaynağının sorgulanması, birimin tanımlanması, ardından doldurma. Yaygın
+yaklaşım bu sırayı tersine işletir; önce eldeki veri doldurulur, sonra ne çıkacağına
+bakılır.
+Sırayı taşıyan dört kural ayrıca belirtilmelidir:
+• Örneklemin kaynağı sorgulanır. Satırlar hangi süreçten geçerek toplanmıştır,
+bir filtreden geçmiş midir? Bu sorunun atlanması hayatta kalma yanılgısına
+(survivorship bias) yol açar.
+• Boş ve aşırı düzgün hücrelere şüpheyle yaklaşılır. Rastgele bir
+süreçte mükemmel boşluk ya da tam simetri beklenmez. Böyle bir hücre
+çoğunlukla bir toplama ya da ölçüm hatasının işaretidir.
+• Her hücrenin birimi tanımlanır. Aynı tabloda farklı birimlerin bir
+arada kullanılması sık yapılan hatadır; “adet” ile “olasılık” aynı ızgarada
+yan yana duramaz, bunlar iki ayrı tablodur.
+4
+
+-- 4 of 18 --
+
+• Tablo boş hâliyle sınanır. ˙Iyi tasarlanmış bir tablo, tek bir hücre
+dolmadan önce bile “bu sütunlar dolarsa şu karar verilebilir” dedirtmelidir.
+Doldurulduktan sonra beklenmedik bir karar mantığı ortaya çıkıyorsa yapı
+baştan hatalıdır.
+Wald örneği
+˙Ikinci Dünya Savaşı sırasında geri dönen uçakların gövdelerindeki isabet dağılımı
+incelendiğinde, zırhın en çok isabet alan bölgelere eklenmesi önerilmiştir. Abra-
+ham Wald bunun tersini savunmuştur: zırh, isabet izi bulunmayan bölgelere
+konmalıdır (Wald, 1943). Gerekçe, incelenen örneklemin rastgele değil filtre-
+lenmiş olmasıdır; yalnızca geri dönebilen uçaklar incelenmektedir. Motor ve
+kokpit bölgelerinde iz bulunmaması, oralara isabet almayan uçakların çokluğundan
+değil, isabet alanların dönememesinden kaynaklanmaktadır. Wald’ın çalışması
+uzun süre sınırlı biçimde bilinmiş, sonradan yeniden ele alınarak literatüre kazandırılmıştır
+(Mangel ve Samaniego, 1984).
+Bu örnek, tablo kurma açısından doğrudan okunabilir. Yaygın yaklaşımın
+örtük tablosu şudur:
+Bölge Dönen uçaklarda isabet
+Kanat C ok
+Gövde C ok
+Motor Az
+Kokpit Az
+Bu tablonun yazılmamış bir başlığı vardır: “yalnızca dönen uçaklar”. Ku-
+rulması gereken tablo ise şudur:
+Bölge Dönenlerde isa-
+bet
+Düşenlerde isabet ˙Isabet ölümcül mü
+Kanat C ok Bilinmiyor Hayır
+Motor Az Muhtemelen çok Evet
+˙Iki sütun eklendiğinde sonuç kendiliğinden çıkmaktadır. Buradan çıkan
+genel kural şudur: aynı tabloya bakan herkes aynı noktada tıkanıyorsa, çözüm
+hücreleri daha iyi doldurmak değil, eksik bir satır ya da sütun eklemektir.
+5
+
+-- 5 of 18 --
+
+Formelleşmiş Tablo Biçimleri
+Farklı alanlarda yerleşmiş tablo biçimleri, aynı bilişsel mekanizmanın belirli
+problem türlerine uyarlanmış hâlleridir. Aşağıdaki örneklerin her birinde, ek-
+senlerin ayrılmasıyla ortaya çıkan ve ayrılmadığında görünmeyen bir hücre bu-
+lunmaktadır.
+Aciliyet ve önem matrisi
+˙Iki eksenin ayrılmasının klasik örneğidir. Zihin aciliyeti önemle karıştırma eğilimindedir;
+eksenler ayrıldığında “acil ancak önemsiz” hücresi ortaya çıkar ve çalışma za-
+manının büyük bölümünün bu hücreye gittiği görünür hâle gelir. Yapı, zaman
+yönetimi literatüründe yaygınlaştırılmıştır (Covey, 1989); Eisenhower’a atfedilen
+köken yaygın olarak tekrarlansa da doğrudan kaynağı belirsizdir.
+Acil Acil değil
+Önemli Üretimde oluşan arıza Test altyapısının kurulması
+Önemsiz Rutin toplantılar, bildirimler Amaçsız içerik taraması
+Risk matrisi
+Eksenler olasılık ve etkidir. Tek başına hiçbiri karar üretmez; karar kesişimden
+çıkar. Düşük olasılıklı fakat yıkıcı etkili olay için kaynak ayrılırken, yüksek
+olasılıklı fakat küçük etkili olay kabul edilir. Mühendislikte aynı mantığın genişletilmiş
+hâli hata türleri ve etkileri analizidir (FMEA), burada olasılık, etki ve saptan-
+abilirlik üç ayrı eksen olarak kullanılır.
+Değer zinciri ve olgunluk haritası
+Dikey eksende bir bileşenin kullanıcıya yakınlığı, yatay eksende ne ölçüde stan-
+dartlaştığı yer alır. Aynı bileşen yatay eksende sağa kaydıkça, kendi geliştirilmesi
+yerine satın alınması gereken bir emtiaya dönüşür. Yöntem Wardley haritala-
+ması adıyla tanımlanmıştır (Wardley, 2016).
+Ürün portföy matrisi
+Pazar payı ve pazar büyümesi eksenlerinden oluşur. Dört hücre dört farklı nakit
+davranışına karşılık gelir: nakit üreten, nakit tüketen, karar bekleyen ve tasfiye
+edilecek ürünler. Ürünler tek bir kârlılık listesine dizildiğinde bu ayrım tamamen
+kaybolur (Henderson, 1970).
+Karar matrisi
+Satırlarda seçenekler, sütunlarda ölçütler yer alır. Mevcut çözüm referans alınır,
+diğer seçenekler her ölçütte ona göre daha iyi, daha kötü ya da eşdeğer olarak
+işaretlenir (Pugh, 1991).
+6
+
+-- 6 of 18 --
+
+Ölçüt Mevcut Seçenek A Seçenek B
+Geliştirme süresi 0 − +
+C alıştırma maliyeti 0 + −
+Ekip tecrübesi 0 + −
+Ölçeklenebilirlik 0 + +
+Bakım yükü 0 0 −
+Net 0 +2 −1
+Yöntemin değeri hesaplanan net puanda değildir; puan, ölçütlerin ağırlıkları
+eşit varsayıldığı için yanıltıcı olabilir. Değer, hiçbir hücrenin boş bırakılamamasındadır.
+Morfolojik kutu
+Satırlarda bir tasarımın bağımsız boyutları, her satırın karşısında o boyutun al-
+abileceği değerler yer alır. Tablo doldurulmaz; kombinasyonlar taranır. Yöntem
+Zwicky tarafından astronomi ve itki sistemi tasarımında geliştirilmiştir (Zwicky,
+1969). Benzer bir mantık, TRIZ’in çelişki matrisinde de kullanılır (Altshuller,
+1984).
+Boyut Değer 1 Değer 2 Değer 3
+Enerji kaynağı Elektrik Gaz Güneş
+Isıtma biçimi Direnç ˙Indüksiyon Eşanjör
+Depolama Tanklı Anlık Hibrit
+Kontrol Mekanik Dijital Uzaktan
+3×3×3×3 = 81 kombinasyon oluşur. C oğu uygulanabilir değildir; yöntemin
+değeri, serbest düşünmeyle akla gelmeyecek birkaç kombinasyonun tarama sırasında
+zorunlu olarak önüne çıkmasıdır.
+Karışıklık matrisi
+Eksenler gerçek durum ve tahmindir. ˙Iki hücre doğru, iki hücre hatalı sınıflandırmaya
+karşılık gelir. Kritik nokta, iki hata türünün eşdeğer olmamasıdır.
+Tahmin: istenmeyen Tahmin: normal
+Gerçek: istenmeyen 940 60
+Gerçek: normal 15 8985
+Toplam doğruluk oranı %99,25 olarak hesaplanır. Ancak yanlış alarm olarak
+sınıflandırılan 15 örnek kritik yazışmalar ise, gözden kaçan 60 örnekten çok daha
+maliyetlidir. Tek bir doğruluk sayısı bu asimetriyi gizler. Yapısal olarak bu,
+Wald örneğiyle aynı problemdir: bilgi, toplam sayıda değil hücrelerin ayrışmasındadır.
+˙Ilişkisel veritabanı tablosu
+En yaygın ve en az fark edilen biçimdir. Satır bir varlığa, sütun bir özelliğe
+karşılık gelir (Codd, 1970). Sema tasarlanırken cevaplanan soru teknik değil
+7
+
+-- 7 of 18 --
+
+kavramsaldır: modellenen alanın hangi boyutları vardır. Bir özelliğin tek değerli
+mi yoksa çok değerli mi olduğu kararı bir eksen kararıdır ve sonraki tüm sorgu-
+ların maliyetini belirler.
+Sorumluluk matrisi
+Satırlarda görevler, sütunlarda roller yer alır; hücrelerde sorumluluk türü be-
+lirtilir. Bilgi, dolu hücrelerde değil iki hata biçiminde bulunur: bir satırda hiç
+sorumlu bulunmaması işin sahipsiz olduğunu, iki sorumlu bulunması ise fiilen
+kimsenin sahiplenmeyeceğini gösterir.
+8
+
+-- 8 of 18 --
+
+Boyut Sayısı Arttığında: ˙Indirgeme Yöntemleri
+Üçüncü boyut ne düzleme tam olarak indirilebilir ne de zihinde eşzamanlı tu-
+tulabilir. Bu nedenle uygulanan çözüm boyutu göstermeye çalışmak değil, iki
+boyuta indirgeme biçimini seçmektir. Her yöntemin farklı bir kaybı vardır.
+Üç boyut için altı yol
+• Sabitleme ve dilimleme. Üçüncü boyut sabitlenir, aynı tablo her değeri
+için yeniden çizilir. Tabloların yapısı aynı olduğundan farklar görsel olarak
+kendiliğinden yakalanır. Bu teknik veri görselleştirme literatüründe küçük
+çoklular (small multiples) adıyla tanımlanmıştır (Tufte, 1983). Kaybı,
+sürekli değerli boyutlarda kullanılamamasıdır; beş dilim okunabilir, yirmi
+dilim okunamaz.
+• Hücre zenginleştirme. Hücreye tek değer yerine ikili yazılır. Yer
+kazandırır, karşılaştırmayı zorlaştırır. Yalnızca üçüncü boyut iki ya da
+üç değer alıyorsa uygulanabilir.
+• Eksen birleştirme. ˙Iki boyut tek eksende çarpıma dönüştürülür. Tüm
+veri tek tabloda kalır ve sıralanabilir; buna karşılık ızgaranın görsel gücü
+kaybolur, yapı listeye dönüşür.
+• Uzun formatta saklama ve anlık özetleme. Veri ızgara olarak değil,
+her satır bir gözlem olacak biçimde tutulur; her boyut bir sütundur. Bakış
+anında istenen iki boyut seçilerek özet tablo üretilir. Saklama n boyutlu,
+bakış daima iki boyutludur. ˙Ilişkisel veri modeli, özet tablo araçları ve
+çok boyutlu analiz küpleri bu mantığa dayanır; veri düzenleme açısından
+biçimsel tanımı “düzenli veri” başlığı altında yapılmıştır (Wickham, 2014).
+• Görünüme gömme. Üçüncü değişken rengin koyuluğuna ya da işaretin
+büyüklüğüne kodlanır. Örüntü taramasında etkili, kesin değer okumada
+zayıftır.
+• Tek skora indirgeme. Boyutlar ağırlıklandırılıp toplanır. En pratik
+ve en riskli yoldur; farklı birimler toplandığı için hangi boyutun sonucu
+sürüklediği kaybolur. Skor verilirken alt bileşenlerin saklanmaması gerekir.
+Zamanın özel durumu
+Üçüncü boyut zaman olduğunda üç seçenek vardır: her dönem için ayrı küçük
+tablo, tek tabloda değer ve değişimin birlikte yazılması, ya da zamanın eksene
+alınarak diğer boyutlardan birinin feda edilmesi. Zaman genellikle en son ekle-
+nen boyuttur; sıralı olması ve geri dönmemesi onu diğer boyutlardan ayırır.
+9
+
+-- 9 of 18 --
+
+Üçüncü boyutun gerçekten boyut olup olmadığı
+Boyut sanılan değişkenlerin çoğu boyut değildir. Üç durum ayırt edilmelidir:
+• Filtre. Karar yalnızca belirli bir alt küme için veriliyorsa, o değişken bir
+boyut değil kapsamdır ve tablonun dışında kalır.
+• Hiyerarşi. Ülke ve şehir ayrı boyutlar değil, aynı boyutun iki seviyesidir.
+˙Iç içe satır olarak yazılır, yeni eksen açılmaz.
+• Türetilmiş değer. Bir sütun diğer ikisinden hesaplanıyorsa yeni bilgi
+taşımaz.
+Bu üçü ayıklandıktan sonra çoğu problem iki boyuta iner.
+Dört ve daha fazla boyut
+Bu noktada asıl sorun görselleştirme değil, kombinasyon sayısının üstel büyümesidir.
+Beş boyut ve boyut başına dört değer 1024 kombinasyon üretir. Yöntemler ikiye
+ayrılır.
+Kombinasyon üretenler:
+• Morfolojik kutu. Boyutlar satır olarak yazılır, kombinasyonlar taranır.
+• Uyumluluk matrisi. Boyutlar ikişerli karşılaştırılarak imkânsız eşleşmeler
+işaretlenir. Asıl eleme burada yapılır; tarama değil, kısıtların yazılması
+listeyi kullanılabilir boyuta indirir.
+• Ortogonal diziler. Tüm kombinasyonlar yerine, ikili etkileşimlerin tamamını
+kapsayan küçük bir alt küme seçilir. Deney tasarımında ve yazılım testinde
+kullanılır; hataların büyük çoğunluğunun tekli ve ikili etkileşimlerden kay-
+naklandığı gözlemine dayanır (Kuhn, Kacker ve Lei, 2013).
+Boyut azaltanlar:
+• Sabitleme ve daraltma. Boyutların bir kısmı karar öncesinde kilitlenir.
+Kaybı açıktır: kilitlenen boyutlarda sorgulama durdurulmuştur, bu ne-
+denle neyin neden sabitlendiği yazılmalıdır.
+• Hiyerarşiye çevirme. Boyutlar eşzamanlı değil sırayla ele alınır. Karar
+ağacı bu yapıdadır; boyutlar yan yana duramaz ancak üst üste durabilir.
+• ˙Istatistiksel indirgeme. Değişkenler arası bağıntılar kullanılarak gerçek
+bağımsız eksen sayısı bulunur ve veri bu eksenlere yansıtılır. Temel bileşenler
+analizi bu ailenin en eski üyesidir (Pearson, 1901). Bedeli, yeni eksen-
+lerin çoğunlukla insan tarafından adlandırılabilir bir karşılığının bulunma-
+masıdır.
+10
+
+-- 10 of 18 --
+
+Bir noktadan sonra doğru hamle boyut saymayı bırakmaktır. Bağlantı sayısı
+boyut sayısını aşıyorsa yapı tablo değil çizgedir (graph); varlıklar düğüm, ilişkiler
+kenar olarak modellenir. Boyutlar sürekli ve birbirleriyle etkileşimliyse ne tarama
+ne indirgeme yeter; parametreler rastgele örneklenip çıktı dağılımına bakılır. Bu
+durumda görülen şey kombinasyonlar değil sistemin davranışıdır.
+Yüksek boyutlu bir tablo çoğunlukla boyutların indirgenememesinden değil,
+problemin sınırının çizilememesinden doğar. Dört eksen açmak zorunda kalındığında,
+genellikle iki ayrı problem tek tabloya sıkıştırılmıştır.
+11
+
+-- 11 of 18 --
+
+Kademeli Örnek: Bir Ciro Düşüşünün C özümlenmesi
+Yöntemin işleyişi tek bir örnek üzerinde boyut boyut izlenebilir. ˙Iki ürün satan
+bir işletmede aylık ciro 100 birimden 90 birime düşmüştür.
+Sıfır boyut
+Elde yalnızca “düştü” bilgisi vardır. Bu bilgiden hiçbir karar türetilemez.
+Bir boyut
+Ürün Geçen ay Bu ay
+A 60 62
+B 40 28
+Düşüşün tamamı B ürünündedir. Soru daralmıştır; ancak tek boyut yalnızca
+sıralama verdiği için nedene dair bilgi yoktur.
+˙Iki boyut
+˙Ikinci eksen bölgedir. Parantez içindeki değerler geçen aya aittir.
+Bölge 1 Bölge 2
+A 31 (30) 31 (30)
+B 8 (20) 20 (20)
+Dört hücrenin üçü beklendik, biri değildir. B ürününün ikinci bölgedeki
+satışı hiç değişmemiştir. Bu, sorunun ürüne, fiyata ya da rekabete ilişkin genel
+bir sorun olmadığını gösterir; öyle olsaydı her iki bölge de etkilenirdi. Bu çıkarım
+tek boyutlu listede üretilemez, çünkü liste B ürününü tek bir sayıya indirgemek-
+tedir.
+Üç boyut
+Üçüncü eksen satış kanalıdır. Üçü tek ızgaraya sığdırılmaz; kanal sabitlenerek
+iki ayrı tablo çizilir.
+Mağaza kanalı Bölge 1 Bölge 2
+A 16 (15) 16 (15)
+B 8 (10) 10 (10)
+C evrim içi kanal Bölge 1 Bölge 2
+A 15 (15) 15 (15)
+B 0 (10) 10 (10)
+12
+
+-- 12 of 18 --
+
+Mağaza kanalındaki düşüş olağan dalgalanma aralığındadır. C evrim içi
+kanalda ise hücre tam olarak sıfırdır. Talep düşüşü bir değeri sıfıra indirmez;
+sıfır, satışın hiç gerçekleşmediğini, dolayısıyla ürünün o kanalda muhtemelen
+satışta olmadığını gösterir. Bu noktada aranan şey bir talep sorunu olmaktan
+çıkıp bir işleyiş sorununa dönüşür. Dönüşü sağlayan, üçüncü boyutun eklenme-
+sidir.
+Dört boyut
+Dördüncü eksen zamandır ve ay yerine hafta kullanılır. Dört boyut ızgaraya
+sığmadığı için veri uzun formatta tutulur.
+Hafta Ürün Bölge Kanal Ciro
+1 B Bölge 1 C evrim içi 2,5
+2 B Bölge 1 C evrim içi 0
+3 B Bölge 1 C evrim içi 0
+4 B Bölge 1 C evrim içi 0
+Dört boyut yan yana durmakta, ancak hepsine aynı anda bakılmamaktadır;
+üçü sabitlenmiş, tek eksen bırakılmıştır. Kesintinin ikinci haftada başladığı
+görülür ve inceleme o haftaya odaklanır.
+Örneğin verdiği iki ders
+Birincisi, hiçbir adımda ikiden fazla boyuta aynı anda bakılmamıştır. Üçüncü
+boyutta tablo ikiye bölünmüş, dördüncüde üç boyut sabitlenerek tek eksen
+bırakılmıştır. Yöntem daha çok boyut göstermek değil, her adımda hangi ikisine
+bakılacağını seçmektir.
+˙Ikincisi, her yeni boyut cevabı değil soruyu değiştirmiştir. Boyut eklemek
+cevabı vermez; doğru yere bakılmasını sağlar. Ve bilgiyi üreten şey her adımda
+dolu hücreler değil, diğerlerine benzemeyen tek hücre olmuştur.
+13
+
+-- 13 of 18 --
+
+Matematikte Tablo: Ölçüm Yerine Kural
+Matematiksel kullanımda temel hareket aynıdır: iki şeyin kesiştirilmesiyle yapının
+görünür kılınması. Ayrım, hücrelerin nasıl dolduğundadır. Ampirik tabloda
+hücreler ölçümle dolar; matematiksel tabloda kuralla dolar ve tablo kurulduğu
+anda içeriği zaten belirlenmiştir. Bu nedenle okunan şey veri değil örüntüdür.
+˙Işlem tablosu
+Dört elemanlı bir grup için işlem tablosu:
+· 1 a b c
+1 1 a b c
+a a 1 c b
+b b c 1 a
+c c b a 1
+Hiçbir değer ölçülmemiş, tümü kuraldan türetilmiştir. Tablo tek bakışta üç
+şey söyler: köşegenin tamamı birim eleman olduğundan her eleman kendi ter-
+sidir; tablo köşegene göre simetrik olduğundan işlem değişmelidir; her satırda
+her eleman tam bir kez geçtiğinden yapı bir gruptur. ˙Iki grubun yapısal olarak
+aynı olup olmadığı da satır ve sütun yeniden adlandırmasıyla birbirine dönüşüp
+dönüşmediğine bakılarak sınanır. Tablo burada hesap aracı değil, yapının kimliğidir.
+Küçük durumların dizilmesi
+Genel bir formül aranmadan önce küçük durumlar tabloya dökülür ve fark satırı
+eklenir.
+n 1 2 3 4 5
+f (n) 1 3 6 10 15
+Fark 2 3 4 5
+Farkların düzgün artması ifadenin ikinci dereceden olduğunu gösterir ve
+f (n) = n(n + 1)/2 tahminine götürür. Burada ampirik kullanımdan ayrılan
+nokta şudur: örüntünün görülmesi sonuç değil yalnızca hipotezdir; ispat edilme-
+den geçerli sayılmaz.
+Durum ayrıştırma
+Bir ispatta tüm durumların tabloya dökülmesi, MECE ilkesinin en katı hâlidir.
+Doğruluk tablosu bunun temel örneğidir. Ampirik tabloda eksik bir sütun bul-
+guyu zayıflatır; ispatta eksik bir satır ispatı geçersiz kılar.
+14
+
+-- 14 of 18 --
+
+Boşluğun bulgu sayılması
+Mendeleyev örneğinin matematikteki karşılığı, sonlu basit grupların sınıflandırılmasında
+bilinen ailelerin parametrelere göre dizilmesi sırasında ortaya çıkan boşluklardır;
+bu boşluklar sınıflandırmanın eksik olduğunu göstermiş ve eksik yapıların aran-
+masına yol açmıştır. Refleks aynıdır: boşluk bir bulgudur.
+Boyut kısıtının bulunmaması
+Matematikte dört ve daha fazla boyut indirgenmek zorunda değildir, çünkü
+resmedilmesi gerekmez; n boyutlu uzayda cebirsel olarak çalışılır. Tabloya
+duyulan ihtiyaç yalnızca küçük ve somut durumlarda, sezgi kurulurken ortaya
+çıkar. Sezgi kurulduktan sonra tablo bırakılır, yerini simgesel gösterim alır.
+Ampirik kullanımda tablo çoğunlukla cevabın kendisidir; matematikte cevaba
+giden geçici bir yapıdır.
+Tuhaf hücrenin yorumu
+˙Iki kullanımda da üç hareket ortaktır: iki eksenin seçilmesi, hücrelerin doldu-
+rulması ve diğerlerine benzemeyen hücreye bakılması. Ayrıldıkları nokta, o
+hücrenin ne anlama geldiğidir. Ampirik tabloda tuhaf hücre bir olayın izidir
+ve nedeni gerçek dünyada aranır. Matematikte ise ya bir teorem ipucudur ya
+da bir hesap hatasıdır; hangisi olduğunu yalnızca ispat belirler. Biri gözlemle,
+diğeri kanıtla kapanır.
+15
+
+-- 15 of 18 --
+
+Tablo Boyutu ile Uzay Boyutu Ayrımı
+Sık yapılan bir karıştırma, tablodaki boyut sayısı ile geometrik uzaydaki boyut
+sayısının aynı bilişsel yükü taşıdığının varsayılmasıdır. Üç boyutlu bir vektörle
+rahatça çalışılırken üç sütunlu bir tablonun zihinde tutulamaması bu varsayımla
+çelişir gibi görünür. C elişki, iki farklı “boyut” kavramının aynı adı taşımasından
+kaynaklanır.
+Bağımsız değişken olarak boyut
+Ürün, bölge ve kanal eksenleri arasında hiçbir ilişki yoktur. Ürün ekseninde
+iki adım ilerlemek bölge ekseninde hiçbir konum değişikliği üretmez. Bu üç
+eksen birbirine yalnızca kesişim noktalarında bağlanır; aralarında mesafe, açı ya
+da dönme tanımlı değildir. Zihinde tutulamamalarının nedeni, tutunulacak bir
+yapının bulunmamasıdır.
+Uzamsal boyut
+Sağ-sol, ileri-geri ve aşağı-yukarı eksenleri arasında ise tam bir yapı vardır: uzun-
+luk, açı, dönme tanımlıdır. Bu yapı günlük deneyimle sürekli kullanılmaktadır;
+bir cisme uzanmak ya da bir mekânda hareket etmek, üç koordinatın eşzamanlı
+işlenmesini gerektirir. Bu işlem ayrı bir bilişsel çaba olarak deneyimlenmez.
+Vektörün tek nesne olarak temsili
+Üç vektörle çalışılırken üç ayrı sayı üçlüsü tutulmaz. Vektör tek bir nesne
+olarak, yönü ve uzunluğu olan bir ok olarak temsil edilir; zihinsel yük üçten bire
+iner. Sonraki işlemler bu nesneler üzerinde yürütülür: toplama, döndürme, aynı
+düzlemde olup olmama. Bu bir bilgi sıkıştırma hareketidir ve bellek araştırmalarında
+öbekleme (chunking) olarak tanımlanan mekanizmayla aynı yapıdadır (Miller,
+1956).
+Vektörlerin denklem yerine çizim olarak gösterilmesinin nedeni de budur:
+soyut bir problem, zihnin halihazırda verimli çalıştığı uzamsal alana taşınmaktadır.
+C izim problemi zorlaştırmaz, aksine mevcut bir yeteneğin üzerine bindirir.
+Sınır
+Dördüncü bir vektör bileşeni ne çizilebilir ne de uzamsal olarak sezilebilir. Bu
+noktada görsel temsil tümüyle bırakılır ve simgesel işleme geçilir; dört boyutlu
+uzay hayal edilmez, kurallarla işlenir. Üç boyut, uzamsal sezginin çalıştığı son
+duraktır.
+Buradan çıkan genel ilke, tablo tartışmasıyla birleştirildiğinde şudur: zor-
+luk boyut sayısından değil, boyutlar arasında bir yapının bulunup bulunma-
+masından kaynaklanır. Eksenler ortak bir uzayda birleşiyorsa üç boyut kolay,
+birbirine yabancıysa iki boyut sınırdır.
+16
+
+-- 16 of 18 --
+
+Sonuç
+Tablo kurmanın maliyeti hücreleri doldurmakta değil, sınırı çizmektedir. Amaç
+belirlenmeden, örneklemin hangi filtreden geçtiği sorgulanmadan ve birimler
+tanımlanmadan açılan her sütun rastgeledir; bu sıra tersine işletildiğinde elde
+edilen yapı bir karar aracı değil bir kayıt olur. Pratik karşılık şudur: bir tablo
+tasarlanırken ilk yazılması gereken şey, o tablonun hangi kararı besleyeceğidir.
+Aynı tabloya bakan herkesin aynı noktada tıkanması, tablonun içeriğiyle ilgili
+bir sorun değil yapısıyla ilgili bir sorundur. Böyle bir durumda doğru hamle
+hücreleri daha dikkatli doldurmak değil, eksik bir satır ya da sütunun varlığını
+araştırmaktır. Wald örneğinde tablo yanlış doldurulmamıştı; sınırı yanlış yere
+çizilmişti.
+Boyut sayısı arttığında izlenen yol boyutları göstermek değil, her adımda
+hangi ikisine bakılacağını seçmektir. Bu seçim bir kayıp kararıdır: dilimleme
+sürekli değerleri, eksen birleştirme ızgaranın görsel gücünü, tek skora indirgeme
+ise hangi boyutun sonucu sürüklediği bilgisini feda eder. Kaybın hangisi olduğunun
+bilinerek seçilmesi, yöntemin kendisinden daha önemlidir.
+C erçevenin sınırları da belirtilmelidir. Tablo, ızgaraya sığmayan olguyu
+görünmez kılma eğilimi taşır; düzenli ve simetrik görünümü, kategorilere yerleşmeyen
+durumların yok sayılmasına zemin hazırlar. Nicelleştirilemeyen ancak belir-
+leyici olan etkenler bu yapıda sistematik olarak dışarıda kalır. Ayrıca eksenlerin
+bağımsız olduğu varsayımı çoğu gerçek problemde yaklaşık olarak doğrudur;
+bağıntı güçlendikçe hücrelerin bir kısmı yapısal olarak boş kalır ve bu boşluk
+yanlışlıkla bulgu sayılabilir.
+Açık kalan bir soru, eksen seçiminin öğretilebilir bir yöntem mi yoksa alan
+deneyimine bağlı bir sezgi mi olduğudur. Kurma sırası ve MECE gibi ölçütler
+yanlış eksenleri elemeye yarar; ancak doğru eksen çiftinin üretilmesi, incelenen
+alanın içeriğine ilişkin bilgi gerektirir ve bu bilgi genel bir yöntemle ikame edile-
+mez. Morfolojik analiz bu boşluğu kombinasyon taramasıyla kapatmayı dener,
+ancak taranacak boyutların belirlenmesi yine alan bilgisine dayanır.
+Son olarak, tablo ile vektör ayrımından çıkan ilke daha geniş bir alana
+taşınabilir: bir yapının zihinde tutulabilirliği, bileşen sayısına değil bileşenler
+arasında tanımlı bir ilişki bulunup bulunmadığına bağlıdır. ˙Ilişkisiz üç öğe tu-
+tulamazken, aralarında yapı bulunan çok sayıda öğe tek bir nesne olarak tutu-
+labilir.
+1. Bir sistem doğru çalışırken bile içi anlaşılmaz olabilir; o zaman onu
+içeriden değil, davranışından yönetirsin — çıktısını doğrula, geri alınabilir yap,
+tehlikeli aksiyonu izne bağla.
+2. Bazı problemler kural yazarak değil yeterince örnek toplayarak çözülüyor;
+ama bunu seçtiğin an çözümü kazanıp anlaşılabilirliği kaybediyorsun.
+3. Bir sistemin ne yapabileceğini, ne için yazıldığına bakarak tahmin ede-
+mezsin — tek bir hedefi kovalarken yan yolda başka yetenekler kazanabiliyor.
+17
+
+-- 17 of 18 --
+
+Kaynaklar
+• Altshuller, G. S. (1984). Creativity as an Exact Science. Gordon and
+Breach.
+• Codd, E. F. (1970). A Relational Model of Data for Large Shared Data
+Banks. Communications of the ACM, 13(6).
+• Covey, S. R. (1989). The 7 Habits of Highly Effective People. Free Press.
+• Henderson, B. D. (1970). The Product Portfolio. BCG Perspectives,
+Boston Consulting Group.
+• Kuhn, D. R., Kacker, R. N. ve Lei, Y. (2013). Introduction to Combina-
+torial Testing. CRC Press.
+• Mangel, M. ve Samaniego, F. J. (1984). Abraham Wald’s Work on Aircraft
+Survivability. Journal of the American Statistical Association, 79(386).
+• Mendeleev, D. I. (1869). Über die Beziehungen der Eigenschaften zu den
+Atomgewichten der Elemente. Zeitschrift für Chemie, 12.
+• Miller, G. A. (1956). The Magical Number Seven, Plus or Minus Two.
+Psychological Review, 63(2).
+• Minto, B. (1987). The Pyramid Principle. Pitman.
+• Pearson, K. (1901). On Lines and Planes of Closest Fit to Systems of
+Points in Space. Philosophical Magazine, 2(11).
+• Pugh, S. (1991). Total Design: Integrated Methods for Successful Product
+Engineering. Addison-Wesley.
+• Tufte, E. R. (1983). The Visual Display of Quantitative Information.
+Graphics Press.
+• Wald, A. (1943). A Method of Estimating Plane Vulnerability Based on
+Damage of Survivors. Statistical Research Group, Columbia University.
+(Yeniden basım: CRC 432, 1980.)
+• Wardley, S. (2016). Wardley Maps: Topographical Intelligence in Busi-
+ness. (C evrim içi seri.)
+• Wickham, H. (2014). Tidy Data. Journal of Statistical Software, 59(10).
+18
+
+-- 18 of 18 --

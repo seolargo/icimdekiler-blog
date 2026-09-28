@@ -1,0 +1,148 @@
+Yazılım Testi: Öncelik Sırası
+ÖFY
+September 2026
+Öncelik Sırası
+Ölçüt, öncelik sırasıyla üç terimden oluşur: hata sınıfı bu sistemde yaşanmış mı;
+kurulum ne kadar sürüyor; koşma ne kadar sürüyor. ˙Ilk terim ağır basar: kuru-
+lumu yarım saat süren ama hatası dün yaşanmış bir test, sıfır maliyetli ama bu
+sistemde hiç hata yakalamamış bir denetimin önünde durur. Tek istisna birinci
+gruptur: kurulum ve koşma maliyeti sıfırsa yaşanmışlık aranmaz ve denetim
+sürekli açık kalır, çünkü sıfır maliyetli bekçiyi kapalı tutmanın da bir maliyeti
+vardır.
+1. Sıfır Maliyet, Sürekli Açık ( Ölçütten Muaf )
+• Tip denetimi
+• Lint
+• Bütünlük kontrolü (lockfile ve npm ci)
+• Bağımlılık açık taraması
+• Lisans denetimi
+• Fitness function (satır limiti, katman ayrımı)
+• Yapılandırma ve ortam (açılışta ortam değişkeni şeması)
+• Race detector (yalnızca Go; mevcut testler -race bayrağıyla koşar. Type-
+Script ve Python’da karşılığı yoktur, o taraflar için kapsam dışıdır)
+2. Mevcut Kodu Sabitleme (˙Ilk Hafta)
+• Flakiness takibi (retries kapalı, liste açık)
+• Dosya bölme (characterization kaydı)
+• Düzeltme öncesi kırmızı birim testi
+• Regresyon testi
+1
+
+-- 1 of 5 --
+
+• Sözleşme
+• Fixture parser testi
+• Sema testi
+• Bozuk fixture
+• Giriş doğrulama
+• Aşamalar arası veri sözleşmesi (Whisper segmenti ile cümle aynı şey değildir;
+SOT hatası bu sözleşme yazılmadığı için yaşanmıştır)
+• C ıkış değişmezleri
+3. Girdi Tasarımı ve Hat Bütünlüğü (˙Ilk Döngü)
+• Sınır değer analizi
+• Eşdeğerlik sınıfları
+• Karar tablosu
+• Durum geçişi
+• Hata yolu testi
+• ˙Idempotency
+• Eşzamanlılık birim testi (kredi defteri ve meşgul sayacı yarışları)
+• Kaynak temizliği
+• Önbellek doğruluğu
+• Property-based test (fast-check, hypothesis)
+• Parite (TypeScript ve Python ayrıştırıcıları aynı fixture’ı okur)
+• Metamorfik test (fixture ile)
+• Ağ: birim ve bileşen katmanı (msw, nock, httptest ile gecikme, kopma,
+yarım cevap)
+• Ağ: model tarafı (sahte sağlayıcı ile zaman aşımı, 429, yarım stream, tek
+ücret)
+• Determinizm
+• Hat bütünlüğü (sayım, yarım kalma)
+• Girdi sınır testleri (boş, bozuk, çok büyük)
+• Bozuk medya korpusu
+2
+
+-- 2 of 5 --
+
+• Zip-bomb ve zip-slip
+• Karakter işkencesi
+• Altın veri seti
+• Saat ve saat dilimi
+• Süre dolması
+4. Kullanıcı Akışları ve Canlı Sağlık (˙Ikinci Döngü)
+• Kullanıcı hikâyelerinin çıkarılması
+• Kabul testi
+• Uçtan uca test (yapay zekâsız)
+• Smoke testi
+• Sanity testi
+• Sistem testi
+• Keşif testi
+• Kullanıcı hatası (çift tıklama, geri tuşu, yenileme)
+• Sentetik izleme (watchdog)
+• Gözlemlenebilirlik (hata yolunda log var mı, correlation ID, alarm çalıyor
+mu)
+• Doküman testi
+5. Gerçek Bağımlılıkla Test (Gerçek Veritabanı, Kuyruk,
+Depolama ˙Ister)
+• Zamanlanmış işlerin çift tetiklenmesi (askıda publish süpürmesi; tek in-
+stance varsayımı)
+• Uzun süren iş ve süreç yeniden başlaması (aynı sınıf)
+• Entegrasyon
+• Eşzamanlı yazma
+• Yarıda kalan işlem
+• Kuyruk teslim garantisi
+• Yetki matrisi
+3
+
+-- 3 of 5 --
+
+• Kiracı izolasyonu
+• Faturalama değişmezi
+• Kimlik
+• Ağ: yükleme tarafı (gerçek depolamaya yarım yükleme)
+• Sıra boşluğu
+• Migrasyon ve geri dönüş
+• Dağıtım ve geri alma
+• Yedekten dönüş
+6. Yavaş, Ücretli ya da Kırılgan (Gece Koşusu, Sürüm
+Öncesi)
+• Uçtan uca test (tam)
+• AI eval (kurallı)
+• Metamorfik test (gerçek modelle)
+• Mutasyon testi
+• Benchmark
+• Ağ: sınır katmanı (Toxiproxy, netem)
+• Ağ: indirme tarafı ve iç ağ
+• Ağ: sistem katmanı (tarayıcı ağ profili)
+• Ağ: test matrisi
+• Arıza enjeksiyonu
+• Disk dolması
+• Nesne depolama görünürlüğü
+• Canlı izleme (kayma)
+• Görsel regresyon
+• Erişilebilirlik
+• Yerelleştirme
+• Uyumluluk
+• Yapılandırılmış keşif
+4
+
+-- 4 of 5 --
+
+• AI eval (yargıçlı)
+• Kombinatoryal (pairwise) test
+• Model tabanlı test
+• Kullanılabilirlik
+• Kapsama ölçümü
+7. ˙Ilk Arıza Yaşanınca Açılır
+• Kaynak sınırları
+• Canlı migrasyon kilidi
+• Ağ: canlı coğrafi izleme
+• Performans ailesi (istisna: bir kez keşif amaçlı koşulur, hatta alınmaz;
+önceki load/stress koşusu bu istisnadır)
+• Dayanıklılık ailesi
+• Üretim trafiği ailesi
+• Güvenlik ailesi
+• ˙Insan ve organizasyon ailesi
+• Regülasyon ailesi
+Kapsam Dışı
+• Biçimsel doğrulama, sembolik yürütme, mobil senaryolar, donanım testleri
+5
+
+-- 5 of 5 --

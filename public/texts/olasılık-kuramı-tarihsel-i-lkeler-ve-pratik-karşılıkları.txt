@@ -1,0 +1,1438 @@
+Olasılık Kuramı: Tarihsel ˙Ilkeler ve Pratik
+Karşılıkları
+ÖFY
+September 2026
+Özet
+Okulda öğretilen olasılık, eşit ihtimalli sonuçları sayan ve dağılımları hesaplayan
+bir tekniktir. Gündelik hayatta ve mühendislikte işe yarayan olasılık düşüncesi
+ise bir bakış açısıdır. Bu nedenle olasılık dersi alınmış olsa bile olasılık düşüncesi
+kazanılmamış olabilir. Bu bakış açısı tek bir soruya indirgenebilir: bir durum
+bin kez tekrarlansa ne olur? Soru, bir sonucun ne sıklıkla ortaya çıktığını ve
+ortaya çıktığında ne kadar zarar verdiğini birlikte düşündürür. Sorunun bir
+sınırı vardır: geri dönüşü olmayan bir sonuç mümkünse, ortalamanın iyi olması
+bir anlam taşımaz; çünkü ortalama ancak oyunda kalınırsa gerçekleşir. Pascal ile
+Fermat’nın 1654’teki yazışmasıyla başlayan tarih, bu soruya her aşamada yeni
+bir boyut eklemiştir: doğru sayma, tekrarın gücü, paranın kişiye göre değeri,
+kanıtla güncelleme, ölçüm hatası, nadir olaylar, sebep-sonuç ve dayanıklılık.
+Yirminci yüzyılda bu fikirler kalite kontrole, kuyruk teorisine, hata düzelten
+kodlara ve güvenilirlik mühendisliğine dönüşmüştür. 1970 sonrası araştırmalar
+insan sezgisinin olasılık konusunda sistematik olarak yanıldığını göstermiştir; bu
+yüzden ilkelerin asıl değeri, sezgiyi düzelten araçlar olmalarındadır.
+1
+
+-- 1 of 42 --
+
+Giriş
+Ders ile Düşünce Arasındaki Fark
+Olasılık dersleri genellikle zar atma, torbadan top çekme, kombinasyon formülleri
+ve olasılık dağılımları üzerine kuruludur. Bu problemlerde bütün sonuçlar ve
+sayılar baştan bellidir. Gerçek hayatta ise kimse torbada kaç top olduğunu
+söylemez; sayılar belirsizdir ve durum karmaşıktır. Formüller bu yüzden hafızada
+kalır ama kararlara geçmez.
+Gündelik hayatta işe yarayan kısım formülden çok bir alışkanlıktır. Bu
+alışkanlık birkaç biçimde görünür:
+• “Kesin” yerine “ne kadar muhtemel” diye düşünmek. Bir iş
+başvurusunun sonucunu evet/hayır diye düşünen kişi, ret aldığında yıkılır.
+Başarı şansını kabaca yüzde 20 olarak düşünen kişi ise birden fazla başvuru
+yapması gerektiğini görür ve tek bir ret onu sarsmaz.
+• Kararı tek sonuca göre değerlendirmemek. Riskli bir yatırımdan
+kazanç elde eden biri iyi karar vermiş olmayabilir; yalnızca şanslı olabilir.
+˙Iyi karar ile iyi sonuç aynı şey değildir.
+• Taban oranına bakmak. “Yüzde 99 doğru” bir test pozitif çıktığında,
+önce hastalığın ne kadar yaygın olduğu sorulmalıdır. Hastalık çok nadirse
+pozitif sonuçların çoğu yanlış alarm olabilir.
+• Küçük ama sık riskleri ciddiye almak. Emniyet kemeri takmamak
+tek yolculukta neredeyse hiç sorun çıkarmaz; binlerce yolculukta ise küçük
+risk birikir.
+• Örneklemi sorgulamak. Sosyal medyada görülen hayatlar genel nüfusu
+temsil etmez; yalnızca paylaşmaya değer bulunan anlar görünür.
+Semsiye almak, önemli bir dosyanın yedeğini tutmak ya da trafik ihtima-
+line karşı erken çıkmak da olasılık düşüncesidir. C oğu insan bunu yapar ama
+adını koymaz. Adını koymak, aynı mantığı önemli kararlarda bilinçli olarak
+kullanmayı mümkün kılar.
+Merkezı Terimler
+Olasılık (probability ) Bir olayın gerçekleşme ihtimalini 0 ile 1 arasında bir
+sayıyla ifade eden ölçüdür. 0 imkânsızı, 1 kesin olanı gösterir.
+Beklenen değer (expected value) Her olası sonucun değerinin, o sonucun
+olasılığıyla çarpılıp toplanmasıyla bulunan ortalama değerdir.
+Dağılım (distribution) Olası sonuçların her birinin ne sıklıkla ortaya çıktığını
+gösteren tablo ya da eğridir.
+Örneklem (sample) Bir bütün hakkında fikir edinmek için incelenen parçadır.
+2
+
+-- 2 of 42 --
+
+Taban oranı (base rate) Bir olayın genel nüfusta ya da genel durumda ne
+sıklıkla görüldüğüdür.
+Kapsam
+Not, olasılık düşüncesini bir hesap tekniği olarak değil, karar verme alışkanlığı
+olarak ele alır. Tarihsel bölümlerde her düşünürün katkısı kısaca anlatılır,
+ardından bu katkıdan çıkan ilke ile ilkenin mühendislikteki ve gündelik hay-
+attaki karşılığı verilir. Formüllerin türetilmesi ve ispatlar kapsam dışıdır.
+3
+
+-- 3 of 42 --
+
+Temel Soru: Bin Tekrar Testi
+Soru
+Olasılık düşüncesinin bütün uygulamalarının altında aynı soru yatar:
+Bu bin kez olsa ne olur?
+Soru, tek bir denemeye ya da tek bir sonuca bakmak yerine olabilecek bütün
+sonuçlara ve bunların ne sıklıkla ortaya çıktığına bakmayı gerektirir. Aynı anda
+iki şeyi düşündürür: bir sonucun ne sıklıkla ortaya çıktığı ve ortaya çıktığında
+ne kadar kötü olduğu.
+Yazılım Geliştirmedeki Karşılıkları
+Hata ayıklama
+Bir hata için on olası sebep düşünülebilir. Hepsini sırayla denemek yerine en
+olası sebepten başlanır. Bu tür bir hata bin kez yaşansa, çoğunda sebep en
+son yapılan değişiklik çıkar. “Dün çalışıyordu, bugün çalışmıyor” durumunda
+önce son commit’lere, güncellenen kütüphanelere ve değişen ayarlara bakılır.
+Derleyici ya da veritabanı hatası mümkündür ama ihtimali çok düşüktür.
+Ölçek
+Milyonda bir kez olan bir hata, günde on milyon istek alan bir sistemde günde
+on kez olur. “C ok nadir” denen durumlar, yeterince trafik olduğunda kesin
+olarak yaşanır. Yarış durumları (race condition), ağ kopmaları ve yarım kalan
+yazmalar bu nedenle ciddiye alınır.
+Risk önceliği
+Risk, olasılık ile etkinin çarpımı olarak düşünülür:
+• Sık olan ve etkisi büyük olan durumlar mutlaka test edilir.
+• Nadir ama felaket niteliğindeki durumlara (veri kaybı, para işlemleri, silme)
+mutlaka koruma konur.
+• Nadir ve etkisi küçük olan durumlar kaydedilir (log) ve geçilir.
+Uç değerler
+“Ortalama cevap süresi 100 ms” iyi görünür. Ancak isteklerin yüzde 1’i 5 saniye
+sürüyor olabilir. Kullanıcılar ortalamayı değil en kötü anları hatırlar. Bu yüzden
+performansta p95 ve p99 gibi yüzdelik değerlere bakılır.
+4
+
+-- 4 of 42 --
+
+˙Iş tahmini
+“Bu iş iki gün sürer” yerine “büyük ihtimalle iki gün, işler ters giderse beş gün”
+demek daha doğrudur. Yazılım işleri bilinmeyen sorunlar sonradan çıktığı için
+neredeyse her zaman tahminden uzun sürer. Tahmin tek bir sayı değil, bir
+dağılımdır.
+Aralıklı başarısız olan testler
+Bazen geçen bazen kalan bir test (flaky test) tekrar çalıştırılıp geçilmez. Yüzde 5
+oranında kalan bir test, gerçek bir yarış durumunun ya da zamanlama sorununun
+işareti olabilir. Aralıklı hata, henüz yakalanmamış bir hatadır.
+“Bende çalışıyor”
+Geliştiricinin bilgisayarında üç kez başarılı olan bir deneme çok küçük bir örneklemdir.
+Farklı tarayıcı, ağ hızı, veri ve saat dilimine sahip binlerce kullanıcıda ne olacağını
+göstermez.
+Yayına alma zamanı
+Büyük bir değişikliği cuma akşamı yayına almak ile salı sabahı almak aynı hata
+olasılığını taşır. Ancak cuma akşamı sorun çıkarsa hafta sonu müdahale edecek
+kimse yoktur ve etki büyür. Kod aynıdır, risk farklıdır.
+Yeniden deneme
+Bir ağ isteğinin başarısız olma olasılığı yüzde 1 ise, bir kez yeniden denemek
+başarısızlık olasılığını yüzde 0,01’e indirir (iki bağımsız denemenin ikisinin de
+başarısız olması). Ancak sorun kalıcıysa (sunucu çökmüşse) sonsuz yeniden
+deneme durumu kötüleştirir. ˙Iyi bir yeniden deneme mantığı geçici ve kalıcı
+hatayı ayırt eder.
+Sınır: Oyundan Atan Sonuç
+“Bin kez olsa ortalamada iyi” demek, o bin denemenin yaşanabileceğini varsayar.
+Bazı sonuçlar ise oyunu bitirir. Bin denemenin 999’unda kazandıran ama birinde
+bütün sermayeyi silen bir yatırımın ortalaması iyi görünür; ancak o tek sonuç
+yaşandığında yeni deneme hakkı kalmaz. Sağlık, can güvenliği ve yedeksiz silinen
+veri de bu türdendir.
+Sorunun tam hâli bu nedenle şöyledir:
+Bu bin kez olsa ne olur ve o binin içinde beni oyundan atan bir sonuç
+var mı?
+Böyle bir sonuç yoksa karar ortalamaya göre verilebilir. Varsa, ortalama ne
+kadar iyi olursa olsun önce o risk ortadan kaldırılır. Yazılımda yedek alma, geri
+alınabilir yayına alma ve silme işlemlerine ek koruma koyma uygulamaları bu
+ilkeden doğar.
+5
+
+-- 5 of 42 --
+
+Beş Temel Kural
+Descartes’ın Kurallarıyla Karşılaştırma
+Descartes, Yöntem Üzerine Konuşma (1637) adlı eserinde doğru düşünme için
+dört kural önermiştir: apaçık olarak bilinmeyeni doğru kabul etmemek, prob-
+lemi olabildiğince çok parçaya bölmek, düşünceleri basitten karmaşığa doğru
+sıralamak ve hiçbir şeyin atlanmadığından emin olacak biçimde her şeyi gözden
+geçirmek (Descartes, 1637). Bu kurallar mühendislik disiplininin temelinde yer
+alır.
+Olasılık düşüncesinin tek bir kişi tarafından yazılmış böyle resmı bir lis-
+tesi yoktur. Ancak alanı kuran düşünürlerin bıraktığı temel ilkeler beş kurala
+toplanabilir.
+Kurallar
+1. Tek sonuca değil, çok tekrara bakılır. Az sayıda deneme yanıltır; den-
+eme sayısı arttıkça gerçek oran ortaya çıkar. Kaynağı Jakob Bernoulli’nin
+büyük sayılar yasasıdır (Bernoulli, 1713).
+2. Karar, olasılık ile sonucun değeri birlikte tartılarak verilir. Yalnızca
+“olur mu” değil, “olursa ne kazanılır, ne kaybedilir” de sorulur. Kaynağı
+Pascal ile Fermat’nın 1654 yazışması ve Huygens’in (1657) beklenen değer
+tanımıdır.
+3. Önce genel sıklığa, sonra özel duruma bakılır. Bir olayın olasılığı,
+önce o tür olayların genelde ne sıklıkla görüldüğüne bakılarak tahmin
+edilir. Bu, Bayes çizgisinden gelen taban oranı ilkesidir.
+4. Yeni kanıt geldikçe inanç güncellenir. ˙Inanç ya hep ya hiç değildir;
+kanıtla güçlenir ya da zayıflar (Bayes, 1763; Laplace, 1812).
+5. Oyundan atan risk ortalamaya katılmaz. Her şeyi kaybettiren bir
+sonuç varsa, ortalama ne kadar iyi olursa olsun önce o risk kapatılır.
+Kaynağı Daniel Bernoulli’nin St. Petersburg paradoksu üzerine çalışmasıdır
+(Bernoulli, 1738).
+Laplace, olasılık teorisini hesaba dökülmüş sağduyu olarak tanımlamıştır
+(Laplace, 1814). Bu kurallar yeni bir şey öğretmekten çok, insanın zaten sezdiği
+şeyleri düzenli ve hatasız yapmasını sağlar. Descartes’ın kuralları problemin
+nasıl parçalanacağını ve düzenli düşünüleceğini söyler; olasılık kuralları ise kesinliğin
+olmadığı yerde nasıl karar verileceğini.
+6
+
+-- 6 of 42 --
+
+Kuruluş Dönemi: Kumar Masasından Matematiğe
+Olasılık teorisi kumar oyunlarından doğmuştur. Kumarbazların sorduğu pratik
+sorular, belirsizliği sayılarla ifade etmenin ilk sistemli denemelerine yol açmıştır.
+Gerolamo Cardano (1501–1576)
+˙Italyan hekim, matematikçi ve kumarbaz Cardano, zar oyunları üzerine Liber de
+Ludo Aleae (Sans Oyunları Kitabı) adlı eseri yazmıştır. Eşit ihtimalli sonuçları
+sayma fikrini ilk kullananlardan biridir. Kitap ölümünden yaklaşık yüz yıl sonra,
+1663’te yayımlandığı için etkisi sınırlı kalmıştır; bu nedenle kurucu değil öncü
+sayılır (Cardano, 1663).
+˙Ilke Bir olayın olasılığı, istenen sonuçların sayısının bütün olası sonuçların
+sayısına bölümüdür. Bunun için sonuçların gerçekten eşit ihtimalli olması
+gerekir.
+Mühendislikte Tahmin yapmadan önce olası bütün durumlar listelenir. Uç
+durumlar (edge case) bu listeden çıkar.
+Hayatta “Olur mu?” sorusundan önce “neler olabilir?” sorusu sorulur. Seçenekler
+görülmeden olasılık hesaplanamaz.
+Galileo Galilei (1564–1642)
+Kumar oynayan bir soylu Galileo’ya şunu sormuştur: üç zar atıldığında 9 ve 10
+toplamlarının oluşma biçimi sayısı aynı görünmektedir, ama 10 neden daha sık
+gelir? Galileo, sonuçları sıralı olarak sayınca 10 için 27, 9 için 25 yol olduğunu
+göstermiştir (Galileo, yak. 1620).
+˙Ilke Sonuçlar doğru sayılmalıdır. Sonuç türlerinin sayısı ile bir sonuca giden
+yolların sayısı aynı şey değildir.
+Mühendislikte Kombinasyon sayısının yanlış hesaplanması, test kapsamını ya
+da çakışma olasılığını olduğundan küçük gösterir.
+Hayatta ˙Iki sonuç eşit görünse bile birine giden yol sayısı daha fazla olabilir.
+Pierre de Fermat (1607–1665)
+1654’te Fransız kumarbaz Chevalier de M´er´e, Blaise Pascal’a “puanlar prob-
+lemi”ni sormuştur: iki oyuncu bir oyunu yarıda bırakırsa ortadaki para ar-
+alarında nasıl adil bölünür? Pascal soruyu Fermat’ya yazmış ve ikisi mektu-
+plaşarak çözmüştür. Olasılık teorisinin doğuşu genellikle bu yazışmaya dayandırılır.
+Fermat’nın çözümü, oyun bitmemiş olsa bile olabilecek bütün devamları yazıp
+kaçının hangi oyuncunun kazanmasıyla sonuçlandığını saymaktır.
+˙Ilke Gelecek hayal edilerek sayılır. Henüz gerçekleşmemiş bütün senaryolar
+açıkça yazılır, ardından kaçının hangi sonuca gittiğine bakılır.
+7
+
+-- 7 of 42 --
+
+Mühendislikte Bir adımdan sonra olabilecek bütün dallar çizilir: durum ağaçları,
+test senaryoları, hata yolları.
+Hayatta Bir karardan sonraki olası yolları kâğıda dökmek, zihinde dönen be-
+lirsizliği somutlaştırır.
+Blaise Pascal (1623–1662)
+Pascal aynı soruyu sondan başa doğru çözmüştür: son adımda durum bellidir
+ve bir önceki adımın değeri ondan hesaplanır. Bu hesaplar için bugün Pascal
+üçgeni olarak bilinen sayı tablosunu kullanmıştır. Düşünceler adlı eserinde yer
+alan “Pascal’ın bahsi” ise olasılık küçük olsa bile sonucun büyüklüğünün kararı
+değiştirebileceğini gösterir (Pascal, 1670).
+˙Ilke Bir durumun değeri geçmişe değil, o noktadan sonra olabileceklere bağlıdır.
+Ayrıca kararda olasılık ile sonucun büyüklüğü birlikte tartılır.
+Mühendislikte Bir projeye ne kadar emek harcandığı değil, bundan sonra ne
+getireceği önemlidir. Kötü kod “çok uğraşıldı” diye korunmaz.
+Hayatta Batık maliyet (sunk cost) tuzağından çıkış yolu budur. “Bu işe üç yıl
+verildi” değil, “bundan sonraki üç yıl ne getirir” sorusu sorulur.
+Christiaan Huygens (1629–1695)
+Pascal–Fermat yazışmasını duyan Hollandalı bilim insanı Huygens, 1657’de olasılık
+üzerine ilk basılı kitabı yayımlamıştır. Beklenen değer fikrini açıkça tanımlamıştır:
+bir oyunun adil fiyatı, ortalamada ne kazandırdığıdır (Huygens, 1657).
+˙Ilke Belirsiz bir durum tek bir sayıyla özetlenebilir: her sonucun değeri ile
+olasılığının çarpımlarının toplamı.
+Mühendislikte ˙Iki çözüm karşılaştırılırken ortalama maliyet hesaplanır; örneğin
+bir önbelleğin ortalamada kaç milisaniye kazandırdığı.
+Hayatta Sigorta, piyango ve iş teklifleri ortalamada ne getirdiklerine göre değerlendirilir.
+Piyangonun beklenen değeri her zaman kaybettirir.
+8
+
+-- 8 of 42 --
+
+Klasik Dönem: Tekrar, Değer ve Güncelleme
+On sekizinci yüzyılda olasılık kumar masasından çıkarak doğum istatistiklerine,
+sigortaya, hukuka ve bilimsel gözleme uygulanmıştır.
+John Arbuthnot (1667–1735)
+Arbuthnot, 1710’da Londra’da 82 yıl boyunca her yıl erkek doğumların kız
+doğumlardan fazla olduğunu göstermiş ve bunun tesadüf olma olasılığının son
+derece küçük olduğunu hesaplamıştır (Arbuthnot, 1710). Bu çalışma tarihteki
+ilk istatistiksel anlamlılık testi sayılır.
+˙Ilke Bir desen tesadüfle açıklanamayacak kadar tutarlıysa arkasında bir sebep
+vardır.
+Mühendislikte Bir hata hep aynı saatte ya da aynı kullanıcı tipinde çıkıyorsa
+bu şans değildir; desen aranır.
+Hayatta Bir kez olan şey tesadüf olabilir; sürekli tekrar eden şey bir işarettir.
+Jakob Bernoulli (1655–1705)
+Ölümünden sonra yayımlanan Ars Conjectandi (Tahmin Sanatı) adlı eserinde
+büyük sayılar yasasını ispatlamıştır: deneme sayısı arttıkça gözlenen oran
+gerçek orana yaklaşır (Bernoulli, 1713). Bu çalışma olasılığı zar oyunlarından
+çıkarıp gerçek dünyaya bağlamıştır.
+˙Ilke Az sayıda gözlem yanıltır, çok sayıda gözlem gerçeği gösterir.
+Mühendislikte Bir performans ölçümü (benchmark ) bir kez değil çok kez çalıştırılır.
+Az veriyle karar verilmez.
+Hayatta Tek bir kötü deneyimle bir şehir, bir insan ya da bir yöntem hakkında
+hüküm verilmez.
+Abraham de Moivre (1667–1754)
+De Moivre, çok sayıda denemenin sonucunun bugün normal dağılım ya da
+çan eğrisi denen şekle yaklaştığını göstermiştir. Belirsizliğin deneme sayısının
+karekökü oranında azaldığı sonucu da bu çalışmadan çıkar (de Moivre, 1718).
+˙Ilke Belirsizliği yarıya indirmek için dört kat veri gerekir. Veri arttıkça her yeni
+verinin katkısı azalır.
+Mühendislikte Ölçüm doğruluğunu artırmanın bir maliyeti vardır. Belli bir
+noktadan sonra daha fazla test çalıştırmak çok az şey kazandırır.
+Hayatta “Biraz daha araştırılsın” demenin bir sınırı vardır. Belli bir noktadan
+sonra karar vermek, daha fazla bilgi toplamaktan daha değerlidir.
+9
+
+-- 9 of 42 --
+
+Daniel Bernoulli (1700–1782)
+Daniel Bernoulli, St. Petersburg paradoksunu çözmüştür. Paradoksta beklenen
+değeri sonsuz görünen bir oyuna kimse büyük para ödemek istemez. Bernoulli’ye
+göre sebep, paranın değerinin herkes için aynı olmamasıdır: yoksul biri için 1.000
+lira, varlıklı biri için 1.000 liradan çok daha değerlidir. Bu kişisel değere fayda
+(utility) adını vermiştir (Bernoulli, 1738).
+˙Ilke Karar verirken paranın miktarına değil, kişi için taşıdığı değere bakılır.
+Seni oyundan atacak kayıp, ortalamaya katılmaz.
+Mühendislikte Sistemi batıracak riskler (veri kaybı, güvenlik açığı) “ortala-
+mada iyi” hesabıyla göze alınmaz.
+Hayatta Birikimin tamamını tek bir yatırıma koymamak bu ilkenin uygula-
+masıdır.
+Thomas Bayes (1701–1761)
+Ölümünden sonra Richard Price tarafından yayımlanan makalesinde, yeni kanıt
+geldiğinde bir inancın nasıl güncelleneceğini göstermiştir (Bayes, 1763). Bu
+yöntem bugün Bayes teoremi olarak bilinir.
+˙Ilke Başlangıç inancı ile yeni kanıt birleşerek güncellenmiş inancı verir. Hiçbir
+inanç kesin değildir.
+Mühendislikte Hata ayıklamanın özüdür. Her testten sonra şüpheliler yeniden
+sıralanır: “Kayıtlarda bu çıktı, o hâlde sorun büyük ihtimalle verita-
+banında değil.”
+Hayatta Birini ilk izlenimle yargılayıp fikri hiç değiştirmemek yerine, yeni
+davranışlar görüldükçe görüş ayarlanır.
+Comte de Buffon (1707–1788)
+Buffon, çizgili bir zemine atılan iğnenin çizgiye değme olasılığını hesaplamış ve
+sonuçta π sayısının ortaya çıktığını göstermiştir (Buffon, 1777). Böylece rastgele
+deneylerle bir matematik sabitini tahmin etmenin mümkün olduğu anlaşılmıştır.
+˙Ilke Hesaplaması zor olan bir şey, çok sayıda rastgele deneme yapılarak tahmin
+edilebilir.
+Mühendislikte Simülasyonun ve Monte Carlo yönteminin atasıdır. Formülü
+bilinmeyen bir sistem binlerce kez rastgele çalıştırılarak davranışı gözlenir.
+Hayatta Bir şeyin nasıl sonuçlanacağı bilinmiyorsa küçük ve ucuz denemelerle
+öğrenilir.
+10
+
+-- 10 of 42 --
+
+Marquis de Condorcet (1743–1794)
+Condorcet, 1785’te jüri teoremini ortaya koymuştur: her biri yarıdan biraz fa-
+zla olasılıkla doğru karar veren kişilerden oluşan bir grupta, kişi sayısı arttıkça
+çoğunluk kararı neredeyse kesin olarak doğruya ulaşır (Condorcet, 1785). Teo-
+remin şartı, kişilerin birbirinden bağımsız karar vermesidir.
+˙Ilke Birçok bağımsız görüş, tek bir görüşten daha güvenilirdir. Görüşler bir-
+birini kopyalıyorsa bu avantaj kaybolur.
+Mühendislikte Kod incelemesinde farklı kişilerin bağımsız bakması değerlidir.
+Herkes ilk yorumu okuyup ona katılıyorsa aslında tek bir inceleme yapılmış
+olur.
+Hayatta Tavsiye alınırken birbirini tanımayan, farklı çevrelerden insanlara danışılır.
+Pierre-Simon Laplace (1749–1827)
+Laplace, olasılığı kapsamlı bir teori hâlinde toplamış (Laplace, 1812), Bayes’in
+fikrini geliştirip yaygınlaştırmıştır. “Güneş yarın doğacak mı?” gibi soru-
+larla gözlemden tahmin yapmayı sistemleştirmiştir. Olasılık teorisini hesaba
+dökülmüş sağduyu olarak tanımlamıştır (Laplace, 1814).
+˙Ilke Hiçbir şey bilinmiyorsa olasılıklar eşit sayılır. Ayrıca hiçbir şeye tam sıfır
+ya da tam yüzde yüz olasılık verilmez; hiç görülmemiş bir şey imkânsız
+değildir.
+Mühendislikte “Bu asla olmaz” denen durumlar için bile en azından bir hata
+mesajı ya da kayıt bırakılır.
+Hayatta “Kesin” ve “asla” kelimeleri az kullanılır. Bugüne kadar olmamış
+olması, hiç olmayacağı anlamına gelmez.
+11
+
+-- 11 of 42 --
+
+On Dokuzuncu Yüzyıl: Ölçüm, Toplum ve Hata
+On dokuzuncu yüzyılda olasılık astronomik ölçümlere, nüfus istatistiklerine,
+halk sağlığına ve ekonomiye uygulanmıştır.
+Carl Friedrich Gauss (1777–1855)
+Gauss, ölçüm hatalarını incelemiş ve birçok küçük, bağımsız hatanın toplamının
+çan eğrisi oluşturduğunu göstermiştir. En küçük kareler yöntemiyle hatalı
+ölçümlerden en iyi tahminin nasıl çıkarılacağını ortaya koymuştur (Gauss, 1809).
+˙Ilke Her ölçümde hata vardır. Tek ölçüme değil, birçok ölçümün ortalamasına
+güvenilir.
+Mühendislikte Performans ölçülürken tek bir sayı değil, ortalama ve sapma
+birlikte raporlanır. Gürültü sinyalden ayrılır.
+Hayatta Bir günlük ruh hâli, bir sınav sonucu ya da bir aylık kazanç gürültü
+içerir. Tek noktaya değil eğilime bakılır.
+Sim´eon Denis Poisson (1781–1840)
+Poisson, nadir ama sürekli olabilecek olayların (kazalar, hatalar, gelen çağrılar)
+nasıl dağıldığını gösteren dağılımı tanımlamıştır (Poisson, 1837).
+˙Ilke Rastgele olaylar eşit aralıklarla gelmez, bazen kümelenir. Art arda gelen
+kötü olaylar çoğu zaman yalnızca rastlantıdır.
+Mühendislikte Sunucuya gelen istekler düzenli gelmez; ani yığılmalar olur.
+Kapasite ortalamaya göre değil yığılmalara göre planlanır.
+Hayatta Kötü olaylar üst üste geldiğinde bunun kişisel bir örüntü olduğu
+sanılmaz; rastgeleliğin doğasında kümelenme vardır.
+Adolphe Quetelet (1796–1874)
+Quetelet çan eğrisini insanlara uygulamış (boy, kilo, suç oranları) ve “orta-
+lama insan” fikrini ortaya atmıştır (Quetelet, 1835). Fikrin sınırı yüzyıl sonra
+görülmüştür: 1950’lerde ABD Hava Kuvvetleri pilot kokpitlerini ortalama ölçülere
+göre tasarlamış, ancak binlerce pilotun ölçüldüğü çalışmada on temel ölçünün
+hepsinde ortalama aralığa uyan tek bir pilot bile bulunamamıştır (Daniels,
+1952). C özüm ayarlanabilir koltuk olmuştur (Rose, 2016).
+˙Ilke Toplumlar ortalamalarla anlaşılabilir, ama ortalama insan yoktur.
+Mühendislikte Tasarım ortalama kullanıcıya göre değil, kullanıcı aralığına
+göre yapılır. Ayarlanabilirlik bu yüzden değerlidir.
+Hayatta “Ortalama insan böyle yaşar” bilgisi bir kişiye uymayabilir; kişinin
+kendi durumuna bakılır.
+12
+
+-- 12 of 42 --
+
+Florence Nightingale (1820–1910)
+Nightingale, Kırım Savaşı’nda askerlerin çoğunun yaralardan değil hastane koşullarından
+kaynaklanan hastalıklardan öldüğünü verilerle göstermiştir. Bu bulguyu kendi
+tasarladığı grafiklerle hükümete sunmuş ve hastane reformunu başlatmıştır (Nightin-
+gale, 1858).
+˙Ilke Doğru gösterilen veri ikna eder ve yerleşik inançları değiştirebilir.
+Mühendislikte Bir sorunu çözmek yetmez; karar vericilere anlaşılır biçimde
+göstermek gerekir. ˙Iyi bir grafik uzun bir rapordan daha etkilidir.
+Hayatta Bir şey değiştirilmek isteniyorsa fikir değil kanıt sunulur.
+Pafnuti C ebışev (1821–1894)
+C ebışev, dağılımın şekli hiç bilinmese bile değerlerin ortalamadan ne kadar uza-
+klaşabileceğine bir üst sınır koyan eşitsizliği ispatlamıştır (Chebyshev, 1867).
+˙Ilke Her şey bilinmese de en kötü durum için güvenli bir sınır konabilir.
+Mühendislikte Güvenlik payı mantığıdır. Yük tam bilinmese bile sistem kaldırabileceğinden
+daha az yüklenirse güvende kalır.
+Hayatta Belirsizlikte “ne kadar kötü olabilir?” sorusuna kabaca bir sınır koy-
+mak kaygıyı yönetilebilir kılar.
+Simon Newcomb (1835–1909) ve Frank Benford (1883–1948)
+Newcomb, 1881’de logaritma tablolarının ilk sayfalarının daha çok yıprandığını
+fark etmiştir (Newcomb, 1881). Benford 1938’de binlerce gerçek veriyle bu
+gözlemi doğrulamıştır: doğal verilerde sayıların ilk basamağı yaklaşık üçte bir
+oranında 1’dir; 9 ise en nadir ilk basamaktır (Benford, 1938).
+˙Ilke Gerçek verinin kendine özgü doğal desenleri vardır. Uydurulmuş veri genel-
+likle bu desenlere uymaz.
+Mühendislikte Muhasebe sahteciliğinin ve seçim verisi usulsüzlüklerinin tespitinde
+kullanılır. Test verisi üretilirken de gerçek verinin dağılımı taklit edilir;
+düz rastgele sayılar gerçekçi değildir.
+Hayatta Fazla düzgün görünen sonuçlar şüphe uyandırır.
+Francis Galton (1822–1911)
+Galton, çok uzun boylu anne babaların çocuklarının genellikle onlardan biraz
+daha kısa olduğunu gözlemlemiş ve buna ortalamaya dönüş (regression to the
+mean) adını vermiştir (Galton, 1886).
+13
+
+-- 13 of 42 --
+
+˙Ilke Uç bir sonucun ardından genellikle daha sıradan bir sonuç gelir. Bunun
+sebebi çoğu zaman bir müdahale değil, şansın normale dönmesidir.
+Mühendislikte Sistemin çok yavaşladığı gün bir ayar değiştirilir ve ertesi gün
+sistem düzelir. Ayar işe yaramış olabilir; sistem zaten normale de dönebilirdi.
+Hayatta Kahneman’ın aktardığı örnekte uçuş eğitmenleri, kötü inişten sonra
+azarlanan öğrencinin bir sonraki inişte daha iyi yaptığını görüp azarın işe
+yaradığını düşünmüştür. Gerçekte gözlenen, yalnızca ortalamaya dönüştür
+(Kahneman, 2011).
+Joseph Bertrand (1822–1900)
+Bertrand 1889’da bir paradoks yayımlamıştır: bir çemberde “rastgele” bir kiriş
+seçildiğinde uzunluğunun belli bir değerden büyük olma olasılığı nedir? Rastgele
+seçmenin üç makul yolu vardır ve her biri farklı cevap verir: 1/2, 1/3 ve 1/4
+(Bertrand, 1889).
+˙Ilke “Rastgele” kelimesi tek başına bir şey söylemez. Seçimin nasıl rastgele
+yapıldığı tanımlanmadan olasılık hesaplanamaz.
+Mühendislikte “Rastgele kullanıcılarla test edildi” ifadesi belirsizdir: rastgele
+hesaplar mı, rastgele istekler mi, rastgele günler mi? Her biri farklı sonuç
+verir.
+Hayatta Bir istatistik görüldüğünde verinin nasıl seçildiği sorulur.
+Vilfredo Pareto (1848–1923) ve George Zipf (1902–1950)
+Pareto, gelir ve servetin toplumda çok eşitsiz dağıldığını göstermiştir; popüler
+anlatımda bu, toprağın yaklaşık yüzde 80’inin nüfusun yüzde 20’sine ait olduğu
+gözlemi olarak aktarılır (Pareto, 1896). Zipf ise dillerde en sık kullanılan keli-
+menin ikinciden yaklaşık iki kat, üçüncüden yaklaşık üç kat daha sık geçtiğini
+bulmuştur (Zipf, 1949). ˙Iki gözlem de aynı yapıya işaret eder: birçok alanda
+küçük bir kısım sonucun büyük kısmını belirler. “80/20 kuralı” adı sonradan
+kalite uzmanı Joseph Juran tarafından yaygınlaştırılmıştır.
+˙Ilke Sonuçların çoğu nedenlerin azından gelir. Her şeye eşit emek vermek yerine
+az ama etkili kısım bulunur.
+Mühendislikte Hataların çoğu kodun küçük bir bölümünden, yavaşlığın çoğu
+birkaç fonksiyondan çıkar. Önce profil çıkarılır, sonra o birkaç yere odak-
+lanılır.
+Hayatta Mutluluğu en çok etkileyen birkaç insan ve birkaç alışkanlık vardır;
+enerji oraya yöneltilir.
+14
+
+-- 14 of 42 --
+
+1900–1945: Kuramın Kurulması ve Sanayiye Geçiş
+Yirminci yüzyılın ilk yarısında olasılık sağlam matematiksel temellere oturmuş,
+aynı zamanda telefon şebekelerine, fabrikalara, tarıma ve savaş planlamasına
+uygulanmıştır.
+Karl Pearson (1857–1936)
+Pearson, iki değişkenin birlikte ne kadar değiştiğini ölçen korelasyon katsayısını
+sistemleştirmiş ve ki-kare testini geliştirmiştir (Pearson, 1900).
+˙Ilke ˙Iki şeyin birlikte hareket etmesi ölçülebilir; ama birlikte hareket etmek,
+birinin diğerine sebep olduğu anlamına gelmez.
+Mühendislikte ˙Işlemci kullanımı ile hata oranı birlikte artıyor olabilir. Sebep
+ikisini birden artıran üçüncü bir etken, örneğin yoğun trafik olabilir.
+Hayatta Dondurma satışı ile boğulma vakaları birlikte artar. Sebep dondurma
+değil, yaz mevsimidir.
+Henri Poincar´e (1854–1912)
+Poincar´e, fark edilemeyecek kadar küçük bir sebebin çok büyük bir sonuç doğurabileceğini
+göstermiş ve bu durumda sonuca “şans” dememizin sebebinin o küçük sebebi
+görememek olduğunu yazmıştır (Poincar´e, 1908). Kaos teorisinin öncüsü sayılır.
+˙Ilke Bazı sistemlerde başlangıçtaki küçük farklar sonucu tamamen değiştirir.
+Bu sistemlerde uzun vadeli kesin tahmin imkânsızdır.
+Mühendislikte Dağıtık sistemlerde küçük bir zamanlama farkı bambaşka sonuçlar
+doğurabilir. Bu tür hatalar tekrar üretmesi en zor hatalardır.
+Hayatta Hava durumu gibi hayat da uzun vadede tahmin edilemez. Uzun
+planlar yapılır ama sık güncellenir.
+Andrey Markov (1856–1922)
+Markov, bir sonraki adımın yalnızca şu anki duruma bağlı olduğu süreçleri in-
+celemiştir (Markov, 1906). Bu süreçler bugün Markov zincirleri olarak bilinir.
+˙Ilke Bazı sistemlerde geçmişin tamamı değil, şu anda bulunulan durum belir-
+leyicidir.
+Mühendislikte Durum makineleri (state machine) bu fikre dayanır. Sistemin
+davranışı bulunduğu duruma ve geçiş kurallarına göre tasarlanır.
+Hayatta Geçmiş hataları sürekli düşünmek yerine “şu an neredeyim ve bu-
+radan nereye gidebilirim?” sorusuna odaklanılır.
+15
+
+-- 15 of 42 --
+
+Agner Krarup Erlang (1878–1929)
+Kopenhag telefon şirketinde çalışan Danimarkalı mühendis Erlang, aynı anda
+kaç arama gelebileceğini ve kaç hat gerektiğini hesaplamak için kuyruk teorisini
+kurmuştur (Erlang, 1909). Trafik yoğunluğunun birimi bugün onun adını taşır.
+˙Ilke Rastgele gelen talepler, kapasite doluluğa yaklaştıkça bekleme sürelerini
+bir anda patlatır. Yüzde 90 dolu bir sistem, yüzde 50 dolu bir sistemden
+çok daha fazla bekletir.
+Mühendislikte Sunucu, veritabanı bağlantısı ve iş kuyruğu kapasiteleri yüzde
+yüze göre değil, rahat bir boşluk bırakılarak planlanır.
+Hayatta Takvim tamamen doluysa beklenmedik tek bir olay her şeyi çökertir.
+Boş zaman bırakmak verimsizlik değil dayanıklılıktır.
+Udny Yule (1871–1951) ve Edward Simpson (1922–2019)
+Yule (1903) ve Simpson (1951), bir eğilimin veri gruplara bölündüğünde tersine
+dönebileceğini göstermiştir. Bu durum Simpson paradoksu olarak bilinir. Bi-
+linen örnek 1973 Berkeley Üniversitesi başvurularıdır: genel olarak erkeklerin
+kabul oranı kadınlardan yüksek görünmektedir, ancak bölüm bölüm bakıldığında
+çoğu bölümde kadınların kabul oranı eşit ya da daha yüksektir. Fark, kadınların
+kabulü daha zor bölümlere daha çok başvurmasından kaynaklanmaktadır (Bickel,
+Hammel ve O’Connell, 1975).
+˙Ilke Toplam veriye bakıp sonuç çıkarılmaz. Gruplara ayrıldığında tablo değişebilir.
+Mühendislikte Yeni bir sürüm genel olarak daha yavaş görünebilir. Ancak
+her cihaz tipinde daha hızlı olabilir; yalnızca yavaş cihaz kullanan kullanıcı
+oranı artmış olabilir.
+Hayatta “Bu hastane daha çok hasta kaybediyor” bilgisi yanıltıcı olabilir; en
+ağır vakalar oraya gidiyor olabilir.
+William Sealy Gosset, “Student” (1876–1937)
+Guinness bira fabrikasında çalışan Gosset’nin elinde yalnızca birkaç örnek vardı.
+Az veriyle nasıl doğru sonuç çıkarılacağını gösteren t-dağılımını bulmuştur. Sirket
+izin vermediği için çalışmasını “Student” takma adıyla yayımlamıştır (Student,
+1908).
+˙Ilke Veri azsa daha temkinli olunur ve belirsizlik aralığı geniş tutulur.
+Mühendislikte Beş ölçümle “yüzde 20 hızlandı” demek fazla iddialı olabilir.
+Farkın gerçek mi gürültü mü olduğu test edilir.
+Hayatta Az denenmiş bir şey hakkında kesin konuşulmaz.
+16
+
+-- 16 of 42 --
+
+Frank Knight (1885–1972)
+Knight, 1921’de risk ile belirsizliği ayırmıştır (Knight, 1921). Risk, olasılıkları
+bilinen durumlardır (zar gibi). Belirsizlik ise olasılıkların bile bilinmediği du-
+rumlardır (yeni bir teknolojinin geleceği gibi).
+˙Ilke Her belirsiz durum hesaplanabilir değildir. Hesaplanabilen risk hesaplanır;
+hesaplanamayan belirsizlik için esneklik ve yedek bırakılır.
+Mühendislikte Bilinen hata oranları için yedeklilik tasarlanır. Yeni bir teknolo-
+jiye geçerken ise ne çıkacağı bilinemediği için geri dönüş yolu bırakılır.
+Hayatta Kariyer ya da ülke değiştirme gibi kararlarda kesin olasılık hesabı
+yapılamaz. Geri dönüşü mümkün küçük adımlar bu yüzden daha güvenlidir.
+John Maynard Keynes (1883–1946)
+Ekonomist olarak tanınan Keynes, 1921’de olasılık üzerine de bir kitap yazmıştır
+(Keynes, 1921). En bilinen sözlerinden biri, uzun vadede hepimizin ölü olacağıdır
+(Keynes, 1923).
+˙Ilke “Uzun vadede ortalama iyi olur” demek yetmez. Uzun vadeye ulaşana
+kadar kısa vadede ayakta kalmak gerekir.
+Mühendislikte Bir mimarinin uzun vadede daha iyi olması doğru olabilir; an-
+cak geçiş sürecinde sistem çökerse uzun vadeye ulaşılamaz.
+Hayatta Bin tekrar sorusunun tamamlayıcısıdır: o bine ulaşana kadar dayanılabilir
+mi?
+Frank Ramsey (1903–1930) ve Bruno de Finetti (1906–
+1985)
+Ramsey ve de Finetti, olasılığın bir kişinin bir şeye ne kadar inandığının ölçüsü
+olduğunu savunmuştur (Ramsey, 1926; de Finetti, 1937). Bunu test etmenin
+yolu bahistir: gerçekten inanılıyorsa o olasılığa göre bahse girmeye razı ol-
+unmalıdır. Tutarsız inançlara sahip birinin bahislerde sistematik olarak para
+kaybedeceğini göstermişlerdir.
+˙Ilke “Buna bahse girer misin?” sorusu bir inancın ne kadar ciddi olduğunu
+ortaya çıkarır.
+Mühendislikte “Bu kod kesin çalışır” diyen kişi onu cuma akşamı yayına al-
+maya razı değilse, o kadar emin değildir.
+Hayatta Söylenen ile yapılmaya razı olunan arasındaki fark gerçek inancı gösterir.
+17
+
+-- 17 of 42 --
+
+Walter Shewhart (1891–1967) ve W. Edwards Deming (1900–
+1993)
+Shewhart, 1920’lerde Bell Laboratuvarı’nda kontrol grafiğini geliştirmiştir (She-
+whart, 1931). Deming bu fikri savaş sonrası Japon sanayisine taşımış ve kalite
+devrimine katkıda bulunmuştur (Deming, 1986). ˙Ikisinin temel ayrımı şudur:
+bir sistemdeki değişkenliğin bir kısmı normal gürültüdür, bir kısmı ise özel bir
+sebepten gelir.
+˙Ilke Normal dalgalanmaya müdahale etmek işleri kötüleştirir. Yalnızca gerçekten
+sıra dışı olan değişime müdahale edilir.
+Mühendislikte Her küçük metrik oynamasında alarm kurmak ve ayar değiştirmek
+sistemi daha dengesiz yapar. Önce normal aralık öğrenilir, sonra o aralığın
+dışına çıkanlara tepki verilir.
+Hayatta Tartıdaki günlük bir oynamaya göre beslenme düzenini değiştirmek
+bu hatanın örneğidir. Normal dalgalanma sinyal sanılmaz.
+Andrey Kolmogorov (1903–1987)
+Kolmogorov, 1933’te olasılığa kesin matematiksel temel (aksiyomlar) kazandırmıştır
+(Kolmogorov, 1933). Olasılık, belirsiz sezgilerden kesin kuralları olan bir matem-
+atik dalına dönüşmüştür.
+˙Ilke Önce olası sonuçların neler olduğu açıkça tanımlanır. Bütün olasılıkların
+toplamı her zaman 1’dir.
+Mühendislikte Bir fonksiyonun alabileceği bütün girdiler ve çıktılar açıkça
+tanımlanır; tanımsız durum bırakılmaz.
+Hayatta Bir olasılık artırılıyorsa başka bir şeyin olasılığı azalıyordur. Her şey
+aynı anda “çok muhtemel” sayılamaz.
+Jerzy Neyman (1894–1981) ve Egon Pearson (1895–1980)
+Neyman ve Pearson, karar verirken iki tür hata yapılabileceğini netleştirmiştir:
+olmayan bir şeyi var sanmak (yanlış alarm) ve olan bir şeyi kaçırmak (Neyman
+ve Pearson, 1933).
+˙Ilke Bir hata türü azaltılmaya çalışıldıkça diğeri artar. Hangisinin daha pahalı
+olduğuna karar verilmesi gerekir.
+Mühendislikte Alarm eşikleri bunun tipik örneğidir. Eşik çok düşükse ekip
+gece yarısı boşuna uyanır, çok yüksekse gerçek sorun kaçırılır. ˙Istenmeyen
+e-posta filtresi de çok sıkı olursa önemli e-postalar kaybolur.
+Hayatta Tıbbi taramalar, işe alım ve güvenlik kontrollerinde “hangi hatayı
+yapmak daha çok göze alınabilir?” sorusu vardır.
+18
+
+-- 18 of 42 --
+
+Ronald Fisher (1890–1962)
+Fisher, deney tasarımını kurmuş ve deneklerin gruplara rastgele atanmasının,
+sebep ile tesadüfü ayırmanın en güvenilir yolu olduğunu göstermiştir (Fisher,
+1935).
+˙Ilke Bir şeyin işe yarayıp yaramadığını anlamak için onu uygulayan ve uygula-
+mayan gruplar rastgele seçilip karşılaştırılır.
+Mühendislikte A/B testleri bu fikre dayanır: yeni bir özelliğin işe yarayıp
+yaramadığı, kullanıcılar rastgele ikiye bölünerek ölçülür.
+Hayatta “Su yapıldı, düzeldi” yerine “yapılmasaydı ne olurdu?” sorusu soru-
+lur.
+´ Emile Borel (1871–1956)
+Borel, “tek şans yasası” adını verdiği pratik bir kural önermiştir: olasılığı yeter-
+ince küçük olan olaylar pratikte hiç gerçekleşmez kabul edilebilir (Borel, 1943).
+˙Ilke Teoride mümkün olan her şey dert edilmez. Bir eşik belirlenir ve altındakiler
+pratikte imkânsız sayılır.
+Mühendislikte ˙Iki UUID’nin çakışması teorik olarak mümkündür ama olasılığı
+o kadar küçüktür ki pratikte göz ardı edilir. Her olasılığa karşı kod yaz-
+maya çalışmak sistemi gereksiz yere karmaşıklaştırır.
+Hayatta C ok uzak ihtimallerle zihni meşgul etmek kaygı üretir, fayda üretmez.
+Bu kural, Mandelbrot’un uç olayların sanıldığından sık olduğu gözlemiyle
+dengelenmelidir.
+George P´olya (1887–1985)
+P´olya’nın incelediği torba modelinde torbadan bir top çekilir ve aynı renkten bir
+top daha eklenerek geri konur (Eggenberger ve P´olya, 1923). Başta tamamen
+şansa bağlı küçük farklar zamanla büyüyüp kalıcı hâle gelir. P´olya ayrıca Nasıl
+C özmeli? kitabıyla problem çözme yöntemini öğretmiştir (P´olya, 1945).
+˙Ilke Başlangıçtaki küçük şans avantajları kendini besleyerek büyür. Kazanan
+çoğu zaman en iyi olan değil, erken öne geçendir.
+Mühendislikte Bir teknolojinin standart olması genellikle en iyi olmasından
+değil erken yaygınlaşmasından gelir. Kütüphane seçerken yalnızca kaliteye
+değil ekosistemin büyüklüğüne de bakılır.
+Hayatta Başarılı insanların başarısı yalnızca yetenekle açıklanmaz; erken bir
+şans sonrasını çok etkiler. Erken başlamak bu yüzden değerlidir.
+19
+
+-- 19 of 42 --
+
+John von Neumann (1903–1957) ve Stanislaw Ulam (1909–
+1984)
+Von Neumann, Oskar Morgenstern ile birlikte oyun teorisini ve beklenen fayda
+teorisini kurmuştur (von Neumann ve Morgenstern, 1944). Ulam ile birlikte, bil-
+gisayarda rastgele denemelerle karmaşık problemleri çözen Monte Carlo yöntemini
+geliştirmiştir (Metropolis ve Ulam, 1949). Ulam’ın fikri, hastayken oynadığı bir
+iskambil oyununun kazanma olasılığını merak etmesiyle başlamıştır.
+˙Ilke Sonuç yalnızca kişinin kendi kararına değil, karşı tarafın kararlarına da
+bağlı olabilir. C özülemeyen bir hesap binlerce kez simüle edilerek yaklaşık
+olarak bulunabilir.
+Mühendislikte Güvenlik tasarımında saldırganın ne yapacağı düşünülür. Karmaşık
+sistemlerin davranışı simülasyonla test edilir.
+Hayatta Pazarlıkta ve rekabette karşı tarafın ne düşüneceği hesaba katılır.
+Abraham Wald (1902–1950)
+˙Ikinci Dünya Savaşı’nda ABD ordusu, geri dönen uçaklarda kurşun deliklerinin
+en çok olduğu yerlere zırh eklemeyi düşünmüştür. Wald bunun tersini önermiştir:
+zırh, delik olmayan yerlere konmalıdır; çünkü o bölgelerden vurulan uçaklar hiç
+geri dönememiştir (Wald, 1943). Bu durum hayatta kalan yanlılığı (survivor-
+ship bias) olarak bilinir.
+˙Ilke Görülen veri hayatta kalanların verisidir. Görülmeyenler çoğu zaman daha
+önemlidir.
+Mühendislikte Yalnızca şikâyet eden kullanıcılar dinlenirse, uygulamayı ses-
+sizce bırakanlar görülmez. Hata raporları da çökmeden önce rapor gönderebilen
+istemcilerden gelir.
+Hayatta Okulu bırakıp çok başarılı olanlar görülür, okulu bırakıp zorlananlar
+görülmez. Sosyal medyadaki başarı hikâyeleri de aynı süzgeçten geçmiştir.
+20
+
+-- 20 of 42 --
+
+1945–1970: Bilgi, Güvenilirlik ve Karar
+Savaş sonrası dönemde olasılık iletişim mühendisliğine, bilgisayar donanımına,
+güvenilirlik analizine, finansa ve karar biliminin kendisine uygulanmıştır.
+Claude Shannon (1916–2001)
+Shannon, 1948’de bilgi teorisini kurmuştur (Shannon, 1948). Bilgiyi belirsi-
+zliğin azalması olarak tanımlamıştır: beklenmedik bir olay çok bilgi taşır, bek-
+lenen olay az bilgi taşır.
+˙Ilke Saşırtıcı olan bilgilidir. Hep aynı şeyi söyleyen bir kaynak yeni bir şey
+öğretmez.
+Mühendislikte Her şeyi kaydetmek yerine beklenmedik olan kaydedilir. Sürekli
+çalan alarm alarm olmaktan çıkar.
+Hayatta Saşırtan şeylere dikkat edilir; öğrenilecek bir şey oradadır. Her konuda
+hak veren biri yeni bilgi vermez.
+Richard Hamming (1915–1998)
+Bell Laboratuvarı’nda hafta sonları çalışan bilgisayarların küçük hatalar yüzünden
+işleri yarıda bırakması üzerine Hamming, hatayı yalnızca fark eden değil kendi
+kendine düzelten kodlar geliştirmiştir (Hamming, 1950).
+˙Ilke Gürültünün olduğu her yerde hata olacaktır. Akıllıca eklenmiş fazlalık
+(redundancy) hatayı hem yakalar hem düzeltir.
+Mühendislikte Sağlama toplamları (checksum), RAID, bellekteki hata düzeltme
+ve veritabanı çoğaltma bu fikirden gelir.
+Hayatta Önemli bir bilgi tek bir yerde tutulmaz. Önemli bir mesaj biraz tekrar
+edilerek anlatılırsa yanlış anlaşılma azalır.
+Waloddi Weibull (1887–1979)
+Weibull, 1951’de malzemelerin ve parçaların ne zaman bozulacağını modelleyen
+bir dağılım yayımlamıştır (Weibull, 1951). Dağılım güvenilirlik mühendisliğinin
+temel araçlarından biri olmuştur. Bu alanda kullanılan “küvet eğrisi” fikrine
+göre arızalar üç dönemde yoğunlaşır: başta üretim hatalarından kaynaklanan
+erken arızalar, ortada rastgele arızalar, sonda yıpranma arızaları.
+˙Ilke Arıza riski zamanla sabit değildir; yeni olan da eski olan da daha risklidir.
+Mühendislikte Yeni yayına alınan kod ilk günlerde en çok hatayı verir. Uzun
+süredir çalışan sistemlerde de birikmiş teknik borç ve eskiyen bağımlılıklar
+sorun çıkarır. ˙Izleme her iki dönemde sıkı tutulur.
+Hayatta Yeni alınan bir cihazın ilk haftası da, yıllanmış bir aracın son yılları
+da daha fazla dikkat ister.
+21
+
+-- 21 of 42 --
+
+Harry Markowitz (1927–2023)
+Markowitz, 1952’de modern portföy teorisini kurmuştur (Markowitz, 1952).
+Riskin yalnızca tek tek yatırımlara değil, bunların birbiriyle ne kadar birlikte
+hareket ettiğine bağlı olduğunu göstermiştir. 1990’da Nobel Ekonomi Ödülü’nü
+almıştır.
+˙Ilke Birbirinden bağımsız hareket eden şeylere dağılmak riski azaltır. Hepsi
+aynı anda batıyorsa çeşitlendirme işe yaramaz.
+Mühendislikte ˙Iki yedek sunucu aynı veri merkezinde ve aynı elektrik hattındaysa
+gerçek bir yedek sayılmaz. Yedekler birbirinden bağımsız olmalıdır.
+Hayatta Bütün sosyal çevre aynı iş yerindeyse iş kaybı sosyal çevreyi de sarsar.
+Farklı alanlarda kurulan bağlar dayanıklılık verir.
+Herbert Simon (1916–2001)
+Simon, insanların her kararda en iyi seçeneği hesaplayamayacağını göstermiştir;
+zaman, bilgi ve zihinsel kapasite sınırlıdır. Buna sınırlı rasyonellik (bounded
+rationality) adını vermiştir. ˙Insanlar genellikle en iyiyi değil “yeterince iyi”yi
+seçer (Simon, 1955). 1978’de Nobel Ekonomi Ödülü’nü almıştır.
+˙Ilke Her karar mükemmel yapılmaya çalışılmaz. Bir yeterlilik eşiği belirlenir ve
+onu geçen ilk seçenek alınır.
+Mühendislikte Her kütüphaneyi ve her yöntemi araştırmak yerine ihtiyacı
+karşılayan makul bir çözüm seçilir ve ilerlenir.
+Hayatta Telefon, ev ya da restoran seçerken sonsuza kadar araştırmak mutsu-
+zluk getirir. “Bu kriterleri karşılıyorsa yeterli” demek zamanı ve huzuru
+korur.
+Edward Murphy (1918–1990) ve Shigeo Shingo (1909–1990)
+Murphy yasasının kökeni, 1949’da ABD Hava Kuvvetleri’nde yapılan bir deneyde
+sensörlerin ters takılmasına dayandırılır; ters yapılabilecek bir şey varsa birinin
+mutlaka ters yapacağı sözü buradan doğmuştur. Yasanın kökenine dair an-
+latımlar tartışmalıdır. Shingo ise Toyota’da hatayı imkânsız kılan tasarımları,
+yani poka-yoke yaklaşımını yaygınlaştırmıştır (Shingo, 1986). Bir parça yalnızca
+doğru yönde takılabiliyorsa yanlış takılamaz.
+˙Ilke Yeterince çok tekrarda yapılabilecek her hata yapılır. ˙Insanlardan dikkat
+beklemek yerine hata tasarımla imkânsız hâle getirilir.
+Mühendislikte Tip sistemleri, zorunlu alanlar, geri alınamaz işlemler için onay
+adımı ve yanlış ortama yayına almayı engelleyen kontroller bu ilkeye dayanır.
+USB-C’nin iki yönlü takılabilmesi de aynı fikrin ürünüdür.
+Hayatta Anahtarları hep aynı yere koymak ya da ilaçları günlük bölmeli kutuya
+yerleştirmek, hafızaya değil düzene güvenmektir.
+22
+
+-- 22 of 42 --
+
+John Kelly (1923–1965)
+Bell Laboratuvarı’nda çalışan Kelly, avantajın olduğu bir bahiste sermayenin ne
+kadarının yatırılması gerektiğini hesaplamıştır (Kelly, 1956). Cevap avantajın
+büyüklüğüne bağlı bir orandır; hiçbir zaman sermayenin tamamı değildir.
+˙Ilke Avantajlı olunsa bile her şey tek seferde riske atılmaz. Uzun vadede kazan-
+mak için oyunda kalmak gerekir.
+Mühendislikte Yeni bir değişiklik bütün kullanıcılara birden değil önce küçük
+bir kısmına açılır (kademeli yayın). ˙Işe yarıyorsa oran artırılır.
+Hayatta Yatırımda, kariyerde ve girişimde emin olunan bir fırsata bile her şey
+konmaz.
+Charles Stein (1920–2016)
+Stein, 1956’da şaşırtıcı bir sonuç göstermiştir: birçok büyüklük aynı anda tah-
+min edilirken her tahmini biraz genel ortalamaya doğru çekmek toplamda daha
+isabetli sonuç verir (Stein, 1956). Bradley Efron ve Carl Morris bunu beyzbol
+oyuncularının vuruş ortalamalarıyla yaygınlaştırmıştır: sezon başındaki uç orta-
+lamalar genel ortalamaya çekildiğinde sezon sonunu daha iyi tahmin etmektedir
+(Efron ve Morris, 1977).
+˙Ilke Az veriyle çıkan uç sonuçlar biraz ortalamaya doğru yumuşatılır; uç değer
+genellikle biraz şans içerir.
+Mühendislikte Az yorumu olan bir ürünün 5 yıldızı, binlerce yorumu olan
+ürünün 4,6’sından daha az güvenilirdir. Sıralama sistemleri bu yüzden az
+veriye sahip öğeleri ortalamaya doğru çeker.
+Hayatta Bir insan tek bir harika ya da berbat anına göre değerlendirilmez.
+Bu, ortalamaya dönüşün pratik düzeltmesidir.
+Rudolf K´alm´an (1930–2016)
+K´alm´an, 1960’ta bugün kendi adıyla anılan filtreyi geliştirmiştir (Kalman, 1960).
+Kalman filtresi, bir sistemin nerede olduğunu tahmin etmek için iki kaynağı
+birleştirir: modelin tahmini ve gürültülü ölçüm. Hangisine ne kadar güvenileceğini
+ikisinin belirsizliğine göre ayarlar. Filtre, Apollo görevlerinin seyrüsefer siste-
+minde kullanılmıştır.
+˙Ilke Ne tahmine ne ölçüme körü körüne güvenilir. ˙Ikisi güvenilirliklerine göre
+ağırlıklandırılarak birleştirilir.
+Mühendislikte GPS, insansız hava araçları, robotlar ve telefon sensörleri gürültülü
+sinyalleri bu yöntemle birleştirir.
+Hayatta Bayes güncellemesinin pratik hâlidir: eski bilgi ile yeni gözlem arasında
+hangisi daha sağlamsa ona daha çok ağırlık verilir.
+23
+
+-- 23 of 42 --
+
+Daniel Ellsberg (1931–2023)
+Ellsberg, 1961’de insanların içindeki top oranı bilinen bir torbayı, oranı bil-
+inmeyen bir torbaya tercih ettiğini göstermiştir; mantıken ikisi aynı derecede
+iyi olsa bile (Ellsberg, 1961). Bu eğilim belirsizlikten kaçınma (ambiguity
+aversion) olarak bilinir.
+˙Ilke ˙Insanlar bilinmeyen riskten bilinen riskten daha çok korkar. Bu eğilim
+bazen korur, bazen iyi fırsatları kaçırtır.
+Mühendislikte Ekipler sorunlarını bildikleri eski teknolojiyi, daha iyi olabile-
+cek ama tanımadıkları yeni teknolojiye tercih eder. Bu tercih bazen bil-
+gelik, bazen yalnızca alışkanlıktır.
+Hayatta Yeni bir şehir, iş ya da ülke bilinmediği için olduğundan daha korku-
+tucu görünür. Korkunun gerçek bir riskten mi yoksa yalnızca bilinmezlik-
+ten mi kaynaklandığı sorgulanır.
+Edward Thorp (1932–)
+Thorp, 1962’de blackjack’te kart sayarak kasaya karşı küçük ama gerçek bir
+avantaj elde edilebileceğini göstermiş ve Kelly’nin bahis formülünü uygulamıştır
+(Thorp, 1962). Shannon ile birlikte rulet için giyilebilir bir bilgisayar yapmıştır.
+Daha sonra bu fikirleri borsaya taşıyarak başarılı bir yatırım fonu kurmuştur.
+˙Ilke Küçük bir avantaj, çok sayıda tekrar ve doğru bahis büyüklüğü birleştiğinde
+güvenilir kazanç doğar.
+Mühendislikte Her gün yapılan küçük iyileştirmeler, bir kerelik büyük yeniden
+yazımlardan daha güvenilir sonuç verir.
+Hayatta Bin tekrar sorusunun kazanan tarafıdır: avantaj küçük bile olsa oyunda
+kalınıp tekrarlanırsa birikir.
+Benoit Mandelbrot (1924–2010)
+Mandelbrot, pamuk fiyatlarını incelerken büyük dalgalanmaların çan eğrisinin
+öngördüğünden çok daha sık olduğunu görmüştür (Mandelbrot, 1963). Bazı
+sistemlerde uç olaylar kalın kuyruklu (fat-tailed ) dağılır.
+˙Ilke Her şey çan eğrisine uymaz. Bazı alanlarda nadir sanılan felaketler düzenli
+olarak yaşanır.
+Mühendislikte Ağ trafiği, gecikme süreleri ve dosya boyutları genellikle kalın
+kuyrukludur. Ortalamaya göre yapılan plan uç durumda sistemi çökertir.
+Hayatta Borsa çöküşleri, salgınlar ve büyük krizler “yüz yılda bir” değil, çok
+daha sık yaşanır; hazırlık buna göre yapılır.
+24
+
+-- 24 of 42 --
+
+Austin Bradford Hill (1897–1991)
+Hill, Richard Doll ile birlikte sigara ile akciğer kanseri arasındaki bağı göstermiştir.
+1965’te deney yapılamayan durumlarda sebep-sonuç ilişkisini değerlendirmek
+için bir ölçütler listesi önermiştir: ilişki güçlü mü, tutarlı mı, sebep sonuçtan
+önce mi geliyor, doz arttıkça etki artıyor mu, makul bir mekanizma var mı (Hill,
+1965).
+˙Ilke Deney yapılamıyorsa sebep-sonuç ilişkisi tek bir kanıtla değil, birçok farklı
+işaretin bir araya gelmesiyle değerlendirilir.
+Mühendislikte Canlı sistemde deney yapmak her zaman mümkün değildir. O
+durumda şu sorular sorulur: Hata değişiklikten sonra mı başladı? Değişiklik
+daha çok kullanıldıkça hata artıyor mu? Başka ortamlarda da aynı şey
+oluyor mu?
+Hayatta Tek bir tesadüfe dayanarak sebep bulunmaz; birden fazla işaretin aynı
+yönü gösterip göstermediğine bakılır.
+Ronald Howard (1934–)
+Karar analizinin kurucularından Howard, 1966’da bilginin değeri kavramını
+tanımlamıştır: bir bilgiyi edinmek ancak kararı değiştirebiliyorsa değerlidir (Howard,
+1966).
+˙Ilke Yeni bilgi toplamadan önce bu bilginin kararı değiştirip değiştiremeyeceği
+sorulur. Değiştirmeyecekse toplanmaz.
+Mühendislikte Bir analizin sonucu ne çıkarsa çıksın aynı şey yapılacaksa o
+analiz yapılmaz.
+Hayatta Sonsuz araştırma bir kaçış yolu olabilir. Kararı değiştirmeyecek bil-
+giyi aramak kararı ertelemektir.
+25
+
+-- 25 of 42 --
+
+1970 Sonrası: ˙Insan Yanılgıları, Risk ve Tahmin
+Son dönemin ana bulgusu, insan sezgisinin olasılık konusunda sistematik olarak
+yanıldığı ve karmaşık sistemlerde hatanın istisna değil kural olduğudur. Bu
+dönemin katkıları çoğunlukla sezgiyi düzelten yöntemlerdir.
+Daniel Kahneman (1934–2024) ve Amos Tversky (1937–
+1996)
+Kahneman ve Tversky, insanların olasılık konusunda sistematik olarak nasıl
+yanıldığını göstermiştir: taban oranını unutmak, akılda kalan örneklere fazla
+ağırlık vermek, kayıptan aşırı korkmak gibi (Kahneman ve Tversky, 1979; Kah-
+neman, 2011). 1979’da ayrıca planlama yanılgısını tanımlamışlardır: insanlar
+kendi projelerinin süresini ve maliyetini sistematik olarak olduğundan küçük
+tahmin eder (Kahneman ve Tversky, 1979b).
+˙Ilke Olasılık konusunda sezgi güvenilmezdir. Önemli kararlarda sezgi ölçümle
+kontrol edilir.
+Mühendislikte “Bence yavaşlık burada” demek yerine ölçüm yapılır. Sezgiyle
+yapılan optimizasyon genellikle yanlış yere yapılır.
+Hayatta Haberlerde çok görülen tehlikeler (uçak kazası gibi) gerçekte olduğundan
+büyük, sık ama sessiz riskler (hareketsizlik, trafik) ise olduğundan küçük
+görünür.
+Dan Lovallo ve Bent Flyvbjerg
+Kahneman ve Lovallo, planlama yanılgısına çözüm olarak referans sınıfı tah-
+minini önermiştir: kişinin kendi projesinin ayrıntılarına değil, benzer projelerin
+geçmişte gerçekte ne kadar sürdüğüne bakılır (Kahneman ve Lovallo, 1993). Fly-
+vbjerg bu yöntemi büyük altyapı projelerine uygulamış ve bu projelerin büyük
+çoğunluğunun bütçeyi ve süreyi aştığını göstermiştir (Flyvbjerg, Bruzelius ve
+Rothengatter, 2003).
+˙Ilke “Bu proje farklı” denmez. Önce benzerlerine ne olduğuna bakılır, sonra
+özel duruma göre küçük bir düzeltme yapılır.
+Mühendislikte “Bu yeniden yapılandırma iki hafta sürer” demeden önce son
+beş benzer işin ne kadar sürdüğüne bakılır. Cevap genellikle tahminden
+çok daha uzundur.
+Hayatta Tadilat, taşınma ya da yeni bir dil öğrenme gibi işlerde kişinin iyimser
+planına değil, benzer şeyi yapanların gerçek deneyimine güvenilir.
+26
+
+-- 26 of 42 --
+
+Charles Goodhart (1936–)
+Goodhart, 1975’te ˙Ingiltere Merkez Bankası’ndaki deneyiminden bir yasa çıkarmıştır
+(Goodhart, 1975). Yasanın en bilinen formülasyonu Marilyn Strathern’e aittir:
+bir ölçü hedef hâline geldiğinde iyi bir ölçü olmaktan çıkar (Strathern, 1997).
+˙Ilke ˙Insanlar bir sayıya göre değerlendirildiğinde asıl amaç yerine o sayıyı iy-
+ileştirmeye çalışır.
+Mühendislikte Kod satırı sayısı, kapatılan iş kaydı sayısı ve test kapsama
+oranı hedef hâline gelince anlamsızlaşır: gereksiz kod, küçük parçalara
+bölünmüş iş kayıtları ve hiçbir şeyi test etmeyen testler ortaya çıkar.
+Hayatta Adım sayısı, okunan kitap sayısı ya da gezilen ülke sayısı bir göstergedir,
+amacın kendisi değildir.
+Steve Selvin (1941–) ve Marilyn vos Savant (1946–)
+Monty Hall problemi şöyledir: üç kapıdan birinin arkasında araba vardır. Yarışmacı
+bir kapı seçer. Arabanın yerini bilen sunucu, kalan iki kapıdan boş olanı açar.
+Yarışmacı seçimini değiştirirse kazanma olasılığı 1/3’ten 2/3’e çıkar. Selvin
+problemi 1975’te yayımlamıştır (Selvin, 1975). Vos Savant 1990’da bir dergi
+köşesinde aynı cevabı verince aralarında doktoralı matematikçilerin de bulunduğu
+binlerce kişi ona yanıldığını yazmıştır. Matematikçi Paul Erd˝os’ün de ancak bil-
+gisayar simülasyonunu gördükten sonra ikna olduğu aktarılır (Hoffman, 1998).
+˙Ilke Bilgiyi kimin ve neden verdiği de bilgidir. Sunucunun seçimi rastgele değil
+bilgiye dayalıdır ve bu yeni bilgi taşır. Olasılıkta sezgi en yetkin insanlarda
+bile yanılabilir.
+Mühendislikte Bir kayıt ya da rapor, onu üreten sistemin neyi gösterip neyi
+gizlediğine göre anlam taşır. Sezgi yetmediğinde simülasyon yazılır.
+Hayatta Birinin gösterdiği ve göstermediği şey, ne bildiği hakkında bilgi verir.
+John Tukey (1915–2000)
+Tukey, keşifsel veri analizini (exploratory data analysis) kurmuştur: teoriye
+geçmeden önce veriye bakmak, çizmek, tanımak (Tukey, 1977). “Bit” kelimesini
+de ilk kullanan odur.
+˙Ilke Model kurmadan önce veriye bakılır. Veri, sorulmamış soruların cevabını
+gösterebilir.
+Mühendislikte Optimizasyona başlamadan önce profil çıkarılır, kayıtlar ince-
+lenir ve grafiğe dökülür. Sorun çoğu zaman beklenen yerde değildir.
+Hayatta Bir konuda karar vermeden önce durum önyargısız gözlenir.
+27
+
+-- 27 of 42 --
+
+George Box (1919–2013)
+Deney tasarımı ve zaman serileri üzerine çalışan Box, en çok bütün modellerin
+yanlış ama bazılarının faydalı olduğu sözüyle tanınır (Box, 1979).
+˙Ilke Hiçbir model gerçeğin kendisi değildir. Önemli olan, modelin işe yarayacak
+kadar doğru olmasıdır.
+Mühendislikte Mimari diyagramlar, kapasite hesapları ve tahmin modelleri
+basitleştirmedir. Model kullanılır; gerçekle çeliştiğinde model değiştirilir.
+Hayatta ˙Insanlar ve dünya hakkındaki kalıplar da modeldir. Yol gösterirler
+ama bölgenin kendisi değildirler.
+Bradley Efron (1938–)
+Efron, 1979’da bootstrap yöntemini geliştirmiştir: eldeki veriden yerine ko-
+yarak tekrar tekrar örnek çekip sonucun ne kadar güvenilir olduğunu hesapla-
+mak (Efron, 1979). Yöntem, karmaşık formüllere gerek kalmadan belirsizliği
+ölçmeyi sağlar.
+˙Ilke Sonucun ne kadar sallantılı olduğu eldeki veriyle test edilebilir.
+Mühendislikte Bir performans ölçümünün ne kadar sağlam olduğunu görmek
+için ölçümler yeniden örneklenir ve sonucun ne kadar değiştiğine bakılır.
+Sonuç çok oynuyorsa ona güvenilmez.
+Hayatta “Bu sonuç tesadüf olabilir mi?” sorusu, veriye farklı açılardan tekrar
+tekrar bakılarak cevaplanır.
+Charles Perrow (1925–2019)
+Perrow, Normal Accidents kitabında parçaları sıkı bağlı ve etkileşimleri karmaşık
+sistemlerde kazaların kaçınılmaz olduğunu savunmuştur (Perrow, 1984). C ıkış
+noktası Three Mile Island nükleer santral kazasıdır.
+˙Ilke Karmaşık ve sıkı bağlı sistemlerde kaza istisna değil, normal bir sonuçtur.
+C özüm her hatayı önlemeye çalışmak değil, sistemi daha basit ve gevşek
+bağlı yapmaktır.
+Mühendislikte Mikroservislerin birbirine sıkı bağlı olduğu bir sistemde bir
+servisin yavaşlaması zincirleme çöküşe yol açar. Kuyruklar, zaman aşımları
+ve devre kesiciler (circuit breaker ) bağları gevşetir.
+Hayatta Her parçanın birbirine bağlı olduğu ve hiç boşluk bırakmayan bir plan
+tek bir aksamayla çöker.
+28
+
+-- 28 of 42 --
+
+Richard Feynman (1918–1988)
+Feynman, 1986’da Challenger uzay mekiği kazasını inceleyen Rogers Komisy-
+onu’nda yer almıştır. NASA yönetimi mekiğin kaybolma olasılığını yaklaşık
+100.000’de bir olarak tahmin ederken mühendisler yaklaşık 100’de bir öngörmekteydi.
+Feynman raporuna eklediği değerlendirmede, başarılı bir teknoloji için gerçeğin
+halkla ilişkilerin önüne geçmesi gerektiğini, çünkü doğanın kandırılamayacağını
+yazmıştır (Feynman, 1986).
+˙Ilke Risk tahmini duyulmak istenene göre değil sahadaki veriye göre yapılır.
+Geçmişte sorun çıkmamış olması riskin olmadığını göstermez.
+Mühendislikte “Simdiye kadar hiç çökmedi” demek bir güvenlik kanıtı değildir.
+Sahadaki mühendislerin endişeleri yöneticilerin iyimser tahminlerinden daha
+değerlidir.
+Hayatta ˙Insanın en kolay kandırdığı kişi kendisidir. Hoşa giden tahmine değil
+kanıta bakılır.
+James Reason (1938–)
+Reason, 1990’da ˙Isviçre peyniri modelini önermiştir: her savunma katmanında
+delikler vardır ve kaza, deliklerin tesadüfen aynı hizaya gelmesiyle olur (Reason,
+1990).
+˙Ilke Tek bir savunmaya güvenilmez. Birden çok bağımsız katman, deliklerin
+hizalanma olasılığını çok düşürür. Kazalardan sonra “kim hata yaptı”
+yerine “hangi katmanlar nasıl delindi” sorusu sorulur.
+Mühendislikte Test, kod incelemesi, izleme ve geri alma mekanizması tek
+başına kusurludur ama birlikte güçlüdür. Suçlama içermeyen olay son-
+rası analizler (blameless postmortem) bu fikirden gelir.
+Hayatta Önemli işlerde birden fazla kontrol noktası konur: hatırlatıcı, liste,
+ikinci bir göz.
+Gerd Gigerenzer (1947–)
+Gigerenzer, insanların olasılığı yüzdelerle zor, sıklıklarla kolay anladığını göstermiştir.
+Doktorların bile yüzdelerle anlatılan test sonuçlarını sıklıkla yanlış yorumladığını,
+aynı bilgi “1.000 kişiden 10’u” biçiminde verildiğinde ise doğru anladıklarını
+bulmuştur (Gigerenzer, 2002). Ayrıca belirsiz ortamlarda basit kuralların karmaşık
+modellerden daha iyi çalışabildiğini savunmuştur.
+˙Ilke Olasılık yüzde olarak değil “kaç kişiden kaçı” biçiminde düşünülür. Belir-
+sizlik büyükse basit kurallar güvenilirdir.
+Mühendislikte “Yüzde 0,1 hata oranı” yerine “günde 1.000 kullanıcıdan 1’i
+hata görüyor” demek ekibin durumu gerçekten anlamasını sağlar.
+Hayatta Bin tekrar sorusunun neden işe yaradığının bilimsel açıklamasıdır.
+29
+
+-- 29 of 42 --
+
+John Ioannidis (1965–)
+Ioannidis, 2005’te yayımlanan makalesinde yayımlanmış araştırma bulgularının
+önemli bir kısmının muhtemelen yanlış olduğunu savunmuştur (Ioannidis, 2005).
+Gerekçeleri küçük örneklemler, küçük etkiler, çok sayıda test yapılması, yayımlanma
+baskısı ve beklentiye uyan sonuçları bulma eğilimidir.
+˙Ilke Tek bir çalışma kanıt değildir. Özellikle şaşırtıcı, küçük örneklemli ve
+birçok şeyin test edilip içinden “anlamlı” çıkanın yayımlandığı sonuçlara
+şüpheyle yaklaşılır.
+Mühendislikte Yirmi farklı metriğe bakıldığında bazıları tesadüfen “anlamlı”
+değişmiş görünür. Neyin ölçüleceğine önceden karar verilir.
+Hayatta “Bilim insanları kanıtladı” başlıklı haberlerde sonucun başka çalışmalarla
+tekrarlanıp tekrarlanmadığına bakılır.
+Philip Tetlock (1954–)
+Tetlock, uzmanların tahminlerini yıllarca izlemiş ve çoğunun tahmininin ba-
+sit yöntemlerden pek iyi olmadığını bulmuştur (Tetlock, 2005). Daha sonra
+bazı sıradan insanların çok iyi tahminciler olduğunu keşfetmiştir. “Süper tah-
+minciler” olarak adlandırılan bu kişiler olasılıkları ince ayarlamakta, küçük
+adımlarla güncellemekte ve yanıldıklarında bunu kabul etmektedir (Tetlock ve
+Gardner, 2015).
+˙Ilke Tahminler kaydedilir ve isabetleri kontrol edilir. “Yüzde 70 eminim” denen
+şeylerin gerçekten yüzde 70’inin doğru çıkıp çıkmadığına bakılır.
+Mühendislikte ˙Iş tahminleri kaydedilir ve gerçek sürelerle karşılaştırılır. Birkaç
+ay sonra hangi tür işlerde sistematik olarak yanılındığı görülür.
+Hayatta Kesin konuşan uzmanlardan çok “büyük ihtimalle” diyen ve görüşünü
+güncelleyen insanlara güvenilir.
+Douglas Hubbard
+Hubbard, How to Measure Anything kitabında “ölçülemez” sanılan şeylerin
+aslında ölçülebileceğini savunmuştur (Hubbard, 2007). Ölçmenin amacı kesin-
+lik değil belirsizliği azaltmaktır. Yaygınlaştırdığı “beşli kural”a göre bir gruptan
+rastgele yalnızca beş örnek alındığında, grubun ortancasının bu beşin en küçüğü
+ile en büyüğü arasında olma olasılığı yaklaşık yüzde 94’tür.
+˙Ilke C ok az veri bile belirsizliği büyük ölçüde azaltır. “Kesin ölçülemez” diye
+hiç ölçmemek en büyük hatadır.
+Mühendislikte Kullanıcıların ne hissettiği bilinmiyorsa beş kişiyle görüşülür.
+Bir özelliğin ne kadar kullanıldığı bilinmiyorsa basit bir sayaç konur.
+Hayatta Bir konuda hiç bilgi yoksa küçük bir deneme ya da birkaç kişiye soru-
+lan bir soru bile büyük fark yaratır.
+30
+
+-- 30 of 42 --
+
+Nassim Nicholas Taleb (1960–)
+Taleb, siyah kuğu kavramını yaygınlaştırmıştır: çok nadir, öngörülemeyen
+ama büyük etkili olaylar (Taleb, 2007). Ayrıca antikırılganlık fikrini ortaya
+atmıştır: bazı sistemler şoklardan zarar görmez, güçlenir (Taleb, 2012).
+˙Ilke Öngörülemeyen şeyler tahmin edilmeye çalışılmaz; onlara karşı dayanıklı
+olunur. Riski, sonucuna katlanan kişi almalıdır.
+Mühendislikte Her hata öngörülemez, ama sistemin hatalardan sonra topar-
+lanması sağlanabilir: yedekler, otomatik yeniden başlatma, hata izolasy-
+onu. Kaos testleri sistemi bilerek bozarak güçlendirir.
+Hayatta Tek gelir kaynağına bağlı kalmamak ve küçük zorluklardan kaçmamak
+insanı daha dayanıklı yapar.
+Judea Pearl (1936–)
+Pearl, sebep-sonuç ilişkisini matematiksel olarak ifade etmenin yolunu bulmuş
+ve gözlemlemek ile müdahale etmek arasındaki farkı netleştirmiştir (Pearl, 2009;
+Pearl ve Mackenzie, 2018). 2011’de Turing Ödülü’nü almıştır.
+˙Ilke “Birlikte görülüyor” ile “biri diğerine yol açıyor” farklıdır. Sebebi anlamak
+için sorulacak soru “bu değiştirilirse ne olur?” sorusudur.
+Mühendislikte Metrikler arasında ilişki görmek yetmez. Sebebi anlamak için
+müdahale edilir, test edilir ve sonuç gözlenir.
+Hayatta “Başarılı insanlar erken kalkıyor” gözlemi, erken kalkmanın başarı
+getireceği anlamına gelmez.
+Annie Duke (1965–)
+Profesyonel poker oyuncusu Duke, karar kalitesi ile sonuç kalitesinin karıştırılmasına
+resulting adını vermiş ve kararları bahis gibi düşünmeyi önermiştir (Duke, 2018).
+˙Ilke Bir karar sonucuna göre değil, verildiği andaki bilgiye ve mantığa göre
+değerlendirilir. Kötü sonuç her zaman kötü karar demek değildir.
+Mühendislikte Bir olay sonrası analizde “bu kararı veren yanıldı” demeden
+önce o anki bilgiyle kararın makul olup olmadığı sorulur. Makul değilse
+süreç düzeltilir; makulse sonuç şanssızlık olabilir.
+Hayatta Kendine ve başkalarına karşı daha adil olmanın yoludur. ˙Iyi bir
+kararla kaybedilebilir, kötü bir kararla kazanılabilir.
+31
+
+-- 31 of 42 --
+
+Carl Jacobi (1804–1851) ve Charlie Munger (1924–2023)
+Matematikçi Jacobi’nin zor problemleri çözmek için “her zaman tersine çevir”
+öğüdünü verdiği aktarılır. Yatırımcı Munger bu fikri hayata taşımıştır: nasıl
+başarılı olunacağını sormak yerine nasıl kesin olarak başarısız olunacağını sorup
+bunlardan kaçınmak (Munger, 1986).
+˙Ilke Neyin işe yarayacağını bulmak zordur; neyin kesin felaket getireceğini bul-
+mak daha kolaydır. Önce bunlardan kaçınılır.
+Mühendislikte “Bu sistem nasıl güvenilir olur?” yerine “bu sistem nasıl kesin
+çöker?” diye sorulur. Cevaplar önce nerenin korunması gerektiğini gösterir.
+Tehdit modellemesi ve ölüm öncesi analiz (pre-mortem) bu fikrin uygula-
+malarıdır.
+Hayatta “Nasıl mutlu olunur?” sorusundan çok “kesin mutsuz eden şeyler
+neler?” sorusu daha net cevaplar verir.
+32
+
+-- 32 of 42 --
+
+˙Ilkelerin Toplu Listesi
+Tarihsel sırayla ortaya çıkan ilkeler, işlevlerine göre sekiz grupta toplanabilir.
+Sayma ve Tanımlama
+• Önce bütün olası sonuçlar listelenir. (Cardano, Fermat, Kolmogorov)
+• Sonuçlar doğru sayılır; sonuç türü sayısı ile sonuca giden yol sayısı farklıdır.
+(Galileo)
+• “Rastgele”nin nasıl rastgele olduğu tanımlanır. (Bertrand)
+• Bütün olasılıkların toplamı 1’dir; her şey aynı anda “çok muhtemel” ola-
+maz. (Kolmogorov)
+Tekrar ve Örneklem
+• Az veri yanıltır, çok tekrar gerçeği gösterir. (Jakob Bernoulli)
+• Daha fazla bilginin getirisi giderek azalır. (de Moivre)
+• Az veride temkinli olunur. (Gosset)
+• Az ölçüm, hiç ölçmemekten çok daha iyidir. (Hubbard)
+• Görülmeyen veri de düşünülür. (Wald)
+• Toplam veri yanıltabilir; gruplara ayrılıp bakılır. (Yule, Simpson)
+Karar ve Değer
+• Karar geçmişe değil bundan sonra olabileceklere göre verilir. (Pascal)
+• Olasılık ile sonucun büyüklüğü birlikte tartılır. (Pascal, Huygens)
+• Paranın miktarına değil kişi için değerine bakılır. (Daniel Bernoulli)
+• Mükemmel değil yeterince iyi olan seçilir. (Simon)
+• Kararı değiştirmeyecek bilgi toplanmaz. (Howard)
+• Karar sonucuna göre değil verildiği anın mantığına göre yargılanır. (Duke)
+• “Buna bahse girer misin?” diye sorulur. (Ramsey, de Finetti)
+• Karşı tarafın kararları da hesaba katılır. (von Neumann)
+33
+
+-- 33 of 42 --
+
+Güncelleme ve Tahmin
+• Önce genel sıklığa, sonra özel duruma bakılır. (taban oranı)
+• Kanıt geldikçe inanç güncellenir. (Bayes)
+• Hiçbir şeye sıfır ya da yüzde yüz denmez. (Laplace)
+• Tahmin ile ölçüm güvenilirliklerine göre birleştirilir. (K´alm´an)
+• Uç sonuçlardan sonra ortalamaya dönüş beklenir. (Galton)
+• Az veriyle çıkan uç sonuçlar ortalamaya doğru yumuşatılır. (Stein)
+• Kendi plana değil benzerlerinin gerçek sonucuna bakılır. (Kahneman, Lo-
+vallo, Flyvbjerg)
+• Tahminler kaydedilir ve isabetleri ölçülür. (Tetlock)
+• Küçük farklar büyük sonuçlar doğurabilir; uzun vadeli tahmine güvenilmez.
+(Poincar´e)
+Sebep ve Sonuç
+• Tesadüfle açıklanamayacak kadar tutarlı bir desen sebebe işaret eder. (Ar-
+buthnot)
+• Birlikte hareket etmek sebep olmak değildir. (Pearson, Pearl)
+• Bir şeyin işe yaradığı onsuz hâliyle karşılaştırılarak gösterilir. (Fisher)
+• Deney yapılamıyorsa birçok işaretin birleşmesine bakılır. (Bradford Hill)
+• Sebep “bu değiştirilirse ne olur?” sorusuyla anlaşılır. (Pearl)
+• Tek çalışma kanıt değildir; tekrarlanmış sonuca güvenilir. (Ioannidis)
+Risk ve Dayanıklılık
+• Oyundan atan risk ortalamaya katılmaz. (Daniel Bernoulli)
+• Uzun vadeye ulaşmak için kısa vadede ayakta kalınır. (Keynes)
+• Avantaj olsa bile her şey riske atılmaz. (Kelly)
+• Küçük avantaj, çok tekrar ve doğru büyüklükle birikir. (Thorp)
+• Gerçekten bağımsız şeylere dağılınır. (Markowitz)
+• Bilinmediğinde bile en kötü duruma bir sınır konur. (C ebışev)
+• Hesaplanabilen risk hesaplanır, hesaplanamayan belirsizliğe esneklik bırakılır.
+(Knight)
+34
+
+-- 34 of 42 --
+
+• Her şey çan eğrisine uymaz; uç olaylar sanıldığından sıktır. (Mandelbrot)
+• Öngörmeye değil dayanıklı olmaya çalışılır. (Taleb)
+• Tersine çevrilir: önce kesin başarısızlık yollarından kaçınılır. (Jacobi,
+Munger)
+Sistem ve Güvenilirlik
+• Rastgele olaylar kümelenir. (Poisson)
+• Kapasite doldukça bekleme patlar; boşluk bırakılır. (Erlang)
+• Normal dalgalanmaya müdahale edilmez; yalnızca sıra dışı olana tepki
+verilir. (Shewhart, Deming)
+• Akıllıca eklenmiş fazlalık hatayı yakalar ve düzeltir. (Hamming)
+• Yeni ve eski olan daha risklidir. (Weibull)
+• Yapılabilecek her hata yapılır; tasarımla imkânsız kılınır. (Murphy, Shingo)
+• Karmaşık ve sıkı bağlı sistemlerde kaza normaldir; bağlar gevşetilir. (Per-
+row)
+• Tek savunmaya değil bağımsız katmanlara güvenilir. (Reason)
+• “Simdiye kadar olmadı” güvenlik kanıtı değildir. (Feynman)
+• C ok küçük olasılıklar pratikte sıfır sayılabilir, ama eşik bilinçli seçilir.
+(Borel)
+• Su anki duruma odaklanılır. (Markov)
+• Erken küçük avantajlar kendini besleyerek büyür. (P´olya)
+• Sonuçların çoğu nedenlerin azından gelir. (Pareto, Zipf)
+Ölçüm, Model ve Sezgi
+• Tek ölçüme değil ortalamaya ve eğilime bakılır. (Gauss)
+• Hesaplanamayan şey rastgele denemelerle tahmin edilir. (Buffon, Ulam)
+• Ortalama insan yoktur; aralığa göre tasarlanır. (Quetelet)
+• Veri doğru gösterilirse ikna eder. (Nightingale)
+• Gerçek verinin doğal desenleri vardır; fazla düzgün olan şüphelidir. (New-
+comb, Benford)
+• Saşırtıcı olan bilgi taşır. (Shannon)
+35
+
+-- 35 of 42 --
+
+• Model kurmadan önce veriye bakılır. (Tukey)
+• Bütün modeller yanlıştır, bazıları faydalıdır. (Box)
+• Sonucun ne kadar sallantılı olduğu eldeki veriyle test edilir. (Efron)
+• Bilgiyi kimin ve neden verdiği de bilgidir. (Selvin, vos Savant)
+• Ölçü hedef olunca bozulur. (Goodhart)
+• Bağımsız görüşler birleşince güçlenir; kopya görüşler güçlenmez. (Con-
+dorcet)
+• Bilinmeyen risk bilinen riskten korkutucu görünür. (Ellsberg)
+• Olasılık “kaç kişiden kaçı” biçiminde düşünülür. (Gigerenzer)
+• Sezgiye değil ölçüme güvenilir. (Kahneman, Tversky)
+36
+
+-- 36 of 42 --
+
+Sonuç
+Olasılık düşüncesinin gündelik karşılığı formüllerde değil, sorulan sorudadır. Bin
+tekrar sorusu ve onun sınırı olan oyundan atan sonuç sorusu, tarihsel ilkelerin
+neredeyse tamamını kapsar. Bu iki soruyu alışkanlık hâline getiren biri, formülleri
+unutsa bile dersin hayattaki karşılığının büyük kısmını korur.
+Tarihsel gelişimin yönü de öğreticidir. ˙Ilk dönemde soru “doğru nasıl sayılır”
+iken, on sekizinci yüzyılda “tekrar ve değer”, on dokuzuncu yüzyılda “ölçüm
+hatası ve toplum”, yirminci yüzyılın ilk yarısında “kesin temel ve sanayi”, savaş
+sonrasında “bilgi ve güvenilirlik”, son dönemde ise “insan sezgisi ve dayanıklılık”
+öne çıkmıştır. Alan, dünyayı hesaplamaktan insanın kendi hesap hatalarını
+düzeltmeye doğru ilerlemiştir.
+˙Ilkeler arasında gerilimler vardır ve bunlar bilinçli yönetilmelidir:
+• Borel’in çok küçük olasılıkları göz ardı etme kuralı, Mandelbrot’un uç
+olayların sanıldığından sık olduğu gözlemiyle çatışır. Eşik, sistemin kalın
+kuyruklu olup olmadığına göre seçilmelidir.
+• Simon’ın “yeterince iyi” ilkesi ile Howard’ın bilginin değeri ilkesi araştırmayı
+durdurmayı önerirken, Jakob Bernoulli ve Gosset az veriyle karar vermeye
+karşı uyarır. Denge, kararın geri alınabilir olup olmamasına göre kurulur:
+geri alınabilir kararlar hızlı, geri alınamaz kararlar temkinli verilir.
+• Beklenen değer hesabı ortalamaya dayanır; Daniel Bernoulli, Kelly ve
+Keynes ise ortalamanın ancak hayatta kalındığında anlamlı olduğunu hatırlatır.
+C erçevenin sınırı da vardır. Knight’ın ayrımıyla, olasılıkların hiç bilinmediği
+gerçek belirsizlik durumlarında sayısal hesap yerini esnekliğe, geri dönüş yol-
+larına ve küçük denemelere bırakır. Bu alanda olasılık düşüncesinin katkısı
+kesin cevap vermek değil, hangi sorunun sorulacağını göstermektir.
+Açık kalan bir soru, bu ilkelerin nasıl alışkanlığa dönüştürüleceğidir. Tet-
+lock’un bulgularına göre ilkeleri bilmek yetmez; tahminleri kaydetmek, sonuçlarla
+karşılaştırmak ve yanılgıları görmek gerekir. ˙Ilkeler bu anlamda bir bilgi listesi
+değil, düzenli uygulanması gereken bir pratiktir.
+Kaynaklar
+• Arbuthnot, J. (1710). An Argument for Divine Providence, Taken from
+the Constant Regularity Observed in the Births of Both Sexes. Philosoph-
+ical Transactions of the Royal Society, 27.
+• Bayes, T. (1763). An Essay towards Solving a Problem in the Doctrine of
+Chances. Philosophical Transactions of the Royal Society, 53.
+• Benford, F. (1938). The Law of Anomalous Numbers. Proceedings of the
+American Philosophical Society, 78(4).
+• Bernoulli, D. (1738). Specimen Theoriae Novae de Mensura Sortis. Com-
+mentarii Academiae Scientiarum Imperialis Petropolitanae, 5.
+37
+
+-- 37 of 42 --
+
+• Bernoulli, J. (1713). Ars Conjectandi. Basel.
+• Bertrand, J. (1889). Calcul des probabilit´es. Gauthier-Villars.
+• Bickel, P. J., Hammel, E. A. ve O’Connell, J. W. (1975). Sex Bias in
+Graduate Admissions: Data from Berkeley. Science, 187.
+• Borel, ´E. (1943). Les probabilit´es et la vie. Presses Universitaires de
+France.
+• Box, G. E. P. (1979). Robustness in the Strategy of Scientific Model
+Building. R. L. Launer ve G. N. Wilkinson (Ed.), Robustness in Statistics
+içinde. Academic Press.
+• Buffon, G.-L. L. (1777). Essai d’arithm´etique morale. Histoire naturelle,
+Suppl´ement, 4.
+• Cardano, G. (1663). Liber de Ludo Aleae. Opera Omnia içinde. Lyon.
+• Chebyshev, P. L. (1867). Des valeurs moyennes. Journal de math´ematiques
+pures et appliqu´ees, 12.
+• Condorcet, M. J. A. N. de (1785). Essai sur l’application de l’analyse `a
+la probabilit´e des d´ecisions rendues `a la pluralit´e des voix. Paris.
+• Daniels, G. S. (1952). The “Average Man”? Technical Note WCRD 53-7.
+Wright-Patterson Air Force Base.
+• de Finetti, B. (1937). La pr´evision: ses lois logiques, ses sources subjec-
+tives. Annales de l’Institut Henri Poincar´e, 7.
+• de Moivre, A. (1718). The Doctrine of Chances. Londra.
+• Deming, W. E. (1986). Out of the Crisis. MIT Press.
+• Descartes, R. (1637). Discours de la m´ethode. Leiden.
+• Duke, A. (2018). Thinking in Bets. Portfolio.
+• Efron, B. (1979). Bootstrap Methods: Another Look at the Jackknife.
+The Annals of Statistics, 7(1).
+• Efron, B. ve Morris, C. (1977). Stein’s Paradox in Statistics. Scientific
+American, 236(5).
+• Eggenberger, F. ve P´olya, G. (1923). Über die Statistik verketteter Vorgange.
+Zeitschrift für Angewandte Mathematik und Mechanik, 3.
+• Ellsberg, D. (1961). Risk, Ambiguity, and the Savage Axioms. Quarterly
+Journal of Economics, 75(4).
+• Erlang, A. K. (1909). The Theory of Probabilities and Telephone Conver-
+sations. Nyt Tidsskrift for Matematik B, 20.
+38
+
+-- 38 of 42 --
+
+• Feynman, R. P. (1986). Personal Observations on the Reliability of the
+Shuttle. Report of the Presidential Commission on the Space Shuttle Chal-
+lenger Accident, Ek F.
+• Fisher, R. A. (1935). The Design of Experiments. Oliver and Boyd.
+• Flyvbjerg, B., Bruzelius, N. ve Rothengatter, W. (2003). Megaprojects
+and Risk. Cambridge University Press.
+• Galileo, G. (yak. 1620). Sopra le scoperte dei dadi. ( Ölümünden sonra
+yayımlanmıştır; kesin yazım tarihi tartışmalıdır.)
+• Galton, F. (1886). Regression towards Mediocrity in Hereditary Stature.
+Journal of the Anthropological Institute, 15.
+• Gauss, C. F. (1809). Theoria motus corporum coelestium. Hamburg.
+• Gigerenzer, G. (2002). Calculated Risks: How to Know When Numbers
+Deceive You. Simon and Schuster.
+• Goodhart, C. A. E. (1975). Problems of Monetary Management: The U.K.
+Experience. Papers in Monetary Economics. Reserve Bank of Australia.
+• Hamming, R. W. (1950). Error Detecting and Error Correcting Codes.
+Bell System Technical Journal, 29(2).
+• Hill, A. B. (1965). The Environment and Disease: Association or Causa-
+tion? Proceedings of the Royal Society of Medicine, 58.
+• Hoffman, P. (1998). The Man Who Loved Only Numbers. Hyperion.
+• Howard, R. A. (1966). Information Value Theory. IEEE Transactions on
+Systems Science and Cybernetics, 2(1).
+• Hubbard, D. W. (2007). How to Measure Anything. Wiley.
+• Huygens, C. (1657). De Ratiociniis in Ludo Aleae. Leiden.
+• Ioannidis, J. P. A. (2005). Why Most Published Research Findings Are
+False. PLoS Medicine, 2(8).
+• Kahneman, D. (2011). Thinking, Fast and Slow. Farrar, Straus and
+Giroux.
+• Kahneman, D. ve Lovallo, D. (1993). Timid Choices and Bold Forecasts.
+Management Science, 39(1).
+• Kahneman, D. ve Tversky, A. (1979). Prospect Theory: An Analysis of
+Decision under Risk. Econometrica, 47(2).
+• Kahneman, D. ve Tversky, A. (1979b). Intuitive Prediction: Biases and
+Corrective Procedures. TIMS Studies in Management Science, 12.
+39
+
+-- 39 of 42 --
+
+• Kalman, R. E. (1960). A New Approach to Linear Filtering and Prediction
+Problems. Journal of Basic Engineering, 82(1).
+• Kelly, J. L. (1956). A New Interpretation of Information Rate. Bell
+System Technical Journal, 35(4).
+• Keynes, J. M. (1921). A Treatise on Probability. Macmillan.
+• Keynes, J. M. (1923). A Tract on Monetary Reform. Macmillan.
+• Knight, F. H. (1921). Risk, Uncertainty and Profit. Houghton Mifflin.
+• Kolmogorov, A. N. (1933). Grundbegriffe der Wahrscheinlichkeitsrech-
+nung. Springer.
+• Laplace, P.-S. (1812). Th´eorie analytique des probabilit´es. Paris.
+• Laplace, P.-S. (1814). Essai philosophique sur les probabilit´es. Paris.
+• Mandelbrot, B. (1963). The Variation of Certain Speculative Prices. Jour-
+nal of Business, 36(4).
+• Markov, A. A. (1906). Rasprostranenie zakona bol’shih chisel na velichiny,
+zavisyaschie drug ot druga. Izvestiya Fiziko-matematicheskogo obschestva
+pri Kazanskom universitete, 15.
+• Markowitz, H. (1952). Portfolio Selection. Journal of Finance, 7(1).
+• Metropolis, N. ve Ulam, S. (1949). The Monte Carlo Method. Journal of
+the American Statistical Association, 44.
+• Munger, C. (1986). Harvard School mezuniyet konuşması (“How to Guar-
+antee a Life of Misery”). Los Angeles.
+• Newcomb, S. (1881). Note on the Frequency of Use of the Different Digits
+in Natural Numbers. American Journal of Mathematics, 4.
+• Neyman, J. ve Pearson, E. S. (1933). On the Problem of the Most Efficient
+Tests of Statistical Hypotheses. Philosophical Transactions of the Royal
+Society A, 231.
+• Nightingale, F. (1858). Notes on Matters Affecting the Health, Efficiency,
+and Hospital Administration of the British Army. Londra.
+• Pareto, V. (1896). Cours d’´economie politique. Lausanne.
+• Pascal, B. (1670). Pens´ees. Paris.
+• Pearl, J. (2009). Causality (2. baskı). Cambridge University Press.
+• Pearl, J. ve Mackenzie, D. (2018). The Book of Why. Basic Books.
+40
+
+-- 40 of 42 --
+
+• Pearson, K. (1900). On the Criterion that a Given System of Deviations
+from the Probable... Philosophical Magazine, 50.
+• Perrow, C. (1984). Normal Accidents: Living with High-Risk Technologies.
+Basic Books.
+• Poincar´e, H. (1908). Science et m´ethode. Flammarion.
+• Poisson, S. D. (1837). Recherches sur la probabilit´e des jugements en
+mati`ere criminelle et en mati`ere civile. Paris.
+• P´olya, G. (1945). How to Solve It. Princeton University Press.
+• Quetelet, A. (1835). Sur l’homme et le d´eveloppement de ses facult´es.
+Paris.
+• Ramsey, F. P. (1926). Truth and Probability. R. B. Braithwaite (Ed.),
+The Foundations of Mathematics and Other Logical Essays (1931) içinde.
+Routledge.
+• Reason, J. (1990). Human Error. Cambridge University Press.
+• Rose, T. (2016). The End of Average. HarperOne.
+• Selvin, S. (1975). A Problem in Probability (editöre mektup). The Amer-
+ican Statistician, 29(1).
+• Shannon, C. E. (1948). A Mathematical Theory of Communication. Bell
+System Technical Journal, 27.
+• Shewhart, W. A. (1931). Economic Control of Quality of Manufactured
+Product. Van Nostrand.
+• Shingo, S. (1986). Zero Quality Control: Source Inspection and the Poka-
+Yoke System. Productivity Press.
+• Simon, H. A. (1955). A Behavioral Model of Rational Choice. Quarterly
+Journal of Economics, 69(1).
+• Simpson, E. H. (1951). The Interpretation of Interaction in Contingency
+Tables. Journal of the Royal Statistical Society B, 13.
+• Stein, C. (1956). Inadmissibility of the Usual Estimator for the Mean of
+a Multivariate Normal Distribution. Proceedings of the Third Berkeley
+Symposium on Mathematical Statistics and Probability, 1.
+• Strathern, M. (1997). “Improving Ratings”: Audit in the British Univer-
+sity System. European Review, 5(3).
+• Student (1908). The Probable Error of a Mean. Biometrika, 6(1).
+• Taleb, N. N. (2007). The Black Swan. Random House.
+41
+
+-- 41 of 42 --
+
+• Taleb, N. N. (2012). Antifragile. Random House.
+• Tetlock, P. E. (2005). Expert Political Judgment. Princeton University
+Press.
+• Tetlock, P. E. ve Gardner, D. (2015). Superforecasting. Crown.
+• Thorp, E. O. (1962). Beat the Dealer. Blaisdell.
+• Tukey, J. W. (1977). Exploratory Data Analysis. Addison-Wesley.
+• von Neumann, J. ve Morgenstern, O. (1944). Theory of Games and Eco-
+nomic Behavior. Princeton University Press.
+• Wald, A. (1943). A Method of Estimating Plane Vulnerability Based on
+Damage of Survivors. Statistical Research Group, Columbia University.
+• Weibull, W. (1951). A Statistical Distribution Function of Wide Applica-
+bility. Journal of Applied Mechanics, 18.
+• Yule, G. U. (1903). Notes on the Theory of Association of Attributes in
+Statistics. Biometrika, 2(2).
+• Zipf, G. K. (1949). Human Behavior and the Principle of Least Effort.
+Addison-Wesley.
+Not: Murphy yasasının kökenine dair anlatımlar ve Jacobi’nin “tersine çevir”
+öğüdü yazılı birincil kaynaktan değil aktarımlardan gelmektedir; ayrıntıları doğrulanmalıdır.
+42
+
+-- 42 of 42 --
