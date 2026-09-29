@@ -329,9 +329,7 @@ const duvarlar = existsSync(join(dist, 'duvarlar.json'))
   ? JSON.parse(readFileSync(join(dist, 'duvarlar.json'), 'utf8'))
   : { themes: {}, walls: [] }
 const dvIntro =
-  'Arşivdeki makalelerden süzülmüş taşınabilir kurallar. Her kural bir duvar: nerede geçerli, ' +
-  'nerede kırıldığı ve neyi engellediği yazılıdır. Bir sorunla karşılaştığında “bu duvara daha ' +
-  'önce çarpılmış mı, nedeni neydi” diye sor.'
+  'Arşivdeki makalelerden süzülmüş taşınabilir kurallar.'
 const dvThemeName = (k) => duvarlar.themes?.[k]?.name || k
 const dvCard = (w) =>
   `<li class="dv-card" data-theme="${escAttr(w.t)}">` +
@@ -365,10 +363,7 @@ const kodDuvarlari = existsSync(join(dist, 'kod-duvarlari.json'))
   ? JSON.parse(readFileSync(join(dist, 'kod-duvarlari.json'), 'utf8'))
   : { anlar: {}, kurallar: [] }
 const kdIntro =
-  'Mühendislik makalelerinden süzülmüş, kod yazarken uygulanan kurallar. Duvarlar karar ' +
-  'düzeyinde kalır; bunlar klavye düzeyindedir. Beş ana bölünür: işe başlarken, kod yazarken, ' +
-  'eski koda dokunurken, “bitti” demeden ve bir şey bozulunca. Her kural nerede geçerli olduğu ' +
-  'kadar nerede geçerli olmadığını da söyler.'
+  'Mühendislik makalelerinden süzülmüş, kod yazarken uygulanan kurallar.'
 const kdAnName = (k) => kodDuvarlari.anlar?.[k]?.name || k
 const kdCard = (w) =>
   `<li class="dv-card" data-theme="${escAttr(w.an)}">` +

@@ -99,12 +99,12 @@ export const TRANSLATIONS = {
     aiEmpty: 'Yakında.',
     walls: 'Duvarlar',
     wallsIntro:
-      'Arşivdeki makalelerden süzülmüş taşınabilir kurallar. Her kural bir duvar: nerede geçerli, nerede kırıldığı ve neyi engellediği yazılıdır. Bir sorunla karşılaştığında “bu duvara daha önce çarpılmış mı, nedeni neydi” diye sor.',
+      'Arşivdeki makalelerden süzülmüş taşınabilir kurallar.',
     wallsSearch: 'Duvarlarda ara: köşe, gerekçe, atıf gücü, Goodhart…',
     wallsUnit: 'duvar',
     codeWalls: 'Kod Duvarları',
     codeWallsIntro:
-      'Mühendislik makalelerinden süzülmüş, kod yazarken uygulanan kurallar. Duvarlar karar düzeyinde kalır; bunlar klavye düzeyindedir. Beş ana bölünür: işe başlarken, kod yazarken, eski koda dokunurken, “bitti” demeden ve bir şey bozulunca. Her kural nerede geçerli olduğu kadar nerede geçerli OLMADIĞINI da söyler — hepsini birden uygulama, KOD-06 derinliği tehlikeye göre seçer.',
+      'Mühendislik makalelerinden süzülmüş, kod yazarken uygulanan kurallar.',
     codeWallsSearch: 'Kod duvarlarında ara: idempotency, retry, migration, test, gerekçe…',
     codeWallsUnit: 'kural',
     momentsLabel: 'Anlar',
@@ -234,12 +234,12 @@ export const TRANSLATIONS = {
     aiEmpty: 'Coming soon.',
     walls: 'Walls',
     wallsIntro:
-      'Transferable rules distilled from the essays. Each rule is a wall: where it holds, where it breaks, and what failure it prevents. When you hit a problem, ask “has this wall been hit before, and why?”',
+      'Transferable rules distilled from the essays.',
     wallsSearch: 'Search walls: corner, rationale, attribution power, Goodhart…',
     wallsUnit: 'walls',
     codeWalls: 'Code Walls',
     codeWallsIntro:
-      'Rules distilled from the engineering papers, applied while writing code. The Walls stay at decision level; these are at keyboard level. They are split by moment: starting work, writing code, touching existing code, before calling it done, and when something breaks. Each rule states where it does NOT apply as clearly as where it does — do not run the whole list, KOD-06 picks the depth from the danger.',
+      'Rules distilled from the engineering papers, applied while writing code.',
     codeWallsSearch: 'Search code walls: idempotency, retry, migration, test, rationale…',
     codeWallsUnit: 'rules',
     momentsLabel: 'Moments',
