@@ -1,0 +1,284 @@
+Kontrol Teorisi ve Yazılım Denetimi
+ÖFY
+September 2026
+Özet
+Mühendislik faaliyetinin ağırlıklı kısmı yeni davranış üretmek değil, üretilmiş
+bir davranışı bozucu etki altında aynı kalır tutmaktır. Bu ikinci iş, kontrol
+teorisinin kapalı döngü (closed-loop control ) kavramıyla örtüşür: ölçme, refer-
+ansla karşılaştırma, müdahale ve müdahalenin sönümlenmesi. Döngünün altı
+bileşeni, yani gözlenebilirlik, referans, denetlenebilirlik, sönümleme, kararlılık
+payı ve histerezis, birbirinin yerine geçmez; biri eksik olduğunda döngü ka-
+panmaz ve sistem kararlı olmadığı hâlde kararlı görünür. Ölçüm hatası bu
+görünüşün başlıca kaynağıdır: ölçtüğü büyüklük korunması istenen büyüklükle
+örtüşmeyen bir gösterge, bozulmayı olumlu rapor eder ve döngü yanlış yöne
+çalışır. Döngünün doğru işlemesi ise sistemin sağlığı için yeterli değildir, çünkü
+referansın kendisi zamanla kayabilir ve sıkı denetim sistemi değiştirilemez hâle
+getirebilir. Sapma ve katılık adı verilen bu iki olgu döngünün içinden görülmez;
+döngüye dışarıdan bakan ikinci bir gözlem katı gerektirir. Mühendislik pratiğinde
+sistematik olarak atlanan da birinci kat değil bu ikinci kattır.
+1
+
+-- 1 of 9 --
+
+Giriş
+Stabilizasyon, bir sistemin belirlenmiş bir davranışını, dış koşullar değişirken
+belirlenmiş sınırlar içinde tutma işlemidir. Sistemi bu sınırların dışına itmeye
+çalışan her etkiye bozucu etki (disturbance) denir: girdi hacmindeki artış,
+donanım yaşlanması, bağımlı bir servisin gecikmesi, ortam sıcaklığı, kullanıcı
+davranışındaki kayma.
+Mühendislik üzerine yaygın kabul, faaliyetin özünde bir üretme işi olduğudur:
+olmayan bir yetenek var edilir, iş biter. Bu kabul, harcanan emeğin dağılımıyla
+uyuşmaz. Bir sistemin ilk kez çalışır hâle gelmesi tek seferlik bir olaydır; çalışmaya
+devam etmesi süreklilik gerektiren bir iştir ve toplam emeğin büyük kısmını
+tüketir. Dolayısıyla mühendislik pratiği, üretme işinden çok stabilizasyon işidir.
+Bu tespit tek başına bir çerçeve değildir. Stabilizasyonun neyi gerektirdiği,
+hangi bileşenlerden oluştuğu ve nerede yanıltıcı hâle geldiği açıklanmadığında
+geriye yalnızca bir benzetme kalır. Kontrol teorisi (control theory) bu boşluğu
+doldurur: mühendislik pratiğinde farklı adlarla anılan uygulamaların çoğu, aynı
+kapalı döngünün bileşenlerine karşılık gelir ve teorideki karşılıklarıyla birlikte
+ele alındığında hangisinin eksik olduğu görünür hâle gelir.
+Notun kapsamı bu eşleştirmedir: kurma ile sürdürme işlerinin ayrımı, kapalı
+döngünün bileşenleri ve bu bileşenlerin yazılım sistemlerindeki karşılıkları, son
+olarak döngünün kendisinin denetlenmesi. Kapsam dışında kalanlar, kontrol
+teorisinin matematiksel aygıtı (transfer fonksiyonları, kutup yerleşimi, kararlılık
+kanıtları) ve belirli bir denetleyici tasarımının yöntemidir.
+2
+
+-- 2 of 9 --
+
+Kurma ve Sürdürme
+Mühendislik işi, stabilizasyon kavramı açısından iki ayrı türe bölünür ve bu iki
+tür farklı yetenekler gerektirir.
+Kurma, daha önce var olmayan bir davranışı var etme işidir. Burada ko-
+runacak bir durum yoktur, dolayısıyla stabilizasyon da yoktur. Kurma işinin
+içeriği seçimdir: hangi yaklaşımın alınacağı, sistemin sınırlarının nereden geçirileceği,
+hangi durumların kapsam dışı bırakılacağı. Bu seçimlerin çoğu geri alınması
+pahalı olduğu için kurma aşaması, sonraki bütün sürdürme işinin maliyetini
+belirler.
+Sürdürme, var edilmiş davranışı bozucu etkiye karşı koruma işidir. ˙Içeriği
+seçim değil ölçme ve müdahaledir. Regresyon testleri, sürekli tümleştirme (con-
+tinuous integration), sağlık kontrolleri, oran sınırlayıcılar, uyarı eşikleri ve olay
+sonrası incelemeler bu türe girer. Bu uygulamaların ortak yanı, hiçbirinin sis-
+teme yeni bir yetenek eklememesidir; hepsi mevcut yeteneğin aynı kalmasına
+hizmet eder.
+˙Iki tür arasındaki oran, bir sistemin ömrü boyunca sürdürme lehine değişir.
+Brooks, bir yazılım ürününün toplam maliyetinin büyük kısmının ilk teslimden
+sonra harcandığını gözlemlemiştir (Brooks, 1975). Lehman ise bu harcamanın
+kaçınılmazlığını daha güçlü biçimde ifade eder: gerçek bir ortamda kullanılan
+bir yazılım ya sürekli değiştirilir ya da kullanıcısı için giderek daha az tatmin
+edici hâle gelir (Lehman, 1980). Bu durumda sürdürme, ihmal edilebilecek bir
+bakım kalemi değil, sistemin var olma koşuludur.
+Somut bir örnek ayrımı görünür kılar. Bir video işleme hattında yeni bir
+kesim kuralının yazılması kurma işidir ve bir kez yapılır. Aynı kuralın bir-
+birinden farklı yirmi girdi paketinde aynı sonucu vermesini sağlamak sürdürme
+işidir; girdi çeşitliliği arttıkça bu ikinci iş büyür ve hiçbir zaman tamamlanmış
+sayılmaz. ˙Ilk iş bir hafta, ikincisi sistemin bütün ömrü sürer.
+3
+
+-- 3 of 9 --
+
+Kapalı Döngünün Bileşenleri
+Kapalı döngü, bir sistemin çıktısının ölçülüp istenen değerle karşılaştırıldığı ve
+aradaki farka göre girdisinin ayarlandığı düzenektir. Karşıtı olan açık döngü
+(open-loop) düzeneğinde çıktı ölçülmez; sistem, kendisine verilen komutu sonu-
+cuna bakmaksızın uygular. Bir termostat kapalı döngüdür, belirli bir süre
+çalışan zamanlayıcılı bir ısıtıcı açık döngüdür.
+Kapalı döngünün bileşenleri aşağıda, döngüdeki işleyiş sırasına göre ver-
+ilmiştir.
+Döngüdeki işlev Bileşen Kontrol teorisindeki adı
+Durumu görmek Gözlenebilirlik observability
+Neye göre ölçmek Referans setpoint
+Müdahale edebilmek Denetlenebilirlik controllability
+Müdahalenin şiddeti Sönümleme damping
+Sınıra uzaklık Kararlılık payı stability margin
+Kararın titrememesi Histerezis hysteresis
+Gözlenebilirlik
+Gözlenebilirlik, bir sistemin iç durumunun, dışarıdan yapılan ölçümlerden be-
+lirlenebilmesi özelliğidir. Kavram, denetlenebilirlikle birlikte Kalman tarafından
+formüle edilmiştir (Kalman, 1960). Ölçülemeyen bir büyüklük sabit tutulamaz;
+döngünün ilk halkası ölçümdür.
+Pratikte daha tehlikeli olan durum ölçümün yokluğu değil, yanlış büyüklüğün
+ölçülmesidir. Yanlış ölçü, sistemin kararlı olduğu yanılsamasını üretir ve bu
+yanılsama ölçüm hiç yapılmamasından daha zararlıdır, çünkü müdahale gereğini
+ortadan kaldırır.
+Video sabitleme alanından bir örnek mekanizmayı gösterir. Görüntüdeki
+titremeyi ölçmek için ardışık kareler arasındaki konum farkının tepe değeri kul-
+lanılabilir. Bu gösterge yüksek frekanslı titremeye duyarlıdır, ancak kameranın
+yavaşça bir yöne kayması durumunda kareler arası fark küçük kaldığı için sap-
+mayı hiç görmez. Sonuçta bir görüntü, izleyici tarafından belirgin biçimde
+kaymış algılandığı hâlde göstergeye göre sabittir. Ölçülen büyüklük (kare farkı)
+korunmak istenen büyüklükle (görüntünün algılanan sabitliği) örtüşmediğinden,
+bu göstergeye dayanan her sabitlik değerlendirmesi geçersizdir.
+Buradan çıkan kural, ölçümün kendisinin de doğrulanması gerektiğidir: bir
+göstergenin yüksek çıktığı durumlar kadar, bozulmanın var olduğu hâlde göstergenin
+düşük kaldığı durumlar da sınanmalıdır.
+Referans
+Referans, sistemin korunması istenen hedef değeridir. Referans tanımlanmadan
+stabilizasyondan söz edilemez, çünkü sapma ancak bir hedefe göre tanımlıdır.
+“Sistem kararlı” ifadesi, hangi büyüklüğün hangi değer etrafında hangi bant
+içinde tutulduğu belirtilmeden bilgi taşımaz.
+4
+
+-- 4 of 9 --
+
+Yazılım sistemlerinde referansın açık biçimde yazılmış hâli hizmet düzeyi
+hedefidir (service level objective, SLO): belirli bir gözlem penceresinde isteklerin
+belirli bir oranının belirli bir süre içinde yanıtlanması gibi. Referansın yazılı
+olmaması onu ortadan kaldırmaz, yalnızca örtük hâle getirir; bu durumda her
+katılımcı kendi referansını varsayar ve sistemin kararlı olup olmadığı tartışması
+çözümsüz kalır.
+Denetlenebilirlik
+Denetlenebilirlik, sistemin durumunun, eldeki girdilerle istenen başka bir du-
+ruma götürülebilmesi özelliğidir (Kalman, 1960). Ölçülebilen ancak müdahale
+edilemeyen bir büyüklük stabilize edilmez, yalnızca izlenir.
+Ayrım pratikte sıkça bulanır. Üçüncü taraf bir servisin yanıt süresi ölçülebilir,
+fakat doğrudan denetlenemez. Bu durumda stabilizasyon o büyüklük üzerinde
+değil, ona bağlı olan kendi davranışımız üzerinde kurulur: zaman aşımı, yeniden
+deneme, yedek yol, önbellek. Denetim yetkisinin bulunduğu nokta yanlış belir-
+lendiğinde, üzerinde hiçbir etki kurulamayan bir göstergeye bakarak müdahale
+üretilmeye çalışılır ve döngü kapanmaz.
+Ashby’nin gerekli çeşitlilik yasası (law of requisite variety) bu bileşenin sınırını
+verir: bir denetleyici, ancak denetlediği sistemin üretebileceği durum çeşitliliği
+kadar çeşitli tepki üretebiliyorsa onu denetleyebilir (Ashby, 1956). Tek bir
+müdahale biçimine sahip bir denetleyici, çok biçimli bozucu etkiler karşısında
+yetersiz kalır.
+Sönümleme
+Sönümleme, sistemin bir bozucu etkiye verdiği tepkinin genliğini azaltan ve
+tepkinin hedef değer etrafında salınmasını engelleyen etkidir. Yetersiz sönümlenmiş
+bir döngü, her düzeltmede hedefi aşar (overshoot) ve ters yöne düzeltme gerek-
+tirir; sonuç, sistemin hiçbir zaman yerleşmediği bir salınımdır.
+Yazılımda karşılığı, düzeltmenin kendisinin yeni düzeltme doğurduğu döngüdür.
+Bir gecikme sorununu çözmek için eşzamanlı istek sayısının artırılması, arka uçta
+kuyruk oluşumuna ve gecikmenin büyümesine yol açabilir; buna karşı verilen ik-
+inci düzeltme birinciyi geri alır. Otomatik ölçekleme düzeneklerinde aynı olgu,
+örnek sayısının sürekli artıp azalmasıyla gözlenir.
+Bu nedenle müdahalenin şiddeti, sapmanın büyüklüğü kadar sistemin tepki
+gecikmesine de bağlı olmalıdır. Gecikmesi uzun bir sistemde sert müdahale,
+tanımı gereği salınım üretir.
+Kararlılık payı
+Kararlılık payı, sistemin kararsız hâle gelmesine ne kadar kaldığını niceleyen
+büyüklüktür. Klasik kontrol kuramında kazanç payı ve faz payı (gain margin,
+phase margin) biçiminde tanımlanır ve Nyquist’in kararlılık ölçütünden türetilir
+(Nyquist, 1932; Bode, 1945).
+5
+
+-- 5 of 9 --
+
+Payın önemi şu ayrımdan gelir: sınırın hemen içinde çalışan bir sistem kararlı
+değildir, yalnızca henüz sapmamıştır. Bellek kullanımı sınırının yüzde doksan
+dokuzunda çalışan bir süreç, ölçüme göre sorunsuzdur ve girdi hacmindeki küçük
+bir artışta çöker. Kararlılık değerlendirmesi bu nedenle sistemin bulunduğu
+noktayı değil, sınıra olan uzaklığını konu almalıdır.
+Histerezis
+Histerezis, bir sistemin durum değiştirme eşiğinin, değişimin yönüne göre farklı
+olması demektir. Kavramın devre tasarımındaki bilinen uygulaması Schmitt
+tetikleyicisidir (Schmitt, 1938).
+Tek eşikli bir karar kuralı, ölçülen büyüklük eşiğin yakınında gezindiğinde
+sürekli durum değiştirir. Belirli bir yük değerinde örnek ekleyen ve aynı değerde
+örnek kaldıran bir ölçekleyici, o değer civarında kararını durmadan tersine çevirir.
+C özüm eşiğin taşınması değil, iki ayrı eşik tanımlanmasıdır: durumun açılması
+için gereken değer, kapanması için gereken değerden yüksek tutulur ve aradaki
+bant kararı sabitler.
+Histerezis, döngünün diğer bileşenleri doğru kurulduğu hâlde ortaya çıkan
+bir kararsızlık türünü giderdiği için ayrı bir bileşen sayılır: sorun ölçümde, refer-
+ansta ya da müdahale yetkisinde değil, kararın verilme biçimindedir.
+6
+
+-- 6 of 9 --
+
+Döngüye Dışarıdan Bakmak
+Yukarıdaki altı bileşen “döngü çalışıyor mu” sorusunu yanıtlar. Bu soru olumlu
+yanıtlandığında bile yanıtlanmamış iki soru kalır ve her ikisi de döngünün içinden
+görülmez.
+Sapma
+Sapma (drift), referansın ya da sistemin kabul edilen davranışının, kimsenin
+ayrı bir karar almasına gerek kalmadan zaman içinde yavaşça yer değiştirmesidir.
+Tek bir olay olarak sapma gürültüdür; birikerek artan bir dizi olarak sapma
+eğilimdir.
+Ayrım pratikte şöyle görünür: bir testin bir kez kararsız çıkması ve yeniden
+çalıştırılınca geçmesi tek başına bilgi taşımaz. Aynı ay içinde altı ayrı testin
+kararsızlaşması, iki uyarı eşiğinin gevşetilmesi ve bir lint kuralının susturulması,
+tek tek bakıldığında her biri makul gerekçeli kararlar olduğu hâlde birlikte sis-
+temin denetim kalitesinin düştüğünü gösterir. Hiçbir olay tek başına bu sonucu
+vermez; sonuç ancak sayım tutulduğunda görünür.
+Bundan çıkan uygulama, sapma olaylarının ayrı bir defterde kaydedilmesidir:
+kararsız çıkan test, susturulan uyarı, gevşetilen eşik, eklenen geçici çözüm ve
+kendiliğinden düzelen tekrarlayan hata. Defterin değeri tek tek kayıtlarda değil,
+kayıt sayısının zaman içindeki eğrisindedir.
+Lehman’ın yazılım evrimi yasaları bu olguyu daha genel düzeyde ifade eder:
+bir sistem evrildikçe karmaşıklığı artar; karmaşıklığı azaltmak için ayrıca iş
+yapılmadığı sürece bu artış sürer (Lehman, 1980).
+Katılık
+˙Ikinci soru, kurulan denetimin bedeliyle ilgilidir. Her stabilizasyon düzeneği sis-
+temin değişebilme kapasitesinden bir miktar tüketir: her yeni sabitlenen davranış,
+sonradan yapılacak değişikliklerin sağlamak zorunda olduğu kısıtların listesine
+eklenir. Bu kısıtlar yeterince biriktiğinde sistem sabit değil katı hâle gelir.
+Katı bir sistem sağlam değildir. Değişen bir ortamda uyarlanamayan bir sis-
+tem, bozucu etkiye direnerek değil, ortamın gerisinde kalarak başarısız olur.
+Parnas, yazılımın yaşlanmasının iki nedenini ayırır: değişen dünyaya uyum
+sağlayamama ve yapısını anlamadan yapılan değişiklikler (Parnas, 1994). Bir-
+inci neden doğrudan katılığın sonucudur ve fazla stabilizasyonla üretilir.
+Bu nedenle stabilizasyon kararları tek yönlü değerlendirilemez. Bir davranışın
+sabitlenmesi kazanç sağlar, aynı zamanda bir maliyet doğurur ve maliyet ancak
+sonradan, değişiklik gerektiğinde ödenir. Maliyet ödeme anında görüldüğü için
+karar anında hesaba katılmaz; katılığın sistematik olarak biriktirilmesinin nedeni
+budur.
+7
+
+-- 7 of 9 --
+
+Sonuç
+Kontrol teorisinin kapalı döngü çerçevesi, yazılım mühendisliğindeki denetim
+uygulamalarına doğrudan uygulanabilir ve pratikte en çok işe yarayan tarafı bir
+eksik listesi vermesidir. Bir sistemin neden kararsız kaldığı sorusu, altı bileşenin
+hangisinin bulunmadığı sorusuna indirgenebilir: durum ölçülmüyor mu, referans
+tanımlı değil mi, müdahale yetkisi yok mu, müdahale fazla sert mi, sınıra pay
+bırakılmamış mı, yoksa karar eşiğin etrafında mı titriyor. Bu altı soru, “sistem
+kararsız” gözleminden eyleme geçilebilir bir teşhise götürür.
+C erçevenin kritik uyarısı ölçüm üzerinedir. Yanlış büyüklüğü ölçen bir gösterge,
+döngünün diğer beş bileşeni kusursuz olsa dahi sistemi sistematik olarak yanlış
+yöne sürer ve bunu yaparken olumlu rapor verir. Gösterge doğrulanmadan ku-
+rulan bir döngü, stabilizasyon değil stabilizasyon görüntüsü üretir.
+Döngünün kendisi de yeterli bir birim değildir. Referansın kayması ve dene-
+timin sistemi katılaştırması, döngünün içinden ölçülemeyen ve ancak döngüye
+dışarıdan bakan ikinci bir gözlem katında görülebilen olgulardır. Bu ikinci katın
+uygulamadaki karşılığı, tek tek olayların değil olay sayısının eğiliminin izlenme-
+sidir.
+C erçevenin sınırları belirtilmelidir. Kontrol teorisinin kavramları sürekli ve
+sayısal büyüklükler için geliştirilmiştir; doğruluk, güvenlik ve arayüz uyum-
+luluğu gibi ikili nitelikler için ancak benzetme yoluyla kullanılabilir. Bir yanıtın
+yanlış olması, gecikmenin yüksek olması gibi derecelendirilemez ve bu tür nite-
+liklerde sönümleme ya da kararlılık payı kavramlarının doğrudan karşılığı yok-
+tur. Ayrıca çerçeve, bozucu etkilerin birbirinden bağımsız olduğunu varsa-
+yar; birbirini tetikleyen arızalardan oluşan zincirler tek döngülü bir modelle
+açıklanamaz.
+Açık kalan soru, katılığın ölçülmesidir. Sapma için sayım tutmak mümkündür,
+çünkü olaylar sayılabilir niteliktedir. Buna karşılık bir sistemin değişebilme
+kapasitesinin ne kadar tüketildiği doğrudan gözlemlenemez; ancak değişiklik
+talebi geldiğinde, yani ölçümün artık karar değiştiremeyeceği bir anda görünür
+hâle gelir. Bu kapasiteyi önceden gösteren bir öncü gösterge tanımlanması,
+çerçevenin tamamlanmamış tarafıdır.
+Kaynaklar
+• Ashby, W. R. (1956). An Introduction to Cybernetics. Chapman & Hall.
+• Bode, H. W. (1945). Network Analysis and Feedback Amplifier Design.
+Van Nostrand.
+• Brooks, F. P. (1975). The Mythical Man-Month. Addison-Wesley.
+• Kalman, R. E. (1960). On the General Theory of Control Systems. Pro-
+ceedings of the First IFAC Congress.
+• Lehman, M. M. (1980). Programs, Life Cycles, and Laws of Software
+Evolution. Proceedings of the IEEE, 68(9).
+8
+
+-- 8 of 9 --
+
+• Nyquist, H. (1932). Regeneration Theory. Bell System Technical Journal,
+11(1).
+• Parnas, D. L. (1994). Software Aging. Proceedings of the 16th Interna-
+tional Conference on Software Engineering.
+• Schmitt, O. H. (1938). A Thermionic Trigger. Journal of Scientific In-
+struments, 15(1).
+• Wiener, N. (1948). Cybernetics: or Control and Communication in the
+Animal and the Machine. MIT Press.
+9
+
+-- 9 of 9 --
