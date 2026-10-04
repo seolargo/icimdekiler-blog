@@ -1,5 +1,69 @@
 [
   {
+    "slug": "durum-vektörü-ve-durum-uzayı-yaklaşımı",
+    "title": "Durum Vektörü ve Durum Uzayı Yaklaşımı",
+    "date": "2026-10-04",
+    "description": "Metin, durum vektörünü bir sistemin belirli bir andaki halini tam olarak tarif eden sayılar listesi olarak tanımlar; tamlık ölçütü, vektör ve kural bilindiğinde geçmişe bakmadan bir sonraki halin hesaplanabilmesidir. Terimin kontrol teorisi, kuantum mekaniği, yörünge mekaniği, CRDT ve yinelemeli sinir ağlarındaki kullanımlarının aynı fikri taşıdığı gösterilir. Zamanın üç yönü üç işlemle karşılanır: geçmiş log olarak saklanır, şimdi durum vektörüyle özetlenir, gelecek geçiş modeliyle hesaplanır. Banka hesabında bakiye hareketlerden türetilebilir, hareketler bakiyeden geri çıkarılamaz; bu asimetri bir tasarım kararına dönüşür: log saklanıyorsa yanlış hesaplanmış durum düzeltilebilir, yalnızca durum saklanıyorsa kayıp geri gelmez, snapshot oynatma bedelini düşürür ama kaldırmaz. Durum çıkarımı ham veriden vektör üretir, elle ya da öğrenerek yapılır; ölçütü vektörün küçük kalırken sonraki adım için gereken her şeyi içermesidir. Durum uzayı yaklaşımı girdi-çıktı yaklaşımının kapalı kutusunu açar; dinamik sistemler teorisi denge, kararlılık, döngü, kaos ve çatallanmayı sorar. Yazılımdaki karşılıklar reducer, durum makinesi, event sourcing, eşitleme ve optimistic update olarak sayılır; üç mantıksal bayrağın sekiz kombinasyonundan yalnızca dördü anlamlıdır. Otomatik ölçeklemenin salınması ve yeniden deneme fırtınası kod hatası değil kararlılık sorunu olarak okunur. Sınırlar olarak Markov özelliğine bağımlılık, kaos, değişken seçiminin önceden bilinmemesi ve öğrenilmiş gizil durumun okunamazlığı kaydedilir.",
+    "pdf": "Durum_Vektörü_ve_Durum_Uzayı_Yaklaşımı.pdf",
+    "thumb": "thumbs/durum-vektörü-ve-durum-uzayı-yaklaşımı.png",
+    "addedAt": "2026-10-04T18:23:58.457Z",
+    "pages": 13,
+    "belge": "BELGE-234",
+    "title_en": "The State Vector and the State-Space Approach",
+    "description_en": "The text defines the state vector as a list of numbers that fully describes a system's condition at a given moment; it is complete when, given the rule, the next condition can be computed without consulting the past. Uses of the term in control theory, quantum mechanics, orbital mechanics, CRDTs and recurrent neural networks are shown to carry the same idea. The three directions of time are met by three operations: the past is stored as a log, the present is summarised by the state vector, and the future is computed by a transition model. In a bank account the balance can be derived from the transactions, but the transactions cannot be recovered from the balance; this asymmetry becomes a design decision: if the log is kept, a miscomputed state can be corrected, if only the state is kept, lost information does not return, and snapshots reduce the cost of replay without removing it. State extraction produces the vector from raw data, either by hand or by learning; its criterion is that the vector stays small while containing everything needed for the next step. The state-space approach opens the black box of the input-output approach; dynamical systems theory asks about equilibrium, stability, cycles, chaos and bifurcation. Software counterparts include reducers, state machines, event sourcing, synchronisation and optimistic updates; of the eight combinations of three boolean flags only four are meaningful. Autoscaling oscillation and retry storms are read as stability problems, not code bugs. The recorded limits are dependence on the Markov property, chaos, not knowing in advance which variables belong to the state, and the unreadability of learned latent states.",
+    "priority": 4,
+    "related": [
+      "02-davranis-uzayi-ve-geometrisi",
+      "kontrol-teorisi-ve-yazılım-denetimi",
+      "arayüz-tasarımı-durum-makinesi-ile-denetim-modelleme",
+      "04-bug-topolojisi-ve-formel-dogrulama",
+      "sistem-teorisi",
+      "tasarım-kuramı-özgürlüğün-altyapısı-olarak-kısıt"
+    ]
+  },
+  {
+    "slug": "tasarım-kuramı-özgürlüğün-altyapısı-olarak-kısıt",
+    "title": "Tasarım Kuramı: Özgürlüğün Altyapısı Olarak Kısıt",
+    "date": "2026-10-04",
+    "description": "Metin, özgürlüğü engelin yokluğu olarak değil, sınırların içinde fiilen erişilebilen seçeneklerin genişliği olarak tanımlar ve teknik ile disiplinin bu nedenle özgürlüğün karşıtı değil altyapısı olduğunu savunur. Sınır, kısıt, takas, hareket alanı, tasarım uzayı ve serbestlik derecesinden oluşan bir kavram sözlüğü kurulur; kontrol edilemeyen serbestliğin kullanılamadığı belirtilir. Ustalık üç aşamada tarif edilir: bilgisizlikte sınırsızlık hissi, bilgide görünür hâle gelen gerçek sınırlar, ustalıkta sınırlar arasındaki manevra alanı ve gerektiğinde sınırın değiştirilmesi. Bale, müzik, köprü ve uçak tasarımı, dosya işleme sistemi ve dil öğrenimi aynı örüntünün örnekleri olarak işlenir. Satranç üzerinden durum uzayı, arama uzayı, strateji ve optimizasyon ayrılır; de Groot ile Chase ve Simon'a dayanarak ustanın daha çok hamle hesaplamadığı, değerlendirmeye değer hamleleri baştan seçtiği ve sınır bilgisinin arama uzayını aynı biçimde daralttığı ileri sürülür. Harita, gösterge paneli ve API örnekleriyle temsil, kararı mümkün kılan bilinçli bir sınır olarak ele alınır. İkinci bölüm, akılda tutulamayan ya da davranışı kestirilemeyen bir parçada o seviyede tek bir sınırın sıkılaştırılmasını ve karmaşıklığın başka seviyeye geçip geçmediğinin denetlenmesini öneren, koddan iş akışına uzanan işaret ve müdahale kataloğudur. Metin, keyfi kurallarla fiziksel sınırları ayırt eden bir ölçüt vermediğini, örneklerin başarılı ustalık durumlarından seçildiğini, kataloğun ölçümle doğrulanmadığını ve fazla sınırın kendisinin karmaşıklık ürettiğini kaydeder.",
+    "pdf": "Tasarım_Kuramı__Özgürlüğün_Altyapısı_Olarak_Kısıt.pdf",
+    "thumb": "thumbs/tasarım-kuramı-özgürlüğün-altyapısı-olarak-kısıt.png",
+    "addedAt": "2026-10-04T18:23:58.457Z",
+    "pages": 45,
+    "belge": "BELGE-235",
+    "related": [
+      "kavramsal-çarpıştırma-yöntemi-ve-negatif-bilginin-kısıt-geometrisi",
+      "yazılım-tasarımı-boyut-sınırıyla-yönlendirilen-modüler-ayrıştırma",
+      "durum-vektörü-ve-durum-uzayı-yaklaşımı",
+      "kullanılabilirlik-algı-sınırlarından-türeyen-tasarım-kuralları",
+      "ağır-rejim-hafif-rejim"
+    ],
+    "title_en": "Design Theory: Constraint as the Infrastructure of Freedom",
+    "description_en": "The text defines freedom not as the absence of obstacles but as the breadth of options actually reachable within limits, and argues that technique and discipline are therefore the infrastructure of freedom rather than its opposite. A vocabulary of limit, constraint, trade-off, room for movement, design space and degree of freedom is built; uncontrollable freedom is noted to be unusable. Mastery is described in three stages: a sense of limitlessness in ignorance, real limits made visible by knowledge, and in mastery the room to manoeuvre between limits and, when needed, the changing of the limit itself. Ballet, music, bridge and aircraft design, a file-processing system and language learning illustrate the same pattern. Through chess, state space, search space, strategy and optimisation are distinguished; drawing on de Groot and on Chase and Simon, it is argued that the master does not calculate more moves but selects the moves worth evaluating from the start, and that knowledge of limits narrows the search space in the same way. Through the map, dashboard and API, representation is treated as a deliberate limit that makes decisions possible. The second part is a signal-and-intervention catalogue, from code to workflow, proposing tightening a single limit at the level where a part can no longer be held in mind or its behaviour predicted, then checking whether the complexity has moved to another level. The text records that it offers no criterion for distinguishing arbitrary rules from physical limits, that its examples are drawn from successful cases of mastery, that the catalogue is not validated by measurement, and that too many limits themselves produce complexity.",
+    "priority": 6
+  },
+  {
+    "slug": "yazılım-tasarımı-boyut-sınırıyla-yönlendirilen-modüler-ayrıştırma",
+    "title": "Yazılım Tasarımı: Boyut Sınırıyla Yönlendirilen Modüler Ayrıştırma",
+    "date": "2026-10-04",
+    "description": "Metin, bir kod tabanında her dosyayı belirli bir satır sayısının altında tutma alışkanlığını boyut sınırıyla yönlendirilen modüler ayrıştırma olarak adlandırır ve terimi iki bileşene ayırır: ayrıştırma yapılan işlemi, boyut sınırı ise işlemin ne zaman yapılacağını belirler. Sınır bir tasarım ilkesi değil tetikleyicidir; bölmenin nereden yapılacağını söylemez, bu karar dosyadaki farklı işlerin sınırı boyunca ayrıca verilir. Kararlılık üç mekanizmaya bağlanır. Bilişsel yük sınırında küçük dosya tek seferde akılda tutulur; 800 satırlık dosyada baştaki değişkenle sondaki fonksiyon arasındaki bağlantı gözden kaçabilir, 200 satırda ekranda kalır. Yüksek uyumda küçük kalmak zorunda olan dosyaya ikinci bir iş sığmaz; veritabanı sorgusu ile sonucun biçimlendirilmesini birlikte içeren dosya sınır aşıldığında iki dosyaya ayrılır ve bu sonuç tek sorumluluk ilkesine denk gelir. Değişikliğin yerelleşmesinde aynı dosyadaki ortak değişkenlerin ürettiği görünmez bağlantılar, bölünmeden sonra açık arayüze taşınarak görünür hale gelir; Parnas'ın bilgi gizleme ilkesi bu durumu tarif eder. Satır sayısı uyum ve yerelliğin kendisi değil, ucuz ölçülebilen vekilidir. Tek iş yapan 250 satırlık dosya sınırı aşar ama sorun üretmez; sıkı bağlı kodu yalnızca sınıra uymak için bölmek uyumu düşürür ve bilişsel yükü artırır. Esnetme kararı satır sayısına değil dosyanın kaç iş yaptığına göre verilir. 200 değerinin deneyime dayandığı, kod üreten dil modelleriyle sınırın önem kazandığı gözleminin ise henüz sistematik olarak ölçülmediği belirtilir.",
+    "pdf": "Yazılım_Tasarımı__Boyut_Sınırıyla_Yönlendirilen_Modüler_Ayrıştırma.pdf",
+    "thumb": "thumbs/yazılım-tasarımı-boyut-sınırıyla-yönlendirilen-modüler-ayrıştırma.png",
+    "addedAt": "2026-10-04T18:23:58.456Z",
+    "pages": 6,
+    "belge": "BELGE-233",
+    "title_en": "Software Design: Size-Constrained Modular Decomposition",
+    "description_en": "The text names the habit of keeping every file in a codebase below a fixed line count size-constrained modular decomposition and splits the term into two components: decomposition names the operation, and the size constraint determines when it is performed. The limit is a trigger, not a design principle; it does not say where to split, a decision made separately along the boundary between the distinct jobs inside the file. Stability is attributed to three mechanisms. Under the cognitive load limit a small file can be held in mind at once; in an 800-line file the link between a variable at the top and a function at the bottom can be missed, while in 200 lines it stays on screen. Under high cohesion a file forced to stay small has no room for a second job; a file containing both a database query and the code formatting its result splits into two files when the limit is exceeded, matching the single responsibility principle. Under locality of change, invisible couplings created by shared variables within one file become visible once splitting routes them through an explicit interface; Parnas's information hiding principle describes this. Line count is not cohesion or locality itself but a cheaply measured proxy for them. A 250-line file doing one job exceeds the limit without causing problems, while splitting tightly coupled code merely to satisfy the limit lowers cohesion and raises cognitive load. Whether to relax the limit is decided by how many jobs the file does, not by its line count. The value of 200 rests on experience, and the observation that the limit matters more with code-generating language models is noted as not yet systematically measured.",
+    "priority": 5,
+    "related": [
+      "tasarım-kuramı-özgürlüğün-altyapısı-olarak-kısıt",
+      "architectural-fitness-function-ratchet",
+      "kod-tabani-geometrisi",
+      "bilişsel-psikoloji-yazılım-mühendisliğine-aktarım",
+      "vekil-değişkenler-ve-örtük-yargı"
+    ]
+  },
+  {
     "slug": "kavram-üretimi-ülkelere-göre-taşıyıcı-altyapılar",
     "title": "Kavram Üretimi: Ülkelere Göre Taşıyıcı Altyapılar",
     "date": "2026-10-02",
@@ -59,7 +123,8 @@
       "ölçüm-cihazı-kavram-tarih-ve-mühendislik-i-lkeleri",
       "kapasite-ve-kullanım-ölçülemeyeni-ölçmek",
       "architectural-fitness-function-ratchet",
-      "sistem-teorisi"
+      "sistem-teorisi",
+      "durum-vektörü-ve-durum-uzayı-yaklaşımı"
     ]
   },
   {
@@ -141,7 +206,8 @@
       "arayüz-tasarımı-durum-makinesi-ile-denetim-modelleme",
       "bilişsel-psikoloji-yazılım-mühendisliğine-aktarım",
       "06-tasarim-muhendisligi",
-      "kumarhane-mekaniklerinin-davranışsal-ve-psikolojik-analizi"
+      "kumarhane-mekaniklerinin-davranışsal-ve-psikolojik-analizi",
+      "tasarım-kuramı-özgürlüğün-altyapısı-olarak-kısıt"
     ],
     "title_en": "Usability: Design Rules Derived from the Limits of Perception",
     "description_en": "The text argues that interface rules come from two distinct sources: some are measured cognitive and physiological limits such as the Fitts, Hick and Miller laws and contrast thresholds, while others, such as component choices, layout patterns and visual style, are accumulated practice that varies with context; most design disagreements within a team are attributed to confusing these two sets. The software principles of information hiding, modularity and grouping are mapped onto progressive disclosure, component systems and Gestalt principles in the interface. Visual hierarchy, proximity, typographic measure, WCAG contrast ratios, the 44-pixel touch target, the Doherty threshold, Jakob's law and the aesthetic-usability effect are defined with concrete examples. The most frequently skipped part of frontend development is identified as state coverage: the empty, loading, error and edge states of every screen require as much design as the ideal state, and an error state must convey what happened, why, and what can be done now. The text holds that perceived performance improves through reducing uncertainty rather than actual duration, that undo is preferable to a confirmation dialog, and that accessibility is a structural decision beginning with the choice of the correct HTML element. Forms, navigation, responsive design, design systems, motion and measurement methods are treated in separate sections; dark patterns are classified as the use of the same knowledge against the user. The text records that the rules were produced in a Western, left-to-right screen context, that Tesler's law has no written primary source, and that the 60-30-10 ratio has no empirical basis.",
@@ -161,7 +227,8 @@
       "düşünme-araçları-tablolarla-düşünme",
       "sınıfı-kapatmak-güvenlik-bulgularının-tip-tasarımındaki-karşılığı",
       "girdi-i-şlemede-temsil-boşluğu",
-      "kullanılabilirlik-algı-sınırlarından-türeyen-tasarım-kuralları"
+      "kullanılabilirlik-algı-sınırlarından-türeyen-tasarım-kuralları",
+      "durum-vektörü-ve-durum-uzayı-yaklaşımı"
     ],
     "title_en": "Interface Design: Modelling Controls with a State Machine",
     "description_en": "The text argues that an interface button does not decide but emits events, and that whether a click takes effect is determined not by the button but by the state the system is in when the event arrives. It traces the divergence between visible and real state to independent boolean flags: five flags yield thirty-two combinations, while five discrete states make the rest unrepresentable. The cases in which a submit event is swallowed are separated into transient, structural and nothing-to-do; a free-form list is shown to produce duplication and gaps, which a table bound to states exposes. Eight axes of an event are defined: presence, time, order, frequency, interval, duration, context and concurrency. Besides an identifier, the record holds only source, time and state; the rest is computed; context cannot be recovered afterwards and must therefore be written when the event occurs. A transition carries source state, event, guard and action; when a server response and a cancel collide, the cancel must win. Submit and cancel are bound not to each other but to a shared state. In the state-event matrix, no row having two filled cells shows that mutual exclusion follows without being written separately; the fully empty success row shows a missing exit; the empty cancel cell in the error row shows an unconsidered case. Double submission is prevented by the matrix's empty cell, whereas hardware-induced repeats need a time filter in the event stream, not the logic layer. Limits are recorded: on simple screens the model costs more than the problem it solves, and the cost of logging context and how a swallowed event should be reported to the user are left as open questions.",
@@ -332,7 +399,8 @@
       "müdahale-ederek-anlama-karmaşık-yazılım-sistemlerini-anlamanın-yöntem-kataloğu",
       "kullanılabilirlik-algı-sınırlarından-türeyen-tasarım-kuralları",
       "olasılık-kuramı-tarihsel-i-lkeler-ve-pratik-karşılıkları",
-      "kişisel-gelişim-en-çok-fark-yaratan-beceriler"
+      "kişisel-gelişim-en-çok-fark-yaratan-beceriler",
+      "yazılım-tasarımı-boyut-sınırıyla-yönlendirilen-modüler-ayrıştırma"
     ],
     "title_en": "Cognitive Psychology: Transfer to Software Engineering",
     "description_en": "The text sifts the psychology curriculum for engineering value and argues that what transfers is not clinical content but the discipline of measurement and experimental design; reliability, validity and power analysis correspond to A/B testing and metric design. Working memory's capacity of about four units is the physiological limit of code readability; chunking, naming, parameter grouping and the guard clause are tools for conforming to that limit. Because the intrinsic, extraneous and germane forms of cognitive load draw on one capacity, disorderly code is not read slowly but not understood; three questions separate the sources of difficulty. Since vision is a reconstruction, change blindness, preattentive features and Gestalt principles inform dashboard design. The main obstacle in debugging is identified as confirmation bias; through Wason's 2-4-6 task, writing the prediction in advance, working with at least two hypotheses and bisection are listed. In feedback the decisive variable is not speed but the accessibility of context; technical delays are shortened, and where the delay belongs to the phenomenon, context is kept in decision records. The retrieval effect, desirable difficulty and Diátaxis document types are applied to onboarding. The fundamental attribution error, diffusion of responsibility, conformity pressure and Goodhart's law form the organizational dimension. The final section treats the blind spot of just-in-time learning, the Challenger and Ariane 5 cases, and damage limitation that needs no foresight. The text records that the components of cognitive load are not cleanly separated experimentally and that capacity figures do not predict individuals.",
@@ -446,7 +514,8 @@
       "test-mühendisliği-yeterlilik-etkinlik-güvenilirlik",
       "amerikan-giris-imcilik-ve-mu-hendislik-ku-ltu-ru-nde-cesaret-hız-ve-toparlanma-mantıg-ı",
       "yazılım-mimarisi-seçim-zamanlama-ve-kademeli-değişim",
-      "yazılım-yönetimi-zihniyeti-belirleyen-i-ki-soru"
+      "yazılım-yönetimi-zihniyeti-belirleyen-i-ki-soru",
+      "tasarım-kuramı-özgürlüğün-altyapısı-olarak-kısıt"
     ]
   },
   {
@@ -767,7 +836,8 @@
       "bireysel-sınırlar-kurumsal-borc-ve-i-letis-im-yazılım-ekiplerinde-performans-ve-bu-yu-me-i-c-in-bir-c-erc-eve",
       "otonominin-mühendisliği-etmen-tabanlı-sistemler-i-çin-bir-karar-sistemleri-çerçevesi",
       "test-mühendisliği-yeterlilik-etkinlik-güvenilirlik",
-      "kontrol-teorisi-ve-yazılım-denetimi"
+      "kontrol-teorisi-ve-yazılım-denetimi",
+      "yazılım-tasarımı-boyut-sınırıyla-yönlendirilen-modüler-ayrıştırma"
     ]
   },
   {
@@ -1561,7 +1631,8 @@
       "bildiğini-sandığın-kelime-otomasyon-örneği-üzerinden-kavramın-sınırları",
       "refleks-reddin-mekanizmaları",
       "epistemik-çaprazlamanın-biçimsel-temelleri",
-      "disiplinler-arası-transferin-ölçütleri"
+      "disiplinler-arası-transferin-ölçütleri",
+      "tasarım-kuramı-özgürlüğün-altyapısı-olarak-kısıt"
     ],
     "priority": 9,
     "belge": "BELGE-163"
@@ -3653,7 +3724,8 @@
     "related": [
       "kod-tabani-geometrisi",
       "geometrinin-otesi",
-      "kontrol-teorisi-ve-yazılım-denetimi"
+      "kontrol-teorisi-ve-yazılım-denetimi",
+      "yazılım-tasarımı-boyut-sınırıyla-yönlendirilen-modüler-ayrıştırma"
     ],
     "belge": "BELGE-061"
   },
@@ -3694,7 +3766,8 @@
       "çekirdek-katmandan-sınırlı-bağlamlara-domain-odaklı-mimariye-evrimsel-geçiş",
       "architectural-fitness-function-ratchet",
       "haritalama-koddan-kavrama-bir-zihinsel-hamlenin-anatomisi",
-      "yazılım-mimarisi-seçim-zamanlama-ve-kademeli-değişim"
+      "yazılım-mimarisi-seçim-zamanlama-ve-kademeli-değişim",
+      "yazılım-tasarımı-boyut-sınırıyla-yönlendirilen-modüler-ayrıştırma"
     ],
     "title_en": "Codebase Geometry: A Topological Diagnosis of Software Architecture",
     "description_en": "This piece treats a software codebase not as a technical entity made up only of file and line counts but as a geometric structure of directed relations, mass densities, central nodes, and layered flows. Modules are read as nodes, import relations as edges, file volume as mass, and import density as central gravity. The aim is to move architectural health beyond intuitive assessment and evaluate it through measurable and visualizable indicators.",
@@ -4364,7 +4437,8 @@
       "duvarlarla-i-lerlemek-test-güdümlü-geliştirmeden-ölçüt-önceliği-i-lkesine",
       "nereden-biliyoruz-bilginin-anatomisi-üzerine-bir-i-nceleme",
       "02-davranis-uzayi-ve-geometrisi",
-      "yazılım-testi-oracle-problemi"
+      "yazılım-testi-oracle-problemi",
+      "durum-vektörü-ve-durum-uzayı-yaklaşımı"
     ],
     "title_en": "Behavior Space, High-Dimensional Bug Topology, and Formal Verification in Software Systems",
     "description_en": "In software, a function's behavior is traditionally thought of within the 'input–process–output' triad; yet this mental model covers only a small region of the set of all states the system can take — the behavior space. This piece addresses the structure of the behavior space, its high-dimensional nature, the human mind's strategies for grasping this space, and the ability of formal verification methods to systematically scan it.",
@@ -4406,7 +4480,8 @@
     "priority": 7,
     "related": [
       "03-akademik-ve-endustriyel-karsiliklar",
-      "04-bug-topolojisi-ve-formel-dogrulama"
+      "04-bug-topolojisi-ve-formel-dogrulama",
+      "durum-vektörü-ve-durum-uzayı-yaklaşımı"
     ],
     "belge": "BELGE-024"
   },
@@ -4520,7 +4595,8 @@
       "düzen-nereden-çıkar-sistemler-ağlar-evrim-ve-zihin-üzerine",
       "yapısal-i-zomorfizm-kaynaklar-gelenekler-sentez",
       "sistem-dusuncesi-gorsellestirme",
-      "kontrol-teorisi-ve-yazılım-denetimi"
+      "kontrol-teorisi-ve-yazılım-denetimi",
+      "durum-vektörü-ve-durum-uzayı-yaklaşımı"
     ],
     "pages": 7,
     "title_en": "Systems Theory: Archetypes, Leverage Points, and Complexity",
