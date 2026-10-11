@@ -1,0 +1,218 @@
+Düşünme Araçları: S ekil Kataloğu
+ÖFY
+October 2026
+Özet
+Bir problemin geometrik şekli, parçaları arasındaki ilişkinin kağıda çizilmiş hâlidir;
+bu nedenle her probleme uyan tek bir şekil yoktur ve şekli parçalar arasındaki
+ilişkinin türü belirler. Sıra çizgiyi, tekrar daireyi, bölünme ağacı, karşılıklı bağ
+ağı verir. Ağ bu şekillerin en genelidir, çünkü çizgi dalsız bir ağ, ağaç döngüsüz
+bir ağ, daire ise kapalı bir ağdır. Problem bir ağ olarak çizildiğinde çözüm bu
+ağın içinde başlangıçtan hedefe giden bir yoldur. Yolun biçimi çözümün türüne
+göre değişir: adımları belli çözümler düz çizgi, eleme gerektirenler huni, önce
+çoğaltıp sonra daraltanlar baklava, deneyerek ilerleyenler sarmal biçimini alır.
+Uygulamada en sık karşılaşılan biçim sarmaldır, çünkü çözümlerin çoğu ilk den-
+emede tutmaz ve düzeltilerek bulunur. Sekil seçimi bu nedenle bir süsleme değil,
+problemin yapısı hakkında verilmiş bir karardır.
+1
+
+-- 1 of 9 --
+
+Giriş
+Bir problemi çizmek, onu çözmenin en eski yardımcı yöntemlerinden biridir;
+Polya, problem çözme üzerine yazdığı kitapta “bir şekil çiz” önerisini temel
+buluşsal yöntemler arasında sayar (Polya, 1945). C izim işe yarar, çünkü prob-
+lemin parçalarını ve bunların birbirine nasıl bağlandığını aynı anda görünür
+kılar.
+Buradaki geometrik şekil terimi, matematikteki ölçülü şekli değil, bir prob-
+lemin parçaları arasındaki ilişkiyi gösteren şematik çizimi ifade eder. Parça,
+problemin ayrı ayrı adlandırılabilen ögesidir: bir adım, bir seçenek, bir kişi,
+bir kısıt. ˙Ilişki, iki parçayı birbirine bağlayan şeydir: birinin diğerinden önce
+gelmesi, birinin diğerini içermesi ya da ikisinin birbirini etkilemesi.
+Yaygın kabul, bazı şekillerin kendiliğinden daha iyi olduğudur; örneğin her
+konunun bir piramitle ya da 2 × 2 matrisle anlatılabileceği düşünülür. Bu kabul
+yanlıştır. Sekil probleme dışarıdan giydirilmez, problemin yapısından çıkar.
+Yapıya uymayan bir şekil, problemde olmayan bir ilişkiyi varmış gibi gösterir.
+Kapsam iki soruyla sınırlıdır: bir problemin kendisine hangi şekil uyar ve bir
+problemin çözümüne hangi şekil uyar. Sekillerin estetik yönü ve sunum tekniği
+kapsam dışındadır.
+2
+
+-- 2 of 9 --
+
+Problemin S ekli
+Sekli ˙Ilişki Belirler
+Bir problemin şeklini bulmak için parçalara değil, parçalar arasındaki ilişkiye
+bakılır. Aynı parçalar farklı ilişkilerle farklı şekiller üretir. Dört görev art arda
+yapılacaksa çizgi oluşur; aynı dört görev birbirini bekliyorsa ağ oluşur.
+Parçalar arasındaki ilişki Uygun şekil
+Sıra C izgi
+Tekrar Daire
+Üç yönlü çekişme Üçgen
+˙Iki ölçüte göre sınıflama Kare (2 × 2 matris)
+Bölünme Ağaç
+Karşılıklı bağ Ağ
+Katmanlanma ˙Iç içe halkalar
+Temel ve üst kat Piramit
+Sekil Kataloğu
+C izgi Daire Üçgen Matris
+Ağaç Ağ Halkalar Piramit
+Sekil 1. Problemlerin sekiz temel şekli.
+C izgi
+Parçalar tek bir sıraya dizildiğinde çizgi oluşur. Her parçanın bir öncesi ve bir
+sonrası vardır. Bir üretim sürecinin aşamaları ya da bir olayın zaman akışı bu
+şekle uyar.
+Daire
+Son parça yeniden ilk parçaya bağlandığında çizgi kapanır ve daire oluşur. Ken-
+dini tekrar eden problemler bu şekli alır. Stok azalır, sipariş verilir, stok dolar,
+3
+
+-- 3 of 9 --
+
+yeniden azalır; bu bir döngüdür ve çizgiyle gösterilemez, çünkü çizginin bir sonu
+vardır.
+Üçgen
+Üç parça birbiriyle çekiştiğinde, yani birini iyileştirmek diğer ikisinden birini
+kötüleştirdiğinde üçgen oluşur. Hız, maliyet ve kalite arasındaki ilişki bunun
+bilinen örneğidir: iş hızlandırıldığında ya maliyet artar ya kalite düşer.
+Kare
+Parçalar iki ayrı ölçüte göre sınıflandırıldığında 2 × 2 matris oluşur. Her ölçüt
+bir ekseni, her hücre bir sınıfı verir. ˙Işlerin önemli olup olmamasına ve acil olup
+olmamasına göre dört hücreye ayrılması bu şeklin yaygın kullanımıdır (Covey,
+1989).
+Ağaç
+Bir parça alt parçalara, onlar da kendi alt parçalarına bölündüğünde ağaç oluşur.
+Büyük bir problemi küçük problemlere ayırmak ya da bir arızanın kök ne-
+denini aramak bu şekli üretir. Minto, bir düşüncenin alt düşüncelere bölünerek
+düzenlenmesini bu yapı üzerine kurar (Minto, 1987).
+Ağ
+Parçalar birbirine çok yönlü bağlandığında ağ oluşur. Ağda bir parçanın birden
+fazla komşusu olabilir ve bağlar döngü kurabilir. Bir yazılımdaki modüllerin
+birbirine bağımlılığı ya da bir ekipteki kişilerin ilişkileri bu şekle uyar. Ağın
+matematikteki adı graftır (graph); kökeni Euler’in Königsberg köprüleri üzerine
+çalışmasına dayanır (Euler, 1736).
+˙Iç ˙Içe Halkalar
+Parçalar birbirini sardığında iç içe halkalar oluşur. Ortada çekirdek, çevresinde
+onu saran katmanlar bulunur. Bir ürünün çekirdek işlevi, çevresindeki ek özellikler
+ve en dışta pazar koşulları bu biçimde çizilir.
+Piramit
+Üst katın ancak alt kat kurulduktan sonra durabildiği yapılar piramit oluşturur.
+Piramit bir öncelik sırası bildirir: önce temel, sonra üstü. Halkalardan farkı yön
+içermesidir; halkalarda içeriden dışarıya, piramitte aşağıdan yukarıya gidilir.
+Ağın Genelliği
+Sekiz şekil arasında en genel olan ağdır, çünkü diğerlerinin çoğu ağa bir kısıt
+eklenerek elde edilir:
+4
+
+-- 4 of 9 --
+
+• C izgi, hiçbir düğümü dallanmayan ağdır.
+• Ağaç, içinde döngü bulunmayan ağdır.
+• Daire, tek bir kapalı döngüden oluşan ağdır.
+Bunun pratik sonucu şudur: bir problemin şekli hakkında karar verilemiy-
+orsa önce ağ olarak çizilir, sonra çizimde dallanma ya da döngü bulunup bulun-
+madığına bakılır. Dallanma yoksa şekil çizgidir, döngü yoksa ağaçtır.
+5
+
+-- 5 of 9 --
+
+C özümün S ekli
+C özüm Bir Yoldur
+Problem bir ağ ise çözüm, o ağın içinde başlangıç noktasından hedef noktasına
+giden bir yoldur. Newell ve Simon, problem çözmeyi bu biçimde tanımlar: olası
+durumların tamamı bir problem uzayı (problem space) oluşturur ve çözmek, bu
+uzayda başlangıç durumundan hedef durumuna giden bir yol aramaktır (Newell
+ve Simon, 1972).
+Evden işe gitmek bunun gündelik örneğidir. Sehrin haritası, birbirine bağlı
+sokaklarıyla bir ağdır ve problemi temsil eder. Seçilen güzergah ise bu ağın
+içinden geçen tek bir hattır ve çözümü temsil eder. Problem bütün sokaklardır;
+çözüm yalnızca yürünen sokaklardır.
+Ev ˙Iş
+Sekil 2. Problem bütün ağdır (ince çizgiler); çözüm ağın içindeki tek bir yoldur
+(kalın çizgi).
+Yolun Biçimleri
+C özümün türüne göre yol farklı biçimler alır.
+Düz çizgi Huni Baklava
+Sarmal Ağaç Köprü
+Sekil 3. C özüm yolunun altı biçimi.
+6
+
+-- 6 of 9 --
+
+Düz C izgi
+Adımları önceden bilinen çözümler düz bir çizgi izler. Bir yemek tarifi ya da bir
+kurulum prosedürü bu türdendir; karar verilmez, yalnızca sırayla uygulanır.
+Huni
+C ok sayıda seçenekten tek seçeneğe inen çözümler huni biçimindedir. Geniş
+ağızdan çok aday girer, her aşamada bir kısmı elenir, dar uçtan tek aday çıkar.
+˙Işe alım süreci bunun örneğidir.
+Baklava
+Önce seçenekleri çoğaltıp sonra daraltan çözümler baklava biçimini alır. ˙Ilk
+yarıda fikir üretilir ve şekil genişler; ikinci yarıda seçim yapılır ve şekil daralır.
+Design Council’ın tasarım süreci için önerdiği çift baklava (double diamond )
+modeli bu biçimi iki kez art arda kullanır: ilki doğru problemi bulmak, ikincisi
+doğru çözümü bulmak içindir (Design Council, 2005).
+Sarmal
+Deneyip düzelterek ilerleyen çözümler sarmal çizer. Her turda aynı adımlar
+yeniden atılır, ancak her tur hedefe bir öncekinden daha yakın biter. C orbaya
+tuz atmak bunun en yalın örneğidir: tadılır, az gelir, biraz eklenir, yeniden
+tadılır. Boehm, yazılım geliştirme sürecini aynı biçimle modeller; her tur bir
+öncekinin sonucuna göre planlanır (Boehm, 1988).
+Sarmalın daireden farkı ilerlemedir. Daire aynı noktaya döner; sarmal her
+turda merkeze biraz daha yaklaşır.
+Ağaç
+Her adımda koşula göre dallanan çözümler ağaç biçimindedir: bir durum gerçekleşirse
+bir dal, gerçekleşmezse öteki dal izlenir. Bir arıza giderme kılavuzu bu yapıdadır.
+Ağacın tamamı olası bütün çözümleri gösterir; belirli bir durumda izlenen çözüm
+ise kökten yaprağa giden tek bir yoldur.
+Köprü
+˙Iki ayrı şeyi birbirine bağlayan çözümler köprü biçimindedir. Bir yanda mev-
+cut durum, öte yanda istenen durum bulunur; çözüm aradaki boşluğu kap-
+atan yapıdır. Birbiriyle konuşmayan iki sistemi bağlayan bir ara katman bu
+türdendir.
+Sarmalın Yaygınlığı
+Altı biçim arasında uygulamada en sık karşılaşılan sarmaldır. Nedeni, çözümlerin
+çoğunun ilk denemede tutmamasıdır. Düz çizgi, yolun baştan bilinmesini gerek-
+tirir; bu koşul yalnızca daha önce çözülmüş problemlerde sağlanır. Yeni bir
+7
+
+-- 7 of 9 --
+
+problemde yol bilinmez, bu yüzden bir adım atılır, sonuca bakılır ve bir sonraki
+adım buna göre düzeltilir. Bu davranış çizildiğinde sarmal ortaya çıkar.
+8
+
+-- 8 of 9 --
+
+Sonuç
+Sekil seçmek, problemin yapısı hakkında bir iddiada bulunmaktır. Bir problemi
+piramitle çizen kişi, parçalar arasında temel ve üst kat ilişkisi olduğunu söylemiş
+olur; ağ ile çizen kişi, parçaların birbirini karşılıklı etkilediğini söylemiş olur.
+Yanlış şekil yanlış çözüme götürür: döngülü bir problemi çizgi olarak çizen kişi,
+sona ulaştığında problemin bittiğini sanır.
+Problem ile çözümün şekli aynı olmak zorunda değildir. Problem bir ağ iken
+çözüm bir yoldur; yani çözüm, problemin şeklinin içinden seçilmiş daha dar bir
+şekildir. C özmek bu anlamda bir eleme işidir: ağdaki bağların çoğu bırakılır,
+yalnızca hedefe götürenler tutulur.
+C erçevenin sınırları vardır. Ağ ve yol modeli, parçaları tek tek sayılabilen
+problemlere uyar. Parçaları ayrık olmayan, sürekli değişen büyüklüklerle tanımlanan
+problemlerde düğüm ve bağ çizmek zorlama olur. Ayrıca gerçek problemler çoğu
+zaman tek şekle sığmaz; bir ağacın bir dalında döngü, bir çizginin bir adımında
+huni bulunabilir. Bu durumda şekiller iç içe kullanılır.
+Açık kalan soru, şeklin problemden mi çıktığı yoksa çizen kişinin alışkanlığından
+mı geldiğidir. Aynı problemi iki kişinin iki farklı şekille çizmesi, şeklin yalnızca
+problemin değil, bakışın da ürünü olduğunu düşündürür.
+Kaynaklar
+• Boehm, B. W. (1988). A Spiral Model of Software Development and
+Enhancement. Computer, 21(5).
+• Covey, S. R. (1989). The 7 Habits of Highly Effective People. Free Press.
+• Design Council (2005). The Double Diamond tasarım süreci modeli.
+• Euler, L. (1736). Solutio problematis ad geometriam situs pertinentis.
+Commentarii Academiae Scientiarum Petropolitanae.
+• Minto, B. (1987). The Pyramid Principle: Logic in Writing and Thinking.
+Pitman.
+• Newell, A. ve Simon, H. A. (1972). Human Problem Solving. Prentice-
+Hall.
+• Polya, G. (1945). How to Solve It. Princeton University Press.
+9
+
+-- 9 of 9 --
