@@ -80,6 +80,7 @@ function header(active) {
     tab(base + 'kod-duvarlari', 'Kod Duvarları', 'kod-duvarlari') +
     tab(base + 'kavramlar', 'Kavramlar', 'kavramlar') +
     tab(base + 'yapay-zeka', 'Yapay Zekâ', 'yapay-zeka') +
+    tab(base + 'ask', 'Aşk', 'ask') +
     `</nav>` +
     `<main class="site-main">`
 }
@@ -214,7 +215,8 @@ const homeHead = buildHead({
     author: { '@type': 'Person', name: SITE_NAME, jobTitle: SITE_ROLE },
   },
 })
-const writings = posts.filter((p) => !p.tab) // sekmeli yazılar (müzik, rehber) hariç
+const writings = posts.filter((p) => !p.tab && !p.bolum) // sekmeli yazılar (müzik, rehber) ve bölümlü yazılar (aşk) hariç
+const lovePosts = posts.filter((p) => p.bolum === 'ask' && !p.tab)
 const musicPosts = posts.filter((p) => p.tab === 'muzik')
 const guidePosts = posts.filter((p) => p.tab === 'rehber')
 const homeBody =
@@ -237,6 +239,22 @@ const muzikBody =
   `<ul class="post-list">${musicPosts.map(hiddenListItem).join('')}</ul>` +
   footer()
 write('muzik', renderPage({ head: muzikHead, bodyHtml: muzikBody }))
+
+// --- AŞK SEKMESİ ------------------------------------------------------------
+const askHead = buildHead({
+  title: 'Aşk',
+  description: 'Aşk ve ilişkiler üzerine yazılar.',
+  canonical: `${SITE_URL}${base}ask`,
+  type: 'website',
+  image: '/profile.jpeg',
+})
+const askBody =
+  header('ask') +
+  (lovePosts.length
+    ? `<ul class="post-list">${lovePosts.map(postListItem).join('')}</ul>`
+    : `<p class="muted">Bu bölümde henüz yazı yok.</p>`) +
+  footer()
+write('ask', renderPage({ head: askHead, bodyHtml: askBody }))
 
 // --- REHBERLER SEKMESİ -------------------------------------------------------
 const rehberHead = buildHead({
@@ -503,8 +521,9 @@ for (const p of posts) {
   const lead = p.description ? `<p class="post-lead">${esc(p.description)}</p>` : ''
   const isMusic = p.tab === 'muzik'
   const isGuide = p.tab === 'rehber'
-  const backHref = isMusic ? base + 'muzik' : isGuide ? base + 'rehberler' : base
-  const backLabel = isMusic ? '← Müzik' : isGuide ? '← Rehberler' : '← Tüm yazılar'
+  const isLove = p.bolum === 'ask'
+  const backHref = isMusic ? base + 'muzik' : isGuide ? base + 'rehberler' : isLove ? base + 'ask' : base
+  const backLabel = isMusic ? '← Müzik' : isGuide ? '← Rehberler' : isLove ? '← Aşk' : '← Tüm yazılar'
   const curatedRelated = (p.related || []).map((s) => postsBySlug.get(s)).filter((r) => r && !r.tab)
   const relatedPosts = curatedRelated.length
     ? curatedRelated
@@ -542,7 +561,7 @@ for (const p of posts) {
     `<div class="cite-actions"><button type="button" class="btn">Atfı kopyala</button>` +
     `<button type="button" class="btn">BibTeX</button></div></section>`
   const body =
-    header(isMusic ? 'muzik' : isGuide ? 'rehber' : 'yazilar') +
+    header(isMusic ? 'muzik' : isGuide ? 'rehber' : isLove ? 'ask' : 'yazilar') +
     `<article class="post">` +
     `<a href="${escAttr(backHref)}" class="back-link">${backLabel}</a>` +
     `<div class="post-head"><div><h1 class="post-heading">${esc(p.title)}</h1>${meta}${lead}</div></div>` +

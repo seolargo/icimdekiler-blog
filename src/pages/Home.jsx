@@ -233,7 +233,7 @@ export default function Home() {
   }, [loading, location.pathname, location.search])
 
   // Sekmeli yazılar (müzik, rehber) ana "Yazılar" akışında görünmez
-  const writings = useMemo(() => posts.filter((p) => !p.tab), [posts])
+  const writings = useMemo(() => posts.filter((p) => !p.tab && !p.bolum), [posts])
 
   // seriler ve adetleri (yazı sırasına göre ilk görülen sırada)
   const seriesList = useMemo(() => {

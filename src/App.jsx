@@ -95,6 +95,9 @@ export default function App() {
         <NavLink to="/yapay-zeka" className="nav-tab">
           {t('ai')}
         </NavLink>
+        <NavLink to="/ask" className="nav-tab">
+          {t('love')}
+        </NavLink>
       </nav>
 
       <main className="site-main">

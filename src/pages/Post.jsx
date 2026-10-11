@@ -41,13 +41,17 @@ export default function Post() {
       ? '/muzik'
       : post?.tab === 'rehber'
         ? '/rehberler'
-        : { pathname: '/', search: listSearch }
+        : post?.bolum === 'ask'
+          ? '/ask'
+          : { pathname: '/', search: listSearch }
   const backLabel =
     post?.tab === 'muzik'
       ? `← ${t('music')}`
       : post?.tab === 'rehber'
         ? `← ${t('guides')}`
-        : t('allPosts')
+        : post?.bolum === 'ask'
+          ? `← ${t('love')}`
+          : t('allPosts')
 
   useHead(
     post
