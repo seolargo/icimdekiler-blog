@@ -1,0 +1,280 @@
+Yazılım Felsefesi: Kod Yasadır
+ÖFY
+October 2026
+Özet
+Yazılımın mimarisi, insanların dijital ortamda ne yapabileceğini yasa kadar etk-
+ili biçimde sınırlar. Lawrence Lessig bu görüşü “kod yasadır” (code is law )
+ifadesiyle özetlemiştir (Lessig, 1999). Yasa, ihlalden sonra ceza vererek çalışır;
+kod ise ihlali baştan imkânsız kılar. Bu yüzden kod, yasadan daha kesin ve
+daha görünmez bir düzenleyicidir. Yasayı seçilmiş organlar yapar ve yasa açıkça
+tartışılır; kodu ise çoğunlukla şirketler yazar ve kullanıcı, konulan kuralı fark
+etmez. ˙Internetin özgür yapısı doğal bir özellik değil, bir tasarım tercihidir
+ve değiştirilebilir. Mahremiyet, gözetim, sansür ve açık kaynak tartışmaları
+aynı soruya dayanır: dijital ortamın kurallarını kim yazar ve bu kuralları kim
+denetler. Bu soru, özgürlüğün sınırı ve mülkiyetin kapsamı üzerine yüzyıllardır
+süren felsefi tartışmaların devamıdır.
+1
+
+-- 1 of 10 --
+
+Giriş
+Yazılım yaygın olarak tarafsız bir araç sayılır. Bu kabule göre yazılım yalnızca
+bir işi yapar; iyi ya da kötü kullanılması kullanıcıya bağlıdır. ˙Ikinci bir yaygın
+kabul, internetin doğası gereği özgür ve denetlenemez olduğudur. Lessig’in
+çalışması bu iki kabulü de reddeder.
+Tartışmanın dayandığı terimler şunlardır:
+• Kod (code): Bir dijital ortamı oluşturan yazılım ve protokollerin tamamı.
+Protokol, bilgisayarların birbiriyle nasıl haberleşeceğini belirleyen kurallar
+dizisidir.
+• Mimari (architecture): Bir ortamın, içinde hangi davranışların mümkün
+olduğunu belirleyen yapısı. Fiziksel dünyada duvarlar, kapılar ve yollar
+mimaridir. Dijital dünyada mimari koddur.
+• Düzenleme (regulation): Davranışı sınırlayan ya da yönlendiren her türlü
+etki. Yalnızca devletin koyduğu kuralları değil, davranışı fiilen şekillendiren
+her şeyi kapsar.
+Problem şudur: Bir yazılımı tasarlayan kişi, kullanıcının ne yapabileceğine
+ve ne yapamayacağına karar verir. Bu karar bir kural koyma işlemidir. Ancak
+bu kural, yasalar gibi açık bir tartışmadan geçmez ve çoğu zaman kural olarak
+algılanmaz.
+Bu not kavramsal çerçeveyi ele alır. Belirli ülkelerin mevzuatı, güncel davalar
+ve teknik uygulama ayrıntıları kapsam dışındadır.
+2
+
+-- 2 of 10 --
+
+Davranışı Sınırlayan Dört Etken
+Lessig’e göre bir insanın davranışını dört etken sınırlar (Lessig, 1999). Bu etken-
+ler birlikte çalışır ve biri zayıfladığında diğeri güçlenebilir.
+• Yasa: Devletin koyduğu ve ceza tehdidiyle desteklediği kurallar.
+• Toplumsal normlar: C evrenin onayı ya da kınamasıyla işleyen yazısız
+kurallar.
+• Piyasa: Fiyat yoluyla işleyen sınır. Pahalı olan şey daha az yapılır.
+• Mimari: Ortamın fiziksel ya da teknik yapısı. Mümkün olmayan şey
+yapılamaz.
+Lessig bu modeli sigara örneğiyle açıklar. Aynı davranış dört etkenle de
+sınırlanabilir:
+Etken Sigara örneğinde karşılığı
+Yasa Yaş sınırı, kapalı alanda içme yasağı
+Norm Birinin evinde izin almadan içmenin ayıp sayılması
+Piyasa Vergiyle yükseltilen fiyat
+Mimari Sigaranın nikotin miktarı, filtrenin yapısı
+Dijital Ortamda Mimari
+Fiziksel dünyada mimari büyük ölçüde verilidir. Yerçekimi, mesafe ve duvarlar
+kolay değiştirilemez. Dijital ortamda ise mimarinin tamamı insan yapımıdır. Bir
+platformda ne yazılabileceği, kimin kimi görebileceği, bir dosyanın kopyalanıp
+kopyalanamayacağı kodu yazan kişinin kararıdır.
+Bu yüzden dijital ortamda mimari, dört etken içinde en güçlü olanıdır. “Kod
+yasadır” ifadesi bu durumu anlatır. ˙Ifadenin kökeni Lessig’den öncesine gider:
+Lessig, benzer düşünceyi William Mitchell’in ve Joel Reidenberg’in çalışmalarına
+dayandırır. Reidenberg, teknolojinin koyduğu kurallar bütününe lex informatica
+adını vermiştir (Reidenberg, 1998).
+3
+
+-- 3 of 10 --
+
+Kodun Yasadan Farkı
+Kod ve yasa aynı işi görür, ancak farklı biçimde çalışır. Dört fark öne çıkar.
+Zamanlama
+Yasa, davranıştan sonra devreye girer. Kişi kuralı çiğneyebilir ve ardından
+yaptırımla karşılaşır. Kod, davranıştan önce devreye girer. ˙Izin verilmeyen
+işlem hiç gerçekleşmez.
+Bir platform ileti uzunluğunu belirli bir karakter sayısıyla sınırladığında,
+daha uzun ileti yazmak yasak değil, imkânsızdır. Kullanıcı cezalandırılmaz;
+gönderme düğmesi çalışmaz.
+Kendiliğinden Uygulanma
+Yasanın uygulanması için polis, savcı ve mahkeme gerekir. Bu süreç maliyetlidir
+ve her ihlal yakalanmaz. Kod kendi kendini uygular. Aracıya ihtiyaç duymaz
+ve istisnasız çalışır.
+Takdir Payının Yokluğu
+Yasada yorum alanı vardır. Hâkim somut durumu değerlendirir ve istisna tanıyabilir.
+Kod bu esnekliği taşımaz.
+Dijital haklar yönetimi (digital rights management, DRM) bunun örneğidir.
+DRM, dijital içeriğin kopyalanmasını teknik olarak engelleyen sistemlerin genel
+adıdır. Telif hukuku, eğitim ya da alıntı gibi amaçlarla sınırlı kopyalamaya izin
+verebilir ve telif süresi bir noktada sona erer. DRM ise bu istisnaları tanımaz.
+Böylece kod, yasanın verdiğinden daha geniş bir koruma sağlayabilir (Lessig,
+2006).
+Aynı durum sahiplik kavramını da değiştirir. Kâğıt bir kitap ödünç verilebilir
+ya da satılabilir. DRM korumalı bir e-kitapta bu işlemler yazılım izin verdiği
+ölçüde yapılabilir. 2009 yılında Amazon, Kindle cihazlarındaki bazı George
+Orwell kitaplarını kullanıcıların cihazlarından uzaktan silmiştir (Stone, 2009).
+Olay, satın alınan bir dijital ürün üzerindeki denetimin satıcıda kalabildiğini
+göstermiştir.
+Görünmezlik ve Meşruiyet
+Yasa yayımlanır. Kim tarafından, hangi süreçle yapıldığı bellidir ve yasaya itiraz
+edilebilir. Kod çoğu zaman kapalıdır. Kullanıcı, bir işlemi neden yapamadığını
+bilmez; bunu bir kural olarak değil, sistemin doğal hâli olarak algılar.
+Meşruiyet sorunu buradan doğar. Demokratik bir düzende yasa koyma yetk-
+isi seçilmiş organlardadır. Kod yoluyla kural koyanlar ise şirketler ve yazılımcılardır.
+Bu kişiler seçilmemiştir ve koydukları kurallar için kamuya hesap vermek zorunda
+değildir.
+4
+
+-- 4 of 10 --
+
+Mimarinin Değişebilirliği
+˙Internetin ilk dönemindeki özgürlük, onun teknik yapısından kaynaklanıyordu.
+Temel protokoller, kullanıcının kim olduğunu, nerede bulunduğunu ve ne gönderdiğini
+doğrulamıyordu. Kimlik bilinmediği için denetim zordu.
+Lessig bu durumun kalıcı olmadığını savunur. ˙Internetin yapısı bir doğa
+yasası değil, bir tasarımdır. Tasarım değiştiğinde özgürlük alanı da değişir.
+Ticaretin ve devletlerin çıkarı, kullanıcıyı tanıyan ve izleyebilen bir mimariden
+yanadır. Bu yüzden internet, kendi hâline bırakıldığında daha denetlenebilir bir
+yapıya doğru evrilir (Lessig, 2006).
+Yasa ile Kodun Etkileşimi
+Lessig iki tür “kod”dan söz eder. Doğu Yakası kodu (East Coast code), Wash-
+ington’da yapılan yasalardır. Batı Yakası kodu (West Coast code), Silikon Va-
+disi’nde yazılan yazılımdır.
+Bu ikisi birbirinden bağımsız değildir. Devlet, davranışı doğrudan düzenlemek
+yerine kodu düzenleyebilir. Örneğin bir yasa, hizmet sağlayıcıları kullanıcı
+kayıtlarını saklamaya zorlayabilir. Bu durumda sınırı fiilen kod uygular, an-
+cak kararı yasa vermiştir. Dolaylı düzenleme, sorumluluğun kime ait olduğunu
+belirsizleştirir.
+Jonathan Zittrain benzer bir kaygıyı cihazlar üzerinden dile getirir. Üreticinin
+uzaktan denetleyebildiği kapalı cihazlar yaygınlaştıkça, kullanıcının kendi ci-
+hazında neyi çalıştırabileceğine üretici karar verir (Zittrain, 2008).
+5
+
+-- 5 of 10 --
+
+Dört Tartışma Alanı
+Mahremiyet
+Mahremiyet, kişinin kendisi hakkındaki bilginin kimlere ulaşacağını denetleye-
+bilmesidir. Bir yazılımın hangi veriyi topladığı, ne kadar süre sakladığı ve kim-
+lerle paylaştığı tasarım kararlarıdır.
+Kod mahremiyeti zayıflatabildiği gibi koruyabilir de. Uçtan uca şifreleme
+(end-to-end encryption) bunun örneğidir. Bu yöntemde ileti yalnızca gönderen
+ve alan tarafından okunabilir; hizmeti sağlayan şirket bile içeriğe erişemez. Bu-
+rada mahremiyeti güvence altına alan bir sözleşme ya da yasa değil, mimarinin
+kendisidir.
+Gözetim
+Gözetim, kişilerin davranışlarının sistemli biçimde izlenmesi ve kaydedilmesidir.
+Dijital ortamda her işlem iz bırakır. Bu izlerin toplanıp toplanmayacağı mi-
+mariye bağlıdır.
+Gözetimin özgürlük üzerindeki etkisi, fiilen izlenmekle sınırlı değildir. ˙Izlendiğini
+düşünen kişi davranışını kendiliğinden kısıtlar: bazı konuları aramaz, bazı görüşleri
+yazmaz. Bu etki, hiçbir yasak konmadan ifade alanını daraltır.
+Sansür
+Geleneksel sansür görünürdür: bir kitap yasaklanır ve bu karar bilinir. Kod
+yoluyla yapılan filtreleme çoğu zaman görünmezdir. Kullanıcı, erişemediği içeriğin
+engellendiğini bilmeyebilir; içerik yokmuş gibi görünür.
+Lessig bu yüzden filtrelemeyi açık yasaklardan daha sorunlu bulur. Bilin-
+meyen bir kısıtlamaya itiraz edilemez. Aynı durum, hangi içeriğin öne çıkarılacağına
+karar veren sıralama algoritmaları için de geçerlidir. Bir içeriği silmeden görünürlüğünü
+düşürmek mümkündür.
+Açık Kaynak ve Özgür Yazılım
+Kod bir tür yasaysa, kodun okunabilir olması yasanın yayımlanmasına ben-
+zer. Kaynak kodu kapalı bir yazılımın kullanıcıyı nasıl sınırladığı dışarıdan tam
+olarak bilinemez.
+Richard Stallman, özgür yazılımı (free software) dört özgürlükle tanımlar
+(Stallman, 2002):
+• Programı her amaçla çalıştırma özgürlüğü.
+• Programın nasıl çalıştığını inceleme ve onu değiştirme özgürlüğü.
+• Kopyaları dağıtma özgürlüğü.
+• Değiştirilmiş sürümleri dağıtma özgürlüğü.
+6
+
+-- 6 of 10 --
+
+˙Ikinci ve dördüncü özgürlük, kaynak koduna erişimi gerektirir. Stallman için
+bu bir etik meseledir: kullanıcı programı denetlemiyorsa, program kullanıcıyı
+denetler.
+Açık kaynak (open source) terimi 1998’de ortaya çıkmıştır ve aynı uygula-
+mayı farklı bir gerekçeyle savunur. Bu yaklaşım etik iddiayı değil pratik faydayı
+öne çıkarır: açık geliştirme daha güvenilir yazılım üretir (Raymond, 1999). ˙Iki
+akım çoğunlukla aynı yazılımları kapsar, ancak gerekçeleri farklıdır.
+7
+
+-- 7 of 10 --
+
+Felsefi Temeller
+Özgürlük
+Isaiah Berlin özgürlüğü iki anlama ayırır (Berlin, 1969). Negatif özgürlük,
+kişinin başkaları tarafından engellenmemesidir. Pozitif özgürlük, kişinin kendi
+hayatını yönetebilmesidir.
+Kod tartışması bu iki anlamı da ilgilendirir. Bir yazılımın bir işlemi en-
+gellemesi negatif özgürlüğü sınırlar. Kullanıcının kullandığı sistemin kurallarını
+anlayamaması ve değiştirememesi ise pozitif özgürlüğü sınırlar.
+Liberal gelenek, özgürlüğe yönelik tehdidi esas olarak devlette görür. John
+Stuart Mill ise toplumun ve çoğunluğun baskısının da özgürlüğü sınırlayabileceğini
+belirtmiştir (Mill, 1859). Lessig’in katkısı bu listeye mimariyi eklemektir. Özgürlüğü
+yalnızca devlete karşı korumak, sınırlamanın özel şirketlerin yazdığı koddan
+geldiği durumda yetersiz kalır.
+Mülkiyet
+John Locke’a göre kişi, emeğini kattığı şeyin sahibi olur (Locke, 1689). Bu görüş
+yazılıma uygulandığında, kodu yazan kişinin onun üzerinde hak sahibi olduğu
+sonucu çıkar. Kapalı kaynak savunusu bu gerekçeye dayanır.
+Karşı görüş, bilginin fiziksel mallardan farklı olduğuna dikkat çeker. Bir elma
+yendiğinde başkası onu yiyemez. Bir program kopyalandığında ise ilk sahibinin
+elindeki kopya eksilmez. ˙Iktisatta bu özelliğe rakipsizlik (non-rivalry) denir.
+Fiziksel mülkiyeti gerekçelendiren kıtlık, bilgi için aynı biçimde geçerli değildir.
+˙Iki Değerin C atışması
+Açık kaynak tartışması, özgürlük ile mülkiyetin karşı karşıya geldiği yerdir.
+Bir taraf, yazarın emeği üzerindeki hakkını savunur. Diğer taraf, kullanıcının
+kendi cihazında çalışan programı bilme ve değiştirme hakkını savunur. Tartışma
+teknik bir tercih gibi görünse de, hangi değerin öncelikli olduğu sorusuna dayanır.
+8
+
+-- 8 of 10 --
+
+Eleştiriler ve Sınırlar
+“Kod yasadır” görüşü birkaç açıdan eleştirilmiştir.
+• Kod aşılabilir. Teknik engeller mutlak değildir. Kopya korumaları
+kırılır, filtreler dolanılır. Kodun sınırı, teknik bilgisi olan kullanıcı için
+yasadan daha zayıf olabilir.
+• Kod yasadan kaçmanın aracı da olabilir. Tim Wu, kodun yalnızca
+bir düzenleyici olmadığını, yasanın etkisini azaltmak için de tasarlan-
+abildiğini savunur. Dosya paylaşım ağları, telif yasasının uygulanmasını
+zorlaştıracak biçimde kurulmuştur (Wu, 2003).
+• Benzetme abartılabilir. Yasa meşru bir otoriteye ve zor kullanma yetk-
+isine dayanır. Kod ise bir ürünün özelliğidir ve kullanıcı çoğu durumda
+başka bir ürüne geçebilir. Ancak bu itiraz, alternatifi olmayan ya da
+ayrılmanın çok maliyetli olduğu platformlarda zayıflar.
+• Görüş tümüyle yeni değildir. Langdon Winner, teknik nesnelerin
+siyasi sonuçlar taşıdığını daha önce savunmuştur (Winner, 1980). Win-
+ner’ın en bilinen örneği, New York’ta alçak yapılan köprülerin otobüslerin
+geçişini engellediği iddiasıdır. Bu örneğin tarihsel doğruluğu sonradan
+tartışılmıştır (Joerges, 1999).
+9
+
+-- 9 of 10 --
+
+Sonuç
+Yazılım tasarımı bir kural koyma etkinliğidir. Bir özelliğin eklenmesi ya da
+çıkarılması, kullanıcıların ne yapabileceğini belirler. Bu durum yazılımcıya, çoğu
+zaman fark edilmeyen bir sorumluluk yükler: varsayılan ayarlar, veri toplama
+kararları ve erişim sınırları teknik olduğu kadar normatif tercihlerdir.
+Hukuk açısından çıkan sonuç, özgürlüğü yalnızca yasa metinleriyle koru-
+manın yetmediğidir. Bir hak yasada tanınmış olsa bile, mimari o hakkın kul-
+lanılmasını imkânsız kılabilir. Tersine, iyi tasarlanmış bir mimari, yasanın
+veremediği güvenceyi verebilir.
+C erçevenin zayıf kaldığı yerler vardır. Kod her zaman kesin değildir ve
+aşılabilir. Ayrıca dört etken pratikte iç içe geçer; bir sınırın yasadan mı, piyasadan
+mı, yoksa koddan mı kaynaklandığını ayırmak her zaman mümkün olmaz.
+Açık kalan sorular şunlardır: Özel şirketlerin yazdığı kod, kamusal bir dene-
+time tabi olmalı mıdır ve olacaksa bu denetimi kim yapar. Karar veren sistem,
+kuralları açıkça yazılmamış bir öğrenme algoritması olduğunda, okunacak bir
+“kod” kalmadığında şeffaflık ne anlama gelir. Kaynak kodunun açık olması, onu
+okuyamayan çoğunluk için gerçek bir güvence sağlar mı.
+Kaynaklar
+• Berlin, I. (1969). Four Essays on Liberty. Oxford University Press.
+• Joerges, B. (1999). Do Politics Have Artefacts? Social Studies of Science,
+29(3).
+• Lessig, L. (1999). Code and Other Laws of Cyberspace. Basic Books.
+• Lessig, L. (2006). Code: Version 2.0. Basic Books.
+• Locke, J. (1689). Two Treatises of Government.
+• Mill, J. S. (1859). On Liberty.
+• Raymond, E. S. (1999). The Cathedral and the Bazaar. O’Reilly.
+• Reidenberg, J. R. (1998). Lex Informatica: The Formulation of Informa-
+tion Policy Rules through Technology. Texas Law Review, 76(3).
+• Stallman, R. M. (2002). Free Software, Free Society: Selected Essays of
+Richard M. Stallman. GNU Press.
+• Stone, B. (2009). Amazon Erases Orwell Books From Kindle. The New
+York Times, 17 Temmuz 2009.
+• Winner, L. (1980). Do Artifacts Have Politics? Daedalus, 109(1).
+• Wu, T. (2003). When Code Isn’t Law. Virginia Law Review, 89(4).
+• Zittrain, J. (2008). The Future of the Internet and How to Stop It. Yale
+University Press.
+10
+
+-- 10 of 10 --

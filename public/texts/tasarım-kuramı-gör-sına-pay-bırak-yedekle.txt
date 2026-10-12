@@ -1,0 +1,427 @@
+Tasarım Kuramı: Gör, Sına, Pay Bırak, Yedekle
+ÖFY
+October 2026
+Özet
+Mühendisliğin üzerinde çalıştığı niceliklerin çoğu insan duyularına doğrudan
+açık değildir: kuvvet, gerilim, akım, ısı akışı, gecikme ve bellek kullanımı çıplak
+gözle görülmez. Mühendislik pratiği bu nedenle iki aşamalıdır; önce görünmeyen
+nicelik bir alet ya da bir temsil aracılığıyla algılanabilir hâle getirilir, ardından
+bu bilgiye dayanılarak tasarım kararı verilir. Görünür kılma mühendisliğin
+zorunlu koşuludur, ancak onu tanımlamaya yetmez; aynı işi doğa bilimi de
+yapar. Ayırt edici olan, görülen şeyin bir yapıntının (artifact) üretilmesinde
+kullanılmasıdır. Mühendislikte en zor görünür kılma işi, henüz var olmayan
+bir nesnenin davranışını önceden göstermektir; çizim, model ve benzetim bu
+işi görür. Mühendislik aynı anda ters yönde de çalışır: tasarımcı için görünür
+kılınan karmaşıklık, kullanıcı için arayüzün arkasına gizlenir. Gizlenen ayrıntı
+arıza anında yeniden ortaya çıkar; bu yüzden iyi tasarım, gizlediğini gerektiğinde
+geri gösterebilen tasarımdır.
+1
+
+-- 1 of 14 --
+
+Giriş
+Bir köprünün kirişi yük altında durgun görünür. Oysa kirişin içinde çekme
+ve basma gerilmeleri vardır, malzeme her yük çevriminde bir miktar yorulur
+ve çatlak görünür boyuta ulaşmadan çok önce başlamıştır. Gözün gördüğü ile
+yapının gerçek durumu arasındaki bu fark, mühendisliğin çalıştığı alandır.
+Bu notta görünmeyen, insan duyularının aracısız algılayamadığı her nice-
+lik, yapı ya da durum anlamında kullanılır. Görünür kılma ise bu niceliğin
+bir alet, bir çizim, bir sayı ya da bir model üzerinden algılanabilir ve üzerinde
+akıl yürütülebilir hâle getirilmesidir. Kelime görme duyusuna gönderme yapsa
+da kapsamı daha geniştir; bir alarm sesi ya da bir titreşim uyarısı da aynı işi
+görür.
+Yaygın kabul, mühendisliği uygulamalı bilim olarak tanımlar: bilim keşfeder,
+mühendis uygular. Vincenti (1990) bu kabule karşı çıkmış, mühendislik bil-
+gisinin bilimden türetilmiş bir alt küme değil, tasarım ihtiyacından doğan ayrı
+bir bilgi türü olduğunu havacılık tarihinden örneklerle göstermiştir. Ferguson
+(1992) ise bu bilginin büyük kısmının sözel ya da matematiksel değil görsel
+olduğunu savunmuştur. Bu iki yaklaşım birlikte okunduğunda, görünür kılmanın
+mühendislikte yardımcı bir beceri değil, bilginin üretildiği yer olduğu sonucu
+çıkar.
+Notun kapsamı görünür kılmanın mühendislikteki işleviyle sınırlıdır. Ölçüm
+kuramının matematiği, belirli bir mühendislik dalının alet tarihi ve veri görselleştirmenin
+tasarım kuralları kapsam dışındadır.
+2
+
+-- 2 of 14 --
+
+Görünmezliğin Türleri
+Bir şeyin görünmez olmasının tek bir nedeni yoktur. Neden farklı olduğunda,
+görünür kılmak için gereken araç da farklıdır.
+Duyusal Karşılığı Olmayan Nicelikler
+Elektrik akımı, manyetik alan ve mekanik gerilme için insanda bir duyu organı
+yoktur. Bu nicelikler ancak başka bir niceliğe çevrilerek algılanır. Voltmetre ger-
+ilimi ibrenin açısına, gerinim ölçer (strain gauge) malzemedeki uzamayı elektrik-
+sel direnç değişimine çevirir. Bu çevirme işlemini yapan elemana dönüştürücü
+(transducer ) denir. Ölçüm aletlerinin büyük kısmı, görünmeyen bir niceliği
+görünen bir niceliğe taşıyan dönüştürücülerdir.
+Ölçek ve Hız
+Bazı olaylar duyulara açık türdendir, ancak boyutu ya da hızı algı sınırının
+dışındadır. Bir metal yüzeyindeki mikron düzeyindeki çatlak çok küçüktür. Bir
+devredeki sinyal saniyede milyonlarca kez değişir. Bir barajın oturması yıllara
+yayılır. Mikroskop birinci durumu, osiloskop ikinci durumu, uzun süreli kayıt
+tutma üçüncü durumu görünür kılar. Osiloskop zamanı yatay eksene yayarak
+hızlı bir olayı durağan bir şekle çevirir; kayıt defteri ise yavaş bir olayı tek bir
+grafikte sıkıştırır.
+Soyut Yapılar
+Yazılımın fiziksel bir biçimi yoktur. Bir programın mimarisi, modüller arasındaki
+bağımlılıklar ve verinin sistem içindeki yolu hiçbir yerde nesne olarak dur-
+maz. Aynı durum bir kuruluşun iş akışı ya da bir şebekenin topolojisi için
+de geçerlidir. Bu yapılar ancak diyagramla görülür. Diyagram burada var olan
+bir görüntünün kopyası değildir; yapıya ilk kez bir biçim verir.
+C alışan Sistemin ˙Iç Durumu
+Kapalı bir kutu gibi çalışan sistemlerde iç durum dışarıdan gizlidir. Kalman
+(1960) denetim kuramında bu sorunu gözlemlenebilirlik (observability) kavramıyla
+tanımlamıştır: bir sistemin iç durumu, yalnızca çıkışlarına bakılarak sonlu sürede
+belirlenebiliyorsa sistem gözlemlenebilirdir. Kavram, görünür kılmanın bir alet
+meselesi olmadan önce bir tasarım meselesi olduğunu gösterir. Gerekli çıkışları
+üretmeyen bir sistemin içi, ne kadar iyi alet kullanılırsa kullanılsın görülemez.
+Henüz Var Olmayan
+Mühendisliğe özgü görünmezlik türü budur. Tasarlanan köprü, uçak ya da
+yazılım henüz yoktur; dolayısıyla ölçülecek bir nesne de yoktur. Yine de nasıl
+davranacağı yapılmadan önce bilinmek zorundadır. Bu görünmezlik bir aletle
+giderilemez; yalnızca temsil ile giderilir.
+3
+
+-- 3 of 14 --
+
+Görünür Kılma Araçları
+Ölçüm
+Ölçüm, bir niceliğe sayı atama işlemidir. Sayı, niceliği karşılaştırılabilir ve ak-
+tarılabilir kılar. William Thomson (Lord Kelvin) 1883 tarihli konuşmasında,
+hakkında konuşulan şey ölçülüp sayıyla ifade edilemediği sürece o konudaki bil-
+ginin yetersiz kaldığını söylemiştir (Thomson, 1889). ˙Ifade aşırı genelleme olarak
+eleştirilebilir, ancak mühendislik açısından isabetlidir: sayıya dökülmeyen bir
+nicelik için tolerans belirlenemez, sınır konamaz ve iki tasarım karşılaştırılamaz.
+Ölçümün bir sınırı vardır. Yalnızca ölçülmesi kararlaştırılan şey görünür
+olur. Ölçülmeyen nicelik, ölçülenlerin yarattığı güven duygusu nedeniyle es-
+kisinden daha da görünmez hâle gelebilir.
+Temsil
+C izim ve Diyagram
+Teknik çizim, serbest cisim diyagramı ve devre şeması, görünmeyen ilişkileri
+kâğıt üzerine taşır. Serbest cisim diyagramı bir cismi çevresinden yalıtır ve ona
+etkiyen kuvvetleri ok olarak gösterir. Kuvvetin kendisi görülmez; ok, kuvvetin
+yönünü ve büyüklüğünü göze sunar. Ferguson (1992), mühendislerin tasarım
+sırasında büyük ölçüde bu tür görsel düşünmeye dayandığını ve bu bilginin
+sözcüklere ya da denklemlere tam olarak çevrilemediğini savunmuştur. Ona göre
+mühendislik eğitiminin analitik derslere ağırlık verip çizimi ve gözlemi geriye
+itmesi, bu bilgi türünü zayıflatmıştır.
+Model ve Benzetim
+Rüzgâr tüneli, ölçekli maket ve bilgisayar benzetimi, henüz var olmayan nes-
+nenin davranışını önceden gösterir. Sonlu elemanlar analizi bir parçadaki ger-
+ilme dağılımını renk haritası olarak çizer; tasarımcı parçanın nerede zorlanacağını
+parça üretilmeden görür.
+Modelin gösterdiği şey gerçek nesne değil, modelin kendisidir. Model bir
+ayrıntıyı içermiyorsa, o ayrıntıdan doğacak davranış da görünmez. Bu nedenle
+model bir şeyi görünür kılarken, dışarıda bıraktığını gizler.
+Yazılımda Gözlemlenebilirlik
+Yazılım mühendisliği Kalman’ın terimini ödünç almıştır. C alışan bir sistemin
+iç durumunu dışarıdan anlamak için üç tür çıktı kullanılır: olay kayıtları (log),
+sayısal ölçümler (metric) ve bir isteğin sistem içindeki yolunu gösteren izler
+(trace). Sigelman ve arkadaşları (2010), Google’ın dağıtık izleme altyapısı Dap-
+per’ı anlatırken sorunu açık biçimde ortaya koymuştur: tek bir kullanıcı isteği
+onlarca servisten geçtiğinde, gecikmenin hangi serviste oluştuğu hiçbir servisin
+kendi kaydından anlaşılamaz. ˙Iz, bu dağınık olayı tek bir resimde birleştirir.
+4
+
+-- 4 of 14 --
+
+Majors, Fong-Jones ve Miranda (2022) gözlemlenebilirliği izlemeden (mon-
+itoring) ayırır. ˙Izleme, önceden bilinen sorulara cevap verir: disk doldu mu,
+hata oranı eşiği geçti mi. Gözlemlenebilirlik ise önceden düşünülmemiş bir soru-
+nun, sisteme yeni kod eklemeden sorulabilmesidir. Ayrım, görünür kılmanın iki
+düzeyini gösterir: beklenen arızayı görmek ve beklenmeyen arızayı görebilecek
+durumda olmak.
+Arıza
+Arıza, görünür kılmanın istenmeyen ama en güçlü biçimidir. Petroski (1985),
+mühendislik bilgisinin büyük ölçüde başarısızlıklardan öğrenildiğini savunmuştur:
+ayakta duran bir yapı, tasarımın neden yeterli olduğunu göstermez; çöken bir
+yapı ise hangi varsayımın yanlış olduğunu gösterir. Başarı, güvenlik payının
+arkasında kalan hataları gizler. Hata ayıklama da aynı mantıkla işler. Görünen
+şey hatanın belirtisidir; iş, belirtiden geriye giderek nedeni görünür kılmaktır.
+5
+
+-- 5 of 14 --
+
+Görmek Yeterli Değildir
+Görünmeyeni görünür kılmak mühendisliğe özgü değildir. Mikroskop, teleskop
+ve parçacık dedektörü bilimin aletleridir ve aynı işi yapar. Tanım yalnızca bu-
+rada bırakılırsa mühendislik bilimden ayırt edilemez.
+Simon (1969) ayrımı amaç üzerinden kurmuştur. Doğa bilimi şeylerin nasıl
+olduğuyla ilgilenir; tasarım ise şeylerin nasıl olması gerektiğiyle ve bu amaca
+ulaşacak yapıntının nasıl kurulacağıyla ilgilenir. Bilim için görmek varılacak
+yerdir. Mühendislik için görmek bir ara adımdır; ardından karar gelir.
+Bu fark, neyin görünür kılınacağını da belirler. Bilim insanı bir olguyu
+anlamak için gerekeni ölçer. Mühendis ise bir kararı verebilmek için gerekeni
+ölçer. Bir kirişteki gerilme dağılımının tamamı bilimsel açıdan ilgi çekici olabilir;
+mühendis için önemli olan en yüksek gerilmenin malzemenin dayanım sınırının
+altında kalıp kalmadığıdır. Mühendislikte görünür kılma bu yüzden seçicidir ve
+bir sınırla, bir toleransla ya da bir maliyetle birlikte anlam kazanır.
+Bilim Mühendislik
+Görmenin amacı Olguyu açıklamak Karar vermek
+Neyin ölçüleceği Açıklama için gereken Tasarım için gereken
+Nesnenin durumu C oğunlukla zaten var C oğunlukla henüz yok
+Sonuç Bilgi Yapıntı
+Ayrım keskin değildir. Bilim insanı deney düzeneğini tasarlarken mühendislik
+yapar, mühendis de bir malzemenin davranışını araştırırken bilim yapar. Tablo
+iki uç durumu gösterir, aradaki geçiş bölgesini değil.
+6
+
+-- 6 of 14 --
+
+Ters Hareket: Gizleme
+Mühendislik görünür kıldığı kadar gizler de. Musluğu açan kişi pompayı, boru
+hattını ve basınç hesabını görmez. Bir fonksiyonu çağıran programcı, fonksiy-
+onun içindeki işlemleri bilmek zorunda değildir.
+Arayüz ve Soyutlama
+Soyutlama (abstraction), bir sistemin ayrıntılarını gizleyip yerine daha küçük
+bir arayüz koyma işlemidir. Amaç, kullanıcının zihinsel yükünü azaltmaktır.
+Weiser (1991) bu yönü en uç biçimiyle ifade etmiş, en derin teknolojilerin gözden
+kaybolan, gündelik hayatın dokusuna karışan teknolojiler olduğunu yazmıştır.
+Elektrik buna örnektir: priz kullanılırken santral, iletim hattı ve trafo akla
+gelmez.
+Gizlemenin Sınırı
+Gizlenen ayrıntı yok olmaz. Spolsky (2002) bunu sızdıran soyutlamalar yasası
+olarak adlandırmıştır: basit olmayan her soyutlama bir ölçüde sızdırır, yani
+gizlediği ayrıntı belirli koşullarda kullanıcının önüne çıkar. Ağ bağlantısını
+yerel bir dosya gibi gösteren bir arayüz, bağlantı koptuğunda bu görüntüyü
+sürdüremez.
+Star (1999) aynı gözlemi altyapı için yapmıştır: altyapı çalıştığı sürece görünmezdir
+ve bozulduğunda görünür hâle gelir. Su şebekesi boru patlayana, elektrik şebekesi
+kesinti olana kadar fark edilmez.
+˙Iki Hareketin Dengesi
+Görünür kılma ve gizleme birbirinin karşıtı değil, aynı tasarım kararının iki
+yüzüdür. Her arayüz, neyin gösterileceği ve neyin saklanacağı konusunda bir
+seçimdir. Norman (1988) kullanılabilirlik açısından bu seçimin ölçütünü vermiştir:
+kullanıcı, sistemin o andaki durumunu ve yapabileceği işlemleri görebilmelidir.
+Sistemin durumu ile kullanıcının o durumu algılaması arasındaki boşluk büyüdükçe
+hata artar. Arabanın gösterge paneli bu dengenin örneğidir. Motorun içi gi-
+zlenir, ancak hız, yakıt düzeyi ve motor sıcaklığı gösterilir; arıza lambası ise
+normalde gizli olan bir durumu yalnızca gerektiğinde ortaya çıkarır.
+7
+
+-- 7 of 14 --
+
+Görülemeyene Karşı Tasarım ˙Ilkeleri
+Görünür kılma her zaman mümkün değildir. Bazı nicelikler ölçülemez, bazı
+yükler önceden bilinemez, bazı hatalar ancak ortaya çıktıklarında fark edilir.
+Mühendislik bu durumda durmaz; göremediği şeyin zararını sınırlayan bir dizi
+ilkeye başvurur. Bu ilkeler bir sıra izler: önce görülür, görülemiyorsa sınanır,
+sınanamıyorsa pay bırakılır, pay yetmiyorsa yedeklenir, yedek de bozulursa sis-
+temin zararsız biçimde bozulması sağlanır.
+˙Ilkeler karşı çıktıkları soruna göre üç kümeye ayrılır: belirsizlik, karmaşıklık
+ve değişim. Dördüncü bir ilke, ödünleşim, üçünün de üstünde durur.
+Belirsizliğe Karşı
+Belirsizlik (uncertainty), bir niceliğin değerinin ya da bir olayın gerçekleşip
+gerçekleşmeyeceğinin önceden bilinememesidir.
+Doğrulama
+Doğrudan görülemeyen bir özellik, sınanarak dolaylı yoldan görülür. Bir kaynağın
+iç yapısı gözle görülmez; yük testi, kaynağın taşıyıp taşımadığını gösterir. Yazılımda
+test aynı işi görür: kodun doğruluğu okunarak kanıtlanamadığında, belirli girdilere
+verdiği çıktılar denetlenir. Sınama yalnızca sınanan durumu gösterir; denen-
+memiş durum hakkında bilgi vermez.
+Güvenlik Payı
+Güvenlik payı (safety factor ), bir yapının hesaplanan yükten daha fazlasını
+taşıyacak biçimde tasarlanmasıdır. Hesap on ton gösteriyorsa yapı yirmi tona
+göre boyutlandırılır. Pay, bilinmeyen hataların karşılığıdır: malzemedeki kusur,
+hesaptaki basitleştirme ve öngörülmemiş yük bu fazlalığın içinde erir.
+Yedekleme
+Yedekleme (redundancy), aynı işi görebilecek birden fazla elemanın bulun-
+durulmasıdır. Yolcu uçağında birden fazla motor, veri merkezinde birden fazla
+kopya bu ilkenin örneğidir. Yedekleme, tek bir elemanın arızasının sistemin
+arızasına dönüşmesini engeller. Elemanlar aynı nedenle aynı anda bozulabiliy-
+orsa yedekleme işe yaramaz; iki kopya aynı binadaysa yangın ikisini de yok eder.
+Güvenli Arıza
+Güvenli arıza (fail-safe), sistemin bozulduğunda zararsız duruma geçecek
+biçimde tasarlanmasıdır. Asansörde halat koptuğunda fren kendiliğinden de-
+vreye girer; frenin açık kalması için enerji gerekir, kapanması için gerekmez.
+˙Ilke, arızanın önlenemeyeceğini kabul eder ve yalnızca yönünü belirler.
+8
+
+-- 8 of 14 --
+
+Küçük Ölçekte Deneme
+Maket, prototip ve pilot uygulama, hatanın ucuzken bulunmasını sağlar. Tam
+ölçekli üretimden sonra bulunan bir tasarım hatası binlerce ürünü etkiler; pro-
+totipte bulunan aynı hata yalnızca bir çizimi etkiler.
+Karmaşıklığa Karşı
+Karmaşıklık (complexity), bir sistemdeki parça ve bağlantı sayısının, sistemin
+bir bütün olarak akılda tutulmasını engelleyecek düzeye ulaşmasıdır.
+Bölme
+Büyük bir problem, her biri tek başına çözülebilen parçalara ayrılır. Parnas
+(1972) bölmenin nasıl yapılacağına dair ölçütü vermiştir: her modül, değişmesi
+muhtemel bir tasarım kararını içinde saklamalı ve dışarıya yalnızca küçük bir
+arayüz açmalıdır. Bu yaklaşıma bilgi gizleme (information hiding) denir. Ölçüt,
+bölmenin gizleme ile aynı işlem olduğunu gösterir.
+Yalıtma
+Yalıtma, bir parçadaki arızanın diğerlerine yayılmasını engeller. Elektrik tesisatındaki
+sigorta, gemideki su geçirmez bölmeler ve yazılımdaki modül sınırları aynı işi
+görür. Bölme sistemi anlaşılır kılar; yalıtma ise arızayı yerel tutar.
+Sadeleştirme
+Var olmayan parça bozulmaz. C ıkarılabilen her eleman, olası bir arıza noktasını
+ve akılda tutulması gereken bir ayrıntıyı ortadan kaldırır.
+Standartlaştırma
+Aynı vida ölçüsü, aynı arayüz ve aynı protokolün tekrar kullanılması, her se-
+ferinde yeniden karar verme yükünü kaldırır. Standart, daha önce verilmiş ve
+sınanmış bir kararın yeniden kullanılmasıdır.
+Değişime Karşı
+Sistemin çalıştığı ortam, kullanıcının ihtiyacı ve sistemin kendisi zamanla değişir.
+Tasarım anında doğru olan karar sonradan yanlış hâle gelebilir.
+Geri Besleme
+Geri besleme (feedback ), bir sistemin çıkışının ölçülüp hedefle karşılaştırılması
+ve aradaki farka göre girişin düzeltilmesidir. Termostat oda sıcaklığını ölçer,
+ayarlanan değerle karşılaştırır ve ısıtıcıyı açar ya da kapatır. Wiener (1948) bu
+düzeneği makinelerde ve canlılarda ortak bir denetim ilkesi olarak ele almıştır.
+9
+
+-- 9 of 14 --
+
+Geri besleme, görünür kılmanın sürekli hâlidir: ölçüm bir kez değil, sistem
+çalıştığı sürece yapılır.
+Geri Alınabilirlik
+Bir kararın yanlış çıkması hâlinde önceki duruma dönülebilmesi, hatanın maliyetini
+düşürür. Yazılımda sürüm denetimi, mekanikte sökülebilir bağlantı bu ilkenin
+örneğidir. Kaynakla birleştirilen iki parça ayrılamaz; cıvatayla birleştirilen
+ayrılır.
+Kayıt
+Görülen şey yazılmadığında, bir sonraki kişi için yeniden görünmez olur. C izim,
+bakım defteri ve tasarım belgesi, bir kişinin gördüğünü başkalarına ve geleceğe
+taşır.
+Ödünleşim
+Ödünleşim (trade-off ), bir özelliğin iyileştirilmesinin başka bir özelliğin kötüleşmesine
+yol açmasıdır. Sağlam yapı ağırdır, hızlı çözüm pahalıdır, yedekli sistem karmaşıktır.
+Yukarıdaki ilkelerin her biri bir bedel taşır: güvenlik payı malzeme, yedekleme
+maliyet, yalıtma ise ek arayüz demektir. Bu nedenle ilkeler birlikte en üst
+düzeyde uygulanamaz. Mühendislik kararı, kısıtlar altında hangi özellikten ne
+kadar vazgeçileceğinin seçimidir.
+Adlandırma
+Aynı kümeler, soruna ya da çözüme göre iki ayrı biçimde adlandırılır.
+Küme Sorunun adı C özümün adı
+Bilinmeyene karşı Belirsizlik (uncertainty) Güvenilirlik (reliability),
+dayanıklılık (robustness)
+Karmaşıklığa karşı Karmaşıklık (complexity) Modülerlik (modularity)
+Değişime karşı Değişkenlik (volatility) Uyarlanabilirlik (adaptability),
+bakım yapılabilirlik (maintain-
+ability)
+Hepsinin üstünde Ödünleşim (trade-off ) Optimizasyon
+10
+
+-- 10 of 14 --
+
+Yönetim Dilindeki Karşılıklar: VUCA ve BANI
+Belirsizlik, karmaşıklık ve değişkenlik üçlüsü mühendislik dışında da adlandırılmıştır.
+Yönetim ve strateji yazınında aynı kavramlar iki kısaltma altında toplanır. ˙Ikisi
+de mühendislik terimi değildir; ölçülebilir tanımları yoktur ve birer düşünme
+çerçevesi olarak kullanılırlar.
+VUCA
+VUCA dört ˙Ingilizce kelimenin baş harflerinden oluşur: Volatility (değişkenlik),
+Uncertainty (belirsizlik), Complexity (karmaşıklık) ve Ambiguity (muğlaklık).
+Terim 1980’lerin sonunda ABD Kara Harp Koleji’nde (US Army War College)
+kullanılmaya başlanmış, Soğuk Savaş sonrasında tek düşmanlı ve öngörülebilir
+yapısını yitiren dünyayı anlatmıştır. Fikrin temeli çoğunlukla Bennis ve Nanus’un
+(1985) liderlik çalışmasına dayandırılır. Terim 2000’lerden sonra iş dünyasına
+geçmiş; işletme, strateji ve insan kaynakları çevrelerinde yaygınlaşmıştır.
+˙Ilk üç kavram, önceki bölümdeki üç kümeyle doğrudan örtüşür. Dördüncüsü
+olan muğlaklık, neyin bilinmediğinin bile bilinmediği durumu anlatır ve notun
+başındaki görünmezlik sorununa karşılık gelir.
+Terime yöneltilen başlıca eleştiri, dört kavramın tek bir sözcük gibi kul-
+lanılarak birbirinden ayırt edilmez hâle gelmesidir. Bennett ve Lemoine (2014),
+dört durumun farklı karşılıklar gerektirdiğini, hepsini tek bir etiket altında topla-
+manın hangi önlemin alınacağını bulanıklaştırdığını savunmuştur.
+BANI
+BANI, gelecek araştırmacısı Jamais Cascio’nun önerdiği ve 2020 tarihli yazısıyla
+yaygınlaşan çerçevedir (Cascio, 2020). Cascio’ya göre VUCA durumu belirsiz
+olarak tanımlar, oysa güncel durum yer yer kaotiktir ve daha sert kelimeler
+gerektirir. C erçeve, salgın dönemine denk geldiği için hızla benimsenmiştir.
+• Kırılgan (Brittle): Sistem sağlam görünür ancak birden kırılır. Tek
+tedarikçiye bağlı bir fabrika yıllarca sorunsuz çalışır, tedarikçi durduğunda
+bir günde durur.
+• Kaygılı (Anxious): Belirsizlik karar vericide kaygıya dönüşür. Sonuç ya
+hareketsizlik ya da panikle verilen karardır.
+• Doğrusal olmayan (Nonlinear ): Neden ile sonuç orantılı değildir. Küçük
+bir etki büyük sonuç doğurur, büyük çaba hiçbir şeyi değiştirmez; arada
+uzun gecikmeler bulunur.
+• Anlaşılmaz (Incomprehensible): Daha fazla veri daha fazla anlayış ge-
+tirmez. Sistemin neden öyle davrandığı açıklanamaz.
+Cascio her kavram için bir karşılık önerir: kırılganlığa karşı dayanıklılık ve
+yedek kapasite, kaygıya karşı empati ve farkındalık, doğrusal olmayana karşı
+bağlam bilgisi ve esneklik, anlaşılmaza karşı şeffaflık ve sezgi.
+11
+
+-- 11 of 14 --
+
+Mühendislik ˙Ilkeleriyle Eşleşme
+VUCA BANI Mühendislik karşılığı
+Değişkenlik Kırılgan Yedekleme, güvenli arıza, geri
+alınabilirlik
+Belirsizlik Kaygılı Doğrulama, güvenlik payı, küçük ölçekte
+deneme
+Karmaşıklık Doğrusal olmayan Bölme, yalıtma, sadeleştirme
+Muğlaklık Anlaşılmaz Görünür kılma, gözlemlenebilirlik, kayıt
+Eşleşme yaklaşıktır. Yönetim çerçeveleri durumu adlandırır; mühendislik
+ilkeleri ise duruma karşı ne yapılacağını söyler. BANI’nin “kaygılı” maddesi in-
+sanın durumunu tarif eder ve mühendislikte doğrudan karşılığı yoktur; tablodaki
+ilkeler kaygının kaynağı olan belirsizliği hedef alır.
+12
+
+-- 12 of 14 --
+
+Sonuç
+Görünür kılma mühendisliğin tanımı değil, ön koşuludur. Tasarım kararı, ancak
+karar verilecek nicelik algılanabilir hâle geldikten sonra verilebilir. Bundan çıkan
+ilk pratik sonuç şudur: bir sistemin görülebilirliği sonradan eklenen bir özellik
+değil, tasarımın parçasıdır. Ölçüm noktası konmamış bir yapı, iç durumunu
+dışarı vermeyen bir yazılım ve test edilemeyen bir devre, baştan görünmez olarak
+tasarlanmıştır.
+˙Ikinci sonuç, her görünür kılma aracının aynı zamanda bir şeyi gizlediğidir.
+Ölçüm, ölçülmeyeni; model, modele girmeyeni; gösterge paneli, panele kon-
+mayanı saklar. Araca duyulan güven arttıkça, aracın dışında kalan bölge daha
+tehlikeli hâle gelir. Bu, çerçevenin temel sınırlılığıdır: neyin görünmediği, tanımı
+gereği görünmez. Petroski’nin arıza vurgusu bu yüzden önemlidir; arıza, hiçbir
+aracın göstermediği varsayımı gösteren tek kaynaktır.
+Üçüncü sonuç, tasarımcı ile kullanıcının ters yönde hizmet beklediğidir.
+Tasarımcı için iyi sistem içini gösteren sistemdir, kullanıcı için iyi sistem içini
+düşündürmeyen sistemdir. Bu iki talep aynı sistemde ancak katmanlı bir yapıyla
+karşılanır: normal kullanımda gizli, arıza anında erişilebilir.
+Açık kalan soru, karmaşıklık arttıkça bu dengenin sürdürülüp sürdürülemeyeceğidir.
+Öğrenen yazılım sistemlerinde iç durum kaydedilebilir, ancak kaydedilen sayıların
+insan tarafından yorumlanabilir olması ayrı bir sorundur. Burada görünür kılma
+ile anlaşılır kılma birbirinden ayrılır; Kalman’ın gözlemlenebilirlik tanımı birin-
+cisini karşılar, ikincisini karşılamaz.
+Kaynaklar
+• Ferguson, E. S. (1992). Engineering and the Mind’s Eye. MIT Press.
+• Kalman, R. E. (1960). On the General Theory of Control Systems. Pro-
+ceedings of the First IFAC Congress, Moskova.
+• Majors, C., Fong-Jones, L., Miranda, G. (2022). Observability Engineer-
+ing. O’Reilly Media.
+• Norman, D. A. (1988). The Psychology of Everyday Things. Basic Books.
+• Petroski, H. (1985). To Engineer Is Human: The Role of Failure in Suc-
+cessful Design. St. Martin’s Press.
+• Sigelman, B. H. ve diğerleri (2010). Dapper, a Large-Scale Distributed
+Systems Tracing Infrastructure. Google Technical Report.
+• Simon, H. A. (1969). The Sciences of the Artificial. MIT Press.
+• Spolsky, J. (2002). The Law of Leaky Abstractions. Joel on Software.
+• Star, S. L. (1999). The Ethnography of Infrastructure. American Behav-
+ioral Scientist, 43(3).
+13
+
+-- 13 of 14 --
+
+• Thomson, W. (1889). Electrical Units of Measurement (1883 tarihli konuşma).
+Popular Lectures and Addresses, Cilt 1. Macmillan.
+• Vincenti, W. G. (1990). What Engineers Know and How They Know It.
+Johns Hopkins University Press.
+• Weiser, M. (1991). The Computer for the 21st Century. Scientific Amer-
+ican, 265(3).
+• Bennett, N., Lemoine, G. J. (2014). What VUCA Really Means for You.
+Harvard Business Review.
+• Bennis, W., Nanus, B. (1985). Leaders: The Strategies for Taking Charge.
+Harper & Row.
+• Cascio, J. (2020). Facing the Age of Chaos. Medium.
+• Parnas, D. L. (1972). On the Criteria To Be Used in Decomposing Systems
+into Modules. Communications of the ACM, 15(12).
+• Wiener, N. (1948). Cybernetics: Or Control and Communication in the
+Animal and the Machine. MIT Press.
+14
+
+-- 14 of 14 --
