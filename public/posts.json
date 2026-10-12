@@ -1,5 +1,47 @@
 [
   {
+    "slug": "otomasyon-ve-hatalardan-öğrenme",
+    "title": "Otomasyon ve Hatalardan Öğrenme",
+    "date": "2026-10-12",
+    "description": "Metin, \"otomatikleştiremezsen kendindeki hataları öğrenemezsin\" sezgisini inceler ve bu ifadenin doğru bir çekirdeği olmakla birlikte hem fazla geniş hem eksik olduğunu savunur. Doğru çekirdek otomasyonun kendisi değil, zorunlu kıldığı üç özelliktir: açıklık, tekrarlanabilirlik ve ölçülebilirlik. İddianın aşırı güçlü yönü, insanların geri bildirim, not tutma ve gözden geçirme yoluyla otomasyonsuz da öğrenmesi ve bazı alanların otomatikleşmemesidir. Dijkstra'nın testin hatanın yokluğunu kanıtlayamayacağı tespiti ile Bainbridge'in otomasyon ironileri, yanlış kurulan otomasyonun hatayı gizleyip büyüttüğünü göstermek için kullanılır. Savunulabilir ifade, açıkça tarif edilemeyen bir süreçteki hataların sistemli biçimde öğrenilemeyeceğidir. İkinci bölüm önlemeyi hatanın kaynağına bağlar. Mantık hatasında aynı girdi her seferinde aynı hatayı üretir; hata bir kez düzeltilir ve regresyon testiyle kilitlenir. Girdi hatası önceden kapatılamaz; her çıktı ölçülür, sorunlu çıktı işaretlenir ve kararı insan verir. Ayırt etme ölçütü düzeltmenin yeridir. Boş çıktı örneğinde aynı belirti hem kodun boş satırları atlamasından hem gerçekten boş dosyadan doğabildiği için iki yöntem birlikte uygulanır. Testler verilmiş kararları da korur. Kaynak aracı, ciddiyet ise eşiğin sıkılığını belirler: uyarı ya da çıktının durdurulması. Sınırlılık olarak mantık ile girdi arasındaki çizginin her zaman net olmadığı, testle kilitlenen kararların eskiyip değişime direnç üretebildiği ve otomatikleşmeyen alanlarda testle kilitlemenin karşılığının açık kaldığı kaydedilir.",
+    "pdf": "Otomasyon_ve_Hatalardan_Öğrenme.pdf",
+    "thumb": "thumbs/otomasyon-ve-hatalardan-öğrenme.png",
+    "addedAt": "2026-10-12T15:16:32.392Z",
+    "pages": 10,
+    "belge": "BELGE-249",
+    "title_en": "Automation and Learning from Errors",
+    "description_en": "The text examines the claim that \"if you cannot automate it, you cannot learn from your own errors\" and argues that the statement has a correct core yet is both too broad and incomplete. The correct core is not automation itself but the three properties it enforces: explicitness, repeatability and measurability. The overstated side is that people learn without automation through feedback, note-taking and review, and that some fields cannot be automated. Dijkstra's observation that testing cannot prove the absence of errors and Bainbridge's ironies of automation are used to show that automation built on a wrong process hides and amplifies errors. The defensible statement is that errors in a process that cannot be explicitly described cannot be learned systematically. The second part ties prevention to the source of the error. In a logic error the same input produces the same error every time; it is fixed once and locked with a regression test. An input error cannot be closed in advance; every output is measured, the problematic output is flagged and a human decides. The distinguishing criterion is where the fix is made. In the empty-output example the same symptom can arise both from code skipping blank lines and from a genuinely empty file, so the two methods are applied together. Tests also protect decisions already made. The source selects the tool, while severity sets the strictness of the threshold: a warning or halting the output. As limitations, the text records that the line between logic and input is not always clear, that decisions locked by tests can age and resist change, and that the equivalent of test locking in non-automated fields remains open.",
+    "priority": 7,
+    "related": [
+      "bildiğini-sandığın-kelime-otomasyon-örneği-üzerinden-kavramın-sınırları",
+      "yazılım-testi-öncelik-sırası",
+      "güvenilirlik-mühendisliği-yöntemler-ve-alternatifleri-haritası",
+      "gerekçenin-taşınması-kuralların-aşınma-mekanizması-ve-bilgi-kaybı",
+      "yazılım-mimarisi-kuruluş-ve-girdi-varsayımları"
+    ]
+  },
+  {
+    "slug": "mühendislik-eğitimi-ecole-polytechnique-yaklaşımı",
+    "title": "Mühendislik Eğitimi: École Polytechnique Yaklaşımı",
+    "date": "2026-10-12",
+    "description": "Metin, mühendislik eğitiminin iki amaca göre kurulabileceğini belirtir: bir alanın araçlarını öğretmek ya da farklı bilimleri anlayabilen bir bilim insanı-mühendis yetiştirmek; École Polytechnique ikinci amacın temsilcisi sayılır. Okulun yaklaşımı altı ilkeyle tarif edilir: ortak dil olarak matematik, farklı bilimlerin bakışını tanımak, açık problem (Projet Scientifique Collectif), uzmanlaşmanın ertelenmesi, insan bilimleri dersleri ve bilim-mühendislik birliği. Şehir trafiği dört bakışla incelenir: fizik akış ve hayalet tıkanıklığı, ekonomi uyarılmış talep ve Braess paradoksu, bilgisayar bilimi graf ve en kısa yol, biyoloji ajan tabanlı kendiliğinden düzen ile açıklar. Her modelin bir kör nokta taşıdığı, trafik, veri ağları ve elektrik şebekesinin aynı matematiği paylaştığı ve soyutlamanın bu ortak yapıyı görmek olduğu savunulur. Bakış açısı doğuştan gelen bir yetenek değil, bir alanın temel kavramlarından oluşan öğrenilebilir bir kelime dağarcığı olarak tanımlanır. Scott Page'in The Model Thinker kitabı çok modelli düşünme ve 29 bölümüyle özetlenir. Açık problem yöntemi market kuyruğu örneğinde sekiz adımla uygulanır: soruyu netleştirmek, değişken seçmek, model kurmak, simüle etmek ve gerçek gözlemle karşılaştırmak. Fransız rasyonalist geleneğinin deneyi reddetmediği, ayrımın kuram ile deney arasında değil kör deneme yanılma ile model-gözlem döngüsü arasında olduğu belirtilir. Sınırlılık olarak temel kavramların derin uzmanlığın yerini tutmadığı, kurumun eğitim felsefesi ile mezunların fiilî becerisinin ayrışabildiği ve hangi bakış bileşiminin hangi probleme uygun olduğunun açık kaldığı kaydedilir.",
+    "pdf": "Mühendislik_Eğitimi__École_Polytechnique_Yaklaşımı.pdf",
+    "thumb": "thumbs/mühendislik-eğitimi-ecole-polytechnique-yaklaşımı.png",
+    "addedAt": "2026-10-12T15:16:32.391Z",
+    "pages": 18,
+    "belge": "BELGE-248",
+    "title_en": "Engineering Education: The École Polytechnique Approach",
+    "description_en": "Engineering education is said to serve two possible aims: teaching the tools of one field, or training a scientist-engineer able to understand different sciences; École Polytechnique is treated as representative of the second aim. The school's approach is described through six principles: mathematics as a common language, knowing the perspective of different sciences, the open problem (Projet Scientifique Collectif), deferred specialisation, humanities courses, and the unity of science and engineering. City traffic is examined through four perspectives: physics explains flow and phantom jams, economics induced demand and the Braess paradox, computer science graphs and shortest paths, biology agent-based self-organisation. The text argues that every model carries a blind spot, that traffic, data networks and power grids share the same mathematics, and that abstraction consists in seeing this common structure. A perspective is defined not as an innate talent but as a learnable vocabulary made of a field's core concepts. Scott Page's The Model Thinker is summarised through many-model thinking and its 29 chapters. The open problem method is applied in eight steps to a supermarket queue: sharpening the question, choosing variables, building a model, simulating and comparing with real observation. The French rationalist tradition is said not to reject experiment; the distinction lies not between theory and experiment but between blind trial and error and the model-observation loop. Recorded limitations: core concepts do not replace deep expertise, an institution's philosophy and its graduates' actual skills can diverge, and which mix of perspectives suits which problem remains open.",
+    "priority": 2,
+    "related": [
+      "eğitim-tarihi-fransız-okul-yöntemleri-ve-kökenleri",
+      "02-descartes-ve-kartezyen-muhendislik-gelenegi",
+      "bilginin-yönü-reçeteden-teoriye-ve-tersi",
+      "düzen-nereden-çıkar-sistemler-ağlar-evrim-ve-zihin-üzerine",
+      "disiplinler-arası-transferin-ölçütleri"
+    ]
+  },
+  {
     "slug": "mühendislik-tarihi-uzak-doğu-felsefelerinin-i-zleri",
     "title": "Mühendislik Tarihi: Uzak Doğu Felsefelerinin İzleri",
     "date": "2026-10-12",
@@ -97,7 +139,8 @@
       "03-ulusal-muhendislik-kulturlerinin-felsefi-kokenleri",
       "okumanın-anatomisi-talmudik-hermenötikten-genel-bir-çerçeveye",
       "02-descartes-ve-kartezyen-muhendislik-gelenegi",
-      "i-nsan-faktörleri-zihnin-sınırlarına-göre-tasarım"
+      "i-nsan-faktörleri-zihnin-sınırlarına-göre-tasarım",
+      "mühendislik-eğitimi-ecole-polytechnique-yaklaşımı"
     ],
     "title_en": "History of Education: French School Methods and Their Origins",
     "description_en": "The text attributes the strength of the social sciences in France to six historical factors: the search for order after the Revolution, the secular republic's need for a worldly morality, the place of philosophy in the lycée, the intellectual's public standing, Parisian centralism and the Enlightenment legacy. It states that the subject selecting the elite is mathematics, not philosophy, and defines the common ground of French education as abstraction, planned writing, rapid synthesis, oral defence and ranking by examination. The dissertation, the explication de texte and the note de synthèse are described with examples; the thesis-antithesis order is traced to the scholastic disputatio, text explication to the Jesuit praelectio, and ranking to Jesuit classroom contests. The same line-by-line reading exists in an older form in Jewish interpretation (midrash, Rashi, PaRDeS, havruta, pilpul); the two traditions meet in Durkheim, Lévi-Strauss, Derrida and Levinas. The grandes écoles, preparatory classes and the concours are described with Bourdieu's critique of social reproduction. Eight tools that shaped French engineering (decomposition, change of representation, modelling, standardisation, formal proof and others) are treated mostly as applications of abstraction; of the six tools on the level of abstraction, the French tradition is strong in symbols, composition, invariants, isomorphism and proof, and weak in experiment. Citing Thorndike's study of Latin, it records that transfer of these exercises to general thinking rests on weak evidence, that the weight of the six factors is unmeasured, and that the claims on Jewish influence and the Industrial Revolution are contested.",
@@ -118,7 +161,8 @@
       "kontrol-teorisi-ve-yazılım-denetimi",
       "tasarım-kuramı-gör-sına-pay-bırak-yedekle",
       "test-mühendisliği-yeterlilik-etkinlik-güvenilirlik",
-      "müdahale-ederek-anlama-karmaşık-yazılım-sistemlerini-anlamanın-yöntem-kataloğu"
+      "müdahale-ederek-anlama-karmaşık-yazılım-sistemlerini-anlamanın-yöntem-kataloğu",
+      "otomasyon-ve-hatalardan-öğrenme"
     ],
     "title_en": "Reliability Engineering: A Map of Methods and Their Alternatives",
     "description_en": "The text places controlled failure injection and reverse engineering in a wider family of methods and maps the rest along four questions: anticipating failure before it occurs, quantifying and testing reliability, production consistency, and learning from failure. The concepts of reliability, quality, safety and resilience are separated. Each method is given a blind spot and an alternative that covers it: FMEA cannot see interactions between parts, while STPA looks at control relationships; statistical life prediction is set against physics of failure, redundancy against common cause failure and diversity, and the single root cause assumption of 5 Whys against the Swiss cheese, normal accidents, STAMP and normalisation of deviance models. It is recorded that MTBF alone is misleading, that HALT gives weak points rather than lifetime, and that measurement system analysis closes the first trap in reverse engineering. The Netflix section describes the 2008 database failure, the Simian Army tools, FIT and ChAP, the five principles of chaos engineering, and the circuit breaker, fallback, timeout, bulkhead, load shedding and stateless service patterns, noting that a slowing dependency is more dangerous than a crashing one and that a server-killing tool does not test for it. The tool's effect depends on teams operating their own code and on blameless postmortems. Tacit knowledge, absorptive capacity and learning by doing explain institutional differences by accumulated production knowledge rather than method knowledge. The text records that it is a map, gives no order of application, relies on Netflix's own publications, and leaves the question of priority open.",
@@ -444,7 +488,8 @@
       "yazılım-mimarisi-seçim-zamanlama-ve-kademeli-değişim",
       "yazılım-bakımı-değişikliğin-yayılması",
       "yazılım-bakımı-sistem-bilgisinin-biriktirilmesi-ve-ölçülmesi",
-      "yazılım-testi-dört-soru-ile-test-sınıflandırması"
+      "yazılım-testi-dört-soru-ile-test-sınıflandırması",
+      "otomasyon-ve-hatalardan-öğrenme"
     ]
   },
   {
@@ -547,7 +592,8 @@
       "test-mühendisliği-yeterlilik-etkinlik-güvenilirlik",
       "yazilim-test-turleri",
       "yazılım-testi-oracle-problemi",
-      "duvarlarla-i-lerlemek-test-güdümlü-geliştirmeden-ölçüt-önceliği-i-lkesine"
+      "duvarlarla-i-lerlemek-test-güdümlü-geliştirmeden-ölçüt-önceliği-i-lkesine",
+      "otomasyon-ve-hatalardan-öğrenme"
     ],
     "title_en": "Software Testing: Order of Priority",
     "description_en": "The text presents a criterion for ordering test types by when they are set up, with a list divided into seven groups by it. The criterion consists of three terms in order of precedence: whether the failure class has occurred in this system, how long setup takes, and how long a run takes. The first term dominates; a test that takes half an hour to set up but whose failure occurred yesterday stands ahead of a zero-cost check that has never caught a failure in this system. The single exception is the first group: for checks whose setup and run cost are zero, prior occurrence is not required and the check stays on, because keeping a zero-cost guard off also has a cost. This group consists of type checking, lint, lockfile, dependency and licence checks, fitness functions, an environment variable schema, and the race detector for Go only. The second group pins existing code in the first week: flakiness tracking, characterization recording, a red unit test before a fix, regression, and the data contract between stages; for the last, the SOT failure is recorded as occurring because the contract between a Whisper segment and a sentence had not been written. The third group covers input design and pipeline integrity in the first cycle, the fourth covers user flows and live health in the second cycle. The fifth group gathers tests that require a real database, queue and storage, the sixth gathers slow, paid or brittle tests run nightly or before a release. The seventh group keeps the performance, resilience, security and regulation families off until the first failure occurs. Formal verification, symbolic execution, mobile scenarios and hardware tests are out of scope.",
@@ -844,7 +890,8 @@
       "teori-vadisi-bilgi-üretimi-ile-kurumsal-uygulama-arasındaki-boşluk",
       "bilişsel-psikoloji-yazılım-mühendisliğine-aktarım",
       "yanlışlanabilirlik-ölçütünün-kurumlara-uygulanması",
-      "yaratıcılık-alanlar-arası-fikir-taşıma"
+      "yaratıcılık-alanlar-arası-fikir-taşıma",
+      "mühendislik-eğitimi-ecole-polytechnique-yaklaşımı"
     ]
   },
   {
@@ -933,7 +980,8 @@
       "teknolojik-bilginin-kaybı-aktarım-zincirleri-örtük-bilgi-ve-kurumsal-süreklilik-stratejileri-üzerine-bir-i-nceleme",
       "teori-vadisi-bilgi-üretimi-ile-kurumsal-uygulama-arasındaki-boşluk",
       "mükemmellik-adaları-yoğunlaşma-modelinin-ekonomisi",
-      "eğitim-tarihi-fransız-okul-yöntemleri-ve-kökenleri"
+      "eğitim-tarihi-fransız-okul-yöntemleri-ve-kökenleri",
+      "mühendislik-eğitimi-ecole-polytechnique-yaklaşımı"
     ]
   },
   {
@@ -1575,7 +1623,8 @@
       "zamanlama-problemi-olarak-teknoloji-takibi",
       "refleks-reddin-mekanizmaları",
       "şemaya-gömülen-felsefe",
-      "kavram-üretimi-ülkelere-göre-taşıyıcı-altyapılar"
+      "kavram-üretimi-ülkelere-göre-taşıyıcı-altyapılar",
+      "otomasyon-ve-hatalardan-öğrenme"
     ]
   },
   {
@@ -2281,7 +2330,8 @@
       "teori-vadisi-bilgi-üretimi-ile-kurumsal-uygulama-arasındaki-boşluk",
       "dinleme-üç-kutsal-metin-geleneğinde-i-şitme-kavrayış-ve-aktarım",
       "yazılım-bakımı-sistem-bilgisinin-biriktirilmesi-ve-ölçülmesi",
-      "zihinsel-model-yabancı-sistemi-anlama-yordamı"
+      "zihinsel-model-yabancı-sistemi-anlama-yordamı",
+      "otomasyon-ve-hatalardan-öğrenme"
     ],
     "title_en": "Carrying the Rationale: How Rules Erode and Knowledge Is Lost",
     "description_en": "Reads the accident-investigation literature of high-stakes fields — aviation, medicine, nuclear power, spaceflight — around a single thesis: a rule's capacity to survive is determined not by its correctness but by whether its rationale is carried along with it. The mechanism rests on an asymmetry — the cost of a rule whose rationale wasn't transmitted is visible at every application, while the failure it prevents is by definition never observed; so abandoning the rule becomes not indiscipline but a rational decision given the information at hand. It frames the problem not as a matter of character or negligence but of knowledge transfer, works through neighboring forms — whether a signal reports intent or state, how an authority gradient cuts off information flow, when redundancy is only apparent — and carries the findings into software engineering, marking the limits of the transfer as well.",
@@ -2430,7 +2480,8 @@
     "description": "Disiplinler arası yapısal düşüncenin 1940-1975 gövdesini (sibernetik, genel sistem teorisi, sistem dinamiği, TRIZ, klasik iktisat) işleyen önceki notların devamı olarak, 1980 sonrasında doğan yeni gövdeleri tanıtır: karmaşıklık bilimi (Santa Fe Enstitüsü, belirme, güç yasaları), ağ bilimi, ikinci dalga sibernetik ve enaktivizm (Maturana-Varela'nın autopoiesis'i), kategori teorisi, bilişsel dilbilim, evrimsel düşünce, gramer olarak enformasyon teorisi, pragmatizm ve Polanyi. Her bölüm, alanın çekirdek fikrini ön bilgi varsaymadan açıp yazılım mühendisliğine düşen karşılığını verir.",
     "related": [
       "sistem-teorisi",
-      "yapısal-i-zomorfizm-kaynaklar-gelenekler-sentez"
+      "yapısal-i-zomorfizm-kaynaklar-gelenekler-sentez",
+      "mühendislik-eğitimi-ecole-polytechnique-yaklaşımı"
     ],
     "pdf": "Düzen_Nereden_Çıkar____Sistemler__Ağlar__Evrim_ve_Zihin_Üzerine.pdf",
     "thumb": "thumbs/düzen-nereden-çıkar-sistemler-ağlar-evrim-ve-zihin-üzerine.png",
@@ -4274,7 +4325,8 @@
       "08-geometri-uzay-zaman-ve-iliskisel-yapi",
       "05-muhendislik-dusuncesinin-gelisimi",
       "03-ulusal-muhendislik-kulturlerinin-felsefi-kokenleri",
-      "eğitim-tarihi-fransız-okul-yöntemleri-ve-kökenleri"
+      "eğitim-tarihi-fransız-okul-yöntemleri-ve-kökenleri",
+      "mühendislik-eğitimi-ecole-polytechnique-yaklaşımı"
     ],
     "belge": "BELGE-049"
   },
