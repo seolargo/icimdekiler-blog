@@ -38,7 +38,7 @@ export default function AskPost() {
       {item.cover && <img className="ask-cover" src={base + item.cover} alt="" />}
       <header className="ask-head">
         <h1 className="ask-title">{v.title}</h1>
-        <time className="ask-date" dateTime={item.date}>{formatDate(item.date, lang)}</time>
+        <time className="ask-date" dateTime={item.date.slice(0, 10)}>{formatDate(item.date, lang)}</time>
       </header>
       <div className="ask-body" dangerouslySetInnerHTML={{ __html: html }} />
     </article>

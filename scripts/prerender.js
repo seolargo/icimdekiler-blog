@@ -253,7 +253,7 @@ const askItems = existsSync(join(dist, 'ask.json')) ? JSON.parse(readFileSync(jo
 const ASK_FONTS =
   '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap" data-ask-fonts="" />'
 const askDate = (iso) =>
-  new Date(iso + 'T12:00:00').toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' })
+  new Date(iso.slice(0, 10) + 'T12:00:00').toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' })
 const askListItem = (it) =>
   `<li><a href="${base}ask/${encodeURIComponent(it.slug)}" class="ask-item">` +
   (it.cover ? `<img class="ask-thumb" src="${asset(it.cover)}" alt="" loading="lazy" />` : '') +
@@ -284,7 +284,7 @@ for (const it of askItems) {
     `<article class="ask ask-post">` +
     (it.cover ? `<img class="ask-cover" src="${asset(it.cover)}" alt="" />` : '') +
     `<header class="ask-head"><h1 class="ask-title">${esc(it.tr.title)}</h1>` +
-    `<time class="ask-date" datetime="${escAttr(it.date)}">${esc(askDate(it.date))}</time></header>` +
+    `<time class="ask-date" datetime="${escAttr(it.date.slice(0, 10))}">${esc(askDate(it.date))}</time></header>` +
     `<div class="ask-body">${it.tr.html.replace(/src="ask\//g, `src="${base}ask/`)}</div></article>` +
     footer()
   write(`ask/${it.slug}`, renderPage({ head: h, bodyHtml }))
@@ -627,7 +627,7 @@ const urls = [
   { loc: `${SITE_URL}${base}kavramlar` },
   { loc: `${SITE_URL}${base}yapay-zeka` },
   { loc: `${SITE_URL}${base}ask` },
-  ...askItems.map((it) => ({ loc: `${SITE_URL}${base}ask/${encodeURIComponent(it.slug)}`, lastmod: it.date })),
+  ...askItems.map((it) => ({ loc: `${SITE_URL}${base}ask/${encodeURIComponent(it.slug)}`, lastmod: it.date.slice(0, 10) })),
   ...lovePosts.map((p) => ({ loc: `${SITE_URL}${base}post/${encodeURIComponent(p.slug)}`, lastmod: p.date })),
   ...writings.map((p) => ({
     loc: `${SITE_URL}${base}post/${encodeURIComponent(p.slug)}`,

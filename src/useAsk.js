@@ -42,7 +42,7 @@ export const ASK_FONT_HREF = FONT_HREF
 export const pick = (item, lang) => (lang === 'en' && item.en ? item.en : item.tr)
 
 export const formatDate = (iso, lang) =>
-  new Date(iso + 'T12:00:00').toLocaleDateString(lang === 'en' ? 'en-GB' : 'tr-TR', {
+  new Date(iso.slice(0, 10) + 'T12:00:00').toLocaleDateString(lang === 'en' ? 'en-GB' : 'tr-TR', {
     day: 'numeric',
     month: 'long',
     year: 'numeric',

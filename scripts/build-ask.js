@@ -3,7 +3,8 @@
 // Yazı biçimi (tr.md, en.md aynı):
 //   ---
 //   baslik: Yazının başlığı
-//   tarih: 2026-10-14          (yalnızca tr.md'den okunur)
+//   tarih: 2026-10-14          (yalnızca tr.md'den; aynı gün iki yazı varsa saat de
+//                               verilebilir: 2026-10-14 06:30, sıralamada kullanılır)
 //   kapak: kapak.jpg           (yalnızca tr.md'den; public/ask/<slug>/ altında)
 //   ozet: İsteğe bağlı kısa özet (yoksa ilk paragraftan üretilir)
 //   ---
@@ -101,7 +102,7 @@ for (const slug of slugs) {
   const en = existsSync(enPath) ? parse(readFileSync(enPath, 'utf8')) : null
 
   if (!tr.meta.baslik) problems.push(`${slug}: tr.md başlık yok`)
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(tr.meta.tarih || '')) problems.push(`${slug}: tarih YYYY-AA-GG değil`)
+  if (!/^\d{4}-\d{2}-\d{2}( \d{2}:\d{2})?$/.test(tr.meta.tarih || '')) problems.push(`${slug}: tarih YYYY-AA-GG [SS:DD] değil`)
   const cover = tr.meta.kapak ? `ask/${slug}/${tr.meta.kapak}` : null
   if (tr.meta.kapak && !existsSync(join(root, 'public', cover))) problems.push(`${slug}: kapak yok: ${tr.meta.kapak}`)
 
