@@ -79,7 +79,7 @@ function header(active) {
     tab(base + 'duvarlar', 'Duvarlar', 'duvarlar') +
     tab(base + 'kod-duvarlari', 'Kod Duvarları', 'kod-duvarlari') +
     tab(base + 'kavramlar', 'Kavramlar', 'kavramlar') +
-    tab(base + 'yapay-zeka', 'Yapay Zekâ', 'yapay-zeka') +
+    tab(base + 'insan', 'İnsan', 'insan') +
     tab(base + 'ask', 'Aşk', 'ask') +
     `</nav>` +
     `<main class="site-main">`
@@ -216,7 +216,6 @@ const homeHead = buildHead({
   },
 })
 const writings = posts.filter((p) => !p.tab && !p.bolum) // sekmeli yazılar (müzik, rehber) ve bölümlü yazılar (aşk) hariç
-const lovePosts = posts.filter((p) => p.bolum === 'ask' && !p.tab)
 const musicPosts = posts.filter((p) => p.tab === 'muzik')
 const guidePosts = posts.filter((p) => p.tab === 'rehber')
 const homeBody =
@@ -240,54 +239,65 @@ const muzikBody =
   footer()
 write('muzik', renderPage({ head: muzikHead, bodyHtml: muzikBody }))
 
-// --- AŞK SEKMESİ ------------------------------------------------------------
-const askHead = buildHead({
-  title: 'Aşk',
-  description: 'Aşk ve ilişkiler üzerine yazılar.',
-  canonical: `${SITE_URL}${base}ask`,
-  type: 'website',
-  image: '/profile.jpeg',
-})
-// Aşk yazıları (scripts/build-ask.js -> public/ask.json). Yazı tipleri yalnızca bu bölümde yüklenir.
-const askItems = existsSync(join(dist, 'ask.json')) ? JSON.parse(readFileSync(join(dist, 'ask.json'), 'utf8')) : []
+// --- DENEME BÖLÜMLERİ: AŞK, İNSAN ----------------------------------------------
+// scripts/build-ask.js -> public/<bolum>.json. Yazı tipleri yalnızca bu bölümlerde yüklenir.
+const SECTIONS = [
+  { key: 'ask', label: 'Aşk', description: 'Aşk ve ilişkiler üzerine yazılar.' },
+  { key: 'insan', label: 'İnsan', description: 'İnsan üzerine yazılar.' },
+]
 const ASK_FONTS =
   '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap" data-ask-fonts="" />'
 const askDate = (iso) =>
   new Date(iso.slice(0, 10) + 'T12:00:00').toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' })
-const askListItem = (it) =>
-  `<li><a href="${base}ask/${encodeURIComponent(it.slug)}" class="ask-item">` +
-  (it.cover ? `<img class="ask-thumb" src="${asset(it.cover)}" alt="" loading="lazy" />` : '') +
-  `<div class="ask-item-body"><span class="ask-item-title">${esc(it.tr.title)}</span>` +
-  `<span class="ask-item-date">${esc(askDate(it.date))}</span>` +
-  `<span class="ask-item-excerpt">${esc(it.tr.excerpt)}</span></div></a></li>`
-askHead.extra += '\n    ' + ASK_FONTS
-const askBody =
-  header('ask') +
-  `<div class="ask">` +
-  (askItems.length ? `<ul class="ask-list">${askItems.map(askListItem).join('')}</ul>` : '') +
-  (lovePosts.length ? `<ul class="post-list">${lovePosts.map(postListItem).join('')}</ul>` : '') +
-  (!askItems.length && !lovePosts.length ? `<p class="muted">Bu bölümde henüz yazı yok.</p>` : '') +
-  `</div>` +
-  footer()
-write('ask', renderPage({ head: askHead, bodyHtml: askBody }))
-for (const it of askItems) {
-  const h = buildHead({
-    title: it.tr.title,
-    description: it.tr.excerpt,
-    canonical: `${SITE_URL}${base}ask/${encodeURIComponent(it.slug)}`,
-    type: 'article',
-    image: it.cover ? '/' + it.cover : '/profile.jpeg',
+const sectionItems = {}
+for (const sec of SECTIONS) {
+  const items = existsSync(join(dist, `${sec.key}.json`))
+    ? JSON.parse(readFileSync(join(dist, `${sec.key}.json`), 'utf8'))
+    : []
+  sectionItems[sec.key] = items
+  const papers = posts.filter((p) => p.bolum === sec.key && !p.tab)
+  const listItem = (it) =>
+    `<li><a href="${base}${sec.key}/${encodeURIComponent(it.slug)}" class="ask-item">` +
+    (it.cover ? `<img class="ask-thumb" src="${asset(it.cover)}" alt="" loading="lazy" />` : '') +
+    `<div class="ask-item-body"><span class="ask-item-title">${esc(it.tr.title)}</span>` +
+    `<span class="ask-item-date">${esc(askDate(it.date))}</span>` +
+    `<span class="ask-item-excerpt">${esc(it.tr.excerpt)}</span></div></a></li>`
+  const listHead = buildHead({
+    title: sec.label,
+    description: sec.description,
+    canonical: `${SITE_URL}${base}${sec.key}`,
+    type: 'website',
+    image: '/profile.jpeg',
   })
-  h.extra += '\n    ' + ASK_FONTS
-  const bodyHtml =
-    header('ask') +
-    `<article class="ask ask-post">` +
-    (it.cover ? `<img class="ask-cover" src="${asset(it.cover)}" alt="" />` : '') +
-    `<header class="ask-head"><h1 class="ask-title">${esc(it.tr.title)}</h1>` +
-    `<time class="ask-date" datetime="${escAttr(it.date.slice(0, 10))}">${esc(askDate(it.date))}</time></header>` +
-    `<div class="ask-body">${it.tr.html.replace(/src="ask\//g, `src="${base}ask/`)}</div></article>` +
+  listHead.extra += '\n    ' + ASK_FONTS
+  const listBody =
+    header(sec.key) +
+    `<div class="ask">` +
+    (items.length ? `<ul class="ask-list">${items.map(listItem).join('')}</ul>` : '') +
+    (papers.length ? `<ul class="post-list">${papers.map(postListItem).join('')}</ul>` : '') +
+    (!items.length && !papers.length ? `<p class="muted">Bu bölümde henüz yazı yok.</p>` : '') +
+    `</div>` +
     footer()
-  write(`ask/${it.slug}`, renderPage({ head: h, bodyHtml }))
+  write(sec.key, renderPage({ head: listHead, bodyHtml: listBody }))
+  for (const it of items) {
+    const h = buildHead({
+      title: it.tr.title,
+      description: it.tr.excerpt,
+      canonical: `${SITE_URL}${base}${sec.key}/${encodeURIComponent(it.slug)}`,
+      type: 'article',
+      image: it.cover ? '/' + it.cover : '/profile.jpeg',
+    })
+    h.extra += '\n    ' + ASK_FONTS
+    const bodyHtml =
+      header(sec.key) +
+      `<article class="ask ask-post">` +
+      (it.cover ? `<img class="ask-cover" src="${asset(it.cover)}" alt="" />` : '') +
+      `<header class="ask-head"><h1 class="ask-title">${esc(it.tr.title)}</h1>` +
+      `<time class="ask-date" datetime="${escAttr(it.date.slice(0, 10))}">${esc(askDate(it.date))}</time></header>` +
+      `<div class="ask-body">${it.tr.html.replace(/src="(?!https?:|\/)/g, `src="${base}`)}</div></article>` +
+      footer()
+    write(`${sec.key}/${it.slug}`, renderPage({ head: h, bodyHtml }))
+  }
 }
 
 // --- REHBERLER SEKMESİ -------------------------------------------------------
@@ -555,9 +565,9 @@ for (const p of posts) {
   const lead = p.description ? `<p class="post-lead">${esc(p.description)}</p>` : ''
   const isMusic = p.tab === 'muzik'
   const isGuide = p.tab === 'rehber'
-  const isLove = p.bolum === 'ask'
-  const backHref = isMusic ? base + 'muzik' : isGuide ? base + 'rehberler' : isLove ? base + 'ask' : base
-  const backLabel = isMusic ? '← Müzik' : isGuide ? '← Rehberler' : isLove ? '← Aşk' : '← Tüm yazılar'
+  const sec = SECTIONS.find((x) => x.key === p.bolum)
+  const backHref = isMusic ? base + 'muzik' : isGuide ? base + 'rehberler' : sec ? base + sec.key : base
+  const backLabel = isMusic ? '← Müzik' : isGuide ? '← Rehberler' : sec ? '← ' + sec.label : '← Tüm yazılar'
   const curatedRelated = (p.related || []).map((s) => postsBySlug.get(s)).filter((r) => r && !r.tab)
   const relatedPosts = curatedRelated.length
     ? curatedRelated
@@ -595,7 +605,7 @@ for (const p of posts) {
     `<div class="cite-actions"><button type="button" class="btn">Atfı kopyala</button>` +
     `<button type="button" class="btn">BibTeX</button></div></section>`
   const body =
-    header(isMusic ? 'muzik' : isGuide ? 'rehber' : isLove ? 'ask' : 'yazilar') +
+    header(isMusic ? 'muzik' : isGuide ? 'rehber' : sec ? sec.key : 'yazilar') +
     `<article class="post">` +
     `<a href="${escAttr(backHref)}" class="back-link">${backLabel}</a>` +
     `<div class="post-head"><div><h1 class="post-heading">${esc(p.title)}</h1>${meta}${lead}</div></div>` +
@@ -626,9 +636,14 @@ const urls = [
   { loc: `${SITE_URL}${base}kod-duvarlari` },
   { loc: `${SITE_URL}${base}kavramlar` },
   { loc: `${SITE_URL}${base}yapay-zeka` },
-  { loc: `${SITE_URL}${base}ask` },
-  ...askItems.map((it) => ({ loc: `${SITE_URL}${base}ask/${encodeURIComponent(it.slug)}`, lastmod: it.date.slice(0, 10) })),
-  ...lovePosts.map((p) => ({ loc: `${SITE_URL}${base}post/${encodeURIComponent(p.slug)}`, lastmod: p.date })),
+  ...SECTIONS.flatMap((sec) => [
+    { loc: `${SITE_URL}${base}${sec.key}` },
+    ...sectionItems[sec.key].map((it) => ({
+      loc: `${SITE_URL}${base}${sec.key}/${encodeURIComponent(it.slug)}`,
+      lastmod: it.date.slice(0, 10),
+    })),
+  ]),
+  ...posts.filter((p) => p.bolum && !p.tab).map((p) => ({ loc: `${SITE_URL}${base}post/${encodeURIComponent(p.slug)}`, lastmod: p.date })),
   ...writings.map((p) => ({
     loc: `${SITE_URL}${base}post/${encodeURIComponent(p.slug)}`,
     lastmod: p.date,

@@ -1,14 +1,17 @@
 import { useEffect, useState } from 'react'
 
-// Aşk yazıları (scripts/build-ask.js üretir). Korpustan ayrıdır.
-export function useAsk() {
+// Deneme bölümleri (Aşk, İnsan): scripts/build-ask.js üretir. Korpustan ayrıdır.
+export const SECTION_LABEL = { ask: 'love', insan: 'human' }
+export const SECTION_EMPTY = { ask: 'loveEmpty', insan: 'humanEmpty' }
+
+export function useAsk(section = 'ask') {
   const [state, setState] = useState({ items: [], loading: true, error: null })
 
   useEffect(() => {
     let alive = true
-    fetch(`${import.meta.env.BASE_URL}ask.json`)
+    fetch(`${import.meta.env.BASE_URL}${section}.json`)
       .then((r) => {
-        if (!r.ok) throw new Error(`ask.json yüklenemedi (${r.status})`)
+        if (!r.ok) throw new Error(`${section}.json yüklenemedi (${r.status})`)
         return r.json()
       })
       .then((items) => alive && setState({ items, loading: false, error: null }))
@@ -16,12 +19,12 @@ export function useAsk() {
     return () => {
       alive = false
     }
-  }, [])
+  }, [section])
 
   return state
 }
 
-// Aşk bölümünün yazı tipleri yalnızca bu bölüme girilince yüklenir.
+// Deneme bölümlerinin yazı tipleri yalnızca bu bölüme girilince yüklenir.
 const FONT_HREF =
   'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap'
 

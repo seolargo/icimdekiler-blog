@@ -4,6 +4,7 @@ import { usePosts } from '../usePosts.js'
 import { useHead, SITE_NAME } from '../seo.js'
 import { useLang, seriesLabel } from '../i18n.jsx'
 import { excerpt, RELATED_WORDS } from '../excerpt.js'
+import { SECTION_LABEL } from '../useAsk.js'
 
 export default function Post() {
   const { slug } = useParams()
@@ -41,16 +42,16 @@ export default function Post() {
       ? '/muzik'
       : post?.tab === 'rehber'
         ? '/rehberler'
-        : post?.bolum === 'ask'
-          ? '/ask'
+        : post?.bolum
+          ? `/${post.bolum}`
           : { pathname: '/', search: listSearch }
   const backLabel =
     post?.tab === 'muzik'
       ? `← ${t('music')}`
       : post?.tab === 'rehber'
         ? `← ${t('guides')}`
-        : post?.bolum === 'ask'
-          ? `← ${t('love')}`
+        : post?.bolum
+          ? `← ${t(SECTION_LABEL[post.bolum] || 'allPosts')}`
           : t('allPosts')
 
   useHead(

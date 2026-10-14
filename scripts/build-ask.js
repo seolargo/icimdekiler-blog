@@ -1,4 +1,6 @@
-// Aşk yazılarını derler: content/ask/<slug>/{tr.md,en.md} -> public/ask.json
+// Deneme bölümlerini (Aşk, İnsan) derler:
+//   content/<bolum>/<slug>/{tr.md,en.md} + public/<bolum>/<slug>/resimler -> public/<bolum>.json
+// Bölümler aşağıdaki SECTIONS listesinde. Yeni bölüm için oraya bir satır eklemek yeter.
 //
 // Yazı biçimi (tr.md, en.md aynı):
 //   ---
@@ -21,8 +23,7 @@ import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
-const srcDir = join(root, 'content', 'ask')
-const outFile = join(root, 'public', 'ask.json')
+const SECTIONS = ['ask', 'insan']
 
 const esc = (s) =>
   s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
@@ -49,7 +50,7 @@ function parse(raw) {
   return { meta, body: body.trim() }
 }
 
-function render(body, slug, problems) {
+function render(body, sec, slug, problems) {
   const blocks = body.split(/\n\s*\n/).map((b) => b.trim()).filter(Boolean)
   const html = []
   let firstText = ''
@@ -57,8 +58,8 @@ function render(body, slug, problems) {
     const img = b.match(/^!\[([^\]]*)\]\(([^)\s]+)\)$/)
     if (img) {
       const [, alt, file] = img
-      if (!existsSync(join(root, 'public', 'ask', slug, file))) problems.push(`${slug}: resim yok: ${file}`)
-      const src = `ask/${slug}/${file}`
+      if (!existsSync(join(root, 'public', sec, slug, file))) problems.push(`${sec}/${slug}: resim yok: ${file}`)
+      const src = `${sec}/${slug}/${file}`
       html.push(
         `<figure><img src="${esc(src)}" alt="${esc(alt)}" loading="lazy" />` +
           (alt ? `<figcaption>${inline(alt)}</figcaption>` : '') +
@@ -86,42 +87,48 @@ const clip = (s, n = 220) => {
 }
 
 const problems = []
-const items = []
-const slugs = existsSync(srcDir)
-  ? readdirSync(srcDir).filter((d) => statSync(join(srcDir, d)).isDirectory() && !d.startsWith('_'))
-  : []
+for (const sec of SECTIONS) {
+  const srcDir = join(root, 'content', sec)
+  const outFile = join(root, 'public', `${sec}.json`)
+  const items = []
+  const slugs = existsSync(srcDir)
+    ? readdirSync(srcDir).filter((d) => statSync(join(srcDir, d)).isDirectory() && !d.startsWith('_'))
+    : []
 
-for (const slug of slugs) {
-  const trPath = join(srcDir, slug, 'tr.md')
-  if (!existsSync(trPath)) {
-    problems.push(`${slug}: tr.md yok`)
-    continue
+  for (const slug of slugs) {
+    const trPath = join(srcDir, slug, 'tr.md')
+    if (!existsSync(trPath)) {
+      problems.push(`${sec}/${slug}: tr.md yok`)
+      continue
+    }
+    const tr = parse(readFileSync(trPath, 'utf8'))
+    const enPath = join(srcDir, slug, 'en.md')
+    const en = existsSync(enPath) ? parse(readFileSync(enPath, 'utf8')) : null
+
+    if (!tr.meta.baslik) problems.push(`${sec}/${slug}: tr.md başlık yok`)
+    if (!/^\d{4}-\d{2}-\d{2}( \d{2}:\d{2})?$/.test(tr.meta.tarih || '')) problems.push(`${sec}/${slug}: tarih YYYY-AA-GG [SS:DD] değil`)
+    const cover = tr.meta.kapak ? `${sec}/${slug}/${tr.meta.kapak}` : null
+    if (tr.meta.kapak && !existsSync(join(root, 'public', cover))) problems.push(`${sec}/${slug}: kapak yok: ${tr.meta.kapak}`)
+
+    const trR = render(tr.body, sec, slug, problems)
+    const enR = en ? render(en.body, sec, slug, problems) : null
+
+    items.push({
+      slug,
+      date: tr.meta.tarih,
+      cover,
+      tr: { title: tr.meta.baslik, excerpt: tr.meta.ozet || clip(trR.firstText), html: trR.html },
+      en: en ? { title: en.meta.baslik, excerpt: en.meta.ozet || clip(enR.firstText), html: enR.html } : null,
+    })
   }
-  const tr = parse(readFileSync(trPath, 'utf8'))
-  const enPath = join(srcDir, slug, 'en.md')
-  const en = existsSync(enPath) ? parse(readFileSync(enPath, 'utf8')) : null
 
-  if (!tr.meta.baslik) problems.push(`${slug}: tr.md başlık yok`)
-  if (!/^\d{4}-\d{2}-\d{2}( \d{2}:\d{2})?$/.test(tr.meta.tarih || '')) problems.push(`${slug}: tarih YYYY-AA-GG [SS:DD] değil`)
-  const cover = tr.meta.kapak ? `ask/${slug}/${tr.meta.kapak}` : null
-  if (tr.meta.kapak && !existsSync(join(root, 'public', cover))) problems.push(`${slug}: kapak yok: ${tr.meta.kapak}`)
-
-  const trR = render(tr.body, slug, problems)
-  const enR = en ? render(en.body, slug, problems) : null
-
-  items.push({
-    slug,
-    date: tr.meta.tarih,
-    cover,
-    tr: { title: tr.meta.baslik, excerpt: tr.meta.ozet || clip(trR.firstText), html: trR.html },
-    en: en ? { title: en.meta.baslik, excerpt: en.meta.ozet || clip(enR.firstText), html: enR.html } : null,
-  })
+  items.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0))
+  if (!problems.length) {
+    writeFileSync(outFile, JSON.stringify(items, null, 2) + '\n')
+    console.log(`[${sec}] ${items.length} yazı -> public/${sec}.json`)
+  }
 }
-
-items.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0))
 if (problems.length) {
-  console.error('[ask] SORUNLAR:\n  ' + problems.join('\n  '))
+  console.error('[bölümler] SORUNLAR:\n  ' + problems.join('\n  '))
   process.exit(1)
 }
-writeFileSync(outFile, JSON.stringify(items, null, 2) + '\n')
-console.log(`[ask] ${items.length} yazı -> public/ask.json`)

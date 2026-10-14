@@ -1,13 +1,13 @@
 import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { useAsk, useAskFonts, pick, formatDate } from '../useAsk.js'
+import { useAsk, useAskFonts, pick, formatDate, SECTION_LABEL } from '../useAsk.js'
 import { useHead } from '../seo.js'
 import { useLang } from '../i18n.jsx'
 
 // Tek bir Aşk yazısı. Gövde HTML'i build-ask.js'te kaçışlanarak üretilir.
-export default function AskPost() {
+export default function AskPost({ section = 'ask' }) {
   const { slug } = useParams()
-  const { items, loading, error } = useAsk()
+  const { items, loading, error } = useAsk(section)
   const { t, lang } = useLang()
   useAskFonts()
 
@@ -17,21 +17,21 @@ export default function AskPost() {
 
   const item = items.find((i) => i.slug === slug)
   const v = item ? pick(item, lang) : null
-  useHead({ title: v?.title || t('love'), description: v?.excerpt, image: item?.cover ? '/' + item.cover : '/profile.jpeg' })
+  useHead({ title: v?.title || t(SECTION_LABEL[section]), description: v?.excerpt, image: item?.cover ? '/' + item.cover : '/profile.jpeg' })
 
   if (loading) return <p className="muted">{t('loading')}</p>
   if (error) return <p className="error">{t('error')}: {error.message}</p>
   if (!item) {
     return (
       <div className="ask">
-        <Link to="/ask" className="back-link">← {t('love')}</Link>
+        <Link to={`/${section}`} className="back-link">← {t(SECTION_LABEL[section])}</Link>
         <p className="muted">{t('notFound')}</p>
       </div>
     )
   }
 
   const base = import.meta.env.BASE_URL
-  const html = v.html.replace(/src="ask\//g, `src="${base}ask/`)
+  const html = v.html.replace(/src="(?!https?:|\/)/g, `src="${base}`)
 
   return (
     <article className="ask ask-post">

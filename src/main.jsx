@@ -42,8 +42,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <Route path="kod-duvarlari" element={<KodDuvarlari />} />
             <Route path="kavramlar" element={<Kavramlar />} />
             <Route path="yapay-zeka" element={<YapayZeka />} />
-            <Route path="ask" element={<Ask />} />
-            <Route path="ask/:slug" element={<AskPost />} />
+            <Route path="ask" element={<Ask key="ask" />} />
+            <Route path="ask/:slug" element={<AskPost key="ask-post" />} />
+            <Route path="insan" element={<Ask section="insan" key="insan" />} />
+            <Route path="insan/:slug" element={<AskPost section="insan" key="insan-post" />} />
             <Route path="sor" element={<Sor />} />
             <Route path="post/:slug" element={<Post />} />
           </Route>
