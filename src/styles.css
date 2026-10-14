@@ -1993,9 +1993,12 @@ code {
   gap: 22px;
 }
 .ask-cover {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
+  /* resim kendi oranında: yatay kapak sütunu doldurur, dikey kapak kırpılmadan ortalanır */
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: min(80vh, 900px);
+  margin-inline: auto;
   border-radius: 2px;
 }
 .ask-head {
