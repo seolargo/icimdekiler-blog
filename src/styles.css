@@ -1921,3 +1921,170 @@ code {
 .kv-searchlink {
   font-size: 0.85rem;
 }
+
+/* --- Aşk bölümü --------------------------------------------------------------
+   Kitap havası: başlıkta Playfair Display, metinde Noto Serif. Yazı tipleri
+   yalnızca bu bölüme girilince yüklenir; sitenin geri kalanı değişmez. */
+.ask {
+  --ask-display: 'Playfair Display', Constantia, 'Lucida Bright', Georgia, serif;
+  --ask-text: 'Noto Serif', Constantia, 'Lucida Bright', Georgia, serif;
+}
+.ask-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+}
+.ask-item {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+  color: inherit;
+  text-decoration: none;
+}
+.ask-list li:last-child .ask-item {
+  border-bottom: none;
+}
+.ask-thumb {
+  width: 112px;
+  height: 112px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+.ask-item-body {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+.ask-item-title {
+  font-family: var(--ask-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+.ask-item:hover .ask-item-title {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+.ask-item-date {
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.ask-item-excerpt {
+  font-family: var(--ask-text);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--muted);
+}
+.ask-post {
+  display: grid;
+  gap: 22px;
+}
+.ask-cover {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 2px;
+}
+.ask-head {
+  display: grid;
+  gap: 10px;
+  text-align: center;
+  padding-block: 8px 4px;
+}
+.ask-title {
+  margin: 0;
+  font-family: var(--ask-display);
+  font-size: clamp(1.9rem, 5vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+.ask-date {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.ask-body {
+  font-family: var(--ask-text);
+  font-size: 1.09rem;
+  line-height: 1.85;
+  max-width: 64ch;
+  margin-inline: auto;
+  width: 100%;
+}
+.ask-body p {
+  margin: 0 0 1.3em;
+}
+.ask-body h2,
+.ask-body h3 {
+  font-family: var(--ask-display);
+  line-height: 1.25;
+  margin: 1.8em 0 0.6em;
+}
+.ask-body h2 {
+  font-size: 1.6rem;
+}
+.ask-body h3 {
+  font-size: 1.25rem;
+}
+.ask-body figure {
+  margin: 2em 0;
+  text-align: center;
+}
+.ask-body figure img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 2px;
+}
+.ask-body figcaption {
+  margin-top: 0.6em;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--muted);
+}
+.ask-body blockquote {
+  margin: 1.8em 0;
+  padding: 0 0 0 1.2em;
+  border-left: 2px solid var(--fg);
+  font-style: italic;
+}
+.ask-body hr {
+  border: none;
+  text-align: center;
+  margin: 2em 0;
+}
+.ask-body hr::after {
+  content: '· · ·';
+  letter-spacing: 0.6em;
+  color: var(--muted);
+}
+.ask-body a {
+  color: inherit;
+  text-underline-offset: 3px;
+}
+@media (max-width: 480px) {
+  .ask-item {
+    grid-template-columns: 84px minmax(0, 1fr);
+    gap: 14px;
+  }
+  .ask-thumb {
+    width: 84px;
+    height: 84px;
+  }
+  .ask-item-title {
+    font-size: 1.15rem;
+  }
+  .ask-body {
+    font-size: 1.02rem;
+  }
+}

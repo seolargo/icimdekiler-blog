@@ -248,13 +248,47 @@ const askHead = buildHead({
   type: 'website',
   image: '/profile.jpeg',
 })
+// Aşk yazıları (scripts/build-ask.js -> public/ask.json). Yazı tipleri yalnızca bu bölümde yüklenir.
+const askItems = existsSync(join(dist, 'ask.json')) ? JSON.parse(readFileSync(join(dist, 'ask.json'), 'utf8')) : []
+const ASK_FONTS =
+  '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap" data-ask-fonts="" />'
+const askDate = (iso) =>
+  new Date(iso + 'T12:00:00').toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' })
+const askListItem = (it) =>
+  `<li><a href="${base}ask/${encodeURIComponent(it.slug)}" class="ask-item">` +
+  (it.cover ? `<img class="ask-thumb" src="${asset(it.cover)}" alt="" loading="lazy" />` : '') +
+  `<div class="ask-item-body"><span class="ask-item-title">${esc(it.tr.title)}</span>` +
+  `<span class="ask-item-date">${esc(askDate(it.date))}</span>` +
+  `<span class="ask-item-excerpt">${esc(it.tr.excerpt)}</span></div></a></li>`
+askHead.extra += '\n    ' + ASK_FONTS
 const askBody =
   header('ask') +
-  (lovePosts.length
-    ? `<ul class="post-list">${lovePosts.map(postListItem).join('')}</ul>`
-    : `<p class="muted">Bu bölümde henüz yazı yok.</p>`) +
+  `<div class="ask">` +
+  (askItems.length ? `<ul class="ask-list">${askItems.map(askListItem).join('')}</ul>` : '') +
+  (lovePosts.length ? `<ul class="post-list">${lovePosts.map(postListItem).join('')}</ul>` : '') +
+  (!askItems.length && !lovePosts.length ? `<p class="muted">Bu bölümde henüz yazı yok.</p>` : '') +
+  `</div>` +
   footer()
 write('ask', renderPage({ head: askHead, bodyHtml: askBody }))
+for (const it of askItems) {
+  const h = buildHead({
+    title: it.tr.title,
+    description: it.tr.excerpt,
+    canonical: `${SITE_URL}${base}ask/${encodeURIComponent(it.slug)}`,
+    type: 'article',
+    image: it.cover ? '/' + it.cover : '/profile.jpeg',
+  })
+  h.extra += '\n    ' + ASK_FONTS
+  const bodyHtml =
+    header('ask') +
+    `<article class="ask ask-post"><a href="${base}ask" class="back-link">← Aşk</a>` +
+    (it.cover ? `<img class="ask-cover" src="${asset(it.cover)}" alt="" />` : '') +
+    `<header class="ask-head"><h1 class="ask-title">${esc(it.tr.title)}</h1>` +
+    `<time class="ask-date" datetime="${escAttr(it.date)}">${esc(askDate(it.date))}</time></header>` +
+    `<div class="ask-body">${it.tr.html.replace(/src="ask\//g, `src="${base}ask/`)}</div></article>` +
+    footer()
+  write(`ask/${it.slug}`, renderPage({ head: h, bodyHtml }))
+}
 
 // --- REHBERLER SEKMESİ -------------------------------------------------------
 const rehberHead = buildHead({
@@ -592,6 +626,9 @@ const urls = [
   { loc: `${SITE_URL}${base}kod-duvarlari` },
   { loc: `${SITE_URL}${base}kavramlar` },
   { loc: `${SITE_URL}${base}yapay-zeka` },
+  { loc: `${SITE_URL}${base}ask` },
+  ...askItems.map((it) => ({ loc: `${SITE_URL}${base}ask/${encodeURIComponent(it.slug)}`, lastmod: it.date })),
+  ...lovePosts.map((p) => ({ loc: `${SITE_URL}${base}post/${encodeURIComponent(p.slug)}`, lastmod: p.date })),
   ...writings.map((p) => ({
     loc: `${SITE_URL}${base}post/${encodeURIComponent(p.slug)}`,
     lastmod: p.date,

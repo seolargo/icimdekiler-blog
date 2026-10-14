@@ -13,6 +13,7 @@ import KodDuvarlari from './pages/KodDuvarlari.jsx'
 import Kavramlar from './pages/Kavramlar.jsx'
 import YapayZeka from './pages/YapayZeka.jsx'
 import Ask from './pages/Ask.jsx'
+import AskPost from './pages/AskPost.jsx'
 import Sor from './pages/Sor.jsx'
 import { LanguageProvider } from './i18n.jsx'
 import './styles.css'
@@ -42,6 +43,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <Route path="kavramlar" element={<Kavramlar />} />
             <Route path="yapay-zeka" element={<YapayZeka />} />
             <Route path="ask" element={<Ask />} />
+            <Route path="ask/:slug" element={<AskPost />} />
             <Route path="sor" element={<Sor />} />
             <Route path="post/:slug" element={<Post />} />
           </Route>
