@@ -281,7 +281,7 @@ for (const it of askItems) {
   h.extra += '\n    ' + ASK_FONTS
   const bodyHtml =
     header('ask') +
-    `<article class="ask ask-post"><a href="${base}ask" class="back-link">← Aşk</a>` +
+    `<article class="ask ask-post">` +
     (it.cover ? `<img class="ask-cover" src="${asset(it.cover)}" alt="" />` : '') +
     `<header class="ask-head"><h1 class="ask-title">${esc(it.tr.title)}</h1>` +
     `<time class="ask-date" datetime="${escAttr(it.date)}">${esc(askDate(it.date))}</time></header>` +

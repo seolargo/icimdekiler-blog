@@ -35,7 +35,6 @@ export default function AskPost() {
 
   return (
     <article className="ask ask-post">
-      <Link to="/ask" className="back-link">← {t('love')}</Link>
       {item.cover && <img className="ask-cover" src={base + item.cover} alt="" />}
       <header className="ask-head">
         <h1 className="ask-title">{v.title}</h1>
