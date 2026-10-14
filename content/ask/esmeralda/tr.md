@@ -3,7 +3,7 @@ baslik: Esmeralda
 tarih: 2026-10-14
 kapak: kapak.jpg
 ---
-Gece yarısı bir şarkı dinledim. Fransızca, sözlerinin çoğunu anlamıyordum. Üç erkek sırayla aynı kadının adını söylüyordu. Belle, diyorlardı. Güzel.
+Üç erkek sırayla aynı kadının adını söylüyordu. Belle, diyorlardı. Güzel.
 
 Sonra hikâyesini okudum. Victor Hugo'nun Notre-Dame de Paris romanından çıkmış bir şarkıymış bu. Ve o kadın, Esmeralda, iki yüz yıldır aynı şeyi yaşıyormuş.
 

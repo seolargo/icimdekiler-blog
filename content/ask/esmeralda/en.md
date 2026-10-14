@@ -1,7 +1,7 @@
 ---
 baslik: Esmeralda
 ---
-At midnight I listened to a song. It was in French and I did not understand most of the words. Three men took turns singing the same woman's name. Belle, they said. Beautiful.
+Three men took turns singing the same woman's name. Belle, they said. Beautiful.
 
 Then I read her story. The song came from Victor Hugo's novel Notre-Dame de Paris. And that woman, Esmeralda, has been living the same thing for two hundred years.
 
