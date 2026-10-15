@@ -10,6 +10,10 @@ import { fold } from '../search.js'
 // tek kelimelik kavramlar, ikili tamlamalar, her birinin en yoğun geçtiği
 // yazılar ve birlikte geçtiği komşu kavramlar.
 // Kavramlar makale diliyle (Türkçe) kalır; yalnızca arayüz çevrilir.
+//
+// "Aşk sözlüğü" kipi ayrı bir veri kullanır: public/ask-kavramlar.json
+// (scripts/build-ask-kavramlar.js; liste content/ask-kavramlar.json). Yazı
+// bağlantıları /ask/<slug>'a gider. Kip ?m=ask ile bağlantıda korunur.
 
 const nf = (n, locale) => n.toLocaleString(locale)
 
@@ -18,7 +22,18 @@ export default function Kavramlar() {
   const [data, setData] = useState(null)
   const [params, setParams] = useSearchParams()
   const { posts } = usePosts()
-  const [mode, setMode] = useState('tek') // tek | ikili | belirgin | adlar
+  const [mode, setModeState] = useState(params.get('m') === 'ask' ? 'ask' : 'tek') // tek | ikili | belirgin | adlar | ask
+  const [askData, setAskData] = useState(null)
+  const [askTitles, setAskTitles] = useState(new Map())
+  const isAsk = mode === 'ask'
+  const setMode = (m) => {
+    setModeState(m)
+    const next = new URLSearchParams(params)
+    if (m === 'ask') next.set('m', 'ask')
+    else next.delete('m')
+    next.delete('k')
+    setParams(next, { replace: true })
+  }
   const [q, setQ] = useState('')
 
   const selected = params.get('k') || null
@@ -38,6 +53,14 @@ export default function Kavramlar() {
       .catch(() =>
         setData({ concepts: [], phrases: [], distinct: [], names: [], docs: 0, tokens: 0, vocab: 0 }),
       )
+    fetch(`${import.meta.env.BASE_URL}ask-kavramlar.json`)
+      .then((r) => r.json())
+      .then(setAskData)
+      .catch(() => setAskData({ concepts: [], docs: 0, tokens: 0, vocab: 0 }))
+    fetch(`${import.meta.env.BASE_URL}ask.json`)
+      .then((r) => r.json())
+      .then((items) => setAskTitles(new Map(items.map((i) => [i.slug, i]))))
+      .catch(() => {})
   }, [])
 
   const MODES = [
@@ -45,14 +68,18 @@ export default function Kavramlar() {
     { id: 'ikili', field: 'phrases', label: 'conceptsPairs' },
     { id: 'belirgin', field: 'distinct', label: 'conceptsDistinct' },
     { id: 'adlar', field: 'names', label: 'conceptsNames' },
+    { id: 'ask', field: null, label: 'conceptsLove' },
   ]
-  const listOf = (id) => data?.[MODES.find((m) => m.id === id).field] || []
+  const listOf = (id) =>
+    id === 'ask' ? askData?.concepts || [] : data?.[MODES.find((m) => m.id === id).field] || []
+  const ds = isAsk ? askData || { docs: 0, tokens: 0, vocab: 0 } : data
+  const askByKey = useMemo(() => new Map((askData?.concepts || []).map((c) => [c.k, c])), [askData])
   const list = listOf(mode)
   // anahtar -> kayıt ve anahtar -> hangi kipte olduğu (komşu kavram bağlantıları için)
   const [byKey, modeOf] = useMemo(() => {
     const m = new Map()
     const w = new Map()
-    for (const { id, field } of MODES)
+    for (const { id, field } of MODES.filter((m) => m.field))
       for (const c of data?.[field] || []) {
         if (!m.has(c.k)) w.set(c.k, id)
         m.set(c.k, m.get(c.k) || c)
@@ -64,10 +91,14 @@ export default function Kavramlar() {
     for (const p of posts) m.set(p.slug, lang === 'en' && p.title_en ? p.title_en : p.title)
     return m
   }, [posts, lang])
+  const askTitleOf = (slug) => {
+    const it = askTitles.get(slug)
+    return it ? (lang === 'en' && it.en ? it.en.title : it.tr.title) : slug
+  }
 
   // ?k=… ile gelindiğinde kavramın bulunduğu kipe geç (ad ise "Adlar", vb.)
   useEffect(() => {
-    if (selected && modeOf.has(selected)) setMode(modeOf.get(selected))
+    if (params.get('m') !== 'ask' && selected && modeOf.has(selected)) setModeState(modeOf.get(selected))
     // yalnızca veri yüklendiğinde / bağlantıdan gelindiğinde
   }, [data, selected]) // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -77,7 +108,7 @@ export default function Kavramlar() {
     [list, needle],
   )
 
-  const active = selected ? byKey.get(selected) : null
+  const active = selected ? (isAsk ? askByKey.get(selected) : byKey.get(selected)) : null
   // bulutta yazı boyutu: kipin kendi skorunun karekökü (tf, tf-idf…)
   const val = (c) => c.s ?? c.tf
   const max = shown.length ? Math.max(...shown.map(val)) : 1
@@ -87,13 +118,14 @@ export default function Kavramlar() {
     return (0.82 + r * 1.5).toFixed(2)
   }
 
-  if (data === null) return <p className="muted">{t('loading')}</p>
+  if (data === null || (isAsk && askData === null)) return <p className="muted">{t('loading')}</p>
 
   return (
     <div className="kv">
       <p className="kv-stats">
-        <b>{nf(data.docs, t('locale'))}</b> {t('conceptsDocs')} · <b>{nf(data.tokens, t('locale'))}</b>{' '}
-        {t('conceptsWords')} · <b>{nf(data.vocab, t('locale'))}</b> {t('conceptsForms')}
+        <b>{nf(ds.docs, t('locale'))}</b> {t(isAsk ? 'conceptsLoveDocs' : 'conceptsDocs')} ·{' '}
+        <b>{nf(ds.tokens, t('locale'))}</b> {t('conceptsWords')} · <b>{nf(ds.vocab, t('locale'))}</b>{' '}
+        {t('conceptsForms')}
       </p>
 
       <div className="kv-controls">
@@ -136,7 +168,7 @@ export default function Kavramlar() {
               className={`kv-word${selected === c.k ? ' is-active' : ''}`}
               style={{
                 fontSize: `${size(c)}rem`,
-                opacity: 0.55 + 0.45 * Math.min(1, c.df / (data.docs * 0.5)),
+                opacity: 0.55 + 0.45 * Math.min(1, c.df / (ds.docs * 0.5)),
               }}
               onClick={() => select(selected === c.k ? null : c.k)}
               title={`${c.tf} ${t('conceptsTimes')} · ${c.df} ${t('conceptsInDocs')}`}
@@ -157,7 +189,7 @@ export default function Kavramlar() {
           </div>
           <p className="kv-detail-stats">
             <b>{nf(active.tf, t('locale'))}</b> {t('conceptsTimes')} · <b>{active.df}</b> /{' '}
-            {data.docs} {t('conceptsInDocs')}
+            {ds.docs} {t('conceptsInDocs')}
           </p>
 
           {active.variants?.length > 1 && (
@@ -180,11 +212,11 @@ export default function Kavramlar() {
                   type="button"
                   className="kv-nearw"
                   onClick={() => {
-                    setMode(modeOf.get(n) || 'tek')
+                    if (!isAsk) setModeState(modeOf.get(n) || 'tek')
                     select(n)
                   }}
                 >
-                  {byKey.get(n)?.label || n}
+                  {(isAsk ? askByKey : byKey).get(n)?.label || n}
                 </button>
               ))}
             </p>
@@ -194,15 +226,21 @@ export default function Kavramlar() {
           <ol className="kv-posts">
             {active.top.map(([slug, n]) => (
               <li key={slug}>
-                <Link to={`/post/${encodeURIComponent(slug)}`}>{titleOf.get(slug) || slug}</Link>
+                {isAsk ? (
+                  <Link to={`/ask/${encodeURIComponent(slug)}`}>{askTitleOf(slug)}</Link>
+                ) : (
+                  <Link to={`/post/${encodeURIComponent(slug)}`}>{titleOf.get(slug) || slug}</Link>
+                )}
                 <span className="kv-count">{n}×</span>
               </li>
             ))}
           </ol>
 
-          <Link className="kv-searchlink" to={`/?q=${encodeURIComponent(active.label)}`}>
-            {t('conceptsSearchAll')} →
-          </Link>
+          {!isAsk && (
+            <Link className="kv-searchlink" to={`/?q=${encodeURIComponent(active.label)}`}>
+              {t('conceptsSearchAll')} →
+            </Link>
+          )}
         </div>
       )}
     </div>
