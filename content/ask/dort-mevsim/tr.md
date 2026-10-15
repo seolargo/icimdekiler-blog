@@ -1,0 +1,22 @@
+---
+baslik: Dört Mevsim
+tarih: 2026-10-16 00:29
+kapak: kapak.jpg
+---
+Bir insana çekilmek birkaç saniye sürebilir. Bir bakış, bir gülüş, bir cümle yeter. Kalp hızlanır, akıl o kişiye takılır. Beyin dopamin ve noradrenalin salgılar, uyku kaçar. Bu ilk dönemde karşımızdakini tam tanımayız. Bilmediğimiz yerleri hayal gücümüzle doldururuz. Aslında çoğu zaman gerçek kişiyi değil, kafamızdaki versiyonunu severiz.
+
+Çekim karşılık bulunca romantik aşk başlar. Birlikte zaman geçirilir, "ben" yavaş yavaş "biz" olur. Heyecan hâlâ yüksektir ama artık gerçek kişiyi tanımaya başlarız. Araştırmalara göre bu yoğun dönem genelde altı ay ile iki üç yıl arasında sürer. Sonra kaçınılmaz bir an gelir: gerçekle karşılaşma.
+
+Bu aşamada kafadaki ideal kişi yerini gerçek kişiye bırakır. Kusurlar görünür, farklılıklar belirginleşir, ilk ciddi kavgalar yaşanır. Heyecan azalır. Pek çok ilişki tam burada biter. Çünkü insanlar bu sakinleşmeyi "aşk bitti" diye yorumlar. Oysa bu bir bitiş değil, bir geçiştir. Bu eşiği aşan çiftlerde yeni bir bağ kurulur. Beyinde artık oksitosin ve vazopressin öne çıkar. Kalp çarpıntısının yerini "yanında rahatım" hissi alır. Ardından bağlılık gelir. Bu artık bir his değil, bir karardır. İki insan birbirini bilerek seçer. Yıllar geçtikçe aşk; dostluk, saygı ve ortak bir geçmiş üzerine oturur. Gücünü heyecandan değil, sakinlik ve güvenden alır.
+
+Psikolog Robert Sternberg aşkı bir üçgenle anlatır. Bir köşede tutku vardır, yani çekim ve arzu. Bir köşede yakınlık, yani duygusal bağ ve paylaşım. Son köşede ise bağlılık, yani birlikte kalma kararı. Sadece tutku varsa bu bir tutulmadır, çabuk alevlenir, çabuk söner. Tutku olmadan yakınlık ve bağlılık varsa bu arkadaşça bir aşktır. Üçü bir araya geldiğinde ise Sternberg'in "tamamlanmış aşk" dediği şey ortaya çıkar. Ama bu üçgeni ayakta tutmak kendiliğinden olmaz, emek ister.
+
+Bütün bu aşamalar aylar değil, yıllar alır. Üstelik kesin çizgilerle ayrılmaz. İç içe geçer, bazen geri dönülür. Arkadaşlıktan doğan ilişkilerde çekim ile bağlanma neredeyse aynı anda gelir. Uzak mesafeli ilişkilerde ise süreç uzar, çünkü birini gerçek hayatın içinde tanımak gecikir.
+
+İşte bu yüzden eskilerden beri söylenen bir söz vardır: Birini tanımak için onunla dört mevsim geçirmek gerekir. İlk aylarda herkes en iyi hâlini gösterir. Ama bu hâli uzun süre taşımak zordur. Bir yıl içinde maske yavaş yavaş düşer. Bayramlarda, doğum günlerinde ailesiyle nasıl biri olduğunu görürsün. Stresli bir dönemde sakin mi kalıyor, yoksa öfkesini sana mı yöneltiyor, anlarsın. Sen hastayken yanında mı, yoksa ortadan mı kayboluyor, fark edersin. Bir tatilde plan bozulunca, yorgunken, uzun süre baş başa kalınca nasıl biri olduğunu öğrenirsin. Kışın içe kapanmasını, yazın enerjisini görürsün. Ve ilk büyük kavgada, özür dileyebiliyor mu, barışmak için adım atıyor mu, ortaya çıkar. Dört mevsim bilimsel bir kural değildir. Ama bir hayatın çoğunun heyecanlı anlardan değil, sıradan ve zor günlerden oluştuğunu hatırlatır.
+
+Elbette herkes bu kadar beklemiyor. Pek çok insan kısa sürede tanışıp evleniyor. Türkiye'de görücü usulü hâlâ yaygın. Aileler, değerler ve çevre önceden bilindiği için tanışma kısa tutuluyor. Bazıları belli bir yaşa geldiği ve evlenmeye hazır olduğu için bekletmek istemiyor. Bazıları kültürel ya da dinî sebeplerle uzun bir beraberliği doğru bulmuyor. Bazıları ise "gördüğüm an bildim" diyor. Bunun bir riski var. ABD'de yapılan bir araştırma, evlenmeden önce bir yıldan az birlikte olan çiftlerin boşanma riskinin daha uzun süre birlikte olanlara göre daha yüksek olduğunu gösteriyor. Ama hızlı evlenip çok mutlu olan çiftler de az değil. Demek ki hız tek başına belirleyici değil.
+
+Asıl fark sıralamada. Hızlı evlenen çiftler de aynı aşamalardan geçer. Sadece gerçekle karşılaşma, ilk kavgalar ve dört mevsim evlilikten önce değil, sonra yaşanır. Bu dönemi atlatmayı kolaylaştıran şeyler belli: değerlerin örtüşmesi, gerçekçi beklentiler, arkada duran bir aile ve evliliği bir his değil bir emek olarak görmek. Bu dönemi sabırla geçenler zamanla güçlü bir bağ kurabilir. Geçemeyenler için ise sarsıcı olabilir.
+
+Sonuçta yol ister uzun ister kısa olsun, varılan yer aynı soruya çıkar. Çekim kapıyı açar, aşk içeri girer, bağlılık evi kurar. Ama o evde yaşamak, mevsimler değiştikçe de kalmaya devam etmekle mümkündür. Asıl mesele heyecanı sonsuza kadar korumak değil. Heyecan azaldığında da, kış geldiğinde de, birbirini yeniden seçebilmektir.
