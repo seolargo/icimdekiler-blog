@@ -122,11 +122,13 @@ export default function Kavramlar() {
 
   return (
     <div className="kv">
+      {!isAsk && (
       <p className="kv-stats">
         <b>{nf(ds.docs, t('locale'))}</b> {t(isAsk ? 'conceptsLoveDocs' : 'conceptsDocs')} ·{' '}
         <b>{nf(ds.tokens, t('locale'))}</b> {t('conceptsWords')} · <b>{nf(ds.vocab, t('locale'))}</b>{' '}
         {t('conceptsForms')}
       </p>
+      )}
 
       <div className="kv-controls">
         <div className="kv-modes" role="group" aria-label={t('conceptsMode')}>
