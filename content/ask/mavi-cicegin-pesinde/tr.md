@@ -1,5 +1,5 @@
 ---
-baslik: Mavi Çiçeğin Peşinde
+baslik: Senin Olmadığın Yer
 tarih: 2026-10-16 04:36
 kapak: kapak.jpg
 ---
