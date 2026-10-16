@@ -1,6 +1,7 @@
 import { usePosts } from '../usePosts.js'
 import { useHead } from '../seo.js'
 import { useLang } from '../i18n.jsx'
+import Ask from './Ask.jsx'
 
 export default function Muzik() {
   const { posts, loading, error } = usePosts()
@@ -14,6 +15,7 @@ export default function Muzik() {
 
   return (
     <>
+      <Ask section="muzik" hideEmpty />
       {loading && <p className="muted">{t('loading')}</p>}
       {error && <p className="error">{t('error')}: {error.message}</p>}
 

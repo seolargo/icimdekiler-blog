@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 
 // Deneme bölümleri (Aşk, İnsan): scripts/build-ask.js üretir. Korpustan ayrıdır.
-export const SECTION_LABEL = { ask: 'love', insan: 'human' }
-export const SECTION_EMPTY = { ask: 'loveEmpty', insan: 'humanEmpty' }
+export const SECTION_LABEL = { ask: 'love', insan: 'human', muzik: 'music' }
+export const SECTION_EMPTY = { ask: 'loveEmpty', insan: 'humanEmpty', muzik: 'loveEmpty' }
 
 export function useAsk(section = 'ask') {
   const [state, setState] = useState({ items: [], loading: true, error: null })

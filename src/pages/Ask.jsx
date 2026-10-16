@@ -7,7 +7,7 @@ import { excerpt } from '../excerpt.js'
 
 // Aşk sekmesi: düz metin + resim yazıları (ask.json) ve "Aşk'a konan" PDF
 // belgeleri (manifestte bolum: "ask"). Görünüş yalnızca bu bölüme özgüdür.
-export default function Ask({ section = 'ask' }) {
+export default function Ask({ section = 'ask', hideEmpty = false }) {
   const { posts, loading: pLoading, error: pError } = usePosts()
   const { items, loading: aLoading, error: aError } = useAsk(section)
   const { t, lang } = useLang()
@@ -24,7 +24,7 @@ export default function Ask({ section = 'ask' }) {
       {loading && <p className="muted">{t('loading')}</p>}
       {error && <p className="error">{t('error')}: {error.message}</p>}
 
-      {!loading && !error && items.length === 0 && papers.length === 0 && (
+      {!hideEmpty && !loading && !error && items.length === 0 && papers.length === 0 && (
         <p className="muted">{t(SECTION_EMPTY[section])}</p>
       )}
 

@@ -1,6 +1,6 @@
-# Deneme bölümleri (Aşk, İnsan)
+# Deneme bölümleri (Aşk, İnsan, Müzik)
 
-Her yazı bir klasör: `content/<bolum>/<yazinin-adi>/tr.md` (bölüm: `ask` ya da `insan`) ve isteğe bağlı `en.md`.
+Her yazı bir klasör: `content/<bolum>/<yazinin-adi>/tr.md` (bölüm: `ask`, `insan` ya da `muzik`) ve isteğe bağlı `en.md`.
 Resimler `public/<bolum>/<yazinin-adi>/` altında. `_` ile başlayan klasörler atlanır.
 
 ```

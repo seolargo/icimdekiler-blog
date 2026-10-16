@@ -225,25 +225,18 @@ const homeBody =
   footer()
 writeFileSync(join(dist, 'index.html'), renderPage({ head: homeHead, bodyHtml: homeBody }))
 
-// --- MÜZİK SEKMESİ ---------------------------------------------------------
-const muzikHead = buildHead({
-  title: 'Müzik',
-  description: 'Müzik teorisi ve pratik akor notları.',
-  canonical: `${SITE_URL}${base}muzik`,
-  type: 'website',
-  image: '/profile.jpeg',
-})
-const muzikBody =
-  header('muzik') +
-  `<ul class="post-list">${musicPosts.map(hiddenListItem).join('')}</ul>` +
-  footer()
-write('muzik', renderPage({ head: muzikHead, bodyHtml: muzikBody }))
-
-// --- DENEME BÖLÜMLERİ: AŞK, İNSAN ----------------------------------------------
+// --- DENEME BÖLÜMLERİ: AŞK, İNSAN, MÜZİK ---------------------------------------
+// Müzik'te yazıların altında gizli müzik belgelerinin başlıkları da durur (tail).
 // scripts/build-ask.js -> public/<bolum>.json. Yazı tipleri yalnızca bu bölümlerde yüklenir.
 const SECTIONS = [
   { key: 'ask', label: 'Aşk', description: 'Aşk ve ilişkiler üzerine yazılar.' },
   { key: 'insan', label: 'İnsan', description: 'İnsan üzerine yazılar.' },
+  {
+    key: 'muzik',
+    label: 'Müzik',
+    description: 'Müzik üzerine yazılar, müzik teorisi ve pratik akor notları.',
+    tail: () => `<ul class="post-list">${musicPosts.map(hiddenListItem).join('')}</ul>`,
+  },
 ]
 const ASK_FONTS =
   '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap" data-ask-fonts="" />'
@@ -275,7 +268,8 @@ for (const sec of SECTIONS) {
     `<div class="ask">` +
     (items.length ? `<ul class="ask-list">${items.map(listItem).join('')}</ul>` : '') +
     (papers.length ? `<ul class="post-list">${papers.map(postListItem).join('')}</ul>` : '') +
-    (!items.length && !papers.length ? `<p class="muted">Bu bölümde henüz yazı yok.</p>` : '') +
+    (sec.tail ? sec.tail() : '') +
+    (!items.length && !papers.length && !sec.tail ? `<p class="muted">Bu bölümde henüz yazı yok.</p>` : '') +
     `</div>` +
     footer()
   write(sec.key, renderPage({ head: listHead, bodyHtml: listBody }))
@@ -628,7 +622,6 @@ for (const p of posts) {
 // --- sitemap.xml -----------------------------------------------------------
 const urls = [
   { loc: SITE_URL + base, lastmod: posts[0]?.date },
-  { loc: `${SITE_URL}${base}muzik` },
   { loc: `${SITE_URL}${base}rehberler` },
   { loc: `${SITE_URL}${base}oneriler` },
   { loc: `${SITE_URL}${base}projeler` },

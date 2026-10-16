@@ -35,6 +35,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route element={<App />}>
             <Route index element={<Home />} />
             <Route path="muzik" element={<Muzik />} />
+            <Route path="muzik/:slug" element={<AskPost section="muzik" key="muzik-post" />} />
             <Route path="rehberler" element={<Rehber />} />
             <Route path="oneriler" element={<Oneriler />} />
             <Route path="projeler" element={<Projeler />} />
