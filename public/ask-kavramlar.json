@@ -1,8 +1,8 @@
 {
  "_not": "scripts/build-ask-kavramlar.js üretir — elle düzenleme; liste content/ask-kavramlar.json",
- "docs": 15,
- "tokens": 11589,
- "vocab": 4110,
+ "docs": 16,
+ "tokens": 12122,
+ "vocab": 4256,
  "concepts": [
   {
    "k": "aşk",
@@ -52,9 +52,9 @@
   {
    "k": "sevgi",
    "label": "sevgi",
-   "tf": 43,
-   "df": 10,
-   "s": 43,
+   "tf": 46,
+   "df": 11,
+   "s": 46,
    "top": [
     [
      "sevilmeye-izin-vermek",
@@ -69,11 +69,11 @@
      5
     ],
     [
-     "her-sabah-yeniden",
+     "bir-yabancinin-adi",
      3
     ],
     [
-     "mavi-cicegin-pesinde",
+     "her-sabah-yeniden",
      3
     ]
    ],
@@ -87,11 +87,11 @@
    ],
    "near": [
     "aşk",
-    "sevilmek",
     "bekleyiş",
+    "yabancı",
+    "sevilmek",
     "korku",
-    "güven",
-    "kalıcılık"
+    "güven"
    ]
   },
   {
@@ -302,9 +302,9 @@
   {
    "k": "korku",
    "label": "korku",
-   "tf": 30,
-   "df": 8,
-   "s": 30,
+   "tf": 32,
+   "df": 9,
+   "s": 32,
    "top": [
     [
      "kalbin-eski-odalari",
@@ -480,6 +480,51 @@
    ]
   },
   {
+   "k": "bekleyiş",
+   "label": "bekleyiş",
+   "tf": 23,
+   "df": 11,
+   "s": 23,
+   "top": [
+    [
+     "soylenmeyenin-affi",
+     7
+    ],
+    [
+     "bir-yabancinin-adi",
+     3
+    ],
+    [
+     "dort-mevsim",
+     3
+    ],
+    [
+     "bir-bedenin-hatirladiklari",
+     2
+    ],
+    [
+     "kalbin-eski-odalari",
+     2
+    ]
+   ],
+   "variants": [
+    "bekledik",
+    "beklemez",
+    "bekler",
+    "beklentilerine",
+    "beklemiyorum",
+    "beklemediğim"
+   ],
+   "near": [
+    "sevgi",
+    "hatırlamak",
+    "korku",
+    "evlilik",
+    "gerçek",
+    "mevsim"
+   ]
+  },
+  {
    "k": "evlilik",
    "label": "evlilik",
    "tf": 23,
@@ -595,51 +640,6 @@
     "heyecan",
     "mecburiyet",
     "ihtiyaç",
-    "mevsim"
-   ]
-  },
-  {
-   "k": "bekleyiş",
-   "label": "bekleyiş",
-   "tf": 20,
-   "df": 10,
-   "s": 20,
-   "top": [
-    [
-     "soylenmeyenin-affi",
-     7
-    ],
-    [
-     "dort-mevsim",
-     3
-    ],
-    [
-     "bir-bedenin-hatirladiklari",
-     2
-    ],
-    [
-     "kalbin-eski-odalari",
-     2
-    ],
-    [
-     "ayni-yone-bakmak",
-     1
-    ]
-   ],
-   "variants": [
-    "beklemez",
-    "bekler",
-    "beklentilerine",
-    "beklemiyorum",
-    "beklemediğim",
-    "beklentiyle"
-   ],
-   "near": [
-    "hatırlamak",
-    "korku",
-    "evlilik",
-    "sevgi",
-    "gerçek",
     "mevsim"
    ]
   },
@@ -1124,6 +1124,50 @@
    ]
   },
   {
+   "k": "bakış",
+   "label": "bakış",
+   "tf": 13,
+   "df": 9,
+   "s": 13,
+   "top": [
+    [
+     "aska-asik-olmak-uzerine",
+     2
+    ],
+    [
+     "bir-yabancinin-adi",
+     2
+    ],
+    [
+     "her-sabah-yeniden",
+     2
+    ],
+    [
+     "soylenmeyenin-affi",
+     2
+    ],
+    [
+     "ayni-yone-bakmak",
+     1
+    ]
+   ],
+   "variants": [
+    "bakışta",
+    "bakış",
+    "bakışın",
+    "bakışından",
+    "bakışında"
+   ],
+   "near": [
+    "aşk",
+    "korku",
+    "âşık olmak",
+    "değer",
+    "evlilik",
+    "kader"
+   ]
+  },
+  {
    "k": "sakinlik",
    "label": "sakinlik",
    "tf": 13,
@@ -1166,6 +1210,50 @@
     "tutku",
     "olgunluk",
     "heyecan"
+   ]
+  },
+  {
+   "k": "yabancı",
+   "label": "yabancı",
+   "tf": 13,
+   "df": 5,
+   "s": 13,
+   "top": [
+    [
+     "bir-yabancinin-adi",
+     8
+    ],
+    [
+     "sevilmeye-izin-vermek",
+     2
+    ],
+    [
+     "esmeralda",
+     1
+    ],
+    [
+     "kalbin-eski-odalari",
+     1
+    ],
+    [
+     "mavi-cicegin-pesinde",
+     1
+    ]
+   ],
+   "variants": [
+    "yabancının",
+    "yabancı",
+    "yabancıydı",
+    "yabancıdır",
+    "yabancıya"
+   ],
+   "near": [
+    "emek",
+    "sevgi",
+    "bekleyiş",
+    "sabır",
+    "dinlemek",
+    "alışkanlık"
    ]
   },
   {
@@ -1235,50 +1323,6 @@
     "eksiklik",
     "heyecan",
     "alışkanlık"
-   ]
-  },
-  {
-   "k": "bakış",
-   "label": "bakış",
-   "tf": 11,
-   "df": 8,
-   "s": 11,
-   "top": [
-    [
-     "aska-asik-olmak-uzerine",
-     2
-    ],
-    [
-     "her-sabah-yeniden",
-     2
-    ],
-    [
-     "soylenmeyenin-affi",
-     2
-    ],
-    [
-     "ayni-yone-bakmak",
-     1
-    ],
-    [
-     "bogazici",
-     1
-    ]
-   ],
-   "variants": [
-    "bakışta",
-    "bakış",
-    "bakışın",
-    "bakışından",
-    "bakışında"
-   ],
-   "near": [
-    "aşk",
-    "korku",
-    "âşık olmak",
-    "değer",
-    "evlilik",
-    "heyecan"
    ]
   },
   {
@@ -1374,9 +1418,9 @@
   {
    "k": "dinlemek",
    "label": "dinlemek",
-   "tf": 9,
-   "df": 6,
-   "s": 9,
+   "tf": 10,
+   "df": 7,
+   "s": 10,
    "top": [
     [
      "esmeralda",
@@ -1395,7 +1439,7 @@
      1
     ],
     [
-     "iki-sutun",
+     "bir-yabancinin-adi",
      1
     ]
    ],
@@ -1403,6 +1447,7 @@
     "dinler",
     "dinleyen",
     "dinleyecektim",
+    "dinlemesiyle",
     "dinlediğimde",
     "dinleyenin"
    ],
@@ -1410,9 +1455,9 @@
     "farklılık",
     "değer",
     "zevk",
-    "cesaret",
-    "utanç",
-    "aşk"
+    "sevgi",
+    "sabır",
+    "yabancı"
    ]
   },
   {
@@ -1591,6 +1636,34 @@
     "sevgi",
     "hatırlamak",
     "bağlanma"
+   ]
+  },
+  {
+   "k": "emek",
+   "label": "emek",
+   "tf": 8,
+   "df": 2,
+   "s": 8,
+   "top": [
+    [
+     "bir-yabancinin-adi",
+     7
+    ],
+    [
+     "dort-mevsim",
+     1
+    ]
+   ],
+   "variants": [
+    "emek"
+   ],
+   "near": [
+    "yabancı",
+    "bakış",
+    "korku",
+    "bekleyiş",
+    "sabır",
+    "mevsim"
    ]
   },
   {
@@ -2191,6 +2264,36 @@
    ]
   },
   {
+   "k": "umut",
+   "label": "umut",
+   "tf": 5,
+   "df": 3,
+   "s": 5,
+   "top": [
+    [
+     "mavi-cicegin-pesinde",
+     3
+    ],
+    [
+     "bir-bedenin-hatirladiklari",
+     1
+    ],
+    [
+     "bir-yabancinin-adi",
+     1
+    ]
+   ],
+   "variants": [
+    "umut"
+   ],
+   "near": [
+    "korku",
+    "utanç",
+    "kader",
+    "dinlemek"
+   ]
+  },
+  {
    "k": "utanç",
    "label": "utanç",
    "tf": 5,
@@ -2284,6 +2387,41 @@
     "kayıp",
     "arzu",
     "tanıdıklık"
+   ]
+  },
+  {
+   "k": "alışkanlık",
+   "label": "alışkanlık",
+   "tf": 4,
+   "df": 3,
+   "s": 4,
+   "top": [
+    [
+     "aska-asik-olmak-uzerine",
+     2
+    ],
+    [
+     "bir-yabancinin-adi",
+     1
+    ],
+    [
+     "sevilmeye-izin-vermek",
+     1
+    ]
+   ],
+   "variants": [
+    "alışkanlıklarını",
+    "alışkanlıktır",
+    "alışkanlık",
+    "alışkanlıkla"
+   ],
+   "near": [
+    "sevgi",
+    "mevsim",
+    "kalıcılık",
+    "aşk",
+    "âşık olmak",
+    "heyecan"
    ]
   },
   {
@@ -2437,6 +2575,43 @@
    ]
   },
   {
+   "k": "sabır",
+   "label": "sabır",
+   "tf": 4,
+   "df": 4,
+   "s": 4,
+   "top": [
+    [
+     "aska-asik-olmak-uzerine",
+     1
+    ],
+    [
+     "bir-yabancinin-adi",
+     1
+    ],
+    [
+     "dort-mevsim",
+     1
+    ],
+    [
+     "sevilmeye-izin-vermek",
+     1
+    ]
+   ],
+   "variants": [
+    "sabırlı",
+    "sabırla"
+   ],
+   "near": [
+    "sevgi",
+    "alışkanlık",
+    "dinlemek",
+    "yabancı",
+    "mevsim",
+    "emek"
+   ]
+  },
+  {
    "k": "sevinç",
    "label": "sevinç",
    "tf": 4,
@@ -2488,61 +2663,6 @@
     "özgürlük",
     "bakış",
     "benzerlik"
-   ]
-  },
-  {
-   "k": "umut",
-   "label": "umut",
-   "tf": 4,
-   "df": 2,
-   "s": 4,
-   "top": [
-    [
-     "mavi-cicegin-pesinde",
-     3
-    ],
-    [
-     "bir-bedenin-hatirladiklari",
-     1
-    ]
-   ],
-   "variants": [
-    "umut"
-   ],
-   "near": [
-    "korku",
-    "utanç",
-    "dinlemek"
-   ]
-  },
-  {
-   "k": "alışkanlık",
-   "label": "alışkanlık",
-   "tf": 3,
-   "df": 2,
-   "s": 3,
-   "top": [
-    [
-     "aska-asik-olmak-uzerine",
-     2
-    ],
-    [
-     "sevilmeye-izin-vermek",
-     1
-    ]
-   ],
-   "variants": [
-    "alışkanlıklarını",
-    "alışkanlıktır",
-    "alışkanlıkla"
-   ],
-   "near": [
-    "sevgi",
-    "mevsim",
-    "kalıcılık",
-    "aşk",
-    "âşık olmak",
-    "heyecan"
    ]
   },
   {
@@ -2654,36 +2774,32 @@
    ]
   },
   {
-   "k": "sabır",
-   "label": "sabır",
+   "k": "kader",
+   "label": "kader",
    "tf": 3,
-   "df": 3,
+   "df": 2,
    "s": 3,
    "top": [
     [
-     "aska-asik-olmak-uzerine",
-     1
+     "bir-yabancinin-adi",
+     2
     ],
     [
      "dort-mevsim",
      1
-    ],
-    [
-     "sevilmeye-izin-vermek",
-     1
     ]
    ],
    "variants": [
-    "sabırlı",
-    "sabırla"
+    "kısmetse",
+    "kader",
+    "kaderini"
    ],
    "near": [
+    "bakış",
+    "umut",
+    "aşk",
     "mevsim",
-    "emek",
-    "evlilik",
-    "sevgi",
-    "değer",
-    "cesaret"
+    "evlilik"
    ]
   },
   {
@@ -2918,6 +3034,30 @@
    ]
   },
   {
+   "k": "tanınmak",
+   "label": "tanınmak",
+   "tf": 2,
+   "df": 2,
+   "s": 2,
+   "top": [
+    [
+     "bir-yabancinin-adi",
+     1
+    ],
+    [
+     "bohemi-aramak",
+     1
+    ]
+   ],
+   "variants": [
+    "tanınmak",
+    "tanınmamak"
+   ],
+   "near": [
+    "güven"
+   ]
+  },
+  {
    "k": "teselli",
    "label": "teselli",
    "tf": 2,
@@ -3122,29 +3262,6 @@
    "near": []
   },
   {
-   "k": "emek",
-   "label": "emek",
-   "tf": 1,
-   "df": 1,
-   "s": 1,
-   "top": [
-    [
-     "dort-mevsim",
-     1
-    ]
-   ],
-   "variants": [
-    "emek"
-   ],
-   "near": [
-    "bekleyiş",
-    "sabır",
-    "mevsim",
-    "kusursuzluk",
-    "evlilik"
-   ]
-  },
-  {
    "k": "fernweh",
    "label": "fernweh",
    "tf": 1,
@@ -3340,7 +3457,9 @@
    "variants": [
     "öteki"
    ],
-   "near": []
+   "near": [
+    "yabancı"
+   ]
   },
   {
    "k": "retroaktif kıskançlık",
