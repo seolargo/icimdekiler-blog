@@ -1,19 +1,23 @@
 {
  "_not": "scripts/build-ask-kavramlar.js üretir — elle düzenleme; liste content/ask-kavramlar.json",
- "docs": 13,
- "tokens": 10544,
- "vocab": 3801,
+ "docs": 14,
+ "tokens": 11124,
+ "vocab": 3965,
  "concepts": [
   {
    "k": "aşk",
    "label": "aşk",
-   "tf": 48,
-   "df": 8,
-   "s": 48,
+   "tf": 57,
+   "df": 9,
+   "s": 57,
    "top": [
     [
      "aska-asik-olmak-uzerine",
      17
+    ],
+    [
+     "kalbin-eski-odalari",
+     9
     ],
     [
      "dort-mevsim",
@@ -26,10 +30,6 @@
     [
      "ayni-yone-bakmak",
      4
-    ],
-    [
-     "sevilmeye-izin-vermek",
-     4
     ]
    ],
    "variants": [
@@ -38,7 +38,7 @@
     "aşkın",
     "aşkı",
     "aşkta",
-    "aşklarda"
+    "aşklar"
    ],
    "near": [
     "âşık olmak",
@@ -50,11 +50,56 @@
    ]
   },
   {
+   "k": "sevgi",
+   "label": "sevgi",
+   "tf": 43,
+   "df": 10,
+   "s": 43,
+   "top": [
+    [
+     "sevilmeye-izin-vermek",
+     18
+    ],
+    [
+     "kalbin-eski-odalari",
+     7
+    ],
+    [
+     "iki-sutun",
+     5
+    ],
+    [
+     "her-sabah-yeniden",
+     3
+    ],
+    [
+     "mavi-cicegin-pesinde",
+     3
+    ]
+   ],
+   "variants": [
+    "sevgi",
+    "sevgiyi",
+    "sevgili",
+    "sevginin",
+    "sevgisi",
+    "sevgilisine"
+   ],
+   "near": [
+    "aşk",
+    "sevilmek",
+    "bekleyiş",
+    "korku",
+    "güven",
+    "kalıcılık"
+   ]
+  },
+  {
    "k": "özlem",
    "label": "özlem",
-   "tf": 39,
-   "df": 3,
-   "s": 39,
+   "tf": 40,
+   "df": 4,
+   "s": 40,
    "top": [
     [
      "mavi-cicek",
@@ -67,6 +112,10 @@
     [
      "bogazici",
      11
+    ],
+    [
+     "kalbin-eski-odalari",
+     1
     ]
    ],
    "variants": [
@@ -74,16 +123,16 @@
     "özlemi",
     "özlemin",
     "özlemle",
-    "özlemden",
-    "özlemleri"
+    "özlemimizle",
+    "özlemden"
    ],
    "near": [
     "Sehnsucht",
     "eksiklik",
+    "gerçek",
     "mavi çiçek",
     "kayıp",
-    "gençlik",
-    "kıskançlık"
+    "gençlik"
    ]
   },
   {
@@ -116,56 +165,101 @@
    ]
   },
   {
-   "k": "sevgi",
-   "label": "sevgi",
-   "tf": 36,
-   "df": 9,
-   "s": 36,
+   "k": "gerçek",
+   "label": "gerçek",
+   "tf": 34,
+   "df": 11,
+   "s": 34,
    "top": [
     [
-     "sevilmeye-izin-vermek",
-     18
+     "mavi-cicek",
+     11
     ],
     [
-     "iki-sutun",
-     5
-    ],
-    [
-     "her-sabah-yeniden",
-     3
+     "bogazici",
+     6
     ],
     [
      "mavi-cicegin-pesinde",
+     4
+    ],
+    [
+     "cekimin-bilinmeyen-yuzu",
      3
     ],
     [
-     "aska-asik-olmak-uzerine",
-     2
+     "dort-mevsim",
+     3
     ]
    ],
    "variants": [
-    "sevgiyi",
-    "sevgi",
-    "sevgili",
-    "sevginin",
-    "sevgisi",
-    "sevgilisine"
+    "gerçek",
+    "gerçekte",
+    "gerçektir",
+    "gerçeklikte",
+    "gerçeklik",
+    "gerçekliği"
    ],
    "near": [
+    "hayal",
+    "mavi çiçek",
     "aşk",
-    "sevilmek",
-    "kalıcılık",
-    "alışkanlık",
+    "çekim",
+    "Sehnsucht",
+    "özlem"
+   ]
+  },
+  {
+   "k": "hayal",
+   "label": "hayal",
+   "tf": 34,
+   "df": 7,
+   "s": 34,
+   "top": [
+    [
+     "bogazici",
+     10
+    ],
+    [
+     "mavi-cicek",
+     9
+    ],
+    [
+     "mavi-cicegin-pesinde",
+     6
+    ],
+    [
+     "dort-mevsim",
+     3
+    ],
+    [
+     "kalbin-eski-odalari",
+     3
+    ]
+   ],
+   "variants": [
+    "hayal",
+    "hayali",
+    "hayalle",
+    "hayalet",
+    "hayaller",
+    "hayaldeki"
+   ],
+   "near": [
     "gerçek",
-    "korku"
+    "istek",
+    "aşk",
+    "yara",
+    "özlem",
+    "Sehnsucht"
    ]
   },
   {
    "k": "çekim",
    "label": "çekim",
-   "tf": 32,
-   "df": 7,
-   "s": 32,
+   "tf": 33,
+   "df": 8,
+   "s": 33,
    "top": [
     [
      "cekimin-bilinmeyen-yuzu",
@@ -201,98 +295,8 @@
     "aşk",
     "tanıdıklık",
     "gerçek",
-    "sakinlik",
-    "değer"
-   ]
-  },
-  {
-   "k": "gerçek",
-   "label": "gerçek",
-   "tf": 32,
-   "df": 10,
-   "s": 32,
-   "top": [
-    [
-     "mavi-cicek",
-     11
-    ],
-    [
-     "bogazici",
-     6
-    ],
-    [
-     "mavi-cicegin-pesinde",
-     4
-    ],
-    [
-     "cekimin-bilinmeyen-yuzu",
-     3
-    ],
-    [
-     "dort-mevsim",
-     3
-    ]
-   ],
-   "variants": [
-    "gerçek",
-    "gerçekte",
-    "gerçektir",
-    "gerçeklikte",
-    "gerçeklik",
-    "gerçekliği"
-   ],
-   "near": [
-    "hayal",
-    "mavi çiçek",
-    "çekim",
-    "Sehnsucht",
-    "rüya",
-    "bekleyiş"
-   ]
-  },
-  {
-   "k": "hayal",
-   "label": "hayal",
-   "tf": 31,
-   "df": 6,
-   "s": 31,
-   "top": [
-    [
-     "bogazici",
-     10
-    ],
-    [
-     "mavi-cicek",
-     9
-    ],
-    [
-     "mavi-cicegin-pesinde",
-     6
-    ],
-    [
-     "dort-mevsim",
-     3
-    ],
-    [
-     "her-sabah-yeniden",
-     2
-    ]
-   ],
-   "variants": [
-    "hayal",
-    "hayali",
-    "hayalle",
-    "hayalet",
-    "hayaller",
-    "hayaldeki"
-   ],
-   "near": [
-    "gerçek",
-    "istek",
-    "aşk",
-    "yara",
-    "Sehnsucht",
-    "evlilik"
+    "benzerlik",
+    "sakinlik"
    ]
   },
   {
@@ -341,11 +345,56 @@
    ]
   },
   {
+   "k": "korku",
+   "label": "korku",
+   "tf": 26,
+   "df": 7,
+   "s": 26,
+   "top": [
+    [
+     "kalbin-eski-odalari",
+     6
+    ],
+    [
+     "ayni-yone-bakmak",
+     5
+    ],
+    [
+     "sevilmeye-izin-vermek",
+     5
+    ],
+    [
+     "iki-sutun",
+     4
+    ],
+    [
+     "bogazici",
+     3
+    ]
+   ],
+   "variants": [
+    "korku",
+    "korkudan",
+    "korkudur",
+    "korkusu",
+    "korkusunun",
+    "korkularında"
+   ],
+   "near": [
+    "kayıp",
+    "istek",
+    "değer",
+    "sevgi",
+    "âşık olmak",
+    "evlilik"
+   ]
+  },
+  {
    "k": "ihtiyaç",
    "label": "ihtiyaç",
-   "tf": 24,
-   "df": 6,
-   "s": 24,
+   "tf": 25,
+   "df": 7,
+   "s": 25,
    "top": [
     [
      "iki-sutun",
@@ -388,9 +437,9 @@
   {
    "k": "değer",
    "label": "değer",
-   "tf": 23,
-   "df": 8,
-   "s": 23,
+   "tf": 24,
+   "df": 9,
+   "s": 24,
    "top": [
     [
      "ayni-yone-bakmak",
@@ -422,8 +471,8 @@
     "değerlerdir"
    ],
    "near": [
-    "evlilik",
     "farklılık",
+    "evlilik",
     "korku",
     "ihtiyaç",
     "aşk",
@@ -505,48 +554,134 @@
    ]
   },
   {
-   "k": "korku",
-   "label": "korku",
+   "k": "seçim",
+   "label": "seçim",
+   "tf": 20,
+   "df": 7,
+   "s": 20,
+   "top": [
+    [
+     "her-sabah-yeniden",
+     10
+    ],
+    [
+     "dort-mevsim",
+     3
+    ],
+    [
+     "ayni-yone-bakmak",
+     2
+    ],
+    [
+     "iki-sutun",
+     2
+    ],
+    [
+     "aska-asik-olmak-uzerine",
+     1
+    ]
+   ],
+   "variants": [
+    "seçim",
+    "seçer",
+    "seçtiğini",
+    "seçebilir",
+    "seçimdir",
+    "seçmek"
+   ],
+   "near": [
+    "dürüstlük",
+    "aşk",
+    "heyecan",
+    "mecburiyet",
+    "ihtiyaç",
+    "mevsim"
+   ]
+  },
+  {
+   "k": "yara",
+   "label": "yara",
    "tf": 20,
    "df": 6,
    "s": 20,
    "top": [
     [
-     "ayni-yone-bakmak",
-     5
+     "her-sabah-yeniden",
+     6
     ],
     [
-     "sevilmeye-izin-vermek",
+     "soylenmeyenin-affi",
      5
     ],
     [
      "iki-sutun",
-     4
-    ],
-    [
-     "bogazici",
      3
     ],
     [
-     "her-sabah-yeniden",
+     "kalbin-eski-odalari",
+     3
+    ],
+    [
+     "mavi-cicegin-pesinde",
      2
     ]
    ],
    "variants": [
-    "korku",
-    "korkudur",
-    "korkudan",
-    "korkusu",
-    "korkusunun",
-    "korkularında"
+    "yaralı",
+    "yara",
+    "yarasız",
+    "yaranın",
+    "yarasını",
+    "yaralara"
    ],
    "near": [
-    "kayıp",
-    "istek",
-    "değer",
-    "sevgi",
-    "evlilik",
-    "ihtiyaç"
+    "çekim",
+    "kurtarmak",
+    "tanıdıklık",
+    "hayal",
+    "af",
+    "istek"
+   ]
+  },
+  {
+   "k": "âşık olmak",
+   "label": "âşık olmak",
+   "tf": 19,
+   "df": 5,
+   "s": 19,
+   "top": [
+    [
+     "aska-asik-olmak-uzerine",
+     11
+    ],
+    [
+     "esmeralda",
+     3
+    ],
+    [
+     "her-sabah-yeniden",
+     3
+    ],
+    [
+     "kalbin-eski-odalari",
+     1
+    ],
+    [
+     "mavi-cicek",
+     1
+    ]
+   ],
+   "variants": [
+    "aşık",
+    "âşık"
+   ],
+   "near": [
+    "aşk",
+    "aşka aşık olmak",
+    "eksiklik",
+    "korku",
+    "mevsim",
+    "istek"
    ]
   },
   {
@@ -591,51 +726,6 @@
    ]
   },
   {
-   "k": "seçim",
-   "label": "seçim",
-   "tf": 19,
-   "df": 6,
-   "s": 19,
-   "top": [
-    [
-     "her-sabah-yeniden",
-     10
-    ],
-    [
-     "dort-mevsim",
-     3
-    ],
-    [
-     "ayni-yone-bakmak",
-     2
-    ],
-    [
-     "iki-sutun",
-     2
-    ],
-    [
-     "aska-asik-olmak-uzerine",
-     1
-    ]
-   ],
-   "variants": [
-    "seçim",
-    "seçer",
-    "seçtiğini",
-    "seçebilir",
-    "seçimdir",
-    "seçmek"
-   ],
-   "near": [
-    "dürüstlük",
-    "aşk",
-    "heyecan",
-    "mecburiyet",
-    "ihtiyaç",
-    "mevsim"
-   ]
-  },
-  {
    "k": "Sehnsucht",
    "label": "Sehnsucht",
    "tf": 19,
@@ -668,93 +758,11 @@
    ]
   },
   {
-   "k": "âşık olmak",
-   "label": "âşık olmak",
-   "tf": 18,
-   "df": 4,
-   "s": 18,
-   "top": [
-    [
-     "aska-asik-olmak-uzerine",
-     11
-    ],
-    [
-     "esmeralda",
-     3
-    ],
-    [
-     "her-sabah-yeniden",
-     3
-    ],
-    [
-     "mavi-cicek",
-     1
-    ]
-   ],
-   "variants": [
-    "aşık",
-    "âşık"
-   ],
-   "near": [
-    "aşk",
-    "aşka aşık olmak",
-    "eksiklik",
-    "mevsim",
-    "korku",
-    "istek"
-   ]
-  },
-  {
-   "k": "yara",
-   "label": "yara",
-   "tf": 17,
-   "df": 5,
-   "s": 17,
-   "top": [
-    [
-     "her-sabah-yeniden",
-     6
-    ],
-    [
-     "soylenmeyenin-affi",
-     5
-    ],
-    [
-     "iki-sutun",
-     3
-    ],
-    [
-     "mavi-cicegin-pesinde",
-     2
-    ],
-    [
-     "cekimin-bilinmeyen-yuzu",
-     1
-    ]
-   ],
-   "variants": [
-    "yara",
-    "yaralı",
-    "yarasız",
-    "yaranın",
-    "yarasını",
-    "yaralara"
-   ],
-   "near": [
-    "çekim",
-    "tanıdıklık",
-    "hayal",
-    "af",
-    "kurtarmak",
-    "istek"
-   ]
-  },
-  {
    "k": "bekleyiş",
    "label": "bekleyiş",
-   "tf": 16,
-   "df": 8,
-   "s": 16,
+   "tf": 18,
+   "df": 9,
+   "s": 18,
    "top": [
     [
      "soylenmeyenin-affi",
@@ -765,15 +773,15 @@
      3
     ],
     [
+     "kalbin-eski-odalari",
+     2
+    ],
+    [
      "ayni-yone-bakmak",
      1
     ],
     [
      "bogazici",
-     1
-    ],
-    [
-     "esmeralda",
      1
     ]
    ],
@@ -786,12 +794,57 @@
     "beklememek"
    ],
    "near": [
-    "evlilik",
     "hatırlamak",
+    "evlilik",
+    "sevgi",
+    "korku",
     "gerçek",
-    "mevsim",
-    "özür",
-    "sevgi"
+    "mevsim"
+   ]
+  },
+  {
+   "k": "kayıp",
+   "label": "kayıp",
+   "tf": 16,
+   "df": 10,
+   "s": 16,
+   "top": [
+    [
+     "sevilmeye-izin-vermek",
+     4
+    ],
+    [
+     "mavi-cicegin-pesinde",
+     3
+    ],
+    [
+     "esmeralda",
+     2
+    ],
+    [
+     "ayni-yone-bakmak",
+     1
+    ],
+    [
+     "bogazici",
+     1
+    ]
+   ],
+   "variants": [
+    "kaybetme",
+    "kaybeder",
+    "kaybettiği",
+    "kaybetmek",
+    "kaybettikçe",
+    "kaybedilir"
+   ],
+   "near": [
+    "korku",
+    "ihtiyaç",
+    "özlem",
+    "kaçış",
+    "özgürlük",
+    "evlilik"
    ]
   },
   {
@@ -869,51 +922,6 @@
    ]
   },
   {
-   "k": "kayıp",
-   "label": "kayıp",
-   "tf": 15,
-   "df": 9,
-   "s": 15,
-   "top": [
-    [
-     "sevilmeye-izin-vermek",
-     4
-    ],
-    [
-     "mavi-cicegin-pesinde",
-     3
-    ],
-    [
-     "esmeralda",
-     2
-    ],
-    [
-     "ayni-yone-bakmak",
-     1
-    ],
-    [
-     "bogazici",
-     1
-    ]
-   ],
-   "variants": [
-    "kaybetme",
-    "kaybeder",
-    "kaybettiği",
-    "kaybetmek",
-    "kaybettikçe",
-    "kaybedilir"
-   ],
-   "near": [
-    "korku",
-    "ihtiyaç",
-    "özlem",
-    "kaçış",
-    "özgürlük",
-    "evlilik"
-   ]
-  },
-  {
    "k": "mevsim",
    "label": "mevsim",
    "tf": 15,
@@ -986,9 +994,9 @@
   {
    "k": "farklılık",
    "label": "farklılık",
-   "tf": 13,
-   "df": 6,
-   "s": 13,
+   "tf": 14,
+   "df": 7,
+   "s": 14,
    "top": [
     [
      "ayni-yone-bakmak",
@@ -1007,7 +1015,7 @@
      1
     ],
     [
-     "mavi-cicegin-pesinde",
+     "kalbin-eski-odalari",
      1
     ]
    ],
@@ -1023,6 +1031,182 @@
     "evlilik",
     "yakınlık",
     "heyecan"
+   ]
+  },
+  {
+   "k": "sevilmek",
+   "label": "sevilmek",
+   "tf": 14,
+   "df": 4,
+   "s": 14,
+   "top": [
+    [
+     "sevilmeye-izin-vermek",
+     8
+    ],
+    [
+     "kalbin-eski-odalari",
+     4
+    ],
+    [
+     "bogazici",
+     1
+    ],
+    [
+     "esmeralda",
+     1
+    ]
+   ],
+   "variants": [
+    "sevilen",
+    "sevilmiş",
+    "sevilmeye",
+    "sevilmemiş",
+    "sevildiğinde",
+    "sevilecek"
+   ],
+   "near": [
+    "sevgi",
+    "aşk",
+    "kurtarmak",
+    "hayal",
+    "hatırlamak",
+    "kayıp"
+   ]
+  },
+  {
+   "k": "sakinlik",
+   "label": "sakinlik",
+   "tf": 13,
+   "df": 7,
+   "s": 13,
+   "top": [
+    [
+     "aska-asik-olmak-uzerine",
+     2
+    ],
+    [
+     "cekimin-bilinmeyen-yuzu",
+     2
+    ],
+    [
+     "dort-mevsim",
+     2
+    ],
+    [
+     "her-sabah-yeniden",
+     2
+    ],
+    [
+     "kalbin-eski-odalari",
+     2
+    ]
+   ],
+   "variants": [
+    "sakin",
+    "sakinlikte",
+    "sakinliktir",
+    "sükûneti",
+    "sakinleştiren",
+    "sakinlikle"
+   ],
+   "near": [
+    "güven",
+    "aşk",
+    "çekim",
+    "tutku",
+    "olgunluk",
+    "heyecan"
+   ]
+  },
+  {
+   "k": "hatırlamak",
+   "label": "hatırlamak",
+   "tf": 12,
+   "df": 8,
+   "s": 12,
+   "top": [
+    [
+     "soylenmeyenin-affi",
+     3
+    ],
+    [
+     "kalbin-eski-odalari",
+     2
+    ],
+    [
+     "sevilmeye-izin-vermek",
+     2
+    ],
+    [
+     "aska-asik-olmak-uzerine",
+     1
+    ],
+    [
+     "dort-mevsim",
+     1
+    ]
+   ],
+   "variants": [
+    "hatırlatır",
+    "hatırlatıyordur",
+    "hatırlarsın",
+    "hatırlatabilir",
+    "hatırlatan",
+    "hatırlamaz"
+   ],
+   "near": [
+    "bekleyiş",
+    "af",
+    "sevgi",
+    "unutmak",
+    "sevilmek",
+    "mevsim"
+   ]
+  },
+  {
+   "k": "kurtarmak",
+   "label": "kurtarmak",
+   "tf": 12,
+   "df": 5,
+   "s": 12,
+   "top": [
+    [
+     "cekimin-bilinmeyen-yuzu",
+     4
+    ],
+    [
+     "esmeralda",
+     2
+    ],
+    [
+     "her-sabah-yeniden",
+     2
+    ],
+    [
+     "iki-sutun",
+     2
+    ],
+    [
+     "kalbin-eski-odalari",
+     2
+    ]
+   ],
+   "variants": [
+    "kurtarmak",
+    "kurtarma",
+    "kurtaran",
+    "kurtarmaya",
+    "kurtarmışlar",
+    "kurtarılmayı"
+   ],
+   "near": [
+    "yara",
+    "sevilmek",
+    "çekim",
+    "tanıdıklık",
+    "istek",
+    "kurtarma isteği"
    ]
   },
   {
@@ -1094,101 +1278,56 @@
    ]
   },
   {
-   "k": "sakinlik",
-   "label": "sakinlik",
+   "k": "benzerlik",
+   "label": "benzerlik",
    "tf": 11,
-   "df": 6,
+   "df": 7,
    "s": 11,
    "top": [
     [
-     "aska-asik-olmak-uzerine",
+     "bohemi-aramak",
      2
     ],
     [
-     "cekimin-bilinmeyen-yuzu",
+     "iki-sutun",
      2
     ],
     [
-     "dort-mevsim",
-     2
-    ],
-    [
-     "her-sabah-yeniden",
+     "kalbin-eski-odalari",
      2
     ],
     [
      "mavi-cicegin-pesinde",
      2
+    ],
+    [
+     "ayni-yone-bakmak",
+     1
     ]
    ],
    "variants": [
-    "sakin",
-    "sakinlikte",
-    "sakinliktir",
-    "sükûneti",
-    "sakinleştiren",
-    "sakinlikle"
+    "benzer",
+    "benzediği",
+    "benzeyen",
+    "benzemeye",
+    "benzeyeni",
+    "benzerlik"
    ],
    "near": [
-    "güven",
-    "aşk",
     "çekim",
-    "olgunluk",
-    "tutku",
-    "heyecan"
-   ]
-  },
-  {
-   "k": "hatırlamak",
-   "label": "hatırlamak",
-   "tf": 10,
-   "df": 7,
-   "s": 10,
-   "top": [
-    [
-     "soylenmeyenin-affi",
-     3
-    ],
-    [
-     "sevilmeye-izin-vermek",
-     2
-    ],
-    [
-     "aska-asik-olmak-uzerine",
-     1
-    ],
-    [
-     "dort-mevsim",
-     1
-    ],
-    [
-     "her-sabah-yeniden",
-     1
-    ]
-   ],
-   "variants": [
-    "hatırlatır",
-    "hatırlatıyordur",
-    "hatırlatan",
-    "hatırlamaz",
-    "hafıza",
-    "hatırlanmaya"
-   ],
-   "near": [
-    "bekleyiş",
-    "af",
-    "sevgi",
-    "sevilmek",
-    "mevsim",
-    "evlilik"
+    "değer",
+    "bohem",
+    "hasret",
+    "aşk",
+    "korku"
    ]
   },
   {
    "k": "heyecan",
    "label": "heyecan",
-   "tf": 10,
-   "df": 7,
-   "s": 10,
+   "tf": 11,
+   "df": 8,
+   "s": 11,
    "top": [
     [
      "cekimin-bilinmeyen-yuzu",
@@ -1221,134 +1360,56 @@
    ],
    "near": [
     "aşk",
+    "sakinlik",
     "seçim",
     "âşık olmak",
     "alışkanlık",
-    "olgunluk",
-    "aşka aşık olmak"
+    "olgunluk"
    ]
   },
   {
-   "k": "kurtarmak",
-   "label": "kurtarmak",
-   "tf": 10,
-   "df": 4,
-   "s": 10,
+   "k": "güven",
+   "label": "güven",
+   "tf": 9,
+   "df": 7,
+   "s": 9,
    "top": [
-    [
-     "cekimin-bilinmeyen-yuzu",
-     4
-    ],
-    [
-     "esmeralda",
-     2
-    ],
     [
      "her-sabah-yeniden",
      2
     ],
     [
-     "iki-sutun",
-     2
-    ]
-   ],
-   "variants": [
-    "kurtarmak",
-    "kurtarma",
-    "kurtarmaya",
-    "kurtarmışlar",
-    "kurtaran",
-    "kurtarılmayı"
-   ],
-   "near": [
-    "çekim",
-    "yara",
-    "tanıdıklık",
-    "istek",
-    "kurtarma isteği",
-    "sevilmek"
-   ]
-  },
-  {
-   "k": "sevilmek",
-   "label": "sevilmek",
-   "tf": 10,
-   "df": 3,
-   "s": 10,
-   "top": [
-    [
      "sevilmeye-izin-vermek",
-     8
+     2
     ],
     [
-     "bogazici",
+     "aska-asik-olmak-uzerine",
      1
     ],
-    [
-     "esmeralda",
-     1
-    ]
-   ],
-   "variants": [
-    "sevilmiş",
-    "sevilmeye",
-    "sevilmemiş",
-    "sevilen",
-    "sevildim",
-    "sevilmenin"
-   ],
-   "near": [
-    "sevgi",
-    "hatırlamak",
-    "kayıp",
-    "değer",
-    "kıskançlık",
-    "retroaktif kıskançlık"
-   ]
-  },
-  {
-   "k": "benzerlik",
-   "label": "benzerlik",
-   "tf": 9,
-   "df": 6,
-   "s": 9,
-   "top": [
     [
      "bohemi-aramak",
-     2
-    ],
-    [
-     "iki-sutun",
-     2
-    ],
-    [
-     "mavi-cicegin-pesinde",
-     2
-    ],
-    [
-     "ayni-yone-bakmak",
      1
     ],
     [
-     "esmeralda",
+     "cekimin-bilinmeyen-yuzu",
      1
     ]
    ],
    "variants": [
-    "benzer",
-    "benzediği",
-    "benzeyen",
-    "benzemeye",
-    "benzeyeni",
-    "benzerlik"
+    "güvenli",
+    "güvencenin",
+    "güvenilir",
+    "güven",
+    "güvendiğin",
+    "güvenmeyi"
    ],
    "near": [
-    "çekim",
-    "bohem",
-    "hasret",
+    "sakinlik",
     "aşk",
+    "sevgi",
+    "huzur",
     "korku",
-    "değer"
+    "olgunluk"
    ]
   },
   {
@@ -1393,60 +1454,15 @@
     "istek",
     "sevgi",
     "hatırlamak",
-    "seçim"
-   ]
-  },
-  {
-   "k": "güven",
-   "label": "güven",
-   "tf": 8,
-   "df": 6,
-   "s": 8,
-   "top": [
-    [
-     "her-sabah-yeniden",
-     2
-    ],
-    [
-     "sevilmeye-izin-vermek",
-     2
-    ],
-    [
-     "aska-asik-olmak-uzerine",
-     1
-    ],
-    [
-     "bohemi-aramak",
-     1
-    ],
-    [
-     "cekimin-bilinmeyen-yuzu",
-     1
-    ]
-   ],
-   "variants": [
-    "güvenli",
-    "güvencenin",
-    "güvenilir",
-    "güven",
-    "güvendiğin",
-    "güvenmek"
-   ],
-   "near": [
-    "sakinlik",
-    "aşk",
-    "huzur",
-    "sevgi",
-    "olgunluk",
-    "çekim"
+    "bağlanma"
    ]
   },
   {
    "k": "dinlemek",
    "label": "dinlemek",
-   "tf": 7,
-   "df": 4,
-   "s": 7,
+   "tf": 8,
+   "df": 5,
+   "s": 8,
    "top": [
     [
      "esmeralda",
@@ -1463,11 +1479,15 @@
     [
      "iki-sutun",
      1
+    ],
+    [
+     "kalbin-eski-odalari",
+     1
     ]
    ],
    "variants": [
-    "dinleyen",
     "dinler",
+    "dinleyen",
     "dinlediğimde",
     "dinleyenin"
    ],
@@ -1476,8 +1496,131 @@
     "değer",
     "zevk",
     "cesaret",
-    "umut",
-    "mavi çiçek"
+    "aşk",
+    "umut"
+   ]
+  },
+  {
+   "k": "kalıcılık",
+   "label": "kalıcılık",
+   "tf": 8,
+   "df": 5,
+   "s": 8,
+   "top": [
+    [
+     "aska-asik-olmak-uzerine",
+     4
+    ],
+    [
+     "her-sabah-yeniden",
+     1
+    ],
+    [
+     "kalbin-eski-odalari",
+     1
+    ],
+    [
+     "mavi-cicek",
+     1
+    ],
+    [
+     "sevilmeye-izin-vermek",
+     1
+    ]
+   ],
+   "variants": [
+    "kalıcı",
+    "kalıcılık"
+   ],
+   "near": [
+    "sevgi",
+    "mevsim",
+    "dürüstlük",
+    "alışkanlık",
+    "aşk",
+    "evlilik"
+   ]
+  },
+  {
+   "k": "tutku",
+   "label": "tutku",
+   "tf": 8,
+   "df": 3,
+   "s": 8,
+   "top": [
+    [
+     "her-sabah-yeniden",
+     6
+    ],
+    [
+     "ayni-yone-bakmak",
+     1
+    ],
+    [
+     "kalbin-eski-odalari",
+     1
+    ]
+   ],
+   "variants": [
+    "tutku",
+    "tutkuya",
+    "tutkuları",
+    "tutkunun",
+    "tutkudan",
+    "tutkulu"
+   ],
+   "near": [
+    "aşk",
+    "huzur",
+    "güven",
+    "korku",
+    "yokluk",
+    "özgürlük"
+   ]
+  },
+  {
+   "k": "unutmak",
+   "label": "unutmak",
+   "tf": 8,
+   "df": 5,
+   "s": 8,
+   "top": [
+    [
+     "kalbin-eski-odalari",
+     3
+    ],
+    [
+     "mavi-cicegin-pesinde",
+     2
+    ],
+    [
+     "aska-asik-olmak-uzerine",
+     1
+    ],
+    [
+     "bogazici",
+     1
+    ],
+    [
+     "soylenmeyenin-affi",
+     1
+    ]
+   ],
+   "variants": [
+    "unutmak",
+    "unuttuğu",
+    "unutulmaz",
+    "unutmaya",
+    "unutamaz",
+    "unutulmayan"
+   ],
+   "near": [
+    "hatırlamak",
+    "hayal",
+    "sevgi",
+    "kalıcılık",
+    "bekâret",
+    "özlem"
    ]
   },
   {
@@ -1523,40 +1666,40 @@
    ]
   },
   {
-   "k": "kalıcılık",
-   "label": "kalıcılık",
+   "k": "huzur",
+   "label": "huzur",
    "tf": 7,
-   "df": 4,
+   "df": 3,
    "s": 7,
    "top": [
     [
-     "aska-asik-olmak-uzerine",
-     4
-    ],
-    [
      "her-sabah-yeniden",
-     1
+     3
     ],
     [
-     "mavi-cicek",
-     1
+     "iki-sutun",
+     3
     ],
     [
-     "sevilmeye-izin-vermek",
+     "kalbin-eski-odalari",
      1
     ]
    ],
    "variants": [
-    "kalıcı",
-    "kalıcılık"
+    "huzur",
+    "huzurdur",
+    "huzura",
+    "huzurdan",
+    "huzursuz",
+    "huzursuzluk"
    ],
    "near": [
-    "sevgi",
-    "mevsim",
-    "dürüstlük",
-    "alışkanlık",
     "aşk",
-    "evlilik"
+    "güven",
+    "korku",
+    "yokluk",
+    "tutku",
+    "çekim"
    ]
   },
   {
@@ -1648,35 +1791,76 @@
    ]
   },
   {
-   "k": "tutku",
-   "label": "tutku",
+   "k": "tanıdıklık",
+   "label": "tanıdıklık",
    "tf": 7,
-   "df": 2,
+   "df": 4,
    "s": 7,
    "top": [
     [
-     "her-sabah-yeniden",
-     6
+     "iki-sutun",
+     3
     ],
     [
-     "ayni-yone-bakmak",
+     "cekimin-bilinmeyen-yuzu",
+     2
+    ],
+    [
+     "kalbin-eski-odalari",
+     1
+    ],
+    [
+     "sevilmeye-izin-vermek",
      1
     ]
    ],
    "variants": [
-    "tutkuya",
-    "tutkuları",
-    "tutkunun",
-    "tutku",
-    "tutkudan",
-    "tutkulu"
+    "tanıdık",
+    "tanıdıklıktır",
+    "tanıdıklık",
+    "tanıdıktır"
    ],
    "near": [
-    "huzur",
-    "güven",
-    "korku",
-    "yokluk",
-    "özgürlük",
+    "çekim",
+    "yara",
+    "sevgi",
+    "kurtarmak",
+    "istek",
+    "kurtarma isteği"
+   ]
+  },
+  {
+   "k": "yakınlık",
+   "label": "yakınlık",
+   "tf": 7,
+   "df": 3,
+   "s": 7,
+   "top": [
+    [
+     "ayni-yone-bakmak",
+     3
+    ],
+    [
+     "dort-mevsim",
+     2
+    ],
+    [
+     "kalbin-eski-odalari",
+     2
+    ]
+   ],
+   "variants": [
+    "yakınlık",
+    "yakınlığını",
+    "yakınlığı",
+    "yakınlıktır"
+   ],
+   "near": [
+    "arzu",
+    "heyecan",
+    "farklılık",
+    "merak",
+    "arkadaşlık",
     "aşk"
    ]
   },
@@ -1804,71 +1988,42 @@
    ]
   },
   {
-   "k": "huzur",
-   "label": "huzur",
-   "tf": 6,
-   "df": 2,
-   "s": 6,
+   "k": "belirsizlik",
+   "label": "belirsizlik",
+   "tf": 5,
+   "df": 4,
+   "s": 5,
    "top": [
     [
-     "her-sabah-yeniden",
-     3
-    ],
-    [
-     "iki-sutun",
-     3
-    ]
-   ],
-   "variants": [
-    "huzurdur",
-    "huzura",
-    "huzur",
-    "huzurdan",
-    "huzursuz",
-    "huzursuzluk"
-   ],
-   "near": [
-    "aşk",
-    "güven",
-    "korku",
-    "yokluk",
-    "tutku",
-    "çekim"
-   ]
-  },
-  {
-   "k": "tanıdıklık",
-   "label": "tanıdıklık",
-   "tf": 6,
-   "df": 3,
-   "s": 6,
-   "top": [
-    [
-     "iki-sutun",
-     3
-    ],
-    [
-     "cekimin-bilinmeyen-yuzu",
+     "kalbin-eski-odalari",
      2
     ],
     [
-     "sevilmeye-izin-vermek",
+     "cekimin-bilinmeyen-yuzu",
+     1
+    ],
+    [
+     "her-sabah-yeniden",
+     1
+    ],
+    [
+     "mavi-cicek",
      1
     ]
    ],
    "variants": [
-    "tanıdık",
-    "tanıdıklıktır",
-    "tanıdıklık",
-    "tanıdıktır"
+    "belirsizlik",
+    "belirsizliktir",
+    "belirsizliğin",
+    "belirsiz"
    ],
    "near": [
-    "çekim",
-    "yara",
-    "sevgi",
+    "heyecan",
+    "tutku",
+    "aşk",
     "kurtarmak",
-    "istek",
-    "kurtarma isteği"
+    "ihtiyaç",
+    "dürüstlük"
    ]
   },
   {
@@ -2022,46 +2177,6 @@
    ]
   },
   {
-   "k": "unutmak",
-   "label": "unutmak",
-   "tf": 5,
-   "df": 4,
-   "s": 5,
-   "top": [
-    [
-     "mavi-cicegin-pesinde",
-     2
-    ],
-    [
-     "aska-asik-olmak-uzerine",
-     1
-    ],
-    [
-     "bogazici",
-     1
-    ],
-    [
-     "soylenmeyenin-affi",
-     1
-    ]
-   ],
-   "variants": [
-    "unuttuğu",
-    "unutulmaz",
-    "unutamaz",
-    "unutulmayan",
-    "unutmakla"
-   ],
-   "near": [
-    "sevgi",
-    "kalıcılık",
-    "bekâret",
-    "özlem",
-    "rüya",
-    "mavi çiçek"
-   ]
-  },
-  {
    "k": "üçüncü yer",
    "label": "üçüncü yer",
    "tf": 5,
@@ -2080,36 +2195,6 @@
    "near": [
     "bohem",
     "merak"
-   ]
-  },
-  {
-   "k": "yakınlık",
-   "label": "yakınlık",
-   "tf": 5,
-   "df": 2,
-   "s": 5,
-   "top": [
-    [
-     "ayni-yone-bakmak",
-     3
-    ],
-    [
-     "dort-mevsim",
-     2
-    ]
-   ],
-   "variants": [
-    "yakınlık",
-    "yakınlığını",
-    "yakınlığı"
-   ],
-   "near": [
-    "arzu",
-    "heyecan",
-    "farklılık",
-    "merak",
-    "arkadaşlık",
-    "aşk"
    ]
   },
   {
@@ -2283,6 +2368,40 @@
    ]
   },
   {
+   "k": "yalnızlık",
+   "label": "yalnızlık",
+   "tf": 4,
+   "df": 4,
+   "s": 4,
+   "top": [
+    [
+     "bogazici",
+     1
+    ],
+    [
+     "bohemi-aramak",
+     1
+    ],
+    [
+     "iki-sutun",
+     1
+    ],
+    [
+     "kalbin-eski-odalari",
+     1
+    ]
+   ],
+   "variants": [
+    "yalnızlık",
+    "yalnızlığın"
+   ],
+   "near": [
+    "kayıp",
+    "arzu",
+    "tanıdıklık"
+   ]
+  },
+  {
    "k": "alışkanlık",
    "label": "alışkanlık",
    "tf": 3,
@@ -2367,37 +2486,31 @@
    ]
   },
   {
-   "k": "belirsizlik",
-   "label": "belirsizlik",
+   "k": "bağlanma",
+   "label": "bağlanma",
    "tf": 3,
-   "df": 3,
+   "df": 2,
    "s": 3,
    "top": [
     [
-     "cekimin-bilinmeyen-yuzu",
-     1
+     "ayni-yone-bakmak",
+     2
     ],
     [
      "her-sabah-yeniden",
      1
-    ],
-    [
-     "mavi-cicek",
-     1
     ]
    ],
    "variants": [
-    "belirsizliktir",
-    "belirsizliğin",
-    "belirsizlik"
+    "bağlanmak",
+    "bağlanmaktan"
    ],
    "near": [
-    "aşk",
-    "kurtarmak",
+    "evlilik",
     "ihtiyaç",
-    "dürüstlük",
-    "kusursuzluk",
-    "Sehnsucht"
+    "hatırlamak",
+    "vazgeçmek",
+    "istek"
    ]
   },
   {
@@ -2476,36 +2589,6 @@
    ],
    "near": [
     "dinlemek"
-   ]
-  },
-  {
-   "k": "yalnızlık",
-   "label": "yalnızlık",
-   "tf": 3,
-   "df": 3,
-   "s": 3,
-   "top": [
-    [
-     "bogazici",
-     1
-    ],
-    [
-     "bohemi-aramak",
-     1
-    ],
-    [
-     "iki-sutun",
-     1
-    ]
-   ],
-   "variants": [
-    "yalnızlık",
-    "yalnızlığın"
-   ],
-   "near": [
-    "kayıp",
-    "arzu",
-    "tanıdıklık"
    ]
   },
   {
