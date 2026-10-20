@@ -1,5 +1,5 @@
 ---
-baslik: Someone Else's Memory at Galata
+baslik: Another Love at Galata
 ---
 One evening I said to her, let's go up the Galata Tower.
 

@@ -1,5 +1,5 @@
 ---
-baslik: Galata'da Başkasının Anısı
+baslik: Galata'da Başka Aşk
 tarih: 2026-10-20 19:32
 kapak: kapak.jpg
 ---
