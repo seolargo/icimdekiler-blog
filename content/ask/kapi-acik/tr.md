@@ -14,3 +14,15 @@ Ve o sahnede uğurlanan çocuk bendim.
 O zaman anladım. Ben senin gençliğinin değil, kendi gençliğimin yasını tutuyormuşum. Senin geçmişini kaçırdım demek, benim geçmişim kimsesiz geçti demekten daha kolaymış. Birincisi dışarıda bir kayıp. İkincisi içimde bir oda. Kapısını uzun zamandır açmadığım bir oda.
 
 O odada yirmili yaşlarım var. Kimsenin seyretmediği danslar var. Kimsenin dinlemediği şarkılar var. Gece yarısı tek başına yürüdüğüm sokaklar, kimseye anlatmadığım sevinçler, kimsenin silmediği gözyaşları var. Bir ara bunları senden saklamaya karar vermiştim. Dans etmeyecektim seninle, müziğimi dinletmeyecektim. Çünkü onlar yalnız benimdi. Bunu söylerken bir sınır çizdiğimi sanıyordum. Meğer sadece yalnızlığımın adını koyuyormuşum. O yıllar yalnız benimdi, çünkü başka kimse orada değildi.
+
+Peki sahi, ne olur görmezsem?
+
+Hiçbir şey olmaz.
+
+Görmediğim şey, hiç seyretmediğim bir film. O yıllar kaybolmadı, hepsi karşımdaki kadının içinde. Nasıl güldüğü, neye kırıldığı, neyden korktuğu, bana nasıl baktığı o yıllardan geliyor. Gençliğini görmedim ama gençliğinin yaptığı kadınla oturuyorum.
+
+Asıl soru şu: Görseydim ne değişecekti? Yirmi yaşında tanışsaydık da yaşlanacaktı. Ben de yanında yaşlanacaktım. Gençliğini görmek, yaşlanmasını görmekten kimseyi kurtarmaz, sadece sırayı değiştirir. Herkes sevdiğinin yaşlandığını görür. Bunun adı birlikte yaşlanmak. Ve ben onu hep bir kayıp olarak değil, bir hedef olarak istedim.
+
+Kafamdaki o genç hâl ise benim çizdiğim bir resim. Hiçbir gerçek kadın o resimle yarışamaz, çünkü resim yorulmaz, yaşlanmaz, hiç değişmez. Sevebileceğim tek kadın, karşımda duran kadın.
+
+Acıyan yer, onun benim kaçırdığım yılları değil, benim boş geçen yıllarım. Onun yaşı sadece o odanın kapısını çalıyor.
