@@ -1,0 +1,297 @@
+Kalite Testi: Bisküvi Fabrikasından Öğrenmek
+ÖFY
+October 2026
+Özet
+Kalite kontrolü tek bir test değil, üretimin her aşamasına yayılmış bir test aile-
+sidir. Bu ailenin iki temel ayağı vardır. Uygunluk testi, ürünün belirlenen
+ölçülere uyup uymadığını sorar ve sonucu “geçti” ya da “kaldı” biçiminde verir.
+Kalite testi ise ürünün ne kadar iyi olduğunu sorar; ölçülere tam uyan bir ürün
+yine de yavaş, dayanıksız ya da kullanışsız olabilir. Bu iki ayağın yanında ham-
+madde kontrolü, süreç içi kontrol, duman testi, gerileme testi, stres testi, kabul
+testi, pazar testi ve kalibrasyon gibi tamamlayıcı türler bulunur. Bu türlerin her
+biri üretimin farklı bir anında farklı bir riski yakalar. Bir bisküvi fabrikasındaki
+kontroller ile bir yazılım projesindeki testler büyük ölçüde aynı mantığa dayanır.
+Son olarak, ölçüm aracının kendisi doğrulanmadıkça hiçbir test sonucu güvenilir
+değildir.
+1
+
+-- 1 of 11 --
+
+Giriş
+Kalite, bir ürünün ya da hizmetin kendisinden beklenen gereksinimleri ne
+ölçüde karşıladığıdır (ISO 9000:2015). Bu tanımın iki farklı okuması vardır.
+Crosby’ye göre kalite, gereksinimlere uygunluktur (conformance to requirements);
+ürün şartnameye uyuyorsa kalitelidir (Crosby, 1979). Juran’a göre ise kalite, kul-
+lanıma uygunluktur (fitness for use); şartnameye uyan ama kullanıcının işini
+görmeyen ürün kaliteli sayılmaz (Juran, 1951).
+Bu iki okuma, test dünyasındaki temel ayrımı da açıklar. Yazılım mühendisliğinde
+bu ayrım doğrulama (verification) ve geçerleme (validation) olarak adlandırılır.
+Boehm bu farkı iki kısa soruyla özetlemiştir: doğrulama “ürünü doğru mu
+yapıyoruz?”, geçerleme ise “doğru ürünü mü yapıyoruz?” sorusudur (Boehm,
+1981).
+Yaygın bir yanlış kabul, testin yalnızca üretimin sonunda yapılan bir kontrol
+olduğudur. Gerçekte test, hammaddenin gelişinden ürünün satışa çıkmasına
+kadar her aşamada yer alır. Sondaki kontrol en görünür olanıdır, ama tek başına
+yeterli değildir: hatalı un ile yapılan bisküvi, ne kadar iyi tartılırsa tartılsın kötü
+bisküvidir.
+Bu not, test türlerini bir bisküvi fabrikası örneği üzerinden anlatır ve her
+türün yazılımdaki karşılığını verir. Test otomasyonu araçları, istatistiksel süreç
+kontrolü ve kalite yönetim sistemlerinin belgelendirme süreçleri kapsam dışıdır.
+2
+
+-- 2 of 11 --
+
+Uygunluk Testi
+Tanım
+Uygunluk testi, ürünün önceden belirlenmiş ölçülere ve davranışlara uyup
+uymadığını kontrol eder. Yazılımda bu teste fonksiyonel test (functional testing)
+denir. Sorduğu soru tektir: bu özellik beklendiği gibi çalışıyor mu? Beklenen
+sonuç ile gerçek sonuç karşılaştırılır. Sonuç ikili bir karardır; ürün ya testi geçer
+ya da kalır.
+Bisküvi Fabrikasında Uygunluk Testi
+Fabrikada her bisküvi için bir şartname vardır. Uygunluk testi bu şartnameye
+bakar:
+• Her bisküvi 10 gram mı?
+• Sekli yuvarlak mı, kırık var mı?
+• Pakette 20 adet bisküvi var mı?
+• Paket hava almayacak biçimde kapanmış mı?
+• Etiketteki son kullanma tarihi doğru basılmış mı?
+Sartnameye uymayan ürün banttan ayrılır. Testin bisküvinin lezzeti hakkında
+söylediği bir şey yoktur; yalnızca ölçülere bakar.
+Yazılımdaki Karşılığı
+Yazılımda şartnamenin yerini gereksinimler alır. Örneğin “kullanıcı doğru şifreyle
+giriş yapabilmeli” bir gereksinimdir. Uygunluk testi bu davranışın gerçekleşip
+gerçekleşmediğine bakar. Yazılımda bu testler üç düzeyde yapılır:
+• Birim testi (unit test): Tek bir fonksiyonu tek başına sınar.
+• Entegrasyon testi (integration test): Birden fazla parçanın birlikte doğru
+çalışıp çalışmadığını sınar.
+• Uçtan uca test (end-to-end test): Kullanıcının izlediği yolu baştan sona
+sınar.
+3
+
+-- 3 of 11 --
+
+Kalite Testi
+Tanım
+Kalite testi, ürünün ne kadar iyi olduğunu ölçer. Yazılımda bu testlere fonksiy-
+onel olmayan testler (non-functional testing) denir. Bir özellik çalışıyor olabilir,
+ama yavaş, güvensiz ya da kullanması zor olabilir. Uygunluk testi bu sorunları
+yakalamaz, çünkü bu sorunlar “çalışıyor mu” sorusunun dışında kalır.
+Yazılım ürün kalitesinin hangi özelliklerden oluştuğu ISO/IEC 25010 stan-
+dardında sınıflandırılmıştır. Standart; performans verimliliği, güvenlik, güvenilirlik,
+kullanılabilirlik ve uyumluluk gibi özellikleri ayrı başlıklar olarak tanımlar (ISO/IEC
+25010:2011). Aşağıdaki alt bölümler bu özelliklerin bisküvi fabrikasındaki ve
+yazılımdaki karşılıklarını verir.
+Kalite Boyutları
+Duyusal Kalite ve Performans
+Fabrikada tadım ekibi her partiden örnek alır. Bisküvinin çok tatlı olup ol-
+madığına, yanık tadı taşıyıp taşımadığına ve her partide aynı tadı verip ver-
+mediğine bakılır. Isırıldığında çıtır olup olmadığı da ayrıca kontrol edilir.
+Yazılımda bunun karşılığı performanstır. Bir sayfanın açılması ya da bir
+işlemin tamamlanması ne kadar sürüyor? Kullanıcı aynı işlemi her seferinde
+aynı hızda mı yapabiliyor?
+Raf Ömrü ve Kararlılık
+Bisküvi depoda altı ay bekletilir. Bu sürede bayatlayıp bayatlamadığı, yağının
+acılaşıp acılaşmadığı izlenir. Üretildiği gün iyi olan ürün, zamanla bozulabilir.
+Yazılımda bunun karşılığı kararlılıktır (stability). Sistem saatlerce, günlerce
+açık kaldığında çöküyor mu? Bellek kullanımı zamanla artıyor mu? Bu tür
+sorunlar kısa testlerde görünmez, ancak uzun süreli çalıştırmada ortaya çıkar.
+Sağlık Güvenliği ve Yazılım Güvenliği
+Laboratuvarda bisküvide mikrop, küf ya da yabancı madde olup olmadığına
+bakılır. Gıda sektöründe bu tür riskler HACCP (Hazard Analysis and Criti-
+cal Control Points, Tehlike Analizi ve Kritik Kontrol Noktaları) adlı sistemle
+yönetilir. HACCP, üretimdeki tehlikelerin belirlenmesini ve bu tehlikelerin kon-
+trol edileceği noktaların tanımlanmasını öngörür (Codex Alimentarius, CXC
+1-1969).
+Yazılımda bunun karşılığı güvenlik testidir. Yetkisi olmayan bir kişi başkasının
+verisine ulaşabiliyor mu? Sisteme zararlı girdi verildiğinde ne oluyor?
+Taşıma Dayanıklılığı
+Paketler kamyonla taşındıktan sonra açılır. ˙Içindeki bisküvilerin kırılıp kırılmadığına
+bakılır. Ürün fabrikadan sağlam çıkmış olabilir, ama müşteriye ulaştığında
+4
+
+-- 4 of 11 --
+
+sağlam olmalıdır.
+Yazılımda bunun karşılığı ağ koşullarına dayanıklılıktır. Bağlantı yavaşladığında
+ya da kısa süre koptuğunda uygulama veriyi kaybediyor mu?
+Tüketici Deneyimi ve Kullanılabilirlik
+Paketin kolay açılıp açılmadığı, müşterinin ürünü tekrar alıp almayacağı da
+kalitenin parçasıdır. Lezzetli ama açılması zor bir paket, kullanıcıyı uzaklaştırır.
+Yazılımda bunun karşılığı kullanılabilirliktir (usability). Kullanıcı ne ya-
+pacağını yardım almadan anlayabiliyor mu? Sık yapılan bir işlem kaç tıklama
+gerektiriyor?
+Uyumluluk
+Yazılımda kalite testinin bir boyutu da uyumluluktur (compatibility). Uygulama
+farklı tarayıcılarda, işletim sistemlerinde ve ekran boyutlarında düzgün çalışıyor
+mu? Bisküvi fabrikasında bunun yakın karşılığı, ürünün farklı iklimlere ihraç
+edildiğinde aynı kaliteyi koruyup korumadığıdır.
+5
+
+-- 5 of 11 --
+
+Tamamlayıcı Test Türleri
+Uygunluk ve kalite testi çoğunlukla üretimin sonunda yapılır. Ancak birçok
+sorun üretimden önce, üretim sırasında ya da ürün değiştirildiğinde ortaya çıkar.
+Aşağıdaki test türleri bu anları kapsar.
+Üretimden Önce
+Hammadde Kontrolü
+Fabrikaya gelen un, şeker ve yağ üretime girmeden önce kontrol edilir. Unun
+nemli olup olmadığına, şekerin temiz olup olmadığına, yağın bozulup bozul-
+madığına bakılır. Kötü malzemeden iyi ürün çıkmaz; bu yüzden hata en ucuz
+hâliyle, kapıda yakalanır.
+Yazılımdaki karşılığı, dışarıdan alınan her şeyin kontrolüdür. Kullanılan
+kütüphanelerin güvenlik açığı taşıyıp taşımadığı, dış servislerden gelen verinin
+beklenen biçimde olup olmadığı bu kapsamdadır.
+Üretim Sırasında
+Süreç ˙Içi Kontrol
+Üretim devam ederken makineler izlenir. Fırının 180 derecede olup olmadığına,
+hamur karıştırıcının doğru sürede çalışıp çalışmadığına bakılır. Amaç, sorunu
+bisküvi bantta çıkmadan önce yakalamaktır. Fırın sıcaklığı düşmüşse, bunu fark
+etmek için yüzlerce çiğ bisküvi üretmeyi beklemek gerekmez.
+Yazılımdaki karşılığı izlemedir (monitoring). Sistem çalışırken hata oranları,
+yanıt süreleri ve kaynak kullanımı sürekli ölçülür. Bir değer sınırı aştığında
+alarm üretilir.
+Duman Testi
+Duman testi (smoke test), bir sistemin temel olarak çalışıp çalışmadığını
+gösteren hızlı ve yüzeysel bir kontroldür. Fabrikada hat ilk açıldığında birkaç
+bisküvi üretilir ve hızlıca bakılır: pişmiş mi, şekli var mı? Detaylı ölçüm
+yapılmaz. Bu test geçilmeden ayrıntılı testlere başlamanın anlamı yoktur.
+Yazılımda yeni bir sürüm yüklendiğinde önce uygulamanın açılıp açılmadığına,
+giriş yapılıp yapılamadığına bakılır. Bu adım başarısızsa sürüm hemen geri
+alınır.
+Değişiklik Olduğunda
+Gerileme Testi
+Gerileme testi (regression test), bir değişikliğin daha önce çalışan özellikleri
+bozup bozmadığını kontrol eder. Fabrikada tarifteki şeker oranı azaltıldığını
+düşünelim. Yeni tarifle bisküvi hâlâ çıtır mı? Raf ömrü kısaldı mı? Seker,
+6
+
+-- 6 of 11 --
+
+tatlılığın yanında nem tutma ve doku üzerinde de etkili olduğu için tek bir
+değişiklik birden fazla özelliği etkileyebilir.
+Yazılımda da durum aynıdır. Yeni bir özellik eklenirken eski bir fonksiyon
+değişebilir ve başka bir yerdeki davranış bozulabilir. Gerileme testi, daha önce
+geçen testlerin yeniden çalıştırılmasıyla yapılır.
+Üretimden Sonra
+Stres Testi
+Stres testi, ürünü normal koşulların ötesinde zorlayarak sınırlarını bulur. Fab-
+rikada paket yerden bir metre düşürülür, sıcak ve nemli bir odada bekletilir.
+Amaç ürünün nerede ve nasıl bozulduğunu görmektir.
+Yazılımda sisteme kaldırabileceğinden fazla yük bindirilir. Örneğin normalde
+1000 kullanıcıya hizmet veren bir sisteme 10.000 kullanıcı yönlendirilir. Sistemin
+çökmesi beklenir; önemli olan nasıl çöktüğü ve yük azalınca kendini toparlayıp
+toparlamadığıdır.
+Satışa C ıkarken
+Kabul Testi
+Kabul testi (acceptance test), ürünü kullanacak ya da satın alacak tarafın kendi
+kurallarıyla yaptığı kontroldür. Büyük bir market zinciri, bisküviyi raflarına
+koymadan önce kendi kriterlerine göre denetler. Fabrika ürünü onaylamış olsa
+bile son karar müşterinindir.
+Yazılımda bunun adı kullanıcı kabul testidir (User Acceptance Testing, UAT).
+Müşteri ya da gerçek kullanıcılar ürünü kendi iş akışlarında dener ve onay verir
+(ISTQB, 2023).
+Pazar Testi
+Yeni bir bisküvi çeşidi önce yalnızca birkaç şehirde satışa sunulur. ˙Iki farklı
+paket tasarımı aynı anda denenir ve hangisinin daha çok sattığına bakılır. Bu
+test ürünün kendisini değil, pazardaki karşılığını ölçer.
+Yazılımdaki karşılığı A/B testidir. Kullanıcıların bir kısmına yeni tasarım,
+bir kısmına eski tasarım gösterilir. ˙Iki grubun davranışı karşılaştırılarak hangi
+seçeneğin daha iyi sonuç verdiğine karar verilir (Kohavi, Tang ve Xu, 2020).
+Her Aşamada
+Kalibrasyon
+Kalibrasyon, ölçüm aracının doğru ölçüp ölçmediğinin kontrolüdür. Bisküviyi
+tartan terazi bozuksa, bütün ağırlık testleri yanlış sonuç verir. Üstelik bu
+yanlışlık fark edilmez, çünkü test “geçti” demeye devam eder. Laboratuvarlarda
+ölçüm aletlerinin yeterliliği ISO/IEC 17025 standardıyla düzenlenir (ISO/IEC
+17025:2017).
+7
+
+-- 7 of 11 --
+
+Yazılımdaki karşılığı testlerin kendisinin doğrulanmasıdır. Her koşulda “geçti”
+sonucu veren bir test hiçbir hatayı yakalamaz. Bu yüzden bir testin, bilerek
+bozulan bir kodda gerçekten başarısız olduğu görülmelidir. Myers, testin amacını
+programın çalıştığını göstermek değil, hata bulmak olarak tanımlar; hata bula-
+mayan test bu amaca hizmet etmez (Myers, 1979).
+8
+
+-- 8 of 11 --
+
+Karşılaştırmalı Görünüm
+Uygunluk Testi ile Kalite Testi
+Uygunluk testi Kalite testi
+Sorduğu soru Ölçülere uygun mu? Ne kadar iyi?
+Sonuç biçimi Geçti / kaldı Ölçülen bir değer ya da derece
+Bisküvide örnek 10 gram mı, paket kapalı mı? Lezzetli mi, altı ay sonra hâlâ
+çıtır mı?
+Yazılımda örnek Buton çalışıyor mu? Hızlı mı, güvenli mi, kolay mı?
+Karşılık geldiği
+kavram
+Doğrulama (verification) Geçerleme (validation)
+Test Türlerinin Üretim Aşamalarına Dağılımı
+Aşama Test türü Yakaladığı risk
+Üretimden önce Hammadde kontrolü Kötü malzeme, hatalı dış bileşen
+Üretim sırasında Süreç içi kontrol, duman testi Makine ya da sistem arızası
+Üretimden sonra Uygunluk testi, kalite testi,
+stres testi
+Sartname dışı ürün, düşük kalite,
+sınırda çökme
+Değişiklik olduğunda Gerileme testi Eski özelliklerin bozulması
+Satışa çıkarken Kabul testi, pazar testi Müşteri beklentisinin
+karşılanmaması
+Her aşamada Kalibrasyon Yanlış ölçüm, işe yaramayan test
+9
+
+-- 9 of 11 --
+
+Sonuç
+Test türleri arasındaki fark, sordukları sorunun farkıdır. Uygunluk testi ürünün
+tarif edildiği gibi yapılıp yapılmadığına, kalite testi ise yapılan ürünün işe yarayıp
+yaramadığına bakar. Bu ayrımın pratik sonucu, tek bir test türünün hiçbir
+zaman yeterli olmamasıdır: bütün uygunluk testlerini geçen bir ürün, kalite
+testinde başarısız olabilir.
+Test türlerini üretim aşamalarına göre dağıtmak, hatanın maliyetiyle ilgili
+bir sonucu görünür kılar. Hata ne kadar erken yakalanırsa o kadar ucuzdur.
+Kapıda geri çevrilen bozuk un bir çuval undur; markete ulaşmış bozuk bisküvi
+ise geri çağırma, itibar kaybı ve olası sağlık sorunudur. Yazılımda da birim
+testinde yakalanan bir hata birkaç dakikada düzeltilir, kullanıcıya ulaşmış bir
+hata ise çok daha pahalıya mal olur.
+Kalibrasyon bütün yapının dayandığı zemindir. Diğer test türleri ölçüm
+aracının doğru olduğunu varsayar; bu varsayım sınanmazsa test süreci güven
+verir ama güvence vermez.
+Bu çerçevenin bir sınırı vardır. Bisküvi örneği fiziksel bir ürün üzerine kuru-
+ludur ve fiziksel ürünler üretildikten sonra değişmez. Yazılım ise sürekli değişir;
+aynı ürün her hafta yeniden “üretilir”. Bu yüzden yazılımda gerileme testi,
+gıda sektörüne göre çok daha sık ve çok daha merkezı bir yer tutar. Ayrıca
+kullanılabilirlik ve pazar uygunluğu gibi bazı kalite boyutlarının nesnel ölçümü
+zordur; tadım ekibinin kararı da A/B testinin sonucu da yoruma açıktır. Bu
+boyutların ne ölçüde sayısal hâle getirilebileceği açık bir sorudur.
+Kaynaklar
+• Boehm, B. W. (1981). Software Engineering Economics. Prentice-Hall.
+• Codex Alimentarius Commission. General Principles of Food Hygiene
+(CXC 1-1969). FAO/WHO.
+• Crosby, P. B. (1979). Quality Is Free. McGraw-Hill.
+• ISO 9000:2015. Quality management systems — Fundamentals and vo-
+cabulary. International Organization for Standardization.
+• ISO/IEC 17025:2017. General requirements for the competence of testing
+and calibration laboratories. International Organization for Standardiza-
+tion.
+• ISO/IEC 25010:2011. Systems and software engineering — Systems and
+software Quality Requirements and Evaluation (SQuaRE) — System and
+software quality models. International Organization for Standardization.
+• ISTQB (2023). Certified Tester Foundation Level Syllabus, v4.0. Interna-
+tional Software Testing Qualifications Board.
+• Juran, J. M. (1951). Quality Control Handbook. McGraw-Hill.
+10
+
+-- 10 of 11 --
+
+• Kohavi, R., Tang, D. ve Xu, Y. (2020). Trustworthy Online Controlled
+Experiments: A Practical Guide to A/B Testing. Cambridge University
+Press.
+• Myers, G. J. (1979). The Art of Software Testing. Wiley.
+11
+
+-- 11 of 11 --

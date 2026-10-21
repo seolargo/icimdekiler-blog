@@ -1,0 +1,313 @@
+Felsefe Tarihi: Aristoteles’in Zihin Erdemleri
+ÖFY
+October 2026
+Özet
+Bilgiye erişimin ucuzlaması, bilgi sahibi olmanın değerini ortadan kaldırmamış,
+yalnızca bilginin işlevini değiştirmiştir. Ezberlenmiş ve kolayca erişilebilen olgu-
+lar artık ayırt edici bir üstünlük sağlamamakta; buna karşılık bilginin işlenmesi,
+sınanması ve doğru bağlamda kullanılması daha belirleyici hâle gelmektedir.
+Sezgi, bilginin karşıtı değil, sindirilmiş ve kısa yoldan çalışan bilgidir; bu nedenle
+bilgi birikimi olmadan güvenilir sezgi oluşmaz. Biliş tek bir yeti değil, birbirinin
+üzerine kurulan katmanlardan oluşur: veri, bilgi, kavrayış ve beceri birikimi
+oluşturur; muhakeme, sezgi, yargı ve hayal gücü bu birikimi işler; merak, zevk ve
+bilgelik ise süreci yönlendirir. Aynı ayrım Aristoteles tarafından Nikomakhos’a
+Etik ’te beş zihin erdemi olarak kurulmuştur ve bu çerçevede sezgi (nous) bilginin
+temeli olarak konumlanır. Aristoteles’e göre pratik akıl (phronesis) yalnızca
+deneyimle kazanılabilir; bu tespit, bilgiyi atlayarak doğrudan sezgiye geçilebileceği
+fikriyle bağdaşmaz. Yapay zekâ çağı için daha isabetli tanım, ezber çağının
+sona erdiği ve muhakeme çağının başladığı, ancak muhakemenin hâlâ bilgiye
+dayandığı yönündedir.
+1
+
+-- 1 of 10 --
+
+Giriş
+Yapay zekâ araçlarının yaygınlaşmasıyla birlikte sıkça dile getirilen bir iddia,
+bilgi sahibi olmanın önemini yitirdiği ve insan zihninin asıl değerinin artık
+sezgide yattığıdır. ˙Iddianın bazı biçimleri bu dönüşümü belirli bir tarihe, örneğin
+2020 yılına bağlar. ˙Iddia, bilgi ile sezgiyi iki ayrı ve birbirinin yerine geçebilen
+yeti olarak ele aldığı için sorunludur.
+Bu iddiayı değerlendirebilmek için önce zihnin bilme, anlama ve düşünme
+ile ilgili işlerinin ayrıştırılması gerekir. Bu işlerin tamamını kapsayan üst kavram
+biliştir (cognition): zihnin bilgi edinme, işleme, saklama ve kullanma süreçlerinin
+bütünü. Bilginin doğasını, kaynağını ve sınırlarını inceleyen felsefe dalı ise epis-
+temolojidir (epistemology).
+Biliş katmanlarının ayrıştırılmasında iki çerçeveden yararlanılır. Birincisi,
+veriden bilgeliğe uzanan ve bilgi yönetimi literatüründe yaygın kullanılan hiy-
+erarşik modeldir (Ackoff, 1989). ˙Ikincisi, Aristoteles’in zihin erdemleri sınıflandırmasıdır.
+Kavramların her biri yazılım ve genel mühendislik örnekleriyle somutlaştırılır.
+Kapsam, bireysel bilişle sınırlıdır. Kurumsal bilgi yönetimi, yapay zekâ sis-
+temlerinin kendi bilişsel kapasitesi ve eğitim politikaları kapsam dışındadır.
+2
+
+-- 2 of 10 --
+
+Bilişin Katmanları
+Biliş katmanları işlevlerine göre üç gruba ayrılır: zihinde ya da bedende biriken
+bilme türleri, bu birikimi işleyen düşünme biçimleri ve süreci yönlendiren eğilimler.
+Gruplar ayrı kutular değildir; her katman bir öncekinden beslenir.
+Bilme Türleri
+Veri
+Veri, yorumlanmamış ham olgudur. Tek başına bir anlam ya da yönerge
+taşımaz.
+• Mühendislik örneği: Bir köprü sensöründen gelen ölçüm, “kiriş 12 mm
+esnedi” bilgisinden ibarettir.
+• Yazılım örneği: Bir log satırı: GET /api/users 200 1840ms.
+Bilgi
+Bilgi, verinin bir bağlam içine yerleştirilerek anlam kazanmış hâlidir. Verinin
+ne anlama geldiğini söyler.
+• Mühendislik örneği: Kiriş için izin verilen sınır 15 mm olduğundan 12
+mm’lik esneme sınırın altındadır.
+• Yazılım örneği: ˙Ilgili uç nokta (endpoint) normalde yaklaşık 50 ms’de yanıt
+verdiğinden 1840 ms’lik süre anormal derecede yavaştır.
+Kavrayış
+Kavrayış (understanding), bir olgunun neden öyle olduğunu görmektir. Bilgi
+“ne” sorusunu, kavrayış “neden” sorusunu yanıtlar. Ezberleyen kişi bilir; kavrayan
+kişi açıklayabilir ve yeni durumlara uygulayabilir.
+• Mühendislik örneği: Kirişin esnemesinin yük, açıklık ve malzeme sertliğiyle
+nasıl ilişkili olduğunu bilmek; formülü değil, formülün arkasındaki mekaniz-
+mayı görmek.
+• Yazılım örneği: Yavaşlığın nedeninin bir döngü içinde her kullanıcı için
+ayrı veritabanı sorgusu atılması olduğunu görmek. Bu durum N+1 sorgu
+problemi olarak bilinir: bir liste için bir sorgu, ardından listedeki her öğe
+için ayrıca bir sorgu çalıştırılır ve kayıt sayısı arttıkça sorgu sayısı da
+doğrusal olarak artar.
+3
+
+-- 3 of 10 --
+
+Beceri
+Beceri, bir işi fiilen yapabilmektir. Ryle (1949), bir şeyin böyle olduğunu bilmek
+(knowing that) ile bir şeyin nasıl yapılacağını bilmek (knowing how ) arasında
+ayrım yapmıştır. Becerinin önemli bir kısmı sözle aktarılamaz; Polanyi (1966)
+bu tür bilgiyi örtük bilgi (tacit knowledge) olarak adlandırmış ve insanların
+söyleyebildiklerinden fazlasını bildiğini ileri sürmüştür.
+• Mühendislik örneği: Sahada temiz bir kaynak dikişi çekebilmek ya da bir
+devreyi düzgün lehimleyebilmek.
+• Yazılım örneği: Hata ayıklayıcıda (debugger ) doğru noktaya kesme nok-
+tası (breakpoint) koymak, karmaşık bir git merge çakışmasını çözmek,
+terminalde akıcı çalışmak.
+Düşünme Biçimleri
+Muhakeme
+Muhakeme (reasoning), eldeki bilgilerden adım adım ve denetlenebilir biçimde
+sonuç çıkarmaktır. Yavaş işler, ancak her adımı geriye doğru kontrol edilebilir.
+• Mühendislik örneği: Yavaşlayan bir sunucuda sırasıyla işlemci, bellek ve
+veritabanı sorgularını kontrol ederek darboğazı tek bir sorguya indirgemek.
+• Yazılım örneği: Yalnızca canlı ortamda (production) görülen bir hatayı
+daraltmak. Yerel ortamda hata yoktur; ortam değişkenleri aynıdır; fark
+verididir; canlı ortamda boş isimli bir kullanıcı bulunmaktadır; kod boş
+metni (empty string) denetlememektedir. Hata bu zincirin sonunda bu-
+lunur.
+Sezgi
+Sezgi (intuition), birikmiş deneyimin bilinçli akıl yürütme olmadan, hızlı ve kısa
+yoldan çalışmasıdır. Kişi çoğu zaman sonuca neden vardığını hemen açıklayamaz.
+Kahneman ve Klein (2009), uzman sezgisinin ancak iki koşul birlikte sağlandığında
+güvenilir olduğunu göstermiştir: ortamın yeterince düzenli ve öngörülebilir ol-
+ması ve kişinin bu düzenlilikleri uzun süreli pratik ve geri bildirimle öğrenme
+fırsatı bulmuş olması. Bu koşullar sağlanmadığında sezgi, yalnızca kendinden
+emin bir tahmindir.
+• Mühendislik örneği: Deneyimli bir makine ustasının motorun sesinden
+arızayı tahmin etmesi.
+• Yazılım örneği: Testleri geçen ve çalışan bir kod değişikliğine bakıp iki
+eşzamanlı iş parçacığının (goroutine) aynı map yapısına yazdığını ve yüksek
+yük altında yarış durumu (race condition) oluşacağını önceden görmek.
+4
+
+-- 4 of 10 --
+
+Yargı
+Yargı (judgment), belirli bir durumda neyin önemli olduğunu ayırt etmek ve
+birden çok teknik olarak doğru seçenek arasında en az zararlı olanı seçmektir.
+Doğru bilgiye sahip olup onu yanlış yerde kullanmak mümkündür; yargı bunu
+engeller.
+• Mühendislik örneği: Bir hatanın yayın öncesinde mi yoksa yayından sonra
+mı düzeltileceğine karar vermek.
+• Yazılım örneği: Bir özelliğin mevcut geliştirme döngüsüne (sprint) sığdırılıp
+sığdırılmayacağına ya da bir kod parçasına test yazmanın maliyetine değip
+değmeyeceğine; ekip durumu, teslim tarihi ve riski birlikte tartarak karar
+vermek.
+Hayal Gücü
+Hayal gücü, henüz var olmayanı zihinde kurabilmektir. Yeni bir çözümün
+başlangıç noktasıdır.
+• Mühendislik örneği: ˙Ilk asma köprü tasarımları ya da veriyi tek bir sunucu
+yerine binlerce makineye dağıtma fikri.
+• Yazılım örneği: Kullanıcının sayfayı yenilemesine gerek kalmadan değişikliklerin
+anında ekrana gelmesini tasarlamak ve bunu WebSocket bağlantısıyla gerçekleştirmek;
+ya da tek parçalı bir uygulamayı olay tabanlı küçük servislere bölen farklı
+bir mimari kurgulamak.
+Eğilimler ve Olgunluk
+Merak
+Merak, bilme isteğidir ve diğer katmanları besleyen itici güçtür. Merak ol-
+madan bilgi birikmez; bilgi birikmeden sezgi oluşmaz.
+• Mühendislik örneği: Bir sistemin neden her salı gecesi yavaşladığını sorup
+nedenini bulana kadar peşini bırakmamak.
+• Yazılım örneği: Bir kütüphanenin bir işi neden bu kadar hızlı yaptığını
+anlamak için kaynak koduna inmek; ya da yalnızca ayın son günü ortaya
+çıkan bir hatanın peşine düşüp tarih hesaplamasındaki kusuru bulmak.
+Zevk
+Zevk, neyin iyi neyin sıradan olduğunu hissedebilme duyarlılığıdır. Üretimin
+kolaylaştığı ancak seçimin kolaylaşmadığı koşullarda değeri artar.
+• Mühendislik örneği: ˙Iki sağlam köprü tasarımından birinin aynı zamanda
+zarif olduğunu fark etmek.
+5
+
+-- 5 of 10 --
+
+• Yazılım örneği: Aynı işi yapan iki fonksiyondan, iç içe koşullarla dolu 80
+satırlık olana karşı adlandırmaları açık 15 satırlık olanın daha iyi olduğunu
+görmek; bir API’nin adlandırmasının “doğru oturduğunu” sezmek.
+Bilgelik
+Bilgelik (wisdom), diğer bütün katmanları doğru amaç için ve doğru ölçüde
+kullanabilmektir. Neyin bilinmediğinin bilinmesi de bilgeliğin parçasıdır.
+• Mühendislik örneği: Maliyeti düşürmek için güvenlik payının azaltılmasını
+reddetmek; teknik olarak mümkün olanın yapılmaması gerektiğini söyleyebilmek.
+• Yazılım örneği: Üç kişilik bir ekip için mikroservis mimarisinin gereksiz
+olduğunu ve tek parçalı (monolith) yapının yeterli olduğunu söylemek; yeni
+bir teknolojiyi yalnızca yeni olduğu için benimsememek; “bunu bilmiyo-
+rum, öğrenmem gerekiyor” diyebilmek.
+6
+
+-- 6 of 10 --
+
+Aristoteles’in Zihin Erdemleri
+Bilişin katmanlara ayrılması yeni bir girişim değildir. Aristoteles, Nikomakhos’a
+Etik ’in altıncı kitabında aynı soruyu ele almış ve zihnin doğruya ulaşma biçimlerini
+sınıflandırmıştır.
+Karakter Erdemleri ve Zihin Erdemleri
+Aristoteles insanın erdemlerini iki gruba ayırır. Karakter erdemleri (cesaret,
+cömertlik, ölçülülük gibi) alışkanlıkla kazanılır. Zihin erdemleri ise doğruyu
+bulma yetenekleridir ve öğrenme ile deneyim yoluyla gelişir.
+Zihnin ˙Iki Kısmı
+Aristoteles zihnin akıl sahibi kısmını da ikiye ayırır:
+• Bilimsel kısım: Değişmeyen ve zorunlu olan şeylerle ilgilenir. Matem-
+atiksel ve doğal yasalar bu alana girer; örneğin bir üçgenin iç açılarının
+toplamı her durumda aynıdır.
+• Hesaplayıcı kısım: Değişebilen şeylerle, yani insan eylemleri, kararlar
+ve üretimle ilgilenir. “Bu ev nasıl yapılmalı” ya da “bu durumda ne
+yapılmalı” sorularının tek ve sabit bir yanıtı yoktur.
+Beş Zihin Erdemi
+Episteme
+Episteme, değişmeyen şeylerin kanıt yoluyla bilinmesidir; genellikle “bilimsel
+bilgi” olarak çevrilir. Bir öncülden mantıksal olarak sonuç çıkarmaya dayanır.
+Ancak her kanıtlama zinciri, kendisi kanıtlanamayan ilk ilkelerden başlamak
+zorundadır ve episteme bu ilk ilkelere kendi başına ulaşamaz.
+Nous
+Nous, ilk ilkelerin doğrudan kavranmasıdır; “sezgisel akıl” ya da “kavrayış”
+olarak çevrilir. Kanıtlanamayan ama apaçık olan temel doğruları yakalar. Bu
+çerçevede sezgi bilginin rakibi değil, temelidir: bilimsel bilgi, nous’un sağladığı
+ilkelerden yola çıkar.
+Sophia
+Sophia, Aristoteles’in en yüksek bilme biçimi olarak gördüğü kuramsal bilge-
+liktir ve nous ile episteme’nin birleşimidir: hem ilk ilkeleri kavramak hem de
+onlardan çıkanları bilmek. Aristoteles bu erdemi en saf hâliyle filozoflarda ve
+matematikçilerde görür.
+7
+
+-- 7 of 10 --
+
+Techne
+Techne, bir şey üretmeyi bilmektir; “zanaat”, “ustalık” ya da “sanat” olarak
+çevrilir. Marangozun masa yapması ve mimarın ev inşa etmesi bu erdemin
+örnekleridir. Techne’de amaç eylemin dışındadır; değerli olan ortaya çıkan
+üründür.
+Phronesis
+Phronesis, nasıl yaşanması ve ne yapılması gerektiğini bilmektir; “pratik akıl”
+ya da “pratik bilgelik” olarak çevrilir. Doğru zamanda, doğru biçimde ve doğru
+ölçüde davranmayı içerir. Techne’den farkı, amacın bir ürün değil eylemin ken-
+disinin iyi olması olmasıdır.
+Öne C ıkan Tespitler
+• Gençlik ve pratik akıl: Aristoteles’e göre gençler matematikte yetkin
+olabilir, ancak pratik akılda yetkin olamaz. Matematik soyuttur ve öğretilebilir;
+pratik akıl ise tek tek durumların bilgisini gerektirir ve bu bilgi ancak yıllar
+içinde yaşanarak edinilir.
+• Deneyimin kuram karşısındaki üstünlüğü: Kuramı bilmeyen ancak
+deneyimli olan kişiler, bazı durumlarda kuramı bilen kişilerden daha isa-
+betli davranır.
+• Pratik akıl ve iyilik: Pratik akıl olmadan iyi insan olunamaz; iyi insan
+olmadan da pratik akla sahip olunamaz. Amaca ulaşmada usta olan ancak
+amacı kötü olan kişi pratik akıl sahibi değil, yalnızca kurnazdır (deinotes).
+C ağdaş Kavramlarla Karşılaştırma
+Aristoteles’in sınıflandırması, çağdaş biliş katmanlarıyla büyük ölçüde örtüşür:
+Aristoteles Anlamı C ağdaş karşılık
+Episteme Kanıtlanabilir bilgi Bilgi, kavrayış
+Techne Üretme ustalığı Beceri
+Phronesis Pratik akıl Yargı
+Nous ˙Ilk ilkeleri doğrudan görme Sezgi
+Sophia Kuramsal bilgelik Bilgelik
+Örtüşme tam değildir. Aristoteles’in nous kavramı, çağdaş psikolojideki
+deneyime dayalı uzman sezgisinden çok, temel doğruların kavranmasını ifade
+eder. Merak ve zevk ise Aristoteles’in zihin erdemleri listesinde ayrı başlıklar
+olarak yer almaz.
+8
+
+-- 8 of 10 --
+
+“Sezgi C ağı” ˙Iddiasının Değerlendirilmesi
+˙Iddianın Doğru Kısmı
+Bir olguyu ezberlemek ya da bir kaynaktan bulup getirmek, internetin yaygınlaşmasıyla
+ucuzlamış, sohbet tabanlı yapay zekâ araçlarıyla neredeyse maliyetsiz hâle gelmiştir.
+Bir kelimenin anlamını ya da bir fonksiyonun nasıl yazılacağını bilmek artık tek
+başına ayırt edici bir üstünlük sağlamaz. Bu anlamda ezbere dayalı bilginin
+değeri gerçekten düşmüştür.
+˙Iddianın Yanlış Kısmı
+˙Iddia, sezgiyi bilginin yerine geçebilen bağımsız bir yeti olarak ele alır. Hem Aris-
+toteles’in çerçevesi hem de çağdaş uzmanlık araştırmaları bunun tersini gösterir.
+Kahneman ve Klein’ın (2009) belirlediği koşullar, güvenilir sezginin ancak uzun
+süreli pratik ve geri bildirimle oluşabileceğini ortaya koyar. Bilgi birikimi ol-
+mayan kişinin sezgisi, çoğu durumda yalnızca tahmindir.
+Yapay zekâ araçlarının yaygınlaşması bilginin önemini azaltmak bir yana,
+bazı açılardan artırır:
+• Bir yapay zekâ çıktısının doğru olup olmadığını değerlendirmek, konuya
+hâkim olmayı gerektirir. Konuyu bilmeyen kişi hatayı fark edemez.
+• ˙Iyi soru sormak bilgi gerektirir. Hangi sorunun sorulmadığını fark etmek,
+alanın sınırlarını bilmeye bağlıdır.
+• Farklı alanlar arasında bağ kurmak ve gerçekten yeni bir şey üretmek, bu
+alanların zihinde bulunmasını gerektirir.
+Tarihlendirme Sorunu
+˙Iddianın 2020 yılını bir kırılma noktası olarak göstermesi de isabetli değildir.
+Bilgiye erişimdeki asıl dönüşüm, internetin yaygınlaşmasıyla başlamış ve soh-
+bet tabanlı büyük dil modeli araçlarının 2022 sonundan itibaren geniş kitlelere
+ulaşmasıyla hızlanmıştır. Bu dönüşüm de bilgiyi ortadan kaldırmamış, bilginin
+işlevini değiştirmiştir.
+9
+
+-- 9 of 10 --
+
+Sonuç
+Bilgi ile sezgi arasında kurulan karşıtlık yanlış bir ikiliktir. Biliş katmanları
+birbirinin yerine geçmez, birbirinin üzerine kurulur: sezgi bilgiden, yargı deney-
+imden, bilgelik ise bütün katmanlardan beslenir. Bu nedenle bilginin erişilebilir
+hâle gelmesi, bilgiyi içselleştirme gereğini ortadan kaldırmaz; dışarıda duran
+bilgi, zihinde sindirilmemiş olduğu sürece sezgiye dönüşemez.
+Bu ayrımın pratik karşılığı, değerin bilme türlerinden düşünme biçimlerine ve
+eğilimlere doğru kaymasıdır. Bulup getirme işi araçlara devredildikçe, getirileni
+sınama (muhakeme), doğru bağlamda kullanma (yargı) ve iyi olanı seçme (zevk)
+yetilerinin göreli önemi artar. Bu yetilerin her biri ise yine bilgi birikimine
+dayanır. Daha isabetli bir formülasyon şudur: ezber çağı sona ermiş, muhakeme
+çağı başlamıştır; ancak muhakeme hâlâ bilginin üzerinde durur.
+C erçevenin sınırlılıkları da vardır. Katmanlar arasındaki geçişler keskin
+değildir; kavrayış ile sezgi ya da yargı ile bilgelik arasındaki sınır çoğu du-
+rumda bulanıktır. Aristoteles’in kavramlarının çağdaş terimlerle eşleştirilmesi
+de yaklaşıktır ve tarihsel bağlamın bir kısmını kaçırır. Ayrıca bilgi–sezgi ilişkisine
+dair çağdaş bulgular büyük ölçüde düzenli ortamlardaki uzmanlık çalışmalarına
+dayanır; düşük geri bildirimli ve hızla değişen alanlarda sezginin nasıl oluştuğu
+daha az aydınlatılmıştır.
+Açık kalan sorulardan biri, yapay zekâ araçlarının sürekli kullanımının sezgi
+oluşumunu nasıl etkileyeceğidir. Sezgi tekrarlı pratik ve geri bildirimle oluşuyorsa,
+bu pratiğin önemli bir kısmının araçlara devredilmesi, uzun vadede uzman sezgisinin
+oluşmasını zorlaştırabilir. Aristoteles’in pratik akla dair tespiti burada da geçerlidir:
+doğru karar vermenin kısa yolu yoktur ve deneyimin yerini tutacak bir araç
+henüz bulunmamaktadır.
+Kaynaklar
+• Ackoff, R. L. (1989). From Data to Wisdom. Journal of Applied Systems
+Analysis, 16, 3–9.
+• Aristoteles. Nikomakhos’a Etik, VI. Kitap.
+• Kahneman, D. ve Klein, G. (2009). Conditions for Intuitive Expertise: A
+Failure to Disagree. American Psychologist, 64(6), 515–526.
+• Klein, G. (1998). Sources of Power: How People Make Decisions. MIT
+Press.
+• Polanyi, M. (1966). The Tacit Dimension. Doubleday.
+• Ryle, G. (1949). The Concept of Mind. Hutchinson.
+10
+
+-- 10 of 10 --

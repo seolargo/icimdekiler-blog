@@ -1,0 +1,199 @@
+Bilişsel Bilim: Algısal Tamamlama ve
+Yazılımdaki Karşılıkları
+ÖFY
+October 2026
+Özet
+Eksik bilginin bağlam ve önceki bilgi kullanılarak tahminle tamamlanması, hem
+insan algısında hem de yazılım sistemlerinde görülen ortak bir işlemdir. Beyin,
+gözdeki kör noktayı çevredeki görüntüyle doldurur ve harfleri karışık kelimeleri
+yine de okur. Yazılımda aynı işlem görüntü onarma (inpainting), ara değer
+bulma (interpolation), kayıp paket gizleme, otomatik tamamlama ve hata düzeltme
+gibi tekniklerde karşımıza çıkar. Bu tekniklerin genel adı tamamlama (comple-
+tion) ya da yeniden kurmadır (reconstruction); altta yatan işlem ise çıkarımdır
+(inference). Her durumda üretilen sonuç kesin bilgi değil, en olası tahmindir.
+Bu ortak yapının matematiksel karşılığı Bayesçi çıkarımdır. Tahmine dayandığı
+için hem beyin hem yazılım sistematik biçimde yanılabilir: beyinde bu yanılma
+göz yanılması, yazılımda ise gerçekte olmayan içeriğin üretilmesi olarak görülür.
+1
+
+-- 1 of 8 --
+
+Giriş
+Bir sistemin elindeki veri çoğu zaman eksiktir. Gözün bir bölgesinde ışığa du-
+yarlı hücre yoktur, ağ üzerinden gelen ses paketlerinin bir kısmı kaybolur, bir
+veri tablosunda bazı hücreler boş kalır. Sistem bu eksikliğe iki biçimde tepki
+verebilir: boşluğu boş bırakır ya da onu tahminle doldurur.
+Tamamlama, eksik kalan bilgiyi, mevcut bilgiye ve önceki deneyime daya-
+narak tahmin edip yerine koyma işlemidir. Tamamlama sonucu ortaya çıkan
+içerik gözlenmiş değil, üretilmiştir.
+Yaygın bir kabul, algının dünyayı olduğu gibi kaydettiği yönündedir. Algısal
+tamamlama olgusu bu kabulü zayıflatır: algılanan şeyin bir kısmı dışarıdan
+gelen veri değil, beynin kendi tahminidir. Aynı ayrım yazılım için de geçerlidir.
+Telefonla çekilmiş ve bir nesnesi silinmiş fotoğrafta o bölge, kameranın kaydettiği
+değil, yazılımın tahmin ettiği piksellerden oluşur.
+Not, eksik bilgiyi tahminle tamamlayan işlemleri kapsar. Eksik bilgiyi kul-
+lanıcıdan isteyerek ya da varsayılan sabit değer atayarak gideren yöntemler,
+tahmin içermedikleri ölçüde kapsam dışıdır.
+2
+
+-- 2 of 8 --
+
+˙Insan Algısında Tamamlama
+Algısal Tamamlama
+Algısal tamamlama (perceptual filling-in), beynin duyu verisinde bulunmayan
+bir bölgeyi çevresindeki bilgiyle doldurması ve kişinin bu bölgeyi eksiksiz algılamasıdır
+(Komatsu, 2006).
+Kör Nokta
+Göz sinirinin retinadan çıktığı noktada ışığa duyarlı hücre bulunmaz. Bu ne-
+denle her gözün görme alanında bir boşluk vardır. Günlük yaşamda bu boşluk
+fark edilmez; beyin, boşluğun çevresindeki renk ve dokuyu o bölgeye taşır.
+Örneğin düz mavi bir duvara bakıldığında kör noktaya karşılık gelen bölge de
+mavi görülür. Yapay olarak oluşturulan görme boşluklarının da benzer biçimde
+doldurulduğu deneysel olarak gösterilmiştir (Ramachandran ve Gregory, 1991).
+Harfleri Karışık Kelimelerin Okunması
+˙Iç harflerinin sırası bozulmuş bir kelime, ilk ve son harfi yerinde kaldığı sürece
+çoğu zaman okunabilir. Okuyucu, harf dizisini tek tek çözmek yerine bağlamı
+ve bildiği kelimeleri kullanarak en olası kelimeyi seçer. Bu etkinin sınırları ve
+hangi koşullarda bozulduğu tartışmalıdır (Grainger ve Whitney, 2004).
+Cümleyi Tamamlama
+Konuşmada dinleyici, karşısındakinin cümlesini o bitirmeden tahmin edebilir.
+Tahmin, konuşmanın o ana kadarki içeriğine ve dilin genel kalıplarına dayanır.
+Bilinçdışı C ıkarım
+Algının, duyu verisinden yapılan bir çıkarım olduğu fikri Helmholtz’a dayanır;
+Helmholtz bu işlemi bilinçdışı çıkarım (unbewusster Schluss) olarak adlandırmıştır
+(Helmholtz, 1867). Güncel karşılığı olan tahminci işleme (predictive process-
+ing) kuramına göre beyin, gelecek duyu verisini sürekli tahmin eder ve yalnızca
+tahmin ile gelen veri arasındaki farkı işler (Clark, 2013; Friston, 2010). Bu
+çerçevede tamamlama istisnai bir durum değil, algının olağan çalışma biçimidir.
+3
+
+-- 3 of 8 --
+
+Yazılımda Tamamlama
+Yazılımda tamamlama, eksik ya da bozuk verinin, mevcut veriye ve önceden
+bilinen kurallara veya öğrenilmiş kalıplara dayanılarak yeniden üretilmesidir.
+Görüntü Onarma
+Görüntü onarma (inpainting), bir görüntünün silinmiş ya da bozulmuş bölgesinin
+çevredeki piksellerden yararlanılarak yeniden oluşturulmasıdır (Bertalm´ıo vd.,
+2000). Fotoğraf düzenleme uygulamalarındaki nesne silme özelliği bu tekniğe
+dayanır. Beynin kör noktayı doldurmasına en yakın yazılım karşılığıdır: her iki
+durumda da boşluk, çevresindeki görsel bilgiyle doldurulur.
+Ara Değer Bulma
+Ara değer bulma (interpolation), iki bilinen değer arasındaki bilinmeyen değerin
+tahmin edilmesidir. Örneğin saniyede 30 kare içeren bir videoda iki kare arasına
+yeni kareler üretilerek video saniyede 60 kareye çıkarılabilir. Üretilen kareler
+kamera tarafından çekilmemiş, komşu karelerden hesaplanmıştır.
+Kayıp Paket Gizleme
+˙Internet üzerinden iletilen ses verisi küçük paketlere bölünür ve bu paketlerin
+bir kısmı yolda kaybolabilir. Kayıp paket gizleme (packet loss concealment),
+kaybolan paketin yerine, önceki paketlerdeki sese dayanarak tahmini bir ses
+parçası üretir (Perkins vd., 1998). Dinleyici kısa kayıpları kesinti olarak duymaz.
+Otomatik Tamamlama ve Dil Modelleri
+Telefon klavyelerinin bir sonraki kelimeyi önermesi, o ana kadar yazılmış metne
+bakarak en olası devamın seçilmesidir. Metnin öngörülebilirliğini ölçme fikri
+Shannon’a dayanır (Shannon, 1951). Büyük dil modelleri (large language mod-
+els) aynı işlemi ölçeklenmiş biçimde yapar: bağlamdan bir sonraki kelimeyi ya
+da eksik kelimeyi tahmin eder.
+Hata Düzeltme
+Hata düzeltme kodları (error-correcting codes), iletilen veriye fazladan bilgi
+ekler. Veri yolda bozulursa alıcı bu fazladan bilgiyi kullanarak doğru hâlini
+geri hesaplar (Hamming, 1950). Bu yöntem diğerlerinden bir yönüyle ayrılır:
+tamamlama, istatistiksel tahmin yerine önceden eklenmiş yapı üzerinden yapılır
+ve belirli bir hata sınırına kadar kesin sonuç verir.
+Eksik Veri Atama
+Veri analizinde boş kalan hücrelerin, eldeki diğer verilerden tahmin edilen değerlerle
+doldurulmasına atama (imputation) denir (Rubin, 1987). Örneğin bir anket
+4
+
+-- 4 of 8 --
+
+tablosunda yaşı boş bırakılmış bir katılımcı için benzer katılımcıların verisinden
+tahmini bir yaş hesaplanabilir.
+5
+
+-- 5 of 8 --
+
+Ortak Yapı: C ıkarım
+Genel Sema
+Yukarıdaki örneklerin tamamı aynı şemaya indirgenebilir:
+Bağlam + Önceki bilgi → En olası tahmin
+• Bağlam: Boşluğun çevresindeki gözlenmiş veridir. C evredeki pikseller,
+önceki kelimeler ve önceki ses paketleri bu türdendir.
+• Önceki bilgi: Dünyanın genellikle nasıl olduğuna dair birikimdir. Beyinde
+bu birikim deneyimden, yazılımda ise kurallardan ya da eğitim verisinden
+gelir.
+• En olası tahmin: Kesin doğru değil, eldeki bilgiyle en makul cevaptır.
+Bu şemanın genel adı çıkarımdır (inference): gözlenen bilgiden gözlenmeyen
+bilginin türetilmesi.
+Bayesçi C ıkarım
+Semanın matematiksel karşılığı Bayesçi çıkarımdır (Bayesian inference). Eksik
+parça için olası açıklama H, gözlenen bağlam D ile gösterilirse:
+P (H | D) ∝ P (D | H) P (H)
+Burada P (H) önceki bilgiyi, P (D | H) bu açıklamanın gözlenen bağlamla ne
+kadar uyuştuğunu, P (H | D) ise bağlam göz önüne alındıktan sonra açıklamanın
+olasılığını gösterir. Tamamlama, P (H | D) değerini en yüksek yapan açıklamanın
+seçilmesidir.
+Beynin duyu verisini bu biçimde yorumladığı görüşü Bayesçi beyin hipotezi
+olarak bilinir (Knill ve Pouget, 2004). Makine öğrenmesindeki pek çok tamam-
+lama yöntemi de doğrudan ya da dolaylı olarak aynı ilkeye dayanır.
+Yanılmanın Kaynağı
+Tamamlama tahmin olduğu için yanılabilir. Yanılma iki kaynaktan gelir. Bir-
+incisi, bağlam yetersiz ya da yanıltıcı olabilir. ˙Ikincisi, önceki bilgi o duruma
+uymayabilir. Göz yanılmaları, beynin önceki bilgisinin gerçek uyarıcıyla çeliştiği
+durumlardır. Yazılımda bunun karşılığı, görüntü onarmada gerçekte olmayan bir
+nesnenin üretilmesi ya da dil modelinin akıcı ama yanlış bir cümle kurmasıdır.
+6
+
+-- 6 of 8 --
+
+Sonuç
+Tamamlama, eksik bilgiyle çalışmak zorunda olan her sistemin başvurduğu genel
+bir çözümdür. ˙Insan algısı ile yazılım tekniklerinin aynı şemaya indirgenebilmesi,
+bu benzerliğin yüzeysel olmadığını gösterir: her ikisi de bağlamı ve önceki bilgiyi
+birleştirerek en olası açıklamayı seçer.
+Bu çerçevenin pratik sonucu, tamamlanmış bir çıktının gözlenmiş veri gibi
+değerlendirilmemesi gerektiğidir. Onarılmış bir fotoğraf, ara karelerle akıcı hâle
+getirilmiş bir video ya da atama yapılmış bir veri tablosu, gerçeğin kaydı değil,
+gerçeğe dair bir tahmindir. Aynı durum algı için de geçerlidir.
+C erçevenin sınırı hata düzeltme kodlarında belirginleşir. Bu kodlar tamam-
+lama yapar ancak istatistiksel tahmin yerine önceden eklenmiş yapıya dayanır
+ve belirli koşullar altında kesin sonuç verir. Dolayısıyla tamamlamanın her
+biçimi Bayesçi çıkarıma indirgenmez; bir kısmı tasarım yoluyla belirsizliği or-
+tadan kaldırır.
+Açık kalan bir soru, beynin tamamlama sırasında hangi önceki bilgiyi kul-
+landığının ve bu bilginin nasıl güncellendiğinin ne ölçüde ayrıntılı biçimde açıklanabileceğidir.
+Tahminci işleme kuramı bu soruya genel bir cevap verir; kuramın ayrıntıları ise
+tartışmalıdır.
+Kaynaklar
+• Bertalm´ıo, M., Sapiro, G., Caselles, V. ve Ballester, C. (2000). Image
+Inpainting. Proceedings of SIGGRAPH 2000.
+• Clark, A. (2013). Whatever Next? Predictive Brains, Situated Agents,
+and the Future of Cognitive Science. Behavioral and Brain Sciences, 36(3).
+• Friston, K. (2010). The Free-Energy Principle: A Unified Brain Theory?
+Nature Reviews Neuroscience, 11.
+• Grainger, J. ve Whitney, C. (2004). Does the Huamn Mnid Raed Wrods
+as a Wlohe? Trends in Cognitive Sciences, 8(2).
+• Hamming, R. W. (1950). Error Detecting and Error Correcting Codes.
+Bell System Technical Journal, 29(2).
+• Helmholtz, H. von (1867). Handbuch der physiologischen Optik. Leipzig:
+Voss.
+• Knill, D. C. ve Pouget, A. (2004). The Bayesian Brain: The Role of
+Uncertainty in Neural Coding and Computation. Trends in Neurosciences,
+27(12).
+• Komatsu, H. (2006). The Neural Mechanisms of Perceptual Filling-in.
+Nature Reviews Neuroscience, 7.
+• Perkins, C., Hodson, O. ve Hardman, V. (1998). A Survey of Packet Loss
+Recovery Techniques for Streaming Audio. IEEE Network, 12(5).
+7
+
+-- 7 of 8 --
+
+• Ramachandran, V. S. ve Gregory, R. L. (1991). Perceptual Filling In of
+Artificially Induced Scotomas in Human Vision. Nature, 350.
+• Rubin, D. B. (1987). Multiple Imputation for Nonresponse in Surveys.
+New York: Wiley.
+• Shannon, C. E. (1951). Prediction and Entropy of Printed English. Bell
+System Technical Journal, 30(1).
+8
+
+-- 8 of 8 --
