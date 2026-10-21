@@ -1,8 +1,8 @@
 {
  "_not": "scripts/build-ask-kavramlar.js üretir — elle düzenleme; liste content/ask-kavramlar.json",
  "docs": 24,
- "tokens": 16477,
- "vocab": 5307,
+ "tokens": 16211,
+ "vocab": 5242,
  "concepts": [
   {
    "k": "aşk",
@@ -52,9 +52,9 @@
   {
    "k": "sevgi",
    "label": "sevgi",
-   "tf": 55,
-   "df": 18,
-   "s": 55,
+   "tf": 54,
+   "df": 17,
+   "s": 54,
    "top": [
     [
      "sevilmeye-izin-vermek",
@@ -230,11 +230,40 @@
    ]
   },
   {
+   "k": "bohem",
+   "label": "bohem",
+   "tf": 38,
+   "df": 1,
+   "s": 38,
+   "top": [
+    [
+     "bohemi-aramak",
+     38
+    ]
+   ],
+   "variants": [
+    "bohem",
+    "bohemi",
+    "boheme",
+    "bohemin",
+    "bohemlikle",
+    "bohemler"
+   ],
+   "near": [
+    "gençlik",
+    "çekim",
+    "topluluk",
+    "ihtiyaç",
+    "benzerlik",
+    "yoksulluk"
+   ]
+  },
+  {
    "k": "bekleyiş",
    "label": "bekleyiş",
-   "tf": 38,
+   "tf": 37,
    "df": 16,
-   "s": 38,
+   "s": 37,
    "top": [
     [
      "bir-kez-de-kapi-benim-icin-acilsin",
@@ -272,35 +301,6 @@
     "evlilik",
     "gerçek",
     "dinlemek"
-   ]
-  },
-  {
-   "k": "bohem",
-   "label": "bohem",
-   "tf": 38,
-   "df": 1,
-   "s": 38,
-   "top": [
-    [
-     "bohemi-aramak",
-     38
-    ]
-   ],
-   "variants": [
-    "bohem",
-    "bohemi",
-    "boheme",
-    "bohemin",
-    "bohemlikle",
-    "bohemler"
-   ],
-   "near": [
-    "gençlik",
-    "çekim",
-    "topluluk",
-    "ihtiyaç",
-    "benzerlik",
-    "yoksulluk"
    ]
   },
   {
@@ -660,96 +660,6 @@
    ]
   },
   {
-   "k": "gençlik",
-   "label": "gençlik",
-   "tf": 23,
-   "df": 5,
-   "s": 23,
-   "top": [
-    [
-     "bohemi-aramak",
-     6
-    ],
-    [
-     "mavi-cicek",
-     6
-    ],
-    [
-     "kapi-acik",
-     4
-    ],
-    [
-     "mavi-cicegin-pesinde",
-     4
-    ],
-    [
-     "bogazici",
-     3
-    ]
-   ],
-   "variants": [
-    "genç",
-    "gençliğini",
-    "gençliğine",
-    "gençliğinde",
-    "gençtik",
-    "gençtiler"
-   ],
-   "near": [
-    "bohem",
-    "özlem",
-    "rüya",
-    "Sehnsucht",
-    "yas",
-    "kimsesizlik"
-   ]
-  },
-  {
-   "k": "sevilmek",
-   "label": "sevilmek",
-   "tf": 23,
-   "df": 8,
-   "s": 23,
-   "top": [
-    [
-     "sevilmeye-izin-vermek",
-     8
-    ],
-    [
-     "kalbin-eski-odalari",
-     4
-    ],
-    [
-     "bir-bedenin-hatirladiklari",
-     3
-    ],
-    [
-     "kapi-acik",
-     3
-    ],
-    [
-     "kristaller-bizim",
-     2
-    ]
-   ],
-   "variants": [
-    "sevilmemiş",
-    "sevilen",
-    "sevilmek",
-    "sevilmeye",
-    "sevilmiş",
-    "sevilmeyi"
-   ],
-   "near": [
-    "sevgi",
-    "aşk",
-    "utanç",
-    "kurtarmak",
-    "hayal",
-    "gerçek"
-   ]
-  },
-  {
    "k": "af",
    "label": "af",
    "tf": 22,
@@ -779,11 +689,56 @@
    ]
   },
   {
+   "k": "gençlik",
+   "label": "gençlik",
+   "tf": 22,
+   "df": 5,
+   "s": 22,
+   "top": [
+    [
+     "bohemi-aramak",
+     6
+    ],
+    [
+     "mavi-cicek",
+     6
+    ],
+    [
+     "mavi-cicegin-pesinde",
+     4
+    ],
+    [
+     "bogazici",
+     3
+    ],
+    [
+     "kapi-acik",
+     3
+    ]
+   ],
+   "variants": [
+    "genç",
+    "gençliğini",
+    "gençliğine",
+    "gençliğinde",
+    "gençtik",
+    "gençtiler"
+   ],
+   "near": [
+    "bohem",
+    "özlem",
+    "rüya",
+    "Sehnsucht",
+    "yas",
+    "kimsesizlik"
+   ]
+  },
+  {
    "k": "kayıp",
    "label": "kayıp",
-   "tf": 22,
+   "tf": 21,
    "df": 13,
-   "s": 22,
+   "s": 21,
    "top": [
     [
      "sevilmeye-izin-vermek",
@@ -802,15 +757,15 @@
      2
     ],
     [
-     "kapi-acik",
-     2
+     "ayni-yone-bakmak",
+     1
     ]
    ],
    "variants": [
     "kaybetme",
-    "kayıp",
     "kaybeder",
     "kaybettiği",
+    "kayıp",
     "kaybetmek",
     "kaybettikçe"
    ],
@@ -821,50 +776,6 @@
     "gerçek",
     "hayal",
     "kaçış"
-   ]
-  },
-  {
-   "k": "eksiklik",
-   "label": "eksiklik",
-   "tf": 21,
-   "df": 13,
-   "s": 21,
-   "top": [
-    [
-     "soylenmeyenin-affi",
-     5
-    ],
-    [
-     "her-sabah-yeniden",
-     2
-    ],
-    [
-     "hic-yasanmamis-hatiralar",
-     2
-    ],
-    [
-     "mavi-cicegin-pesinde",
-     2
-    ],
-    [
-     "mavi-cicek",
-     2
-    ]
-   ],
-   "variants": [
-    "eksik",
-    "eksiklik",
-    "eksikmiş",
-    "eksiklerimizi",
-    "eksikliği"
-   ],
-   "near": [
-    "özlem",
-    "aşk",
-    "âşık olmak",
-    "aşka aşık olmak",
-    "bohem",
-    "seçim"
    ]
   },
   {
@@ -913,6 +824,50 @@
    ]
   },
   {
+   "k": "eksiklik",
+   "label": "eksiklik",
+   "tf": 20,
+   "df": 12,
+   "s": 20,
+   "top": [
+    [
+     "soylenmeyenin-affi",
+     5
+    ],
+    [
+     "her-sabah-yeniden",
+     2
+    ],
+    [
+     "hic-yasanmamis-hatiralar",
+     2
+    ],
+    [
+     "mavi-cicegin-pesinde",
+     2
+    ],
+    [
+     "mavi-cicek",
+     2
+    ]
+   ],
+   "variants": [
+    "eksik",
+    "eksiklik",
+    "eksikmiş",
+    "eksiklerimizi",
+    "eksikliği"
+   ],
+   "near": [
+    "özlem",
+    "aşk",
+    "âşık olmak",
+    "aşka aşık olmak",
+    "bohem",
+    "seçim"
+   ]
+  },
+  {
    "k": "emek",
    "label": "emek",
    "tf": 20,
@@ -948,6 +903,51 @@
     "bekleyiş",
     "sabır",
     "mevsim"
+   ]
+  },
+  {
+   "k": "sevilmek",
+   "label": "sevilmek",
+   "tf": 20,
+   "df": 7,
+   "s": 20,
+   "top": [
+    [
+     "sevilmeye-izin-vermek",
+     8
+    ],
+    [
+     "kalbin-eski-odalari",
+     4
+    ],
+    [
+     "bir-bedenin-hatirladiklari",
+     3
+    ],
+    [
+     "kristaller-bizim",
+     2
+    ],
+    [
+     "bogazici",
+     1
+    ]
+   ],
+   "variants": [
+    "sevilen",
+    "sevilmemiş",
+    "sevilmiş",
+    "sevilmek",
+    "sevilmeye",
+    "sevilmeyi"
+   ],
+   "near": [
+    "sevgi",
+    "aşk",
+    "utanç",
+    "kurtarmak",
+    "hayal",
+    "gerçek"
    ]
   },
   {
@@ -3237,27 +3237,6 @@
    ]
   },
   {
-   "k": "kimsesizlik",
-   "label": "kimsesizlik",
-   "tf": 2,
-   "df": 1,
-   "s": 2,
-   "top": [
-    [
-     "kapi-acik",
-     2
-    ]
-   ],
-   "variants": [
-    "kimsesiz"
-   ],
-   "near": [
-    "gençlik",
-    "kayıp",
-    "yas"
-   ]
-  },
-  {
    "k": "kurtarma isteği",
    "label": "kurtarma isteği",
    "tf": 2,
@@ -3843,6 +3822,27 @@
    "near": [
     "bağlılık",
     "ihtiyaç"
+   ]
+  },
+  {
+   "k": "kimsesizlik",
+   "label": "kimsesizlik",
+   "tf": 1,
+   "df": 1,
+   "s": 1,
+   "top": [
+    [
+     "kapi-acik",
+     1
+    ]
+   ],
+   "variants": [
+    "kimsesiz"
+   ],
+   "near": [
+    "gençlik",
+    "kayıp",
+    "yas"
    ]
   },
   {
