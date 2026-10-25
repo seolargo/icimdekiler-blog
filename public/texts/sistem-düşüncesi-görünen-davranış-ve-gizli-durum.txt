@@ -1,0 +1,688 @@
+Sistem Düşüncesi: Görünen Davranış ve Gizli
+Durum
+ÖFY
+October 2026
+Özet
+Japonca Ki, Ma, Honne ve Tatemae kavramları mühendislik terimi değildir.
+Ancak her biri sistemlere sorulabilecek bir soruya karşılık gelir. Ki ve özellikle
+k¯uki o yomu gizli durumun kestirimine, Ma zamanlama ve gecikmeye, Tatemae
+ile Honne ise arayüz ile iç durum arasındaki farka benzetilebilir. Buna karşılık
+Kaizen, Poka-yoke, Jidoka ve Muda gibi Toyota Üretim Sistemi kavramları ben-
+zetme değildir; doğrudan mühendislik pratiğinde kullanılır. Sistemleri anla-
+mak için asıl araçlar kontrol teorisi, sinyal işleme, sistem dinamiği ve karmaşık
+sistemler gibi alanlardan gelir. Bu alanların ortak dili durum, geri besleme,
+gözlemlenebilirlik, kontrol edilebilirlik, kararlılık ve belirme gibi kavramlardır.
+Gözlemlenebilirlik ile kontrol edilebilirlik birbirinin ikizidir ve birlikte öğrenilmelidir.
+Sağlamlık bozulmamak, esneklik ise bozulunca toparlanmak demektir. Sistem
+düşüncesi bir bakış açısı, sistem dinamiği bir modelleme yöntemi, kontrol teorisi
+ise matematiksel bir disiplindir.
+1
+
+-- 1 of 20 --
+
+Giriş
+Sistem, birbirini etkileyen parçalardan oluşan ve bir bütün olarak davranan
+yapıdır. Bir termostat, bir şehir trafiği ya da bir yazılım servisi bu tanıma
+uyar. Bir sistemi anlamak için yalnızca parçalarını bilmek yetmez. Parçaların
+nasıl etkileştiğini, sistemin zaman içinde nasıl değiştiğini ve hangi durumların
+dışarıdan görülebildiğini de bilmek gerekir.
+Yaygın bir yaklaşım, Doğu düşüncesinden gelen kavramları doğrudan mühendislik
+yöntemi gibi sunmaktır. Bu yanıltıcıdır. Ki ya da Ma gibi kavramlar düşünmeyi
+yönlendiren birer hatırlatıcı olabilir. Ama teknik bilgiyi sağlayan şey matem-
+atiksel modeller, ölçümler ve deneylerdir. Bu notta iki tür kavram ayrı tutu-
+lur: yalnızca benzetme olarak kullanılabilenler ve mühendislikte gerçekten kul-
+lanılanlar.
+Not şu konuları kapsar: Japonca kavramların mühendislik karşılıkları, temel
+sistem kavramları, sistemleri inceleyen başlıca alanlar ve bu alanlar için bir
+öğrenme sırası. Alanların matematiksel ayrıntıları kapsam dışındadır; yalnızca
+temel denklemler verilir.
+2
+
+-- 2 of 20 --
+
+Japonca Kavramlar ve Mühendislik Benzetmeleri
+Aşağıdaki eşleştirmeler birer analojidir. Kavramların özgün anlamı, mühendislikteki
+karşılığından daha geniştir.
+Kavram Mühendislikteki benzeri Sorduğu soru
+Ki () Gizli durumun kestirimi Doğrudan göremediğim bir şeyi
+hangi işaretlerden anlarım?
+Ma () Zamanlama, gecikme, tampon Ne zaman harekete geçmeliyim; iki
+olay arasındaki boşluk ne işe yarıyor?
+Tatemae () Dış arayüz, gözlenen davranış Sistem dışarıya ne gösteriyor?
+Honne () ˙Iç durum, gerçek amaç Sistemin içinde gerçekte ne oluyor?
+Ba () Ortam, ortak bağlam Bir şey içinde bulunduğu ortamdan
+nasıl etkileniyor?
+Mushin () Öğrenilmiş becerinin akıcı
+uygulanması
+Gereksiz müdahaleler performansı
+bozuyor mu?
+Ki ve K¯ uki o Yomu: Gizli Durumun Kestirimi
+Ki, bağlama göre enerji, ruh hâli ya da atmosfer anlamına gelir. Gizli durumu
+sezmeye asıl karşılık gelen ifade ise k¯uki o yomu () ifadesidir. Kelime anlamı
+“havayı okumak”tır. Ortamda açıkça söylenmeyen durumu küçük işaretlerden
+çıkarmayı anlatır.
+Kontrol teorisinde bunun karşılığı durum kestirimi (state estimation) işlemidir:
+ölçülemeyen bir iç durumu, ölçülebilen çıktılardan tahmin etmek. Doğrusal bir
+sistem şöyle yazılır:
+xt+1 = Axt + But + wt, yt = Cxt + vt
+Burada xt sistemin iç durumu, ut sisteme verilen giriş, yt ölçülen çıktı, wt ve
+vt ise model ve ölçüm belirsizlikleridir. ˙Iç durum doğrudan görülmez; ama
+yt ölçümlerinden hakkında çıkarım yapılır. Kalman filtresi, belirli varsayımlar
+altında bu tahmini en iyi biçimde yapan yöntemdir (Kalman, 1960).
+Örnek: bir elektrik motorunun iç sıcaklığını ölçen bir sensör olmasın. Akım,
+gerilim ve dönüş hızı ölçülebiliyor olsun. Bu ölçümler ve motorun ısıl modeli
+kullanılarak iç sıcaklık tahmin edilebilir.
+Yazılımdan bir örnek: bir dosya indirme isteği 500 Internal Server Error
+döndürsün. Bu çıktı sorunun ne olduğunu söylemez. Sorun yanlış bir dosya
+kimliği, bozuk bir veritabanı ilişkisi ya da hatalı bir yapılandırma olabilir. Loglar
+ve istek kayıtları incelenerek iç durum bulunur.
+Önemli bir sınır vardır: her gizli durum çıkarılamaz. Ölçümler yetersizse iç
+durum hakkında güvenilir bir sonuca varılamaz. Bu sınır aşağıda gözlemlenebilirlik
+başlığında ele alınır.
+3
+
+-- 3 of 20 --
+
+Ma: Aralık, Gecikme ve Tampon
+Ma, iki şey arasındaki aralık ya da boşluktur. Mühendislikte iki farklı karşılığı
+vardır.
+Teknik gecikme
+Bir kontrol sistemi ölçümü gecikmeli alıyorsa kararını geçmişteki bir değere göre
+verir:
+u(t) = K(︁ r(t) − y(t − τ ))︁
+Burada r(t) hedef değer, y(t − τ ) ise τ kadar gecikmiş ölçümdür. Gecikme
+büyüdükçe kontrol kötüleşir. Bazı sistemlerde salınım ve kararsızlık ortaya
+çıkar. Duşta su sıcaklığını ayarlarken yaşanan durum buna örnektir: musluk
+çevrildikten sonra sıcaklık geç değiştiği için kişi fazla çevirir, ardından ters yöne
+fazla döner.
+Bazı gecikmeler ise kaçınılmazdır ve tasarıma katılmalıdır. Bir robotun kam-
+eradan görüntü alması, görüntüyü işlemesi ve ardından hareket etmesi zaman
+alır. Kontrolcü bu süreyi hesaba katmazsa robot, artık geçerli olmayan bir
+görüntüye göre hareket eder. Buradan çıkan genel ilke şudur: bir sistemi anla-
+mak için yalnızca bileşenlere ve olaylara değil, olayların ne zaman gerçekleştiğine
+ve aralarındaki süreye de bakmak gerekir.
+˙Işlevli boşluk: tampon
+Her aralık zararlı değildir. Üretim ve operasyonda tampon (buffer ) ya da
+boşluk payı (slack ), sistemi dalgalanmalara karşı korur. ˙Iki makine arasındaki
+ara stok, birinin kısa süre durması hâlinde diğerinin çalışmaya devam etmesini
+sağlar. Müzikte iki nota arasındaki sessizlik de yapının parçasıdır.
+Ma bu iki olguyla da ilişkilendirilebilir, ama ikisiyle de özdeş değildir.
+Tatemae ve Honne: Arayüz ile ˙Iç Durum
+Tatemae, topluma gösterilen tutumdur. Honne ise kişinin gerçek düşüncesidir.
+Yazılımda bunun karşılığı arayüzün gösterdiği durum ile sistemin gerçek durumu
+arasındaki farktır:
+xiç̸ = xgösterilen
+Bir uygulama “˙Indirme başarılı” yazabilir; ama dosya diske hiç yazılmamış ola-
+bilir.
+Bu fark tek başına hata değildir. Hiçbir sistem iç durumunun tamamını
+dışarıya göstermez; göstermemesi de iyi tasarımın parçasıdır. Bu ilkeye kapsülleme
+(encapsulation) denir. Hata, gösterilen bilginin gerçek durum hakkında yanlış
+bir izlenim yaratmasıdır.
+˙Insan ilişkilerindeki karşılığı şöyledir: bir çalışan toplantıda yöneticisinin
+önerisini kabul ediyor görünebilir, ama uygulamada çekinceler taşıyabilir. Toplantıdaki
+onay Tatemae’ye, taşınan çekince Honne’ye karşılık gelir.
+4
+
+-- 4 of 20 --
+
+˙Insanlarla kurulan benzetmenin bir sınırı vardır. Yazılımda iç durum log ve
+ölçümlerle doğrudan görülebilir. ˙Insanın gerçek düşüncesi ise doğrudan okuna-
+maz; yalnızca söz ve davranışlardan, yanılma payı kabul edilerek tahmin edilir.
+Ba ve Mushin
+Ba, ortak bağlam ya da ortam demektir. Nonaka ve Konno, bilginin paylaşıldığı
+ve üretildiği ortamı tanımlamak için bu kavramı bilgi yönetimine taşımıştır
+(Nonaka ve Konno, 1998). Mühendislikte karşılığı sistemin çalışma ortamıdır:
+aynı yazılım farklı donanımda ya da farklı ağ koşullarında farklı davranır.
+Mushin, zihnin gereksiz takılmalardan arınmış hâlidir. Ustalaşmış bir be-
+cerinin düşünmeden, akıcı biçimde uygulanmasına benzetilebilir. Bu kavramın
+mühendislikte teknik bir karşılığı yoktur; yalnızca benzetme düzeyinde kalır.
+Dört Soruluk ˙Inceleme C erçevesi
+˙Ilk dört kavram, bir mühendislik yöntemi olarak değil, sistem incelerken sorula-
+cak dört soru olarak kullanılabilir. Her sorunun mühendislikte bir teknik aracı
+vardır.
+Soru ˙Incelenen şey Teknik araç
+Görmediğim ne ola-
+bilir? (Ki)
+Gizli durumlar ve bilin-
+meyenler
+Sensörler, loglar, durum kestirimi
+Zamanlama neyi
+değiştiriyor? (Ma)
+Gecikmeler, olaylar arası
+ilişki
+Zaman diyagramları, zaman seri-
+leri, benzetim
+Dışarıya ne
+gösteriliyor?
+(Tatemae)
+Arayüz ve gözlenen çıktılar API sözleşmeleri, arayüz testleri,
+telemetri
+Gerçekte ne oluyor?
+(Honne)
+˙Iç durum ve gerçek davranış Enstrümantasyon, entegrasyon
+testleri, durum makineleri
+Bu çerçeve özellikle hata ayıklama, sistem analizi ve tasarım incelemelerinde
+işe yarar. Ancak soruların kendisi yeni değildir. Sistem mühendisliği, kontrol
+teorisi ve yazılım mühendisliği aynı soruları kendi teknik yöntemleriyle zaten ele
+alır.
+Dört soru, sistem düşüncesinin dört temel meselesine karşılık gelir: parçaların
+birbiriyle nasıl etkileştiği, sistemin zaman içinde nasıl değiştiği, hangi durum-
+ların gözlemlenebildiği ve dıştan görünen davranışın iç süreçlerle nasıl ilişkili
+olduğu. Zen ile bu alanlar arasında düşünsel benzerlik kurulabilir. Teknik bil-
+giyi sağlayan ise Zen değil, matematiksel modeller, deneyler ve mühendislik
+yöntemleridir.
+5
+
+-- 5 of 20 --
+
+Mühendislikte Doğrudan Kullanılan Japonca Kavram-
+lar
+Yukarıdaki kavramlardan farklı olarak aşağıdakiler benzetme değildir. Büyük
+bölümü Toyota Üretim Sistemi’nden (Ohno, 1988) gelir ve bugün yalın üretim
+(lean manufacturing) ile yazılım geliştirmede kullanılır.
+Kavram Anlamı Örnek
+Kaizen () Küçük adımlarla sürekli iy-
+ileştirme
+Her sprint sonunda bir süreci bi-
+raz düzeltmek
+Poka-yoke () Hatayı baştan imkânsız kılan
+tasarım
+USB-C fişin iki yönde de
+takılabilmesi; tip sistemi
+Jidoka () Hata olunca sistemin kendini
+durdurması
+Testler geçmezse dağıtımın
+otomatik durması
+Genchi genbutsu () Yerinde git, kendi gözünle gör Raporla yetinmeyip üretim
+loglarına bakmak
+Muda () ˙Israf Kimsenin okumadığı rapor
+Mura () Düzensizlik, dengesiz yük Ay sonunda biriken iş yığını
+Muri () Aşırı yük Kapasitesinin üstünde
+çalıştırılan sunucu
+Nemawashi () Karar öncesi zemin
+hazırlamak
+Toplantıdan önce ilgili kişilerle
+tek tek konuşmak
+Hansei () Dürüst geriye bakış Olay sonrası değerlendirme
+(postmortem)
+Poka-yoke kavramını Shigeo Shingo sistemleştirmiştir (Shingo, 1986). Muda,
+Mura ve Muri üçlüsü birlikte düşünülür: Mura ve Muri çoğu zaman Muda’nın
+nedenidir.
+Bu listeye bir kavram daha eklenebilir: Shoshin (), “başlangıç zihni”. Uz-
+man olunsa bile bir konuya ilk kez bakıyormuş gibi açık bakmayı anlatır (Suzuki,
+1970). Toyota kökenli değildir; ama kod incelemesi ve hata ayıklamada kul-
+lanılan bir tutumu tarif eder.
+6
+
+-- 6 of 20 --
+
+Temel Sistem Kavramları
+Durum, Sinyal ve Gürültü
+• Durum (state): Sistemin belirli bir andaki hâlidir. Geleceği hesaplamak
+için gereken en küçük bilgi kümesidir.
+• Sinyal (signal ): Bilgi taşıyan ölçülebilir değişimdir.
+• Gürültü (noise): Sinyali bozan ya da yorumlamayı zorlaştıran rastlantısal
+etkidir.
+• Eşik (threshold ): Bir tepkiyi tetikleyen sınır değeridir.
+Sinyal ile gürültünün oranına sinyal-gürültü oranı (signal-to-noise ratio,
+SNR) denir:
+SN R = Psinyal
+Pg ür ültü
+Burada P güçtür. Bir sensörden gelen tek bir aykırı ölçüm arıza anlamına
+gelmeyebilir. Birden çok ölçüm ve zaman içindeki eğilim daha güvenilir bilgi
+verir. ˙Insan davranışını yorumlarken de tek bir olaya fazla anlam yüklememek
+aynı ilkeye dayanır.
+Geri Besleme
+Geri besleme (feedback ), sistemin çıktısının yeniden girişe dönerek sonraki
+davranışı etkilemesidir. ˙Iki türü vardır:
+• Dengeleyici döngü (balancing loop): Sapmayı azaltır. Termostat, sıcaklık
+düştüğünde ısıtıcıyı açar, yükseldiğinde kapatır.
+• Güçlendirici döngü (reinforcing loop): Değişimi büyütür. Bir ürün
+yayıldıkça daha çok kişi duyar, daha çok kişi duydukça daha da yayılır.
+Geri besleme döngüsünde gecikme varsa sistem hedefin etrafında salınabilir.
+Duş örneği bunun günlük hayattaki karşılığıdır.
+˙Insan hayatında da davranışın sonucu sonraki kararı etkiler. Ancak döngü
+her zaman doğru çalışmaz. Geri bildirim yanlış yorumlanırsa hatalı bir davranış
+düzeltilmek yerine güçlenebilir.
+Gözlemlenebilirlik ve Kontrol Edilebilirlik
+Bu iki kavram kontrol teorisinin temelidir ve birbirinin ikizidir (Kalman, 1960).
+• Gözlemlenebilirlik (observability): Sistemin iç durumunun, çıktılar ölçülerek
+bulunup bulunamayacağıdır. Soru şudur: ˙Iç durumu görebilir miyim?
+• Kontrol edilebilirlik (controllability): Sistemin, girişler kullanılarak is-
+tenen herhangi bir duruma götürülüp götürülemeyeceğidir. Soru şudur:
+˙Iç durumu istediğim yere götürebilir miyim?
+7
+
+-- 7 of 20 --
+
+n durum değişkenli doğrusal bir sistem için iki koşul matrislerle sınanır:
+rankCCA...CAn−1 = n (gözlemlenebilir), rankBAB · · · An−1B = n (kontroledilebilir)
+Sezgisel anlamı şudur: ölçümler iç durumun her yönünü “görüyorsa” sistem
+gözlemlenebilirdir; girişler iç durumun her yönünü “itebiliyorsa” kontrol edilebilirdir.
+Örnek: bir aracın yalnızca hızı ölçülüyorsa konumu tam bilinemez; başlangıç
+konumu eksik kalır. Bir arabada direksiyon kilitliyse araç istenen yöne götürülemez;
+sistem kontrol edilebilir değildir.
+Yazılımda “observability” kelimesi daha gevşek kullanılır. Log, metrik ve iz
+(trace) kayıtlarıyla sistemin içinde ne olduğunun anlaşılabilmesini anlatır. Fikir
+aynıdır ama matematiksel tanım yoktur.
+Kararlılık ve Dinamik Tepki
+• Kararlılık (stability): Sistem küçük bir bozulmadan sonra dengeye geri
+döner mi? C ukurun dibindeki top kararlıdır; tepenin üstündeki top kararsızdır.
+• Aşma (overshoot): Sistemin hedefe ulaşırken hedefi geçmesidir.
+• Sönüm (damping): Salınımın ne kadar çabuk söndüğüdür. Az sönümlü
+sistem uzun süre salınır, aşırı sönümlü sistem hedefe yavaş ulaşır.
+• Histerezis (hysteresis): Sistemin tepkisinin yalnızca bugünkü girişe değil,
+geçmişine de bağlı olmasıdır.
+Histerezis için örnek termostattır. Termostat 22 °C’de açılıp aynı noktada
+kapansaydı ısıtıcı saniyede bir açılıp kapanırdı. Bunun yerine örneğin 21 °C’de
+açılır, 23 °C’de kapanır. Aradaki bant, sistemi gereksiz anahtarlamadan korur.
+Sağlamlık, Esneklik ve Yedeklilik
+Bu kavramlar sık karıştırılır:
+• Sağlamlık (robustness): Sistemin bozulmalara ve belirsizliklere rağmen
+çalışmaya devam etmesidir. Ölçüt, bozulmamaktır.
+• Esneklik (resilience): Sistemin bozulduktan sonra toparlanabilmesidir.
+Ölçüt, geri dönebilmektir. Kavramı ekolojide Holling kurmuştur (Holling,
+1973).
+• Yedeklilik (redundancy): Bir parça bozulduğunda işini üstlenecek ikinci
+bir parçanın bulunmasıdır. Uçaklardaki çift hidrolik sistem buna örnektir.
+• Kademeli bozulma (graceful degradation): Sistemin bir parçası bozulduğunda
+tamamen çökmek yerine daha az işlevle çalışmaya devam etmesidir. Bir
+web sitesinin öneri servisi çöktüğünde sayfanın öneriler olmadan açılması
+buna örnektir.
+8
+
+-- 8 of 20 --
+
+Kısıt ve Darboğaz
+Kısıt (constraint), sistemin yapabileceklerini sınırlayan koşuldur. Darboğaz
+(bottleneck ) ise sistemin toplam hızını belirleyen en yavaş halkadır. Goldratt’ın
+kısıtlar teorisine (Theory of Constraints) göre darboğaz dışındaki bir yeri hızlandırmak
+toplam çıktıyı artırmaz (Goldratt, 1984).
+Örnek: bir yazılım servisinde istekler veritabanında bekliyorsa, uygulama
+sunucusunu hızlandırmak yanıt süresini kısaltmaz. Önce veritabanı sorunu
+çözülmelidir.
+Bağlaşım ve Belirme
+• Bağlaşım (coupling): ˙Iki parçanın birbirinin davranışını ne kadar etk-
+ilediğidir. Sıkı bağlaşımda bir parçadaki değişiklik diğerini hemen etkiler.
+• Belirme (emergence): Parçaların etkileşiminden, tek tek parçalarda bu-
+lunmayan bir davranışın ortaya çıkmasıdır.
+Belirme için örnek kuş sürüsüdür. Her kuş yalnızca yakınındaki kuşlara
+tepki verir. Sürünün koordineli hareketi ise hiçbir kuşun planı değildir. Karınca
+kolonisi de aynı yapıdadır. Tek bir karıncanın davranışı koloninin yiyecek bulma
+stratejisini açıklamaz; strateji karıncaların birbirleriyle ve çevreyle etkileşiminden
+doğar.
+Bağlaşım için ayırt edici soru şudur: iki parça gerçekten birbirini etkiliyor
+mu, yoksa yalnızca aynı ortamda mı bulunuyor? Aynı ortamda olmak bağlaşım
+anlamına gelmez. ˙Iki insanın kararları birbirine bağlı olabilir; ama aynı ofiste
+çalışmaları tek başına bunu göstermez.
+Devrilme Noktası ve Yol Bağımlılığı
+Devrilme noktası (tipping point), küçük bir değişimin sistemin niteliğini bir
+anda değiştirdiği eşiktir. Fizikteki karşılığı faz geçişidir (phase transition): su
+0 °C’nin hemen altında birden buza dönüşür.
+Yol bağımlılığı (path dependence), geçmişte yapılan seçimlerin bugünkü
+seçenekleri sınırlamasıdır. Arthur, küçük tarihsel rastlantıların bir teknolojiyi
+kalıcı biçimde baskın hâle getirebildiğini göstermiştir (Arthur, 1989). QWERTY
+klavye düzeninin sürmesi sıkça verilen bir örnektir.
+Kaldıraç Noktaları, Gerekli C eşitlilik ve Goodhart Yasası
+Kaldıraç noktaları
+Kaldıraç noktası (leverage point), küçük bir müdahalenin sistemde büyük
+değişim yarattığı yerdir. Meadows bu noktaları etkilerine göre sıralamıştır
+(Meadows, 1999). Sıralamaya göre sayıları ve parametreleri değiştirmek en zayıf
+müdahaledir. Geri besleme döngülerini, bilgi akışlarını, kuralları ve sistemin
+amacını değiştirmek ise çok daha güçlüdür.
+9
+
+-- 9 of 20 --
+
+Örnek: bir binada enerji tüketimini azaltmak için tarifeyi biraz değiştirmek
+zayıf bir kaldıraçtır. Her dairenin anlık tüketimini görebilmesini sağlamak, yani
+yeni bir bilgi akışı kurmak, daha güçlü bir kaldıraçtır.
+Gerekli çeşitlilik yasası
+Ashby’ye göre bir kontrolcü, kontrol ettiği sistemin karşılaşabileceği bozulmalar
+kadar çeşitli tepki verebilmelidir (Ashby, 1956). Buna gerekli çeşitlilik yasası
+(law of requisite variety) denir. Yalnızca açıp kapatabilen bir ısıtıcı, hem ısınma
+hem soğuma gerektiren bir ortamı tek başına düzenleyemez.
+Goodhart yasası
+Goodhart yasası, bir ölçüm hedef hâline geldiğinde iyi bir ölçüm olmaktan
+çıktığını söyler (Goodhart, 1975; Strathern, 1997). Bugün bilinen kısa ifadesi
+Strathern’e aittir. Örnek: bir ekip yazdığı test sayısıyla ölçülürse, hiçbir şeyi
+sınamayan testler yazılmaya başlanır. Sayı artar, kalite artmaz.
+Kavramların Bağlı Olduğu Alanlar
+Bu kavramlar tek bir alanın alt başlığı değildir; farklı disiplinlerden gelir.
+10
+
+-- 10 of 20 --
+
+Kavram Bağlı olduğu alan Özel konusu
+Durum Kontrol teorisi Durum uzayı modellemesi
+Sinyal Sinyal işleme Sinyal analizi
+Gürültü Sinyal işleme, istatistik Gürültü filtreleme
+Geri besleme Kontrol teorisi Geri beslemeli kontrol
+Gecikme Bilgisayar mühendisliği, kon-
+trol teorisi
+Zaman gecikmesi analizi
+Eşik Sinyal işleme, kontrol teorisi Eşikleme ve tetikleme
+Kısıt Optimizasyon, sistem
+mühendisliği
+Kısıtlı optimizasyon
+Gözlemlenebilirlik Kontrol teorisi Durum gözlemcileri
+Kontrol edilebilirlik Kontrol teorisi Durum uzayı analizi
+Kararlılık, sönüm Kontrol teorisi, dinamik sis-
+temler
+Kararlılık analizi
+Sağlamlık Kontrol teorisi, sistem
+mühendisliği
+Sağlam kontrol
+Esneklik, yedeklilik Güvenilirlik mühendisliği Arıza toleransı
+Darboğaz Yöneylem araştırması Kısıtlar teorisi
+Belirme Karmaşık sistemler Kolektif davranış
+Bağlaşım Sistem dinamiği, kontrol
+teorisi
+Sistemler arası etkileşim
+Geri besleme döngüsü Sistem dinamiği Güçlendirici ve dengeleyici
+döngüler
+Kaldıraç noktası Sistem düşüncesi Müdahale noktaları
+Gerekli çeşitlilik Sibernetik Düzenleme kuramı
+11
+
+-- 11 of 20 --
+
+Sistemleri ˙Inceleyen Dört Temel Alan
+Sistem Düşüncesi
+Sistem düşüncesi (systems thinking), bir sorunu tek bir parçaya bağlamadan,
+parçalar arasındaki ilişkiler üzerinden inceleyen bir yaklaşımdır. Temel sorusu
+şudur: Birbirine bağlı parçalar bütünü nasıl etkiliyor?
+Örnek: bir şehirde trafik sıkışıklığı varsa yalnızca yol genişletmek düşünülmez.
+Toplu taşımanın yeterliliği, konut ile iş yeri arasındaki mesafe ve park imkânı
+da incelenir. Yeni yolların daha fazla kişiyi araç kullanmaya teşvik etmesi de
+hesaba katılır. Bu son olguya uyarılmış talep (induced demand ) denir.
+Mühendislikten bir örnek: yavaş çalışan bir yazılımın sorunu yalnızca işlemciye
+bağlanmaz. Veritabanı, ağ gecikmesi, servisler arası bağımlılıklar ve önbellek
+birlikte incelenir.
+Sistem düşüncesi bir disiplinden çok bir bakış açısıdır. Matematiksel araçları
+diğer alanlardan alır.
+Sistem Dinamiği
+Sistem dinamiği (system dynamics), bir sistemin zaman içinde nasıl değiştiğini
+stoklar, akışlar ve geri besleme döngüleriyle modelleyen yöntemdir. Forrester
+tarafından geliştirilmiştir (Forrester, 1961).
+• Stok (stock ): Belirli bir anda sistemde biriken miktardır.
+• Akış (flow ): Stoku artıran ya da azaltan hareket hızıdır.
+Bir şirketteki çalışan sayısı N bir stoktur. ˙Işe alımlar ve ayrılmalar akıştır:
+dN
+dt = ˙I şealımlar − Ayrılmalar
+Model geri beslemeyle zenginleşir: çalışan sayısı arttıkça koordinasyon yükü ar-
+tar, yük arttıkça ayrılma oranı yükselir. Su deposu da aynı yapıdadır: depodaki
+su stok, giren ve çıkan su akıştır.
+Kontrol Teorisi
+Kontrol teorisi (control theory), bir sistemi ölçüp müdahale ederek istenen
+davranışa yaklaştırmanın matematiğidir. Döngü şöyledir: ölç, hedefle karşılaştır,
+müdahale et, yeniden ölç.
+Hedef ile ölçüm arasındaki fark hatadır:
+e(t) = r(t) − y(t)
+Burada r(t) istenen değer, y(t) ölçülen değerdir. Kontrolcü hataya göre girişi
+ayarlar. Oda sıcaklığını 22 °C’de tutan bir termostat ya da bir robot kol-
+unu istenen konuma götüren motor kontrolcüsü buna örnektir. Kontrol teorisi
+ayrıca gözlemlenebilirlik, kontrol edilebilirlik ve kararlılık sorularını matematik-
+sel olarak cevaplar.
+12
+
+-- 12 of 20 --
+
+Karmaşık Sistemler
+Karmaşık sistemler (complex systems), çok sayıda parçanın etkileşiminden,
+parçalara bakarak kolayca çıkarılamayan davranışların doğduğu sistemleri in-
+celer (Mitchell, 2009). Karmaşıklığın kaynağı parçaların sayısı değil, etkileşimlerin
+yapısıdır.
+Temel özellikleri şunlardır:
+• Etkileşim: Parçalar birbirinin davranışını etkiler.
+• Doğrusal olmama: Küçük bir değişiklik büyük sonuç doğurabilir; büyük
+bir değişiklik az etki yaratabilir.
+• Belirme: Bütünde parçalara indirgenemeyen örüntüler oluşur.
+• Geri besleme: Sonuçlar yeniden sisteme etki eder. Sıkışıklığı gören sürücüler
+başka yollara yönelir; bu da o yolların trafiğini artırır.
+• Uyarlanma: Parçalar deneyime göre davranışlarını değiştirebilir. ˙Insanlar
+yeni trafik koşullarına zamanla alışır.
+Her karmaşık sistem bu özelliklerin hepsini aynı ölçüde taşımaz.
+Örnek: kaza ya da yol daralması olmayan bir yolda da trafik sıkışabilir. Bir
+sürücü hafifçe fren yapar, arkadaki daha sert yapar ve etki geriye doğru büyür.
+Sugiyama ve arkadaşları dairesel bir pistte araçları sabit hızda sürdürmeye
+çalışarak bu olguyu deneyle göstermiştir; bir süre sonra darboğaz olmadan
+sıkışma dalgası oluşmuştur (Sugiyama vd., 2008).
+Basit bir elektrik devresi bu anlamda karmaşık değildir. Bileşenler ve bağlantılar
+biliniyorsa davranış hesaplanabilir. Bir şehir ise karmaşıktır. Yeni bir metro
+hattı yalnızca ulaşım süresini değil, zamanla insanların nerede oturduğunu ve
+nerede iş kurulduğunu da değiştirir. Mühendislikten bir örnek de merkezi bir
+yönetici olmadan, yalnızca komşularıyla etkileşerek birlikte hareket eden robot
+sürüleridir.
+Mühendislikteki uygulamaları
+• Robotik: Birden çok robotun birlikte çalışması.
+• Yapay zekâ: C ok sayıda birimin etkileşiminden doğan davranışların mod-
+ellenmesi.
+• Enerji sistemleri: Elektrik şebekesinde tek bir arızanın başka hatlara yük
+bindirerek zincirleme arızaya (cascading failure) yol açması.
+• Ulaşım: Trafik akışları ve şehir içi hareketlilik.
+• Biyoloji: Hücrelerin etkileşiminden doku ve organizma davranışının doğması.
+• Ekonomi: Birbirinin kararını etkileyen şirket ve bireylerden oluşan piyasalar.
+13
+
+-- 13 of 20 --
+
+Üç düşünme biçimi
+Bir sistemin davranışını parçaların özellikleri mi belirler, yoksa parçalar arasındaki
+ilişkiler yeni davranışlar mı üretir? Bu soru üç düşünme biçimini ayırır:
+• Analitik düşünme: Parçaları birbirinden ayırıp tek tek incelemek.
+• Sistem düşüncesi: Parçalar arasındaki ilişkileri ve geri beslemeleri incele-
+mek.
+• Karmaşık sistemler yaklaşımı: Bu etkileşimlerden yeni örüntülerin, kolek-
+tif davranışların ve öngörülmesi güç sonuçların nasıl doğduğunu incelemek.
+Bu üçü birbirinin alternatifi değil, tamamlayıcısıdır.
+Aynı Problem, Dört Bakış
+Alan Trafik için sorusu ˙Incelediği şey
+Sistem düşüncesi Trafiği hangi unsurlar ve ilişkiler
+oluşturuyor?
+Yol ağı, toplu taşıma, konut ve iş
+yeri dağılımı
+Sistem dinamiği Trafik zamanla neden artıyor? Araç sayısının değişimi, döngüler,
+gecikmeler
+Kontrol teorisi Akış nasıl düzenlenir? Trafik ışıkları, sensörler, kontrol al-
+goritmaları
+Karmaşık sistemler Sürücülerin etkileşiminden ne
+doğuyor?
+Kendiliğinden oluşan sıkışma dal-
+gaları
+Bu alanlar birbirinin alternatifi değildir. Bir trafik projesinde sistem düşüncesi
+kapsamı belirler, sistem dinamiği zaman içindeki etkileri modeller, kontrol teorisi
+müdahale mekanizmasını tasarlar, karmaşık sistemler yaklaşımı da beklenmedik
+kolektif etkileri araştırır.
+14
+
+-- 14 of 20 --
+
+Diğer Alanlar
+Sistemleri inceleyen alanlar yaptıkları işe göre altı grupta toplanabilir. Gruplar
+kesin değildir; alanlar birbiriyle kesişir.
+Sistemi Tanımak
+• Sistem mühendisliği (systems engineering): C ok bileşenli sistemlerin
+tasarımı ve yönetimi. Örnek: bir uçağın donanım ve yazılımını tek sistem
+olarak bütünleştirmek.
+• C izge kuramı (graph theory): Nesneler arası ilişkilerin matematiği. Düğümler
+ve kenarlardan oluşur.
+• Ağ bilimi (network science): Büyük gerçek ağların yapısı ve davranışı.
+Örnek: bir salgının ya da haberin ağda yayılması (Barab´asi, 2016).
+Sistemin Davranışını Anlamak
+• Dinamik sistemler kuramı (dynamical systems theory): Sistemlerin
+zaman içindeki evrimini diferansiyel denklemlerle inceler.
+• Doğrusal olmayan dinamik (nonlinear dynamics): Girdi ile çıktının
+orantılı olmadığı sistemleri inceler. Kaos bu alanın konusudur (Strogatz,
+1994).
+• Matematiksel modelleme (mathematical modeling): Gerçek bir olguyu
+denklemlerle temsil etme. Diğer bütün alanların ortak zeminidir.
+• Boyut analizi (dimensional analysis): Fiziksel büyüklüklerin birimleri
+üzerinden ilişkileri inceleme. Örnek: deneyden önce bir denklemin iki
+tarafının aynı birimde olup olmadığını kontrol ederek modelin fiziksel tu-
+tarlılığını sınamak.
+Sistemi Kontrol Etmek
+• Sibernetik (cybernetics): Canlı ve makine sistemlerinde iletişim ve kendi
+kendini düzenleme. Wiener tarafından adlandırılmıştır (Wiener, 1948).
+Örnek: vücudun sıcaklığını sabit tutması.
+• Durum kestirimi (state estimation): Ölçülemeyen durumu tahmin etme.
+Örnek: bir robotun konumunu sensörlerden hesaplaması.
+• Model öngörülü kontrol (model predictive control, MPC): Bir model
+üzerinden geleceği öngörerek, kısıtlar altında en iyi girişi seçme. Örnek:
+otonom aracın yol planlaması.
+15
+
+-- 15 of 20 --
+
+Belirsizlik Altında Anlamak
+• Olasılık ve istatistik (probability and statistics): Belirsizliğin ve verinin
+temel dili. Aşağıdaki alanların hepsi buna dayanır.
+• Bilgi kuramı (information theory): Bilginin ölçülmesi ve gürültülü kanal-
+lardan aktarılması (Shannon, 1948).
+• Bayesçi çıkarım (Bayesian inference): Yeni kanıtla olasılık tahminini
+güncelleme.
+• Nedensel çıkarım (causal inference): Bir olayın diğerine gerçekten ne-
+den olup olmadığını anlama. Korelasyon ile nedensellik ayrımı bu alanın
+konusudur (Pearl ve Mackenzie, 2018).
+• ˙Istatistiksel öğrenme (statistical learning): Verilerden örüntü öğrenme.
+Örnek: sensör verisinden arıza tahmini.
+Tasarlamak ve ˙Iyileştirmek
+• Optimizasyon kuramı (optimization theory): Kısıtlar altında en iyi
+çözümü bulma. Örnek: en az enerjiyle çalışan motoru tasarlamak.
+• Yöneylem araştırması (operations research): Optimizasyonun lojistik,
+planlama ve kaynak dağıtımına uygulanması. Örnek: dağıtım rotalarını
+kısaltmak.
+• Karar kuramı (decision theory): Belirsizlik altında seçenekler arasında
+karar verme.
+• Oyun kuramı (game theory): Birbirinin kararını etkileyen aktörlerin
+davranışı. Örnek: iki şirketin fiyat rekabeti.
+• Güvenilirlik mühendisliği (reliability engineering): Sistemin ne kadar
+süre ve hangi koşullarda bozulmadan çalışacağının hesabı.
+Temsil Etmek ve Doğrulamak
+• Hesaplamalı modelleme ve benzetim (simulation): Bir olguyu bil-
+gisayarda çalıştırılabilir modele dönüştürme.
+• Ajan tabanlı modelleme (agent-based modeling): Tek tek aktörleri ku-
+rallarıyla modelleyip toplu davranışı gözleme (Bonabeau, 2002). Örnek:
+sürücü kurallarından trafik örüntüsü üretmek.
+• Biçimsel yöntemler (formal methods): Bir sistemin belirli özellikleri
+ihlal etmediğini matematiksel olarak kanıtlama.
+16
+
+-- 16 of 20 --
+
+Öğrenme Sırası ve Okuma Listesi
+Önerilen Sıra
+1. Sistem düşüncesi: Problemi ve ilişkilerini görmek.
+2. Matematiksel modelleme: Gerçek bir olguyu denklemle temsil etmek.
+3. Sistem dinamiği: Değişimin zaman içindeki yapısını incelemek.
+4. Olasılık ve istatistik: Belirsizlik ve veriyle çalışmak.
+5. Kontrol teorisi: Durum, gözlemlenebilirlik, kontrol edilebilirlik ve geri
+besleme.
+6. Optimizasyon: Kısıtlar altında daha iyi çözüm bulmak.
+7. Karmaşık sistemler ve ağ bilimi: C ok sayıda etkileşimden doğan davranışlar.
+8. Benzetim: Kurulan modeli bilgisayarda sınamak.
+Bu sıra resmı bir müfredat değildir. Kontrol teorisine diferansiyel denklemler
+üzerinden, ağ bilimine çizge kuramı üzerinden girmek daha kolay olabilir.
+Bir Kavramı Öğrenme Yöntemi
+Kavramları ezberlemek yerine her biri için üç soru sorulur:
+1. Nedir? Teknik tanımı nedir?
+2. Nasıl ölçülür ya da modellenir? Mühendislikteki somut karşılığı nedir?
+3. Nerede işe yarar? Gerçek bir olayı anlamayı nasıl kolaylaştırır?
+Örneğin gözlemlenebilirlik için cevaplar şöyledir: iç durumun çıktılardan
+bulunabilmesi; gözlemlenebilirlik matrisinin rankı; bir sensörün eksik olduğu
+durumda hangi büyüklüğün yine de tahmin edilebileceğini bilmek.
+Alanlara Göre Kitaplar
+17
+
+-- 17 of 20 --
+
+Alan Kitap
+Sistem düşüncesi Meadows, Thinking in Systems
+Sistem dinamiği Sterman, Business Dynamics
+Kontrol teorisi ˚ Aström ve Murray, Feedback Systems (yazarlar ücretsiz
+erişime açmıştır)
+Doğrusal olmayan di-
+namik
+Strogatz, Nonlinear Dynamics and Chaos
+Sibernetik Ashby, An Introduction to Cybernetics
+Karmaşık sistemler Mitchell, Complexity: A Guided Tour
+Ağ bilimi Barab´asi, Network Science (çevrimiçi ücretsiz)
+Nedensel çıkarım Pearl ve Mackenzie, The Book of Why
+Kısıtlar teorisi Goldratt, The Goal
+Yalın üretim Ohno, Toyota Production System
+18
+
+-- 18 of 20 --
+
+Sonuç
+Japonca kavramlar sistemlere bakarken sorulacak soruları hatırlatır, ama cevap-
+ları vermez. Ki gizli durumu, Ma zamanlamayı, Tatemae ile Honne arayüz ile
+iç durum farkını sordurur. Bu soruların teknik cevabı durum kestirimi, gecikme
+analizi ve kapsülleme gibi araçlardan gelir. Pratik bir kural şudur: benzetme
+bir soruyu açıyorsa yararlıdır; bir cevabın yerine geçiyorsa yanıltıcıdır.
+Toyota kökenli kavramlar ise farklı bir yerde durur. Poka-yoke, Jidoka ve
+Kaizen bir düşünme biçimini değil, doğrudan uygulanabilen tasarım ve süreç
+ilkelerini anlatır. Bu yüzden yazılım geliştirmeye benzetme olmadan aktarılabilirler:
+tip sistemi bir poka-yoke, testi geçmeyen dağıtımı durduran hat bir jidoka
+örneğidir.
+Sistem kavramları arasında en verimli başlangıç gözlemlenebilirlik ile kon-
+trol edilebilirlik ikilisidir. Birincisi elindeki verinin sınırını, ikincisi müdahalenin
+sınırını gösterir. Bir sorunu çözmeye çalışırken iki soru birlikte sorulmalıdır: sis-
+temi yeterince görebiliyor muyum ve görsem bile istediğim yöne itebilir miyim?
+C erçevenin sınırları da vardır. ˙Insan ve toplum sistemlerinde iç durum
+ölçülemez, parametreler zamanla değişir ve aktörler modeli öğrenip davranışlarını
+değiştirir. Goodhart yasası bunun bir örneğidir. Bu tür sistemlerde mühendislik
+kavramları açıklama gücü taşır ama kesin öngörü vermez.
+Açık kalan bir soru şudur: karmaşık sistemlerde kaldıraç noktaları önceden
+bulunabilir mi, yoksa yalnızca geriye dönüp bakıldığında mı görülür? Mead-
+ows’un sıralaması nereye bakılacağını söyler; ama belirli bir sistemde hangi
+müdahalenin işe yarayacağını ancak model, benzetim ve deneme birlikte gösterebilir.
+Kaynaklar
+• Arthur, W. B. (1989). Competing Technologies, Increasing Returns, and
+Lock-In by Historical Events. The Economic Journal, 99(394).
+• Ashby, W. R. (1956). An Introduction to Cybernetics. Chapman & Hall.
+• ˚ Aström, K. J. ve Murray, R. M. (2008). Feedback Systems: An Introduc-
+tion for Scientists and Engineers. Princeton University Press.
+• Barab´asi, A.-L. (2016). Network Science. Cambridge University Press.
+• Bonabeau, E. (2002). Agent-Based Modeling: Methods and Techniques
+for Simulating Human Systems. PNAS, 99(suppl. 3).
+• Forrester, J. W. (1961). Industrial Dynamics. MIT Press.
+• Goldratt, E. M. (1984). The Goal. North River Press.
+• Goodhart, C. A. E. (1975). Problems of Monetary Management: The U.K.
+Experience. Papers in Monetary Economics, Reserve Bank of Australia.
+• Holling, C. S. (1973). Resilience and Stability of Ecological Systems. An-
+nual Review of Ecology and Systematics, 4.
+19
+
+-- 19 of 20 --
+
+• Kalman, R. E. (1960). A New Approach to Linear Filtering and Prediction
+Problems. Journal of Basic Engineering, 82(1).
+• Meadows, D. H. (1999). Leverage Points: Places to Intervene in a System.
+The Sustainability Institute.
+• Meadows, D. H. (2008). Thinking in Systems: A Primer. Chelsea Green.
+• Mitchell, M. (2009). Complexity: A Guided Tour. Oxford University
+Press.
+• Nonaka, I. ve Konno, N. (1998). The Concept of “Ba”: Building a Foun-
+dation for Knowledge Creation. California Management Review, 40(3).
+• Ohno, T. (1988). Toyota Production System: Beyond Large-Scale Produc-
+tion. Productivity Press.
+• Pearl, J. ve Mackenzie, D. (2018). The Book of Why. Basic Books.
+• Shannon, C. E. (1948). A Mathematical Theory of Communication. Bell
+System Technical Journal, 27.
+• Shingo, S. (1986). Zero Quality Control: Source Inspection and the Poka-
+yoke System. Productivity Press.
+• Sterman, J. D. (2000). Business Dynamics: Systems Thinking and Mod-
+eling for a Complex World. McGraw-Hill.
+• Strathern, M. (1997). ‘Improving Ratings’: Audit in the British University
+System. European Review, 5(3).
+• Strogatz, S. H. (1994). Nonlinear Dynamics and Chaos. Addison-Wesley.
+• Sugiyama, Y. vd. (2008). Traffic Jams Without Bottlenecks: Experimen-
+tal Evidence for the Physical Mechanism of the Formation of a Jam. New
+Journal of Physics, 10.
+• Suzuki, S. (1970). Zen Mind, Beginner’s Mind. Weatherhill.
+• Wiener, N. (1948). Cybernetics: Or Control and Communication in the
+Animal and the Machine. MIT Press.
+20
+
+-- 20 of 20 --

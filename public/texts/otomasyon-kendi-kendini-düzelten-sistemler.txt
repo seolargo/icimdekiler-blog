@@ -1,0 +1,673 @@
+Otomasyon: Kendi Kendini Düzelten Sistemler
+ÖFY
+October 2026
+Özet
+Kontrol ve Otomasyon Mühendisliği, zaman içinde değişen sistemlerin matem-
+atiksel modelini kurmayı ve bu sistemlerin davranışını istenen yöne çevirmeyi
+öğreten bir mühendislik dalıdır. Bölümün omurgası geri besleme (feedback )
+kavramıdır: sistemin çıkışı ölçülür, hedefle karşılaştırılır ve aradaki fark girişe
+düzeltme olarak geri verilir. Müfredat yedi grupta toplanabilir. Matematik ve
+elektronik dersleri araç sağlar, kontrol dersleri yöntemi verir, otomasyon, robotik
+ve yazılım dersleri bu yöntemi gerçek sistemlere uygular. Kontrol teorisi iki
+kuşakta gelişmiştir: frekans tepkisine dayanan klasik kontrol ve sistemin iç du-
+rumlarına dayanan modern kontrol. Kestirim yöntemleri, doğrudan ölçülemeyen
+büyüklüklerin gürültülü ölçümlerden tahmin edilmesini sağlar; bu yöntemler
+navigasyondan robotiğe kadar geniş bir alanda kullanılır. Bölümün ayırt edici
+yanı tek bir teknoloji değil, modelleme, simülasyon ve kontrol zincirini çok farklı
+sistemlere taşıyabilen bir düşünme biçimidir. Ders adları ve sıraları üniversiteden
+üniversiteye değişse de içerik büyük ölçüde ortaktır.
+1
+
+-- 1 of 21 --
+
+Giriş
+Sistem, girdileri alıp çıktılar üreten ve iç durumu zamanla değişen bir bütündür.
+Bir oda ısıtıcısı, bir elektrik motoru, bir uçak ya da bir üretim hattı birer sis-
+temdir. Model, bu sistemin davranışını denklemlerle anlatan sadeleştirilmiş
+tanımdır. Model, sistemin her ayrıntısını içermez; yalnızca sorulan soru için
+gerekli olan davranışı yakalar.
+Kontrol, bir sistemin çıkışını istenen değere getirmek için girdisini ayarlama
+işidir. ˙Iki temel yapı vardır:
+• Açık çevrim kontrol (open-loop): Girdi önceden belirlenir, sonuç ölçülmez.
+Zamanlayıcıyla çalışan bir çamaşır makinesi buna örnektir; çamaşırın gerçekten
+temizlenip temizlenmediğine bakmaz.
+• Kapalı çevrim kontrol (closed-loop): C ıkış sürekli ölçülür ve hedeften
+sapma düzeltilir. Termostat buna örnektir; oda sıcaklığı hedefin altına
+düşünce ısıtıcıyı açar.
+Kapalı çevrim kontrol eski bir fikirdir. Buhar makinelerinde kullanılan
+merkezkaç regülatörü, makinenin hızını kendi kendine sabit tutuyordu. Maxwell
+bu düzeneğin kararlılığını 1868’de matematiksel olarak incelemiş ve kontrol
+teorisinin ilk analitik çalışmalarından birini yapmıştır (Maxwell, 1868).
+Kontrol ile otomasyon sık karıştırılır. Kontrol, tek bir büyüklüğün (sıcaklık,
+hız, konum) hedefte tutulmasıyla ilgilenen matematiksel bir disiplindir. Otomasyon
+ise bir işin insan müdahalesi olmadan yürütülmesidir; içinde çok sayıda kontrol
+döngüsünün yanı sıra sıralama, haberleşme ve izleme işleri de bulunur. Bir fab-
+rikada her motorun hızı bir kontrol döngüsüyle tutulur; motorların hangi sırayla
+çalışacağına ise otomasyon sistemi karar verir.
+Bu not belirli bir üniversitenin ders planını değil, bölümün genel müfredat
+haritasını anlatır. Her ders için ne öğretildiği, neden gerekli olduğu ve tipik bir
+örnek verilir.
+2
+
+-- 2 of 21 --
+
+Matematik ve Temel Bilimler
+Bu grup, bölümün geri kalanında kullanılan dili öğretir. Kontrol dersleri bu
+derslerde öğrenilen araçlar olmadan okunamaz.
+Matematik Dersleri
+Matematik I (Calculus)
+Limit, türev ve tek değişkenli integral öğretilir. Türev bir büyüklüğün ne hızla
+değiştiğini gösterir; kontrol mühendisliğinde hız, ivme ve değişim oranı her yerde
+karşılaşılan kavramlardır. Örneğin bir aracın konumunun türevi hızını, hızının
+türevi ivmesini verir.
+Matematik II (˙Integral ve C ok Değişkenli Analiz)
+˙Integral teknikleri, çok değişkenli fonksiyonlar, kısmi türev ve çok katlı integral
+öğretilir. Gerçek sistemler genellikle birden fazla değişkene bağlıdır. Bir odanın
+sıcaklığı hem zamana hem de odadaki konuma bağlıdır; bu tür ilişkiler çok
+değişkenli analizle ifade edilir.
+Diferansiyel Denklemler
+Bir büyüklüğün kendisi ile değişim hızı arasındaki ilişkiyi kuran denklemler ve
+bunların çözüm yöntemleri öğretilir. Bölümün en temel matematik dersidir,
+çünkü fiziksel sistemlerin modelleri neredeyse her zaman diferansiyel denklem
+biçimindedir. Örneğin bir yay-kütle sisteminde kütlenin ivmesi, yayın uzama
+miktarına bağlıdır:
+mx + c ˙x + kx = F (t)
+Burada m kütle, c sönüm katsayısı, k yay sabiti, F (t) dış kuvvettir. Laplace
+dönüşümü de bu derste ya da hemen ardından öğretilir; diferansiyel denklemleri
+cebirsel denklemlere çevirerek çözümü kolaylaştırır.
+Lineer Cebir
+Vektörler, matrisler, doğrusal dönüşümler, özdeğer ve özvektörler öğretilir. Bir-
+den çok değişkeni olan sistemler matrislerle yazılır. Bir matrisin özdeğerleri, sis-
+temin kararlı olup olmadığını, yani dış etki kesildiğinde dengeye dönüp dönmediğini
+gösterir. Modern kontrol derslerinin tamamı lineer cebir üzerine kuruludur.
+Olasılık ve ˙Istatistik
+Rastgele değişkenler, olasılık dağılımları, beklenen değer, varyans ve istatistik-
+sel çıkarım öğretilir. Gerçek ölçümler her zaman gürültülüdür. Bir sıcaklık
+sensörü aynı sıcaklığı her seferinde biraz farklı okur. Bu belirsizliği hesaba kat-
+madan doğru kestirim yapılamaz; bu nedenle ders, kestirim ve sistem tanılama
+derslerinin ön koşuludur.
+3
+
+-- 3 of 21 --
+
+Fizik ve Kimya Dersleri
+Fizik I (Mekanik)
+Kuvvet, hareket, enerji, momentum ve dönme hareketi öğretilir. Newton’un
+hareket yasaları, mekanik sistemlerin modelinin doğrudan kaynağıdır. Bir robot
+kolunun ya da bir aracın denklemleri bu dersteki ilkelerden türetilir.
+Fizik II (Elektrik ve Manyetizma)
+Elektrik yükü, elektrik alanı, akım, manyetik alan ve elektromanyetik indüksiyon
+öğretilir. Elektrik motorları, sensörlerin çoğu ve devre elemanları bu ilkelere
+göre çalışır. Bir motorun dönmesi, manyetik alan içindeki akım taşıyan iletkene
+etkiyen kuvvetle açıklanır.
+Genel Kimya
+Maddenin yapısı, kimyasal tepkimeler ve tepkime hızları öğretilir. Bölümün
+merkezinde olmasa da süreç kontrolü için gereklidir. Kimya tesislerinde, rafiner-
+ilerde ve su arıtma sistemlerinde kontrol edilen büyüklüklerin çoğu (sıcaklık,
+basınç, derişim) kimyasal süreçlere bağlıdır.
+4
+
+-- 4 of 21 --
+
+Elektrik ve Elektronik
+Kontrol sistemleri büyük ölçüde elektronik donanım üzerinde çalışır. Bu grup,
+sensörden gelen sinyalin işlenmesini, motorun sürülmesini ve kontrol algorit-
+masının bir işlemcide çalıştırılmasını sağlayan donanımı öğretir.
+Devre ve Elektronik Dersleri
+Devre Analizi
+Direnç, kondansatör ve bobinden oluşan devrelerde akım ve gerilimin nasıl hesa-
+planacağı öğretilir. Ohm yasası ve Kirchhoff yasaları temel araçlardır. Bir RC
+devresinin (direnç ve kondansatör) davranışı birinci dereceden bir diferansiyel
+denklemle anlatılır; bu nedenle devre analizi, sistem modellemenin ilk somut
+uygulamalarından biridir.
+Elektronik Devreler
+Diyot, transistör ve işlemsel yükselteç (operational amplifier ) gibi aktif eleman-
+lar öğretilir. Bu elemanlar sinyali yükseltmek, filtrelemek ve anahtarlamak için
+kullanılır. Örneğin bir sensörden gelen birkaç milivoltluk sinyal, işlemciye ver-
+ilmeden önce bir yükselteçle büyütülür.
+Analog Elektronik
+Sürekli değerli sinyallerle çalışan devreler ayrıntılı olarak öğretilir: yükselteçler,
+analog filtreler, osilatörler. Sensör çıkışlarının çoğu analog olduğu için ölçüm
+zincirinin ilk aşaması analog elektroniktir. Bu derste ayrıca geri beslemeli
+yükselteçler incelenir; elektronikteki geri besleme, kontrol teorisindeki geri besle-
+menin ilk uygulama alanlarından biridir.
+Sayısal Elektronik
+˙Ikili sayı sistemi, mantık kapıları, flip-flop’lar, sayıcılar ve durum makineleri
+öğretilir. Bilgisayarlar, mikrodenetleyiciler ve PLC’ler sayısal devrelerden oluşur.
+Bir trafik ışığının sırayla yanması, sayısal elektronikteki durum makinesi kavramıyla
+tasarlanabilir.
+Güç ve Makine Dersleri
+Elektrik Makineleri
+Doğru akım motorları, asenkron motorlar, senkron motorlar, jeneratörler ve
+transformatörler öğretilir. Endüstride hareket üreten elemanların büyük çoğunluğu
+elektrik motorudur. Bir motoru kontrol etmeden önce onun elektriksel ve mekanik
+davranışını bilmek gerekir.
+5
+
+-- 5 of 21 --
+
+Güç Elektroniği
+Yüksek akım ve gerilimlerin yarı iletken anahtarlarla dönüştürülmesi öğretilir:
+doğrultucular, DC-DC dönüştürücüler ve evirici (inverter ) devreleri. Bir mo-
+torun hızını ayarlayan sürücüler güç elektroniği devreleridir. Elektrikli araçlarda
+bataryadaki doğru akımı motor için alternatif akıma çeviren devre de bir eviri-
+cidir.
+Ölçme ve ˙Işlemci Dersleri
+Elektrik ve Elektronik Ölçme
+Akım, gerilim, direnç, güç ve frekansın nasıl ölçüleceği ile ölçüm hataları öğretilir.
+Ölçüm hatası iki türdür: sistematik hata her ölçümü aynı yönde kaydırır, rast-
+gele hata ölçümden ölçüme değişir. Kontrol sistemi ancak ölçtüğü değer kadar
+doğru çalışabilir; yanlış ölçen bir sensör, mükemmel tasarlanmış bir kontrolcüyü
+bile yanlış yöne götürür.
+Mikroişlemciler ve Mikrodenetleyiciler
+˙Işlemci mimarisi, bellek, kesmeler (interrupt), zamanlayıcılar, analog-sayısal
+dönüştürücüler ve çevre birimleri öğretilir. Mikrodenetleyici, işlemci, bellek ve
+giriş-çıkış birimlerini tek bir yonga üzerinde birleştiren küçük bir bilgisayardır.
+Kontrol algoritmaları gerçek hayatta çoğunlukla bir mikrodenetleyici üzerinde
+çalışır; bir çamaşır makinesinin, bir dronun ya da bir otomobil motorunun kon-
+trolcüsü buna örnektir.
+6
+
+-- 6 of 21 --
+
+Kontrol Mühendisliğinin Temel Dersleri
+Bu grup bölümün asıl omurgasıdır. Diğer gruplar ya bu derslere araç sağlar ya
+da bu derslerde öğrenilen yöntemleri uygular.
+Modelleme ve Analiz Dersleri
+Sistem Dinamiği ve Modellemesi
+Mekanik, elektrik, hidrolik ve ısıl sistemlerin ortak bir dille modellenmesi öğretilir.
+Bu dersin önemli bulgusu, çok farklı görünen sistemlerin aynı denklemlerle an-
+latılabilmesidir. Bir yay-kütle-sönümleyici sistemi ile bir direnç-bobin-kondansatör
+devresi aynı biçimde ikinci dereceden diferansiyel denkleme sahiptir. Kütle
+bobine, yay kondansatöre, sönümleyici dirence karşılık gelir. Bu benzerlik sayesinde
+bir alanda öğrenilen yöntem diğerine doğrudan taşınabilir.
+Sistemlerin Matematiksel Modellenmesi
+Bazı üniversitelerde Sistem Dinamiği dersinin yerine ya da devamı olarak ver-
+ilir. Fiziksel yasalardan model türetme, modeli sadeleştirme ve doğrusallaştırma
+(linearization) öğretilir. Doğrusallaştırma, doğrusal olmayan bir sistemi belirli
+bir çalışma noktası çevresinde doğrusal bir modelle yaklaşık olarak anlatmaktır.
+Örneğin bir sarkacın hareket denklemi açıya bağlı sinüs terimi içerir, ancak
+küçük açılarda sin θ ≈ θ alınarak doğrusal hâle getirilir.
+Sinyaller ve Sistemler
+Sinyallerin sınıflandırılması, sistemlerin özellikleri, konvolüsyon, Fourier dönüşümü,
+Laplace dönüşümü ve z-dönüşümü öğretilir (Oppenheim ve Willsky, 1983). Bu
+dersin temel fikri, bir sinyalin farklı frekanstaki dalgaların toplamı olarak yazılabileceğidir.
+Bir sistemin her frekansa nasıl tepki verdiği bilinirse, herhangi bir girdiye nasıl
+tepki vereceği de bilinir. Ses işleme, haberleşme ve görüntü işleme bu dersin
+uygulama alanlarıdır.
+Klasik Kontrol Dersleri
+Kontrol Sistemleri
+Geri besleme, transfer fonksiyonu, kararlılık, geçici tepki ve kalıcı durum hatası
+öğretilir. Transfer fonksiyonu, Laplace uzayında çıkışın girişe oranıdır ve
+sistemin girdi-çıktı davranışını tek bir ifadeyle özetler. Kararlılık için Routh-
+Hurwitz ölçütü, Nyquist ölçütü (Nyquist, 1932) ve Bode diyagramları (Bode,
+1945) kullanılır. Kök yer eğrisi (root locus) yöntemi, bir kazanç değiştirildiğinde
+sistemin davranışının nasıl değiştiğini grafik olarak gösterir (Evans, 1948).
+Bu dersin en çok kullanılan aracı PID kontrolcüsüdür. PID üç terimden
+oluşur:
+7
+
+-- 7 of 21 --
+
+• Oransal (P) terim, hatayla orantılı düzeltme yapar. Hata büyükse düzeltme
+de büyüktür.
+• ˙Integral (I) terim, geçmişte biriken hatayı düzeltir. Küçük ama sürekli
+kalan hatayı sıfıra indirir.
+• Türev (D) terim, hatanın değişim hızına tepki verir. Sistem hedefe hızla
+yaklaşırken onu frenler ve aşmayı önler.
+PID kazançlarının deneysel olarak ayarlanması için önerilen Ziegler-Nichols
+yöntemi hâlâ derslerde öğretilmektedir (Ziegler ve Nichols, 1942).
+Otomatik Kontrol
+Birçok üniversitede Kontrol Sistemleri dersinin diğer adı ya da ikinci dönemidir.
+Kontrolcü tasarımı öne çıkar: ilerletici-geciktirici kompanzatörler (lead-lag com-
+pensators), frekans uzayında tasarım ve kazanç-faz payı. Kazanç payı ve faz
+payı, sistemin kararsız hâle gelmeden önce ne kadar belirsizliğe dayanabileceğini
+gösteren güvenlik paylarıdır.
+Modern Kontrol Dersleri
+Durum Uzayı Analizi
+Sistemi transfer fonksiyonu yerine durum değişkenleriyle anlatma yöntemi öğretilir.
+Durum, sistemin geleceğini hesaplamak için bilinmesi gereken en küçük bilgi
+kümesidir. Bir yay-kütle sistemi için bu bilgi kütlenin konumu ve hızıdır. Du-
+rum uzayı modeli şu biçimdedir:
+˙x = Ax + Bu, y = Cx + Du
+Burada x durum vektörü, u girdi, y çıktıdır. Bu gösterim çok girdili ve çok çıktılı
+sistemlere doğal olarak genişler; transfer fonksiyonu yaklaşımında bu zordur.
+Modern Kontrol Teorisi
+Durum uzayı üzerinde kontrol tasarımı öğretilir: kontrol edilebilirlik, gözlenebilirlik,
+kutup yerleştirme ve gözlemci tasarımı. Kontrol edilebilirlik, girdinin sis-
+temi istenen her duruma götürüp götüremeyeceğini; gözlenebilirlik, ölçülen
+çıkışlardan sistemin bütün durumunun hesaplanıp hesaplanamayacağını sorar.
+Gözlemci (observer ), ölçülemeyen durumları ölçülenlerden tahmin eden bir hesaplama
+yapısıdır. Örneğin bir motorun yalnızca konumu ölçülüyorsa, hızı gözlemciyle
+tahmin edilebilir. Kalman filtresi, gürültülü ölçümler için en iyi gözlemcidir
+(Kalman, 1960).
+8
+
+-- 8 of 21 --
+
+Sayısal Kontrol Sistemleri
+Kontrol algoritmasının bilgisayarda, yani ayrık zamanda çalıştırılması öğretilir.
+Bilgisayar sistemi sürekli izleyemez; belirli aralıklarla örnek alır. Örnekleme
+kuramına göre bir sinyali kaybetmeden örneklemek için örnekleme frekansının
+sinyaldeki en yüksek frekansın iki katından büyük olması gerekir (Shannon,
+1949). Bu derste z-dönüşümü, ayrık transfer fonksiyonu, sürekli kontrolcülerin
+ayrıklaştırılması ve sayısal filtreler öğretilir. Günümüzde kontrolcülerin neredeyse
+tamamı sayısal olduğu için bu ders uygulamada en sık karşılaşılan kontrol bil-
+gisini verir.
+˙Ileri Kontrol Dersleri
+Doğrusal Olmayan Kontrol
+Doğrusal varsayımın geçerli olmadığı sistemlerin analizi ve kontrolü öğretilir
+(Khalil, 1992). Gerçek sistemlerin çoğu doğrusal değildir: motorların bir hız
+sınırı, vanaların bir açıklık sınırı vardır, sürtünme hıza doğrusal bağlı değildir.
+Lyapunov kararlılık yöntemi, sistemin denklemleri çözülmeden kararlı olup ol-
+madığını bir “enerji benzeri” fonksiyonla göstermeyi sağlar. Kayan kipli kontrol
+(sliding mode control ) ve geri besleme doğrusallaştırması da bu dersin konu-
+larıdır.
+Optimal Kontrol
+Bir hedefe en az maliyetle ulaşan kontrol girdisinin bulunması öğretilir. Maliyet,
+harcanan enerji, geçen süre ya da hedeften sapma olabilir. ˙Iki temel yaklaşım
+vardır: Bellman’ın dinamik programlaması (Bellman, 1957) ve Pontryagin’in
+maksimum ilkesi (Pontryagin ve diğerleri, 1962). Bu dersin en yaygın sonucu
+doğrusal karesel düzenleyicidir (Linear Quadratic Regulator, LQR): hata ile kon-
+trol çabası arasındaki dengeyi bir maliyet fonksiyonuyla kurar ve en iyi geri
+besleme kazancını hesaplar. Bir roketin en az yakıtla yörüngeye çıkması tipik
+bir optimal kontrol problemidir.
+Uyarlamalı Kontrol
+Sistemin parametreleri zamanla değiştiğinde kendini buna göre ayarlayan kon-
+trolcüler öğretilir (˚ Aström ve Wittenmark, 1989). Örneğin bir uçağın kütlesi
+yakıt harcadıkça azalır, aerodinamik davranışı da hıza ve irtifaya göre değişir.
+Sabit kazançlı bir kontrolcü bütün koşullarda iyi çalışmayabilir. Uyarlamalı
+kontrolcü sistemi çalışırken tanır ve kazançlarını günceller.
+Kestirim ve Sistem Tanılama
+˙Iki ilişkili konu öğretilir. Kestirim (estimation), gürültülü ölçümlerden sis-
+temin durumunu tahmin etmektir; Kalman filtresi bu konunun merkezindedir.
+Sistem tanılama (system identification), sistemin modelini fiziksel yasalardan
+9
+
+-- 9 of 21 --
+
+değil, ölçülen girdi-çıktı verilerinden çıkarmaktır (Ljung, 1987). Örneğin bir bi-
+nanın ısıl davranışının denklemi bilinmiyorsa, ısıtıcıya farklı girdiler verilip oda
+sıcaklığı kaydedilir ve bu verilerden bir model kestirilir. Bu ders, kontrol teorisi
+ile makine öğrenmesi arasındaki en yakın bağı kurar.
+10
+
+-- 10 of 21 --
+
+Otomasyon ve Endüstriyel Kontrol
+Bu grup, kontrol yöntemlerinin fabrikalarda, tesislerde ve büyük altyapılarda
+nasıl uygulandığını öğretir. Konular matematikten çok donanım, yazılım ve
+standartlarla ilgilidir.
+Endüstriyel Kontrol Yazılımı ve Ağları
+PLC Programlama
+PLC (Programmable Logic Controller, programlanabilir mantık denetleyicisi),
+endüstriyel ortamlar için tasarlanmış dayanıklı bir bilgisayardır. Sensörlerden
+giriş alır, programına göre karar verir ve motorlar, vanalar gibi elemanlara çıkış
+gönderir. PLC programlama dilleri IEC 61131-3 standardıyla tanımlanmıştır;
+en yaygını, röle devrelerine benzeyen merdiven diyagramıdır (ladder diagram)
+(IEC, 1993). Örneğin bir konveyör bandında ürün sensörün önüne geldiğinde
+bandı durdurup bir robot kolunu çalıştıran mantık PLC ile yazılır.
+SCADA Sistemleri
+SCADA (Supervisory Control and Data Acquisition, denetimsel kontrol ve
+veri toplama), dağınık bir tesisin merkezı olarak izlenmesini ve yönetilmesini
+sağlayan yazılım ve donanım bütünüdür. Operatör ekranlarında tesisin anlık
+durumu gösterilir, alarmlar yönetilir ve geçmiş veriler kaydedilir. Bir şehrin su
+dağıtım şebekesi ya da bir elektrik iletim hattı SCADA ile izlenir.
+Endüstriyel Otomasyon
+PLC, SCADA, sensörler, sürücüler ve haberleşme ağlarının bir tesiste birlikte
+nasıl kurulduğu öğretilir. Otomasyon piramidi denen katmanlı yapı bu dersin
+temel modelidir: en altta saha cihazları, üstünde kontrolcüler, onun üstünde
+izleme sistemleri, en üstte üretim ve işletme yönetimi yazılımları bulunur.
+Endüstriyel Haberleşme Protokolleri
+Endüstriyel cihazların birbiriyle nasıl haberleştiği öğretilir. Modbus, PROFIBUS,
+PROFINET, EtherCAT ve OPC UA yaygın protokollerdir. Endüstriyel ağlar
+ofis ağlarından farklı olarak zamanlamaya duyarlıdır: bir motor komutunun
+birkaç milisaniye gecikmesi üretimde hataya yol açabilir. Bu nedenle bu pro-
+tokollerin çoğu, mesajın belirli bir süre içinde ulaşmasını garanti etmeye odak-
+lanır.
+Gerçek Zamanlı ve Gömülü Sistemler
+Gerçek Zamanlı Sistemler
+Doğruluğu yalnızca sonuca değil, sonucun ne zaman üretildiğine de bağlı olan sis-
+temler öğretilir. Bir otomobilin hava yastığı kontrolcüsü doğru kararı çarpışmadan
+11
+
+-- 11 of 21 --
+
+sonra verirse işe yaramaz. Katı gerçek zamanlı sistemlerde süre aşımı kabul
+edilemez; esnek gerçek zamanlı sistemlerde ara sıra gecikme hoş görülebilir.
+Görev zamanlama algoritmaları ve gerçek zamanlı işletim sistemleri (RTOS) bu
+dersin konularıdır.
+Gömülü Sistemler
+Belirli bir işi yapmak üzere başka bir cihazın içine yerleştirilmiş bilgisayar sistem-
+leri öğretilir. Gömülü sistemlerde bellek, işlem gücü ve enerji sınırlıdır; yazılım
+bu sınırlar içinde çalışacak biçimde tasarlanır. Bir akıllı saat, bir kombi kontrol
+kartı ya da bir otomobilin fren kontrol ünitesi gömülü sistemdir.
+Saha Cihazları ve Ölçme
+Sensörler ve Aktüatörler
+Sensör, fiziksel bir büyüklüğü elektrik sinyaline çeviren cihazdır: sıcaklık sensörü,
+basınç sensörü, ivmeölçer, enkoder. Aktüatör ise elektrik sinyalini fiziksel bir
+etkiye çevirir: motor, vana, piston, ısıtıcı. Kontrol döngüsü sensörle başlar,
+aktüatörle biter. Bu derste her cihaz türünün çalışma ilkesi, doğruluğu, tepki
+süresi ve seçim ölçütleri öğretilir.
+Ölçme ve Enstrümantasyon
+Ölçüm sistemlerinin tasarımı, kalibrasyon, doğruluk, kesinlik ve belirsizlik anal-
+izi öğretilir. Doğruluk, ölçümün gerçek değere ne kadar yakın olduğunu; kesin-
+lik, tekrarlanan ölçümlerin birbirine ne kadar yakın olduğunu anlatır. Bir ölçüm
+sistemi çok kesin ama yanlış olabilir: her seferinde aynı değeri okuyan ama
+sürekli iki derece fazla gösteren bir termometre buna örnektir. Dersin temel
+sorusu, ölçümün gerçekten ölçülmek istenen şeyi ölçüp ölçmediğidir.
+Endüstriyel Robotlar
+Fabrikalarda kullanılan robot kollarının türleri, programlanması, iş güvenliği ve
+üretim hattına entegrasyonu öğretilir. Kaynak, boyama, montaj ve paketleme
+işleri endüstriyel robotların tipik görevleridir. Bu ders robotik teorisinden çok
+uygulamaya odaklanır.
+12
+
+-- 12 of 21 --
+
+Mekanik, Robotik ve Fiziksel Sistemler
+Bu grup, kontrol edilen sistemin mekanik tarafını öğretir. Hareket eden her
+sistemin kontrolü, önce o hareketin fiziğini anlamayı gerektirir.
+Mekanik Dersleri
+Mühendislik Mekaniği
+Kuvvetlerin dengede olduğu durağan sistemler (statik) ile katı cisimlerin temel
+hareketi öğretilir. Bir köprünün ya da bir robot kolunun hareketsiz dururken
+hangi kuvvetleri taşıdığı bu dersle hesaplanır.
+Dinamik
+Kuvvetlerin etkisi altında hareket eden cisimler öğretilir: öteleme, dönme, eylem-
+sizlik momenti, iş ve enerji. Bir robot kolunun hızlı hareket ederken eklemlerine
+binen yükler ya da bir aracın virajda kayma eğilimi dinamik problemleridir.
+Lagrange yöntemi, karmaşık mekanik sistemlerin hareket denklemlerini enerji
+ifadelerinden türetmeyi sağlar.
+Bilgisayar Destekli Tasarım
+CAD (Computer-Aided Design) yazılımlarıyla parça ve montaj çizimi öğretilir.
+Mekanik bir sistemin üretilmeden önce bilgisayarda tasarlanması, ölçülerinin ve
+kütle özelliklerinin hesaplanması bu derste yapılır. CAD modelinden elde edilen
+kütle ve eylemsizlik değerleri, dinamik modelde doğrudan kullanılabilir.
+Robotik ve Hareket Dersleri
+Mekatronik Sistemler
+Mekatronik, mekanik, elektronik, kontrol ve yazılımın tek bir üründe birleştirilmesidir.
+Bu derste dört alanın birlikte tasarlanması öğretilir. Bir yazıcı, bir otomatik kapı
+ya da bir kamera sabitleyicisi (gimbal ) mekatronik sistemdir. Dersin önemli
+fikri, mekanik tasarımla kontrol tasarımının ayrı ayrı değil birlikte yapılması
+gerektiğidir; mekanik olarak titreşime yatkın bir yapıyı yalnızca kontrolle düzeltmek
+zordur.
+Robotik
+Robotların algılama, karar verme ve hareket etme yetenekleri genel olarak öğretilir.
+Robot türleri, koordinat sistemleri, yol planlama ve temel kontrol yöntemleri
+dersin konularıdır. Robotik, bölümdeki neredeyse bütün dersleri bir araya ge-
+tiren bir uygulama alanıdır.
+13
+
+-- 13 of 21 --
+
+Robot Kinematiği ve Dinamiği
+Kinematik, kuvvetlere bakmadan yalnızca hareketin geometrisini inceler. ˙Ileri
+kinematik, eklem açılarından robot ucunun konumunu hesaplar; ters kinematik,
+robot ucunun belirli bir noktaya gitmesi için eklemlerin hangi açılarda olması
+gerektiğini bulur. Denavit-Hartenberg gösterimi, eklemler arası ilişkileri stan-
+dart bir biçimde yazmak için kullanılır (Denavit ve Hartenberg, 1955). Dinamik
+kısımda ise bu hareketi üretmek için gereken tork hesaplanır (Craig, 1986).
+Hareket Kontrolü
+Motorların konum, hız ve ivmesinin hassas biçimde kontrolü öğretilir. Bir CNC
+tezgâhında kesici ucun mikron düzeyinde doğrulukla hareket etmesi hareket kon-
+trolüyle sağlanır. ˙Iç içe kontrol döngüleri (akım döngüsü, hız döngüsü, konum
+döngüsü) ve hareket profilleri dersin temel konularıdır.
+Elektrik Motorlarının Kontrolü
+Farklı motor türlerinin hız ve tork kontrolü öğretilir. Doğru akım motorları
+gerilimle kolayca kontrol edilir. Asenkron ve senkron motorlar için ise vektör
+kontrolü (field-oriented control ) gibi daha karmaşık yöntemler gerekir. Elektrikli
+araç motorları ve endüstriyel servo motorlar bu yöntemlerle kontrol edilir.
+14
+
+-- 14 of 21 --
+
+Bilgisayar, Yazılım ve Hesaplamalı Yöntemler
+Bu grup, kontrol algoritmalarının bilgisayarda nasıl yazılacağını, modellerin
+nasıl çözüleceğini ve veriden nasıl öğrenileceğini öğretir.
+Programlama ve Hesaplama Dersleri
+C/C++ Programlama
+Gömülü sistemlerde ve gerçek zamanlı uygulamalarda en çok kullanılan diller
+öğretilir. C, donanıma yakın çalışır ve bellek kullanımını doğrudan kontrol etm-
+eye izin verir; bu yüzden mikrodenetleyici yazılımının büyük kısmı C ile yazılır.
+C++ ise daha büyük kontrol ve robotik yazılımlarında kullanılır.
+Algoritmalar ve Programlama
+Veri yapıları, temel algoritmalar ve algoritmaların karmaşıklık analizi öğretilir.
+Bir robotun haritada en kısa yolu bulması ya da bir zamanlayıcının görevleri
+sıralaması algoritma problemleridir. Gerçek zamanlı sistemlerde bir algorit-
+manın ne kadar sürdüğü, doğru sonuç vermesi kadar önemlidir.
+Sayısal Analiz
+Analitik olarak çözülemeyen matematik problemlerinin bilgisayarda yaklaşık
+olarak çözülmesi öğretilir: denklem kökleri, sayısal türev ve integral, doğrusal
+denklem sistemleri ve diferansiyel denklemlerin sayısal çözümü. Gerçek sistem-
+lerin modelleri çoğu zaman elle çözülemeyecek kadar karmaşıktır. Örneğin Euler
+ve Runge-Kutta yöntemleri, bir diferansiyel denklemi küçük zaman adımlarıyla
+ilerleterek çözer. Her simülasyon yazılımının içinde bu yöntemler çalışır.
+MATLAB ve Simulink
+Kontrol mühendisliğinde en yaygın kullanılan hesaplama ve simülasyon ortamı
+öğretilir. MATLAB matris hesapları, veri analizi ve kontrolcü tasarımı için;
+Simulink ise sistemleri blok diyagramlarla modelleyip simüle etmek için kul-
+lanılır. Bir kontrolcü gerçek donanıma yüklenmeden önce genellikle Simulink’te
+denenir. Python ve onun bilimsel kütüphaneleri de giderek aynı amaçla kul-
+lanılmaktadır.
+Gerçek Zamanlı Yazılım
+Zaman kısıtları altında çalışan yazılımın tasarımı ve yazılması öğretilir. Gerçek
+Zamanlı Sistemler dersinin teorisi burada kod düzeyine iner: görevler arası
+iletişim, kesme yönetimi, paylaşılan kaynakların korunması ve gecikmenin ölçülmesi.
+˙Iki görevin aynı veriye aynı anda erişmesi gibi hatalar, gerçek zamanlı yazılımda
+en zor bulunan hatalardır.
+15
+
+-- 15 of 21 --
+
+Yapay Zekâ ve Görü Dersleri
+Yapay Zekâ
+Arama algoritmaları, bilgi gösterimi, planlama ve karar verme yöntemleri öğretilir.
+Bir robotun bir görevi hangi adımlarla yapacağına karar vermesi yapay zekâ
+problemidir. Kontrol ile yapay zekâ arasındaki ayrım şudur: kontrol genellikle
+bir büyüklüğü hedefte tutar, yapay zekâ ise hangi hedefin seçileceğine ve hangi
+sırayla ilerleneceğine karar verir.
+Makine Öğrenmesi
+Verilerden örüntü öğrenen yöntemler öğretilir: doğrusal regresyon, sınıflandırma,
+kümeleme, karar ağaçları ve sinir ağları. Makine öğrenmesi ile sistem tanılama
+aynı soruyu sorar: veriden bir model nasıl çıkarılır. Fark, sistem tanılamanın
+genellikle fiziksel yorumu olan küçük modeller, makine öğrenmesinin ise çoğunlukla
+büyük ve esnek modeller kullanmasıdır.
+Görüntü ˙Işleme
+Sayısal görüntülerin iyileştirilmesi, filtrelenmesi, kenar bulma ve bölütleme (seg-
+mentation) öğretilir. Görüntü, iki boyutlu bir sinyaldir; bu yüzden Sinyaller
+ve Sistemler dersindeki filtreleme ve Fourier yöntemleri doğrudan görüntülere
+uygulanır. Bir üretim hattında kusurlu ürünlerin kamerayla ayıklanması görüntü
+işlemeye dayanır.
+Bilgisayarlı Görü
+Görüntülerden anlam çıkarılması öğretilir: nesne tanıma, nesne takibi, derinlik
+kestirimi ve kamera hareketinin kestirimi. Görüntü işleme görüntüyü dönüştürürken,
+bilgisayarlı görü görüntüde ne olduğunu ve sahnenin nasıl bir yapıda olduğunu
+anlamaya çalışır. Otonom araçların yolu ve çevredeki nesneleri algılaması bil-
+gisayarlı görüyle yapılır.
+16
+
+-- 16 of 21 --
+
+˙Ileri Seviye ve Seçmeli Dersler
+Bu dersler genellikle son sınıfta ya da yüksek lisansta verilir. C oğu, temel kontrol
+derslerindeki yöntemlerin daha karmaşık problemlere genişletilmesidir.
+Gelişmiş Kontrol Yöntemleri
+Model Öngörülü Kontrol (MPC)
+MPC (Model Predictive Control ), sistemin modelini kullanarak geleceğe doğru
+belirli bir pencere boyunca tahmin yapan ve bu pencere içinde en iyi kontrol
+girdilerini hesaplayan bir yöntemdir (Camacho ve Bordons, 1999). Hesaplanan
+girdilerin yalnızca ilki uygulanır; bir sonraki adımda pencere ileri kaydırılır ve
+hesap yenilenir. MPC’nin en büyük avantajı kısıtları doğrudan hesaba kata-
+bilmesidir: bir vananın en fazla ne kadar açılabileceği ya da bir sıcaklığın hangi
+değeri aşmaması gerektiği problemin içine yazılır. Kimya tesisleri ve rafineril-
+erde uzun süredir kullanılır.
+Bulanık Mantıkla Kontrol
+Kesin sayılar yerine “sıcak”, “biraz soğuk” gibi dilsel kurallarla çalışan kontrol
+öğretilir. Bulanık küme kuramı Zadeh tarafından ortaya konmuştur (Zadeh,
+1965); kontrole ilk uygulamalarından biri Mamdani’nin çalışmasıdır (Mamdani,
+1974). Bir kural örneği: “sıcaklık biraz düşükse ısıtıcıyı biraz aç”. Matematiksel
+modeli kurmanın zor olduğu, ancak uzman bilgisinin bulunduğu sistemlerde
+kullanılır.
+Sinir Ağları ile Kontrol
+Sinir ağlarının sistem modeli ya da kontrolcü olarak kullanılması öğretilir. Sinir
+ağı, doğrusal olmayan karmaşık ilişkileri veriden öğrenebilir. Modelin bilin-
+mediği ya da çok karmaşık olduğu sistemlerde sinir ağı önce sistemi taklit et-
+meyi öğrenir, ardından bu model üzerinden kontrolcü tasarlanır. Pekiştirmeli
+öğrenme (reinforcement learning) de bu alana yakındır ve optimal kontrolle or-
+tak bir matematik temeli paylaşır.
+Akıllı Kontrol Sistemleri
+Bulanık mantık, sinir ağları ve evrimsel algoritmalar gibi yöntemlerin bir arada
+kullanıldığı kontrol yaklaşımları öğretilir. Bu ders, klasik kontrolün kesin modele
+dayanan yaklaşımı ile yapay zekânın veriye dayanan yaklaşımını birleştirmeye
+çalışır.
+17
+
+-- 17 of 21 --
+
+Otonom ve C ok Ajanlı Sistemler
+Otonom Robotlar
+Kendi başına çevresini algılayan, konumunu belirleyen, plan yapan ve hareket
+eden robotlar öğretilir. Eş zamanlı konum belirleme ve haritalama (Simultane-
+ous Localization and Mapping, SLAM), bu dersin temel problemidir: robot hem
+bilmediği bir ortamın haritasını çıkarır hem de bu haritada nerede olduğunu ke-
+stirir. Kalman filtresi ve olasılıksal yöntemler burada yoğun biçimde kullanılır.
+Otonom Araç Sistemleri
+Sürücüsüz araçların algılama, karar verme ve kontrol katmanları öğretilir. Kam-
+eralar, radar ve lidar gibi farklı sensörlerden gelen verilerin birleştirilmesi (sensor
+fusion), yol planlama ve araç dinamiği kontrolü dersin konularıdır. Bölümdeki
+neredeyse her ders bu uygulamada bir yerde kullanılır.
+C oklu Ajan Sistemleri
+Birbirleriyle etkileşen birden fazla karar vericinin oluşturduğu sistemler öğretilir.
+Bir drone sürüsünün birlikte uçması ya da bir depodaki robotların birbirine
+çarpmadan çalışması bu dersin problemleridir. Temel soru, her ajanın yalnızca
+yerel bilgiyle karar verdiği durumda bütün sistemin istenen davranışı nasıl göstereceğidir.
+Sistem Düzeyi Dersler
+Sistem Optimizasyonu
+Kısıtlar altında en iyi çözümü bulma yöntemleri öğretilir: doğrusal program-
+lama, doğrusal olmayan optimizasyon, tam sayılı programlama ve sezgisel yöntemler.
+Optimizasyon, optimal kontrol ve MPC’nin hesaplama altyapısıdır. Ayrıca bir
+üretim hattında işlerin makinelere en verimli biçimde dağıtılması gibi kontrol
+dışı problemlerde de kullanılır.
+Sistem Mühendisliği
+C ok sayıda bileşenden oluşan büyük sistemlerin bütün olarak tasarlanması,
+gereksinimlerin tanımlanması, bileşenlerin entegrasyonu ve doğrulanması öğretilir.
+Bir uçağın ya da bir uydunun tasarımında yüzlerce alt sistemin birlikte çalışması
+gerekir. Dersin temel fikri, iyi çalışan bileşenlerin bir araya gelmesinin iyi çalışan
+bir sistem garanti etmediğidir; sorunlar çoğunlukla bileşenlerin arayüzlerinde or-
+taya çıkar.
+18
+
+-- 18 of 21 --
+
+Derslerin Birbirine Bağlanması
+Dersler bağımsız değildir; her biri bir öncekinin üzerine kurulur. Aşağıdaki tablo
+bölümün ana öğrenme zincirini gösterir.
+Ders Önkoşul Kazandırdığı beceri
+Diferansiyel Denklemler Matematik I-II Değişen sistemleri denklemle
+yazmak
+Lineer Cebir Matematik I C ok değişkenli sistemleri ma-
+trisle yazmak
+Sistem Dinamiği Fizik, Dif. Denklemler Fiziksel sistemi modele çevirmek
+Sinyaller ve Sistemler Dif. Denklemler Girdi-çıktı davranışını analiz et-
+mek
+Kontrol Sistemleri Sinyaller, Sistem Dinamiği Geri beslemeli kontrolcü tasarla-
+mak
+Sayısal Kontrol Kontrol Sistemleri Kontrolcüyü bilgisayarda
+çalıştırmak
+Modern Kontrol Lineer Cebir, Kontrol Sist. ˙Iç durumlarla kontrol ve gözlem
+Kestirim Olasılık, Modern Kontrol Gürültülü veriden durum tah-
+mini
+Optimal Kontrol Modern Kontrol, Optimiza-
+syon
+En az maliyetli kontrolü bulmak
+MPC Optimal Kontrol Kısıtlı sistemleri ileriye bakarak
+kontrol etmek
+Bölümün bütününde tekrar eden yöntem dört adımdan oluşur:
+1. Modelleme: Sistem fiziksel yasalardan ya da veriden denklemlere çevrilir.
+2. Analiz: Modelin kararlılığı, tepki hızı ve sınırları incelenir.
+3. Simülasyon: Model bilgisayarda çalıştırılır ve farklı koşullardaki davranışı
+denenir.
+4. Kontrol tasarımı ve uygulama: Kontrolcü tasarlanır, önce simülasyonda
+sonra gerçek sistemde denenir.
+Bu zincir sistemin türünden bağımsızdır. Bir motor, bir kimya reaktörü, bir
+uçak ya da bir binanın ısıtma sistemi aynı adımlarla ele alınır. Bölümün farklı
+sektörlere geçişi kolay bir meslek kazandırmasının nedeni budur.
+Gruplar arasındaki işbölümü şöyle özetlenebilir:
+• Matematik dersleri dili verir.
+• Fizik, elektronik ve mekanik dersleri kontrol edilen sistemin kendisini tanıtır.
+• Kontrol dersleri yöntemi verir.
+• Yazılım ve hesaplama dersleri yöntemin bilgisayarda çalışmasını sağlar.
+• Otomasyon ve robotik dersleri her şeyi gerçek bir uygulamada birleştirir.
+19
+
+-- 19 of 21 --
+
+Sonuç
+Kontrol ve Otomasyon Mühendisliği müfredatı dışarıdan bakıldığında birbirinden
+çok uzak konuları içeriyor gibi görünür: diferansiyel denklemler ile PLC pro-
+gramlama, Fourier dönüşümü ile endüstriyel robotlar aynı bölümde yer alır. Bu
+çeşitlilik, bölümün belirli bir teknolojiye değil bir yönteme dayanmasından kay-
+naklanır. Modelleme, analiz, simülasyon ve kontrol adımları her sistemde aynı
+kaldığı için, bu adımları taşıyan dersler bölümün kalıcı çekirdeğini oluşturur.
+Belirli donanımlara ve standartlara bağlı dersler (PLC, haberleşme protokolleri,
+belirli motor türleri) ise teknoloji değiştikçe daha hızlı eskir.
+Müfredat aynı zamanda iki farklı mühendislik profilini birlikte barındırır.
+Birinci profil teoriye yakındır: modern kontrol, optimal kontrol ve kestirim
+üzerinden matematiksel tasarım yapar. ˙Ikinci profil uygulamaya yakındır: PLC,
+SCADA ve saha cihazları üzerinden tesis kurar ve işletir. Bir öğrencinin seçmeli
+derslerle hangi profile yaklaşacağı, mezuniyetten sonraki iş alanını büyük ölçüde
+belirler.
+Bu haritanın sınırları vardır. Ders adları üniversitelere göre değişir; aynı
+içerik bir yerde “Otomatik Kontrol”, başka bir yerde “Kontrol Sistemleri II”
+adını taşıyabilir. Bazı üniversitelerde bölüm elektrik mühendisliğine, bazılarında
+makine mühendisliğine daha yakındır ve buna göre ağırlık değişir. Ayrıca son
+yıllarda makine öğrenmesi ile kontrol teorisi arasındaki sınır giderek incelmek-
+tedir. Pekiştirmeli öğrenme ile optimal kontrol, makine öğrenmesi ile sistem
+tanılama aynı soruları farklı araçlarla sormaktadır. Müfredatın bu yakınlaşmayı
+ne ölçüde yansıtacağı açık bir sorudur.
+Kaynaklar
+• ˚ Aström, K. J. ve Murray, R. M. (2008). Feedback Systems: An Introduc-
+tion for Scientists and Engineers. Princeton University Press.
+• ˚ Aström, K. J. ve Wittenmark, B. (1989). Adaptive Control. Addison-
+Wesley.
+• Bellman, R. (1957). Dynamic Programming. Princeton University Press.
+• Bode, H. W. (1945). Network Analysis and Feedback Amplifier Design.
+Van Nostrand.
+• Camacho, E. F. ve Bordons, C. (1999). Model Predictive Control. Springer.
+• Craig, J. J. (1986). Introduction to Robotics: Mechanics and Control.
+Addison-Wesley.
+• Denavit, J. ve Hartenberg, R. S. (1955). A Kinematic Notation for Lower-
+Pair Mechanisms Based on Matrices. Journal of Applied Mechanics.
+• Evans, W. R. (1948). Graphical Analysis of Control Systems. Transac-
+tions of the AIEE.
+20
+
+-- 20 of 21 --
+
+• IEC (1993). IEC 61131-3: Programmable Controllers – Part 3: Program-
+ming Languages. International Electrotechnical Commission.
+• Kalman, R. E. (1960). A New Approach to Linear Filtering and Prediction
+Problems. Journal of Basic Engineering.
+• Khalil, H. K. (1992). Nonlinear Systems. Macmillan.
+• Ljung, L. (1987). System Identification: Theory for the User. Prentice
+Hall.
+• Mamdani, E. H. (1974). Application of Fuzzy Algorithms for Control of
+Simple Dynamic Plant. Proceedings of the IEE.
+• Maxwell, J. C. (1868). On Governors. Proceedings of the Royal Society of
+London.
+• Nyquist, H. (1932). Regeneration Theory. Bell System Technical Journal.
+• Ogata, K. (1970). Modern Control Engineering. Prentice Hall.
+• Oppenheim, A. V. ve Willsky, A. S. (1983). Signals and Systems. Prentice
+Hall.
+• Pontryagin, L. S., Boltyanskii, V. G., Gamkrelidze, R. V. ve Mishchenko,
+E. F. (1962). The Mathematical Theory of Optimal Processes. Inter-
+science.
+• Shannon, C. E. (1949). Communication in the Presence of Noise. Pro-
+ceedings of the IRE.
+• Zadeh, L. A. (1965). Fuzzy Sets. Information and Control.
+• Ziegler, J. G. ve Nichols, N. B. (1942). Optimum Settings for Automatic
+Controllers. Transactions of the ASME.
+21
+
+-- 21 of 21 --

@@ -1,0 +1,354 @@
+˙Istatistiksel Süreç Kontrolü: Ortak Neden ve Özel
+Neden
+ÖFY
+October 2026
+Özet
+Toplam Kalite Yönetimi (TKY), kaliteyi bir denetim bölümünün görevi olarak
+değil, kurumun bütün süreçlerine ve bütün çalışanlarına yayılmış bir sorum-
+luluk olarak ele alan yönetim anlayışıdır. Bu anlayışın merkezinde, kalitenin
+üretim sonunda yapılan kontrolle değil, sürecin her adımında hatanın oluşmasını
+önleyerek sağlandığı ilkesi yer alır. C alışanların sürece katılımı bu ilkenin pratik
+karşılığıdır; kalite çemberleri, iş güvenliği kurulları, ramak kala bildirimleri
+ve yazılımdaki retrospektif toplantılar aynı katılım ilkesinin farklı alanlardaki
+biçimleridir. Süreçte kalite ilkesinin ölçüm aracı ˙Istatistiksel Süreç Kontrolü’dür
+(SPC). SPC, bir sürecin normal davranışını geçmiş verilerden hesaplanan kon-
+trol sınırlarıyla tanımlar ve bu davranıştan sapmaları sorun büyümeden yakalar.
+SPC’nin temel ayrımı, sürecin doğal dalgalanmasından doğan ortak neden ile
+dışarıdan gelen belirli bir arızadan doğan özel neden arasındadır. Bu ayrım
+yapılmadan verilen tepkiler, ya normal dalgalanmaya müdahale ederek süreci
+bozar ya da gerçek bir sorunu gözden kaçırır.
+1
+
+-- 1 of 12 --
+
+Giriş
+Geleneksel üretim anlayışında kalite, ürün tamamlandıktan sonra yapılan muayene
+ile güvence altına alınır. Hatalı ürünler son kontrolde ayıklanır, atılır ya da
+yeniden işlenir. Bu yaklaşımın temel sorunu, hatanın kontrol anına kadar çoktan
+oluşmuş olmasıdır; malzeme, zaman ve emek bu noktada harcanmıştır. Ayrıca
+muayene hiçbir zaman kusursuz değildir ve bir kısım hatalı ürün müşteriye
+ulaşır.
+Kalite, bu notta bir ürünün ya da hizmetin müşteri beklentisini karşılama
+derecesi olarak tanımlanmaktadır. Süreç ise girdileri çıktıya dönüştüren, tekrar-
+lanan adımlar dizisidir. Bu iki tanım bir araya getirildiğinde temel soru ortaya
+çıkar: kalite, sürecin çıktısını ayıklayarak mı, yoksa sürecin kendisini doğru ku-
+rup izleyerek mi sağlanır.
+Toplam Kalite Yönetimi ikinci cevabı verir. Bu cevabın üç bileşeni vardır:
+bir yönetim anlayışı (TKY), bu anlayışın çalışanları sürece katma biçimi (kalite
+çemberleri ve benzeri yapılar) ve sürecin istatistiksel olarak izlenmesi (SPC).
+Not bu üç bileşeni ve aralarındaki bağı kapsar; ISO 9001 gibi kalite yönetim
+standartları ve Altı Sigma gibi sonraki yöntemler kapsam dışındadır.
+2
+
+-- 2 of 12 --
+
+Toplam Kalite Yönetimi
+Tanım
+Toplam Kalite Yönetimi (Total Quality Management, TQM), bir kurumun
+bütün işlerinde ve bütün çalışanlarıyla kaliteyi sürekli iyileştirmeye odaklandığı
+yönetim anlayışıdır. Adındaki “toplam” sözcüğü kapsamı belirtir: kalite yalnızca
+kalite kontrol bölümünün değil, üst yönetimden sahadaki işçiye, üretimden muhase-
+beye kadar herkesin sorumluluğu sayılır.
+Temel ˙Ilkeler
+Müşteri Odaklılık
+Kaliteyi tanımlayan, üreticinin teknik ölçütleri değil müşterinin beklentisidir.
+Teknik olarak kusursuz ama müşterinin ihtiyacını karşılamayan bir ürün, TKY
+açısından kaliteli sayılmaz. Müşteri kavramı kurum içini de kapsar: bir üretim
+adımının çıktısını alan sonraki adım, o adımın iç müşterisidir.
+Sürekli ˙Iyileştirme
+Süreç hiçbir zaman tamamlanmış kabul edilmez; küçük ve sürekli iyileştirmeler
+aranır. Japon yönetim literatüründe bu ilke kaizen olarak adlandırılır (Imai,
+1986). Büyük ve seyrek reformlar yerine, her gün yapılan küçük düzeltmelerin
+birikimi esas alınır.
+Herkesin Katılımı
+Bir işteki sorunu en iyi bilen, o işi her gün yapan kişidir. TKY bu bilgiyi
+kullanmak için çalışanları sorun bulma ve çözme sürecine dahil eder. Bu ilkenin
+araçları ayrı bir bölümde ele alınmaktadır.
+Önleme
+Hatalı ürünü sonradan yakalamak yerine hatanın hiç oluşmaması hedeflenir. Bu
+ilke, “kalite süreçte yapılır” ifadesiyle özetlenir ve ayrı bir bölümde ayrıntılandırılmaktadır.
+Veriye Dayalı Karar
+Kararlar kişisel kanaatle değil, ölçüm ve veriyle verilir. Sorunun nedeni tahmin
+edilmez, ölçülerek bulunur.
+Süreç Bakışı
+Hataların büyük kısmı çalışanın bireysel kusurundan değil, işin yapılış biçiminden
+kaynaklanır. Deming, bir kurumdaki sorunların çok büyük çoğunluğunun sis-
+temden, yani yönetimin kurduğu süreçten doğduğunu savunmuştur (Deming,
+1986). Bu nedenle TKY’de hata görüldüğünde kişi değil süreç düzeltilir.
+3
+
+-- 3 of 12 --
+
+Tarihsel Köken
+TKY’nin fikirsel temeli büyük ölçüde iki Amerikalı uzmana dayanır: W. Ed-
+wards Deming ve Joseph M. Juran. Her ikisi de 1950’lerde Japon Bilim ˙Insanları
+ve Mühendisleri Birliği’nin (Union of Japanese Scientists and Engineers, JUSE)
+davetiyle Japonya’da yöneticilere ve mühendislere kalite üzerine dersler vermiştir.
+Japon sanayisi bu fikirleri benimsemiş, Kaoru Ishikawa gibi Japon kalite uzman-
+ları da bunları kurum geneline yayılan bir kalite kontrol anlayışına dönüştürmüştür
+(Ishikawa, 1985). 1980’lerde Japon şirketlerinin, özellikle otomotiv ve elektronik
+alanındaki başarısı karşısında Amerikan ve Avrupa şirketleri de bu anlayışı uygu-
+lamaya başlamış ve “Toplam Kalite Yönetimi” adı bu dönemde yaygınlaşmıştır.
+4
+
+-- 4 of 12 --
+
+Süreçte Kalite ˙Ilkesi
+Sonda Kontrol ile Süreçte Kalite Arasındaki Ayrım
+Sonda kontrol anlayışında ürün üretilir, ardından muayene edilir ve hatalılar
+ayıklanır. Hata bu noktada zaten oluşmuştur; kontrol yalnızca hatanın müşteriye
+ulaşmasını engellemeye çalışır.
+Süreçte kalite anlayışında ise hatanın oluşmaması için işin her adımı doğru
+kurulur ve izlenir. Her çalışan kendi adımının kalitesinden sorumludur ve hatalı
+iş bir sonraki adıma geçirilmez. Son kontrol yine yapılabilir, ancak kalitenin ana
+güvencesi o değildir; ana güvence sürecin kendisidir.
+Deming bu ilkeyi yönetim için önerdiği on dört maddeden birinde formüle
+etmiştir: kaliteyi muayeneye dayanarak sağlama alışkanlığı bırakılmalı, kalite
+baştan ürünün içine yerleştirilmelidir (Deming, 1986).
+Uygulama Örnekleri
+Poka-yoke
+Poka-yoke (Japonca “hata önleme”), bir işin yanlış yapılmasını fiziksel ya
+da teknik olarak imkânsız kılan tasarım yöntemidir. Kavram Shigeo Shingo
+tarafından geliştirilmiştir (Shingo, 1986). Örneğin bir parçanın yalnızca tek
+yönde takılabilecek biçimde tasarlanması, yanlış montajı muayeneye gerek kalmadan
+önler.
+Jidoka
+Jidoka, Toyota Üretim Sistemi’nde bir hata fark edildiğinde üretim hattının
+durdurulabilmesi ilkesidir (Ohno, 1988). Hattaki işçi bir sorun gördüğünde hattı
+durdurma yetkisine sahiptir. Böylece hata, aynı kusurlu iş yüzlerce kez tekrar-
+lanmadan, oluştuğu noktada çözülür.
+˙Istatistiksel Süreç Kontrolü
+Süreç sürekli ölçülür ve ölçümler istatistiksel olarak izlenir. Süreç sapmaya
+başladığında, ürünler henüz bozulmadan müdahale edilir. Bu yöntem ayrı bir
+bölümde ayrıntılı olarak ele alınmaktadır.
+Yazılım Geliştirmede Karşılığı
+Yazılımda sonda kontrolün karşılığı, kodun tamamlandıktan sonra ayrı bir test
+aşamasında sınanmasıdır. Süreçte kalitenin karşılığı ise hataların yazım sırasında
+yakalanmasıdır: birim testleri (unit tests), kod incelemesi (code review ) ve her
+değişiklikte testleri otomatik çalıştıran sürekli entegrasyon (Continuous Integra-
+tion, CI) bu yaklaşımın araçlarıdır.
+5
+
+-- 5 of 12 --
+
+C alışan Katılımı ve Kalite C emberleri
+Kalite C emberlerinin Tanımı
+Kalite çemberi (quality circle), aynı iş alanında çalışan küçük bir grubun
+düzenli olarak bir araya gelip işle ilgili sorunları belirlediği, analiz ettiği ve çözüm
+önerdiği yapıdır. Temel özellikleri şunlardır:
+• Grup genellikle 5 ile 12 kişiden oluşur.
+• Katılım çoğunlukla gönüllüdür.
+• Grup haftada bir gibi düzenli aralıklarla toplanır.
+• Toplantıyı bir lider, çoğu zaman ilgili birimin ustabaşı ya da şefi yönetir.
+• Ele alınan konular grubun kendi işinden çıkar: hatalar, israf, gecikmeler,
+güvenlik sorunları.
+C alışma Biçimi
+Bir kalite çemberinin çalışması şu adımları izler:
+1. Grup ele alacağı sorunu seçer.
+2. Sorunun nedenleri basit analiz araçlarıyla incelenir. Bu araçların başlıcaları,
+nedenleri kategorilere ayıran balık kılçığı (neden-sonuç) diyagramı, sorun-
+ların büyük kısmına yol açan az sayıdaki nedeni öne çıkaran Pareto analizi
+ve ölçümlerin zaman içindeki seyrini gösteren kontrol grafikleridir.
+3. Grup bir çözüm önerisi hazırlar.
+4. Öneri yönetime sunulur.
+5. Onaylanan çözüm uygulanır ve sonucu izlenir.
+Balık kılçığı diyagramı Ishikawa tarafından geliştirildiği için “Ishikawa diya-
+gramı” olarak da anılır.
+Köken
+Kalite çemberleri 1960’ların başında Japonya’da ortaya çıkmıştır. ˙Ilk çemberler
+1962’de JUSE’nin desteğiyle kurulmuş ve fikir en çok Kaoru Ishikawa ile özdeşleşmiştir
+(Ishikawa, 1985). Uygulama, Toyota gibi Japon şirketleri aracılığıyla yaygınlaşmış
+ve 1970’ler ile 1980’lerde Japonya dışına yayılmıştır.
+Aynı ˙Ilkenin Diğer Alanlardaki Biçimleri
+Kalite çemberi, “işi yapan kişi sorunu en iyi bilir” ilkesinin yöntemi ve araçları
+tanımlanmış bir biçimidir. Aynı ilke başka alanlarda farklı yapılarla uygulanır.
+6
+
+-- 6 of 12 --
+
+˙Iş Güvenliği
+• ˙Iş sağlığı ve güvenliği kurulları: C alışan temsilcileri ile yönetim bir
+araya gelerek güvenlik sorunlarını görüşür. Türkiye’de bu kurullar, belirli
+büyüklüğün üzerindeki işyerleri için 6331 sayılı ˙Iş Sağlığı ve Güvenliği
+Kanunu ile zorunlu tutulmuştur.
+• Ramak kala bildirimleri: Kazaya dönüşmeden atlatılan tehlikeli du-
+rumlar çalışanlar tarafından bildirilir. Her ciddi kazanın arkasında çok
+sayıda küçük olay ve ramak kala durumu bulunduğu fikri Heinrich’e dayanır
+(Heinrich, 1931). Ramak kala durumlarının kaydedilmesi, kaza olmadan
+önlem alınmasını sağlar.
+• Risk değerlendirmesine katılım: Sahadaki tehlikeler, sahada çalışanlar
+tarafından gösterilir.
+Deneyim Paylaşımı
+• Öneri sistemleri: C alışanlar iyileştirme fikirlerini yazılı olarak iletir.
+• Ders çıkarma toplantıları (lessons learned ): Bir iş tamamlandığında
+nelerin iyi, nelerin kötü gittiği değerlendirilir.
+• Retrospektif toplantılar: C evik (agile) yazılım ekiplerinde her çalışma
+döneminin sonunda ekip kendi çalışma biçimini değerlendirir.
+• Suçlamasız olay analizi (blameless postmortem): Bir yazılım arızasından
+sonra ekip, sorunu bir kişiye yüklemeden sürecin hangi noktasında aksama
+olduğunu araştırır (Beyer vd., 2016). Bu yaklaşım TKY’nin “kişi değil
+süreç düzeltilir” ilkesinin doğrudan karşılığıdır.
+Farklar
+Kalite çemberi düzenli toplanan, belirli analiz araçları kullanan sürekli bir grup-
+tur. Diğer yapılar aynı katılım ilkesinin farklı biçimleridir: kimi kalıcı bir ku-
+rul, kimi bir bildirim formu, kimi bir iş bittikten sonra yapılan tek seferlik bir
+toplantıdır.
+7
+
+-- 7 of 12 --
+
+˙Istatistiksel Süreç Kontrolü
+Tanım ve Amaç
+˙Istatistiksel Süreç Kontrolü (Statistical Process Control, SPC), bir sürecin
+normal davranışını sayısal olarak tanımlayan ve bu davranıştan sapmaları otomatik
+olarak yakalayan yöntemler bütünüdür. Fabrikalarda üretim kalitesini izlemek
+için geliştirilmiş, sonra yazılımda performans ve hata takibinde de kullanılmaya
+başlanmıştır.
+SPC’nin cevapladığı temel soru şudur: ölçümde görülen bir değişim sıradan
+bir dalgalanma mıdır, yoksa süreçte gerçekten bir şey mi bozulmuştur.
+Ortak Neden ve Özel Neden
+SPC’nin dayandığı ayrım Walter A. Shewhart tarafından kurulmuş (Shewhart,
+1931), Deming tarafından yaygınlaştırılmıştır (Deming, 1986).
+• Ortak neden (common cause): Sürecin doğal dalgalanmasıdır. Hiçbir
+süreç her seferinde birebir aynı sonucu üretmez; küçük farklılıklar sürecin
+yapısından gelir. Ortak nedenli değişime tek tek ölçümler üzerinden tepki
+verilmez; azaltılması isteniyorsa sürecin kendisi değiştirilmelidir.
+• Özel neden (special cause): Sürecin dışından gelen belirli bir sorundur.
+Bozulan bir makine, hatalı bir malzeme partisi ya da yanlış yapılandırılmış
+bir sunucu buna örnektir. Özel nedenin kaynağı bulunur ve giderilir.
+Bu ayrımın pratik önemi iki karşıt hatadan gelir. Birincisi, normal dalgalan-
+mayı sorun sanıp sürece müdahale etmektir. Deming bu davranışı tampering
+(kurcalama) olarak adlandırmış ve bu tür müdahalelerin sürecin değişkenliğini
+azaltmak yerine artırdığını göstermiştir (Deming, 1986). ˙Ikincisi, gerçek bir
+sorunu normal dalgalanma sanıp gözden kaçırmaktır. SPC’nin işlevi bu iki
+hatayı birbirinden ayırmaktır.
+Kontrol Grafiği
+Kontrol grafiği (control chart), ölçümleri zaman ekseninde gösteren bir grafik-
+tir. Grafiğin ortasında ölçümlerin ortalamasını gösteren bir merkez çizgisi,
+üstünde ve altında ise kontrol sınırları bulunur. Ölçümler sınırların içinde kaldığı
+sürece süreç “kontrol altında” sayılır; değişim yalnızca ortak nedenlerden kay-
+naklanmaktadır. Sınırın dışına çıkan bir ölçüm büyük olasılıkla özel bir nedene
+işaret eder.
+Kontrol Sınırları
+UCL ve LCL
+• UCL (Upper Control Limit): Üst kontrol sınırı.
+• LCL (Lower Control Limit): Alt kontrol sınırı.
+8
+
+-- 8 of 12 --
+
+Sınırların Hesaplanması
+Sınırlar insan tarafından tahmin edilmez, geçmiş verilerden hesaplanır:
+1. Ölçümlerin ortalaması (μ) alınır.
+2. Ölçümlerin ortalamadan ne ölçüde saptığını gösteren standart sapma
+(σ) hesaplanır.
+3. Üst sınır ortalamanın üç standart sapma üstüne, alt sınır üç standart
+sapma altına konur:
+U CL = μ + 3σ, LCL = μ − 3σ
+Ölçümler normal dağılıma uyduğunda, değerlerin yaklaşık %99,7’si bu aralıkta
+kalır. Bu nedenle aralığın dışına düşen bir değerin yalnızca şans eseri oluşma
+olasılığı çok düşüktür.
+Sabit Eşikle Karşılaştırma
+Yazılımda yaygın uygulama, bir metrik için sabit bir eşik belirlemektir; örneğin
+bir API’nin yanıt süresi 500 ms’yi geçtiğinde uyarı verilmesi. Sabit eşik iki
+yönden hata üretir. Eşik sürecin normal davranışına göre düşük seçilirse sistem
+normal dalgalanmada bile uyarı verir ve uyarılar zamanla önemsenmez hâle
+gelir. Eşik yüksek seçilirse sorun büyüyene kadar fark edilmez. SPC, sınırı
+sürecin kendi verisinden türettiği için her iki hatayı da azaltır.
+Yavaş Kaymaların Tespiti
+Kontrol sınırları ani sıçramaları iyi yakalar, ancak ölçümlerin sınır içinde kalarak
+yavaş yavaş kaydığı durumları geç fark eder. Bu tür kaymalar için iki yöntem
+kullanılır.
+CUSUM
+CUSUM (Cumulative Sum, birikimli toplam), her ölçümün hedef değerden
+farkını sürekli toplar (Page, 1954). Tek tek bakıldığında önemsiz görünen ama
+aynı yönde süren küçük farklar, toplamda büyüyerek alarm eşiğini aşar. Örneğin
+bir API’nin yanıt süresi her gün 2 ms artıyorsa, tek günlük artış dikkat çekmez;
+birikimli toplam ise birkaç hafta içinde belirgin bir sapma gösterir.
+EWMA
+EWMA (Exponentially Weighted Moving Average, üstel ağırlıklı hareketli or-
+talama), yeni ölçümlere yüksek, eski ölçümlere giderek azalan ağırlık veren bir
+ortalamadır (Roberts, 1959):
+zt = λxt + (1 − λ)zt−1, 0 < λ ≤ 1
+9
+
+-- 9 of 12 --
+
+Burada xt son ölçümü, zt güncel ortalamayı, λ ise yeni ölçüme verilen ağırlığı
+gösterir. EWMA gürültüyü yumuşatır ve yavaş başlayan değişimleri erken
+gösterir. CUSUM ile benzer bir işlevi farklı bir hesapla yerine getirir.
+Western Electric Kuralları
+Western Electric kuralları, 1950’lerde Western Electric şirketinin yayımladığı
+ve kontrol grafiğinde sınır aşımı olmasa bile şüpheli kabul edilen desenleri tanımlayan
+kurallardır (Western Electric, 1956). Başlıcaları şunlardır:
+1. Bir ölçüm 3σ sınırının dışındadır.
+2. Art arda üç ölçümden ikisi, aynı tarafta 2σ’nın ötesindedir.
+3. Art arda beş ölçümden dördü, aynı tarafta 1σ’nın ötesindedir.
+4. Art arda sekiz ölçüm ortalamanın hep aynı tarafındadır.
+Bu kuralların ortak mantığı, tek başına olası olan ama dizi hâlinde şans eseri
+oluşması düşük olasılıklı desenleri özel neden belirtisi saymaktır.
+Yazılım Projelerinde Durum
+Bir yazılım projesinde metrik toplanıyor olması, SPC uygulandığı anlamına
+gelmez. Kontrol grafiği, istatistiksel olarak hesaplanmış kontrol sınırları, CUSUM
+ya da EWMA ile kayma tespiti veya Western Electric türü desen kuralları bulun-
+muyorsa, metrikler ya sabit eşiklerle ya da hiç otomatik kontrol olmadan izleniy-
+ordur. Bu durumda sürecin normal aralığı istatistiksel olarak tanımlanmamış
+ve yavaş kaymalar otomatik olarak tespit edilmiyordur.
+10
+
+-- 10 of 12 --
+
+Sonuç
+TKY, kalite çemberleri ve SPC tek bir zincirin halkalarıdır: TKY genel anlayışı,
+süreçte kalite bu anlayışın temel ilkesini, çalışan katılımı ilkenin insan boyutunu,
+SPC ise ilkenin ölçüm boyutunu oluşturur. Bu zincirden çıkan pratik sonuç,
+bir hatayla karşılaşıldığında ilk sorulacak sorunun “kim yaptı” değil “süreç bu
+hataya nasıl izin verdi” olmasıdır.
+Ortak neden ile özel neden ayrımı, bu çerçevenin en az bilinen ama en çok
+iş gören parçasıdır. Bu ayrım, bir ölçümdeki her değişime tepki vermenin de
+hiçbirine tepki vermemenin de hatalı olduğunu gösterir. Yazılım işletiminde
+sabit eşikli uyarıların ürettiği gereksiz alarm ve geç fark edilen sorun ikilemi, bu
+ayrımın yapılmamasının doğrudan sonucudur.
+C erçevenin sınırlılıkları da vardır. 3σ sınırları ölçümlerin yaklaşık normal
+dağıldığı ve sürecin kararlı olduğu varsayımına dayanır; yazılım metriklerinin
+önemli kısmı, örneğin yanıt süreleri, çarpık dağılım gösterir ve gün içi ya da haf-
+talık döngüler taşır. Bu tür verilerde sınırların doğrudan hesaplanması yanıltıcı
+olabilir ve verinin dönüştürülmesi ya da döngülere göre ayrılması gerekir. Kalite
+çemberleri de 1980’lerde Batı’da sıklıkla yönetim desteği olmadan kurulmuş,
+önerileri uygulanmadığında kısa sürede işlevsizleşmiştir; katılım yapısı, önerilerin
+sonuç doğurduğu bir yönetim anlayışı olmadan tek başına işlemez.
+Açık kalan soru, imalat için geliştirilmiş bu yöntemlerin, girdileri ve çıktıları
+sürekli değişen yazılım sistemlerine hangi ölçüde aktarılabileceğidir. Sürekli
+dağıtım yapılan bir sistemde “kararlı süreç” varsayımı sık sık bozulur; her
+dağıtım sonrasında kontrol sınırlarının yeniden hesaplanması gerekip gerekmediği
+uygulamaya göre belirlenmelidir.
+Kaynaklar
+• Beyer, B., Jones, C., Petoff, J. ve Murphy, N. R. (2016). Site Reliability
+Engineering: How Google Runs Production Systems. O’Reilly Media.
+• Deming, W. E. (1986). Out of the Crisis. MIT Center for Advanced
+Engineering Study.
+• Heinrich, H. W. (1931). Industrial Accident Prevention: A Scientific Ap-
+proach. McGraw-Hill.
+• Imai, M. (1986). Kaizen: The Key to Japan’s Competitive Success. McGraw-
+Hill.
+• Ishikawa, K. (1985). What Is Total Quality Control? The Japanese Way.
+Prentice-Hall.
+• Ohno, T. (1988). Toyota Production System: Beyond Large-Scale Produc-
+tion. Productivity Press.
+• Page, E. S. (1954). Continuous Inspection Schemes. Biometrika, 41(1/2).
+11
+
+-- 11 of 12 --
+
+• Roberts, S. W. (1959). Control Chart Tests Based on Geometric Moving
+Averages. Technometrics, 1(3).
+• Shewhart, W. A. (1931). Economic Control of Quality of Manufactured
+Product. Van Nostrand.
+• Shingo, S. (1986). Zero Quality Control: Source Inspection and the Poka-
+yoke System. Productivity Press.
+• Western Electric Company (1956). Statistical Quality Control Handbook.
+Western Electric.
+• 6331 sayılı ˙Iş Sağlığı ve Güvenliği Kanunu (2012). Resmı Gazete.
+12
+
+-- 12 of 12 --
