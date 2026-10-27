@@ -1,7 +1,26 @@
 Anlamın Sınırları: Wittgenstein’dan Ontolojiye
 ve Domain-Driven Design’a
 Ömer Faruk Yavuz
-July 2026
+October 2026
+Özet
+Aynı kelimenin farklı topluluklarda farklı nesnelere karşılık gelmesi, geç Witt-
+genstein’ın anlamın kullanımdan doğduğu tespitinin yazılımdaki görünümüdür.
+Tek bir kanonik şema bu farkı sessizce siler; Palantir Ontology ve Domain-Driven
+Design bu soruna verilmiş iki ayrı cevaptır. Ontology farkı ortak bir nesne kat-
+manında eritir ve çeviriyi bir kez, verinin platforma alındığı noktada yapar.
+Domain-Driven Design ise farkı korur ve çeviriyi her topluluk sınırına, açıkça
+adlandırılmış bir katman olarak yerleştirir. Taktiksel düzeyde iki yaklaşım bü-
+yük ölçüde örtüşür: nesne tipleri Entity’ye, fonksiyonlar Domain Service’e ya-
+kındır. Ayrışma, sınır çizen araçlarda yoğunlaşır; Context Map ve Aggregate’in
+Ontology’de doğrudan karşılığı bulunmaz. Domain-Driven Design’ın taktiksel
+kararlarının tamamı, Entity davranışından Aggregate sınırına kadar, domain
+uzmanına söylenen bir cümlenin sınanmasına dayanır; bu, bir kuralın uygula-
+masının kuraldan değil pratikten çıktığı tespitinin mühendislik karşılığıdır. İki
+yaklaşım arasındaki asıl fark etkinlikte değil, hangi topluluğun dilinin geçerli
+olacağı kararının görünür kalıp kalmadığındadır.
+
+-- 1 of 37 --
+
 Giriş
 Sorun ve Amaç
 Bu çalışma tek bir soruyu izleyerek felsefeden yazılım mühendisliğine uzanan
@@ -16,16 +35,16 @@ Tez
 Çalışmanın savunduğu tez üç önermeden oluşmaktadır.
 1. Her iki yaklaşım da aynı felsefi tespitten hareket etmektedir: kavramlar
 topluluğa görelidir ve tek bir kanonik şemaya sıkıştırılamaz.
-2. Verdikleri cevaplar zıt yönlüdür. Domain-Driven Design farkı koruyup sı-
-nırlar arasına açık bir çeviri katmanı yerleştirir; Ontology farkı ortak bir
+2. Verdikleri cevaplar zıt yönlüdür. Domain-Driven Design farkı koruyup
+sınırlar arasına açık bir çeviri katmanı yerleştirir; Ontology farkı ortak bir
 nesne katmanında eritir.
 3. Aradaki en kritik ayrım performans veya ifade gücü değil, gücün görünür-
 lüğüdür. Domain-Driven Design hangi topluluğun dilinin geçerli olacağını
 açık bir tasarım kararına dönüştürür; Ontology aynı kararı ortadan kal-
 dırmaz, yalnızca altyapı konfigürasyonuna gömerek görünmez kılar.
-1
+2
 
--- 1 of 23 --
+-- 2 of 37 --
 
 Yol Haritası
 [0] KAVRAMSAL ZEMIN
@@ -46,6 +65,8 @@ v v
 [3] BIRINCI CEVAP [4] IKINCI CEVAP
 Ontoloji Domain-Driven Design
 (merkezilestirme) (sinirlandirma)
+stratejik + sinirda ceviri
++ taktiksel yapi taslari
 | |
 +-------+-------+
 |
@@ -60,81 +81,83 @@ maktadır.
 Kaynak asimetrisi. Domain-Driven Design tarafı, öğretisini doğrudan or-
 taya koyan birincil ve ikincil metinlerden okunmuştur: Evans’ın kurucu kitabı,
 Vernon’un uygulama kitabı ve Ürkmez’in bu öğretiyi Türkçede sistematik bi-
-çimde işleyen dört yazılık serisi. Ontology tarafı ise büyük ölçüde ürün dokü-
-mantasyonundan, şirket beyanlarından ve üçüncü taraf teknik incelemelerden
-okunmuştur. Birinci grup nasıl yapılması gerektiğini anlatan normatif metinler-
-dir; ikinci grup ise ürünün nasıl sunulduğunu gösteren metinlerdir.
+çimde işleyen on yazılık serisi. Serinin ilk dört yazısı stratejik tasarımı, beşinci
+yazısı bağlamlar arası entegrasyonu, son beş yazısı ise taktiksel tasarımı ele al-
+maktadır. Ontology tarafı ise büyük ölçüde ürün dokümantasyonundan, şirket
+beyanlarından ve üçüncü taraf teknik incelemelerden okunmuştur. Birinci grup
+3
+
+-- 3 of 37 --
+
+nasıl yapılması gerektiğini anlatan normatif metinlerdir; ikinci grup ise ürünün
+nasıl sunulduğunu gösteren metinlerdir.
 Bunun sonucu şudur: karşılaştırma, doğası gereği Domain-Driven Design’ı en
 olgun hâliyle, Ontology’yi ise beyan edilmiş hâliyle ele almaktadır. Bu eşitsizlik
 ortadan kaldırılamamıştır; altıncı bölümde açıkça bir karşı argüman olarak ele
 alınmaktadır.
-Ampirik dayanağın yokluğu. Çalışma kavramsal bir analizdir. Vaka in-
-celemesi, ölçüm veya saha gözlemi içermemektedir. Dolayısıyla ileri sürülen tez,
-2
-
--- 2 of 23 --
-
-bir hipotez olarak okunmalı ve ampirik sınamaya açık kabul edilmelidir.
+Ampirik dayanağın yokluğu. Çalışma kavramsal bir analizdir. Vaka
+incelemesi, ölçüm veya saha gözlemi içermemektedir. Dolayısıyla ileri sürülen
+tez, bir hipotez olarak okunmalı ve ampirik sınamaya açık kabul edilmelidir.
 Felsefi okumanın niteliği. Wittgenstein’a yapılan başvuru araçsaldır, me-
 tin şerhi niteliğinde değildir. Amaç, mühendislik tartışmasına kavramsal bir çer-
 çeve kazandırmaktır; Wittgenstein yorumculuğuna katkı sunmak değildir. Ça-
-lışma boyunca kullanılan Türkçe terimler için Aral’ın Felsefi Soruşturmalar çe-
-virisi esas alınmıştır.
-3
+lışma boyunca kullanılan Türkçe terimler için Barışcan’ın Felsefi Soruşturmalar
+çevirisi esas alınmıştır.
+4
 
--- 3 of 23 --
+-- 4 of 37 --
 
 Kavramsal Zemin
 Aşağıdaki liste hızlı başvuru amaçlıdır. Terimler ilgili bölümlerde ayrıntılı olarak
 ele alınmaktadır.
 Anlam ve Formalizasyon
-• Anlam. Bir işaretin neye karşılık geldiği. Bu çalışmada işaretin kendisinde
-bulunan bir özellik değil, kullanımdan doğan bir ilişki olarak ele alınır. Ör-
-nek: “Yeşil ışık” trafikte geçme izni, projede yönetici onayı, ameliyathanede
-hastanın stabil olduğu bilgisidir.
+• Anlam. Bir işaretin neye karşılık geldiği. Bu çalışmada işaretin ken-
+disinde bulunan bir özellik değil, kullanımdan doğan bir ilişki olarak ele
+alınır. Örnek: “Yeşil ışık” trafikte geçme izni, projede yönetici onayı, ame-
+liyathanede hastanın stabil olduğu bilgisidir.
 • Özcülük. Her kavramın, tüm örneklerinde ortak bulunan bir çekirdek
-niteliği olduğu varsayımı. Örnek: “Sandalye” tanımı her sıkılaştırmada bir
-örneği dışarıda bırakır, her gevşetmede bir yabancıyı içeri alır.
+niteliği olduğu varsayımı. Örnek: “Sandalye” tanımı her sıkılaştırmada
+bir örneği dışarıda bırakır, her gevşetmede bir yabancıyı içeri alır.
 • Dil oyunu. Kelimenin, içine gömülü olduğu faaliyet ve o faaliyetin kural-
 larıyla birlikte oluşturduğu bütün. Örnek: Şantiyede “tuğla” bir emirdir,
 malzeme dersinde bir sınıflandırma birimidir, arkeolojik raporda bir tarih-
 lendirme kanıtıdır.
-• Aile benzerliği. Ortak tek bir nitelik bulunmamasına karşın örtüşen ben-
-zerlik zincirleriyle bir kavramın tutarlı işlemesi. Örnek: Maraton, satranç,
-dart ve otomobil yarışının hepsini kapsayan tek bir “spor” niteliği sapta-
-namaz.
-• Formalizasyon. Bir pratiğin açıkça yazılmış, sonlu ve makine tarafın-
-dan işlenebilir kurallara dönüştürülmesi. Örnek: Bir tarifte malzemeler ve
+• Aile benzerliği. Ortak tek bir nitelik bulunmamasına karşın örtüşen
+benzerlik zincirleriyle bir kavramın tutarlı işlemesi. Örnek: Maraton, sat-
+ranç, dart ve otomobil yarışının hepsini kapsayan tek bir “spor” niteliği
+saptanamaz.
+• Formalizasyon. Bir pratiğin açıkça yazılmış, sonlu ve makine tarafından
+işlenebilir kurallara dönüştürülmesi. Örnek: Bir tarifte malzemeler ve
 süreler yazılabilir; “hamur kıvamını alınca” ifadesi yazılamaz.
 • Kural takibi problemi. Bir kuralın nasıl uygulanacağının kuralın ken-
-disinden türetilemeyeceği tespiti. Örnek: “Kütüphanede sessiz olunuz” ku-
-ralı, öksürüğün ve sandalye gıcırtısının kapsam içinde olup olmadığını söy-
-lemez.
+disinden türetilemeyeceği tespiti. Örnek: “Kütüphanede sessiz olunuz”
+kuralı, öksürüğün ve sandalye gıcırtısının kapsam içinde olup olmadığını
+söylemez.
 • Örtük bilgi. Uygulanan ancak sorulduğunda formüle edilemeyen bilgi.
 Örnek: Deneyimli kaynakçının dikişin tuttuğunu sesinden anlaması.
+5
+
+-- 5 of 37 --
+
 Modelleme ve Temsil
-• Model. Bir alanın, belirli bir amaç doğrultusunda seçilmiş yönlerini temsil
-eden yapı; tanımı gereği eksiktir. Örnek: Metro haritası coğrafi olarak
+• Model. Bir alanın, belirli bir amaç doğrultusunda seçilmiş yönlerini tem-
+sil eden yapı; tanımı gereği eksiktir. Örnek: Metro haritası coğrafi olarak
 yanlıştır ve işlevini tam da bu yanlışlık sayesinde görür.
 • Şema. Verinin hangi alanlardan oluştuğunu belirleyen biçimsel tanım.
 Örnek: Formda “ikinci uyruk” kutusu yoksa o bilgi sisteme hiç girmez.
 • Kanonik. Birden fazla aday arasından birinin resmî ve bağlayıcı sayıl-
-ması. Örnek: Uyuşmazlıkta insan kaynaklarının yayımladığı tatil listesinin
-geçerli sayılması.
-4
-
--- 4 of 23 --
-
+ması. Örnek: Uyuşmazlıkta insan kaynaklarının yayımladığı tatil listesi-
+nin geçerli sayılması.
 • Ontoloji. Felsefede varlığın temel kategorilerini inceleyen metafizik dalı;
 veri alanında bir alandaki nesne tiplerini, özelliklerini ve ilişkilerini tanım-
 layan yapı.
-• Ham veri. Yorum katmanı bulunmayan kayıtlar. Örnek: Market fişindeki
-barkod ve tutar, ne alındığını söylemez.
+• Ham veri. Yorum katmanı bulunmayan kayıtlar. Örnek: Market fişin-
+deki barkod ve tutar, ne alındığını söylemez.
 • Anlam katmanı. Ham verinin gerçek dünyadaki karşılığını tanımlayan,
 veriyi değiştirmeyip okunuşunu belirleyen yapı.
 • Uygulamalı soyutlama. Kâğıt üzerinde kalmayıp çalışan bir sisteme
-dönüşen ve bu nedenle sınanabilen soyutlama. Örnek: Yanlış konumlandı-
-rılmış bir kapı, planda görünmez; inşaatta ilk gün kendini gösterir.
+dönüşen ve bu nedenle sınanabilen soyutlama. Örnek: Yanlış konumlan-
+dırılmış bir kapı, planda görünmez; inşaatta ilk gün kendini gösterir.
 • Dijital ikiz. Bir kurumun yazılımda birebir karşılığının kurulduğu iddiası.
 Harita ölçekli sadeleştirmedir ve sadeleştirdiğini beyan eder; ikiz eksiksizlik
 iddiası taşır.
@@ -143,12 +166,16 @@ Topluluk, Sınır ve Güç
 bir kelime dağarcığı geliştiren grup. Örnek: Boş bir yatak hemşire için
 kapasite, muhasebe için gelir kaybıdır.
 • Bağlam. Bir kavramın belirli bir anlama sabitlendiği alan.
-• Sınır. İki bağlamın ayrıldığı ve kavramların anlam değiştirdiği hat. Teknik
-değil dilseldir. Örnek: Pasaport kontrol hattının asıl işlevi konum değil,
-kural değişimidir.
+• Sınır. İki bağlamın ayrıldığı ve kavramların anlam değiştirdiği hat. Tek-
+nik değil dilseldir. Örnek: Pasaport kontrol hattının asıl işlevi konum
+değil, kural değişimidir.
 • Çeviri ve çeviri kaybı. Bir bağlamın kavramlarının başka bir bağlama
 dönüştürülmesi ve bu dönüşümde bazı ayırt edici unsurların düşmesi. Ör-
 nek: “Acil” kaydın sırasıyla “öncelikli” ve “bugün içinde” hâline gelmesi.
+6
+
+-- 6 of 37 --
+
 • Asimetri. Etkinin tek yönlü akması. Değer sıralaması değil, bağımlılık
 yönüdür. Örnek: Ana yüklenicinin kararı taşeronun planını yeniden kurar;
 tersi olmaz.
@@ -159,16 +186,13 @@ tartışılamaz, çünkü hiç kurulmamış gibidir.
 • Sessiz hata. Sistemin çökmediği, uyarı üretmediği, ancak yanlış çalıştığı
 durum. Örnek: Sabit biçimde şaşan bir terazi, her tartımda tutarlı ve
 yanlış sonuç verir.
-5
-
--- 5 of 23 --
-
 Domain-Driven Design Terimleri
 Türkçe karşılıkları yerleşmediği için özgün biçimleriyle bırakılmıştır.
+Stratejik terimler
 • Domain. Organizasyonun varlık nedeni ve bilgisinin bütünü. Banka için
 bankacılık, havayolu için havacılık.
-• Problem space / Solution space. Hangi problemin önemli olduğu so-
-rusunun alanı ile bunun yazılımda nasıl karşılanacağı sorusunun alanı.
+• Problem space / Solution space. Hangi problemin önemli olduğu
+sorusunun alanı ile bunun yazılımda nasıl karşılanacağı sorusunun alanı.
 • Subdomain. Domain’in mantıksal parçası; Core, Supporting veya Gene-
 ric olarak sınıflandırılır. Problem space’e aittir.
 • Bounded Context. Bir domain modelinin yaşadığı ve kavramların tek
@@ -177,25 +201,60 @@ anlama sabitlendiği sınır. Solution space’e aittir.
 ricilerin birlikte kurduğu ve toplantıda, dokümantasyonda ve kodda aynı
 biçimde kullanılan dil.
 • Domain expert. İşi herkesten iyi bilen kişi; unvan değil konum.
-• Entity / Value Object. Kimliği olan ve zaman içinde değişen nesne ile
-kimliği olmayıp yalnızca değerleriyle tanımlanan nesne.
-• Aggregate. Tutarlılığından tek bir kök nesnenin sorumlu olduğu nesne
-kümesi.
-• Context Map. Bağlamların ve aralarındaki ilişkilerin haritası; hedeflenen
-mimariyi değil mevcut durumu çizer.
+• Context Map. Bağlamların ve aralarındaki ilişkilerin haritası; hedefle-
+nen mimariyi değil mevcut durumu çizer.
 • Anemic Domain Model. Veri taşıyıp davranış taşımayan modellerin
 oluşturduğu anti-pattern.
 • Big Ball of Mud. Sınırların tutarsızlaştığı ve kavramsal düzenin kaybe-
 dildiği sistem bölgesi.
+7
+
+-- 7 of 37 --
+
+Sınır ve entegrasyon terimleri
+• Open Host Service / Published Language. Üst taraftaki bağlamın
+tüm tüketicilere sunduğu tek açık protokol ve bu protokolde kullanılan,
+belgelenmiş ve kararlı ortak dil.
+• Anticorruption Layer (ACL). Alt taraftaki bağlamın, üst tarafın mo-
+delini kendi diline çevirdiği koruma katmanı.
+• Translation Map. Dış bir temsilin alanlarının yerel modelin kavramla-
+rına eşlenme tablosu; neyin alındığını ve neyin dışarıda bırakıldığını gös-
+terir.
+• Eventual consistency. Sınırlar arası tutarlılığın aynı anda değil, belirli
+bir süre içinde sağlanması.
+Taktiksel terimler
+• Entity. Kimliği olan ve zaman içinde değişebilen nesne. Öznitelikleri
+değil, kimliği onu tanımlar.
+• Value Object. Kimliği olmayan, yalnızca taşıdığı değerlerle tanımlanan
+ve oluşturulduktan sonra değişmeyen nesne.
+• Primitive obsession. Alan kavramlarının anlam taşıyan tipler yerine
+string, int, decimal gibi çıplak dil tipleriyle temsil edilmesi.
+• Domain Service. Tek bir Entity ya da Value Object’e ait olmayan,
+birden fazla nesnenin bilgisini gerektiren, adı domain dilinden gelen ve
+durum tutmayan işlem.
+• Invariant. Her an doğru kalması gereken iş kuralı. Örnek: Bir siparişin
+ödenecek tutarı ile kalemlerinin toplamı arasındaki eşitlik.
+• Aggregate. Bir tutarlılık sınırı: içindeki kuralların her işlemden sonra,
+tek bir transaction içinde birlikte doğru kalması gereken nesne grubu. Dı-
+şarıyla yalnızca kök nesnesi (Aggregate Root) üzerinden iletişim kurar.
+• Repository. Aggregate’leri saklayıp geri getiren ve dışarıya bir koleksiyon
+gibi görünen sözleşme.
+• Domain Event. Bir Aggregate’te gerçekleşmiş, domain uzmanının önem-
+sediği ve geriye dönük değiştirilemeyen olayın kaydı. Geçmiş zamanla ad-
+landırılır.
+8
+
+-- 8 of 37 --
+
 Terminoloji Notu
 Küçük harfle “ontoloji” genel kavramı, “Ontology” Palantir ürününü belirtmek-
 tedir. Benzer biçimde “bağlam” genel anlamda, “Bounded Context” Domain-
 Driven Design’ın teknik terimi olarak kullanılmaktadır. Bu ayrım çalışmanın
 konusunun doğrudan bir gereğidir: aynı kelimenin iki dil oyununda iki farklı
 nesneye karşılık gelmesi, incelenen olgunun kendisidir.
-6
+9
 
--- 6 of 23 --
+-- 9 of 37 --
 
 Felsefi Çerçeve
 Ontoloji Teriminin İki Yaşamı
@@ -210,8 +269,9 @@ koyduğumuz bir etiket midir?
 Felsefi ontoloji, kısaca, gerçekliğin envanterini ve o envanterin kategorilere
 ayrılma biçimini sorgular.
 Teknik kullanım
-Veri alanındaki anlam daha somuttur: bir ontoloji, belirli bir alandaki nesne tip-
-lerini, bunların özelliklerini ve aralarındaki ilişkileri açıkça tanımlayan yapıdır.
+Veri alanındaki anlam daha somuttur: bir ontoloji, belirli bir alandaki nesne
+tiplerini, bunların özelliklerini ve aralarındaki ilişkileri açıkça tanımlayan yapı-
+dır.
 Ham veri, tablo düzeyinde birbirinden kopuk hücrelerden oluşur. Ontoloji ise
 bu hücrelerin üzerine şu iddiayı yerleştirir: burada gerçekte bir Kayıt nesnesi,
 bir Kullanıcı nesnesi ve bir İndirme olayı bulunmaktadır; ve bunlar arasında
@@ -227,14 +287,14 @@ toplamıdır.
 Bu konum formal, sonlu ve tam bir temsil idealini savunur. Modern veri mo-
 dellemesinin örtük felsefesi büyük ölçüde budur; bu tespit çalışmanın ilerleyen
 bölümlerinde belirleyici olacaktır.
+10
+
+-- 10 of 37 --
+
 Geç Wittgenstein: Dil Oyunları ve Aile Benzerliği
 Felsefi Soruşturmalar, bu konumun yazarı tarafından terk edildiği metindir.
 Merkezî iddia şudur:
 Bir kelimenin anlamı, dildeki kullanımıdır.
-7
-
--- 7 of 23 --
-
 Bu iddiaya göre bir kavramın çekirdek tanımı yoktur. Kavramı anlamlı kılan
 şey, belirli bir topluluğun onu belirli pratikler içinde nasıl kullandığıdır: kimi
 kapsadığı, kimi dışladığı ve hangi eylemi tetiklediği. Wittgenstein bu bütünlüğe
@@ -244,9 +304,9 @@ bulunmaktaydı.
 İkinci kavram aile benzerliğidir. “Oyun” kelimesinin kapsadığı örneklerin
 tümünde bulunan tek bir özellik saptanamaz. Satranç, futbol, solitaire ve ço-
 cukların yakalamacası arasında kimisi rekabetçidir kimisi değildir; kimisi katı
-kurallıdır kimisi gevşektir. Ortak bir öz yoktur; örtüşen benzerlik zincirleri var-
-dır. Bu tespit, “yeterince kesin bir tanım yapılırsa kavram yakalanır” varsayımına
-doğrudan bir itirazdır.
+kurallıdır kimisi gevşektir. Ortak bir öz yoktur; örtüşen benzerlik zincirleri
+vardır. Bu tespit, “yeterince kesin bir tanım yapılırsa kavram yakalanır” varsa-
+yımına doğrudan bir itirazdır.
 Kural Takibi ve Formalizasyonun Sınırı
 Geç Wittgenstein’ın en radikal iddiası çoğunlukla atlanan bir noktadadır. İddia
 yalnızca “anlam kullanımdadır” değil, “anlam tam olarak formalize edilemez”dir.
@@ -259,9 +319,9 @@ dır: incelenen mühendislik cevaplarının her ikisi de, tam olarak anlamı for
 etme girişimidir. Dolayısıyla ikisi de aynı felsefi itirazın hedefindedir ve arala-
 rındaki fark, itirazı ne ölçüde karşıladıklarında değil, itiraza rağmen neyi feda
 ettiklerinde aranmalıdır.
-8
+11
 
--- 8 of 23 --
+-- 11 of 37 --
 
 Problemin Yazılımdaki Görünümü
 Aynı Kelime, Farklı Nesne
@@ -294,26 +354,27 @@ Satis Risk Hukuk Destek
 [ tek Customer tablosu ] <-- anlam burada donduruldu
 |
 ham veri
+12
+
+-- 12 of 37 --
+
 Yapısal sorun şudur: söz konusu tablo, taraflardan birinin dil oyununa göre
 yazılmıştır. Diğerleri kendi kavramlarını bu şemaya çevirmek zorunda kalır ve
 çeviride belirleyici olan unsur kaybolur. Risk birimi vefat etmiş müşteriyi, destek
 birimi sözleşme sahibinin eşini kaybeder.
-Kaybın niteliği belirleyicidir. Kayıp gürültülü değil sessizdir: sistem çökmez,
-yalnızca yanlış çalışır. Bu nedenle teknik izleme araçlarıyla saptanamaz. Göz-
-lemlenebilir sonucu, birimlerin kendi kayıt dışı tablolarını tutmaya başlamasıdır.
-9
-
--- 9 of 23 --
-
+Kaybın niteliği belirleyicidir. Kayıp gürültülü değil sessizdir: sistem çök-
+mez, yalnızca yanlış çalışır. Bu nedenle teknik izleme araçlarıyla saptanamaz.
+Gözlemlenebilir sonucu, birimlerin kendi kayıt dışı tablolarını tutmaya başlama-
+sıdır.
 Ara Tespit: Çevirinin Kaçınılmazlığı
 Buradan çıkan ve her iki cevabın da örtük olarak kabul ettiği ilke şudur:
 Çeviri yok edilemez; yalnızca nerede yapılacağı seçilebilir.
-Kötü tasarımda çeviri her yerdedir ve görünmezdir. İyi tasarımda çeviri sı-
-nırlı sayıda noktada toplanmıştır ve bilinçlidir. İncelenen iki yaklaşım, bu nok-
-taların nerede olacağı konusunda ayrışmaktadır.
-10
+Kötü tasarımda çeviri her yerdedir ve görünmezdir. İyi tasarımda çeviri
+sınırlı sayıda noktada toplanmıştır ve bilinçlidir. İncelenen iki yaklaşım, bu
+noktaların nerede olacağı konusunda ayrışmaktadır.
+13
 
--- 10 of 23 --
+-- 13 of 37 --
 
 Birinci Cevap: Ontoloji
 Yapı
@@ -345,21 +406,21 @@ ilişki grafiği üzerinde gezinmesini mümkün kılar.
 Mimari Kısıtlar
 Ürünün üç mimari özelliği, çalışmanın karşılaştırma bölümü açısından belirleyi-
 cidir.
-Kapsam zorunluluğu. Veri yerinde sorgulanmaz; işleme hatlarından geçi-
-rilerek platforma alınır ve ontoloji nesnelerine dönüştürülür. Bu, kısmi uygula-
-mayı zorlaştırır: ontolojinin değeri bağlantı kurabilmesinden geldiği için, kapsam
-dışında kalan her alan aynı zamanda değer kaybıdır.
+Kapsam zorunluluğu. Veri yerinde sorgulanmaz; işleme hatlarından ge-
+çirilerek platforma alınır ve ontoloji nesnelerine dönüştürülür. Bu, kısmi uy-
+gulamayı zorlaştırır: ontolojinin değeri bağlantı kurabilmesinden geldiği için,
+kapsam dışında kalan her alan aynı zamanda değer kaybıdır.
+14
+
+-- 14 of 37 --
+
 Ontoloji-alan eşlemesi. Bir ontoloji, platformdaki bir çalışma alanıyla
 birebir eşleşir. Bu, ilerleyen bölümde ele alınacağı üzere, bir sınır kavramının
 tümüyle yok olmadığını ancak farklı bir ölçekte konumlandığını göstermektedir.
-Ontolojiler arası bağ yasağı. Farklı ontolojilerdeki varlıklar birbirine bağ-
-lanamaz. Bu kısıt, çoklu ontolojiyi teknik olarak mümkün kılmakla birlikte pra-
-11
-
--- 11 of 23 --
-
-tikte cazibesiz hâle getirir, zira ürünün temel vaadi olan bağlantılanabilirlik tam
-da bu sınırda kesilir.
+Ontolojiler arası bağ yasağı. Farklı ontolojilerdeki varlıklar birbirine
+bağlanamaz. Bu kısıt, çoklu ontolojiyi teknik olarak mümkün kılmakla birlikte
+pratikte cazibesiz hâle getirir, zira ürünün temel vaadi olan bağlantılanabilirlik
+tam da bu sınırda kesilir.
 Ontoloji Uygulamalı Soyutlamadır
 Ontoloji kurmak uygulamalı bir soyutlama işlemidir. Yüzeydeki değişken ayrıntı
 — hangi tablo, hangi sütun, hangi format — atılır; altındaki yapı tutulur.
@@ -373,23 +434,27 @@ Erken mi, Geç mi Wittgenstein?
 Ontology’yi geç Wittgenstein’ın ürüne dönüşmüş hâli olarak sunan yaygın anlatı
 tam oturmamaktadır ve bu uyumsuzluk kavramın anlaşılmasını derinleştirmek-
 tedir.
-Yapı erken Wittgenstein’a benzemektedir. Nesneler, özellikler ve ilişki-
-lerden kurulu formal, sonlu ve makine tarafından işlenebilir bir model, doğrudan
-Tractatus’un dünya tasviridir.
+Yapı erken Wittgenstein’a benzemektedir. Nesneler, özellikler ve iliş-
+kilerden kurulu formal, sonlu ve makine tarafından işlenebilir bir model, doğru-
+dan Tractatus’un dünya tasviridir.
 Gerekçe geç Wittgenstein’a benzemektedir. Neden tek şema değil de
 çoğul şema sorusuna verilen cevap, anlamın topluluğa göreliliğine dayanır.
 Yani ürün, çoğulculuğun neden gerektiğini geç Wittgenstein’dan, nasıl mo-
 delleneceğini erken Wittgenstein’dan almaktadır. Burada gerçek bir felsefi ironi
 bulunmaktadır: geç Wittgenstein’ın asıl iddiası anlamın tam olarak formalize
 edilemeyeceğidir; ontoloji ise tam olarak anlamı formalize etme girişimidir.
-Dürüst formülasyon şudur: ontoloji, Wittgenstein’ın tespitini ciddiye alır an-
-cak uyarısını göz ardı eder. Bu bir kusur değildir; mühendislik zaten böyle çalışır.
-Ancak “Wittgenstein’ın ürüne dönüşmüş hâli” ifadesi, olduğundan daha temiz
-bir düşünsel devamlılık ima etmektedir.
+Dürüst formülasyon şudur: ontoloji, Wittgenstein’ın tespitini ciddiye alır
+ancak uyarısını göz ardı eder. Bu bir kusur değildir; mühendislik zaten böyle
+çalışır. Ancak “Wittgenstein’ın ürüne dönüşmüş hâli” ifadesi, olduğundan daha
+temiz bir düşünsel devamlılık ima etmektedir.
 Olgusal Düzeltme
 Yaygın anlatıda düzeltilmesi gereken bir olgusal hata bulunmaktadır: Palantir’in
 ilk ürününün adı Wittgenstein’a atıf değildir. Şirket adı Tolkien’den gelmektedir
 (palantír, gören taş); ilk ürün Palantir Government, sonrasında Gotham’dır.
+15
+
+-- 15 of 37 --
+
 Wittgenstein bağlantısı ürün adında değil, ontoloji kavramının kendisindedir ve
 o kelimenin kökü Aristoteles’e kadar gitmekte olup Wittgenstein’a özgü değildir.
 Alex Karp’ın Frankfurt’ta tamamladığı doktora tezinin başlığı Aggression
@@ -397,16 +462,12 @@ in der Lebenswelt’tir. Bu tezin “ontoloji” terimine başvurmayı ideolojik
 lem olarak eleştirdiği yönündeki iddia ikincil kaynaklarda dolaşmaktadır; ancak
 birincil metin üzerinden doğrulanmamıştır ve bu çalışmada kanıt olarak kulla-
 nılmamaktadır.
-12
-
--- 12 of 23 --
-
 Arşivlenecek doğru formülasyon şudur: ontoloji kavramının savunusu geç
 Wittgenstein’cı bir argümana dayanmakta, yapısı ise erken Wittgenstein’cı kal-
 maktadır.
-13
+16
 
--- 13 of 23 --
+-- 16 of 37 --
 
 İkinci Cevap: Domain-Driven Design
 Bu bölüm, yaklaşımın yalnızca karşılaştırma için gerekli unsurlarını özetlemek-
@@ -432,11 +493,15 @@ yalnızca yazılımla sınırlı değildir; ekipler arası sınırları da belir
 nizasyonu da tasarlar.
 DDD Lite
 Stratejik kısmın atlanıp yalnızca taktiksel araçlara odaklanıldığı uygulama bi-
-çimi literatürde DDD Lite olarak adlandırılmaktadır. Dışarıda bırakılan üç un-
-sur şunlardır: ortak dil inşası, bağlamsal sınırlar ve bağlamlar arası ilişki hari-
-tası. Bunların yerine sırasıyla teknik terminoloji, kod içi klasörleme yapısı ve
+çimi literatürde DDD Lite olarak adlandırılmaktadır. Dışarıda bırakılan üç
+unsur şunlardır: ortak dil inşası, bağlamsal sınırlar ve bağlamlar arası ilişki ha-
+ritası. Bunların yerine sırasıyla teknik terminoloji, kod içi klasörleme yapısı ve
 tasarlanmamış entegrasyonlar geçer.
 Bu kavram, çalışmanın karşılaştırma bölümünde merkezî bir işlev görecektir.
+17
+
+-- 17 of 37 --
+
 Bounded Context: Dilsel Sınır
 Bounded Context, bir domain modelinin yaşadığı sınırdır ve sınır içinde konu-
 şulan dil Ubiquitous Language’dir. Tanımın en işlevsel sonucu bir teşhis kriteri
@@ -444,10 +509,6 @@ sunmasıdır:
 Bir kavramın birden fazla anlama geldiği düşünülüyorsa, bağlam
 fazla büyümüştür; aslında birden fazla bağlamın içinde bulunulmak-
 tadır.
-14
-
--- 14 of 23 --
-
 Kanonik örnek, bankacılık domain’indeki Account kavramıdır. Vadesiz he-
 sap bağlamında Account; para yatırma, çekme, bakiye takibi ve günlük işlem
 limitleri davranışlarına sahiptir. Vadeli hesap bağlamında ise faiz hesaplama,
@@ -473,37 +534,37 @@ Sürtünme sinyali
 Epistemolojik olarak en değerli tespit şudur: bir kelimeyi kullanırken duyulan
 rahatsızlık genellikle kelime sorunu değil, anlayış sorununun göstergesidir. “Si-
 pariş” kelimesi rahat kullanılırken “sepete eklendi ama ödenmedi, bu da sipariş
-midir?” sorusu karşısında duraksanıyorsa, kelimenin iki farklı şeyi birden taşıdığı
-ortaya çıkmıştır.
+midir?” sorusu karşısında duraksanıyorsa, kelimenin iki farklı şeyi birden taşı-
+dığı ortaya çıkmıştır.
 Ters durumda ise şu gözlenir: hiç rahatsızlık üretmeyen kelimelerin ortak
 özelliği hiçbir şey söylememeleridir — “kayıt”, “bilgi”, “işlem”, “birim”, “öğe”.
 Bunlar hiçbir yere yerleştirilirken zorlanma yaratmaz, çünkü hiçbir şeyi ayırt
 etmezler. Sıfır sürtünme genellikle sıfır anlam göstergesidir.
+18
+
+-- 18 of 37 --
+
 Anemic Domain Model
 Fowler’ın 2003’te adlandırdığı bu anti-pattern, veri taşıyıp davranış taşımayan
 modelleri tanımlar.
 Kavramı somutlaştırmak için şu karşıtlık kullanılabilir. Bir varlık iki biçimde
-temsil edilebilir: birincisinde varlık kendi kilidine sahip bir kasadır ve talep edi-
-len işlemi gerçekleştirmeden önce koşulları kendisi denetler; ikincisinde varlık
+temsil edilebilir: birincisinde varlık kendi kilidine sahip bir kasadır ve talep
+edilen işlemi gerçekleştirmeden önce koşulları kendisi denetler; ikincisinde varlık
 üzerinde bir değer yazılı bir kâğıttır ve kuralları bilen ayrı birimler bulunur.
 Anemic Domain Model ikinci temsildir.
-15
-
--- 15 of 23 --
-
 Asıl maliyet, kuralların model dışına dağılmasının iki sonucudur. Birincisi,
 yeni eklenen bir yolun mevcut kuralı farkında olmadan atlayabilmesidir; model
 itiraz etmediği için hata sessizce geçer. İkincisi, bir kural değiştiğinde onu bilen
 tüm birimlerin tek tek bulunup düzeltilmesi gereğidir; biri atlandığında kural
 sistemde iki farklı biçimde işlemeye başlar.
 Nüans önemlidir: anemik model her zaman hata değildir ve korunacak bir
-kuralın bulunmadığı basit alanlarda bilinçli bir tercih olabilir. Asıl sorun, anemik
-model kullanıldığının fark edilmemesidir.
+kuralın bulunmadığı basit alanlarda bilinçli bir tercih olabilir. Asıl sorun, ane-
+mik model kullanıldığının fark edilmemesidir.
 Context Map ve İlişki Pattern’leri
 Context Map, bağlamların ve aralarındaki ilişkilerin haritasıdır. Belirleyici ilkesi
 bugünü çizmesidir: hayal edilen mimariyi değil mevcut durumu gösterir.
-Harita üç katmanı aynı anda temsil eder: modeller arasındaki ilişki, dille-
-rin sınırda nasıl uyumlanacağı ve ekipler arasındaki organizasyonel dinamik.
+Harita üç katmanı aynı anda temsil eder: modeller arasındaki ilişki, dil-
+lerin sınırda nasıl uyumlanacağı ve ekipler arasındaki organizasyonel dinamik.
 Üçüncü katman, başka hiçbir diyagram türünde bulunmaz ve bu çalışmanın
 karşılaştırma bölümünün dayanak noktasıdır.
 Dokuz pattern
@@ -517,44 +578,318 @@ Open Host Service Çok tüketiciye açık protokol Protokol taahhüdü
 Published Language Belgeli ortak yayın dili Sürüm yönetimi
 Separate Ways Bilinçli olarak bağlanmama İşlevin yinelenmesi
 Big Ball of Mud Karmaşayı karantinaya alma Kurtarmadan vazgeçme
-Bu dokuz pattern, esasen tek bir soruya verilen farklı cevaplardır: iki topluluk
-anlaşamadığında kimin dili geçerli olacaktır?
+19
+
+-- 19 of 37 --
+
+Bu dokuz pattern, esasen tek bir soruya verilen farklı cevaplardır: iki toplu-
+luk anlaşamadığında kimin dili geçerli olacaktır?
 İki uyarı, karşılaştırma bölümü açısından özellikle önemlidir.
 İlan edilmemiş Shared Kernel. Bir bağlamın veritabanı diğerinin ta-
 rafına çoğaltıldığında, resmen kararlaştırılmadan bir Shared Kernel yaratılmış
-olur. Çoğaltma, beklenenin aksine özerklik getirmez; iki tarafı aynı şemaya bağ-
-lar ve bu bağ hiç müzakere edilmemiştir.
+olur. Çoğaltma, beklenenin aksine özerklik getirmez; iki tarafı aynı şemaya
+bağlar ve bu bağ hiç müzakere edilmemiştir.
 Bilinçsiz Conformist. Conformist olmak bilinçli yapıldığında makul bir
 ödünleşimdir; asıl sorun farkında olmadan Conformist olmaktır. Dış bir ara-
 yüzün veri taşıyıcıları domain modelin içine kadar sızmışsa, karar verilmeden
 verilmiş demektir.
 Son olarak, roller bağlama değil ilişkiye aittir: aynı bağlam bir ilişkide üst
 konumda, diğerinde alt konumda bulunabilir.
-16
+Sınırda Çeviri
+Context Map, bağlamlar arasındaki ilişkiyi etiketlerle gösterir. Bir sonraki soru,
+sınırı geçen verinin karşı tarafa hangi biçimde girdiğidir. Ürkmez bu soruyu, bir
+e-ticaret modelinde kimlik bilgisini yöneten Identity bağlamı ile sipariş süreçle-
+rini yöneten Order bağlamı arasındaki hat üzerinden işler (Ürkmez, 2026e).
+Üst taraf: Open Host Service ve Published Language
+Üst taraftaki bağlamın birden çok tüketicisi vardır ve her tüketici için ayrı bir
+entegrasyon tasarlamak sürdürülemez. Open Host Service bu soruna tek bir
+açık protokolle cevap verir. Published Language ise bu protokolde kullanılan,
+belgelenmiş ve kararlı temsil biçimidir. Üst taraf iki tür kaynak açabilir: doğru-
+dan sorgu adresleri ve önemli olayların yayınlandığı bir bildirim akışı. Tüketici
+bu akışı kendi hızında okur; aynı bildirimi iki kez işlememek tüketicinin sorum-
+luluğudur.
+Bir bağlamın dışarıya yayınladığı Domain Event’ler de Published Langu-
+age’in parçasıdır. Event’ler, bağlamın kamuya açık sözlüğü işlevini görür.
+Alt taraf: Anticorruption Layer’ın üç rolü
+ACL tek bir sınıf değil, üç rolden oluşan bir zincirdir:
+• Domain Service, yerel modelin kapısıdır. Model “bana şu müşteriyi ver”
+der ve uzak sistemin varlığından habersizdir.
+• Adapter, uzak sistemle konuşan istemcidir. Üst tarafın protokolüne gider
+ve temsili alır.
+20
 
--- 16 of 23 --
+-- 20 of 37 --
+
+• Translator, dönen temsili yerel modelin kavramına çevirir; ortaya yerel
+bir Value Object çıkar.
+Bu zincirin hiçbir halkasında uzak bağlamın dili yerel modelin içine girmez.
+Translation Map ve asgari state
+Translator’ın işi bir eşleme tablosuyla tarif edilir. Identity bağlamının kullanıcı
+temsilinde kiracı kimliği, kullanıcı adı, ad, soyad, e-posta ve rol alanları bulun-
+duğu varsayılsın. Order bağlamının ihtiyacı yalnızca üç kavramdır: müşterinin
+kimliği, adı ve e-posta adresi. Ad ile soyad birleşip tek bir ad alanına, kullanıcı
+adı kimliğe dönüşür; geri kalan alanlar eşlenmeden dışarıda kalır.
+İlke şudur: uzak modelden alınan state, yerel modelin ihtiyaç duyduğu as-
+gari alanlardan ibarettir. Ürkmez bu ilkenin ihlalini hibritleşme olarak ad-
+landırır (Ürkmez, 2026e). “Nasılsa lazım olur” gerekçesiyle eklenen her alan,
+yerel Customer kavramını uzak User kavramının melez bir kopyasına yaklaştı-
+rır. Çevirinin giderek karmaşıklaşması ve çevrilen nesnenin karşı modeldekine
+benzemeye başlaması, yabancı bağlamdan fazla şey alındığının erken uyarısıdır.
+Bu tespit, kanonik şema bölümündeki çöküşün ters yönden yeniden üretilme-
+sidir. Kanonik şemada tüm birimler tek bir kavrama sıkıştırılır; hibritleşmede
+ise bir birimin kavramı, farkında olunmadan bir başkasının kavramına doğru
+büyür. İki durumda da sonuç, sınırın dilsel işlevini yitirmesidir.
+Senkron ve asenkron entegrasyon
+Adapter, en basit hâliyle uzak sisteme senkron bir istek atar ve cevabı bek-
+ler. Kurulumu kolaydır, ancak bedeli çalışma anında ödenir: üst taraf cevap
+veremediğinde alt tarafın akışı da durur. Asenkron yaklaşımda ise alt taraf,
+üst tarafın yayınladığı bildirimleri kendi hızında işler ve ihtiyaç duyduğu asgari
+state’i yerelde güncel tutar. Böylece çevresindeki sistemlerin o an ayakta olup
+olmamasından etkilenmez. Ürkmez, ilk sürümde senkron başlayıp sonradan
+asenkrona geçmeyi meşru bir yol olarak görür; belirleyici olan, geçiş kararının
+bilinçli verilmesidir (Ürkmez, 2026e).
+Ara durumun adlandırılması
+Asenkron entegrasyon, iki bağlamın birbiriyle tutarlı olmadığı bir ara an yaratır.
+Bir sipariş oluşturulduğunda stok rezervasyonu henüz yapılmamış olabilir. Bu
+ara an bir hata değil, modellenmesi gereken geçerli bir durumdur. Order bağlamı
+rezervasyonun durumunu açıkça tutar: REQUESTED, READY, FAILED. Kullanıcı
+hiçbir anda belirsizlikte kalmaz, çünkü sistemin her ara anı adı olan bir duruma
+karşılık gelir.
+Bu çözüm, kavramsal zemindeki sessiz hata tanımına doğrudan bir cevaptır.
+Sessiz hata, sistemin yanlış çalıştığı ancak bunu bildirmediği durumdur. Ara
+21
+
+-- 21 of 37 --
+
+durumun adlandırılması, aynı belirsizliği görünür ve sorgulanabilir bir nesneye
+dönüştürür.
+Taktiksel Yapı Taşları
+Stratejik tasarım sınırları çizer; taktiksel tasarım bu sınırların içini kodla doldu-
+rur. Bu alt bölüm, karşılaştırma için gerekli olan beş yapı taşını özetlemektedir.
+Entity: kimlik ve zaman
+Bir kavramın Entity olarak modellenmesinin tek gerekçesi, tekilliğinin önemsen-
+mesidir (Ürkmez, 2026f). Bir sipariş oluşur, ödenir, kargoya verilir, belki iptal
+edilir; durumu ve adresi değişir ama aynı sipariş olarak kalır. Entity’yi tanımla-
+yan taşıdığı veri değil, kimliği ve zaman içindeki değişimidir. İki siparişin tutarı,
+adresi ve kalemleri aynı olabilir; yine de aynı sipariş değildir.
+Kimliğin kaynağı için dört strateji vardır: kullanıcının girdiği değer, uygu-
+lamanın ürettiği değer (örneğin UUID), veritabanının ürettiği değer ve başka
+bir bağlamın verdiği değer. Kullanıcı girdisi okunaklıdır ancak hataya açıktır;
+bu nedenle kullanıcının girdiği kod çoğunlukla aranabilir bir özellik olarak tu-
+tulur ve kimlik arka planda ayrıca üretilir. Veritabanının ürettiği kimlik ise
+ancak kayıt anında doğar ve nesne bir süre kimliksiz yaşar. Bu durum, kimliğe
+nesne oluşturulduğu anda ihtiyaç duyan Domain Event’lerle çatışır: event ya-
+yınlandığında içinde geçerli bir kimlik bulunmaz. Bu yüzden event yayınlayan
+Entity’lerde kimliğin erken atanması tercih edilir.
+Kimlik, çıplak bir string yerine kendine ait bir tipte tutulur. Böylece
+OrderId bekleyen bir metoda ProductId verilmesi derleme anında engellenir.
+İki kimlik aynı ham tipte tutulduğunda ise bu hata derleyici tarafından görülmez
+ve sistem yanlış veriyle sessizce çalışmaya devam eder (Ürkmez, 2026f).
+Entity’nin davranışı dilden keşfedilir. “Sipariş iptal edilebilir” cümlesi ilk
+bakışta tamdır. Domain uzmanıyla konuşma sürdürüldüğünde cümle değişir:
+“Müşteri, siparişini kargoya verilene kadar iptal edebilir; kargoya verilmiş si-
+parişler için iade süreci başlatılır.” İlk cümleden bir kural çıkmaz; ikinci cümle
+metodun ilk satırını kendisi yazar. order.Status = Cancelled biçimindeki bir
+atama, kuralın her çağıran tarafından tekrarlanmasını gerektirir; order.Cancel()
+ise kuralı verinin yanında tutar. Evans bu tür arayüzlere niyetini gizlemeyen
+arayüz (Intention-Revealing Interface) adını verir (Evans, 2003).
+Value Object: değer ve değişmezlik
+Value Object, Entity’nin karşıt kutbudur: bir nesnenin yalnızca taşıdığı öznite-
+likler yeterliyse, o nesne bir Value Object’tir (Ürkmez, 2026g). Value bir şeyi
+ölçer, niceler ya da tanımlar; kendisi o şey değildir. Bir tutar tek başına bir
+varlık değil, bir siparişin parasal değeridir.
+22
+
+-- 22 of 37 --
+
+Ürkmez, Value Object’i tanımlayan altı karakteristik sayar:
+1. Bütünlük. Alanlar tek başına anlamsızdır, birlikte bir değer oluşturur.
+100 sayısı ile TRY kodu ayrı ayrı bir şey söylemez; birlikte bir tutardır.
+2. Değişmezlik. Oluşturulduktan sonra değişmez.
+3. Yer değiştirebilirlik. Değer değiştiğinde eskisi güncellenmez, yerine ye-
+nisi konur.
+4. Değer eşitliği. Aynı alanları taşıyan iki nesne eşittir.
+5. Yan etkisiz davranış. Metotları kendi durumunu değiştirmez, yeni bir
+değer döndürür.
+6. Entity’den bağımsızlık. Bir Value’nun metodu parametre olarak Entity
+almaz, yalnızca başka Value’larla çalışır.
+Value Object’in hedef aldığı alışkanlığın literatürdeki adı primitive obses-
+sion’dır (Fowler, 1999). Tip anlam taşımadığında, o anlamı korumak kodun her
+yerine dağılır. Bir tutar decimal ve string olarak iki ayrı alanda tutulduğunda,
+para birimi denetimi her kullanımda yeniden yazılmak zorundadır; Price tipi
+ise farklı para birimlerinin toplanmasını kendisi reddeder.
+Ters yöndeki risk de adlandırılmıştır: gerçekten yalın ve başka hiçbir alanla
+ilişkisi olmayan bir değeri tipe sarmalamak yarardan çok karmaşıklık getirir.
+Önceden bilinen sınırlı bir kümeden değer alan tipler (sipariş durumu, para
+birimi) ise Standard Type adıyla ayrı bir Value Object ailesi oluşturur.
+Value Object’in bu çalışmadaki önemi, sınırda çeviriyle doğrudan bağından
+gelir. Translation Map’in ürettiği üç alanlık Customer, uzak bağlamın zengin
+temsilini yerel ihtiyaca indiren bir Value Object’tir. ACL’nin çıktısı, taktiksel
+düzeyde bir Value Object olarak somutlaşır.
+Domain Service: sahibi olmayan davranış
+Evans’ın tanımına göre, domain’deki önemli bir süreç ya da dönüşüm doğal ola-
+rak bir Entity’nin veya Value Object’in sorumluluğu değilse, modele ayrı bir
+arayüz olarak eklenir; arayüz modelin diliyle adlandırılır ve durumsuz tutulur
+(Evans, 2003). Ürkmez bu tanımı işlemsel bir ölçüte çevirir: bir kural tek bir
+Aggregate’in içindeki bilgiyle çalıştırılamıyorsa Domain Service gerekir (Ürk-
+mez, 2026h).
+Örnek, bir siparişin ödenecek tutarıdır. Kural, siparişin kalemlerini, satıcının
+o an aktif kampanyasını ve müşterinin kuponunu aynı anda görmeyi gerektirir;
+ayrıca toplam indirim sepet tutarının yarısını geçemez. Bu hesap uygulama ser-
+visinde yazıldığında kampanya ve kupon birer veri paketi gibi okunur ve kendi
+kurallarını işletmez; sonuç Anemic Domain Model’dir. Order sınıfının içine ya-
+zıldığında ise sipariş iki yabancı kavramı tanımak zorunda kalır. Doğru yer, adı
+domain dilinden gelen bir OrderPricingService’tir. Servis, “siparişi işle” gibi
+23
+
+-- 23 of 37 --
+
+teknik bir etiketle değil, domain uzmanının kurduğu “sipariş tutarını hesaplıyo-
+ruz” cümlesinden adlandırılır.
+Ürkmez’in vurguladığı risk aracın kendisindedir: yerini bulamayan her ku-
+ralı servise atmak modeli boşaltır ve Domain-Driven Design’ın kaçındığı anemik
+yapıyı yeniden üretir. Önerilen sezgi, Ubiquitous Language bölümündeki sür-
+tünme sinyalinin taktiksel karşılığıdır. Bir davranışı bir nesneye yerleştirirken
+zorlanılıyorsa, davranış o nesneye ait olmayabilir; servisin içindeki kod tek bir
+Entity’nin alanlarıyla oynuyorsa, davranışın adresi o Entity’dir.
+Ürkmez ayrıca karar veren servis ile çeviri yapan servisi ayırır. Bir adre-
+sin bir kargo firmasının hizmet alanında olup olmadığına karar veren servis bir
+Domain Service’tir. Kargo firmasının durum kodunu yerel durum tipine dönüş-
+türen servis ise bir dönüşüm servisidir (transformation service); arayüzü domain
+katmanında dursa bile bir karar vermez. Arayüzün nerede durduğu bağımlılığın
+yönünü belirler; operasyonun ne yaptığı ise domain’e ait olup olmadığını.
+Aggregate: tutarlılığın sınırı
+Aggregate kelimesi bir yığın çağrıştırır; anlattığı şey ise bir sınırdır. Sorulması
+gereken soru “hangi nesneler bir arada durmalı” değil, “hangi kurallar her an,
+aynı anda doğru kalmalı”dır (Ürkmez, 2026i). Aggregate bir nesne grafiği ya
+da sahiplik şeması değildir; bir tutarlılık sınırıdır ve tek bir transaction içinde
+bütün kurallarıyla tutarlı hâle gelebilmelidir.
+Ürkmez’in örneği, “bir siparişin kalemleri, ödemesi, kargosu ve durum geçmişi
+vardır” cümlelerinden türetilmiş dev bir Order’dır. Model domain uzmanının
+cümleleriyle birebir örtüşür. Ancak üretimde, birbiriyle ilgisiz iki işlem — bir
+kalemin iadesi ile bir kolinin kargoya verilmesi — aynı nesne üzerinde çakışır.
+Kök neden bir sahte invariant’tır: gerçek bir iş kuralı olmayan, geliştiricinin
+kendi koyduğu bir kısıt.
+Sahte invariant’ı tanımanın yolu dilseldir: kural, domain uzmanına cümle
+olarak söylenir. “Sipariş iade edilirken kargo bilgisinin aynı anda değişmemesi
+gerekiyor” cümlesini duyan bir operasyon yöneticisi bu kuralı tanımaz, çünkü
+böyle bir kural yoktur. Gerçek invariant ise tanınır: “Siparişin ödenecek tutarı,
+kalemlerinin toplamıyla tutarlı olmak zorundadır.” Bu nedenle Order ile kalem-
+leri aynı sınırın içindedir; ödeme, kargo ve iade ise kendi kimlikleri olan ayrı
+Aggregate’lerdir.
+Ürkmez dört kural sayar:
+1. Gerçek invariant’lar sınırın içinde modellenir.
+2. Aggregate küçük tasarlanır. Büyük Aggregate’ler tek bir alanı okumak
+için onlarca nesneyi belleğe yükler.
+3. Diğer Aggregate’lere nesneyle değil, kimlikle referans verilir. Böylece bir
+transaction içinde iki Aggregate’in birden değiştirilmesi kodda zorlaşır.
+4. Sınırın dışında eventual consistency kullanılır.
+24
+
+-- 24 of 37 --
+
+Bir kuralın transactional mı eventual mı tutulacağına dair Evans’ın ayracı
+da dilseldir: veriyi tutarlı hâle getirmek, işlemi yapan kullanıcının işi midir?
+Sipariş tutarının kalemlerle tutarlı olması müşterinin işidir, çünkü müşteri o
+tutar üzerinden karar verir; bu kural transactional tutulur. Stok rezervasyonu
+ise sistemin işidir ve eventual tutulabilir. Gecikmeye ne kadar tahammül edil-
+diği de domain uzmanına sorulur; cevap çoğunlukla geliştiricinin beklediğinden
+cömerttir, çünkü işin kendisinde zaten gecikmeler vardır.
+Domain Event: sınırın dışına taşan olay
+Domain Event, bir Aggregate’te gerçekleşmiş ve geriye dönük değiştirilemeyen
+bir olayın kaydıdır; Aggregate’ler arasındaki eventual consistency’nin köprüsü-
+dür (Ürkmez, 2026j). Domain uzmanının “. . . onaylandığında”, “. . . tükenirse”,
+“bana haber ver, eğer . . . ” kalıplarındaki cümleleri bir event sinyalidir. Event,
+kendisini üreten komuttan türetilir ve geçmiş zamanla adlandırılır: Confirm()
+komutu OrderConfirmed olayını üretir. Adın kendisi Ubiquitous Language’e
+bağlıdır; o domain’de siparişler “tamamlanmıyor” da “onaylanıyorsa”, event’in
+adı da buna göre konur.
+Event, transaction başarıyla tamamlandıktan sonra yayınlanır; transaction
+geri alınırsa gerçekleşmiş bir şey yoktur ve event de yayınlanmamalıdır. Bağlam
+dışına çıkacak event’ler, modelle aynı transaction içinde ayrı bir tabloya yazı-
+lır ve ayrı bir süreç tarafından mesajlaşma altyapısına iletilir; bu düzenin adı
+Outbox’tır. Mesajlaşma altyapıları çoğunlukla “en az bir kez” teslim garantisi
+verdiğinden, aynı event bir tüketiciye iki kez ulaşabilir. Tüketici bu nedenle
+idempotent tasarlanır: aynı event ikinci kez geldiğinde sonuç değişmez.
+İki olumsuz tanım belirleyicidir. Domain Event bir bildirim değildir; bil-
+dirim, event’e verilen tepkilerden biridir. Her durum değişikliği de bir event
+değildir; event, domain uzmanının bilmek istediği yerde devreye girer.
+Taktiksel Kararların Dilsel Dayanağı
+Beş yapı taşının ortak bir özelliği vardır: her birinde belirleyici karar, domain
+uzmanına söylenen bir cümlenin sınanmasıyla verilir.
+25
+
+-- 25 of 37 --
+
+Yapı taşı Karar Dilsel sınama
+Entity Hangi davranış hangi kuralı
+taşır
+Gereksinim cümlesi uz-
+manla yeniden yazılıyor mu
+Value Object Hangi alanlar tek bir değer
+oluşturur
+Alanlar tek başına bir şey
+söylüyor mu
+Domain Service Davranışın bir sahibi var mı Servisin adı uzmanın kul-
+landığı bir eylem mi
+Aggregate Sınır nereden geçer Invariant cümlesini uzman
+tanıyor mu
+Domain Event Hangi olay yayınlanır Uzman bu olaydan haber-
+dar olmak istiyor mu
+Bu tablo, felsefi çerçevedeki kural takibi tespitinin mühendislikteki karşılığı-
+dır. “Sipariş iptal edilebilir” bir kuraldır, ancak kendi uygulamasını belirlemez.
+Kargodaki bir siparişin kapsam içinde olup olmadığı, kuralın metninden değil,
+onu uygulayan topluluğun pratiğinden öğrenilir. Domain-Driven Design forma-
+lizasyondan vazgeçmez; formalizasyonun her adımını, pratiğin sahibi olan kişiye
+geri götürülen bir sınamaya bağlar. Böylece Wittgenstein’ın itirazı ortadan
+kalkmaz, ancak her taktiksel kararda yeniden sorulabilir hâlde kalır.
+26
+
+-- 26 of 37 --
 
 Karşılaştırma
 Kavram Eşlemesi
 DDD Ontology Durum
-Entity / Value Object Object Type / Property Yakın
+Entity Object Type Yakın
+Value Object Property Kısmi
 Domain Service Function Yakın
-Domain Event Action Kısmi
+Aggregate komutu Action Kısmi
+Domain Event — Belirsiz
 Ubiquitous Language Nesne tipi isimlendirmesi Kısmi
+ACL / Translation Map Veri hattı dönüşümleri Farklı konumda
 Bounded Context Ontoloji-alan eşlemesi Farklı ölçekte
 Aggregate — Karşılığı yok
 Context Map — Karşılığı yok
 İlişki pattern’leri — Karşılığı yok
 Subdomain tipolojisi — Karşılığı yok
 Tablodaki en önemli satır Bounded Context satırıdır ve dikkatli okunmalıdır.
-Ontology’de bir sınır kavramının bulunmadığını söylemek yanlış olur: ontolojiler
-çalışma alanlarıyla eşleşmekte ve aralarında bağ kurulamamaktadır. Doğru tes-
-pit, sınırın yok olması değil ölçek değiştirmesidir. Domain-Driven Design’da sınır
-kurumun içinden geçer ve topluluklar arasına konur; Ontology’de sınır kurumun
-etrafını çevirir ve dış dünyaya karşı konur.
-Bu ayrımın sonucu şudur: karşılığı bulunmayan tüm kalemler stratejik ta-
-raftadır ve Ontology, Domain-Driven Design’ın taktiksel yarısıyla önemli ölçüde
-örtüşmekte, stratejik yarısıyla örtüşmemektedir.
+Ontology’de bir sınır kavramının bulunmadığını söylemek yanlış olur: ontoloji-
+ler çalışma alanlarıyla eşleşmekte ve aralarında bağ kurulamamaktadır. Doğru
+tespit, sınırın yok olması değil ölçek değiştirmesidir. Domain-Driven Design’da
+sınır kurumun içinden geçer ve topluluklar arasına konur; Ontology’de sınır ku-
+rumun etrafını çevirir ve dış dünyaya karşı konur.
+Taktiksel satırlar ayrıca açıklanmalıdır. Value Object ile Property arasın-
+daki eşleşme kısmidir: bir Property bir değer taşır, ancak Value Object’in değer
+önerisi değeri değil, değere bağlı kuralı ve yan etkisiz davranışı taşımasıdır.
+Action ile Domain Event arasında ilk bakışta kurulabilecek eşleşme ise yanıl-
+tıcıdır. Action, bir kullanıcının nesneler üzerinde yaptığı değişikliği tanımlar;
+Domain-Driven Design açısından bir event’ten çok Aggregate üzerindeki komut
+metoduna yakındır. Gerçekleşmiş olayın geçmiş zamanla adlandırılmış bir kaydı
+olarak diğer bağlamlara yayılması ise bu çalışmanın incelediği kaynaklarda Do-
+main Event’le eşdeğer bir kavram olarak tanımlanmamıştır; bu nedenle satır
+“belirsiz” olarak işaretlenmiştir.
+Bu ayrımların sonucu şudur: karşılığı bulunmayan kalemlerin Aggregate dı-
+şındakilerin tamamı stratejik taraftadır. Aggregate taktiksel bir yapı taşıdır;
+ancak işlevi küçük ölçekte bir sınır çizmektir. Dolayısıyla karşılığı bulunmayan
+kalemlerin ortak paydası stratejik olmaları değil, sınır çizmeleri ve sınırlar arası
+ilişkiyi adlandırmalarıdır. Ontology, Domain-Driven Design’ın nesne, özellik ve
+fonksiyon düzeyindeki taktiksel araçlarıyla büyük ölçüde örtüşmekte; büyük öl-
+çekte Bounded Context ve Context Map, küçük ölçekte Aggregate olmak üzere
+sınır çizen araçlarıyla örtüşmemektedir.
+27
+
+-- 27 of 37 --
+
 Birinci Ayrım: Gücün Görünürlüğü
 Context Map’in dokuz pattern’i bir müzakere spektrumu oluşturur:
 KIMIN DILI GECERLI?
@@ -573,10 +908,6 @@ Conformist olmasıdır.
 İki uyarı burada birleşmektedir. Shared Kernel için kural, paylaşılan par-
 çanın olabildiğince küçük tutulmasıdır; Ontology ise paylaşılan parçayı bilinçli
 olarak büyütür, zira değeri kapsamından gelmektedir. Conformist için kural,
-17
-
--- 17 of 23 --
-
 kararın bilinçli alınmasıdır; Ontology ise bu kararı bir konfigürasyon işlemine
 dönüştürerek görünmezleştirir.
 Sonuç şudur: Ontology, gücün nerede olduğu sorusunu ortadan kaldırmaz;
@@ -591,11 +922,18 @@ kapsama oranıyla gerçekleşir.
 İki farklı bahis söz konusudur:
 • Domain-Driven Design’ın bahsi: Karmaşıklık her yerde eşit değildir;
 çaba Core’a yoğunlaştırılmalıdır.
-• Ontology’nin bahsi: Asıl değer bağlantıdadır; bu nedenle her şey kapsam
-içinde olmalıdır.
+• Ontology’nin bahsi: Asıl değer bağlantıdadır; bu nedenle her şey kap-
+sam içinde olmalıdır.
+28
+
+-- 28 of 37 --
+
 Pratik sonucu, Ontology’nin kısmi uygulanmaya elverişsiz olmasıdır. Domain-
 Driven Design ise seçici uygulanabilir; yalnızca Core’da uygulanıp geri kalanın
-basit tutulması meşru bir stratejidir.
+basit tutulması meşru bir stratejidir. Taktiksel literatür bu seçiciliği tek tek
+yapı taşları düzeyinde de tekrarlar: korunacak ciddi bir iş kuralı bulunmayan
+alanlarda Entity yerine CRUD tabanlı bir çözüm hem daha ucuz hem daha
+doğrudur (Ürkmez, 2026f).
 Üçüncü Ayrım: Anlamın Yaşadığı Yer
 DDD’DE ANLAM NEREDE ONTOLOGY’DE ANLAM NEREDE
 kod -> tip sistemi konfigurasyon -> arayuz
@@ -606,37 +944,78 @@ surum kontrolu, inceleme yonetim paneli, yetki
 | |
 sahibi: gelistirici ekibi sahibi: platform/analist
 Domain-Driven Design’da bir kavramın değiştirilmesi bir kod değişikliğidir:
-tartışılır, incelenir, geçmişi kayıt altına alınır ve tip sistemi tarafından denetlenir.
-Ontology’de bir kavramın değiştirilmesi bir konfigürasyon değişikliğidir: hızlıdır
-ve teknik olmayan personel tarafından yapılabilir, ancak daha az sürtünmeli ve
-daha az izlenebilirdir.
+tartışılır, incelenir, geçmişi kayıt altına alınır ve tip sistemi tarafından denetle-
+nir. Kimliğin ve değerlerin ayrı tiplerde tutulması (OrderId, Price) bu denetimi
+derleme zamanına taşır. Ontology’de bir kavramın değiştirilmesi bir konfigüras-
+yon değişikliğidir: hızlıdır ve teknik olmayan personel tarafından yapılabilir,
+ancak daha az sürtünmeli ve daha az izlenebilirdir.
 Bu fark, “anlamı kim korumaktadır?” sorusunun cevabını değiştirir. Domain-
 Driven Design’ın ana metaforu duvardır — sınır, koruma, çeviri. Ontology’nin
 ana metaforu katmandır — serilen, her yere uzanan. Birincisinin vaadi koruma,
 ikincisininki erişimdir.
-18
-
--- 18 of 23 --
-
 Dördüncü Ayrım: Harita ile İkiz
 Context Map’in tanımlayıcı ilkesi bugünü çizmesidir; bu nedenle bozulmuş böl-
-geler bile haritaya dâhil edilir. Ontology ise kendisini kurumun dijital ikizi olarak
-tanımlar.
-İkiz, harita değildir. Harita ölçekli bir sadeleştirmedir ve sadeleştirdiğini be-
-yan eder; ikiz eksiksizlik iddiası taşır.
+geler bile haritaya dâhil edilir. Ontology ise kendisini kurumun dijital ikizi
+olarak tanımlar.
+İkiz, harita değildir. Harita ölçekli bir sadeleştirmedir ve sadeleştirdiğini
+beyan eder; ikiz eksiksizlik iddiası taşır.
 Bu ayrımın yalnızca retorik olmadığı, mimari kısıtlardan çıkarılabilir. On-
 tology’nin kapsam zorunluluğu — kısmi uygulamanın değer üretmemesi — fiilî
 bir birebirlik baskısı yaratmaktadır. Yani eksiksizlik iddiası bir slogandan ibaret
 değil, ürünün değer önerisinin yapısal sonucudur.
 Bu tespit, birinci bölümdeki felsefi gerilimi yeniden üretmektedir:
+29
+
+-- 29 of 37 --
+
 Tractatus : dunya <-> dil, birebir ~ dijital ikiz
 Sorusturmalar : ortusen kismi pratikler ~ context map
 Domain-Driven Design, felsefi bir iddiada bulunmaksızın geç Wittgenstein
 tarafında konumlanmaktadır. Ontology ise retorik olarak geç Wittgenstein’a
 yaslanırken pratikte erken Wittgenstein projesini yürütmektedir.
-19
+Beşinci Ayrım: Çevirinin Konumu
+Kanonik şema bölümünün ara tespiti, çevirinin yok edilemeyeceği, yalnızca ye-
+rinin seçilebileceğiydi. İki yaklaşım bu seçimi farklı yapar.
+Ontology’de çeviri, ham verinin işleme hatlarından geçirilip nesnelere dö-
+nüştürüldüğü noktada, yani kaynak sistem ile ortak katman arasında yapılır.
+Çeviri bir kez yapılır ve tek yönlüdür: her kaynak ortak dile çevrilir. Topluluk-
+lar arasında ikinci bir çeviri katmanı öngörülmez, çünkü topluluklar zaten aynı
+nesneler üzerinde çalışır.
+Domain-Driven Design’da çeviri her topluluk sınırında yapılır ve yönü iliş-
+kiye göre belirlenir. Alt taraf, ACL ile üst tarafın dilini kendi diline çevirir;
+Translation Map neyin alındığını ve neyin dışarıda bırakıldığını açıkça kayde-
+der. Asgari state ilkesi, her topluluğun diğerinin kavram dünyasından yalnızca
+ihtiyaç duyduğu kadarını almasını şart koşar.
+Fark, çeviri kaybının kime ait olduğundadır. Ontology’de kayıp, ortak kat-
+manı tanımlayan tarafın seçimiyle bir kez ve herkes için belirlenir. Domain-
+Driven Design’da her topluluk kendi kaybını kendisi seçer ve bu seçim bir eş-
+leme tablosunda görünür kalır. Hibritleşme uyarısı ise Domain-Driven Design’ın
+kendi riskini de adlandırır: asgari state ilkesi terk edildiğinde sınır kendiliğinden
+bir kanonik şemaya doğru erir.
+Altıncı Ayrım: Tutarlılığın Sınırı
+Aggregate, Domain-Driven Design’ın “hangi kurallar aynı anda doğru kalmalı”
+sorusuna verdiği cevaptır. Bu soru bir performans ayarı değil, domain uzmanına
+sorulan bir sorudur: invariant cümlesi uzmana söylenir; tanınıyorsa sınırın içine,
+tanınmıyorsa dışına konur. Sınırın dışında kalan her şey için kabul edilebilir
+gecikme de yine uzmana sorulur ve ara durumlar (REQUESTED, READY, FAILED)
+modelde adlandırılır.
+Bu çalışmanın incelediği Ontology kaynaklarında, Aggregate’e karşılık gelen
+ve tutarlılık sınırını bir domain kararı olarak tanımlayan bir kavram bulunama-
+mıştır. Bu, platformun tutarlılık sağlamadığı anlamına gelmez. Düşündürdüğü
+şey, tutarlılığın nerede sağlanacağının bir domain kararı olarak değil, platformun
+işleyişine ait bir özellik olarak ele alındığıdır. Bu çıkarım ürün kaynaklarına da-
+yandığı için, birinci karşı argümandaki kaynak asimetrisine tabidir.
+Ayrımın sonucu birinci ayrımla aynı yöndedir. Domain-Driven Design’da “bu
+iki nesne aynı anda tutarlı olmak zorunda mı?” sorusu bir karar nesnesidir ve
+30
 
--- 19 of 23 --
+-- 30 of 37 --
+
+cevabı kodda, Aggregate sınırı olarak görünür. Ontology’de aynı soru sorulabilir,
+ancak cevabın kaydedileceği bir model öğesi yoktur.
+31
+
+-- 31 of 37 --
 
 Karşı Argümanlar ve Tezin Sınırları
 Bu bölüm, çalışmanın tezine yöneltilebilecek en güçlü itirazları ele almaktadır.
@@ -648,11 +1027,13 @@ numuyla karşılaştırmaktadır. Adil olan, ya iki öğretiyi ya da iki pratiğ
 laştırmaktır. Mevcut kurguda ilk yaklaşım en olgun hâliyle, ikincisi ise broşür
 hâliyle temsil edilmektedir.
 Değerlendirme. İtiraz büyük ölçüde haklıdır ve yöntem bölümünde açıkça
-kabul edilmiştir. Kısmi bir savunma şudur: bir ürünün mimari kısıtları — kap-
-sam zorunluluğu, ontolojiler arası bağ yasağı — pazarlama metni değil teknik
+kabul edilmiştir. Kısmi bir savunma şudur: bir ürünün mimari kısıtları —
+kapsam zorunluluğu, ontolojiler arası bağ yasağı — pazarlama metni değil teknik
 gerçekliktir ve çalışmanın en güçlü çıkarımları bu kısıtlara dayanmaktadır. Buna
-karşın “gücün görünürlüğü” argümanının pratikte nasıl işlediği, saha gözlemi ol-
-maksızın kesin biçimde savunulamaz.
+karşın “gücün görünürlüğü” argümanının pratikte nasıl işlediği, saha gözlemi
+olmaksızın kesin biçimde savunulamaz. Aynı sınırlılık, Aggregate’in karşılığının
+bulunamadığı tespiti için de geçerlidir: bir kavramın ürün dokümantasyonunda
+bulunmaması, pratikte karşılığının bulunmadığını kanıtlamaz.
 Tezin bu itiraz karşısındaki doğru statüsü şudur: sınanmayı bekleyen bir
 hipotez.
 İkinci İtiraz: Kurumsallaşmış Ubiquitous Language
@@ -668,40 +1049,58 @@ bin kod tabanında yaşar. Ontology’de dil, platformu yapılandıran tarafa ai
 ve konfigürasyonda yaşar. Yoğun domain teması, bu sahiplik farkını ortadan
 kaldırmaz.
 Üçüncü İtiraz: Çoklu Ontoloji İmkânı
-İtiraz. Platform birden fazla ontolojiye izin vermektedir. Dolayısıyla “tek kano-
-nik anlam katmanı” tasviri yanlıştır.
-Değerlendirme. İtiraz teknik olarak doğrudur ve çalışma bu nedenle “karşı-
-lığı yok” iddiasını “farklı ölçekte” biçiminde revize etmiştir. Ancak itirazın gücü
-sınırlıdır: ontolojiler arasında bağ kurulamadığı için, çoklu ontoloji seçeneği ürü-
-nün temel değer önerisini fiilen iptal etmektedir. Sonuç, teknik olarak mümkün
-ancak ekonomik olarak cazibesiz bir seçenektir — ki bu, tasarımın yönlendirdiği
-davranışın tekil ontolojiye doğru olduğu anlamına gelir.
-20
+İtiraz. Platform birden fazla ontolojiye izin vermektedir. Dolayısıyla “tek ka-
+nonik anlam katmanı” tasviri yanlıştır.
+32
 
--- 20 of 23 --
+-- 32 of 37 --
 
+Değerlendirme. İtiraz teknik olarak doğrudur ve çalışma bu nedenle “kar-
+şılığı yok” iddiasını “farklı ölçekte” biçiminde revize etmiştir. Ancak itirazın
+gücü sınırlıdır: ontolojiler arasında bağ kurulamadığı için, çoklu ontoloji seçe-
+neği ürünün temel değer önerisini fiilen iptal etmektedir. Sonuç, teknik olarak
+mümkün ancak ekonomik olarak cazibesiz bir seçenektir — ki bu, tasarımın
+yönlendirdiği davranışın tekil ontolojiye doğru olduğu anlamına gelir.
 Dördüncü İtiraz: İdeal ile Pratiğin Kıyaslanması
 İtiraz. Domain-Driven Design’ın kendi literatürü, uygulamaların büyük kısmı-
 nın DDD Lite olduğunu kabul etmektedir. Bu durumda karşılaştırma, gerçek-
 leşmeyen bir ideal ile fiilen çalışan bir ürün arasında yapılmaktadır. Pratikte
 Ontology, pratikte uygulanan Domain-Driven Design’dan daha fazla dilsel di-
 siplin üretiyor olabilir.
-Değerlendirme. Bu, tezin karşılaştığı en ciddi itirazdır ve çalışma onu çürü-
-tememektedir. Verilebilecek tek yanıt şudur: Domain-Driven Design’ın stratejik
-kısmı atlandığında bunun bir eksiklik olduğu literatürde adlandırılmış ve kayıt
-altına alınmıştır. Ontology’de aynı eksiklik için bir ad ve bir teşhis kriteri bu-
-lunmamaktadır. Yani fark, sonuçta değil, sonucun görünürlüğündedir — ki bu,
-çalışmanın merkezî tezinin kendisidir.
+Değerlendirme. Bu, tezin karşılaştığı en ciddi itirazdır ve çalışma onu
+çürütememektedir. Verilebilecek tek yanıt şudur: Domain-Driven Design’ın st-
+ratejik kısmı atlandığında bunun bir eksiklik olduğu literatürde adlandırılmış ve
+kayıt altına alınmıştır. Ontology’de aynı eksiklik için bir ad ve bir teşhis kriteri
+bulunmamaktadır. Yani fark, sonuçta değil, sonucun görünürlüğündedir — ki
+bu, çalışmanın merkezî tezinin kendisidir.
 Buna karşın bu yanıt, karşılaştırmanın ampirik olarak sınanması gereğini
 ortadan kaldırmaz.
 Beşinci İtiraz: Konfigürasyonun Yönetilebilirliği
-İtiraz. Konfigürasyon değişikliklerinin izlenemez olduğu iddiası abartılıdır; plat-
-formlar sürüm kayıtları, yetkilendirme ve denetim izleri sunmaktadır.
-Değerlendirme. İtiraz kısmen haklıdır. Çalışmanın iddiası izlenebilirliğin
-teknik olarak imkânsız olduğu değil, sürtünmenin düşük olduğudur. Kod deği-
-şikliği zorunlu bir inceleme sürecinden geçer ve tip sistemi tarafından denetle-
-nir; konfigürasyon değişikliği için bu zorunluluk yapısal değil, kurumsal disipline
-bağlıdır. Fark niteliksel değil derecesel olmakla birlikte gerçektir.
+İtiraz. Konfigürasyon değişikliklerinin izlenemez olduğu iddiası abartılıdır;
+platformlar sürüm kayıtları, yetkilendirme ve denetim izleri sunmaktadır.
+Değerlendirme. İtiraz kısmen haklıdır. Çalışmanın iddiası izlenebilirli-
+ğin teknik olarak imkânsız olduğu değil, sürtünmenin düşük olduğudur. Kod
+değişikliği zorunlu bir inceleme sürecinden geçer ve tip sistemi tarafından de-
+netlenir; konfigürasyon değişikliği için bu zorunluluk yapısal değil, kurumsal
+disipline bağlıdır. Fark niteliksel değil derecesel olmakla birlikte gerçektir.
+Altıncı İtiraz: Taktiksel Maliyet
+İtiraz. Domain-Driven Design’ın taktiksel yapı taşları ciddi bir uygulama ma-
+liyeti taşır: her kimlik ayrı bir tip, her tutar bir Value Object, her sınır ötesi
+etkileşim bir event, bir Outbox tablosu ve idempotent bir tüketici gerektirir. On-
+tology bu maliyetin büyük kısmını platforma devreder. Karşılaştırma, Domain-
+Driven Design’ın bu bedelini yeterince tartmamaktadır.
+Değerlendirme. İtiraz haklıdır ve Domain-Driven Design literatürünün
+kendisi de bunu kabul eder: korunacak ciddi bir iş kuralı bulunmayan alanlarda
+CRUD tabanlı bir çözüm daha doğrudur (Ürkmez, 2026f); Domain Service’in
+33
+
+-- 33 of 37 --
+
+aşırı kullanımı modeli boşaltır (Ürkmez, 2026h); Aggregate kuralları belirli ko-
+şullarda bilinçli olarak esnetilebilir (Ürkmez, 2026i). Bu kabuller, ikinci ay-
+rımdaki seçicilik bahsini güçlendirir: taktiksel maliyet, Core’a yoğunlaştırılmak
+üzere tasarlanmıştır. Ancak itirazın asıl gücü, maliyetin gerçek olması ve bu
+çalışmanın onu ölçmemiş olmasıdır.
 Tezin Nihai Statüsü
 Yukarıdaki itirazların ışığında, çalışmanın tezi şu daraltılmış biçimde savunula-
 bilir:
@@ -709,11 +1108,11 @@ Ontology, kavramların topluluğa göreliliğini kabul eden ancak bu
 görelilikten doğan müzakereyi kurumsal olarak adlandırmayan bir
 tasarımdır. Domain-Driven Design ise aynı müzakereyi adlandırır ve
 bir karar nesnesine dönüştürür. Bu fark, iki yaklaşımın etkinliğine
-ilişkin bir hüküm değil, hangi sorunun sorulabilir kaldığına ilişkin
-bir tespittir.
-21
+ilişkin bir hüküm değil, hangi sorunun sorulabilir kaldığına ilişkin bir
+tespittir.
+34
 
--- 21 of 23 --
+-- 34 of 37 --
 
 Sonuç
 Her iki yaklaşım da aynı gözlemden hareket etmektedir: aynı kelime farklı top-
@@ -727,50 +1126,82 @@ Ontology, ortak bir nesne katmanı kurmayı, farklılığı bu katmanın üzerin
 nesne tipleriyle ifade etmeyi ve tüm birimlerin aynı grafik üzerinde çalışmasını
 önerir. Bedeli, ortak katmanı tanımlayan tarafın fiilî üstünlük kazanması ve bu
 üstünlüğün açık bir tasarım kararı olarak kaydedilmemesidir.
-İkisi de aynı gerilimin iki ucudur: anlamın yerel olması ile sistemin bü-
-tünsel olarak sorgulanabilir olması arasındaki gerilim. Bu gerilim çözül-
-müş değildir; her yaklaşım bir ucu seçmekte ve diğerinin bedelini ödemektedir.
-Çalışmadan çıkan uygulamaya dönük sonuç şudur: bir kurumda ontoloji ku-
-ruluyorsa, Context Map’in yine de çizilmesi gerekmektedir. Haritadaki tüm oklar
-aynı yöne bakacaktır; belirleyici olan, bunun bilinçli bir tercih mi yoksa varsa-
-yılan bir sonuç mu olduğunun bilinmesidir.
+İkisi de aynı gerilimin iki ucudur: anlamın yerel olması ile sistemin
+bütünsel olarak sorgulanabilir olması arasındaki gerilim. Bu gerilim
+çözülmüş değildir; her yaklaşım bir ucu seçmekte ve diğerinin bedelini ödemek-
+tedir.
+Taktiksel düzeydeki inceleme bu gerilimi daha küçük bir ölçekte yeniden
+göstermiştir. İki yaklaşım nesne, özellik ve fonksiyon düzeyinde büyük ölçüde
+örtüşür; ayrıştıkları yer, sınır çizen ve sınırlar arası ilişkiyi adlandıran araçlar-
+dır. Bu araçlar büyük ölçekte Bounded Context ve Context Map, küçük ölçekte
+Aggregate ve ACL’dir. Domain-Driven Design’ın taktiksel kararlarının her biri
+domain uzmanına geri götürülen bir cümle sınamasına dayandığı için, forma-
+lizasyonun pratiğe bağımlılığı sistemin içinde sürekli işleyen bir süreç olarak
+korunur. Wittgenstein’ın uyarısı bu yolla çözülmez, ama unutulmaz.
+Çalışmadan çıkan uygulamaya dönük sonuç şudur: bir kurumda ontoloji
+kuruluyorsa, Context Map’in yine de çizilmesi gerekmektedir. Haritadaki tüm
+oklar aynı yöne bakacaktır; belirleyici olan, bunun bilinçli bir tercih mi yoksa
+varsayılan bir sonuç mu olduğunun bilinmesidir. Aynı ilke küçük ölçekte de
+geçerlidir: hangi iki nesnenin aynı anda tutarlı olması gerektiği, platform ne
+olursa olsun, domain uzmanıyla birlikte açıkça kararlaştırılmalıdır.
 Özet formülasyon:
 Ontology, Domain-Driven Design’ın stratejik yarısını atlayıp taktik-
 sel yarısını platform seviyesine çıkarma girişimidir. Kazandığı şey
-bağlantılanabilirlik, kaybettiği şey sınır müzakeresinin görünürlüğü-
-dür.
+bağlantılanabilirlik, kaybettiği şey sınır müzakeresinin ve tutarlılık
+kararının görünürlüğüdür.
 İleri Araştırma Yönleri
-Çalışmanın ampirik dayanaktan yoksun olması, üç somut araştırma sorusu do-
-ğurmaktadır.
+Çalışmanın ampirik dayanaktan yoksun olması, dört somut araştırma sorusu
+doğurmaktadır.
+35
+
+-- 35 of 37 --
+
 1. Ontoloji kuran kurumlarda, nesne tipi tanımlarının hangi birim tarafından
 ve hangi müzakere süreciyle belirlendiğinin saha gözlemiyle incelenmesi.
 2. Kanonik şemadan ontolojiye geçiş yapan kurumlarda, birimlerin kayıt dışı
 tablo tutma davranışının azalıp azalmadığının ölçülmesi.
 3. Stratejik tasarımı uygulayan ve uygulamayan ekiplerde, kavramsal bula-
 nıklığa bağlı hataların sıklığının karşılaştırılması.
+4. Ontoloji kuran kurumlarda, birimler arası tutarlılık gereksinimlerinin —
+hangi iki nesnenin aynı anda tutarlı olması gerektiğinin — nerede ve kim
+tarafından kararlaştırıldığının incelenmesi.
+36
+
+-- 36 of 37 --
+
 Kaynakça
-• Evans, E. (2003). Domain-Driven Design: Tackling Complexity in the He-
-art of Software. Addison-Wesley.
+• Evans, E. (2003). Domain-Driven Design: Tackling Complexity in the
+Heart of Software. Addison-Wesley.
+• Fowler, M. (1999). Refactoring: Improving the Design of Existing Code.
+Addison-Wesley.
 • Fowler, M. (2003). “Anemic Domain Model”. martinfowler.com.
-22
-
--- 22 of 23 --
-
 • Palantir Technologies. Ontology Overview. Foundry Dokümantasyonu.
 • Palantir Technologies. Ontologies Overview. Foundry Dokümantasyonu.
-• Ürkmez, Z. (2026). “DDD #1: Tasarım ve Yazılımın Sonunda Buluştuğu
+• Ürkmez, Z. (2026a). “DDD #1: Tasarım ve Yazılımın Sonunda Buluştuğu
 Yer”. Codewarts Bülten, 21 Ocak 2026.
-• Ürkmez, Z. (2026). “DDD #2: Anlamın Sınırları”. Codewarts Bülten, 3
+• Ürkmez, Z. (2026b). “DDD #2: Anlamın Sınırları”. Codewarts Bülten, 3
 Şubat 2026.
-• Ürkmez, Z. (2026). “DDD #3: Modellemeye Başlıyoruz, Bir E-Ticaret Do-
-main’ini Sıfırdan Okumak”. Codewarts Bülten, 2 Mart 2026.
-• Ürkmez, Z. (2026). “DDD #4: Context Map, Bounded Context’ler Ara-
+• Ürkmez, Z. (2026c). “DDD #3: Modellemeye Başlıyoruz, Bir E-Ticaret
+Domain’ini Sıfırdan Okumak”. Codewarts Bülten, 2 Mart 2026.
+• Ürkmez, Z. (2026d). “DDD #4: Context Map, Bounded Context’ler Ara-
 sındaki Güç Dengesi”. Codewarts Bülten, 21 Temmuz 2026.
+• Ürkmez, Z. (2026e). “DDD #5: Sınırda Çeviri, ACL, Open Host Service
+ve Eventual Consistency”. Codewarts Bülten, 28 Temmuz 2026.
+• Ürkmez, Z. (2026f). “DDD #6: Tactical Design Başlıyor, Entity ve Kimlik
+Meselesi”. Codewarts Bülten, 4 Ağustos 2026.
+• Ürkmez, Z. (2026g). “DDD #7: Value Object, Kimliği Olmayan Kural
+Taşıyıcısı”. Codewarts Bülten, 12 Ağustos 2026.
+• Ürkmez, Z. (2026h). “DDD #8: Domain Service, DDD’nin En Riskli Yapı
+Taşı”. Codewarts Bülten, 26 Ağustos 2026.
+• Ürkmez, Z. (2026i). “DDD #9: Aggregate, Tutarlılığın Sınırı”. Codewarts
+Bülten, 8 Eylül 2026.
+• Ürkmez, Z. (2026j). “DDD #10: Domain Event, Aggregate Sınırının Dı-
+şına Taşanlar”. Codewarts Bülten, 16 Eylül 2026.
 • Vernon, V. (2013). Implementing Domain-Driven Design. Addison-Wesley.
 • Wittgenstein, L. (1921/2006). Tractatus Logico-Philosophicus. Çev. O.
 Aruoba. Metis Yayınları.
 • Wittgenstein, L. (1953/2007). Felsefi Soruşturmalar. Çev. H. Barışcan.
 Metis Yayınları.
-23
+37
 
--- 23 of 23 --
+-- 37 of 37 --

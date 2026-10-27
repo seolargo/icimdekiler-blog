@@ -1,14 +1,64 @@
 Yazılım Testi: Öncelik Sırası
 ÖFY
 September 2026
-Öncelik Sırası
-Ölçüt, öncelik sırasıyla üç terimden oluşur: hata sınıfı bu sistemde yaşanmış mı;
-kurulum ne kadar sürüyor; koşma ne kadar sürüyor. ˙Ilk terim ağır basar: kuru-
-lumu yarım saat süren ama hatası dün yaşanmış bir test, sıfır maliyetli ama bu
-sistemde hiç hata yakalamamış bir denetimin önünde durur. Tek istisna birinci
-gruptur: kurulum ve koşma maliyeti sıfırsa yaşanmışlık aranmaz ve denetim
-sürekli açık kalır, çünkü sıfır maliyetli bekçiyi kapalı tutmanın da bir maliyeti
-vardır.
+Özet
+Test kurulumunun sırası üç terimli bir ölçütle belirlenir: hata sınıfının bu sis-
+temde yaşanmış olması, kurulum süresi ve koşma süresi. ˙Ilk terim ağır basar;
+yalnızca kurulum ve koşma maliyeti sıfır olan denetimler ölçütten muaftır ve
+sürekli açık kalır. Regresyon testi yalnızca yaşanmış hatayı korur. Henüz
+yaşanmamış hata, tek tek hatalar yerine değişmezlerin yazılması ve bunların
+hem test anında rastgele girdiyle hem çalışma anında gerçek girdiyle denetlen-
+mesiyle yakalanır. Değişmezler mevcut davranışı korur, yeni özelliği korumaz;
+bu nedenle her özellik kendi kuralıyla teslim edilir ve kural koddan önce yazılıp
+kırmızı görülür. Mutasyon testi test takımının kör olduğu yeri, varyant analizi
+ise bulunan hatanın henüz tetiklenmemiş örneklerini gösterir. Deploy anında
+ve kopan istekte kullanıcının zarar görmemesi tek bir mekanizmaya değil; nazik
+kapanış, hazırlık sinyali, idempotency, geri çekilmeli yeniden deneme ve iş ki-
+rasından oluşan bir ailenin birlikte kurulmasına bağlıdır.
+1
+
+-- 1 of 18 --
+
+Giriş
+Yazılım testinin bilinen türleri yüzü aşar ve bir ekibin hepsini aynı anda kurması
+mümkün değildir. Hangi testin önce kurulacağına dair bir sıra olmadığında iki
+hata tekrarlanır: kolay kurulan ama hiç hata yakalamayan denetimler çoğalır,
+gerçekten yaşanmış hata sınıfları ise korunmasız kalır.
+Bu sıranın dayandığı birkaç terim şöyle tanımlanır. Test, kodun belirli
+bir girdi karşısında beklenen davranışı gösterip göstermediğini otomatik olarak
+denetleyen programdır. Regresyon testi (regression test), daha önce yaşanmış
+bir hatanın geri dönmediğini doğrulayan testtir. Değişmez (invariant), hiçbir
+girdi ve koşulda bozulmaması gereken kuraldır. Fixture, testin girdi olarak
+kullandığı sabit örnek veridir; bir transkript, bir JSON yanıtı ya da kısa bir
+video dosyası olabilir.
+Yaygın kabul, test sayısı arttıkça güvenliğin de arttığıdır. Bu kabul iki
+noktada yanılır. Birincisi, testlerin büyük çoğunluğu regresyon testiyse takım
+yalnızca geçmişe bakar. ˙Ikincisi, hiç kırmızı görülmemiş bir test kuralı denetlemediği
+hâlde yeşil kalabilir; sayı artar, koruma artmaz.
+Sıra, TypeScript arka ucu ve ön yüzü, Python medya hattı ve yer yer Go
+servisleri olan, dış yapay zekâ sağlayıcılarına ve nesne depolamaya bağımlı bir
+web sistemi için kurulmuştur. Biçimsel doğrulama, mobil ve donanım testleri
+kapsam dışıdır.
+2
+
+-- 2 of 18 --
+
+Öncelik Ölçütü
+Ölçüt, öncelik sırasıyla üç terimden oluşur: hata sınıfı bu sistemde yaşanmış
+mı; kurulum ne kadar sürüyor; koşma ne kadar sürüyor. ˙Ilk terim ağır basar.
+Kurulumu yarım saat süren ama hatası dün yaşanmış bir test, sıfır maliyetli
+ama bu sistemde hiç hata yakalamamış bir denetimin önünde durur.
+Ölçütün iki istisnası vardır. Birincisi birinci gruptur: kurulum ve koşma
+maliyeti sıfırsa yaşanmışlık aranmaz ve denetim sürekli açık kalır, çünkü sıfır
+maliyetli bekçiyi kapalı tutmanın da bir maliyeti vardır. ˙Ikincisi yeni özelliğin
+kendi kuralıdır: yeni özelliğin henüz yaşanmış hatası olamaz, ama kuralın maliyeti
+özellik yazılırken ödendiği için her özellikte uygulanır. Bu ikinci istisna Yazım
+Zamanı bölümünde gerekçelendirilir.
+3
+
+-- 3 of 18 --
+
+Gruplar
 1. Sıfır Maliyet, Sürekli Açık ( Ölçütten Muaf )
 • Tip denetimi
 • Lint
@@ -24,10 +74,6 @@ Script ve Python’da karşılığı yoktur, o taraflar için kapsam dışıdır
 • Dosya bölme (characterization kaydı)
 • Düzeltme öncesi kırmızı birim testi
 • Regresyon testi
-1
-
--- 1 of 5 --
-
 • Sözleşme
 • Fixture parser testi
 • Sema testi
@@ -35,14 +81,23 @@ Script ve Python’da karşılığı yoktur, o taraflar için kapsam dışıdır
 • Giriş doğrulama
 • Aşamalar arası veri sözleşmesi (Whisper segmenti ile cümle aynı şey değildir;
 SOT hatası bu sözleşme yazılmadığı için yaşanmıştır)
-• C ıkış değişmezleri
+• C ıkış değişmezleri (test anında; aynı kuralların çalışma anında da koşması
+için bkz. Yazım Zamanı)
+4
+
+-- 4 of 18 --
+
 3. Girdi Tasarımı ve Hat Bütünlüğü (˙Ilk Döngü)
 • Sınır değer analizi
 • Eşdeğerlik sınıfları
 • Karar tablosu
 • Durum geçişi
 • Hata yolu testi
+• Kütüphane hatasının yüzeye çıkması (bağımlılığın attığı hata yutulmadan
+çağırana ve kullanıcıya ulaşıyor mu)
 • ˙Idempotency
+• Yeniden deneme (retry with backoff ; yalnızca idempotent istekler tekrar
+denenir)
 • Eşzamanlılık birim testi (kredi defteri ve meşgul sayacı yarışları)
 • Kaynak temizliği
 • Önbellek doğruluğu
@@ -57,15 +112,15 @@ yarım cevap)
 • Hat bütünlüğü (sayım, yarım kalma)
 • Girdi sınır testleri (boş, bozuk, çok büyük)
 • Bozuk medya korpusu
-2
-
--- 2 of 5 --
-
 • Zip-bomb ve zip-slip
 • Karakter işkencesi
 • Altın veri seti
 • Saat ve saat dilimi
 • Süre dolması
+5
+
+-- 5 of 18 --
+
 4. Kullanıcı Akışları ve Canlı Sağlık (˙Ikinci Döngü)
 • Kullanıcı hikâyelerinin çıkarılması
 • Kabul testi
@@ -75,6 +130,9 @@ yarım cevap)
 • Sistem testi
 • Keşif testi
 • Kullanıcı hatası (çift tıklama, geri tuşu, yenileme)
+• Sekme geçişinde durum kaybı (başka sekmeye gidip dönünce form ve iler-
+leme yerinde mi)
+• Süren iş varken çıkış uyarısı (sekme kapatılırken ya da sayfadan ayrılırken)
 • Sentetik izleme (watchdog)
 • Gözlemlenebilirlik (hata yolunda log var mı, correlation ID, alarm çalıyor
 mu)
@@ -89,17 +147,19 @@ stance varsayımı)
 • Yarıda kalan işlem
 • Kuyruk teslim garantisi
 • Yetki matrisi
-3
-
--- 3 of 5 --
-
 • Kiracı izolasyonu
 • Faturalama değişmezi
 • Kimlik
+6
+
+-- 6 of 18 --
+
 • Ağ: yükleme tarafı (gerçek depolamaya yarım yükleme)
 • Sıra boşluğu
 • Migrasyon ve geri dönüş
 • Dağıtım ve geri alma
+• Nazik kapanış (graceful shutdown) ve bağlantı boşaltma
+• Hazırlık sinyali (readiness probe; kapanışta önce trafik kesilir)
 • Yedekten dönüş
 6. Yavaş, Ücretli ya da Kırılgan (Gece Koşusu, Sürüm
 Öncesi)
@@ -114,17 +174,19 @@ stance varsayımı)
 • Ağ: test matrisi
 • Arıza enjeksiyonu
 • Disk dolması
+• Sızıntı testi (uzun koşuda bellek, dosya tanıtıcısı, çocuk süreç ve dinleyici
+sayısı sabit kalıyor mu)
 • Nesne depolama görünürlüğü
 • Canlı izleme (kayma)
 • Görsel regresyon
 • Erişilebilirlik
 • Yerelleştirme
 • Uyumluluk
+7
+
+-- 7 of 18 --
+
 • Yapılandırılmış keşif
-4
-
--- 4 of 5 --
-
 • AI eval (yargıçlı)
 • Kombinatoryal (pairwise) test
 • Model tabanlı test
@@ -137,12 +199,340 @@ stance varsayımı)
 • Performans ailesi (istisna: bir kez keşif amaçlı koşulur, hatta alınmaz;
 önceki load/stress koşusu bu istisnadır)
 • Dayanıklılık ailesi
+• Devre kesici (circuit breaker )
 • Üretim trafiği ailesi
 • Güvenlik ailesi
 • ˙Insan ve organizasyon ailesi
 • Regülasyon ailesi
 Kapsam Dışı
 • Biçimsel doğrulama, sembolik yürütme, mobil senaryolar, donanım testleri
-5
+8
 
--- 5 of 5 --
+-- 8 of 18 --
+
+Yazım Zamanı ve C alışma Anı
+Öncelik sırası hangi testin önce kurulacağını belirler; bir testin hangi işle bir-
+likte yazılacağını ve hangi anda koşacağını belirlemez. Bu iki soru gruplardan
+bağımsızdır ve her değişiklikte yeniden cevaplanır.
+Regresyon Testinin Sınırı
+Regresyon testi bilinen hatayı korur, henüz yaşanmamış hatayı yakalamaz. Yarım
+cümlede kesilen bir soundbite için belirli bir paket üzerinde yazılmış test yalnızca
+o paketi korur. Aynı hata başka bir pakette farklı bir yoldan doğarsa test sessiz
+kalır.
+Hata Yerine Kural
+Henüz yaşanmamış hatayı yakalamanın yolu tek tek hataları değil, değişmezi
+yazmaktır. “Hiçbir pakette soundbite yarım cümlede kesilmez” cümlesi bir
+değişmezdir; “şu paketteki soundbite 12. saniyede kesilmez” cümlesi bir re-
+gresyon örneğidir. Değişmez iki ayrı anda denetlenir:
+• Test anında, üretilmiş girdiyle. Özellik tabanlı test (property-based
+testing), değişmezi çok sayıda rastgele ve uç girdi üzerinde dener (Claessen
+ve Hughes, 2000). Boş transkript, sıfır saniyelik klip, iki dilin karıştığı
+okuma gibi kimsenin elle yazmayacağı durumlar bu yolla bulunur.
+• C alışma anında, gerçek girdiyle. C alışma zamanı denetimi (runtime
+assertion), aynı değişmezi her gerçek render’ın sonunda yeniden kontrol
+eder. Kural bozulursa paket temiz olarak işaretlenmez. Bu denetim, testin
+hiç görmediği gerçek görüntüdeki hatayı yakalar.
+Kuralın baştan yazılıp sürekli denetlenmesi fikri sözleşmeyle tasarım (design
+by contract) adıyla bilinir (Meyer, 1988). ˙Ikinci gruptaki “C ıkış değişmezleri”
+maddesi bu fikrin test yarısıdır; çalışma anı yarısı aynı kuralın üretim hattında
+da koşmasını gerektirir.
+Yeni Özelliğin Kendi Kuralı
+Değişmezler mevcut davranışı korur, yeni eklenen bir özelliği kendiliğinden ko-
+rumaz. Yeni özellik eski bir kuralı bozarsa yakalanır. Kendi işini yanlış yaparsa
+yakalanmaz, çünkü ne yapması gerektiği hiçbir yerde yazılı değildir. Kuralı
+yazılmamış ve elle denenmemiş bir özelliğin çalıştığını bilen kimse yoktur.
+Bu nedenle her özellik kendi kuralıyla birlikte teslim edilir. Lower third’e kişi
+adını basan bir özellik “ad, konuşan kişinin görüntüsü üstüne düşer” değişmeziyle
+birlikte gelir. Ekip pratiğinde bu, bitmiş sayılma tanımının (Definition of Done)
+bir maddesidir: testi olmayan iş bitmemiştir. Bu düzende elle test hata aramak
+için yapılmaz, yalnızca özelliğin istenen davranış olup olmadığını onaylamak için
+yapılır.
+9
+
+-- 9 of 18 --
+
+Yazım Sırası
+Kuralın koddan önce mi sonra mı yazıldığı, testin güvenilirliğini belirler.
+Teste dayalı geliştirme (TDD). Önce test yazılır ve kırmızı olduğu görülür,
+ardından kod yazılır ve test yeşile döner (Beck, 2002). Kırmızı başlangıç,
+testin gerçekten kuralı denetlediğinin kanıtıdır.
+Sonradan test (test-after ya da test-last). Önce kod yazılır, test sonra ek-
+lenir. Risk, testin her durumda geçmesidir: hiç kırmızı görülmemiş bir
+test, kuralı denetlemediği hâlde yeşil kalabilir.
+Davranışa dayalı geliştirme (BDD). Test, düz dilde Given / When / Then
+kalıbıyla yazılır ve koda bağlanır (North, 2006). Böylece kuralın doğru
+kural olup olmadığına yazılımcı olmayan taraf da karar verebilir.
+Given muhabir okuması ve iki soundbite içeren bir paket
+When render alındığında
+Then hiçbir soundbite yarım cümlede kesilmemiş olmalı
+TDD kodun doğruluğunu sorar, BDD ürünün istenen davranışı yapıp yap-
+madığını sorar. Tercih edilen sıra, kuralın koddan önce yazılıp kırmızı görülmesidir.
+Bu, ikinci gruptaki “Düzeltme öncesi kırmızı birim testi” maddesinin yeni özelliklere
+genişletilmiş hâlidir.
+Testin Körlüğünü Ölçmek
+Mutasyon testi (mutation testing), kodu bilerek bozar (< yerine <= yazmak, bir
+satırı silmek) ve test takımının bunu fark edip etmediğine bakar (DeMillo, Lip-
+ton ve Sayward, 1978). Fark edilmeyen bir bozulma, o bölgede ileride doğacak
+hatanın da yakalanmayacağını gösterir. Altıncı gruptaki madde, bu yönüyle
+gelecekteki hatanın nerede kaçacağının haritasıdır.
+Varyant Avı
+Bir hata bulunduğunda yalnızca o örnek düzeltilirse aynı kusurun diğer örnekleri
+yerinde kalır. Varyant analizi (variant analysis), bulunan hatanın biçimini
+çıkarıp kodun geri kalanında aynı biçimi arar. SOT hatasının kökü Whisper
+segmentinin cümle sayılmasıydı; aynı varsayım segmenti kullanan her aşamada
+henüz patlamamış bir hata olarak durur.
+10
+
+-- 10 of 18 --
+
+Kapanış ve Kopan ˙Istek
+Bir sunucu kopyası yenisiyle değiştirilirken ya da bir istek yolda koptuğunda
+kullanıcının zarar görmemesi, birbirini tamamlayan bir kavram ailesiyle sağlanır.
+Ailenin bir kısmı deploy anını, kalanı kopan isteğin sonucunu ele alır.
+Deploy Anı
+Nazik kapanış (graceful shutdown). Kapanma sinyali (SIGTERM) alan süreç
+hemen ölmez; yeni iş kabul etmeyi bırakır, süren işleri bitirir ya da güvenli
+bir noktada bırakır, sonra çıkar. Nazik kapanışı olmayan bir süreç her de-
+ploy’da o an süren render’ı ve yüklemeyi yarıda keser.
+Bağlantı boşaltma (connection draining ). Nazik kapanışın içindeki adımdır:
+yeni bağlantı alınmaz, açık olanların tamamlanması beklenir.
+Kesintisiz deploy (zero-downtime deploy, rolling update). Yeni kopya ayağa
+kalkıp sağlık kontrolünden geçmeden eski kopya kapatılmaz. Platform
+bunu sağlasa bile eski kopyanın nazik kapanması uygulamanın sorum-
+luluğudur.
+Sağlık ve hazırlık sinyali (health check, readiness probe). Süreç “hazırım”
+ve “artık istek gönderme” sinyallerini ayrı ayrı verir. Kapanış başladığında
+önce hazırlık sinyali kapatılır, yük dengeleyici trafiği keser, ardından boşaltma
+başlar.
+Kopan ˙Isteğin Sonucu
+˙Idempotency. Aynı istek iki kez geldiğinde iş bir kez yapılır. Kopan bir
+isteğin tekrar denenebilmesinin ön koşuludur; idempotent olmayan bir
+isteği tekrar denemek çifte ücret ya da çifte yayın üretir. Bu nedenle
+okuma istekleri tekrar denenir, değiştiren istekler ancak idempotency anahtarı
+taşıyorsa denenir.
+Geri çekilmeli yeniden deneme (retry with backoff ). ˙Istemci başarısız isteği
+artan aralıklarla birkaç kez tekrar dener. Sabit aralıklı ve sınırsız deneme,
+bozulan servise yük bindirerek bozulmayı derinleştirir.
+˙Iş kirası (job lease) ve en az bir kez işleme (at-least-once processing ).
+Uzun iş, süresi kısa ve yenilenen bir kira ile tutulur. ˙Işçi ölürse kira dolar
+ve iş başka bir işçiye geçer. Bu düzen işin kaybolmasını önler, ancak aynı
+işin iki kez koşabileceğini kabul eder; bu yüzden idempotency ile birlikte
+kurulur.
+Devre kesici (circuit breaker ). Arkadaki servis art arda hata verdiğinde is-
+temci bir süre istek göndermeyi bırakır ve hemen hata döner (Nygard,
+2007). ˙Istekler bozuk servisin önünde yığılmaz, servis toparlanınca de-
+vre yeniden kapanır. Tek bir dış servise bağlı küçük bir sistemde yeniden
+deneme çoğunlukla yeterlidir; devre kesici bu nedenle yedinci gruptadır.
+11
+
+-- 11 of 18 --
+
+˙Istemci Tarafındaki Karşılıklar
+Aynı fikir tarayıcıda da geçerlidir. Süren bir iş varken sekme kapatılmak is-
+tendiğinde kullanıcı uyarılır (beforeunload). Sekmeler arasında gidip gelindiğinde
+form ve ilerleme durumu kaybolmaz. Bağımlı bir kütüphanenin attığı hata yu-
+tulmaz, kullanıcıya anlaşılır bir mesaj olarak ulaşır. Hatanın yutulması, sistemin
+çalıştığı izlenimini verirken işin sessizce kaybolması demektir.
+Sızıntı
+Sızıntı (leak ), bir kaynağın kullanıldıktan sonra geri bırakılmamasıdır. Bellek,
+dosya tanıtıcısı, çocuk süreç, olay dinleyicisi ve açık bağlantı bu kaynaklar-
+dandır. Kısa testte görünmez, çünkü her koşu az miktarda bırakır; günler süren
+üretim çalışmasında birikerek çöküşe yol açar. Bu nedenle sızıntı testi aynı işi
+çok sayıda tekrarlayıp kaynak sayısının sabit kalıp kalmadığını ölçer.
+12
+
+-- 12 of 18 --
+
+Sonuç
+Öncelik ölçütü neyin kurulacağını, yazım kuralı neyin ne zaman yazılacağını, ka-
+panış ailesi ise sistemin hangi anda kırıldığını cevaplar. Üçü birlikte okunduğunda
+test, hata çıktıkça eklenen bir yama listesi olmaktan çıkar ve üç eksenli bir
+düzene dönüşür: geçmişi koruyan regresyon testleri, geleceği koruyan değişmezler
+ve geçiş anlarını koruyan kapanış mekanizmaları.
+Ölçütün temel sınırlılığı geçmişe bakmasıdır. Yaşanmışlık şartı kaynakları
+gerçek hatalara yönlendirir, ama tek başına uygulandığında sistemi yalnızca
+bir kez yanmış yerlerden korur. Yeni özelliğin kendi kuralı, mutasyon testi ve
+varyant analizi bu eğilimi dengeleyen üç araçtır; üçü de hatanın yaşanmasını
+beklemeden çalışır.
+Değişmezlerin çalışma anında denetlenmesi bir maliyet doğurur. Her render
+sonunda koşan denetim süre ekler ve yanlış alarm üretebilir; hangi değişmezin
+yalnızca test anında, hangisinin her render’da koşacağı açık bir sorudur. Medya
+hattında rastgele girdi üretmek de pahalıdır: rastgele video üretilemez, ancak
+rastgele transkript, zaman damgası ve kesim listesi üretilebilir. Bu nedenle
+özellik tabanlı test en çok ayrıştırıcı ve zamanlama katmanında verim verir,
+piksel katmanında ise altın veri seti ve görsel regresyon yerinde kalır.
+Kesişim Taraması
+Öncelik sırası testlerin hangi sırayla kurulacağını belirler. Mevcut bir sistemin
+bugün nerede kırık olduğunu göstermez; bunun için ayrı bir tarama gerekir. Bu
+bölüm, sistemin parça parça değil, parçaların buluştuğu noktalardan tarandığı
+bir çalışmayı ve bu çalışmanın literatürdeki karşılıklarını anlatır. Notta bu
+yöntem kesişim taraması adıyla anılır.
+Neden Bu Kadar C ok Hata C ıktı
+Tarama yaklaşık elli bulgu üretti. Sayının yüksek olmasının nedeni sorulan
+sorunun türüdür. Mevcut testler her parçayı tek başına denetler. Tarama ise
+“şu olay, şu durumdayken gelirse ne olur” sorusunu sorar.
+Kombinasyon Sorusu
+“˙Iptal çalışıyor mu?” yerine “iptal, render bitip yükleme sürerken gelirse ne
+olur?” diye soruldu. Hataların çoğu, tek başına doğru çalışan iki parçanın
+buluştuğu yerdeydi:
+• ˙Iptal ile yayın
+• Replay ile atlama kuralı
+• ˙Imza ile soundbite
+• Altyazı ile isim bandı
+13
+
+-- 13 of 18 --
+
+Kapıların Karşılaştırılması
+Zip, kova, LiveU ve sayfa kapıları aynı kuralı ayrı ayrı uyguluyordu ve zamanla
+birbirinden ayrışmışlardı. .MTS uzantısı bir kapıda kabul, diğerinde ret ediliy-
+ordu. “vo” adı bir kapıda adla, diğerinde ses kanalıyla seçiliyordu.
+Adımlar Arasında Kesinti
+˙Iş, adımların arasında kesildi. “Paket bitti, kayıt yazılırken sunucu çöktü” gibi
+anlar normal testlerde hiç oluşmaz, çünkü test her adımı ayrı koşar.
+Gerçek Veriyle Karşılaştırma
+Sahte XML ile her şey geçiyordu, gerçek LiveU dosyası hatayı hemen gösterdi.
+Laptoptaki ffmpeg (8.1) ile sunucudaki Debian sürümünün farklı olması da aynı
+türden bir hatadır.
+Varsayımların Yazıya Dökülmesi
+“Tek kopya çalışır” kuralı vardı, ama kod bunu kendisi zorlamıyordu; kuralı
+yalnızca bir ayar satırı koruyordu. Beşinci gruptaki “Zamanlanmış işlerin çift
+tetiklenmesi” maddesi bu varsayımın test karşılığıdır.
+Hataların Birikme Nedeni
+• Hızlı büyüme. Sisteme dört giriş kapısı, redo, Edit, LiveU ve otomasyon
+eklendi. Her yeni özellik kendi başına test edildi, eskilerle buluştuğu yerler
+edilmedi.
+• Nadir tetiklenme. Bu hatalar günlük kullanımda seyrek ortaya çıkar:
+iki redo aynı saniyede, deploy tam yükleme sırasında, iki kamerada aynı
+dosya adı. Bu yüzden şikâyet gelmeden birikirler.
+Bulguların Ağırlığı
+Elli bulgunun hepsi ağır değildir. Yayına ya da veriye gerçekten dokunanlar on
+beş ile yirmi arasındadır: kaybolan paket, silinen video, geçmeli ve anamorfik
+görüntü, kısılan kelime, yanlış kesilen redo. Geri kalanlar uç durum ya da iç
+tutarlılık sorunudur.
+Bulguların çoğu kod okunarak ve sahte veriyle kanıtlandı. Gerçek ortamda
+kaçının gerçekten patlayacağı bilinmiyor. Bazıları, örneğin çok sayıda muhabir
+ya da binin üzerinde kullanıcı gerektirenler, hiç yaşanmayabilir.
+Tarama büyük bir özellikten sonra ya da müşteriye çıkmadan önce tekrar-
+lanmalıdır. Sonraki taramalar daha az bulgu üretir; ilk tarama her zaman en
+çoğunu bulur.
+14
+
+-- 14 of 18 --
+
+Yöntemin Karşılıkları
+Kesişim taramasının tek bir adı yoktur, birkaç bilinen yöntemin karışımıdır:
+Yapılan Karşılığı
+Durum ve olay eşleşmeleri (iptal,
+yükleme sırasında gelirse)
+State-space exploration, model ta-
+banlı analiz
+˙Iki kuralın buluştuğu yeri arama Feature interaction analysis
+Kapıları birbiriyle, laptopu
+sunucuyla karşılaştırma
+Differential testing, environment
+parity
+Adımlar arası kesinti Fault injection, crash consistency
+Varsayımın kodda zorlanıp zorlan-
+madığına bakma
+Invariant / assumption analysis
+Sahte veri yerine gerçek dosyayla
+deneme
+Fixture ve üretim verisi
+doğrulaması
+Bütüne en yakın tek ad STPA’dır (System-Theoretic Process Analysis; Leve-
+son, 2011). FMEA her parçanın nasıl bozulacağını tek tek sorar. STPA ise
+parçalar sağlamken aralarındaki etkileşimden doğan hatalara bakar. Taramadaki
+bulguların çoğu bu türdendir.
+˙Ilgili Terimler
+Tasarım Aşamasında Hata Aramak
+FMEA (Failure Mode and Effects Analysis). Her parça için nasıl bozu-
+lacağı ve bozulunca ne olacağı sorulur. Risk puanı üç terimin çarpımıdır:
+etkinin ağırlığı, görülme sıklığı ve fark edilme güçlüğü. Sessizce biriken
+hatalarda üçüncü terim belirleyicidir.
+FTA (Fault Tree Analysis). Kötü sonuçtan geriye gidilir: “Paket kayboldu;
+hangi yollardan olabilir?”
+STPA. Parçalar arasındaki etkileşimden doğan hatalara bakar (Leveson, 2011).
+HAZOP (Hazard and Operability Study ). Sapma kelimeleri her adıma tek
+tek uygulanır (Kletz, 1999). Klasik liste şunlardır: yok, fazla, az, kısmen,
+ayrıca, ters, başka, erken, geç, önce, sonra. Örneğin: “LiveU parçası geç
+gelirse?”
+Pre-mortem. “Altı ay sonra büyük bir hata çıktı; sebebi neydi?” diye geriye
+bakılarak düşünülür (Klein, 2007).
+Tehdit modelleme (STRIDE). Aynı mantığın güvenlik tarafıdır (Shostack,
+2014). Örneğin bir kiracının diğerinin muhabirlerini görebilmesi. Beşinci
+gruptaki “Kiracı izolasyonu” maddesi bunun test karşılığıdır.
+15
+
+-- 15 of 18 --
+
+Kombinasyonlarla Test
+Kombinatoryal (pairwise) test. Her ayar çifti en az bir kez birlikte denenir.
+Örneğin altyazı açık/kapalı, isim bandı var/yok ve format seçenekleri.
+Yazılım hatalarının büyük kısmı az sayıda parametrenin etkileşiminden
+doğar (Kuhn, Wallace ve Gallo, 2004). Altıncı gruptadır.
+Özellik etkileşimi (feature interaction). ˙Iki özelliğin birbirini bozmasıdır.
+Örneğin replay ile atlama kuralı.
+Durum uzayı taraması ve model denetimi (model checking ). Bütün du-
+rumlar ve geçişler çıkarılıp gezilir. TLA+ bu alanın en bilinen aracıdır;
+Amazon, S3 ve DynamoDB dahil birçok servisin tasarımını bununla doğrulamıştır
+(Newcombe ve diğ., 2015). Biçimsel doğrulama bu notta kapsam dışıdır.
+Hafif hâli olan model tabanlı test altıncı gruptadır.
+Özellik tabanlı test (property-based testing ). Örnek yerine kural yazılır,
+araç çok sayıda rastgele girdi üretir. Python’da hypothesis, JavaScript’te
+fast-check kullanılır. Üçüncü gruptadır.
+Gerçek Dünyayı Bozarak Test
+Arıza enjeksiyonu (fault injection). Ağ kesintisi, disk dolması ya da veri-
+tabanı hatası bilerek araya sokulur. Altıncı gruptadır.
+Kaos mühendisliği (chaos engineering ). Aynı işlemin canlı sistemde yapılmasıdır
+(Basiri ve diğ., 2016). En bilinen örneği Netflix’in Chaos Monkey aracıdır.
+C ökme tutarlılığı (crash consistency ). “Tam bu satırda elektrik kesilirse
+veri tutarlı kalır mı?” sorusudur. Beşinci gruptaki “Yarıda kalan işlem”
+maddesine karşılık gelir.
+Jepsen testi. Dağıtık sistemlerde birden çok kopya ve ağ bölünmesi altında
+tutarlılığı sınar. Tek kopya kilidi bunun küçük bir hâlidir.
+Karşılaştırarak Bulmak
+Diferansiyel test (differential testing ). Aynı girdi iki yoldan verilir, sonuçlar
+karşılaştırılır (McKeeman, 1998). Zip kapısı ile kova kapısının karşılaştırılması
+bu türdendir. Üçüncü gruptaki “Parite” maddesi de aynı fikre dayanır.
+Metamorfik test. Girdi bilinen bir biçimde değiştirilir ve çıktının buna uygun
+değişip değişmediğine bakılır (Chen, Cheung ve Yiu, 1998). Örneğin klip
+sırası değişince toplam süre aynı kalmalıdır.
+Ortam paritesi (environment parity ). Geliştirme makinesi ile sunucunun
+aynı olup olmadığı denetlenir. ffmpeg sürüm farkı buna örnektir.
+16
+
+-- 16 of 18 --
+
+Testlerin Kendisini Sınamak
+Mutasyon testi. Koda bilerek küçük hatalar konur ve testlerin bunları yakalayıp
+yakalamadığına bakılır. JavaScript tarafında Stryker kullanılır. Altıncı
+gruptadır.
+Kapsama (coverage). Satırların, dalların ve yolların ne kadarının test edildiğini
+ölçer. Yüksek kapsama, kesişimlerin denendiği anlamına gelmez. Her satır
+ayrı ayrı koşmuş olabilir, ama iki satır aynı durumda hiç birlikte koşmamış
+olabilir.
+Sonraki Tarama ˙Için Yöntem
+Kesişim taramasına en yakın üç yöntem birlikte kullanılır:
+• Etkileşimler için STPA
+• Adım adım sapma için HAZOP
+• Kapıların ve ortamların karşılaştırılması için diferansiyel test
+HAZOP’un sapma kelimeleri her adıma sistemli uygulanırsa, ilk taramada
+atlanan köşeler de yakalanır.
+17
+
+-- 17 of 18 --
+
+Kaynaklar
+• Beck, K. (2002). Test-Driven Development: By Example. Addison-Wesley.
+• Claessen, K. ve Hughes, J. (2000). QuickCheck: A Lightweight Tool for
+Random Testing of Haskell Programs. ICFP 2000.
+• DeMillo, R. A., Lipton, R. J. ve Sayward, F. G. (1978). Hints on Test
+Data Selection: Help for the Practicing Programmer. IEEE Computer.
+• Meyer, B. (1988). Object-Oriented Software Construction. Prentice Hall.
+• North, D. (2006). Introducing BDD. Better Software.
+• Nygard, M. T. (2007). Release It! Design and Deploy Production-Ready
+Software. Pragmatic Bookshelf.
+18
+
+-- 18 of 18 --

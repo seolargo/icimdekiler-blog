@@ -1,0 +1,1447 @@
+İstatistik Epistemolojisi: Varsayım, Tuzak ve
+Kırılma Noktaları
+ÖFY
+Ekim 2026
+Özet
+Olasılık ve istatistik aynı belirsizliği iki zıt yönden ele alır: olasılık bilinen bir
+modelden verinin nasıl davranacağını hesaplar, istatistik ise gözlenen veriden
+bilinmeyen modeli tahmin eder. Bu yüzden öğrenme olasılıkla başlar; istatis-
+tiğin kullandığı dil olasılıktır. Temel konular bir sıra izler: matematik altyapısı,
+olasılık teorisi, betimsel istatistik, matematiksel istatistik, veri toplama, analiz
+yöntemleri ve hesaplamalı yöntemler. Her konunun teknik içeriğinin arkasında
+tek cümleyle söylenebilecek bir ilke vardır; örneğin dağılım seçimi bir hesap
+değil, problemin hangi hikâyeye uyduğuna dair bir yargıdır. En pahalı hatalar
+konuların içinde değil arasında saklıdır: Simpson paradoksu, ortalamaya dönüş,
+hayatta kalan yanlılığı ve çoklu test gibi tuzaklar, teknik olarak doğru bir anal-
+izi tamamen yanlış bir sonuca götürebilir. İleri konularda odak değişir; yöntemi
+öğrenmekten çok, yöntemin hangi varsayım bozulduğunda kırıldığını ve verinin
+gerçek yapısına (iç içe gruplar, zamana bağlılık, yarım kalan gözlemler, kirli veri)
+hangi modelin uyduğunu öğrenmek esastır. Bütün bu ilkelerin ortak paydası,
+belirsizliği yok etmeye değil ölçmeye ve dürüstçe raporlamaya çalışmaktır.
+1
+
+-- 1 of 41 --
+
+Giriş
+Olasılık, bir olayın gerçekleşme ihtimalini sıfır ile bir arasında bir sayıyla ifade
+eden matematik dalıdır. Olasılıkta model bilinir ve verinin nasıl davranacağı
+sorulur. Örneğin hilesiz bir paranın on atışta sekiz kez tura gelme ihtimali
+hesaplanır.
+İstatistik ise veriden yola çıkarak bilinmeyen model hakkında sonuç çıkarma
+yöntemidir. Burada veri bilinir ve modelin ne olduğu sorulur. Aynı örnek tersin-
+den kurulur: on atışta sekiz tura geldiğine göre para hileli midir?
+Bu iki yön birbirine bağımlıdır. İstatistikteki her test ve her tahmin, arka
+planda bir olasılık hesabına dayanır. Bu nedenle olasılık bilinmeden istatistik
+yalnızca formül ezberine dönüşür.
+Yaygın bir kabul, istatistiğin hesap yapmak olduğudur. Oysa hesap işin
+en kolay kısmıdır. Asıl güçlük, problemi doğru tanımlamak, verinin nasıl top-
+landığını sorgulamak, uygun modeli seçmek ve sonucu belirsizliğiyle birlikte
+yorumlamaktır.
+Bu not beş katmandan oluşur: bir problemin olasılık ve istatistikle nasıl ele
+alınacağına dair genel çerçeve, temel konuların açıklaması, bu konulardan çıkan
+genel ilkeler, ileri konuların haritası ve ileri konuların ilkeleri. Konuların genel
+çerçevesi için Casella ve Berger (2002), Wasserman (2004) ve James ve diğerleri
+(2013) temel kaynaklardır.
+2
+
+-- 2 of 41 --
+
+Bir Probleme Olasılık ve İstatistikle Bakmak
+Problemi Tanımlamak
+Hesaba geçmeden önce dört soru cevaplanır:
+• Asıl soru nedir: bir değeri tahmin etmek mi, iki durumu karşılaştırmak
+mı, bir karar vermek mi?
+• Belirsizlik nereden gelmektedir: ölçüm hatasından mı, rastgele seçimden
+mi, olgunun kendisinden mi?
+• Popülasyon ve örneklem nedir? Hakkında sonuç çıkarılmak istenen bütün
+grup (popülasyon) ile elde bulunan küçük parça (örneklem) ayrı şeylerdir.
+• Ne sayılmakta ya da ölçülmektedir? Bu nicelik, ileride rastgele değişken
+olarak modellenir.
+Kontrol Listesi
+Her problemde aşağıdaki sıra izlenir:
+1. Sorunun türünü belirle: tahmin, karşılaştırma ya da karar.
+2. Rastgele olan niceliği bir değişken olarak tanımla.
+3. Bu değişkenin hangi dağılıma benzediğini belirle.
+4. Verinin nasıl toplandığını sorgula ve olası yanlılıkları ara.
+5. Veriye bak: grafik çiz, özet istatistikleri çıkar.
+6. Uygun yöntemi seç: tahmin, test ya da model.
+7. Yöntemin varsayımlarını kontrol et.
+8. Sonucu belirsizliğiyle birlikte yorumla ve raporla.
+Örnek: A/B Testi
+Bir web sitesinde yeni bir buton tasarımının satın alma oranını artırıp artır-
+madığı sorulsun.
+• Soru iki grubu karşılaştırmaktır.
+• Her ziyaretçinin satın alıp almaması bir Bernoulli değişkenidir; bir grup-
+taki toplam satın alma sayısı Binom dağılıma uyar.
+• Ziyaretçiler eski ve yeni tasarıma rastgele atanır. Bu düzene A/B testi
+(A/B testing) denir.
+3
+
+-- 3 of 41 --
+
+• İki grubun dönüşüm oranları hesaplanır ve iki oran farkı testi uygulanır.
+Sıfır hipotezi “fark yoktur” biçimindedir.
+• Test yapılmadan önce, beklenen küçük bir farkı yakalamak için kaç zi-
+yaretçi gerektiği hesaplanır (güç analizi).
+• Fark istatistiksel olarak anlamlı çıksa bile, artışın pratikte değip değmediği
+ayrıca değerlendirilir ve fark bir güven aralığıyla raporlanır.
+4
+
+-- 4 of 41 --
+
+Olasılık ve İstatistiğin Konuları ve İlkeleri
+Her konu üç soruyla ele alınır: kavram nedir, neden gereklidir ve ondan hangi
+genel ilke çıkar. Amaç konuları ezberlemek değil, her konunun dünyaya nasıl
+bakmayı öğrettiğini görmektir.
+Kalkülüs
+Kalkülüs, değişimi ve birikimi hesaplayan matematiktir. İstatistikte iki temel iş
+yapar: en iyi tahmini bulmak (türev) ve olasılığı hesaplamak (integral).
+Fonksiyonlar ve Limit
+Fonksiyon, bir girdiye tek bir çıktı karşılık getiren kuraldır. İstatistikte neredeyse
+her şey bir fonksiyondur: bir değerin olasılığı, bir parametrenin veriye uyumu,
+bir modelin tahmini. Limit ise girdi bir değere yaklaşırken çıktının nereye
+gittiğini sorar. “Veri sonsuza giderse tahmin nereye gider” sorusu bir limit
+sorusudur. Büyük sayılar yasası ve merkezi limit teoremi bu dille yazılır.
+İlke: İstatistikte birçok sonuç “çok veri olduğunda” doğrudur. Limit kavramı,
+bu sonuçların küçük veride ne kadar geçerli olduğunu sorgulamayı öğretir.
+Türev
+Türev, bir şeyin ne kadar hızlı değiştiğini ölçer. Bir eğrinin en tepe noktasında
+eğim sıfırdır; bu yüzden türevi sıfıra eşitlemek en büyük ya da en küçük değeri
+bulur. İstatistikte en iyi tahmin çoğu zaman böyle bulunur. Örneğin en çok
+olabilirlik yöntemi, gözlenen veriyi en olası kılan parametre değerini türev alarak
+arar.
+İlke: Tahmin bir arama işidir. “En iyi” değer, bir ölçütün en büyük ya da en
+küçük olduğu noktadır. Hangi ölçütün seçildiği, hangi tahminin bulunacağını
+belirler.
+İntegral
+İntegral, bir eğrinin altındaki alanı hesaplar. Sürekli bir değişkende tek bir
+noktanın olasılığı sıfırdır; olasılık ancak bir aralık için anlamlıdır ve bu aralığın
+altındaki alana eşittir. Örneğin bir kişinin boyunun tam olarak 175,000 cm olma
+ihtimali sıfırdır, ama 170 ile 180 cm arasında olma ihtimali bir alandır. Sınırı
+sonsuza giden integraller, normal ve üstel dağılım gibi sınırsız değer alabilen
+değişkenlerde gerekir.
+İlke: Sürekli dünyada tek noktanın olasılığı yoktur, aralığın olasılığı vardır.
+Soru her zaman “tam olarak ne” değil “hangi aralıkta” biçiminde sorulur.
+Diziler ve Seriler
+Seri, sonsuz sayıda terimin toplamıdır. Bazı olasılık hesapları sonsuz olasılığın
+toplanmasını gerektirir. Örneğin ilk başarıya kadar kaç deneme gerektiğini so-
+5
+
+-- 5 of 41 --
+
+ran geometrik dağılımda, olası deneme sayısı sınırsızdır ama tüm olasılıkların
+toplamı yine bir eder. Taylor serisi ise karmaşık bir fonksiyonu basit bir poli-
+nomla yaklaşık olarak yazar; Poisson dağılımının formülü bu yaklaşımdan doğar.
+İlke: Sonsuz sayıda olasılık sonlu bir toplam verebilir. Karmaşık bir fonksiyon,
+yeterince yakından bakıldığında basit bir şeye benzer; birçok istatistiksel yak-
+laşım bu fikre dayanır.
+Lineer Cebir
+Lineer cebir, çok sayıda sayıyı aynı anda işlemenin dilidir. Bir veri seti bir
+matristir ve istatistiğin çok değişkenli yöntemleri bu matrisler üzerinde yapılan
+işlemlerdir.
+Vektör ve Matris
+Vektör, sayıların sıralı listesidir; bir kişinin yaşı, boyu ve kilosu bir vektör oluştu-
+rur. Matris ise bu vektörlerin üst üste dizilmesiyle oluşan tablodur; bin kişinin
+verisi bin satırlı bir matristir. Matris işlemleri, bin kişi için aynı hesabı tek
+seferde yapmayı sağlar.
+İlke: Veri, tek tek sayılar değil bir yapı olarak görülür. Yapıyı gören, aynı
+işlemi binlerce kez tekrar etmek yerine bir kez yapar.
+Denklem Sistemleri
+Regresyonda katsayılar, bir denklem sisteminin çözümüyle bulunur. Gauss elim-
+inasyonu bu sistemi adım adım çözer; ters matris ise “matrisle bölme” işlemini
+yapar. Determinant sıfırsa ters matris yoktur ve sistem tek bir çözüm vermez.
+Regresyonda bu durum, iki değişkenin birbirinin tam kopyası olduğu durumda
+ortaya çıkar: model hangisinin etkili olduğunu ayırt edemez.
+İlke: Aynı bilgiyi iki kez veren değişkenler modele yeni bilgi katmaz, sadece
+belirsizlik katar.
+Vektör Uzayları
+Bir vektör diğerlerinin toplamı ya da katı olarak yazılamıyorsa, bağımsızdır; yani
+yeni bilgi taşır. Rank, bir matristeki bağımsız bilgi miktarıdır. Yüz sütunlu bir
+veri tablosunun rankı on ise, aslında yalnızca on bağımsız bilgi vardır; geri kalan
+doksan sütun bunların tekrarıdır.
+İlke: Verinin büyüklüğü ile içerdiği bilgi miktarı farklı şeylerdir. Çok sütun,
+çok bilgi demek değildir.
+İzdüşüm ve Diklik
+İzdüşüm, bir vektörü daha düşük boyutlu bir uzaya “gölge” olarak düşürmek-
+tir. En küçük kareler regresyonu tam olarak budur: gözlenen değerler, modelin
+üretebileceği değerlerin oluşturduğu düzleme izdüşürülür. Kalan kısım, yani
+6
+
+-- 6 of 41 --
+
+artık, bu düzleme diktir; model açıklayabildiği her şeyi açıklamış, geriye yal-
+nızca açıklayamadığını bırakmıştır.
+İlke: Bir model, gerçeği kendi anlayabileceği biçime indirger. Geriye kalan
+hata, modelin göremediği şeyin ölçüsüdür.
+Özdeğer ve Özvektör
+Bir matrisle çarpıldığında yönü değişmeyen, yalnızca uzayan ya da kısalan vek-
+töre özvektör denir; ne kadar uzadığı da özdeğerdir. Bir veri bulutunun özvek-
+törleri, verinin en çok yayıldığı yönleri gösterir. Tekil değer ayrışımı (SVD),
+veriyi önem sırasına göre bileşenlere ayırır. Örneğin yüz soruluk bir ankette
+cevapların büyük kısmı iki ya da üç temel yönle açıklanabilir.
+İlke: Karmaşık verinin arkasında çoğu zaman birkaç ana yön vardır. Bu
+yönleri bulmak, veriyi anlamanın en kısa yoludur.
+Çok Değişkenli Kalkülüs
+Gerçek problemlerde tek bir değişken nadiren yeterlidir. Çok değişkenli kalkülüs,
+birden fazla değişkenin aynı anda değiştiği durumlar için kalkülüsün genişletilme-
+sidir.
+Çok Değişkenli Fonksiyonlar ve Kısmi Türev
+Bir ürünün satışı hem fiyata hem reklam harcamasına bağlı olabilir. Kısmi
+türev, diğer değişkenler sabit tutulurken tek bir değişkenin etkisini ölçer. Re-
+gresyondaki “diğer değişkenler sabitken” yorumu bu fikirden gelir.
+İlke: Bir etkinin gerçek büyüklüğü, diğer etkiler sabit tutulduğunda görülür.
+Her şey aynı anda değişirken tek bir sebebi ayırmak mümkün değildir.
+Optimizasyon
+Gradyan, bir fonksiyonun en hızlı arttığı yönü gösterir; ters yönde ilerlemek en
+hızlı azalma sağlar. Makine öğrenmesindeki “eğitim” işlemi büyük ölçüde budur:
+hatayı en hızlı azaltan yönde küçük adımlar atmak. Hessian matrisi, bulunan
+noktanın gerçekten bir tepe ya da çukur olup olmadığını gösterir. Lagrange
+çarpanları ise bir kısıt altında en iyi değeri bulur; örneğin sınırlı bütçeyle en
+yüksek getiriyi elde etmek.
+İlke: En iyi çözüm çoğu zaman bir kısıt altındaki en iyi çözümdür. Kısıtı
+görmeyen optimizasyon, uygulanamaz bir cevap üretir.
+Çok Katlı İntegral
+İki değişkenin aynı anda belirli aralıklarda olma olasılığı, bir yüzeyin altındaki
+hacimle hesaplanır. Değişken dönüşümü yapıldığında, örneğin kartezyen koordi-
+natlardan kutupsal koordinatlara geçildiğinde, alanın nasıl genişleyip daraldığını
+Jacobian ölçer. Rastgele değişkenlerin dönüşümünde aynı mekanizma kullanılır.
+7
+
+-- 7 of 41 --
+
+İlke: Ölçeği değiştirmek olasılığı da değiştirir. Bir dönüşüm yapıldığında
+olasılığın nasıl yeniden dağıldığı hesaba katılmalıdır.
+Olasılık Teorisi
+Olasılık teorisi, belirsizliği sayıyla ifade etmenin kurallarını koyar. İstatistiğin
+bütün yöntemleri bu kurallar üzerine kurulur.
+Temel Kavramlar
+Örnek uzayı, bir deneyde olabilecek bütün sonuçların kümesidir; bir zar için
+{1, 2, 3, 4, 5, 6}. Olay, bu sonuçların bir alt kümesidir; “çift sayı gelmesi”
+gibi. Olasılık aksiyomları, her olasılığın sıfır ile bir arasında olmasını ve bütün
+sonuçların toplam olasılığının bir olmasını şart koşar. Tümleyen kuralı ise bir
+olayın olasılığını, olmama olasılığını birden çıkararak bulur. “Beş atışta en az
+bir altı gelmesi” gibi sorular doğrudan zor, tersinden kolaydır: hiç altı gelmeme
+olasılığı hesaplanır ve birden çıkarılır.
+İlke: Bir problem doğrudan zorsa tersinden sorulur. “En az bir” sorusunun
+cevabı çoğu zaman “hiç” sorusunun içindedir.
+Sayma
+Eşit olasılıklı sonuçlarda olasılık, istenen durum sayısının toplam durum sayısına
+bölünmesidir. Bu yüzden doğru saymak doğru olasılık demektir. Permüta-
+syonda sıra önemlidir (bir yarışmada birinci, ikinci, üçüncü); kombinasyonda
+sıra önemsizdir (bir takıma üç kişi seçmek). Aynı problem sıranın önemli sanıl-
+masıyla katlarca farklı sonuç verir.
+İlke: Hesaba başlamadan önce neyin sayıldığı net olarak tanımlanır. Tanım
+yanlışsa en doğru formül de yanlış sonuç verir.
+Koşullu Olasılık ve Bağımsızlık
+Koşullu olasılık, bir bilgi elde edildikten sonra olasılığın nasıl değiştiğini ölçer.
+Bayes kuralı ise sonuçtan sebebe geri gider. Klasik örnek bir tanı testidir:
+hastalık bin kişiden birinde varsa ve test yüzde 99 doğruysa, test pozitif çıkan
+birinin gerçekten hasta olma ihtimali yalnızca yüzde 9 civarındadır. Çünkü
+sağlıklı insan sayısı o kadar fazladır ki, onların küçük bir kısmının yanlış pozi-
+tif çıkması bile gerçek hastalardan sayıca fazla olur. Bağımsızlık ise bir olayın
+diğerinin olasılığını değiştirmemesidir; iki zar atışı bağımsızdır, ama aynı kişinin
+iki gün üst üste ölçülen tansiyonu bağımsız değildir.
+İlke: Yeni bir bilgi, başlangıçtaki duruma göre değerlendirilir. Temel oranı
+unutmak, en güçlü kanıtı bile yanlış yorumlatır.
+Kesikli Rastgele Değişkenler
+Rastgele değişken, belirsiz bir sonucu sayıya çeviren kuraldır. Kesikli olanlar
+sayılabilir değerler alır. Beklenen değer uzun vadedeki ortalamayı, varyans ise
+8
+
+-- 8 of 41 --
+
+değerlerin bu ortalamadan ne kadar saptığını gösterir. Her kesikli dağılım bir
+durumu anlatır: Bernoulli tek bir evet/hayır denemesini, Binom belirli sayıda
+denemedeki başarı sayısını, Geometrik ilk başarıya kadar geçen deneme sayısını,
+Hipergeometrik iadesiz çekilişleri, Poisson ise belli bir sürede kaç olay olduğunu
+anlatır. Örneğin bir çağrı merkezine saatte gelen arama sayısı Poisson, bu ara-
+malardan kaçının satışla sonuçlandığı ise Binom ile modellenir.
+İlke: Dağılım bir formül değil bir hikâyedir. Problemi okuyunca hangi hikây-
+eye uyduğunu görmek, hesabın yarısıdır.
+Sürekli Rastgele Değişkenler
+Sürekli değişkenler ölçülen değerlerdir: süre, ağırlık, sıcaklık. Yoğunluk fonksiy-
+onu, olasılığın değerler üzerinde nasıl yayıldığını gösterir. Üstel dağılım iki olay
+arasında geçen süreyi anlatır ve “hafızasızdır”: bir otobüsü on dakikadır bek-
+liyor olmak, kalan bekleme süresini değiştirmez. Normal dağılım, birçok küçük
+ve bağımsız etkinin toplandığı durumlarda ortaya çıkar; insan boyu, ölçüm hata-
+ları ve sınav puanları buna örnektir.
+İlke: Bir değişkenin hangi mekanizmayla oluştuğu, dağılımının şeklini belir-
+ler. Mekanizmayı anlamak, dağılımı tahmin etmekten daha güvenilirdir.
+Rastgele Değişken Dönüşümleri
+Bazen bilinen bir değişkenden yeni bir değişken türetilir. Örneğin bir dairenin
+yarıçapı rastgele ise, alanı da rastgeledir ama dağılımı farklıdır. Yarıçapın
+düzgün dağılması, alanın da düzgün dağılacağı anlamına gelmez.
+İlke: Bir değişken üzerinde yapılan işlem belirsizliğin şeklini de değiştirir.
+Girdinin belirsizliği çıktıya olduğu gibi aktarılmaz.
+Ortak Dağılımlar
+İki değişken birlikte incelendiğinde, ortak dağılım ikisinin aynı anda belirli değer-
+ler alma olasılığını verir. Kovaryans ve korelasyon, iki değişkenin birlikte artıp
+azalma eğilimini ölçer. Koşullu beklenen değer ise bir değişken bilindiğinde
+diğerinin ortalamasının ne olduğunu söyler; regresyon aslında bir koşullu bekle-
+nen değer tahminidir.
+İlke: Değişkenleri tek tek incelemek, aralarındaki ilişkiyi göstermez. İlişki
+ancak birlikte bakıldığında görülür.
+Moment Üreten Fonksiyonlar
+Ortalama, varyans ve çarpıklık gibi momentler bir dağılımın özelliklerini özetler.
+Moment üreten fonksiyon bunların hepsini tek bir fonksiyonda toplar. En büyük
+faydası, bağımsız değişkenlerin toplamının dağılımını kolayca bulmaktır.
+İlke: Doğru araç seçildiğinde zor bir problem kolaylaşır. Bazı hesaplar doğru-
+dan değil dolaylı yoldan çok daha kısa yapılır.
+9
+
+-- 9 of 41 --
+
+Eşitsizlikler ve Limit Teoremleri
+Chebyshev eşitsizliği, dağılım hiç bilinmese bile değerlerin ortalamadan ne kadar
+uzaklaşabileceğine bir sınır koyar. Büyük sayılar yasası, örneklem büyüdükçe
+ortalamanın gerçek değere yaklaşacağını söyler; bir kumarhane tek bir oyunu
+kaybedebilir, ama milyonlarca oyunun toplamında kazanacağı bellidir. Merkezi
+limit teoremi ise bağımsız gözlemlerin ortalamasının, veri hangi dağılımdan
+gelirse gelsin yaklaşık normal dağılacağını söyler. İstatistikteki güven aralık-
+larının ve testlerin büyük kısmı bu teoreme dayanır.
+İlke: Tek bir olay tahmin edilemez, ama kalabalığın ortalaması tahmin
+edilebilir. Belirsizlik tekrarla düzenli hâle gelir.
+İstatistiğe Giriş
+İstatistiğe giriş, veriyle ilk temasın nasıl kurulacağını öğretir. Formüllerden önce
+veriyi tanımak gelir.
+Veri Türleri
+Nicel veri sayıyla ölçülür, nitel veri kategoridir. Ölçek türü, hangi işlemin an-
+lamlı olduğunu belirler. Sınıflama ölçeğinde (göz rengi) yalnızca sayma anlam-
+lıdır. Sıralama ölçeğinde (memnuniyet: az, orta, çok) sıra vardır ama aralar eşit
+değildir. Aralık ölçeğinde (santigrat sıcaklık) farklar anlamlıdır ama oran an-
+lamsızdır; 20 derece 10 derecenin iki katı sıcak değildir. Oran ölçeğinde (ağırlık)
+her işlem anlamlıdır.
+İlke: Her sayı aynı şeyi ifade etmez. Bir işlem yapılmadan önce o işlemin
+veri türü için anlamlı olup olmadığı sorulur.
+Betimsel İstatistik
+Ortalama, medyan ve mod verinin merkezini farklı biçimlerde tanımlar. Gelir
+gibi çarpık verilerde ortalama birkaç çok zengin kişi yüzünden yukarı çekilir;
+medyan tipik kişiyi daha iyi temsil eder. Standart sapma, değerlerin orta-
+lama etrafında ne kadar yayıldığını gösterir. Aynı ortalamaya sahip iki şehirden
+birinde herkes benzer gelire sahipken diğerinde uçurum olabilir.
+İlke: Tek bir özet sayı veriyi anlatmaz. Merkez her zaman yayılımla birlikte
+verilir.
+Grafikler
+Histogram dağılımın şeklini, kutu grafiği yayılımı ve aykırı değerleri, saçılım
+grafiği iki değişken arasındaki ilişkiyi gösterir. Anscombe’un dört veri seti aynı
+ortalama, varyans ve korelasyona sahip olduğu hâlde grafikte tamamen farklı
+görünür (Anscombe, 1973): biri düz bir ilişki, biri eğri, biri tek bir aykırı değerin
+bozduğu bir doğrudur.
+İlke: Hesaba geçmeden önce veri görülür. Bir grafik, sayıların gizlediğini bir
+bakışta ortaya çıkarır.
+10
+
+-- 10 of 41 --
+
+Örneklem ve Popülasyon
+Popülasyon, hakkında sonuç çıkarılmak istenen bütün gruptur; örneklem, bu
+gruptan gözlenen parçadır. Popülasyonun gerçek ortalaması bir parametredir
+ve bilinmez; örneklemden hesaplanan ortalama bir istatistiktir ve her yeni örnek-
+lemde biraz farklı çıkar. Örneklem dağılımı, bu istatistiğin örneklemden örnek-
+leme nasıl değiştiğini anlatır.
+İlke: Elde edilen sonuç, olası birçok sonuçtan yalnızca biridir. Başka bir
+örneklemle farklı bir sayı çıkacağı unutulmaz.
+İlk Çıkarımlar
+Güven aralığı, tahminin belirsizliğini bir aralıkla ifade eder. Hipotez testi, gözle-
+nen bir farkın şansla açıklanıp açıklanamayacağını sorar. p-değeri, hiçbir gerçek
+etki yokken bu kadar uç bir sonuç görme olasılığıdır; etkinin büyüklüğünü ya da
+önemini göstermez.
+İlke: Bir sonuç her zaman “ne kadar emin olunduğu” bilgisiyle birlikte verilir.
+Belirsizliği belirtilmeyen tahmin eksiktir.
+Matematiksel İstatistik
+Matematiksel istatistik, yöntemlerin neden çalıştığını ve hangi koşullarda çalış-
+madığını ispatlarla gösterir.
+Örneklem Dağılımları
+Ki-kare, t ve F dağılımları, normal dağılmış verilerden hesaplanan istatistik-
+lerin davranışını anlatır. Örneğin t dağılımı, popülasyon varyansı bilinmediğinde
+ve örneklem küçük olduğunda ortalamanın belirsizliğini doğru biçimde hesaba
+katar; normal dağılıma göre daha kalın kuyrukludur, çünkü az veriyle daha az
+emin olunmalıdır. Sıra istatistikleri ise en büyük, en küçük ve medyan gibi
+değerlerin dağılımını inceler.
+İlke: Az veriyle yapılan tahmin, daha geniş bir belirsizlik payı ister. Yöntem,
+verinin azlığını cezalandırmalıdır.
+Nokta Tahmini
+Momentler yöntemi, örneklemin ortalama ve varyansını popülasyonunkine eşitley-
+erek parametreyi bulur. En çok olabilirlik yöntemi ise “hangi parametre değeri
+bu veriyi görmeyi en olası kılar” diye sorar. Örneğin on atışta yedi tura gelmişse,
+turanın olasılığı için en çok olabilirlik tahmini 0,7’dir.
+İlke: Tahmin, veriyi en iyi açıklayan açıklamayı seçmektir. Ama “en iyi
+açıklama” ile “doğru açıklama” her zaman aynı değildir.
+Tahmin Edicilerin Özellikleri
+Yansız bir tahmin edici ortalamada doğru değeri verir. Etkin bir tahmin edicinin
+varyansı düşüktür. Tutarlı bir tahmin edici veri arttıkça doğruya yaklaşır. Bu
+11
+
+-- 11 of 41 --
+
+özellikler bazen çatışır: biraz yanlı ama çok daha düşük varyanslı bir tahmin
+edici, yansız ama dağınık olandan daha iyi sonuç verebilir. Cramér–Rao alt
+sınırı, yansız bir tahmin edicinin varyansının ne kadar düşebileceğine teorik bir
+sınır koyar.
+İlke: Mükemmel tahmin edici yoktur, dengeler vardır. Yansızlık tek başına
+bir erdem değildir; toplam hata önemlidir.
+Aralık Tahmini
+Güven aralığı, tek bir tahmin yerine olası değerlerin bir aralığını verir. Yüzde 95
+güven aralığı, aynı yöntem tekrar tekrar uygulandığında oluşan aralıkların yüzde
+95’inin gerçek değeri kapsayacağı anlamına gelir. Aralığın genişliği belirsizliği
+gösterir; dar aralık daha kesin bir bilgi demektir.
+İlke: Bir tahminin değeri, ne kadar kesin olduğuyla birlikte anlam kazanır.
+“45 ile 55 arasında” demek, “50” demekten daha dürüsttür.
+Hipotez Testinin Teorisi
+Tip I hata, olmayan bir etkiyi var saymaktır; tip II hata, var olan bir etkiyi
+kaçırmaktır. Bir hatayı azaltmak genellikle diğerini artırır; bir mahkemede suç-
+suzu mahkûm etmemek için daha katı delil istenirse, bazı suçlular da serbest
+kalır. Testin gücü, gerçek bir etkiyi yakalama olasılığıdır. Neyman–Pearson lem-
+ması, belirli bir tip I hata düzeyinde en güçlü testin nasıl kurulacağını gösterir
+(Neyman ve Pearson, 1933).
+İlke: Her karar iki tür hata riski taşır. Hangi hatanın daha pahalı olduğu,
+karar kuralını belirlemelidir.
+Asimptotik Teori
+Veri çok büyüdüğünde en çok olabilirlik tahmini yaklaşık normal dağılır ve
+varyansı hesaplanabilir hâle gelir. Delta yöntemi, bir tahmin edicinin fonksiy-
+onunun belirsizliğini bulur; örneğin bir oranın tahmini biliniyorsa, o oranın log-
+aritmasının belirsizliği hesaplanabilir.
+İlke: Birçok yöntem büyük veride iyi çalışır. Küçük veride bu yöntemlere ne
+kadar güvenilebileceği ayrıca sorgulanmalıdır.
+Örnekleme Teorisi
+Örnekleme teorisi, bütün popülasyonu ölçmeden doğru sonuç çıkarmanın yolunu
+öğretir.
+Temel Kavramlar
+Örnekleme çerçevesi, örneğin seçildiği listedir. Çerçeve popülasyonu tam kap-
+samıyorsa, en iyi seçim yöntemi bile yanlı sonuç verir. Örneğin yalnızca sabit
+telefonu olanların arandığı bir anket, genç nüfusu dışarıda bırakır. Örnekleme
+12
+
+-- 12 of 41 --
+
+hatası şanstan, örnekleme dışı hata ise yanlış çerçeve, cevap vermeme ve ölçüm
+hatası gibi sistemli sorunlardan gelir.
+İlke: Şansın yarattığı hata veri arttıkça azalır, sistemli hata azalmaz. Büyük
+ama yanlı veri, küçük ama yansız veriden daha tehlikelidir.
+Basit Rastgele Örnekleme
+Her birimin eşit şansla seçildiği örneklemedir. Gereken örneklem büyüklüğü, is-
+tenen kesinliğe ve popülasyondaki yayılıma bağlıdır; popülasyonun büyüklüğüne
+çok az bağlıdır. Bu yüzden bir ülkenin seçim anketi ile bir şehrin seçim anketi
+için benzer sayıda kişi yeterli olabilir.
+İlke: Gereken veri miktarı, popülasyonun büyüklüğüne değil istenen kesinliğe
+bağlıdır.
+Tabakalı Örnekleme
+Popülasyon önce benzer gruplara (tabakalara) bölünür, sonra her gruptan ayrı
+örnek seçilir. Örneğin bir üniversitede öğrenci memnuniyeti ölçülürken her
+fakülteden ayrı örnek almak, küçük fakültelerin örneklemde kaybolmasını önler
+ve tahmini daha kesin yapar.
+İlke: Bilinen farklılıklar şansa bırakılmaz, tasarımla kontrol edilir.
+Küme ve Sistematik Örnekleme
+Küme örneklemesinde bireyler yerine gruplar seçilir; örneğin tek tek öğrenci
+yerine okullar. Bu yöntem ucuzdur ama aynı kümedekiler birbirine benzediği
+için daha az bilgi verir. Sistematik örneklemede listeden her k’ıncı birim seçilir;
+listede gizli bir düzen varsa (örneğin her onuncu daire köşe daire ise) sonuç yanlı
+olur.
+İlke: Her kolaylık bir bedel taşır. Ucuz yöntemin bilgi kaybı ve gizli riskleri
+hesaba katılır.
+Yanlılık ve Eksik Veri
+Seçilen kişilerin bir kısmı cevap vermezse, cevap verenler popülasyonu temsil
+etmeyebilir. Örneğin bir müşteri memnuniyet anketine çoğunlukla çok memnun
+ya da çok kızgın olanlar cevap verir. Ağırlıklandırma, az temsil edilen grupların
+cevaplarına daha fazla ağırlık vererek bu dengesizliği kısmen düzeltir.
+İlke: Cevap vermeyenler de bir şey söyler. Eksik veri, rastgele eksik olduğu
+varsayılmadan önce sorgulanır.
+Deney Tasarımı
+Deney tasarımı, sebep-sonuç ilişkisini güvenilir biçimde göstermenin yoludur.
+Temel ilkeleri Fisher tarafından sistemleştirilmiştir (Fisher, 1935).
+13
+
+-- 13 of 41 --
+
+Deneyin Temelleri
+Rastgele atama, katılımcıları gruplara şansla dağıtır; böylece yaş, sağlık ya da
+motivasyon gibi ölçülmemiş farklar gruplar arasında dengelenir. Tekrar, sonu-
+cun tek bir şanslı gözleme dayanmadığını gösterir. Bloklama ise bilinen önemli
+bir farkı (örneğin farklı tarlaların toprak kalitesi) kontrol altına alır.
+İlke: Görülebilen farklar tasarımla, görülemeyen farklar rastgele atamayla
+kontrol edilir. Rastgele atama, bilinmeyeni dengelemenin tek güvenilir yoludur.
+Tek Yönlü ANOVA
+ANOVA (varyans analizi), ikiden fazla grubun ortalamasını aynı anda karşılaştırır.
+Mantığı, gruplar arası farkı grupların kendi içindeki dağınıklıkla kıyaslamaktır.
+Grup içinde değerler zaten çok dağınıksa, gruplar arasındaki küçük bir fark an-
+lamlı değildir. Hangi grupların birbirinden farklı olduğunu bulmak için Tukey
+ya da Bonferroni gibi çoklu karşılaştırma yöntemleri kullanılır.
+İlke: Bir farkın önemi, arka plandaki gürültüyle karşılaştırılarak anlaşılır.
+Gürültü büyükse küçük farklar anlamsızdır.
+Blok Tasarımları
+Rastgele tam blok tasarımında her blok içinde bütün işlemler denenir; böylece
+bloklar arası farklar karşılaştırmayı bozmaz. Latin kare tasarımı, iki ayrı gürültü
+kaynağını aynı anda kontrol eder; örneğin hem farklı günleri hem farklı makineleri.
+İlke: Karşılaştırma, benzer koşullar içinde yapıldığında daha keskindir.
+Faktöriyel Tasarımlar
+Birden fazla faktör aynı anda ve tüm kombinasyonlarıyla denenir. Bu sayede
+etkileşim görülebilir: bir gübre yalnızca bol sulamayla birlikte işe yarıyor ola-
+bilir. Faktörleri tek tek denemek bu tür etkileşimleri tamamen kaçırır.
+İlke: Etkenler birbirinden bağımsız çalışmayabilir. Bir şeyi değiştirmenin
+etkisi, diğer şeylerin durumuna bağlı olabilir.
+Güç ve Örneklem Büyüklüğü
+Deney başlamadan önce, beklenen etkiyi yakalamak için kaç gözlem gerektiği
+hesaplanır. Yetersiz örneklemle yapılan deney, gerçek bir etkiyi kaçırma riski
+yüksek olduğu için hem zaman hem kaynak israfıdır.
+İlke: “Fark bulunamadı” ile “fark yok” aynı şey değildir. Bulamamanın sebebi
+yetersiz veri olabilir.
+Regresyon Analizi ve Doğrusal Modeller
+Regresyon, değişkenler arasındaki ilişkiyi bir denklemle ifade eder ve istatistiğin
+en yaygın kullanılan aracıdır.
+14
+
+-- 14 of 41 --
+
+Basit Doğrusal Regresyon
+Bir değişken, örneğin çalışma saati, başka bir değişkeni, örneğin sınav puanını
+tahmin etmek için kullanılır. En küçük kareler yöntemi, noktalara en yakın
+doğruyu, hataların karelerinin toplamını en aza indirerek bulur. R2, puanlardaki
+değişkenliğin ne kadarının çalışma saatiyle açıklandığını gösterir.
+İlke: Model, ilişkinin ortalama eğilimini yakalar, her bireyi değil. Doğrunun
+etrafındaki dağılım da en az doğrunun kendisi kadar bilgi taşır.
+Çoklu Regresyon
+Birden fazla açıklayıcı değişken aynı modele girer. Her katsayı, diğer değişken-
+ler sabitken o değişkenin etkisini gösterir. Örneğin ev fiyatında metrekarenin
+etkisi, konum sabit tutulduğunda ölçülür; aksi hâlde büyük evlerin genellikle iyi
+semtlerde olması, metrekarenin etkisini olduğundan büyük gösterir.
+İlke: Bir etkinin gerçek büyüklüğü, karıştırıcı etkenler kontrol edildiğinde
+ortaya çıkar.
+Model Varsayımları ve Tanı
+Regresyon, hataların rastgele, sabit yayılımlı ve birbirinden bağımsız olduğunu
+varsayar. Artık grafikleri bu varsayımları kontrol eder. Artıklarda bir desen
+görülüyorsa, model bir şeyi kaçırıyordur. Tek bir aşırı nokta da doğruyu kendine
+doğru çekerek bütün sonucu değiştirebilir.
+İlke: Modelin hataları rastgele görünmüyorsa, model eksiktir. Hatalardaki
+desen, modelin göremediği yapının izidir.
+Sorunlu Durumlar
+İki açıklayıcı değişken birbirine çok benziyorsa (örneğin hem metrekare hem
+oda sayısı), model hangisinin etkili olduğunu ayıramaz ve katsayılar kararsı-
+zlaşır. Logaritma gibi dönüşümler, eğri bir ilişkiyi düz hâle getirebilir. Kate-
+gorik değişkenler ise kukla değişkenlerle modele katılır.
+İlke: Model, kendisine verilen bilgiden fazlasını ayırt edemez. Birbirine ben-
+zeyen değişkenler, ayrı ayrı yorumlanamaz.
+Model Seçimi
+Modele değişken eklemek eğitim verisine uyumu her zaman artırır, ama yeni
+veride tahmin gücünü düşürebilir. AIC ve BIC, uyumu ödüllendirirken kar-
+maşıklığı cezalandırır. Çapraz doğrulama ise modeli eğitimde kullanılmayan
+veride sınar.
+İlke: Daha karmaşık model daha iyi model değildir. Karmaşıklık, yeni veride
+performansla kanıtlanmalıdır.
+15
+
+-- 15 of 41 --
+
+Doğrusal Modellerin Teorisi
+Gauss–Markov teoremi, belirli varsayımlar altında en küçük kareler yönteminin
+doğrusal ve yansız tahmin ediciler arasında en düşük varyanslı olduğunu gösterir.
+Bu, yöntemin neden bu kadar yaygın kullanıldığının teorik gerekçesidir. Ama
+varsayımlar bozulduğunda bu üstünlük ortadan kalkar.
+İlke: Bir yöntemin “en iyi” olması, hep belirli koşullar altında geçerlidir.
+Koşullar değişince en iyi yöntem de değişir.
+Genelleştirilmiş Doğrusal Modeller ve Kategorik Veri
+Her sonuç sürekli ve normal dağılmış bir sayı değildir. Genelleştirilmiş doğrusal
+modeller, regresyon fikrini farklı veri türlerine taşır (Nelder ve Wedderburn,
+1972).
+Kontenjans Tabloları
+İki kategorik değişken, örneğin sigara içme ve hastalık, bir çapraz tabloda göster-
+ilir. Ki-kare testi, iki değişkenin bağımsız olup olmadığını sınar. Odds oranı ve
+göreli risk, ilişkinin büyüklüğünü ölçer; örneğin sigara içenlerde hastalık riskinin
+kaç kat fazla olduğunu.
+İlke: Kategorik veride ilişkinin varlığı kadar büyüklüğü de raporlanır. “İlişk-
+ili” demek yetmez, “ne kadar” da söylenir.
+Üstel Aile ve GLM Yapısı
+Normal, Binom ve Poisson dağılımları aynı matematiksel aileye aittir. Bağ
+fonksiyonu, doğrusal bir denklemi sonucun doğal ölçeğine bağlar; örneğin bir
+olasılığın sıfır ile bir arasında kalmasını sağlar. Böylece farklı veri türleri tek bir
+mantıkla modellenir.
+İlke: Farklı görünen problemlerin ortak yapısı aranır. Ortak yapıyı bulan,
+her problem için ayrı yöntem öğrenmek zorunda kalmaz.
+Lojistik Regresyon
+Sonuç evet/hayır olduğunda, örneğin bir müşterinin satın alıp almayacağı, lo-
+jistik regresyon kullanılır. Model doğrudan olasılığı değil, olasılığın odds’unun
+logaritmasını tahmin eder. Katsayılar, bir değişken bir birim arttığında odds’un
+kaç katına çıktığını gösterir.
+İlke: Sonucun doğasına uyan ölçek kullanılır. Olasılığa sıradan bir sayı gibi
+davranmak, birden büyük ya da sıfırdan küçük anlamsız tahminler üretir.
+Poisson Regresyonu
+Sonuç bir sayımsa, örneğin bir kavşaktaki aylık kaza sayısı, Poisson regresy-
+onu kullanılır. Poisson dağılımı ortalama ile varyansın eşit olduğunu varsayar.
+16
+
+-- 16 of 41 --
+
+Gerçek veride varyans çoğu zaman ortalamadan büyüktür (aşırı yayılım); bu
+durum görmezden gelinirse sonuçlar olduğundan daha kesin görünür.
+İlke: Bir modelin varsayımı, veriyle karşılaştırılarak doğrulanır. Gözden
+kaçan varsayım, sahte bir kesinlik üretir.
+Model Değerlendirme
+Sapma (deviance), modelin veriye ne kadar uyduğunu ölçer. Olabilirlik oranı
+testleri, iki modelden hangisinin daha iyi olduğunu karşılaştırır. Sınıflandırma
+modellerinde ise doğru ve yanlış tahminlerin sayısı incelenir.
+İlke: Bir model her zaman bir alternatife karşı değerlendirilir. “İyi” bir model
+ancak başka bir modelle karşılaştırıldığında anlam kazanır.
+Parametrik Olmayan İstatistik
+Parametrik olmayan yöntemler, verinin belirli bir dağılıma uyduğunu varsay-
+madan sonuç çıkarır.
+Kullanım Gerekçesi
+Klasik testler genellikle verinin normal dağıldığını varsayar. Örneklem küçükse,
+veri çok çarpıksa ya da yalnızca sıralama bilgisi varsa bu varsayım tutmaz.
+Parametrik olmayan yöntemler değerlerin kendisi yerine sıralarını kullanır.
+İlke: Bir varsayımdan emin olunamıyorsa, daha az şey varsayan yönteme
+başvurulur. Biraz güç kaybedilir, ama yanılma riski azalır.
+Tek ve İki Örneklem Testleri
+İşaret testi ve Wilcoxon işaretli sıra testi, tek bir grubun medyanını ya da
+eşleştirilmiş ölçümleri inceler. Mann–Whitney U testi iki bağımsız grubu, Kolmogorov–
+Smirnov testi ise iki dağılımın bütününü karşılaştırır. Örneğin iki ilacın etkisi
+karşılaştırılırken birkaç uç değer ortalamayı bozuyorsa, sıralara dayanan testler
+daha güvenilir sonuç verir.
+İlke: Uç değerlerin sonucu ele geçirmesine izin verilmez. Sıra, bazen değerin
+kendisinden daha güvenilir bir bilgidir.
+Çok Örneklem Testleri
+Kruskal–Wallis testi, ANOVA’nın dağılım varsayımı gerektirmeyen karşılığıdır.
+Friedman testi ise aynı kişilerin farklı koşullarda ölçüldüğü durumlar içindir.
+İlke: Her klasik yöntemin, varsayımı gevşetilmiş bir karşılığı vardır. Varsayım
+bozulduğunda çözüm yöntemi bırakmak değil, karşılığına geçmektir.
+Sıra Korelasyonu
+Spearman ve Kendall korelasyonları, iki değişkenin birlikte artıp azalmasını
+sıralar üzerinden ölçer. Doğrusal olmayan ama tek yönlü ilişkileri de yakalarlar;
+örneğin deneyim arttıkça maaşın önce hızlı, sonra yavaş artması.
+17
+
+-- 17 of 41 --
+
+İlke: İlişki her zaman düz bir çizgi değildir. Ölçüt, aranan ilişkinin türüne
+uygun seçilir.
+Çok Değişkenli İstatistik
+Çok değişkenli istatistik, birçok değişkeni aynı anda inceleyerek tek tek bakıldığında
+görülmeyen yapıları ortaya çıkarır.
+Çok Değişkenli Normal Dağılım
+Birden fazla değişkenin birlikte normal dağılmasıdır. Ortalama vektörü her
+değişkenin merkezini, kovaryans matrisi değişkenlerin birbirleriyle ilişkisini tu-
+tar. Hotelling T 2 testi, iki grubun birden fazla değişken üzerinde aynı anda
+farklı olup olmadığını sınar.
+İlke: Değişkenleri tek tek test etmek hem çoklu test sorununu doğurur hem
+de aralarındaki ilişkiyi kaçırır. Birlikte hareket eden değişkenler birlikte test
+edilir.
+Temel Bileşenler Analizi
+Temel bileşenler analizi (PCA), çok sayıda ilişkili değişkeni, birbirinden bağımsız
+az sayıda bileşene indirir. Örneğin bir öğrencinin on farklı dersten aldığı notlar,
+büyük ölçüde “sayısal yetenek” ve “sözel yetenek” gibi iki bileşenle özetlenebilir.
+İlke: Çok sayıda değişkenin arkasında az sayıda temel eksen vardır. Bu
+eksenleri bulmak, gürültüyü atıp yapıyı korumaktır.
+Faktör Analizi
+Faktör analizi, gözlenen değişkenlerin arkasındaki gözlenemeyen etkenleri arar.
+Bir kişilik testindeki yüz soru, beş temel kişilik özelliğinin farklı yansımaları
+olabilir. PCA’dan farkı, veriyi özetlemek yerine onu üreten gizli bir yapı varsay-
+masıdır.
+İlke: Ölçülen şey ile ölçülmek istenen şey farklı olabilir. Gözlenen değişken-
+ler, görülemeyen bir yapının işaretleridir.
+Sınıflandırma
+Diskriminant analizi, bir gözlemin hangi gruba ait olduğuna, grupların bilinen
+özelliklerine bakarak karar verir. Örneğin bir kredi başvurusunun geri ödenip
+ödenmeyeceği, geçmişteki ödeyen ve ödemeyen müşterilerin özelliklerinden yola
+çıkılarak tahmin edilir.
+İlke: Geçmişteki grupların özellikleri, yeni bir gözlemin nereye ait olduğunu
+söyler. Ama geçmiş gelecekle aynı değilse sınıflandırma da yanılır.
+18
+
+-- 18 of 41 --
+
+Kümeleme
+Kümeleme, önceden bilinen grup olmadan benzer gözlemleri bir araya toplar.
+Hiyerarşik kümeleme benzerlik ağacı kurar; k-ortalamalar yöntemi veriyi önce-
+den belirlenen sayıda gruba böler. Örneğin müşteriler satın alma davranışlarına
+göre doğal segmentlere ayrılır.
+İlke: Kümeleme her zaman bir sonuç üretir, veride gerçek gruplar olmasa
+bile. Bulunan grupların anlamlı olup olmadığı ayrıca sorgulanır.
+MANOVA
+MANOVA, grupları birden fazla sonuç değişkeni üzerinden aynı anda karşılaştırır.
+Örneğin üç öğretim yönteminin hem matematik hem okuma başarısı üzerindeki
+etkisi birlikte incelenir.
+İlke: Bir müdahalenin etkisi tek bir sonuçla sınırlı değildir. Birbirine bağlı
+sonuçlar birlikte değerlendirilir.
+Zaman Serileri
+Zaman serileri, zaman içinde sırayla toplanan verileri inceler. Bu veride gözlem-
+ler birbirinden bağımsız değildir.
+Temel Kavramlar
+Bir zaman serisi genellikle üç parçadan oluşur: uzun vadeli yön (trend), düzenli
+tekrar eden desen (mevsimsellik) ve açıklanamayan dalgalanma. Örneğin bir
+mağazanın satışları yıllar içinde artabilir, her Aralık’ta zirve yapar ve günden
+güne rastgele dalgalanır. Durağanlık, serinin ortalama ve yayılımının zamanla
+değişmemesidir; birçok yöntem bunu gerektirir.
+İlke: Gözlenen değişim tek bir kaynaktan gelmez. Trend, mevsim ve rastlantı
+birbirinden ayrılmadan seri anlaşılamaz.
+Otokorelasyon
+Otokorelasyon, bir değerin kendi geçmiş değerleriyle ilişkisidir. Bugünkü sıcaklık
+dünkü sıcaklıkla güçlü biçimde ilişkilidir. ACF ve PACF grafikleri, geçmişin kaç
+adım geriye kadar bugünü etkilediğini gösterir.
+İlke: Zamanla toplanan veride geçmiş bugünü etkiler. Bu bağ görmezden
+gelinirse, model kendini olduğundan daha emin sanır.
+ARIMA Modelleri
+AR modelleri bugünü geçmiş değerlerle, MA modelleri ise geçmiş hatalarla açık-
+lar. Fark almak, trendi çıkararak seriyi durağan hâle getirir. Bu model ailesinin
+sistemli kullanımı Box ve Jenkins (1970) ile yerleşmiştir.
+İlke: Bir serinin geleceği, geçmişinin yapısı anlaşılarak tahmin edilir. Yapı
+değişirse tahmin de geçersiz olur.
+19
+
+-- 19 of 41 --
+
+Üstel Düzeltme
+Üstel düzeltme, yakın geçmişe uzak geçmişten daha fazla ağırlık vererek tahmin
+yapar. Holt yöntemi trendi, Holt–Winters yöntemi mevsimselliği de hesaba
+katar. Basit ve hızlı olduğu için pratikte yaygın kullanılır.
+İlke: Yakın geçmiş, uzak geçmişten daha çok şey söyler. Ama ne kadar geriye
+bakılacağı veriye göre ayarlanır.
+Tahmin ve Değerlendirme
+Zaman serisi tahmini her zaman bir tahmin aralığıyla verilir ve bu aralık geleceğe
+gidildikçe genişler. Yarının hava durumu, gelecek ayın hava durumundan çok
+daha kesindir. Tahmin başarısı, modelin görmediği dönemler üzerinde ölçülür.
+İlke: Gelecek uzaklaştıkça belirsizlik büyür. Uzak geleceğe dair dar bir tah-
+min aralığı, bir hatanın işaretidir.
+Stokastik Süreçler
+Stokastik süreçler, zaman içinde rastgele değişen sistemleri modeller.
+Markov Zincirleri
+Markov zincirinde gelecek yalnızca bugünkü duruma bağlıdır, geçmişin nasıl
+yaşandığına bağlı değildir. Geçiş matrisi, bir durumdan diğerine geçme olasılık-
+larını tutar. Durağan dağılım, sistemin uzun vadede her durumda ne kadar
+zaman geçireceğini gösterir. Örneğin bir web sitesindeki ziyaretçilerin sayfalar
+arası geçişleri, uzun vadede hangi sayfaların en çok ziyaret edileceğini belirler.
+İlke: Rastgele adımlardan oluşan bir sistem bile uzun vadede bir dengeye
+oturur. Kısa vadede tahmin edilemeyen, uzun vadede tahmin edilebilir.
+Poisson Süreci ve Sürekli Zamanlı Zincirler
+Poisson süreci, olayların rastgele zamanlarda ve bağımsız biçimde gerçekleştiği
+durumları anlatır; bir sunucuya gelen istekler gibi. Olaylar arası süreler üstel
+dağılır. Doğum–ölüm süreçleri ise bir sistemdeki sayının bir artıp bir azaldığı
+durumları modeller; bir kuyruğa insanların gelip gitmesi gibi.
+İlke: Tek tek rastgele görünen olaylar, toplu olarak düzenli bir hız taşır. Hız
+bilinirse sistem planlanabilir.
+Kuyruk Teorisi
+Kuyruk teorisi, bekleme hatlarının davranışını inceler. Doluluk oranı arttıkça
+bekleme süresi doğrusal değil, patlayarak artar. Yüzde 90 dolu bir sistem, yüzde
+70 dolu bir sistemden kat kat daha uzun bekletir.
+İlke: Tam kapasiteyle çalışan sistem kırılgandır. Boş kapasite israf değil,
+güvencedir.
+20
+
+-- 20 of 41 --
+
+Rastgele Yürüyüş ve Brown Hareketi
+Rastgele yürüyüşte her adım bir öncekinden bağımsız ve rastgele yöndedir. Hisse
+senedi fiyatlarının kısa vadeli hareketleri sıklıkla bu modelle temsil edilir. Brown
+hareketi bunun sürekli zamandaki karşılığıdır.
+İlke: Rastgele bir süreçte geçmişteki desenler geleceği her zaman göstermez.
+Desen görmek, desen olduğunu kanıtlamaz.
+Bayesçi İstatistik
+Bayesçi istatistik, olasılığı bir inancın derecesi olarak ele alır ve bu inancı veriyle
+günceller.
+Bayesçi Düşünce
+Önsel, veri görülmeden önceki inançtır. Olabilirlik, verinin farklı parametre
+değerleriyle ne kadar uyumlu olduğunu ölçer. Sonsal, ikisinin birleşimiyle oluşan
+güncellenmiş inançtır. Örneğin yeni bir ilacın etkisi hakkında önceki çalışmalar-
+dan bir fikir vardır; yeni deney bu fikri günceller. Frekansçı yaklaşımdan farkı,
+parametrenin kendisinin de belirsiz bir nicelik olarak ele alınmasıdır.
+İlke: Bilgi sıfırdan başlamaz. Önceki bilgi açıkça yazılır ve verinin onu
+değiştirmesine izin verilir.
+Eşlenik Önseller ve Önsel Seçimi
+Bazı önsel ve olabilirlik çiftleri, sonsalın da aynı aileden çıkmasını sağlar ve
+hesap kolaylaşır; Beta–Binom bunun en bilinen örneğidir. Önsel bilgi taşıyıcı
+ya da bilgi taşımayan biçimde seçilebilir. Az veride önsel sonucu güçlü biçimde
+etkiler, çok veride etkisi azalır.
+İlke: Varsayımlar sonucu etkiler ve bu etki gizlenmez. Veri arttıkça varsayımın
+ağırlığı azalmalıdır.
+Bayesçi Çıkarım
+Güvenilir aralık, parametrenin belirli bir olasılıkla bulunduğu aralığı doğrudan
+verir; bu, güven aralığının sıklıkla yanlış yapılan yorumunun Bayesçi dünyadaki
+doğru karşılığıdır. Bayes faktörü, iki modelden hangisinin veriyle daha uyumlu
+olduğunu karşılaştırır.
+İlke: Belirsizlik tek bir sayı değil, bütün bir dağılım olarak taşınır. Karar
+bu dağılımın tamamına göre verilir.
+Hesaplama
+Karmaşık modellerde sonsal dağılım formülle hesaplanamaz. MCMC (Markov
+zinciri Monte Carlo), bu dağılımdan simülasyonla örnek çeker (Metropolis ve
+diğerleri, 1953). Gibbs örneklemesi ve Metropolis–Hastings algoritması en yaygın
+yöntemlerdir.
+21
+
+-- 21 of 41 --
+
+İlke: Çözülemeyen bir hesap, simülasyonla yaklaşık olarak çözülebilir. Hesaplama
+gücü, teorinin sınırını genişletir.
+Hiyerarşik Modeller
+Hiyerarşik modellerde gruplar birbirinden bilgi ödünç alır. Örneğin az sayıda
+hastası olan bir hastanenin başarı oranı, diğer hastanelerin ortalamasına doğru
+çekilerek daha güvenilir tahmin edilir. Az veriye sahip gruplar daha çok, çok
+veriye sahip gruplar daha az çekilir.
+İlke: Az bilgiyle yapılan uç tahminler genellikle abartılıdır. Benzer gruplar-
+dan öğrenmek, tek başına tahminden daha güvenilirdir.
+Hesaplamalı İstatistik
+Hesaplamalı istatistik, formülle çözülemeyen problemleri bilgisayar gücüyle çözer.
+Rastgele Sayı Üretimi
+Ters dönüşüm yöntemi, düzgün dağılmış rastgele sayıları istenen dağılıma çe-
+virir. Kabul–ret yöntemi, kolay üretilebilen bir dağılımdan örnek çekip bazılarını
+reddederek zor bir dağılımdan örnek elde eder.
+İlke: Karmaşık bir rastgeleliği üretmek için basit bir rastgelelikten başlanır.
+Monte Carlo
+Monte Carlo yöntemi, bir olasılığı ya da integrali, binlerce rastgele deneme ya-
+parak hesaplar. Örneğin bir projenin gecikme olasılığı, her görevin süresi rast-
+gele seçilerek on bin kez simüle edilir ve gecikmeli sonuçların oranı sayılır. Önem
+örneklemesi, nadir olayları daha verimli simüle etmek için kullanılır.
+İlke: Formül bulunamıyorsa deneyerek bulunur. Ama simülasyon, kurulduğu
+model kadar doğrudur.
+Yeniden Örnekleme
+Bootstrap, eldeki veriden tekrar tekrar iadeli örnek çekerek bir tahminin be-
+lirsizliğini ölçer (Efron, 1979). Örneğin medyanın güven aralığı için kolay bir
+formül yoktur, ama bootstrap ile kolayca bulunur. Permütasyon testleri, grup
+etiketlerini rastgele karıştırarak gözlenen farkın şansla ne sıklıkta oluşacağını
+gösterir.
+İlke: Elindeki veri, popülasyonun en iyi temsilcisidir. Veriyi yeniden örnek-
+lemek, popülasyondan yeniden örneklemenin yerini tutabilir.
+Sayısal Optimizasyon
+Newton–Raphson yöntemi, bir fonksiyonun en iyi noktasını adım adım yak-
+laşarak bulur. EM algoritması, eksik ya da gizli veri olduğunda en çok olabilirlik
+22
+
+-- 22 of 41 --
+
+tahminini iki adımın tekrarıyla yapar: eksik olanı tahmin et, sonra bu tahminle
+parametreyi güncelle.
+İlke: Tek seferde çözülemeyen bir problem, küçük adımlarla çözüme yak-
+laştırılır.
+İstatistiksel Öğrenme
+İstatistiksel öğrenme, veriden tahmin yapan modellerin istatistiksel temelini in-
+celer. Makine öğrenmesinin altındaki mantık buradadır.
+Temel Fikir
+Çıkarım “neden” sorusunu, tahmin “ne olacak” sorusunu cevaplar. Yanlılık–
+varyans dengesi, basit modellerin sistematik hata yaptığını, karmaşık modellerin
+ise veriye aşırı uyup yeni veride dağıldığını söyler. Aşırı uyum, modelin eğitim
+verisindeki gürültüyü de öğrenmesidir; tıpkı sınav sorularını ezberleyen ama
+konuyu anlamayan bir öğrenci gibi.
+İlke: Eğitim verisindeki başarı, gerçek başarı değildir. Model, görmediği
+veride sınanır.
+Model Değerlendirme
+Veri eğitim ve test olarak ayrılır; model eğitim verisinde öğrenir, test verisinde
+sınanır. Çapraz doğrulama, veriyi birkaç parçaya bölüp her parçayı sırayla test
+verisi olarak kullanarak daha güvenilir bir değerlendirme yapar.
+İlke: Değerlendirme, öğrenmeden ayrı tutulur. Kendi sınavını kendisi hazır-
+layan model, kendini olduğundan iyi gösterir.
+Düzenlileştirme
+Ridge ve Lasso regresyonu, büyük katsayıları cezalandırarak modelin aşırı uy-
+masını engeller (Tibshirani, 1996). Lasso, önemsiz değişkenlerin katsayılarını
+tam sıfıra indirerek değişken seçimi de yapar.
+İlke: Model biraz kısıtlandığında daha iyi genelleşir. Sınırsız esneklik, gürültüyü
+öğrenmeye yol açar.
+Sınıflandırma ve Ağaç Yöntemleri
+Lojistik regresyon, k-en yakın komşu ve naive Bayes farklı varsayımlarla sınıflandırma
+yapar: biri ilişkinin doğrusal olduğunu, biri benzer gözlemlerin yakın durduğunu,
+biri değişkenlerin bağımsız olduğunu varsayar. Karar ağaçları veriyi art arda
+sorularla böler. Rastgele orman ve boosting, çok sayıda zayıf ağacı birleştirerek
+güçlü bir model kurar.
+İlke: Her yöntem dünyaya dair bir varsayımla gelir. Araç değil varsayım
+seçilir. Ayrıca çok sayıda zayıf görüşün birleşimi, tek bir güçlü görüşten daha
+isabetli olabilir.
+23
+
+-- 23 of 41 --
+
+Diğer Yöntemler ve Gözetimsiz Öğrenme
+Destek vektör makineleri, iki grubu en geniş boşlukla ayıran sınırı arar. Sinir
+ağları, çok sayıda basit birimi katmanlar hâlinde birleştirerek karmaşık ilişkileri
+öğrenir. Gözetimsiz öğrenme ise etiket olmadan verideki yapıyı, yani kümeleri
+ve ana boyutları bulur.
+İlke: Modelin gücü arttıkça şeffaflığı azalır. Ne kadar karmaşık bir model
+kullanıldığı, ne kadar açıklama gerektiğiyle dengelenir.
+Programlama
+Programlama, istatistiksel yöntemlerin gerçek veride uygulanmasını sağlar. Teori
+kâğıt üzerinde kaldığı sürece eksiktir.
+Temeller ve Veriyle Çalışma
+Değişkenler, döngüler ve fonksiyonlar her analizin yapı taşlarıdır. Gerçek veri
+dağınıktır: eksik değerler, yanlış girilmiş kayıtlar ve tutarsız biçimler içerir.
+R’daki dplyr ya da Python’daki pandas gibi araçlar veriyi analize hazır hâle
+getirir. Bir analiz sürecinin büyük kısmı bu temizlik işiyle geçer.
+İlke: Veri hiçbir zaman kitaplardaki örnekler gibi temiz değildir. Temizlik,
+analizin hazırlığı değil kendisidir.
+Görselleştirme ve Analiz
+ggplot2, matplotlib ve seaborn gibi araçlarla veri görselleştirilir; testler ve
+modeller kodla çalıştırılır. Kodla yapılan analiz, adım adım izlenebilir ve kontrol
+edilebilir.
+İlke: Elle yapılan analiz tekrarlanamaz. Kod, analizin kaydıdır.
+Simülasyon
+Rastgele sayılar üreterek olasılık kuralları deneysel olarak doğrulanabilir. Örneğin
+doğum günü problemi, kod ile on bin sınıf simüle edilerek kolayca test edilir.
+Bu yöntem, sezgiye ters gelen sonuçları anlamanın en etkili yollarından biridir.
+İlke: Sezgiye ters gelen bir sonuç, simülasyonla sınanır. Görmek, ikna ol-
+manın en kısa yoludur.
+Raporlama
+R Markdown, Quarto ya da Jupyter, kod, sonuç ve açıklamayı aynı belgede
+birleştirir. Böylece analiz başkaları tarafından yeniden çalıştırılabilir.
+İlke: Başkasının tekrar çalıştıramadığı analiz kanıt değil iddiadır. Sonuç,
+yeniden üretilebilir biçimde teslim edilir.
+24
+
+-- 24 of 41 --
+
+Olasılık ve İstatistiğin Genel İlkeleri
+Olasılık ve istatistiğin genel ilkesi şudur: dünya belirsizdir ve bu belirsizlik yok
+edilemez. Yapılabilecek olan, belirsizliği ölçmek, onunla birlikte doğru karar
+vermek ve ne kadar emin olunduğunu dürüstçe söylemektir.
+Temel Konulardan Çıkan İlkeler
+Matematik Altyapısı
+Türev bir şeyin en iyi değerini bulur, integral alanı hesaplar, matris çok sayıda
+veriyi tek seferde taşır. İstatistikteki her yöntem bu üç araçla yazılır. İlke:
+Formül ezberlenmez, arkasındaki işlem anlaşılır. Yöntem değişse de araç aynı
+kalır.
+Olasılığın Temelleri
+Olasılık, bilinmeyeni sayıyla ifade etme yoludur. Bir olayın olup olmayacağı
+bilinemez, ama ne kadar muhtemel olduğu söylenebilir. İlke: “Olur mu, olmaz
+mı” yerine “ne kadar olası” diye sorulur. Kesinlik beklemek çoğu zaman yanlış
+karara götürür.
+Koşullu Olasılık ve Bayes Kuralı
+Yeni bir bilgi geldiğinde ihtimaller değişir. Bir tanı testi pozitif çıktığında
+bile hasta olma ihtimali düşük kalabilir, çünkü hastalık popülasyonda zaten
+nadirdir. İlke: Yeni bilgi her zaman başlangıçtaki duruma (temel orana) göre
+değerlendirilir. Temel oranı unutmak en sık yapılan hatadır.
+Dağılımlar
+Her dağılım dünyaya dair bir hikâye anlatır. Binom “kaç denemede kaç başarı”,
+Poisson “belli sürede kaç olay”, Normal “birçok küçük etkinin toplamı” hikâye-
+sidir. İlke: Problem okunduğunda hangi hikâyeye uyduğu görülür. Yanlış
+dağılım seçilirse hesap ne kadar doğru olursa olsun sonuç yanlış çıkar.
+Limit Teoremleri
+Tek bir olay tahmin edilemez, ama çok sayıda olayın ortalaması şaşırtıcı derecede
+düzenlidir. Merkezi limit teoremi istatistiğin neden çalıştığını açıklar. İlke:
+Birey değil kalabalık tahmin edilir. Belirsizlik çok tekrarla ölçülebilir hâle gelir.
+Veriye Bakmak
+Ortalama tek başına yanıltabilir. Anscombe’un dört veri seti aynı ortalama,
+varyans, korelasyon ve regresyon doğrusuna sahip olduğu hâlde grafikte tama-
+men farklı görünür (Anscombe, 1973). İlke: Hesaba geçmeden önce veri görülür.
+Bir grafik, onlarca testin kaçırdığını bir bakışta gösterir.
+25
+
+-- 25 of 41 --
+
+Örnekleme
+Bütün popülasyon ölçülemez, küçük bir parçasına bakılır. Bu parça yanlış
+seçilirse, ne kadar büyük olursa olsun yanlış sonuç verir. İlke: Verinin mik-
+tarından önce nereden geldiğine bakılır. Yanlı seçilmiş bir milyon kişi, rastgele
+seçilmiş bin kişiden daha az şey söyler.
+Deney Tasarımı
+İki şeyin birlikte değişmesi, birinin diğerine sebep olduğunu göstermez. Sebep-
+sonuç ilişkisini görmenin en güvenilir yolu kontrollü deneydir. İlke: Mümkünse
+gözlem yerine deney yapılır. Rastgele atama, gözlenemeyen etkileri dengeler.
+Tahmin
+Tek bir sayıyla verilen tahmin, ne kadar emin olunduğunu gizler. İlke: Tahmin
+her zaman bir aralıkla verilir. “Ortalama 50” yerine “45 ile 55 arasında” demek
+daha dürüsttür.
+Hipotez Testi
+Test, gözlenen sonucun şans eseri olup olmadığını sorar. Küçük bir p-değeri
+sonucun şansla açıklanmasının zor olduğunu gösterir, ama etkinin büyük ya da
+önemli olduğunu göstermez (Wasserstein ve Lazar, 2016). İlke: “Anlamlı” ile
+“önemli” aynı şey değildir. Veri çok büyükse en küçük fark bile anlamlı çıkar.
+Regresyon
+Model veriyi ne kadar iyi açıklarsa açıklasın, varsayımları bozuksa yanıltır. İlke:
+Model kurulduktan sonra hatalarına bakılır. Modelin yanıldığı yer, en çok şey
+öğrettiği yerdir.
+Kategorik Veri ve Genelleştirilmiş Modeller
+Her sonuç sürekli bir sayı değildir; bazen evet-hayır, bazen sayım, bazen bir
+gruptur. Her veri türü kendi modelini ister. İlke: Veri modele uydurulmaz,
+model veriye uydurulur.
+Parametrik Olmayan Yöntemler
+Klasik testler verinin belirli bir biçimde dağıldığını varsayar. Bu varsayım tut-
+mazsa sonuçlar güvenilmez olur. İlke: Varsayımın tutmadığı yerde daha az şey
+varsayan yöntem seçilir. Bir miktar güç kaybedilir, ama yanılma riski azalır.
+Çok Değişkenli İstatistik
+Gerçek dünyada değişkenler birlikte hareket eder. Onlarca değişkenin arkasında
+çoğu zaman birkaç temel etken bulunur. İlke: Karmaşıklığın içindeki basit yapı
+aranır. Her değişkeni ayrı incelemek büyük resmi kaçırtır.
+26
+
+-- 26 of 41 --
+
+Zaman Serileri
+Zamanla toplanan veride bugün dünden bağımsız değildir. Bu bağı görmezden
+gelen model geçmişi geleceğe yanlış taşır. İlke: Trend, mevsim ve rastlantı
+birbirinden ayrılmadan gelecek tahmin edilemez.
+Stokastik Süreçler
+Kuyruktaki insanlar, sunucuya gelen istekler ve fiyat hareketleri zamanla rast-
+gele adımlarla ilerler. İlke: Tek bir an değil, sistemin uzun vadede nereye gittiği
+sorulur. Rastgele adımların da bir dengesi vardır.
+Bayesçi Bakış
+Bilgi sıfırdan başlamaz. Veriden önce de bir fikir vardır ve veri geldikçe bu fikir
+güncellenir. İlke: Önceki bilgi açıkça yazılır ve verinin onu değiştirmesine izin
+verilir. Saklanan varsayım, açık varsayımdan daha tehlikelidir.
+Hesaplamalı İstatistik
+Bazı problemlerin kapalı biçimde çözümü yoktur. Bilgisayarla binlerce kez
+simülasyon yapmak cevabı deneyerek bulmayı sağlar. İlke: Formül bulunamıy-
+orsa simüle edilir. Doğru kurulmuş bir simülasyon, yanlış uygulanmış bir for-
+mülden daha güvenilirdir.
+İstatistiksel Öğrenme
+Model karmaşıklaştıkça eğitim verisini daha iyi ezberler, ama yeni veride daha
+kötü çalışabilir. İlke: Model hiç görmediği veride test edilir. Eğitim verisindeki
+başarı gerçek başarı değildir.
+Programlama
+Gerçek veri dağınık, eksik ve hatalıdır. Analiz sürecinin büyük kısmı veriyi
+temizlemekle geçer. İlke: Bir yöntem, gerçek veride uygulanmadan öğrenilmiş
+sayılmaz.
+Kavramlardan Çıkan İlkeler
+Sayma ve Kombinatorik
+Olasılık hesabının önemli bir kısmı, kaç farklı durum olduğunu doğru saymak-
+tır. Sıranın önemli olup olmadığı sonucu katlarca değiştirir. İlke: Hesaba başla-
+madan önce neyin sayıldığı tanımlanır.
+27
+
+-- 27 of 41 --
+
+Bağımsızlık
+Birçok yöntem gözlemlerin birbirini etkilemediğini varsayar. Gerçekte aynı kişi-
+den alınan ölçümler ya da aynı gün yaşanan olaylar birbirine bağlıdır. İlke:
+Bağımsızlık varsayılmadan önce sorgulanır. Bağlı veriyi bağımsız saymak, olduğun-
+dan daha emin olmak demektir.
+Beklenen Değer ve Varyans
+Ortalama kazanç olumlu olsa bile, varyans yüksekse tek seferde büyük kayıp
+yaşanabilir. Sigorta ve kumar bu farkın üzerine kuruludur. İlke: Yalnızca
+ortalamaya değil riske de bakılır. “Ortalamada iyi” ile “her seferinde güvenli”
+aynı şey değildir.
+Korelasyon ve Nedensellik
+Dondurma satışları ile boğulma vakaları birlikte artar; ikisinin de ortak sebebi
+sıcak havadır. İlke: Bir ilişki görüldüğünde önce üçüncü bir etken (karıştırıcı
+değişken) aranır.
+Güven Aralığının Anlamı
+Yüzde 95 güven aralığı, gerçek değerin bu belirli aralıkta yüzde 95 ihtimalle
+bulunduğu anlamına gelmez. Yöntem tekrar tekrar uygulandığında, üretilen
+aralıkların yüzde 95’inin gerçek değeri kapsayacağı anlamına gelir. İlke: Aracın
+kendisi kadar neyi vaat ettiği de bilinir.
+Güç ve Örneklem Büyüklüğü
+Küçük bir çalışma gerçek bir etkiyi kolayca kaçırır. “Fark bulunamadı” ifadesi
+“fark yoktur” anlamına gelmez. İlke: Veri toplanmadan önce ne kadar veri
+gerektiği hesaplanır.
+Model Seçimi
+Değişken eklemek modelin eğitim verisine uyumunu her zaman artırır, ama mod-
+eli her zaman iyileştirmez. İlke: Basit model tercih edilir, karmaşıklık kanıtlanır.
+Karar Teorisi
+İstatistiğin son amacı bilmek değil karar vermektir. Yanlış alarm ile kaçırılan
+tehlikenin bedeli genellikle eşit değildir. İlke: Karar, olasılığa değil olasılık ile
+bedelin çarpımına göre verilir. Kanser taramasında bir vakayı kaçırmak, yanlış
+alarmdan çok daha pahalıdır.
+28
+
+-- 28 of 41 --
+
+Hayatta Kalım Analizi
+Çalışma bittiğinde hasta hâlâ yaşıyor ya da makine hâlâ çalışıyor olabilir. Bu
+tür gözlemlere sansürlü gözlem denir (Kaplan ve Meier, 1958). İlke: Yarım
+kalan gözlem de bilgi taşır. Onu atmak sonucu sistemli olarak çarpıtır.
+Kalite Kontrol
+Her süreçte doğal bir dalgalanma vardır. Her küçük değişime müdahale etmek
+süreci daha da bozar. İlke: Normal dalgalanma ile gerçek sorun birbirinden
+ayrılır.
+Konular Arasında Saklı Tuzaklar
+Simpson Paradoksu
+Her alt grupta A seçeneği daha iyi çıkarken, gruplar birleştirildiğinde B daha iyi
+görünebilir. Bunun sebebi alt grupların büyüklüklerinin farklı olmasıdır (Simp-
+son, 1951). İlke: Toplam rakama güvenmeden önce verinin nasıl bölündüğüne
+bakılır.
+Ortalamaya Dönüş
+Uç bir ölçümden sonra gelen ölçüm genellikle ortalamaya daha yakındır. Bu olgu
+ilk kez Galton tarafından boy verilerinde tanımlanmıştır (Galton, 1886). En
+kötü dönemde yapılan her müdahale bu yüzden işe yaramış gibi görünür. İlke:
+“Düzeldi” denmeden önce zaten kendiliğinden düzelip düzelmeyeceği sorulur.
+Hayatta Kalan Yanlılığı
+Yalnızca başaranlar incelenirse başarının sırrı bulunmuş sanılır; aynı şeyi yapıp
+başarısız olanlar görülmez. İlke: Görülmeyen veri sorgulanır. Eksik olan çoğu
+zaman en önemli olandır.
+Çoklu Test
+Hiçbir gerçek etki olmasa bile, 0,05 düzeyinde yirmi bağımsız test yapıldığında
+ortalama bir tanesinin şans eseri anlamlı çıkması beklenir. İlke: Yapılan test
+sayısı sayılır ve buna göre düzeltme uygulanır.
+p-Hacking
+Veriyi farklı biçimlerde kesip biçerek anlamlı sonuç çıkana kadar denemek, bil-
+erek ya da bilmeyerek yapılan yaygın bir hatadır. İlke: Analiz planı veriye
+bakılmadan önce yazılır. Sonuca göre seçilen yöntem sonucu kanıtlamaz.
+29
+
+-- 29 of 41 --
+
+Ölçüm Hatası
+Bir değişken hatalı ölçüldüğünde, iki değişken arasındaki gerçek ilişki olduğun-
+dan zayıf görünür. İlke: Önce neyin ve ne kadar doğru ölçüldüğü sorgulanır.
+Eksik Veri
+Eksik veri çoğu zaman rastgele eksik değildir. Ankete cevap vermeyenler, cevap
+verenlerden farklı olabilir. İlke: Eksik veri silinmeden önce neden eksik olduğu
+sorulur.
+Veri Sızıntısı
+Model eğitilirken farkında olmadan gelecekten bilgi kullanılırsa (data leakage),
+model testte çok iyi görünür ve gerçek kullanımda çöker. İlke: Model, karar
+anında gerçekten elde bulunacak bilgiyle eğitilir. İnanılmayacak kadar iyi sonuç
+çoğu zaman bir hatanın işaretidir.
+Etki Büyüklüğü
+p-değeri bir etkinin var olup olmadığını söyler, ne kadar büyük olduğunu söyle-
+mez. İlke: Her zaman “ne kadar” diye sorulur.
+Tekrarlanabilirlik
+Tek bir çalışmanın sonucu, ne kadar güçlü görünürse görünsün, tesadüf olabilir.
+İlke: Bir sonuca güvenmeden önce tekrarlanıp tekrarlanmadığına bakılır.
+Sonucu Anlatmak
+İnsanlar yüzdeleri, riskleri ve olasılıkları sezgisel olarak iyi kavramaz. “Yüzde
+50 artış” ifadesi, “binde 2’den binde 3’e çıktı” ifadesinden çok daha büyük bir
+izlenim bırakır. İlke: Belirsizlik gizlenmez, anlaşılır biçimde gösterilir. Göreli
+risk yerine mutlak risk de verilir.
+Üst Düzey İlkeler
+Nedensel Çıkarım
+Deney yapılamayan durumlarda da sebep-sonuç ilişkisini tahmin eden yöntemler
+vardır. Bu yöntemler, değişkenlerin birbirini nasıl etkilediğine dair açık bir
+model gerektirir (Pearl, 2009). İlke: Veri tek başına sebebi söylemez. Sebep,
+veriye eklenen varsayımlardan gelir.
+Tüm Modeller Yanlıştır
+Hiçbir model gerçeğin kendisi değildir, yalnızca basitleştirilmiş bir resmidir. Bu
+ilke Box’a atfedilir (Box, 1976). İlke: “Model doğru mu” değil, “bu iş için
+yeterince iyi mi” diye sorulur.
+30
+
+-- 30 of 41 --
+
+Kalın Kuyruklar
+Normal dağılım uç olayların neredeyse hiç gerçekleşmeyeceğini söyler. Finansal
+krizler ve büyük felaketler bu varsayımın sık sık çöktüğünü gösterir (Taleb,
+2007). İlke: Nadir olay imkânsız sanılmaz. Uç durumların bedeli, sıradan du-
+rumların toplamından büyük olabilir.
+Dağılım Kayması
+Model geçmiş veriden öğrenir, ama dünya değişir. Dünün verisiyle kurulan
+model yarın sessizce bozulabilir. İlke: Modelin öğrendiği dünyanın hâlâ geçerli
+olup olmadığı düzenli olarak kontrol edilir.
+Belirsizliğin İki Türü
+Bazı belirsizlikler olgunun kendisinden gelir ve azaltılamaz (rastlantısal belirsi-
+zlik, aleatoric uncertainty); zar atışı buna örnektir. Bazıları bilgi eksikliğinden
+gelir ve daha fazla veriyle azalır (bilgisel belirsizlik, epistemic uncertainty). İlke:
+Hangi belirsizlikle uğraşıldığı bilinir. Azaltılamayanı azaltmaya çalışmak boşa
+emektir.
+Goodhart Yasası
+Bir ölçü hedef hâline getirildiğinde iyi bir ölçü olmaktan çıkar; insanlar asıl
+amacı değil sayıyı iyileştirmeyi öğrenir (Goodhart, 1975). İlke: Ölçülen şey ile
+istenen şey arasındaki fark unutulmaz.
+Frekansçı ve Bayesçi Bakış
+Frekansçı yaklaşım olasılığı uzun vadeli sıklık olarak, Bayesçi yaklaşım bir inancın
+derecesi olarak tanımlar. İlke: İki yaklaşım da araçtır. Problemin yapısına uyan
+kullanılır.
+31
+
+-- 31 of 41 --
+
+İleri Konular
+Konu Grupları
+Temel konuların üzerine kurulan ileri konular aşağıdaki gruplarda toplanabilir:
+• İstatistik teorisi: istatistikte kullanılan matematiksel yöntemler, tahmin
+ve test teorisinin ileri hâli.
+• Regresyon: ileri regresyon, uygulamalı regresyon ve klasik varsayımları
+gevşeten alternatif regresyon yöntemleri.
+• Genelleştirilmiş doğrusal modeller: lojistik ve Poisson regresyonu,
+log-doğrusal modeller, kategorik veri analizi.
+• Çok değişkenli yöntemler: ileri çok değişkenli analiz, yapısal eşitlik
+modelleri.
+• Yapılandırılmış veri: çok aşamalı modeller, boylamsal veri, panel veri,
+hayatta kalım ve olay tarihçesi analizi.
+• Zamana bağlı veri: uygulamalı zaman serileri, dinamik istatistik.
+• Bayesçi yöntemler: Bayesçi veri analizi, Bayesçi ağlar.
+• Hesaplamalı yöntemler: Monte Carlo, modelleme için simülasyon, bil-
+gisayar destekli çıkarsama (bootstrap ve yeniden örnekleme).
+• Öğrenme ve yüksek boyut: seyrek modelleme, veri madenciliği, yapay
+zekâ.
+• Dayanıklı yöntemler: dayanıklı istatistik, parametrik olmayan yöntem-
+ler.
+• Optimizasyon ve karar: doğrusal olmayan programlama, cevap yüzeyi
+metodolojisi, oyunlar ve karar verme, veri zarflama analizi.
+• Risk ve finans: risk analizi, kapula teorisi, finansta istatistik, portföy
+optimizasyonu, aktüerya, ekonometri.
+• Sistemler: bekleme hattı problemleri, çoklu sensör veri füzyonu.
+• Ölçme ve sosyal bilimler: geçerlilik ve güvenirlik, pazarlama araştır-
+maları, sosyal ağ analizi, bulanık olasılık.
+• Sağlık: biyoistatistik.
+• Araçlar: istatistiksel programlama, veri düzenleme ve görselleştirme, web
+tabanlı istatistik uygulamaları.
+32
+
+-- 32 of 41 --
+
+Öğrenme Önceliği
+Programlama altyapısı olan biri için verimli bir sıra şöyledir:
+1. Temel: istatistik teorisi, ileri regresyon, Bayesçi veri analizi, çok değişkenli
+analiz.
+2. Hesaplamayla birleşen: bootstrap ve yeniden örnekleme, Monte Carlo,
+seyrek modelleme, veri madenciliği, Bayesçi ağlar, genelleştirilmiş doğrusal
+modeller, doğrusal olmayan programlama.
+3. Sistemlere uygulanabilen: bekleme hattı problemleri, zaman serileri,
+hayatta kalım analizi, dayanıklı istatistik, sensör veri füzyonu, risk analizi.
+4. Alan odaklı: finans, aktüerya, ekonometri, pazarlama, sağlık ve sosyal
+bilim konuları yalnızca o alana yönelindiğinde öğrenilir.
+5. Düşük öncelik: programlama ve araç konuları, programlama bilen biri
+için büyük ölçüde tekrar niteliğindedir.
+Dengeli bir başlangıç için sekiz konu: istatistik teorisi, ileri regresyon, Bayesçi
+veri analizi, çok değişkenli analiz, bootstrap ve yeniden örnekleme, seyrek mod-
+elleme, zaman serileri, bekleme hattı problemleri.
+33
+
+-- 33 of 41 --
+
+İleri Konuların Genel İlkeleri
+Temel konularda yöntemler öğrenilir; ileri konularda yöntemlerin nerede kırıldığı
+öğrenilir. Gerçek veri kitaplardaki örnekler gibi temiz, bağımsız ve düzgün
+dağılmış değildir. Asıl iş, verinin gerçek yapısına uyan modeli kurmaktır.
+Teori ve Modelleme
+İstatistik Teorisi ve Matematiksel Yöntemler
+İleri düzeydeki her yöntem birkaç temel teoremin üzerine kurulur. Bu teoremleri
+bilen biri yeni bir yöntemi sıfırdan anlayabilir. İlke: Yöntem değil, yöntemi
+doğuran mantık öğrenilir. Yöntemler değişir, mantık kalır.
+İleri Regresyon Yöntemleri
+Klasik regresyon doğrusal ilişki, sabit varyans ve normal hata varsayar. Gerçek
+veride bu varsayımların çoğu bozulur. İlke: Varsayım bozulduğunda model terk
+edilmez, varsayımı gevşeten modele geçilir. Her bozulmanın kendine özgü bir
+çözümü vardır.
+Genelleştirilmiş Doğrusal ve Log-Doğrusal Modeller
+Normal, Binom ve Poisson aynı dağılım ailesinin (üstel aile) üyeleridir. Tek bir
+çatı farklı veri türlerini aynı mantıkla modellemeyi sağlar. İlke: Farklı görünen
+problemlerin ortak yapısı aranır. Ortak yapıyı gören, her problem için yeni
+yöntem öğrenmek zorunda kalmaz.
+Kategorik Veri Analizi
+Gruplar, etiketler ve sayımlar, ortalaması alınacak sürekli sayılar değildir. İlke:
+Verinin türüne saygı gösterilir. Kategoriye sayı muamelesi yapmak anlamsız
+sonuç üretir.
+İleri Çok Değişkenli Yöntemler
+Değişken sayısı arttıkça sezgi çöker. Yüksek boyutlu uzayda noktalar birbirine
+benzer uzaklıklarda bulunur ve “yakınlık” bildiğimiz gibi davranmaz. İlke: Yük-
+sek boyutta sezgiye değil matematiğe güvenilir.
+Yapısal Eşitlik Modelleri
+Zekâ, memnuniyet ve güven gibi kavramlar doğrudan ölçülemez; birkaç gözlenen
+değişken üzerinden dolaylı olarak tahmin edilir (gizil değişken, latent variable).
+İlke: Ölçülemeyen şey modellenebilir, ama modelin ölçülen göstergelere ne kadar
+bağlı olduğu unutulmaz.
+34
+
+-- 34 of 41 --
+
+Yapılandırılmış Veri
+Çok Aşamalı Modeller
+Öğrenciler sınıflara, sınıflar okullara, okullar şehirlere bağlıdır. Aynı gruptaki
+gözlemler birbirine benzer. İlke: Verinin iç içe yapısı görmezden gelinmez. Gru-
+planmış veriyi bağımsız saymak sahte kesinlik üretir.
+Boylamsal ve Panel Veri
+Aynı kişi ya da birim zaman içinde tekrar tekrar ölçüldüğünde değişim doğru-
+dan görülebilir. İlke: Kişiler yalnızca birbirleriyle değil kendi geçmişleriyle de
+karşılaştırılır. Kişiler arası fark ile kişi içi değişim farklı şeyler anlatır.
+Hayatta Kalım ve Olay Tarihçesi Analizi
+Bazı sorular “ne kadar” değil “ne zaman” diye sorulur ve gözlemlerin çoğu olay
+gerçekleşmeden biter. Cox regresyon modeli bu tür verinin standart aracı hâline
+gelmiştir (Cox, 1972). İlke: Zaman da bir sonuç değişkenidir. Henüz gerçek-
+leşmemiş olay, gerçekleşmeyecek olay demek değildir.
+Zaman Serileri ve Dinamik İstatistik
+Sistemler geçmişlerini taşır. Bugünkü bir şok yarına ve sonraki günlere yayılır.
+İlke: Anlık resme değil sürece bakılır. Dinamik bir sistemde tek ölçüm bir film
+karesinden fazlasını söylemez.
+Bayesçi ve Hesaplamalı Yöntemler
+Bayesçi Veri Analizi
+İleri düzeyde Bayesçi yaklaşım bir felsefe olmaktan çıkıp güçlü bir hesaplama
+aracına dönüşür; karmaşık modeller simülasyonla çözülür (Gelman ve diğerleri,
+2013). İlke: Belirsizlik tek bir sayı olarak değil bütün bir dağılım olarak taşınır
+ve karar bu dağılımın tamamına göre verilir.
+Bayesçi Ağlar
+Değişkenler arasındaki bağımlılıklar yönlü bir graf olarak çizilebilir. Bu graf
+neyin neyi etkilediğini ve hangi değişkenlerin belirli bir bilgi verildiğinde gerek-
+sizleştiğini gösterir. İlke: İlişkiler bir ağ olarak düşünülür. Bazı değişkenler,
+aradaki bir değişken bilindiğinde birbirleri için bilgi taşımaz hâle gelir.
+Monte Carlo, Simülasyon ve Bilgisayar Destekli Çıkarsama
+Kapalı biçimde çözümü olmayan problemler binlerce sanal deneyle çözülür.
+Bootstrap, verinin kendisini yeniden örnekleyerek belirsizliği ölçer. İlke: Hesaplama
+gücü matematiğin yerini almaz ama sınırını genişletir. Simülasyon, kurulduğu
+model kadar doğrudur.
+35
+
+-- 35 of 41 --
+
+Seyrek Modelleme
+Değişken sayısı gözlem sayısını aştığında klasik yöntemler çöker. Çözüm, değişken-
+lerin çoğunun etkisiz olduğunu varsaymaktır (seyreklik, sparsity). İlke: Her şey
+açıklanmaya çalışılmaz. Az sayıda güçlü etkeni bulmak, çok sayıda zayıf etkeni
+tahmin etmekten değerlidir.
+Veri Madenciliği ve Yapay Zekâ
+Büyük veride desen bulmak kolaydır, ama bulunan desenlerin çoğu tesadüftür.
+İlke: Bulunan desen yeni veride doğrulanır. Arayarak bulunan şey kanıtlanmış
+şey değildir.
+Dayanıklı İstatistik ve Parametrik Olmayan Yöntemler
+Birkaç hatalı gözlem ortalamayı ve regresyonu tamamen bozabilir. Dayanıklı
+(robust) yöntemler bu tür bozulmalara direnç gösterir (Huber, 1964). İlke:
+Verinin kirli olacağı baştan kabul edilir. Mükemmel veriye göre kurulan yöntem
+gerçek veride kırılır.
+Optimizasyon, Karar ve Risk
+Bulanık Olasılık
+Bazı belirsizlikler rastlantıdan değil kavramın kendisinin net olmamasından gelir.
+“Uzun boylu” ya da “sıcak” kesin bir sınırla tanımlanamaz (Zadeh, 1965). İlke:
+Rastlantı belirsizliği ile tanım belirsizliği karıştırılmaz; ikisi farklı araçlar ister.
+Cevap Yüzeyi Metodolojisi
+Bir süreci en iyi hâle getirmek için ayarlar tek tek değil birlikte ve sistemli
+biçimde değiştirilir (Box ve Wilson, 1951). İlke: En iyi nokta rastgele aranmaz,
+iyi tasarlanmış deneylerle ona doğru ilerlenir. Az ama doğru deney, çok ama
+dağınık denemeden iyidir.
+Doğrusal Olmayan Programlama
+Gerçek optimizasyon problemlerinde birden fazla tepe ve çukur bulunabilir. İlke:
+Bulunan en iyi noktanın gerçekten en iyi olduğu varsayılmaz. Yerel en iyi, genel
+en iyi olmayabilir.
+Risk Analizi
+Risk, bir olayın olasılığı ile bedelinin birleşimidir. Nadir ama çok pahalı olay-
+lar, sık ama ucuz olaylardan daha tehlikeli olabilir. İlke: Risk tek bir sayıya
+indirgenmez. Ortalama kayıp kadar en kötü senaryo da hesaplanır.
+36
+
+-- 36 of 41 --
+
+Kapula Teorisi
+İki değişken sakin dönemlerde zayıf ilişkili görünürken kriz anında birlikte çöke-
+bilir. Kapula, değişkenlerin tek tek dağılımlarını aralarındaki bağımlılık yapısın-
+dan ayırarak modeller (Sklar, 1959). İlke: İlişkinin gücü her koşulda aynı
+değildir. Sakin dönemdeki korelasyon kriz anında koruma sağlamaz.
+Finans ve Portföy Optimizasyonu
+Getiri ve risk birlikte gelir. Farklı varlıkları birleştirmek aynı getiriyi daha
+düşük riskle elde etmeyi sağlar (Markowitz, 1952). İlke: Çeşitlendirme yapılır,
+ama çeşitlendirmenin işe yaraması için varlıkların gerçekten farklı davranması
+gerekir.
+Aktüerya
+Sigorta, bireyin tahmin edilemeyen riskini kalabalığın tahmin edilebilir ortala-
+masına dönüştürür. İlke: Tek kişinin geleceği bilinemez, ama binlerce kişinin
+toplamı oldukça kesin hesaplanır. Belirsizlik paylaşıldığında yönetilebilir hâle
+gelir.
+Ekonometrik Modeller
+Ekonomide deney yapmak çoğu zaman mümkün değildir. Sebep-sonuç ilişk-
+isi doğal olarak oluşan durumlardan dolaylı biçimde çıkarılır. İlke: Deney
+yapılamıyorsa deneye en çok benzeyen durum (doğal deney) aranır.
+Bekleme Hattı Problemleri
+Kapasite doluluğa yaklaştıkça bekleme süresi doğrusal değil patlayarak artar.
+Tek sunuculu temel kuyruk modelinde ortalama bekleme, doluluk oranı ρ için
+ρ/(1 − ρ) ile orantılıdır; yüzde 90 dolulukta bu değer yüzde 70 doluluktakinin
+yaklaşık dört katıdır. Sistemdeki ortalama kişi sayısı, varış hızı ve ortalama
+bekleme süresi arasındaki genel ilişki Little yasasıyla verilir (Little, 1961). İlke:
+Sistem tam kapasitede çalıştırılmaz. Boş kapasite verimsizlik değil sigortadır.
+Oyunlar ve Karar Verme
+Bazı kararlarda karşıda da düşünen ve tepki veren bir taraf bulunur. En iyi
+hamle rakibin hamlesine bağlıdır. İlke: Karşı taraf sabit bir doğa olayı gibi
+değil akıllı bir oyuncu gibi modellenir.
+Veri Zarflama Analizi
+Birimlerin verimliliği birden fazla girdi ve çıktı aynı anda dikkate alınarak
+karşılaştırılır (Charnes, Cooper ve Rhodes, 1978). İlke: Verimlilik tek bir ölçüye
+indirgenmez. Bir açıdan zayıf görünen birim başka bir açıdan en iyisi olabilir.
+37
+
+-- 37 of 41 --
+
+Ölçme, İnsan ve Sistem
+Geçerlilik ve Güvenirlik
+Güvenilir bir ölçü her seferinde aynı sonucu verir; geçerli bir ölçü ise ölçmek
+istediği şeyi ölçer. Her gün iki kilo fazla gösteren bir tartı güvenilirdir ama
+geçerli değildir. İlke: Tutarlı sonuç doğru sonuç demek değildir.
+Pazarlama Araştırmaları
+İnsanların söyledikleri ile yaptıkları çoğu zaman farklıdır. İlke: Mümkün olduğunda
+beyan yerine davranış ölçülür.
+Biyoistatistik
+Sağlık alanında yanlış sonucun bedeli insan hayatıdır. Bu nedenle çalışma
+tasarımı analizden önce titizlikle planlanır. İlke: Sonucun bedeli yükseldikçe
+yöntemin katılığı da artar.
+Sosyal Ağ Analizi
+İnsanlar ve kurumlar bağlantılar içinde yaşar. Bir kişinin davranışı çevresindek-
+ilerin davranışına bağlıdır. İlke: Yalnızca bireye değil bağlantılara da bakılır.
+Ağdaki konum, bireysel özelliklerden daha fazla şey söyleyebilir.
+Çoklu Sensör Veri Füzyonu
+Her sensör hatalıdır, ama farklı biçimlerde hatalıdır. Birden fazla kaynağın uy-
+gun biçimde birleştirilmesi, her birinden tek başına daha doğru sonuç verir. İlke:
+Tek bir kaynağa güvenilmez. Hataları birbirinden farklı kaynakların birleşimi
+hatayı azaltır.
+Programlama, Görselleştirme ve Web Uygulamaları
+Analiz başkaları tarafından anlaşılıp kullanılmadıkça değer üretmez. İlke: Sonuç
+tekrarlanabilir kod, anlaşılır grafik ve kullanılabilir araç olarak teslim edilir.
+Kimsenin yeniden çalıştıramadığı analiz kanıt değil iddiadır.
+38
+
+-- 38 of 41 --
+
+Sonuç
+Olasılık ve istatistiğin konu listesi uzun görünse de içeriği birkaç tekrarlanan
+fikre indirgenebilir: belirsizlik ölçülür ama yok edilmez; verinin nereden geldiği,
+ne kadar olduğundan önemlidir; her yöntem bir varsayımla gelir ve sonuç ancak o
+varsayım kadar güvenilirdir. Temel konular bu fikirleri temiz koşullarda kurar,
+ileri konular aynı fikirleri bozulmuş koşullarda (bağımlı gözlemler, eksik veri,
+yüksek boyut, kalın kuyruklar) yeniden kurar.
+Pratik karşılığı şudur: bir istatistik sorusu karşısında ilk soru “hangi test”
+değil, “veri nasıl üretildi ve hangi varsayım en kolay bozulur” olmalıdır. Simpson
+paradoksu, ortalamaya dönüş ve çoklu test gibi tuzaklar teknik bilgi eksikliğin-
+den değil bu sorunun atlanmasından doğar.
+Çerçevenin sınırları vardır. Konuların kapsamı ve sırası kaynaktan kaynağa
+değişir; burada verilen yapı yaygın bir ortalamadır. İleri konuların öncelik-
+lendirmesi programlama altyapısı olan biri varsayımına dayanır; farklı bir hedef
+(örneğin aktüerya ya da biyoistatistik kariyeri) farklı bir sıra gerektirir.
+Açık kalan soru, nedensel çıkarımın bu yapıdaki yeridir. Temel konular
+arasında genellikle ayrı bir başlık olarak yer almaz, ancak “korelasyon nedensel-
+lik değildir” uyarısının ötesine geçen tek araç odur ve istatistik ile karar verme
+arasındaki köprüyü kurar.
+Kaynaklar
+• Anscombe, F. J. (1973). Graphs in Statistical Analysis. The American
+Statistician, 27(1).
+• Box, G. E. P. (1976). Science and Statistics. Journal of the American
+Statistical Association, 71(356).
+• Box, G. E. P. ve Jenkins, G. M. (1970). Time Series Analysis: Forecasting
+and Control. Holden-Day.
+• Box, G. E. P. ve Wilson, K. B. (1951). On the Experimental Attainment
+of Optimum Conditions. Journal of the Royal Statistical Society, Series
+B, 13(1).
+• Casella, G. ve Berger, R. L. (2002). Statistical Inference (2. baskı).
+Duxbury.
+• Charnes, A., Cooper, W. W. ve Rhodes, E. (1978). Measuring the Ef-
+ficiency of Decision Making Units. European Journal of Operational Re-
+search, 2(6).
+• Cox, D. R. (1972). Regression Models and Life-Tables. Journal of the
+Royal Statistical Society, Series B, 34(2).
+• Efron, B. (1979). Bootstrap Methods: Another Look at the Jackknife.
+The Annals of Statistics, 7(1).
+39
+
+-- 39 of 41 --
+
+• Fisher, R. A. (1935). The Design of Experiments. Oliver and Boyd.
+• Galton, F. (1886). Regression Towards Mediocrity in Hereditary Stature.
+Journal of the Anthropological Institute of Great Britain and Ireland, 15.
+• Gelman, A., Carlin, J. B., Stern, H. S., Dunson, D. B., Vehtari, A. ve
+Rubin, D. B. (2013). Bayesian Data Analysis (3. baskı). CRC Press.
+• Goodhart, C. A. E. (1975). Problems of Monetary Management: The U.K.
+Experience. Papers in Monetary Economics, Reserve Bank of Australia.
+• Huber, P. J. (1964). Robust Estimation of a Location Parameter. The
+Annals of Mathematical Statistics, 35(1).
+• James, G., Witten, D., Hastie, T. ve Tibshirani, R. (2013). An Introduc-
+tion to Statistical Learning. Springer.
+• Kaplan, E. L. ve Meier, P. (1958). Nonparametric Estimation from In-
+complete Observations. Journal of the American Statistical Association,
+53(282).
+• Little, J. D. C. (1961). A Proof for the Queuing Formula: L = λW .
+Operations Research, 9(3).
+• Markowitz, H. (1952). Portfolio Selection. The Journal of Finance, 7(1).
+• Metropolis, N., Rosenbluth, A. W., Rosenbluth, M. N., Teller, A. H. ve
+Teller, E. (1953). Equation of State Calculations by Fast Computing
+Machines. The Journal of Chemical Physics, 21(6).
+• Nelder, J. A. ve Wedderburn, R. W. M. (1972). Generalized Linear Mod-
+els. Journal of the Royal Statistical Society, Series A, 135(3).
+• Neyman, J. ve Pearson, E. S. (1933). On the Problem of the Most Efficient
+Tests of Statistical Hypotheses. Philosophical Transactions of the Royal
+Society A, 231.
+• Pearl, J. (2009). Causality: Models, Reasoning, and Inference (2. baskı).
+Cambridge University Press.
+• Simpson, E. H. (1951). The Interpretation of Interaction in Contingency
+Tables. Journal of the Royal Statistical Society, Series B, 13(2).
+• Sklar, A. (1959). Fonctions de répartition à n dimensions et leurs marges.
+Publications de l’Institut de Statistique de l’Université de Paris, 8.
+• Taleb, N. N. (2007). The Black Swan: The Impact of the Highly Improb-
+able. Random House.
+• Tibshirani, R. (1996). Regression Shrinkage and Selection via the Lasso.
+Journal of the Royal Statistical Society, Series B, 58(1).
+40
+
+-- 40 of 41 --
+
+• Wasserman, L. (2004). All of Statistics. Springer.
+• Wasserstein, R. L. ve Lazar, N. A. (2016). The ASA Statement on p-
+Values: Context, Process, and Purpose. The American Statistician, 70(2).
+• Zadeh, L. A. (1965). Fuzzy Sets. Information and Control, 8(3).
+41
+
+-- 41 of 41 --

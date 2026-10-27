@@ -1,5 +1,112 @@
 [
   {
+    "slug": "veri-mühendisliği-alanlar-ve-ortak-i-lkeler",
+    "title": "Veri Mühendisliği: Alanlar ve Ortak İlkeler",
+    "date": "2026-10-27",
+    "description": "Metin, veriyle çalışan on dört alanı araçlardan bağımsız bir düşünce çekirdeği üzerinden ele alır ve şu iddiayı taşır: veri dünyanın kendisi değil, belirli bir amaçla ve yöntemle alınmış eksik bir parçasıdır; kalıcı olan araç bilgisi değil, her alanın sorduğu sorular, tanıdığı tuzaklar ve kaçınılmaz saydığı ödünleşimlerdir. İlk bölüm veri biliminin ilkelerini altı grupta toplar: soru ve bağlam, belirsizlik ve olasılık, nedensellik ve yanlılık, model ve genelleme, ölçme, güven ve sorumluluk. Taban oranı yanılgısı, ortalamaya gerileme, Simpson paradoksu, hayatta kalan yanlılığı, veri sızıntısı, dağılım değişimi ve Goodhart yasası somut vakalarla işlenir. Sonraki bölümler makine öğrenmesi mühendisliği, MLOps, analitik mühendisliği, iş zekâsı, büyük veri, bulut veri platformları, veritabanı yönetimi, veri mimarisi, veri yönetişimi ve kalitesi, görselleştirme, ürün analitiği, zaman serileri ve coğrafi veriyi sırayla ele alır; her bölüm bir genel dersle kapanır. Kaynaklar arasında Sculley vd., Kimball ve Ross, Inmon, Data Vault, Dehghani, Lambda ve Kappa mimarileri, Cleveland ve McGill, Box ve Jenkins, Makridakis yarışmaları, GDPR ve KVKK yer alır. Sonuç altı ortak ilke çıkarır: veri bir temsildir, zaman her şeyi eskitir, güven kurulan bir şeydir, basitlik varsayılandır, ölçülen şey davranışı biçimlendirir, veri insanlarla ilgilidir. Metin bu derslerin genel eğilim olduğunu, istisna taşıdığını ve karar kuralı değil sorgulama sorusu olarak okunması gerektiğini belirtir; yapay zekâ destekli araçların bu ilkelerin ağırlığını nasıl değiştireceğini açık soru olarak bırakır.",
+    "pdf": "Veri_Mühendisliği__Alanlar_ve_Ortak_İlkeler.pdf",
+    "thumb": "thumbs/veri-mühendisliği-alanlar-ve-ortak-i-lkeler.png",
+    "addedAt": "2026-10-27T13:17:33.090Z",
+    "pages": 53,
+    "belge": "BELGE-262",
+    "title_en": "Data Engineering: Fields and Common Principles",
+    "description_en": "The text treats fourteen data-related fields through a core of thinking independent of tools and advances the following claim: data is not the world itself but an incomplete fragment taken for a particular purpose and by a particular method; what endures is not tool knowledge but the questions each field asks, the traps it recognises and the trade-offs it regards as unavoidable. The first section groups the principles of data science into six clusters: question and context, uncertainty and probability, causality and bias, model and generalisation, measurement, trust and responsibility. The base rate fallacy, regression to the mean, Simpson's paradox, survivorship bias, data leakage, distribution shift and Goodhart's law are treated through concrete cases. The following sections cover machine learning engineering, MLOps, analytics engineering, business intelligence, big data, cloud data platforms, database administration, data architecture, data governance and quality, visualisation, product analytics, time series and geospatial data; each section closes with a general lesson. Sources include Sculley et al., Kimball and Ross, Inmon, Data Vault, Dehghani, the Lambda and Kappa architectures, Cleveland and McGill, Box and Jenkins, the Makridakis competitions, the GDPR and the KVKK. The conclusion draws six common principles: data is a representation, time ages everything, trust is something built, simplicity is the default, what is measured shapes behaviour, data concerns people. The text states that these lessons are general tendencies, carry exceptions and are to be read as questions for interrogating decisions rather than decision rules; it leaves open how AI-assisted tools will change the weight of these principles.",
+    "priority": 5,
+    "related": [
+      "i-statistik-epistemolojisi-varsayım-tuzak-ve-kırılma-noktaları",
+      "olasılık-kuramı-tarihsel-i-lkeler-ve-pratik-karşılıkları",
+      "vekil-değişkenler-ve-örtük-yargı",
+      "kalite-mühendisliği-ürün-geliştirmede-temel-araçlar",
+      "i-statistiksel-süreç-kontrolü-ortak-neden-ve-özel-neden"
+    ]
+  },
+  {
+    "slug": "sistem-güvenliği-kesişimde-doğan-hatalar",
+    "title": "Sistem Güvenliği: Kesişimde Doğan Hatalar",
+    "date": "2026-10-27",
+    "description": "Metin, karmaşık sistemlerde tek tek doğru çalışan parçaların buluştuğu kesişim noktalarında doğan hataları inceler ve bu hatalara karşı en etkili savunmanın hatayı test anında yakalamak değil, tasarım aşamasında imkânsız kılmak olduğunu savunur. Kesişim, değişmez ve giriş kapısı kavramları tanımlanır; kapsam asenkron medya işleme hattı içeren orta ölçekli web sistemleriyle sınırlıdır. İlk bölüm hatanın kesişimde doğuşunu Perrow'un normal kazalar kuramı, Reason'ın İsviçre peyniri modeli, Vaughan'ın sapmanın normalleşmesi kavramı ve Hollnagel'in Safety-II yaklaşımıyla temellendirir. İkinci bölüm bulguların değerlendirilmesini risk tabanlı test, hata kümelenmesi, Goel-Okumoto hata keşif eğrisi, hizmet düzeyi hedefi ile hata bütçesi ve suçsuz olay sonrası analiz üzerinden ele alır. Üçüncü bölüm poka-yoke ilkesini yazılıma taşır: geçersiz durumu temsil edilemez kılmak, doğrulama yerine ayrıştırma, tek kural kaynağı, bölme duvarı ve yük atma. Tamamlayıcı test türleri olarak fuzzing, deterministik simülasyon testi, kanarya sürümü ve gölge trafik sunulur. Mimari bölümünde Alana Dayalı Tasarım'ın ortak dil ve modelde tutulan kural yoluyla bu hataların bir kısmını önlediği, Olay Güdümlü Mimari'nin ise sıra belirsizliği, tekrar teslim, yarıda kalma ve izlenebilirlik kaybını çoğalttığı gösterilir. Son bölüm her projede aynı sırayla kurulacak temeli tarif eder: kod öncesi belge, kod iskeleti, ortam, test düzeni, teslim ve düzenli bakım. Metin, kod öncesi belgenin kodla senkron tutulma güçlüğünü ve deterministik simülasyonun sonradan eklenme maliyetini açık soru olarak bırakır.",
+    "pdf": "Sistem_Güvenliği__Kesişimde_Doğan_Hatalar.pdf",
+    "thumb": "thumbs/sistem-güvenliği-kesişimde-doğan-hatalar.png",
+    "addedAt": "2026-10-27T13:17:33.088Z",
+    "pages": 15,
+    "belge": "BELGE-261",
+    "related": [
+      "güvenlik-eğitiminin-anatomisi-temelden-uygulamaya",
+      "sınıfı-kapatmak-güvenlik-bulgularının-tip-tasarımındaki-karşılığı",
+      "yazılım-mimarisi-kuruluş-ve-girdi-varsayımları",
+      "yazılım-mimarisi-seçim-zamanlama-ve-kademeli-değişim",
+      "yazılım-testi-öncelik-sırası"
+    ],
+    "title_en": "System Safety: Failures Born at Intersections",
+    "description_en": "The text examines failures that arise at intersections, the points where individually correct parts of a complex system meet, and argues that the most effective defence against them is not to catch the failure at test time but to make it impossible at design time. The concepts of intersection, invariant and entry gate are defined; the scope is limited to medium-sized web systems with an asynchronous media processing pipeline. The first section grounds the emergence of failure at intersections in Perrow's normal accidents theory, Reason's Swiss cheese model, Vaughan's normalization of deviance and Hollnagel's Safety-II approach. The second section treats the evaluation of findings through risk-based testing, defect clustering, the Goel-Okumoto defect discovery curve, service level objectives with error budgets, and blameless postmortems. The third section carries the poka-yoke principle into software: making illegal states unrepresentable, parsing instead of validating, a single source of rules, bulkheads and load shedding. Fuzzing, deterministic simulation testing, canary releases and shadow traffic are presented as complementary test types. The architecture section shows that Domain-Driven Design prevents part of these failures through ubiquitous language and rules held in the model, while Event-Driven Architecture multiplies ordering ambiguity, redelivery, partial completion and loss of traceability. The final section describes the foundation to be built in the same order in every project: a pre-code document, skeleton, environment, test regime, delivery and routine maintenance. It leaves open the difficulty of keeping the pre-code document in sync with the code and the cost of retrofitting deterministic simulation.",
+    "priority": 8
+  },
+  {
+    "slug": "güvenlik-eğitiminin-anatomisi-temelden-uygulamaya",
+    "title": "Güvenlik Eğitiminin Anatomisi: Temelden Uygulamaya",
+    "date": "2026-10-27",
+    "description": "Metin, siber güvenlik eğitiminin doğrusal bir yol değil, birbirini önceleyen katmanlardan oluşan bir yapı olduğunu savunur. İncelenen Udemy kursları pazarlama mantığıyla adlandırılmış farklı başlıklar taşısa da içerikleri sekiz çekirdek konu kümesine indirgenir: ağ temelleri, işletim sistemi ve sistem güvenliği, kriptografi, ağ ve sistem saldırıları, web uygulama güvenliği, savunma ve izleme, zararlı yazılım ve dijital adli analiz, yönetişim, risk ve uyumluluk. Her küme için kapsanan alt konular, kümeyi öğreten kurslar ve müfredattaki yeri verilir. Kümeler bir önkoşul grafiği oluşturur ve ders dizisi dört katmanda kurulur: temel katman (ağ ve işletim sistemi), çekirdek katman (kriptografi), uygulama katmanı (saldırı kümeleri savunmadan önce, çünkü neyin izleneceği saldırının nasıl yapıldığı bilinince anlaşılır) ve ileri katman (adli analiz ve yönetişim). Sertifikalar ayrı dersler değil küme paketleri olarak eşlenir; Network+, Security+, CySA+, CISSP, CEH ve AWS Security Specialty bu eşlemede yer alır. Ardından kimlik ve erişim yönetimi, bulut güvenliği, mobil ve IoT güvenliği ile güvenli yazılım geliştirme ek kümeler olarak eklenir; sosyal mühendislik çift aidiyeti nedeniyle küme dışında ele alınır. Uygulamalı beceri katmanı lab, CTF ve bug bounty ortamlarını her kümeye bağlar. Temel ilke sorusu iki cevaba ayrılır: pratikte en az yetki ilkesi, kavramsal düzeyde CIA üçlüsü. Metin, çerçevenin pratik beceriyi tam yansıtamadığını kabul eder; açık soru, kümelerin hedef kitleye göre nasıl ağırlıklandırılacağıdır.",
+    "pdf": "Güvenlik_Eğitiminin_Anatomisi__Temelden_Uygulamaya.pdf",
+    "thumb": "thumbs/güvenlik-eğitiminin-anatomisi-temelden-uygulamaya.png",
+    "addedAt": "2026-10-27T13:17:33.087Z",
+    "pages": 16,
+    "belge": "BELGE-259",
+    "title_en": "The Anatomy of Security Education: From Fundamentals to Practice",
+    "description_en": "The text argues that cybersecurity education is not a linear path but a structure of layers that precede one another. Although the Udemy courses examined carry different titles named by marketing logic, their content reduces to eight core topic clusters: network fundamentals, operating system and system security, cryptography, network and system attacks, web application security, defense and monitoring, malware and digital forensics, and governance, risk and compliance. For each cluster the covered subtopics, the courses that teach it and its place in the curriculum are given. The clusters form a prerequisite graph, and the course sequence is built in four layers: a foundation layer (networking and operating systems), a core layer (cryptography), an application layer (attack clusters before defense, since what to monitor is understood only once it is known how the attack is carried out) and an advanced layer (forensics and governance). Certifications are mapped not as separate courses but as cluster bundles; Network+, Security+, CySA+, CISSP, CEH and AWS Security Specialty appear in this mapping. Identity and access management, cloud security, mobile and IoT security, and secure software development are then added as further clusters; social engineering is treated outside the clusters because of its dual membership. A hands-on skill layer ties lab, CTF and bug bounty environments to every cluster. The question of the most basic principle splits into two answers: least privilege in practice, the CIA triad at the conceptual level. The text acknowledges that the framework cannot fully reflect practical skill; the open question is how the clusters should be weighted by target audience.",
+    "priority": 4,
+    "related": [
+      "sistem-güvenliği-kesişimde-doğan-hatalar",
+      "güvenlik-kavramları-envanteri-duruş-i-lke-alan-ve-anti-örüntü-haritası",
+      "sınıfı-kapatmak-güvenlik-bulgularının-tip-tasarımındaki-karşılığı",
+      "mühendislik-eğitimi-ecole-polytechnique-yaklaşımı"
+    ]
+  },
+  {
+    "slug": "i-statistik-epistemolojisi-varsayım-tuzak-ve-kırılma-noktaları",
+    "title": "İstatistik Epistemolojisi: Varsayım, Tuzak ve Kırılma Noktaları",
+    "date": "2026-10-27",
+    "description": "Metin olasılık ile istatistiği aynı belirsizliğe zıt yönlerden bakan iki alan olarak ayırır: olasılık bilinen bir modelden verinin davranışını hesaplar, istatistik gözlenen veriden bilinmeyen modeli tahmin eder. Hesabın işin en kolay kısmı olduğu, asıl güçlüğün problemi tanımlamak, verinin nasıl toplandığını sorgulamak, modeli seçmek ve sonucu belirsizliğiyle yorumlamak olduğu savunulur. Not beş katmandan oluşur: sekiz adımlı bir kontrol listesi ve A/B testi örneğiyle genel çerçeve; kalkülüs ve lineer cebirden olasılık teorisine, örneklemeye, deney tasarımına, regresyona, Bayesçi ve hesaplamalı yöntemlere ve istatistiksel öğrenmeye uzanan temel konular; bu konulardan çıkan genel ilkeler; ileri konuların haritası ve öğrenme önceliği; ileri konuların ilkeleri. Her konu kavram, gereklilik ve tek cümlelik bir ilke olarak verilir. En pahalı hataların konuların arasında saklandığı ileri sürülür; Simpson paradoksu, ortalamaya dönüş, hayatta kalan yanlılığı, çoklu test, p-hacking ve veri sızıntısı bu başlıkta toplanır. İleri konularda odak yöntemin hangi varsayım bozulduğunda kırıldığına ve iç içe gruplar, zamana bağlılık, sansürlü gözlem ve kirli veri gibi gerçek yapılara kayar. Kaynaklar arasında Casella ve Berger, Wasserman, Fisher, Box, Efron, Pearl ve Taleb bulunur. Sınırlılık olarak konu sırasının kaynaktan kaynağa değiştiği ve önceliklendirmenin programlama altyapısı varsaydığı belirtilir; nedensel çıkarımın bu yapıdaki yeri açık soru olarak bırakılır.",
+    "pdf": "İstatistik_Epistemolojisi__Varsayım__Tuzak_ve_Kırılma_Noktaları.pdf",
+    "thumb": "thumbs/i-statistik-epistemolojisi-varsayım-tuzak-ve-kırılma-noktaları.png",
+    "addedAt": "2026-10-27T13:17:33.087Z",
+    "pages": 41,
+    "belge": "BELGE-260",
+    "title_en": "The Epistemology of Statistics: Assumptions, Traps and Breaking Points",
+    "description_en": "The text distinguishes probability and statistics as two fields that approach the same uncertainty from opposite directions: probability computes how data behave under a known model, while statistics estimates an unknown model from observed data. It argues that calculation is the easiest part of the work and that the real difficulty lies in defining the problem, questioning how the data were collected, choosing the model and interpreting the result together with its uncertainty. The note has five layers: a general framework with an eight-step checklist and an A/B test example; the core topics, ranging from calculus and linear algebra through probability theory, sampling, experimental design, regression, Bayesian and computational methods to statistical learning; the general principles derived from these topics; a map of advanced topics with a learning priority; and the principles of the advanced topics. Each topic is given as a concept, its necessity and a one-sentence principle. It contends that the costliest errors hide between topics; Simpson's paradox, regression to the mean, survivorship bias, multiple testing, p-hacking and data leakage are gathered under this heading. In the advanced topics the focus shifts to which broken assumption makes a method fail and to real structures such as nested groups, time dependence, censored observations and dirty data. Sources include Casella and Berger, Wasserman, Fisher, Box, Efron, Pearl and Taleb. As limitations, it notes that topic order varies across sources and that the prioritisation assumes a programming background; the place of causal inference within this structure is left as an open question.",
+    "priority": 6,
+    "related": [
+      "olasılık-kuramı-tarihsel-i-lkeler-ve-pratik-karşılıkları",
+      "epistemik-ve-ontik-belirsizlik-mühendislikte-olasılığın-i-ki-yüzü",
+      "i-statistiksel-süreç-kontrolü-ortak-neden-ve-özel-neden",
+      "mühendislikte-nedensellik-ve-kavramsal-ayrımlar",
+      "kalite-mühendisliği-ürün-geliştirmede-temel-araçlar",
+      "veri-mühendisliği-alanlar-ve-ortak-i-lkeler"
+    ]
+  },
+  {
+    "slug": "kalite-mühendisliği-ürün-geliştirmede-temel-araçlar",
+    "title": "Kalite Mühendisliği: Ürün Geliştirmede Temel Araçlar",
+    "date": "2026-10-27",
+    "description": "Metin, üretim kökenli kalite araçlarından yazılıma aktarılabilir olanların sektöre değil her sistemde bulunan olgulara, yani riske, soruna, israfa ve veriye dayananlar olduğunu savunur. Kalite, ürünün müşterinin beklediği işi beklediği biçimde yapmasıdır; kalite kontrol hatayı sonradan yakalar, kalite güvence oluşmasını engeller. Bölümler ISO/IEC 25010 ve Boehm'in geç bulunan hatanın maliyeti ilkesi, Ohno'nun yalın yönetimi ve israfların yazılımdaki karşılıkları, QFD, JIT ve Jidoka, Ishikawa'nın yedi temel kalite aracı, FMEA, PUKÖ ve 8D, hata senaryolarının sistematik türetilmesi, ISO 9001, ISO 27001, Lean Six Sigma ve Kano modeli ile temel proje yönetimidir. Uygulama EARS ses yönetim platformu üzerinden örneklenir. FMEA bölümü RPN çarpımının tek başına karar mekanizması olmadığını gösterir ve AIAG-VDA eylem önceliği tablosunu aktarır; FMEA'dan çıkan testler tanımlanmış risklerden türetilir. PUKÖ'nün standartlaştırma adımı dokümantasyon, prosedür, otomasyon, mimari kural ve ölçüm seviyelerine ayrılır; hatayı sistem aracılığıyla önleyen çözüm insan disiplinine dayanandan güçlü sayılır. Aynı cut numarası örneği, tek senaryoda çalışan çözümün güvenilir olmadığını ve sınır durum testlerinin gerekliliğini gösterir. Senaryolar ontoloji, durum modeli, bağımlılık ve sınır analiziyle türetilir. Metin kendi sınırını belirtir: FMEA da modelden test türetme de modelin doğruluğuna bağlıdır; açık soru alan modelinin nasıl sınanacağıdır, önerilen cevap üretim hatalarının modele geri beslenmesidir. Otomotive ve imalata özgü araçlar kapsam dışıdır.",
+    "pdf": "Kalite_Mühendisliği__Ürün_Geliştirmede_Temel_Araçlar.pdf",
+    "thumb": "thumbs/kalite-mühendisliği-ürün-geliştirmede-temel-araçlar.png",
+    "addedAt": "2026-10-27T13:17:33.086Z",
+    "pages": 24,
+    "belge": "BELGE-258",
+    "title_en": "Quality Engineering: Core Tools in Product Development",
+    "description_en": "The text argues that the manufacturing-born quality tools transferable to software are those grounded not in an industry but in phenomena present in every system, namely risk, problems, waste and data. Quality is the product doing the job the customer expects in the way the customer expects; quality control catches defects afterwards, quality assurance prevents them. The sections cover ISO/IEC 25010 and Boehm's principle on the cost of late defects, Ohno's lean management and the software counterparts of the wastes, QFD, JIT and Jidoka, Ishikawa's seven basic quality tools, FMEA, PDCA and 8D, systematic derivation of failure scenarios, ISO 9001, ISO 27001, Lean Six Sigma and the Kano model, and basic project management. Application is shown through the EARS audio management platform. The FMEA section shows that the RPN product is not a decision mechanism on its own and presents the AIAG-VDA action priority table; tests from FMEA are derived from identified risks. The PDCA standardisation step is divided into documentation, procedure, automation, architectural rule and measurement levels; a solution that prevents defects through the system is considered stronger than one relying on human discipline. The duplicate cut number example shows that a solution working in one scenario is not thereby reliable and that boundary tests are required. Scenarios are derived through ontology, state modelling, dependency and boundary analysis. The text states its own limit: FMEA and model-based test derivation both depend on the model's correctness; the open question is how the domain model is to be tested, and the proposed answer is feeding production failures back into it. Automotive and manufacturing-specific tools are out of scope.",
+    "priority": 7,
+    "related": [
+      "kalite-testi-bisküvi-fabrikasından-öğrenmek",
+      "üretim-felsefesi-deming-den-sola-kaydırmaya",
+      "i-statistiksel-süreç-kontrolü-ortak-neden-ve-özel-neden",
+      "yazılım-testi-öncelik-sırası",
+      "anlamın-sınırları-wittgenstein-dan-ontolojiye-ve-domain-driven-design-a",
+      "i-statistik-epistemolojisi-varsayım-tuzak-ve-kırılma-noktaları",
+      "veri-mühendisliği-alanlar-ve-ortak-i-lkeler"
+    ]
+  },
+  {
     "slug": "sistem-düşüncesi-görünen-davranış-ve-gizli-durum",
     "title": "Sistem Düşüncesi: Görünen Davranış ve Gizli Durum",
     "date": "2026-10-25",
@@ -38,7 +145,10 @@
       "kalite-testi-bisküvi-fabrikasından-öğrenmek",
       "güvenilirlik-mühendisliği-yöntemler-ve-alternatifleri-haritası",
       "mühendislik-tarihi-uzak-doğu-felsefelerinin-i-zleri",
-      "yazılım-bakımı-sistem-bilgisinin-biriktirilmesi-ve-ölçülmesi"
+      "yazılım-bakımı-sistem-bilgisinin-biriktirilmesi-ve-ölçülmesi",
+      "kalite-mühendisliği-ürün-geliştirmede-temel-araçlar",
+      "i-statistik-epistemolojisi-varsayım-tuzak-ve-kırılma-noktaları",
+      "veri-mühendisliği-alanlar-ve-ortak-i-lkeler"
     ]
   },
   {
@@ -115,7 +225,8 @@
       "yazılım-testi-öncelik-sırası",
       "üretim-felsefesi-deming-den-sola-kaydırmaya",
       "otomasyon-ve-hatalardan-öğrenme",
-      "i-statistiksel-süreç-kontrolü-ortak-neden-ve-özel-neden"
+      "i-statistiksel-süreç-kontrolü-ortak-neden-ve-özel-neden",
+      "kalite-mühendisliği-ürün-geliştirmede-temel-araçlar"
     ],
     "title_en": "Quality Testing: Learning from a Biscuit Factory",
     "description_en": "The text treats quality control not as a single test but as a family of tests spread across every stage of production, and explains the test types through the example of a biscuit factory, together with the software counterpart of each. The introduction separates Crosby's definition of quality as conformance to requirements from Juran's fitness for use, and ties this distinction to Boehm's questions of verification and validation. The conformance test asks whether the product meets the specified measures and gives a binary pass or fail result; in software it corresponds to functional testing at the unit, integration and end-to-end levels. The quality test measures how good the product is; sensory quality is paired with performance, shelf life with stability, health safety with software security, transport durability with resilience to network conditions, consumer experience with usability, and compatibility. Complementary types are distributed across the moments of production: raw material control, in-process control, smoke testing, regression testing, stress testing, acceptance testing, market testing and calibration. Calibration is positioned as the foundation of the whole structure; unless the measuring instrument is verified, the test process gives confidence but no assurance, which in software appears as a test that passes under every condition and catches no error. That an error is cheaper the earlier it is caught is shown with a table distributing the tests across stages. As a limitation, the text notes that a physical product does not change after it is made, whereas software is continuously remade, which is why regression testing is more central in software.",
@@ -160,7 +271,8 @@
       "kalite-testi-bisküvi-fabrikasından-öğrenmek",
       "yazılım-testi-dört-soru-ile-test-sınıflandırması",
       "durum-vektörü-ve-durum-uzayı-yaklaşımı",
-      "i-statistiksel-süreç-kontrolü-ortak-neden-ve-özel-neden"
+      "i-statistiksel-süreç-kontrolü-ortak-neden-ve-özel-neden",
+      "kalite-mühendisliği-ürün-geliştirmede-temel-araçlar"
     ]
   },
   {
@@ -205,7 +317,8 @@
       "düzen-nereden-çıkar-sistemler-ağlar-evrim-ve-zihin-üzerine",
       "disiplinler-arası-transferin-ölçütleri",
       "felsefe-tarihi-aristoteles-in-zihin-erdemleri",
-      "otomasyon-kendi-kendini-düzelten-sistemler"
+      "otomasyon-kendi-kendini-düzelten-sistemler",
+      "güvenlik-eğitiminin-anatomisi-temelden-uygulamaya"
     ]
   },
   {
@@ -380,7 +493,8 @@
       "müdahale-ederek-anlama-karmaşık-yazılım-sistemlerini-anlamanın-yöntem-kataloğu",
       "tersine-mühendislik-ve-mühendislik-refleksi-sistem-modellemesinden-örgütsel-öğrenmeye",
       "teknolojik-bilginin-kaybı-aktarım-zincirleri-örtük-bilgi-ve-kurumsal-süreklilik-stratejileri-üzerine-bir-i-nceleme",
-      "o-rtu-k-bilgi-ve-u-ru-n-gelis-tirici-deneyiminden-bilme-bic-imlerine"
+      "o-rtu-k-bilgi-ve-u-ru-n-gelis-tirici-deneyiminden-bilme-bic-imlerine",
+      "yazılım-testi-öncelik-sırası"
     ]
   },
   {
@@ -646,7 +760,9 @@
       "mimari-kararların-katmanları-ve-geri-alınabilirliği",
       "bilişsel-psikoloji-yazılım-mühendisliğine-aktarım",
       "paranın-psikolojisi-davranıs-zaman-risk-ve-finansal-kararların-i-nsani-temelleri",
-      "kişisel-gelişim-en-çok-fark-yaratan-beceriler"
+      "kişisel-gelişim-en-çok-fark-yaratan-beceriler",
+      "i-statistik-epistemolojisi-varsayım-tuzak-ve-kırılma-noktaları",
+      "veri-mühendisliği-alanlar-ve-ortak-i-lkeler"
     ]
   },
   {
@@ -668,7 +784,8 @@
       "yazılım-bakımı-değişikliğin-yayılması",
       "yazılım-bakımı-sistem-bilgisinin-biriktirilmesi-ve-ölçülmesi",
       "yazılım-testi-dört-soru-ile-test-sınıflandırması",
-      "otomasyon-ve-hatalardan-öğrenme"
+      "otomasyon-ve-hatalardan-öğrenme",
+      "sistem-güvenliği-kesişimde-doğan-hatalar"
     ]
   },
   {
@@ -761,11 +878,9 @@
     "slug": "yazılım-testi-öncelik-sırası",
     "title": "Yazılım Testi: Öncelik Sırası",
     "date": "2026-09-28",
-    "description": "Metin, test türlerini kurulma sırasına dizen bir ölçüt ve bu ölçüte göre yedi gruba ayrılmış bir liste sunar. Ölçüt öncelik sırasıyla üç terimden oluşur: hata sınıfının bu sistemde yaşanmış olup olmadığı, kurulum süresi ve koşma süresi. İlk terim ağır basar; kurulumu yarım saat süren ama hatası dün yaşanmış bir test, sıfır maliyetli ama bu sistemde hiç hata yakalamamış bir denetimin önünde yer alır. Tek istisna birinci gruptur: kurulum ve koşma maliyeti sıfır olan denetimlerde yaşanmışlık aranmaz ve denetim sürekli açık tutulur, çünkü sıfır maliyetli bekçiyi kapalı tutmanın da maliyeti vardır. Bu grup tip denetimi, lint, lockfile, bağımlılık ve lisans denetimi, fitness function'lar, ortam değişkeni şeması ve yalnızca Go için race detector'dan oluşur. İkinci grup ilk haftada mevcut kodu sabitler: flakiness takibi, characterization kaydı, düzeltme öncesi kırmızı birim testi, regresyon ve aşamalar arası veri sözleşmesi; sonuncusu için SOT hatasının Whisper segmenti ile cümle arasındaki sözleşme yazılmadığı için yaşandığı kaydedilir. Üçüncü grup ilk döngüde girdi tasarımını ve hat bütünlüğünü, dördüncü grup ikinci döngüde kullanıcı akışlarını ve canlı sağlığı kapsar. Beşinci grup gerçek veritabanı, kuyruk ve depolama gerektiren testleri, altıncı grup gece ya da sürüm öncesi koşan yavaş, ücretli veya kırılgan testleri toplar. Yedinci grup performans, dayanıklılık, güvenlik ve regülasyon ailelerini ilk arıza yaşanana kadar kapalı tutar. Biçimsel doğrulama, sembolik yürütme, mobil senaryolar ve donanım testleri kapsam dışıdır.",
+    "description": "Metin, test türlerini kurulma sırasına dizen üç terimli bir ölçüt, bu ölçüte göre yedi gruba ayrılmış bir liste ve listenin yanıtlamadığı iki soruyu ele alan bölümler sunar. Ölçüt öncelik sırasıyla hata sınıfının bu sistemde yaşanmış olup olmadığını, kurulum süresini ve koşma süresini sorar; ilk terim ağır basar. İki istisna vardır: maliyeti sıfır olan denetimler sürekli açık kalır, yeni özelliğin kendi kuralı ise yaşanmış hata aranmadan her özellikte yazılır. Gruplar sıfır maliyetli denetimlerden ilk hafta mevcut kodu sabitlemeye, girdi tasarımı ve hat bütünlüğüne, kullanıcı akışlarına, gerçek bağımlılık gerektiren testlere, gece koşan yavaş testlere ve ilk arızaya kadar kapalı tutulan ailelere uzanır. Yazım zamanı bölümü regresyon testinin yalnızca yaşanmış hatayı koruduğunu kaydeder ve henüz yaşanmamış hata için değişmezlerin yazılmasını, bunların test anında özellik tabanlı testle, çalışma anında runtime assertion ile denetlenmesini öngörür. Kuralın koddan önce yazılıp kırmızı görülmesi TDD ve BDD üzerinden gerekçelendirilir; mutasyon testi test takımının kör noktasını, varyant analizi bulunan hatanın diğer örneklerini gösterir. Deploy anı ve kopan istek için nazik kapanış, hazırlık sinyali, idempotency, geri çekilmeli yeniden deneme, iş kirası ve devre kesiciden oluşan bir aile tanımlanır. Son bölüm, parçaların buluştuğu noktalardan yapılan ve yaklaşık elli bulgu üreten bir kesişim taramasını ve STPA, FMEA, HAZOP, diferansiyel test gibi literatür karşılıklarını aktarır; sonraki tarama için STPA, HAZOP ve diferansiyel testin birlikte kullanılmasını önerir.",
     "pdf": "Yazılım_Testi__Öncelik_Sırası.pdf",
-    "thumb": "thumbs/yazılım-testi-öncelik-sırası.png",
     "addedAt": "2026-09-28T23:48:04.478Z",
-    "pages": 5,
     "belge": "BELGE-223",
     "related": [
       "yazılım-testi-dört-soru-ile-test-sınıflandırması",
@@ -774,11 +889,17 @@
       "yazılım-testi-oracle-problemi",
       "duvarlarla-i-lerlemek-test-güdümlü-geliştirmeden-ölçüt-önceliği-i-lkesine",
       "otomasyon-ve-hatalardan-öğrenme",
-      "kalite-testi-bisküvi-fabrikasından-öğrenmek"
+      "kalite-testi-bisküvi-fabrikasından-öğrenmek",
+      "scrutiny-mühendislikte-derinlemesine-i-rdeleme-pratiği",
+      "dayanıklılık-mühendisliği-chaos-monkey-ve-gizli-bağımlılıklar",
+      "kalite-mühendisliği-ürün-geliştirmede-temel-araçlar",
+      "sistem-güvenliği-kesişimde-doğan-hatalar"
     ],
     "title_en": "Software Testing: Order of Priority",
-    "description_en": "The text presents a criterion for ordering test types by when they are set up, with a list divided into seven groups by it. The criterion consists of three terms in order of precedence: whether the failure class has occurred in this system, how long setup takes, and how long a run takes. The first term dominates; a test that takes half an hour to set up but whose failure occurred yesterday stands ahead of a zero-cost check that has never caught a failure in this system. The single exception is the first group: for checks whose setup and run cost are zero, prior occurrence is not required and the check stays on, because keeping a zero-cost guard off also has a cost. This group consists of type checking, lint, lockfile, dependency and licence checks, fitness functions, an environment variable schema, and the race detector for Go only. The second group pins existing code in the first week: flakiness tracking, characterization recording, a red unit test before a fix, regression, and the data contract between stages; for the last, the SOT failure is recorded as occurring because the contract between a Whisper segment and a sentence had not been written. The third group covers input design and pipeline integrity in the first cycle, the fourth covers user flows and live health in the second cycle. The fifth group gathers tests that require a real database, queue and storage, the sixth gathers slow, paid or brittle tests run nightly or before a release. The seventh group keeps the performance, resilience, security and regulation families off until the first failure occurs. Formal verification, symbolic execution, mobile scenarios and hardware tests are out of scope.",
-    "priority": 8
+    "description_en": "The text presents a three-term criterion for ordering test types by when they are set up, a list divided into seven groups by that criterion, and sections addressing two questions the list does not answer. In order of precedence, the criterion asks whether the failure class has occurred in this system, how long setup takes and how long a run takes; the first term dominates. There are two exceptions: zero-cost checks stay on permanently, and a new feature's own rule is written for every feature without requiring a prior failure. The groups range from zero-cost checks, through pinning existing code in the first week, input design and pipeline integrity, user flows, and tests requiring real dependencies, to slow tests run nightly and families kept off until the first failure. The writing-time section records that a regression test protects only a failure that has already occurred, and prescribes writing invariants for failures not yet seen, checked at test time through property-based testing and at run time through runtime assertions. Writing the rule before the code and seeing it red is justified through TDD and BDD; mutation testing shows where the test suite is blind, and variant analysis shows the other instances of a found failure. For the deploy moment and the dropped request, a family of graceful shutdown, a readiness signal, idempotency, retry with backoff, job leases and a circuit breaker is defined. The final section reports an intersection scan conducted at the points where components meet, which produced about fifty findings, and its counterparts in the literature such as STPA, FMEA, HAZOP and differential testing; for the next scan it recommends using STPA, HAZOP and differential testing together.",
+    "priority": 8,
+    "thumb": "thumbs/yazılım-testi-öncelik-sırası.png",
+    "pages": 18
   },
   {
     "slug": "yazılım-testi-dört-soru-ile-test-sınıflandırması",
@@ -1336,7 +1457,8 @@
       "test-mühendisliği-yeterlilik-etkinlik-güvenilirlik",
       "kontrol-teorisi-ve-yazılım-denetimi",
       "yazılım-tasarımı-boyut-sınırıyla-yönlendirilen-modüler-ayrıştırma",
-      "tasarım-ve-i-ktidar-fiil-düzenleyiciler"
+      "tasarım-ve-i-ktidar-fiil-düzenleyiciler",
+      "veri-mühendisliği-alanlar-ve-ortak-i-lkeler"
     ]
   },
   {
@@ -1397,7 +1519,10 @@
       "güvenlik-kavramları-envanteri-duruş-i-lke-alan-ve-anti-örüntü-haritası",
       "yazılım-bakımı-değişikliğin-yayılması",
       "arayüz-tasarımı-durum-makinesi-ile-denetim-modelleme",
-      "yazılım-felsefesi-kod-yasadır"
+      "yazılım-felsefesi-kod-yasadır",
+      "anlamın-sınırları-wittgenstein-dan-ontolojiye-ve-domain-driven-design-a",
+      "güvenlik-eğitiminin-anatomisi-temelden-uygulamaya",
+      "sistem-güvenliği-kesişimde-doğan-hatalar"
     ]
   },
   {
@@ -1421,7 +1546,8 @@
       "1976-nın-ekonomisi-kod-i-ncelemesinin-kökeni-ve-sürekliliği",
       "mimari-kararların-katmanları-ve-geri-alınabilirliği",
       "ağır-rejim-hafif-rejim",
-      "yazılım-mimarisi-kuruluş-ve-girdi-varsayımları"
+      "yazılım-mimarisi-kuruluş-ve-girdi-varsayımları",
+      "sistem-güvenliği-kesişimde-doğan-hatalar"
     ]
   },
   {
@@ -1465,7 +1591,8 @@
       "müdahale-ederek-anlama-karmaşık-yazılım-sistemlerini-anlamanın-yöntem-kataloğu",
       "nereden-biliyoruz-bilginin-anatomisi-üzerine-bir-i-nceleme",
       "tetikleyici-eşleştirmesi-karar-anları-ve-sorular",
-      "olasılık-kuramı-tarihsel-i-lkeler-ve-pratik-karşılıkları"
+      "olasılık-kuramı-tarihsel-i-lkeler-ve-pratik-karşılıkları",
+      "i-statistik-epistemolojisi-varsayım-tuzak-ve-kırılma-noktaları"
     ]
   },
   {
@@ -1584,7 +1711,8 @@
       "müdahale-ederek-anlama-karmaşık-yazılım-sistemlerini-anlamanın-yöntem-kataloğu",
       "şemaya-gömülen-felsefe",
       "tetikleyici-eşleştirmesi-karar-anları-ve-sorular",
-      "sınanabilirlik-mantıktan-mimariye"
+      "sınanabilirlik-mantıktan-mimariye",
+      "i-statistik-epistemolojisi-varsayım-tuzak-ve-kırılma-noktaları"
     ]
   },
   {
@@ -1874,7 +2002,8 @@
       "müdahale-ederek-anlama-karmaşık-yazılım-sistemlerini-anlamanın-yöntem-kataloğu",
       "tasarım-gözden-geçirme-pratiği-tr",
       "uzay-bilimlerinden-yazılım-mühendisliğine-dersler",
-      "1976-nın-ekonomisi-kod-i-ncelemesinin-kökeni-ve-sürekliliği"
+      "1976-nın-ekonomisi-kod-i-ncelemesinin-kökeni-ve-sürekliliği",
+      "yazılım-testi-öncelik-sırası"
     ],
     "title_en": "Scrutiny: The Practice of In-Depth Examination in Engineering",
     "description_en": "The practice of interrogating an object, system, or claim systematically down to its smallest detail. The normative summary: a good design review is conducted not to defend the design but to refute it as far as it can be refuted; confidence rises when the refutation attempt fails. The document enumerates twenty layers of scrutiny (purpose, requirements, assumptions, architecture, interfaces, data and state, timing, faults, boundary conditions, security, human factors, manufacturing and maintenance, evidence, decision rationale, unknowns, lifecycle, organizational) and adds the layer most teams skip: scrutinizing the review itself — were the right people asked, could the test applied actually catch the defect sought, might the whole team share one blind spot. It then stays concrete: the physical operations of inspection (wiggling connectors, flexing cable at angles, verifying torque, thermal cycling, attempting reverse installation), a layer-by-layer teardown of a money-transfer function (race condition, atomicity violation, missing idempotency, observability gap), and the examination of an integrated circuit (current draw as the signature of an invisible fault, signal integrity, thermal mapping). The rule for moving from a single finding to a principle is explicit: not “the technician installed it wrong” but “critical connectors must physically prevent incorrect installation.” A final section automates the scrutiny loop: rounds that deliberately ignore prior rounds and regenerate from scratch, a saturation criterion that stops after three consecutive rounds without new findings, and three implementation tiers — in-prompt, file-based, and fully scripted.",
@@ -1941,7 +2070,8 @@
       "kurumsal-mükemmellik-rejimleri-ve-öz-denetimin-yapısal-sınırları",
       "sistem-mühendisliği-zinciri-ve-uygulanmama-koşulları-yazılım-geliştirme-pratiği-i-çin-bir-çerçeve-ve-eleştiri",
       "girdi-i-şlemede-temsil-boşluğu",
-      "sınıfı-kapatmak-güvenlik-bulgularının-tip-tasarımındaki-karşılığı"
+      "sınıfı-kapatmak-güvenlik-bulgularının-tip-tasarımındaki-karşılığı",
+      "güvenlik-eğitiminin-anatomisi-temelden-uygulamaya"
     ]
   },
   {
@@ -2531,11 +2661,9 @@
     "slug": "anlamın-sınırları-wittgenstein-dan-ontolojiye-ve-domain-driven-design-a",
     "title": "Anlamın Sınırları: Wittgenstein'dan Ontolojiye ve Domain-Driven Design'a",
     "date": "2026-07-25",
-    "description": "'Aynı kelime farklı topluluklarda farklı anlamlara geldiğinde, bu farklılık tek bir bilgi sisteminde nasıl temsil edilir?' sorusunu felsefeden yazılım mühendisliğine taşır. Erken/geç Wittgenstein (kural takibi ve formalizasyonun sınırı) üzerinden kavramların topluluğa göreli olduğu ve tek bir kanonik şemaya sıkıştırılamayacağı tespitinden yola çıkıp, bu tespite verilen iki zıt kurumsal cevabı — Palantir Ontology ile Domain-Driven Design'ı — ortak felsefi zeminleri üzerinden karşılaştırır. Tez: DDD farkı koruyup sınırlar arasına açık bir çeviri katmanı yerleştirir, Ontology farkı ortak bir nesne katmanında eritir; aradaki asıl ayrım performans ya da ifade gücü değil gücün görünürlüğüdür — DDD hangi topluluğun dilinin geçerli olacağını açık bir tasarım kararına dönüştürürken Ontology aynı kararı altyapı konfigürasyonuna gömerek görünmez kılar. Kaynak asimetrisini ve ampirik dayanağın yokluğunu açıkça kaydedip kapanışta karşı argümanları ele alır.",
+    "description": "Metin, aynı kelimenin farklı topluluklarda farklı nesnelere karşılık gelmesini, geç Wittgenstein'ın anlamın kullanımdan doğduğu tespitinin yazılımdaki görünümü olarak ele alır ve bu soruna verilmiş iki kurumsal cevabı, Palantir Ontology ile Domain-Driven Design'ı, ortak felsefi zeminleri üzerinden karşılaştırır. Kanonik şemanın farkı sessizce sildiği ve çevirinin yok edilemeyip yalnızca yerinin seçilebildiği tespitinden yola çıkar. Ontology farkı ortak bir nesne katmanında eritir ve çeviriyi bir kez, verinin platforma alındığı noktada yapar; Domain-Driven Design farkı korur ve çeviriyi her topluluk sınırına, Anticorruption Layer ve Translation Map olarak açıkça adlandırılmış bir katmanla yerleştirir. Metin sınırda çeviriyi asgari state ilkesi ve hibritleşme uyarısıyla, taktiksel tasarımı ise Entity, Value Object, Domain Service, Aggregate ve Domain Event üzerinden işler. Kavram eşlemesine göre iki yaklaşım nesne, özellik ve fonksiyon düzeyinde büyük ölçüde örtüşür; ayrışma sınır çizen araçlarda yoğunlaşır ve Context Map ile Aggregate'in Ontology'de doğrudan karşılığı bulunmaz. Taktiksel kararların tamamı domain uzmanına söylenen bir cümlenin sınanmasına dayanır; metin bunu kural takibi tespitinin mühendislik karşılığı olarak okur. Tez, asıl farkın etkinlikte değil gücün görünürlüğünde olduğudur: Domain-Driven Design hangi topluluğun dilinin geçerli olacağını ve tutarlılık sınırını açık birer karar nesnesine dönüştürür, Ontology aynı kararları altyapı konfigürasyonuna gömer. Kaynak asimetrisi ve ampirik dayanağın yokluğu açıkça kaydedilir; taktiksel maliyet dahil altı karşı argüman ele alınır.",
     "pdf": "Anlamın_Sınırları__Wittgenstein_dan_Ontolojiye_ve_Domain_Driven_Design_a.pdf",
-    "thumb": "thumbs/anlamın-sınırları-wittgenstein-dan-ontolojiye-ve-domain-driven-design-a.png",
     "addedAt": "2026-07-25T16:05:04.459Z",
-    "pages": 23,
     "related": [
       "çekirdek-katmandan-sınırlı-bağlamlara-domain-odaklı-mimariye-evrimsel-geçiş",
       "sibernetik-savaş-ve-sermaye-kurumsal-dilin-karşılaştırmalı-bir-i-ncelemesi",
@@ -2545,12 +2673,16 @@
       "bildiğini-sandığın-kelime-otomasyon-örneği-üzerinden-kavramın-sınırları",
       "şemaya-gömülen-felsefe",
       "tetikleyici-eşleştirmesi-karar-anları-ve-sorular",
-      "sınanabilirlik-mantıktan-mimariye"
+      "sınanabilirlik-mantıktan-mimariye",
+      "sınıfı-kapatmak-güvenlik-bulgularının-tip-tasarımındaki-karşılığı",
+      "kalite-mühendisliği-ürün-geliştirmede-temel-araçlar"
     ],
     "title_en": "The Limits of Meaning: From Wittgenstein to Ontology and Domain-Driven Design",
-    "description_en": "Carries the question 'when the same word means different things to different communities, how is that difference represented in a single information system?' from philosophy into software engineering. Starting from early/late Wittgenstein (rule-following and the limit of formalization) and the finding that concepts are community-relative and can't be compressed into one canonical schema, it compares two opposing institutional answers — Palantir Ontology and Domain-Driven Design — on their shared philosophical ground. The thesis: DDD preserves the difference and places an explicit translation layer between boundaries, while Ontology dissolves the difference into a shared object layer; the real distinction is not performance or expressive power but the visibility of power — DDD turns 'whose language prevails' into an explicit design decision, while Ontology buries the same decision in infrastructure configuration and makes it invisible. It openly records the source asymmetry and the absence of empirical grounding, and closes by addressing counter-arguments.",
-    "priority": 7,
-    "belge": "BELGE-147"
+    "description_en": "The text reads the same word naming different objects in different communities as the software form of late Wittgenstein's finding that meaning arises from use, and compares two institutional answers to this problem, Palantir Ontology and Domain-Driven Design, on their shared philosophical ground. It starts from the findings that a canonical schema silently erases the difference and that translation cannot be eliminated, only located. Ontology dissolves the difference into a shared object layer and translates once, where data enters the platform; Domain-Driven Design preserves the difference and places translation at every community boundary through an explicitly named layer, the Anticorruption Layer and Translation Map. The text treats boundary translation through the minimal-state principle and the hybridization warning, and tactical design through Entity, Value Object, Domain Service, Aggregate and Domain Event. Per the concept mapping, the two approaches largely overlap at the level of objects, properties and functions; divergence concentrates in the boundary-drawing tools, and Context Map and Aggregate have no direct counterpart in Ontology. Every tactical decision rests on testing a sentence spoken to the domain expert; the text reads this as the engineering form of the rule-following finding. The thesis is that the real difference lies not in effectiveness but in the visibility of power: Domain-Driven Design turns whose language prevails and where the consistency boundary falls into explicit decision objects, while Ontology buries the same decisions in infrastructure configuration. Source asymmetry and the lack of empirical grounding are recorded openly; six counter-arguments, tactical cost among them, are addressed.",
+    "priority": 8,
+    "belge": "BELGE-147",
+    "thumb": "thumbs/anlamın-sınırları-wittgenstein-dan-ontolojiye-ve-domain-driven-design-a.png",
+    "pages": 37
   },
   {
     "slug": "dört-k-ağır-metinleri-okumak-i-çin-bir-yöntem-denemesi",
