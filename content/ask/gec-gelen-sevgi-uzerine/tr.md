@@ -1,5 +1,5 @@
 ---
-baslik: Geç Gelen Sevgi Üzerine
+baslik: Geç Gelen Sevgi
 tarih: 2026-10-27 16:47
 kapak: kapak.jpg
 ---

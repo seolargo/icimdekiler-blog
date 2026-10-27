@@ -1,5 +1,5 @@
 ---
-baslik: On Love That Comes Late
+baslik: Love That Comes Late
 ---
 Some men are not loved until they are thirty. No one says this out loud, but most know it. From the outside they lack nothing. They do their work, they laugh with their friends, they have their own pursuits, their own dreams. They are steady. But when they come home in the evening, inside the silence that opens the door, the same feeling is always waiting. A wistfulness. Not a sharp pain, more like tea going cold.
 
