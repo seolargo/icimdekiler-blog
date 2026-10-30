@@ -17,7 +17,7 @@ deni görünmez kılabilir. En sağlam yapı, bilinen etkileri önceden karşıl
 besleme ile kalan hatayı temizleyen geri beslemenin birleşimidir.
 1
 
--- 1 of 10 --
+-- 1 of 14 --
 
 Giriş
 Bir kontrol sistemi, bir sürecin çıktısını istenen bir değerde ya da aralıkta
@@ -41,7 +41,7 @@ kararlılık kriterleri ve kontrolcü tasarımı gibi kontrol teorisinin matemat
 araçları kapsam dışındadır.
 2
 
--- 2 of 10 --
+-- 2 of 14 --
 
 Açık ve Kapalı Döngünün Yapısı
 Açık Döngü
@@ -78,7 +78,7 @@ Kararsızlık riski Süreç kararlıysa yok Gecikme ve aşırı düzeltmeyle or-
 taya çıkabilir
 3
 
--- 3 of 10 --
+-- 3 of 14 --
 
 Döngü Türünün Seçimi
 Açık Döngünün Yeterli Olduğu Durumlar
@@ -115,7 +115,7 @@ Sürecin yükü değişiyorsa, parçalar zamanla aşınıyorsa ya da ortam koşu
 oynuyorsa, model bir süre sonra gerçeği yansıtmaz. Kapalı döngü, modelin bu
 4
 
--- 4 of 10 --
+-- 4 of 14 --
 
 eskimesini ölçüm yoluyla telafi eder.
 Hassasiyet Kritikse
@@ -134,7 +134,7 @@ olması gerekir. Bu koşul sağlandığında kapalı döngünün maliyeti düşe
 dası artar.
 5
 
--- 5 of 10 --
+-- 5 of 14 --
 
 Analizde Döngünün Tespiti
 Döngü kavramı yalnızca tasarlanmış kontrol sistemlerine ait değildir. Ekonomik,
@@ -173,7 +173,7 @@ tahmin edilir, ancak sistem müdahaleye tepki verir ve sonuç beklenenden farkl�
 kısmını bu tür gözden kaçırılmış geri besleme döngülerine bağlar.
 6
 
--- 6 of 10 --
+-- 6 of 14 --
 
 Kalite Testi ile Kontrol Arasındaki Fark
 Testlerin Kararlılık Sağlamamasının Nedenleri
@@ -205,7 +205,7 @@ kontrol işlevine dönüştürülmesi anlamına gelir: daha önce yalnızca rapo
 sonuç, artık sürecin bir sonraki adımını belirler.
 7
 
--- 7 of 10 --
+-- 7 of 14 --
 
 Kapalı Döngünün Riskleri
 Ölçüm Kalitesi Sınırı
@@ -228,7 +228,7 @@ Döngünün her turu zaman ve kaynak harcar. Düzeltme oranı yüksekse sistemin
 toplam gecikmesi ve maliyeti belirgin biçimde artar.
 8
 
--- 8 of 10 --
+-- 8 of 14 --
 
 ˙Ileri Besleme ve Geri Beslemenin Birleşimi
 Görev Paylaşımı
@@ -249,7 +249,144 @@ geri beslemeye düşen yük zamanla azalır. Hedeflenen durum, kapalı döngün�
 nadiren devreye girdiği ancak gerektiğinde her zaman hazır bulunduğu bir yapıdır.
 9
 
--- 9 of 10 --
+-- 9 of 14 --
+
+Düzeltme Sayısının Değerlendirilmesi
+Kapalı döngü bir sistemde döngünün kaç kez devreye girdiği, sistemin sağlığına
+dair bir gösterge olarak kullanılabilir. Ancak bu sayı tek başına yorumlanamaz;
+düşük bir düzeltme sayısı iyi bir sistemi de, hatayı göremeyen bir ölçümü de
+gösterebilir. Belirleyici olan, döngünün neden az ya da çok çalıştığıdır.
+Yüksek Düzeltme Oranı
+Döngünün sık devreye girmesi, açık döngü bileşeninin, yani modelin, ayarların
+ve girdilerin işin büyük kısmını tek başına yapamadığını gösterir. Sistem doğru
+sonuca ulaşıyor olabilir, ancak bu sonuca sürekli düzeltme yaparak ulaşır. Bu
+durumun üç bedeli vardır:
+• Her düzeltme turu zaman ve kaynak harcar; toplam gecikme ve maliyet
+artar.
+• Her düzeltme yeni bir sapma yaratabileceği için salınım riski büyür.
+• Hatalar sürekli giderildiği için kök neden görünmez hâle gelir ve sistem
+dışarıdan sağlam görünür.
+Yüksek düzeltme oranı, sistemin bir noktada zayıf olduğunun işaretidir.
+Döngü bu zayıflığın sonuçlarını kapatır, ancak zayıflığın kendisini gidermez.
+Düşük Düzeltme Oranı
+Düşük düzeltme oranının birbirine zıt iki açıklaması olabilir.
+Güçlü Açık Döngü
+Açık döngü bileşeni güçlü olduğunda çıktılar büyük ölçüde baştan doğru üretilir
+ve döngü yalnızca nadir sapmaları yakalar. Hedeflenen durum budur: geri
+besleme yükü taşımaz, yalnızca güvence sağlar.
+Kör Ölçüm
+Ölçüm mekanizması zayıf olduğunda hatalar fark edilmez ve döngü, düzeltilecek
+bir şey görmediği için çalışmaz. Bu durum yüksek düzeltme oranından daha
+tehlikelidir, çünkü sistem sorunsuz çalışıyormuş gibi görünür ve hatalar sessizce
+çıktıya geçer.
+˙Iki durumu ayırt etmenin basit bir yolu, hatalı olduğu bilinen örneklerin
+sisteme bilinçli olarak verilmesi ve döngünün bunları yakalayıp yakalamadığının
+gözlenmesidir. Bu, ölçümün hata yakalama oranını doğrudan ölçer.
+10
+
+-- 10 of 14 --
+
+Düzeltme Başına Tur Sayısı
+Bir hatanın giderilmesi için gereken tur sayısı, düzeltme mekanizmasının kendisi
+hakkında ayrı bir bilgi verir. Hata bir ya da iki turda gideriliyorsa düzeltme
+doğru yöne ve uygun büyüklükte yapılıyordur. Düzeltme çok sayıda tur sürüyor
+ya da en fazla deneme sınırına ulaşıyorsa üç olasılık söz konusudur: düzeltme
+yanlış yöne gidiyordur, hatayı aşarak ters yönde yeni bir hata yaratıyordur ya
+da hedef o girdiler için ulaşılamazdır. Bu durumda tur sınırını artırmak çözüm
+değildir; düzeltmenin nasıl hesaplandığı incelenmelidir.
+Sistemdeki Döngü Sayısı
+Döngü sayısı, bir döngünün kaç kez çalıştığı yerine sistemde kaç ayrı geri besleme
+döngüsü bulunduğu anlamında da ele alınabilir. Bu anlamda döngü eklemek her
+zaman sistemi güçlendirmez. Her döngü kendi ölçümünü, kendi gecikmesini ve
+kendi hata kaynağını getirir. Aynı büyüklüğü etkileyen döngüler birbirine karşı
+çalışabilir: biri bir yöne düzeltirken diğeri ters yöne düzeltir ve sistem salınıma
+girer.
+Az sayıda ve görevi net tanımlanmış döngü genellikle daha sağlam bir yapı
+oluşturur. Birden fazla döngü gerektiğinde en yaygın çözüm katmanlı yapıdır:
+iç döngü hızlı çalışarak anlık sapmaları giderir, dış döngü daha yavaş çalışarak
+genel hedefi ayarlar. ˙Iç döngünün dış döngüden belirgin biçimde hızlı olması,
+iki döngünün birbirine karışmasını önler.
+˙Izlenecek Göstergeler
+Döngünün sağlığı tek bir sayıyla değil, birlikte okunan üç göstergeyle değerlendirilir:
+• Düzeltme oranı: çıktıların ne kadarının düzeltme gerektirdiği. Açık
+döngü bileşeninin gücünü gösterir.
+• Düzeltme başına tur sayısı: bir hatanın kaç turda giderildiği. Düzeltme
+mekanizmasının kalitesini gösterir.
+• Hata yakalama oranı: bilinen hataların ne kadarının ölçüm tarafından
+fark edildiği. Ölçümün güvenilirliğini gösterir.
+Hedeflenen durum, döngünün seyrek çalışması ancak çalışması gereken her
+durumda mutlaka devreye girmesidir.
+11
+
+-- 11 of 14 --
+
+PID Kontrolcüde Döngü Kavramı
+PID kontrolcü (Proportional-Integral-Derivative controller ), hatanın kendi-
+sine (oransal terim), hatanın zaman içindeki birikimine (integral terimi) ve
+hatanın değişim hızına (türev terimi) göre kontrol girdisini hesaplayan, endüstride
+en yaygın kullanılan geri besleme kontrolcüsüdür (˚ Aström ve Murray, 2008).
+PID kontrolcüde döngü çok sık çalışır. Bu durum, düşük düzeltme oranının
+iyi sayıldığı önceki değerlendirmeyle çelişiyor gibi görünür; çelişki, iki farklı
+kavramın aynı kelimeyle anılmasından kaynaklanır.
+Örnekleme Hızı ile Düzeltme Turunun Ayrımı
+Sürekli Döngü
+PID kontrolcü sürekli çalışır: çıktıyı saniyede yüzlerce ya da binlerce kez ölçer
+ve her ölçümde kontrol girdisini küçük bir miktar ayarlar. Ölçümlerin yapıldığı
+bu sıklığa örnekleme hızı (sampling rate) denir. Buradaki her adım ucuzdur
+ve bir başarısızlığı ifade etmez; kontrolcünün olağan çalışma biçimidir. Ter-
+mostatın sıcaklığı sürekli ölçmesi termostatın kötü çalıştığını göstermediği gibi,
+PID kontrolcünün sık örnekleme yapması da bir sorun belirtisi değildir.
+Ayrık Düzeltme Turu
+Ayrık düzeltme turunda ise bir çıktı bütün olarak üretilir, kontrol edilir ve kabul
+edilemezse yeniden üretilir. Her tur pahalıdır ve bir önceki denemenin başarısız
+olduğu anlamını taşır. Düzeltme oranının düşük olmasının istenmesi bu tür
+döngüler için geçerlidir.
+Örnekleme Hızının Seçimi
+Hızlı örnekleme genel olarak avantajlıdır, çünkü sapmalar büyümeden yakalanır.
+Temel kural, örnekleme hızının kontrol edilen sürecin değişim hızından belirgin
+biçimde yüksek olmasıdır. Ancak bu avantajın sınırları vardır:
+• Örnekleme hızı arttıkça ölçüm gürültüsü öne çıkar. Türev terimi hatanın
+değişim hızına tepki verdiği için gürültüyü özellikle büyütür.
+• Her örnekte hesaplama yapıldığı için işlemci yükü artar.
+• Süreç belirli bir hızdan daha hızlı değişmiyorsa, örnekleme hızını bu düzeyin
+üzerine çıkarmak ek bir kazanç sağlamaz.
+PID Kontrolcüde Başarı Ölçütleri
+PID kontrolcünün kalitesi örnekleme adımlarının sayısıyla değil, çıktının hedefe
+ne kadar hızlı ve ne kadar sakin yerleştiğiyle ölçülür. Bu davranış, referansta
+ani bir değişiklik yapıldığında sistemin verdiği tepki üzerinden değerlendirilir
+(Ogata, 2010):
+12
+
+-- 12 of 14 --
+
+• Oturma süresi (settling time): çıktının hedefin etrafındaki dar bir aralığa
+girip orada kalması için geçen süre. Kısa olması istenir.
+• Aşma (overshoot): çıktının hedefi ne kadar geçtiği. Küçük olması istenir.
+• Salınım sayısı: çıktının yerleşmeden önce hedefin etrafında kaç kez gidip
+geldiği. Az olması istenir.
+Kötü ayarlanmış bir PID kontrolcü hedefin etrafında uzun süre salınır. Bu
+durum, ayrık düzeltme döngüsünde bir hatanın çok sayıda turda giderilmesinin,
+yani düzeltmenin aşarak ters yönde yeni hata yaratmasının karşılığıdır. Dolayısıyla
+iki döngü türü arasındaki doğru benzetme, PID kontrolcünün örnekleme adımlarını
+değil, salınımlarını düzeltme turlarına karşılık getirir.
+Kademeli PID Yapısı
+Tek bir PID kontrolcü tek bir döngü oluşturur. Birden fazla döngü, bir kon-
+trolcünün çıktısının bir diğerinin referansı olduğu kademeli kontrol (cascade
+control ) yapısıyla kurulur (˚ Aström ve Murray, 2008).
+Bir elektrik motorunun konum kontrolü bu yapının tipik örneğidir. En içteki
+döngü motor akımını, ortadaki döngü motor hızını, en dıştaki döngü ise motorun
+konumunu kontrol eder. Dış döngü istenen hızı belirler, orta döngü bu hız için
+gereken akımı belirler, iç döngü de bu akımı sağlar. C ok rotorlu insansız hava
+araçlarında da benzer bir yapı kullanılır: iç döngü aracın açısal dönme hızını,
+dış döngü ise eğim açısını kontrol eder.
+Kademeli yapının çalışması, sistemdeki döngü sayısına dair genel kurala
+bağlıdır: iç döngü dış döngüden belirgin biçimde hızlı olmalıdır. ˙Iç döngü yeter-
+ince hızlı olduğunda dış döngü, iç döngüyü verdiği referansı anında izleyen bir
+bileşen olarak görebilir. Hızlar birbirine yakın olduğunda ise döngüler birbirinin
+düzeltmelerine tepki verir ve sistem salınıma girer.
+13
+
+-- 13 of 14 --
 
 Sonuç
 Açık ve kapalı döngü ayrımı, bir sistemin fiziksel yapısından çok, belirsizlik
@@ -280,6 +417,6 @@ Experience. Papers in Monetary Economics, Reserve Bank of Australia.
 • Ogata, K. (2010). Modern Control Engineering (5. baskı). Prentice Hall.
 • Sterman, J. D. (2000). Business Dynamics: Systems Thinking and Mod-
 eling for a Complex World. Irwin/McGraw-Hill.
-10
+14
 
--- 10 of 10 --
+-- 14 of 14 --
