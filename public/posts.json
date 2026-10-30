@@ -1,5 +1,54 @@
 [
   {
+    "slug": "hata-avcılığı-yazılımda-kalite-pratikleri",
+    "title": "Hata Avcılığı: Yazılımda Kalite Pratikleri",
+    "date": "2026-10-30",
+    "description": "Metin, yazılım kalitesinin tek bir testle ya da araçla değil, Reason'ın İsviçre peyniri modelindeki gibi delikleri farklı yerlerde olan katmanların birlikte kullanılmasıyla sağlandığını savunur ve Dijkstra'nın testin hatanın yokluğunu gösteremeyeceği tespitinden yola çıkar. Katmanlar sırasıyla hatayı yazılmadan önleme, insan gözüyle yakalama, testi doğru tasarlama, hatayı makineye aratma, sistem ve dayanıklılık, arayüz ve güvenlik, teslim ve canlı ortam ile bulunan hatadan öğrenmedir. Önleme katmanı TDD, karmaşıklık sınırları, geçersiz durumu temsil edilemez kılan tipler, fail fast ve veritabanı kısıtlarını; inceleme katmanı 200–400 satırlık tek amaçlı PR, kontrol listesi, BDD, threat modeling ve FMEA'yı kapsar. Test tasarımı sınır değer, karar tablosu, durum geçişi, pairwise ve error guessing ile oracle problemine karşı golden, characterization ve contract testleri işler. Makine katmanı fuzzing, property-based, differential ve metamorphic testing, sembolik çalıştırma ve race detector'ı; mutation testing ise coverage'ın gösteremediği test gücünü ölçer. Fenton ve Ohlsson'un bulgusuna dayanarak hataların modüllerin küçük bir kısmında toplandığı, test emeğinin hotspot analiziyle riskli bölgelere yöneltilmesi gerektiği kaydedilir. Kalite niyet ile davranış arasındaki mesafe olarak tanımlanır ve önleme, tespit, sınırlama ve öğrenme işlevlerine ayrılır. Önerilen çekirdek küme küçük PR, zorunlu linter ve race detector, sınır değer testleri, ayrıştırıcılar için fuzzing, her bug için regression testi ve canlıda hata takibidir. Kalite yatırımının ne zaman yeterli olduğu açık soru olarak bırakılır.",
+    "pdf": "Hata_Avcılığı__Yazılımda_Kalite_Pratikleri.pdf",
+    "thumb": "thumbs/hata-avcılığı-yazılımda-kalite-pratikleri.png",
+    "addedAt": "2026-10-30T21:21:57.290Z",
+    "pages": 33,
+    "belge": "BELGE-266",
+    "title_en": "Bug Hunting: Quality Practices in Software",
+    "priority": 9,
+    "related": [
+      "yazılım-testi-öncelik-sırası",
+      "yazılım-testi-dört-soru-ile-test-sınıflandırması",
+      "yazılım-testi-oracle-problemi",
+      "test-mühendisliği-yeterlilik-etkinlik-güvenilirlik",
+      "yazilim-test-turleri",
+      "dayanıklılık-mühendisliği-chaos-monkey-ve-gizli-bağımlılıklar",
+      "otomasyon-ve-hatalardan-öğrenme",
+      "kalite-mühendisliği-ürün-geliştirmede-temel-araçlar",
+      "sınıfı-kapatmak-güvenlik-bulgularının-tip-tasarımındaki-karşılığı",
+      "kontrol-sistemleri-açık-ve-kapalı-döngü-seçimi"
+    ],
+    "description_en": "The text argues that software quality is achieved not by a single test or tool but by combining layers whose holes lie in different places, as in Reason's Swiss cheese model, and starts from Dijkstra's finding that testing cannot show the absence of bugs. The layers are, in order, preventing bugs before they are written, catching them by human eye, designing tests correctly, having the machine search for bugs, system and resilience, interface and security, delivery and production, and learning from bugs found. The prevention layer covers TDD, complexity limits, types that make invalid states unrepresentable, fail fast and database constraints; the review layer covers single-purpose PRs of 200 to 400 lines, checklists, BDD, threat modeling and FMEA. Test design treats boundary values, decision tables, state transitions, pairwise and error guessing, and against the oracle problem golden, characterization and contract tests. The machine layer covers fuzzing, property-based, differential and metamorphic testing, symbolic execution and the race detector; mutation testing measures the test strength that coverage cannot show. Drawing on Fenton and Ohlsson, the text records that bugs concentrate in a small share of modules and that test effort should be directed to risky areas through hotspot analysis. Quality is defined as the distance between intent and behaviour and divided into the functions of prevention, detection, mitigation and learning. The proposed core set is small PRs, a mandatory linter and race detector, boundary-value tests, fuzzing for parsers, a regression test for every bug and error tracking in production. When quality investment is sufficient is left as an open question."
+  },
+  {
+    "slug": "siber-fiziksel-sistemler-donanımın-yazılıma-aktarılması",
+    "title": "Siber-Fiziksel Sistemler: Donanımın Yazılıma Aktarılması",
+    "date": "2026-10-30",
+    "description": "Metin, bir donanımı tarayıp doğrudan çalışan bir yazılıma dönüştürmenin mümkün olmadığını, çünkü cihaz davranışının her biri ayrı yöntem gerektiren üç katmandan oluştuğunu savunur: geometri, fiziksel davranış ve kontrol mantığı. Geometri tarama ya da fotogrametriyle kolayca sayısallaştırılır; fiziksel davranış Ljung'un tarif ettiği sistem tanımlama yöntemiyle, cihaz kara kutu olarak ele alınıp girdi ve tepki ölçülerek elde edilir; kontrol mantığı ise yalnızca PX4 ve ArduPilot gibi açık kaynaklı sistemlerde modele katılabilir. Bu nedenle kablolama, malzeme ve kontrolcüleri birlikte içeren tam bir model, yani dijital ikiz, çoğunlukla üreticinin tasarım verisiyle kurulur. Arıza teşhisi Isermann'ın model tabanlı yaklaşımıyla açıklanır: gerçek ölçüm ile modelin beklentisi arasındaki fark, yani artık, eşiği aştığında arızanın varlığını, biçimiyle de türünü gösterir; drone örnekleri akım, titreşim, voltaj ve pusula sapmaları üzerinden verilir. Dijital ikiz bağlantı seviyesi, kapsam, yaşam döngüsü, kurulum yöntemi, işlev düzeyi ve çalışma yeri eksenlerinde sınıflandırılır; Kritzinger'in dijital model, dijital gölge ve dijital ikiz ayrımı veri akışının yönüne dayanır. Modeli gerçeğe yakın tutan kalibrasyon, veri asimilasyonu ve belirsizlik hesabı ile Kalman filtresi, sanal sensör, vekil model, FMI ve döngüde test yöntemleri aktarılır. Metin, dijital ikiz olarak pazarlanan ürünlerin önemli bir kısmının dijital gölge düzeyinde kaldığını kaydeder ve taramadan tasarım verisine uzanan boşluğu açık soru olarak bırakır.",
+    "pdf": "Siber_Fiziksel_Sistemler__Donanımın_Yazılıma_Aktarılması.pdf",
+    "thumb": "thumbs/siber-fiziksel-sistemler-donanımın-yazılıma-aktarılması.png",
+    "addedAt": "2026-10-30T21:21:57.289Z",
+    "pages": 20,
+    "belge": "BELGE-265",
+    "title_en": "Cyber-Physical Systems: Transferring Hardware into Software",
+    "priority": 4,
+    "related": [
+      "kontrol-sistemleri-açık-ve-kapalı-döngü-seçimi",
+      "otomasyon-kendi-kendini-düzelten-sistemler",
+      "sistem-düşüncesi-görünen-davranış-ve-gizli-durum",
+      "tersine-mühendislik-ve-mühendislik-refleksi-sistem-modellemesinden-örgütsel-öğrenmeye",
+      "müdahale-ederek-anlama-karmaşık-yazılım-sistemlerini-anlamanın-yöntem-kataloğu",
+      "kalite-mühendisliği-ürün-geliştirmede-temel-araçlar",
+      "otonominin-mühendisliği-etmen-tabanlı-sistemler-i-çin-bir-karar-sistemleri-çerçevesi"
+    ],
+    "description_en": "The text argues that a device cannot be scanned and turned directly into working software, because its behaviour consists of three layers, each requiring a separate method: geometry, physical behaviour and control logic. Geometry is easily digitised through scanning or photogrammetry; physical behaviour is obtained through system identification as described by Ljung, treating the device as a black box and measuring input and response; control logic can enter the model only in open-source systems such as PX4 and ArduPilot. A complete model combining wiring, materials and controllers, the digital twin, is therefore mostly built by the manufacturer from design data. Fault diagnosis is explained through Isermann's model-based approach: the difference between real measurement and the model's expectation, the residual, indicates a fault when it exceeds a threshold and its type through its shape; drone examples are given through deviations in current, vibration, voltage and compass readings. The digital twin is classified along the axes of connection level, scope, life cycle, construction method, functional level and place of operation; Kritzinger's distinction between digital model, digital shadow and digital twin rests on the direction of data flow. Calibration, data assimilation and uncertainty quantification, which keep the model close to reality, are presented together with the Kalman filter, virtual sensors, surrogate models, FMI and in-the-loop testing methods. The text records that a significant share of products marketed as digital twins remain at the digital shadow level, and leaves open the gap between scanning and design data."
+  },
+  {
     "slug": "kontrol-sistemleri-açık-ve-kapalı-döngü-seçimi",
     "title": "Kontrol Sistemleri: Açık ve Kapalı Döngü Seçimi",
     "date": "2026-10-30",
@@ -17,7 +66,9 @@
       "kalite-testi-bisküvi-fabrikasından-öğrenmek",
       "kalite-mühendisliği-ürün-geliştirmede-temel-araçlar",
       "yazılım-testi-öncelik-sırası",
-      "düzen-nereden-çıkar-sistemler-ağlar-evrim-ve-zihin-üzerine"
+      "düzen-nereden-çıkar-sistemler-ağlar-evrim-ve-zihin-üzerine",
+      "siber-fiziksel-sistemler-donanımın-yazılıma-aktarılması",
+      "hata-avcılığı-yazılımda-kalite-pratikleri"
     ],
     "description_en": "The text defines the distinction between open and closed loop by whether a system's output returns to its input, and offers qualitative criteria for choosing between the two loop types and for detecting a loop in an existing system. An open loop is only as correct as its model; a closed loop compensates for a disturbance by seeing its effect on the output. An open loop suffices when the model is well known, disturbances are small or predictable, the output cannot be measured, errors are cheap, or feedback is heavily delayed; the shower temperature example shows that delay can drive feedback into oscillation. A closed loop is required when uncertainty is large, precision is critical or the system is inherently unstable. Drawing on Sterman, the analysis section determines whether a loop exists through the criteria of return path, time scale, loop strength and system boundary; the most common error is overlooking a strong loop and treating the system as open-loop. A quality test is measurement rather than control unless its result returns to the process; Deming's critique of inspection explains why a system that has passed its tests can remain unstable. The risks of closed loop include the limit set by measurement quality, concealment of the root cause and oscillation. The proposed structure combines feedforward with feedback. Loop health is read through three indicators, correction rate, rounds per correction and error-capture rate; a low correction rate can indicate either a strong open loop or a blind measurement. The PID controller section separates sampling rate from discrete correction rounds, measures success by settling time, overshoot and number of oscillations, and records that in a cascade structure the inner loop must be markedly faster than the outer loop.",
     "thumb": "thumbs/kontrol-sistemleri-açık-ve-kapalı-döngü-seçimi.png",
@@ -152,7 +203,9 @@
       "anlamın-sınırları-wittgenstein-dan-ontolojiye-ve-domain-driven-design-a",
       "i-statistik-epistemolojisi-varsayım-tuzak-ve-kırılma-noktaları",
       "veri-mühendisliği-alanlar-ve-ortak-i-lkeler",
-      "kontrol-sistemleri-açık-ve-kapalı-döngü-seçimi"
+      "kontrol-sistemleri-açık-ve-kapalı-döngü-seçimi",
+      "siber-fiziksel-sistemler-donanımın-yazılıma-aktarılması",
+      "hata-avcılığı-yazılımda-kalite-pratikleri"
     ]
   },
   {
@@ -171,7 +224,8 @@
       "kontrol-teorisi-ve-yazılım-denetimi",
       "durum-vektörü-ve-durum-uzayı-yaklaşımı",
       "otomasyon-kendi-kendini-düzelten-sistemler",
-      "kontrol-sistemleri-açık-ve-kapalı-döngü-seçimi"
+      "kontrol-sistemleri-açık-ve-kapalı-döngü-seçimi",
+      "siber-fiziksel-sistemler-donanımın-yazılıma-aktarılması"
     ],
     "title_en": "Systems Thinking: Visible Behaviour and Hidden State",
     "description_en": "The text argues that presenting concepts from Eastern thought directly as engineering methods is misleading, and separates concepts that can only be used as analogies from those actually used in engineering. Ki and kūki o yomu are likened to hidden-state estimation, Ma to delay and buffering, and Tatemae and Honne to the gap between interface and internal state; these analogies are tied to their technical counterparts in the Kalman filter, the delayed control equation and encapsulation. The first four concepts are turned into a four-question framework for debugging and design review. Kaizen, Poka-yoke, Jidoka, Genchi genbutsu, Muda, Mura, Muri, Nemawashi and Hansei, by contrast, are listed not as analogies but as principles originating in the Toyota Production System and applied directly in software. The section on core system concepts defines state, signal, noise, feedback, observability and controllability, stability, hysteresis, the distinction between robustness and resilience, bottleneck, coupling, emergence, tipping point, path dependence, Meadows's leverage points, Ashby's law of requisite variety and Goodhart's law. Systems thinking, system dynamics, control theory and complex systems are compared on the same traffic problem and positioned as complementary rather than alternatives. A learning order and a reading list by field are given. In conclusion, an analogy is said to be useful when it opens a question and misleading when it replaces an answer. The text records that in human and social systems engineering concepts carry explanatory power but do not give exact predictions.",
@@ -220,7 +274,8 @@
       "durum-vektörü-ve-durum-uzayı-yaklaşımı",
       "mühendislik-eğitimi-ecole-polytechnique-yaklaşımı",
       "sistem-düşüncesi-görünen-davranış-ve-gizli-durum",
-      "kontrol-sistemleri-açık-ve-kapalı-döngü-seçimi"
+      "kontrol-sistemleri-açık-ve-kapalı-döngü-seçimi",
+      "siber-fiziksel-sistemler-donanımın-yazılıma-aktarılması"
     ]
   },
   {
@@ -349,7 +404,8 @@
       "güvenilirlik-mühendisliği-yöntemler-ve-alternatifleri-haritası",
       "gerekçenin-taşınması-kuralların-aşınma-mekanizması-ve-bilgi-kaybı",
       "yazılım-mimarisi-kuruluş-ve-girdi-varsayımları",
-      "kalite-testi-bisküvi-fabrikasından-öğrenmek"
+      "kalite-testi-bisküvi-fabrikasından-öğrenmek",
+      "hata-avcılığı-yazılımda-kalite-pratikleri"
     ]
   },
   {
@@ -549,7 +605,8 @@
       "tersine-mühendislik-ve-mühendislik-refleksi-sistem-modellemesinden-örgütsel-öğrenmeye",
       "teknolojik-bilginin-kaybı-aktarım-zincirleri-örtük-bilgi-ve-kurumsal-süreklilik-stratejileri-üzerine-bir-i-nceleme",
       "o-rtu-k-bilgi-ve-u-ru-n-gelis-tirici-deneyiminden-bilme-bic-imlerine",
-      "yazılım-testi-öncelik-sırası"
+      "yazılım-testi-öncelik-sırası",
+      "hata-avcılığı-yazılımda-kalite-pratikleri"
     ]
   },
   {
@@ -951,7 +1008,8 @@
       "dayanıklılık-mühendisliği-chaos-monkey-ve-gizli-bağımlılıklar",
       "kalite-mühendisliği-ürün-geliştirmede-temel-araçlar",
       "sistem-güvenliği-kesişimde-doğan-hatalar",
-      "kontrol-sistemleri-açık-ve-kapalı-döngü-seçimi"
+      "kontrol-sistemleri-açık-ve-kapalı-döngü-seçimi",
+      "hata-avcılığı-yazılımda-kalite-pratikleri"
     ],
     "title_en": "Software Testing: Order of Priority",
     "description_en": "The text presents a three-term criterion for ordering test types by when they are set up, a list divided into seven groups by that criterion, and sections addressing two questions the list does not answer. In order of precedence, the criterion asks whether the failure class has occurred in this system, how long setup takes and how long a run takes; the first term dominates. There are two exceptions: zero-cost checks stay on permanently, and a new feature's own rule is written for every feature without requiring a prior failure. The groups range from zero-cost checks, through pinning existing code in the first week, input design and pipeline integrity, user flows, and tests requiring real dependencies, to slow tests run nightly and families kept off until the first failure. The writing-time section records that a regression test protects only a failure that has already occurred, and prescribes writing invariants for failures not yet seen, checked at test time through property-based testing and at run time through runtime assertions. Writing the rule before the code and seeing it red is justified through TDD and BDD; mutation testing shows where the test suite is blind, and variant analysis shows the other instances of a found failure. For the deploy moment and the dropped request, a family of graceful shutdown, a readiness signal, idempotency, retry with backoff, job leases and a circuit breaker is defined. The final section reports an intersection scan conducted at the points where components meet, which produced about fifty findings, and its counterparts in the literature such as STPA, FMEA, HAZOP and differential testing; for the next scan it recommends using STPA, HAZOP and differential testing together.",
@@ -980,7 +1038,8 @@
       "yazılım-bakımı-değişikliğin-yayılması",
       "yazılım-mimarisi-kuruluş-ve-girdi-varsayımları",
       "üretim-felsefesi-deming-den-sola-kaydırmaya",
-      "kalite-testi-bisküvi-fabrikasından-öğrenmek"
+      "kalite-testi-bisküvi-fabrikasından-öğrenmek",
+      "hata-avcılığı-yazılımda-kalite-pratikleri"
     ]
   },
   {
@@ -1159,7 +1218,8 @@
       "04-bug-topolojisi-ve-formel-dogrulama",
       "uzay-bilimlerinden-yazılım-mühendisliğine-dersler",
       "yazılım-testi-dört-soru-ile-test-sınıflandırması",
-      "yazılım-testi-öncelik-sırası"
+      "yazılım-testi-öncelik-sırası",
+      "hata-avcılığı-yazılımda-kalite-pratikleri"
     ],
     "title_en": "Software Testing: The Oracle Problem",
     "description_en": "The text treats the basis on which a test declares pass or fail as a problem separate from the test itself and names it the oracle problem. Software testing involves two independent decisions: which input to run the program with, and whether the result is accepted as correct. In most real systems the expected output cannot be written in advance, so correctness is checked not against an absolute value but through a relation between two executions. Oracle types are classified: specified, derived (metamorphic, regression, differential, inverse, model-based), implicit, human and partial oracles. In metamorphic testing, source and follow-up test case, transformation function and output relation are defined; equality, ordering, scaling, composition and containment relations are illustrated. The inheritance of the terminology from mathematical names such as symmetry, invariance, idempotency and permutation is presented as the main reason the method is little known in industry. The method's blind spot is recorded: if both executions produce the same wrong result the relation holds and the test passes; on a violation it is not known which side is wrong. Scenario discovery is defined as a problem of imagination; property-based testing, fuzzing, mutation testing and feedback from real failures are given as the remedy. Ariane 5, Mars Climate Orbiter and the 737 MAX are used to argue that the most expensive failures are validation, not verification, failures; the layers used in high-cost domains do not eliminate error but cover one another's blind spots. Two questions are left open: whether relation discovery can be systematized, and the cost-benefit balance of runtime invariant checking.",
@@ -1233,7 +1293,8 @@
       "yazılım-bakımı-sistem-bilgisinin-biriktirilmesi-ve-ölçülmesi",
       "yazılım-testi-dört-soru-ile-test-sınıflandırması",
       "yazılım-testi-öncelik-sırası",
-      "güvenilirlik-mühendisliği-yöntemler-ve-alternatifleri-haritası"
+      "güvenilirlik-mühendisliği-yöntemler-ve-alternatifleri-haritası",
+      "hata-avcılığı-yazılımda-kalite-pratikleri"
     ]
   },
   {
@@ -1581,7 +1642,8 @@
       "yazılım-felsefesi-kod-yasadır",
       "anlamın-sınırları-wittgenstein-dan-ontolojiye-ve-domain-driven-design-a",
       "güvenlik-eğitiminin-anatomisi-temelden-uygulamaya",
-      "sistem-güvenliği-kesişimde-doğan-hatalar"
+      "sistem-güvenliği-kesişimde-doğan-hatalar",
+      "hata-avcılığı-yazılımda-kalite-pratikleri"
     ]
   },
   {
@@ -1941,7 +2003,8 @@
       "ko-tu-projede-agent-tahmin-eder-yazılımda-niyet-ve-i-z",
       "ölçüm-cihazı-kavram-tarih-ve-mühendislik-i-lkeleri",
       "uzun-döngülü-karar-problemleri-doğrulama-mimarisi-üzerine-birleşik-bir-çerçeve",
-      "vekil-değişkenler-ve-örtük-yargı"
+      "vekil-değişkenler-ve-örtük-yargı",
+      "siber-fiziksel-sistemler-donanımın-yazılıma-aktarılması"
     ]
   },
   {
@@ -2251,7 +2314,8 @@
       "bilişsel-psikoloji-yazılım-mühendisliğine-aktarım",
       "zihinsel-model-yabancı-sistemi-anlama-yordamı",
       "dayanıklılık-mühendisliği-chaos-monkey-ve-gizli-bağımlılıklar",
-      "güvenilirlik-mühendisliği-yöntemler-ve-alternatifleri-haritası"
+      "güvenilirlik-mühendisliği-yöntemler-ve-alternatifleri-haritası",
+      "siber-fiziksel-sistemler-donanımın-yazılıma-aktarılması"
     ],
     "priority": 10,
     "belge": "BELGE-166"
@@ -2460,7 +2524,8 @@
       "i-sveç-özelinde-teknolojik-uzmanlaşma-kabiliyet-birikimi-ve-sistem-çözümlemesi-üzerine-bir-i-nceleme",
       "nereden-biliyoruz-bilginin-anatomisi-üzerine-bir-i-nceleme",
       "ürünlerle-düşünmek-bilginin-alete-aletin-yargıya-dönüşümü",
-      "dayanıklılık-mühendisliği-chaos-monkey-ve-gizli-bağımlılıklar"
+      "dayanıklılık-mühendisliği-chaos-monkey-ve-gizli-bağımlılıklar",
+      "siber-fiziksel-sistemler-donanımın-yazılıma-aktarılması"
     ],
     "priority": 9,
     "belge": "BELGE-158"
@@ -4113,7 +4178,8 @@
       "test-mühendisliği-yeterlilik-etkinlik-güvenilirlik",
       "yazılım-testi-oracle-problemi",
       "yazılım-testi-dört-soru-ile-test-sınıflandırması",
-      "yazılım-testi-öncelik-sırası"
+      "yazılım-testi-öncelik-sırası",
+      "hata-avcılığı-yazılımda-kalite-pratikleri"
     ]
   },
   {

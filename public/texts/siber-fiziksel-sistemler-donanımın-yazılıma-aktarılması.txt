@@ -1,0 +1,511 @@
+Siber-Fiziksel Sistemler: Donanımın Yazılıma
+Aktarılması
+ÖFY
+October 2026
+Özet
+Bir donanımı tarayıp doğrudan çalışan bir yazılıma dönüştürmek mümkün değildir.
+Tarama yalnızca dış geometriyi verir. Fiziksel davranış ölçümle ve sistem tanımlama
+yöntemiyle elde edilir. Kontrol yazılımı ise ancak açık kaynaklıysa ya da üretici
+erişim veriyorsa modele katılabilir. Kablolama, malzeme ve kontrolcüleri bir-
+likte içeren tam bir model, üreticinin tasarım verisiyle kurulur. Bu modelin adı
+dijital ikizdir (digital twin). Dijital ikizin arıza teşhisindeki gücü, gerçek ölçüm
+ile modelin beklentisi arasındaki farktan gelir. Farkın büyüklüğü bir sorunun
+varlığını, biçimi ise sorunun türünü gösterir. Dijital ikiz tek bir alan değildir.
+Bağlantı seviyesi, kapsam, yaşam döngüsü, kurulum yöntemi ve işlev düzeyi gibi
+birbirini dışlamayan eksenlerde sınıflandırılır. Alanın en büyük açık sorunları,
+araçlar arası birlikte çalışabilirlik, modelin zamanla gerçekten uzaklaşması ve
+kurulum maliyetidir.
+1
+
+-- 1 of 20 --
+
+Giriş
+Fiziksel bir cihazın tüm özellikleriyle bilgisayar ortamına aktarılması fikri, özellikle
+arıza teşhisi açısından çekicidir. Bir drone düştüğünde ya da bir motor bozulduğunda,
+sorunun hangi kablodan, hangi parçadan ya da hangi yazılım kararından kay-
+naklandığını bir yazılımın söyleyebilmesi beklenir.
+Bu beklentinin arkasında yaygın bir yanlış kabul vardır: cihazın taran-
+masının, onu yazılıma aktarmak için yeterli olduğu düşünülür. Oysa tarama
+yalnızca yüzeyi görür. Bir cihazın davranışını belirleyen üç katman vardır ve
+her biri farklı bir yöntem gerektirir.
+• Geometri: parçaların biçimi, ölçüsü ve yerleşimi.
+• Fiziksel davranış: kütle, eylemsizlik, itki, sürtünme, ısınma, elektriksel
+özellikler.
+• Kontrol mantığı: cihazın gömülü yazılımı (firmware) ve kontrol algorit-
+maları.
+Dijital ikiz, bu üç katmanı birleştiren ve gerçek cihazla veri alışverişi ya-
+pan bilgisayar modelidir. Notun kapsamı dijital ikizin kuruluşu, arıza teşhisinde
+kullanımı, sınıflandırmaları, dayandığı yöntemler, uygulama alanları ve ekosis-
+temidir. Tek tek araçların kullanım ayrıntıları kapsam dışıdır.
+2
+
+-- 2 of 20 --
+
+Donanımın Yazılıma Aktarılması
+Geometri Katmanı
+Geometri, katmanlar arasında elde edilmesi en kolay olanıdır. 3D tarayıcı ya
+da fotogrametri (photogrammetry, çok sayıda fotoğraftan 3D model çıkarma) ile
+bir drone gövdesi dakikalar içinde sayısallaştırılabilir.
+Elde edilen model ise yalnızca bir kabuktur. Hangi bölgenin motor, hangisinin
+batarya olduğu, parçaların ağırlığı, ağırlık merkezi ve malzemesi bu modelde
+yer almaz. Basit mekanik parçalarda (bir dişli, bir bağlantı braketi) geometri
+neredeyse yeterlidir. Elektronik ve yazılım içeren cihazlarda ise geometri yalnızca
+başlangıçtır.
+Fiziksel Davranış Katmanı
+Bir drone’un nasıl uçtuğu taramayla öğrenilemez, ölçülmesi gerekir. Bunun
+yöntemi sistem tanımlamadır.
+Sistem Tanımlama
+Sistem tanımlama (system identification), bir sistemin davranışını iç yapısını
+açmadan, yalnızca verilen girdiye karşı alınan tepkiyi inceleyerek matematik
+modele dönüştürme yöntemidir (Ljung, 1999). Sistem bir kara kutu olarak ele
+alınır.
+Bir otomobil örneği mekanizmayı açıklar. Gaz pedalına yarım basıldığında
+araç 5 saniyede 50 km/s hıza, tam basıldığında 3 saniyede aynı hıza ulaşıyorsa
+ve bu deneme yeterince tekrarlanırsa, pedal konumu ile ivmelenme arasındaki
+ilişki bir denklemle ifade edilebilir. Bu denklem, motorun içi hiç görülmeden
+aracın davranışını tahmin etmeye yeter.
+Drone için süreç şöyle işler:
+• Drone’a bilinen komutlar verilir: motor hızının artırılması, belirli bir açıyla
+yatma.
+• Sensörler tepkiyi kaydeder: yükselme miktarı, dönüş hızı, salınım.
+• Girdi ve çıktı verileri bilgisayara aktarılır.
+• Bu verilere en iyi uyan denklemler bulunur.
+Yöntemin değeri, formülle hesaplanması zor etkileri doğrudan ölçmesinden
+gelir. Pervane ile hava arasındaki etkileşim, motor tepki gecikmesi ve gövde
+titreşimi bunlara örnektir. Sistem tanımlama kontrol mühendisliğinin temel
+konularından biridir. Uçaklarda, robotlarda, endüstriyel makinelerde ve ekonomik
+modellemede aynı mantıkla kullanılır. Süreç günler ya da haftalar alabilir.
+3
+
+-- 3 of 20 --
+
+Kontrol Mantığı Katmanı
+Kontrol yazılımının modele katılabilmesi cihazın açıklığına bağlıdır.
+• Açık kaynaklı sistemler: PX4 ve ArduPilot gibi uçuş yazılımları kaynak
+kodu açık olduğu için bilgisayarda sanal bir drone üzerinde çalıştırılabilir.
+Bu yönteme SIL (Software-in-the-Loop) denir.
+• Kapalı sistemler: Ticari ürünlerin çoğunda yazılım şifrelidir. ˙Içeriğinin
+çıkarılması teknik olarak zordur ve çoğu durumda lisans koşullarıyla yasak-
+lanmıştır.
+Neden Her Donanım Aktarılamaz
+Tarama içerideki devreyi, çiplerdeki kodu ve malzemenin özelliklerini göremez.
+Bu bilgiler yoksa iş tersine mühendisliğe döner: kartlar tek tek incelenir, kablo-
+lar takip edilir, gerekirse endüstriyel bilgisayarlı tomografi (CT) ile cihazın içi
+kesilmeden görüntülenir. Bu yol yavaş ve pahalıdır. Bu nedenle ciddi dijital
+ikizler çoğunlukla üreticinin kendisi tarafından kurulur.
+4
+
+-- 4 of 20 --
+
+Dijital ˙Ikiz ile Arıza Teşhisi
+Tasarım Verisinin Rolü
+Kablolama, metal yapı ve kontrolcülerin birlikte yer aldığı tam bir model tara-
+mayla değil, tasarım belgeleriyle kurulur:
+• Mekanik: CAD çizimleri, malzeme bilgisi, parça ağırlıkları.
+• Elektrik: devre şemaları ve kablo demeti planı (hangi kablonun nereden
+nereye gittiği, kesiti).
+• Elektronik: kontrolcü kartlarının şemaları, sensör özellikleri.
+• Yazılım: kontrolcünün firmware’i.
+Bu katmanlar tek bir modelde birleştirilir ve mekanik, elektrik ve kontrol aynı
+simülasyonda birlikte çalışır. Bu tür çok alanlı modelleme için Simulink/Simscape,
+Modelica ve Ansys Twin Builder gibi araçlar kullanılır.
+Teşhisin Mekanizması
+Arıza teşhisinin temeli, gerçek ölçüm ile modelin beklentisinin karşılaştırılmasıdır.
+Bu yaklaşıma model tabanlı arıza teşhisi denir (Isermann, 2006).
+1. Gerçek cihazdaki sensörler akım, voltaj, sıcaklık, titreşim ve motor devri
+gibi değerleri ölçer.
+2. Dijital ikiz, aynı koşullarda bu değerlerin normalde ne olması gerektiğini
+hesaplar.
+3. ˙Iki değer karşılaştırılır. Aradaki farka artık (residual ) denir.
+4. Artık belirli bir eşiği aşarsa arıza vardır. Artığın biçimi arızanın türünü
+gösterir.
+Drone Örnekleri
+• Bir motor aynı komuta karşı diğerlerinden fazla akım çekiyorsa, o motorun
+rulmanı bozuluyor ya da pervanesi hasar görmüş olabilir.
+• Titreşim belirli bir frekansta artıyorsa, pervane dengesizdir ya da gövdede
+çatlak vardır.
+• Voltaj beklenenden hızlı düşüyorsa, bir batarya hücresi yaşlanmış ya da
+bir kablo bağlantısı gevşeyip ısınıyor olabilir.
+• Pusula verisi motor gücüyle birlikte kayıyorsa, güç kabloları pusulaya fazla
+yakındır ve manyetik parazit üretir.
+PX4 ve ArduPilot’un uçuş kaydı analiz araçları bu tespitlerin bir kısmını
+otomatik olarak yapar.
+5
+
+-- 5 of 20 --
+
+Endüstriyel Uygulamalar
+• Rolls-Royce ve GE, uçak motorlarını uçuş sırasında toplanan veriyle izler
+ve arıza oluşmadan bakım planlar.
+• Tesla, araçlardan topladığı verilerle sorunları uzaktan teşhis eder.
+• Endüstriyel ve askerı drone üreticileri filo bakımında aynı yöntemi kullanır.
+Bu alanın endüstrideki adı PHM’dir (Prognostics and Health Management,
+sağlık izleme ve arıza tahmini).
+6
+
+-- 6 of 20 --
+
+Tarihsel Gelişim
+• 1970, Apollo 13: NASA mühendisleri arızalı uzay aracının sorunlarını
+yerdeki eş sistemler ve simülatörler üzerinde çözmüştür. Bu olay, dijital
+ikiz fikrinin en sık anılan erken örneğidir.
+• 2002: Michael Grieves, kavramı ürün yaşam döngüsü yönetimi bağlamında
+ortaya koymuştur. Fiziksel ürün, sanal ürün ve ikisi arasındaki veri bağlantısı
+üçlüsü bu çerçevenin temelidir (Grieves ve Vickers, 2017).
+• 2010–2012: NASA “dijital ikiz” terimini teknoloji yol haritalarında kul-
+lanmaya başlamış (Shafto ve diğerleri, 2012), kavram hava araçları için
+ayrıntılandırılmıştır (Glaessgen ve Stargel, 2012).
+• 2015 sonrası: Nesnelerin interneti (IoT) ve bulut bilişimin yaygınlaşmasıyla
+kavram endüstride geniş ölçüde benimsenmiştir.
+7
+
+-- 7 of 20 --
+
+Dijital ˙Ikizin Sınıflandırmaları
+Aşağıdaki sınıflandırmalar birbirini dışlamaz. Sahadaki tek bir drone aynı anda
+ürün ikizi, örnek ikizi ve tahmin edici ikiz olabilir.
+Bağlantı Seviyesine Göre
+Kritzinger ve diğerleri (2018) bu ayrımı veri akışının yönüne göre kurmuştur:
+Tür Veri akışı
+Dijital model Gerçek cihazla otomatik veri akışı yoktur, model elle
+güncellenir.
+Dijital gölge Veri gerçek cihazdan modele akar, model cihaza geri
+bildirim vermez.
+Dijital ikiz Veri iki yönlü akar, model gerçek cihaza ayar ya da komut
+gönderebilir.
+Kapsama Göre
+• Parça ikizi: tek bir bileşen, örneğin bir rulman ya da batarya hücresi.
+• Ürün ikizi: parçaların birleşmesiyle oluşan cihaz, örneğin bir drone.
+• Sistem ikizi: birlikte çalışan cihazlar, örneğin bir drone filosu ya da
+üretim hattı.
+• Süreç ikizi: cihazdan çok işin kendisi, örneğin üretim akışı ya da tedarik
+zinciri.
+Küçük ikizlerin birleşerek büyük ikizleri oluşturmasına ikizlerin ikizi denir:
+parça ikizleri ürün ikizini, ürün ikizleri filo ikizini oluşturur.
+Yaşam Döngüsüne Göre
+Grieves ve Vickers (2017) üç tür tanımlar:
+• Prototip ikizi (Digital Twin Prototype): ürün üretilmeden, tasarım aşamasında
+kurulan model.
+• Örnek ikizi (Digital Twin Instance): sahadaki her tek cihazın kendi ikizi,
+örneğin belirli bir seri numaralı drone’un ikizi.
+• Toplu ikiz (Digital Twin Aggregate): çok sayıda örnek ikizin verisinin
+birleştiği model. “Bu motor modeli ortalama 300 saatte bozulmaya başlıyor”
+gibi eğilimler buradan çıkarılır.
+Ürünün ömür aşamalarına göre ayrıca üretim ikizi (hangi makinede, hangi
+toleransla, hangi malzeme partisiyle üretildiği), bakım ikizi (hangi parçanın ne
+zaman değiştiği) ve ömür sonu ikizi (hangi parçanın geri dönüştürülebileceği)
+ayrımları yapılır.
+8
+
+-- 8 of 20 --
+
+Kurulum Yöntemine Göre
+• Fizik tabanlı: fizik yasalarına dayanan denklemlerle kurulur. Doğrudur
+ancak yavaştır ve kurulması uzmanlık ister.
+• Veri tabanlı: makine öğrenmesi modeli, cihazın geçmiş verisinden öğrenir.
+Hızlıdır ancak eğitim verisinde bulunmayan durumlarda yanılabilir.
+• Hibrit: fizik modeli iskeleti kurar, veri tabanlı model eksik kalan etkileri
+tamamlar. Günümüzde en çok tercih edilen yaklaşımdır.
+˙Işlev Düzeyine Göre
+Basitten karmaşığa doğru:
+1. Betimleyici: şu an ne olduğunu gösterir.
+2. Teşhis edici: bir olayın neden olduğunu açıklar.
+3. Tahmin edici: ne olacağını öngörür, örneğin bir motorun iki hafta içinde
+bozulacağını.
+4. Öneri veren: ne yapılması gerektiğini söyler.
+5. Otonom: kararı kendisi verir ve insan onayı olmadan uygular.
+Hız ve C alışma Yerine Göre
+• Gerçek zamanlı ikiz: cihazla eşzamanlı çalışır, milisaniyeler içinde tepki
+verir.
+• C evrimdışı ikiz: veriyi sonradan, daha ayrıntılı analiz eder.
+• Uç (edge) ikiz: cihazın üzerinde ya da yakınında çalışır, internet bağlantısına
+bağımlı değildir.
+• Bulut ikizi: sunucuda çalışır, ağır hesaplamalar ve filo analizleri burada
+yapılır.
+• Federe ikiz: farklı kurumların ikizleri birbiriyle iletişim kurar ancak
+veriyi tamamen paylaşmaz. Bir drone üreticisinin ikizi ile batarya tedarikçisinin
+ikizi buna örnektir.
+9
+
+-- 9 of 20 --
+
+Teknik Disiplinler ve Yöntemler
+Temel Disiplinler
+Bir dijital ikiz kurmak birkaç disiplinin birlikte çalışmasını gerektirir:
+• Modelleme ve simülasyon: mekanik, elektrik, ısıl ve akışkan modelleri.
+• Sensörler ve IoT: gerçek cihazdan veri toplama.
+• Veri ve yapay zekâ: veriyi işleme, örüntü bulma, tahmin.
+• PHM: sağlık izleme ve arıza tahmini.
+• Görselleştirme: 3D arayüzler, artırılmış gerçeklik (AR), izleme panoları.
+• ˙Iletişim: cihaz ile model arasındaki veri yolu.
+Modelin Gerçeğe Yakın Tutulması
+Parçalar aşındıkça ve malzeme yaşlandıkça model ile gerçek cihaz birbirinden
+uzaklaşır. Bunu önlemek için dört yöntem kullanılır:
+• Kalibrasyon: modeldeki parametrelerin gerçek veriyle düzenli olarak
+düzeltilmesi.
+• Veri asimilasyonu: sensör verisinin model çalışırken sürekli olarak mod-
+ele katılması. Sayısal hava tahmini bu yöntemle yapılır.
+• Belirsizlik hesabı (uncertainty quantification): tahminin bir güven aralığıyla
+verilmesi. Model “motor iki hafta sonra bozulur” yerine “%80 olasılıkla
+10 ile 18 gün arasında bozulur” der.
+• Doğrulama ve geçerleme (verification and validation): modelin doğru
+kurulduğunun ve gerçeği doğru temsil ettiğinin kanıtlanması. Havacılık
+gibi alanlarda yasal zorunluluktur.
+Matematiksel Yöntemler
+• Durum kestirimi: doğrudan ölçülemeyen bir değerin ölçülebilenlerden
+tahmin edilmesi. Kalman filtresi (Kalman, 1960) ve parçacık filtresi bu
+alanın temel araçlarıdır. Drone’un konumunun GPS, ivmeölçer ve pusula
+verilerinin birleştirilmesiyle bulunması buna örnektir.
+• Sanal sensör: fiziksel olarak yerleştirilemeyen bir sensörün yerine mod-
+elin kullanılması. Motorun iç sıcaklığının akım ve devir verisinden hesa-
+planması buna örnektir.
+• ˙Indirgenmiş model (reduced-order model ) ve vekil model (surrogate
+model ): saatler süren ayrıntılı simülasyonların yerine milisaniyede sonuç
+veren yaklaşık modeller. Gerçek zamanlı ikizlerin çoğu bunlara dayanır.
+10
+
+-- 10 of 20 --
+
+• Fizik bilgili sinir ağları (Physics-Informed Neural Networks, PINN):
+fizik denklemlerini eğitim sürecine katan sinir ağları (Raissi ve diğerleri,
+2019). Az veriyle daha doğru sonuç verir.
+• Optimizasyon: ikiz üzerinde çok sayıda ayarın denenmesi ve en iyisinin
+bulunması.
+Verinin Anlamlandırılması
+Sensör verisi tek başına sayı dizisidir. “Bu sensör şu motora bağlı, o motor
+şu kola takılı” gibi ilişkilerin bilgisayarın işleyebileceği biçimde tanımlanması
+gerekir. Bunun için ontolojiler ve bilgi grafları (knowledge graph) kullanılır. Mi-
+crosoft’un DTDL (Digital Twins Definition Language) dili, ikizlerin tanımlanması
+için geliştirilmiş bir örnektir.
+Modellerin Birleştirilmesi
+• FMI ve FMU (Functional Mock-up Interface / Unit): farklı araçlarda
+hazırlanmış modellerin tek bir pakette birleştirilmesini sağlayan standart.
+Simulink’te hazırlanmış bir motor modeli ile Modelica’da hazırlanmış bir
+batarya modeli bu yolla aynı simülasyonda çalışır.
+• Eş-simülasyon (co-simulation): birden fazla simülasyon aracının aynı
+anda, birbirine veri vererek çalışması.
+• SysML v2: sistem mühendisliğinin modelleme dili. Parçaların birbirine
+nasıl bağlandığını ve hangi gereksinimi karşıladığını tanımlar. Bu yaklaşımın
+genel adı model tabanlı sistem mühendisliğidir (MBSE).
+Taramadan ˙Ikize Geçiş
+• Nokta bulutu: lazer tarayıcının (LiDAR) ürettiği milyonlarca noktalık
+3D veri.
+• Scan-to-CAD / Scan-to-BIM: nokta bulutunun düzenlenebilir CAD ya
+da yapı modeline dönüştürülmesi. Yapay zekâ ile kısmen otomatikleşmektedir.
+• NeRF (Mildenhall ve diğerleri, 2020) ve Gaussian Splatting (Kerbl ve
+diğerleri, 2023): az sayıda fotoğraftan yüksek görsel kalitede 3D sahne
+üreten yöntemler. Görsel ikizlerde hızla yayılmaktadır.
+• Endüstriyel CT: cihazın içinin kesilmeden 3D olarak görüntülenmesi. ˙Iç
+kablolama ve parça yerleşiminin görülmesinin yoludur.
+11
+
+-- 11 of 20 --
+
+Oyun ve Fizik Motorları
+Unity ve Unreal Engine, oyun için geliştirilmiş olmalarına rağmen ikizlerin görsel
+ve etkileşimli katmanında yaygın olarak kullanılır. PhysX, MuJoCo ve Bullet
+gibi fizik motorları ise robot ve drone simülasyonlarının çoğunun altyapısını
+oluşturur. Drone alanında Gazebo, AirSim ve PX4 simülasyon ortamı bu mo-
+torlar üzerine kurulu hazır ortamlardır.
+12
+
+-- 12 of 20 --
+
+Test, Geliştirme ve Eğitim
+Döngüde Test Yöntemleri
+Bu yöntemler dijital ikize çok yakındır ve çoğu zaman aynı modelleri kullanır:
+• MIL (Model-in-the-Loop): yalnızca modeller birbiriyle test edilir.
+• SIL (Software-in-the-Loop): gerçek yazılım sanal cihaz üzerinde çalışır.
+• HIL (Hardware-in-the-Loop): gerçek kontrol kartı sanal cihaza bağlanır.
+Kart, gerçek bir drone’a bağlı olduğunu varsayarak çalışır.
+• Sanal devreye alma (virtual commissioning): bir üretim hattının yazılımının,
+hat fiziksel olarak kurulmadan sanal hat üzerinde denenmesi.
+˙Ikizin Eğitim Ortamı Olarak Kullanılması
+• Sentetik veri üretimi: gerçekte nadir görülen arızalar ikizde binlerce
+kez üretilir ve yapay zekâ modelleri bu verilerle eğitilir.
+• Simülasyondan gerçeğe aktarım (sim-to-real ): robot ya da drone, ikiz
+içinde çok sayıda deneme yaparak öğrenir, öğrenilen davranış gerçek cihaza
+aktarılır.
+• Operatör eğitimi: pilot ya da teknisyen gerçek cihazı riske atmadan ikiz
+üzerinde çalışır.
+13
+
+-- 13 of 20 --
+
+Uygulama Alanları
+Endüstri ve Ulaşım
+• Üretim: fabrika, makine, robot hattı.
+• Havacılık, uzay ve savunma: uçak motoru, uydu, uzay aracı, drone.
+Alanın doğduğu yerdir.
+• Otomotiv: araç, batarya, otonom sürüş testi.
+• Denizcilik: gemi gövdesi aşınması, yakıt tüketimi, rota.
+• Demiryolu: ray ve tren durumu, ray bozulmasının önceden tahmini.
+• Lojistik: depo, liman, tedarik zinciri.
+Enerji ve Kaynaklar
+• Enerji: rüzgâr türbini, elektrik şebekesi, santral.
+• Petrol ve gaz: platform, boru hattı, kuyu.
+• Madencilik: maden sahası ve ekipman.
+• Su şebekeleri: kaçak tespiti, basınç yönetimi.
+• Tarım: tarla ve ürün; sulama, gübreleme, hasat zamanı.
+Yapılar, Sehir ve Gezegen
+• Bina: BIM (Building Information Modeling, yapı bilgi modellemesi) bina
+ikizlerinin temelidir.
+• Sehir: CBS (coğrafi bilgi sistemleri) şehir ikizlerinin temelidir. Trafik ve
+altyapı planlamasında kullanılır.
+• Dünya: iklim ve hava sisteminin modeli. Avrupa Birliği’nin Destination
+Earth girişimi bunun örneğidir.
+˙Insan ve Kurum
+• ˙Insan dijital ikizi: bir hastanın kalp, akciğer ya da genel fizyoloji modeli.
+Tedavinin önce ikiz üzerinde denenmesi amaçlanır.
+• Sporcu ikizi: sakatlık riski ve performans takibi.
+• Kurum ikizi: bir şirketin çalışanları, süreçleri ve karar yapısının modeli.
+Örgütsel değişikliklerin etkisini önceden denemek için kullanılır.
+14
+
+-- 14 of 20 --
+
+Özel Amaçlı ˙Ikizler
+• Ağ ikizi: telekom şebekelerinin modeli. 5G ve 6G ağlarında değişikliklerin
+gerçek ağa uygulanmadan önce denenmesi için.
+• Siber güvenlik ikizi: bir sistemin kopyası üzerinde saldırı ve savunma
+senaryolarının denenmesi.
+• Karbon ikizi: bir ürünün ya da tesisin enerji tüketimi ve karbon salımının
+izlenmesi.
+• Perakende ikizi: mağaza düzeni ve müşteri akışı.
+15
+
+-- 15 of 20 --
+
+Ekosistem
+Yakın Kavramlar
+• Dijital iplik (digital thread ): bir ürünün tasarımdan üretime, sahadan
+hurdaya kadar tüm verisini birbirine bağlayan zincir. Dijital ikiz bu zin-
+cirin üzerinde çalışır.
+• Siber-fiziksel sistemler: yazılım ve fiziksel dünyanın iç içe geçtiği sis-
+temlerin genel adı. Dijital ikiz bu sistemlerin bir bileşenidir.
+• Endüstriyel metaverse: fabrika ve şehirlerin paylaşılan 3D sanal or-
+tamlarda modellenmesi. NVIDIA Omniverse bu alanın bilinen örneğidir.
+• Dijital ürün pasaportu: ürünün ömür boyu bilgisini taşıyan kayıt.
+Avrupa Birliği bunu bataryalarla başlayarak zorunlu hâle getirmektedir
+(Avrupa Parlamentosu ve Konseyi, 2023).
+Standartlar ve Kuruluşlar
+• ISO 23247: üretimde dijital ikiz çerçevesi (ISO, 2021).
+• RAMI 4.0: Almanya’nın Endüstri 4.0 referans mimari modeli.
+• Asset Administration Shell: endüstriyel varlıkların sayısal temsilinin
+standart yapısı.
+• OPC UA: endüstriyel cihazlar arasında veri iletişimi standardı.
+• Digital Twin Consortium: alanın ortak kavram ve kurallarını belir-
+lemeye çalışan uluslararası topluluk.
+Platformlar
+Azure Digital Twins (Microsoft), AWS IoT TwinMaker (Amazon), Siemens
+Xcelerator, Dassault Syst`emes 3DEXPERIENCE, PTC ThingWorx ve NVIDIA
+Omniverse alandaki başlıca ticari platformlardır.
+˙Iş Modelleri
+• Kullanım başına ödeme: müşteri motoru satın almaz, çalıştığı saat
+için ödeme yapar. Üretici motoru ikiz üzerinden izler ve bakımı ken-
+disi üstlenir. Rolls-Royce uçak motorlarında bu modeli 1960’lardan beri
+“Power by the Hour” adıyla uygular.
+• Hizmet olarak ikiz: kurum ikizi kendisi kurmaz, abonelikle kullanır.
+• Ürünün hizmete dönüşmesi (servitization): ürün satmak yerine ürünü
+çalışır durumda tutma hizmeti satmak. Dijital ikiz bu modeli mümkün
+kılan teknolojidir.
+16
+
+-- 16 of 20 --
+
+Meslekler
+• Simülasyon mühendisi
+• Kontrol sistemleri mühendisi
+• PHM ve güvenilirlik mühendisi
+• IoT mühendisi
+• Veri bilimci ve makine öğrenmesi mühendisi
+• Dijital ikiz mimarı
+• Model tabanlı sistem mühendisi
+17
+
+-- 17 of 20 --
+
+Zorluklar ve Araştırma Yönleri
+Başlıca Zorluklar
+• Birlikte çalışabilirlik: farklı üreticilerin araçları birbiriyle uyumlu çalışmaz.
+Alanın en büyük sorunudur.
+• Maliyet: iyi bir ikizin kurulması pahalıdır. Düşük maliyetli cihazlar için
+çoğu zaman ekonomik değildir.
+• Veri kalitesi: hatalı sensör verisi hatalı teşhise yol açar.
+• Model kayması: model zamanla gerçek cihazdan uzaklaşır ve sürekli
+bakım gerektirir.
+• Güvenlik: ikize erişim sağlayan bir saldırgan, iki yönlü veri akışı ne-
+deniyle gerçek cihazı da etkileyebilir.
+• Etik ve mahremiyet: özellikle insan ikizlerinde verinin kime ait olduğu
+ve kimin erişebileceği tartışmalıdır.
+Açık Araştırma Başlıkları
+• Kendi kendini güncelleyen ikizler.
+• Büyük dil modelleriyle birleşen ve doğal dille sorgulanabilen ikizler.
+• Simülasyonların kuantum hesaplama ile hızlandırılması.
+• Atomdan makineye kadar farklı ölçekleri tek modelde birleştiren çok ölçekli
+modelleme.
+• ˙Ikizlerin güvenilirliğinin biçimsel olarak kanıtlanması.
+• Öğrenen ve akıl yürüten bilişsel ikizler.
+18
+
+-- 18 of 20 --
+
+Sonuç
+“Donanımı tara, yazılım olsun” fikri, katmanlara ayrıldığında farklı zorluk düzeylerine
+bölünür. Geometri bugün kolayca sayısallaştırılır. Fiziksel davranış ölçüm ve
+modellemeyle elde edilir. Kontrol mantığı ise erişim izni ve açıklık meselesidir.
+Bu nedenle hızlı ve tam aktarımın önündeki asıl engel teknolojiden çok bilgiye
+erişimdir: tasarım verisine sahip olan üretici, dışarıdan bakan birinden çok daha
+iyi bir ikiz kurabilir.
+Arıza teşhisi açısından belirleyici olan, modelin ayrıntı düzeyidir. Arızanın
+kablo ya da parça düzeyine kadar izlenebilmesi için modelin de o düzeyde ku-
+rulmuş olması gerekir. Bu da ikizin değerinin, cihazın maliyeti ve arızanın be-
+deliyle orantılı olduğunu gösterir. Uçak motorları ve endüstriyel tesisler için
+yüksek ayrıntı ekonomik olarak anlamlıdır. Tüketici ürünlerinde ise çoğunlukla
+veri tabanlı ve sınırlı ikizler tercih edilir.
+Sınıflandırmaların çokluğu, dijital ikizin bir teknolojiden çok bir yaklaşım
+olduğunu gösterir. Aynı kavram bir rulmandan bir gezegene kadar her ölçekte
+uygulanabilmekte, bu da terimin anlamını genişletirken sınırlarını bulanıklaştırmaktadır.
+“Dijital ikiz” olarak pazarlanan ürünlerin önemli bir kısmı, veri akışı bakımından
+dijital gölge düzeyinde kalmaktadır.
+Açık kalan temel soru, taramadan tasarım verisine uzanan boşluğun yapay
+zekâ ile ne ölçüde kapatılabileceğidir. Tomografi, nokta bulutu işleme ve parça
+tanıma yöntemlerinin birleşimi bu boşluğu daraltmaktadır. Gömülü yazılımın
+ve malzeme özelliklerinin dışarıdan çıkarılması ise henüz çözülmüş değildir.
+Kaynaklar
+• Avrupa Parlamentosu ve Konseyi (2023). Regulation (EU) 2023/1542
+concerning batteries and waste batteries. Official Journal of the European
+Union.
+• Glaessgen, E. ve Stargel, D. (2012). The Digital Twin Paradigm for Future
+NASA and U.S. Air Force Vehicles. 53rd AIAA Structures, Structural
+Dynamics and Materials Conference.
+• Grieves, M. ve Vickers, J. (2017). Digital Twin: Mitigating Unpredictable,
+Undesirable Emergent Behavior in Complex Systems. Transdisciplinary
+Perspectives on Complex Systems içinde. Springer.
+• Isermann, R. (2006). Fault-Diagnosis Systems: An Introduction from
+Fault Detection to Fault Tolerance. Springer.
+• ISO (2021). ISO 23247: Automation systems and integration — Digital
+twin framework for manufacturing.
+• Kalman, R. E. (1960). A New Approach to Linear Filtering and Prediction
+Problems. Journal of Basic Engineering, 82(1).
+19
+
+-- 19 of 20 --
+
+• Kerbl, B., Kopanas, G., Leimkühler, T. ve Drettakis, G. (2023). 3D Gaus-
+sian Splatting for Real-Time Radiance Field Rendering. ACM Transac-
+tions on Graphics, 42(4).
+• Kritzinger, W., Karner, M., Traar, G., Henjes, J. ve Sihn, W. (2018). Dig-
+ital Twin in Manufacturing: A Categorical Literature Review and Classi-
+fication. IFAC-PapersOnLine, 51(11).
+• Ljung, L. (1999). System Identification: Theory for the User (2. baskı).
+Prentice Hall.
+• Mildenhall, B. ve diğerleri (2020). NeRF: Representing Scenes as Neural
+Radiance Fields for View Synthesis. ECCV 2020.
+• Raissi, M., Perdikaris, P. ve Karniadakis, G. E. (2019). Physics-Informed
+Neural Networks. Journal of Computational Physics, 378.
+• Shafto, M. ve diğerleri (2012). Modeling, Simulation, Information Tech-
+nology & Processing Roadmap, Technology Area 11. NASA.
+20
+
+-- 20 of 20 --
