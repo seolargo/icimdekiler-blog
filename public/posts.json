@@ -1,5 +1,29 @@
 [
   {
+    "slug": "kontrol-sistemleri-açık-ve-kapalı-döngü-seçimi",
+    "title": "Kontrol Sistemleri: Açık ve Kapalı Döngü Seçimi",
+    "date": "2026-10-30",
+    "description": "Metin, açık döngü ile kapalı döngü arasındaki ayrımı sistemin çıktısının girdiye geri dönüp dönmemesi üzerinden tanımlar ve iki döngü türü arasında seçim yapmak ile var olan bir sistemde döngüyü tespit etmek için nitel ölçütler sunar. Açık döngüde kontrolün doğruluğu tamamen modelin doğruluğuna bağlıdır; kapalı döngü ise bozucu etkinin ne olduğunu bilmeden yalnızca çıktı üzerindeki sonucunu görerek telafi eder. Açık döngü model iyi bilindiğinde, bozucu etkiler küçük ya da öngörülebilir olduğunda, çıktı ölçülemediğinde, hata ucuz olduğunda, iş kısa sürdüğünde ve geri besleme çok gecikmeli olduğunda yeterli sayılır; duş sıcaklığı örneği gecikmenin geri beslemeyi salınıma sokabildiğini gösterir. Kapalı döngü belirsizlik büyük, hassasiyet kritik ya da sistem kendi başına kararsız olduğunda zorunludur. Analiz bölümü Sterman'a dayanarak döngünün varlığını geri dönüş yolu, zaman ölçeği, döngü gücü ve sistem sınırı ölçütleriyle belirler; en sık hata güçlü bir döngüyü gözden kaçırıp sistemi açık döngü saymaktır. Kalite testi, sonucu sürece geri dönmedikçe kontrol değil ölçümdür; Deming'in muayene eleştirisiyle testlerden geçmiş bir sistemin neden kararsız kalabildiği açıklanır. Kapalı döngünün riskleri ölçüm kalitesi sınırı, kök nedenin gizlenmesi, sınırsız tekrar ve salınım ile gecikme ve maliyet olarak sıralanır. Önerilen yapı ileri besleme ile geri beslemenin birleşimidir; düzeltme kayıtları açık döngü bileşenini iyileştirmek için veri kaynağı olarak kullanılır. Büyük gecikmeli durumlarda seçimin kararlılık analizi gerektirdiği kaydedilir.",
+    "pdf": "Kontrol_Sistemleri__Açık_ve_Kapalı_Döngü_Seçimi.pdf",
+    "thumb": "thumbs/kontrol-sistemleri-açık-ve-kapalı-döngü-seçimi.png",
+    "addedAt": "2026-10-30T16:07:07.005Z",
+    "pages": 10,
+    "belge": "BELGE-264",
+    "title_en": "Control Systems: Choosing Between Open and Closed Loop",
+    "priority": 7,
+    "related": [
+      "otomasyon-kendi-kendini-düzelten-sistemler",
+      "sistem-düşüncesi-görünen-davranış-ve-gizli-durum",
+      "i-statistiksel-süreç-kontrolü-ortak-neden-ve-özel-neden",
+      "üretim-felsefesi-deming-den-sola-kaydırmaya",
+      "kalite-testi-bisküvi-fabrikasından-öğrenmek",
+      "kalite-mühendisliği-ürün-geliştirmede-temel-araçlar",
+      "yazılım-testi-öncelik-sırası",
+      "düzen-nereden-çıkar-sistemler-ağlar-evrim-ve-zihin-üzerine"
+    ],
+    "description_en": "The text defines the distinction between open and closed loop by whether a system's output returns to its input, and offers qualitative criteria for choosing between the two loop types and for detecting a loop in an existing system. In an open loop the correctness of control depends entirely on the correctness of the model; a closed loop compensates without knowing what the disturbance is, seeing only its effect on the output. An open loop is considered sufficient when the model is well known, disturbances are small or predictable, the output cannot be measured, errors are cheap, the job is short, or feedback is heavily delayed; the shower temperature example shows that delay can drive feedback into oscillation. A closed loop is required when uncertainty is large, precision is critical or the system is inherently unstable. Drawing on Sterman, the analysis section determines whether a loop exists through the criteria of return path, time scale, loop strength and system boundary; the most common error is overlooking a strong loop and treating the system as open-loop. A quality test is measurement rather than control unless its result returns to the process; Deming's critique of inspection explains why a system that has passed its tests can remain unstable. The risks of closed loop are listed as the limit set by measurement quality, concealment of the root cause, unbounded repetition and oscillation, and delay and cost. The proposed structure combines feedforward with feedback; correction records serve as a data source for improving the open-loop component. The text records that where delay is large the choice requires stability analysis."
+  },
+  {
     "slug": "duygu-psikolojisi-duygu-ile-davranış-arasındaki-mesafe",
     "title": "Duygu Psikolojisi: Duygu ile Davranış Arasındaki Mesafe",
     "date": "2026-10-30",
@@ -127,7 +151,8 @@
       "yazılım-testi-öncelik-sırası",
       "anlamın-sınırları-wittgenstein-dan-ontolojiye-ve-domain-driven-design-a",
       "i-statistik-epistemolojisi-varsayım-tuzak-ve-kırılma-noktaları",
-      "veri-mühendisliği-alanlar-ve-ortak-i-lkeler"
+      "veri-mühendisliği-alanlar-ve-ortak-i-lkeler",
+      "kontrol-sistemleri-açık-ve-kapalı-döngü-seçimi"
     ]
   },
   {
@@ -145,7 +170,8 @@
       "mühendislik-tarihi-uzak-doğu-felsefelerinin-i-zleri",
       "kontrol-teorisi-ve-yazılım-denetimi",
       "durum-vektörü-ve-durum-uzayı-yaklaşımı",
-      "otomasyon-kendi-kendini-düzelten-sistemler"
+      "otomasyon-kendi-kendini-düzelten-sistemler",
+      "kontrol-sistemleri-açık-ve-kapalı-döngü-seçimi"
     ],
     "title_en": "Systems Thinking: Visible Behaviour and Hidden State",
     "description_en": "The text argues that presenting concepts from Eastern thought directly as engineering methods is misleading, and separates concepts that can only be used as analogies from those actually used in engineering. Ki and kūki o yomu are likened to hidden-state estimation, Ma to delay and buffering, and Tatemae and Honne to the gap between interface and internal state; these analogies are tied to their technical counterparts in the Kalman filter, the delayed control equation and encapsulation. The first four concepts are turned into a four-question framework for debugging and design review. Kaizen, Poka-yoke, Jidoka, Genchi genbutsu, Muda, Mura, Muri, Nemawashi and Hansei, by contrast, are listed not as analogies but as principles originating in the Toyota Production System and applied directly in software. The section on core system concepts defines state, signal, noise, feedback, observability and controllability, stability, hysteresis, the distinction between robustness and resilience, bottleneck, coupling, emergence, tipping point, path dependence, Meadows's leverage points, Ashby's law of requisite variety and Goodhart's law. Systems thinking, system dynamics, control theory and complex systems are compared on the same traffic problem and positioned as complementary rather than alternatives. A learning order and a reading list by field are given. In conclusion, an analogy is said to be useful when it opens a question and misleading when it replaces an answer. The text records that in human and social systems engineering concepts carry explanatory power but do not give exact predictions.",
@@ -172,7 +198,8 @@
       "yazılım-bakımı-sistem-bilgisinin-biriktirilmesi-ve-ölçülmesi",
       "kalite-mühendisliği-ürün-geliştirmede-temel-araçlar",
       "i-statistik-epistemolojisi-varsayım-tuzak-ve-kırılma-noktaları",
-      "veri-mühendisliği-alanlar-ve-ortak-i-lkeler"
+      "veri-mühendisliği-alanlar-ve-ortak-i-lkeler",
+      "kontrol-sistemleri-açık-ve-kapalı-döngü-seçimi"
     ]
   },
   {
@@ -192,7 +219,8 @@
       "kontrol-teorisi-ve-yazılım-denetimi",
       "durum-vektörü-ve-durum-uzayı-yaklaşımı",
       "mühendislik-eğitimi-ecole-polytechnique-yaklaşımı",
-      "sistem-düşüncesi-görünen-davranış-ve-gizli-durum"
+      "sistem-düşüncesi-görünen-davranış-ve-gizli-durum",
+      "kontrol-sistemleri-açık-ve-kapalı-döngü-seçimi"
     ]
   },
   {
@@ -251,7 +279,8 @@
       "üretim-felsefesi-deming-den-sola-kaydırmaya",
       "otomasyon-ve-hatalardan-öğrenme",
       "i-statistiksel-süreç-kontrolü-ortak-neden-ve-özel-neden",
-      "kalite-mühendisliği-ürün-geliştirmede-temel-araçlar"
+      "kalite-mühendisliği-ürün-geliştirmede-temel-araçlar",
+      "kontrol-sistemleri-açık-ve-kapalı-döngü-seçimi"
     ],
     "title_en": "Quality Testing: Learning from a Biscuit Factory",
     "description_en": "The text treats quality control not as a single test but as a family of tests spread across every stage of production, and explains the test types through the example of a biscuit factory, together with the software counterpart of each. The introduction separates Crosby's definition of quality as conformance to requirements from Juran's fitness for use, and ties this distinction to Boehm's questions of verification and validation. The conformance test asks whether the product meets the specified measures and gives a binary pass or fail result; in software it corresponds to functional testing at the unit, integration and end-to-end levels. The quality test measures how good the product is; sensory quality is paired with performance, shelf life with stability, health safety with software security, transport durability with resilience to network conditions, consumer experience with usability, and compatibility. Complementary types are distributed across the moments of production: raw material control, in-process control, smoke testing, regression testing, stress testing, acceptance testing, market testing and calibration. Calibration is positioned as the foundation of the whole structure; unless the measuring instrument is verified, the test process gives confidence but no assurance, which in software appears as a test that passes under every condition and catches no error. That an error is cheaper the earlier it is caught is shown with a table distributing the tests across stages. As a limitation, the text notes that a physical product does not change after it is made, whereas software is continuously remade, which is why regression testing is more central in software.",
@@ -297,7 +326,8 @@
       "yazılım-testi-dört-soru-ile-test-sınıflandırması",
       "durum-vektörü-ve-durum-uzayı-yaklaşımı",
       "i-statistiksel-süreç-kontrolü-ortak-neden-ve-özel-neden",
-      "kalite-mühendisliği-ürün-geliştirmede-temel-araçlar"
+      "kalite-mühendisliği-ürün-geliştirmede-temel-araçlar",
+      "kontrol-sistemleri-açık-ve-kapalı-döngü-seçimi"
     ]
   },
   {
@@ -920,7 +950,8 @@
       "scrutiny-mühendislikte-derinlemesine-i-rdeleme-pratiği",
       "dayanıklılık-mühendisliği-chaos-monkey-ve-gizli-bağımlılıklar",
       "kalite-mühendisliği-ürün-geliştirmede-temel-araçlar",
-      "sistem-güvenliği-kesişimde-doğan-hatalar"
+      "sistem-güvenliği-kesişimde-doğan-hatalar",
+      "kontrol-sistemleri-açık-ve-kapalı-döngü-seçimi"
     ],
     "title_en": "Software Testing: Order of Priority",
     "description_en": "The text presents a three-term criterion for ordering test types by when they are set up, a list divided into seven groups by that criterion, and sections addressing two questions the list does not answer. In order of precedence, the criterion asks whether the failure class has occurred in this system, how long setup takes and how long a run takes; the first term dominates. There are two exceptions: zero-cost checks stay on permanently, and a new feature's own rule is written for every feature without requiring a prior failure. The groups range from zero-cost checks, through pinning existing code in the first week, input design and pipeline integrity, user flows, and tests requiring real dependencies, to slow tests run nightly and families kept off until the first failure. The writing-time section records that a regression test protects only a failure that has already occurred, and prescribes writing invariants for failures not yet seen, checked at test time through property-based testing and at run time through runtime assertions. Writing the rule before the code and seeing it red is justified through TDD and BDD; mutation testing shows where the test suite is blind, and variant analysis shows the other instances of a found failure. For the deploy moment and the dropped request, a family of graceful shutdown, a readiness signal, idempotency, retry with backoff, job leases and a circuit breaker is defined. The final section reports an intersection scan conducted at the points where components meet, which produced about fifty findings, and its counterparts in the literature such as STPA, FMEA, HAZOP and differential testing; for the next scan it recommends using STPA, HAZOP and differential testing together.",
@@ -2830,7 +2861,8 @@
     "related": [
       "sistem-teorisi",
       "yapısal-i-zomorfizm-kaynaklar-gelenekler-sentez",
-      "mühendislik-eğitimi-ecole-polytechnique-yaklaşımı"
+      "mühendislik-eğitimi-ecole-polytechnique-yaklaşımı",
+      "kontrol-sistemleri-açık-ve-kapalı-döngü-seçimi"
     ],
     "pdf": "Düzen_Nereden_Çıkar____Sistemler__Ağlar__Evrim_ve_Zihin_Üzerine.pdf",
     "thumb": "thumbs/düzen-nereden-çıkar-sistemler-ağlar-evrim-ve-zihin-üzerine.png",

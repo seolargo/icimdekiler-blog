@@ -1,0 +1,285 @@
+Kontrol Sistemleri: Açık ve Kapalı Döngü Seçimi
+ÖFY
+October 2026
+Özet
+Açık döngü ile kapalı döngü arasındaki temel ayrım, sistemin çıktısının girdiye
+geri dönüp dönmemesidir. Açık döngü; model doğru bilindiğinde, bozucu etk-
+iler küçük ya da öngörülebilir olduğunda, çıktı ölçülemediğinde ve hata ucuz
+olduğunda yeterlidir. Kapalı döngü ise belirsizlik büyük, hassasiyet kritik ya
+da sistem doğası gereği kararsız olduğunda zorunludur. Bir sistemin hangi
+türden sayılacağı yalnızca fiziksel yapısına değil, analizde çizilen sınıra, ilgile-
+nilen zaman ölçeğine ve geri dönüş yolunun gücüne de bağlıdır. Kalite testleri,
+sonuçlarını sürece geri taşımadıkları sürece kontrol değil ölçüm işlevi görür; bu
+nedenle iyi test edilmiş bir açık döngü sistem de değişken koşullarda kararlı
+çıktı üretemeyebilir. Kapalı döngüye geçiş bu sorunu çözer, ancak döngünün
+başarısı ölçümün doğruluğuyla sınırlıdır ve döngü, hataları düzeltirken kök ne-
+deni görünmez kılabilir. En sağlam yapı, bilinen etkileri önceden karşılayan ileri
+besleme ile kalan hatayı temizleyen geri beslemenin birleşimidir.
+1
+
+-- 1 of 10 --
+
+Giriş
+Bir kontrol sistemi, bir sürecin çıktısını istenen bir değerde ya da aralıkta
+tutmak için sürece uygulanan girdileri belirleyen düzenektir. ˙Istenen değere
+referans, referans ile gerçekleşen çıktı arasındaki farka hata, sürece dışarıdan
+etki eden ve kontrol edilmeyen etkenlere ise bozucu etki (disturbance) denir.
+Açık döngü (open-loop) sistemde kontrol girdisi yalnızca referansa ve sürecin
+önceden bilinen modeline göre belirlenir; çıktı ölçülmez ya da ölçülse bile kontrol
+girdisini etkilemez. Kapalı döngü (closed-loop) sistemde çıktı ölçülür, refer-
+ansla karşılaştırılır ve ortaya çıkan hata kontrol girdisini değiştirmek için kul-
+lanılır. C ıktıdan girdiye uzanan bu yola geri besleme (feedback ) denir (˚ Aström
+ve Murray, 2008).
+Pratikte sık rastlanan bir kabul, bir sistemin kalite testlerinden geçmesinin
+onun kararlı çalışacağını gösterdiğidir. Bu kabul, test ile kontrolü aynı işlev sa-
+yar. Oysa test, çıktının durumunu bildiren bir ölçümdür; ölçümün sonucu sürece
+geri dönmedikçe sistemin davranışı değişmez. Bu ayrım, testlerden geçmiş bir
+sistemin neden kararsız sonuç üretmeye devam edebileceğini açıklar.
+Bu not, iki döngü türü arasında seçim yapmak ve var olan bir sistemde
+döngüyü tespit etmek için kavramsal ölçütleri kapsar. Transfer fonksiyonları,
+kararlılık kriterleri ve kontrolcü tasarımı gibi kontrol teorisinin matematiksel
+araçları kapsam dışındadır.
+2
+
+-- 2 of 10 --
+
+Açık ve Kapalı Döngünün Yapısı
+Açık Döngü
+Açık döngü sistemde komut verilir ve sonuca bakılmaz. Kontrolün doğruluğu
+tamamen modelin doğruluğuna bağlıdır: süreç modelin öngördüğü gibi davranırsa
+çıktı doğru olur, davranmazsa sistem bunu fark etmez.
+Örnek olarak zamanlayıcıyla çalışan bir ekmek kızartma makinesi düşünülebilir.
+Makine, belirlenen süre boyunca ısıtır ve durur. Ekmeğin gerçekte ne kadar
+kızardığını ölçmez; ekmek ince ya da donmuş olsa bile aynı süreyi uygular.
+Benzer şekilde zamanlayıcılı çamaşır makineleri ve konum algılayıcısı (encoder )
+bulunmayan step motorlar da açık döngü çalışır. Step motor, belirli sayıda adım
+komutu aldığında motorun o kadar döndüğünü varsayar; yük fazla gelip adım
+kaçırırsa sistem bunu bilmez.
+Kapalı Döngü
+Kapalı döngü sistemde çıktı sürekli ya da düzenli aralıklarla ölçülür. Ölçülen
+değer referansla karşılaştırılır ve hata sıfırdan farklıysa kontrol girdisi hatayı
+azaltacak yönde değiştirilir.
+Termostat bunun en bilinen örneğidir. Oda sıcaklığı ölçülür; sıcaklık hedefin
+altına düştüğünde ısıtıcı çalışır, hedefe ulaştığında durur. Kapı açılıp soğuk
+hava girse bile termostat sıcaklık düşüşünü ölçer ve telafi eder. Araçlardaki hız
+sabitleyici ve insülin pompaları da aynı mantıkla çalışır.
+Kapalı döngünün temel avantajı, modelde bulunmayan etkileri de telafi ede-
+bilmesidir. Sistem, bozucu etkinin ne olduğunu bilmek zorunda değildir; yalnızca
+çıktı üzerindeki sonucunu görmesi yeterlidir.
+Karşılaştırma
+Özellik Açık döngü Kapalı döngü
+C ıktı ölçümü Yok Var
+Bozucu etkilere tepki Yalnızca modelde öngörülenlere Ölçüme yansıyan her etkiye
+Model hatasına du-
+yarlılık
+Yüksek Düşük
+Maliyet ve karmaşıklık Düşük Daha yüksek
+Kararsızlık riski Süreç kararlıysa yok Gecikme ve aşırı düzeltmeyle or-
+taya çıkabilir
+3
+
+-- 3 of 10 --
+
+Döngü Türünün Seçimi
+Açık Döngünün Yeterli Olduğu Durumlar
+Model ˙Iyi Biliniyorsa
+Sürecin belirli bir girdiye nasıl tepki vereceği önceden doğru tahmin edilebiliy-
+orsa, çıktıyı ölçüp düzeltmeye gerek kalmaz. Doğru hesaplanmış girdi, doğru
+çıktıyı üretir.
+Bozucu Etkiler Küçük ya da Öngörülebilirse
+Dış etkenler ihmal edilebilecek kadar küçükse ya da önceden bilinebiliyorsa, bun-
+lar kontrol girdisine baştan katılabilir. Bu durumda geri beslemenin sağlayacağı
+ek düzeltme, getirdiği maliyete değmez.
+C ıktı Ölçülemiyorsa
+Bazı süreçlerde çıktıyı ölçmek teknik olarak imkânsız, çok pahalı ya da sonucu
+kullanılamayacak kadar yavaştır. Ölçüm yoksa geri besleme de kurulamaz; tek
+seçenek açık döngüdür.
+Hata Ucuzsa
+Hatanın sonucu önemsizse, onu önlemek için kurulan düzenek gereksiz bir maliyet-
+tir. Ekmeğin biraz fazla kızarması, kızarma derecesini ölçen bir algılayıcının
+maliyetini haklı çıkarmaz.
+˙Iş Kısa ve Tek Seferlikse
+Hataların birikmesi zaman alır. Kısa süren ya da bir kez yapılan işlemlerde
+sapmanın büyüyecek zamanı olmadığı için açık döngü genellikle yeterlidir.
+Geri Besleme C ok Gecikmeliyse
+Ölçüm ile düzeltme arasındaki gecikme uzunsa, düzeltme eski bir duruma göre
+yapılır. Bu durumda sistem gereğinden fazla düzeltir, ardından ters yönde
+yeniden düzeltir ve salınıma girer. Klasik örnek, tesisattaki gecikme nedeniyle
+duş sıcaklığının bir türlü ayarlanamamasıdır: kullanıcı suyu soğuk bulup sıcağı
+açar, sıcak su geç geldiği için fazla açar, ardından su fazla ısınır ve bu kez soğuğu
+açar. Gecikme büyükse geri besleme sistemi düzeltmek yerine kararsızlaştırabilir;
+bu durumda iyi ayarlanmış bir açık döngü daha güvenli olabilir.
+Kapalı Döngünün Gerekli Olduğu Durumlar
+Belirsizlik Büyükse
+Sürecin yükü değişiyorsa, parçalar zamanla aşınıyorsa ya da ortam koşulları
+oynuyorsa, model bir süre sonra gerçeği yansıtmaz. Kapalı döngü, modelin bu
+4
+
+-- 4 of 10 --
+
+eskimesini ölçüm yoluyla telafi eder.
+Hassasiyet Kritikse
+C ıktının dar bir aralıkta tutulması gerekiyorsa, küçük model hataları bile kabul
+edilemez sapmalara yol açar. Her çıktının ölçülüp düzeltilmesi bu durumda
+zorunlu hâle gelir.
+Sistem Kendi Başına Kararsızsa
+Bazı süreçler, kendi hâline bırakıldığında küçük bir sapmayı büyüterek dengeden
+uzaklaşır. Ters sarkaç, yani bir çubuğun dik durumda dengede tutulması, bunun
+klasik örneğidir; çubuk en küçük eğilmede devrilir. Aerodinamik olarak kararsız
+tasarlanmış modern savaş uçakları da sürekli geri besleme olmadan uçamaz. Bu
+tür sistemlerde açık döngü bir seçenek değildir (˚ Aström ve Murray, 2008).
+C ıktı Hızlı ve Güvenilir Ölçülebiliyorsa
+Geri beslemenin işe yaraması için ölçümün süreçteki değişimlerden hızlı ve doğru
+olması gerekir. Bu koşul sağlandığında kapalı döngünün maliyeti düşer ve fay-
+dası artar.
+5
+
+-- 5 of 10 --
+
+Analizde Döngünün Tespiti
+Döngü kavramı yalnızca tasarlanmış kontrol sistemlerine ait değildir. Ekonomik,
+örgütsel ve yazılım sistemlerinde de çıktılar çoğu zaman bir yoldan girdilere geri
+döner. Bir sistemin analizinde döngünün varlığı ve önemi aşağıdaki ölçütlerle
+belirlenebilir (Sterman, 2000).
+Geri Dönüş Yolu
+˙Ilk ölçüt, çıktının herhangi bir yoldan girdiyi etkileyip etkilemediğidir. Bu
+yol bir algılayıcı olmak zorunda değildir; bir insanın kararı, bir piyasanın tep-
+kisi ya da kullanıcı davranışı da geri dönüş yolu oluşturabilir. Kimse tasarla-
+mamış olsa bile böyle bir yol varsa sistem kapalı döngüdür. Örneğin bir ürünün
+fiyatı yükseldiğinde talep düşer, düşen talep de fiyatı aşağı çeker; burada fiyatı
+ayarlayan bir kontrolcü yoktur, ancak döngü vardır.
+Zaman Ölçeği
+Geri besleme, ilgilenilen zaman aralığından çok daha yavaş işliyorsa, o aralık
+için sistem açık döngü kabul edilebilir. Fiyat artışının talebi düşürmesi yıllar
+sürüyorsa, bir haftalık bir analizde bu etki ihmal edilebilir. Aynı sistem uzun
+vadeli bir analizde ise kapalı döngü olarak modellenmelidir.
+Döngü Gücü
+C ıktının girdi üzerindeki etkisi zayıfsa, döngü var olsa bile sistemin davranışını
+belirgin biçimde değiştirmez ve ihmal edilebilir. Güçlü bir döngü ise küçük
+bir değişikliği büyütebilir ya da bastırabilir; bu durumda ihmal edilmesi yanlış
+tahminlere yol açar.
+Sistem Sınırı
+Aynı fiziksel düzenek, sınırın nereye çizildiğine göre açık ya da kapalı döngü
+görünebilir. Tek başına bir fırın açık döngüdür: ayarlanan sıcaklıkta ısıtır ve
+yemeğin pişip pişmediğini bilmez. Ancak başında bekleyip yemeği kontrol eden
+ve ateşi ona göre ayarlayan aşçı sisteme dahil edildiğinde, ortaya çıkan bütün
+kapalı döngüdür. Analizde sınırın bilinçli olarak seçilmesi, hangi döngülerin
+görüleceğini belirler.
+Tipik Hata
+En sık yapılan analiz hatası, gerçekte güçlü ve hızlı bir döngü varken sistemi
+açık döngü saymaktır. Bu durumda yapılan müdahalenin etkisi doğrusal olarak
+tahmin edilir, ancak sistem müdahaleye tepki verir ve sonuç beklenenden farklı
+çıkar. Sterman (2000), sistem davranışındaki beklenmedik sonuçların önemli bir
+kısmını bu tür gözden kaçırılmış geri besleme döngülerine bağlar.
+6
+
+-- 6 of 10 --
+
+Kalite Testi ile Kontrol Arasındaki Fark
+Testlerin Kararlılık Sağlamamasının Nedenleri
+Test Sonradan Bakar
+Kalite testi, çıktının kabul edilebilir olup olmadığını bildirir; çıktıyı iyileştirmez.
+Test sonucu sürece geri dönmüyorsa sistem, testlere rağmen açık döngü olarak
+çalışmaya devam eder. Deming (1986), kaliteye muayene yoluyla ulaşılamayacağını,
+kalitenin sürecin kendisine yerleştirilmesi gerektiğini savunmuştur; muayene yalnızca
+hatalı ürünü ayıklar, hatanın üretilmesini engellemez.
+Test Belirli Koşullarda Yapılır
+Testte kullanılan girdiler, gerçek kullanımda karşılaşılacak girdilerin tamamını
+temsil etmez. Gerçek koşullarda testte görülmemiş durumlar ortaya çıkar ve
+test koşullarına göre ayarlanmış sabit parametreler bu durumlara uymaz.
+Süreç Kendi ˙Içinde Değişkendir
+Sürecin parametreleri zamanla kayıyorsa, girdileri çeşitliyse ya da süreç doğası
+gereği rastgelelik içeriyorsa, aynı ayarlar her seferinde farklı sonuç üretir. Bir
+kez ayarlayıp bırakmak, bu değişkenliği gidermez.
+Test Bir Örneklemdir
+Testler genellikle sınırlı sayıda örnek üzerinde yapılır ve ortalama davranışı
+ölçer. Ortalamada iyi sonuç veren bir sistem, tek tek çıktılarda büyük sapmalar
+gösterebilir. Kararlılık ise ortalamayla değil, her bir çıktının hedefte kalmasıyla
+ilgilidir.
+Kapalı Döngüye Geçiş
+Belirsizlik büyük olduğunda, açık döngü ne kadar iyi test edilirse edilsin her
+çıktıyı hedefte tutamaz. Bu durumda her çıktıyı ölçen ve hedeften sapma
+görüldüğünde düzelten bir mekanizma gerekir. Testlere rağmen kararlı sonuç
+elde edilemeyen bir sistemde kapalı döngüye geçilmesi, testin ölçüm işlevinin
+kontrol işlevine dönüştürülmesi anlamına gelir: daha önce yalnızca raporlanan
+sonuç, artık sürecin bir sonraki adımını belirler.
+7
+
+-- 7 of 10 --
+
+Kapalı Döngünün Riskleri
+Ölçüm Kalitesi Sınırı
+Kapalı döngü, ölçtüğü büyüklüğü hedefe yaklaştırır. Ölçen mekanizma yanlış
+ya da eksikse, sistem kararlı bir biçimde yanlış sonuca yakınsar. Bu risk, Good-
+hart’ın (1975) para politikası bağlamında dile getirdiği gözleme benzer: bir
+gösterge kontrol hedefi hâline geldiğinde, göstergeyle asıl amaç arasındaki ilişki
+zayıflayabilir.
+Kök Nedenin Gizlenmesi
+Döngü hataları düzelttikçe, hataların neden oluştuğu görünmez hâle gelebilir.
+Sistem dışarıdan kararlı görünür, ancak arka planda sürekli düzeltme yapıyordur.
+Kaç düzeltme yapıldığının ve neyin düzeltildiğinin kaydedilmesi bu riski azaltır.
+Sınırsız Tekrar ve Salınım
+Düzeltme mekanizmasına bir üst sınır konmazsa, ulaşılamayan bir hedef için
+döngü sonsuza kadar sürebilir ya da ardışık aşırı düzeltmeler nedeniyle salınıma
+girebilir. Bu nedenle en fazla deneme sayısı ve bu sınıra ulaşıldığında izlenecek
+bir alternatif yol (hata bildirimi ya da yedek çözüm) tanımlanmalıdır.
+Gecikme ve Maliyet
+Döngünün her turu zaman ve kaynak harcar. Düzeltme oranı yüksekse sistemin
+toplam gecikmesi ve maliyeti belirgin biçimde artar.
+8
+
+-- 8 of 10 --
+
+˙Ileri Besleme ve Geri Beslemenin Birleşimi
+Görev Paylaşımı
+˙Ileri besleme (feedforward ), bilinen ya da ölçülebilen bozucu etkileri, çıktıyı
+etkilemeden önce telafi eden açık döngü bileşenidir. Hatayı beklemeden hareket
+ettiği için hızlıdır, ancak yalnızca modelde öngörülen etkileri karşılayabilir. Geri
+besleme ise yavaştır, çünkü hatanın oluşmasını bekler; buna karşılık beklen-
+meyen etkileri de giderir. Pratikte iyi tasarlanmış sistemlerin çoğu bu iki bileşeni
+birlikte kullanır (˚ Aström ve Murray, 2008).
+˙Iki bileşen arasındaki iş bölümü modelin kalitesine bağlıdır. Model ne kadar
+iyiyse işin büyük kısmını ileri besleme üstlenir; belirsizlik arttıkça geri beslemeye
+düşen pay büyür.
+Düzeltme Kayıtlarının Kullanımı
+Geri beslemenin yaptığı düzeltmeler, açık döngü kısmının nerede yetersiz kaldığını
+gösteren bir veri kaynağıdır. En sık tekrarlanan düzeltmeler incelenip bunları
+baştan önleyecek şekilde parametreler, girdiler ya da model güncellendiğinde,
+geri beslemeye düşen yük zamanla azalır. Hedeflenen durum, kapalı döngünün
+nadiren devreye girdiği ancak gerektiğinde her zaman hazır bulunduğu bir yapıdır.
+9
+
+-- 9 of 10 --
+
+Sonuç
+Açık ve kapalı döngü ayrımı, bir sistemin fiziksel yapısından çok, belirsizlik
+karşısında nasıl davranması gerektiğine dair bir karardır. Belirsizlik küçük ve
+model güvenilirse açık döngünün sadeliği bir avantajdır; belirsizlik büyüdükçe
+bu sadelik kırılganlığa dönüşür. Testlerden geçmiş bir sistemin kararlı sonuç
+üretmemesi bu kırılganlığın tipik belirtisidir ve testin ölçüm olarak kalıp kontrole
+dönüşmediğini gösterir.
+Kapalı döngüye geçiş sorunu çözer, ancak sorunun yerini değiştirir: kararlılığın
+kaynağı artık modelin doğruluğu değil, ölçümün doğruluğudur. Ölçüm hatalıysa
+döngü hatayı büyütür; ölçüm doğru ama tek başına bırakılmışsa döngü kök ne-
+deni gizler. Bu nedenle kapalı döngü bir son durum değil, açık döngü bileşenini
+iyileştirmek için veri toplayan bir ara aşama olarak ele alındığında en verimli
+sonucu verir.
+C erçevenin sınırı, gecikmenin büyük olduğu durumlarda belirginleşir. Bu
+durumlarda geri besleme sistemi kararsızlaştırabilir ve iki seçenek arasındaki ter-
+cih, burada verilen nitel ölçütlerle değil kararlılık analiziyle yapılmalıdır. Ayrıca
+insan davranışı ya da piyasa tepkisi gibi tasarlanmamış döngülerin gücünü ve
+hızını önceden kestirmek çoğu zaman zordur; bu tür döngülerin tespiti, sistem
+sınırının nereye çizildiğine dair bilinçli bir seçim gerektirir.
+Kaynaklar
+• ˚ Aström, K. J. ve Murray, R. M. (2008). Feedback Systems: An Introduc-
+tion for Scientists and Engineers. Princeton University Press.
+• Deming, W. E. (1986). Out of the Crisis. MIT Center for Advanced
+Engineering Study.
+• Goodhart, C. A. E. (1975). Problems of Monetary Management: The U.K.
+Experience. Papers in Monetary Economics, Reserve Bank of Australia.
+• Ogata, K. (2010). Modern Control Engineering (5. baskı). Prentice Hall.
+• Sterman, J. D. (2000). Business Dynamics: Systems Thinking and Mod-
+eling for a Complex World. Irwin/McGraw-Hill.
+10
+
+-- 10 of 10 --
