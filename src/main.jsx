@@ -47,6 +47,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <Route path="ask/:slug" element={<AskPost key="ask-post" />} />
             <Route path="insan" element={<Ask section="insan" key="insan" />} />
             <Route path="insan/:slug" element={<AskPost section="insan" key="insan-post" />} />
+            <Route path="kitaplar" element={<Ask section="kitaplar" key="kitaplar" />} />
+            <Route path="kitaplar/:slug" element={<AskPost section="kitaplar" key="kitaplar-post" />} />
             <Route path="sor" element={<Sor />} />
             <Route path="post/:slug" element={<Post />} />
           </Route>

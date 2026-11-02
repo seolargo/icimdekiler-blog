@@ -79,6 +79,7 @@ function header(active) {
     tab(base + 'duvarlar', 'Duvarlar', 'duvarlar') +
     tab(base + 'kod-duvarlari', 'Kod Duvarları', 'kod-duvarlari') +
     tab(base + 'kavramlar', 'Kavramlar', 'kavramlar') +
+    tab(base + 'kitaplar', 'Kitaplar', 'kitaplar') +
     tab(base + 'insan', 'İnsan', 'insan') +
     tab(base + 'ask', 'Aşk', 'ask') +
     `</nav>` +
@@ -231,6 +232,7 @@ writeFileSync(join(dist, 'index.html'), renderPage({ head: homeHead, bodyHtml: h
 const SECTIONS = [
   { key: 'ask', label: 'Aşk', description: 'Aşk ve ilişkiler üzerine yazılar.' },
   { key: 'insan', label: 'İnsan', description: 'İnsan üzerine yazılar.' },
+  { key: 'kitaplar', label: 'Kitaplar', description: 'Kitaplar üzerine yazılar.' },
   {
     key: 'muzik',
     label: 'Müzik',
