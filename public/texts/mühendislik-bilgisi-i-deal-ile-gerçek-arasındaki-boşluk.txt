@@ -1,0 +1,1219 @@
+Mühendislik Bilgisi: ˙Ideal ile Gerçek Arasındaki
+Boşluk
+ÖFY
+November 2026
+Özet
+Mühendislikte güven bir his değil, kanıtla kazanılan bir durumdur. Bu kanıt
+katmanlar hâlinde kurulur: hesap tahmin eder, test doğrular, emniyet payı bil-
+inmeyene karşı korur, yedeklilik ve güvenli bozulma arızayı tehlikesiz kılar; stan-
+dartlar, kayıtlar, bağımsız kontrol ve izleme bu güveni kurumsal düzeyde taşır,
+dürüstlük ve suçlamasız kültür ise insani dayanağını oluşturur. Katmanlara
+duyulan ihtiyacın kökü, ideal model ile kusurlu gerçek arasındaki kapanmayan
+farktır. Mühendis bu farkta çalışır; amacı ideale ulaşmak değil, amaca yete-
+cek olanı kurmak ve hangi kusurun nereye konacağına karar vermektir. Walter
+Vincenti, mühendislerin bu farkı kapatırken bilimden bağımsız bir bilgi türü
+ürettiğini gösterir; Donald Campbell’ın kör çeşitlenme ve seçici koruma modeli
+bu bilginin deneme, eleme ve koruma yoluyla büyüdüğünü açıklar. Aynı yapı
+Toyota Üretim Sistemi’nde, kalite yönetiminde ve yazılım geliştirmede tekrar or-
+taya çıkar: Jidoka hatayı yakalayıp hattı durdurur, kapalı döngü kalite hatanın
+bilgisini tasarıma geri taşır, standartlaştırma öğrenileni korur, Deming soru-
+nun insanda değil sistemde ve değişkenlikte aranmasını ister. Yazılımda geri
+bildirim, basitlik ve ilgi alanlarının ayrılması aynı döngünün karşılığıdır. Yapay
+zekânın belge ve kod üretimini kolaylaştırması ise kanıt ile düşünce arasındaki
+bağı zayıflatarak güvenin dayanağını yeniden sorgulatır.
+1
+
+-- 1 of 34 --
+
+Giriş
+Gündelik dilde güven, sonucu tam bilmeden duyulan olumlu bir beklentidir.
+Mühendislikte bu anlam yetersiz kalır. Bir köprünün, uçağın, üretim hattının
+ya da yazılımın çalışacağına inanmak, onu kullanan insanları korumaz.
+Bu notta mühendislikte güven, bir sistemin belirli koşullar altında bekle-
+nen biçimde davranacağına dair kanıta dayalı yargı olarak tanımlanır. Tanımdaki
+“belirli koşullar” güvenin her zaman bir sınır içinde geçerli olduğunu, “kanıta
+dayalı” ise yargının arkasında hesap, test ya da gözlem bulunması gerektiğini
+anlatır.
+Yaygın bir yanlış kabul, güvenilir sistemin hiç bozulmayan sistem olduğudur.
+Her malzeme yorulur, her süreç değişkenlik gösterir, her yazılımda bulunmamış
+hatalar vardır. Güvenilir sistem, bozulmayı önceden hesaba katan, bozulduğunda
+bunu fark eden ve öğrendiğini koruyan sistemdir.
+Not altı konuyu tek bir çizgi üzerinde birleştirir: güvenin teknik, kurumsal ve
+insani katmanları; ideal ile gerçek arasındaki farkın felsefi niteliği; mühendislik
+bilgisinin nasıl üretilip büyüdüğü; bu ilkelerin Toyota Üretim Sistemi’ndeki
+karşılıkları; kalite yönetimindeki kapalı döngü; ve aynı ilkelerin yazılım geliştirmedeki
+biçimi. Kalite ve yalın üretimde kullanılan kısaltmalar ayrı bir sözlükte toplanmıştır.
+Not belirli bir mühendislik dalının ayrıntılı hesap yöntemlerini kapsamaz.
+2
+
+-- 2 of 34 --
+
+Mühendislikte Güvenin Katmanları
+Teknik Katmanlar
+Hesap
+Güvenin ilk adımı tahmindir, ancak bu tahmin sezgiye değil hesaba dayanır.
+Bir parçanın taşıyacağı yük, ne kadar ısınacağı ve kaç çevrim sonra yorulacağı
+tasarım aşamasında hesaplanır. Hesabın değeri, hatayı sistem kurulmadan,
+kimse zarar görmeden kâğıt üzerinde yakalamasıdır. Sınırı ise modele bağlı ol-
+masıdır: her hesap gerçeğin sadeleştirilmiş bir modeli üzerinde yapılır ve model
+gerçeği eksik temsil ediyorsa hesap ne kadar dikkatli yapılırsa yapılsın yanlış
+sonuç verir.
+Test
+Test, hesabın gerçekte doğru çıkıp çıkmadığını görmektir; “öyle olması gerekir”i
+“öyle olduğunu gördük”e çevirir. Malzemeler çekme, burulma ve yorulma test-
+lerinden, otomobiller çarpışma testlerinden, köprüler hizmete açılmadan önce
+yük testinden geçer. Yazılımda birim testleri tek bir fonksiyonu, entegrasyon
+testleri parçaların birlikte çalışmasını sınar. Testin sınırı yalnızca denenen koşullar
+hakkında bilgi vermesidir. Dijkstra’nın sık aktarılan gözlemiyle, test hataların
+varlığını gösterebilir ama yokluğunu kanıtlayamaz (Dijkstra, 1970). Bu yüzden
+test hesabın yerine değil yanına konur.
+Emniyet Katsayısı
+Mühendisler sistemi beklenen yükün tam sınırında tasarlamaz. Dayanım ile
+beklenen yük arasında bırakılan paya emniyet katsayısı denir:
+n = sistemindayanabileceğiyük
+beklenenenbüyükyük
+Örneğin 10 tonluk yük bekleyen ve 20 tona dayanacak biçimde tasarlanmış
+bir elemanın emniyet katsayısı 2’dir. Bu pay; fark edilmemiş malzeme kusurları,
+beklenenden ağır yükler, üretim sapmaları ve zamanla oluşan korozyon gibi
+tek tek hesaplanamayan belirsizliklere karşı toplu bir güvencedir. Bu anlamda
+bilinmeyene duyulan saygının sayısal ifadesidir.
+Katsayının değeri alana göre büyük farklılık gösterir. Ağırlığın kritik olduğu
+sivil havacılıkta yapılar en büyük beklenen yükün 1,5 katına dayanacak biçimde
+tasarlanır (14 CFR ğ 25.303); ağırlık kaygısının daha az olduğu bazı kaldırma
+ekipmanlarında katsayı çok daha yüksek tutulur. Katsayı büyüdükçe güvenlik,
+maliyet ve ağırlık birlikte artar; uygun değerin seçimi bir mühendislik kararıdır.
+Yedeklilik
+Yedeklilik, kritik bir parçanın bozulma ihtimaline karşı aynı işi görebilecek ik-
+inci bir parçanın bulundurulmasıdır. Ticari uçaklardaki çoklu motor, bağımsız
+3
+
+-- 3 of 34 --
+
+hidrolik hatlar ve birden fazla uçuş bilgisayarı bunun örneğidir; yazılımda bir-
+den fazla sunucuya dağıtılmış uygulamalar ve farklı bölgelerdeki veri kopy-
+aları aynı ilkeyi uygular. Gerçek yedeklilik, yedeklerin aynı nedenle aynı anda
+bozulmamasını gerektirir. ˙Iki motor aynı yakıt hattından besleniyorsa hat-
+taki arıza ikisini birden durdurur; buna ortak neden arızası denir. Yedeklilik
+güven kavramındaki önemli kaymayı gösterir: güvenilir sistem “hiç bozulmaz”
+iddiasında değil, “bir parçası bozulsa da ayakta kalır” iddiasında bulunur.
+Güvenli Bozulma
+Güvenli bozulma, sistemin arıza anında rastgele bir duruma değil, önceden
+belirlenmiş tehlikesiz bir duruma geçmesidir. Westinghouse’un otomatik havalı
+fren sisteminde frenler hava basıncıyla açık tutulur; hat koparsa ya da basınç
+kaybolursa frenler kendiliğinden kapanır, böylece en olası arıza treni durdu-
+rur. Taşıyıcı yapılarda sünek malzeme tercih edilir, çünkü kırılmadan önce
+eğilip uzayarak uyarı verir; gevrek malzeme ise uyarı vermeden aniden kırılır.
+Yazılımda bir hata oluştuğunda işlemin geri alınması ya da yetkilendirme servi-
+sine ulaşılamadığında erişimin açılmak yerine kapanması aynı ilkedir.
+Kurumsal Katmanlar
+Standartlar
+Mühendisler her şeyi sıfırdan icat etmez; yıllarca yaşanmış hatalardan çıkarılmış
+kurallara uyar. 19. yüzyıl sonu ve 20. yüzyıl başında ABD’de kazan patlamaları
+sıktı; 1905’te Massachusetts’teki Grover ayakkabı fabrikasındaki patlama büyük
+etki yarattı. Bu kazaların ardından Amerikan Makine Mühendisleri Derneği
+kazan ve basınçlı kap kurallarını hazırladı ve ilk sürümü 1914’te yayımladı
+(ASME, t.y.). Standartlar geçmiş kazaların bıraktığı derslerin yazılı hâlidir;
+standarda uyan mühendis dersi kendisi yaşamadan ondan yararlanır. Petroski
+başarılı tasarımın büyük ölçüde geçmiş başarısızlıkların anlaşılmasına dayandığını
+savunur (Petroski, 1985).
+˙Izlenebilirlik ve Belgeleme
+˙Izlenebilirlik, her parçanın nereden geldiğinin, hangi üretim partisine ait olduğunun,
+hangi testlerden geçtiğinin ve kimin onayladığının kayıt altında olmasıdır. Bir
+uçak parçasında üretim hatası bulunduğunda kayıtlar sayesinde aynı partiden
+parçaların hangi uçaklarda olduğu bulunur ve yalnızca onlar değiştirilir. Yazılımda
+sürüm kontrol sistemleri aynı işi görür: her değişikliğin kim tarafından, ne za-
+man ve neden yapıldığı kayıtlıdır.
+Bağımsız Kontrol
+Bir işi yapan kişi onu tek başına onaylamaz, çünkü tasarımı yaparken kurduğu
+varsayımları kontrol ederken de taşır ve aynı kör noktaya ikinci kez düşer. Yapı
+projelerinde kontrol mühendisi, havacılıkta üreticiden bağımsız sertifikasyon
+4
+
+-- 4 of 34 --
+
+otoritesi, yazılımda kod incelemesi bu işi görür. Fagan, IBM’de sistematik
+kod incelemelerinin hataları testten önce ve daha düşük maliyetle yakaladığını
+göstermiştir (Fagan, 1976).
+˙Izleme
+Güven bir kez kazanılıp bitmez. Malzemeler yorulur, kullanım koşulları değişir.
+Köprülere gerinim ve titreşim ölçen sensörler yerleştirilir; buna yapısal sağlık
+izleme denir. Uçaklar belirli uçuş saatlerinde bakıma girer; yazılımın logları ve
+metrikleri izlenir, eşik aşılınca uyarı üretilir. ˙Izleme, testin sistemin bütün ömrü
+boyunca sürmesidir.
+˙Insani Katman
+Toplumun Mühendise Güveni
+Teknik ve kurumsal katmanların ürettiği kanıtı toplumun büyük kısmı göremez.
+Bir binaya giren kişi statik hesabı, bir uçağa binen yolcu bakım kayıtlarını in-
+celemez; o sistemi yapanların işini doğru yaptığına güvenir. Mühendisin sisteme
+güveni kanıta, toplumun mühendise güveni sorumluluk bilincine dayanır. Bu ne-
+denle mühendislik etik kodları kamu güvenliğini mühendisin diğer yükümlülüklerinin
+önüne koyar (NSPE, t.y.).
+Dürüstlük
+Bu ikinci tür güvenin dayanağı dürüstlüktür ve üç biçimde somutlaşır:
+• Hatayı saklamamak: Fark edilen hata maliyetli ya da utandırıcı olsa bile
+bildirilir.
+• “Bilmiyorum” diyebilmek: Bilinmeyeni biliniyor gibi sunmak, kanıtı ol-
+mayan bir güven üretir.
+• Sınırı belirtmek: Sistemin hangi koşullarda güvenilir olmadığı da açıkça
+söylenir.
+Suçlamasız Hata Analizi
+Bireysel dürüstlük, kurum yapısı tarafından desteklenmezse sürdürülemez; hatasını
+bildiren cezalandırılıyorsa bir sonraki hata bildirilmez. Suçlamasız hata anal-
+izi, bir kazadan sonra “kim hata yaptı” yerine “sistem bu hataya neden izin
+verdi” sorusunu soran yaklaşımdır. Reason, kazaların çoğunlukla tek kişinin
+hatasından değil, kurum içinde birikmiş gizli zayıflıkların üst üste gelmesinden
+doğduğunu savunur (Reason, 1997). Dekker, hatayı bildirmenin güvenli olduğu
+ortamın sorumluluğu da koruyabileceğini tartışır (Dekker, 2007). Yazılımda bu
+yaklaşım Google’ın site güvenilirliği mühendisliği uygulamalarında yaygınlaşmıştır
+(Beyer vd., 2016). Kasıtlı ihmal ve kuralların bilerek çiğnenmesi bu kapsamın
+dışındadır; ayrımın nerede çizileceği tartışmalıdır.
+5
+
+-- 5 of 34 --
+
+Karmaşık Sistemlerde Güvenin Sınırı
+“Güven ama doğrula” ifadesi bir Rus atasözünden gelir ve 1980’lerde ABD
+Başkanı Reagan’ın Sovyetlerle silah denetimi görüşmelerinde kullanmasıyla yaygınlaşmıştır.
+Mühendislikte bu ifade, güvenin her zaman kanıtla desteklenmesi gerektiğini
+özetler; kanıtı olmayan güven yalnızca bir varsayımdır. ˙Iyi bir mühendisin
+“güveniyorum” demesi, “neden güvenebileceğinizi gösterebilirim” demesidir.
+Katmanlı güvenin çok karmaşık sistemlerde ne ölçüde yeterli olduğu tartışmalıdır.
+Perrow, parçaları sıkı bağlı ve etkileşimleri karmaşık sistemlerde kazaların kaçınılmaz,
+yani “normal” olduğunu savunur (Perrow, 1984). Leveson ise güvenliğin parçaların
+tek tek güvenilirliğinden değil, parçalar arasındaki etkileşimlerin kontrolünden
+doğduğunu ileri sürer (Leveson, 2011).
+6
+
+-- 6 of 34 --
+
+˙Ideal ile Gerçek Arasında
+Kusurun Ontolojisi
+Kötü Sanılan ama Vazgeçilmez Olanlar
+Mühendislikte bazı kavramlar ilk bakışta olumsuz görünür ama işleyişin vazgeçilmez
+parçasıdır:
+• Kusur: Tamamen saf ve kusursuz bir metal bildiğimiz anlamda işe yara-
+mazdı. Metalleri dayanıklı ve şekil verilebilir yapan kristal kusurları ve
+katılan yabancı atomlardır; çelik karbon katılmış demirdir. C ipler saf sil-
+isyuma bilerek katılan safsızlıklarla (katkılama) çalışır. Bu konu malzeme
+bilimi ve yarı iletken fiziğine girer.
+• Boşluk: Raylarda, köprülerde ve binalarda ısıl genleşme için genleşme
+derzleri bırakılır; bırakılmazsa raylar yazın eğrilir, yapı kendi kendini iter.
+Yapı mühendisliğinin konusudur.
+• Kırılmak: Sigorta kabloları korumak için kendini yakar; otomobilin ön
+kısmı yolcuyu korumak için ezilir; yol kenarındaki bazı direkler çarpan
+aracı durdurmasın diye kolayca kopar. C arpışma güvenliği ve elektrik
+koruma sistemlerinin konusudur.
+• Esnemek: Yüksek binalar rüzgârda ve depremde bilerek sallanır; tamamen
+katı bir yapı kuvveti emecek yer bulamaz ve çatlar. Deprem mühendisliği
+ve yapı dinamiğinin konusudur.
+• Sürtünme: Enerji kaybettirir ve aşındırır, ama sürtünme olmasa ne fren
+tutar ne vida yerinde durur ne de yürünebilir. Sürtünme, aşınma ve
+yağlamayı inceleyen dala triboloji denir.
+• Gürültü: Sinyali bozar, ama dijital seste çok düşük düzeyde gürültü ekle-
+mek (dithering) duyulan bozulmayı azaltır. Sinyal işlemenin konusudur.
+Üç Varlık Türü
+Bu kavramlar ontolojik olarak birer nesne değildir; üç farklı türde var olurlar.
+Kusur ve boşluk bir şeyin eksikliği olarak vardır; Aristoteles bu tür varlığa
+yoksunluk (steresis) der. Boşluğun bir varlık sayılıp sayılamayacağı felsefede
+ayrı bir tartışmadır (Casati ve Varzi, 1994). Kırılmak ve esnemek şu an olan
+değil, belirli koşulda ortaya çıkacak bir eğilimdir; felsefede buna yatkınlık (dis-
+pozisyon) denir ve klasik örneği zaten kırılganlıktır: bardak şu an kırılmıyor
+ama kırılgandır. Sürtünme ve gürültü ise iki şeyin arasındaki ilişkide vardır.
+Sürtünme iki yüzey arasında oluşur; neyin gürültü olduğu, neyin sinyal sayıldığına
+bağlıdır. Güven de bu üçüncü türe girer: bir kişi ile bir sistem arasındaki
+ilişkidir.
+7
+
+-- 7 of 34 --
+
+˙Idealleştirmenin Bedeli
+Epistemolojik açıdan bu kavramların ortak çatısı idealleştirmedir: bilimin
+dünyayı anlamak için sürtünmesiz yüzey, kusursuz kristal, gürültüsüz sinyal
+ve tam katı cisim gibi sadeleştirilmiş modeller kurması. Galileo’dan beri fizik
+böyle çalışır. Cartwright fizik yasalarının ancak bu ideal koşullarda tam doğru
+olduğunu savunur (Cartwright, 1983). Mühendislik tam bu ideal ile gerçek
+arasındaki boşlukta çalışır: bilim “sürtünmeyi ihmal edelim” der, mühendis ih-
+mal edilen şeyle uğraşmak zorundadır. Ontolojik olarak bu kavramların hepsi
+kusurluluğun biçimleri, epistemolojik olarak idealleştirmenin bedelidir. Güven
+de buraya oturur: model ile gerçek hiçbir zaman tam örtüşmediği için güvene
+ihtiyaç vardır; model kusursuz olsaydı yalnızca bilgi yeterdi.
+Mühendisin Yeri
+Mühendis mutlak ideal ile mutlak kusur arasındaki bir çizginin ortasında dur-
+maz, çünkü iki uç da gerçekte yoktur. Kusursuz malzeme, sürtünmesiz makine
+ve hatasız yazılım üretilemez; tamamen kusurlu bir köprü ise köprü olmaktan
+çıkar. Mühendis iki gerçek nokta arasında değil, iki hayali sınır arasında çalışır.
+Mühendisin hedefi ideal değil, amaca yetecek olandır. Bilim insanı doğruyu
+bilmek için ideale yaklaşır; mühendisin amacı bir işi görmektir. Herbert Simon
+bu tutuma yeterlilik arayışı (satisficing) der: en iyiyi değil, yeterince iyiyi
+aramak (Simon, 1956). Koen mühendisliği, az anlaşılmış bir durumda eldeki
+imkânlarla en iyi değişikliği yaratmak için pratik kurallar kullanmak olarak
+tanımlar (Koen, 2003).
+Mühendis ideali hedef olarak değil araç olarak kullanır: sürtünmesiz hesapla
+başlar, sonra gerçeğin kusurlarını ekler. ˙Ideal yönü gösteren harita, kusur
+üzerinde yürünen arazidir. Bazen ideale yaklaşmak yanlıştır: çeliğe karbon kat-
+mak, raya boşluk bırakmak, ön kısmı ezilecek biçimde yapmak idealden bilerek
+uzaklaşmaktır. Mühendis kusuru en aza indiren değil, hangi kusurun nereye
+konacağına karar veren kişidir; amacın belirlediği yerde durur.
+Örtük Kavramlar
+Mühendislik pratiğinin üzerine kurulduğu ama ders kitaplarında nadiren ayrı
+konu olarak ele alınan kavramlar şunlardır:
+• Belirsizlik: Malzemenin gerçek dayanımı, gelecekteki yük ve kullanıcı davranışı
+hep belirsizdir; mühendisliğin büyük kısmı belirsizlik altında karar ver-
+mektir.
+• Sorumluluk: Bir köprü çöktüğünde hesabı yapan, onaylayan, malzemeyi
+üreten ve bakımı yapmayan arasında sorumluluk bölünür; bölünen sorum-
+luluk kimsenin sorumlu olmaması tehlikesini doğurur.
+• Bakım: Yeni bir şey yapmak ödüllendirilir, var olanı ayakta tutmak görünmez
+kalır; oysa bir sistemin ömrü boyunca harcanan emeğin çoğu bakıma gider.
+8
+
+-- 8 of 34 --
+
+• Basitlik: Basit bir şey yapmak karmaşık bir şey yapmaktan zordur; basit-
+lik başlangıç noktası değil, çok çalışmanın sonunda ulaşılan yerdir.
+• Ölçek: Küçükken çalışan bir şey büyüyünce çalışmayabilir. Galileo’nun
+ortaya koyduğu kare-küp yasasına göre cisim büyüdükçe yüzey alanı
+boyutun karesiyle, ağırlığı küpüyle artar; karınca kendi ağırlığının kat-
+larını taşır ama aynı oranlarla fil boyutuna getirilmiş bir karınca ayakta
+duramaz. Ekipler ve yazılımlar da büyüdükçe başka kurallara uyar.
+• Risk: Riskin ne olduğu, ne kadarının kabul edilebileceği ve buna kimin
+karar verdiği teknik olduğu kadar ahlaki bir sorudur; insan hayatının
+değerinin hesaba nasıl gireceği mühendisliğin en rahatsız edici sorusudur.
+• Ölçmek: Ölçülemeyen hakkında güvenilir bilgi edinmek zordur, ama ölçülen
+her zaman bilinmek istenen şey değildir; ölçmenin kendisi de sistemi değiştirebilir.
+Temelde Bilinmesi Gereken
+Bu çerçevede mühendisin temelde bilmesi gereken şey, modelin nerede bittiğidir:
+• Amacı bilmek: Neyin yeterli olduğunu ve hangi kusurun kabul edilebileceğini
+amaç belirler.
+• Neyin ihmal edilebileceğini bilmek: Hataların çoğu yanlış hesaptan değil,
+yanlış ihmalden çıkar.
+• Nasıl bozulacağını bilmek: Tasarım, arızayı önceden görme işidir (Pet-
+roski, 1985).
+• Bilmediğini bilmek: Emniyet payı, test, yedek ve izleme bilinmeyen için
+vardır; ne kadar bilmediğini doğru tahmin eden doğru payı bırakır.
+Kısacası mühendislikte temel bilgi, dünyanın kendisinden çok dünya hakkındaki
+bilginin sınırlarıdır.
+Güvenle Akraba Kavramlar
+Hata ve Kaza
+• ˙Isviçre peyniri modeli: Kazalar tek bir hatadan değil, kural, kontrol ve
+eğitim gibi savunma katmanlarındaki açıkların aynı anda üst üste gelmesin-
+den doğar (Reason, 1997).
+• Normal kazalar: Bazı sistemler o kadar karmaşık ve sıkı bağlıdır ki kaza
+istisna değil, er geç olacak bir şeydir; nükleer santraller bu fikrin çıkış
+noktasıdır (Perrow, 1984).
+• Sapmanın normalleşmesi: Küçük kural dışılıklar bir süre sorun çıkarmayınca
+olağan kabul edilir. Challenger kazasında conta sorunu biliniyordu, ancak
+önceki uçuşlarda bir şey olmadığı için önemsenmedi (Vaughan, 1996).
+9
+
+-- 9 of 34 --
+
+• Hayatta kalan yanılgısı: ˙Ikinci Dünya Savaşı’nda dönen uçaklardaki kurşun
+delikleri incelenirken Abraham Wald, asıl güçlendirilmesi gereken yerin
+delik görülmeyen bölgeler olduğunu gösterdi; oralardan vurulan uçaklar
+zaten dönememişti.
+Tasarım
+• Zarif bozulma: Sistem bir parçasını kaybettiğinde tamamen çökmek yerine
+daha yavaş ya da daha az işlevle çalışmayı sürdürür.
+• Poka-yoke: Yanlış yapılmasını fiziksel olarak imkânsız kılan tasarımdır
+(Shingo, 1986); tek yönde takılan fişler ve farklı çaplı benzin ve dizel
+tabancaları örnektir.
+• Chesterton’ın çiti: Neden konduğu bilinmeyen bir çit, sebebi öğrenilmeden
+kaldırılmamalıdır (Chesterton, 1929); eski kodda gereksiz görünen satırlar
+için de geçerlidir.
+• Gall yasası: C alışan her karmaşık sistem çalışan basit bir sistemden evrilmiştir;
+sıfırdan tasarlanan karmaşık sistem genellikle çalışmaz (Gall, 1975).
+Bilgi ve Karar
+• Örtük bilgi: Usta bir kaynakçının sesten anlaması gibi yazıya dökülemeyen
+bilgidir (Polanyi, 1966); emekli olan mühendisle birlikte kaybolur.
+• Goodhart yasası: Bir ölçü hedef hâline gelince iyi bir ölçü olmaktan
+çıkar (Goodhart, 1975); test kapsama oranı hedef olunca anlamsız testler
+yazılmaya başlanır.
+• Lindy etkisi: Uzun süredir ayakta olan bir teknoloji ya da fikrin daha uzun
+süre ayakta kalması beklenir; elli yıllık bir araç, iki yıllık bir araçtan daha
+güvenilir bir bahistir.
+• Bilinen ve bilinmeyen bilinmeyenler: Neyi bilmediğini bilmek ile bilmediğin
+şeyin varlığından habersiz olmak farklıdır; emniyet katsayısı esas olarak
+ikincisine karşı konur.
+˙Insan ve Organizasyon
+• Conway yasası: Bir sistemin yapısı, onu yapan organizasyonun iletişim
+yapısını kopyalar (Conway, 1968); dört ekip bir derleyici yaparsa dört
+aşamalı bir derleyici çıkar.
+• Brooks yasası: Geciken bir yazılım projesine insan eklemek onu daha da
+geciktirir, çünkü yeni gelenlere iş öğretmek zaman alır (Brooks, 1975).
+• Psikolojik güvenlik: Ekipte hata söylemenin cezasız olmasıdır (Edmond-
+son, 1999); Google’ın kendi ekipleri üzerinde yaptığı araştırmada başarılı
+ekiplerin en belirgin ortak özelliği olarak öne çıkmıştır.
+10
+
+-- 10 of 34 --
+
+Mühendislik Bilgisinin Doğası
+Vincenti ve Mühendislik Bilgisi
+Walter G. Vincenti
+Walter G. Vincenti (1917–2019), Amerikalı havacılık mühendisi ve mühendislik
+tarihçisidir. Kariyerinin ilk yarısını NACA’nın (NASA’nın öncülü) Ames lab-
+oratuvarında ses üstü hızlarda kanat ve hava akışı üzerine çalışarak geçirmiş,
+1957’de Stanford Üniversitesi’ne geçerek havacılık mühendisliği profesörü olmuştur.
+Charles Kruger ile yazdığı gaz dinamiği ders kitabı uzun süre alanın temel
+kaynaklarından biri olmuştur (Vincenti ve Kruger, 1965). Kariyerinin ikinci
+yarısında mühendislik tarihi ve felsefesine yönelmiştir. Bu dönemin ürünü olan
+What Engineers Know and How They Know It (Vincenti, 1990) mühendislik
+felsefesinin kurucu metinlerinden biri sayılır. 102 yaşında ölmüştür.
+Temel ˙Iddia
+Dönemin yaygın görüşüne göre mühendislik uygulamalı bilimdi: bilim bilgiyi
+üretir, mühendis kullanır. Vincenti buna karşı çıkar. Mühendisler bilimin
+üretmediği ve üretemeyeceği bir bilgi üretir; bu bilginin amacı dünyayı anla-
+mak değil bir şey tasarlamaktır, ölçütü “doğru mu” değil “işe yarıyor mu”dur.
+Vincenti bu iddiayı soyut tartışmayla değil, havacılık tarihinden somut vakalarla
+destekler.
+Normal ve Radikal Tasarım
+Normal tasarım, ürünün yapısının ve çalışma ilkesinin bilindiği, mühendisin
+bu çerçeve içinde iyileştirme yaptığı tasarımdır. Radikal tasarım ise çerçevenin
+kendisini değiştirir. Vincenti bu ayrımı Constant’ın “normal teknoloji” kavramından
+alır (Constant, 1980) ve kitabını bilerek normal tasarıma odaklar, çünkü mühendisliğin
+günlük gerçeği odur.
+Tasarım Hiyerarşisi
+Karmaşık bir ürün tek seferde tasarlanmaz. Bir uçak önce genel yapı, sonra
+kanat ve gövde gibi alt sistemler, sonra bileşenler, en sonunda perçin gibi ayrıntılar
+düzeyinde tasarlanır. Her düzeyin kendi bilgisi ve problemleri vardır; bir düzeydeki
+karar alt düzeylerin problemlerini belirler.
+Beş Vaka
+Davis Kanadı
+Consolidated firmasının B-24 bombardıman uçağında David R. Davis’in geliştirdiği
+kanat profili kullanıldı. Kanat başarılı sonuç verdi, ancak başarısının nedeni
+11
+
+-- 11 of 34 --
+
+dönemin bilgisiyle tam açıklanamadı. Vincenti bu vakayla mühendislikteki be-
+lirsizliği gösterir: mühendisler bazen nedenini bilmedikleri çözümlerle çalışmak
+zorundadır.
+Uçuş Nitelikleri
+Pilotlar bir uçağın iyi ya da kötü uçtuğunu ayırt edebiliyordu, ancak bu öznel bir
+histi. 1918–1943 arasında mühendisler bu hissi ölçülebilir tasarım kurallarına
+dönüştürdü; Robert Gilruth’un NACA çalışması bu sürecin dönüm noktasıdır
+(Gilruth, 1943). Vaka, tasarımdan ne istendiğini tanımlamanın bile ayrı bir bilgi
+işi olduğunu gösterir.
+Kontrol Hacmi Analizi
+Kontrol hacmi analizi, akışkanlar mekaniği ve termodinamikte bir sistemin
+çevresine hayali bir sınır çizip bu sınırdan giren ve çıkan kütle, enerji ve momen-
+tumu hesaplama yöntemidir. Fizikçilerin pek ihtiyaç duymadığı, mühendislerin
+kendi problemleri için geliştirdiği bir düşünme aracıdır.
+Pervane Testleri
+1916–1926 arasında Stanford’da William F. Durand ve Everett P. Lesley, per-
+vaneleri kapsamlı bir teori olmadan, ölçülerini sistematik biçimde birer birer
+değiştirip etkisini ölçerek incelediler. Vincenti buna parametre değiştirme
+yöntemi der: teori yokken güvenilir tasarım verisi üretmenin yolu.
+Gömme Perçin
+1930–1950 arasında uçak gövdesindeki perçin başlarının yüzeyle aynı hizaya ge-
+tirilmesi problemi çözüldü. Küçük görünen bu değişiklik hava direncini azaltır.
+Problem laboratuvarda değil fabrikada, tasarımcı ve üretim çalışanlarının bir-
+likte deneme yanılmasıyla çözüldü; mühendislik bilgisi üretim sürecinde de üretilir.
+Mühendislik Bilgisinin Türleri
+• Temel tasarım kavramları: Ürünün nasıl çalıştığına ve genel olarak nasıl
+düzenlendiğine dair bilgi.
+• Kriterler ve şartnameler: Tasarımın karşılaması gereken somut, ölçülebilir
+hedefler.
+• Teorik araçlar: Hesap yöntemleri ve kontrol hacmi analizi gibi düşünme
+araçları.
+• Sayısal veriler: Malzeme özellikleri ve deney sonuçları gibi ölçümler.
+• Pratik bilgi: Deneyimle edinilen, çoğu zaman yazıya geçmeyen bilgi.
+12
+
+-- 12 of 34 --
+
+• Tasarım yöntemleri: Bilginin bir tasarım sürecinde nasıl kullanılacağına
+dair bilgi.
+Altı türün hepsi aynı soruya hizmet eder: eldeki bilgi bu işi görmeye yeter
+mi?
+Bilginin Büyümesi: Kör C eşitlenme ve Seçici Koruma
+Campbell’ın Modeli
+Psikolog Donald T. Campbell, yeni bilginin nereden geldiği sorusuna evrimden
+esinlenen bir cevap verir (Campbell, 1960). Kör çeşitlenme ve seçici koruma
+modeline göre bilgi, biyolojik evrim gibi üç adımda büyür:
+• C eşitlenme: Birçok farklı fikir, çözüm ya da deneme ortaya çıkar.
+• Seçilme: Denemeler sınanır. Doğada sınama ortamın kendisi, bilgide
+deney, test ya da gerçek kullanımdır.
+• Koruma: Sınamayı geçenler kaydedilir, öğretilir ve aktarılır.
+“Kör” Sözcüğünün Anlamı
+Campbell “kör” derken rastgeleliği değil, bir denemenin sonucunun önceden
+bilinmemesini kasteder; sonuç bilinseydi deneme gereksiz olurdu. Gerçekten
+yeni olan her şey bir ölçüde karanlıkta atılmış bir adımdır. Campbell yaklaşımı
+evrimsel epistemoloji olarak genelleştirmiştir (Campbell, 1974). Popper’ın
+tahmin ve çürütme yaklaşımı da aynı yapıdadır: bilim cesur tahminler yapar,
+sınamalar çoğunu eler, elenmeyenler şimdilik kabul edilir (Popper, 1963).
+Vincenti’nin Uyarlaması
+Vincenti modeli mühendisliğe uyarlarken bir düzeltme yapar: birikmiş bilgi
+neyin denenmeye değer olduğunu gösterir, bu yüzden denemeler tamamen kör
+değildir. Ancak bilginin sınırında, daha önce yapılmamış bir şey yapılırken sonuç
+yine bilinmez. Mühendislikte çeşitlenme farklı tasarım, malzeme ve yöntemlerin
+denenmesi; seçilme hesap, rüzgâr tüneli, prototip ve sonunda gerçek kullanım;
+koruma ise el kitapları, ders kitapları, şirket içi kurallar ve standartlardır. Bir
+kaza seçilmenin en sert biçimi, ardından yazılan standart ise korumanın kalıcı
+biçimidir; sonraki kuşak mühendis dersi yeniden yaşamak zorunda kalmaz.
+13
+
+-- 13 of 34 --
+
+Toyota Üretim Sistemi: ˙Içeriden Bakış
+Kökler
+Sakichi Toyoda ve Jidoka
+Toyota Üretim Sistemi (TPS) iki direk üzerine kuruludur. ˙Ilki Jidoka, yani
+anormalliği algılayıp kendini durduran, insan dokunuşlu otomasyondur. Kökü
+Sakichi Toyoda’nın dokuma tezgâhlarına dayanır. Sakichi’nin ilk tezgâhından
+önce dokumacılar çözgü ve atkı ipliklerini iki elle kontrol etmek zorundaydı;
+Sakichi tezgâhını annesinin tek elle çalışabilmesi için geliştirdi ve buluş kaliteyi,
+verimliliği ve üretkenliği birlikte artırdı. G tipi otomatik tezgâh, iplik koptuğunda
+bunu modern sensör ya da motor kullanmadan yaylarla algılayıp ipliği otomatik
+olarak değiştiriyor, işçiyi de daha güvenli kılıyordu. Bu tezgâhın teknolojisinin
+˙Ingiliz Platt Brothers firmasına satılması, Toyota’nın otomobil üretimine geçişinin
+sermayesini sağladı.
+Kiichiro Toyoda ve Tam Zamanında Üretim
+˙Ikinci direk, Toyota Motor’un kurucusu Kiichiro Toyoda’nın Tam Zamanında
+Üretim (JIT) anlayışıdır: gereken ürünü, gereken zamanda ve gereken mik-
+tarda sağlamak. Toyota’da bir sonraki prosese “vadi proses” (ato-kotei) denir ve
+her proses onu müşterisi sayar. Her proses bir sonrakine hata göndermemeye ve
+onun işini kolaylaştırmaya çalışırsa son kullanıcının hatalı ürün alması imkânsızlaşır;
+bitişik prosesler iyileştirmede iş birliği yapar.
+Akio Toyoda’nın Yorumu
+Akio Toyoda son yıllarda “bizi Toyota yapan şeyleri geri getirmek” ve “Toyota’yı
+gelecek için baştan tasarlamak” fikirlerini öne çıkarır; bunlardan ilkiyle TPS’yi
+kasteder. Bu amaçla Toyota’da, üretim hattında çalışmayan yöneticilere TPS’yi
+derinlemesine öğreten bir “TPS liderleri” programı başlatılmış ve Akio Toyoda
+açılış oturumuna bizzat katılmıştır.
+Akio Toyoda’ya göre Sakichi’nin buluşlarının temeli sahaya gidip “insanların
+işini nasıl kolaylaştırırım” diye düşünmektir; verimlilik bunun sonucudur. Ichi-
+nin-ku, bir işçinin bir günde yapabileceği iş miktarı, yani kişi başına iş yükü ve
+kapasite anlamına gelir.
+JIT’i Akio Toyoda yalnızca parçayı bir sonraki prosese zamanında göndermek
+olarak değil, müşterinin siparişi ile teslim arasındaki sürenin (lead time) kısaltılması
+olarak yorumlar. Aynı modelin kaplama, renk ve ses sistemi gibi birçok çeşidi
+vardır; Japonya’da yalnızca Prius’un 14.000’den fazla çeşidi bulunur ve azaltma
+çalışmasından önce bu sayı 48.000’i aşıyordu. Hepsini stokta tutmak imkânsızdır.
+Akio Toyoda ideali bir suşi restoranıyla anlatır: malzemeler hazırdır, sipariş gelir
+gelmez ürün hazırlanır ve teslim edilir. Bu otomobil için tam olarak mümkün
+değildir, ama hedef her proseste teslim süresini bu ideale yaklaştırmaktır.
+Toyota ekibinin yağmurluk üreticisi Funahashi’ye tıbbi önlük üretiminde
+yardım ettiği örnek bu yaklaşımı somutlaştırır. Toyota çalışanları ceketlerini ve
+14
+
+-- 14 of 34 --
+
+unvanlarını bilerek bırakmış, sahadaki çalışanlarla birlikte çalışarak en değerli
+geri bildirimi doğrudan almıştır. Bir çalışanın sırt ağrısından yakınması çalışma
+masasının yüksekliğinin değiştirilmesiyle, makas aranması makaslar için tanımlı
+bir yer yaratılmasıyla sonuçlanmıştır. Akio Toyoda’ya göre TPS’nin kalbi “başkaları
+için yapmak”tır.
+Sahadan Sesler
+Batuhan Tanrıverdi’nin Toyota Boshoku çevresiyle yaptığı röportajlar ve gözlem
+yazıları TPS’nin araçlarının arkasındaki düşünceyi gösterir (Tanrıverdi, 2021–
+2026).
+Samet Yakışık
+Toyota Boshoku Türkiye’de koltuk üretiminden sorumlu üretim müdürüdür;
+Corolla ve C-HR projelerinde hat kurulumu yapmış, ardından üretim ve sürekli
+iyileştirme bölümlerinde çalışmıştır.
+• TPS’nin kuralları ve sınırları net tanımlanmıştır, ancak bu sınırlar içinde
+yaratıcılığa yer bırakır; kişi yalnızca kural uyguladığını değil, başardığını
+hisseder.
+• Sistemin yükü insana değil kurulu sisteme verilmiştir; hata olduğunda
+kusur insanda değil sistemde aranır.
+• Hitozukuri (insan yetiştirme) ile Monozukuri (ürün yapma) birlikte gider.
+• En önemli araç standartlaştırmadır: standart yoksa iyileştirme başlamaz,
+iyileştirme standarda dönüşmezse korunamaz; standart konuyu kişiye bağlı
+olmaktan çıkarır, kişi ayrıldığında her şey sıfırlanmaz.
+• Japonya’da Ogawa-san’dan aldığı eğitimde en çok egosuzluk etkilemiştir;
+aklında kalan söz “öze dön” (back to origin) olmuştur.
+• Endüstri 4.0’ın temelinde dijitalleşme vardır; koltuk hattında güvenlik
+sıkım sistemi ve gerçek zamanlı Andon projeleri yapılmıştır, sonraki adım
+verilerden otomatik karar üretmektir.
+• Hat liderlerine habersiz sözlü ve yazılı TPS sınavları yapar; amacı yönetmekten
+çok geliştirmektir ve bunu bir gönül borcu olarak görür.
+• ˙Insana saygının karşılığı, başarısızlıkta yalnız kalmamaktır.
+• Öz eleştiri olarak şirketin uzun süre dışarıya kapalı bir kutu gibi çalıştığını
+söyler.
+• Firmalara önce inanmalarını önerir, çünkü aynı şeyi defalarca tekrar etmek
+gerekecektir; öğrencilere insan ilişkilerini geliştirmelerini öğütler.
+15
+
+-- 15 of 34 --
+
+Matsuda Tetsuya
+Shinshu Üniversitesi hassas malzeme mühendisliği mezunudur; 2004’ten beri
+Toyota Boshoku’da (eski adıyla Araco) yeni model seri üretim hazırlıkları, hat
+yerleşimi değişiklikleri, Jidoka projeleri ve IATF 16949 iç denetimlerinde çalışmış,
+Japonya fabrikalarının koordinasyonunu yürütmüş, 2023’ten beri Türkiye’de
+proje genel müdürüdür.
+• TPS’yi israfı ortadan kaldırmaya odaklı, yalın ve basit bir düşünce biçimi
+olarak tanımlar; en güçlü yanı evde bile uygulanabilecek kadar geniş kul-
+lanım alanıdır.
+• En önemli araç 5S’tir. Yeri belli olmayan malzeme hem aranır hem elde
+varken yeniden satın alınır; aramak müşteriye hiçbir değer katmaz. Örneği,
+kumandanın pili bitince yedek pillerin nerede olduğunu aramaktır.
+• ˙Ileri teknolojiler önemlidir, ancak önce gerçek ihtiyaç belirlenmeli ve maliyet–
+fayda dengesi gözetilmelidir.
+• Geriye dönse yabancı dile ve uluslararası deneyime daha çok zaman ayırırdı.
+Yeni yöneticilere tavsiyesi iletişimdir: kimse tek başına başaramaz.
+• Bir tedarikçide işe sahaya gidip parçanın girişten sevkiyata akışını izley-
+erek, sorun varsa kök nedeni bularak ve büyük yatırım yerine çalışanlarla
+parasız kaizen fikirleriyle başlar.
+• Üst yöneticilere genchi genbutsu, yani yerinde görüp yerinde doğrulama
+ilkesini öğütler; zihindeki algı ile gerçek arasındaki fark ancak sahada
+görülür.
+• Röportajda Japon ve Türk çalışma kültürlerinin karşılaştırıldığı soru ce-
+vapsız kalmıştır.
+Bülent Durmuşoğlu
+˙IT Ü endüstri mühendisliği profesörüdür; yalın kelimesi yaygınlaşmadan önce,
+1986’dan beri bu alanda çalışır ve danışmanlık yaptığı firmalardan üçünün tama-
+men yalına dönüştüğünü söyler.
+• Araçlar “tek seferde tek değişiklik” kuralıyla seçilmelidir; en temel araç
+akışı yaratan hücresel üretimdir.
+• Stoklar hücresel üretim ve kanban ile kontrol altına alınır, ardından kaizen
+ile düşürülür; stok azaltmak sorunları görünür kılar.
+• Gelecekte rekabet şirketler arasında değil tedarik zincirleri arasında ola-
+caktır. Ford 1926’da demir cevherinden sevke hazır otomobile 81 saat-
+lik toplam akış süresine ulaşmıştı (Ford, 1926); bugün kimse bunu ya-
+pamıyor. Nedenleri aşırı ürün çeşitliliği, muri ve mura, iş sahiplerinin akış
+süresinden önce maliyet muhasebecilerini dinlemesi ve otomotiv dışındaki
+tedarikçilerin ilkel koşullarıdır.
+16
+
+-- 16 of 34 --
+
+• Goldratt’ın, TPS’nin süreç, talep ve kaynak yükünde istikrar gerektirdiği
+eleştirisine katılır (Goldratt ve Cox, 1984). Talep dengesizliğine çare bu-
+lunabilir, ama kapasite üstü yük sistemi bozar; fasona kaydırılan yük kalite
+sorunu ve akış süresinde üstel uzama getirir. Bunun önüne ancak ilkeli bir
+satış bölümü geçebilir. Eski alışkanlıklar ve yüksek çalışan devriyle birlikte
+yalın sistemler çoğu yerde TPS gibi tam işletilemez.
+• Yalın olmayan şirket dijitalleşemez; Endüstri 4.0’ı para harcayıp karanlık
+fabrika kurmak olarak görmek sığdır, asıl iş azla çok yapmaktır.
+• Kişisel hayatında derse asla geç kalmaz ve herhangi bir slaytı en fazla 25
+saniyede bulur; buna harcadığı zamanı uzun vadeli kazanç olarak görür.
+• Firmalara sürekli öğrenmeyi ve bilmediğini bilmeyi, öğrencilere fabrika
+fiziğini (Hopp ve Spearman, 1996) ve davranış bilimlerini öğrenmeyi önerir.
+Dr. Shuhei Toyoda
+Toyota Boshoku’nun 74 yaşındaki yönetim kurulu başkanı, 100’den fazla fab-
+rikası olan şirketin Türkiye’deki bir projesi için Aralık 2021’de 1,5 saat ayırarak
+önerilerde bulunmuştur. Amacı maliyet ya da verimlilik göstergelerinden çok in-
+san gelişimidir. Önerilerinde hep operatörün işini kolaylaştırmaya odaklanmıştır;
+yazarın çıkardığı ilke şudur: asıl amaç operatörün işini kolaylaştırmaktır, er-
+gonomi, kalite, süre ve maliyet bunun ardından kendiliğinden iyileşir.
+Muda, Mura ve Muri
+Muda müşteriye değer katmayan israf, mura süreçteki dengesizlik ve değişkenlik,
+muri insan ya da makine üzerindeki aşırı yüktür. Üçü birbirine bağlıdır: den-
+gesizlik aşırı yüke, aşırı yük de israfa yol açar.
+TPS Bütünün Bir Parçasıdır
+Takao Sakai, Batı’da Toyota denince yalnızca TPS’nin konuşulduğunu, oysa
+TPS’nin bütünün bir bileşeni olduğunu savunur ve NHK’nın Toyota’nın ürün
+geliştirme merkezine ilk kez kamera sokulan programını önerir (Sakai, 2026).
+Ona göre Toyota’nın uzun vadeli başarısının asıl motoru ürün geliştirmedeki
+Chief Engineer (baş mühendis) sistemidir. Baş mühendis bir aracın tamamından
+sorumludur ama mühendislerin çoğu ona doğrudan bağlı değildir; ekibi yetkiyle
+değil bilgi ve vizyonla yönetir (Morgan ve Liker, 2006). Corolla, Camry ve Lexus
+modellerinin geliştirilmesini yönetmiş Naoto Kitagawa’nın 3 Eylül 2026’da Fransızca
+yayımlanan 228 sayfalık kitabı bu sistemi üç başlıkta anlatır: soyut müşteri geri
+bildirimini ürün özelliklerine çevirmek, ürün vizyonunu ilk eskizden seri üretime
+kadar korumak ve mühendisleri, tasarımcıları, üretimi ve tedarikçileri tek bir
+vizyon etrafında birleştirmek (Kitagawa, 2026). Bu ayrım Vincenti’nin tasarım
+bilgisi ile üretim bilgisi ayrımına karşılık gelir.
+17
+
+-- 17 of 34 --
+
+Kalite: Muayeneden Kapalı Döngüye
+Kalitenin Evrimi
+Kalite anlayışı dört aşamada gelişmiştir: muayene, önleme, iyileştirme ve mükemmellik.
+• Kalite kontrol (QC): Yalnızca ürüne bakar ve hatalı parçayı yakalar.
+• Kalite güvence (QA): Ürünle birlikte süreci kapsar ve hatanın oluşmasını
+önlemeye çalışır.
+• Kalite iyileştirme (QI): Değişkenliği azaltmaya ve verimliliğe odaklanır.
+• Toplam kalite yönetimi (TQM): Müşteri memnuniyeti, sürekli iyileştirme,
+çalışan katılımı ve yönetim bağlılığıyla bütün kuruma yayılır.
+Ana fikir, kalitenin hatayı sonunda yakalamaktan hatayı baştan üretmeyen
+bir kuruma doğru gelişmesidir.
+Muayene ve Proses Kontrol
+Muayene, müşteri gereksiniminden teknik çizime, muayene yönteminden kabul
+kriterine giden ve kabul ya da redle biten akıştır. Parçanın iyi olup olmadığına
+bakar, neden kötü çıktığını sormaz; açık döngüdür.
+Proses kontrol, süreci etkileyen girdilerden başlar, ürün özelliğini stan-
+dartla ve kontrol grafiğiyle karşılaştırır ve sürecin kararlı mı anormal mi olduğuna
+karar verir. Anormallik varsa sebep aranır, tekrarı önleyecek önlem alınır ve
+önlem sürece geri döner; kapalı döngüdür. Kontrol grafiklerinin temeli She-
+whart’a dayanır (Shewhart, 1931).
+Spesifikasyon ve Kontrol Sınırları
+Spesifikasyon sınırları (U SL, LSL) müşteriden gelir ve parçanın hangi aralıkta
+olması gerektiğini söyler. Kontrol sınırları (U CL, LCL) sürecin kendi doğal
+değişkenliğinden hesaplanır ve sürecin normalde hangi aralıkta çalıştığını söyler.
+Bir parça spesifikasyona uygunken kontrol sınırının dışına çıkabilir; bu, ürünün
+hâlâ kabul edilebilir olduğunu ama süreçte bir şeyin değiştiğini gösterir. Proses
+kontrol sorunu hatalı ürüne dönüşmeden yakalar.
+5M
+Süreç girdileri genellikle 5M ile incelenir:
+• ˙Insan: C alışanın becerisi, eğitimi, devamlılığı ve insan hatası.
+• Makine: Makinenin durumu, arızaları, bakımı ve ayarları.
+• Malzeme: Hammaddenin kalitesi, spesifikasyona uygunluğu, miktarı ve
+kusurları.
+18
+
+-- 18 of 34 --
+
+• Yöntem: Doğru prosedürün ya da iş talimatının uygulanıp uygulanmadığı.
+• Ölçüm: Ölçüm aletlerinin doğruluğu, kalibrasyonu ve muayene.
+Bu kategoriler Ishikawa’nın balık kılçığı diyagramının dallarıdır; bazı kay-
+naklar sıcaklık, nem ve ışık gibi çevre koşullarını ekleyerek 6M der.
+Kapalı Döngü Kalite
+Kapalı döngü kalite, hatanın bilgisinin kaynağına geri taşınması ve düzeltmenin
+işe yaradığının kanıtlanmasıdır. Kavram kontrol mühendisliğindeki geri besleme-
+den gelir: açık döngülü bir fırın yemek yansa da kurulan süre boyunca çalışır,
+kapalı döngülü bir termostat odayı ölçüp tepki verir. Bir parçada vida deliğinin
+sürekli kaymış çıktığı bir örnekte döngü şöyle işler:
+1. Tespit: Proses içi kontrol ya da istatistiksel proses kontrolünde sapma
+görülür ve uygunsuzluk kaydı (NC/NCR) açılır.
+2. Durdurma: Süpheli parti karantinaya alınır; malzeme inceleme kurulu
+(MRB) yeniden işleme, sapma onayıyla kullanma ya da hurdaya ayırma
+kararı verir.
+3. Kök neden: Kök neden analizi ya da 8D ile asıl sebep bulunur; örneğin
+tasarımdaki toleransın makinenin kapasitesinin altında olduğu anlaşılır.
+4. Düzeltici ve önleyici faaliyet: Kök neden tasarımdaysa CAPA mühendislik
+değişikliğine dönüşür.
+5. Tasarım değişikliği: Tolerans ya da parça değiştirilir, tasarım hata türü
+analizi ve risk dosyaları güncellenir, çizim yeni revizyonla onaylanır.
+6. Aktarım: Yeni revizyon ürün ağacına, iş emirlerine, iş talimatlarına ve
+muayene kriterlerine iner.
+7. Doğrulama: Düzeltmenin etkisi ölçülür; ancak etki kanıtlanınca CAPA
+kapatılır ve döngü kapanır.
+Bu döngünün en sade hâli Deming’in Planla–Uygula–Kontrol Et– Önlem
+Al (PDCA) döngüsüdür. ISO 9001 ve otomotive özel IATF 16949, düzeltici
+faaliyetin etkinliğinin doğrulanmasını zorunlu tutar.
+Döngünün Açık Kalma Nedenleri
+• Sahada hata sürekli yeniden işlenerek düzeltilir, ama tasarıma hiç haber
+gitmez.
+• Tasarım değişir, ama muayene kriterleri eski revizyona göre kalır.
+• CAPA kapatıldı olarak işaretlenir, ama etkisi hiç ölçülmez.
+19
+
+-- 19 of 34 --
+
+Dört Sistem ve Tek Kayıt
+Döngü çoğu zaman bilgi sistemleri arasında kopar (Karumanchi, 2026). PLM
+ürünü tanımlar, CAD belgelerini, mühendislik ürün ağacını, revizyonları ve
+mühendislik değişikliklerini yönetir. ERP iş planlaması, maliyet, stok, satın
+alma, satış siparişleri ve ana üretim çizelgesini yönetir. MES sahadaki üretimi
+yürütür; iş emirlerini dağıtır, iş talimatlarını sunar, işçilik ve ekipmanı izler,
+OEE verisi toplar ve üretilen ürünün soyağacını kaydeder. QMS kalite planla-
+ması, uyum ve iyileştirmeyi yönetir; müşteri şikâyetleri, eğitim kayıtları, kali-
+brasyon, iç ve tedarikçi denetimleri ile CAPA’yı yürütür.
+Kesişimlerde kritik akışlar vardır:
+• PLM ve ERP: Parça ana verisinin eşlenmesi, onaylanan mühendislik ürün
+ağacının (EBOM) üretim ürün ağacına (MBOM) dönüşmesi, değişiklik
+yürürlük tarihleri, onaylı tedarikçi listeleri ve yap ya da satın al kararları.
+• ERP ve MES: Planlamadan üretime geçiş; iş emirlerinin sahaya inmesi,
+malzeme çıkışı, üretim onayları, ara stok hareketleri, hurda ve verim ra-
+porları, plan ile gerçekleşenin karşılaştırılması.
+• MES ve QMS: Proses içi kalite; uygunsuzluk kayıtları, proses içi muayene
+ve SPC, kalite blokajı ve karantina, yeniden işleme ve sapma kayıtları,
+parti serbest bırakma ve mastar kalibrasyon kontrolleri.
+• QMS ve PLM: Kapalı döngü kalite; CAPA’nın mühendislik değişikliğine
+dönmesi, tasarım FMEA’sı ve risk dosyaları, belge kontrolü, muayene
+kriterleri, düzenlemeye tabi tasarım geçmişi ve RoHS ile REACH beyan-
+ları.
+Dört sistemin ortak dayanağı tek parça numarası, tek geçerli revizyon ve tek
+izlenebilirlik kaydıdır. Herkes aynı parçanın aynı sürümünden konuşmuyorsa
+döngü kapanamaz.
+Değer Akış Haritalama
+Değer akış haritalama (VSM), sürecin neresinde zaman, israf ve darboğaz
+olduğunu görünür kılar; görülmeyen kayıp için yapılan iyileştirme tahmine dönüşür.
+Adımları şunlardır (Six Sigma Manufacturing, 2026):
+1. Mevcut durum haritası: Sürecin bugün nasıl işlediğini anlamak.
+2. Veri analizi: Teslim süresi, katma değerli süre, OEE ve kaliteyi ölçmek.
+3. Problem kaydı: Kayıpları, gecikmeleri ve darboğazları belirlemek.
+4. Pareto analizi: En kritik kayıplara odaklanmak.
+5. Karşı önlemler: Uygulanabilir iyileştirmeleri tanımlamak.
+6. Gelecek durum haritası: Daha akıcı bir süreç tasarlamak.
+20
+
+-- 20 of 34 --
+
+7. Gantt şeması: ˙Iyileştirmeleri sorumlusu ve tarihi belli işlere çevirmek.
+Hedef daha az israf, daha kısa teslim süresi, daha iyi kalite ve daha yüksek
+verimdir. VSM’yi teoride bilmek ile sahada uygulanışını görmek farklıdır; birçok
+ekip problemi haritalamaktan sahada gerçekten çalışan bir gelecek duruma geçmekte
+zorlanır.
+Deming ve Derin Bilgi Sistemi
+Deming’in ana fikri, iyileşmek için insanları değil sistemi düzeltmek gerektiğidir.
+Yönetim felsefesine verdiği ad olan Derin Bilgi Sistemi dört parçadan oluşur
+(Deming, 1993; Parent, 2026):
+• Sistemi kavramak: Sonuçları sistem belirler; hedef sistemin kapasitesini ve
+performansını artırmaktır.
+• Değişkenliği bilmek: C alışanlar sıralanmamalı ve işlerin olağan inip çıkmalarına
+özel bir sebep varmış gibi tepki verilmemelidir.
+• Bilgi kuramı: Sistem ancak dışarıdan bilgi girdiğinde gelişir.
+• Psikoloji: C alışanların motivasyonunu kıran şeyler yapılmamalı, işleriyle
+gurur duyabilecekleri bir ortam kurulmalıdır.
+Değişkenliği bilmek kontrol grafiklerinin teorisidir. Her süreçte doğal bir
+oynama vardır; bu oynamaya tepki vermek, örneğin bu ay sonucu düşük çıkan
+çalışanı cezalandırmak, sistemi düzeltmez, bozar. Sık aktarılan bir anekdota
+göre Deming’e felsefesini kaç şirketin uyguladığı sorulduğunda “hiçbiri”, gele-
+cekte kaçının uygulayacağı sorulduğunda “hayatta kalanların hepsi” demiştir;
+anekdotun kaynağı belirsizdir.
+Değişkenliğin Gizli Maliyeti
+Yöneticilerin çoğu projelerin geciktiğini işin küçümsenmesine, değişen önceliklere
+ya da birinin hatasına bağlar; oysa gecikme çoğu zaman sistemin işleyişine
+gömülüdür. ˙Işlerin düzensiz gelmesi, kararların farklı sürelerde alınması, tu-
+tarsız devir teslimler ve değişen öncelikler her gün küçük değişkenlikler birik-
+tirir ve kuyruk oluşturur. Bunlar tek tek önemsiz görünür ve çoğu zaman
+fark edilmez; buna örgütsel körlük denir. Birlikte ise gecikmeyi, israfı ve
+yöneticilerin dikkatini yiyen yangın söndürme işlerini yaratır (anonim LinkedIn
+yazısı, 2026).
+Toyota’nın amacı yalnızca israfı yok etmek değil, israfı baştan yaratan gerek-
+siz değişkenliği azaltmaktı. Kurumlar ise aşırı yüklenmiş işin ne zaman biteceğini
+tahmin etmek için binlerce Monte Carlo simülasyonu çalıştırıp bu simülasyonları
+gerekli kılan aşırı yükü ve değişkenliği gidermeye çok daha az çaba harcar. Bu
+bir olasılık paradoksudur: işlev bozukluğunu tahmin etmede ustalaşmak, onu
+yaratan sistemi düzeltmek yerine.
+21
+
+-- 21 of 34 --
+
+Yazının vurguladığı diğer noktalar şunlardır: ortalamalar yöneticileri yanıltır,
+çünkü değişkenliği gizler; kullanım oranını en yükseğe çıkarmak sistemi yavaşlatır;
+kahraman kültürü kötü sistem tasarımının belirtisidir; değişkenliği görmeyi öğrenmek
+en önemli liderlik becerilerinden biridir. Kullanım oranıyla ilgili iddia kuyruk
+teorisine dayanır: bir kaynağın doluluğu tam kapasiteye yaklaştıkça bekleme
+süresi doğrusal değil hızla artar ve değişkenlik yükseldikçe bu artış daha erken
+başlar (Kingman, 1961; Hopp ve Spearman, 1996).
+22
+
+-- 22 of 34 --
+
+Kısaltmalar Sözlüğü
+Kalite ve Yalın Üretim Kısaltmaları
+• 5S: Ayıkla, Düzenle, Temizle, Standartlaştır, Sürdür; verimlilik ve düzen
+için işyeri düzenleme yöntemi.
+• 5W1H: Ne, Neden, Nerede, Ne zaman, Kim, Nasıl; problem çözmede soru
+sorma tekniği.
+• 8D: Sekiz disiplinli problem çözme yöntemi.
+• A3: Tek bir A3 sayfasında yürütülen yapılandırılmış problem çözme yöntemi.
+• Andon: Üretim sorunlarını bildiren görsel sinyal sistemi.
+• AQL: Kabul edilebilir kalite seviyesi; örnekleme muayenesinde kabul edilen
+en kötü ortalama hata düzeyi.
+• APQP: ˙Ileri ürün kalite planlaması.
+• CAPA: Düzeltici ve önleyici faaliyet.
+• CAR: Düzeltici faaliyet talebi.
+• CI: Sürekli iyileştirme.
+• COPQ: Kalitesizliğin maliyeti.
+• COQ: Kalite maliyeti; hataları önleme, tespit etme ve düzeltmeyle ilgili
+toplam maliyet.
+• CP: Kontrol planı.
+• Cpk: Proses yeterlilik indeksi.
+• CQI: Sürekli kalite iyileştirme.
+• CT: C evrim süresi; bir proses çevrimini tamamlamak için gereken süre.
+• CTQ: Kalite için kritik özellik.
+• DFMEA: Tasarım hata türü ve etkileri analizi.
+• DMAIC: Tanımla, Ölç, Analiz Et, ˙Iyileştir, Kontrol Et; Altı Sigma prob-
+lem çözme yöntemi.
+• DOE: Deney tasarımı.
+• DPMO: Milyon fırsatta hata.
+• DPPM: Milyonda hatalı parça.
+• EBOM ve MBOM: Mühendislik ürün ağacı ve üretim ürün ağacı.
+23
+
+-- 23 of 34 --
+
+• ERP: Kurumsal kaynak planlama sistemi.
+• FIFO: ˙Ilk giren ilk çıkar; en eski malzemenin önce kullanıldığı stok yöntemi.
+• FMEA: Hata türü ve etkileri analizi.
+• FMECA: Hata türü, etkileri ve kritiklik analizi.
+• FPY: ˙Ilk geçiş verimi; ilk seferde doğru üretilen ürünlerin oranı.
+• FTQ: ˙Ilk seferde kalite; yeniden işlenmeden hatasız üretilen ürünlerin
+ölçüsü.
+• Gemba: ˙Işin ve değer yaratmanın gerçekte yapıldığı yer.
+• IATF 16949: Otomotiv kalite yönetim sistemi standardı.
+• ISO 9001: Kalite yönetim sistemi standardı.
+• ISO 14001: C evre yönetim sistemi standardı.
+• ISO 45001: ˙Iş sağlığı ve güvenliği yönetim sistemi standardı.
+• JIT: Tam zamanında üretim; yalnızca gerekeni, gerektiği anda üretmek.
+• Kanban: Üretim akışını kontrol eden görsel çizelgeleme sistemi.
+• KPI: Anahtar performans göstergesi.
+• KQI: Anahtar kalite göstergesi.
+• LPA: Katmanlı proses denetimi.
+• LSS: Yalın Altı Sigma; israfı ve hatayı azaltmak için yalın ile Altı Sigma’nın
+birleşimi.
+• LT: Teslim süresi; siparişten teslime kadar geçen toplam süre.
+• MES: Üretim yürütme sistemi.
+• MRB: Malzeme inceleme kurulu.
+• MSA: Ölçüm sistemi analizi; ölçen aletin ve yöntemin güvenilirliğinin
+incelenmesi.
+• MTBF: Arızalar arası ortalama süre.
+• MTTR: Ortalama onarım süresi.
+• Muda, Mura, Muri: ˙Israf, dengesizlik ve aşırı yük.
+• NC ve NCR: Uygunsuzluk ve uygunsuzluk raporu.
+• OEE: Toplam ekipman etkinliği; kullanılabilirlik, performans ve kalitenin
+çarpımı.
+24
+
+-- 24 of 34 --
+
+• PAR: Önleyici faaliyet talebi.
+• PDCA: Planla, Uygula, Kontrol Et, Önlem Al döngüsü.
+• PFMEA: Proses hata türü ve etkileri analizi.
+• PLM: Ürün yaşam döngüsü yönetimi sistemi.
+• Poka-yoke: Hata önleme tekniği.
+• PPAP: Üretim parçası onay süreci.
+• Ppk: Proses performans indeksi.
+• PPM: Milyonda parça; milyon parça başına hatalı parça sayısı.
+• QA ve QC: Kalite güvence ve kalite kontrol.
+• QAP: Kalite güvence planı.
+• QFD: Kalite fonksiyon yayılımı; müşteri isteklerini ürün özelliklerine çevirme
+yöntemi.
+• QI: Kalite iyileştirme.
+• QMS: Kalite yönetim sistemi.
+• RCA: Kök neden analizi.
+• RPN: Risk öncelik sayısı; FMEA’da şiddet, olasılık ve tespit puanlarının
+çarpımı.
+• RTY: Yuvarlanmış verim; tüm proses adımlarının ilk geçiş verimlerinin
+çarpımı.
+• SCAR: Tedarikçiye açılan düzeltici faaliyet talebi.
+• SIP: Standart muayene prosedürü.
+• SIPOC: Tedarikçiler, Girdiler, Süreç, C ıktılar, Müşteriler; süreç sınırlarını
+tanımlama aracı.
+• SMED: Tek dakikada kalıp değişimi; makine hazırlık süresini kısaltma
+yöntemi.
+• SOP: Standart işletim prosedürü.
+• SPC: ˙Istatistiksel proses kontrol.
+• SW: Standart iş.
+• Takt süresi: Müşteri talebini karşılamak için ürünlerin üretilmesi gereken
+hız.
+25
+
+-- 25 of 34 --
+
+• TPM: Toplam verimli bakım.
+• TPS: Toyota Üretim Sistemi.
+• TQM: Toplam kalite yönetimi.
+• TWI: Endüstri içi eğitim; işgücü eğitim ve beceri geliştirme programı.
+• VDA: Alman otomotiv sanayii birliği; otomotiv kalite standartları yayımlar.
+• VOB ve VOC: ˙Işin sesi ve müşterinin sesi.
+• VSM: Değer akış haritalama.
+• WI: ˙Iş talimatı; bir işin adım adım nasıl yapılacağını anlatan belge.
+Sık Karıştırılan Kavramlar
+• Takt, çevrim ve teslim süresi: Takt müşterinin istediği hız, çevrim süresi
+prosesin gerçek hızı, teslim süresi siparişten teslime geçen bütün zamandır.
+C evrim süresi takt süresinden uzunsa talep karşılanamaz.
+• SOP, standart iş ve iş talimatı: SOP genel prosedürdür; iş talimatı tek bir
+işin adımlarıdır; standart iş o işin bilinen en iyi yapılış biçimini zaman,
+sıra ve ara stokla birlikte tanımlar.
+• PPM ile DPMO: PPM hatalı parçayı sayar. DPMO bir parçada hata
+olabilecek her noktayı ayrı fırsat sayar; on ölçüsü olan parça on fırsat
+demektir.
+• Cpk ile Ppk: Cpk sürecin kısa dönemli doğal değişkenliğine göre yeterliliğini,
+Ppk uzun dönemde gerçekleşen toplam değişkenliğe göre performansını
+gösterir.
+• FPY ile RTY: FPY tek bir adımın ilk seferde doğru üretme oranıdır; RTY
+bütün adımların bu oranlarının çarpımıdır ve süreç boyunca gizli yeniden
+işlemeyi görünür kılar.
+• QA ile QC: QC ürünü muayene eder, QA süreci güvence altına alır.
+26
+
+-- 26 of 34 --
+
+Yazılımda Aynı ˙Ilkeler
+Üç Temel ˙Ilke
+Yazılımcı her gün yeni kalıp, teknoloji ve disiplinlerle bombardımana tutu-
+lur; öğrendiklerini düzenlemekte ve parçaların nasıl birleştiğini görmekte zor-
+lanır. Bir yaklaşım, yazılım pratiklerinin çoğunun üç ilkeye indirgenebileceğini
+savunur: geri bildirim, basitlik ve ilgi alanlarının ayrılması (Anonim, 2026).
+Geri Bildirim
+Yazılım varsayımlar üzerine kurulur: problemin doğru anlaşıldığı, tasarımın onu
+çözeceği, kodun amaçlananı yaptığı, parçaların birlikte çalışacağı, canlı ortamın
+beklendiği gibi davranacağı ve en önemlisi yapılanın gerçekten değerli olduğu.
+Sorun varsayım yapmak değil, varsayımların uzun süre sınanmadan yaşamasıdır.
+Geri bildirim, gerçeğin varsayımların doğru olup olmadığını söylediği mekaniz-
+madır.
+Derleyici saniyeler içinde hatayı söyler; testler beklenen davranışın hâlâ
+çalışıp çalışmadığını, sürekli entegrasyon değişikliğin başkalarınınkiyle uyumunu
+gösterir; kod incelemesi başka bir mühendisin gözünü, izleme canlı ortamda
+gerçekte ne olduğunu, kullanıcılar doğru problemin çözülüp çözülmediğini gösterir.
+Hepsinin amacı bir eylem ile o eylemin doğru olup olmadığını söyleyen bilgi
+arasındaki mesafeyi kısaltmaktır; mesafe kısaldıkça sistemi değiştirmek güvenli
+hâle gelir.
+Adım adım geliştirme bu yüzden işe yarar: yüzlerce karar verip aylar sonra
+sonucunu öğrenmek yerine küçük kararlar verilir, sonuç gözlenir, öğrenilir ve
+düzeltilir. Belirsizlik ortadan kaldırılamaz; yapılabilecek olan yanılmak ile yanıldığını
+fark etmek arasındaki süreyi kısaltmaktır. Bu, proses kontrolün ve kapalı döngünün
+yazılımdaki karşılığıdır.
+Basitlik
+Yazılım sürtünmesiz biçimde karmaşıklaşır: her özellik davranış, her entegrasyon
+bağımlılık, her istisna yeni bir yol, her soyutlama yeni bir kavram ekler. Karmaşık
+problemler karmaşık çözümler gerektirmez; görev problemin karmaşıklığını koda
+kopyalamak değil yönetmektir. Basitlik, gerekli karmaşıklıktan kaçmak değil,
+gereksiz karmaşıklığı ayıklamaktır.
+KISS gereğinden karmaşık yapmamayı, YAGNI varsayımsal gelecekler için
+inşa etmemeyi söyler; yeniden düzenleme sonradan biriken karmaşıklığı tem-
+izler; TDD önündeki problemi çözmeye iter. Bugün eklenen her şeyin yarın
+anlaşılması, test edilmesi, bakımının yapılması ve sonunda silinmesi gerekebilir.
+Basitliğin birikimli etkisi vardır: basit sistem kolay anlaşılır, kolay anlaşılan
+sistem kolay değişir, kolay değişen sistem geri bildirime hızlı cevap verir.
+27
+
+-- 27 of 34 --
+
+˙Ilgi Alanlarının Ayrılması
+Sistem büyüyünce bütünü basit tutmak imkânsızlaşır; yapılabilecek olan her
+parçayı kendi içinde basit tutmaktır. ˙Ilgi alanlarının ayrılması, büyük prob-
+lemi sınırlarla ayrılmış küçük problemlere bölmek ve her sınır içinde tek konuya
+odaklanmaktır. Terim Dijkstra’ya aittir (Dijkstra, 1974); Parnas modüllere
+ayırmanın ölçütünü, her modülün değişmesi muhtemel bir tasarım kararını gi-
+zlemesi olarak tanımlamıştır (Parnas, 1972).
+Fonksiyonlar davranışı, modüller sorumluluk alanlarını, arayüzler “ne” ile
+“nasıl”ı, katmanlar iş mantığını altyapıdan, sınırlı bağlamlar alan modellerini,
+altıgen mimari çekirdeği dış teknolojilerden ayırır. Yüksek uyum ilgili şeyleri bir
+arada, düşük bağımlılık ilgisiz şeyleri birbirinden uzak tutar. Konular karışınca
+değişiklik yayılır: bir iş kuralı veritabanını etkiler, bir servisteki değişiklik beş
+başkasını değiştirmeye zorlar. ˙Iyi ayrım değişikliğin etrafına sınır çizer. Bu ilke
+Vincenti’nin tasarım hiyerarşisinin yazılımdaki karşılığıdır.
+Döngü ve Pratik Haritası
+Üç ilke bir döngü oluşturur: geri bildirim neyin değişmesi gerektiğini söyler, ba-
+sitlik değişimi mümkün kılar, ayrım basitliğin büyük ölçekte yaşamasını sağlar;
+değişim kolaylaşınca geri bildirime daha hızlı cevap verilir. Her pratik bu ilkelere
+yerleştirilebilir:
+• TDD: Geri bildirim, ayrıca basitliği teşvik eder.
+• Sürekli entegrasyon, eşli programlama ve kod incelemesi: Geri bildirim.
+• Gözlemlenebilirlik: Canlı ortamdan geri bildirim.
+• Yeniden düzenleme, KISS ve YAGNI: Basitlik.
+• Kapsülleme, modülerlik ve Clean Architecture: Ayrım.
+• Alan güdümlü tasarım: Ayrım ve alandan sürekli geri bildirim.
+• Agile: Daha kısa geri bildirim döngüleri, daha küçük adımlar ve daha az
+gereksiz iş.
+˙Işe yarar bir büyük resim her şeyi içermez; her şeyin nereye ait olduğunu
+anlamaya yardım eder.
+Veri Biliminde Aynı ˙Ilke
+Umut Akbulut, veri bilimine modelle değil SQL ve veriyle başlamayı önerir:
+verinin nereden geldiğini, neden eksik olduğunu ve aynı müşterinin farklı satırlarda
+nasıl göründüğünü anlayan kişi algoritma ne olursa olsun daha az hata ya-
+par. Ardından istatistik, özellikle bir sonucun şans eseri olup olmadığını okuya-
+bilmek gelir; model eğitmek en son adımdır. Asıl fark değerlendirmeyi doğru
+kurmakta, veri sızıntısından kaçınmakta, modeli servis olarak yayına alıp izle-
+mekte ve sonucu iş tarafına anlatmaktadır. Tavsiyesi bir projeyi baştan sona
+28
+
+-- 28 of 34 --
+
+bitirmek ve modelin yanlış tahminlerine bakıp nedenini bulmaktır (Akbulut,
+2026). Bu yaklaşım gerçek ortamdan gelen geri bildirimin model mimarisinden
+önemli olduğunu söyler.
+Kireçlenme ve Değişim Maliyeti
+Fowler, kaliteli yazılımın daha pahalı olup olmadığını sorar (Fowler, 2019).
+Temiz kod, test, yeniden düzenleme ve iyi mimari ilk bakışta geliştirmeyi yavaşlatır
+görünür; düşük kaliteyle başlangıçta daha hızlı ilerlemek de mümkündür. An-
+cak sistem büyüdükçe küçük değişiklikler daha çok yeri etkiler, yeni özellikler
+uzar ve hata riski artar; Fowler bu dengenin aylar değil haftalar içinde tersine
+döndüğünü savunur. ˙Iç kalitenin asıl değeri güzel kod değil, değişim maliyetini
+düşük tutmaktır; kaliteye harcanan zaman uzun vadeli ekonomik bir yatırımdır.
+Fowler mevcut kod ile idealde olması istenen kod arasındaki farka cruft
+der; ˙Ibrahim Yıldız bunu yazılımın kireçlenmesi olarak yorumlar (Yıldız, 2026).
+Ekip geliştirme sırasında problemi daha iyi öğrendiği, ihtiyaçlar ve teknolo-
+jiler değiştiği için başta doğru görünen kararlar zamanla yetersiz kalır; bir mik-
+tar kireçlenme kaçınılmazdır. Amaç hiç kireç oluşmaması değil, az oluşması
+ve biriken kirecin sistemi yavaşlatmadan düzenli temizlenmesidir. ˙Iyi ekipleri
+ayıran şey de budur. Yeniden düzenleme, otomatik test ve sürekli entegrasy-
+onun değeri burada ortaya çıkar; iyi mimari yarın değiştirmeyi kolay ve ucuz
+tutar. Cruft, ideal ile gerçek arasındaki farkın yazılımdaki adıdır.
+˙Invaryant Kataloğu
+˙Invaryant, bir sistem çalışırken her durumda doğru kalması gereken özelliktir;
+invaryant kataloğu ise bu kuralların açıkça yazılıp tek yerde toplandığı liste-
+dir. Bu ifade yerleşik tek bir terim değil, iki kavramın birleşimidir. Örnekler:
+• Bankacılık: Hesaplar arası aktarımda toplam para değişmez; kredili ol-
+mayan hesabın bakiyesi eksiye düşmez.
+• Stok: Depodaki miktar giren eksi çıkana eşittir ve sıfırın altına inmez.
+• Ses yayını: Bir kanalda aynı anda tek yayın çalar; planlanmış bir reklam
+iki kez oynatılmaz.
+• Üretim: Bir parça numarasının aynı anda yalnızca bir geçerli revizyonu
+vardır.
+Yazılı bir katalog yeni gelen birine sistemin asla bozulmaması gereken yer-
+lerini gösterir, testlerin bu kurallara göre yazılmasını sağlar ve bir hata çıktığında
+ilk bakılacak yeri belirler. Sözleşmeyle tasarımda her sınıfın bir invaryantı
+vardır (Meyer, 1988); veritabanı kısıtları birer invaryanttır; TLA+ gibi biçimsel
+doğrulama araçları sistemin olası bütün durumlarında invaryantların bozul-
+madığını denetler. Kalitedeki kritik özellikler ve kontrol planı da aynı işlevi
+görür. ˙Invaryant kataloğu, “bu sistem neden güvenilir” sorusunun yazılı cevabıdır.
+29
+
+-- 29 of 34 --
+
+Niyete Dayalı Yazılım Mimarisi
+Rıdvan Özcan’ın paylaştığı niyete dayalı yazılım mimarisi fikrinde sistem kodla
+değil, bağlam, kararlar ve kısıtlar biçiminde ifade edilen niyetle tanımlanır; kodu
+yapay zekâ üretir ( Özcan, 2026). Bu geleceğin ne kadar yakın olduğu açık bir
+sorudur. Bu yaklaşımda kod her seferinde yeniden üretilebilir, ama niyet ve
+kısıtlar sabit kalır; kısıtlar katmanı invaryant kataloğuna çok yakındır.
+Organizasyon ve Sistem Yapısı
+Trendyol’da tasarım ekipleri hizmet ettikleri iş alanının adıyla anılır. OPS-CX-
+TEX-UX ekibi; operasyon (depo ve sipariş hazırlama gibi iç süreçler), müşteri
+deneyimi (müşteri hizmetleri), Trendyol’un kargo şirketi Trendyol Express ve
+kullanıcı deneyimi disiplininin birleşimidir. Ekip bu geniş ürün yelpazesine
+merkeziyetsiz bir UX yaklaşımıyla destek verir, kendi tasarım sistemini yapay
+zekâyla kullanmayı deneyimler (Yılmaz, 2026). OPS ve CX’in Trendyol içindeki
+kapsamı kısaltmaların yaygın anlamına göre yorumlanmıştır. Ekiplerin hizmet
+ettikleri alana göre örgütlenmesi Conway yasasının bilinçli kullanımıdır: orga-
+nizasyon yapısı, ortaya çıkan ürünlerin yapısını belirler.
+Yazı, Düşünce ve Kanıt
+Amazon’da toplantılar sunumla değil, ilk yarım saat kadar sessizce okunan
+altı sayfalık anlatı belgeleriyle başlar. Bezos’a göre fiilleri ve konu cümleleri
+olan tam cümlelerle yapılandırılmış bir anlatı yazmak net düşünmeyi zorunlu
+kılar. Yaklaşık yirmi yıl Amazon’da çalışmış Huynh, bu kültürü şirketin gizli
+gücü olarak görür, ancak yapay zekâyla eleştirel düşünme olmadan altı sayfa
+üretmenin kolaylaştığını ve kuralın artık geçerli olmadığını savunur. Aktardığı
+örnekte L7 seviyesinde kıdemli bir ürün yöneticisi tartışmaya açtığı belgeyi
+toplantıda ilk kez okumaktadır; odadaki herkes bunu fark eder, ama kıdem farkı
+yüzünden L6 seviyesindeki katılımcılar dahil kimse bir şey söyleyemez (Huynh,
+2026).
+Belge, yazarının düşündüğünün kanıtıydı; kanıt üretmek kolaylaşınca kanıtın
+değeri düştü. Bu, ölçü hedef hâline gelince ölçü olmaktan çıkar diyen Goodhart
+yasasının bir örneğidir ve güvenin kanıta dayandığı her alan için genel bir uyarı
+taşır: kanıt ile kanıtladığı şey arasındaki bağ korunmalıdır. Kıdem karşısında
+susan oda ise psikolojik güvenliğin yokluğunun örneğidir.
+30
+
+-- 30 of 34 --
+
+Sonuç
+Not boyunca aynı yapı farklı alanlarda tekrar ortaya çıkar. Güvenin katmanları,
+Campbell modelinin adımları, Toyota’nın Jidoka ve standartlaştırma pratikleri,
+kalitedeki kapalı döngü ve yazılımdaki geri bildirim, basitlik ve ayrım döngüsü
+aynı üç işlevi yerine getirir: hatayı erken fark etmek, kaynağını düzeltmek ve
+öğrenileni korumak. Muayene tek başına açık döngüdür; güveni kalıcı kılan,
+bilginin kaynağına geri dönmesidir.
+˙Ikinci ortak nokta, sorunun insanda değil sistemde aranmasıdır. Suçlamasız
+hata analizi, Toyota’nın kusuru sistemde araması, operatörün işini kolaylaştırma
+ilkesi ve Deming’in değişkenlik vurgusu aynı yargıya dayanır: sonuçları büyük
+ölçüde sistem üretir. Değişkenliği ve aşırı yükü görmeden yapılan iyileştirme, be-
+lirtileri tahmin etmekte ustalaşıp nedenlere dokunmamak riskini taşır. Üçüncü
+ortak nokta, ideal ile gerçek arasındaki farkın hiçbir zaman kapanmamasıdır;
+emniyet payı, cruft temizliği, bakım ve sürekli iyileştirme bu farkı yönetmenin
+farklı adlarıdır.
+C erçevenin sınırları da vardır. Evrimsel bilgi modeli birikimli iyileşmeyi iyi
+açıklar ama radikal tasarımı açıklamakta zayıftır; jet motoru ya da transistör
+gibi kırılmalar küçük denemelerin birikmesinden çok yeni bir çerçevenin kurul-
+masıyla gelmiştir. Seçilme her zaman en iyi çözümü seçmez; maliyet, alışkanlık
+ve piyasa koşulları da elemede rol oynar. Goldratt’ın ve Durmuşoğlu’nun işaret
+ettiği gibi TPS istikrar ister; yoğun ürün çeşitliliği, yüksek çalışan devri ve aşırı
+yük altında yalın sistemler tam işletilemez. Kanıt üretmenin de bir maliyeti
+vardır; emniyet payının, yedek sayısının ya da kontrol sıklığının seçimi teknik
+olduğu kadar değer yargısı içerir.
+Açık kalan soru, kanıt üretmenin maliyeti sıfıra yaklaştığında güvenin neye
+dayanacağıdır. Yazılımda deneme ucuzladıkça çeşitlenme artar ama seçilme
+ve özellikle koruma adımı zayıflayabilir: çok şey denenir, az şey kalıcı bil-
+giye dönüşür. Yapay zekâ belge ve kod üretimini kolaylaştırdıkça bunların
+arkasında düşünce olduğunu gösteren işaretler azalır. Bu durumda güvenin
+ağırlığının üretilen çıktıdan, yazılı ve sınanan kısıtlara, ölçülen sonuçlara ve ka-
+palı döngünün kendisine kayması gerekecektir.
+Kaynaklar
+• Akbulut, U. (2026). Veri bilimine nereden başlanır. LinkedIn paylaşımı.
+• Anonim (2026). Software Development Comes Down to Three Principles.
+Blog yazısı, 24 Eylül 2026.
+• Anonim (2026). Why Everything Takes Longer: The Hidden Cost of
+Process Variation. LinkedIn makalesi.
+• ASME (t.y.). History of the ASME Boiler and Pressure Vessel Code.
+American Society of Mechanical Engineers.
+• Beyer, B., Jones, C., Petoff, J. ve Murphy, N. R. (2016). Site Reliability
+Engineering. O’Reilly Media.
+31
+
+-- 31 of 34 --
+
+• Brooks, F. P. (1975). The Mythical Man-Month. Addison-Wesley.
+• Campbell, D. T. (1960). Blind variation and selective retention in creative
+thought as in other knowledge processes. Psychological Review, 67(6),
+380–400.
+• Campbell, D. T. (1974). Evolutionary epistemology. P. A. Schilpp (Ed.),
+The Philosophy of Karl Popper içinde. Open Court.
+• Cartwright, N. (1983). How the Laws of Physics Lie. Oxford University
+Press.
+• Casati, R. ve Varzi, A. C. (1994). Holes and Other Superficialities. MIT
+Press.
+• Chesterton, G. K. (1929). The Thing. Sheed and Ward.
+• Constant, E. W. (1980). The Origins of the Turbojet Revolution. Johns
+Hopkins University Press.
+• Conway, M. E. (1968). How do committees invent? Datamation, 14(4).
+• Dekker, S. (2007). Just Culture: Balancing Safety and Accountability.
+Ashgate.
+• Deming, W. E. (1993). The New Economics for Industry, Government,
+Education. MIT Center for Advanced Engineering Study.
+• Dijkstra, E. W. (1970). Notes on Structured Programming (EWD249).
+• Dijkstra, E. W. (1974). On the role of scientific thought (EWD447).
+• Edmondson, A. (1999). Psychological safety and learning behavior in work
+teams. Administrative Science Quarterly, 44(2).
+• Fagan, M. E. (1976). Design and code inspections to reduce errors in
+program development. IBM Systems Journal, 15(3).
+• Ford, H. (1926). Today and Tomorrow. Doubleday.
+• Fowler, M. (2019). Is High Quality Software Worth the Cost? martin-
+fowler.com.
+• Gall, J. (1975). General Systemantics. Quadrangle.
+• Gilruth, R. R. (1943). Requirements for Satisfactory Flying Qualities of
+Airplanes. NACA Report.
+• Goldratt, E. M. ve Cox, J. (1984). The Goal. North River Press.
+• Goodhart, C. A. E. (1975). Problems of monetary management: the U.K.
+experience. Papers in Monetary Economics. Reserve Bank of Australia.
+32
+
+-- 32 of 34 --
+
+• Hopp, W. J. ve Spearman, M. L. (1996). Factory Physics. Irwin.
+• Huynh, S. (2026). On the Death of Amazon’s Writing Culture. A Life
+Engineered, Substack, 14 Ekim 2026.
+• Karumanchi, A. (2026). The Manufacturing Systems Map: PLM vs ERP
+vs MES vs QMS. PLM Coach, LinkedIn.
+• Kingman, J. F. C. (1961). The single server queue in heavy traffic. Math-
+ematical Proceedings of the Cambridge Philosophical Society, 57(4).
+• Kitagawa, N. (2026). Mieux concevoir pour vendre plus: Le syst`eme du
+Chief Engineer chez Toyota.
+• Koen, B. V. (2003). Discussion of the Method. Oxford University Press.
+• Leveson, N. G. (2011). Engineering a Safer World. MIT Press.
+• Meyer, B. (1988). Object-Oriented Software Construction. Prentice Hall.
+• Morgan, J. M. ve Liker, J. K. (2006). The Toyota Product Development
+System. Productivity Press.
+• Naveen K (2026). 50 Acronyms in Quality Management; Essential Lean
+Manufacturing Acronyms; The Quality Pyramid. LinkedIn infografikleri.
+• NSPE (t.y.). Code of Ethics for Engineers. National Society of Profes-
+sional Engineers.
+• Özcan, R. (2026). Intent-Based Software Architecture. LinkedIn paylaşımı.
+• Parent, M. (2026). Inspection vs Process Control; Deming’s System of
+Profound Knowledge. LinkedIn paylaşımları.
+• Parnas, D. L. (1972). On the criteria to be used in decomposing systems
+into modules. Communications of the ACM, 15(12).
+• Perrow, C. (1984). Normal Accidents. Basic Books.
+• Petroski, H. (1985). To Engineer Is Human. St. Martin’s Press.
+• Polanyi, M. (1966). The Tacit Dimension. Doubleday.
+• Popper, K. R. (1963). Conjectures and Refutations. Routledge.
+• Reason, J. (1997). Managing the Risks of Organizational Accidents. Ash-
+gate.
+• Sakai, T. (2026). TPS ve Chief Engineer sistemi üzerine LinkedIn paylaşımları.
+• Shewhart, W. A. (1931). Economic Control of Quality of Manufactured
+Product. Van Nostrand.
+33
+
+-- 33 of 34 --
+
+• Shingo, S. (1986). Zero Quality Control: Source Inspection and the Poka-
+yoke System. Productivity Press.
+• Simon, H. A. (1956). Rational choice and the structure of the environment.
+Psychological Review, 63(2).
+• Six Sigma Manufacturing (2026). Value Stream Mapping. LinkedIn paylaşımı.
+• Tanrıverdi, B. (2021–2026). TPS Röportajları 1–3; Akio Toyoda’nın TPS’ye
+Bakış Açısı; Dr. Shuhei Toyoda’dan TPS Öğrenmek. batuhantanriverdi.com.
+• U.S. Federal Aviation Administration. 14 CFR ğ 25.303, Factor of safety.
+• Vaughan, D. (1996). The Challenger Launch Decision. University of
+Chicago Press.
+• Vincenti, W. G. (1990). What Engineers Know and How They Know It.
+Johns Hopkins University Press.
+• Vincenti, W. G. ve Kruger, C. H. (1965). Introduction to Physical Gas
+Dynamics. Wiley.
+• Yıldız, ˙I. (2026). Martin Fowler’ın kaliteli yazılım yazısı üzerine LinkedIn
+paylaşımı.
+• Yılmaz, C. (2026). Selam Ekip, 97. bölüm: OPS-CX-TEX-UX. Trendyol
+Tech podcast.
+34
+
+-- 34 of 34 --

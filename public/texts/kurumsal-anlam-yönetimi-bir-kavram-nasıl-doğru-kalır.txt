@@ -1,0 +1,407 @@
+Kurumsal Anlam Yönetimi: Bir Kavram Nasıl
+Doğru Kalır
+ÖFY
+November 2026
+Özet
+Büyük dil modelleri dünyaya dair genel bilgiye sahiptir, ancak belirli bir şirketin
+kavramlarını, kurallarını ve işlem sınırlarını kendiliğinden bilmez. Bir yapay
+zekâ ajanına veriye erişim vermek, o verinin şirket içindeki anlamını öğretmek
+demek değildir; erişim ile anlayış ayrı şeylerdir. Ontoloji, şirketin kavram-
+larını, aralarındaki ilişkileri, geçerli durumları ve kuralları makinenin yorum-
+layabileceği ortak bir modelde tanımlayarak bu boşluğu kapatır. Ontoloji an-
+lamı tanımlar ama uygulamaz: yetki, kural denetimi, işlem ve kayıt ayrı sistem-
+lerin işidir. Ajan merkezli bakışta kimlik çözümleme, belirsizlikte durma, geri
+alınabilirlik, tekrarsız işlem, gizlilik ve açıklanabilirlik gibi ek halkalar gerekir.
+Ontoloji merkezli bakışta ise asıl eksik, modelin nasıl yaşatılacağıdır: ontoloji
+bir kez kurulan bir şema değil; keşif, uzlaşma, veriye bağlanma, yayınlanma,
+gözlem ve değişiklikten oluşan sürekli bir döngüdür. Ajan bu döngünün yalnızca
+bir tüketicisidir.
+1
+
+-- 1 of 14 --
+
+Giriş
+Büyük dil modeli (Large Language Model, LLM), çok büyük metin derlemleri
+üzerinde eğitilmiş ve dil üretebilen bir modeldir. Bu modeller genel dünya bil-
+gisini taşır; fakat bir şirkette “aktif müşteri” ifadesinin hangi koşulları kap-
+sadığını ya da bir hesabın hangi durumda askıya alınabileceğini bilemez. Bu
+bilgi şirketin kendi iç bilgisidir ve hiçbir eğitim verisinde yer almaz.
+Yapay zekâ ajanı (AI agent), bir hedefe ulaşmak için ortamını gözlemleyen,
+plan yapan, araç seçip çağıran, sonuçları değerlendiren ve gerektiğinde planını
+değiştiren yazılım sistemidir. LLM bu sistemin yalnızca akıl yürütme parçasıdır;
+talimatlar, bağlam, araçlar, izinler, bellek, durma koşulları ve insan onayı da
+sistemin parçalarıdır.
+Alan (domain), şirketin belirli bir iş bölgesini ve bu bölgeye ait kavram-
+ları, ilişkileri ve kuralları ifade eder: müşteri, sipariş, kredi ya da sözleşme birer
+alandır. Ontoloji (ontology) ise bir alandaki kavramları, ilişkileri, özellikleri,
+durumları ve kısıtları ortak ve makine tarafından yorumlanabilir biçimde tanımlayan
+modeldir. Bilgisayar bilimindeki yaygın tanımıyla ontoloji, paylaşılan bir kavram-
+sallaştırmanın açık bir belirtimidir (Gruber, 1993).
+Yaygın bir kabul, ajanların başarısızlığını model kalitesine bağlar ve çözümü
+daha güçlü bir modelde ya da daha fazla belge vermekte arar. Bu notun
+dayandığı yaklaşım farklıdır: sorun çoğu zaman modelin zekâsında değil, şirketin
+kendi anlamlarının hiçbir yerde açıkça yazılmamış olmasındadır.
+Not, Unal (2026)’nın ontoloji ve ajanlar üzerine yazısını temel alır, yazıdaki
+zinciri önce ajan merkezli, ardından ontoloji merkezli bir bakışla genişletir. Be-
+lirli bir ontoloji dili, graf veritabanı ya da ürün karşılaştırması kapsam dışıdır.
+2
+
+-- 2 of 14 --
+
+Ajan ile ˙Iş Akışı Ayrımı
+Bir ajanın en basit çalışma döngüsü şu adımlardan oluşur:
+1. Hedefin alınması
+2. Ortamın gözlemlenmesi
+3. Plan yapılması
+4. Bir aracın çağrılması
+5. Sonucun alınması ve doğrulanması
+6. Yanıt verilmesi ya da bir işlemin yapılması
+Adımlar ve karar noktaları önceden kodlanmışsa sistem bir iş akışıdır (work-
+flow ). Hangi aracın hangi sırayla kullanılacağına model ara sonuçlara bakarak
+kendisi karar veriyorsa sistem ajan niteliği taşır (Anthropic, 2024). Üretim
+ortamlarında iki yaklaşım çoğunlukla birlikte kullanılır: esnek karar gereken
+yerlerde ajan, kritik ve öngörülebilir adımlarda iş akışı.
+Bu ayrım ontoloji açısından önemlidir. Bir sohbet botu bir kavramı yanlış
+anlarsa yanlış bir cümle üretir. Bir ajan aynı kavramı yanlış anlarsa yanlış veriyi
+seçebilir, bilgiyi yanlış kişiye gösterebilir ya da yanlış bir işlem yapabilir. Anlam
+hatasının maliyeti, sistemin eylem yetkisiyle birlikte büyür.
+3
+
+-- 3 of 14 --
+
+Ontolojinin Yapısı
+Temel Bileşenler
+Bir ontoloji şu sorulara yanıt verir: şirkette hangi kavramlar vardır, bunlar ne
+anlama gelir, birbirleriyle nasıl ilişkilidir, hangi durumlar ve geçişler geçerlidir,
+hangi koşullarda hangi işlemler yapılabilir. Müşteri doğrulama alanı için bileşenler
+şöyle örneklenebilir:
+Bileşen Örnek
+Kavram Customer, Account, Verification
+˙Ilişki Müşteri hesabın sahibidir (Customer owns
+Account)
+Özellik ya da durum email verified, phone verified,
+identity verified
+Kural ya da kısıt Doğrulanmış müşteri için üç kontrolün de tamam-
+lanmış olması gerekir
+Eş anlamlılık ve kimlik “verified customer”, “doğrulanmış müşteri” ve
+kanonik müşteri kimliği aynı kavrama bağlanır
+˙Işlem suspend account yalnızca yetkili kullanıcı ve geçerli
+hesap durumunda çağrılabilir
+Anlamsal Web (Semantic Web) bağlamında ontoloji daha biçimsel bir kavramdır.
+W3C’nin OWL 2 standardı ontolojileri sınıflar, özellikler, bireyler ve veri değerleri
+içeren, anlamı biçimsel olarak tanımlanmış modeller olarak ele alır (W3C, 2012).
+Kurumsal uygulamada OWL ya da RDF kullanmak zorunlu değildir; belirleyici
+olan, iş anlamlarının ortak bir modelde açıkça ifade edilmesidir.
+Yakın Kavramlardan Ayrımı
+Ontoloji pratikte şema, semantik katman ve bilgi grafiğiyle sıkça karıştırılır. Her
+birinin yanıtladığı temel soru farklıdır:
+Yapı Temel soru
+Sema Veri teknik olarak hangi tablolarda, alanlarda ve
+ilişkilerde tutuluyor?
+Semantik katman “Aktif müşteri” ya da “gelir” gibi metrikler iş
+açısından nasıl hesaplanıyor?
+Bilgi grafiği Gerçek dünyada hangi varlıklar ve aralarında hangi
+somut bağlantılar var?
+Ontoloji Kavramların anlamı nedir, hangi ilişkiler ve kısıtlar
+geçerlidir?
+Bu ayrım mutlak değildir. Bir bilgi grafiği ontolojiyi ve somut olguları bir-
+likte taşıyabilir; bir ontoloji de bilgi grafiği üzerinde uygulanabilir. Ancak on-
+toloji bir veritabanı türü değildir: ayrı bir graf veritabanı olmadan da tablolar,
+4
+
+-- 4 of 14 --
+
+servisler ve olay akışları ortak kavramlara bağlanabilir. Depolama tercihi ile
+anlam modeli birbirine karıştırılmamalıdır.
+5
+
+-- 5 of 14 --
+
+Erişim ile Anlayış Arasındaki Fark
+Doğrulanmış Müşteri Örneği
+Bir ajana “Dün kaç kullanıcı kayıt oldu ve doğrulandı?” sorusu yöneltildiğini
+varsayalım. Model “doğrulandı” ifadesini email verified = true koşulu olarak
+yorumlarsa sonuç 312 çıkar. Sirkette doğrulama; e-posta, telefon ve kimlik kon-
+trollerinin üçünün de tamamlanması anlamına geliyorsa doğru sonuç 89’dur.
+Sorgu teknik olarak geçerli, iş açısından yanlıştır.
+Hata raporla sınırlı kalmaz. Yönetim yanlış sayıyı bütçe planlamasında,
+operasyon kapasite planlamasında, finans gelir tahmininde kullanabilir. Tek bir
+kavramın yanlış yorumlanması kısa sürede şirket çapında yanlış karara dönüşür.
+Mevcut Tekniklerin Sınırları
+Ajanlarda yaygın kullanılan üç teknik bu sorunu tek başına çözmez:
+• Getirme destekli üretim (Retrieval-Augmented Generation, RAG), mod-
+ele ilgili belgeleri bulup bağlam olarak veren tekniktir. ˙Ilgili belgeyi ge-
+tirebilir, ancak çelişen tanımlar arasında hangisinin güncel ve otoriter
+olduğunu garanti etmez.
+• Metinden SQL’e çeviri (text-to-SQL), doğal dildeki soruyu veritabanı
+sorgusuna çevirir. Doğru tabloyu bulabilir, ancak seçilen alanın iş tanımına
+uyduğunu garanti etmez.
+• Araç çağırma (tool calling), modelin dış bir API’yi ya da fonksiyonu
+çağırmasıdır. Doğru API’yi çağırabilir, ancak işlemin o kullanıcı ve bağlam
+için yetkili olup olmadığını kendi başına belirlememelidir.
+Ontoloji bu adımlar arasında ortak bir zemin kurar. Ajan yalnızca hangi
+tabloyu sorgulayacağını değil; bir kelimenin hangi kavrama karşılık geldiğini, o
+kavramın güncel kaynağının hangisi olduğunu, hangi ilişkilerin izleneceğini ve
+işlemin ön koşullarını da sistematik bir çerçevede belirler.
+6
+
+-- 6 of 14 --
+
+Ontolojinin Sınırları ve Temel Zincir
+Ontolojinin Yapmadıkları
+Ontoloji şirketin dünyasını ve anlamlarını tanımlar, ancak bu anlamları uygula-
+maz. Modeli yeniden eğitmez, veriyi güncellemez, yetki vermez, API çağırmaz
+ve işlem yapmaz. Tek başına bir yetkilendirme sistemi, politika motoru, veri
+kalitesi sistemi ya da işlem yöneticisi değildir.
+Örneğin ontoloji “doğrulanmış müşteri” kavramını tanımlayabilir. Ancak
+güvenilir bir sistem için şu soruların da yanıtlanması gerekir: müşterinin güncel
+verisi nerededir, bu kaynak güvenilir midir, kullanıcı bu hesabı görebilir mi,
+askıya alma yetkisi var mıdır, işlem hangi servis üzerinden yapılacaktır, işlem
+başarılı olmuş mudur ve kim tarafından yapılmıştır.
+Temel Zincir
+Unal (2026), güvenilir bir ajan sisteminin akışını şu halkalarla tanımlar:
+1. Ontoloji: kavramın anlamı ve önemli ilişkiler
+2. Veri erişimi: kanonik kaynaklar, güncellik ve sahiplik
+3. Kural ve izin kontrolü: yetkilendirme sistemi ve politika motoru
+4. Araç ya da API: girdi tipleri, ön koşullar ve hata davranışı belirli araçlar
+5. ˙Işlem: gerçek değişikliği yapan sistem
+6. Denetim kaydı (audit log): kimin neyi ne zaman yaptığının kanıtı
+Bu zincirin temel ilkesi şudur: ajan plan önerebilir ve kanıt toplayabilir, an-
+cak kritik durum geçişleri, para hareketleri ve erişim değişiklikleri yetkili sistem-
+lerde deterministik olarak, yani her seferinde aynı girdiye aynı sonucu veren
+kurallarla yeniden denetlenmelidir. Model karar önerir; şirket politikasının tek
+otoritesi olmaz.
+7
+
+-- 7 of 14 --
+
+Ajan Merkezli Zincirin Eksik Halkaları
+Temel zincir gerekli parçaları sayar, ancak gerçek kullanımda ortaya çıkan bazı
+halkaları içermez. Bu halkalar üç grupta toplanabilir.
+Girdi Tarafı
+Kimlik C özümleme
+Kullanıcı “Ahmet Bey’in hesabı” dediğinde hangi Ahmet kastedildiği belir-
+sizdir. Aynı kişi farklı sistemlerde farklı kayıtlarla bulunabilir. Ontolojideki
+kavrama ulaşmadan önce doğru kişi ve doğru kayıt bulunmalıdır; bu işleme
+varlık çözümleme (entity resolution) denir.
+Belirsizlikte Durma
+Ajan bir kavramı ya da kaydı kesin biçimde eşleyemediğinde tahmin yürütmemelidir.
+Soru sormalı ya da işi bir insana devretmelidir. Hangi koşulda duracağı önceden
+tanımlanmalıdır.
+˙Içerik Güvenliği
+Ajan bir e-postayı ya da belgeyi okurken içine gizlenmiş talimatlara uyabilir. Bu
+saldırı türüne dolaylı komut enjeksiyonu (indirect prompt injection) denir
+(Greshake ve diğerleri, 2023). Okunan içerik veri olarak ele alınmalı, talimat
+olarak değil.
+˙Işlem Tarafı
+Geri Alınabilirlik
+Yanlış bir işlem yapıldığında nasıl geri alınacağı önceden belirlenmelidir. Geri
+alınamayan işlemler için telafi adımları tanımlanmalı ya da bu işlemler insan
+onayına bağlanmalıdır.
+Tekrarsız ˙Işlem
+Sistem bir hata nedeniyle aynı isteği yeniden denediğinde aynı ödeme iki kez
+gitmemelidir. Bir işlemin birden fazla kez uygulanmasının tek uygulamayla
+aynı sonucu vermesine eş güçlülük (idempotency) denir. Aynı anda iki ajanın
+aynı kaydı değiştirmeye çalışması durumunda çakışma da yönetilmelidir.
+Kaynak Sınırları
+Bir görev için harcanabilecek süre, adım sayısı ve maliyet sınırlandırılmalıdır.
+Sınır olmadığında ajan bir döngüye girip kaynak tüketmeye devam edebilir.
+8
+
+-- 8 of 14 --
+
+Yönetişim Tarafı
+Kişisel Veri Gizliliği
+Ajan yetkisi olsa bile işi için gereğinden fazla kişisel veri görmemeli ve yanıtlarında
+paylaşmamalıdır. Türkiye’de bu konu 6698 sayılı Kişisel Verilerin Korunması
+Kanunu ile düzenlenir (KVKK, 2016).
+Açıklanabilirlik
+Ajan bir karar verdiğinde hangi kaynağa ve hangi kurala dayandığını gösterebilmelidir.
+Denetim kaydı ne yapıldığını, açıklama ise neden yapıldığını gösterir.
+Canlı ˙Izleme ve Öğrenme
+Test aşamasında iyi çalışan bir sistem zamanla bozulabilir; veri ve model değişir.
+Sistem canlıda sürekli izlenmeli, insanların düzelttiği her hata kayda geçirilmeli
+ve kuralları, araçları ya da ontolojiyi iyileştirmek için kullanılmalıdır.
+Genişletilmiş Zincir
+Bu halkalar eklendiğinde ajan merkezli zincir şu biçimi alır:
+1. Kullanıcı niyetinin anlaşılması
+2. Doğru kişinin ve kaydın bulunması
+3. Kavramın ontolojiye eşlenmesi
+4. Otoriter veri kaynağına erişim
+5. Yetki ve kural denetimi
+6. Belirsizlik varsa durma ya da soru sorma
+7. Gerektiğinde insan onayı
+8. Aracın çağrılması
+9. Tekrarsız ve geri alınabilir işlem
+10. Denetim kaydı
+11. Canlı izleme
+12. Hatalardan öğrenip modelin güncellenmesi
+Son halka zinciri bir döngüye çevirir.
+9
+
+-- 9 of 14 --
+
+Ontoloji Merkezli Yaşam Döngüsü
+Ajan merkezli zincir, ontolojiyi tek bir halka olarak ele alır ve bir kez ku-
+rulmuş kabul eder. Ontoloji merkeze alındığında soru değişir: bir anlam mod-
+eli nasıl doğar, nasıl yaşar ve nasıl güncel kalır? Bu bakışta ajan, ontolojinin
+tüketicilerinden yalnızca biridir. Unal (2026) ontolojiyi “yaşayan bir kurum-
+sal model” olarak niteler, ancak modelin nasıl yaşatılacağını ayrıntılandırmaz.
+Yaşam döngüsü dört evrede incelenebilir.
+Oluşum
+Keşif
+Kavramlar boşlukta tasarlanmaz; şirkette zaten vardır. ˙Insanların günlük konuşmalarında,
+belgelerde, mevcut tablolarda, süreç tanımlarında ve yazışmalarda kullanılan ke-
+limeler toplanır. Bu evrede amaç, şirketin fiilen hangi dili konuştuğunu ortaya
+çıkarmaktır.
+Uzlaşma
+Satış, finans ve destek ekipleri “müşteri” kelimesini kullanıp farklı varlık kümelerini
+kastedebilir. Satış için müşteri teklif almış herkes, finans için fatura kesilmiş
+taraf, destek için aktif sözleşmesi olan kişi olabilir. Bu farklar görünür kılınır ve
+karar verilir: tek bir tanım mı benimsenecek, yoksa birbirine bağlı ayrı kavram-
+lar mı tanımlanacak? Her kavrama bir sahip atanır. Unal (2026)’nın vur-
+guladığı gibi ajan bu tür anlaşmazlıkları çözmez, yalnızca otomatikleştirir; bu
+nedenle uzlaşma teknik değil örgütsel bir adımdır.
+Biçimlendirme
+Üzerinde anlaşılan anlamlar makinenin okuyabileceği bir biçime çevrilir: kavram-
+lar, ilişkiler, durumlar, geçişler, kurallar ve eş anlamlılar açıkça yazılır.
+˙Iç Tutarlılık Denetimi
+Model kendi içinde denetlenir: çelişen tanımlar, birbiriyle çakışan kurallar,
+tanımsız bırakılmış ilişkiler ya da hiçbir duruma geçiş vermeyen durum modelleri
+aranır. Örnek verilerle model sınanır.
+Bağlanma
+Veriye Bağlama
+Her kavram gerçek veriye bağlanır: hangi sistem, hangi tablo, hangi alan. Aynı
+kavram birden fazla sistemde bulunuyorsa hangisinin otoriter kaynak olduğu,
+ne sıklıkla güncellendiği ve kimin sorumluluğunda olduğu belirlenir.
+10
+
+-- 10 of 14 --
+
+Veriyle Tutarlılık Denetimi
+Bağlanan verinin tanıma gerçekten uyup uymadığı denetlenir. “Aktif hesap”
+olarak işaretlenmiş kayıtların bir kısmı tanımdaki koşulları sağlamıyorsa iki
+olasılık vardır: ya veri bozuktur ya da tanım şirketin fiili işleyişini yansıtmamaktadır.
+Her iki durumda da ontoloji bir veri kalitesi sorununu görünür kılmış olur.
+Kurallara Dönüşme
+Ontolojideki kurallar yetkilendirme sistemine, politika motoruna ve işlem sis-
+temlerine aktarılır. Kuralların her sistemde elle yeniden yazılması yerine on-
+tolojiden türetilmesi, aynı kuralın her yerde aynı biçimde geçerli olmasını sağlar.
+Aksi hâlde ontoloji bir şey, uygulama başka bir şey söyler.
+Dolaşım
+Yayınlama ve Sürümleme
+Model bir sürüm numarasıyla yayınlanır. Hangi tanımın hangi tarihten itibaren
+geçerli olduğu kayıt altında tutulur. Bu, geçmiş bir raporun hangi tanımla
+hesaplandığını sonradan bilebilmek için gereklidir.
+Tüketim
+Ontolojiyi yalnızca ajanlar kullanmaz. Raporlar, gösterge panoları, API’ler,
+yeni geliştirilen yazılımlar ve insanlar da aynı kaynaktan beslenir. Ontolojinin
+asıl değeri, farklı tüketicilerin aynı kelimeye aynı anlamı vermesidir.
+Dış Eşleme
+Sirketin modeli dışarıdaki standartlarla, iş ortaklarının modelleriyle ve yasal
+tanımlarla eşleştirilir. Bir sözleşme kavramının şirket içi tanımı ile mevzuattaki
+tanımı arasındaki fark, bu eşlemede ortaya çıkar.
+Evrim
+Gözlem
+Hangi kavramların sık sorulduğu, hangi kelimelerin hiçbir kavrama eşlenemediği
+ve kullanıcıların nerede karıştığı izlenir. Eşlenemeyen kelimeler, modelde eksik
+olan kavramların en güçlü işaretidir.
+Sapma Tespiti
+˙Iş değişir ama model değişmezse ontoloji eskir. Yeni bir ürün, yeni bir süreç
+ya da yeni bir yasal düzenleme modeli geride bırakabilir. Bu sapmanın fark
+edilmesi için gözlem verisi ile modelin düzenli olarak karşılaştırılması gerekir.
+11
+
+-- 11 of 14 --
+
+Değişiklik Yönetimi
+Bir tanım değiştirilmeden önce etki analizi yapılır: değişiklik hangi raporları,
+hangi kuralları, hangi araçları ve hangi ajanları etkiler? Ontoloji birçok sis-
+temin ortak kaynağı olduğu için tek bir tanım değişikliği zincirleme sonuçlar
+doğurabilir.
+Emeklilik
+Artık kullanılmayan kavramlar modelden kaldırılır. Ancak geçmiş veri, o verinin
+üretildiği dönemdeki tanımla okunabilir kalmalıdır.
+Döngü Olarak Ontoloji
+Bu evreler doğrusal bir sıra değil, kapalı bir döngü oluşturur:
+1. Keşif
+2. Uzlaşma
+3. Biçimlendirme
+4. ˙Iç tutarlılık denetimi
+5. Veriye bağlama
+6. Veriyle tutarlılık denetimi
+7. Kurallara dönüşme
+8. Yayınlama ve sürümleme
+9. Tüketim ve dış eşleme
+10. Gözlem
+11. Sapma tespiti
+12. Değişiklik yönetimi ve emeklilik
+Değişiklik yönetimi yeniden uzlaşmaya döner ve döngü sürer.
+12
+
+-- 12 of 14 --
+
+Uygulamaya Başlama
+Sirketin tamamını bir anda modellemek yerine, yanlış işlemin maliyetli olduğu
+tek bir alan ve iş akışı seçilir: müşteri doğrulama, iade, sözleşme yenileme ya
+da erişim onayı gibi. Unal (2026)’nın önerdiği adımlar şunlardır:
+1. ˙Iş alanı sahipleriyle kanonik kavramların ve ekipler arasındaki tanım fark-
+larının belirlenmesi
+2. Eş anlamlıların, kimliklerin, durumların ve istisnaların açıkça yazılması
+3. Kavramların otoriter kaynaklara, güncellik bilgisine ve kanıta bağlanması
+4. Ajana az sayıda, sözleşmesi açık ve güvenli araç verilmesi
+5. Gerçek sorulardan oluşan bir değerlendirme setinin hazırlanması; yalnızca
+yanıtın değil, kaynak seçiminin ve işlem kararının da ölçülmesi
+6. Kritik işlemlerin başlangıçta insan onayına sunulması; hatalar ve müdahale
+nedenleri ölçüldükçe özerkliğin artırılması
+Bu adımlara yaşam döngüsü açısından bir şart eklenmelidir: ilk alan mod-
+ellenirken modelin sahibi, sürümleme yöntemi ve güncelleme sıklığı da baştan
+belirlenmelidir. Aksi hâlde ilk sürüm doğru olsa bile kısa sürede eskir.
+Unal (2026), ontoloji fikrinin kurumsal ürünlerde farklı biçimlerde uygu-
+landığını aktarır: Databricks iş terimlerini, metrik tanımlarını ve kaynak otoritesini
+çıkaran bir bağlam katmanı; Snowflake semantik görünümler üzerine eklenen on-
+toloji ve bilgi grafiği; Palantir ise veri, mantık, işlem ve güvenliğin birlikte mod-
+ellendiği operasyonel bir katman olarak sunmaktadır. Bu ürünlerin ayrıntıları
+burada doğrulanmamış olup yalnızca kaynak yazıdaki aktarım esas alınmıştır.
+13
+
+-- 13 of 14 --
+
+Sonuç
+Ajanların güvenilirliği, model kalitesinden önce şirketin kendi anlamlarını ne
+kadar açık yazdığına bağlıdır. Model sağlayıcı ve ajan çerçevesi değişebilir; an-
+cak müşterinin ne olduğu, bir sözleşmenin ne zaman aktif sayıldığı ve hangi
+işlemi kimin onaylayabileceği şirketin kalıcı bilgisidir. Bu bilgi açıkça model-
+lenmediğinde ajan, şirket içindeki mevcut belirsizlikleri hızla ve ölçekli biçimde
+yeniden üretir.
+Ajan merkezli ve ontoloji merkezli bakışlar birbirinin alternatifi değil, tamam-
+layıcısıdır. Ajan merkezli bakış tek bir isteğin güvenli biçimde nasıl işleneceğini
+sorar; ontoloji merkezli bakış ise bu isteğin dayandığı anlamın zaman içinde
+nasıl doğru tutulacağını sorar. ˙Ilki olmadan sistem güvensiz, ikincisi olmadan
+sistem zamanla yanlış olur.
+Bu çerçevenin bazı sınırları vardır. Ontoloji kurmak teknik olduğu kadar
+örgütsel bir süreçtir ve ekipler arası uzlaşma her zaman sağlanamayabilir. Küçük
+ölçekli ya da hızla değişen alanlarda biçimsel bir ontolojinin bakım maliyeti,
+getirdiği faydayı aşabilir. Ayrıca ontolojinin hangi ayrıntı düzeyinde tutulması
+gerektiği, yani ne zaman “yeterince modellenmiş” sayılacağı, açık bir sorudur.
+Açık kalan diğer sorular şunlardır: uzlaşma sağlanamayan kavramlar mod-
+elde nasıl temsil edilmelidir; ontolojinin güncelliği nasıl ölçülebilir; ajanların
+kullanım verisi ontolojiyi otomatik olarak önerebilir mi, yoksa her değişiklik
+insan kararı mı gerektirir?
+Kaynaklar
+• Anthropic. (2024). Building Effective Agents. Anthropic Engineering
+Blog.
+• Greshake, K., Abdelnabi, S., Mishra, S., Endres, C., Holz, T. ve Fritz,
+M. (2023). Not What You’ve Signed Up For: Compromising Real-World
+LLM-Integrated Applications with Indirect Prompt Injection. arXiv:2302.12173.
+• Gruber, T. R. (1993). A Translation Approach to Portable Ontology
+Specifications. Knowledge Acquisition, 5(2).
+• KVKK. (2016). 6698 sayılı Kişisel Verilerin Korunması Kanunu. Resmı
+Gazete.
+• Unal, Ü. (2026). Ontoloji: AI Ajanlarına Sirketinizin Nasıl C alıştığını
+Öğretmek. Kişisel blog yazısı, 24 Ağustos 2026.
+• W3C. (2012). OWL 2 Web Ontology Language Document Overview (Sec-
+ond Edition). W3C Recommendation.
+14
+
+-- 14 of 14 --
