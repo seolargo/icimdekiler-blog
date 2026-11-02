@@ -1,0 +1,675 @@
+Okuma Notları: Bir Araba Nasıl Yapılır? (Adrian
+Newey)
+ÖFY
+November 2026
+Özet
+Yarış mühendisliği, bir yarış aracının pistte en hızlı ve en güvenilir biçimde
+gitmesini sağlayan mühendislik dalıdır; özünde ölçmeye, tek değişkenle den-
+emeye ve darboğazı bulmaya dayanan disiplinli bir düşünme biçimidir. Bu
+düşünme biçimi yazılıma doğrudan taşınabilir: tahmin yerine ölçüm, aynı anda
+tek değişiklik, güvenilirliğin performanstan önce gelmesi ve her çalışmadan sonra
+suçlu aramayan değerlendirme. Sürücü ile yarış mühendisi arasındaki ilişki, biri
+baskı altında dar bir alana odaklanırken diğerinin geniş resmi gördüğü bir güven
+ilişkisidir; aynı yapı ralli, havacılık, cerrahi ve eşli programlamada da görülür.
+Yapay zekâ ile kod yazmak bu ilişkinin yeni bir biçimidir, ancak burada güven
+kendiliğinden verilmez, doğrulama ile kazanılır. Yaratıcılık bir meslek değil bir
+düşünme alışkanlığıdır; varsayımları sorgulamak, farklı alanlardan ödünç al-
+mak ve üretmeyi sürdürmekle gelişir. ˙Iyi bir yönün başlatılmasından sonra
+başarıyı çoğu zaman küçük iyileştirmelerin birikimi belirler, ancak bu birikim
+yön yanlışsa yalnızca yanlış şeyi daha düzgün yapar. Mühendislikte güven inanç
+değil kanıttır: hesapla başlar, testle doğrulanır, emniyet payıyla korunur ve izle-
+meyle sürer. Kurumlarda asıl kültür duvarda yazan değil, insanların gerçekte
+nasıl davrandığıdır.
+1
+
+-- 1 of 23 --
+
+Giriş
+Adrian Newey, Formula 1 tarihinin en başarılı araç tasarımcılarından biridir.
+How to Build a Car adlı kitabında, farklı takımlarda tasarladığı araçlar üzerinden
+kendi meslek hayatını anlatır (Newey, 2017). Kitap bir teknik el kitabı değildir;
+bir tasarımcının nasıl düşündüğünü, ekiplerle nasıl çalıştığını ve kararlarını nasıl
+verdiğini gösteren bir anlatıdır.
+Bu not, kitabın açtığı dünyadan yola çıkarak genişletilmiş düşünceleri bir
+araya getirir. Bu düşüncelerin bir kısmı doğrudan yarış mühendisliğiyle ilgilidir.
+Bir kısmı ise oradan yazılıma, yaratıcılığa, güvene ve kurum kültürüne taşınmış
+derslerdir. Not, kitabın içeriğinin bir özeti değildir; kitabın tetiklediği soruların
+cevaplarıdır.
+Notta kullanılan bazı temel terimler şunlardır:
+• Yarış mühendisi (race engineer ): Pilotla doğrudan çalışan, aracın ayarından
+ve pist üzerindeki performansından sorumlu mühendis.
+• Telemetri: Araç üzerindeki sensörlerden gelen ve hız, devir, sıcaklık, gaz
+ve fren kullanımı gibi değerleri kaydeden veri akışı.
+• Ayar (setup): Süspansiyon sertliği, kanat açısı, lastik basıncı ve fren den-
+gesi gibi araç üzerinde değiştirilebilen değerlerin bütünü.
+2
+
+-- 2 of 23 --
+
+Yarış Mühendisliği
+Tanım ve Görev Alanı
+Yarış mühendisliği, bir yarış aracının hem hızlı hem güvenilir olmasını sağlayan
+işlerin toplamıdır. Formula 1, dayanıklılık yarışları, ralli ve MotoGP gibi bütün
+motor sporlarında bulunur.
+Yarış mühendisinin başlıca görevleri şunlardır:
+• Aracın ayarını piste, havaya ve pilota göre belirlemek.
+• Telemetri verisini inceleyip aracın nerede zaman kaybettiğini bulmak.
+• Pilotun hissettiklerini teknik karşılıklara çevirmek. Pilot “araç virajda
+kayıyor” dediğinde bunun hangi ayara karşılık geldiğini bulmak.
+• Pit stop zamanı, lastik seçimi ve yakıt yönetimi gibi strateji kararlarına
+katkı vermek.
+Alanın alt dalları aerodinamik, araç dinamiği, güç ünitesi, elektronik, yazılım,
+veri mühendisliği ve simülasyondur.
+Sürücü ile Mühendis Arasındaki ˙Ilişki
+Pilot araç içinde yalnızdır. Dış dünyayla tek bağlantısı telsizdeki sestir. Bu
+yüzden yarış mühendisi pilotun gözü, kulağı ve bazen de aklı olur. Pilot hisseder,
+mühendis ölçer; ikisi birlikte aracı hızlandırır.
+Bu ilişkinin parçaları şunlardır:
+• Ortak dil: Zamanla iki taraf kendi kısa dilini kurar. Pilotun “arka biraz
+tembel” ifadesinin teknik karşılığını deneyimli bir mühendis hemen bilir.
+• Karşılıklı güven: Yağmurda “şimdi pite gir” talimatı tartışılmaz. Mühendis
+de pilotun hissine güvenir; veri bir şey söylerken pilotun hissettiği başka
+bir şey bazen haklı çıkar.
+• Sakinleştirme: Mühendis ses tonuyla bile pilotu dengeye getirir. Ne
+zaman konuşacağını ve ne zaman susacağını bilir.
+• Kısa ve net iletişim: Saniyede onlarca metre giden birine uzun cümle
+kurulmaz.
+• Dürüstlük: Kötü haber de açıkça söylenir. “Bu yarış kazanılmaz, puanı
+koru” diyebilmek pilotu gerçekçi tutar.
+Bilinen örnekler arasında Lewis Hamilton ile Mercedes’teki mühendisi Peter
+Bonnington ve Max Verstappen ile mühendisi Gianpiero Lambiase yer alır. Her
+iki ilişki de uzun süreli birlikte çalışmanın ürettiği güvenin örneğidir.
+3
+
+-- 3 of 23 --
+
+Aynı ˙Ilişkinin Başka Alanlardaki Biçimleri
+Bu ilişkinin özü şudur: Bir taraf baskı altında dar bir alana odaklanır, diğer
+taraf geniş resmi görür. Aynı yapı birçok alanda bulunur.
+• Ralli pilotu ve yardımcı pilot: Yardımcı pilot önceden yazılmış yol
+notlarını okur. Pilot yolu görmeden bu notlara güvenerek gaza basar.
+• Golfçü ve caddie: Caddie rüzgârı ve mesafeyi okur, sopa önerir ve oyun-
+cunun zihnini sakin tutar.
+• Boksör ve köşe antrenörü: Raundlar arasındaki bir dakikada hem te-
+davi hem strateji hem motivasyon verilir.
+• Astronot ve görev kontrol: Uzaydaki ekiple konuşan yer görevlisi
+genellikle başka bir astronottur; çünkü içeride yaşananı anlaması gerekir.
+• Pilot ve hava trafik kontrolörü: Standart ve kısa bir dil kullanılır;
+yanlış anlaşılan tek kelime felakete yol açabilir.
+• Cerrah ve ameliyat ekibi: Hemşire bir sonraki aleti cerrah istemeden
+hazırlar.
+• Eşli programlama (pair programming): Klavyedeki kişiye sürücü (driver ),
+yanında büyük resmi izleyen kişiye yön gösterici (navigator ) denir (Beck,
+1999). Roller sık sık değiştirilir.
+Yapay Zekâ ile Kod Yazmak
+Yapay zekâ ile kod yazmak, bu ilişkinin yeni bir biçimidir. Roller iki yönlü
+kurulabilir.
+˙Iki Rol Dağılımı
+• ˙Insan sürücü, yapay zekâ mühendis: Kodu insan yazar. Yapay zekâ
+hata yakalar, öneri verir ve belgeleri hatırlatır.
+• Yapay zekâ sürücü, insan mühendis: Kodu yapay zekâ hızla yazar.
+˙Insan hedefi, stratejiyi ve riskleri yönetir; sonucun doğru olup olmadığını
+denetler.
+Yarıştan Taşınan ˙Ilkeler
+• Ortak dil: Projenin kuralları ve mimarisi açıkça yazılırsa her seferinde
+baştan anlatmak gerekmez.
+• Telemetri: Yapay zekânın yazdığı kodun telemetrisi testler, loglar ve
+hata mesajlarıdır. Test olmadan çalışmak, verisi olmayan araçla yarışmaya
+benzer.
+4
+
+-- 4 of 23 --
+
+• Tek değişken: Aynı anda çok sayıda değişiklik istendiğinde hangisinin
+işe yaradığı anlaşılamaz.
+• Net talimat: Belirsiz istek belirsiz sonuç üretir.
+Güven ve Kontrol
+Yarışta pilot, yıllarca kendini kanıtlamış mühendisine güvenebilir. Yapay zekâ
+ise kendinden emin biçimde yanlış bir şey söyleyebilir; var olmayan bir fonksiyon
+uydurabilir ya da bir hatayı gözden kaçırabilir. Bu yüzden bu ilişkide güven her
+zaman doğrulamayla birlikte yürür.
+Asıl risk, kodun ne yaptığını anlamadan kabul etmektir. Sistem çalışmaya
+devam eder ama artık kimse onu bilmez. ˙Insanın bu ilişkideki kalıcı değeri üç
+noktada toplanır: ne yapılacağına karar vermek, bağlamı bilmek ve sonucun
+sorumluluğunu taşımak.
+5
+
+-- 5 of 23 --
+
+Yarış Mühendisliğinden Yazılıma Dersler
+C alışma ˙Ilkeleri
+• Değiştirmeden önce ölçmek: Yarış mühendisi “bence araç ağır” demez,
+veriye bakar. Yazılımda da “bence şurası yavaş” yerine önce profil çıkarılır
+ve metriklere bakılır.
+• Aynı anda tek değişiklik: Süspansiyon, kanat ve lastik basıncı birlikte
+değiştirilirse hangisinin işe yaradığı bilinemez. Hata ayıklamada da durum
+aynıdır.
+• Darboğazı bulmak: Bir tur, virajların toplamıdır. Mühendis en çok
+zaman kaybedilen virajı düzeltir. Yazılımda da yavaşlık çoğu zaman tek
+bir yerden gelir.
+• Önce bitirmek: Motor sporlarının eski bir sözüne göre birinci bitirmek
+için önce bitirmek gerekir. Hızlı ama kırılgan bir sistem değer üretmez.
+• Doğru uzlaşmayı bulmak: Fazla kanat virajda hız kazandırır ama
+düzlükte yavaşlatır. Mimari kararlar da her zaman bir şeyden vazgeçmeyi
+içerir.
+• His ile veriyi birlikte okumak: Veri ne olduğunu, pilot nasıl hisset-
+tirdiğini söyler. Yazılımda bunların karşılığı metrikler ve kullanıcı geri
+bildirimidir.
+• Prova edilmiş süreç: ˙Iki saniyelik pit stop şans değil, yüzlerce kez prova
+edilmiş bir süreçtir. Deploy ve acil durum müdahalesi de önceden yazılmış
+adımlarla yapılmalıdır.
+• Seans sonrası değerlendirme: Takımlar her antrenmandan sonra suçlu
+aramadan ne olduğunu konuşur. Yazılımdaki karşılığı postmortem (post-
+mortem) kültürüdür.
+• Önceden hazırlanmış planlar: Strateji ekibi yağmur, kaza ve güvenlik
+aracı için önceden plan yapar; karar anında düşünmeye zaman yoktur.
+• Aşınmayı izlemek: Lastik her turda biraz yavaşlar. Teknik borç da aynı
+biçimde sessizce birikir.
+• Kısa iletişim: Telsizdeki gibi; durum raporu, commit mesajı ve standup
+notu da kısa ve işe yarar olmalıdır.
+Yazılımda Kontrolü Kaybetmek
+Yazılımda kontrol kaybı, sistemin ne yaptığını artık tam bilmemek ve onu güvenle
+değiştirememek demektir. Yarıştaki karşılığı, aracın hâlâ gitmesi ama direksiy-
+ona vereceği tepkinin kestirilememesidir.
+6
+
+-- 6 of 23 --
+
+Belirtiler
+• “Buna dokunma, bir şey bozulur” denen bölgelerin oluşması.
+• Bir yeri düzeltirken alakasız başka bir yerin bozulması.
+• Hataların nedeninin bulunamaması ya da kendiliğinden düzelmesi.
+• Kodu yalnızca tek bir kişinin anlaması.
+• Süre tahminlerinin sürekli tutmaması.
+Nedenler
+Test eksikliği, log ve metrik eksikliği, birikmiş teknik borç, parçalar arasındaki
+sıkı bağımlılıklar, kontrolsüz durum (state) değişiklikleri ve belgelenmemiş karar-
+lar başlıca nedenlerdir.
+Kontrolü Geri Almak
+Önce gözlem eklenir; ne olduğu görülmeden düzeltme yapılmaz. Değiştirilecek
+bölgelerin etrafına test yazılır. Küçük adımlarla ilerlenir. Parçalar arasındaki
+bağımlılıklar azaltılır. Deploy geri alınabilir hâle getirilir. Kontrol, sistemin
+hızlı olması değil, ne yapacağının önceden bilinebilmesidir.
+7
+
+-- 7 of 23 --
+
+Tasarım ve Mühendislik Rolleri
+Tasarımcı ve Tasarım Mühendisi
+Tasarımcı, “bu nasıl görünmeli ve nasıl hissettirmeli” sorusuna odaklanır. Grafik
+tasarım, arayüz ve deneyim tasarımı (UI/UX ) ve endüstriyel tasarım bu alana
+girer.
+Tasarım mühendisi ise “bu nasıl çalışacak ve nasıl üretilecek” sorusuna odak-
+lanır. Parçaların ölçüsünü ve malzemesini belirler, dayanım hesabı yapar, 3B
+model ve teknik çizim hazırlar, simülasyonla test eder ve ürünün makul maliyetle
+üretilebilmesini sağlar.
+Bir otomobil örneğinde endüstriyel tasarımcı aracın çizgilerini ve iç mekânın
+hissini çizer. Tasarım mühendisi ise kaportanın malzemesini, kaza davranışını,
+aerodinamiğini ve üretim yöntemini çözer. Yazılım dünyasında “tasarım mühendisi”
+(design engineer ) ayrıca tasarım ile ön yüz geliştirme arasında duran ve tasarımı
+doğrudan koda döken kişi için de kullanılır.
+Baş Tasarımcı
+Formula 1’de baş tasarımcı (chief designer ) aracın fiziksel tasarımından so-
+rumludur. Aracın genel konseptini belirler; aerodinamik, şasi, süspansiyon ve
+soğutma ekiplerinin işlerini birbirine uydurur. Bir ekip soğutma için büyük bir
+hava girişi isterken diğeri aerodinamik için onu küçültmek ister; bu çatışmayı
+çözen kişi baş tasarımcıdır. Ayrıca teknik kuralların sınırlarını en iyi biçimde
+kullanmanın yollarını arar ve sezon içi gelişimi yönlendirir.
+Bu rolün en bilinen ismi Adrian Newey’dir. Farklı takımlarda tasarladığı
+araçlar çok sayıda şampiyonluk kazanmıştır ve çizim masasında elle çizim yap-
+masıyla bilinir (Newey, 2017).
+Genel anlamda baş tasarımcı; vizyonu belirleyen, farklı tasarımcıların işini
+tutarlı tutan, ekibi geliştiren ve son kararı veren kişidir. Kendisi de bir en-
+strüman çalmayı bilen ama asıl işi herkesin aynı eseri çalmasını sağlamak olan
+bir orkestra şefine benzer.
+Kilit Mühendis
+Kilit mühendis, yokluğu bir projede ciddi boşluk yaratacak kadar önemli olan
+mühendistir. Kilit taşı benzetmesinden gelir: kemerin tepesindeki taş çıkarsa
+kemer çöker. Kritik bilgiye sahip olması, büyük resmi görmesi, zor kararlar
+verebilmesi ve yerine kolay konamaması onu kilit yapar.
+Bu durum aynı zamanda bir risktir. Yazılımda buna otobüs faktörü (bus fac-
+tor ) denir: “Bu kişi yarın gelmese proje durur mu?” Sağlıklı bir kilit mühendis
+bildiklerini belgeler, başkalarına öğretir ve kritik bilginin tek bir kişide kalma-
+masını sağlar. Gerçekten iyi bir kilit mühendisin hedefi, zamanla kendini gerek-
+siz kılmaktır.
+8
+
+-- 8 of 23 --
+
+Burulma Testi
+Malzeme ve Sasi Testi
+Burulma testi, bir malzemenin ya da yapının döndürme kuvvetine karşı davranışını
+ölçer. Bir ucu sabitlenmiş numunenin diğer ucu döndürülür; uygulanan tork ve
+oluşan dönme açısı kaydedilir. Bu testle malzemenin burulmaya karşı sertliği,
+kalıcı şekil değiştirmeye başladığı nokta ve kırılma dayanımı bulunur. Sünek
+malzemeler düz bir yüzeyle koparken gevrek malzemeler yaklaşık 45 derecelik
+spiral bir çizgiyle kırılır.
+Otomotivde aynı test bütün gövdeye uygulanır. Aracın arkası sabitlenir,
+ön akslardan biri yukarı diğeri aşağı zorlanır ve gövdenin ne kadar büküldüğü
+ölçülür. Sasi burulursa süspansiyon doğru çalışmaz, çünkü bütün süspansiyon
+ayarları gövdenin sağlam durduğunu varsayar.
+Soyut Anlamı
+Soyut olarak burulma testi şu soruyu sorar: Bir şeyin iki ucu farklı yönlere
+çekildiğinde o şey bütünlüğünü ne kadar koruyabilir? Bu soru farklı alanlara
+uygulanabilir:
+• ˙Insan: ˙Iş ile aile ya da kendi istekleri ile başkalarının beklentileri arasında
+kalmak.
+• ˙Ilişki: ˙Iki insanın farklı ihtiyaçlarının aynı anda bağı zorlaması.
+• Yazılım: Bir ekibin hız, diğerinin güvenlik istemesi gibi çelişkili talepler.
+• Kurum: Yönetimin, çalışanların ve müşterilerin farklı yönlere çekmesi.
+Sasi örneğinden çıkan ders, temelin sağlam olmadığı yerde üstüne kurulan
+ayarların işe yaramamasıdır. Kırılma biçiminden çıkan ders ise şudur: Sünek
+malzeme kırılmadan önce uyarı verir, gevrek malzeme aniden çatlar. Bu yüzden
+yalnızca dayanıklılığa değil, zorlandığını gösterebilme yeteneğine de bakmak
+gerekir.
+9
+
+-- 9 of 23 --
+
+Yaratıcılık ve Düşünme Biçimleri
+Kalıpların Dışında Düşünmek
+Kalıpların dışında düşünmek, bir soruna herkesin baktığı yerden değil başka
+bir yerden bakabilmektir. Bu bir yetenekten çok öğrenilebilen bir alışkanlıktır.
+Başlıca yöntemleri şunlardır:
+• Varsayımları yazmak ve her birine “ya doğru değilse” diye sormak.
+• Sorunu yeniden tanımlamak. Yavaş asansör şikâyetine asansörü hızlandırmak
+yerine yanına ayna koymak bilinen bir örnektir.
+• Başka alanlardan ödünç almak; yarış mühendisliğinden yazılıma ders çıkarmak
+gibi.
+• Tersine çevirmek: “Bunu nasıl kesin batırırım” diye sormak.
+• Uç senaryolar kurmak: bütçe sıfır olsa ya da sınırsız olsa ne yapılırdı.
+• Bir kısıt eklemek ya da kaldırmak.
+• Önce çok fikir üretmek, sonra seçmek.
+• Ara vermek ve konuyu bilmeyen birine anlatmak.
+Sol Beyin ve Sağ Beyin Efsanesi
+Yaygın inanışa göre sol beyin mantıksal, sağ beyin yaratıcıdır. Bu ayrım büyük
+ölçüde bir efsanedir. Roger Sperry’nin 1960’larda beynin iki yarısını bağlayan
+yapı ameliyatla kesilmiş hastalar üzerinde yaptığı çalışmalar, iki yarının bazı
+işlerde farklı güçlü yanları olduğunu göstermiş ve 1981’de Nobel ödülü almıştır.
+Popüler kültür bu bulguyu bir kişilik tipine dönüştürmüştür.
+Gerçekte dil çoğu insanda ağırlıklı olarak sol tarafta işlenir; yüz tanıma ve
+mekân algısı gibi bazı işler biraz daha sağ tarafa yaslanır. Ancak matematik
+ve sanat gibi karmaşık beceriler iki tarafı birlikte kullanır. Yaklaşık bin kişinin
+beyin taramasını inceleyen bir çalışma, bazı insanların bir yarıyı genel olarak
+daha baskın kullandığına dair kanıt bulamamıştır (Nielsen ve diğerleri, 2013).
+C izer ile Mühendis
+C izgi roman çizen biri boş bir sayfadan bütün bir dünya kurar ve bunu birkaç
+karelik dar bir alanda yapar. Mühendislik eğitimi ise çoğu zaman bilinen yöntemleri
+ve doğru cevabı öğretir; bu da insanı kalıp içinde çalışmaya alıştırabilir. Bu
+yüzden hayal etme cesaretinde çizerler çoğu zaman öndedir.
+Ancak yenilik iki adımdan oluşur: bir şeyi hayal etmek ve onu çalışır hâle
+getirmek. Hayal olmadan yön yoktur, mühendislik olmadan da hayal kâğıtta
+kalır. En güçlü örnekler iki dünyayı birden taşıyanlardır. Leonardo da Vinci
+hem ressam hem mühendisti. Pixar, sanatçılarla mühendislerin aynı masada
+çalışmasından doğmuştur.
+10
+
+-- 10 of 23 --
+
+Yaratıcı Tarafı Geliştirmek
+• Düzenli olarak elle bir şey üretmek ve kötü olmaya izin vermek.
+• Kendi alanının dışındaki şeyleri okumak, izlemek ve dinlemek.
+• Merakın peşine düşmek ve şeylerin nasıl yapıldığını sökerek anlamak.
+• Önce taklit etmek, sonra bilerek bir şeyi değiştirmek.
+• Kendine kısıt koymak: üç renkle çizmek, dört karede hikâye anlatmak.
+• Fikirleri anında not almak.
+• Can sıkıntısına alan bırakmak.
+• Sonucu düşünmeden oyun gibi denemek.
+• Zevkin yetenekten önce geliştiğini kabul edip sabırlı olmak.
+Müzik, dans ve yazı gibi alanlarla zaten uğraşan biri için görsel bir alan
+eklemek, yaratıcı kodlama gibi mühendislik ile sanatı birleştiren alanlara girmek
+ya da mevcut alanları birleştirmek en çok katkıyı sağlayabilir. Yaratıcılığın en
+güçlü olduğu yer alanların kesiştiği yerdir.
+Detay ve Biçimcilik
+Detayın Katkısı
+Detaya önem vermek büyük sorunları küçükken yakalamayı sağlar, güven kazandırır,
+kaliteyi fark edilir kılar, konuyu derinden anlamayı sağlar ve uzun vadede zaman
+kazandırır. Ancak her detay aynı önemde değildir. Asıl ustalık, hangi detayın
+sonucu etkilediğini ayırt edebilmektir.
+Biçimciliğe Kayma
+Detaya fazla odaklanan zihin bazen asıl meseleyi bırakıp şekle takılır. Buna
+biçimcilik denir. Biçimle uğraşmak daha kolaydır, daha kolay ölçülür ve kon-
+trol hissi verir. Kod incelemesinde mantık hatası gözden kaçarken boşluk ve
+isimlendirmenin uzun uzun tartışılması bunun tipik örneğidir.
+Dengeyi korumanın yolu önce özü, sonra biçimi ele almaktır. Bir detay
+sonucu ya da anlamı değiştirmiyorsa ona harcanan çaba büyük ihtimalle biçimciliktir.
+Biçim önemsiz değildir; dağınık bir yapı düşünceyi de bulanıklaştırır. Sorun
+biçimin özün yerine geçmesidir.
+11
+
+-- 11 of 23 --
+
+Boşluğu Değerlendirmek
+Boşluk farklı anlamlara gelir ve her birinde değerlendirme yolu farklıdır.
+• Fırsat olarak boşluk: Kuralların söylemediği alan. 2009’da Brawn
+takımının çift difüzörü böyle bir boşluktan doğmuş ve takımı şampiyon
+yapmıştır. Fırsat boşlukları kalıcı değildir; hızlı davranmak gerekir.
+• Zaman olarak boşluk: Ya bilinçli olarak doldurulur ya da zihnin dolaşması
+için bilinçli olarak boş bırakılır.
+• Hayattaki boşluk: Bir şeyin bitmesinden sonra gelen dönem. Aceleyle
+doldurulan boşluk çoğu zaman yanlış şeyle dolar.
+• Tasarımda boşluk: Sayfadaki beyaz alan ya da müzikteki sessizlik ek-
+siklik değil, nefes alma yeridir.
+Devrim ve Evrim
+˙Iyi bir yön bir kez belirlendikten sonra başarıyı çoğu zaman küçük iyileştirmelerin
+birikimi belirler. Bir başka deyişle önce doğru yön bulunur, sonra sabırla adım
+adım geliştirilir.
+Formula 1’de yeni bir kural döneminde doğru konsepti bulan takım öne geçer,
+ancak şampiyonluğu çoğu zaman bu konseptin sezon boyunca geliştirilmesi kazandırır.
+Toyota’nın üretim sistemi de tek bir buluştan değil, uzun yıllar boyunca yapılan
+küçük iyileştirmelerden (kaizen) doğmuştur (Ohno, 1988).
+Bu yaklaşımın iki sınırı vardır. Birincisi, yanlış yönde yapılan evrim yalnızca
+yanlış şeyi daha düzgün yapar. ˙Ikincisi, evrim içinde bulunduğu yönün en iyi
+hâline ilerler ama o yönün dışına çıkamaz. Küçük iyileştirmeler bir noktada
+tükenir; o zaman yeni bir sıçrama gerekir.
+12
+
+-- 12 of 23 --
+
+Güven, S ans ve Baskı
+Sans Vermekten Kaçınmanın Nedenleri
+˙Insanların kişilere, fikirlere ve şeylere şans vermekten kaçınmasının ardında çoğu
+zaman belirsizlik korkusu vardır. Bu korku farklı biçimlerde görülür:
+• Kayıptan kaçınma: Bir şeyi kaybetmenin acısı aynı büyüklükte bir
+kazancın sevincinden daha güçlü hissedilir (Kahneman ve Tversky, 1979).
+• Mevcut durumu koruma eğilimi: Tanıdık olan, daha iyi ama bilin-
+meyen olana çoğu zaman tercih edilir (Samuelson ve Zeckhauser, 1988).
+• ˙Ilk izlenim: ˙Ilk yargıdan sonra onu doğrulayan bilgiler fark edilir, aksini
+gösterenler gözden kaçar.
+• Geçmiş deneyim: Bir kez hayal kırıklığı yaşamış zihin benzer durumları
+tehlike olarak işaretler.
+• Yanılma korkusu: Hiç denememek, yanılmamayı garanti eder.
+• Toplumsal yargı ve kimlik: Alışılmışın dışına çıkmak yargıya açık ol-
+mak, yeni bir fikre şans vermek ise eski düşüncenin yanlış olabileceğini
+kabul etmek demektir.
+Her kaçınma kötü değildir; tekrar eden bir zarar karşısında temkinli olmak
+sağlıklıdır. Sorun, temkinin her şeye karşı otomatik bir tepkiye dönüşmesidir.
+Bir kişinin geçmişi sonucu tek başına belirlemez; bugün nasıl davrandığı ve
+zorluklarla nasıl baş edildiği daha çok şey söyler. “Kesin kötü bitecek” beklentisi
+davranışı değiştirir ve korkulan sonucu kısmen kendisi üretebilir.
+Sans vermeyi kolaylaştıran yollar küçük başlamak, korkunun kaynağına bak-
+mak, denememenin bedelini de hesaba katmak ve yanılmayı denemenin doğal bir
+parçası olarak kabul etmektir. Korkunun büyüklüğü çoğu zaman verilen şeyin
+değerinden gelir; cesaret korkunun yokluğu değil, korkuya rağmen el uzata-
+bilmektir.
+Güvenin Yeri
+C ok şey güvene dayanır ama her şey güvenden ibaret değildir. Pilot mühendisine
+sonuna kadar güvense de araç yavaşsa yarış kazanılmaz. Güven tek başına bir şey
+üretmez; diğer her şeyin çalışmasına izin veren zemindir. Sasi benzetmesiyle:
+Sasi yarışı kazanmaz, ama şasi sağlam değilse motor, aerodinamik ve sürücü
+gerçek güçlerini gösteremez.
+Sağlıklı güven gözü kapalı değildir. Küçük adımlarla başlar, kanıtlandıkça
+büyür, karşı tarafın sözüyle değil davranışıyla şekillenir. Bir yanlışta yıkılmaz,
+ama tekrar eden bir zarar karşısında körü körüne de sürmez.
+13
+
+-- 13 of 23 --
+
+Mühendislikte Güven
+Mühendislikte güven bir his değil, kanıtla kazanılan bir durumdur. Su yollarla
+kurulur:
+• Hesap: Bir parçanın yükü, ısınması ve yorulması önceden hesaplanır.
+• Test: Hesabın gerçekte doğru olup olmadığı görülür.
+• Emniyet katsayısı: 10 ton taşıyacak bir köprü daha yüksek yüklere
+dayanacak biçimde tasarlanır. Bu pay, bilinmeyene karşı bir güvencedir.
+• Yedeklilik: Uçaklardaki birden fazla motor ve hidrolik hat gibi. Güven
+“hiç bozulmaz” değil, “bozulursa da ayakta kalır” demektir.
+• Güvenli bozulma (fail-safe): Tren frenleri basınç kaybolunca açılmaz,
+kapanır.
+• Standartlar: Geçmiş kazalardan çıkarılmış derslerin yazılı hâlidir.
+• ˙Izlenebilirlik ve bağımsız kontrol: Hangi parçanın hangi testten geçtiği
+kayıtlıdır; bir işi yapan kişi onu tek başına onaylamaz.
+• ˙Izleme: Güven bir kez kazanılıp bitmez; sensörler, bakım ve loglarla
+sürekli yenilenir.
+Mühendislikteki ilke “güven ama doğrula” biçiminde özetlenebilir. Bir mühendis
+bir şeye güvendiğini söylediğinde, aslında neden güvenilebileceğini gösterebileceğini
+söyler. Bunun insan tarafı da vardır: Bir binaya giren kimse statik hesapları
+kontrol etmez. Bu yüzden dürüstlük, hatayı saklamamak ve “bilmiyorum” diye-
+bilmek teknik bilgi kadar önemlidir.
+Baskı ile Başa C ıkmak
+• Bedeni sakinleştirmek: Yavaş nefes almak ve özellikle nefesi uzun ver-
+mek bedene tehlike olmadığı sinyalini verir.
+• Kontrol edilebilene odaklanmak: Pilot yarışı kazanmayı değil, bir
+sonraki virajı düşünür.
+• ˙Işi küçük parçalara bölmek.
+• Önceden hazırlanmak ve rutin kurmak: Prova edilen şey baskı anında
+otomatik akar.
+• Baskıyı yeniden yorumlamak: Heyecan ile kaygı bedende benzer his-
+settirir. “Gerginim” yerine “heyecanlıyım” demenin performansı artırabildiği
+gösterilmiştir (Brooks, 2014).
+• Mükemmeliyetçiliği bırakmak, yükü yalnız taşımamak ve dinlen-
+meyi ciddiye almak.
+14
+
+-- 14 of 23 --
+
+• Sonrasında değerlendirmek: Her baskılı durum bir sonrakini daha
+tanıdık kılar.
+15
+
+-- 15 of 23 --
+
+Mühendislik Temelli Sporlar
+Başlıca Örnekler
+Mühendislik temelli sporlarda başarı, sporcunun yeteneği kadar makinenin ya
+da ekipmanın tasarımına bağlıdır.
+• Motor sporları: Formula 1, dayanıklılık yarışları, Formula E, ralli, Mo-
+toGP, IndyCar, NASCAR ve drag yarışları.
+• Su sporları: Teknelerin suyun üzerinde yükseldiği America’s Cup yelken
+yarışları, motorlu tekne yarışları ve kürek.
+• Kış sporları: Kızak, kayak ve sürat pateni; kızak ve kıyafet aerodinamiği
+saliselik fark yaratır.
+• Bisiklet: Pist ve zamana karşı yarışlarda rüzgâr tüneli testleri ve karbon
+gövdeler.
+• Paralimpik sporlar: Protezler ve yarış sandalyeleri sporcuyla tek bir
+sistem gibi tasarlanır.
+• Öğrenci yarışmaları: Formula Student, Shell Eco-marathon, güneş en-
+erjili araç yarışları, robot ve roket yarışmaları. Türkiye’de TEKNOFEST
+bu türün bilinen örneğidir.
+• Diğerleri: Drone yarışları, planör yarışları ve kara hız rekoru denemeleri.
+Japonya ve Formula 1
+Japonya’nın Formula 1’e ilgisi birkaç kökten beslenir. Honda 1960’larda küçük
+bir şirketken bu spora girmiş ve 1965’te yarış kazanmıştır. 1980’lerin sonunda
+Honda motorlu McLaren araçları neredeyse her yarışı kazanmış ve bu dönemin
+pilotu Ayrton Senna Japonya’da kahraman olmuştur. 1987’den bu yana Japonya
+Grand Prix’si çoğunlukla Suzuka’da yapılır; Senna ile Prost’un 1989 ve 1990’daki
+ünlü çarpışmaları bu pistte yaşanmıştır. Aynı yıllarda başlayan düzenli tele-
+vizyon yayınları bir neslin bu spora bağlanmasını sağlamıştır. Kusursuz üretime
+ve ustalığa saygıyı anlatan monozukuri anlayışı da sporun hassasiyetiyle örtüşür.
+Suzuka seyircisi, kendi yaptığı şapkalar ve bütün pilotlara gösterdiği saygıyla
+tanınır.
+Bu Sporlardan C ıkan Dersler
+• Küçük kazanımlar birikir: ˙Ingiliz bisiklet takımı her şeyi küçük oran-
+larda iyileştirme fikriyle tanınmıştır.
+• Kurallar tasarım alanıdır: Sıkı kurallar yaratıcılığı öldürmez, keskinleştirir.
+• ˙Insan ve makine tek sistemdir: En iyi araç, kullanan insana göre
+yapılmış araçtır.
+16
+
+-- 16 of 23 --
+
+• Hız yetmez, sonuna kadar gitmek gerekir: Le Mans’ı 24 saat boyunca
+bozulmadan en hızlı kalan kazanır.
+• Enerji sınırlıdır: Formula E’de kazanan, enerjisini en akıllıca kullanandır.
+• Koşula uyum: Rallide aynı araç toprağa, kara ve asfalta göre farklı
+ayarlanır.
+• Gerçek dünyada denemek: Rüzgâr tüneli değerlidir, ama son sözü pist
+söyler.
+• Başarısızlık bilgidir: Formula Student’ta bozulan her araç bir sonraki
+tasarımın verisidir.
+• Görünen kahramanın arkasında ekip vardır.
+• Kurallar değişince sıfırdan düşünmek gerekir.
+• Sınırlı bütçe verimliliği öğretir.
+• Pistte doğan hayata taşınır: Disk fren ve çekiş kontrolü gibi teknolo-
+jiler önce yarışta denenmiştir.
+17
+
+-- 17 of 23 --
+
+Felsefeler: Otomobil, Yazılım ve Rekabet
+Otomobilin Felsefesi
+Otomobil kelimesi “kendi” (auto) ve “hareket eden” (mobile) parçalarından
+oluşur. Asıl anlamı insanın kendi başına hareket edebilmesidir.
+• Özgürlük: Ray ya da güzergâh olmadan istenen zamanda istenen yere
+gitmek.
+• Zaman ve mekânın değişmesi: Otomobil uzaklık kavramını değiştirmiş,
+şehirleri büyütmüş ve banliyöleri doğurmuştur.
+• Bedenin uzantısı: ˙Iyi bir sürücü aracı bedeninin parçası gibi hisseder.
+Mazda’nın tasarım felsefesi bu fikre dayanır: jinba ittai, yani at ile binicinin
+tek vücut olması.
+• Kimlik: Seçilen araç, sahibinin neye değer verdiğini anlatır.
+• Ulusal felsefeler: Alman otomobilinde hassasiyet ve sağlamlık, ˙Italyan
+otomobilinde tutku ve güzellik, Japon otomobilinde güvenilirlik ve ver-
+imlilik öne çıkar.
+• Özgürlüğün çelişkisi: Herkes özgürce hareket etmek isteyince trafik,
+kirlilik ve araca göre tasarlanmış şehirler ortaya çıkmıştır.
+Elektrikli ve sürücüsüz araçlarla bu felsefe yeniden yazılmaktadır. Direk-
+siyon insanın elinden çıktığında otomobilin verdiği özgürlük duygusunun ne
+olacağı açık bir sorudur.
+Yazılımın Felsefesi
+Yazılımın özü, düşünceyi çalışan bir şeye dönüştürmektir. Mühendis çelikle ve
+betonla çalışırken yazılımcı doğrudan düşünceyle çalışır.
+• Değiştirilebilirlik: Donanım (hardware) sabittir, yazılım (software) değiştirilebilir.
+Aynı bilgisayar yalnızca yazılım değiştirilerek başka bir şeye dönüşür.
+• Soyutlama: Karmaşık bir şeyi basit bir isim ve kural arkasına saklamak.
+• Kaldıraç: Bir kez yazılan kod milyonlarca kez çalışabilir.
+• Sıfıra yakın maliyetle çoğalma: Bu özellik açık kaynak hareketini
+mümkün kılmıştır.
+• Kurallarla dünya kurmak: Bir oyunun fiziği ya da bir uygulamanın
+akışı yazılımcının koyduğu kurallarla belirlenir ve insanlar o kurallar içinde
+yaşar.
+• Hiç bitmemek: Yazılım sürekli güncellenir; bir nesneden çok yaşayan
+bir şeye benzer.
+18
+
+-- 18 of 23 --
+
+• Karmaşıklıkla mücadele: ˙Iyi yazılımcının asıl işi karmaşıklığı kontrol
+altında tutmaktır.
+• Etik boyut: Yazılım görünmez ama hayatın büyük kısmını yönetir; hangi
+kuralların kimin yararına yazıldığı bir sorumluluk sorusudur.
+Otomobil insana hareket özgürlüğü verdiyse, yazılım da fikirleri çoğaltma ve
+dünyaya işleme özgürlüğü vermiştir. Her iki özgürlüğün de bir bedeli vardır.
+Rekabetin Felsefesi
+˙Ingilizce competition kelimesi Latince competere kökünden gelir ve “birlikte ara-
+mak, birlikte çabalamak” anlamını taşır.
+• Rakip büyüten kişidir: Senna ve Prost birbirlerini zorlayarak daha iyi
+pilotlar olmuştur.
+• Agon: Eski Yunanlılar rekabeti erdemin ortaya çıktığı alan olarak görürdü.
+• ˙Ilerlemenin motoru: Rekabet doğada evrimi, ekonomide yeniliği yürütür.
+• Sıfır toplamlı ve pozitif toplamlı rekabet: Sağlıklı rekabet pastayı
+büyütür, sağlıksız rekabet yalnızca bölmeye çalışır.
+• Kurallar ve centilmenlik: Kuralsız rekabet savaşa dönüşür; hileyle
+kazanılan şey zafer değildir.
+• Kendinle yarışmak: Rekabetin en olgun hâli dünkü kendinle yarışmaktır.
+• Karşı görüş: Thiel (2014), herkesin olduğu yerde yarışmak yerine kims-
+enin olmadığı yeni bir alan yaratmanın daha akıllıca olduğunu savunur.
+• Karanlık taraf : Aşırı rekabet sürekli karşılaştırma, kıskançlık ve tükenmişlik
+üretir.
+• Rekabet ve iş birliği: Formula 1 takımları pistte rakip, güvenlik kural-
+larında ortaktır.
+19
+
+-- 19 of 23 --
+
+Kurum Kültürü
+Toplantı Kültürü
+Toplantı kültürü genellikle bilinçli bir kararla değil, tekrar eden alışkanlıklarla
+oluşur. Liderin davranışı, ilk toplantıların nasıl geçtiği, söylenmeyen kurallar,
+güven ortamı ve toplantıdan sonra bir şeyin değişip değişmediği bu kültürü
+belirler.
+˙Iyi bir toplantı kültürünün özellikleri şunlardır:
+• Her toplantının açık bir amacı vardır.
+• Gündem önceden paylaşılır.
+• Yalnızca gerekli kişiler katılır.
+• Toplantı zamanında başlar ve biter.
+• Her toplantı kim, neyi, ne zamana kadar yapacak sorusunun cevabıyla
+biter.
+• Notlar alınır ve paylaşılır.
+• Herkese söz hakkı tanınır.
+• Toplantıların kendisi de ara sıra değerlendirilir.
+Amazon’da bazı toplantılar sunum yerine önceden yazılmış birkaç sayfalık
+bir metinle başlar; katılımcılar önce bu metni sessizce okur, sonra tartışmaya
+geçer (Bezos, 2018). Bu, fikirlerin sunum becerisine göre değil içeriğe göre
+değerlendirilmesini sağlayan, bilinçli olarak tasarlanmış bir kültür örneğidir.
+Kurum Kültürü ve Alt Kültür
+Genel Anlamda Alt Kültür
+Alt kültür, büyük bir toplumun içinde kendine özgü değerleri, dili ve tarzı olan
+daha küçük bir gruptur. Punk, hip-hop, kaykay, araba kültürü ve açık kay-
+nak topluluğu bilinen örneklerdir. Alt kültürler önce dışlanır, sonra ana kültür
+tarafından benimsenir ve ticarileşir; bu yüzden ana kültürün yenilik kaynağıdır.
+Ana kültüre doğrudan karşı çıkıp onu değiştirmeye çalışan gruplara ise karşı
+kültür denir.
+Sirketlerde Alt Kültür
+Sirket kültürü, şirketin resmı olarak söylediği değerlerdir. Sirket içindeki alt
+kültür ise belirli ekiplerde ya da gruplarda kendiliğinden oluşan, çoğu zaman
+yazılmamış kurallardır. Alt kültür kendi başına kötü değildir; resmı kültürle
+çeliştiğinde olumsuz anlam kazanır. Su durumlar bu çelişkinin tipik örnekleridir:
+20
+
+-- 20 of 23 --
+
+• “Seffafız” denirken gerçek kararların kapalı kapılar ardında verilmesi.
+• “Hata yapmaktan korkmayın” denirken hata yapanın kenara itilmesi.
+• “˙Iş ve özel hayat dengesi önemli” denirken geç saatte cevap vermeyenin
+az çalışıyor sayılması.
+• “Tek takımız” denirken ekiplerin birbirini rakip görmesi.
+Olumsuz alt kültürün belirtileri klikler, toplantıda susulup koridorda konuşulması,
+“biz ve onlar” ayrımı, değişime sessiz direniş ve gölge kurallardır. Bu durum
+genellikle söylenen ile yapılanın ayrıştığı, liderlerin söyledikleriyle çeliştiği ve
+insanların kendini güvende hissetmediği yerlerde ortaya çıkar.
+Öte yandan bazı alt kültürler şirketin genelinden daha sağlıklıdır. Bürokratik
+bir şirkette hızlı ve güvene dayalı çalışan bir mühendislik ekibi buna örnektir;
+şirketteki iyi değişiklikler çoğu zaman böyle ekiplerden yayılır. Asıl kültür du-
+varda yazan değil, insanların gerçekte nasıl davrandığıdır.
+21
+
+-- 21 of 23 --
+
+Sonuç
+Yarış mühendisliğinden çıkan en genel ders, iyi işin bir düşünme disiplinin-
+den doğduğudur. Ölçmek, tek değişkenle denemek, darboğazı bulmak ve her
+çalışmadan sonra dürüstçe değerlendirmek; bu dört alışkanlık yarış aracında da,
+yazılımda da, kurumda da aynı biçimde işler. Bu yüzden yarış mühendisliği,
+mühendislik dışındaki alanlara bakmak için de kullanışlı bir mercektir.
+˙Ikinci ders güvenle ilgilidir. Sürücü ile mühendis arasındaki ilişki, mühendislikteki
+kanıta dayalı güven, kurumdaki toplantı kültürü ve kişilere şans vermek aynı ze-
+minden beslenir. Güven tek başına sonuç üretmez, ama onsuz diğer hiçbir şey
+tam çalışmaz. Yapay zekâ ile çalışmak bu zemini yeniden sınar: Hız artarken
+anlamayı ve doğrulamayı korumak, kontrolü kaybetmemenin şartıdır.
+Üçüncü ders yaratıcılık ile disiplin arasındaki ilişkidir. Hayal gücü yönü
+belirler, mühendislik o yönü gerçeğe dönüştürür, küçük iyileştirmeler ise onu
+ustalaştırır. Ancak bu üç aşamanın her birinin bir tuzağı vardır: hayalin kâğıtta
+kalması, detayın biçimciliğe kayması ve evrimin yanlış yönde sürmesi. Newey’in
+kariyeri, elle çizim yapan bir tasarımcının bu üç aşamayı aynı kişide birleştirebileceğini
+gösteren bir örnektir.
+Notun sınırları da vardır. Yarıştan yazılıma ve kuruma yapılan aktarımlar
+benzetmeye dayanır; benzetme açıklar ama kanıtlamaz. Yarışta kararların sonucu
+birkaç tur içinde görülürken yazılımda ve kurumlarda sonuçlar çok daha geç or-
+taya çıkar. Bu fark, yarıştaki hızlı geri bildirim döngüsünün başka alanlarda
+nasıl kurulabileceği sorusunu açık bırakır.
+Kaynaklar
+• Beck, K. (1999). Extreme Programming Explained: Embrace Change.
+Addison-Wesley.
+• Bezos, J. (2018). 2017 Letter to Shareholders. Amazon.
+• Brooks, A. W. (2014). Get Excited: Reappraising Pre-Performance Anxi-
+ety as Excitement. Journal of Experimental Psychology: General, 143(3).
+• Kahneman, D. ve Tversky, A. (1979). Prospect Theory: An Analysis of
+Decision under Risk. Econometrica, 47(2).
+• Newey, A. (2017). How to Build a Car. HarperCollins.
+• Nielsen, J. A., Zielinski, B. A., Ferguson, M. A., Lainhart, J. E. ve An-
+derson, J. S. (2013). An Evaluation of the Left-Brain vs. Right-Brain
+Hypothesis with Resting State Functional Connectivity Magnetic Reso-
+nance Imaging. PLOS ONE, 8(8).
+• Ohno, T. (1988). Toyota Production System: Beyond Large-Scale Produc-
+tion. Productivity Press.
+• Samuelson, W. ve Zeckhauser, R. (1988). Status Quo Bias in Decision
+Making. Journal of Risk and Uncertainty, 1(1).
+22
+
+-- 22 of 23 --
+
+• Thiel, P. (2014). Zero to One. Crown Business.
+23
+
+-- 23 of 23 --

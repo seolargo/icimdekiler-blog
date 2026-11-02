@@ -1,0 +1,280 @@
+Mühendislik: Güven Bir His Değil, Kanıttır
+ÖFY
+November 2026
+Özet
+Mühendislikte güven bir duygu değil, kanıtla kazanılan bir durumdur. Bir sis-
+teme güvenmek, onun neden çalışacağını gösterebilmek anlamına gelir. Bu kanıt
+tek bir adımda değil, birbirini tamamlayan katmanlarla kurulur: hesap tahmini
+sağlar, test tahmini doğrular, emniyet katsayısı hesabın göremediğine karşı pay
+bırakır, yedeklilik tek bir arızanın sistemi düşürmesini engeller, güvenli bozulma
+ise arızayı tehlikesiz bir duruma yönlendirir. Standartlar, kayıtlar, bağımsız kon-
+trol ve sürekli izleme bu teknik katmanları kurumsal düzeyde taşır. Güvenin bir
+de insani boyutu vardır: toplum, kontrol edemediği hesaplar için mühendisin
+dürüstlüğüne dayanır. Bu nedenle hatayı saklamamak ve bilinmeyeni açıkça
+söylemek, teknik bilgi kadar güvenin parçasıdır.
+1
+
+-- 1 of 9 --
+
+Giriş
+Gündelik dilde güven, çoğunlukla bir inanç ya da his olarak anlaşılır. Bir kişiye
+güvenmek, onun nasıl davranacağını tam bilmeden olumlu bir beklentiye sahip
+olmaktır. Mühendislikte bu anlam yetersiz kalır. Bir köprünün, uçağın ya da
+yazılımın çalışacağına inanmak, onu kullanan insanları korumaz.
+Mühendislik bağlamında güven, bir sistemin belirli koşullar altında bek-
+lenen biçimde davranacağına dair kanıta dayalı bir yargıdır. Bu tanımın iki
+önemli parçası vardır. ˙Ilki “belirli koşullar” ifadesidir: hiçbir sistem her koşulda
+çalışmaz, güven her zaman bir sınır içinde geçerlidir. ˙Ikincisi “kanıta dayalı”
+ifadesidir: yargının arkasında hesap, test ya da gözlem bulunmalıdır.
+Yaygın bir yanlış kabul, güvenilir sistemin hiç bozulmayan sistem olduğudur.
+Mühendislik bunu reddeder. Her malzeme yorulur, her parça bir gün arızalanır,
+her yazılımda bulunmamış hatalar vardır. Güvenilir sistem, bozulmaları önceden
+hesaba katan ve bozulduğunda da insanları korumaya devam eden sistemdir.
+Bu not, güvenin mühendislikte hangi araçlarla kurulduğunu üç düzeyde ele
+alır: tek bir sistemin tasarımındaki teknik araçlar, bu araçları kalıcı kılan ku-
+rumsal mekanizmalar ve bunların hepsinin dayandığı insani sorumluluk. Not,
+belirli bir mühendislik dalının ayrıntılı yöntemlerine girmez; dallar arasında or-
+tak olan ilkeleri kapsar.
+2
+
+-- 2 of 9 --
+
+Güvenin Teknik Katmanları
+Hesap
+Güvenin ilk adımı tahmindir, ancak bu tahmin sezgiye değil hesaba dayanır. Bir
+parçanın ne kadar yük taşıyacağı, ne kadar ısınacağı, kaç çevrim sonra yorulacağı
+tasarım aşamasında hesaplanır.
+Hesabın değeri, sistemi kurmadan önce davranışını görmeyi sağlamasıdır.
+Bir köprü yapıldıktan sonra yetersiz olduğunu anlamak hem pahalı hem tehlike-
+lidir. Hesap, hatanın kâğıt üzerinde, kimse zarar görmeden yakalanmasına
+imkân verir.
+Hesabın sınırı ise modeline bağlı olmasıdır. Her hesap, gerçeğin basitleştirilmiş
+bir modeli üzerinde yapılır. Model gerçeği eksik temsil ediyorsa hesap ne kadar
+dikkatli yapılırsa yapılsın yanlış sonuç verir. Bu nedenle hesap tek başına yeterli
+kanıt sayılmaz.
+Test
+Test, hesabın gerçekte doğru çıkıp çıkmadığını görmektir. Hesap “böyle olması
+gerekir” der, test “böyle olduğunu gördük” der.
+Mühendislikte test türleri alana göre değişir. Malzemeler çekme, burulma
+ve yorulma testlerinden geçirilir. Otomobiller çarpışma testlerine tabi tutu-
+lur. Köprüler hizmete açılmadan önce yük testiyle denenir. Yazılımda birim
+testleri tek bir fonksiyonun, entegrasyon testleri parçaların birlikte çalışmasının
+doğruluğunu sınar.
+Testin de sınırı vardır. Test yalnızca denenen koşullar hakkında bilgi verir.
+Yazılım için bu durum Dijkstra’nın sık aktarılan gözlemiyle ifade edilir: test
+hataların varlığını gösterebilir, ama yokluğunu kanıtlayamaz (Dijkstra, 1970).
+Aynı ilke fiziksel sistemler için de geçerlidir. Bu yüzden test, hesabın yerine
+değil yanına konur.
+Emniyet Katsayısı
+Mühendisler bir sistemi beklenen yükün tam sınırında tasarlamaz. Sistemin
+dayanabileceği yük ile karşılaşması beklenen yük arasında bilinçli bir pay bırakılır.
+Bu paya emniyet katsayısı (factor of safety) denir:
+n = sistemindayanabileceğiyük
+beklenenenbüyükyük
+Örneğin bir taşıyıcı eleman 10 tonluk yük bekliyorsa ve 20 tona dayanacak
+biçimde tasarlanmışsa, emniyet katsayısı 2’dir.
+Bu payın gerekçesi, hesabın ve testin göremediği belirsizliklerdir. Malzemede
+fark edilmemiş bir kusur olabilir, yük beklenenden ağır gelebilir, üretimde küçük
+sapmalar olabilir, zamanla korozyon oluşabilir. Emniyet katsayısı bu bilin-
+meyenlerin her birini ayrı ayrı hesaplamak yerine hepsine birden karşı bir güvence
+sağlar. Bu anlamda bilinmeyene duyulan saygının sayısal ifadesidir.
+3
+
+-- 3 of 9 --
+
+Katsayının değeri alana göre büyük farklılık gösterir. Ağırlığın kritik olduğu
+sivil havacılıkta yapılar, en büyük beklenen yükün 1,5 katına dayanacak biçimde
+tasarlanır (14 CFR ğ 25.303). Ağırlık kaygısının daha az olduğu ve arızanın
+ağır sonuçlar doğurduğu bazı kaldırma ekipmanlarında katsayı çok daha yüksek
+tutulur. Katsayı büyüdükçe güvenlik artar, ancak maliyet ve ağırlık da artar.
+Uygun değerin seçimi bu iki yön arasında yapılan bir mühendislik kararıdır.
+Yedeklilik
+Kritik sistemlerde bir parçanın bozulma ihtimaline karşı aynı işi yapabilecek
+ikinci bir parça bulundurulur. Bu ilkeye yedeklilik (redundancy) denir.
+Ticari uçaklar bu ilkenin en bilinen örneğidir. Uçaklarda birden fazla motor,
+birbirinden bağımsız hidrolik hatlar ve birden fazla uçuş bilgisayarı bulunur.
+Bir hidrolik hat sızıntı yaparsa diğerleri kumanda yüzeylerini hareket ettirmeye
+devam eder. Yazılım sistemlerinde aynı ilke, birden fazla sunucuya dağıtılmış
+uygulamalar ve farklı bölgelerde tutulan veri kopyaları biçiminde uygulanır.
+Yedekliliğin kritik koşulu, yedeklerin aynı nedenle aynı anda bozulmamasıdır.
+˙Iki motor aynı yakıt hattından besleniyorsa, yakıt hattındaki bir arıza ikisini bir-
+den durdurur. Bu duruma ortak neden arızası (common-cause failure) denir.
+Gerçek yedeklilik, yedeklerin birbirinden bağımsız olmasını gerektirir.
+Yedeklilik, güven kavramındaki önemli bir kaymayı gösterir: güvenilir sis-
+tem “hiç bozulmaz” iddiasında bulunmaz, “bir parçası bozulsa da ayakta kalır”
+iddiasında bulunur.
+Güvenli Bozulma
+˙Iyi tasarlanmış bir sistem bozulduğunda rastgele bir duruma değil, önceden
+belirlenmiş ve tehlikesiz bir duruma geçer. Bu ilkeye güvenli bozulma (fail-
+safe) denir.
+Demiryolu frenleri bu ilkenin klasik örneğidir. Westinghouse’un geliştirdiği
+otomatik havalı fren sisteminde frenler hava basıncıyla açık tutulur. Hat koparsa
+ya da basınç kaybolursa frenler kendiliğinden kapanır. Böylece en olası arıza,
+yani basınç kaybı, treni durdurur. Sistem tersine tasarlansaydı, yani basınç
+frenleri kapatsaydı, bir sızıntı treni frensiz bırakırdı.
+Aynı ilke malzeme seçiminde de görülür. Sünek (ductile) malzemeler, örneğin
+yapı çeliği, kırılmadan önce gözle görülür biçimde eğilir ve uzar. Bu şekil
+değiştirme bir uyarıdır; çatlak büyümeden fark edilebilir. Gevrek (brittle)
+malzemeler ise, örneğin dökme demir ya da cam, uyarı vermeden aniden kırılır.
+Taşıyıcı yapılarda sünek malzemenin tercih edilmesinin nedenlerinden biri budur:
+malzeme önce uyarır, sonra kırılır.
+Yazılımda karşılığı, bir hata oluştuğunda sistemin tutarsız bir duruma düşmek
+yerine işlemi geri alması ya da güvenli bir varsayılana dönmesidir. Örneğin
+bir yetkilendirme servisine ulaşılamadığında erişimin açılması değil kapanması,
+güvenli bozulmanın yazılımdaki uygulamasıdır.
+4
+
+-- 4 of 9 --
+
+Güvenin Kurumsal Katmanları
+Teknik katmanlar tek bir sistemin güvenini kurar. Bu güvenin bir projeden
+diğerine, bir kuşaktan diğerine taşınması ise kurumsal mekanizmalarla sağlanır.
+Standartlar
+Mühendisler her sistemi sıfırdan tasarlamaz. Belirli sistem türleri için yazılmış
+kurallara ve standartlara uyar. Bu standartların büyük kısmı, geçmişte yaşanmış
+kazaların incelenmesinden doğmuştur.
+Buhar kazanları bunun açık bir örneğidir. 19. yüzyıl sonu ve 20. yüzyıl
+başında Amerika Birleşik Devletleri’nde kazan patlamaları sık yaşanıyordu. 1905’te
+Massachusetts’teki Grover ayakkabı fabrikasında meydana gelen patlama, ölü
+sayısıyla kamuoyunda büyük etki yarattı. Bu ve benzeri kazaların ardından
+Amerikan Makine Mühendisleri Derneği (ASME) kazan ve basınçlı kap kural-
+larını hazırladı; ilk sürüm 1914’te yayımlandı (ASME, t.y.). Standart, kazan-
+ların nasıl tasarlanacağını, hangi malzemelerin kullanılacağını ve nasıl denetleneceğini
+belirledi.
+Bu açıdan standartlar, geçmişteki kazaların bıraktığı derslerin yazılı hâlidir.
+Bir standarda uyan mühendis, o dersleri kendisi yaşamak zorunda kalmadan
+onlardan yararlanır. Petroski bu ilişkiyi mühendislik tasarımının temel özelliği
+olarak tanımlar: başarılı tasarım büyük ölçüde geçmiş başarısızlıkların anlaşılmasına
+dayanır (Petroski, 1985).
+˙Izlenebilirlik ve Belgeleme
+˙Izlenebilirlik (traceability), bir sistemin her parçasının geçmişinin kayıt altında
+olmasıdır: parça nereden geldi, hangi üretim partisine ait, hangi testlerden geçti,
+kim onayladı.
+˙Izlenebilirliğin değeri bir sorun çıktığında ortaya çıkar. Bir uçak parçasında
+üretim hatası bulunduğunda, kayıtlar sayesinde aynı partiden üretilmiş diğer
+parçaların hangi uçaklarda olduğu tespit edilebilir ve yalnızca onlar değiştirilir.
+Kayıt yoksa ya sorun gözden kaçar ya da bütün filonun incelenmesi gerekir.
+Yazılımda aynı işlevi sürüm kontrol sistemleri görür. Her değişikliğin kim
+tarafından, ne zaman ve hangi gerekçeyle yapıldığı kayıt altındadır. Bir hata
+ortaya çıktığında, hatayı getiren değişiklik geriye doğru izlenerek bulunabilir.
+Bağımsız Kontrol
+Bir işi yapan kişi, o işi tek başına onaylamaz. ˙Işi başka biri kontrol eder. Bu
+ilkenin gerekçesi, kişinin kendi hatasını görmesinin zor olmasıdır. Tasarımcı,
+tasarımı yaparken kurduğu varsayımları kontrol ederken de taşır; aynı kör nok-
+taya ikinci kez düşer.
+Bu ilke farklı ölçeklerde uygulanır. Yapı projeleri, onu çizen mühendisten
+bağımsız bir kontrol mühendisince incelenir. Uçak tasarımları, üreticiden bağımsız
+5
+
+-- 5 of 9 --
+
+havacılık otoritelerince sertifikalandırılır. Yazılımda kod incelemesi (code re-
+view ), yazılan kodun başka bir geliştirici tarafından okunmasıdır. Fagan, IBM’de
+yaptığı çalışmada sistematik kod incelemelerinin hataları test aşamasından önce,
+daha düşük maliyetle yakaladığını göstermiştir (Fagan, 1976).
+˙Izleme
+Güven bir kez kazanılıp bitmez. Malzemeler yorulur, kullanım koşulları değişir,
+sistemler tasarlandıkları ilk koşullardan uzaklaşır. Bu nedenle güvenin sürekli
+yenilenmesi gerekir.
+Köprülere ve büyük yapılara gerinim, titreşim ve yer değiştirme ölçen sensörler
+yerleştirilir. Bu uygulamaya yapısal sağlık izleme (structural health moni-
+toring) denir. Uçaklar belirli uçuş saatlerinde ayrıntılı bakıma girer. Yazılım
+sistemlerinin günlük kayıtları (log) ve metrikleri sürekli izlenir; hata oranı ya da
+yanıt süresi belirlenen eşiği aştığında uyarı üretilir.
+˙Izleme, tasarım aşamasında kurulan güvenin hâlâ geçerli olup olmadığını
+sınar. Bu açıdan izleme, test etkinliğinin sistemin bütün ömrü boyunca sürmesidir.
+6
+
+-- 6 of 9 --
+
+Güvenin ˙Insani Boyutu
+Doğrulanamayan Kanıt Sorunu
+Teknik ve kurumsal katmanlar kanıt üretir, ancak bu kanıtı toplumun büyük
+kısmı göremez. Bir binaya giren kişi statik hesapları incelemez, bir uçağa bi-
+nen yolcu bakım kayıtlarını okumaz. Bu kişiler, sistemi yapanların işini doğru
+yaptığına güvenir.
+Bu durum mühendislikte güvenin ikinci bir anlamını ortaya çıkarır. Mühendisin
+sisteme olan güveni kanıta dayanır; toplumun mühendise olan güveni ise büyük
+ölçüde mühendisin sorumluluk bilincine dayanır. Mühendislik meslek etiği kod-
+ları bu nedenle kamu güvenliğini mühendisin diğer yükümlülüklerinin önüne
+koyar (NSPE, t.y.).
+Dürüstlük ve Bilinmeyeni Söylemek
+Bu ikinci tür güvenin dayanağı dürüstlüktür. Dürüstlük mühendislikte üç biçimde
+somutlaşır.
+• Hatayı saklamamak: Fark edilen bir tasarım ya da hesap hatası, maliyetli
+ya da utandırıcı olsa bile bildirilir.
+• “Bilmiyorum” diyebilmek: Bir sistemin belirli koşullardaki davranışı bil-
+inmiyorsa bu açıkça söylenir. Bilinmeyeni biliniyor gibi sunmak, kanıtı
+olmayan bir güven üretir.
+• Sınırı belirtmek: Bir sistemin hangi koşullarda güvenilir olduğu kadar,
+hangi koşullarda güvenilir olmadığı da bildirilir.
+Suçlamasız Hata Analizi
+Bireysel dürüstlük, kurum yapısı tarafından desteklenmezse sürdürülemez. Hatasını
+bildiren kişi cezalandırılıyorsa, bir sonraki hata bildirilmez. Bu nedenle güvenlik
+açısından olgun kurumlar suçlamasız hata analizi (blameless postmortem)
+kültürünü benimser. Bu yaklaşımda bir kazadan sonra sorulan soru “kim hata
+yaptı” değil, “sistem bu hatanın yapılmasına neden izin verdi” olur.
+Reason, kazaların çoğunlukla tek bir kişinin hatasından değil, kurum içinde
+birikmiş gizli zayıflıkların üst üste gelmesinden doğduğunu savunur (Reason,
+1997). Dekker ise hatayı bildirmenin güvenli olduğu bir ortamın, aynı za-
+manda sorumluluğun da korunduğu bir ortam olabileceğini tartışır (Dekker,
+2007). Yazılım alanında bu yaklaşım, Google’ın site güvenilirliği mühendisliği
+uygulamalarında yaygınlaşmıştır (Beyer vd., 2016).
+Suçlamasız kültürün sınırı da vardır. Kasıtlı ihmal ya da kuralların bilerek
+çiğnenmesi bu kapsamda değerlendirilmez. Ayrımın nerede çizileceği kurumdan
+kuruma değişir ve tartışmalı olmaya devam eder.
+7
+
+-- 7 of 9 --
+
+Sonuç
+Mühendislikte güvenin kanıta dayanması, güvenin kesinlik anlamına geldiği sonu-
+cunu doğurmaz. Her katman bir öncekinin eksiğini kapatmak için vardır. Hesap
+modele bağlı olduğu için test gerekir; test yalnızca denenen koşulları kapsadığı
+için emniyet payı gerekir; pay her şeyi karşılayamayacağı için yedeklilik ve
+güvenli bozulma gerekir. Katmanların varlığı, tek bir katmana güvenilemeyeceğinin
+kabulüdür.
+Bu yapının pratik karşılığı şudur: bir mühendisin bir sisteme “güveniyorum”
+demesi, aslında “neden güvenebileceğinizi gösterebilirim” demesidir. Gösterilemeyen
+güven, mühendislikte bir varsayım olarak kalır. “Güven ama doğrula” ifadesi
+bu tutumu özetler. Rusça bir atasözünden gelen ifade, 1980’lerde ABD Başkanı
+Reagan’ın Sovyetlerle silah denetimi görüşmelerinde kullanmasıyla yaygınlaşmıştır.
+C erçevenin sınırı, kanıt üretmenin maliyetidir. Her sistemi her koşulda test
+etmek mümkün değildir. Emniyet katsayısı ne kadar büyük tutulacağı, kaç
+yedek konacağı ve ne sıklıkta izleneceği, güvenlik ile maliyet arasında yapılan
+seçimlerdir. Bu seçimler teknik olduğu kadar değer yargısı da içerir.
+Açık kalan soru, karmaşıklığın artmasıyla ilgilidir. Perrow, parçaları bir-
+birine sıkı bağlı ve etkileşimleri karmaşık sistemlerde kazaların kaçınılmaz olduğunu,
+yani “normal” hâle geldiğini savunur (Perrow, 1984). Leveson ise güvenliğin tek
+tek parçaların güvenilirliğinden değil, parçalar arasındaki etkileşimlerin kon-
+trolünden doğduğunu ileri sürer (Leveson, 2011). Bu iki görüş, katmanlı güven
+anlayışının çok karmaşık sistemlerde ne ölçüde yeterli olduğunu sorgular. Yazılım
+sistemleri bu sorunun en canlı örneğidir.
+Kaynaklar
+• ASME (t.y.). History of the ASME Boiler and Pressure Vessel Code.
+American Society of Mechanical Engineers.
+• Beyer, B., Jones, C., Petoff, J. ve Murphy, N. R. (2016). Site Reliability
+Engineering: How Google Runs Production Systems. O’Reilly Media.
+• Dekker, S. (2007). Just Culture: Balancing Safety and Accountability.
+Ashgate.
+• Dijkstra, E. W. (1970). Notes on Structured Programming (EWD249).
+• Fagan, M. E. (1976). Design and code inspections to reduce errors in
+program development. IBM Systems Journal, 15(3).
+• Leveson, N. G. (2011). Engineering a Safer World: Systems Thinking
+Applied to Safety. MIT Press.
+• NSPE (t.y.). Code of Ethics for Engineers. National Society of Profes-
+sional Engineers.
+• Perrow, C. (1984). Normal Accidents: Living with High-Risk Technologies.
+Basic Books.
+8
+
+-- 8 of 9 --
+
+• Petroski, H. (1985). To Engineer Is Human: The Role of Failure in Suc-
+cessful Design. St. Martin’s Press.
+• Reason, J. (1997). Managing the Risks of Organizational Accidents. Ash-
+gate.
+• U.S. Federal Aviation Administration. 14 CFR ğ 25.303, Factor of safety.
+9
+
+-- 9 of 9 --
