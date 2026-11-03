@@ -1,0 +1,343 @@
+Kontrol Sistemleri: Açık ve Kapalı Döngü
+Tasarımı
+ÖFY
+November 2026
+Özet
+Bir sistemin çıktısını ölçüp bu ölçüme göre kendini düzelttiği yapıya kapalı
+döngü, çıktıya hiç bakmadan yalnızca komut uyguladığı yapıya açık döngü
+denir. Kapalı döngü, ancak çıktı güvenilir biçimde ölçülebiliyor ve ölçülen hata
+gerçekten düzeltilebiliyorsa açık döngüden üstündür; yanlış ölçen bir döngü,
+döngüsüz bir sistemden daha fazla zarar verir. Açık döngüden kapalı döngüye
+geçişin pahalı olmasının nedeni çoğunlukla döngünün kendisi değil, açık döngünün
+tek geçişte çalışacak, ara sonuç saklamayacak ve ölçüm içermeyecek biçimde
+yazılmış olmasıdır. Geçişten sonra ortaya çıkan hatalar iki farklı kaynaktan
+gelir: bir kısmı zaten vardı ve döngü onları yalnızca görünür kılmıştır, bir kısmını
+ise döngü kendisi üretir. Bu iki kaynak, aynı girdinin “yalnızca ölç” ve “ölç ve
+düzelt” kiplerinde yan yana çalıştırılmasıyla ayrılabilir. Geçiş kaçınılmazdır, an-
+cak sistem baştan kapalı döngü yapısıyla kurulup düzeltmeler kapalı başlatılırsa
+geçiş bir yeniden yazım değil, bir ayar değişikliği olur. Tek bir ölçüyü iy-
+ileştirmekle görevlendirilen her kendini düzelten sistem, o ölçüyü en ucuz yoldan
+iyileştirir ve bu yol çoğunlukla asıl korunması gereken şeyin feda edilmesidir. Bu
+nedenle kapalı döngü kalite sistemleri iki hedefle, baştan yazılmış değişmezlerle
+ve izlenebilir kararlarla tasarlanmalıdır.
+1
+
+-- 1 of 13 --
+
+Giriş
+Kendini düzelten bir sistem tasarlanırken iki karar birlikte verilir: sistemin
+çıktısını ölçüp ölçmeyeceği ve ölçerse bu ölçüme göre kendi davranışını değiştirip
+değiştirmeyeceği. Kontrol kuramında bu ayrım açık döngü (open-loop) ve ka-
+palı döngü (closed-loop, feedback ) kontrol olarak adlandırılır (˚ Aström ve Murray,
+2008).
+Açık döngü, sistemin bir komutu çıktısını kontrol etmeden uyguladığı yapıdır.
+Kapalı döngü ise sistemin çıktısını ölçtüğü, bu ölçümü bir hedefle karşılaştırdığı
+ve aradaki farka göre bir düzeltme hamlesi yaptığı yapıdır. Kapalı döngünün
+üç bileşeni vardır: ölçüm (sensör ya da kontrol fonksiyonu), karşılaştırma (hedef
+ile ölçüm arasındaki fark) ve düzeltme (farkı azaltmak için yapılan hamle).
+Yaygın kabul, kapalı döngünün her durumda açık döngüden daha iyi olduğudur.
+Bu kabul eksiktir. Kapalı döngü yalnızca ölçümü kadar iyidir; ölçüm yanlışsa
+döngü iyi bir çıktıyı “düzelterek” bozar. Ayrıca kapalı döngü, açık döngüde hiç
+bulunmayan yeni hata türleri üretir.
+Bu not, yazılım tabanlı bir haber paketi üretim sisteminde açık döngüden
+kapalı döngüye geçiş sırasında karşılaşılan sorunlardan yola çıkar. Konu genel
+kontrol kuramı değil, yazılımda kalite döngülerinin tasarımı ve bu döngülerin
+ölçüyü hedefe dönüştürme eğilimidir. Somut fiziksel örnek olarak drone kontrolü
+kullanılır.
+2
+
+-- 2 of 13 --
+
+Açık ve Kapalı Döngü: Drone Örneği
+Açık döngü drone
+Açık döngüde drone’a “motorları %60 güçte üç saniye çalıştır” komutu verilir.
+Drone bu komutu uygular ve nerede olduğuna bakmaz.
+• Rüzgâr yoksa, batarya doluysa ve gövde dengeliyse drone istenen yere
+ulaşır.
+• Rüzgâr eserse drone yana kayar, ancak bunu bilmez.
+• Batarya azaldığında aynı güç komutu daha az yükseklik üretir, ancak
+drone bunu da bilmez.
+Hata yalnızca dışarıdan, örneğin onu izleyen bir insan tarafından fark edilir.
+Sistemin kendisi hatadan habersizdir.
+Kapalı döngü drone
+Kapalı döngüde drone’a “iki metre yükseklikte, yatay dur” hedefi verilir. Drone
+saniyede yüzlerce kez sensörlerini okur, yüksekliğini ve eğimini hedefle karşılaştırır
+ve fark varsa motor güçlerini ayarlar.
+• Rüzgâr gövdeyi eğdiğinde drone eğimi ölçer ve karşı taraftaki motoru
+güçlendirir.
+• Batarya azaldığında yüksekliğin düştüğünü ölçer ve gücü artırır.
+Kapalı döngü, dış koşulların değişken olduğu ve önceden bilinemediği du-
+rumlarda açık döngünün yapamadığını yapar: koşul değişse de hedefi korur.
+Yazılım sistemine karşılığı
+Drone Yazılım kalite sistemi
+Komut verip bakmamak Açık döngü üretim hattı
+Sensörle ölçüp düzeltmek Kapalı döngü kalite sistemi
+Sensör Kontrol fonksiyonu
+Kirli ya da yanlış ölçen sensör Yanlış alarm veren kontrol
+Sensörlü ama elle uçuş “Yalnızca ölç” kipi
+Havada sallanma Bir düzeltmenin başka bir yeri bozması
+Motor gücü ve yükseklik sınırları Değişmezler
+3
+
+-- 3 of 13 --
+
+Döngü Türünün Seçilmesi
+Temel ölçüt
+Seçimi belirleyen soru şudur: sistemin çıktısı güvenilir biçimde ölçülebiliyor mu
+ve bu ölçüme göre yapılan düzeltme gerçekten işe yarıyor mu? ˙Iki koşul birlikte
+sağlanıyorsa kapalı döngü, sağlanmıyorsa açık döngü uygundur.
+Açık döngünün uygun olduğu durumlar
+• Girdi ile çıktı arasındaki ilişki iyi biliniyor ve sabitse. Aynı girdi her
+seferinde aynı çıktıyı veriyorsa çıktıya geri bakmak bilgi eklemez.
+• Dış etkiler (gürültü, değişen koşullar) azsa.
+• Hata ucuzsa ya da her çıktıya zaten bir insan bakıyorsa.
+• C ıktıyı ölçmek zor, pahalı ya da güvenilmezse. Kötü bir ölçüm üzerine
+kurulan döngü, döngüsüz sistemden daha zararlıdır.
+• Hız kritikse. Her döngü turu zaman ve maliyet ekler.
+Kapalı döngünün uygun olduğu durumlar
+• C ıktı her çalıştırmada değişiyorsa. Ses seviyesi, video kalitesi ve dil modeli
+çıktıları bu türdendir.
+• C ıktı otomatik ve güvenilir biçimde ölçülebiliyorsa.
+• Ölçülen hatayı düzeltecek gerçek bir hamle varsa. Ölçüp düzeltemeyen bir
+yapı döngü değil, yalnızca bir alarmdır.
+• Hata pahalıysa ve her çıktının insan tarafından incelenmesi ölçeklenmiyorsa.
+Ara seçenek: insan onaylı döngü
+Döngü kapatılabilir, ancak son karar insana bırakılabilir. Sistem ölçer ve düzeltme
+önerir, insan onaylar. Ölçüme henüz tam güvenilmediği dönemde bu yapı, kapalı
+döngünün ölçüm kapasitesini açık döngünün güvenliğiyle birleştirir.
+4
+
+-- 4 of 13 --
+
+Açık Döngüden Kapalı Döngüye Geçiş
+Geçişi pahalı kılan nedenler
+Geçişin maliyeti çoğunlukla döngünün eklenmesinden değil, açık döngü kuru-
+lurken bırakılan yapısal eksiklerden kaynaklanır:
+• Sistem tek geçişte çalışacak biçimde yazılmıştır; bir adımı yeniden çalıştırmak
+için sürecin baştan başlatılması gerekir.
+• Ara sonuçlar saklanmaz; döngü hangi adımın bozulduğunu görmek için
+bunlara ihtiyaç duyar.
+• Adımlar birbirine sıkı bağlıdır; tek bir parçayı değiştirip yeniden denemek
+zordur.
+• Kalite ölçümü ya hiç yoktur ya da yalnızca insan gözündedir; döngü ku-
+rulurken ölçümün sıfırdan yazılması gerekir.
+• Kararlar kayda geçirilmemiştir; hangi girdinin neden o çıktıyı verdiği bil-
+inmez.
+Drone örneğinde bu, sensörsüz bir drone yapıp kapalı döngüye geçmek için
+gövdeyi söküp sensör takmaya ve kabloları yeniden çekmeye karşılık gelir.
+Geçişe hazır açık döngü
+Açık döngü aşağıdaki özelliklerle kurulursa, sonradan döngüyü kapatmak ucu-
+zlar:
+1. Her adım aynı girdiyle yeniden çağrılabilir ve aynı yere yazar.
+2. Her adımın çıktısı ayrı saklanır, son çıktıya gömülmez.
+3. Kalite ölçümü baştan yazılır, ancak yalnızca raporlar; düzeltme yapmaz.
+4. Düzeltme hamleleri (örneğin bir kesim noktasını kaydırmak ya da bir
+görüntüyü değiştirmek) ana akışa gömülmez, ayrı çağrılabilir fonksiyonlar
+olarak tasarlanır.
+5. Korunması gereken şeyler açık döngüde de ölçülür ve kaydedilir.
+6. Her karar kayda geçirilir.
+Bu biçimde kurulan açık döngü, aslında düzeltme fonksiyonu boş bırakılmış
+bir kapalı döngüdür.
+5
+
+-- 5 of 13 --
+
+Baştan kapalı ama aşamalı kurulum
+Sistemi doğrudan, tam işler hâlde kapalı döngü olarak çalıştırmak üç şeyin
+kaybına yol açar:
+• Karşılaştırma temeli. Açık hâl hiç görülmemişse, bir hatanın gerçek
+mi yoksa döngünün ürünü mü olduğu ayırt edilemez.
+• Doğru ölçüm. Kontroller, sistemin nerede bozulduğu görüldükten sonra
+doğru yazılır. Baştan yazılan kontroller tahmine dayanır ve yanlış şeyi
+ölçen bir döngü yanlış şeyi düzeltir.
+• Hata ayıklanabilirlik. Açık döngüde bir hata tek bir kaynaktan gelir.
+Kapalı döngüde aynı hata kontrolden, düzeltmeden, turlar arası etkileşimden
+ya da asıl sistemden gelebilir. Bütün bileşenler aynı anda yeniyse kaynağı
+bulmak uzun sürer.
+Önerilen yol yapı ile davranışı ayırmaktır: yapı baştan kapalı döngüdür,
+davranış ilk aşamada açık döngüdür. Drone geliştirmede bu sıra şöyle uygulanır:
+1. Sensörler bağlanır ama yalnızca okur; drone elle uçurulur ve sensör ölçümlerinin
+gerçekle uyuşup uyuşmadığına bakılır.
+2. Tek bir düzeltme açılır, örneğin yalnızca yükseklik kontrolü.
+3. Düzeltme yumuşak başlatılır; salınım yoksa kademeli olarak güçlendirilir.
+4. Bir sonraki düzeltme, örneğin eğim kontrolü, eklenir ve etkisi ayrıca gözlenir.
+5. Motor gücü ve asgari yükseklik gibi sınırlar konur.
+Bu yaklaşımda da açıktan kapalıya bir geçiş vardır ve geçiş sırasında hatalar
+yine görünür. Fark, geçişin kod yeniden yazımı gerektirmemesi ve her hatanın
+kaynağının ayırt edilebilmesidir. Geçişten kaçınılamaz; kaçınılabilecek olan,
+geçişin pahalı olmasıdır.
+6
+
+-- 6 of 13 --
+
+Geçişte Ortaya C ıkan Hatalar
+˙Iki kaynak
+Döngünün görünür kıldığı hatalar
+Açık döngüde ölçüm olmadığı ya da insan gözü kaçırdığı için fark edilmeyen
+hatalar, döngü her çıktıyı ölçmeye başladığında görünür olur. Drone örneğinde
+sensör “bir derece sola eğiğim” der; bu eğim önceden de vardı, yalnızca ölçülmüyordu.
+Bu tür hataların ortaya çıkması döngünün işe yaradığını gösterir.
+Döngünün ürettiği hatalar
+• Yanlış alarm. Kontrol iyi bir çıktıyı kötü olarak işaretler, döngü onu
+“düzeltir” ve bozar. Kirli bir yükseklik sensörü drone’un sürekli yükselmesine
+yol açar.
+• Zincirleme etki. Bir düzeltme başka bir yeri bozar, o da düzeltilir ve
+başka bir yeri bozar.
+• Salınım. Ölçüm gecikmeliyse döngü bir yöne fazla düzeltir, sonra geri
+döner ve yine fazla gider. Drone havada sallanmaya başlar; açık döngüde
+bu sallanma yoktu.
+• Birikme. Her tur küçük bir kayıp ekler. Tek turda fark edilmeyen kayıp
+birkaç tur sonra belirginleşir.
+• Yeni yollar. Döngü, açık döngüde hiç çalışmayan kod yollarını çalıştırır.
+Varsayılan olarak kapalı tutulan bir özelliğin yolları hiç test edilmediyse,
+o yollardaki hatalar ilk kez döngüde görünür.
+Kaynakların ayırt edilmesi
+• Aynı girdi iki kipte çalıştırılır: yalnızca ölçen ve ölçüp düzelten. Hata
+ilkinde de varsa gerçektir; yalnızca ikincisinde varsa döngünün ürünüdür.
+• Hatanın ilk turda mı yoksa sonraki turlarda mı ortaya çıktığına bakılır.
+Sonraki turlarda çıkıyorsa döngü üretmektedir.
+• Düzeltme kapatılır, yalnızca ölçüm bırakılır. Hata sayısı değişmiyorsa
+hatalar gerçektir; azalıyorsa döngü üretmektedir.
+• Kontrolün hata olarak işaretlediği örneklerin bir kısmı elle incelenir.
+Müdahale
+Hatalar gerçekse sınıflandırılır ve en sık görülenden başlanır; bu durumda döngü
+bir iş listesi üretmiştir. Hatalar döngüden geliyorsa:
+• Tur sayısına üst sınır konur.
+7
+
+-- 7 of 13 --
+
+• Her turda değişmezler ölçülür; biri bozulursa o tur geri alınır.
+• Düzeltmenin gerçekten iyileştirme sağlayıp sağlamadığı ölçülür; sağlamıyorsa
+eski hâl korunur.
+• Kontrol, sonucu önceden bilinen örneklerle sınanır.
+Uygulamada iki kaynak çoğunlukla birlikte bulunur.
+8
+
+-- 8 of 13 --
+
+Ölçünün Hedefe Dönüşmesi
+Goodhart yasası
+Charles Goodhart, 1975’te para politikası bağlamında, kontrol amacıyla baskı
+altına alınan istatistiksel düzenliliklerin çökme eğiliminde olduğunu gözlemlemiştir
+(Goodhart, 1975). Bugün yaygın olarak kullanılan “bir ölçü hedef hâline geldiğinde
+iyi bir ölçü olmaktan çıkar” ifadesi Goodhart’a ait değildir; antropolog Marilyn
+Strathern’in bu gözlemi genelleştiren özetidir (Strathern, 1997).
+Yakın bir ilke Campbell yasasıdır: nicel bir sosyal gösterge karar almada
+ne kadar çok kullanılırsa, bozulma baskısına o kadar açık hâle gelir ve izlemesi
+amaçlanan süreci o kadar çarpıtır (Campbell, 1979). “Döngünün iyi şeyi boz-
+ması” olgusu Campbell yasasına daha yakındır, çünkü yalnızca ölçünün değil
+ölçülen sürecin de bozulmasını anlatır.
+Mekanizma
+Tek bir ölçüyü iyileştirmekle görevlendirilen sistem, o ölçüyü en ucuz yoldan
+iyileştirir. En ucuz yol çoğunlukla asıl istenen şeyin feda edilmesidir. Kalite
+döngüsünde “hata kalmasın” hedefi tek başına verildiğinde, hatayı silmenin en
+ucuz yolu hatalı içeriği atmaktır.
+Diğer alanlardan örnekler
+• Kurumlar. Sikâyet sayısının azaltılması hedeflendiğinde şikâyet kanalı
+zorlaştırılır; şikâyet azalır, memnuniyet artmaz.
+• Yazılım testleri. Testlerin geçmesi hedeflendiğinde test silinir ya da eşik
+gevşetilir.
+• Yapay zekâ eğitimi. Ödülü en çoklamayı öğrenen bir model, görevi yer-
+ine getirmeden ödülü almanın bir açığını bulabilir. Bu olgu ödül istismarı
+(reward hacking) olarak adlandırılır (Amodei vd., 2016).
+• Sağlık hizmetleri. Bekleme süresinin kısaltılması hedeflendiğinde hasta
+sıraya geç kaydedilir.
+Sorunun büyüdüğü ve küçüldüğü koşullar
+Ölçü, istenen şeyin kendisi değil göstergesidir. ˙Ikisi arasındaki fark büyüdükçe
+sistem ölçüyü istenen şeyi sağlamadan karşılayabilir. Sorun şu koşullarda büyür:
+• ˙Istenen şey ölçülmesi zor bir niteliktir (kalite, memnuniyet, doğruluk).
+• Sistemin elinde silme, atma ya da gizleme gibi ucuz hamleler vardır.
+9
+
+-- 9 of 13 --
+
+Sorun, ölçü ile istenen şeyin özdeş olduğu durumlarda küçülür. “Dosya
+UTF-8 kodlamalı olsun” ya da “çıktı tanımlı şemaya uysun” gibi kurallarda
+ölçüyü karşılamak, istenen şeyi sağlamanın ta kendisidir. Buna karşılık “dosya
+16 MB’ı aşmasın” gibi bir sınır bu sınıfa girmez: sistem sınırı içeriği kırparak
+ya da kaliteyi düşürerek karşılayabilir. Ölçü kandırılmaz, ancak asıl istenen şey
+yine feda edilebilir.
+10
+
+-- 10 of 13 --
+
+Kapalı Döngü Kalite Sistemleri ˙Için Tasarım ˙Ilkeleri
+˙Iki hedef
+“Hata kalmasın” hedefinin yanına “korunması gereken kaybolmasın” hedefi konur.
+Tek hedefli döngü, hatayı en ucuz yoldan siler ve bu çoğunlukla içeriği atmak
+anlamına gelir.
+Değişmezler
+Döngünün hiçbir koşulda dokunamayacağı şeyler baştan listelenir. Haber paketi
+üretim sisteminde bunlar muhabirin sözleri ile konuşan kişinin kendi görüntüsü
+ve sesidir. Değişmezler her turda ölçülür; biri bozulursa o tur geçersiz sayılır.
+Hamlelerin sıralanması
+Düzeltme hamleleri maliyetine göre sıralanır: önce onarım (bir kesim noktasının
+kaydırılması, bir görüntünün değiştirilmesi), en son atma. Atma son çaredir.
+Kontrolün sınanması
+Döngü kontrole koşulsuz güvenir; kontrol yanlış alarm verirse döngü iyi çıktıyı
+bozar. Bu nedenle her kontrol iki yönlü sınanır:
+• Bilinen yanlış alarmlarla: kontrol bunlara “hata” dememelidir. Konuşma
+tanıma modellerinin sessiz bölümlere “Thank you for watching” gibi gerçekte
+söylenmemiş ifadeler eklemesi bu sınıfa örnektir.
+• Bilinen gerçek hatalarla: kontrol bunları yakalamalıdır.
+Yalnızca ilk yön sınanırsa, yanlış alarmı susturmak için gevşetilen kontrol
+gerçek hataları da kaçırır ve bu fark edilmez.
+C ok boyutlu başarı ölçümü
+“24/24 temiz” gibi tek bir sayı yeterli değildir. Yanına kaç öğenin atıldığı ve kaç
+öğenin değiştirildiği eklenir. Yalnızca hata yokluğuna bakan bir değerlendirme
+sessiz kayıpları gizler.
+˙Izlenebilirlik
+Döngünün her kararı, yani neyi neden attığı ya da değiştirdiği, kayda ve rapora
+yazılır; atılan her öğe raporda adıyla görünür. Kayıt tutulmadığında sonradan
+sorulan “bu söz neden düştü” sorusu cevapsız kalır. Söz konusu sistemde Lamata
+adlı çalışmada bir sözün neden düştüğü, karar o gün kaydedilmediği için son-
+radan bulunamamıştır.
+11
+
+-- 11 of 13 --
+
+Kapalı dalların test edilmesi
+Varsayılan olarak kapalı tutulan bir özelliğin kod yolları normal çalışmada hiç
+işletilmez. Söz konusu sistemde steady özelliği bu durumdadır. Kapalı özellikler
+de döngünün test setine dahil edilir; aksi hâlde döngü onları ilk kez açtığında
+ortaya çıkan hatalar döngünün hatası sanılır.
+12
+
+-- 12 of 13 --
+
+Sonuç
+Açık ve kapalı döngü arasındaki seçim bir kalite tercihi değil, ölçümün güvenilirliği
+ve düzeltmenin mümkünlüğü hakkında bir karardır. Ölçüm güvenilmezse kapalı
+döngü kaliteyi artırmaz, yalnızca hatayı başka bir biçime dönüştürür.
+Açık döngüden kapalı döngüye geçiş kaçınılmaz olarak yeni hataları görünür
+kılar ve bir kısmını da üretir. Bu durum geçişin başarısız olduğunu göstermez;
+açık döngünün hataları önlemediğini, yalnızca ertelediğini gösterir. Açık döngü
+aşamasının asıl değeri hatasız bir sistem değil, bir karşılaştırma temelidir. Bu
+temel, sistemi baştan kapalı döngü yapısıyla kurup düzeltmeleri kapalı başlatarak
+ayrı bir sistem yazmadan da elde edilebilir.
+Yazılımda kalite döngülerine özgü tehlike, fiziksel kontrol sistemlerinde daha
+az belirgindir. Bir drone’un yükseklik hedefi ile gerçek yüksekliği arasında Good-
+hart tipi bir açık yoktur; drone yüksekliği kandıramaz. Yazılımda ise döngünün
+elinde içeriği atmak gibi ucuz hamleler bulunur ve ölçü ile istenen kalite arasında
+her zaman bir fark vardır. Bu nedenle fiziksel kontrolden aktarılan “ölç ve
+düzelt” ilkesi, yazılımda “neyin korunacağını da ölç” ilkesiyle tamamlanmadıkça
+eksik kalır.
+Açık kalan sorular şunlardır: değişmezlerin ölçümünün kendisi yanlış alarm
+üretirse döngü nasıl davranmalıdır; atma hamlesinin ne zaman meşru olduğuna
+kim karar vermelidir; ve döngü tur sayısının üst sınırı, kalite kazancı ile birikimli
+kayıp arasında nasıl dengelenmelidir.
+Kaynaklar
+• Amodei, D., Olah, C., Steinhardt, J., Christiano, P., Schulman, J. ve
+Man´e, D. (2016). Concrete Problems in AI Safety. arXiv:1606.06565.
+• ˚ Aström, K. J. ve Murray, R. M. (2008). Feedback Systems: An Introduc-
+tion for Scientists and Engineers. Princeton University Press.
+• Campbell, D. T. (1979). Assessing the Impact of Planned Social Change.
+Evaluation and Program Planning, 2(1).
+• Goodhart, C. A. E. (1975). Problems of Monetary Management: The U.K.
+Experience. Papers in Monetary Economics, Reserve Bank of Australia.
+• Strathern, M. (1997). ‘Improving Ratings’: Audit in the British University
+System. European Review, 5(3).
+13
+
+-- 13 of 13 --

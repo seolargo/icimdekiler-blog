@@ -1,5 +1,54 @@
 [
   {
+    "slug": "kontrol-sistemleri-açık-ve-kapalı-döngü-tasarımı",
+    "title": "Kontrol Sistemleri: Açık ve Kapalı Döngü Tasarımı",
+    "date": "2026-11-03",
+    "description": "Metin, açık döngüden kapalı döngüye geçişi yazılımda kalite sistemleri üzerinden ele alır ve yaygın kabulün aksine kapalı döngünün yalnızca ölçümü kadar iyi olduğunu savunur; yanlış ölçen bir döngü, döngüsüz bir sistemden daha fazla zarar verir. Seçim iki koşula bağlanır: çıktının güvenilir biçimde ölçülebilmesi ve ölçülen hatayı düzeltecek gerçek bir hamlenin bulunması. Düzeltemeyen yapı döngü değil, alarm sayılır; ölçüme henüz güvenilmeyen dönem için insan onaylı döngü ara seçenek olarak verilir. Geçişin maliyeti çoğunlukla döngünün kendisinden değil, açık döngünün tek geçişte çalışacak, ara sonuç saklamayacak ve ölçüm içermeyecek biçimde yazılmasından doğar. Önerilen yol yapı ile davranışı ayırmaktır: sistem baştan kapalı döngü yapısıyla kurulur, düzeltmeler kapalı başlatılır ve drone örneğindeki gibi tek tek açılır. Geçişte görülen hatalar iki kaynağa ayrılır: bir kısmı zaten vardır ve görünür olmuştur, bir kısmını ise döngü yanlış alarm, zincirleme etki, salınım, birikme ve yeni kod yolları yoluyla üretir. Aynı girdinin yalnızca ölçen ve ölçüp düzelten kiplerde çalıştırılması bu kaynakları ayırır. Metin Goodhart ve Campbell yasalarına dayanarak tek ölçüyle görevlendirilen sistemin o ölçüyü en ucuz yoldan, çoğunlukla asıl korunması gerekeni feda ederek iyileştirdiğini belirtir. Tasarım ilkeleri iki hedef, baştan yazılmış değişmezler, maliyete göre sıralanan hamleler, kontrollerin iki yönlü sınanması, çok boyutlu başarı ölçümü, izlenebilir kararlar ve kapalı dalların test edilmesidir.",
+    "pdf": "Kontrol_Sistemleri__Açık_ve_Kapalı_Döngü_Tasarımı.pdf",
+    "thumb": "thumbs/kontrol-sistemleri-açık-ve-kapalı-döngü-tasarımı.png",
+    "addedAt": "2026-11-03T14:25:45.159Z",
+    "pages": 13,
+    "belge": "BELGE-273",
+    "title_en": "Control Systems: Designing Open and Closed Loops",
+    "priority": 8,
+    "description_en": "The text examines the transition from open-loop to closed-loop operation through software quality systems and argues, against common assumption, that a closed loop is only as good as its measurement; a loop that measures wrongly does more harm than no loop at all. The choice rests on two conditions: the output can be measured reliably, and a real move exists that corrects the measured error. A structure that cannot correct counts as an alarm rather than a loop, and a human-approved loop is given as the intermediate option while measurement is not yet trusted. The cost of the transition usually comes not from the loop itself but from an open loop written to run in a single pass, store no intermediate results and contain no measurement. The proposed path separates structure from behaviour: the system is built with closed-loop structure from the start, corrections begin switched off and are enabled one at a time, as in the drone example. Errors seen during the transition have two sources: some already existed and have become visible, while others are produced by the loop through false alarms, cascading effects, oscillation, accumulation and new code paths. Running the same input in measure-only and measure-and-correct modes separates these sources. Drawing on the laws of Goodhart and Campbell, the text states that a system tasked with a single metric improves it by the cheapest route, usually by sacrificing what most needed protecting. The design principles are two goals, invariants written in advance, moves ordered by cost, two-way testing of checks, multidimensional success measures, traceable decisions and testing of disabled branches.",
+    "related": [
+      "kontrol-sistemleri-açık-ve-kapalı-döngü-seçimi",
+      "kontrol-teorisi-ve-yazılım-denetimi",
+      "otomasyon-kendi-kendini-düzelten-sistemler",
+      "otomasyon-ve-hatalardan-öğrenme",
+      "vekil-değişkenler-ve-örtük-yargı",
+      "hata-avcılığı-yazılımda-kalite-pratikleri",
+      "test-mühendisliği-yeterlilik-etkinlik-güvenilirlik",
+      "kalite-mühendisliği-ürün-geliştirmede-temel-araçlar"
+    ]
+  },
+  {
+    "slug": "yazılım-kalitesi-deneyim-borcu",
+    "title": "Yazılım Kalitesi: Deneyim Borcu",
+    "date": "2026-11-03",
+    "description": "Metin, güvenlik ve kaliteyi kullanıcı açısından deneyimin alt bileşenleri olarak ele alır, ancak bu bakışın yalnızca deneyimi yaşayan aktörler kullanıcı, geliştirici, şirket ve toplum olarak genişletildiğinde tutarlı kaldığını savunur. Bir şeyin nasıl hissettirdiği ile gerçekte ne olduğu bağımsız olabildiği için deneyimin yanında doğruluk, sonuç ve bu ikisini deneyime bağlayan doğrulama katmanları tutulur. Akıcılık eskiden doğrulukla birlikte geldiği için örtük bir güven sinyali üretir; dil modelleri bu bağı koparmıştır. Railway güvenlik olayı modelin uygulandığı vakadır. Akerlof'un limon piyasası üzerinden alıcının kaliteyi doğrulayamadığı piyasalarda görünüşe yatırımın ödüllendirildiği gösterilir. Bu zemin üzerinde tanımlanan deneyim borcu, ürünün altındaki gerçeğin taşıyabileceğinden fazla güven üretmesidir; teknik borçtan farkı, borcu şirketin alması, riski ise farkında olmayan kullanıcının taşımasıdır. Üretim derinliği görünen yüzeye göre değil, hatanın bedeline, bedeli kimin ödediğine, geri alınabilirliğe ve kullanıcının doğrulama imkânına göre belirlenir. Metin ayrıca ISO/IEC 25010 hiyerarşisini, izlenecek standartları, sertifikanın gerçek değerini ve başarının standarttan çok ortama bağlılığını inceler. Duygu farkındalığı yanılgıları gidermeye yetmediği için doğrulama kontrol listeleri, başka gözler, ölçüm ve ortam tasarımı gibi dış yapılarla kurulur. Son bölüm yeniliği deneme maliyetine bağlar; Disney, Pixar ve Apple örnekleri ucuz hayal alanı ile pahalı gerçek alan arasındaki doğrulama köprüsünü gösterir.",
+    "pdf": "Yazılım_Kalitesi__Deneyim_Borcu.pdf",
+    "thumb": "thumbs/yazılım-kalitesi-deneyim-borcu.png",
+    "addedAt": "2026-11-03T14:25:45.159Z",
+    "pages": 39,
+    "belge": "BELGE-274",
+    "title_en": "Software Quality: Experience Debt",
+    "priority": 7,
+    "description_en": "The text treats security and quality as sub-components of experience from the user's standpoint, but argues that this view stays coherent only when the actors who live the experience are extended to user, developer, company and society. Because how something feels and what it actually is can be independent, three layers are kept alongside experience: truth, outcome and the verification that connects them to experience. Fluency once came together with accuracy and so produces an implicit trust signal; language models have severed that link. The Railway security incident is the case to which the model is applied. Through Akerlof's market for lemons, the text shows that investment in appearance is rewarded in markets where buyers cannot verify quality. On this ground it defines experience debt as a product generating more trust than the reality beneath it can bear; it differs from technical debt in that the company takes on the debt while the unaware user carries the risk. Production depth is set not by the visible surface but by the cost of failure, who pays that cost, reversibility and the user's ability to verify. The text also examines the ISO/IEC 25010 hierarchy, the standards to follow, the real value of certification and the dependence of success on environment more than on standards. Since emotional awareness is not enough to remove biases, verification is built through external structures such as checklists, other eyes, measurement and environment design. The final section ties innovation to the cost of trying; the Disney, Pixar and Apple examples show the verification bridge between a cheap space of imagination and an expensive space of reality.",
+    "related": [
+      "mühendislik-güven-bir-his-değil-kanıttır",
+      "mühendislik-bilgisi-i-deal-ile-gerçek-arasındaki-boşluk",
+      "kalite-mühendisliği-ürün-geliştirmede-temel-araçlar",
+      "hata-avcılığı-yazılımda-kalite-pratikleri",
+      "sistem-güvenliği-kesişimde-doğan-hatalar",
+      "kullanılabilirlik-algı-sınırlarından-türeyen-tasarım-kuralları",
+      "duygusal-zek-duygunun-fark-edilmesi-ve-davranışın-seçilmesi",
+      "yaratıcılık-alanlar-arası-fikir-taşıma",
+      "herkes-konus-abildig-inde-u-retken-yapay-zeka-c-ag-ında-kanıtın-stratejik-deg-eri"
+    ]
+  },
+  {
     "slug": "duygu-psikolojisi-ruminasyon-ve-duygu-düzenleme",
     "title": "Duygu Psikolojisi: Ruminasyon ve Duygu Düzenleme",
     "date": "2026-11-02",
@@ -68,7 +117,8 @@
       "hata-avcılığı-yazılımda-kalite-pratikleri",
       "görsel-yönetim-ve-toyota-üretim-sistemi-zemin-i-şaretlemelerinden-mieruka-kavramına",
       "sistem-güvenliği-kesişimde-doğan-hatalar",
-      "teknolojik-bilginin-kaybı-aktarım-zincirleri-örtük-bilgi-ve-kurumsal-süreklilik-stratejileri-üzerine-bir-i-nceleme"
+      "teknolojik-bilginin-kaybı-aktarım-zincirleri-örtük-bilgi-ve-kurumsal-süreklilik-stratejileri-üzerine-bir-i-nceleme",
+      "yazılım-kalitesi-deneyim-borcu"
     ],
     "description_en": "The text defines engineering trust as an evidence-based judgement that a system will behave as expected under specified conditions, and traces the need for layers to the unclosable gap between the ideal model and the imperfect reality. The first section lists the technical layers of trust (calculation, testing, factor of safety, redundancy, fail-safe design), its institutional layers (standards, traceability, independent review, monitoring) and its human layer of honesty and blameless failure analysis. The second section sorts defect, gap, breaking, flexing, friction and noise into three kinds of being, privation, disposition and relation; citing Cartwright and Simon, it argues that the engineer aims at what suffices rather than the ideal and is the one who decides which imperfection goes where. The third section presents Vincenti's five cases and six kinds of knowledge, and Campbell's model of blind variation and selective retention. The Toyota section covers Jidoka and just-in-time production, Akio Toyoda's interpretation and Tanrıverdi's interviews at Toyota Boshoku. The quality section defines inspection as an open loop and process control as a closed loop, and covers the seven-step closed-loop quality flow, the breaks between PLM, ERP, MES and QMS, and Deming's System of Profound Knowledge; a glossary of abbreviations follows. The software section treats feedback, simplicity and separation of concerns, Fowler's notion of cruft and the invariant catalogue. The conclusion summarises the shared functions as catching errors early, correcting their source and preserving what was learned; it records that the evolutionary model of knowledge is weak at explaining radical design, and leaves open what trust will rest on once the cost of producing evidence approaches zero."
   },
@@ -92,7 +142,8 @@
       "09-stoacilik-eksen-ve-duzen",
       "sosyal-psikoloji-çekimin-ontolojisi",
       "05-bilissel-carpitmalar",
-      "paranın-psikolojisi-davranıs-zaman-risk-ve-finansal-kararların-i-nsani-temelleri"
+      "paranın-psikolojisi-davranıs-zaman-risk-ve-finansal-kararların-i-nsani-temelleri",
+      "yazılım-kalitesi-deneyim-borcu"
     ],
     "description_en": "The text defines the foundation of emotional intelligence as noticing and naming an emotion at the moment it arises, and argues that emotions cannot be chosen, whereas the response to them can; it therefore proposes the principle \"notice your emotion, choose your behaviour\" in place of \"control your emotion\". The introduction defines the concept drawing on Salovey and Mayer and on Goleman, and separates the terms emotion, behaviour and self-awareness. The foundations section treats emotion as information rather than a command and, following Patterson and colleagues, separates fact from the story the mind adds to it. The naming section records that with practice the moment of noticing shifts from hours after the event to while the emotion is rising; Damasio, Barrett, Lieberman and Willcox's feeling wheel are used here. Gross and John and Wegner ground the counterproductive effect of suppression. The single criterion for choosing a behaviour is whether it brings the person closer to where they want to be; under uncertainty the safest choice is to wait. Daily practice comprises morning, daytime and evening steps and a weekly review. A five-step role-play identifies explaining one's intention, postponing, excessive hedging and telling the other person to calm down, and presents clear acknowledgement with a concrete small step as the stronger response. The relationships section, drawing on Gottman and Silver, sets out the principle \"feel your love, choose your relationship\"; the final section records that excitement leads to quick decisions and to over-reading small signals. The stated limits include bodily signals not being pronounced in everyone and written exercises failing to reproduce the intensity of a real conversation; the open question is when self-awareness counts as sufficient.",
     "bolum": "insan"
@@ -117,7 +168,8 @@
       "kontrol-sistemleri-açık-ve-kapalı-döngü-seçimi",
       "dayanıklılık-mühendisliği-chaos-monkey-ve-gizli-bağımlılıklar",
       "otomasyon-ve-hatalardan-öğrenme",
-      "mühendislik-bilgisi-i-deal-ile-gerçek-arasındaki-boşluk"
+      "mühendislik-bilgisi-i-deal-ile-gerçek-arasındaki-boşluk",
+      "yazılım-kalitesi-deneyim-borcu"
     ],
     "description_en": "The text defines trust in engineering not as a belief or feeling but as an evidence-based judgement that a system will behave as expected under given conditions, and treats a reliable system not as one that never fails but as one that anticipates failure and continues to protect people when it fails. The construction of trust is examined at three levels. In the technical layers, calculation provides prediction but depends on its model; testing verifies calculation but, per Dijkstra's observation, informs only about the conditions tried; the factor of safety leaves a numerical margin against the unknown; redundancy prevents a single failure from bringing the system down but requires independent backups against common-cause failure; and fail-safe design, illustrated by the Westinghouse air brake and ductile materials, steers failure into a harmless state. At the institutional layer, standards are read through the origin of the ASME boiler code as the written lessons of past accidents; traceability, independent review grounded in Fagan's inspections, and structural health monitoring carry trust over time. At the human level, the text records that the public relies on the engineer's honesty for evidence it cannot verify; not hiding errors, stating the unknown and declaring limits are forms of this honesty, and blameless postmortems, through Reason and Dekker, support it institutionally. The cost of producing evidence is stated as the framework's limit; the views of Perrow and Leveson leave open how far layered trust suffices in complex systems."
   },
@@ -170,7 +222,9 @@
       "kontrol-sistemleri-açık-ve-kapalı-döngü-seçimi",
       "mühendislik-güven-bir-his-değil-kanıttır",
       "okuma-notları-bir-araba-nasıl-yapılır-adrian-newey",
-      "mühendislik-bilgisi-i-deal-ile-gerçek-arasındaki-boşluk"
+      "mühendislik-bilgisi-i-deal-ile-gerçek-arasındaki-boşluk",
+      "kontrol-sistemleri-açık-ve-kapalı-döngü-tasarımı",
+      "yazılım-kalitesi-deneyim-borcu"
     ],
     "description_en": "The text argues that software quality is achieved not by a single test or tool but by combining layers whose holes lie in different places, as in Reason's Swiss cheese model, and starts from Dijkstra's finding that testing cannot show the absence of bugs. The layers are, in order, preventing bugs before they are written, catching them by human eye, designing tests correctly, having the machine search for bugs, system and resilience, interface and security, delivery and production, and learning from bugs found. The prevention layer covers TDD, complexity limits, types that make invalid states unrepresentable, fail fast and database constraints; the review layer covers single-purpose PRs of 200 to 400 lines, checklists, BDD, threat modeling and FMEA. Test design treats boundary values, decision tables, state transitions, pairwise and error guessing, and against the oracle problem golden, characterization and contract tests. The machine layer covers fuzzing, property-based, differential and metamorphic testing, symbolic execution and the race detector; mutation testing measures the test strength that coverage cannot show. Drawing on Fenton and Ohlsson, the text records that bugs concentrate in a small share of modules and that test effort should be directed to risky areas through hotspot analysis. Quality is defined as the distance between intent and behaviour and divided into the functions of prevention, detection, mitigation and learning. The proposed core set is small PRs, a mandatory linter and race detector, boundary-value tests, fuzzing for parsers, a regression test for every bug and error tracking in production. When quality investment is sufficient is left as an open question."
   },
@@ -219,7 +273,8 @@
       "siber-fiziksel-sistemler-donanımın-yazılıma-aktarılması",
       "hata-avcılığı-yazılımda-kalite-pratikleri",
       "mühendislik-güven-bir-his-değil-kanıttır",
-      "mühendislik-bilgisi-i-deal-ile-gerçek-arasındaki-boşluk"
+      "mühendislik-bilgisi-i-deal-ile-gerçek-arasındaki-boşluk",
+      "kontrol-sistemleri-açık-ve-kapalı-döngü-tasarımı"
     ],
     "description_en": "The text defines the distinction between open and closed loop by whether a system's output returns to its input, and offers qualitative criteria for choosing between the two loop types and for detecting a loop in an existing system. An open loop is only as correct as its model; a closed loop compensates for a disturbance by seeing its effect on the output. An open loop suffices when the model is well known, disturbances are small or predictable, the output cannot be measured, errors are cheap, or feedback is heavily delayed; the shower temperature example shows that delay can drive feedback into oscillation. A closed loop is required when uncertainty is large, precision is critical or the system is inherently unstable. Drawing on Sterman, the analysis section determines whether a loop exists through the criteria of return path, time scale, loop strength and system boundary; the most common error is overlooking a strong loop and treating the system as open-loop. A quality test is measurement rather than control unless its result returns to the process; Deming's critique of inspection explains why a system that has passed its tests can remain unstable. The risks of closed loop include the limit set by measurement quality, concealment of the root cause and oscillation. The proposed structure combines feedforward with feedback. Loop health is read through three indicators, correction rate, rounds per correction and error-capture rate; a low correction rate can indicate either a strong open loop or a blind measurement. The PID controller section separates sampling rate from discrete correction rounds, measures success by settling time, overshoot and number of oscillations, and records that in a cascade structure the inner loop must be markedly faster than the outer loop.",
     "thumb": "thumbs/kontrol-sistemleri-açık-ve-kapalı-döngü-seçimi.png",
@@ -290,7 +345,8 @@
       "yazılım-mimarisi-seçim-zamanlama-ve-kademeli-değişim",
       "yazılım-testi-öncelik-sırası",
       "mühendislik-güven-bir-his-değil-kanıttır",
-      "mühendislik-bilgisi-i-deal-ile-gerçek-arasındaki-boşluk"
+      "mühendislik-bilgisi-i-deal-ile-gerçek-arasındaki-boşluk",
+      "yazılım-kalitesi-deneyim-borcu"
     ],
     "title_en": "System Safety: Failures Born at Intersections",
     "description_en": "The text examines failures that arise at intersections, the points where individually correct parts of a complex system meet, and argues that the most effective defence against them is not to catch the failure at test time but to make it impossible at design time. The concepts of intersection, invariant and entry gate are defined; the scope is limited to medium-sized web systems with an asynchronous media processing pipeline. The first section grounds the emergence of failure at intersections in Perrow's normal accidents theory, Reason's Swiss cheese model, Vaughan's normalization of deviance and Hollnagel's Safety-II approach. The second section treats the evaluation of findings through risk-based testing, defect clustering, the Goel-Okumoto defect discovery curve, service level objectives with error budgets, and blameless postmortems. The third section carries the poka-yoke principle into software: making illegal states unrepresentable, parsing instead of validating, a single source of rules, bulkheads and load shedding. Fuzzing, deterministic simulation testing, canary releases and shadow traffic are presented as complementary test types. The architecture section shows that Domain-Driven Design prevents part of these failures through ubiquitous language and rules held in the model, while Event-Driven Architecture multiplies ordering ambiguity, redelivery, partial completion and loss of traceability. The final section describes the foundation to be built in the same order in every project: a pre-code document, skeleton, environment, test regime, delivery and routine maintenance. It leaves open the difficulty of keeping the pre-code document in sync with the code and the cost of retrofitting deterministic simulation.",
@@ -363,7 +419,9 @@
       "siber-fiziksel-sistemler-donanımın-yazılıma-aktarılması",
       "hata-avcılığı-yazılımda-kalite-pratikleri",
       "mühendislik-güven-bir-his-değil-kanıttır",
-      "mühendislik-bilgisi-i-deal-ile-gerçek-arasındaki-boşluk"
+      "mühendislik-bilgisi-i-deal-ile-gerçek-arasındaki-boşluk",
+      "kontrol-sistemleri-açık-ve-kapalı-döngü-tasarımı",
+      "yazılım-kalitesi-deneyim-borcu"
     ]
   },
   {
@@ -434,7 +492,8 @@
       "mühendislik-eğitimi-ecole-polytechnique-yaklaşımı",
       "sistem-düşüncesi-görünen-davranış-ve-gizli-durum",
       "kontrol-sistemleri-açık-ve-kapalı-döngü-seçimi",
-      "siber-fiziksel-sistemler-donanımın-yazılıma-aktarılması"
+      "siber-fiziksel-sistemler-donanımın-yazılıma-aktarılması",
+      "kontrol-sistemleri-açık-ve-kapalı-döngü-tasarımı"
     ]
   },
   {
@@ -567,7 +626,8 @@
       "kalite-testi-bisküvi-fabrikasından-öğrenmek",
       "hata-avcılığı-yazılımda-kalite-pratikleri",
       "mühendislik-güven-bir-his-değil-kanıttır",
-      "okuma-notları-bir-araba-nasıl-yapılır-adrian-newey"
+      "okuma-notları-bir-araba-nasıl-yapılır-adrian-newey",
+      "kontrol-sistemleri-açık-ve-kapalı-döngü-tasarımı"
     ]
   },
   {
@@ -836,7 +896,8 @@
       "kavramsal-çarpıştırma-yöntemi-ve-negatif-bilginin-kısıt-geometrisi",
       "bilgi-tu-ketiminden-beceri-transferine-serbest-okumaların-mesleg-e-aktarılamama-problemi",
       "yatay-okuma-ve-derinlik-disiplinlerarası-düşünme-üzerine",
-      "epistemik-çaprazlamanın-biçimsel-temelleri"
+      "epistemik-çaprazlamanın-biçimsel-temelleri",
+      "yazılım-kalitesi-deneyim-borcu"
     ]
   },
   {
@@ -996,7 +1057,8 @@
       "güvenilirlik-mühendisliği-yöntemler-ve-alternatifleri-haritası",
       "tasarım-kuramı-gör-sına-pay-bırak-yedekle",
       "otomasyon-kendi-kendini-düzelten-sistemler",
-      "sistem-düşüncesi-görünen-davranış-ve-gizli-durum"
+      "sistem-düşüncesi-görünen-davranış-ve-gizli-durum",
+      "kontrol-sistemleri-açık-ve-kapalı-döngü-tasarımı"
     ]
   },
   {
@@ -1085,7 +1147,8 @@
       "kumarhane-mekaniklerinin-davranışsal-ve-psikolojik-analizi",
       "tasarım-kuramı-özgürlüğün-altyapısı-olarak-kısıt",
       "i-nsan-faktörleri-zihnin-sınırlarına-göre-tasarım",
-      "bilişsel-bilim-algısal-tamamlama-ve-yazılımdaki-karşılıkları"
+      "bilişsel-bilim-algısal-tamamlama-ve-yazılımdaki-karşılıkları",
+      "yazılım-kalitesi-deneyim-borcu"
     ],
     "title_en": "Usability: Design Rules Derived from the Limits of Perception",
     "description_en": "The text argues that interface rules come from two distinct sources: some are measured cognitive and physiological limits such as the Fitts, Hick and Miller laws and contrast thresholds, while others, such as component choices, layout patterns and visual style, are accumulated practice that varies with context; most design disagreements within a team are attributed to confusing these two sets. The software principles of information hiding, modularity and grouping are mapped onto progressive disclosure, component systems and Gestalt principles in the interface. Visual hierarchy, proximity, typographic measure, WCAG contrast ratios, the 44-pixel touch target, the Doherty threshold, Jakob's law and the aesthetic-usability effect are defined with concrete examples. The most frequently skipped part of frontend development is identified as state coverage: the empty, loading, error and edge states of every screen require as much design as the ideal state, and an error state must convey what happened, why, and what can be done now. The text holds that perceived performance improves through reducing uncertainty rather than actual duration, that undo is preferable to a confirmation dialog, and that accessibility is a structural decision beginning with the choice of the correct HTML element. Forms, navigation, responsive design, design systems, motion and measurement methods are treated in separate sections; dark patterns are classified as the use of the same knowledge against the user. The text records that the rules were produced in a Western, left-to-right screen context, that Tesler's law has no written primary source, and that the 60-30-10 ratio has no empirical basis.",
@@ -1460,7 +1523,8 @@
       "yazılım-testi-dört-soru-ile-test-sınıflandırması",
       "yazılım-testi-öncelik-sırası",
       "güvenilirlik-mühendisliği-yöntemler-ve-alternatifleri-haritası",
-      "hata-avcılığı-yazılımda-kalite-pratikleri"
+      "hata-avcılığı-yazılımda-kalite-pratikleri",
+      "kontrol-sistemleri-açık-ve-kapalı-döngü-tasarımı"
     ]
   },
   {
@@ -1745,7 +1809,8 @@
       "kontrol-teorisi-ve-yazılım-denetimi",
       "yazılım-tasarımı-boyut-sınırıyla-yönlendirilen-modüler-ayrıştırma",
       "tasarım-ve-i-ktidar-fiil-düzenleyiciler",
-      "veri-mühendisliği-alanlar-ve-ortak-i-lkeler"
+      "veri-mühendisliği-alanlar-ve-ortak-i-lkeler",
+      "kontrol-sistemleri-açık-ve-kapalı-döngü-tasarımı"
     ]
   },
   {
@@ -3625,7 +3690,8 @@
     "priority": 4,
     "related": [
       "sekizinci-soru-doğrulanamayan-araştırma-programlarının-anatomisi",
-      "epistemik-triyaj-retorik-şişirmenin-teşhisi-ve-marjinal-bilgi-değerinin-ölçülmesi"
+      "epistemik-triyaj-retorik-şişirmenin-teşhisi-ve-marjinal-bilgi-değerinin-ölçülmesi",
+      "yazılım-kalitesi-deneyim-borcu"
     ],
     "belge": "BELGE-117"
   },
