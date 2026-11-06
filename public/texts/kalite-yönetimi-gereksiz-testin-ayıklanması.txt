@@ -1,0 +1,563 @@
+Kalite Yönetimi: Gereksiz Testin Ayıklanması
+ÖFY
+November 2026
+Özet
+Test ve muayene sayısındaki aşırılık çoğunlukla teknik bir zorunluluktan değil,
+gerekçesi kaybolmuş kontrollerin birikmesinden doğar. Kalite, ürünü sonradan
+denetleyerek değil, süreci hatayı üretmeyecek biçimde kurarak elde edilir; bu
+yaklaşım benimsendiğinde muayene ihtiyacı kendiliğinden azalır. Her kontrol
+bir riske karşılık gelmeli ve o riski en düşük maliyetle karşılayan yerde, en düşük
+yoğunlukta yapılmalıdır. Süreç kararlı ve yeterli olduğunda yüzde yüz muayene
+yerini istatistiksel izlemeye ve örneklemeye bırakabilir; örnekleme yoğunluğu
+da geçmiş performansa göre kendini ayarlar. Tasarım aşamasındaki kararlar
+(dayanıklı tasarım, gerçekçi toleranslar, hata önleyici düzenekler) sonradan yapılacak
+testlerin büyük kısmını gereksiz kılar. Testlerin kendisi de bir yönetim nesne-
+sidir: sahibi, gerekçesi, bitiş koşulu ve ölçülmüş bir etkinliği olmayan kontroller
+zamanla şişer ve kaldırılamaz hâle gelir. Ekonomik ölçüt basittir: sonucu hiçbir
+kararı değiştirmeyecek bir test bilgi üretmez.
+1
+
+-- 1 of 20 --
+
+Giriş
+Muayene, bir ürünün ya da parçanın belirlenmiş gereksinimlere uyup uy-
+madığının ölçüm, gözlem veya deneme yoluyla kontrol edilmesidir. Test ise
+ürünün belirli koşullar altında nasıl davrandığını ortaya çıkarmak için yapılan
+denemedir. Her ikisi de üretim açısından değerlendirme (appraisal ) faaliyetidir:
+ürüne yeni bir özellik katmaz, yalnızca var olan durumu görünür kılar.
+Üretim ortamlarında yaygın bir eğilim, her hata sonrasında yeni bir kontrol
+adımı eklemektir. Bu eğilim kısa vadede güven verir, ancak uzun vadede kon-
+trol sayısının sürekli artmasına, aynı özelliğin birden çok yerde ölçülmesine ve
+gerekçesi unutulmuş testlerin yıllarca yaşamasına yol açar. Bu olguya muayene
+sürünmesi (inspection creep) denir.
+Yaygın kabul, daha fazla testin daha yüksek kalite getirdiğidir. Bu kabul
+iki noktada hatalıdır. Birincisi, muayene hatayı önlemez, yalnızca ayıklar;
+hatayı üreten süreç değişmedikçe aynı hata üretilmeye devam eder. ˙Ikincisi,
+insan muayenesinin yakalama oranı sınırlıdır ve aynı kontrolü birden çok kişiye
+yaptırmak orantılı fayda sağlamaz. Deming, kaliteyi elde etmek için toplu
+muayeneye bağımlılığın bırakılması ve kalitenin ürünün içine baştan yerleştirilmesi
+gerektiğini savunmuştur (Deming, 1986).
+Bu not imalat ve genel kalite yönetimi bağlamını kapsar. Yazılım testine
+özgü yaklaşımlar kapsam dışıdır, ancak burada anlatılan ilkelerin çoğu yazılım
+süreçlerine de uygulanabilir. Yasal, güvenlik veya sözleşme gereği zorunlu olan
+testler azaltma hedefi dışında tutulur; gereksiz test ayıklaması bunların dışında
+kalan, alışkanlık ve belirsizlik kaynaklı kontrollerde yapılır.
+2
+
+-- 2 of 20 --
+
+Kontrolün Gerekçelendirilmesi
+Bir kontrolün var olma nedeni, karşıladığı risktir. Riskle ilişkisi kurulamayan
+bir kontrol, ilk ayıklanacak adaydır.
+Risk Temelli Önceliklendirme
+FMEA (Failure Mode and Effects Analysis, Hata Türü ve Etkileri Analizi),
+bir ürün ya da süreçte ortaya çıkabilecek hata türlerini; her birinin ciddiyetini,
+oluşma sıklığını ve ne kadar kolay fark edildiğini sistematik olarak değerlendiren
+yöntemdir (AIAG & VDA, 2019). Analiz sonucunda yüksek riskli adımlar yoğun
+kontrol alır; riski düşük adımlardaki kontroller azaltılır ya da kaldırılır.
+Örnek olarak bir montaj hattında yanlış takılması durumunda araç güvenliğini
+etkileyen bir fren bağlantı parçası ile yalnızca görünümü etkileyen bir kapak
+klipsi aynı yoğunlukta kontrol edilmez.
+Kritik Karakteristikler ve Kusur Sınıflandırması
+CTQ (Critical to Quality) ya da özel karakteristikler, müşteri ve güvenlik
+açısından gerçekten belirleyici olan ürün özellikleridir. Sıkı kontrol yalnızca
+bunlara uygulanır; geri kalan özellikler hafif kontrolle izlenir.
+Kusurlar da benzer biçimde kritik, majör ve minör olarak sınıflandırılır. Her
+sınıf için ayrı muayene seviyesi ve ayrı kabul sınırı tanımlanır. Böylece minör
+bir görünüm kusuru için kritik bir kusurla aynı düzeyde muayene yükü oluşmaz.
+Müşteri ˙Ihtiyacıyla Bağ
+QFD (Quality Function Deployment, Kalite Fonksiyon Yayılımı), müşteri istek-
+lerini ölçülebilir teknik özelliklere dönüştüren yöntemdir (Akao, 1990). Müşteriye
+hiçbir şekilde yansımayan bir özelliğin kontrolü bu eşleştirmede görünür hâle
+gelir ve sorgulanabilir.
+Benzer bir işlevi izlenebilirlik matrisi görür: her test bir gereksinime
+bağlanır. Hiçbir gereksinime bağlanmayan test yetim testtir; aynı gereksinimi
+doğrulayan birden çok test varsa bunlar birleştirilebilir.
+Pareto ˙Ilkesi
+Hataların büyük kısmı az sayıda nedenden kaynaklanır. Juran’ın kalite yönetimine
+taşıdığı bu ilke, kontrol çabasının bu az sayıdaki kritik nedene yoğunlaştırılmasını
+önerir (Juran & Godfrey, 1999). Hata verisinin Pareto grafiğiyle sıralanması,
+hangi kontrollerin gerçekten iş gördüğünü de ortaya koyar.
+Bilginin Değeri
+Bir testin ürettiği bilgi, ancak bir kararı etkiliyorsa değerlidir. Sonucu ne olursa
+olsun ürün aynı şekilde sevk edilecekse, test bilgi üretmiyordur. Bu ölçüt, karar
+3
+
+-- 3 of 20 --
+
+analizindeki bilginin değeri (value of information) kavramına dayanır ve bir
+testin gerekliliğini sınamanın en basit yoludur.
+4
+
+-- 4 of 20 --
+
+Hatanın Önlenmesi
+Muayene hatayı yakalar; önleme ise hatanın oluşmasına izin vermez. Önlemeye
+yapılan her yatırım, ilgili muayenenin gerekliliğini azaltır.
+Tasarım Aşaması
+Dayanıklı Tasarım
+Dayanıklı tasarım (robust design), ürünün üretim ve kullanım koşullarındaki
+dalgalanmalara duyarsız olacak biçimde tasarlanmasıdır. Taguchi’nin geliştirdiği
+bu yaklaşımda amaç, değişkenliği ortadan kaldırmak değil, değişkenliğin ürün
+performansına etkisini azaltmaktır (Taguchi, 1986). Değişkenliğe dayanıklı bir
+ürün, sıkı kontrol gerektirmez.
+Üretilebilirlik ve Test Edilebilirlik
+DFM / DFA (Design for Manufacturing / Assembly), ürünün kolay ve hatasız
+üretilebilecek, az parçayla ve yanlış takılması zor biçimde tasarlanmasıdır. DFT
+(Design for Testability) ise ürüne baştan ölçüm noktaları ve kendi kendini test
+eden yapılar yerleştirilmesidir. Elektronikte boundary scan bunun örneğidir:
+kart üzerindeki bağlantılar, harici uzun test adımlarına gerek kalmadan yon-
+ganın kendi test devresiyle doğrulanır.
+Tolerans Belirleme
+Gereğinden sıkı tolerans, gereksiz ölçüm ve gereksiz ret demektir. Fonksiy-
+ona etkisi olmayan ölçüler ya hiç kontrol edilmez ya da toleransları gevşetilir.
+Tolerans, ürünün işlevinin gerçekten neyi gerektirdiğine göre belirlenmelidir,
+alışkanlıkla değil.
+Süreç Aşaması
+Hata Önleyici Düzenekler
+Poka-yoke, hatanın fiziksel olarak yapılamamasını sağlayan düzeneklerdir: parçanın
+yalnızca doğru yönde takılabildiği fikstür, eksik vida varsa ilerlemeyen hat bunun
+örnekleridir. Jidoka ise makinenin bir anormallik algıladığında kendini durdur-
+masıdır; hata hattın sonuna kadar taşınmaz (Ohno, 1988).
+Kaynakta Muayene
+Shingo, muayeneyi üç türe ayırır (Shingo, 1986):
+• Kaynak muayenesi: Ürünü değil, hataya yol açacak koşulu kontrol eder.
+Örneğin parçanın ölçüsünü kontrol etmek yerine kalıbın doğru takıldığını
+kontrol etmek.
+5
+
+-- 5 of 20 --
+
+• Ardışık muayene: Her istasyon bir önceki istasyonun işini kısa bir kon-
+trolle teyit eder; ayrı bir kalite istasyonuna gerek kalmaz.
+• Kendi kendine muayene: Operatör kendi işini kontrol eder ve sorum-
+luluğunu taşır.
+Hatanın Kaynağının Kurutulması
+• TPM (Total Productive Maintenance, Toplam Üretken Bakım): Makine
+bakımının sistematik yürütülmesi makine kaynaklı hataları azaltır ve makineyi
+sürekli doğrulama ihtiyacını düşürür.
+• Standart iş ve eğitim: ˙Işin herkes tarafından aynı biçimde yapılması
+operatöre bağlı değişkenliği azaltır. Beceri matrisi, kimin hangi işi güvenle
+yapabildiğini gösterir.
+• 5S: ˙Iş alanının düzenli tutulması yanlış parça ya da yanlış alet kullanma
+ihtimalini düşürür.
+• Küçük parti ve tek parça akışı: Hata bir sonraki adımda hemen fark
+edilir; büyük partilerin biriktirilip toplu muayeneye sokulması gerekmez.
+6
+
+-- 6 of 20 --
+
+Süreç Kararlılığı ve ˙Istatistiksel Muayene
+Süreç kararlı ve yeterli olduğunda her ürünü tek tek kontrol etmek gereksiz hâle
+gelir. Bu bölümdeki yöntemler muayene yoğunluğunu sürecin gerçek durumuna
+bağlar.
+Süreç Yeterliliği
+Süreç yeterlilik indeksleri (Cp, Cpk), sürecin doğal değişkenliğini tolerans
+aralığıyla karşılaştırır. Cpk değeri yüksek olduğunda (yaygın eşik 1,33 ve üzeri)
+süreç toleransın içinde rahatça çalışıyordur ve yüzde yüz muayene yerine seyrek
+örnekleme yeterli olur (Montgomery, 2019). Süreç kararsızsa çözüm muayeneyi
+artırmak değil, süreci düzeltmektir.
+˙Istatistiksel Proses Kontrol
+SPC (Statistical Process Control ), süreçten belirli aralıklarla örnek alınarak
+sonuçların kontrol grafiklerinde izlenmesidir. Shewhart’ın geliştirdiği bu yöntemde
+süreç sapmaya başladığında, hatalı ürün çıkmadan önce müdahale edilir (She-
+whart, 1931). Her parçayı ölçmekten çok daha az iş yükü getirir ve hatayı
+önler.
+Ön kontrol (pre-control ), SPC’nin basitleştirilmiş bir biçimidir: tolerans
+aralığı renkli bölgelere ayrılır ve birkaç ölçümle hattın devam edip etmeyeceğine
+karar verilir.
+Ölçüm sıklığı da sürece göre ayarlanabilir. Vardiya başı, takım değişimi,
+malzeme partisi değişimi gibi değişiklik anlarında yoğun ölçüm yapılır; süreç
+sabitken ara ölçümler seyrekleştirilir.
+Kabul Örneklemesi
+AQL Tabanlı Örnekleme
+AQL (Acceptable Quality Limit, Kabul Edilebilir Kalite Seviyesi), bir partinin
+kabul edilebilmesi için izin verilen en yüksek ortalama kusur oranıdır. ISO 2859-
+1 ve ANSI/ASQ Z1.4 standartları, parti büyüklüğüne ve AQL değerine göre kaç
+örnek alınacağını ve kaç kusura kadar kabul edileceğini tablolarla belirler.
+Geçiş Kuralları
+Aynı standartlar normal, azaltılmış ve sıkılaştırılmış olmak üzere üç muayene
+seviyesi tanımlar. Art arda iyi partiler geldiğinde azaltılmış muayeneye geçilir;
+sorun çıktığında sıkılaştırılmış muayeneye dönülür. Böylece muayene miktarı
+tedarikçinin ya da sürecin geçmiş performansına göre kendini ayarlar.
+7
+
+-- 7 of 20 --
+
+Parti Atlama
+Skip-lot örneklemesinde, uzun süre güvenilir performans göstermiş bir tedarikçinin
+bazı partileri hiç muayene edilmeden kabul edilir.
+Örneklem Büyüklüğünü Azaltan Yöntemler
+• Ardışık test (sequential testing): Wald’ın geliştirdiği bu yaklaşımda nu-
+muneler tek tek değerlendirilir ve sonuç yeterince netleştiğinde test erken
+durdurulur (Wald, 1947). Önceden sabit sayıda numune test etmek zorunlu
+değildir.
+• Bayesçi yaklaşım: Geçmiş veriler ve benzer ürünlerden gelen bilgi önsel
+olarak hesaba katılır. Özellikle güvenilirlik kanıtlama testlerinde gereken
+numune sayısı ciddi biçimde azalır.
+Ölçüm Sisteminin Güvenilirliği
+MSA (Measurement System Analysis, Ölçüm Sistemi Analizi) ve bunun bir
+parçası olan Gauge R&R (tekrarlanabilirlik ve yeniden üretilebilirlik) çalışması,
+ölçüm cihazı ve yönteminin ne kadar güvenilir olduğunu belirler (AIAG, 2010).
+Ölçüm sistemine güvenilmediğinde çalışanlar “emin olmak için” tekrar ölçer ya
+da ek kontrol koyar; ölçüm sistemi doğrulandığında bu tekrarlar ortadan kalkar.
+Yeniden Test Döngüsünün Kırılması
+Ret çıkan ürünü tekrar tekrar test edip bir kez geçtiğinde kabul etmek (“geçene
+kadar test et”) hem zaman kaybıdır hem kaliteyi bozar: ölçüm belirsizliği içinde
+şans eseri geçen ürün sevk edilmiş olur. Yeniden test kuralları açıkça tanımlanmalıdır.
+Koruma bantları (guard band ), ölçüm belirsizliği hesaba katılarak kabul
+sınırının tolerans sınırından biraz içeri çekilmesidir. Böylece sınırda kalan sonuçlar
+için tekrar ölçüm döngüsüne girilmez.
+8
+
+-- 8 of 20 --
+
+Test Tasarımı ve Test Akışı
+Gerekli olduğu belirlenen testlerin de en az deneme ve en kısa sürede yapılacak
+biçimde tasarlanması gerekir.
+Doğrulama Yönteminin Seçimi
+Mühendislikte bir gereksinim dört yolla doğrulanabilir: analiz (hesap, model),
+inceleme (gözle ya da doküman üzerinden kontrol), gösterim (ürünün çalıştırılıp
+gözlenmesi) ve test (ölçümlü deneme). Fiziksel test bunların en pahalısıdır;
+diğer üçü yeterliyse teste gerek yoktur.
+Benzerlik ile doğrulama, daha önce aynı koşullarda doğrulanmış bir parça
+ya da tasarımın yeniden kullanıldığında önceki sonuçlara dayanılmasıdır. Havacılık
+ve savunma sanayinde yaygındır. Aynı mantıkla, bir kez doğrulanmış modüler
+ve standart parçalar birçok üründe yeniden test edilmeden kullanılabilir.
+Deney Sayısının Azaltılması
+• Deney tasarımı (DOE, Design of Experiments): Faktörleri tek tek değiştirmek
+yerine birlikte ve planlı biçimde değiştiren deneylerle çok daha az dene-
+meyle aynı bilgi elde edilir (Montgomery, 2017).
+• Ortogonal diziler ve kombinasyonel test: Tüm kombinasyonları den-
+emek yerine ikili etkileşimleri kapsayan küçük bir alt küme seçilir. Örneğin
+her biri üç seviyeli dört faktörün 81 kombinasyonu yerine 9 deneme yeterli
+olabilir.
+• Bracketing ve matrixing: ˙Ilaç ve kimya sektöründe aynı ürün ailesinin
+yalnızca uç durumları (en büyük ve en küçük ambalaj, en düşük ve en
+yüksek doz) test edilir; aradaki varyantlar bu sonuçlarla kapsanmış sayılır.
+• En kötü durum testi: En zorlu varyant geçiyorsa daha kolay varyantlar
+ayrıca test edilmez.
+Ölçümler Arası ˙Ilişkiden Yararlanma
+• Korelasyon analizi: ˙Iki ölçüm sürekli birlikte hareket ediyorsa biri yeter-
+lidir.
+• Vekil ölçüm (proxy): Pahalı ya da yavaş bir ölçümle güçlü ilişkisi olan
+ucuz ve hızlı bir ölçüm bulunur. Pahalı ölçüm yalnızca doğrulama amacıyla
+seyrek yapılır.
+• Fonksiyonel ve parametrik test dengesi: Tek bir “çalışıyor mu” testi
+bazen onlarca ayrı parametre ölçümünü kapsar; bazen de tersine, hedefli
+tek bir ölçüm uzun bir fonksiyonel testin yerini alır.
+9
+
+-- 9 of 20 --
+
+Test Akışının Düzenlenmesi
+• Uyarlanabilir test (adaptive test): Yarı iletken sektöründe yaygındır.
+Parçanın önceki adımlardaki sonuçlarına göre test akışı değişir; iyi gelen
+parçada bazı testler atlanır, şüpheli parçaya ek test yapılır.
+• Sık ret verenden başlama: Testler en sık hata yakalayandan başlayacak
+biçimde sıralanır ve ilk retle durulur. Bozuk parçaya boşuna test süresi
+harcanmaz.
+• Veriye dayalı limit belirleme: Gereğinden sıkı test limitleri iyi parçayı
+reddeder ve yeniden test döngüsü yaratır.
+• Paralel test: Aynı anda birden çok parça ya da birden çok ölçüm. Test
+sayısını değil, test yükünü azaltır.
+Testin Kendisinin Verimliliği
+• Tahribatsız muayene: Ultrason, radyografi gibi yöntemlerle numune
+kaybı önlenir ve aynı numune birçok ölçümde kullanılabilir.
+• Ölçümlerin birleştirilmesi: Tek fikstürde ya da tek bir koordinat ölçüm
+makinesi (CMM) programında birden çok özellik ölçülür; parça istasyonlar
+arasında dolaşmaz.
+• Risk temelli kalibrasyon aralığı: Sabit ve sık kalibrasyon yerine, ci-
+hazın geçmiş kayma verisine göre aralık uzatılır ya da kısaltılır.
+10
+
+-- 10 of 20 --
+
+Yaşam Döngüsü ve Değişiklik Yönetimi
+Bir ürünün ihtiyaç duyduğu kontrol yoğunluğu sabit değildir; ürünün olgunluğuna
+ve yapılan değişikliğin büyüklüğüne göre değişir.
+Ürün Olgunluğuna Göre Kontrol
+Yeni bir ürünün devreye alındığı ilk dönemde ek kontroller konur. Otomotiv
+sektöründeki erken üretim kontrolü (launch containment) bunun örneğidir. Bu
+kontrollerin baştan tanımlanmış bir çıkış kriteri olmalıdır: belirli bir süre ya
+da belirli bir üretim adedi boyunca hata görülmediğinde kaldırılırlar.
+Prototip, ön seri ve seri üretim için ayrı kontrol planları tutulur. Geliştirme
+dönemindeki kapsamlı testler seri üretime olduğu gibi taşınmaz.
+Süreç Doğrulandığında Ürün Testinin Azaltılması
+• Proses validasyonu (IQ/OQ/PQ): Kurulum, çalışma ve performans nite-
+lendirmesi aşamalarıyla makine ve süreç bir kez kapsamlı biçimde doğrulanır.
+Sonrasında her ürün ayrıntılı test edilmez; sürecin doğrulanmış sınırlar
+içinde çalıştığı izlenir.
+• Parametrik ve gerçek zamanlı serbest bırakma: ˙Ilaç sektöründe
+ürün, son test yerine süreç parametreleri ve hat içi ölçümlere dayanılarak
+onaylanır. Bu yaklaşım FDA’nın PAT (Process Analytical Technology)
+çerçevesiyle desteklenmiştir (FDA, 2004).
+• Burn-in testlerinin kademeli azaltılması: Elektronikte erken arızaları
+ayıklamak için yapılan uzun süreli çalıştırma testleri, süreç olgunlaşıp
+erken arıza oranı düştükçe örneklemeye indirilir ya da kaldırılır.
+Değişikliğe Göre Yeniden Doğrulama
+Delta testi, bir değişiklik yapıldığında her şeyin baştan test edilmesi yerine
+değişikliğin etkilediği alanların belirlenip yalnızca onların yeniden doğrulanmasıdır.
+Değişiklikler küçük, orta ve büyük olarak önceden sınıflandırılır ve her sınıf için
+gereken yeniden doğrulama kapsamı kurala bağlanır. Böylece her değişiklikte
+“ne olur ne olmaz” kaygısıyla eklenen testler önlenir.
+Saha Verisinin Geri Beslenmesi
+Garanti ve saha verileri, iç kontrollerin gerçekten işe yarayıp yaramadığını gösterir.
+Sahada hiç sorun çıkmayan özellikler için iç kontroller azaltılır; sorun çıkan yer-
+lere kaynak kaydırılır.
+11
+
+-- 11 of 20 --
+
+Tedarik Zinciri ve Dış Taraflar
+Aynı özelliğin tedarik zinciri boyunca birçok kez ölçülmesi, test fazlalığının en
+yaygın kaynaklarından biridir.
+Tedarikçi Kalitesi
+Tedarikçi nitelendirme, denetim ve sertifikasyon yoluyla güvenilirliği kanıtlanmış
+bir tedarikçiden gelen malzeme giriş muayenesine sokulmadan doğrudan stoğa
+alınabilir (dock-to-stock ). Otomotivde bu nitelendirme PPAP (Production Part
+Approval Process) ile yapılır (AIAG, 2006). Sertifikalı malzemede sertifikayla
+gelen değerler için giriş testi kaldırılabilir ya da seyrekleştirilir.
+Mükerrer Kontrollerin Ayıklanması
+Kontrol planı hammaddeden son ürüne kadar uçtan uca çıkarıldığında, aynı
+özelliğin tedarikçi çıkışında, giriş kalitede ve hat başında tekrar tekrar ölçüldüğü
+sıkça görülür. Hedef, her özelliğin tedarik zinciri boyunca tek ve doğru bir
+noktada kontrol edilmesidir.
+Müşteri ve Düzenleyici Kurumlar
+• Ortak test tanımı: Müşteri ile tedarikçi aynı testi ayrı ayrı yapıyorsa,
+tek bir test ve sonuç paylaşımı üzerinde anlaşılır.
+• Akreditasyon ve karşılıklı tanıma: Akredite bir laboratuvarın sonucu
+farklı ülke ve kurumlarda kabul edilir; aynı ürün her pazar için ayrı ayrı
+test edilmez.
+12
+
+-- 12 of 20 --
+
+Veri ve Teknoloji
+Fiziksel test, pahalı ve yavaş bir bilgi kaynağıdır. Veri ve modelleme yöntemleri
+bu bilginin bir kısmını daha ucuza üretir.
+Sanal Doğrulama
+• Simülasyon: Sonlu elemanlar analizi ve akış analizi gibi yöntemler fiziksel
+prototip ve testlerin bir kısmının yerini alır.
+• Dijital ikiz: Ürünün ya da üretim hattının sanal modeli üzerinden senary-
+olar denenir.
+• Sanal metroloji: Proses verilerinden (sıcaklık, basınç, akım gibi) ürün
+kalitesi tahmin edilir. Fiziksel ölçüm yalnızca modelin güvensiz olduğu
+durumlarda yapılır.
+Hat ˙Içi ˙Izleme ve Otomatik Muayene
+Hat sonundaki ayrı test istasyonu yerine üretim sırasında sensörlerle anlık izleme
+yapılabilir. ˙Insan muayenesinin yakalama oranı en iyi koşulda bile sınırlıdır;
+aynı kontrolü birden çok kişiye yaptırmak ise her kişinin “diğeri zaten bakar”
+diye gevşemesine yol açar. Tekrarlı insan kontrolünün yerine tek bir güvenilir
+otomatik kontrol (örneğin görüntü işleme) konabilir.
+Test Sonuçlarının Analizi
+Test verisi, testlerin kendisini değerlendirmek için de kullanılır:
+• Hiç ret vermeyen testler belirlenir.
+• Her zaman birlikte ret veren, yani aynı şeyi ölçen testler belirlenir.
+• Sürekli yanlış alarm veren testler belirlenir.
+Bu testler ayıklama adayı olarak işaretlenir. Hiç ret vermeyen bir testin
+gereksiz olduğu kesin değildir, çünkü nadir ama ağır bir hatayı korumak için
+var olabilir; bu ayrım risk değerlendirmesiyle yapılır.
+13
+
+-- 13 of 20 --
+
+Organizasyon, Kültür ve Ekonomi
+Test fazlalığı teknik olduğu kadar örgütsel bir sorundur. Kontrolleri ekleyen ve
+tutan, insanlar ve teşvik sistemleridir.
+Testin Yönetimi
+• Sahiplik: Her testin bir sahibi olmalıdır. Sahibi olmayan test kimse
+tarafından sorgulanmaz.
+• Gerekçe kaydı: Bir testin neden konduğu kayıt altına alınır. Gerekçesi
+kaybolan testler, kimse kaldırmaya cesaret edemediği için yıllarca yaşar.
+• Periyodik gözden geçirme: Belirli aralıklarla tüm testler listelenir ve
+her biri için neden var olduğu ve en son ne zaman bir hata yakaladığı
+sorulur.
+• Bitiş koşulu: Bir sorun sonrasında geçici olarak eklenen kontrolün, soru-
+nun kök nedeni giderildiğinde kaldırılacağı baştan tanımlanır.
+Kök Neden Analizi
+Her hata sonrasında yeni bir kontrol eklemek yerine hatanın kök nedeni bulunur
+ve giderilir. Bu amaçla 5 Neden, Ishikawa (balık kılçığı) diyagramı ve 8D prob-
+lem çözme yöntemi kullanılır. Müşteriye ulaşan bir hata için “hangi test bunu
+yakalamalıydı ve neden yakalamadı” sorusu sorulur; yeni test eklemek yerine
+mevcut test iyileştirilir.
+Kültür ve Teşvikler
+• Suçlama kültürü: Hata çıktığında suçlu arandığı ortamlarda herkes ken-
+dini korumak için ek kontrol koyar. Sistem odaklı bakış bu birikimi önler.
+• Yanlış metrikler: “Yapılan test sayısı” ya da “muayene edilen parça
+sayısı” gibi metrikler daha fazla testi ödüllendirir. Bunların yerine kaçan
+hata oranı, ilk seferde geçme oranı (first pass yield ) ve kalite maliyeti
+izlenir.
+• Kontrol listesi şişmesi: Kontrol listeleri zamanla uzar ve işaretleme
+bir ritüele dönüşür. Listeler düzenli olarak gerçekten bakılan maddelere
+indirilir.
+• Denetim için yapılan testler: Bazı testler yalnızca denetimde gösterilmek
+için vardır. Standardın gerçekten istediği ile alışkanlıkla yapılan ayrıştırılır.
+14
+
+-- 14 of 20 --
+
+Standart ve Gereksinimlerin Güncelliği
+Standartlar güncellendiğinde kaldırılan ya da değiştirilen testler, eski sürümden
+kalma olarak uygulanmaya devam edebilir. Benzer biçimde artık geçerli olmayan
+eski müşteri gereksinimlerine dayanan testler ayıklanır. Aynı ürünü üreten farklı
+fabrikalarda zamanla farklı kontrol setleri birikir; bunlar ortak ve gerekçeli bir
+kontrol planına indirilir.
+Kalite Maliyeti
+Kalite maliyeti dört kalemde izlenir: önleme, değerlendirme (test ve muayene),
+iç hata (hurda, yeniden işleme) ve dış hata (iade, garanti). Bu sınıflandırma
+Feigenbaum tarafından kurulmuştur (Feigenbaum, 1951). Değerlendirme maliyeti
+yüksek olduğu hâlde hata maliyetleri düşmüyorsa testler yanlış yerdedir. Kay-
+nak önlemeye kaydırıldığında toplam maliyet genellikle düşer; Crosby bu gözlemi
+kalitenin bedava olduğu tezine dayandırmıştır (Crosby, 1979).
+Test başına maliyet–fayda değerlendirmesinde ölçüt, testin maliyeti ile yakaladığı
+hatanın beklenen maliyetinin karşılaştırılmasıdır.
+Yalın Üretim ve Darboğaz Bakışı
+Yalın üretim açısından muayene, ürüne değer katmayan bir faaliyettir (muda).
+Hedef muayeneyi sıfıra indirmek değil, gerekli olan en aza indirmektir (Ohno,
+1988).
+Kısıtlar Teorisi’ne göre sistemin çıktısı en dar noktası tarafından belir-
+lenir (Goldratt, 1984). Test istasyonu darboğazsa oradaki her gereksiz test
+doğrudan üretim kapasitesini düşürür; azaltma çabası öncelikle darboğazdaki
+testlere yönlendirilir.
+Yapısal ˙Iyileştirme C erçeveleri
+• Altı Sigma (DMAIC): Tanımla, ölç, analiz et, iyileştir, kontrol et. Test
+fazlalığı da bu döngüyle bir iyileştirme projesi olarak ele alınabilir.
+• Hata ağacı analizi: Bir sistem arızasına giden olay zincirleri çıkarılır.
+Hiçbir kritik yola katkısı olmayan bileşen kontrolleri gereksiz olarak işaretlenir.
+Sıralama ˙Ilkesi
+Gereksiz bir testi otomatikleştirmek onu hızlandırır ama gereksiz olmaktan
+çıkarmaz. Önce hangi testlerin gerçekten gerektiği belirlenir, ardından kalanlar
+otomatikleştirilir.
+15
+
+-- 15 of 20 --
+
+Sektörel C erçeveler
+Farklı sektörlerin kalite standartları aynı fikri kendi dilleriyle ifade eder: kontrol
+yoğunluğu riske göre belirlenir.
+• Otomotiv: IATF 16949 kalite yönetim standardı ve APQP (Advanced
+Product Quality Planning) ürün kalite planlama süreci. PFMEA ile kon-
+trol planı arasında doğrudan bağ kurulur.
+• ˙Ilaç: ICH Q9 kalite risk yönetimi kılavuzu ve PAT çerçevesi.
+• Havacılık: AS9100 kalite yönetim standardı.
+• Medikal cihaz: ISO 14971 risk yönetimi standardı.
+Bu standartlarda zorunlu tutulan testler azaltma hedefi dışındadır; ancak
+standartların kendisi de çoğu durumda risk temelli azaltmaya açıkça izin verir.
+16
+
+-- 16 of 20 --
+
+Uzmanlık Alanları
+Bu yöntemler tek bir meslekte toplanmaz; farklı roller farklı kısımlarına sahiptir.
+Meslekler
+• Kalite mühendisi: Muayene planı, örnekleme, kontrol planı, kusur sınıflandırması,
+kalite maliyeti. Konunun ana sahibidir.
+• Proses mühendisi: Süreç yeterliliği, SPC, poka-yoke, proses validasy-
+onu.
+• Güvenilirlik mühendisi: Hızlandırılmış testler, burn-in, Bayesçi güvenilirlik,
+hata ağacı, FMEA.
+• Test mühendisi: Özellikle elektronik ve yarı iletkende test akışı, uyarlan-
+abilir test, test süresi azaltma, limit ayarı.
+• Tedarikçi kalite mühendisi: Tedarikçi nitelendirme, PPAP, dock-to-
+stock, skip-lot.
+• Metroloji uzmanı: Ölçüm sistemi analizi, ölçüm belirsizliği, kalibrasyon
+aralıkları.
+• Endüstri mühendisi: Yalın üretim, darboğaz analizi, kalite maliyeti, iş
+akışı.
+• Validasyon uzmanı: ˙Ilaç ve medikal cihazda IQ/OQ/PQ, parametrik
+serbest bırakma, değişiklik yönetimi.
+• Tasarım ve Ar-Ge mühendisi: Dayanıklı tasarım, DFM, test edilebilir-
+lik, simülasyon, benzerlikle doğrulama.
+Sertifikalar ve Ekoller
+• Altı Sigma kuşakları: Kara Kuşak ve Usta Kara Kuşak; DOE, istatistik
+ve DMAIC konusunda derinlik taşır. Yeşil Kuşak daha temel seviyededir.
+• ASQ sertifikaları: CQE (Certified Quality Engineer ), CRE (Certified
+Reliability Engineer ), CQA (Certified Quality Auditor ).
+• Yalın üretim uzmanları: Özellikle Toyota Üretim Sistemi geleneğinden
+gelenler.
+Akademi ve Kurumlar
+Endüstri mühendisliği bölümlerinde istatistiksel kalite kontrol ve güvenilirlik,
+istatistik bölümlerinde deney tasarımı ve örnekleme bu konuların akademik
+karşılığıdır. Türkiye’de KalDer (Türkiye Kalite Derneği), TSE ve T ÜB˙ITAK
+UME (Ulusal Metroloji Enstitüsü) ilgili kurumlardır. Otomotiv yan sanayi
+17
+
+-- 17 of 20 --
+
+(Bursa, Kocaeli) IATF ve APQP disiplini nedeniyle bu yöntemlerin günlük
+olarak uygulandığı en olgun alanlardan biridir.
+Tek bir kişide bu yöntemlerin tamamı nadiren bulunur. En geniş kapsamı
+genellikle deneyimli bir kalite mühendisi ya da kara kuşak taşır; güvenilirlik
+istatistiği, metroloji ve yarı iletken testi gibi derin teknik konularda ise o alanın
+uzmanı gerekir.
+18
+
+-- 18 of 20 --
+
+Sonuç
+Test fazlalığına karşı tek bir araç yoktur; etkili olan, kontrolü bir alışkanlık
+olarak değil gerekçelendirilmiş bir karar olarak ele alan bütünlüklü bir yaklaşımdır.
+Bu yaklaşımın ilkeleri beş maddede toplanabilir: riski bilmek, hatayı önlemek,
+süreci kararlı kılmak, veriyle karar vermek ve her kontrolün gerekçesini düzenli
+olarak sorgulamak.
+Pratik açıdan en büyük kazanç, kontrol sayısını doğrudan azaltmaya çalışmaktan
+değil, kontrol ihtiyacını doğuran koşulları ortadan kaldırmaktan gelir. Dayanıklı
+tasarım, hata önleyici düzenekler ve yeterli bir süreç kurulduğunda muayene
+kendiliğinden örneklemeye iner. Tersi durumda, yani süreç kararsızken muayeneyi
+azaltmak, hatayı müşteriye taşır.
+Yaklaşımın sınırları da vardır. Nadir ama ağır sonuçlu hatalarda geçmiş
+verinin “hiç ret yok” göstermesi testin gereksiz olduğu anlamına gelmez; bu
+tür kontroller risk değerlendirmesiyle korunmalıdır. Düzenleyici gereksinim-
+ler azaltma alanını daraltır. ˙Istatistiksel yöntemler ise kararlı ve ölçülebilir
+süreçlerde güçlüdür; çok küçük üretim adetlerinde ya da tek seferlik üretimde
+örnekleme ve yeterlilik analizi anlamını yitirir.
+Açık kalan soru, testlerin yönetiminin kurum içinde kimin sorumluluğunda
+olacağıdır. Test eklemek her rolün yetkisindeyken test kaldırmak çoğu zaman
+kimsenin yetkisinde değildir. Bu asimetri giderilmedikçe teknik yöntemler tek
+başına muayene sürünmesini durdurmaz.
+Kaynaklar
+• AIAG (2006). Production Part Approval Process (PPAP), 4. baskı. Au-
+tomotive Industry Action Group.
+• AIAG (2010). Measurement Systems Analysis (MSA), 4. baskı. Automo-
+tive Industry Action Group.
+• AIAG & VDA (2019). FMEA Handbook. Automotive Industry Action
+Group ve Verband der Automobilindustrie.
+• Akao, Y. (1990). Quality Function Deployment: Integrating Customer
+Requirements into Product Design. Productivity Press.
+• Crosby, P. B. (1979). Quality Is Free. McGraw-Hill.
+• Deming, W. E. (1986). Out of the Crisis. MIT Press.
+• FDA (2004). Guidance for Industry: PAT — A Framework for Innova-
+tive Pharmaceutical Development, Manufacturing, and Quality Assurance.
+U.S. Food and Drug Administration.
+• Feigenbaum, A. V. (1951). Quality Control: Principles, Practice and Ad-
+ministration. McGraw-Hill.
+• Goldratt, E. M. (1984). The Goal. North River Press.
+19
+
+-- 19 of 20 --
+
+• ICH (2005). Q9: Quality Risk Management. International Council for
+Harmonisation.
+• ISO 2859-1. Sampling procedures for inspection by attributes. Interna-
+tional Organization for Standardization.
+• ISO 14971:2019. Medical devices — Application of risk management to
+medical devices. International Organization for Standardization.
+• Juran, J. M. & Godfrey, A. B. (1999). Juran’s Quality Handbook, 5. baskı.
+McGraw-Hill.
+• Montgomery, D. C. (2017). Design and Analysis of Experiments, 9. baskı.
+Wiley.
+• Montgomery, D. C. (2019). Introduction to Statistical Quality Control, 8.
+baskı. Wiley.
+• Ohno, T. (1988). Toyota Production System: Beyond Large-Scale Produc-
+tion. Productivity Press.
+• Shewhart, W. A. (1931). Economic Control of Quality of Manufactured
+Product. Van Nostrand.
+• Shingo, S. (1986). Zero Quality Control: Source Inspection and the Poka-
+Yoke System. Productivity Press.
+• Taguchi, G. (1986). Introduction to Quality Engineering. Asian Produc-
+tivity Organization.
+• Wald, A. (1947). Sequential Analysis. Wiley.
+20
+
+-- 20 of 20 --
