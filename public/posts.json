@@ -1,5 +1,30 @@
 [
   {
+    "slug": "yazılım-testi-katmanlı-regresyon-stratejisi",
+    "title": "Yazılım Testi: Katmanlı Regresyon Stratejisi",
+    "date": "2026-11-06",
+    "description": "Metin, kalite kontrolü öğe başına sabit süre alan bir sistemde, örneğin haber videosu üreten bir hatta, öğe sayısı arttıkça her değişiklikten sonra tam regresyon testinin geliştirmeyi yavaşlatması sorununu ele alır. Önerilen çözüm testin iki katmana ayrılmasıdır: değişiklikten hemen sonra küçük ve hızlı bir set, arka planda ya da gece ise geniş test. Metin tek haberle yapılan testin etki analizi olmadığını, ortak kod değiştiğinde yalnızca bir duman testi olduğunu vurgular ve değişiklikleri habere özgü ve ortak kod değişikliği olarak ikiye ayırır. Google'ın presubmit ve postsubmit ayrımı ile Meta'nın geçmiş sonuçlardan eğitilen tahmine dayalı test seçimi incelenir; ikincisi testlerin üçte birinden azını koşturarak hatalı değişikliklerin yüzde 99,9'undan fazlasını yakalar. Altın set, Feathers'ın golden master fikrine dayanır; çeşitlilik, sabitlik, ölçüm oynaklığına göre tolerans ve küçük boyut ilkeleriyle kurulur. Bazel örneğinden türetilen önbellek anahtarı girdi özeti ile kod sürümünden oluşur, bu yüzden ortak kod değiştiğinde önbellek boşalır. Metin Google'da geniş testin müşteriden önce koştuğunu, önce gönderip sonra test etmenin ancak kanarya yayını, tek adımlı geri dönüş ve özellik bayraklarıyla güvenli olduğunu belirtir. Mozilla, Rust Crater ve PostgreSQL build farm gece testi örnekleri olarak verilir; dizüstü bilgisayarda caffeinate kullanımı ve sınırları açıklanır. Savunma ve havacılıkta Kessel Run, DO-178C ve donanımlı döngü testi ele alınır; can güvenliği söz konusu olduğunda tam test bitmeden yayın yapılmaz. Metin yedi adımlı bir akışla kapanır.",
+    "pdf": "Yazılım_Testi__Katmanlı_Regresyon_Stratejisi.pdf",
+    "thumb": "thumbs/yazılım-testi-katmanlı-regresyon-stratejisi.png",
+    "addedAt": "2026-11-06T15:25:49.860Z",
+    "pages": 13,
+    "belge": "BELGE-278",
+    "title_en": "Software Testing: A Layered Regression Strategy",
+    "priority": 8,
+    "description_en": "The text addresses a system in which quality control takes a fixed time per item, such as a pipeline producing news videos, where running the full regression suite after every change slows development as the number of items grows. The proposed solution splits testing into two layers: a small, fast set immediately after a change and a broad suite in the background or overnight. The text stresses that testing a single story is not impact analysis but merely a smoke test when shared code changes, and divides changes into story-specific and shared-code changes. Google's presubmit and postsubmit split and Meta's predictive test selection, trained on past results, are examined; the latter runs fewer than a third of the tests yet catches more than 99.9 percent of faulty changes. The golden set builds on Feathers's golden master idea and is assembled on the principles of diversity, stability, tolerance matched to measurement noise and small size. A cache key derived from the Bazel example combines an input hash with the code version, so the cache empties whenever shared code changes. The text notes that at Google the broad suite runs before release to customers, and that shipping first and testing later is safe only with canary releases, one-step rollback and feature flags. Mozilla, Rust's Crater and the PostgreSQL build farm are given as nightly testing examples, and the use and limits of caffeinate on a laptop are explained. In defence and aviation, Kessel Run, DO-178C and hardware-in-the-loop testing are discussed; where human life is at stake, software is not released before full testing ends. The text closes with a seven-step flow.",
+    "related": [
+      "yazılım-testi-öncelik-sırası",
+      "yazılım-testi-dört-soru-ile-test-sınıflandırması",
+      "test-mühendisliği-yeterlilik-etkinlik-güvenilirlik",
+      "yazılım-testi-oracle-problemi",
+      "06-davranis-geometrisinin-dogrulanmasi",
+      "artımlı-teslimat-ve-sıfır-kesintili-s-ema-gec-is-i-risk-sınıflandırmasından-bes-as-amalı-migrasyon-modeline",
+      "kalite-testi-bisküvi-fabrikasından-öğrenmek",
+      "hata-avcılığı-yazılımda-kalite-pratikleri",
+      "dayanıklılık-mühendisliği-chaos-monkey-ve-gizli-bağımlılıklar"
+    ]
+  },
+  {
     "slug": "i-letişim-kuramı-kelimenin-üstü-ve-altı",
     "title": "İletişim Kuramı: Kelimenin Üstü ve Altı",
     "date": "2026-11-04",
@@ -306,7 +331,8 @@
       "okuma-notları-bir-araba-nasıl-yapılır-adrian-newey",
       "mühendislik-bilgisi-i-deal-ile-gerçek-arasındaki-boşluk",
       "kontrol-sistemleri-açık-ve-kapalı-döngü-tasarımı",
-      "yazılım-kalitesi-deneyim-borcu"
+      "yazılım-kalitesi-deneyim-borcu",
+      "yazılım-testi-katmanlı-regresyon-stratejisi"
     ],
     "description_en": "The text argues that software quality is achieved not by a single test or tool but by combining layers whose holes lie in different places, as in Reason's Swiss cheese model, and starts from Dijkstra's finding that testing cannot show the absence of bugs. The layers are, in order, preventing bugs before they are written, catching them by human eye, designing tests correctly, having the machine search for bugs, system and resilience, interface and security, delivery and production, and learning from bugs found. The prevention layer covers TDD, complexity limits, types that make invalid states unrepresentable, fail fast and database constraints; the review layer covers single-purpose PRs of 200 to 400 lines, checklists, BDD, threat modeling and FMEA. Test design treats boundary values, decision tables, state transitions, pairwise and error guessing, and against the oracle problem golden, characterization and contract tests. The machine layer covers fuzzing, property-based, differential and metamorphic testing, symbolic execution and the race detector; mutation testing measures the test strength that coverage cannot show. Drawing on Fenton and Ohlsson, the text records that bugs concentrate in a small share of modules and that test effort should be directed to risky areas through hotspot analysis. Quality is defined as the distance between intent and behaviour and divided into the functions of prevention, detection, mitigation and learning. The proposed core set is small PRs, a mandatory linter and race detector, boundary-value tests, fuzzing for parsers, a regression test for every bug and error tracking in production. When quality investment is sufficient is left as an open question."
   },
@@ -640,7 +666,8 @@
       "i-statistiksel-süreç-kontrolü-ortak-neden-ve-özel-neden",
       "kalite-mühendisliği-ürün-geliştirmede-temel-araçlar",
       "kontrol-sistemleri-açık-ve-kapalı-döngü-seçimi",
-      "kalite-yönetimi-kalite-yönetimine-giriş"
+      "kalite-yönetimi-kalite-yönetimine-giriş",
+      "yazılım-testi-katmanlı-regresyon-stratejisi"
     ],
     "title_en": "Quality Testing: Learning from a Biscuit Factory",
     "description_en": "The text treats quality control not as a single test but as a family of tests spread across every stage of production, and explains the test types through the example of a biscuit factory, together with the software counterpart of each. The introduction separates Crosby's definition of quality as conformance to requirements from Juran's fitness for use, and ties this distinction to Boehm's questions of verification and validation. The conformance test asks whether the product meets the specified measures and gives a binary pass or fail result; in software it corresponds to functional testing at the unit, integration and end-to-end levels. The quality test measures how good the product is; sensory quality is paired with performance, shelf life with stability, health safety with software security, transport durability with resilience to network conditions, consumer experience with usability, and compatibility. Complementary types are distributed across the moments of production: raw material control, in-process control, smoke testing, regression testing, stress testing, acceptance testing, market testing and calibration. Calibration is positioned as the foundation of the whole structure; unless the measuring instrument is verified, the test process gives confidence but no assurance, which in software appears as a test that passes under every condition and catches no error. That an error is cheaper the earlier it is caught is shown with a table distributing the tests across stages. As a limitation, the text notes that a physical product does not change after it is made, whereas software is continuously remade, which is why regression testing is more central in software.",
@@ -918,7 +945,8 @@
       "o-rtu-k-bilgi-ve-u-ru-n-gelis-tirici-deneyiminden-bilme-bic-imlerine",
       "yazılım-testi-öncelik-sırası",
       "hata-avcılığı-yazılımda-kalite-pratikleri",
-      "mühendislik-güven-bir-his-değil-kanıttır"
+      "mühendislik-güven-bir-his-değil-kanıttır",
+      "yazılım-testi-katmanlı-regresyon-stratejisi"
     ]
   },
   {
@@ -1327,7 +1355,8 @@
       "kalite-mühendisliği-ürün-geliştirmede-temel-araçlar",
       "sistem-güvenliği-kesişimde-doğan-hatalar",
       "kontrol-sistemleri-açık-ve-kapalı-döngü-seçimi",
-      "hata-avcılığı-yazılımda-kalite-pratikleri"
+      "hata-avcılığı-yazılımda-kalite-pratikleri",
+      "yazılım-testi-katmanlı-regresyon-stratejisi"
     ],
     "title_en": "Software Testing: Order of Priority",
     "description_en": "The text presents a three-term criterion for ordering test types by when they are set up, a list divided into seven groups by that criterion, and sections addressing two questions the list does not answer. In order of precedence, the criterion asks whether the failure class has occurred in this system, how long setup takes and how long a run takes; the first term dominates. There are two exceptions: zero-cost checks stay on permanently, and a new feature's own rule is written for every feature without requiring a prior failure. The groups range from zero-cost checks, through pinning existing code in the first week, input design and pipeline integrity, user flows, and tests requiring real dependencies, to slow tests run nightly and families kept off until the first failure. The writing-time section records that a regression test protects only a failure that has already occurred, and prescribes writing invariants for failures not yet seen, checked at test time through property-based testing and at run time through runtime assertions. Writing the rule before the code and seeing it red is justified through TDD and BDD; mutation testing shows where the test suite is blind, and variant analysis shows the other instances of a found failure. For the deploy moment and the dropped request, a family of graceful shutdown, a readiness signal, idempotency, retry with backoff, job leases and a circuit breaker is defined. The final section reports an intersection scan conducted at the points where components meet, which produced about fifty findings, and its counterparts in the literature such as STPA, FMEA, HAZOP and differential testing; for the next scan it recommends using STPA, HAZOP and differential testing together.",
@@ -1357,7 +1386,8 @@
       "yazılım-mimarisi-kuruluş-ve-girdi-varsayımları",
       "üretim-felsefesi-deming-den-sola-kaydırmaya",
       "kalite-testi-bisküvi-fabrikasından-öğrenmek",
-      "hata-avcılığı-yazılımda-kalite-pratikleri"
+      "hata-avcılığı-yazılımda-kalite-pratikleri",
+      "yazılım-testi-katmanlı-regresyon-stratejisi"
     ]
   },
   {
@@ -1537,7 +1567,8 @@
       "uzay-bilimlerinden-yazılım-mühendisliğine-dersler",
       "yazılım-testi-dört-soru-ile-test-sınıflandırması",
       "yazılım-testi-öncelik-sırası",
-      "hata-avcılığı-yazılımda-kalite-pratikleri"
+      "hata-avcılığı-yazılımda-kalite-pratikleri",
+      "yazılım-testi-katmanlı-regresyon-stratejisi"
     ],
     "title_en": "Software Testing: The Oracle Problem",
     "description_en": "The text treats the basis on which a test declares pass or fail as a problem separate from the test itself and names it the oracle problem. Software testing involves two independent decisions: which input to run the program with, and whether the result is accepted as correct. In most real systems the expected output cannot be written in advance, so correctness is checked not against an absolute value but through a relation between two executions. Oracle types are classified: specified, derived (metamorphic, regression, differential, inverse, model-based), implicit, human and partial oracles. In metamorphic testing, source and follow-up test case, transformation function and output relation are defined; equality, ordering, scaling, composition and containment relations are illustrated. The inheritance of the terminology from mathematical names such as symmetry, invariance, idempotency and permutation is presented as the main reason the method is little known in industry. The method's blind spot is recorded: if both executions produce the same wrong result the relation holds and the test passes; on a violation it is not known which side is wrong. Scenario discovery is defined as a problem of imagination; property-based testing, fuzzing, mutation testing and feedback from real failures are given as the remedy. Ariane 5, Mars Climate Orbiter and the 737 MAX are used to argue that the most expensive failures are validation, not verification, failures; the layers used in high-cost domains do not eliminate error but cover one another's blind spots. Two questions are left open: whether relation discovery can be systematized, and the cost-benefit balance of runtime invariant checking.",
@@ -1613,7 +1644,8 @@
       "yazılım-testi-öncelik-sırası",
       "güvenilirlik-mühendisliği-yöntemler-ve-alternatifleri-haritası",
       "hata-avcılığı-yazılımda-kalite-pratikleri",
-      "kontrol-sistemleri-açık-ve-kapalı-döngü-tasarımı"
+      "kontrol-sistemleri-açık-ve-kapalı-döngü-tasarımı",
+      "yazılım-testi-katmanlı-regresyon-stratejisi"
     ]
   },
   {
@@ -3808,7 +3840,8 @@
       "mu-hendislikte-go-ru-nu-rlu-k-gu-c-ve-stratejik-konumlanma",
       "yazılım-mimarisi-seçim-zamanlama-ve-kademeli-değişim",
       "1976-nın-ekonomisi-kod-i-ncelemesinin-kökeni-ve-sürekliliği",
-      "ağır-rejim-hafif-rejim"
+      "ağır-rejim-hafif-rejim",
+      "yazılım-testi-katmanlı-regresyon-stratejisi"
     ],
     "belge": "BELGE-114"
   },
@@ -5250,7 +5283,8 @@
     "related": [
       "03-akademik-ve-endustriyel-karsiliklar",
       "07-yapay-zekaya-mimari-tanimlama-geometri-once-yaklasim",
-      "test-mühendisliği-yeterlilik-etkinlik-güvenilirlik"
+      "test-mühendisliği-yeterlilik-etkinlik-güvenilirlik",
+      "yazılım-testi-katmanlı-regresyon-stratejisi"
     ],
     "belge": "BELGE-043"
   },
