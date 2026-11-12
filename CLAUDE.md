@@ -4,8 +4,8 @@ Bu dosya her oturumda otomatik okunur. Kısa tutulacak; şişerse okunmaz olur.
 
 ## Bu proje ne
 
-Ömer Faruk Yavuz'un yazdığı makalelerin arşivi değil, **korpusu**. 295 kayıt
-(283'ü açık, 12'si gizli müzik/rehber). Üstünde ikinci mertebeden iki katman
+Ömer Faruk Yavuz'un yazdığı makalelerin arşivi değil, **korpusu**. 296 kayıt
+(284'ü açık, 12'si gizli müzik/rehber). Üstünde ikinci mertebeden iki katman
 var: korpustan türetilmiş **34 duvar** (karar düzeyi) ve **62 kod duvarı**
 (klavye düzeyi) — hepsi "X'te geçerli / Y'de kırılır" formunda.
 
