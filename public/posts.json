@@ -1,5 +1,30 @@
 [
   {
+    "slug": "yazılım-tasarımı-özellik-etkileşimi-problemi",
+    "title": "Yazılım Tasarımı: Özellik Etkileşimi Problemi",
+    "date": "2026-11-13",
+    "description": "Not, tek başına doğru çalışan iki ya da daha fazla kuralın birlikte devreye girdiğinde sistemi yanlış davranışa götürmesi olarak tanımlanan özellik etkileşimi problemini ele alır. Kusur kurallardan birinde değil kesişimlerinde bulunduğu için kuralları tek tek sınamak onu göstermez. Terim 1980'lerin sonunda telefon santrali yazılımlarından çıkmıştır; Bowen ve arkadaşlarının adlandırması, 1992'de başlayan Feature Interaction Workshop dizisi ve Calder ile arkadaşlarının değerlendirmesi kaynak olarak verilir. Standart örnek, meşgulde arama yönlendirme ile bekleyen aramanın aynı olaya sahip çıkmasıdır. İki tür ayrılır: iki kuralın aynı tetikleyiciye sahip çıkması ve bir kuralın ötekinin örtük varsayımını bozması; ikincisi, arama engellemenin yönlendirme yoluyla delinmesi örneğinde olduğu gibi görünür bir çakışma üretmediği için daha zor bulunur. Haber paketi üreten bir üründen üç örnek verilir: sessizlik kırpma ile soundbite koruma, tekrar gösterim ile atlama, isim bandı ile altyazının ekran alanını paylaşması. On kural 45 ikili ve 120 üçlü kesişim üretir ve her yeni kural yeni kesişimler doğurur. Dört test türünün işlevi tablo hâlinde eşlenir: kombinasyon testi kesişimleri açar, değişmez denetimi sonucu bozan durumu yakalar, metamorfik test önemsiz girdi farkının başka kuralı tetiklemesini gösterir, onaylı referans eski doğru sonucun bozulduğunu gösterir. Test kesişimi bulur ama hangi kuralın kazanacağına karar vermez; çözüm tasarımda açık bir öncelik sırası, karşılıklı dışlama ya da birleştirme, tek karar noktası ve kazanan kuralın kaydıdır.",
+    "pdf": "Yazılım_Tasarımı__Özellik_Etkileşimi_Problemi.pdf",
+    "thumb": "thumbs/yazılım-tasarımı-özellik-etkileşimi-problemi.png",
+    "addedAt": "2026-11-13T23:20:01.874Z",
+    "pages": 8,
+    "belge": "BELGE-304",
+    "title_en": "Software Design: The Feature Interaction Problem",
+    "description_en": "The note addresses the feature interaction problem, defined as two or more rules that each work correctly on their own leading the system into wrong behaviour when they fire together. Because the defect lies not in any single rule but in their intersection, testing rules one by one cannot reveal it. The term arose in telephone switching software in the late 1980s; Bowen and colleagues' naming, the Feature Interaction Workshop series begun in 1992, and the review by Calder and colleagues are given as sources. The standard example is call forwarding on busy and call waiting both claiming the same event. Two kinds are distinguished: two rules claiming the same trigger, and one rule breaking another's implicit assumption; the second, as when call blocking is bypassed through forwarding, produces no visible conflict and is harder to find. Three examples are drawn from a product that generates news packages: silence trimming against soundbite protection, replay against skipping, and a name band and subtitles competing for screen space. Ten rules produce 45 pairwise and 120 three-way intersections, and every new rule creates new ones. The role of four test types is mapped in a table: combinatorial testing opens the intersections, invariant checks catch a broken result, metamorphic testing shows an irrelevant input change triggering another rule, and approval testing shows an earlier correct result being broken. Testing finds intersections but does not decide which rule wins; the remedy lies in design: an explicit priority order, mutual exclusion or merging, a single decision point, and a record of the winning rule.",
+    "priority": 9,
+    "related": [
+      "yazılım-testi-öncelik-sırası",
+      "yazılım-testi-dört-soru-ile-test-sınıflandırması",
+      "yazılım-testi-oracle-problemi",
+      "yazılım-testi-katmanlı-regresyon-stratejisi",
+      "kalite-yönetimi-gereksiz-testin-ayıklanması",
+      "hata-avcılığı-yazılımda-kalite-pratikleri",
+      "test-mühendisliği-yeterlilik-etkinlik-güvenilirlik",
+      "sistem-güvenliği-kesişimde-doğan-hatalar",
+      "arayüz-tasarımı-durum-makinesi-ile-denetim-modelleme"
+    ]
+  },
+  {
     "slug": "sosyal-beceri-özgüven-ve-umursamazlık-ayrımı",
     "title": "Sosyal Beceri: Özgüven ve Umursamazlık Ayrımı",
     "date": "2026-11-12",
@@ -544,7 +569,8 @@
       "gerekçenin-taşınması-kuralların-aşınma-mekanizması-ve-bilgi-kaybı",
       "kaybolan-gerekçe-devir-teslimsiz-kod-tabanlarında-çalışma",
       "yazılım-testi-öncelik-sırası",
-      "güvenilirlik-mühendisliği-yöntemler-ve-alternatifleri-haritası"
+      "güvenilirlik-mühendisliği-yöntemler-ve-alternatifleri-haritası",
+      "yazılım-tasarımı-özellik-etkileşimi-problemi"
     ]
   },
   {
@@ -570,7 +596,8 @@
       "kalite-testi-bisküvi-fabrikasından-öğrenmek",
       "hata-avcılığı-yazılımda-kalite-pratikleri",
       "dayanıklılık-mühendisliği-chaos-monkey-ve-gizli-bağımlılıklar",
-      "kalite-yönetimi-gereksiz-testin-ayıklanması"
+      "kalite-yönetimi-gereksiz-testin-ayıklanması",
+      "yazılım-tasarımı-özellik-etkileşimi-problemi"
     ]
   },
   {
@@ -895,7 +922,8 @@
       "mühendislik-bilgisi-i-deal-ile-gerçek-arasındaki-boşluk",
       "kontrol-sistemleri-açık-ve-kapalı-döngü-tasarımı",
       "yazılım-kalitesi-deneyim-borcu",
-      "yazılım-testi-katmanlı-regresyon-stratejisi"
+      "yazılım-testi-katmanlı-regresyon-stratejisi",
+      "yazılım-tasarımı-özellik-etkileşimi-problemi"
     ],
     "description_en": "The text argues that software quality is achieved not by a single test or tool but by combining layers whose holes lie in different places, as in Reason's Swiss cheese model, and starts from Dijkstra's finding that testing cannot show the absence of bugs. The layers are, in order, preventing bugs before they are written, catching them by human eye, designing tests correctly, having the machine search for bugs, system and resilience, interface and security, delivery and production, and learning from bugs found. The prevention layer covers TDD, complexity limits, types that make invalid states unrepresentable, fail fast and database constraints; the review layer covers single-purpose PRs of 200 to 400 lines, checklists, BDD, threat modeling and FMEA. Test design treats boundary values, decision tables, state transitions, pairwise and error guessing, and against the oracle problem golden, characterization and contract tests. The machine layer covers fuzzing, property-based, differential and metamorphic testing, symbolic execution and the race detector; mutation testing measures the test strength that coverage cannot show. Drawing on Fenton and Ohlsson, the text records that bugs concentrate in a small share of modules and that test effort should be directed to risky areas through hotspot analysis. Quality is defined as the distance between intent and behaviour and divided into the functions of prevention, detection, mitigation and learning. The proposed core set is small PRs, a mandatory linter and race detector, boundary-value tests, fuzzing for parsers, a regression test for every bug and error tracking in production. When quality investment is sufficient is left as an open question."
   },
@@ -1026,7 +1054,8 @@
       "yazılım-testi-öncelik-sırası",
       "mühendislik-güven-bir-his-değil-kanıttır",
       "mühendislik-bilgisi-i-deal-ile-gerçek-arasındaki-boşluk",
-      "yazılım-kalitesi-deneyim-borcu"
+      "yazılım-kalitesi-deneyim-borcu",
+      "yazılım-tasarımı-özellik-etkileşimi-problemi"
     ],
     "title_en": "System Safety: Failures Born at Intersections",
     "description_en": "The text examines failures that arise at intersections, the points where individually correct parts of a complex system meet, and argues that the most effective defence against them is not to catch the failure at test time but to make it impossible at design time. The concepts of intersection, invariant and entry gate are defined; the scope is limited to medium-sized web systems with an asynchronous media processing pipeline. The first section grounds the emergence of failure at intersections in Perrow's normal accidents theory, Reason's Swiss cheese model, Vaughan's normalization of deviance and Hollnagel's Safety-II approach. The second section treats the evaluation of findings through risk-based testing, defect clustering, the Goel-Okumoto defect discovery curve, service level objectives with error budgets, and blameless postmortems. The third section carries the poka-yoke principle into software: making illegal states unrepresentable, parsing instead of validating, a single source of rules, bulkheads and load shedding. Fuzzing, deterministic simulation testing, canary releases and shadow traffic are presented as complementary test types. The architecture section shows that Domain-Driven Design prevents part of these failures through ubiquitous language and rules held in the model, while Event-Driven Architecture multiplies ordering ambiguity, redelivery, partial completion and loss of traceability. The final section describes the foundation to be built in the same order in every project: a pre-code document, skeleton, environment, test regime, delivery and routine maintenance. It leaves open the difficulty of keeping the pre-code document in sync with the code and the cost of retrofitting deterministic simulation.",
@@ -1873,7 +1902,8 @@
       "sınıfı-kapatmak-güvenlik-bulgularının-tip-tasarımındaki-karşılığı",
       "girdi-i-şlemede-temsil-boşluğu",
       "kullanılabilirlik-algı-sınırlarından-türeyen-tasarım-kuralları",
-      "durum-vektörü-ve-durum-uzayı-yaklaşımı"
+      "durum-vektörü-ve-durum-uzayı-yaklaşımı",
+      "yazılım-tasarımı-özellik-etkileşimi-problemi"
     ],
     "title_en": "Interface Design: Modelling Controls with a State Machine",
     "description_en": "The text argues that an interface button does not decide but emits events, and that whether a click takes effect is determined not by the button but by the state the system is in when the event arrives. It traces the divergence between visible and real state to independent boolean flags: five flags yield thirty-two combinations, while five discrete states make the rest unrepresentable. The cases in which a submit event is swallowed are separated into transient, structural and nothing-to-do; a free-form list is shown to produce duplication and gaps, which a table bound to states exposes. Eight axes of an event are defined: presence, time, order, frequency, interval, duration, context and concurrency. Besides an identifier, the record holds only source, time and state; the rest is computed; context cannot be recovered afterwards and must therefore be written when the event occurs. A transition carries source state, event, guard and action; when a server response and a cancel collide, the cancel must win. Submit and cancel are bound not to each other but to a shared state. In the state-event matrix, no row having two filled cells shows that mutual exclusion follows without being written separately; the fully empty success row shows a missing exit; the empty cancel cell in the error row shows an unconsidered case. Double submission is prevented by the matrix's empty cell, whereas hardware-induced repeats need a time filter in the event stream, not the logic layer. Limits are recorded: on simple screens the model costs more than the problem it solves, and the cost of logging context and how a swallowed event should be reported to the user are left as open questions.",
@@ -1944,7 +1974,8 @@
       "kontrol-sistemleri-açık-ve-kapalı-döngü-seçimi",
       "hata-avcılığı-yazılımda-kalite-pratikleri",
       "yazılım-testi-katmanlı-regresyon-stratejisi",
-      "kalite-yönetimi-gereksiz-testin-ayıklanması"
+      "kalite-yönetimi-gereksiz-testin-ayıklanması",
+      "yazılım-tasarımı-özellik-etkileşimi-problemi"
     ],
     "title_en": "Software Testing: Order of Priority",
     "description_en": "The text presents a three-term criterion for ordering test types by when they are set up, a list divided into seven groups by that criterion, and sections addressing two questions the list does not answer. In order of precedence, the criterion asks whether the failure class has occurred in this system, how long setup takes and how long a run takes; the first term dominates. There are two exceptions: zero-cost checks stay on permanently, and a new feature's own rule is written for every feature without requiring a prior failure. The groups range from zero-cost checks, through pinning existing code in the first week, input design and pipeline integrity, user flows, and tests requiring real dependencies, to slow tests run nightly and families kept off until the first failure. The writing-time section records that a regression test protects only a failure that has already occurred, and prescribes writing invariants for failures not yet seen, checked at test time through property-based testing and at run time through runtime assertions. Writing the rule before the code and seeing it red is justified through TDD and BDD; mutation testing shows where the test suite is blind, and variant analysis shows the other instances of a found failure. For the deploy moment and the dropped request, a family of graceful shutdown, a readiness signal, idempotency, retry with backoff, job leases and a circuit breaker is defined. The final section reports an intersection scan conducted at the points where components meet, which produced about fifty findings, and its counterparts in the literature such as STPA, FMEA, HAZOP and differential testing; for the next scan it recommends using STPA, HAZOP and differential testing together.",
@@ -1975,7 +2006,8 @@
       "üretim-felsefesi-deming-den-sola-kaydırmaya",
       "kalite-testi-bisküvi-fabrikasından-öğrenmek",
       "hata-avcılığı-yazılımda-kalite-pratikleri",
-      "yazılım-testi-katmanlı-regresyon-stratejisi"
+      "yazılım-testi-katmanlı-regresyon-stratejisi",
+      "yazılım-tasarımı-özellik-etkileşimi-problemi"
     ]
   },
   {
@@ -2156,7 +2188,8 @@
       "yazılım-testi-dört-soru-ile-test-sınıflandırması",
       "yazılım-testi-öncelik-sırası",
       "hata-avcılığı-yazılımda-kalite-pratikleri",
-      "yazılım-testi-katmanlı-regresyon-stratejisi"
+      "yazılım-testi-katmanlı-regresyon-stratejisi",
+      "yazılım-tasarımı-özellik-etkileşimi-problemi"
     ],
     "title_en": "Software Testing: The Oracle Problem",
     "description_en": "The text treats the basis on which a test declares pass or fail as a problem separate from the test itself and names it the oracle problem. Software testing involves two independent decisions: which input to run the program with, and whether the result is accepted as correct. In most real systems the expected output cannot be written in advance, so correctness is checked not against an absolute value but through a relation between two executions. Oracle types are classified: specified, derived (metamorphic, regression, differential, inverse, model-based), implicit, human and partial oracles. In metamorphic testing, source and follow-up test case, transformation function and output relation are defined; equality, ordering, scaling, composition and containment relations are illustrated. The inheritance of the terminology from mathematical names such as symmetry, invariance, idempotency and permutation is presented as the main reason the method is little known in industry. The method's blind spot is recorded: if both executions produce the same wrong result the relation holds and the test passes; on a violation it is not known which side is wrong. Scenario discovery is defined as a problem of imagination; property-based testing, fuzzing, mutation testing and feedback from real failures are given as the remedy. Ariane 5, Mars Climate Orbiter and the 737 MAX are used to argue that the most expensive failures are validation, not verification, failures; the layers used in high-cost domains do not eliminate error but cover one another's blind spots. Two questions are left open: whether relation discovery can be systematized, and the cost-benefit balance of runtime invariant checking.",
@@ -2233,7 +2266,8 @@
       "güvenilirlik-mühendisliği-yöntemler-ve-alternatifleri-haritası",
       "hata-avcılığı-yazılımda-kalite-pratikleri",
       "kontrol-sistemleri-açık-ve-kapalı-döngü-tasarımı",
-      "yazılım-testi-katmanlı-regresyon-stratejisi"
+      "yazılım-testi-katmanlı-regresyon-stratejisi",
+      "yazılım-tasarımı-özellik-etkileşimi-problemi"
     ]
   },
   {
