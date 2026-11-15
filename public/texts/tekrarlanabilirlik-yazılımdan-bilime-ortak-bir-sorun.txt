@@ -1,0 +1,254 @@
+Tekrarlanabilirlik: Yazılımdan Bilime Ortak Bir
+Sorun
+Ömer Faruk Yavuz
+November 2026
+Özet
+Büyük dil modeli kullanan sistemler aynı girdiyle her koşuda aynı sonucu ver-
+mez; bu özelliğe belirsizlik (nondeterminism) denir ve testte kararsız (flaky)
+test olarak görünür. Modelin sıcaklık ayarını 0’a çekmek belirsizliği ortadan
+kaldırmaz: bir ölçümde gpt-4o-mini aynı girdiyle koşuların yaklaşık %24’ünde
+farklı çıktı üretmiştir (Nicholson, 2026). Tek bir başarılı koşu bu yüzden güvenilirlik
+kanıtı sayılamaz. Güvenilirliği ölçmek için önerilen pass^k ölçüsü, aynı işin k
+bağımsız denemesinin tamamının başarılı olmasını şart koşar. τ -bench ölçümünde
+bir ajanın tek denemedeki %61,2’lik başarısı sekiz denemede %25’in altına inmiştir
+(Yao ve ark., 2024). Mevcut test araçları ise her koşuyu tek başına değerlendirir
+ve tekrarlanan koşular arasındaki farkı ölçmez (Dobslaw ve ark., 2025). Aynı
+sorun eşzamanlılık hatalarında, dağıtık sistemlerde, model eğitiminde, bilimsel
+deneylerde ve üretim kalite kontrolünde de vardır. Hepsinde çözüm aynıdır: tek
+koşuya güvenilmez, koşu tekrarlanır ve başarı bir oran olarak ölçülür.
+1
+
+-- 1 of 9 --
+
+Giriş
+Geleneksel yazılım testinin arkasında sessiz bir varsayım durur: aynı girdi aynı
+çıktıyı üretir. Bu varsayım doğruysa bir testin bir kez geçmesi, her zaman
+geçeceği anlamına gelir. Büyük dil modeli (large language model, LLM) kullanan
+sistemlerde bu varsayım geçerli değildir. Model, cevabını olasılıklara göre seçilen
+parçalardan kurar; bu yüzden aynı soru iki ayrı koşuda iki ayrı cevap alabilir.
+Bu notta üç terim kullanılmaktadır:
+• Belirsizlik (nondeterminism): Bir sistemin aynı girdiyle farklı koşularda
+farklı sonuç vermesi.
+• Kararsız test (flaky test): Test edilen sistemde hiçbir şey değişmediği
+hâlde bazen geçen, bazen düşen test.
+• Ajan (agent): Bir dil modelinin araç çağırarak ve birden çok adım atarak
+bir işi baştan sona yürüttüğü sistem.
+Yaygın kabul, bir işin bir kez başarıyla tamamlanmasının o işin “çalıştığını”
+gösterdiğidir. Belirsiz sistemlerde bu kabul yanıltır: tek başarı, sistemin o
+işi yapabildiğini gösterir, her seferinde yaptığını göstermez. Not bu iki ifade
+arasındaki farkı, farkın nasıl ölçüldüğünü ve aynı sorunun başka hangi alanlarda
+bulunduğunu kapsar. Belirsizliğin model içindeki teknik kaynakları (örnekleme
+yöntemleri, donanım farkları) ayrıntılı olarak ele alınmamıştır.
+2
+
+-- 2 of 9 --
+
+Belirsizlik ve Kararsız Test
+Sorunun tanımı
+Huo, Pan ve Roychoudhury (2026), belirsizliği ajan testinin en temel engel-
+lerinden biri olarak tanımlar. Gerekçe şudur: model çıkarımı olasılığa dayandığı
+için aynı testin tekrarlanan koşuları farklı son çıktılar, farklı araç çağrıları ve
+farklı akıl yürütme yolları üretebilir. Sonuçta bir test, sistemde hiçbir değişiklik
+olmadan bir koşuda geçip diğerinde düşebilir. Yazarlar bu durumu geleneksel
+yazılımdaki kararsız testlere benzetir.
+Farkın önemi şuradadır: geleneksel yazılımda kararsız test bir kusur sayılır ve
+giderilmeye çalışılır. Model kullanan sistemde ise kararsızlık sistemin doğasından
+gelir; giderilemez, yalnızca ölçülebilir ve sınırlanabilir.
+Sıcaklık 0 belirsizliği gidermez
+Sıcaklık (temperature), modelin cevap üretirken ne kadar rastgele seçim ya-
+pacağını belirleyen ayardır. Yaygın beklenti, sıcaklık 0’a çekildiğinde modelin
+her seferinde aynı cevabı vereceğidir. Nicholson (2026) bu beklentiyi ölçmüş ve
+doğrulamamıştır. Sıcaklık 0’da, tamamen aynı girdiyle yapılan tekrarlarda:
+Model Farklı çıktı oranı Ortalama benzerlik (Jaccard)
+gpt-4o-mini yaklaşık %24 0,89
+llama3.1-8b yaklaşık %9 0,97
+C alışma bu değişkenliği hem modelin kendisine hem de modeli çalıştıran
+altyapıya bağlar. Sıcaklık 0,7’de ise neredeyse her koşu yeni bir cevap üretmiştir.
+Pratik sonuç şudur: “belirleyici” ayarlar tekrarlanabilirliği garanti etmez.
+Mevcut test araçlarının eksiği
+Dobslaw, Feldt, Yoon ve Yoo (2025), altı açık kaynak test aracını incelemiş ve
+bu araçların test koşularını birbirinden kopuk tekil olaylar olarak ele aldığını
+bulmuştur. Araçlarda sonuçları birleştiren açık bir mekanizma yoktur; model
+sürümleri, ayarlar ve tekrarlanan koşular arasındaki değişkenlik yeterince yakalan-
+maz. Yazarların önerisi, doğruluğun geçti/kaldı biçiminde tek bir değer olarak
+değil, sonuçların dağılımı olarak ele alınmasıdır.
+3
+
+-- 3 of 9 --
+
+Güvenilirliğin Ölçülmesi
+pass@k ve pass^k
+Aynı iş k kez denendiğinde sonuç iki ayrı biçimde özetlenebilir:
+• pass@k: k denemeden en az biri başarılıysa iş geçmiş sayılır. Bu ölçü
+sistemin o işi yapabilip yapamadığını gösterir.
+• pass^k: k denemenin tamamı başarılıysa iş geçmiş sayılır. Bu ölçü sis-
+temin o işi her seferinde yapıp yapmadığını gösterir.
+pass^k ölçüsünü τ -bench makalesi önermiştir (Yao ve ark., 2024). Tanımı,
+k bağımsız denemenin hepsinin başarılı olma olasılığının işler üzerinden orta-
+lamasıdır. Bir iş için n deneme yapılmış ve bunların c tanesi başarılı olmuşsa
+tahmin şu biçimde hesaplanır:
+pass^k = Eiş
+[︃
+ 
+ck
+nk
+]︃
+k = 1 için iki ölçü aynı değeri verir. k büyüdükçe pass@k yükselir, pass^k
+düşer. Müşteriyle konuşan bir ajan için anlamlı olan ikincisidir: aynı sorunu
+yaşayan sekiz müşteriden birine doğru hizmet vermek yeterli değildir.
+τ -bench bulgusu
+τ -bench, ajanların müşteri hizmeti benzeri işlerdeki başarısını ölçen bir kıyaslama
+setidir. Perakende (retail ) alanında, araç çağırma yeteneğiyle çalışan gpt-4o
+ajanı için sonuçlar şöyledir:
+Ölçü Değer
+pass^1 %61,2
+pass^8 %25’in altı
+Makale sekiz deneme için kesin bir sayı vermez, yalnızca üst sınırı bildirir;
+değer bir grafikte gösterilmiştir. Kıyaslamayı hazırlayan Sierra şirketinin yazısı
+aynı değeri “yaklaşık %25” olarak aktarır ve bunu, ajanın aynı sorunu sekiz ayrı
+müşteride doğru çözme şansının kabaca dörtte bir olması biçiminde yorumlar
+(Sierra, 2024). Bu sayılar tek bir modele ve tek bir alana aittir; bütün modeller
+için genel bir oran olarak okunmamalıdır.
+Pratik kural olarak kullanım
+Ölçü, tek bir iş paketi için geçti/kaldı kuralına çevrilebilir: paket, birbirinden
+bağımsız beş taze koşunun beşi de temizse tamamlanmış sayılır. Bu kural
+pass^5 mantığını taşır. Aradaki fark şudur: makaledeki ölçü çok sayıda iş
+üzerinden ortalanan bir orandır, buradaki kullanım ise tek bir iş için eşik değeridir.
+Koşuların “taze” olması, yani birbirinin çıktısını ya da durumunu görmemesi
+şarttır; aksi hâlde denemeler bağımsız olmaz ve ölçü anlamını yitirir.
+4
+
+-- 4 of 9 --
+
+Bir hata düzelince diğerinin çıkması
+Ayrı ama komşu bir sorun, bir hatanın düzeltilmesinin başka bir hatayı ortaya
+çıkarmasıdır. Yazılım mühendisliğinde bu duruma özellik etkileşimi problemi
+(feature interaction problem) denir; gündelik adı köstebek vurmacadır (whack-a-
+mole). Belirsizlikten farkı, sebebin rastgelelik değil parçalar arasındaki bağımlılık
+olmasıdır. Bu terimin literatürdeki kökeni bu not için doğrulanmamıştır.
+5
+
+-- 5 of 9 --
+
+Aynı Sorunun Görüldüğü Diğer Alanlar
+“Aynı girdi, farklı sonuç; tek başarı güven vermez” kalıbı dil modellerine özgü
+değildir.
+Yazılım
+Kararsız testler
+Kod değişmeden bazen geçen, bazen düşen testlerdir. Luo ve arkadaşları (2014),
+açık kaynak projelerdeki kararsız test düzeltmelerini incelemiş ve en sık sebe-
+pler arasında zamanlamaya bağlı beklemeleri, eşzamanlılığı ve testlerin çalışma
+sırasına bağımlılığı saymıştır.
+Eşzamanlılık hataları
+Yarış durumu (race condition), iki iş parçacığının aynı veriye hangi sırayla
+eriştiğine göre sonucun değişmesidir. Sıra her koşuda farklı olabildiği için hata
+yüz koşuda bir kez görünebilir.
+Heisenbug
+˙Incelenmeye çalışıldığında kaybolan hatadır. Kayıt satırı eklemek ya da hata
+ayıklayıcı bağlamak programın zamanlamasını değiştirir ve hata görünmez olur.
+Gray (1985), bu tür geçici hataları tekrar denendiğinde kaybolan hatalar olarak
+tanımlamış ve kalıcı hatalardan ayırmıştır.
+Dağıtık sistemler
+Birden çok makinenin ağ üzerinden birlikte çalıştığı sistemlerde mesajlar gecike-
+bilir, kaybolabilir ya da sırası değişebilir. Aynı istek bir kez başarıyla tamam-
+lanır, bir kez zaman aşımına düşer.
+Tekrarlanamayan derlemeler
+Aynı kaynak koddan farklı çıktı dosyası üretilmesidir. Sebepler arasında dosyaya
+gömülen zaman damgaları, dosyaların işlenme sırası ve sürümü sabitlenmemiş
+bağımlılıklar bulunur.
+Kayan nokta hesabı
+Ondalıklı sayılar bilgisayarda sınırlı duyarlıkla saklanır. ˙Işlemlerin sırası ya da
+işlemci değiştiğinde yuvarlama farklı yerde yapılır ve sonucun son basamakları
+değişir (Goldberg, 1991).
+6
+
+-- 6 of 9 --
+
+Yapay zekâ
+Model eğitimi
+Aynı kod ve aynı veriyle yapılan eğitimler, başlangıçtaki rastgele sayı tohumu
+(seed ) değiştiğinde farklı sonuç verir. Henderson ve arkadaşları (2018), pekiştirmeli
+öğrenmede yalnızca tohum değiştirilerek birbirinden belirgin biçimde ayrışan
+sonuçlar elde edilebildiğini göstermiştir. Tek koşuya dayanan “bu yöntem daha
+iyi” iddiası bu yüzden güvenilir değildir.
+C ok adımlı işler
+Belirsizlik adımlar boyunca çarpılarak büyür. Her adımı %95 güvenilir olan on
+adımlık bir işin tamamının başarılı olma olasılığı, adımlar bağımsızsa:
+0,9510 ≈ 0,60
+Tek tek bakıldığında güvenilir görünen adımlar, zincir hâlinde yaklaşık %60
+güvenilir bir iş üretir.
+Yazılım dışı alanlar
+Bilimde tekrarlanabilirlik
+Bir kez elde edilen bulgunun, deney tekrarlandığında elde edilememesidir. Open
+Science Collaboration (2015), psikoloji dergilerinde yayımlanmış 100 çalışmayı
+tekrarlamış ve özgün çalışmaların büyük çoğunluğu anlamlı sonuç bildirmişken
+tekrarların yaklaşık üçte birinde anlamlı sonuç bulmuştur.
+Üretimde kalite kontrol
+Tek bir parçanın sağlam çıkması üretim hattının sağlam olduğunu göstermez.
+Hattın yeterliliği, çok sayıda parçanın tekrarlanan ölçümüyle ve ölçülerin ne
+kadar dağıldığına bakılarak değerlendirilir.
+Ölçüm sistemleri
+Aynı parça aynı kişi tarafından aynı aletle ölçüldüğünde farklı değerler çıkabilir.
+Ölçümün bu yönüne tekrarlanabilirlik (repeatability) denir ve ayrı bir analizle
+sınanır.
+Tıbbi testler
+Aynı örnek iki kez test edildiğinde farklı sonuç verebilir. Önemli sonuçların
+ikinci bir testle doğrulanması bu yüzden yerleşik bir uygulamadır.
+7
+
+-- 7 of 9 --
+
+Sonuç
+Belirsiz bir sistemde “çalışıyor” ifadesi tek başına eksiktir; yanına bir oran ve bir
+tekrar sayısı gerekir. “Beş koşunun beşinde temiz” ile “bir koşuda temiz” aynı
+cümle değildir ve ikincisinden birincisi çıkarılamaz. Bunun pratik karşılığı, bir
+işin bittiğine karar veren kuralın tek koşuya değil tekrarlanan bağımsız koşulara
+bağlanmasıdır.
+C erçevenin sınırları vardır. Birincisi maliyettir: her işi beş ya da sekiz
+kez koşturmak süreyi ve harcamayı aynı oranda artırır; k değerinin seçimi bu
+yüzden güvenilirlik ile maliyet arasında bir tercihtir. ˙Ikincisi, k denemenin
+tamamının geçmesi sistemin güvenilir olduğunu kanıtlamaz, yalnızca güvenilmez
+olma olasılığını düşürür; beş temiz koşu, altıncının da temiz olacağını garanti et-
+mez. Üçüncüsü, ölçü denemelerin bağımsız olduğunu varsayar; koşular ortak bir
+durumu paylaşıyorsa sonuç olduğundan iyi görünür. Dördüncüsü, ölçü yalnızca
+başarının tutarlılığına bakar; başarının doğru tanımlanıp tanımlanmadığına,
+yani testin kendisinin doğru şeyi sınayıp sınamadığına bakmaz.
+Açık kalan sorular şunlardır: Belirli bir iş türü için k kaç olmalıdır ve bu
+sayı neye göre seçilir? Belirsizlikten kaynaklanan düşüşler ile parçalar arası
+bağımlılıktan kaynaklanan düşüşler (özellik etkileşimi) koşu sonuçlarına bakılarak
+birbirinden nasıl ayrılır? Nicholson’ın ölçtüğü değişkenliğin ne kadarı modelden,
+ne kadarı altyapıdan gelir?
+Diğer alanlarla kurulan bağ şunu gösterir: üretimdeki süreç yeterliliği, bil-
+imdeki tekrar çalışmaları ve tıptaki doğrulama testleri aynı soruna verilmiş
+aynı cevabın farklı adlarıdır. Dil modeli kullanan sistemlerin testi, bu alanların
+çoktan yerleştirdiği alışkanlığı, yani tek gözleme güvenmemeyi, yeni öğrenmektedir.
+Kaynaklar
+• Dobslaw, F., Feldt, R., Yoon, J. ve Yoo, S. (2025). Challenges in Testing
+Large Language Model Based Software: A Faceted Taxonomy. arXiv:2503.00481.
+• Goldberg, D. (1991). What Every Computer Scientist Should Know About
+Floating-Point Arithmetic. ACM Computing Surveys.
+• Gray, J. (1985). Why Do Computers Stop and What Can Be Done About
+It? Tandem Computers teknik raporu.
+• Henderson, P., Islam, R., Bachman, P., Pineau, J., Precup, D. ve Meger,
+D. (2018). Deep Reinforcement Learning that Matters. AAAI Conference
+on Artificial Intelligence.
+• Huo, Y., Pan, R. ve Roychoudhury, A. (2026). Towards Risk-free AI Agent
+Deployment. arXiv:2608.16411.
+• Luo, Q., Hariri, F., Eloussi, L. ve Marinov, D. (2014). An Empirical
+Analysis of Flaky Tests. ACM SIGSOFT International Symposium on
+Foundations of Software Engineering (FSE).
+8
+
+-- 8 of 9 --
+
+• Nicholson, C. (2026). Quantifying Non-deterministic Drift in Large Lan-
+guage Models. arXiv:2601.19934.
+• Open Science Collaboration (2015). Estimating the Reproducibility of
+Psychological Science. Science.
+• Sierra (2024). τ -bench: Benchmarking AI Agents for the Real World.
+Sierra blog yazısı, sierra.ai/blog/benchmarking-ai-agents.
+• Yao, S., Shinn, N., Razavi, P. ve Narasimhan, K. (2024). τ -bench: A
+Benchmark for Tool-Agent-User Interaction in Real-World Domains. arXiv:2406.12045.
+9
+
+-- 9 of 9 --

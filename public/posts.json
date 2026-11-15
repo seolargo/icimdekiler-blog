@@ -1,5 +1,105 @@
 [
   {
+    "slug": "tekrarlanabilirlik-yazılımdan-bilime-ortak-bir-sorun",
+    "title": "Tekrarlanabilirlik: Yazılımdan Bilime Ortak Bir Sorun",
+    "date": "2026-11-15",
+    "description": "Not, büyük dil modeli kullanan sistemlerin aynı girdiyle her koşuda aynı sonucu vermemesini, yani belirsizliği (nondeterminism) ve bunun testte kararsız test olarak görünmesini ele alır. Geleneksel testin aynı girdinin aynı çıktıyı ürettiği varsayımına dayandığı, model kullanan sistemlerde bu varsayımın geçerli olmadığı ve kararsızlığın giderilemeyip yalnızca ölçülebileceği savunulur. Nicholson'ın ölçümünde sıcaklık 0'da gpt-4o-mini aynı girdiyle koşuların yaklaşık %24'ünde, llama3.1-8b yaklaşık %9'unda farklı çıktı üretmiştir. Dobslaw ve arkadaşlarının incelediği altı test aracının koşuları tekil olaylar olarak ele aldığı aktarılır. Güvenilirlik için pass@k ile pass^k ayrılır: ilki k denemeden birinin, ikincisi tamamının başarılı olmasını şart koşar. τ-bench'te gpt-4o ajanının perakende alanındaki başarısı tek denemede %61,2 iken sekiz denemede %25'in altına iner. Ölçünün tek bir iş paketi için beş bağımsız taze koşunun beşi de temizse tamamlanmış sayma kuralına çevrilebileceği ve koşuların birbirinin durumunu görmemesi gerektiği belirtilir. Aynı kalıp kararsız testler, yarış durumları, heisenbug, dağıtık sistemler, tekrarlanamayan derlemeler, kayan nokta hesabı, model eğitiminde tohum etkisi, psikolojideki tekrar çalışmaları, üretim hattı yeterliliği, ölçüm sistemleri ve tıbbi testlerde gösterilir; %95 güvenilir on adımın zincirde yaklaşık %60 güvenilirlik verdiği hesaplanır. Sınır olarak maliyet, k temiz koşunun güvenilirliği kanıtlamaması, bağımsızlık varsayımı ve ölçünün başarı tanımının doğruluğuna bakmaması sayılır.",
+    "pdf": "Tekrarlanabilirlik__Yazılımdan_Bilime_Ortak_Bir_Sorun.pdf",
+    "thumb": "thumbs/tekrarlanabilirlik-yazılımdan-bilime-ortak-bir-sorun.png",
+    "addedAt": "2026-11-15T21:45:12.164Z",
+    "pages": 9,
+    "belge": "BELGE-316",
+    "title_en": "Reproducibility: A Common Problem from Software to Science",
+    "description_en": "The note addresses the fact that systems using large language models do not give the same result on every run with the same input, that is, nondeterminism, and how it shows up in testing as flaky tests. Traditional testing is argued to rest on the assumption that the same input produces the same output; in systems using a model this assumption does not hold, and flakiness cannot be removed, only measured. In Nicholson's measurement at temperature 0, gpt-4o-mini produced different output in about 24 percent of runs with the same input and llama3.1-8b in about 9 percent. The six test tools examined by Dobslaw and colleagues are reported to treat runs as isolated events. For reliability, pass@k is distinguished from pass^k: the first requires one of k attempts to succeed, the second all of them. On τ-bench, the success of a gpt-4o agent in the retail domain falls from 61.2 percent on a single attempt to below 25 percent over eight attempts. The measure is stated to translate, for a single work package, into the rule of counting it done only when five independent fresh runs are all clean, with runs that do not see one another's state. The same pattern is shown in flaky tests, race conditions, heisenbugs, distributed systems, non-reproducible builds, floating-point arithmetic, the effect of seeds in model training, replication studies in psychology, production line capability, measurement systems and medical tests; ten steps each 95 percent reliable are calculated to give about 60 percent reliability as a chain. As limits, the note lists cost, the fact that k clean runs do not prove reliability, the independence assumption, and that the measure does not check whether success itself is correctly defined.",
+    "priority": 8,
+    "related": [
+      "yapay-zek-sanity-check",
+      "yazılım-tasarımı-özellik-etkileşimi-problemi",
+      "yazılım-testi-dört-soru-ile-test-sınıflandırması",
+      "yazılım-testi-öncelik-sırası",
+      "yazılım-testi-oracle-problemi",
+      "yazılım-testi-katmanlı-regresyon-stratejisi",
+      "belirsizliğin-korunumu-kodun-determinizminden-ajan-kısıtlarına",
+      "i-statistiksel-süreç-kontrolü-ortak-neden-ve-özel-neden",
+      "i-statistik-epistemolojisi-varsayım-tuzak-ve-kırılma-noktaları",
+      "ölçüm-cihazı-kavram-tarih-ve-mühendislik-i-lkeleri"
+    ]
+  },
+  {
+    "slug": "sosyal-psikoloji-bağın-dört-bileşeni",
+    "title": "Sosyal Psikoloji: Bağın Dört Bileşeni",
+    "date": "2026-11-15",
+    "description": "Not, eş seçiminde statü ve görünüş gibi etkenleri yok sayan duygusal yaklaşım ile bağın nasıl oluştuğunu açıklayamayan hesapçı yaklaşımı birlikte ele alır. Hipergami, hipogami ve homogami tanımlanır; statü aramanın ahlaki bir kusur olmadığı, ölçütün yalnızca tek başına kaldığında, gizlendiğinde ya da kişiyi araca çevirdiğinde sorun hâline geldiği savunulur. Çevrimiçi tanışma verilerine göre kullanıcılar kendilerinden yaklaşık dörtte bir daha çok talep gören kişilere yazar; herkes yukarı baktığı için eşleşmeler denkler arasında toplanır. İlk izlenimdeki ortak sıralamanın tanışıklıkla dağıldığı ve belirsizliğin çekimi artırdığı bulguları aktarılır. Evlilik hukuki ve maddi bir yük olarak ele alınır; evlenmemenin kayıp değil tercih olduğu, uzun ilişkiyi tutulmanın değil karakter, saygı ve uyumun taşıdığı belirtilir. Kaybetme korkusu için iki yol ayrılır: hiçbir şeyi önemsememek ya da önemseyip kaybı kaldırabilmek; sonuç verenin ikincisi olduğu savunulur. Sosyal akıl iki eyleme indirgenir: karşıdakini izlemek ve önce dinlemek. Sıcak davranışın ilgi anlamına gelmediği, ilginin ölçüsünün sohbeti başlatmak, önceki konuşmaları hatırlamak ve ortam dışında zaman ayırmak olduğu gösterilir. Bağın dört bileşeni tekrar, sohbet, fiziksel yakınlık ve ilgidir; belirleyici olanların sohbet ve ilgi olduğu savunulur. Rol içeren birebir ortamlarda dört bileşen yoğun biçimde bir arada bulunduğu için oluşan hissin büyük ölçüde ortamın ürünü olduğu ve kişinin eşsizliğine kanıt sayılamayacağı belirtilir; hissin yönetimi için üç adım önerilir.",
+    "pdf": "Sosyal_Psikoloji__Bağın_Dört_Bileşeni.pdf",
+    "thumb": "thumbs/sosyal-psikoloji-bağın-dört-bileşeni.png",
+    "addedAt": "2026-11-15T21:45:09.746Z",
+    "pages": 11,
+    "belge": "BELGE-315",
+    "related": [
+      "i-lişki-psikolojisi-bağlılık-asimetrisi",
+      "sosyal-psikoloji-çekimin-ontolojisi",
+      "04-iliskiler-baglanma",
+      "i-lişki-psikolojisi-i-lginin-okunması",
+      "kadın-psikolojisi-karanlık-taraf",
+      "öz-denetim-karanlık-oda-yöntemi",
+      "sosyal-algı-i-nsanı-okumanın-kanalları-ve-sınırları",
+      "ahlak-felsefesi-tercih-olarak-i-yilik"
+    ],
+    "title_en": "Social Psychology: The Four Components of a Bond",
+    "description_en": "The note considers together the emotional approach to choosing a spouse, which ignores factors such as status and appearance, and the calculating approach, which cannot explain how a bond forms. Hypergamy, hypogamy and homogamy are defined; seeking status is argued not to be a moral flaw, and a criterion becomes a problem only when it stands alone, is concealed or turns the other person into a means. According to online dating data, users write to people roughly a quarter more sought after than themselves; since everyone looks upwards, matches gather among equals. Findings that the shared ranking of first impressions dissolves with acquaintance and that uncertainty increases attraction are reported. Marriage is treated as a legal and material burden; not marrying is stated to be a choice rather than a loss, and a long relationship is carried not by infatuation but by character, respect and compatibility. Two ways out of the fear of loss are distinguished: caring about nothing, or caring and being able to bear the loss; the second is argued to be the one that works. Social intelligence is reduced to two acts: watching the other person and listening first. Warm behaviour is shown not to mean interest; the measure of interest is starting the conversation, remembering earlier conversations and making time outside the setting. The four components of a bond are repetition, conversation, physical closeness and attention; conversation and attention are argued to be decisive. Because in one-to-one settings involving a role all four components occur together and intensely, the feeling that forms is stated to be largely a product of the setting and no proof that the other person is unique; three steps are proposed for managing the feeling.",
+    "priority": 5,
+    "bolum": "insan"
+  },
+  {
+    "slug": "ahlak-felsefesi-tercih-olarak-i-yilik",
+    "title": "Ahlak Felsefesi: Tercih Olarak İyilik",
+    "date": "2026-11-15",
+    "description": "Not, iyiliğin doğuştan gelen bir özellik değil tekrarlanan tercihlerle kazanılan bir nitelik olduğunu, doğuştan gelenin yalnızca iyiliğe yatkınlık olduğunu savunur. Aristoteles'in erdemin alışkanlıkla kazanıldığı görüşü ile Kant'ın eğilimden doğan eylem ile ödevden doğan eylem ayrımı karşılaştırılır; Aristoteles'e atfedilen “insan tekrar tekrar yaptığı şeydir” cümlesinin Will Durant'a ait olduğu not edilir. Bebeklerin yardım eden figürü tercih etmesi, on sekiz aylık çocukların kendiliğinden yardım etmesi ve empatinin kısmen kalıtsal oluşu, insanların iyiliğe eşit uzaklıkta doğmadığını gösteren bulgular olarak verilir. İyiliğin seçilmemesinin nedenleri çıkar, kendini haklı çıkarma, görmeme, öğrenilmiş model, korku ve alışkanlık olarak sıralanır; Bandura'nın ahlaki çözülme kavramıyla insanların çoğunun kötülüğü değil kolay olanı seçip ardından gerekçe yazdığı savunulur. İyiliği seçmenin araçsal gerekçeleri güven, karşılıklı özgecilik ve tatmindir; içkin gerekçe ise Kant'ın insanlık formülü ve Moore'un iyinin tanımlanamazlığı üzerinden kurulur. Kaybettiren iyiliğin bir çelişki olmadığı, kaybın dışsal kazanç ile kişinin kendine bakışı olmak üzere iki ölçekte tartıldığı gösterilir. Eş seçiminde yükseltme ölçütü statü anlamında zayıf, gelişim anlamında meşru bulunur ve belirleyici ayrım yükseltmeyen ile aşağı çeken arasında kurulur. Son bölüm toplumun iyilikten uzaklaşmasının güven, savunma ve yakın ilişkiler üzerindeki sonuçlarını çıkarım olarak ele alır ve böyle bir ortamda iyiliğin uyum olmaktan çıkıp tercih hâline geldiğini savunur.",
+    "pdf": "Ahlak_Felsefesi__Tercih_Olarak_İyilik.pdf",
+    "thumb": "thumbs/ahlak-felsefesi-tercih-olarak-i-yilik.png",
+    "addedAt": "2026-11-15T21:45:08.093Z",
+    "pages": 10,
+    "belge": "BELGE-314",
+    "related": [
+      "felsefe-tarihi-aristoteles-in-zihin-erdemleri",
+      "09-stoacilik-eksen-ve-duzen",
+      "öz-değer-seçilmiş-taviz-ile-teslimiyet-ayrımı",
+      "sokratik-yo-ntem-go-ru-lme-ve-epistemik-saygı",
+      "i-lişki-psikolojisi-bağlılık-asimetrisi",
+      "i-nsan-doğası-zaafların-haritası",
+      "sosyal-psikoloji-bağın-dört-bileşeni"
+    ],
+    "title_en": "Moral Philosophy: Goodness as a Choice",
+    "description_en": "The note argues that goodness is not an inborn trait but a quality acquired through repeated choices, and that what is inborn is only a disposition towards goodness. Aristotle's view that virtue is acquired by habit is compared with Kant's distinction between action from inclination and action from duty; the sentence 'we are what we repeatedly do', often attributed to Aristotle, is noted as Will Durant's. Infants preferring a helping figure, eighteen-month-old children helping spontaneously and the partly heritable nature of empathy are given as findings showing that people are not born at an equal distance from goodness. The reasons goodness is not chosen are listed as self-interest, self-justification, not seeing, a learned model, fear and habit; drawing on Bandura's concept of moral disengagement, most people are argued to choose not evil but what is easy, and then to write a justification for it. The instrumental reasons for choosing goodness are trust, reciprocal altruism and satisfaction; the intrinsic reason is built on Kant's formula of humanity and Moore's claim that good is indefinable. Goodness that costs is shown not to be a contradiction, since loss is weighed on two scales: external gain and how one regards oneself. In choosing a spouse, the criterion of being lifted up is found weak in the sense of status and legitimate in the sense of growth, and the decisive distinction is drawn between one who does not lift up and one who drags down. The final section treats, as inference, the consequences of a society moving away from goodness for trust, defensiveness and close relationships, and argues that in such a setting goodness ceases to be conformity and becomes a choice.",
+    "priority": 3,
+    "bolum": "insan"
+  },
+  {
+    "slug": "i-nsan-doğası-zaafların-haritası",
+    "title": "İnsan Doğası: Zaafların Haritası",
+    "date": "2026-11-15",
+    "description": "Not, zaafı insanın sahip olduğu bir şeyi kaybetme ya da istediği bir şeye ulaşamama ihtimali karşısında muhakemesinin zayıfladığı nokta olarak tanımlar ve onu bir karakter kusuru değil, sahip olmanın doğal sonucu olarak ele alır. İnsanın sahip olduklarından oluşan bir envanter verilir: ihtiyaç, dürtü, duygu, arzu, akıl, inanç, değer, irade, alışkanlık, kimlik, hafıza, yara, bağ, güç, sınır, amaç, maske ve çelişki. Bu başlıklar arasında bir zincir kurulur: ihtiyaç arzuyu, arzu kaybetme korkusunu, korku da zaafı doğurur; güç ve irade zinciri tutar, yara ve alışkanlık gevşetir. Kahneman ve Tversky'nin kayıptan kaçınma bulgusu korkunun bu zincirdeki ağırlığıyla uyumlu bulunur. İhtiyaç ile arzu, muhtaçlık ile arzu birbirinden ayrılır. En yaygın on zaaf onaylanma isteği, ego, korku, açgözlülük, kıskançlık, tembellik, anlık haz, bağlanma, kendini kandırma ve alışkanlıktır; çoğunun sevilme, güvende olma ve önemli hissetme ihtiyaçlarından beslendiği savunulur. Eş ve çocuğun çoğu insanın en büyük zaafı olduğu, aynı bağın en büyük dayanma gücünü de verdiği belirtilir. Cinsiyete göre ortalama eğilimler ile çocukluk, gençlik, yetişkinlik ve yaşlılık evrelerine göre zaaf listeleri verilir; bu listelerin büyük bölümünün gözleme dayalı genelleme olduğu ve doğrulanmış bulgu olarak okunmaması gerektiği metinde açıkça kaydedilir. Son bölümde hayranlığın ilişkiyi beslediği, muhtaçlığın bozduğu savunulur; Gottman ile Silver'ın karşılıklı hayranlık ve küçümseme bulgularına dayanılarak sağlıklı ilişkide kalmanın mecburiyetten değil istekten gelmesi gerektiği sonucuna varılır.",
+    "pdf": "İnsan_Doğası__Zaafların_Haritası.pdf",
+    "thumb": "thumbs/i-nsan-doğası-zaafların-haritası.png",
+    "addedAt": "2026-11-15T21:45:05.767Z",
+    "pages": 13,
+    "belge": "BELGE-313",
+    "title_en": "Human Nature: A Map of Weaknesses",
+    "description_en": "The note defines a weakness as the point at which a person's judgement weakens in the face of losing something they have or failing to reach something they want, and treats it not as a flaw of character but as a natural consequence of having things. An inventory of what a person has is given: needs, drives, emotions, desires, reason, beliefs, values, will, habits, identity, memory, wounds, bonds, power, limits, purpose, masks and contradictions. A chain is drawn between these headings: need gives rise to desire, desire to the fear of loss, and fear to weakness; power and will hold the chain, while wounds and habits loosen it. Kahneman and Tversky's finding on loss aversion is found consistent with the weight of fear in this chain. Need is distinguished from desire, and dependence from desire. The ten most common weaknesses are the wish for approval, ego, fear, greed, envy, laziness, immediate pleasure, attachment, self-deception and habit; most are argued to draw on the needs to be loved, to be safe and to feel important. Spouse and children are stated to be most people's greatest weakness, while the same bond also gives the greatest strength to endure. Average tendencies by sex and lists of weaknesses by the stages of childhood, youth, adulthood and old age are given; the text records explicitly that most of these lists are generalisations from observation and should not be read as verified findings. The final section argues that admiration nourishes a relationship while dependence corrupts it, and, drawing on the findings of Gottman and Silver on mutual admiration and contempt, concludes that in a healthy relationship staying should come from wanting to, not from necessity.",
+    "priority": 4,
+    "related": [
+      "kadın-psikolojisi-karanlık-taraf",
+      "jung-psikolojisi-gölge-çekim-ve-bağlanma",
+      "sosyal-psikoloji-onay-i-htiyacı-ve-onay-bağımlılığı",
+      "sosyal-psikoloji-çekimin-ontolojisi",
+      "paranın-psikolojisi-davranıs-zaman-risk-ve-finansal-kararların-i-nsani-temelleri",
+      "i-lişki-psikolojisi-bağlılık-asimetrisi",
+      "zihin-yönetimi-alarmı-tanımak",
+      "ahlak-felsefesi-tercih-olarak-i-yilik"
+    ],
+    "bolum": "insan"
+  },
+  {
     "slug": "bilgi-felsefesi-bacon-ın-dört-i-dolü",
     "title": "Bilgi Felsefesi: Bacon'ın Dört İdolü",
     "date": "2026-11-15",
@@ -66,7 +166,8 @@
       "karar-kuramı-çok-nedenli-karar-tek-nedenli-anlatı",
       "öz-denetim-karanlık-oda-yöntemi",
       "bilgi-felsefesi-bacon-ın-dört-i-dolü",
-      "sosyal-algı-i-nsanı-okumanın-kanalları-ve-sınırları"
+      "sosyal-algı-i-nsanı-okumanın-kanalları-ve-sınırları",
+      "i-nsan-doğası-zaafların-haritası"
     ],
     "title_en": "Mind Management: Recognising the Alarm",
     "description_en": "The note starts from the view that the human brain was shaped not to see reality accurately but to keep ancestors living in small groups alive. Using the concept of evolutionary mismatch, it argues that settings useful in the old environment produce false alarms in today's. Error management theory and the smoke detector principle explain that when the costs of two kinds of error are unequal, selection yields a brain that systematically magnifies danger. Four areas where this setting misfires today are listed: an unanswered message processed like exclusion, the craving for food, comparison with thousands of faces on a screen, and threat prolonged by turning into thought. Drawing on Wegner's finding of ironic processes, suppression is said to strengthen a thought, and three ways of managing are proposed: recognising the alarm by naming it, removing the trigger from the environment, and meeting old needs such as movement, daylight, sleep, face-to-face contact and belonging. Vigilance is argued to be not a constant watch but necessary only in major decisions, high emotion, tiredness and night, absolute words, and stories that fit too neatly. A single question is given for these moments: do I know this, or am I guessing. Misreadings in the eye, ear, inner ear, stomach, heart, hormones and pain are examined, concluding that organs send raw signals while the brain writes the meaning. As limits, the note states that evolutionary explanations are hard to test because they are built backwards, and that the old brain and new brain distinction is a convenience of exposition.",
@@ -91,7 +192,10 @@
       "öz-değer-seçilmiş-taviz-ile-teslimiyet-ayrımı",
       "sosyal-psikoloji-onay-i-htiyacı-ve-onay-bağımlılığı",
       "kadın-psikolojisi-karanlık-taraf",
-      "sosyal-algı-i-nsanı-okumanın-kanalları-ve-sınırları"
+      "sosyal-algı-i-nsanı-okumanın-kanalları-ve-sınırları",
+      "i-nsan-doğası-zaafların-haritası",
+      "ahlak-felsefesi-tercih-olarak-i-yilik",
+      "sosyal-psikoloji-bağın-dört-bileşeni"
     ],
     "title_en": "Relationship Psychology: Commitment Asymmetry",
     "description_en": "The note examines the advice 'go to the one who loves you, not the one you love' by splitting it into two claims: a descriptive claim that a relationship with someone who loves less than one loves them does harm, and a prescriptive claim that one should choose the person who loves one more. Waller's principle of least interest and the longitudinal finding of Sprecher and colleagues support the descriptive claim: the less committed partner sets the terms of the relationship. The study by Joel and colleagues pooling 43 couple datasets places perceived partner commitment among the strongest predictors of relationship quality. The prescriptive claim, however, is found incomplete. In the study of 315 couples by Stanley and colleagues, in asymmetric relationships not only the less committed but also the more committed partner reported lower adjustment and more conflict. Two-year break-up rates were 54 percent where the woman was less committed, 29 percent where the man was less committed and 34 percent where commitment was close; the text concludes from this table that lasting and being good are separate criteria. Strong love is shown to form over time through repeated contact, reciprocal liking, responsiveness, self-disclosure and similarity, while contact strengthens the initial feeling in whatever direction it points. Trying to love is distinguished from giving a chance, and two filters are proposed for the latter: basic compatibility and non-zero interest. The defensible form of the advice is stated as 'do not rule out early the one who loves you'. As limits, the note states that most findings come from young, unmarried American couples and are correlational.",
@@ -120,7 +224,8 @@
       "duygusal-zek-bilgi-ve-yakıt-olarak-duygu",
       "i-lişki-psikolojisi-i-lginin-okunması",
       "zihin-yönetimi-alarmı-tanımak",
-      "i-lişki-psikolojisi-bağlılık-asimetrisi"
+      "i-lişki-psikolojisi-bağlılık-asimetrisi",
+      "sosyal-psikoloji-bağın-dört-bileşeni"
     ],
     "bolum": "insan"
   },
@@ -145,7 +250,8 @@
       "yazılım-bakımı-değişikliğin-yayılması",
       "scrutiny-mühendislikte-derinlemesine-i-rdeleme-pratiği",
       "sezgi-i-çgüdü-kökeni-yazılımı-ve-kalibrasyonu",
-      "bilgi-felsefesi-bacon-ın-dört-i-dolü"
+      "bilgi-felsefesi-bacon-ın-dört-i-dolü",
+      "tekrarlanabilirlik-yazılımdan-bilime-ortak-bir-sorun"
     ]
   },
   {
@@ -174,7 +280,9 @@
       "öz-değerlendirme-dışarıdan-görünme-i-htiyacı-karanlık-oda",
       "öz-denetim-karanlık-oda-yöntemi",
       "sosyal-beceri-özgüven-ve-umursamazlık-ayrımı",
-      "i-lişki-psikolojisi-bağlılık-asimetrisi"
+      "i-lişki-psikolojisi-bağlılık-asimetrisi",
+      "i-nsan-doğası-zaafların-haritası",
+      "sosyal-psikoloji-bağın-dört-bileşeni"
     ]
   },
   {
@@ -203,7 +311,8 @@
       "scrutiny-mühendislikte-derinlemesine-i-rdeleme-pratiği",
       "karar-kuramı-çok-nedenli-karar-tek-nedenli-anlatı",
       "kadın-psikolojisi-karanlık-taraf",
-      "zihin-yönetimi-alarmı-tanımak"
+      "zihin-yönetimi-alarmı-tanımak",
+      "sosyal-psikoloji-bağın-dört-bileşeni"
     ]
   },
   {
@@ -228,7 +337,8 @@
       "hata-avcılığı-yazılımda-kalite-pratikleri",
       "test-mühendisliği-yeterlilik-etkinlik-güvenilirlik",
       "sistem-güvenliği-kesişimde-doğan-hatalar",
-      "arayüz-tasarımı-durum-makinesi-ile-denetim-modelleme"
+      "arayüz-tasarımı-durum-makinesi-ile-denetim-modelleme",
+      "tekrarlanabilirlik-yazılımdan-bilime-ortak-bir-sorun"
     ]
   },
   {
@@ -406,7 +516,8 @@
       "özgüven-hayır-demek-ve-hayır-duymak",
       "öz-değerlendirme-dışarıdan-görünme-i-htiyacı-karanlık-oda",
       "öz-denetim-karanlık-oda-yöntemi",
-      "i-lişki-psikolojisi-bağlılık-asimetrisi"
+      "i-lişki-psikolojisi-bağlılık-asimetrisi",
+      "ahlak-felsefesi-tercih-olarak-i-yilik"
     ],
     "title_en": "Self-Worth: Distinguishing Chosen Concession from Surrender",
     "description_en": "The text argues that the person who yields to the pressure of someone he is drawn to is not compliant in general, and that surrender appears only when infatuation, the other person's displeasure and the uncertainty of the situation occur together. In Deutsch and Gerard's terms the influence is normative, not informational: he does not believe the other is right, he cannot bear her displeasure. The behaviour follows a chain of trigger, unease, relieving move and relief, with no thinking time between unease and move. Two forms of the relieving move are separated: the visible concession that changes behaviour, and the invisible concession of spending long stretches decoding the other's intentions (Nolen-Hoeksema's rumination). The mechanism is explained through Freeston and colleagues' intolerance of uncertainty, Skinner's negative reinforcement, Hayes and colleagues' experiential avoidance, Ferster and Skinner's intermittent reinforcement, Tennov's limerence and Waller's principle of least interest; the concession does not protect the infatuation but signals that displeasure works. Chosen concession and surrender are separated by reason, speed, the feeling left afterwards and repetition; the practical criterion is the feeling that remains. The counter-type is Bowen's differentiation of self, which, drawing on Fromm and Schnarch, is argued not to conflict with love; the opposite extreme is the cold observer who turns the other into a case to be solved. The remedy is to delay the reaction: on the day unease is felt, neither concession nor analysis. Limits are that not every quick compliance comes from this chain; the boundary between examining oneself and decoding the other is left as an open question.",
@@ -504,7 +615,8 @@
       "öz-değerlendirme-dışarıdan-görünme-i-htiyacı-karanlık-oda",
       "sosyal-beceri-özgüven-ve-umursamazlık-ayrımı",
       "öz-denetim-karanlık-oda-yöntemi",
-      "i-lişki-psikolojisi-bağlılık-asimetrisi"
+      "i-lişki-psikolojisi-bağlılık-asimetrisi",
+      "i-nsan-doğası-zaafların-haritası"
     ],
     "title_en": "Social Psychology: The Need for Approval and Approval Dependence",
     "description_en": "The text argues that wanting approval is not a weakness and that the real problem is when a person's sense of their own worth becomes tied to others' approval; at its centre is the question of whether a person can remain themselves once attached. The need for approval, approval dependence, the contingent self-worth of Crocker and Wolfe, and Bowen's differentiation of self are defined as core terms. Baumeister and Leary's need to belong and self-determination theory establish that the need for approval is human, while Leary's sociometer hypothesis treats self-esteem as a gauge of acceptance; the problem is a gauge that is oversensitive. Need and dependence are told apart by what happens when approval does not come; the distinguishing question is whether the first thought after a negative remark concerns its content or the loss of affection. The effort to make oneself accepted produces a self-reinforcing cycle of conformity. Holding an opinion, stating wishes and tolerating uncertainty are core skills, practised across everyday life rather than in a single relationship. Using Homans's view of social exchange, relationships are treated as a mutual exchange of needs; weighing who needs whom more is named the scale trap. Conditional value within a relationship is separated from a person's own worth, showing that much of the fear of loss comes from attraction rather than from the relationship itself. Tolerating uncertainty has a limit: persistent non-reciprocation is an answer. Drawing on Cohen and Wills and on Linville, a varied social circle reduces the weight of any single source; drawing on Fiske and colleagues, confident posture is balanced with warmth. When uncertainty turns into an answer remains an open question.",
@@ -573,7 +685,8 @@
       "sosyal-beceri-özgüven-ve-umursamazlık-ayrımı",
       "kadın-psikolojisi-karanlık-taraf",
       "sosyal-algı-i-nsanı-okumanın-kanalları-ve-sınırları",
-      "i-lişki-psikolojisi-bağlılık-asimetrisi"
+      "i-lişki-psikolojisi-bağlılık-asimetrisi",
+      "sosyal-psikoloji-bağın-dört-bileşeni"
     ]
   },
   {
@@ -697,7 +810,8 @@
       "sosyal-psikoloji-onay-i-htiyacı-ve-onay-bağımlılığı",
       "karar-kuramı-çok-nedenli-karar-tek-nedenli-anlatı",
       "kadın-psikolojisi-karanlık-taraf",
-      "i-lişki-psikolojisi-bağlılık-asimetrisi"
+      "i-lişki-psikolojisi-bağlılık-asimetrisi",
+      "i-nsan-doğası-zaafların-haritası"
     ]
   },
   {
@@ -832,7 +946,8 @@
       "hata-avcılığı-yazılımda-kalite-pratikleri",
       "dayanıklılık-mühendisliği-chaos-monkey-ve-gizli-bağımlılıklar",
       "kalite-yönetimi-gereksiz-testin-ayıklanması",
-      "yazılım-tasarımı-özellik-etkileşimi-problemi"
+      "yazılım-tasarımı-özellik-etkileşimi-problemi",
+      "tekrarlanabilirlik-yazılımdan-bilime-ortak-bir-sorun"
     ]
   },
   {
@@ -1342,7 +1457,8 @@
       "mühendislikte-nedensellik-ve-kavramsal-ayrımlar",
       "kalite-mühendisliği-ürün-geliştirmede-temel-araçlar",
       "veri-mühendisliği-alanlar-ve-ortak-i-lkeler",
-      "bilgi-felsefesi-bacon-ın-dört-i-dolü"
+      "bilgi-felsefesi-bacon-ın-dört-i-dolü",
+      "tekrarlanabilirlik-yazılımdan-bilime-ortak-bir-sorun"
     ]
   },
   {
@@ -1425,7 +1541,8 @@
       "kontrol-sistemleri-açık-ve-kapalı-döngü-seçimi",
       "mühendislik-bilgisi-i-deal-ile-gerçek-arasındaki-boşluk",
       "kalite-yönetimi-kalite-yönetimine-giriş",
-      "kalite-yönetimi-gereksiz-testin-ayıklanması"
+      "kalite-yönetimi-gereksiz-testin-ayıklanması",
+      "tekrarlanabilirlik-yazılımdan-bilime-ortak-bir-sorun"
     ]
   },
   {
@@ -1472,7 +1589,8 @@
       "mühendislik-eğitimi-ecole-polytechnique-yaklaşımı",
       "duygu-psikolojisi-duygu-ile-davranış-arasındaki-mesafe",
       "yazılım-kalitesi-amaç-zanaat-bilgisi-ve-yargı",
-      "bilgi-felsefesi-bacon-ın-dört-i-dolü"
+      "bilgi-felsefesi-bacon-ın-dört-i-dolü",
+      "ahlak-felsefesi-tercih-olarak-i-yilik"
     ]
   },
   {
@@ -1853,7 +1971,9 @@
       "öz-değerlendirme-dışarıdan-görünme-i-htiyacı-karanlık-oda",
       "sosyal-beceri-özgüven-ve-umursamazlık-ayrımı",
       "kadın-psikolojisi-karanlık-taraf",
-      "i-lişki-psikolojisi-bağlılık-asimetrisi"
+      "i-lişki-psikolojisi-bağlılık-asimetrisi",
+      "i-nsan-doğası-zaafların-haritası",
+      "sosyal-psikoloji-bağın-dört-bileşeni"
     ],
     "bolum": "insan"
   },
@@ -2222,7 +2342,8 @@
       "hata-avcılığı-yazılımda-kalite-pratikleri",
       "yazılım-testi-katmanlı-regresyon-stratejisi",
       "kalite-yönetimi-gereksiz-testin-ayıklanması",
-      "yazılım-tasarımı-özellik-etkileşimi-problemi"
+      "yazılım-tasarımı-özellik-etkileşimi-problemi",
+      "tekrarlanabilirlik-yazılımdan-bilime-ortak-bir-sorun"
     ],
     "title_en": "Software Testing: Order of Priority",
     "description_en": "The text presents a three-term criterion for ordering test types by when they are set up, a list divided into seven groups by that criterion, and sections addressing two questions the list does not answer. In order of precedence, the criterion asks whether the failure class has occurred in this system, how long setup takes and how long a run takes; the first term dominates. There are two exceptions: zero-cost checks stay on permanently, and a new feature's own rule is written for every feature without requiring a prior failure. The groups range from zero-cost checks, through pinning existing code in the first week, input design and pipeline integrity, user flows, and tests requiring real dependencies, to slow tests run nightly and families kept off until the first failure. The writing-time section records that a regression test protects only a failure that has already occurred, and prescribes writing invariants for failures not yet seen, checked at test time through property-based testing and at run time through runtime assertions. Writing the rule before the code and seeing it red is justified through TDD and BDD; mutation testing shows where the test suite is blind, and variant analysis shows the other instances of a found failure. For the deploy moment and the dropped request, a family of graceful shutdown, a readiness signal, idempotency, retry with backoff, job leases and a circuit breaker is defined. The final section reports an intersection scan conducted at the points where components meet, which produced about fifty findings, and its counterparts in the literature such as STPA, FMEA, HAZOP and differential testing; for the next scan it recommends using STPA, HAZOP and differential testing together.",
@@ -2254,7 +2375,8 @@
       "kalite-testi-bisküvi-fabrikasından-öğrenmek",
       "hata-avcılığı-yazılımda-kalite-pratikleri",
       "yazılım-testi-katmanlı-regresyon-stratejisi",
-      "yazılım-tasarımı-özellik-etkileşimi-problemi"
+      "yazılım-tasarımı-özellik-etkileşimi-problemi",
+      "tekrarlanabilirlik-yazılımdan-bilime-ortak-bir-sorun"
     ]
   },
   {
@@ -2438,7 +2560,8 @@
       "hata-avcılığı-yazılımda-kalite-pratikleri",
       "yazılım-testi-katmanlı-regresyon-stratejisi",
       "yazılım-tasarımı-özellik-etkileşimi-problemi",
-      "yapay-zek-sanity-check"
+      "yapay-zek-sanity-check",
+      "tekrarlanabilirlik-yazılımdan-bilime-ortak-bir-sorun"
     ],
     "title_en": "Software Testing: The Oracle Problem",
     "description_en": "The text treats the basis on which a test declares pass or fail as a problem separate from the test itself and names it the oracle problem. Software testing involves two independent decisions: which input to run the program with, and whether the result is accepted as correct. In most real systems the expected output cannot be written in advance, so correctness is checked not against an absolute value but through a relation between two executions. Oracle types are classified: specified, derived (metamorphic, regression, differential, inverse, model-based), implicit, human and partial oracles. In metamorphic testing, source and follow-up test case, transformation function and output relation are defined; equality, ordering, scaling, composition and containment relations are illustrated. The inheritance of the terminology from mathematical names such as symmetry, invariance, idempotency and permutation is presented as the main reason the method is little known in industry. The method's blind spot is recorded: if both executions produce the same wrong result the relation holds and the test passes; on a violation it is not known which side is wrong. Scenario discovery is defined as a problem of imagination; property-based testing, fuzzing, mutation testing and feedback from real failures are given as the remedy. Ariane 5, Mars Climate Orbiter and the 737 MAX are used to argue that the most expensive failures are validation, not verification, failures; the layers used in high-cost domains do not eliminate error but cover one another's blind spots. Two questions are left open: whether relation discovery can be systematized, and the cost-benefit balance of runtime invariant checking.",
@@ -2695,7 +2818,8 @@
       "09-spec-driven-development",
       "olasılık-kuramı-tarihsel-i-lkeler-ve-pratik-karşılıkları",
       "kurumsal-anlam-yönetimi-bir-kavram-nasıl-doğru-kalır",
-      "yapay-zek-sanity-check"
+      "yapay-zek-sanity-check",
+      "tekrarlanabilirlik-yazılımdan-bilime-ortak-bir-sorun"
     ]
   },
   {
@@ -3262,7 +3386,8 @@
       "mühendislikte-nedensellik-ve-kavramsal-ayrımlar",
       "kontrol-teorisi-ve-yazılım-denetimi",
       "tasarım-kuramı-gör-sına-pay-bırak-yedekle",
-      "kalite-yönetimi-kalite-yönetimine-giriş"
+      "kalite-yönetimi-kalite-yönetimine-giriş",
+      "tekrarlanabilirlik-yazılımdan-bilime-ortak-bir-sorun"
     ]
   },
   {
@@ -4550,7 +4675,8 @@
     "series": "İnsan, Zihin & Davranış",
     "related": [
       "10-sokratik-epistemoloji",
-      "03-felsefe-tarihi"
+      "03-felsefe-tarihi",
+      "ahlak-felsefesi-tercih-olarak-i-yilik"
     ],
     "thumb": "thumbs/sokratik-yo-ntem-go-ru-lme-ve-epistemik-saygı.png",
     "pages": 3,
@@ -5092,7 +5218,8 @@
       "davranıs-ın-no-rokimyasal-temelleri-motivasyon-o-du-l-ve-gu-nlu-k-deneyim",
       "olasılık-kuramı-tarihsel-i-lkeler-ve-pratik-karşılıkları",
       "duygusal-zek-duygunun-fark-edilmesi-ve-davranışın-seçilmesi",
-      "karar-kuramı-çok-nedenli-karar-tek-nedenli-anlatı"
+      "karar-kuramı-çok-nedenli-karar-tek-nedenli-anlatı",
+      "i-nsan-doğası-zaafların-haritası"
     ],
     "belge": "BELGE-097"
   },
@@ -5515,7 +5642,8 @@
       "karar-kuramı-çok-nedenli-karar-tek-nedenli-anlatı",
       "öz-değerlendirme-dışarıdan-görünme-i-htiyacı-karanlık-oda",
       "kadın-psikolojisi-karanlık-taraf",
-      "i-lişki-psikolojisi-bağlılık-asimetrisi"
+      "i-lişki-psikolojisi-bağlılık-asimetrisi",
+      "sosyal-psikoloji-bağın-dört-bileşeni"
     ],
     "title_en": "Human Relationships and Romantic Attachment: A Psychological and Neuroscientific Study",
     "description_en": "Human relationships are one of the strongest variables determining an individual's psychological functioning. Starting from observable, practical criteria for assessing the quality of relationships (e.g., the balance of energy after contact), this piece examines the formation of romantic attachment, the situations in which this process becomes difficult, and the difference between passion and attachment love from a psychological and neuroscientific angle; it addresses the recurring core needs and patterns in relationships.",
@@ -5963,7 +6091,8 @@
       "sosyal-zek-kokla-gözle-ayarla",
       "öz-değerlendirme-dışarıdan-görünme-i-htiyacı-karanlık-oda",
       "sosyal-beceri-özgüven-ve-umursamazlık-ayrımı",
-      "öz-denetim-karanlık-oda-yöntemi"
+      "öz-denetim-karanlık-oda-yöntemi",
+      "ahlak-felsefesi-tercih-olarak-i-yilik"
     ],
     "belge": "BELGE-055"
   },
