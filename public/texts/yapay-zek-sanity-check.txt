@@ -1,0 +1,173 @@
+Yapay Zekâ: Sanity Check
+Ömer Faruk Yavuz
+November 2026
+Özet
+Bir sonucun ya da bir işin mantıken mümkün olup olmadığına kısaca bak-
+maya akıl sağlığı kontrolü (sanity check ) denir. Bu kontrol ayrıntılı testin
+yerini tutmaz; ondan önce yapılır ve kaba hataları ucuza yakalar. Kontrolün
+aracı zarf arkası hesaptır: işin ne kadar sürmesi ve sonucun hangi büyüklükte
+çıkması gerektiği önceden kabaca tahmin edilir. Yapay zekâ ajanları bu kon-
+trolü kendiliğinden yapmaz. Berkeley’de yürütülen MAST çalışmasında en sık
+görülen hata, ilerleme olmadan aynı adımın tekrar edilmesidir (%15,7); durma
+zamanının fark edilmemesi üçüncü sıradadır (%12,4). Erken yapılan bir hata
+fark edilmediğinde sonraki adımlara yayılır ve geç ortaya çıkar. “˙Insanın yap-
+mayacağı ama ajanın yaptığı hata” için literatürde tek bir yerleşik ad yoktur.
+Bu hatalar üç soruyla yakalanabilir: iş ne kadar sürmeli, sonuç ne olmalı, bir
+insan bunu yapar mıydı.
+1
+
+-- 1 of 7 --
+
+Giriş
+Yapay zekâ ajanı (AI agent), bir dil modelinin araç kullanarak çok adımlı bir
+işi kendi başına yürüttüğü sistemdir. Ajan dosya açar, komut çalıştırır, sonucu
+okur ve bir sonraki adıma kendisi karar verir. Bu özerklik bir zayıflık da getirir:
+ajan, bir insanın hemen fark edeceği saçmalıkları fark etmeyebilir. Yirmi saniye
+sürmesi gereken bir işi iki saat bekler ya da aynı dosyayı on kez açar.
+˙Insan bu hataları çoğunlukla yapmaz, çünkü işe başlamadan önce farkında
+olmadan bir beklenti kurar. ˙Iş beklenenden çok uzun sürerse ya da sonuç bek-
+lenenden çok farklı çıkarsa durur ve bakar. Ajan bu beklentiyi kendiliğinden
+kurmaz; kurulmamış bir beklentinin aşılması da fark edilemez.
+Notta üç terim merkezdedir. Akıl sağlığı kontrolü (sanity check ), bir
+sonucun kabaca makul olup olmadığına bakan hızlı kontroldür. Zarf arkası
+hesap (back-of-the-envelope estimation), kesin değeri değil büyüklük mertebesini
+veren kaba tahmindir; fizikçi Enrico Fermi’nin adıyla Fermi tahmini olarak
+da anılır. Hata türü (failure mode), bir sistemin tekrar tekrar aynı biçimde
+bozulduğu kalıptır.
+Yaygın kabul, ajanın hatasının bilgi eksikliğinden kaynaklandığıdır. Bu-
+radaki hatalar bilgi hatası değildir. Ajan işi nasıl yapacağını bilir; eksik olan,
+yaptığı işin hâlâ anlamlı olup olmadığına bakmasıdır.
+Not, tek ajanın uzun ve pahalı işlerde yaptığı bu tür hataları kapsar. Modelin
+yanlış bilgi üretmesi ve güvenlik açıkları kapsam dışıdır.
+2
+
+-- 2 of 7 --
+
+Akıl Sağlığı Kontrolü
+Tanım ve ˙Işlev
+Akıl sağlığı kontrolü, sonucun doğru olduğunu göstermez; yalnızca açıkça yanlış
+olmadığını gösterir. Ayrıntılı test pahalıdır ve zaman alır. Akıl sağlığı kontrolü
+birkaç saniye sürer ve en kaba hataları eler. Bu yüzden ayrıntılı testten önce
+yapılır.
+Örnek
+738 sayısının karesi 54.464 olarak hesaplanmış olsun. Kesin hesap yapmadan
+şu söylenebilir: 700’ün karesi 490.000’dir, dolayısıyla sonuç bundan büyük ol-
+malıdır. 54.464 on kat küçüktür ve yanlıştır. Doğru değer 544.644’tür. Kontrol,
+doğru değeri bulmadan yanlış değeri elemiştir.
+Zarf Arkası Hesap
+Akıl sağlığı kontrolü bir beklentiye dayanır; beklenti de zarf arkası hesapla ku-
+rulur. Hesabın amacı kesinlik değil, mertebedir: iş saniyeler mi, dakikalar mı,
+saatler mi sürer.
+Örnek: bir işlemin 20 saniye sürmesi bekleniyorsa ve 33 dakikadır sürüyorsa,
+işlem beklenenin yaklaşık yüz katı kadar uzamıştır. Bu fark gecikmeyle açıklanamaz;
+bir şey bozulmuştur. Tahmin önceden yapılmamışsa 33 dakikanın uzun olduğu
+söylenemez, çünkü karşılaştırılacak bir sayı yoktur.
+3
+
+-- 3 of 7 --
+
+Ajanların Hata Türleri
+MAST C alışması
+Kaliforniya Üniversitesi Berkeley’den bir ekip, çok ajanlı sistemlerin neden başarısız
+olduğunu incelemiştir (Cemri vd., 2025). C ok ajanlı sistem (multi-agent sys-
+tem), birden fazla ajanın birlikte çalıştığı yapıdır. C alışmada 1.642 çalışma
+kaydı incelenmiş ve 14 hata türünden oluşan bir sınıflandırma çıkarılmıştır.
+Sınıflandırmanın adı MAST’tır (Multi-Agent System Failure Taxonomy).
+En sık görülen hata türleri şunlardır:
+Sıra Hata türü Oran
+1 Adım tekrarı (step repetition) %15,7
+2 Düşünce ile eylemin uyuşmaması
+(reasoning-action mismatch)
+%13,2
+3 Bitiş koşulunu fark etmemek (unaware
+of termination conditions)
+%12,4
+4 Görev tanımına uymamak (disobey task
+specification)
+%11,8
+Adım Tekrarı
+Ajan, ilerleme sağlamayan bir adımı yeniden yapar. Örnek: 41 dakikalık bir
+dosyanın on kez açılması. Her açılış aynı bilgiyi verir; onuncu açılış ilkinden
+fazlasını öğretmez.
+Bitiş Koşulunu Fark Etmemek
+Ajan, durması gereken anı tanımaz. Örnek: sonuç vermeyecek bir işin iki saat
+beklenmesi. ˙Işin bitmeyeceği ilk dakikalarda anlaşılabilirdi, ancak ajan “ne
+zaman vazgeçilir” sorusunu hiç sormamıştır.
+Düşünce ile Eylemin Uyuşmaması
+Ajanın söylediği plan ile yaptığı iş birbirini tutmaz. Örnek: ajan “önce dosyayı
+kontrol edeceğim” der, ardından kontrol etmeden işlemi başlatır.
+Hatanın Yayılması
+Erken yapılan bir hata o anda fark edilmezse sonraki adımların girdisi olur. Shah
+ve arkadaşları (2026), ajan sistemlerinde hataların çoğunlukla erken başladığını
+ancak geç ortaya çıktığını bildirmiştir. Vinay (2025), hatalı bir çıktının bağımlı
+bileşenlere sessizce yayılıp zincirleme arızaya yol açtığını anlatmıştır.
+Örnek: bir aşamada bir konuşmacının 14 alıntısı yanlışlıkla 4’e düşer. Son-
+raki aşamalar bu 4 alıntıyı doğru kabul edip işlemeye devam eder. Hata son
+çıktıda görünür, ancak kaynağı çok önceki bir adımdadır.
+Bu olgu için incelenen kaynaklarda yerleşik tek bir ad geçmemektedir.
+4
+
+-- 4 of 7 --
+
+Sınıflandırmanın Sınırı
+MAST çok ajanlı sistemler üzerinde kurulmuştur. Tek ajanın hatalarına uygu-
+lanması bir benzetmedir; oranlar tek ajan için ölçülmemiştir. Ayrıca “insanın
+asla yapmayacağı, ajanın yaptığı hata” için literatürde tek bir ad yoktur. En
+yakın karşılıklar akıl sağlığı kontrolünün eksikliği ile yukarıdaki hata türleridir.
+5
+
+-- 5 of 7 --
+
+Üç Soruluk Mantık Testi
+Yukarıdaki hatalar, uzun ya da pahalı her işten önce ve iş sürerken sorulan üç
+soruyla yakalanabilir.
+Bu ˙Iş Ne Kadar Sürmeli
+Süre, işe başlamadan önce tahmin edilir. Tahmin belirli bir katı aştığında iş
+kesilir ve nedeni araştırılır. Üç kat, pratik bir eşiktir; literatürden alınmış bir
+değer değildir. Bu soru bitiş koşulunu fark etmeme hatasını yakalar, çünkü “ne
+zaman durulur” sorusunun cevabını önceden yazdırır.
+Sonuç Ne Olmalı
+Sonucun kabaca nasıl görünmesi gerektiği önceden söylenir. Örnek: bir konuşmacının
+14 alıntısının 4’e düşmesi makul müdür? Bir işlem alıntıların üçte ikisinden fa-
+zlasını siliyorsa bunun bir gerekçesi olmalıdır; gerekçe yoksa hata vardır. Bu
+soru hatanın yayılmasını erken keser.
+Bir ˙Insan Bunu Yapar mıydı
+Yapılan iş bir insanın davranışıyla karşılaştırılır. Bir insan iki saat bekler miydi?
+Aynı dosyayı on kez açar mıydı? Cevap hayırsa ajan da yapmamalıdır. Bu soru
+adım tekrarını yakalar.
+Soru Yakaladığı hata
+Bu iş ne kadar sürmeli? Bitiş koşulunu fark etmemek
+Sonuç ne olmalı? Hatanın yayılması
+Bir insan bunu yapar mıydı? Adım tekrarı
+6
+
+-- 6 of 7 --
+
+Sonuç
+Ajanın uzun işlerdeki hataları büyük ölçüde beklenti eksikliğinden doğar. Bun-
+dan çıkan pratik kural şudur: beklenti işten önce yazılı hâle getirilmelidir.
+Süre tahmini ve beklenen sonuç bir kez yazıldığında, sapma ölçülebilir bir şeye
+dönüşür.
+Üç sorunun maliyeti düşüktür. Birkaç saniyelik bir tahmin, saatlerce süren
+boş beklemeyi önler. Bu oran, akıl sağlığı kontrolünün ayrıntılı testten önce
+yapılmasının gerekçesiyle aynıdır.
+C erçevenin sınırları vardır. ˙Ilk kez yapılan bir işte süre tahmini kötü olabilir
+ve eşik gereksiz yere tetiklenebilir. “Bir insan bunu yapar mıydı” sorusu, insanın
+hiç yapmadığı ölçekteki işlerde zayıf kalır; bir insan bin dosyayı elle taramaz,
+ancak ajan için bu makul olabilir. Akıl sağlığı kontrolü de yalnızca kaba hataları
+yakalar; mertebesi doğru ama değeri yanlış bir sonuç kontrolden geçer.
+Açık kalan iki soru vardır. Birincisi, tek ajanın hata türlerinin oranlarının
+çok ajanlı sistemlerdekiyle aynı olup olmadığıdır. ˙Ikincisi, ajanın bu üç soruyu
+dışarıdan hatırlatma olmadan kendiliğinden sormasının nasıl sağlanacağıdır.
+Aynı mantık mühendislikte eskiden beri kullanılır: bir köprü hesabı bilgisa-
+yara verilmeden önce elle kabaca yapılır ve iki sonuç karşılaştırılır.
+Kaynaklar
+• Cemri, M., Pan, M. Z., Yang, S. vd. (2025). Why Do Multi-Agent LLM
+Systems Fail? arXiv:2503.13657.
+• Shah, Morovati, Rahman ve Khomh (2026). Characterizing Faults in
+Agentic AI: A Taxonomy of Types, Symptoms, and Root Causes. arXiv:2603.06847.
+• Vinay, V. (2025). Failure Modes in LLM Systems: A System-Level Tax-
+onomy for Reliable AI Applications. arXiv:2511.19933.
+7
+
+-- 7 of 7 --

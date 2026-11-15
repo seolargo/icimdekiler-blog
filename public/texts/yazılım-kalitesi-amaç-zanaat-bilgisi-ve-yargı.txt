@@ -1,0 +1,377 @@
+Yazılım Kalitesi: Amaç, Zanaat Bilgisi ve Yargı
+Ömer Faruk Yavuz
+November 2026
+Özet
+Kalite, bir şeyin vaat ettiği işi her seferinde ve pürüzsüz yerine getirmesidir.
+Kalite standartları bu hedefi özellikler hâlinde adlandırır, ancak hedefe nasıl
+ulaşılacağını bildirmez. “Dosya en fazla 200 satır olsun” gibi pratik kurallar
+hiçbir standartta geçmez, çünkü bunlar amacın kendisi değil, amaca hizmet
+eden araçlardır. Pratik kuralın gücü, tartışmalı bir hedefi sayılabilir bir eşiğe
+çevirmesinden gelir. Aynı özellik kuralın zayıflığıdır: kural amacın yalnızca vek-
+ilidir ve amaç unutulduğunda sayı tutturulur, kalite kaybedilir. Kaliteyi üreten
+bilgi üç katmanda toplanır: amaç, zanaat bilgisi ve yargı. Standart yalnızca
+ilkini verir. ˙Ikincisi kitaplardan ve tecrübeden, üçüncüsü yalnızca pratikten
+öğrenilir. ˙Iki geliştirici aynı amacı ve aynı tasarım kalıbını bildiği hâlde farklı
+sonuca varıyorsa, farkı yaratan yargıdır.
+1
+
+-- 1 of 14 --
+
+Giriş
+Kalite üzerine çalışan biri iki ayrı bilgi kaynağıyla karşılaşır. Birincisi stan-
+dartlardır: ISO/IEC 25010 gibi belgeler bir yazılımın hangi özellikleri taşıması
+gerektiğini sıralar. ˙Ikincisi ekiplerin günlük kurallarıdır: dosya uzunluğu sınırı,
+kod incelemesi zorunluluğu, test yazma alışkanlığı. Bu iki kaynak birbirine
+doğrudan bağlanmaz. Standartta “200 satır” ya da “şu tasarım kalıbını kullan”
+diye bir madde yoktur. Buna rağmen bu kuralları ve kalıpları bilmeyen biri iyi
+yazılım üretemez.
+Bu boşluk, kalitenin tek katmanlı bir kavram olmamasından doğar. Notta
+kullanılan temel terimler şunlardır:
+• Kalite özelliği (quality attribute): bir ürünün iyi sayılması için taşıması
+gereken nitelik. Örnek: bakım yapılabilirlik.
+• Pratik kural: bir özelliği korumak için konan, sayılabilir ve denetlenebilir
+kural. Örnek: dosya en fazla 200 satır.
+• Tasarım kalıbı (design pattern): tekrar eden bir tasarım sorununa ver-
+ilmiş, adlandırılmış çözüm.
+• Vekil ölçü (proxy): doğrudan ölçülemeyen bir hedefin yerine ölçülen,
+onunla çoğu zaman birlikte hareket eden büyüklük.
+• Yargı: belirli bir durumda bir çözümün gerekli olup olmadığına karar
+verme becerisi.
+Yaygın kabul, kalitenin standartlara uyularak elde edildiğidir. Bu kabul
+eksiktir: standart neyin iyi sayıldığını söyler, iyi yapmayı öğretmez. Not yazılım
+örnekleri üzerinden ilerler; kalite yönetim sistemleri, belgelendirme süreçleri ve
+ölçüm araçları kapsam dışıdır.
+2
+
+-- 2 of 14 --
+
+Kalitenin Boyutları
+Kök Tanım
+Kalite, bir şeyin vaat ettiği işi her seferinde ve pürüzsüz yapmasıdır. Tanımın
+üç parçası vardır: vaat edilen iş (işlev), her seferinde (tutarlılık) ve pürüzsüz
+(deneyim). Kalitenin alt boyutları bu kökten dallanır.
+Beş Ana Dal
+Garvin (1987) ürün kalitesini sekiz boyuta ayırmıştır: performans, özellikler,
+güvenilirlik, uygunluk, dayanıklılık, servis edilebilirlik, estetik ve algılanan kalite.
+Bu sekiz boyut beş dal altında toplanabilir.
+˙Işlev
+• Amaca uygunluk: ürün asıl işini görmektedir.
+• Performans: asıl işin ne kadar iyi yapıldığı.
+• Özellikler: asıl işin üzerine eklenenler.
+Güven
+• Güvenilirlik: ürünün bozulmadan çalışması.
+• Dayanıklılık: ürünün ömrü.
+• Tutarlılık: her kullanımda aynı sonucun alınması.
+˙Işçilik
+• Malzeme: ürünün neyden yapıldığı.
+• Özen: görünmeyen ayrıntıların da düzgün olması.
+• Standarda uygunluk: söz verilen ölçülere uyulması.
+Deneyim
+• Estetik: ürünün göze, ele ve kulağa nasıl geldiği.
+• Kullanım kolaylığı: ürünün kullanıcıyı yormaması.
+• Algılanan kalite: marka ve itibarın yarattığı izlenim.
+Destek
+• Onarılabilirlik: ürünün tamir edilebilmesi.
+• Servis: sorun çıktığında ürünün arkasında duran birinin bulunması.
+3
+
+-- 3 of 14 --
+
+Nesnel ve Öznel Dallar
+˙Işlev, güven ve işçilik dalları ölçülebilir. Deneyim dalı kişiye göre değişir. Bir
+ürüne “kaliteli” denmesinde çoğu zaman güven ve işçilik belirleyicidir: işlevi iyi
+olduğu hâlde tutarsız ya da özensiz olan ürün kaliteli sayılmaz.
+4
+
+-- 4 of 14 --
+
+Amaç ile Araç Arasındaki Katmanlar
+Dört Katman
+Yazılımda bir kalite özelliği ile bir pratik kural arasında dört katman bulunur.
+Bakım yapılabilirlik örneğinde katmanlar şöyledir:
+1. Özellik: bakım yapılabilirlik. Standartta yazar.
+2. Alt özellik: anlaşılabilirlik, değiştirilebilirlik, test edilebilirlik. Stan-
+dartta yazar.
+3. ˙Ilke: tek sorumluluk, düşük bağımlılık, küçük birimler. Kitaplarda yazar.
+4. Pratik kural: dosya en fazla 200 satır. Ekibin kendi belgesinde yazar.
+ISO/IEC 25010 ilk iki katmanda kalır. “Kod anlaşılır olmalı” der, nasıl
+anlaşılır kılınacağını söylemez. 200 satır kuralı ağacın en uç yaprağıdır: soyut
+hedefi sayılabilir bir şeye çevirir.
+Pratik Kuralın Gücü
+200 satır kuralının işe yaramasının dört nedeni vardır.
+• Ölçülebilirlik. “Bu dosya anlaşılır mı” sorusu tartışılır. “200 satırı geçti
+mi” sorusu tartışılmaz.
+• Erken uyarı. Sişen bir dosya çoğu zaman birden fazla iş yapmaktadır.
+Sınır, bölme kararını zorlar.
+• Otomatik denetim. Kuralı bir araç denetler; insanın hatırlaması gerek-
+mez.
+• Düşük maliyet. Uygulamak için özel bilgi ya da toplantı gerekmez.
+Diğer Dallardan Örnekler
+Aynı dört katmanlı yapı diğer kalite özelliklerinde de görülür.
+Özellik Alt hedef ˙Ilke Pratik kural
+Güvenilirlik Hata toleransı Hata yutulmaz Her err kontrol edilir
+Test edilebilirlik Yalıtım Bağımlılık dışarıdan
+verilir
+Fonksiyon içinde servis
+yaratılmaz
+Anlaşılabilirlik Düşük karmaşıklık Sığ iç içelik En fazla üç seviye girinti
+Değiştirilebilirlik Küçük değişiklik Tek iş, tek kayıt Değişiklik isteği en fazla
+400 satır
+5
+
+-- 5 of 14 --
+
+Kural Bir Vekildir
+Pratik kural kalitenin kendisi değil, vekil ölçüsüdür. 200 satırlık kötü bir dosya
+da, 600 satırlık iyi bir dosya da olabilir. Kural çoğu durumda doğru yöne ittiği
+için değerlidir. Amaç unutulup yalnızca sayı kovalandığında kural işlevini yitirir.
+Bu durum ölçüm literatüründe Goodhart yasası olarak bilinir; Strathern (1997)
+yasayı şöyle özetlemiştir: bir ölçü hedefe dönüştüğünde iyi bir ölçü olmaktan
+çıkar.
+Örnek: 210 satıra ulaşan bir dosya, yalnızca sınırı tutturmak için ortasından
+ikiye kesilirse kurala uyulmuş olur. Dosya ise daha anlaşılır hâle gelmez; okuyan
+kişi artık iki dosya arasında gidip gelmek zorundadır.
+6
+
+-- 6 of 14 --
+
+Kural Koyma ve Uygulama
+Amaç ile araç arasındaki ilişki iki yönde çalışır. Kural konurken amaçtan araca
+inilir. Kural uygulanırken araçtan amaca bakılır.
+Kural Koyarken: Yukarıdan Aşağı
+1. Sorun bulunur. Başlangıç noktası somut bir sıkıntıdır. “Kalite artsın”
+bir başlangıç değildir; “bu dosyada değişiklik yapmak yarım gün sürüyor”
+bir başlangıçtır.
+2. Amaç adlandırılır. Sıkıntının hangi kalite özelliğine ait olduğu belir-
+lenir. Örnekte bu değiştirilebilirliktir.
+3. Neden bulunur. Değişikliğin zor olmasının nedeni, dosyanın beş ayrı iş
+yapmasıdır.
+4. Sayılabilir kural yazılır. Dosya en fazla 200 satır olur.
+5. Kural otomatiğe bağlanır. Denetimi bir araç yapar. ˙Insan hafızasına
+bırakılan kural zamanla uygulanmaz hâle gelir.
+Kuralı Uygularken: Aşağıdan Yukarı
+Kural bir yerde engel çıkardığında sorulacak soru “sayı nasıl tutturulur” değil,
+“bu kural neyi koruyordu” sorusudur. Yanıta göre iki yol vardır:
+• Amaç zaten sağlanıyorsa istisna tanınır ve gerekçesi kuralın yanına yazılır.
+• Amaç sağlanmıyorsa sayıyı tutturmak yetmez; sorunun kendisi çözülür.
+Kuralların Bakımı
+• Her kuralın yanında gerekçesi yazılı olur. Gerekçesi bilinmeyen kural ya
+körü körüne uygulanır ya da sessizce çiğnenir.
+• Kural sayısı az tutulur. Az sayıda kurala uyulur; kural sayısı arttıkça
+uyum düşer.
+• Kurallar belirli aralıklarla gözden geçirilir. Sorun ortadan kalkmışsa kural
+kaldırılır, yeni sorun çıkmışsa yeni kural eklenir.
+Amaç yön bildirir, kural yol kenarındaki korkuluk işlevi görür. Korkuluk
+çoğu zaman düşünmeye gerek bırakmadan doğru yerde tutar. Amaca yalnızca
+iki durumda dönülür: kural konurken ve kural anlamsız bir sonuç verdiğinde.
+7
+
+-- 7 of 14 --
+
+Amaç, Zanaat Bilgisi ve Yargı
+Standardın Söylemediği
+Tasarım kalıplarını bilmeyen biri iyi yazılım üretmekte zorlanır. Buna karşın
+hiçbir kalite standardı belirli bir kalıbın kullanılmasını istemez. Bunun nedeni,
+standart ile kalıbın farklı sorulara yanıt vermesidir:
+• Standart “ne” sorusunu yanıtlar: yazılım değiştirilebilir, güvenilir ve anlaşılır
+olmalıdır.
+• Zanaat bilgisi “nasıl” sorusunu yanıtlar: tasarım kalıpları, pratikler ve eşik
+kuralları.
+Standart “nasıl” sorusunu bilerek boş bırakır, çünkü her projeye uyan tek
+bir yol yoktur. Bir projede işe yarayan kalıp başka bir projede gereksiz yük olur.
+Yapı mühendisliğinde de durum aynıdır: yönetmelik binanın depremde ayakta
+kalmasını ister; kolonun nasıl hesaplanacağını mühendislik bilgisi öğretir.
+Kalıbın Adı ve C özdüğü Sorun
+Bilinmesi gereken şey kalıbın adı değil, çözdüğü sorundur. Tasarım kalıbı,
+aynı sorunun defalarca çözülmesinden sonra çözüme verilmiş addır (Gamma
+ve diğerleri, 1994). Kalıbın adını hiç duymamış, ancak aynı çözümü kendi
+bulmuş biri de iyi yazılım üretir; yalnızca daha yavaş ve daha pahalı öğrenmiştir.
+Kalıbın adını bilip çözdüğü sorunu anlamayan kişi ise kalıbı yanlış yere uygular
+ve yazılımı kötüleştirir.
+Üç Katman
+Kaliteyi üreten bilgi üç katmanda toplanır.
+1. Amaç: neyin iyi sayıldığı. Standart verir.
+2. Zanaat bilgisi: bir sorunun genelde nasıl çözüldüğü. Kitaplar ve tecrübe
+verir.
+3. Yargı: bir çözümün şu anda ve burada gerekli olup olmadığı. Yalnızca
+pratik verir.
+Standartta yalnızca birinci katman yazar. Kaliteyi asıl üreten ikinci ve
+üçüncü katmandır.
+Örnekler
+Yargının “Gerekli” Dediği Durum
+• Amaç: değiştirilebilirlik. Yeni bir özellik eklemek eskisini bozmamalıdır.
+8
+
+-- 8 of 14 --
+
+• Zanaat bilgisi: farklı davranışlar ayrı sınıflara konur ve ortak bir arayüzden
+çağrılır. Bu çözüm Strategy kalıbı olarak adlandırılır.
+• Yargı: sistemde dört ödeme yöntemi vardır, her ay bir yenisi eklenmektedir
+ve her eklemede aynı if-else bloğuna dokunulmaktadır. Sorun gerçektir
+ve tekrar etmektedir. Kalıp uygulanır.
+Yargının “Gereksiz” Dediği Durum
+• Amaç: aynı, değiştirilebilirlik.
+• Zanaat bilgisi: aynı, Strategy kalıbı.
+• Yargı: sistemde tek ödeme yöntemi vardır ve ikincisinin geleceğine dair bir
+işaret yoktur. Kalıp kurulursa üç dosya ve bir arayüz eklenir, karşılığında
+hiçbir şey kazanılmaz. Düz bir fonksiyon yazılır; ikinci yöntem geldiğinde
+dönüştürülür.
+˙Iki örnekte amaç ve zanaat bilgisi aynıdır. Sonucu değiştiren yalnızca yargıdır.
+Yargının Kuralı Esnettiği Durum
+• Amaç: anlaşılabilirlik.
+• Zanaat bilgisi: dosya 200 satırı geçmemelidir.
+• Yargı: dosya 350 satırdır, ancak içinde yalnızca 80 ülkenin telefon kodu
+listesi vardır. Dosya tek iş yapmaktadır ve okunması kolaydır. Bölünürse
+okuyan kişi iki dosya arasında gidip gelir. Dosya olduğu gibi bırakılır.
+Yargının “Simdi Değil” Dediği Durum
+• Amaç: performans.
+• Zanaat bilgisi: sık okunan veri önbelleğe (cache) alınır.
+• Yargı: sorgu 40 milisaniye sürmektedir ve sayfa günde 200 kez açılmaktadır.
+Önbellek eklenirse verinin ne zaman eskidiğini yönetmek gibi yeni bir
+sorun doğar. Kazanç küçük, maliyet büyüktür. Önbellek eklenmez; trafik
+arttığında ölçüm yapılır ve karar yeniden verilir.
+Yargının Sorduğu Sorular
+Dört örnekte de yargı aynı üç soruyu sorar:
+• Sorun şu anda gerçekten var mıdır, yoksa bir tahmin midir?
+• C özümün maliyeti kazancından küçük müdür?
+• C özümü sonradan eklemek zor mudur? Kolaysa beklemek daha ucuzdur.
+9
+
+-- 9 of 14 --
+
+Üçüncü soru, yazılımda YAGNI (You Aren’t Gonna Need It, “ihtiyacın ol-
+mayacak”) adıyla bilinen ilkenin karşılığıdır. ˙Ilke, bir özelliğin ancak gerçekten
+gerektiğinde yazılmasını önerir (Fowler, 2015).
+Katmanları Kim Taşır
+• Amaç katmanını standardı okuyan herkes bilir: kalite yöneticisi, denetçi,
+öğrenci. Öğrenilmesi en kolay katmandır.
+• Zanaat bilgisini, kitapları okumuş ve birkaç yıl çalışmış geliştirici taşır.
+Kalıpları sayabilir ve uygulayabilir.
+• Yargıyı, aynı kararı defalarca verip sonucunu görmüş kişi taşır. Kalıbı
+gereksiz yere kurup yükünü çekmiş, kurmayıp pişman olmuş ve iki duru-
+mun farkını yaşayarak öğrenmiştir.
+Kıdemli ile orta seviye geliştirici arasındaki fark çoğu zaman bilgi miktarı
+değil, üçüncü katmandır. ˙Ikisi de aynı kalıbı bilir; kıdemli olan kalıbın ne zaman
+kullanılmayacağını da bilir.
+Yargının zorluğu, sahibinin onu tam olarak anlatamamasıdır. Polanyi (1966)
+bu tür bilgiye örtük bilgi (tacit knowledge) adını vermiş ve insanın söyleyebildiğinden
+fazlasını bildiğini belirtmiştir. Bu nedenle yargı kitaptan değil, ustanın yanında
+çalışarak, kod incelemelerinde ve kişinin kendi hatalarından öğrenilir.
+Üçlünün Kökenleri
+Amaç, zanaat bilgisi ve yargı ayrımı bu adlarla yerleşik bir model değildir; bu-
+rada kurulmuş bir özetlemedir. Aynı ayrımı başka adlarla yapan kaynaklar
+vardır.
+• Aristoteles Nikomakhos’a Etik ’te üç kavramı ayırır: telos bir şeyin amacıdır,
+techne bir şeyi yapma bilgisidir, phronesis ise belirli bir durumda doğru
+olanı görme becerisi, yani pratik bilgeliktir. Üçlüye en yakın karşılık
+budur.
+• Lundvall ve Johnson (1994) bilgiyi dört türe ayırır: neyi bilmek (know-
+what), nedenini bilmek (know-why), nasıl yapılacağını bilmek (know-how )
+ve kimin bildiğini bilmek (know-who). Amaç katmanı ilk ikisine, zanaat
+bilgisi üçüncüsüne yakındır.
+• Schön (1983) mühendis, mimar ve hekimlerin kural bilgisi ile iş başındaki
+yargısını ayırmıştır.
+• Dreyfus ve Dreyfus (1986) beceri kazanmayı beş basamakta anlatır: acemi
+kurala uyar, usta duruma bakar.
+Yazılım alanında bu ayrım çoğunlukla adı konmadan bilinir ve “duruma göre
+değişir” sözüyle ifade edilir.
+10
+
+-- 10 of 14 --
+
+˙Isviçre Kökenli Yazılım Ekolleri
+Amaçtan sayılabilir kurala inme yaklaşımı, ˙Isviçre’de gelişen üç yazılım ekolünde
+açık biçimde görülür. Bu ekoller ülkeye özgü bir kural seti oluşturmaz; ancak
+her biri soyut bir hedefi somut pratiklere bağlar.
+Wirth: Sadelik
+Pascal ve Oberon dillerinin tasarımcısı Niklaus Wirth, Zürih’teki ETH’de çalışmıştır.
+Wirth’e göre bir sistemi tek bir kişi baştan sona anlayabilmelidir. Wirth (1995)
+yazılımların donanımın hızlanmasından daha hızlı şiştiğini savunmuş ve yalın
+yazılım çağrısı yapmıştır. Bu hedeften çıkan pratikler şunlardır:
+• Bir özellik eklenmeden önce onsuz olup olmayacağı sorulur.
+• Dilin ve sistemin tanımı kısa tutulur. Oberon dilinin tanımı yaklaşık 16
+sayfadır.
+• Modülün dışarıya açtığı kısım küçük tutulur, geri kalanı gizlenir.
+Meyer: Sözleşmeyle Tasarım
+Bertrand Meyer, ETH’de profesörlük yapmış ve sözleşmeyle tasarım (Design
+by Contract) yaklaşımını geliştirmiştir. Yaklaşıma göre her fonksiyon ne bek-
+lediğini ve ne söz verdiğini açıkça bildirir (Meyer, 1992).
+• Fonksiyonun başında girdi kontrol edilir (ön koşul).
+• Fonksiyonun sonunda çıktı kontrol edilir (son koşul).
+• Bir fonksiyon ya bilgi döndürür ya da bir durumu değiştirir; ikisini birden
+yapmaz.
+Gamma: Test ve Küçük Adım
+Zürih’te çalışan Erich Gamma, tasarım kalıpları kitabının yazarlarından biridir
+ve Kent Beck ile birlikte JUnit test aracını yazmıştır. Bu ekolün pratikleri test
+güdümlü geliştirmede toplanır (Beck, 2002).
+• Kod yazılmadan önce testi yazılır.
+• Testler sürekli geçer durumda tutulur; başarısız test varken yeni iş eklen-
+mez.
+• Küçük adımlarla ilerlenir ve sık yayın yapılır.
+11
+
+-- 11 of 14 --
+
+Denetlenen Sektörlerin Pratikleri
+Bankacılık, tıbbi cihaz ve demiryolu gibi sıkı denetlenen sektörlerde üç pratik
+öne çıkar:
+• Dört göz kuralı: hiçbir değişiklik ikinci bir kişi incelemeden kabul edilmez.
+• ˙Izlenebilirlik: her kod değişikliği bir gereksinime, her gereksinim bir teste
+bağlanır.
+• Önce belge, sonra kod: kararlar koddan önce yazıya dökülür.
+Bu pratiklerin tümü “az, anlaşılır ve kanıtlanabilir” hedefinden sayılabilir
+kurallara iner. Wirth’ün 16 sayfası ile 200 satır sınırı aynı türden kurallardır.
+12
+
+-- 12 of 14 --
+
+Sonuç
+Standart bilgisi ile kalite üretme becerisi ayrı şeylerdir. Bir ekibin standardı
+bilmesi, neyin iyi sayıldığı konusunda anlaşmasını sağlar; iyi yazılım üretmesini
+sağlamaz. Kalite yatırımı bu nedenle standart eğitimine değil, zanaat bilgisinin
+ve yargının aktarımına yönelmelidir: kod incelemesi, usta ile birlikte çalışma ve
+hatalardan öğrenme.
+Pratik kurallar için çıkan sonuç iki yönlüdür. Kuralsız çalışan ekip her kararı
+baştan tartışır ve yorulur. Kuralı amaç sanan ekip ise sayıları tutturur ve kaliteyi
+kaçırır. Kuralın gerekçesiyle birlikte yazılması bu iki hatayı birlikte önler: kural
+çoğu durumda düşünmeden uygulanır, anlamsız sonuç verdiği yerde gerekçeye
+dönülür.
+C erçevenin sınırları vardır. Üç katman her zaman birbirinden net ayrılmaz.
+YAGNI ilkesi bunun örneğidir: yargının kurala dökülmüş hâlidir ve hem zanaat
+bilgisi hem yargı sayılabilir. Ayrıca yargının yalnızca pratikle kazanıldığı id-
+diası, yargının hiç öğretilemeyeceği anlamına gelmez; örnek olay incelemeleri
+ve gerekçeli kod incelemeleri öğrenmeyi hızlandırır, ancak bunun ne ölçüde
+mümkün olduğu açık bir sorudur.
+˙Iki soru yanıtsız kalmaktadır. Birincisi, yargının ne kadarının açık kurallara
+dökülebileceğidir; her dökülen parça zanaat bilgisine dönüşür ve geriye daha
+ince bir yargı katmanı kalır. ˙Ikincisi, bu çerçevenin yazılım dışındaki zanaatlara
+ne ölçüde taşınabileceğidir. Aristoteles’in ayrımının hekimlik ve yöneticilik için
+de kullanılması, çerçevenin yazılıma özgü olmadığını düşündürmektedir.
+Kaynaklar
+• Aristoteles. Nikomakhos’a Etik.
+• Beck, K. (2002). Test-Driven Development: By Example. Addison-Wesley.
+• Dreyfus, H. L. ve Dreyfus, S. E. (1986). Mind over Machine. Free Press.
+• Fowler, M. (2015). Yagni. martinfowler.com.
+• Gamma, E., Helm, R., Johnson, R. ve Vlissides, J. (1994). Design Pat-
+terns: Elements of Reusable Object-Oriented Software. Addison-Wesley.
+• Garvin, D. A. (1987). Competing on the Eight Dimensions of Quality.
+Harvard Business Review, 65(6).
+• ISO/IEC 25010 (2011). Systems and software engineering – Systems and
+software Quality Requirements and Evaluation (SQuaRE) – System and
+software quality models.
+• Lundvall, B.-˚ A. ve Johnson, B. (1994). The Learning Economy. Journal
+of Industry Studies, 1(2).
+• Meyer, B. (1992). Applying “Design by Contract”. IEEE Computer,
+25(10).
+13
+
+-- 13 of 14 --
+
+• Polanyi, M. (1966). The Tacit Dimension. Doubleday.
+• Schön, D. A. (1983). The Reflective Practitioner. Basic Books.
+• Strathern, M. (1997). “Improving Ratings”: Audit in the British Univer-
+sity System. European Review, 5(3).
+• Wirth, N. (1995). A Plea for Lean Software. IEEE Computer, 28(2).
+14
+
+-- 14 of 14 --
