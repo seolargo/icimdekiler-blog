@@ -1,0 +1,545 @@
+Organizasyon Kuramı: Kısıt ve Bağ Geometrisi.
+Ömer Faruk Yavuz
+November 2026
+Özet
+Bir organizasyonun çıktısını, içindeki en yavaş halka belirler; bu halkanın dışındaki
+her iyileştirme sonucu değiştirmez. Rol dağılımı da bu kurala uyar: yön belli ve
+iş çoksa mühendis sayısı, yön belirsiz ve üretim hızlıysa ürün yöneticisi sayısı
+artırılır. Darboğaz sabit değildir; açıldığı anda başka bir yere kayar. Roller, isim-
+ler ve sektör atıldığında bir organizasyondan geriye dört şey kalır: amaç, insanlar
+arasındaki bağlar, dış dünyayla sınır ve akış. Bir yapının sağlığı, içindeki insan-
+ların niteliğinden çok bu bağların geometrisine bağlıdır. Sağlıklı geometrilerin
+ortak özelliği tek kopma noktası bulunmaması, yolların kısa olması, birden fazla
+yol bulunması ve sıkılığın yerel, bağlantının genel olmasıdır. Sağlıksız yapıların
+çoğu sağlıklı bir yapının eksik hâlidir ve çoğu zaman yıkılarak değil, eksik bağlar
+eklenerek düzeltilir. Kendi yapısını gözlemleyebilen sistem darboğazını görür;
+ancak gözlem işin akışına değil insanlara yöneldiğinde, düzeltmeye çalıştığı geri
+beslemeyi bozar.
+1
+
+-- 1 of 21 --
+
+Giriş
+Yazılım şirketlerinde yaygın bir gözlem, ürün yöneticisi (product manager ) sayısının
+düşük tutulup mühendis sayısının artırılmasıdır. Sektörde sık rastlanan oran
+kabaca bir ürün yöneticisine beş ila on mühendistir. Buna karşılık iki ürün
+yöneticisi ile tek bir geliştiriciden oluşan küçük bir proje ekibinde verimin be-
+lirgin biçimde arttığı da gözlenebilir. ˙Iki gözlem ilk bakışta çelişir.
+C elişki, ikisini birden açıklayan tek bir kavramla çözülür: darboğaz (bot-
+tleneck ). Darboğaz, bir sistemde işin en yavaş aktığı ve bu nedenle sistemin
+toplam hızını belirleyen noktadır. Aynı kavram literatürde kısıt (constraint)
+adıyla da geçer.
+Yaygın kabul, bir organizasyonu iyileştirmenin yolunun her parçasını ayrı
+ayrı iyileştirmek olduğudur. Kısıt kavramı bu kabulden ayrılır: kısıt dışındaki
+iyileştirme toplam çıktıyı artırmaz.
+Kısıtı görebilmek için organizasyonun soyutlanması (abstraction) gerekir.
+Soyutlama, bir şeyin ayrıntılarının bir kısmını atarak geriye yapısını bırakan
+işlemdir. Metinde önce kısıt kavramı, ardından organizasyonun ve fabrikanın
+soyut resimleri, ardından insanlar arasındaki bağların geometrisi ele alınır. Kap-
+sam organizasyonların iç yapısıyla sınırlıdır; pazar stratejisi, finansman ve kültür
+gibi konular kapsam dışındadır.
+2
+
+-- 2 of 21 --
+
+Darboğaz ve Rol Dağılımı
+Ürün Yöneticisi ile Mühendisin Farklı Ölçeklenmesi
+Ürün yöneticisi “ne yapılacak ve neden” sorusunu cevaplar; mühendis bu kararı
+hayata geçirir. Bir karar bir kez verilir, ancak uygulanması kod, test, bakım ve
+altyapı işi olarak aylar sürebilir. Bu nedenle tek bir karar çok sayıda mühendise
+iş çıkarır.
+Oturmuş ürünlerde mühendis sayısının artırılmasının dört nedeni vardır:
+• Aynı ürüne karar veren kişi sayısı arttıkça öncelikler çatışır, toplantı sayısı
+artar ve sorumluluk bulanıklaşır.
+• C oğu şirkette yapılacak fikir boldur; eksik olan, fikri hayata geçirecek
+emektir. Kaynak darboğaza konur.
+• Mühendisin çıktısı görünürdür; ikinci bir ürün yöneticisinin katkısını göstermek
+daha zordur ve bütçe savunması zayıf kalır.
+• Teknik kararların ve küçük ürün kararlarının bir kısmı zaten mühendis
+ekibi içinde çözülür.
+Ürün yöneticisi sayısı genellikle mühendis sayısı arttığında değil, ürün ya da
+ekip sayısı arttığında artar. Brooks (1975) bunun mühendis tarafındaki sınırını
+göstermiştir: geciken bir projeye insan eklemek, koordinasyon maliyeti nedeniyle
+projeyi daha da geciktirebilir.
+Karşı Örnek: ˙Iki Ürün Yöneticisi, Tek Geliştirici
+˙Iki ürün yöneticisi ve tek geliştiriciden oluşan bir ekipte verimin artması aynı
+kuralın öbür yüzüdür. Bu ekipte darboğaz üretim değil, neyin yapılacağını
+bilmektir. Durumu açıklayan beş etken vardır:
+• Erken aşamada asıl iş keşiftir. Müşterinin ne istediğini ve neye para
+ödeyeceğini öğrenmek, kod yazmaktan daha çok zaman alır.
+• Yanlış şeyi üretmek en pahalı israftır. ˙Iki ürün yöneticisi işi süzdüğünde
+tek geliştiricinin yazdığı her şey gerçekten gerekli olan şey olur.
+• Tek geliştiricide kod tarafında koordinasyon maliyeti yoktur.
+• Yapay zekâ destekli araçlar kod yazmayı ucuzlatmıştır. Üretim hızlandığında
+darboğaz karar ve müşteri tarafına kayar.
+• ˙Iki ürün yöneticisinin alanları ayrıysa (örneğin biri müşteri görüşmeleri,
+diğeri öncelik ve kapsam) kararlar çatışmaz.
+Cagan (2017) ürün tarafının asıl işinin keşif olduğunu, Ries (2011) erken
+aşamadaki darboğazın üretim değil öğrenme olduğunu savunur.
+3
+
+-- 3 of 21 --
+
+C ıkan Kural
+Doğru bir oran yoktur; insan, darboğazın bulunduğu yere konur.
+Durum Darboğaz Artırılan rol
+Yön belli, iş çok Üretim Mühendis
+Yön belirsiz, üretim hızlı Keşif ve karar Ürün yöneticisi
+Bu denge kalıcı değildir. Ürün tutunup müşteri sayısı arttığında bakım,
+hata ve destek işleri birikir ve darboğaz yeniden üretime kayar. Pratik işaret
+bekleyen iş listesidir: liste sürekli uzuyorsa darboğaz üretimdedir; geliştirici işi
+bitirip yeni iş bekliyorsa darboğaz keşif tarafındadır.
+4
+
+-- 4 of 21 --
+
+Kısıtlar Teorisi
+Tanım ve Köken
+Kısıtlar Teorisi (Theory of Constraints), her sistemin hızını tek bir yerin,
+en yavaş halkanın belirlediğini söyler. Kuramı Goldratt (1984) The Goal adlı
+kitabında ortaya koymuştur. Aynı düşünce, Ohno’nun (1988) kurduğu Toyota
+üretim sisteminde israfın ve akışı tıkayan noktanın bulunması olarak yer alır.
+Kim, Behr ve Spafford (2013) kuramı yazılım ve bilgi teknolojileri operasyon-
+larına uyarlamıştır.
+Fabrika Örneği
+Bir fabrikada art arda üç makine bulunsun. Birincisi saatte 100, ikincisi 20,
+üçüncüsü 80 parça işlesin. Fabrikanın saatlik üretimi 20 parçadır, çünkü her
+parça ikinci makineden geçmek zorundadır. Buradan üç sonuç çıkar:
+• Kısıt dışındaki iyileştirme boşunadır. Birinci makinenin kapasitesi 200’e
+çıkarılsa üretim yine 20 olur; yalnızca ikinci makinenin önündeki yığın
+büyür.
+• Kısıtta kaybedilen bir saat, bütün sistemin kaybıdır.
+• Herkesin tam kapasite çalışması hedef değildir. Kısıt olmayan bir istasy-
+onun zaman zaman boş durması olağandır; aksi yalnızca stok ve karmaşa
+üretir.
+Beş Adım
+1. Kısıt bulunur: iş nerede yığılmaktadır.
+2. Kısıttan en yüksek verim alınır: kısıt boşa çalıştırılmaz, gereksiz işle
+meşgul edilmez.
+3. Diğer her şey kısıta göre ayarlanır.
+4. Kısıt genişletilir: hâlâ yetmiyorsa oraya insan, makine ya da para konur.
+5. Başa dönülür: kısıt açıldığında darboğaz başka bir yere kayar.
+Beşinci adım kuramın en önemli sonucudur: kısıt ortadan kalkmaz, yer
+değiştirir.
+Organizasyonlarda Kısıt
+Organizasyonda makinenin yerini insanlar ve onaylar alır. ˙Iş bir masadan
+diğerine geçer ve en yavaş masa herkesin hızını belirler.
+5
+
+-- 5 of 21 --
+
+Kısıtın Bulunduğu Yerler
+• Tek bir kişi: her işin kendisine sorulduğu uzman.
+• Onay: her kararın bir yöneticinin imzasını beklemesi.
+• Bir bölüm: yazılım hızlı çıkar, ancak test, hukuk ya da satış yetişemez.
+• Bir kural: hiçbir insan yavaş olmasa da işi yavaşlatan çok aşamalı onay
+kuralları.
+• Dış dünya: ürün hazırdır, ancak müşteri yoktur; bu durumda kısıt pazardır.
+Kısıtın Bulunması
+Üç soru yeterlidir. ˙Iş nerede beklemektedir; kuyruk neredeyse kısıt oradadır.
+Herkes kimi beklemektedir. Kim sürekli yoğun, kim sık sık boştur; sürekli yoğun
+olan kısıttır.
+Kısıt Bulunduktan Sonra
+Kısıttaki kişinin üzerinden yalnızca onun yapabileceği işler dışındaki yük alınır.
+˙Iş ona eksiksiz ve hazır getirilir. Kısıtın kaldıramayacağı kadar iş başlatılmaz.
+Bunlar yetmezse yetki dağıtılır, onay sayısı azaltılır ya da yeni insan alınır.
+Organizasyonlarda en sık yapılan hata herkesi meşgul tutmaya çalışmaktır.
+Boş duran birine verilen iş kısıta gitmiyorsa yalnızca yığını büyütür. Ölçüt
+herkesin dolu olması değil, işin baştan sona akmasıdır.
+6
+
+-- 6 of 21 --
+
+Organizasyonun Soyut Resmi
+Akış Olarak Organizasyon
+˙Ilk soyutlama organizasyonu bir akış olarak gösterir. ˙Ihtiyaç bir uçtan girer, ista-
+syonlardan geçer ve öbür uçtan değer olarak çıkar. Sekilde kutuların yüksekliği
+kapasiteyi temsil eder; en alçak kutu kısıttır. Kesik çizgi, müşteriden dönen
+parayı ve bilgiyi gösterir. Bu çizgi koptuğunda organizasyon neyin işe yaradığını
+öğrenemez.
+Keşif Karar Üretim Teslim
+˙Ihtiyaç Değer
+Kısıt
+Para ve bilgi geri döner
+Klasik organizasyon şeması kimin kime bağlı olduğunu gösterir. Akış resmi
+ise işin nasıl ilerlediğini gösterir ve kısıtı görünür kılan resim budur.
+Canlı Bir Yapı Olarak Organizasyon
+˙Ikinci soyutlama organizasyonu bir hücreye benzetir. Bu resimde üç öğe vardır.
+• Sınır geçirgendir. Organizasyon dışarıdan para, bilgi ve insan alır; dışarıya
+ürün ve hizmet verir. Alışveriş durduğunda yapı yaşayamaz.
+• Bağlar asıl yapıdır. ˙Iş, insanların arasındaki bağlardan akar. Bağı kopan
+kişi içeride bulunsa bile akışın dışındadır.
+• Amaç merkezdedir. Merkezde bir kişi değil, bağları bir arada tutan amaç
+durur.
+7
+
+-- 7 of 21 --
+
+Amaç
+Para, bilgi, insan
+Ürün, hizmet
+Sınır
+˙Insanlar ve bağlar
+Akış resmi işin nasıl ilerlediğini, hücre resmi ise organizasyonun neyden
+oluştuğunu gösterir.
+Dengesiz Organizasyon
+Aynı resim bozulduğunda beş bozukluk ortaya çıkar.
+• Bağlar ağ değil yıldız biçimindedir: insanlar birbirine değil, tek bir kişiye
+bağlıdır. Kısıt o kişidir.
+• Amaç merkezden çıkmış, yerine bir kişi oturmuştur. C alışanlar “neden”
+sorusuna göre değil, o kişinin ne diyeceğine göre davranır.
+• Kopuk parçalar vardır: yalnızca kendi içinde bağlı küçük bir ekip ve kim-
+seye bağlı olmayan bir kişi.
+• Sınır duvara dönmüştür; müşteriden ve pazardan bilgi içeri girmez.
+• Giren ile çıkan orantısızdır: çok kaynak girer, az ürün çıkar. Aradaki fark
+iç sürtünmeye gider.
+8
+
+-- 8 of 21 --
+
+Amaç
+C ok kaynak
+Az ürün
+Kapalı sınır
+Her bağın toplandığı kişi
+Kopuk ekip
+Silik amaç
+Kopuk kişi
+Bu bozukluklar genellikle birlikte görülür ve çoğu zaman ilki diğerlerini
+doğurur: her şey tek kişide toplandığında amaç onun gölgesinde kalır, ona
+ulaşamayanlar kopar ve dışarıdan gelen bilgi ona takılır.
+9
+
+-- 9 of 21 --
+
+Fabrikanın Soyut Resmi
+Girdi, Dönüşüm, C ıktı
+Bir fabrikadan makineler, bina ve ürünün ne olduğu atıldığında geriye beş öğe
+kalır.
+• Giren: malzeme, enerji ve emek.
+• Dönüşüm: girenin biçiminin değişmesi. C ıkan şey girenden daha değerli
+değilse fabrikanın varlık nedeni yoktur.
+• C ıkan: ürün.
+• Kayıp: atık ve ısı. Hiçbir dönüşüm tam verimli değildir; verim, girenin
+ne kadarının ürüne dönüştüğüdür.
+• Geri besleme: çıkanın ölçülmesi ve dönüşümün buna göre ayarlanması.
+Bu bağ yoksa fabrika hatalı ürün çıkardığını fark etmez.
+Malzeme
+Enerji
+Emek
+Dönüşüm Ürün
+Atık ve ısı
+Ölçüm ve ayar
+Bu iskelet yalnızca fabrikaya ait değildir; fırın, yazılım ekibi, okul ve mutfak
+aynı şemaya oturur.
+Dönüşümün ˙Içi: Üretim Hatları
+Dönüşüm kutusu açıldığında, ne üretildiğinden bağımsız olarak altı parça görülür.
+• ˙Istasyon: tek bir işlemin yapıldığı yer.
+• Hat: sırayla dizilmiş istasyonlar.
+• Paralel hatlar: farklı parçaların aynı anda ayrı hatlarda hazırlanması.
+10
+
+-- 10 of 21 --
+
+• Birleşme: hatların montajda buluşması. Montaj en geç gelen parçayı
+bekler.
+• Ara stok: istasyonlar arasında bekleyen iş. Azı tampon görevi görür,
+çoğu bir sorunun işaretidir.
+• Geri dönüş: kontrolden geçemeyen parçanın yeniden işlenmesi. Aynı iş
+iki kez yapılır ve kapasite fark edilmeden tüketilir.
+Kesme Bükme
+Döküm ˙Işleme
+Montaj Kontrol
+Hatalı parça
+Bekleyen iş
+Hat A
+Hat B
+Sekilde kalın çerçeveli istasyon kısıttır; önündeki yığın bunu ele verir. Fab-
+rikanın saatlik üretimi bu istasyonun saatlik üretimi kadardır. Hat A’ya yeni
+makine alınması sonucu değiştirmez; yalnızca montajın önünde eşi gelmemiş
+parça biriktirir.
+11
+
+-- 11 of 21 --
+
+Bağ Geometrileri
+Altı Sağlık Testi
+Hücre resmindeki öğeler tek tek sorulduğunda her biri bir sağlık testine dönüşür.
+1. Amaç: içerideki insanlar yapının ne için var olduğu sorusuna aynı cevabı
+veriyor mu.
+2. Bağlar: insanlar birbirine mi, tek bir kişiye mi bağlı. O kişi bir ay bu-
+lunmasa ne olur.
+3. Sınır: yeni insan girebiliyor mu, giren kalıyor mu, giden neden gidiyor.
+4. Akış: giren emek, para ve zamanın karşılığında bir şey çıkıyor mu.
+5. Geri besleme: bir şey ters gittiğinde bunu kim, ne kadar sürede fark
+ediyor.
+6. Kopukluk: içeride bulunup akışa girmeyen kişi ya da grup var mı.
+Aynı testler farklı ölçekte ve türde yapılara uygulanabilir.
+Test Apartman Kurs grubu Arkadaş grubu
+Amaç Bakımlı, huzurlu
+yaşam
+˙Insanların beceri
+öğrenmesi
+Birlikte iyi vakit
+geçirmek
+Bağlar Komşular birbirini
+tanıyor mu
+Kursiyerler birbiriyle de
+çalışıyor mu
+Herkes herkesle
+görüşüyor mu
+Sınır Yeni taşınan kabul
+görüyor mu
+Yeni gelen üç ay sonra
+orada mı
+Gruba yeni biri
+katılabiliyor mu
+Akış Aidatın karşılığında iş
+yapılıyor mu
+Kursiyerler gerçekten il-
+erliyor mu
+Herkes hem veriyor
+hem alıyor mu
+Geri besleme Arıza kaç günde
+düzeliyor
+Kursiyer derdini
+söyleyebiliyor mu
+Kırgınlık
+konuşulabiliyor mu
+Kopukluk Toplantıya hiç
+gelmeyen daireler
+Köşede kalan kursiyerler Yalnızca adı grupta
+olanlar
+Hızlı bir değerlendirme için üç işaret çoğu şeyi söyler: yeni gelenlerin kalıp
+kalmadığı, kilit kişi yokken işin yürüyüp yürümediği ve kötü haberin ne kadar
+hızlı yayıldığı. Sağlıklı yapıda kötü haber hızlı ve açık dolaşır; sağlıksız yapıda
+saklanır ya da dedikodu olarak dolaşır.
+12
+
+-- 12 of 21 --
+
+Üç Temel Sağlıklı Geometri
+Tam ağ Halkalı merkez Köprülü kümeler
+Tam Ağ
+Herkes herkese bağlıdır. Küçük gruplar için en sağlam yapıdır: yakın arkadaş
+grubu, kurucu ekip. Büyümez, çünkü n kişi için n(n − 1)/2 bağ gerekir; 5 kişide
+10, 50 kişide 1225 bağ.
+Halkalı Merkez
+Merkezde bir kişi bulunur, ancak çevredekiler birbirine de bağlıdır. Orta boy
+yapılara uyar: bir kurs, bir apartman, tek ekipli bir şirket. Yıldızdan tek farkı
+dıştaki halkadır (şekilde kalın çizgi); merkez çekildiğinde yapıyı o halka ayakta
+tutar.
+Köprülü Kümeler
+˙Içeride sıkı bağlı küçük ekipler, aralarında az sayıda köprü bulunur (şekilde kalın
+çizgi). Büyük yapılara uyar. Köprüyü kuran kişiler azdır ve ayrıldıklarında
+ekipler adaya döner.
+Sağlığın Geometrideki Karşılığı
+Üç yapının ortak özellikleri sağlığın tanımını verir.
+1. Tek kopma noktası yoktur: herhangi bir kişi çıkarıldığında geri kalan bağlı
+kalır.
+2. Yollar kısadır: herhangi iki kişi arasında en fazla birkaç adım vardır ve
+bilgi hızlı dolaşır.
+3. Birden fazla yol vardır: bir bağ koptuğunda iş başka yoldan akar.
+4. Sıkılık yerel, bağlantı geneldir: insanlar yakınındakilerle çok, uzaktakilerle
+az ama yeterli bağ kurar.
+Sağlıklı yapıların sayısı sınırlı değildir. Sabit olan biçim değil, bu dört
+özelliktir; dördünü sağlayan her biçim sağlıklıdır.
+13
+
+-- 13 of 21 --
+
+Altı Yapı Daha
+Aşağıdaki şekilde ince çizgiler olağan bağları, kalın ve kesik çizgiler ile gri
+düğümler her yapıyı diğerlerinden ayıran öğeyi gösterir.
+C apraz bağlı ağaç C ekirdek ve çevre Federasyon
+Ekiplerin ekibi Matris Küçük dünya
+• C apraz bağlı ağaç: klasik hiyerarşiye yatay bağlar eklenmiştir. Farklı
+dallardaki insanlar birbirine doğrudan ulaşır. Büyük şirketler ve ordular
+bu biçimde çalışır.
+• C ekirdek ve çevre: ortada sıkı bağlı küçük bir grup, etrafında gevşek
+bağlı geniş bir halka bulunur. Açık kaynak projeler, dernekler ve sanat
+toplulukları bu yapıdadır. C ekirdek sürekliliği sağlar, çevre yeni insan ve
+fikir getirir.
+• Federasyon: kendi kendine yeten bağımsız birimler ve üstte ince bir ortak
+çatı vardır. Kooperatifler ve bayilik zincirleri bu yapıdadır. Bir birim
+çöktüğünde diğerleri etkilenmez.
+• Ekiplerin ekibi: aynı desen her ölçekte tekrar eder. Kişiler ekibi, ekipler
+bölümü, bölümler organizasyonu oluşturur.
+• Matris: herkes iki eksene birden bağlıdır, örneğin hem uzmanlık grubuna
+hem projeye. Bilgiyi iyi yayar, ancak kimin sözünün geçerli olduğu konusunda
+karışıklık üretir.
+• Küçük dünya (small world ): bağların çoğu yakındakilerle, birkaçı çok
+uzaktakilerle kurulur. Az sayıda uzak bağ, ağın iki ucu arasındaki yolu
+belirgin biçimde kısaltır (Watts ve Strogatz, 1998).
+14
+
+-- 14 of 21 --
+
+En iyi geometri yoktur, işe uyan geometri vardır. Hızlı ve net karar gerek-
+tiren işlerde (itfaiye, ameliyathane) merkez güçlü olmalıdır. Keşif ve yaratıcılık
+gerektiren işlerde (araştırma grubu, sanat topluluğu) ağ dağınık olmalıdır.
+Sağlıksız Yapılar
+Aşağıdaki şekilde siyah düğümler, çıkarıldığında yapıyı bölen kırılma nokta-
+larıdır.
+Yıldız Zincir Adalar
+Saf ağaç Tek köprü Klik
+• Yıldız: her kararı tek kişinin verdiği yapı. Her kararın patrondan geçtiği
+aile şirketi ya da tek kişinin toplamasıyla ayakta duran arkadaş grubu.
+Merkez çekildiğinde yapı dağılır.
+• Zincir: bilgi sırayla aktarılır. Her adımda bilgi biraz bozulur ve tek bir
+halka koptuğunda yapı ikiye bölünür.
+• Adalar: ekipler vardır, aralarında köprü yoktur. Aynı işin iki ekip tarafından
+habersizce ayrı ayrı yapılması bunun işaretidir.
+• Saf ağaç: yatay bağı olmayan hiyerarşi. ˙Iki dal arasındaki her bilgi tepeye
+çıkıp inmek zorundadır; tepe hem darboğaz hem tek kopma noktasıdır.
+• Tek köprü: iki grubu yalnızca bir kişi bağlar. O kişi güçlüdür, yapı
+kırılgandır.
+• Klik: içeride sıkı bir çekirdek vardır ve yeni gelenler ona bağlanamaz.
+C ekirdek ve çevre yapısının bozuk hâlidir; orada çevre çekirdeğe bağlıdır,
+burada bağ yoktur.
+15
+
+-- 15 of 21 --
+
+Tedavi: Eksik Bağın Eklenmesi
+Her sağlıksız yapı, sağlıklı bir yapının eksik hâlidir.
+Sağlıksız yapı Eklenen Ortaya çıkan yapı
+Yıldız Dış halka Halkalı merkez
+Adalar Köprüler Köprülü kümeler
+Saf ağaç Yatay bağlar C apraz bağlı ağaç
+Klik C evre ile çekirdek arası bağ C ekirdek ve çevre
+Tedavi bu nedenle çoğu zaman yapıyı yıkıp yeniden kurmak değil, eksik
+bağları eklemektir.
+16
+
+-- 16 of 21 --
+
+Soyutlamanın Gücü ve Sınırı
+Soyutlamanın Sağladığı
+Buraya kadar izlenen yol altı basamaklıdır: somut bir gözlem, onunla çelişen
+bir karşı örnek, ikisini açıklayan ortak kural, bu kuralın adını taşıyan kuram,
+kuramın her organizasyona genellenmesi ve yalnızca yapının kaldığı resim. Soyut
+resmin geçerliliğinin bir göstergesi, hiçbir gerçek kuruma bakılmadan yalnızca
+yapı bozularak tanıdık bozuklukların elde edilebilmesidir.
+Soyutlama üç şey sağlar. Bir durumda öğrenilen başka bir duruma taşınır;
+soyutlama yapamayan kişi her durumu sıfırdan yaşar. Doğrudan görülemeyen
+şey yönetilebilir; beş kişi gözle izlenir, beş yüz kişi, bir bütçe ya da bir strateji
+ancak model üzerinden düşünülür. Örüntüyü tanıyan kişi sorunu yaşamadan
+önce davranır.
+Sınırlar
+• Soyutlama tek başına yetmez. Somut deneyime dayanmayan model boştur;
+her şeyi modelle açıklayıp hiçbir işi bitiremeyen kişi de ilerleyemez.
+• Bazı ustalıklar soyutlamadan geçmez. ˙Iyi bir marangoz ya da cerrah
+bildiğinin çoğunu sözle anlatamaz. Polanyi (1966) bu tür bilgiyi örtük
+bilgi (tacit knowledge) olarak adlandırmıştır.
+• Yaşam işten geniştir. ˙Ilişki kurmak ya da huzurlu olmak soyutlama gücüne
+bağlı değildir; soyutlama eksikliği daha çok düşünce ve yönetim gerektiren
+işlerde sınır oluşturur.
+• Soyut resim nereye bakılacağını söyler, orada ne bulunacağını söylemez.
+Kısıtın kimde olduğunu görmek için somut kuruma inmek gerekir.
+Asıl beceri soyutlamak değil, iki düzey arasında gidip gelebilmektir: somut-
+tan yukarı çıkıp kuralı görmek, sonra aşağı inip kuralı tek bir duruma uygula-
+mak.
+17
+
+-- 17 of 21 --
+
+Kendi Yapısını Gözlemleyen Sistem
+˙Iletişim Ağının Haritalanması
+Bir sistemin kendi yapısını soyutlayabilmesi, darboğazlarını görebilmesinin koşuludur.
+Bunun yerleşik yöntemi organizasyonel ağ analizidir (organizational network
+analysis): kimin kiminle çalıştığı, kime soru sorulduğu ve işin kimde beklediği
+haritalanır (Cross ve Parker, 2004). Ortaya çıkan resim çoğu zaman resmı
+şemaya benzemez ve dört şeyi görünür kılar.
+• Gizli merkezler: unvanı küçük, ancak herkesin soru sorduğu kişi. Asıl
+darboğaz çoğu zaman odur.
+• Köprüler: iki ekibi bağlayan tek kişi.
+• Kopuklar: şemada ekibin içinde, ağda kenarda duran kişiler.
+• Kâğıt bağlar: şemada bağlı görünen, gerçekte hiç iletişim kurmayan bir-
+imler.
+Yazılımda bu ilişkinin bir kuralı vardır. Conway (1968), bir sistemin tasarımının
+onu üreten organizasyonun iletişim yapısını kopyaladığını öne sürmüştür. ˙Iki
+ekip iletişim kurmuyorsa, yazdıkları iki modül de iyi çalışmaz. ˙Iletişim haritası
+bu nedenle yalnızca insanları değil, ürünün biçimini de belirler.
+Haritanın Sınırları
+1. ˙Iki ayrı harita gerekir: resmı yapı ve gerçek akış. Darboğaz ikisinin
+ayrıştığı yerde ortaya çıkar.
+2. C ok iletişim her zaman iyi değildir. En çok mesaj alan kişi en değerli kişi
+de olabilir, herkesi kendine bağımlı kılmış bir tıkaç da. Harita bu ikisini
+ayırt etmez.
+3. Ölçülen şey değişir. ˙Izlendiğini bilen insanlar davranışını ölçüme göre
+ayarlar.
+4. Görmek yetmez. Darboğaz çoğu zaman güç sahibi bir kişidir ve sistem
+onu gördüğü hâlde ona dokunamayabilir.
+Gözlem ile Gözetim Arasındaki Fark
+Bir sistem kendi durumunu göremezse düzeltemez; gözlem bu nedenle gereklidir.
+Ancak gözlemin aracı kamera olmak zorunda değildir ve kamera çoğu zaman en
+zayıf araçlardan biridir.
+Kamera fiziksel akışta işe yarar: üretim hattında parçanın nerede biriktiği,
+depoda hangi koridorun tıkandığı, mağazada kuyruğun nerede oluştuğu. Bilgi
+işinde işe yaramaz; ofisteki kamera kimin masasında oturduğunu gösterir, işin
+18
+
+-- 18 of 21 --
+
+nerede beklediğini göstermez. Darboğaz bir onay adımında, bir e-postada ya da
+bir kişinin zihnindedir.
+Daha kullanışlı ölçümler mevcut kayıtlardan çıkar: bir işin bir adımda orta-
+lama kaç gün beklediği, hangi adımın önünde yığın bulunduğu, bir işin baştan
+sona süresinin ne kadarının beklemeyle geçtiği ve en çok kime soru gittiği.
+˙Işi izlemek ile insanı izlemek farklı sonuç verir. Parçanın nerede beklediği
+ölçüldüğünde sistem öğrenir. ˙Insan gözetlendiğinde çalışanlar meşgul görünmeye
+yönelir, sorunları saklar ve kötü haber yukarı ulaşmaz. Geri beslemeyi artırmak
+için kurulan gözetim, böylece geri beslemeyi azaltır.
+19
+
+-- 19 of 21 --
+
+Sonuç
+Pratik karşılık, bir yapıya bakarken sorulan ilk sorunun değişmesidir: “ne iy-
+ileştirilmeli” yerine “iş nerede bekliyor”. Kaynak kararı bundan sonra gelir ve
+darboğaz yer değiştirdiği için düzenli aralıklarla yeniden verilir. Bir rolün ya da
+kişinin değeri de sabit değildir; darboğazın o anda nerede olduğuna bağlıdır.
+˙Ikinci karşılık kişilerle ilgilidir. Vazgeçilmez olmak bir güç gibi görünür,
+ancak geometri açısından tek kopma noktası olmaktır. Bu konum hem yapıyı
+hem o kişiyi kilitler. Sağlıklı yapıda merkezdeki kişinin işi, kendi etrafına bir
+halka kurarak kendi vazgeçilmezliğini azaltmaktır.
+C erçevenin sınırları vardır. Geometri bağın var olup olmadığını gösterir,
+niteliğini göstermez; iki kişi arasındaki çizgi güveni de düşmanlığı da temsil
+edebilir. Resmı yapı ile fiilı işleyiş ayrışabilir ve çizimler yalnızca birini gösterir.
+Ayrıca hangi geometrinin uygun olduğu işe bağlıdır; aynı yıldız yapısı bir ameliy-
+athanede işlevsel, bir araştırma grubunda zararlıdır.
+Açık kalan sorular şunlardır. Bir yapının bağ geometrisi, içindekilere fark
+ettirmeden ve gözetime dönüşmeden nasıl ölçülebilir. Darboğaz güç sahibi bir
+kişi olduğunda yapı kendini içeriden düzeltebilir mi, yoksa dış bir müdahale
+mi gerekir. Kod üretiminin ucuzlaması darboğazı kalıcı biçimde keşif ve karar
+tarafına taşıyorsa, organizasyonların alışılmış rol oranları hangi yeni dengeye
+oturur.
+Akış, hücre ve fabrika resimlerinin üçü de aynı gözleme varır: bir sistemi
+anlamak için parçalarına değil, parçaların arasından neyin, nasıl aktığına bakılır.
+Kaynaklar
+• Brooks, F. P. (1975). The Mythical Man-Month: Essays on Software
+Engineering. Addison-Wesley.
+• Cagan, M. (2017). Inspired: How to Create Tech Products Customers
+Love (2. baskı). Wiley.
+• Conway, M. E. (1968). How Do Committees Invent? Datamation, 14(4),
+28–31.
+• Cross, R. ve Parker, A. (2004). The Hidden Power of Social Networks.
+Harvard Business School Press.
+• Goldratt, E. M. ve Cox, J. (1984). The Goal: A Process of Ongoing
+Improvement. North River Press.
+• Kim, G., Behr, K. ve Spafford, G. (2013). The Phoenix Project. IT
+Revolution Press.
+• Ohno, T. (1988). Toyota Production System: Beyond Large-Scale Produc-
+tion. Productivity Press.
+• Polanyi, M. (1966). The Tacit Dimension. Doubleday.
+20
+
+-- 20 of 21 --
+
+• Ries, E. (2011). The Lean Startup. Crown Business.
+• Watts, D. J. ve Strogatz, S. H. (1998). Collective dynamics of ‘small-
+world’ networks. Nature, 393, 440–442.
+21
+
+-- 21 of 21 --
