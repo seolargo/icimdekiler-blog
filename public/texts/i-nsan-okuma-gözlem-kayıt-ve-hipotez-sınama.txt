@@ -1,0 +1,866 @@
+İnsan Okuma: Gözlem, Kayıt ve Hipotez Sınama
+ÖFY
+November 2026
+Özet
+İnsan ilişkileri, bir yazılım sistemi gibi modellenebilir: varlıklar (kişi, ilişki, olay,
+ortam), bu varlıkların görünen ve görünmeyen alanları, ilişkinin bulunduğu du-
+rum (state) ve durumu değiştiren olaylar. Modelin merkezî bulgusu, bir kişinin
+davranışının çoğunlukla karşısındakiyle değil kendi ihtiyacı, korkusu ve o günkü
+hâliyle ilgili olduğudur; erken çekilen sınır da bu nedenle kişisel bir hüküm değil,
+bir korunma alışkanlığıdır. Görünmeyen alanlar gözlemci tarafından tahminle
+doldurulur ve tahmin bilgi sanılır; insanlar başkalarını anladıklarını olduğundan
+fazla zanneder. Güven yavaş birikir ve tek olayla düşer; ilişkiye daha az muh-
+taç olan taraf şartları belirler; baskı uzaklaştırır, alan yaklaştırır. Romantik
+çekim ayrı bir durum değişkenidir: güven emekle artar, çekim emekle artmaz,
+dolayısıyla tek taraflı çekim beklemekle iki taraflı hâle gelmez. Gözlemci mod-
+elin dışında değildir; kendi ihtiyaç ve zaafları okumasını eğer. Model yalnızca
+yazılı kayıtla çalışır, çünkü bellek olayı değil olayın bıraktığı hissi saklar. Bilgi
+katmanı tamamlandıktan sonra eksik kalan şey uygulama, kayıt, gözlemcinin
+kendi envanteri ve zaaf bilgisinin kullanımındaki etik çizgidir.
+1
+
+-- 1 of 29 --
+
+Giriş
+İnsan ilişkileri gündelik hayatta sezgiyle okunur. Sezgi hızlıdır, ancak iki za-
+yıflığı vardır: yanıldığında nerede yanıldığı bulunamaz ve gözlemcinin kendi
+duygusundan ayrıştırılamaz. Bir davranışın “soğukluk” olarak etiketlenmesi,
+gözlem ile yorumun tek bir izlenimde birleşmesidir.
+Bu notta ilişkiler, yazılım mühendisliğinin kavramlarıyla soyutlanır. Soyut-
+lama (abstraction), bir sistemin ayrıntılarının bir kısmını bilerek dışarıda
+bırakıp geriye yalnızca davranışı açıklayan öğeleri koymaktır. Ontoloji burada
+felsefi ve kültürel anlamıyla kullanılır: bir ortamın dünyayı hangi temel kavram-
+larla düzenlediği. Durum makinesi (state machine), bir şeyin bulunabileceği
+sonlu sayıda durumu ve bir durumdan ötekine geçiren olayları tanımlayan
+modeldir; yazılımda karmaşık sistemlerin davranışını betimlemek için kullanılır
+(Harel, 1987).
+Yaygın kabul, insanları anlamanın bir yetenek olduğu ve yazıya dökülme-
+den yapılabileceğidir. Buradaki konum farklıdır: insan okuma, gözlem toplama,
+kayıt tutma ve hipotez sınama işidir; bu işi meslek olarak yapanlar da bellek-
+lerine güvenmez.
+Kapsam, iki kişi arasındaki ilişkiler, küçük grup dinamikleri ve romantik
+çekimdir. Klinik tanı, kişilik tipolojileri ve tedavi kapsam dışındadır. Model
+olasılık bildirir, kesinlik bildirmez.
+2
+
+-- 2 of 29 --
+
+Sınır ve Bakış Açısı
+Geri çekilme
+İnsanlardan yorulmak ve bir süre kimseyi görmek ya da dinlemek istememek
+olağan bir durumdur. Geri çekilme bir kusur ya da tuhaflık değildir; kalabalığın
+ağır geldiği dönemlerde sessizlik tanımak, açıklama yapmadan kendi işine dön-
+mek meşru bir ayardır.
+Sınırın erken çekilmesi
+İnsanlar çoğunlukla sınırı erken çeker. Gerekçesi şudur: karşıdaki kişi henüz
+tanınmamıştır ve sınırı baştan koymak sonradan koymaktan kolaydır. Erken
+çekilen sınır bu nedenle çoğunlukla karşıdaki kişiye özel bir hüküm değil, sınırı
+çeken kişinin kendi temkinidir. Rolün belli olduğu ilişkilerde (iş, hizmet) sınır
+daha erken ve daha net çekilir.
+Erken çekilen sınır her zaman kalıcı değildir. Bazı kişiler güven oluştukça
+sınırı gevşetir, bazıları hiç gevşetmez. Hangisinin geçerli olduğunu ilk günkü
+mesafe değil, zaman gösterir.
+Üçüncü kişinin sık anılması
+Yeni tanışılan birinin sohbet sırasında partnerinden sık sık söz etmesi, erken
+sınırın tipik örneğidir. Bir kez söylenmesi bilgidir; tekrar tekrar söylenmesi
+sınırdır. İletilen mesaj “bu sohbet başka bir yere yorulmamalıdır” biçimindedir.
+Bu davranışın üç olası nedeni vardır:
+• Karşı taraftan ilgi sezilmiştir ve önü kesilmek istenmektedir.
+• İlgi sezilmemiş olsa bile kişi kendini baştan güvenceye almaktadır.
+• Kişi sohbetten kendisi keyif almaktadır ve durumu kendine de hatırlat-
+maktadır.
+Üçüncü ihtimal dışarıdan ayırt edilemez; bu nedenle üzerine hesap kurulmaz.
+Sık tekrarlanan ifade, söylendiği biçimiyle alınır: o kapı kapalıdır.
+Başrol yanılgısı
+İnsan ilişkilerinde bilinmesi gereken tek bir şey seçilecekse o şudur: karşıdaki
+kişinin davranışı çoğu zaman gözlemciyle ilgili değildir. İnsanlar kendi dertleri,
+korkuları ve alışkanlıklarıyla hareket eder. Soğuk duran kişi yorgun, mesafeli
+duran kişi temkinli olabilir. Gözlemci, başkasının gününde küçük bir parçadır.
+Herkes kendi hayatının başrolünde, başkalarının hayatında yan karakter-
+dir. Aile, yakın dost ve sevgili gibi az sayıda insanın hayatında büyük bir
+rol üstlenilir; orada da başrol o kişinindir. İnsanların, başkalarının kendilerine
+3
+
+-- 3 of 29 --
+
+ne kadar dikkat ettiğini olduğundan fazla tahmin ettiği deneysel olarak gös-
+terilmiştir (Gilovich, Medvec ve Savitsky, 2000). Bunun pratik karşılığı bir
+serbestliktir: hatalar, sanıldığı kadar izlenmez ve hatırlanmaz.
+Bu kabulden üç sonuç çıkar:
+• Kırılma azalır; her mesafe kişisel bir saldırı sayılmaz.
+• Yorum azalır; küçük bir ilgiye de küçük bir soğukluğa da fazla anlam
+yüklenmez, söylenen ve yapılan olduğu gibi alınır.
+• Karşıdaki kişi görünür hâle gelir; “müdür”, “satıcı”, “komşu” gibi bir rol
+yerine, o gün başka dertleri olan bir insan görülür. Merak, dinlemeyi
+kolaylaştırır.
+Uygulamadaki tek alışkanlık şudur: şaşırtan ya da üzen bir davranışta “bana
+ne demek istedi” sorusu yerine “onun tarafında ne oluyor olabilir” sorusu sorulur.
+Karşıdakini anladığını sanma
+İnsanlar karşılarındakini anladıklarını, gerçekte olduğundan fazla zanneder.
+Mekanizması şudur: insan boşluğa dayanamaz; karşıdakinin içini göremediğinde
+orayı kendi tahminiyle doldurur ve tahmini bilgi sayar. Tahmin çoğunlukla
+kişinin kendisinden türetilir: “ben olsam böyle düşünürdüm.”
+Yanılgıyı üç etken büyütür:
+• Yakınlık. İnsan en çok yakınlarını bildiğini sanar ve onları dinlemeyi
+bırakır; yabancı daha dikkatli dinlenir (Savitsky ve ark., 2011).
+• Tek taraflı görüş. Herkes “ben onu anlıyorum, o beni anlamıyor” diye
+düşünür; karşı taraf da aynı kanıdadır (Pronin ve ark., 2001).
+• Kendi içini açık sanma. İnsan kendi duygusunun dışarıdan belli
+olduğunu zanneder; belli olmaz. “Anlaması gerekirdi” kırgınlığı buradan
+doğar (Gilovich, Savitsky ve Medvec, 1998).
+Başkasının düşünce ve duygusunu tahmin etme isabeti yakın ilişkilerde de
+sınırlıdır; buna karşın kişinin kendi tahminine güveni yüksek kalır (Ickes, 1993).
+Sorun yanılmak değil, yanıldığını bilmemektir. Çaresi, bilindiği sanılan şeyi
+tahmin olarak tutmak ve sorulabiliyorsa sormaktır.
+4
+
+-- 4 of 29 --
+
+CEO Ofisi Örneği
+İnsan üzerine çalışma
+CEO (chief executive officer, şirketin en üst yöneticisi) ofisinde çalışanlar in-
+san üzerine çalışır, ancak çoğunlukla ders alarak değil, işin içinde öğrenerek.
+Ofisteki iş büyük ölçüde insandır: kimin neyi istediği, kimin neye kırılacağı,
+hangi haberin kime nasıl verileceği. Üst kademede bilinçli çalışanlar da bulunur;
+yönetici koçluğu, müzakere, sunum ve medya eğitimi alınır. Bu eğitimlerin
+özü aynıdır: insanı okumak, kendi duruşunu ayarlamak, ne zaman susulacağını
+bilmek.
+Fark adlandırmadadır. Ofis çalışanları bunu “insan üzerine çalışma” olarak
+görmez; işi yürütmenin parçası sayar. Sistemli çalışan azdır. Çoğu deneyimle
+öğrenir, bu nedenle iyi yapar ama neden işe yaradığını açıklayamaz.
+Ofisin ontolojisi
+CEO ofisi bir departman değil, tek bir insanın uzantısıdır. Bir şey üretmez; iki iş
+yapar: CEO’ya geleni süzer, CEO’dan çıkanı büyütür. Dünyayı şu kavramlarla
+düzenler:
+• Dikkat. En kıt kaynak para değil, CEO’nun zamanı ve dikkatidir. Her
+konu “buna değer mi” sorusundan geçer.
+• Erişim. Kimin CEO’ya ulaşabildiği. Kapıyı tutan kişi, unvanı küçük olsa
+da güçlüdür.
+• Bilgi. Ham hâliyle yukarı çıkmaz; özetlenir, sıralanır, süzülür. Elenen,
+söylenen kadar önemlidir.
+• Öncelik. Bir konunun var olması yetmez, gündeme girmesi gerekir. Gün-
+deme girmeyen konu ofis için yok hükmündedir.
+• Karar. Ofisin asıl ürünüdür. Toplantı, rapor ve sunum bir karara varmak
+içindir.
+• Yakınlık. Güç makamdan çok mesafeden gelir. CEO’ya yakın olan onun
+adına konuşabilir, yani ödünç yetki taşır.
+• Güven. Ofisin para birimidir. Sır tutan ve CEO’yu sürprizle karşılaştır-
+mayan kişi içeride kalır. Bir kez bozulduğunda eski hâline dönmez.
+• Sinyal. CEO’nun her sözü aşağıda büyür; yarım bir cümle talimat sanılır.
+Bu nedenle az ve ölçülü konuşulur.
+• Takip. Karar verilmekle iş bitmez; ofis kararın uygulanıp uygulan-
+madığını izler.
+5
+
+-- 5 of 29 --
+
+Varlıklar bu kavramlara göre dizilir: CEO merkezdir; özel kalem müdürü
+(chief of staff ) süzgeç ve takipçidir; asistan zamanın bekçisidir; danışman-
+lar ikinci görüştür; dışarıdaki herkes “talep”tir. Ofiste insanlar unvanla değil,
+CEO’nun dikkatine yakınlıkları ve gördükleri güvenle tanımlanır.
+Üç beceri
+Kimin neyi istediği
+İnsanlar istediklerini nadiren açıkça söyler. Bütçe talebiyle gelen bir müdürün
+asıl isteği CEO’nun gözünde görünmek olabilir; soru soran bir yatırımcı güvence
+arıyor olabilir. Ofis çalışanı zamanla söylenen ile istenen arasındaki farkı duy-
+mayı öğrenir ve buna göre karşılık verir: görünmek isteyene söz hakkı, güvence
+isteyene net bir cümle.
+Kimin neye kırıldığı
+Her kişinin hassas noktası farklıdır: toplantıya çağrılmamak, fikrinin başkasının
+ağzından çıkması, karardan en son haberdar olmak. Ofis bunları bir harita gibi
+aklında tutar. Kırılan kişi açıkça kavga etmez; işi yavaşlatır, bilgiyi geç verir,
+desteğini çeker. Küçük bir ihmal aylar sonra bedel olarak geri döner.
+Hangi haberin kime nasıl verildiği
+Aynı haber, veriliş biçimine göre farklı sonuç doğurur. Üç ayar vardır:
+• Sıra. Kimin önce öğreneceği. Etkilenen kişi haberi koridordan duyma-
+malıdır.
+• Kanal. Kötü haber yüz yüze ya da telefonla verilir, yazıyla değil. İyi
+haber herkesin önünde verilebilir.
+• Çerçeve. Bazı kişilere önce sonuç sonra gerekçe söylenir; bazılarına önce
+gerekçe anlatılır ki sonuca kendileri varsın.
+Örnek: iptal edilen proje
+CEO, Ahmet adlı bir yöneticinin projesini iptal etmiştir ve haberin iletilmesi
+gerekir.
+Kötü yolda herkese toplu e-posta gönderilir. Ahmet projesinin bittiğini e-
+postayı okuyarak öğrenir, küçük düştüğünü hisseder, küser ve işi ağırdan alır.
+İyi yolda asistan önce Ahmet’i arar ve CEO’nun kendisiyle görüşmek iste-
+diğini söyler. CEO haberi yüz yüze verir. Toplu e-posta bundan sonra gönder-
+ilir. Ahmet yine üzülür, ancak küsmez.
+Haber aynıdır; değişen yalnızca veriliş biçimidir. Üç beceri örnekte şöyle
+karşılık bulur: Ahmet saygı görmek ister; haberi herkesle aynı anda öğrenirse
+kırılır; kötü haber önce ona ve yüz yüze verilir.
+6
+
+-- 6 of 29 --
+
+Deneyimle öğrenme
+Ofiste geri bildirim hızlıdır. Sabah yanlış kişiye yanlış sırayla verilen haberin
+sonucu öğleden sonra görülür. Her gün onlarca küçük deneme yapılır ve kişi
+zamanla bir e-postayı göndermeden önce “bunu okuyan ne hisseder” sorusunu
+kendiliğinden sorar. Örnekteki asistan bir kez toplu e-posta gönderip Ahmet’in
+küstüğünü gördükten sonra bir dahaki sefere önce arar; bunu ona kimse öğret-
+mez. İkinci öğrenme yolu ustadan izlemektir: yeni gelen, eski asistanın bir
+telefonu nasıl açtığını, bir reddi nasıl yumuşattığını gözleyerek edinir.
+İlişkinin durum makinesi
+Ofisteki her ilişki, bulunduğu durum ve bu durumu değiştiren olaylarla okun-
+abilir. Her kişi için ayrı bir durum tutulur.
+Başlangıç durumu Olay Varış durumu
+Yabancı İlk iyi iş Tanınan
+Tanınan Sır tuttu, sürpriz yapmadı Güvenilen
+Güvenilen Zor anda yanında durdu İç çember
+Güvenilen Sızıntı ya da sürpriz Kırık güven
+İç çember Aynı hata Kırık güven
+Kırık güven Uzun süre düzgün iş Tanınan
+Okuma sırasında üç soru sorulur:
+• Kişi şu an hangi durumdadır. Unvana değil, CEO’nun güvenine
+bakılır; haberin kime önce gittiği ve kimin toplantıda rahat konuştuğu
+durumu gösterir.
+• Hangi olay durumu değiştirir. Yukarı çıkış yavaştır ve küçük, tekrar-
+lanan işlerle olur; aşağı düşüş tek olayla olur. Bu nedenle ofistekiler iler-
+lemekten çok düşmemeye çalışır.
+• Geçiş geri alınabilir mi. Kırık güvenden dönüş vardır, ancak eski
+basamağa değil bir alt basamağa. İç çembere ikinci kez girmek çok zordur.
+Ortamı soyutlamak budur: kişiler, duygular ve dedikodu bir kenara konur;
+geriye durumlar ve durumları değiştiren olaylar kalır.
+7
+
+-- 7 of 29 --
+
+Yazılım Modeli Olarak İnsan İlişkileri
+Varlıklar
+Modelde dört varlık bulunur: Kişi, İlişki, Olay ve Ortam. Geri kalan her şey bu
+varlıkların alanlarıdır.
+Kişi: bilinenler ve bilinmeyenler
+Kişi {
+// görünen (public)
+rol, söyledikleri, yaptıkları
+// görünmeyen (private)
+niyet?, o günkü hali?, gözlemci hakkındaki fikri?
+}
+Gözlemci yalnızca görünen (public) kısmı okuyabilir. Görünmeyen
+(private) alanlar boş (null) kalır. En sık yapılan hata, boş alanlara tahminle
+değer yazıp bu değeri gerçek saymaktır.
+İlişki
+İlişki, iki kişi arasındaki bağdır ve dört alanı vardır:
+• Durum. Yabancı, tanıdık, güvenilen, yakın, kırık.
+• Yön. Bağ tek değil, iki ayrı bağdır. Bir tarafın ötekine bakışı ile ötekinin
+ona bakışı aynı durumda olmak zorunda değildir.
+• Tür. İş, hizmet, arkadaşlık, aile. Tür, hangi durumlara çıkılabileceğini
+sınırlar.
+• Sınırlar. Kişinin koyduğu kurallar. Bunlar kısıttır (constraint); ihlal
+edildiğinde işlem reddedilir.
+Olay
+Durumu değiştiren şey olaydır ve yalnızca davranış olay sayılır: aradı, geldi,
+sözünü tuttu, haber vermedi. Bir bakış, bir ses tonu ya da bir gülümseme olay
+değil gürültüdür; durum gürültüyle güncellenmez.
+Değişmezler
+Değişmez (invariant), sistemin her koşulda geçerli kalan kuralıdır.
+• Tek olayla durum atlanmaz; yukarı çıkış birikimle olur.
+• Aşağı düşüş tek olayla olabilir.
+• Ortam değiştiğinde kurallar değişir; aynı kişi toplantıda ve kahvede farklı
+davranır.
+8
+
+-- 8 of 29 --
+
+Kayıt
+Geçmişte olan her şey kayıttır (log). Durum, kaydın özetidir. Emin olun-
+madığında hisse değil kayda bakılır: “son üç ayda gerçekte ne yaptı.”
+Bilinmeyenle çalışma
+Görünmeyen alan doğrudan okunamaz, ancak sınanabilir. Küçük bir adım atılır
+ve dönen cevaba bakılır. Cevap gelirse alan dolar; gelmezse boş kalır. O zamana
+kadar bilinmeyen, bilinmeyen olarak tutulur.
+9
+
+-- 9 of 29 --
+
+İnsana Ait Kavramlar
+Kişinin içi
+• İhtiyaç. İnsanı asıl hareket ettiren şey: görülmek, güvende olmak, önem-
+senmek, rahat bırakılmak.
+• Korku. İhtiyacın ters yüzü: rezil olmak, reddedilmek, kullanılmak, yalnız
+kalmak.
+• Gurur. Kişinin kendine biçtiği değer. Dokunulduğunda en sert tepki
+buradan gelir.
+• Yara. Geçmişte canın yandığı yer. Bugünkü tepki çoğu zaman o eski
+olaya verilir.
+• Hâl. O günkü durum: yorgun, aç, gergin, keyifli. Geçicidir, ancak
+davranışı en çok o belirler.
+• Maske. Dışarıya gösterilen yüz. Yalan değil, korunmadır.
+Motorlar
+• Arzu. Canın çektiği şey. İhtiyaçtan farkı, onsuz da yaşanabilmesidir.
+• Çıkar. Kişinin bir işten ne kazanacağı.
+• Hırs. Daha fazlasına ulaşma isteği.
+• Değer. Kişinin doğru bildiği ve uğruna bedel ödediği şey.
+• Alışkanlık. Düşünmeden yapılan. Davranışın büyük kısmı budur.
+• Niyet. Davranışla neyin amaçlandığı. Dışarıdan görünmez.
+Zaaflar
+Zaaf, bir ihtiyacın ya da korkunun fazla büyüdüğü yerdir. İnsan oradan yönetilir,
+oradan kandırılır, oradan kırılır. Bir kişinin zaafı, en çok ihtiyaç duyduğu şey
+ile en çok korktuğu şeyin kesişiminde aranır.
+• Onay ihtiyacı. Beğenilmeden rahat edememek. Övgüyle açılır, eleştiriyle
+kapanır.
+• Kibir. Kendini olduğundan büyük görmek. Pohpohlayan herkese kapı
+açıktır.
+• Hayır diyememe. Sevilmeme korkusu. Yükü taşır, sonra içten içe küser.
+• Çatışmadan kaçma. Tatsızlık çıkmasın diye susmak. Sorun büyür ve
+bir gün patlar.
+10
+
+-- 10 of 29 --
+
+• Kıskançlık. Eldekini kaybetme korkusu.
+• Haset. Başkasında olanı çekememek. Kıskançlıktan farkı, kişinin ken-
+disinde olmayana duyulmasıdır.
+• Açgözlülük. Çıkar görüldüğünde ölçünün kaçması.
+• Yalnızlık. İlgi gösteren ilk kişiye fazla değer vermek.
+• Suçluluk. “Kötü bir şey yaptım” duygusu. Suçlu hisseden kişi kolay
+taviz verir.
+• Utanç. “Ben kötüyüm” duygusu. Suçluluktan ağırdır ve insanı saklan-
+maya iter (Tangney ve Dearing, 2002).
+• Öfke. Çabuk parlayan, sonra pişman olan taraf.
+• Kontrol tutkusu. Belirsizliğe dayanamamak; her şeyi bilmek ve yönet-
+mek istemek.
+• İnat. Haksız çıkmamak için yanlışta ısrar.
+• Rahatına düşkünlük. Zahmet gerektiren her şeyden kaçmak.
+• Merak. Sır ve dedikoduya dayanamamak.
+Duygular
+• Sevgi. Karşıdakinin iyiliğini istemek.
+• Çekim. Birine doğru çekilmek. Sevgiden ayrıdır ve seçilmez.
+• Şefkat. Zayıf olana yumuşamak.
+• Minnet. Yapılan iyiliği içinde taşımak.
+• Hayal kırıklığı. Beklenti ile gerçek arasındaki fark.
+• Sıkılma. İlginin bitmesi. İlişkileri kavgadan çok bu bitirir.
+İki kişi arası
+• Güven. “Bu insan bana zarar vermez” kanaati. Yavaş birikir.
+• Mesafe. Ne kadar yakına izin verildiği. Her kişi kendi ayarlar.
+• Beklenti. Söylenmemiş sözleşme. Kırgınlıkların çoğu, karşı tarafın hiç
+bilmediği bir beklentiden doğar.
+• Karşılıklılık. Alışveriş dengesi. Hep veren yorulur; hep alan borçlu
+hisseder ve uzaklaşır.
+• Hatır. Birikmiş iyilik hesabı. Zor günde buradan harcanır.
+11
+
+-- 11 of 29 --
+
+• Kırgınlık. Söylenmemiş, içeride tutulan hesap. Görünmez ama ilişkiyi
+yavaşlatır.
+• Saygı. Karşıdakini kendi kararını verebilen biri saymak. Sevgiden ayrıdır.
+• Söz. Verilen taahhüt. Tutuldukça güven birikir.
+• Sadakat. Zor zamanda da yanında kalmak.
+• İhanet. Güvenin bilerek çiğnenmesi.
+• Sır. Paylaşılan gizli bilgi. Hem bağ kurar hem koz olur.
+• Yalan. Küçüğü yüz kurtarır, büyüğü güveni bitirir.
+• Borç. Karşılığı beklenen iyilik.
+• Özür ve affetme. Kırık bir ilişkiyi onarmanın yolu.
+• Sınama. İnsanlar güvenmeden önce küçük testler yapar; çoğunu farkında
+olmadan yapar.
+• Bağımlılık. Kimin kime daha çok muhtaç olduğu.
+• Güç dengesi. Az muhtaç olan güçlüdür; ilişkiyi daha az isteyen taraf
+yönetir.
+• Emek. Verilen zaman ve çaba. İnsan emek verdiğine bağlanır.
+• Sınır. Kişinin “buradan öteye geçilmez” dediği yer.
+Ortam ve grup
+• Rol. O ortamda kişiden beklenen davranış: ev sahibi, müdür, misafir.
+• Yüz. Başkalarının önündeki itibar. İnsan baş başa kabul ettiği şeyi kal-
+abalıkta kabul etmez (Goffman, 1967).
+• Statü. Kimin sözünün ağır bastığı. Unvandan değil, ortamın verdiği
+değerden gelir.
+• Ait olma. “Bizden” sayılmak ya da sayılmamak.
+• İttifak. Kimin kiminle birlikte hareket ettiği.
+• Rekabet. Aynı şeyi isteyenler arasındaki gerilim.
+• Dedikodu. Grubun resmî olmayan haber ağı.
+• Dışlama. Grubun en ağır cezası.
+• Kıyas. İnsan kendini mutlak olarak değil, yanındakine göre ölçer.
+• Norm. Yazılı olmayan kurallar. Çiğnendiğinde kimse söylemez, herkes
+fark eder.
+• Hiyerarşi. Kimin kimden üstte sayıldığı.
+12
+
+-- 12 of 29 --
+
+İletişim
+• Söz. Açıkça söylenen. En az bilgi buradadır.
+• İma. Söylemeden söylemek. Reddedildiğinde inkâr edilebilsin diye kul-
+lanılır.
+• Ton. Sözün nasıl söylendiği. Sözle çeliştiğinde ton esas alınır.
+• Beden dili. Duruş, bakış, mesafe. Yalan söylemesi en zor kanaldır.
+• Sessizlik. Cevap vermemek de cevaptır: onay, ret ya da küslük.
+• Espri. Hem yakınlık kurar hem iğneler. Şakayla söylenen çoğu zaman
+ciddidir.
+• Dinleme. Karşıdakine “varsın” demenin yolu.
+• İltifat ve eleştiri. Biri hesaba yatırır, öteki hesaptan çeker.
+• İtiraf. Kişinin kendi açığını göstermesi. Yakınlığı en hızlı bu artırır.
+Savunmalar
+• İnkâr. Olanı yok saymak.
+• Bahane. Yapılana sonradan mantıklı bir gerekçe uydurmak.
+• Yansıtma. Kendi kusurunu karşıdakinde görmek.
+• Kaçınma. Konudan, kişiden, ortamdan uzak durmak.
+• Saldırı. Köşeye sıkışınca önce vurmak.
+• Mağduriyet. Suçu üstünden atmak için kurban rolüne girmek.
+• Şakaya vurma. Ciddi konuyu gülerek geçiştirmek.
+• Geri çekilme. Konuşmadan uzaklaşmak, içe kapanmak.
+Etki yolları
+• Rica. Açık istek. En temiz yoldur.
+• İkna. Gerekçe göstererek razı etmek.
+• Vaat. Karşılık sözü vermek.
+• Tehdit. Bedel göstermek.
+• Suçlu hissettirme. Yapılan iyiliklerin hesabını açmak.
+• Trip. Soğuk durarak cezalandırmak.
+• Kıt gösterme. Az bulunur olmak. İnsan zor ulaştığına değer verir.
+• Manipülasyon. Karşıdakinin zaafını, o fark etmeden kullanmak.
+13
+
+-- 13 of 29 --
+
+Algı hataları
+• İlk izlenim. İlk dakikada verilen hüküm. Sonradan zor değişir.
+• Önyargı. Kişiyi tanımadan, grubuna göre hüküm vermek.
+• Hale etkisi. Bir iyi özelliği görüp gerisini de iyi sanmak (Thorndike,
+1920).
+• Zihin okuma. Karşıdakinin ne düşündüğünü bildiğini sanmak.
+• Kendine yorma. Her davranışı kendisiyle ilgili sanmak.
+• Genelleme. Tek olaydan “hep böyle” sonucu çıkarmak.
+• İstediğini görme. Umulan şeyi destekleyen işareti büyütmek, tersini
+görmemek (Nickerson, 1998).
+Zaman
+• Zamanlama. Doğru söz yanlış anda yanlış sözdür.
+• Sabır. Bir şeyin olgunlaşmasını bekleyebilmek.
+• Alışma. Tekrarlanan şey sıradanlaşır; iyilik de kötülük de.
+• Unutma. Olay unutulur, bıraktığı his kalır.
+• Özlem. Yokluğun yarattığı değer.
+İlişkinin olayları
+Tanışma, yakınlaşma, sınama, kavga, küsme, barışma, uzaklaşma ve kopma,
+durumu değiştiren büyük geçişlerdir.
+Kimlik
+• Özgüven. Kendi değerinden emin olmak. Düşük olduğunda her şey
+tehdit görünür.
+• İmaj. Kişinin nasıl görünmek istediği.
+• İtibar. Başkalarının onun hakkında gerçekte ne düşündüğü.
+• Özerklik. Kendi kararını kendi verme isteği. Sıkıştırılan insan kaçar.
+• Mahremiyet. Kimseye açılmayan alan.
+Güçlü yanlar
+Dürüstlük, cesaret, cömertlik, vefa, tevazu, merhamet, sabır ve söz tutma, za-
+afların karşılığıdır. Bir kişiye ne kadar güvenileceğini zaaflar değil, bunlar be-
+lirler.
+14
+
+-- 14 of 29 --
+
+Kaynaklar
+Zaman, dikkat, para, bilgi ve çevre, kişinin harcayabildiği kaynaklardır. İnsan
+bunları kime harcıyorsa ona değer veriyordur; söze değil harcamaya bakılır.
+İlişki türleri
+• Akrabalık. Seçilmez, bitmez. Hakkı da yükü de hazır gelir.
+• Dostluk. Seçilir, çıkarsız sürer, emekle yaşar.
+• Aşk. Çekim, yakınlık ve bağlılığın bir arada bulunması (Sternberg, 1986).
+• İş ilişkisi. Ortak çıkar üzerine kurulur; çıkar bitince çoğu biter.
+• Usta-çırak. Biri verir, biri alır. Denk değildir, olması da gerekmez.
+• Rakip. Aynı şeyi isteyen. Düşman değildir, saygı duyulabilir.
+• Düşman. Zarar isteyen.
+• Tanıdık. Selamlaşılan ama yük taşımayan bağ. En kalabalık grup budur.
+Bağlanma biçimleri
+Bağlanma kuramı, yakın ilişkilerdeki tutumu üç ana biçimde sınıflar (Ainsworth
+ve ark., 1978; Hazan ve Shaver, 1987):
+• Güvenli. Yakınlıktan da yalnızlıktan da korkmaz.
+• Kaygılı. Terk edilmekten korkar, sık sık teyit ister.
+• Kaçınan. Yakınlık arttığında geri çekilir.
+Güvenin türleri
+Güven tek bir şey değildir; niyet, beceri ve söz olarak ayrışır (Mayer, Davis ve
+Schoorman, 1995):
+• Niyete güven. “Bana kötülük etmez.”
+• Beceriye güven. “Bu işi yapabilir.”
+• Söze güven. “Dediğini yapar.”
+Biri varken öteki bulunmayabilir. İyi niyetli ama beceriksiz kişiye iş verilmez,
+sır verilir.
+15
+
+-- 15 of 29 --
+
+Gücün kaynakları
+Gücün birden çok kaynağı vardır (French ve Raven, 1959):
+• Makam. Unvanın verdiği.
+• Bilgi. Başkasının bilmediğini bilmek.
+• Bağlantı. Kime ulaşılabildiği.
+• Karizma. İnsanların kendiliğinden peşine takılması.
+• Vazgeçebilme. Masadan kalkabilen her zaman güçlüdür.
+Çatışmanın türleri
+• Çıkar çatışması. İki taraf aynı şeyi ister. Pazarlıkla çözülür.
+• Değer çatışması. Doğru bilinenler farklıdır. Çözülmez, mesafeyle
+yönetilir.
+• Yanlış anlama. Gerçekte çatışma yoktur; konuşulduğunda biter.
+• Gurur çatışması. Konu unutulmuştur; kimse ilk adımı atmak istemez.
+Beden
+• Yorgunluk, açlık, uykusuzluk. İnsanı en çok bunlar huysuz yapar.
+Karakter sanılan şeyin önemli kısmı bedendir.
+• Enerji. Kimi insan kalabalıkta dolar, kimi boşalır.
+• Dokunma ve yakın durma. Mesafenin gözle görülen hâli.
+Hayatın büyük olayları
+• Kayıp ve yas. İnsanı uzun süre değiştirir.
+• Başarı ve başarısızlık. İkisi de çevreyi yeniden dizer; kimin kaldığı o
+zaman görülür.
+• Dönüm noktaları. Taşınma, iş değişimi, evlilik, çocuk. Eski ilişkilerin
+çoğu bu geçişlerde düşer.
+Kültür ve köken
+• Aile terbiyesi. İnsanın “normal” saydığı şey evde öğrenilir.
+• Kuşak. Aynı söz farklı yaşta farklı anlaşılır.
+• Ayıp ve âdet. Toplumun neyi hoş gördüğü, neyi görmediği.
+16
+
+-- 16 of 29 --
+
+Şans
+• Denk gelme. İlişkilerin çoğu tesadüfle, aynı yerde ve aynı zamanda bu-
+lunmakla başlar.
+• Yakınlık. İnsan sık gördüğüne alışır, alıştığını sever (Zajonc, 1968).
+Kavramların modele yerleşimi
+İhtiyaç, korku, gurur, yara ve hâl kişinin görünmeyen alanlarıdır. Güven,
+mesafe, beklenti ve hatır ilişkinin alanlarıdır. Rol, yüz ve statü ortamın koyduğu
+kurallardır.
+17
+
+-- 17 of 29 --
+
+Kurallar
+İçeriden dışarıya zincir
+Her davranışın arkasında aynı sıra bulunur: ihtiyaç, zaaf, savunma, görünen
+davranış.
+İhtiyaç Zaaf Görünen davranış
+Görülmek Onay ihtiyacı Övünme, alınganlık
+Güvende olmak Kontrol tutkusu Sorgulama, kıskançlık, hesap isteme
+Sevilmek Hayır diyememe İçten küsme, sonra patlama
+Değerli olmak Kibir Eleştiriye saldırı
+Rahat bırakılmak Kaçınma Yakınlık artınca geri çekilme
+Ait olmak Dışlanma korkusu Kalabalığa uyma, dedikoduya katılma
+Zincir tersten okunur: davranış gözlenir, geriye doğru gidilerek ihtiyaç bu-
+lunur. Saldıran kişi için “kötü” hükmü yerine “neresi tehdit altında” sorusu
+sorulur.
+Olaydan duruma geçişler
+• Tekrar tekrar söz tutma, güveni bir basamak çıkarır.
+• Sır paylaşma, karşılık gelirse yakınlığı artırır; gelmezse açık veren taraf
+geri çekilir.
+• Küçük bir yardım isteme bağı güçlendirir; insan yardım ettiğine yakınlaşır
+(Jecker ve Landy, 1969).
+• Zor günde yanında durma, en hızlı yükselten olaydır.
+• Herkesin önünde küçük düşürme, uzun süren kırık duruma yol açar.
+• Kötü sürpriz güveni düşürür. Düşüren, kötü haberin kendisi değil geç
+öğrenilmesidir.
+• Uzun sessizlik, durumu kendiliğinden bir basamak indirir.
+• Özür ve telafi kısmi onarım sağlar. Yalnızca özür yetmez; davranış
+değişmelidir.
+Genel yasalar
+• Çıkış yavaş, iniş hızlıdır. Güven damla damla birikir, bir anda dökülür.
+• Az isteyen yönetir. İlişkiye daha az muhtaç olan şartları koyar (Waller,
+1938).
+18
+
+-- 18 of 29 --
+
+• Verilen aynı cinsten döner. İlgi ilgiyi, soğukluk soğukluğu, saygı
+saygıyı çağırır.
+• Baskı kaçırır, alan yaklaştırır. Sıkıştırılan insan uzaklaşır, serbest
+bırakılan kendi gelir (Brehm, 1966).
+• Bakılmayan ilişki geriler. Yerinde durmaz; ya ilerler ya solar.
+• Kalabalıkta yüz, baş başa insan konuşur. Gerçek cevap yalnızken
+alınır.
+• Söze değil harcamaya bakılır. Zaman ve dikkat nereye veriliyorsa
+değer oradadır.
+• Hâl karakteri örter. Tek bir günle hüküm verilmez; tekrar eden
+davranışa bakılır.
+• Emek bağlar. İnsan uğruna çaba harcadığını bırakmakta zorlanır (Aron-
+son ve Mills, 1959).
+• Beklenti söylenmezse kırgınlık olur. Karşı taraf bilmediği sözleşmeyi
+tutamaz.
+Okuma sırası
+Bir durum okunurken önce ortamın kuralına, sonra ilişkinin durumuna, sonra
+kişinin o günkü hâline, en son ihtiyacına bakılır.
+19
+
+-- 19 of 29 --
+
+Tekrar Eden Kalıplar
+İki kişinin zaafları birbirine kilitlendiğinde aynı döngü tekrar eder.
+• Kovalayan ve kaçan. Biri yaklaştıkça öteki geri çekilir; geri çekildikçe
+beriki daha çok kovalar. Kovalayan durduğunda döngü bozulur (Chris-
+tensen ve Heavey, 1990).
+• Veren ve alan. Biri hep verir, öteki alışır. Veren bir gün hesap sorar;
+alan şaşırır, çünkü ondan bir şey istenmemiştir.
+• Kurtarıcı ve mağdur. Biri hep dert anlatır, öteki hep çözer. İkisi de
+rolünden memnundur; bu nedenle dert bitmez (Karpman, 1968).
+• Sıcak ve soğuk. Bir gün yakın, bir gün uzak. Belirsizlik, sabit ilgiden
+daha çok bağlar; düzensiz aralıklarla verilen ödülün davranışı daha kalıcı
+kıldığı bilinmektedir (Ferster ve Skinner, 1957).
+• Üçgen. İki kişi arasındaki sorun üçüncü biri üzerinden konuşulur. Sorun
+çözülmez, yayılır (Bowen, 1978).
+• Sessiz sözleşme. Bir taraf içinden anlaşma yapar, öteki bilmez. Ardın-
+dan yapılan iyiliklerin hesabı açılır.
+• Sınama döngüsü. Biri güvenemediği için sürekli sınar; öteki yorulup
+gider; sınayan “biliyordum” der.
+Kalıbı tanımak önemlidir: döngünün içindeyken kişi suçlanır, oysa sorun
+döngüdedir.
+20
+
+-- 20 of 29 --
+
+Gözlemcinin Konumu ve Modelin Sınırı
+Gözlemci modelin içindedir
+Gözlemci dışarıdan bakan biri değil, modeldeki bir Kişi’dir. Onun da ihtiyacı,
+zaafı ve o günkü hâli vardır ve bunlar okumayı eğer:
+• İlgiye aç olan, sıradan nezaketi ilgi olarak okur.
+• Reddedilmekten korkan, nötr bir yüzü soğukluk olarak okur.
+• Yorgun olan için herkes düşman görünür.
+Bu nedenle bir durum okunmadan önce ilk soru gözlemcinin kendisine yöne-
+liktir: “şu an ne hâldeyim ve neyi görmek istiyorum.” Kendi görünmeyen alan-
+larını bilmeyen, başkasınınkini yanlış doldurur.
+Gözlemci aynı zamanda karşı tarafın modelinde bir Kişi’dir. Karşı taraf da
+onun görünen kısmını okur ve görünmeyen alanlarına tahmin yazar. Gösterilen
+şey, karşı tarafın atadığı durumu belirler.
+Modelin sınırı
+• İnsan belirlenimci değildir. Aynı girdi her zaman aynı çıktıyı vermez.
+Model olasılık söyler.
+• Veri azdır. Çoğu kişi hakkında eldeki gözlem üç beş tanedir; az veriyle
+kurulan model kırılgandır.
+• İnsan değişir. Dün doğru olan durum bugün eskimiş olabilir.
+• Harita insanın kendisi değildir. Model okumayı kolaylaştırır, ancak
+karşıdaki bir şema değil canlı bir kişidir (Korzybski, 1933).
+Son madde uygulamada en önemlisidir. Çözümleme sohbetten önce ve sonra
+yapılır; sohbetin içindeyken model kapatılır ve yalnızca dinlenir.
+21
+
+-- 21 of 29 --
+
+Hamleler
+Eldeki hamleler
+• Gözle. Hiçbir şey yapmadan izlemek. En ucuz ve en az kullanılan ham-
+ledir.
+• Sor. Bilinmeyen alanı doldurmanın en kısa yolu.
+• Ver. Zaman, ilgi, yardım, iltifat. Hesaba yatırır.
+• İste. Küçük bir rica. Hem bağ kurar hem karşı tarafın istekliliğini gös-
+terir.
+• Aç. Kendinden bir şey anlatmak. Karşı tarafa da açılma izni verir (Alt-
+man ve Taylor, 1973).
+• Bekle. Hamle yapmamak. Karşı tarafa hareket alanı bırakır.
+• Sınır koy. “Bu bana uymaz” demek. Saygıyı düşürmez, artırır.
+• Geri çekil. Mesafeyi artırmak; ceza olarak değil, ayar olarak.
+• Onar. Özür, telafi, açık konuşma.
+• Bırak. İlişkiyi kapatmak. Geçerli bir hamledir, yenilgi değildir.
+Hamle seçme kuralları
+• Küçükten başlanır. Büyük hamle büyük risk taşır; küçük hamle ucuz-
+dur ve bilgi verir.
+• Cevaba göre ilerlenir. Karşılık geldiyse bir adım daha atılır; gelmediyse
+durulur, aynı hamle büyütülerek tekrarlanmaz.
+• İki cevapsız hamleden sonra beklenir. Üçüncü kez üstüne gitmek
+kovalamaktır.
+• Hamle duruma göre seçilir. Yabancıya sır açılmaz, yakına resmî
+davranılmaz.
+• Belirsizlikte sorulur ya da beklenir. Tahmine dayanarak büyük
+hamle yapılmaz.
+Bir durumun baştan sona işletilmesi
+1. Gözlemcinin kendi hâline bakılır: ne hissedildiği ve neyin görülmek is-
+tendiği.
+2. Ortamın kuralı belirlenir: ortamın neresi olduğu ve roller.
+3. Kayda bakılır: kişinin gerçekte ne yaptığı ve ne söylediği.
+22
+
+-- 22 of 29 --
+
+4. Durum tahmin edilir ve “tahmin” olarak işaretlenir.
+5. Küçük bir hamle seçilir.
+6. Cevap görülür ve durum güncellenir.
+23
+
+-- 23 of 29 --
+
+Romantik Çekim Katmanı
+Romantik çekim, genel modelin üstüne oturan ayrı bir katmandır. Öteki ilişkiler
+emek ve güvenle kurulur; çekim kurulmaz, ya vardır ya yoktur.
+Kavramlar
+• Çekim. Birine doğru çekilmek. Seçilmez, iknayla oluşmaz, pazarlığı
+yapılmaz.
+• İlgi. Çekimin davranışa dökülmüş hâli: zaman ayırmak, soru sormak,
+yakın durmak.
+• Flört. İki tarafın da inkâr edebileceği sinyaller alıp vermesi. Belirsizlik
+üzerine çalışır.
+• Gerilim. “Var mı yok mu” belirsizliği. Çekimi besler.
+• Tırmanma. Yakınlığın adım adım artması: bakış, sohbet, şaka, baş başa
+görüşme, dokunma.
+• Kategori. Karşı tarafın kişiyi koyduğu kutu: olası sevgili, arkadaş, iş
+arkadaşı, müşteri, tanıdık.
+• Müsaitlik. Kişinin hayatında buna yer olup olmadığı. Çekim olsa bile
+müsaitlik yoksa bir şey olmaz.
+Kurallar
+• İyilik çekim üretmez. Emek, yardım ve nezaket karşı tarafta minnet
+ve saygı doğurur, çekim doğurmaz. Bunlar ayrı hesaplardır ve en çok
+karıştırılan nokta budur.
+• Kategori erken atanır. İnsan karşısındakini ilk birkaç karşılaşmada bir
+kutuya koyar. Sonradan değişmesi zor ve nadirdir.
+• İlgi davranışla görünür. İlgilenen kişi zaman yaratır, kendisi yazar, so-
+hbeti uzatır, merak eder. İlgi yoksa kibar ama kısadır. Tek bir gülümseme
+veri değildir; tekrar eden çaba veridir.
+• Ret çoğu zaman dolaylı gelir. Meşguliyet, erteleme, partnerden söz
+etme, “abi” ya da “kardeşim” gibi rol vurguları. Dolaylı ret de rettir.
+• Tırmanma karşılıklıdır. Bir adım atılır; karşılık gelirse bir adım daha.
+Gelmezse durulur. Tek taraflı tırmanma ısrardır.
+• Fazla istemek iter. Muhtaçlık belli olduğunda çekim düşer. Hayatı dolu
+olan ve karşısındakine bağlı kalmayan kişi daha çekici görünür.
+24
+
+-- 24 of 29 --
+
+• Açık konuşma oyunu bitirir. Niyet söylendiğinde belirsizlik kalkar
+ve cevap evet ya da hayır olur. Bu bir kayıp değildir; aylarca yorum
+yapmaktan ucuzdur.
+• Çekim adil değildir. Görünüş, boy, ses, özgüven, statü, mizah ve za-
+manlama rol oynar. Bir kısmı kişinin elinde değildir. Elinde olanlar bakım,
+duruş, rahatlık, cesaret ve dolu bir hayattır.
+• Çekim başlatır, karakter sürdürür. Çekim olmadan ilişki başlamaz;
+uyum ve güven olmadan sürmez.
+• Tek taraflı çekim beklemekle iki taraflı olmaz. Nadiren döner. Bek-
+lemenin bedeli zaman ve dikkattir.
+İki ayrı durum değişkeni
+Romantik ilişkide iki ayrı ölçü tutulur. Güven, “bu kişiye sırt dönülebilir mi,
+yanında rahat edilir mi” sorusudur. Çekim, “bu kişiye doğru çekiliyor muyum”
+sorusudur. İkisi birbirinden bağımsızdır; biri yüksekken öteki sıfır olabilir.
+Güven Çekim Sonuç
+Var Yok Arkadaşlık
+Yok Var Kısa ve fırtınalı ilişki
+Var Var Süren ilişki
+Yok Yok Tanıdıklık
+Güven olup çekim olmadığında kişi her şeyini anlatır, yanında rahattır, an-
+cak karşısındakini o gözle görmez. Çekim olup güven olmadığında taraflar bir-
+birini çeker ama rahat edemez; kıskançlık, kavga ve belirsizlik görülür.
+Belirleyici nokta şudur: birini artırmak ötekini artırmaz. Çok güvenilir biri
+olmak güven ölçüsünü yükseltir; çekim ölçüsü yerinde durur. “Bana bu kadar
+güveniyor, demek ki bir şey var” çıkarımı yanlıştır; yalnızca güven vardır.
+Tek taraflı çekim örneği
+Ali, Ayşe’den hoşlanmaktadır; Ayşe, Ali’den hoşlanmamaktadır. Ali, beklerse
+ve yanında olursa Ayşe’nin zamanla kendisini seveceğini düşünür.
+Bu beklenti gerçekleşmez, çünkü Ayşe’nin Ali’ye çekilip çekilmemesi Ali’nin
+bekleme süresine bağlı değildir. Beklemek Ayşe’nin içinde bir şeyi değiştirmez;
+bir yıl sonra da aynı yerdedir.
+Dönüş bazen olur: Ali zamanla değişir, Ayşe onu başka bir ortamda başka
+bir gözle görür ve fikri değişir. Bu az sayıda durumda gerçekleşir ve üzerine
+plan kurulmaz.
+Beklemek bedelsiz değildir. Ali o bir yıl boyunca aklı Ayşe’de olduğu için
+başka kimseye bakmaz, Ayşe’nin her sözünü ve bakışını yorumlamakla uğraşır,
+kendi işine ve hayatına daha az dikkat verir. Sonuçta bir yıl ve önemli miktarda
+zihinsel emek harcanmış, karşılığında bir şey elde edilmemiştir.
+25
+
+-- 25 of 29 --
+
+Kayıt Tutma ve Dışsallaştırma
+İnsanlar kâğıt, kalem ya da yapay zekâyla konuşma gibi bir dışsallaştırma aracı
+olmadan güvenilir biçimde anlaşılamaz. Bellekten yapılan okuma çoğu zaman
+çözümleme değil histir. Üç nedeni vardır:
+• Bellek olayı değil hissi tutar. İki gün sonra “ne dedi” sorusuna değil,
+“nasıl hissettirdi” sorusuna cevap verilir. Yazı olayı olduğu gibi saklar.
+• Yazarken gözlem ile yorum ayrılır. Zihinde “soğuk davrandı” tek bir
+şeydir. Kâğıtta ikiye bölünür: “selam verdi, oturmadı, on dakika sonra
+çıktı” gözlemdir; “soğuk davrandı” yorumdur.
+• Kalıp ancak üst üste konduğunda görünür. Tek olay bir şey söyle-
+mez; beş kayıt yan yana geldiğinde tekrar eden şey ortaya çıkar.
+Terapistin çalışma biçimi bu ilkeye dayanır. Seansta dinler ve kısa not alır;
+sonra notları okur, önceki seanslarla karşılaştırır. Birçoğu ayrıca başka bir ter-
+apiste danışır, çünkü tek bir zihin kendi yanılgısını göremez. İşi meslek olarak
+yapan kişi de belleğine ve tek başına yorumuna güvenmez.
+Sezgisi güçlü olup yazmadan iyi okuyan kişiler vardır. Ancak yanıldıklarında
+nerede yanıldıklarını bulamazlar, çünkü ellerinde kayıt yoktur.
+Kâğıt, kalem ve yapay zekâ aynı işi görür: düşünceyi zihnin dışına çıkarır.
+Dışarı çıkan şeye uzaktan bakılabilir.
+26
+
+-- 26 of 29 --
+
+Sonuç
+Modelin pratik karşılığı, yorumun yerini gözlemin almasıdır. Bir davranış
+karşısında sorulacak soru “bana ne yapıldı” olmaktan çıkar, “hangi ortamda,
+hangi durumda, hangi olay gerçekleşti” olur. Erken çekilen sınır, sık anılan
+partner ya da kısa kesilen sohbet, kişisel bir hüküm olarak değil, karşı tarafın
+koyduğu bir kısıt olarak okunur ve söylendiği biçimiyle alınır.
+İkinci sonuç, güven ile çekimin ayrı tutulmasıdır. Emeğin güveni artırıp
+çekimi artırmadığı kabul edildiğinde, tek taraflı çekimde beklemenin bir strateji
+değil bir maliyet olduğu görülür. Açık konuşma ya da geri çekilme, bu durumda
+beklemekten ucuz hamlelerdir.
+Bilgi katmanı kavramlar, kurallar, kalıplar, hamleler ve yanılma yollarıyla
+tamamlanmıştır. Eksik kalan dört şey bilgi değildir:
+• Uygulama. Sistem okunarak oturmaz; gerçek bir olay adım adım
+işletilmelidir.
+• Kayıt. Gözlem yazılmadığında birkaç gün sonra geriye olay değil, olayın
+bıraktığı his kalır.
+• Gözlemcinin kendi envanteri. Başkaları için dizilen ihtiyaç ve zaaf
+listesinin gözlemcinin kendisi için doldurulması ayrı bir iştir.
+• Etik çizgi. Zaaf bilgisi iki işe yarar: insanı anlamaya ya da kullan-
+maya. Anlamak için kullanıldığında ilişki derinleşir. Kullanmak için kul-
+lanıldığında kısa vadede işler, sonra güven biter, çünkü insanlar yönetildik-
+lerini eninde sonunda fark eder.
+Çerçevenin bulanıklaştığı yerler bellidir. Gözlem sayısı az olduğunda durum
+tahmini güvenilmezdir. Kişinin o günkü hâli ile kalıcı tutumu tek gözlemle
+ayrılamaz. Model sohbet sırasında açık tutulduğunda dinlemeyi bozar. Kavram
+listeleri gündelik gözleme dayanır; kaynak gösterilen maddeler dışındaki kurallar
+sınanmış bulgu değil, çalışma varsayımıdır.
+Açık kalan sorular şunlardır: bir kişinin görünmeyen alanı hakkında kaç
+gözlemden sonra hüküm verilebileceği; atanmış bir kategorinin hangi koşullarda
+değiştiği; yazılı çözümleme alışkanlığının, kişiyi bir şema olarak görme eğilimini
+güçlendirip güçlendirmediği.
+Kaynaklar
+• Ainsworth, M. D. S., Blehar, M. C., Waters, E. ve Wall, S. (1978). Pat-
+terns of Attachment. Lawrence Erlbaum.
+• Altman, I. ve Taylor, D. A. (1973). Social Penetration: The Development
+of Interpersonal Relationships. Holt, Rinehart and Winston.
+• Aronson, E. ve Mills, J. (1959). The effect of severity of initiation on
+liking for a group. Journal of Abnormal and Social Psychology.
+27
+
+-- 27 of 29 --
+
+• Bowen, M. (1978). Family Therapy in Clinical Practice. Jason Aronson.
+• Brehm, J. W. (1966). A Theory of Psychological Reactance. Academic
+Press.
+• Christensen, A. ve Heavey, C. L. (1990). Gender and social structure in
+the demand/withdraw pattern of marital conflict. Journal of Personality
+and Social Psychology.
+• Ferster, C. B. ve Skinner, B. F. (1957). Schedules of Reinforcement.
+Appleton-Century-Crofts.
+• French, J. R. P. ve Raven, B. (1959). The bases of social power. D.
+Cartwright (Ed.), Studies in Social Power içinde.
+• Gilovich, T., Medvec, V. H. ve Savitsky, K. (2000). The spotlight effect
+in social judgment. Journal of Personality and Social Psychology.
+• Gilovich, T., Savitsky, K. ve Medvec, V. H. (1998). The illusion of trans-
+parency. Journal of Personality and Social Psychology.
+• Goffman, E. (1967). Interaction Ritual: Essays on Face-to-Face Behavior.
+Anchor Books.
+• Harel, D. (1987). Statecharts: A visual formalism for complex systems.
+Science of Computer Programming.
+• Hazan, C. ve Shaver, P. (1987). Romantic love conceptualized as an at-
+tachment process. Journal of Personality and Social Psychology.
+• Ickes, W. (1993). Empathic accuracy. Journal of Personality.
+• Jecker, J. ve Landy, D. (1969). Liking a person as a function of doing him
+a favour. Human Relations.
+• Karpman, S. (1968). Fairy tales and script drama analysis. Transactional
+Analysis Bulletin.
+• Korzybski, A. (1933). Science and Sanity. International Non-Aristotelian
+Library.
+• Mayer, R. C., Davis, J. H. ve Schoorman, F. D. (1995). An integrative
+model of organizational trust. Academy of Management Review.
+• Nickerson, R. S. (1998). Confirmation bias: A ubiquitous phenomenon in
+many guises. Review of General Psychology.
+• Pronin, E., Kruger, J., Savitsky, K. ve Ross, L. (2001). You don’t know
+me, but I know you: The illusion of asymmetric insight. Journal of Per-
+sonality and Social Psychology.
+28
+
+-- 28 of 29 --
+
+• Savitsky, K., Keysar, B., Epley, N., Carter, T. ve Swanson, A. (2011). The
+closeness-communication bias. Journal of Experimental Social Psychology.
+• Sternberg, R. J. (1986). A triangular theory of love. Psychological Review.
+• Tangney, J. P. ve Dearing, R. L. (2002). Shame and Guilt. Guilford Press.
+• Thorndike, E. L. (1920). A constant error in psychological ratings. Jour-
+nal of Applied Psychology.
+• Waller, W. (1938). The Family: A Dynamic Interpretation. Cordon.
+• Zajonc, R. B. (1968). Attitudinal effects of mere exposure. Journal of
+Personality and Social Psychology.
+29
+
+-- 29 of 29 --
